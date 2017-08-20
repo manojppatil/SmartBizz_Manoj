@@ -129,6 +129,7 @@ public class UploadActivity extends AppCompatActivity {
                 documentType = "9_SD_PhotoDoc";
                 documentTypeNo = "9";
                 imageViewUploadTick_9.setVisibility(View.GONE);
+                buttonKycProfilePhoto.setText("Upload");
                 selectImage();
             }
         });
@@ -169,6 +170,7 @@ public class UploadActivity extends AppCompatActivity {
                 documentType = "1_SD_PhotoDoc";
                 documentTypeNo = "1";
                 galleryDocIntent();
+                buttonKycPhotoId.setText("Upload");
             }
         });
         buttonKycPhotoId = (Button) findViewById(R.id.button_kyc_photoID);
@@ -204,6 +206,7 @@ public class UploadActivity extends AppCompatActivity {
                 imageViewUploadTick_2.setVisibility(View.GONE);
                 documentType = "2_SD_PhotoDoc";
                 documentTypeNo = "2";
+                buttonKycAddressProof.setText("Upload");
                 galleryDocIntent();
             }
         });
@@ -240,6 +243,7 @@ public class UploadActivity extends AppCompatActivity {
                 imageViewUploadTick_3.setVisibility(View.GONE);
                 documentType = "3_SD_PhotoDoc";
                 documentTypeNo = "3";
+                buttonKycSignatureProof.setText("Upload");
                 galleryDocIntent();
             }
         });
@@ -276,6 +280,7 @@ public class UploadActivity extends AppCompatActivity {
                 imageViewUploadTick_4.setVisibility(View.GONE);
                 documentType = "4_SD_PhotoDoc";
                 documentTypeNo = "4";
+                buttonFinanceIncomeProof.setText("Upload");
                 galleryDocIntent();
             }
         });
@@ -312,6 +317,7 @@ public class UploadActivity extends AppCompatActivity {
                 imageViewUploadTick_5.setVisibility(View.GONE);
                 documentType = "5_SD_PhotoDoc";
                 documentTypeNo = "5";
+                buttonFinanceBankStatement.setText("Upload");
                 galleryDocIntent();
             }
         });
@@ -348,6 +354,7 @@ public class UploadActivity extends AppCompatActivity {
                 imageViewUploadTick_6.setVisibility(View.GONE);
                 documentType = "6_SD_PhotoDoc";
                 documentTypeNo = "6";
+                buttonEducationDegreeMarksheets.setText("Upload");
                 galleryDocIntent();
             }
         });
@@ -385,6 +392,7 @@ public class UploadActivity extends AppCompatActivity {
                 documentType = "7_SD_PhotoDoc";
                 documentTypeNo = "7";
                 galleryDocIntent();
+                buttonEducationDegreeCertificate.setText("Upload");
             }
         });
         buttonEducationDegreeCertificate= (Button) findViewById(R.id.button_education_degreecertificate);
@@ -420,6 +428,7 @@ public class UploadActivity extends AppCompatActivity {
                 imageViewUploadTick_8.setVisibility(View.GONE);
                 documentType = "8_SD_PhotoDoc";
                 documentTypeNo = "8";
+                buttonOtherDocument.setText("Upload");
                 galleryDocIntent();
             }
         });
@@ -919,22 +928,31 @@ public class UploadActivity extends AppCompatActivity {
 //                                Toast.makeText(UploadActivity.this,"File Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                 if(documentTypeNo.equalsIgnoreCase("9")) {
                                     imageViewUploadTick_9.setVisibility(View.VISIBLE);
+                                    buttonKycProfilePhoto.setText("Uploaded");
                                 }else if(documentTypeNo.equalsIgnoreCase("1")){
                                     imageViewUploadTick_1.setVisibility(View.VISIBLE);
+                                    buttonKycPhotoId.setText("Uploaded");
                                 }else if(documentTypeNo.equalsIgnoreCase("2")){
                                     imageViewUploadTick_2.setVisibility(View.VISIBLE);
+                                    buttonKycAddressProof.setText("Uploaded");
                                 }else if(documentTypeNo.equalsIgnoreCase("3")){
                                     imageViewUploadTick_3.setVisibility(View.VISIBLE);
+                                    buttonKycSignatureProof.setText("Uploaded");
                                 }else if(documentTypeNo.equalsIgnoreCase("4")){
                                     imageViewUploadTick_4.setVisibility(View.VISIBLE);
+                                    buttonFinanceIncomeProof.setText("Uploaded");
                                 }else if(documentTypeNo.equalsIgnoreCase("5")){
                                     imageViewUploadTick_5.setVisibility(View.VISIBLE);
+                                    buttonFinanceBankStatement.setText("Uploaded");
                                 }else if(documentTypeNo.equalsIgnoreCase("6")){
                                     imageViewUploadTick_6.setVisibility(View.VISIBLE);
+                                    buttonEducationDegreeMarksheets.setText("Uploaded");
                                 }else if(documentTypeNo.equalsIgnoreCase("7")){
                                     imageViewUploadTick_7.setVisibility(View.VISIBLE);
+                                    buttonEducationDegreeCertificate.setText("Uploaded");
                                 }else if(documentTypeNo.equalsIgnoreCase("8")){
                                     imageViewUploadTick_8.setVisibility(View.VISIBLE);
+                                    buttonOtherDocument.setText("Uploaded");
                                 }
                                 uploadFilePath = "";
                             }
