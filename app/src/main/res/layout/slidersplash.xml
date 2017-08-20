@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageviewslide"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--<TextView-->
+        <!--android:textStyle="bold"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="30dp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Adervertisement"/>-->
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:background="@color/blacktrasnparent"
+        android:layout_marginTop="350dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textForSlider"
+    android:textColor="@color/white"
+    android:textStyle="bold"
+    android:text="Demo Text!"
+    android:textSize="18dp"/>
+
+    <!--<TextView-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/text2ForSlider"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textStyle="bold"-->
+        <!--android:text="Librarywala provides more than 10,000 Books in physical and digital form to choose from.-->
+<!--Choose what you read, how you read and when you read"-->
+        <!--android:textSize="18dp"/>-->
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Eduvanz</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rupeesymbol">&#xf156;</string>
+    <string name="calendar">&#xf073;</string>
+    <string name="edit">&#xf044;</string>
+
+    <string name="title_activity_main2_navigation">Main2ActivityNavigation</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="facebook_app_id">1557727667677213</string>
+    <string name="fb_login_protocol_scheme">fb1557727667677213</string>
+</resources>

@@ -1,0 +1,163 @@
+<LinearLayout
+    android:background="@color/white"
+    android:paddingTop="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:paddingLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:paddingTop="2dp"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Profession : "
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorPrimary"/>
+                <RadioGroup
+                    android:id="@+id/radiogroup_profession"
+                    android:gravity="left"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:theme="@style/EditTextStyle"
+                        android:textColor="@color/black"
+                        android:checked="false"
+                        android:padding="5dp"
+                        android:id="@+id/radiobutton_isemployed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Employed" />
+                    <RadioButton
+                        android:checked="false"
+                        android:theme="@style/EditTextStyle"
+                        android:textColor="@color/black"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/radiobutton_isstudent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Student" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearlayout_isempoyeed"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <android.support.design.widget.TextInputLayout
+                    android:theme="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText
+                        android:id="@+id/input_nameofcompany"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:hint="Name of Company"
+                        android:textColor="@color/black" />
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_weight="1.5"
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Duration of Job/Business : "
+                        android:layout_gravity="left"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorPrimary"/>
+                    <Spinner
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light"
+                        android:dropDownSelector="@color/colorPrimary"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:id="@+id/spinner_jobduration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:theme="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText
+                        android:id="@+id/input_annualincome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:hint="Annual Income"
+                        android:textColor="@color/black" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:theme="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp">
+                <EditText
+                    android:id="@+id/input_advancepayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="Advance payment you would like to give"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/button_submit_finance_borrower"
+                android:background="@color/colorPrimary"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="Submit"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>

@@ -1,0 +1,452 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.eduvanz.pqformfragments.PqFormFragment1"
+    android:background="@color/white">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:padding="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/colorPrimary" />
+
+                <ImageView
+                    android:id="@+id/imageView_setp1_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/step1_image" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/view1_fragment5_step2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/lightGrey" />
+
+                <View
+                    android:id="@+id/view2_fragment5_step2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/lightGrey" />
+
+                <ImageView
+                    android:id="@+id/imageView_fragment5_step2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp"
+                    android:src="@drawable/step2_notdone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/view1_fragment5_step3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/lightGrey" />
+
+                <View
+                    android:id="@+id/view2_fragment5_step3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/lightGrey" />
+
+                <ImageView
+                    android:id="@+id/imageView_fragment5_step3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/step3_notdone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/view1_fragment5_step4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/lightGrey" />
+
+                <View
+                    android:id="@+id/view2_fragment5_step4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/lightGrey" />
+
+                <ImageView
+                    android:id="@+id/imageView_fragment5_step4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/step4_notdone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/view1_fragment5_step5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/lightGrey" />
+
+                <View
+                    android:id="@+id/view2_fragment5_step5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/lightGrey" />
+
+                <ImageView
+                    android:id="@+id/imageView_fragment5_step5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/step5_notdone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/lightGrey" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/lightGrey" />
+
+                <ImageView
+                    android:id="@+id/imageView_setp6_notdone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/step6_notdone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/lightGrey" />
+                <!--<View-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="10dp"-->
+                <!--android:background="@color/lightGrey"/>-->
+                <ImageView
+                    android:id="@+id/imageView_setp7_notdone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/step7_notdone" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:id="@+id/textview_font_fragment5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Please Provide the Following Documents"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardview1"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_margin="7dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="2dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:padding="5dp"
+                                android:id="@+id/imageView_adhaar"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/adhaar_demo" />
+
+                            <ImageView
+                                android:id="@+id/imageView_tick"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/greenrightclick"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardview2"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_margin="7dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="2dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:padding="5dp"
+                                android:id="@+id/imageView_pan"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/pan_demo" />
+
+                            <ImageView
+                                android:id="@+id/imageView_tick2"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/greenrightclick"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardview3"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_margin="7dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="2dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:padding="5dp"
+                                android:id="@+id/imageView_both"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/both_demo" />
+
+                            <ImageView
+                                android:id="@+id/imageView_tick3"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/greenrightclick"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardview4"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_margin="7dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="2dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:padding="5dp"
+                                android:id="@+id/imageView_none"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/neither_both" />
+
+                            <ImageView
+                                android:id="@+id/imageView_tick4"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/greenrightclick"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_previous_fragment5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="0.25dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/icon_leftarrow"
+            android:paddingLeft="20dp"
+            android:text="Previous"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_next_fragment5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="0.25dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:drawableRight="@drawable/icon_rightarrow"
+            android:paddingRight="20dp"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--tools:context="com.eduvanz.pqformfragments.PqFormFragment2"--><!--android:orientation="vertical">-->
+
+    <!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;--><!--<LinearLayout--><!--android:layout_marginTop="10dp"--><!--android:paddingLeft="15dp"--><!--android:paddingRight="15dp"--><!--android:layout_gravity="center"--><!--android:gravity="center"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:orientation="vertical">--><!--<TextView--><!--android:gravity="center"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:text="Please Provide the Following Documents"--><!--android:textStyle="bold"--><!--android:textSize="20sp"/>-->
+
+    <!--<LinearLayout--><!--android:layout_gravity="center"--><!--android:gravity="center"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:orientation="horizontal">--><!--<android.support.v7.widget.CardView--><!--android:id="@+id/cardview1"--><!--android:layout_margin="7dp"--><!--android:layout_width="100dp"--><!--android:layout_height="100dp"--><!--app:cardCornerRadius="2dp">--><!--<ImageView--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:src="@drawable/adhaar"/>--><!--</android.support.v7.widget.CardView>-->
+
+    <!--<android.support.v7.widget.CardView--><!--android:id="@+id/cardview2"--><!--android:layout_margin="7dp"--><!--android:layout_width="100dp"--><!--android:layout_height="100dp"--><!--app:cardCornerRadius="2dp">--><!--<ImageView--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:src="@drawable/pan"/>--><!--</android.support.v7.widget.CardView>--><!--</LinearLayout>-->
+
+    <!--<LinearLayout--><!--android:layout_gravity="center"--><!--android:gravity="center"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:orientation="horizontal">--><!--<android.support.v7.widget.CardView--><!--android:id="@+id/cardview3"--><!--android:layout_margin="7dp"--><!--android:layout_width="100dp"--><!--android:layout_height="100dp"--><!--app:cardCornerRadius="2dp">--><!--<ImageView--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:src="@drawable/adhaarandpan"/>--><!--</android.support.v7.widget.CardView>-->
+
+    <!--<android.support.v7.widget.CardView--><!--android:id="@+id/cardview4"--><!--android:layout_margin="7dp"--><!--android:layout_width="100dp"--><!--android:layout_height="100dp"--><!--app:cardCornerRadius="2dp">--><!--<ImageView--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:src="@drawable/neitherdocuments"/>--><!--</android.support.v7.widget.CardView>--><!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+
+    <!--<LinearLayout--><!--android:layout_alignParentBottom="true"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:orientation="horizontal">--><!--<Button--><!--android:drawableLeft="@drawable/icon_leftarrow"--><!--android:paddingLeft="20dp"--><!--android:layout_weight="1"--><!--android:id="@+id/button_previous_fragment5"--><!--android:background="@color/colorPrimary"--><!--android:layout_alignParentBottom="true"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:textAllCaps="false"--><!--android:text="Previous"--><!--android:textColor="@color/white"--><!--android:layout_marginRight="0.25dp" />--><!--<Button--><!--android:paddingRight="20dp"--><!--android:drawableRight="@drawable/icon_rightarrow"--><!--android:layout_weight="1"--><!--android:id="@+id/button_next_fragment5"--><!--android:background="@color/colorPrimary"--><!--android:layout_alignParentBottom="true"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:textAllCaps="false"--><!--android:text="Next"--><!--android:textColor="@color/white"--><!--android:layout_marginLeft="0.25dp"/>--><!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
