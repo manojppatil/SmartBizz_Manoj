@@ -20,11 +20,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity {
-    ImageView imageView, imageViewCustomer;
-    View view1, view2;
-    TextView textView, textViewCustomer;
+    ImageView  imageViewCustomer;
+    View view1;
+    TextView textViewCustomer;
     Thread splashTread;
-    RelativeLayout relativeLayout, relativeLayoutCustomer;
+    RelativeLayout relativeLayoutCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
