@@ -174,7 +174,7 @@
                     android:id="@+id/input_borrowerrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress"
+                    android:inputType="number"
                     android:hint="Monthly Rent"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -287,7 +287,7 @@
                     android:id="@+id/input_borrowercurrentpincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress"
+                    android:inputType="number"
                     android:hint="Current Pin Code no."
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -427,7 +427,7 @@
                     android:id="@+id/input_borrowerpermanentpincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress"
+                    android:inputType="number"
                     android:hint="Permanent Pin Code no."
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>

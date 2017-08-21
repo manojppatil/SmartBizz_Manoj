@@ -266,10 +266,11 @@ public class Main2ActivityNavigation extends AppCompatActivity
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
                 finish();
-        }else if (id == R.id.nav_friendlyscore) {
-            Intent clientIntent = null;
-            clientIntent = new Intent(this,ClientActivity.class);
         }
+//        else if (id == R.id.nav_friendlyscore) {
+//            Intent clientIntent = null;
+//            clientIntent = new Intent(this,ClientActivity.class);
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
