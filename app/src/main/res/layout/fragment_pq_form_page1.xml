@@ -37,6 +37,7 @@
                     android:src="@drawable/step1_image"
                     android:drawable="@android:drawable/dialog_holo_light_frame" />
                 <ImageView
+                    android:visibility="gone"
                     android:layout_marginTop="10dp"
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"

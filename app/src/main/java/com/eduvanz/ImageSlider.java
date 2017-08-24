@@ -70,9 +70,12 @@ public class ImageSlider extends AppCompatActivity {
         mbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(ImageSlider.this,Login.class);
-//                    startActivity(intent);
-//                    finish();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("checkForImageSlider",checkForImageSlider);
+                editor.commit();
+
                sharedPref = new SharedPref();
                 if(sharedPref.getLoginDone(ImageSlider.this)){
                     Intent intent = new Intent(ImageSlider.this,Main2ActivityNavigation.class);
@@ -84,15 +87,6 @@ public class ImageSlider extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-//                if(MainApplication.checkforsignup.equalsIgnoreCase("1")) {
-//                    Intent intent = new Intent(ImageSlider.this, Main2ActivityNavigation.class);
-//                    startActivity(intent);
-//                    finish();
-//                }else {
-//                    Intent intent = new Intent(ImageSlider.this, Login.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
             }
         });
         mPager.setAdapter(new SlidingImageAdapter(this,data, mResources));
@@ -101,43 +95,6 @@ public class ImageSlider extends AppCompatActivity {
         mPager.clearDisappearingChildren();
         indicator.setViewPager(mPager);
 
-
-//        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                int a =  position;
-//                Log.e("TAG", "POSITION: "+a );
-//                if(a == 1){
-//                    imageView1.setVisibility(View.VISIBLE);
-//                    imageView2.setVisibility(View.GONE);
-//                    YoYo.with(Techniques.RollIn)
-//                            .duration(700)
-//                            .repeat(0)
-//                            .playOn(findViewById(R.id.imageview1));
-//                } else if(a == 2){
-//                    imageView1.setVisibility(View.GONE);
-//                    imageView2.setVisibility(View.VISIBLE);
-//                    YoYo.with(Techniques.ZoomInLeft)
-//                            .duration(700)
-//                            .repeat(0)
-//                            .playOn(findViewById(R.id.imageview2));
-//                }else if(a == 0){
-//                    imageView1.setVisibility(View.GONE);
-//                    imageView2.setVisibility(View.GONE);
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
 
         final float density=getResources().getDisplayMetrics().density;
         indicator.setRadius(5*density);

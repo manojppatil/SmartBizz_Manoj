@@ -9,6 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+
 
     <application
         android:allowBackup="true"
@@ -17,6 +21,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,14 +61,41 @@
             android:name=".fqform.coborrowerdetail.FqFormCoborrower"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".uploaddocs.UploadDoc"
+            android:name=".uploaddocs.UploadActivityBorrower"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".uploaddocs.UploadActivity"
+            android:name=".uploaddocs.UploadActivityCoBorrower"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".pqformfragments.SuccessAfterPQForm"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".friendlyscore.ClientActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".friendlyscore.StartActivityFS"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".faqexpandablelistview.FAQ"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebViewAboutUs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebViewTermsNCondition"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MyProfile"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Login" />
+        <activity android:name=".SuccessSplash"></activity>
+
+
+
 
         <receiver android:name=".pqformfragments.SmsReceiver">
             <intent-filter>
@@ -78,21 +114,7 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".faqexpandablelistview.FAQ"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".WebViewAboutUs"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".WebViewTermsNCondition"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MyProfile"
-            android:screenOrientation="portrait" />
-        <activity android:name=".Login" />
-        <activity android:name=".ClientActivity" />
-        <activity android:name=".SuccessSplash"></activity>
+
     </application>
 
 </manifest>

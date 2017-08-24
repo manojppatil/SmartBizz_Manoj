@@ -265,6 +265,7 @@ public class SuccessAfterPQForm extends AppCompatActivity {
                 String userType = jsonObject.optString("user_type");
                 String userImage = jsonObject.optString("img_profile");
                 String useremail = jsonObject.optString("email");
+                String mobileNo = jsonObject.optString("mobile_no");
 
                 shareP =new SharedPref();
                 shareP.setLoginDone(this,true);
@@ -275,6 +276,7 @@ public class SuccessAfterPQForm extends AppCompatActivity {
                 editor.putString("first_name",firstName);
                 editor.putString("last_name",lastName);
                 editor.putString("user_type",userType);
+                editor.putString("mobile_no",mobileNo);
                 editor.putString("user_image",userImage);
                 editor.putString("user_email",useremail);
                 editor.commit();
@@ -284,6 +286,7 @@ public class SuccessAfterPQForm extends AppCompatActivity {
 
                 Intent intent = new Intent(this, SuccessSplash.class);
                 startActivity(intent);
+                finish();
 
             }else {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

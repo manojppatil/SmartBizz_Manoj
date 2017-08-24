@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.eduvanz.DashBoardFragment;
 import com.eduvanz.Login;
 import com.eduvanz.fqform.borrowerdetail.BorrowerEducationFragment;
 import com.eduvanz.fqform.borrowerdetail.BorrowerPersonalFragment;
@@ -24,7 +25,8 @@ import com.eduvanz.pqformfragments.PqFormFragment1;
 import com.eduvanz.pqformfragments.PqFormFragment2;
 import com.eduvanz.pqformfragments.PqFormFragment3;
 import com.eduvanz.pqformfragments.SuccessAfterPQForm;
-import com.eduvanz.uploaddocs.UploadActivity;
+import com.eduvanz.uploaddocs.UploadActivityBorrower;
+import com.eduvanz.uploaddocs.UploadActivityCoBorrower;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -558,7 +560,7 @@ public class VolleyCall extends Application {
                 Log.e("CallForData", "getDocuments"+ s);
                 jsonDataO = new JSONObject(s);
                 Log.e("CallForData", "getDocuments"+ s);
-                ((UploadActivity)mActivity).getDocuments(jsonDataO);
+                ((UploadActivityBorrower)mActivity).getDocuments(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             }catch (Exception e){
@@ -573,6 +575,32 @@ public class VolleyCall extends Application {
                 jsonDataO = new JSONObject(s);
                 Log.e("CallForData", "logInPage"+ s);
                 ((Login)mActivity).logIn(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        else if(screen.equalsIgnoreCase("getCoBorrowerDocuments"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                Log.e("CallForData", "getCoBorrowerDocuments"+ s);
+                ((UploadActivityCoBorrower)mActivity).getCoBorrowerDocuments(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        else if(screen.equalsIgnoreCase("getDashBoard"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                Log.e("CallForData", "getDashBoard"+ s);
+                ((DashBoardFragment)mfragment).getDashBoard(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             }catch (Exception e){

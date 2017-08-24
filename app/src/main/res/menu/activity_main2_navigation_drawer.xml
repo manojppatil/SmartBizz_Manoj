@@ -17,17 +17,22 @@
         <item
             android:id="@+id/nav_upload_docs_view"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Upload Docs" />
+            android:title="Upload Docs Borrower" />
+
+        <item
+            android:id="@+id/nav_upload_docs_coborrower"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Upload Docs Co-Borrower" />
 
         <item
             android:id="@+id/nav_account_settings"
             android:icon="@drawable/ic_menu_manage"
             android:title="Account Setting" />
 
-        <!--<item-->
-            <!--android:id="@+id/nav_friendlyscore"-->
-            <!--android:icon="@drawable/ic_menu_manage"-->
-            <!--android:title="Friendly Score" />-->
+        <item
+            android:id="@+id/nav_friendlyscore"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Friendly Score" />
     </group>
 
     <item android:title="Communicate">

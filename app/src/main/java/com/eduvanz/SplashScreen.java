@@ -25,6 +25,8 @@ public class SplashScreen extends AppCompatActivity {
     TextView textViewCustomer;
     Thread splashTread;
     RelativeLayout relativeLayoutCustomer;
+    String checkForImageSlider="";
+    SharedPref sharedPref = new SharedPref();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,9 @@ public class SplashScreen extends AppCompatActivity {
         view1 = getLayoutInflater().inflate(R.layout.activity_splash_screen_customer, null);
         setContentView(view1);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
+        checkForImageSlider = sharedPreferences.getString("checkForImageSlider","null");
 
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -69,16 +74,31 @@ public class SplashScreen extends AppCompatActivity {
                 try {
                     int waited = 0;
                     // Splash screen pause time
-                    while (waited < 3500) {
+                    while (waited < 1000) {
                         sleep(100);
                         waited += 100;
                     }
 
+                    if(checkForImageSlider.equalsIgnoreCase("1")) {
+                        if(sharedPref.getLoginDone(SplashScreen.this)) {
+                            Intent intent = new Intent(SplashScreen.this,
+                                    Main2ActivityNavigation.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                            SplashScreen.this.finish();
+                        }
+                        else {
+                            Intent intent = new Intent(SplashScreen.this,Login.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }else {
                         Intent intent = new Intent(SplashScreen.this,
                                 ImageSlider.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent);
                         SplashScreen.this.finish();
+                    }
 
                 } catch (InterruptedException e) {
                     // do nothing

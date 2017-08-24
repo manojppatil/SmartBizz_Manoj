@@ -12,12 +12,11 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -32,7 +31,6 @@ import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.uploaddocs.Utility;
 import com.eduvanz.volley.VolleyCall;
 import com.squareup.picasso.Picasso;
 
@@ -55,46 +53,45 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UploadActivity extends AppCompatActivity {
+public class UploadActivityBorrower extends AppCompatActivity {
 
+    public Boolean kyc = true, financial = true, education = true, other = true;
+    public String documentType = "";
+    public String documentTypeNo = "";
+    public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
+    public String userChoosenTask;
     AppCompatActivity mActivity;
     LinearLayout linearLayoutKyc, linearLayoutKycHide, linearLayoutFinancial,
             linearLayoutFinancialHide, linearLayoutEducation, linearLayoutEducationHide,
             linearLayoutOther, linearLayoutOtherHide;
     ImageView imageViewECKyc, imageViewECFinancial, imageViewECEducation, imageViewECOther,
-            imageViewUploadTick_9, imageViewUploadTick_1, imageViewUploadTick_2, imageViewUploadTick_3
-            , imageViewUploadTick_4, imageViewUploadTick_5, imageViewUploadTick_6, imageViewUploadTick_7,
+            imageViewUploadTick_9, imageViewUploadTick_1, imageViewUploadTick_2, imageViewUploadTick_3, imageViewUploadTick_4, imageViewUploadTick_5, imageViewUploadTick_6, imageViewUploadTick_7,
             imageViewUploadTick_8;
     Animation a, b;
-    public Boolean kyc = true, financial = true,  education = true, other = true;
     Button buttonKycProfilePhoto, buttonKycPhotoId, buttonKycAddressProof, buttonKycSignatureProof,
             buttonFinanceIncomeProof, buttonFinanceBankStatement, buttonEducationDegreeMarksheets, buttonEducationDegreeCertificate,
             buttonOtherDocument;
     ImageView imageViewKycProfilePhoto, imageViewKycPhotoId, imageViewKycAddressProof, imageViewKycSignatureProof,
-            imageViewFinanceIncomeProof, imageViewFinanceBankStatement,imageViewEducationDegreeMarksheets, imageViewEducationDegreeCertificate,
+            imageViewFinanceIncomeProof, imageViewFinanceBankStatement, imageViewEducationDegreeMarksheets, imageViewEducationDegreeCertificate,
             imageViewOtherDocument;
     TextView textViewKycProfilePhoto, textViewKycPhotoId, textViewKycAddressProof, textViewKycSignatureProof;
-    String uploadFilePath="";
+    String uploadFilePath = "";
     String urlup = MainApplication.mainUrl + "document/applicantDocumentUpload";
     StringBuffer sb;
     ProgressDialog mDialog;
     TextView textView1, textView2, textView3;
     Typeface typefaceFont, typefaceFontBold;
-    String userID="";
-    public String documentType = "";
-    public String documentTypeNo = "";
+    String userID = "";
 
-    public int REQUEST_CAMERA = 0, SELECT_FILE = 1 , SELECT_DOC = 2;
-    public String userChoosenTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload);
+        setContentView(R.layout.activity_upload_borrower);
 
         mActivity = this;
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        userID = sharedPreferences.getString("logged_id","null");
+        userID = sharedPreferences.getString("logged_id", "null");
 
         typefaceFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/droidsans_bold.ttf");
@@ -139,7 +136,7 @@ public class UploadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -152,7 +149,7 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -179,7 +176,7 @@ public class UploadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -192,7 +189,7 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -210,13 +207,13 @@ public class UploadActivity extends AppCompatActivity {
                 galleryDocIntent();
             }
         });
-        buttonKycAddressProof= (Button) findViewById(R.id.button_kyc_addressproof);
+        buttonKycAddressProof = (Button) findViewById(R.id.button_kyc_addressproof);
         buttonKycAddressProof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -229,7 +226,7 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -247,13 +244,13 @@ public class UploadActivity extends AppCompatActivity {
                 galleryDocIntent();
             }
         });
-        buttonKycSignatureProof= (Button) findViewById(R.id.button_kyc_signatureproof);
+        buttonKycSignatureProof = (Button) findViewById(R.id.button_kyc_signatureproof);
         buttonKycSignatureProof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -266,7 +263,7 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -284,13 +281,13 @@ public class UploadActivity extends AppCompatActivity {
                 galleryDocIntent();
             }
         });
-        buttonFinanceIncomeProof= (Button) findViewById(R.id.button_finance_incomeproof);
+        buttonFinanceIncomeProof = (Button) findViewById(R.id.button_finance_incomeproof);
         buttonFinanceIncomeProof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -303,7 +300,7 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -321,13 +318,13 @@ public class UploadActivity extends AppCompatActivity {
                 galleryDocIntent();
             }
         });
-        buttonFinanceBankStatement= (Button) findViewById(R.id.button_finance_bankstatement);
+        buttonFinanceBankStatement = (Button) findViewById(R.id.button_finance_bankstatement);
         buttonFinanceBankStatement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -340,14 +337,14 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         /**-----------------------------END OF FINANCE - BANK STATEMENT--------------------------**/
 
         /**-----------------------------EDUCATION - DEGREE MARKSHEETS----------------------------**/
-        imageViewEducationDegreeMarksheets= (ImageView) findViewById(R.id.imageview_education_degreemarksheet);
+        imageViewEducationDegreeMarksheets = (ImageView) findViewById(R.id.imageview_education_degreemarksheet);
         imageViewEducationDegreeMarksheets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -358,13 +355,13 @@ public class UploadActivity extends AppCompatActivity {
                 galleryDocIntent();
             }
         });
-        buttonEducationDegreeMarksheets= (Button) findViewById(R.id.button_education_degreemarksheet);
+        buttonEducationDegreeMarksheets = (Button) findViewById(R.id.button_education_degreemarksheet);
         buttonEducationDegreeMarksheets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -377,14 +374,14 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         /**---------------------------END OF EDUCATION - DEGREE MARKSHEETS-----------------------**/
 
         /**-----------------------------EDUCATION - DEGREE CERTIFICATE---------------------------**/
-        imageViewEducationDegreeCertificate= (ImageView) findViewById(R.id.imageview_education_degreecertificate);
+        imageViewEducationDegreeCertificate = (ImageView) findViewById(R.id.imageview_education_degreecertificate);
         imageViewEducationDegreeCertificate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -395,13 +392,13 @@ public class UploadActivity extends AppCompatActivity {
                 buttonEducationDegreeCertificate.setText("Upload");
             }
         });
-        buttonEducationDegreeCertificate= (Button) findViewById(R.id.button_education_degreecertificate);
+        buttonEducationDegreeCertificate = (Button) findViewById(R.id.button_education_degreecertificate);
         buttonEducationDegreeCertificate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -414,14 +411,14 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         /**---------------------------END OF EDUCATION - DEGREE CERTIFICATE----------------------**/
 
         /**--------------------------------------OTHER DOCUMENT----------------------------------**/
-        imageViewOtherDocument= (ImageView) findViewById(R.id.imageview_otherdocument);
+        imageViewOtherDocument = (ImageView) findViewById(R.id.imageview_otherdocument);
         imageViewOtherDocument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -432,13 +429,13 @@ public class UploadActivity extends AppCompatActivity {
                 galleryDocIntent();
             }
         });
-        buttonOtherDocument= (Button) findViewById(R.id.button_otherdocument);
+        buttonOtherDocument = (Button) findViewById(R.id.button_otherdocument);
         buttonOtherDocument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
                     // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                    mDialog = new ProgressDialog(UploadActivity.this);
+                    mDialog = new ProgressDialog(UploadActivityBorrower.this);
                     mDialog.setMessage("UPLOADING FILE");
                     mDialog.show();
                     new Thread(new Runnable() {
@@ -451,7 +448,7 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     }).start();
                 } else {
-                    Toast.makeText(UploadActivity.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivityBorrower.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -476,7 +473,7 @@ public class UploadActivity extends AppCompatActivity {
         linearLayoutKyc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(kyc) {
+                if (kyc) {
                     a = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidedown_top);
                     a.reset();
                     linearLayoutKycHide.setVisibility(View.VISIBLE);
@@ -484,7 +481,7 @@ public class UploadActivity extends AppCompatActivity {
                     linearLayoutKycHide.clearAnimation();
                     linearLayoutKycHide.setAnimation(a);
                     kyc = false;
-                }else {
+                } else {
                     b = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidein_top);
                     b.reset();
                     imageViewECKyc.setImageDrawable(getResources().getDrawable(R.drawable.icon_expand));
@@ -508,7 +505,7 @@ public class UploadActivity extends AppCompatActivity {
         linearLayoutFinancial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(financial) {
+                if (financial) {
                     a = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidedown_top);
                     a.reset();
                     linearLayoutFinancialHide.setVisibility(View.VISIBLE);
@@ -516,7 +513,7 @@ public class UploadActivity extends AppCompatActivity {
                     linearLayoutFinancialHide.clearAnimation();
                     linearLayoutFinancialHide.setAnimation(a);
                     financial = false;
-                }else {
+                } else {
                     b = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidein_top);
                     b.reset();
                     imageViewECFinancial.setImageDrawable(getResources().getDrawable(R.drawable.icon_expand));
@@ -531,7 +528,7 @@ public class UploadActivity extends AppCompatActivity {
         linearLayoutEducation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(education) {
+                if (education) {
                     a = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidedown_top);
                     a.reset();
                     linearLayoutEducationHide.setVisibility(View.VISIBLE);
@@ -539,7 +536,7 @@ public class UploadActivity extends AppCompatActivity {
                     linearLayoutEducationHide.clearAnimation();
                     linearLayoutEducationHide.setAnimation(a);
                     education = false;
-                }else {
+                } else {
                     b = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidein_top);
                     b.reset();
                     imageViewECEducation.setImageDrawable(getResources().getDrawable(R.drawable.icon_expand));
@@ -554,7 +551,7 @@ public class UploadActivity extends AppCompatActivity {
         linearLayoutOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(other) {
+                if (other) {
                     a = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidedown_top);
                     a.reset();
                     linearLayoutOtherHide.setVisibility(View.VISIBLE);
@@ -562,7 +559,7 @@ public class UploadActivity extends AppCompatActivity {
                     linearLayoutOtherHide.clearAnimation();
                     linearLayoutOtherHide.setAnimation(a);
                     other = false;
-                }else {
+                } else {
                     b = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slidein_top);
                     b.reset();
                     imageViewECOther.setImageDrawable(getResources().getDrawable(R.drawable.icon_expand));
@@ -589,7 +586,7 @@ public class UploadActivity extends AppCompatActivity {
     }//----------------------------------------END OF ONCREATE------------------------------------//
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home)
+        if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
@@ -600,24 +597,24 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     private void selectImage() {
-        final CharSequence[] items = { "Take Photo", "Choose from Library",
-                "Cancel" };
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivityBorrower.this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result= Utility.checkPermission(UploadActivity.this);
+                boolean result = Utility.checkPermission(UploadActivityBorrower.this);
 
                 if (items[item].equals("Take Photo")) {
-                    userChoosenTask ="Take Photo";
-                    if(result)
+                    userChoosenTask = "Take Photo";
+                    if (result)
                         cameraIntent();
 
                 } else if (items[item].equals("Choose from Library")) {
-                    userChoosenTask ="Choose from Library";
-                    if(result)
+                    userChoosenTask = "Choose from Library";
+                    if (result)
                         galleryIntent();
 
                 } else if (items[item].equals("Cancel")) {
@@ -627,19 +624,19 @@ public class UploadActivity extends AppCompatActivity {
         });
         builder.show();
     }
-    private void galleryIntent()
-    {
+
+    private void galleryIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
     }
 
-    private void cameraIntent()
-    {
+    private void cameraIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -650,7 +647,7 @@ public class UploadActivity extends AppCompatActivity {
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
             else if (requestCode == SELECT_DOC) {
-                Bitmap bm=null;
+                Bitmap bm = null;
                 try {
                     bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
                 } catch (IOException e) {
@@ -658,36 +655,37 @@ public class UploadActivity extends AppCompatActivity {
                 }
                 Uri selectedImage = data.getData();
                 uploadFilePath = PathFile.getPath(this, selectedImage);
-                Log.e("TAG", "onActivityResult: DOC PATH "+uploadFilePath );
+                Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
 //                imageViewKycPhotoId.setImageDrawable(getResources().getDrawable(R.drawable.pdf_image));
-                if(documentTypeNo.equalsIgnoreCase("1")) {
+                if (documentTypeNo.equalsIgnoreCase("1")) {
                     buttonKycPhotoId.setVisibility(View.VISIBLE);
                     imageViewKycPhotoId.setImageBitmap(bm);
-                }else if(documentTypeNo.equalsIgnoreCase("2")){
+                } else if (documentTypeNo.equalsIgnoreCase("2")) {
                     buttonKycAddressProof.setVisibility(View.VISIBLE);
                     imageViewKycAddressProof.setImageBitmap(bm);
-                }else if(documentTypeNo.equalsIgnoreCase("3")){
+                } else if (documentTypeNo.equalsIgnoreCase("3")) {
                     buttonKycSignatureProof.setVisibility(View.VISIBLE);
                     imageViewKycSignatureProof.setImageBitmap(bm);
-                }else if(documentTypeNo.equalsIgnoreCase("4")){
+                } else if (documentTypeNo.equalsIgnoreCase("4")) {
                     buttonFinanceIncomeProof.setVisibility(View.VISIBLE);
                     imageViewFinanceIncomeProof.setImageBitmap(bm);
-                }else if(documentTypeNo.equalsIgnoreCase("5")){
+                } else if (documentTypeNo.equalsIgnoreCase("5")) {
                     buttonFinanceBankStatement.setVisibility(View.VISIBLE);
                     imageViewFinanceBankStatement.setImageBitmap(bm);
-                }else if(documentTypeNo.equalsIgnoreCase("6")){
+                } else if (documentTypeNo.equalsIgnoreCase("6")) {
                     buttonEducationDegreeMarksheets.setVisibility(View.VISIBLE);
                     imageViewEducationDegreeMarksheets.setImageBitmap(bm);
-                }else if(documentTypeNo.equalsIgnoreCase("7")){
+                } else if (documentTypeNo.equalsIgnoreCase("7")) {
                     buttonEducationDegreeCertificate.setVisibility(View.VISIBLE);
                     imageViewEducationDegreeCertificate.setImageBitmap(bm);
-                }else if(documentTypeNo.equalsIgnoreCase("8")){
+                } else if (documentTypeNo.equalsIgnoreCase("8")) {
                     buttonOtherDocument.setVisibility(View.VISIBLE);
                     imageViewOtherDocument.setImageBitmap(bm);
                 }
             }
         }
     }
+
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -697,7 +695,7 @@ public class UploadActivity extends AppCompatActivity {
                 System.currentTimeMillis() + ".jpg");
 
         uploadFilePath = destination.toString();
-        Log.e("TAG", "onCaptureImageResult: "+uploadFilePath );
+        Log.e("TAG", "onCaptureImageResult: " + uploadFilePath);
         FileOutputStream fo;
         try {
             destination.createNewFile();
@@ -720,13 +718,13 @@ public class UploadActivity extends AppCompatActivity {
     @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
 
-        Bitmap bm=null;
+        Bitmap bm = null;
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
                 Uri selectedFileUri = data.getData();
-                    uploadFilePath = PathFile.getPath(this,selectedFileUri);
-                Log.e("TAG", "onSelectFromGalleryResult: "+uploadFilePath );
+                uploadFilePath = PathFile.getPath(this, selectedFileUri);
+                Log.e("TAG", "onSelectFromGalleryResult: " + uploadFilePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -741,7 +739,7 @@ public class UploadActivity extends AppCompatActivity {
         intent.setType("*/*");  // for all types of file
 //        intent.setType("application/pdf"); // for pdf
         intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_DOC);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_DOC);
     }
 
     //android upload file to server
@@ -750,7 +748,7 @@ public class UploadActivity extends AppCompatActivity {
         int serverResponseCode = 0;
         documentType = doctype;
         documentTypeNo = doctypeno;
-        Log.e(MainApplication.TAG, "documentType: "+documentType + "documentTypeNo: "+documentTypeNo);
+        Log.e(MainApplication.TAG, "documentType: " + documentType + "documentTypeNo: " + documentTypeNo);
         HttpURLConnection connection;
         DataOutputStream dataOutputStream;
         String lineEnd = "\r\n";
@@ -818,7 +816,7 @@ public class UploadActivity extends AppCompatActivity {
                 while (bytesRead > 0) {
                     //write the bytes read from inputstream
                     dataOutputStream.write(buffer, 0, bufferSize);
-                    Log.e("TAG"," here: \n\n" + buffer +"\n"+bufferSize);
+                    Log.e("TAG", " here: \n\n" + buffer + "\n" + bufferSize);
                     bytesAvailable = fileInputStream.available();
                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
@@ -828,7 +826,7 @@ public class UploadActivity extends AppCompatActivity {
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 //                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
 //                        + selectedFilePath + "\"" + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"id\";id="+userID+"" + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"id\";id=" + userID + "" + lineEnd);
                 dataOutputStream.writeBytes(lineEnd);
                 dataOutputStream.writeBytes(userID);
                 dataOutputStream.writeBytes(lineEnd);
@@ -837,7 +835,7 @@ public class UploadActivity extends AppCompatActivity {
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 //                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
 //                        + selectedFilePath + "\"" + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"documentType\";documentType="+documentType+"" + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"documentType\";documentType=" + documentType + "" + lineEnd);
                 dataOutputStream.writeBytes(lineEnd);
                 dataOutputStream.writeBytes(documentType);
                 dataOutputStream.writeBytes(lineEnd);
@@ -845,7 +843,7 @@ public class UploadActivity extends AppCompatActivity {
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 //                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
 //                        + selectedFilePath + "\"" + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"documentTypeNo\";documentTypeNo="+documentTypeNo+"" + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"documentTypeNo\";documentTypeNo=" + documentTypeNo + "" + lineEnd);
                 dataOutputStream.writeBytes(lineEnd);
                 dataOutputStream.writeBytes(documentTypeNo);
                 dataOutputStream.writeBytes(lineEnd);
@@ -854,19 +852,19 @@ public class UploadActivity extends AppCompatActivity {
                 dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
                 serverResponseCode = connection.getResponseCode();
-                Log.e("TAG"," here:server response serverResponseCode\n\n" + serverResponseCode );
+                Log.e("TAG", " here:server response serverResponseCode\n\n" + serverResponseCode);
                 String serverResponseMessage = connection.getResponseMessage();
-                Log.e("TAG"," here: server message serverResponseMessage \n\n" + serverResponseMessage.toString() +"\n"+bufferSize);
+                Log.e("TAG", " here: server message serverResponseMessage \n\n" + serverResponseMessage.toString() + "\n" + bufferSize);
                 BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
-                String output="";
-                sb= new StringBuffer();
+                String output = "";
+                sb = new StringBuffer();
 
                 while ((output = br.readLine()) != null) {
                     sb.append(output);
                     Log.e("TAG", "uploadFile: " + br);
                     Log.e("TAG", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
                 }
-                Log.e("TAG", "uploadFile: "+sb.toString() );
+                Log.e("TAG", "uploadFile: " + sb.toString());
 //                [{"code":1,"file_name":"284f0b39af461ad8ae3ee17ac20ee5f4.pdf","message":"Document uploaded successfully"}]
 
 //                try {
@@ -882,8 +880,8 @@ public class UploadActivity extends AppCompatActivity {
 //                            public void run() {
 //                                mDialog.dismiss();
 //                                Log.e("TAG", "uploadFile: code 1 "+code);
-////                                    Toast.makeText(UploadActivity.this, mData.getString("message").toString(), Toast.LENGTH_SHORT).show();
-//                                Toast.makeText(UploadActivity.this,"File Uploaded Successfully", Toast.LENGTH_SHORT).show();
+////                                    Toast.makeText(UploadActivityBorrower.this, mData.getString("message").toString(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(UploadActivityBorrower.this,"File Uploaded Successfully", Toast.LENGTH_SHORT).show();
 //                                imageViewUploadTick.setVisibility(View.VISIBLE);
 //                            }
 //                        });
@@ -897,7 +895,7 @@ public class UploadActivity extends AppCompatActivity {
 //                                try {
 //                                    mDialog.dismiss();
 //                                    Log.e("TAG", "uploadFile: code 2 "+code);
-//                                    Toast.makeText(UploadActivity.this, mData.getString("message").toString(), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(UploadActivityBorrower.this, mData.getString("message").toString(), Toast.LENGTH_SHORT).show();
 //                                } catch (JSONException e) {
 //                                    e.printStackTrace();
 //                                }
@@ -911,46 +909,44 @@ public class UploadActivity extends AppCompatActivity {
 //                }
 
                 try {
-                    JSONObject mJson= new JSONObject(sb.toString());
-                    final String mData= mJson.getString("status");
-                    final String mData1= mJson.getString("message");
+                    JSONObject mJson = new JSONObject(sb.toString());
+                    final String mData = mJson.getString("status");
+                    final String mData1 = mJson.getString("message");
 
-                    Log.e("TAG", "uploadFile: code "+mData);
-                    if(mData.equalsIgnoreCase("1"))
-                    {
-                        runOnUiThread(new Runnable()
-                        {
+                    Log.e("TAG", "uploadFile: code " + mData);
+                    if (mData.equalsIgnoreCase("1")) {
+                        runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 mDialog.dismiss();
-                                Log.e("TAG", "uploadFile: code 1 "+mData);
-                                    Toast.makeText(UploadActivity.this, mData1, Toast.LENGTH_SHORT).show();
-//                                Toast.makeText(UploadActivity.this,"File Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                                if(documentTypeNo.equalsIgnoreCase("9")) {
+                                Log.e("TAG", "uploadFile: code 1 " + mData);
+                                Toast.makeText(UploadActivityBorrower.this, mData1, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(UploadActivityBorrower.this,"File Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                if (documentTypeNo.equalsIgnoreCase("9")) {
                                     imageViewUploadTick_9.setVisibility(View.VISIBLE);
                                     buttonKycProfilePhoto.setText("Uploaded");
-                                }else if(documentTypeNo.equalsIgnoreCase("1")){
+                                } else if (documentTypeNo.equalsIgnoreCase("1")) {
                                     imageViewUploadTick_1.setVisibility(View.VISIBLE);
                                     buttonKycPhotoId.setText("Uploaded");
-                                }else if(documentTypeNo.equalsIgnoreCase("2")){
+                                } else if (documentTypeNo.equalsIgnoreCase("2")) {
                                     imageViewUploadTick_2.setVisibility(View.VISIBLE);
                                     buttonKycAddressProof.setText("Uploaded");
-                                }else if(documentTypeNo.equalsIgnoreCase("3")){
+                                } else if (documentTypeNo.equalsIgnoreCase("3")) {
                                     imageViewUploadTick_3.setVisibility(View.VISIBLE);
                                     buttonKycSignatureProof.setText("Uploaded");
-                                }else if(documentTypeNo.equalsIgnoreCase("4")){
+                                } else if (documentTypeNo.equalsIgnoreCase("4")) {
                                     imageViewUploadTick_4.setVisibility(View.VISIBLE);
                                     buttonFinanceIncomeProof.setText("Uploaded");
-                                }else if(documentTypeNo.equalsIgnoreCase("5")){
+                                } else if (documentTypeNo.equalsIgnoreCase("5")) {
                                     imageViewUploadTick_5.setVisibility(View.VISIBLE);
                                     buttonFinanceBankStatement.setText("Uploaded");
-                                }else if(documentTypeNo.equalsIgnoreCase("6")){
+                                } else if (documentTypeNo.equalsIgnoreCase("6")) {
                                     imageViewUploadTick_6.setVisibility(View.VISIBLE);
                                     buttonEducationDegreeMarksheets.setText("Uploaded");
-                                }else if(documentTypeNo.equalsIgnoreCase("7")){
+                                } else if (documentTypeNo.equalsIgnoreCase("7")) {
                                     imageViewUploadTick_7.setVisibility(View.VISIBLE);
                                     buttonEducationDegreeCertificate.setText("Uploaded");
-                                }else if(documentTypeNo.equalsIgnoreCase("8")){
+                                } else if (documentTypeNo.equalsIgnoreCase("8")) {
                                     imageViewUploadTick_8.setVisibility(View.VISIBLE);
                                     buttonOtherDocument.setText("Uploaded");
                                 }
@@ -960,13 +956,13 @@ public class UploadActivity extends AppCompatActivity {
 
 //                        finish();
 
-                    }else {
+                    } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 mDialog.dismiss();
-                                Log.e("TAG", "uploadFile: code 2 "+mData);
-                                Toast.makeText(UploadActivity.this, mData1, Toast.LENGTH_SHORT).show();
+                                Log.e("TAG", "uploadFile: code 2 " + mData);
+                                Toast.makeText(UploadActivityBorrower.this, mData1, Toast.LENGTH_SHORT).show();
                             }
                         });
 //                        finish();
@@ -981,7 +977,7 @@ public class UploadActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.e("TAG"," here: \n\n" + fileName);
+                            Log.e("TAG", " here: \n\n" + fileName);
                         }
                     });
                 }
@@ -997,16 +993,16 @@ public class UploadActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(UploadActivity.this, "File Not Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivityBorrower.this, "File Not Found", Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                Toast.makeText(UploadActivity.this, "URL error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UploadActivityBorrower.this, "URL error!", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(UploadActivity.this, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UploadActivityBorrower.this, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
             }
 //            dialog.dismiss();
             return serverResponseCode;
@@ -1014,7 +1010,8 @@ public class UploadActivity extends AppCompatActivity {
 
     }//---------------------------------------END OF UPLOAD FILE----------------------------------//
 
-    //---------------------------------RESPONSE OF API CALL---------------------------------------//
+    /**---------------------------------RESPONSE OF API CALL-------------------------------------**/
+
     public void getDocuments(JSONObject jsonData) {
         try {
             Log.e("SERVER CALL", "getDocuments" + jsonData);
@@ -1022,90 +1019,98 @@ public class UploadActivity extends AppCompatActivity {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                Toast.makeText(UploadActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UploadActivityBorrower.this, message, Toast.LENGTH_SHORT).show();
                 JSONObject jsonObject = jsonData.getJSONObject("result");
 
                 JSONArray jsonArray = jsonObject.getJSONArray("KycDocument");
-                for(int i=0;i<jsonArray.length();i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                     String s = jsonObject1.getString("document_type_id");
                     String image = jsonObject1.getString("document_path");
-                    Log.e(MainApplication.TAG, "TYPENO: "+s );
-                    Log.e(MainApplication.TAG, "image: "+image );
-                    if(s.equalsIgnoreCase("1")) {
+                    Log.e(MainApplication.TAG, "TYPENO: " + s);
+                    Log.e(MainApplication.TAG, "image: " + image);
+                    if (s.equalsIgnoreCase("1")) {
                         buttonKycPhotoId.setVisibility(View.VISIBLE);
+                        buttonKycPhotoId.setText("Uploaded");
                         imageViewUploadTick_1.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewKycPhotoId);
-                    }else if(s.equalsIgnoreCase("2")){
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycPhotoId);
+                    } else if (s.equalsIgnoreCase("2")) {
                         buttonKycAddressProof.setVisibility(View.VISIBLE);
+                        buttonKycAddressProof.setText("Uploaded");
                         imageViewUploadTick_2.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewKycAddressProof);
-                    }else if(s.equalsIgnoreCase("3")){
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycAddressProof);
+                    } else if (s.equalsIgnoreCase("3")) {
                         buttonKycSignatureProof.setVisibility(View.VISIBLE);
+                        buttonKycSignatureProof.setText("Uploaded");
                         imageViewUploadTick_3.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewKycSignatureProof);
-                    }else if(s.equalsIgnoreCase("9")){
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycSignatureProof);
+                    } else if (s.equalsIgnoreCase("9")) {
                         buttonKycProfilePhoto.setVisibility(View.VISIBLE);
+                        buttonKycProfilePhoto.setText("Uploaded");
                         imageViewUploadTick_9.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewKycProfilePhoto);
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycProfilePhoto);
                     }
                 }
 
                 JSONArray jsonArray1 = jsonObject.getJSONArray("Financial");
-                Log.e(MainApplication.TAG, "getDocuments: "+jsonArray1 );
-                for(int i=0;i<jsonArray1.length();i++) {
-                    Log.e(MainApplication.TAG, "FOR LOOP: "+i );
+                Log.e(MainApplication.TAG, "getDocuments: " + jsonArray1);
+                for (int i = 0; i < jsonArray1.length(); i++) {
+                    Log.e(MainApplication.TAG, "FOR LOOP: " + i);
                     JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
                     String s = jsonObject1.getString("document_type_id");
                     String image = jsonObject1.getString("document_path");
 
-                    if(s.equalsIgnoreCase("4")){
-                        Log.e(MainApplication.TAG, "IF LOOP : 4" );
+                    if (s.equalsIgnoreCase("4")) {
+                        Log.e(MainApplication.TAG, "IF LOOP : 4");
                         buttonFinanceIncomeProof.setVisibility(View.VISIBLE);
+                        buttonFinanceIncomeProof.setText("Uploaded");
                         imageViewUploadTick_4.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewFinanceIncomeProof);
-                    }else if(s.equalsIgnoreCase("5")){
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceIncomeProof);
+                    } else if (s.equalsIgnoreCase("5")) {
                         buttonFinanceBankStatement.setVisibility(View.VISIBLE);
+                        buttonFinanceBankStatement.setText("Uploaded");
                         imageViewUploadTick_5.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewFinanceBankStatement);
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceBankStatement);
                     }
                 }
 
                 JSONArray jsonArray2 = jsonObject.getJSONArray("Education");
-                for(int i=0;i<jsonArray2.length();i++) {
+                for (int i = 0; i < jsonArray2.length(); i++) {
                     JSONObject jsonObject1 = jsonArray2.getJSONObject(i);
                     String s = jsonObject1.getString("document_type_id");
                     String image = jsonObject1.getString("document_path");
 
-                    if(s.equalsIgnoreCase("6")){
+                    if (s.equalsIgnoreCase("6")) {
                         buttonEducationDegreeMarksheets.setVisibility(View.VISIBLE);
+                        buttonEducationDegreeMarksheets.setText("Uploaded");
                         imageViewUploadTick_6.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewEducationDegreeMarksheets);
-                    }else if(s.equalsIgnoreCase("7")){
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewEducationDegreeMarksheets);
+                    } else if (s.equalsIgnoreCase("7")) {
                         buttonEducationDegreeCertificate.setVisibility(View.VISIBLE);
+                        buttonEducationDegreeCertificate.setText("Uploaded");
                         imageViewUploadTick_7.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewEducationDegreeCertificate);
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewEducationDegreeCertificate);
                     }
                 }
 
                 JSONArray jsonArray3 = jsonObject.getJSONArray("Other");
-                for(int i=0;i<jsonArray3.length();i++) {
-                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                for (int i = 0; i < jsonArray3.length(); i++) {
+                    JSONObject jsonObject1 = jsonArray3.getJSONObject(i);
                     String s = jsonObject1.getString("document_type_id");
                     String image = jsonObject1.getString("document_path");
 
-                    if(s.equalsIgnoreCase("8")){
+                    if (s.equalsIgnoreCase("8")) {
                         buttonOtherDocument.setVisibility(View.VISIBLE);
+                        buttonOtherDocument.setText("Uploaded");
                         imageViewUploadTick_8.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/"+image).into(imageViewOtherDocument);
+                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewOtherDocument);
                     }
                 }
 
-            }else {
-                Toast.makeText(UploadActivity.this, message, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(UploadActivityBorrower.this, message, Toast.LENGTH_SHORT).show();
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -1,16 +1,21 @@
 package com.eduvanz;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,14 +35,13 @@ import android.widget.Toast;
 import com.eduvanz.faqexpandablelistview.FAQ;
 import com.eduvanz.fqform.borrowerdetail.FqFormBorrower;
 import com.eduvanz.fqform.coborrowerdetail.FqFormCoborrower;
+import com.eduvanz.friendlyscore.StartActivityFS;
 import com.eduvanz.pqformfragments.PqFormFragment1;
-import com.eduvanz.pqformfragments.SuccessAfterPQForm;
-import com.eduvanz.uploaddocs.UploadActivity;
+import com.eduvanz.uploaddocs.UploadActivityBorrower;
+import com.eduvanz.uploaddocs.UploadActivityCoBorrower;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -52,17 +56,23 @@ import java.net.URL;
 
 import static com.eduvanz.MainApplication.TAG;
 
+/** GET ALL CONTACTS https://stackoverflow.com/questions/12562151/android-get-all-contacts **/
 public class Main2ActivityNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public int GET_MY_PERMISSION = 1;
     TextView textViewName, textViewEmail;
     Typeface typefaceFont, typefaceFontBold;
     ImageView imageView;
     SharedPref sharedPref;
-    String checkForEligibility="";
+    String checkForEligibility = "";
     StringBuffer sb;
     long total = 0;
     ProgressDialog mDialog;
+    String userpic = "";
+    DrawerLayout drawer;
+    int permission, permission2, permission3;
+    ProgressDialog mDialogBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,56 +81,95 @@ public class Main2ActivityNavigation extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        MainApplication.mainapp_courseID ="";
-        MainApplication.mainapp_instituteID="";
-        MainApplication.mainapp_locationID="";
-        MainApplication.mainapp_loanamount="";
-        MainApplication.mainapp_fammilyincome="";
-        MainApplication.mainapp_doccheck="";
-        MainApplication.mainapp_professioncheck="";
-        MainApplication.mainapp_currentCity="";
+
+
+        MainApplication.mainapp_courseID = "";
+        MainApplication.mainapp_instituteID = "";
+        MainApplication.mainapp_locationID = "";
+        MainApplication.mainapp_loanamount = "";
+        MainApplication.mainapp_fammilyincome = "";
+        MainApplication.mainapp_doccheck = "";
+        MainApplication.mainapp_professioncheck = "";
+        MainApplication.mainapp_currentCity = "";
 
         try {
             Bundle bundle = getIntent().getExtras();
             checkForEligibility = bundle.getString("checkfor_eligibility");
-            Log.e(MainApplication.TAG, "checkForEligibility: "+checkForEligibility );
-        }catch (Exception e){
+            Log.e(MainApplication.TAG, "checkForEligibility: " + checkForEligibility);
+        } catch (Exception e) {
             checkForEligibility = "0";
         }
 
-        if(!checkForEligibility.equalsIgnoreCase("1")) {
-            long time= System.currentTimeMillis();
+        if (!checkForEligibility.equalsIgnoreCase("1")) {
+            long time = System.currentTimeMillis();
             Log.e(TAG, "CURRENT TIME: " + time);
             long databasetime;
             DBHandler dbHandler = new DBHandler(getApplicationContext());
 
-            if(dbHandler.getDate("1").equalsIgnoreCase("")){
-                databasetime=0;
-            }else {
+            if (dbHandler.getDate("1").equalsIgnoreCase("")) {
+                databasetime = 0;
+            } else {
                 databasetime = Long.parseLong(dbHandler.getDate("1"));
             }
             Log.e(TAG, "DATABASE TIME: " + databasetime);
-            if(time-databasetime>86400000){
-                long a = time-databasetime;
+            if (time - databasetime > 86400000) {
+                long a = time - databasetime;
                 Log.e(TAG, "TIME: " + a);
-                MainApplication.readSms(getApplicationContext());
-                mReadJsonData();
+
+
+                if (Build.VERSION.SDK_INT >= 23)
+                {
+                    permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    permission2 = ContextCompat.checkSelfPermission(getApplicationContext(),
+                            Manifest.permission.WRITE_CONTACTS);
+                    permission3 = ContextCompat.checkSelfPermission(getApplicationContext(),
+                            Manifest.permission.READ_CONTACTS);
+                    Log.e(TAG, "permission: "+permission );
+                    if (permission != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED || permission3 != PackageManager.PERMISSION_GRANTED ) {
+                        Log.i("TAG", "Permission to record denied");
+                        makeRequest();
+                        if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED) {
+                            MainApplication.readSms(getApplicationContext());
+                            Log.e(TAG, "onCreate: " + "AYYYYYAAAA");
+                            //                                MainApplication.contactsRead(getApplicationContext());
+                            mReadJsonData();
+                        }
+                    } else if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED){
+
+                        MainApplication.readSms(getApplicationContext());
+                        Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
+                        mDialogBar = new ProgressDialog(Main2ActivityNavigation.this, R.style.AppTheme_Dark_Dialog);
+                        mDialogBar.setMessage("Authenticating... ");
+                        mDialogBar.setCancelable(false);
+                        mDialogBar.show();
+//                            MainApplication.contactsRead(getApplicationContext());
+                        mDialogBar.hide();
+                        mReadJsonData();
+                    }
+                }else {
+                    MainApplication.readSms(getApplicationContext());
+                    Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
+                    //                        MainApplication.contactsRead(getApplicationContext());
+                    mReadJsonData();
+                }
+
             }
         }
 
 
         toolbar.setTitleTextColor(Color.WHITE);
 
-        if(!checkForEligibility.equalsIgnoreCase("1")) {
+        if (!checkForEligibility.equalsIgnoreCase("1")) {
             getSupportActionBar().setTitle("DashBoard");
-        }else {
+        } else {
             getSupportActionBar().setTitle("Pq Form");
         }
 
         typefaceFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/droidsans_bold.ttf");
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -137,14 +186,14 @@ public class Main2ActivityNavigation extends AppCompatActivity
         textViewEmail.setTypeface(typefaceFontBold);
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
-        String firstnameshared = sharedPreferences.getString("first_name","null");
-        String lastnameshared = sharedPreferences.getString("last_name","null");
-        String emailshared = sharedPreferences.getString("user_email","null");
-        String userpic = sharedPreferences.getString("user_image","null");
+        String firstnameshared = sharedPreferences.getString("first_name", "null");
+        String lastnameshared = sharedPreferences.getString("last_name", "null");
+        String emailshared = sharedPreferences.getString("user_email", "null");
+        userpic = sharedPreferences.getString("user_image", "null");
 
-        Log.e(MainApplication.TAG, "firstnameshared: "+firstnameshared + "lastnameshared: "+lastnameshared + "emailshared: "+emailshared + "logged_id: "+sharedPreferences.getString("logged_id","null"));
+        Log.e(MainApplication.TAG, "firstnameshared: " + firstnameshared + "lastnameshared: " + lastnameshared + "emailshared: " + emailshared + "logged_id: " + sharedPreferences.getString("logged_id", "null"));
 
-        if(!userpic.equalsIgnoreCase("null") || !userpic.equalsIgnoreCase("")) {
+        if (!userpic.equalsIgnoreCase("null") || !userpic.equalsIgnoreCase("")) {
             Picasso.with(getApplicationContext()).load(userpic).into(imageView);
         }
 
@@ -152,13 +201,13 @@ public class Main2ActivityNavigation extends AppCompatActivity
         textViewEmail.setText(emailshared);
 
         Menu m = navigationView.getMenu();
-        for (int i=0;i<m.size();i++) {
+        for (int i = 0; i < m.size(); i++) {
             MenuItem mi = m.getItem(i);
 
             //for applying a font to subMenu ...
             SubMenu subMenu = mi.getSubMenu();
-            if (subMenu!=null && subMenu.size() >0 ) {
-                for (int j=0; j <subMenu.size();j++) {
+            if (subMenu != null && subMenu.size() > 0) {
+                for (int j = 0; j < subMenu.size(); j++) {
                     MenuItem subMenuItem = subMenu.getItem(j);
                     applyFontToMenuItem(subMenuItem);
                 }
@@ -168,13 +217,37 @@ public class Main2ActivityNavigation extends AppCompatActivity
             applyFontToMenuItem(mi);
         }
 
-        if(!checkForEligibility.equalsIgnoreCase("1")) {
+        if (!checkForEligibility.equalsIgnoreCase("1")) {
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new DashBoardFragment()).commit();
-        }else {
+        } else {
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new PqFormFragment1()).commit();
         }
+    }
+
+    public void onResume() {
+        super.onResume();
+        Log.e(MainApplication.TAG, "ON RESUME");
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
+        userpic = sharedPreferences.getString("user_image", "null");
+        Log.e(MainApplication.TAG, "ON RESUME" + userpic);
+        Picasso.with(Main2ActivityNavigation.this).load(userpic).into(imageView);
+
+        if (!checkForEligibility.equalsIgnoreCase("1")) {
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new DashBoardFragment()).commit();
+        } else {
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new PqFormFragment1()).commit();
+        }
+
+    }
+
+    protected void makeRequest() {
+        ActivityCompat.requestPermissions(Main2ActivityNavigation.this,
+                new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE,  Manifest.permission.READ_CONTACTS,  Manifest.permission.WRITE_CONTACTS},
+                GET_MY_PERMISSION);
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
@@ -182,7 +255,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
 //        typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/droidsans_font.ttf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
-        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
 
@@ -227,10 +300,13 @@ public class Main2ActivityNavigation extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_upload_docs_view) {
-            Intent intent = new Intent(Main2ActivityNavigation.this, UploadActivity.class);
+            Intent intent = new Intent(Main2ActivityNavigation.this, UploadActivityBorrower.class);
             startActivity(intent);
-        }
-        else if (id == R.id.nav_coborrowerdetail) {
+        } else if (id == R.id.nav_upload_docs_coborrower) {
+            // Handle the camera action
+            Intent intent = new Intent(Main2ActivityNavigation.this, UploadActivityCoBorrower.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_coborrowerdetail) {
             Intent intent = new Intent(Main2ActivityNavigation.this, FqFormCoborrower.class);
             startActivity(intent);
         }
@@ -242,35 +318,33 @@ public class Main2ActivityNavigation extends AppCompatActivity
             // Handle the camera action
             Intent intent = new Intent(Main2ActivityNavigation.this, FqFormBorrower.class);
             startActivity(intent);
-        }
-        else if (id == R.id.nav_faq) {
+        } else if (id == R.id.nav_faq) {
             Intent intent = new Intent(Main2ActivityNavigation.this, FAQ.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_aboutus) {
             Intent intent = new Intent(Main2ActivityNavigation.this, WebViewAboutUs.class);
             startActivity(intent);
-        }
-        else if (id == R.id.nav_termsncondition) {
+        } else if (id == R.id.nav_termsncondition) {
             Intent intent = new Intent(Main2ActivityNavigation.this, WebViewTermsNCondition.class);
             startActivity(intent);
-        }
-        else if (id == R.id.nav_account_settings) {
+        } else if (id == R.id.nav_account_settings) {
             Intent intent = new Intent(Main2ActivityNavigation.this, MyProfile.class);
             startActivity(intent);
-        }else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
 
 //                String checkForImageSlider = "1";
             sharedPref = new SharedPref();
             sharedPref.clearSharedPreference(Main2ActivityNavigation.this);
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
-                finish();
-        }
-//        else if (id == R.id.nav_friendlyscore) {
+            finish();
+        } else if (id == R.id.nav_friendlyscore) {
+            Intent intent = new Intent(Main2ActivityNavigation.this, StartActivityFS.class);
+            startActivity(intent);
 //            Intent clientIntent = null;
 //            clientIntent = new Intent(this,ClientActivity.class);
-//        }
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -278,7 +352,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
     }
 
     public void mReadJsonData() {
-        final File dir = new File(Environment.getExternalStorageDirectory()+"/");
+        final File dir = new File(Environment.getExternalStorageDirectory() + "/");
         if (dir.exists() == false) {
             dir.mkdirs();
         }
@@ -292,7 +366,9 @@ public class Main2ActivityNavigation extends AppCompatActivity
     }
 
 
-    /** upload file to server **/
+    /**
+     * upload file to server
+     **/
     public int uploadFile(final String selectedFilePath) {
         String urlup = "http://139.59.32.234/sms/Api/send_message";
         int serverResponseCode = 0;
@@ -303,7 +379,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
         String twoHyphens = "--";
         String boundary = "*****";
 
-        final int count,fileLength;
+        final int count, fileLength;
 
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
@@ -324,8 +400,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
                 }
             });
             return 0;
-        }
-        else {
+        } else {
 
             try {
 
@@ -370,31 +445,31 @@ public class Main2ActivityNavigation extends AppCompatActivity
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);
                 //setting the buffer as byte array of size of bufferSize
                 buffer = new byte[bufferSize];
-                fileLength=bufferSize;
+                fileLength = bufferSize;
                 //reads bytes from FileInputStream(from 0th index of buffer to buffersize)
                 bytesRead = fileInputStream.read(buffer, 0, bufferSize);
 
-                Log.e(TAG, "uploadFile: TOTAL bytes to read "+bytesRead+"total"+bufferSize );
+                Log.e(TAG, "uploadFile: TOTAL bytes to read " + bytesRead + "total" + bufferSize);
                 //loop repeats till bytesRead = -1, i.e., no bytes are left to read
-                total=0;
+                total = 0;
 
                 while (bytesRead > 0) {
-                    total+=bytesRead;
+                    total += bytesRead;
                     //write the bytes read from inputstream
                     dataOutputStream.write(buffer, 0, bufferSize);
                     Log.e("ReadSms", " here: \n\n" + buffer + "\n" + bufferSize);
                     bytesAvailable = fileInputStream.available();
                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-                    Log.e(TAG, "uploadFile: "+bytesRead+total );
-                    Log.e(TAG, "uploadFile: percentage "+((int) Math.round(total * 100 / fileLength)) );
+                    Log.e(TAG, "uploadFile: " + bytesRead + total);
+                    Log.e(TAG, "uploadFile: percentage " + ((int) Math.round(total * 100 / fileLength)));
                     // Publish the progress
                     final int finalBytesRead = bytesRead;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
 
-                            Log.e(TAG, "uploadFile: percentage "+((int) Math.round(total * 100 / fileLength)) );
+                            Log.e(TAG, "uploadFile: percentage " + ((int) Math.round(total * 100 / fileLength)));
 //                            mDialog.setProgress((int) Math.round(total * 100 / fileLength));
                         }
                     });

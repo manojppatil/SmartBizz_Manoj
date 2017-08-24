@@ -48,6 +48,10 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'ch.halcyon:squareprogressbar:1.6.2'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.github.lzyzsd:circleprogress:1.2.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services-auth:9.0.2'
+
+
 }
 apply plugin: 'com.google.gms.google-services'

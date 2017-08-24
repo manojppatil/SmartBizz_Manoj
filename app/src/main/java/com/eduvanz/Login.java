@@ -72,6 +72,7 @@ public class Login extends AppCompatActivity {
                 bundle.putString("checkfor_eligibility", "1");
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -125,7 +126,6 @@ public class Login extends AppCompatActivity {
 
                 Intent intent = new Intent(Login.this, Main2ActivityNavigation.class);
                 startActivity(intent);
-
                 finish();
             }else {
                 mDialogBar.dismiss();
