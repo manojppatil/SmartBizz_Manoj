@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -49,6 +50,7 @@ dependencies {
     compile 'ch.halcyon:squareprogressbar:1.6.2'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.github.lzyzsd:circleprogress:1.2.1'
+    compile project(':linkedin-sdk')
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-auth:9.0.2'
 

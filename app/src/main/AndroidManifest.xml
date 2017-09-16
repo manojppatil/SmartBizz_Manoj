@@ -91,8 +91,10 @@
         <activity
             android:name=".MyProfile"
             android:screenOrientation="portrait" />
-        <activity android:name=".Login" />
-        <activity android:name=".SuccessSplash"></activity>
+        <activity android:name=".Login"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".SuccessSplash"
+            android:screenOrientation="sensorPortrait" />
 
 
 

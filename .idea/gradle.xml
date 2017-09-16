@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/FriendlyScoreAndroidSDK-UI-release" />
             <option value="$PROJECT_DIR$/FriendlyScoreAndroidSDK-release" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/linkedin-sdk" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

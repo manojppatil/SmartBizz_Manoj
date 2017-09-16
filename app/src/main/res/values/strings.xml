@@ -82,8 +82,8 @@
     <string name="facebook_app_id">1557727667677213</string>
     <string name="fb_login_protocol_scheme">fb1557727667677213</string>
 
-    <string name="twitter_consumer_key">UQwyQoWapNDhqujknECXtz8ye</string>
-    <string name="twitter_consumer_secret">asASqPy80nOQEPWG6QMjvgnWlzaamlf4sl3kn2RSO38eXVyXGl</string>
+    <string name="twitter_consumer_key">BumDT8z4xDIC2YBB4wLV8fhlA</string>
+    <string name="twitter_consumer_secret">a2IsY3WYNOgjhY4jlbFIBVlnEJcagVBBPBx8sVq0dqoAE0QcKj</string>
     <string name="desc_linkedin_login">Use Linkedin Login</string>
     <string name="desc_paypal_login">Login with Paypal</string>
     <string name="title_activity_test_google_login">TestGoogleLoginActivity</string>

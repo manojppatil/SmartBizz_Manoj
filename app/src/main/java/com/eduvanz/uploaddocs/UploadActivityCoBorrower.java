@@ -1085,24 +1085,24 @@ public class UploadActivityCoBorrower extends AppCompatActivity {
                     }
                 }
 
-                JSONArray jsonArray2 = jsonObject.getJSONArray("Education");
-                for (int i = 0; i < jsonArray2.length(); i++) {
-                    JSONObject jsonObject1 = jsonArray2.getJSONObject(i);
-                    String s = jsonObject1.getString("document_type_id");
-                    String image = jsonObject1.getString("document_path");
-
-                    if (s.equalsIgnoreCase("6")) {
-                        buttonEducationDegreeMarksheets.setVisibility(View.VISIBLE);
-                        buttonEducationDegreeMarksheets.setText("Uploaded");
-                        imageViewUploadTick_6.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewEducationDegreeMarksheets);
-                    } else if (s.equalsIgnoreCase("7")) {
-                        buttonEducationDegreeCertificate.setVisibility(View.VISIBLE);
-                        buttonEducationDegreeCertificate.setText("Uploaded");
-                        imageViewUploadTick_7.setVisibility(View.VISIBLE);
-                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewEducationDegreeCertificate);
-                    }
-                }
+//                JSONArray jsonArray2 = jsonObject.getJSONArray("Education");
+//                for (int i = 0; i < jsonArray2.length(); i++) {
+//                    JSONObject jsonObject1 = jsonArray2.getJSONObject(i);
+//                    String s = jsonObject1.getString("document_type_id");
+//                    String image = jsonObject1.getString("document_path");
+//
+//                    if (s.equalsIgnoreCase("6")) {
+//                        buttonEducationDegreeMarksheets.setVisibility(View.VISIBLE);
+//                        buttonEducationDegreeMarksheets.setText("Uploaded");
+//                        imageViewUploadTick_6.setVisibility(View.VISIBLE);
+//                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewEducationDegreeMarksheets);
+//                    } else if (s.equalsIgnoreCase("7")) {
+//                        buttonEducationDegreeCertificate.setVisibility(View.VISIBLE);
+//                        buttonEducationDegreeCertificate.setText("Uploaded");
+//                        imageViewUploadTick_7.setVisibility(View.VISIBLE);
+//                        Picasso.with(getApplicationContext()).load("http://139.59.32.234/eduvanz/" + image).into(imageViewEducationDegreeCertificate);
+//                    }
+//                }
 
                 JSONArray jsonArray3 = jsonObject.getJSONArray("Other");
                 for (int i = 0; i < jsonArray3.length(); i++) {
