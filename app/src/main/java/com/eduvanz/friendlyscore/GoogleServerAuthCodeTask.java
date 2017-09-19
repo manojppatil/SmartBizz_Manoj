@@ -3,6 +3,7 @@ package com.eduvanz.friendlyscore;
 import android.accounts.Account;
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
@@ -44,6 +45,9 @@ public class GoogleServerAuthCodeTask extends AsyncTask<String, Void, JSONObject
         String mEmail = params[0];
         String mType = params[1];
         String idToken = params[2];
+        Log.e("", "doInBackground:mEmail "+mEmail+mType+idToken);
+        Log.e("", "mType"+mType );
+        Log.e("", "idToken"+idToken );
         try {
             URL url = new URL("https://www.googleapis.com/plus/v1/people/me");
 

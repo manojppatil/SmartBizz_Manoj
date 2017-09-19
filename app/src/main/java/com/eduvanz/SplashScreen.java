@@ -1,5 +1,6 @@
 package com.eduvanz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -8,6 +9,7 @@ import android.content.pm.Signature;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -27,6 +29,7 @@ public class SplashScreen extends AppCompatActivity {
     RelativeLayout relativeLayoutCustomer;
     String checkForImageSlider="";
     SharedPref sharedPref = new SharedPref();
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class SplashScreen extends AppCompatActivity {
         view1 = getLayoutInflater().inflate(R.layout.activity_splash_screen_customer, null);
         setContentView(view1);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
+        context = this;
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
         checkForImageSlider = sharedPreferences.getString("checkForImageSlider","null");

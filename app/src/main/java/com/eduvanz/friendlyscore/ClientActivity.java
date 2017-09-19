@@ -80,6 +80,8 @@ public class ClientActivity extends LaunchUI implements
 
     private  String USER_KEY_HEADER = "current-user-state";
 
+    Context mContext;
+
 
 
     /*
@@ -149,6 +151,7 @@ public class ClientActivity extends LaunchUI implements
         String appid = clientIntent.getStringExtra("app_id");
         Credentials credentials = null;
         String session_key = null;
+        mContext=this;
         if(currentUser){
 
 
@@ -198,13 +201,16 @@ public class ClientActivity extends LaunchUI implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        Log.e(TAG, "onActivityResult: "+data );
+        Log.e(TAG, "onActivityResult: "+resultCode );
+        Log.e(TAG, "onActivityResult: "+requestCode );
         if (requestCode == GOOGLE_SIGN_IN_CODE) {
+//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Log.e(TAG, "onActivityResult: "+result.isSuccess() );
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
-
-
                 handleGoogleAuthorization(account);
             } else {
 
@@ -241,7 +247,11 @@ public class ClientActivity extends LaunchUI implements
 //        }
         else if (requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()) {
             fbCallbackManager.onActivityResult(requestCode, resultCode, data);
+
         }
+//        else if (requestCode == Activity.Result_CANCELLED.) {
+//            fbCallbackManager.onActivityResult(requestCode, resultCode, data);
+//        }
 //        else if(requestCode == TwitterAuthConfig.DEFAULT_AUTH_REQUEST_CODE){
 //            twitterLoginbutton.onActivityResult(requestCode, resultCode, data);
 //        }
@@ -257,12 +267,15 @@ public class ClientActivity extends LaunchUI implements
             @Override
             public void onAuthSuccess() {
 
+                Log.e(TAG, "onAuthSuccess: " );
+
                 callLinkedInApi();
                 //Toast.makeText(getApplicationContext(), "success" + LISessionManager.getInstance(this).getSession().getAccessToken().toString(), Toast.LENGTH_LONG).show();
             }
             @Override
             public void onAuthError(LIAuthError error) {
                 //setUpdateState();
+                Log.e(TAG, "onAuthSuccess:Linked IN  "+error );
                 userAuthError(Constants.LINKEDIN_ID);
 
 
@@ -276,14 +289,14 @@ public class ClientActivity extends LaunchUI implements
         apiHelper.getRequest(this, linkedinTopCardUrl, new ApiListener() {
             @Override
             public void onApiSuccess(ApiResponse s) {
-                Log.d(TAG,"onApiSuccess");
-
+                Log.e(TAG,"onApiSuccess");
                 handleAuthorization(s);
             }
 
             @Override
             public void onApiError(LIApiError error) {
                 //((TextView) findViewById(R.id.response)).setText(error.toString());
+                Log.e(TAG,"onApiSuccess"+error);
                 userAuthError(Constants.LINKEDIN_ID);
 
             }
@@ -379,22 +392,20 @@ public class ClientActivity extends LaunchUI implements
     //Send Data to FriendlyScore
     private void handleGoogleAuthorization(GoogleSignInAccount acct){
 
-
+        Log.e(TAG, "display name: " + acct.getDisplayName());
         new GoogleServerAuthCodeTask(this).execute(acct.getEmail(),"com.google",acct.getIdToken());
-
-
 
         idToken = acct.getIdToken();
         //getAccessToken(acct.getEmail());
 
-        Log.d(TAG,acct.getIdToken());
+        Log.e(TAG+"token id",acct.getIdToken());
 
     }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+        Log.e(TAG, "onConnectionFailed:" + connectionResult);
         //Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 

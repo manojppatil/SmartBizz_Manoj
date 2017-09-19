@@ -1,6 +1,7 @@
 package com.eduvanz;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -36,11 +37,13 @@ public class ImageSlider extends AppCompatActivity {
     String checkForImageSlider = "1";
     ImageView imageView1, imageView2;
     SharedPref sharedPref;
+    Context context;
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_slider);
+        context = this;
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 

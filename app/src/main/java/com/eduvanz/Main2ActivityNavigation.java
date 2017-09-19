@@ -1,8 +1,11 @@
 package com.eduvanz;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -37,6 +41,7 @@ import com.eduvanz.fqform.borrowerdetail.FqFormBorrower;
 import com.eduvanz.fqform.coborrowerdetail.FqFormCoborrower;
 import com.eduvanz.friendlyscore.StartActivityFS;
 import com.eduvanz.pqformfragments.PqFormFragment1;
+import com.eduvanz.pqformfragments.SuccessAfterPQForm;
 import com.eduvanz.uploaddocs.UploadActivityBorrower;
 import com.eduvanz.uploaddocs.UploadActivityCoBorrower;
 import com.squareup.picasso.Picasso;
@@ -53,6 +58,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
 
 import static com.eduvanz.MainApplication.TAG;
 
@@ -74,12 +80,33 @@ public class Main2ActivityNavigation extends AppCompatActivity
     int permission, permission2, permission3;
     ProgressDialog mDialogBar;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Log.e(TAG, "verifyOtp: ============================" );
+
+        Log.e(TAG, "onCreate: CALLed Once");
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
+
+//        Intent intentp = new Intent(Main2ActivityNavigation.this, AlarmReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(Main2ActivityNavigation.this, 0, intentp, 0);
+//        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR, 3);
+//        calendar.set(Calendar.MINUTE, 8);
+//        calendar.set(Calendar.AM_PM, Calendar.PM);
+//
+////                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), interval, pendingIntent);
+//        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+//                AlarmManager.INTERVAL_DAY, pendingIntent);
+//        Log.e(MainApplication.TAG, "onTimeSet: milisec : "+  calendar.getTimeInMillis());
 
         /** getting data from shared preference **/
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
@@ -110,70 +137,74 @@ public class Main2ActivityNavigation extends AppCompatActivity
             checkForEligibility = "0";
         }
 
-        if (!checkForEligibility.equalsIgnoreCase("1")) {
-            long time = System.currentTimeMillis();
-            Log.e(TAG, "CURRENT TIME: " + time);
-            long databasetime;
-            DBHandler dbHandler = new DBHandler(getApplicationContext());
+//        if (!checkForEligibility.equalsIgnoreCase("1")) {
+//            long time = System.currentTimeMillis();
+//            Log.e(TAG, "CURRENT TIME: " + time);
+//            long databasetime;
+//            DBHandler dbHandler = new DBHandler(getApplicationContext());
+//
+//            if (dbHandler.getDate("1").equalsIgnoreCase("")) {
+//                databasetime = 0;
+//            } else {
+//                databasetime = Long.parseLong(dbHandler.getDate("1"));
+//            }
+//            Log.e(TAG, "DATABASE TIME: " + databasetime);
+//            if (time - databasetime > 86400000) {
+//                long a = time - databasetime;
+//                Log.e(TAG, "TIME: " + a);
 
-            if (dbHandler.getDate("1").equalsIgnoreCase("")) {
-                databasetime = 0;
-            } else {
-                databasetime = Long.parseLong(dbHandler.getDate("1"));
-            }
-            Log.e(TAG, "DATABASE TIME: " + databasetime);
-            if (time - databasetime > 86400000) {
-                long a = time - databasetime;
-                Log.e(TAG, "TIME: " + a);
 
-
-                if (Build.VERSION.SDK_INT >= 23)
-                {
-                    permission = ContextCompat.checkSelfPermission(getApplicationContext(),
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                    permission2 = ContextCompat.checkSelfPermission(getApplicationContext(),
-                            Manifest.permission.WRITE_CONTACTS);
-                    permission3 = ContextCompat.checkSelfPermission(getApplicationContext(),
-                            Manifest.permission.READ_CONTACTS);
-                    Log.e(TAG, "permission: "+permission );
-                    if (permission != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED || permission3 != PackageManager.PERMISSION_GRANTED ) {
-                        Log.i("TAG", "Permission to record denied");
-                        makeRequest();
-                        if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED) {
-                            MainApplication.readSms(getApplicationContext(), userID, userNo);
-                            Log.e(TAG, "onCreate: " + "AYYYYYAAAA");
-                            //                                MainApplication.contactsRead(getApplicationContext());
-                            mReadJsonData();
-                        }
-                    } else if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED){
-
-                        MainApplication.readSms(getApplicationContext(), userNo, userID);
-                        Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
-                        mDialogBar = new ProgressDialog(Main2ActivityNavigation.this, R.style.AppTheme_Dark_Dialog);
-                        mDialogBar.setMessage("Authenticating... ");
-                        mDialogBar.setCancelable(false);
-                        mDialogBar.show();
-//                            MainApplication.contactsRead(getApplicationContext());
-                        mDialogBar.hide();
-                        mReadJsonData();
-                    }
-                }else {
-                    MainApplication.readSms(getApplicationContext(), userNo, userID);
-                    Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
-                    //                        MainApplication.contactsRead(getApplicationContext());
-                    mReadJsonData();
-                }
-
-            }
-        }
+//                if (Build.VERSION.SDK_INT >= 23)
+//                {
+//                    permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+//                            Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//                    permission2 = ContextCompat.checkSelfPermission(getApplicationContext(),
+//                            Manifest.permission.WRITE_CONTACTS);
+//                    permission3 = ContextCompat.checkSelfPermission(getApplicationContext(),
+//                            Manifest.permission.READ_CONTACTS);
+//                    Log.e(TAG, "permission: "+permission );
+//                    if (permission != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED || permission3 != PackageManager.PERMISSION_GRANTED ) {
+//                        Log.i("TAG", "Permission to record denied");
+//                        makeRequest();
+//                        if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED) {
+//                            MainApplication.readSms(getApplicationContext(), userID, userNo);
+//                            Log.e(TAG, "onCreate: " + "AYYYYYAAAA");
+//                            //                                MainApplication.contactsRead(getApplicationContext());
+//                            mReadJsonData();
+//                        }
+//                    } else if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED){
+//
+//                        MainApplication.readSms(getApplicationContext(), userNo, userID);
+//                        Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
+//                        mDialogBar = new ProgressDialog(Main2ActivityNavigation.this, R.style.AppTheme_Dark_Dialog);
+//                        mDialogBar.setMessage("Authenticating... ");
+//                        mDialogBar.setCancelable(false);
+//                        mDialogBar.show();
+////                            MainApplication.contactsRead(getApplicationContext());
+//                        mDialogBar.hide();
+//                        mReadJsonData();
+//                    }
+//                }else {
+//                    MainApplication.readSms(getApplicationContext(), userNo, userID);
+//                    Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
+//                    //                        MainApplication.contactsRead(getApplicationContext());
+//                    mReadJsonData();
+//                }
+//
+//            }
+//        }
 
 
         toolbar.setTitleTextColor(Color.WHITE);
 
-        if (!checkForEligibility.equalsIgnoreCase("1")) {
-            getSupportActionBar().setTitle("DashBoard");
-        } else {
-            getSupportActionBar().setTitle("Pq Form");
+        try {
+            if (!checkForEligibility.equalsIgnoreCase("1")) {
+                getSupportActionBar().setTitle("DashBoard");
+            } else {
+                getSupportActionBar().setTitle("Pq Form");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
         typefaceFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/droidsans_font.ttf");

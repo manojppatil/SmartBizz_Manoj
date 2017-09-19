@@ -12,16 +12,19 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
-
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
+        android:name=".MainActivity"
         android:allowBackup="true"
         android:icon="@drawable/eduvanz_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -39,7 +42,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -48,7 +51,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -63,22 +66,18 @@
         <activity
             android:name=".uploaddocs.UploadActivityBorrower"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".uploaddocs.UploadActivityCoBorrower"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".pqformfragments.SuccessAfterPQForm"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".friendlyscore.ClientActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".friendlyscore.StartActivityFS"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".faqexpandablelistview.FAQ"
             android:screenOrientation="portrait" />
@@ -91,13 +90,12 @@
         <activity
             android:name=".MyProfile"
             android:screenOrientation="portrait" />
-        <activity android:name=".Login"
+        <activity
+            android:name=".Login"
             android:screenOrientation="sensorPortrait" />
-        <activity android:name=".SuccessSplash"
+        <activity
+            android:name=".SuccessSplash"
             android:screenOrientation="sensorPortrait" />
-
-
-
 
         <receiver android:name=".pqformfragments.SmsReceiver">
             <intent-filter>
@@ -116,7 +114,20 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".UsageStatistic"/>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.NOTIFY"/>
+        </intent-filter>
+        </receiver>
+
+        <service android:name=".MyService"
+            android:exported="false"/>
 
     </application>
+
 
 </manifest>

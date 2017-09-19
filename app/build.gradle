@@ -18,6 +18,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    configurations {
+        all*.exclude group: 'com.android.volley'
+    }
 }
 
 dependencies {
@@ -28,6 +31,10 @@ dependencies {
     //Dotted View For View pager
     compile project(':FriendlyScoreAndroidSDK-release')
     compile project(':FriendlyScoreAndroidSDK-UI-release')
+    compile project(':linkedin-sdk')
+
+
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
@@ -37,7 +44,7 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.google.firebase:firebase-messaging:9.0.2'
+    compile 'com.google.firebase:firebase-messaging:9.2.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.android.support:support-compat:25.3.1'
     compile 'com.daimajia.easing:library:2.0@aar'
@@ -50,10 +57,7 @@ dependencies {
     compile 'ch.halcyon:squareprogressbar:1.6.2'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.github.lzyzsd:circleprogress:1.2.1'
-    compile project(':linkedin-sdk')
+    compile 'com.google.android.gms:play-services-auth:9.2.1'
     testCompile 'junit:junit:4.12'
-    compile 'com.google.android.gms:play-services-auth:9.0.2'
-
-
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE resources [
-    <!ENTITY google_play_services_link "Google Play Store">
-    ]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY google_play_services_link "Google Play Store">]>
 
 <resources>
     <string name="app_name">Eduvanz</string>
