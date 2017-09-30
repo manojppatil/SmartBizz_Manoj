@@ -22,6 +22,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import android.widget.Toast;
 
 import com.eduvanz.uploaddocs.PathFile;
 import com.eduvanz.uploaddocs.Utility;
+import com.eduvanz.volley.VolleyCall;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -46,6 +49,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyProfile extends AppCompatActivity {
 
@@ -60,18 +65,25 @@ public class MyProfile extends AppCompatActivity {
     String urlup = MainApplication.mainUrl + "dashboard/changeImage";
     String userID = "";
     StringBuffer sb;
-    String user_image="";
+    String user_image="", mobileno="";
+    Context context;
+    AppCompatActivity mActivity;
+    Button buttonConfirm;
+    EditText editTextPhoneNo, editTextPassword, editTextConfrimPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
+        context = this;
+        mActivity = this;
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);// hide the keyboard everytime the activty starts.
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
         userID = sharedPreferences.getString("logged_id", "null");
         user_image = sharedPreferences.getString("user_image", "null");
+        mobileno = sharedPreferences.getString("mobile_no", "null");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -80,6 +92,12 @@ public class MyProfile extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.WHITE);
         getSupportActionBar().setTitle("Account Settings");
 
+        editTextPhoneNo = (EditText) findViewById(R.id.editText_phoneno_setting);
+        editTextPhoneNo.setText(mobileno);
+        editTextPassword = (EditText) findViewById(R.id.editText_password_setting);
+        editTextConfrimPassword = (EditText) findViewById(R.id.editText_confrimpassword_setting);
+
+        buttonConfirm = (Button) findViewById(R.id.button_confirm_changesetting);
         imageView = (ImageView) findViewById(R.id.profilepicofUSER);
         linearLayoutChangeImage = (LinearLayout) findViewById(R.id.linearlayout_changeprofilepic);
         linearLayoutChangeImage.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +111,31 @@ public class MyProfile extends AppCompatActivity {
         textViewEditFontAwesome.setTypeface(typefaceFontAwesome);
 
         Picasso.with(this).load(user_image).into(imageView);
+
+        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(editTextPassword.getText().toString().equalsIgnoreCase(editTextConfrimPassword.getText().toString())){
+                    //-----------------------------------------API CALL---------------------------------------//
+                    try {
+                        String url = MainApplication.mainUrl + "dashboard/changePasswordAndNotificationsSettings";
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("mobile", editTextPhoneNo.getText().toString());
+                        params.put("currentPassword", editTextPassword.getText().toString());
+                        params.put("studentId", userID);
+                        VolleyCall volleyCall = new VolleyCall();
+                        volleyCall.sendRequest(context, url, mActivity, null, "changeSettings", params);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //-------------------------------------END OF API CALL------------------------------------//
+                }else {
+                    editTextPassword.setError("Password Does not match");
+                }
+
+            }
+        });
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -497,5 +540,32 @@ public class MyProfile extends AppCompatActivity {
         }
 
     }//---------------------------------------END OF UPLOAD FILE----------------------------------//
+
+
+    /**---------------------------------RESPONSE OF API CALL-------------------------------------**/
+
+    public void changeSettings(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "getDocuments" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+                String phoneno = jsonObject.getString("mobile");
+
+                /** STORING THE COLOR and BOOLEAN VALUE FOR FIRST TIME DEFAULT COLOR STORE INTO SHARED PREFERENCE **/
+                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("mobile_no", phoneno);
+                editor.apply();
+                editor.commit();
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }

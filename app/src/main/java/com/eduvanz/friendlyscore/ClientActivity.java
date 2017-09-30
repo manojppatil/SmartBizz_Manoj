@@ -1,16 +1,19 @@
 package com.eduvanz.friendlyscore;
 
-import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.FriendlyScoreUI.LaunchUI;
@@ -40,10 +43,20 @@ import com.linkedin.platform.listeners.ApiListener;
 import com.linkedin.platform.listeners.ApiResponse;
 import com.linkedin.platform.listeners.AuthListener;
 import com.linkedin.platform.utils.Scope;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import FriendlyScore.AppErrorForClient;
 import FriendlyScore.Constants;
@@ -58,36 +71,27 @@ public class ClientActivity extends LaunchUI implements
         GoogleApiClient.OnConnectionFailedListener {
 
 
-    private static final String TAG = "ClientActivity" ;
+    private static final String TAG = "ClientActivity";
+    private static final int GOOGLE_SIGN_IN_CODE = 9001;
+    /*
+   Facebook
+    */
+    private static final int REQUEST_FACEBOOK_CODE = 1000;
+    /*
+       Linkedin Auth Variables
+    */
+    private static String linkedinTopCardUrl = Constants.LINKEDIN_API_URL;
+    private final String SESSION_KEY_PREF = "SESSION_KEY_PREF";
+    private final String USER_KEY_PREF = "USER_KEY_PREF";
+    Context mContext;
     /*
         Google Auth Variables
 
 
      */
     private GoogleApiClient mGoogleApiClient;
-
-    private static final int GOOGLE_SIGN_IN_CODE = 9001;
-
     private String idToken = null;
-
-
-    private final String SESSION_KEY_PREF = "SESSION_KEY_PREF";
-
-    private  String SESSION_KEY_HEADER = "session-key";
-
-
-    private final String USER_KEY_PREF = "USER_KEY_PREF";
-
-    private  String USER_KEY_HEADER = "current-user-state";
-
-    Context mContext;
-
-
-
-    /*
-       Linkedin Auth Variables
-    */
-    private static String linkedinTopCardUrl = Constants.LINKEDIN_API_URL;
+    private String SESSION_KEY_HEADER = "session-key";
 
 
     /*
@@ -107,20 +111,19 @@ public class ClientActivity extends LaunchUI implements
 //            .merchantName("Example Merchant")
 //            .merchantPrivacyPolicyUri(Uri.parse("https://www.example.com/privacy"))
 //            .merchantUserAgreementUri(Uri.parse("https://www.example.com/legal"));
-
-
-    /*
-   Facebook
-    */
-    private static final int REQUEST_FACEBOOK_CODE = 1000;
+    private String USER_KEY_HEADER = "current-user-state";
     private CallbackManager fbCallbackManager;
 
     /*
         Twitter;
 
      */
-//    private TwitterLoginButton twitterLoginbutton;
+    private TwitterLoginButton twitterLoginbutton;
 
+    //Add to Client Instructions
+    private static Scope buildScope() {
+        return Scope.build(Scope.R_BASICPROFILE, Scope.RW_COMPANY_ADMIN, Scope.R_EMAILADDRESS, Scope.W_SHARE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,8 +137,7 @@ public class ClientActivity extends LaunchUI implements
         //setSupportActionBar(toolbar);
 
         Intent clientIntent = getIntent();
-        boolean currentUser  = clientIntent.getBooleanExtra("currentUser", false);
-
+        boolean currentUser = clientIntent.getBooleanExtra("currentUser", false);
 
 
         setUpGoogle();
@@ -144,23 +146,23 @@ public class ClientActivity extends LaunchUI implements
 
         setUpFacebook();
 
-//        setUpTwitter();
+        setUpTwitter();
 
-        Log.d(TAG,"Session Key: "+getSessionKey());
+        Log.d(TAG, "Session Key: " + getSessionKey());
 
         String appid = clientIntent.getStringExtra("app_id");
         Credentials credentials = null;
         String session_key = null;
-        mContext=this;
-        if(currentUser){
+        mContext = this;
+        if (currentUser) {
 
 
-            if(clientIntent.hasExtra("friendlyScoreUser")){
+            if (clientIntent.hasExtra("friendlyScoreUser")) {
                 //Multiple Users per device, so client has to store User Object
                 //That has session key in a sqlite database and pass it on.
-                session_key = new Gson().fromJson(clientIntent.getStringExtra("friendlyScoreUser"),ReceivedTokenScore.class).session_key;
+                session_key = new Gson().fromJson(clientIntent.getStringExtra("friendlyScoreUser"), ReceivedTokenScore.class).session_key;
 
-            }else{
+            } else {
                 //One user per device. So Session Key for that user is unique
                 session_key = getSessionKey();
             }
@@ -168,7 +170,7 @@ public class ClientActivity extends LaunchUI implements
 
         }
         //Log.d(TAG,session_key);
-        credentials = new Credentials(appid,session_key);
+        credentials = new Credentials(appid, session_key);
 
         credentials.getInstance();
 
@@ -192,6 +194,7 @@ public class ClientActivity extends LaunchUI implements
         super.onStop();
 
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -201,13 +204,13 @@ public class ClientActivity extends LaunchUI implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        Log.e(TAG, "onActivityResult: "+data );
-        Log.e(TAG, "onActivityResult: "+resultCode );
-        Log.e(TAG, "onActivityResult: "+requestCode );
+        Log.e(TAG, "onActivityResult: " + data);
+        Log.e(TAG, "onActivityResult: " + resultCode);
+        Log.e(TAG, "onActivityResult: " + requestCode);
         if (requestCode == GOOGLE_SIGN_IN_CODE) {
 //            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            Log.e(TAG, "onActivityResult: "+result.isSuccess() );
+            Log.e(TAG, "onActivityResult: " + result.isSuccess());
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
@@ -252,30 +255,31 @@ public class ClientActivity extends LaunchUI implements
 //        else if (requestCode == Activity.Result_CANCELLED.) {
 //            fbCallbackManager.onActivityResult(requestCode, resultCode, data);
 //        }
-//        else if(requestCode == TwitterAuthConfig.DEFAULT_AUTH_REQUEST_CODE){
-//            twitterLoginbutton.onActivityResult(requestCode, resultCode, data);
-//        }
-        else {
+        else if (requestCode == TwitterAuthConfig.DEFAULT_AUTH_REQUEST_CODE) {
+            twitterLoginbutton.onActivityResult(requestCode, resultCode, data);
+        } else {
 
             LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
         }
     }
-    public  void loginonClick(){
+
+    public void loginonClick() {
 
         LISessionManager.getInstance(getApplicationContext()).init(this, buildScope(), new AuthListener() {
 
             @Override
             public void onAuthSuccess() {
 
-                Log.e(TAG, "onAuthSuccess: " );
+                Log.e(TAG, "onAuthSuccess: ");
 
                 callLinkedInApi();
                 //Toast.makeText(getApplicationContext(), "success" + LISessionManager.getInstance(this).getSession().getAccessToken().toString(), Toast.LENGTH_LONG).show();
             }
+
             @Override
             public void onAuthError(LIAuthError error) {
                 //setUpdateState();
-                Log.e(TAG, "onAuthSuccess:Linked IN  "+error );
+                Log.e(TAG, "onAuthSuccess:Linked IN  " + error);
                 userAuthError(Constants.LINKEDIN_ID);
 
 
@@ -283,37 +287,32 @@ public class ClientActivity extends LaunchUI implements
         }, true);
     }
 
-    private void callLinkedInApi(){
+    private void callLinkedInApi() {
 
         APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
         apiHelper.getRequest(this, linkedinTopCardUrl, new ApiListener() {
             @Override
             public void onApiSuccess(ApiResponse s) {
-                Log.e(TAG,"onApiSuccess");
+                Log.e(TAG, "onApiSuccess");
                 handleAuthorization(s);
             }
 
             @Override
             public void onApiError(LIApiError error) {
                 //((TextView) findViewById(R.id.response)).setText(error.toString());
-                Log.e(TAG,"onApiSuccess"+error);
+                Log.e(TAG, "onApiSuccess" + error);
                 userAuthError(Constants.LINKEDIN_ID);
 
             }
         });
     }
 
-    private void handleAuthorization(ApiResponse linkedAuthResponse){
+    private void handleAuthorization(ApiResponse linkedAuthResponse) {
 
-        Log.d(TAG,linkedAuthResponse.getResponseDataAsString());
-        new SendToFriendlyScore(this).execute(linkedAuthResponse.getResponseDataAsString().toString(), ""+Constants.LINKEDIN_ID);
+        Log.d(TAG, linkedAuthResponse.getResponseDataAsString());
+        new SendToFriendlyScore(this).execute(linkedAuthResponse.getResponseDataAsString().toString(), "" + Constants.LINKEDIN_ID);
 
 
-    }
-
-    //Add to Client Instructions
-    private static Scope buildScope() {
-        return Scope.build(Scope.R_BASICPROFILE, Scope.RW_COMPANY_ADMIN, Scope.R_EMAILADDRESS, Scope.W_SHARE);
     }
 
     //Abstract Method from Superclass
@@ -322,12 +321,12 @@ public class ClientActivity extends LaunchUI implements
 
         //Log.d(TAG,event.networkType);
 
-        switch (networkType){
+        switch (networkType) {
             case Constants.GOOGLE_ID:
                 signInWithGoogle();
                 break;
             case Constants.TWITTER_ID:
-//                executeTwitterLogin();
+                executeTwitterLogin();
                 break;
             case Constants.LINKEDIN_ID:
                 loginonClick();
@@ -340,19 +339,20 @@ public class ClientActivity extends LaunchUI implements
                 break;
         }
 
-        /* Do something */}
-
+        /* Do something */
+    }
 
 
     ;
 
 
-    private void signInWithGoogle(){
+    private void signInWithGoogle() {
         mGoogleApiClient.clearDefaultAccountAndReconnect();
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN_CODE);
     }
-    private void setUpGoogle(){
+
+    private void setUpGoogle() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestServerAuthCode(getString(R.string.default_web_client_id))
@@ -375,32 +375,29 @@ public class ClientActivity extends LaunchUI implements
                 .build();
 
 
-
         // [END config_signin]
-
-
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-
     }
 
 
     //Send Data to FriendlyScore
-    private void handleGoogleAuthorization(GoogleSignInAccount acct){
+    private void handleGoogleAuthorization(GoogleSignInAccount acct) {
 
         Log.e(TAG, "display name: " + acct.getDisplayName());
-        new GoogleServerAuthCodeTask(this).execute(acct.getEmail(),"com.google",acct.getIdToken());
+        new GoogleServerAuthCodeTask(this).execute(acct.getEmail(), "com.google", acct.getIdToken());
 
         idToken = acct.getIdToken();
         //getAccessToken(acct.getEmail());
 
-        Log.e(TAG+"token id",acct.getIdToken());
+        Log.e(TAG + "token id", acct.getIdToken());
 
     }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
@@ -408,7 +405,6 @@ public class ClientActivity extends LaunchUI implements
         Log.e(TAG, "onConnectionFailed:" + connectionResult);
         //Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
-
 
 
     /*
@@ -454,14 +450,14 @@ public class ClientActivity extends LaunchUI implements
 
      */
 
-    private void setUpFacebook(){
+    private void setUpFacebook() {
         FacebookSdk.sdkInitialize(getApplicationContext());
 
         FacebookSdk.setIsDebugEnabled(true);
         FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
     }
 
-    private void fbLogin(){
+    private void fbLogin() {
         fbCallbackManager = CallbackManager.Factory.create();
 
 
@@ -495,7 +491,6 @@ public class ClientActivity extends LaunchUI implements
                 });
 
 
-
     }
 
 
@@ -509,8 +504,8 @@ public class ClientActivity extends LaunchUI implements
 
 
     //Send FB Token to FriendlyScore
-    private void handleFBAuthorization(final AccessToken token){
-        new SendToFriendlyScore(this).execute(token.getToken(),""+Constants.FACEBOOKL_ID);
+    private void handleFBAuthorization(final AccessToken token) {
+        new SendToFriendlyScore(this).execute(token.getToken(), "" + Constants.FACEBOOKL_ID);
     }
 
 
@@ -519,81 +514,92 @@ public class ClientActivity extends LaunchUI implements
         Twitter
      */
 
-//    private void setUpTwitter(){
-//        // Configure Twitter SDK
+    private void setUpTwitter() {
+        // Configure Twitter SDK
 //        TwitterAuthConfig authConfig =  new TwitterAuthConfig(
 //                getString(R.string.twitter_consumer_key),
 //                getString(R.string.twitter_consumer_secret));
 //        Fabric.with(this, new Twitter(authConfig));
-//
-//    }
-//
-//    private void executeTwitterLogin(){
-//        twitterLoginbutton = new TwitterLoginButton(this);
-//
-//        twitterLoginbutton.setCallback(new Callback<TwitterSession>() {
-//            @Override
-//            public void success(Result<TwitterSession> result) {
-//                handleTwitterSession(result.data);
-//            }
-//
-//            @Override
-//            public void failure(TwitterException exception) {
-//                // Do something on failure
-//                userAuthError(Constants.TWITTER_ID);
-//
-//            }
-//        });
-//
-//        //Artificially Generate Click, this is so we can use customized ui buttons else we would be forced to use twitter ui.
-//        twitterLoginbutton.performClick();
-//    }
 
-    // [START auth_with_twitter]
-//    private void handleTwitterSession(final TwitterSession session) {
-//
-//        handleTwitterAuthorization(session);
-//
-//    }
-//    // [END auth_with_twitter] by sending token to Friendly Score
-//
-//    private void handleTwitterAuthorization(final TwitterSession session){
-//
-//        new SendToFriendlyScore(this).execute(String.valueOf(session.getUserId()), ""+Constants.TWITTER_ID);
-//    }
+        Log.e(TAG, "setUpTwitter: twitter_consumer_key  " + getString(R.string.twitter_consumer_key));
+        Log.e(TAG, "setUpTwitter: twitter_consumer_secret   " + getString(R.string.twitter_consumer_secret));
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig(getString(R.string.twitter_consumer_key),
+                        getString(R.string.twitter_consumer_secret)))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
+
+    }
+
+    private void executeTwitterLogin() {
+        Log.e(TAG, "executeTwitterLogin: ");
+        twitterLoginbutton = new TwitterLoginButton(this);
+
+        twitterLoginbutton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                handleTwitterSession(result.data);
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                // Do something on failure
+                userAuthError(Constants.TWITTER_ID);
+
+            }
+        });
+
+        //Artificially Generate Click, this is so we can use customized ui buttons else we would be forced to use twitter ui.
+        twitterLoginbutton.performClick();
+    }
+
+    //     [START auth_with_twitter]
+    private void handleTwitterSession(final TwitterSession session) {
+
+        handleTwitterAuthorization(session);
+
+    }
+    // [END auth_with_twitter] by sending token to Friendly Score
+
+    private void handleTwitterAuthorization(final TwitterSession session) {
+
+        new SendToFriendlyScore(this).execute(String.valueOf(session.getUserId()), "" + Constants.TWITTER_ID);
+    }
 
     //The current user state is stored. The token received when any authentication is completed.
     //The user state can be used to update UI based on your choice.
-    private void storeCurrentUserState(ReceivedTokenScore receivedTokenScore){
+    private void storeCurrentUserState(ReceivedTokenScore receivedTokenScore) {
 
         //It is store using key-pairs. Private Mode ensures it is available only to your app.
-        SharedPreferences sessionPreferences = this.getSharedPreferences(USER_KEY_PREF,Context.MODE_PRIVATE);
+        SharedPreferences sessionPreferences = this.getSharedPreferences(USER_KEY_PREF, Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sessionPreferences.edit();
-        editor.putString(USER_KEY_HEADER,new Gson().toJson(receivedTokenScore));
+        editor.putString(USER_KEY_HEADER, new Gson().toJson(receivedTokenScore));
         editor.commit();
     }
 
     //The session is used by to connect your user to Friendly Score. So for a repeat user, the previous authentication
     //and scores are available.
-    private String getSessionKey(){
-        SharedPreferences sessionPreferences = this.getSharedPreferences(SESSION_KEY_PREF,Context.MODE_PRIVATE);
+    private String getSessionKey() {
+        SharedPreferences sessionPreferences = this.getSharedPreferences(SESSION_KEY_PREF, Context.MODE_PRIVATE);
 
-        String session_key = sessionPreferences.getString(SESSION_KEY_HEADER,null);
+        String session_key = sessionPreferences.getString(SESSION_KEY_HEADER, null);
 
-        Log.d(TAG, "Sesssion Key:"+session_key);
+        Log.d(TAG, "Sesssion Key:" + session_key);
         return session_key;
     }
 
     //Store the session key returned by SDK so you can identify the user to Friendly Score again.
-    private void storeSessionKey(String session_key){
+    private void storeSessionKey(String session_key) {
 
-        SharedPreferences sessionPreferences = this.getSharedPreferences(SESSION_KEY_PREF,Context.MODE_PRIVATE);
+        SharedPreferences sessionPreferences = this.getSharedPreferences(SESSION_KEY_PREF, Context.MODE_PRIVATE);
 
-        Log.d(TAG, "Sesssion Key:"+session_key);
+        Log.d(TAG, "Sesssion Key:" + session_key);
 
         SharedPreferences.Editor editor = sessionPreferences.edit();
-        editor.putString(SESSION_KEY_HEADER,session_key);
+        editor.putString(SESSION_KEY_HEADER, session_key);
         editor.commit();
     }
 
@@ -604,46 +610,97 @@ public class ClientActivity extends LaunchUI implements
     //The function is triggered when the process of "See Your Score" is finished and the SDK passes
     //for the user to your app. "See Your Score" at the bottom of the screen is visible
     //only when the user has authenticated with the required minimum number of data points(Social Networks).
+
+    /** sample output of scoreCompleted object
+     * {
+     "data": {
+     "twitter": {
+     "id": 1,
+     "name": "twitter",
+     "score_percent": 60
+     }
+     },
+     "max_score": 1000,
+     "photo_url": "https://media.licdn.com/mpr/mprx/0_Pk1lNNAAt9gjNr7gt6OxAzTPPLhjP-_gtqSptvxgOTTYN1A1rNtgrx7jR8F",
+     "score_percent": 0.0,
+     "total_score": 735,
+     "user_id": "41508",
+     "user_session_key": "59ccd6f04b512"
+     }**/
     @Override
     public void getCompletedScore(ScoreCompleted scoreCompleted) {
-        Log.d("ClientActivity",""+scoreCompleted.userObject);
+        Log.d("ClientActivity", "getCompletedScore" + scoreCompleted.userObject);
+        try {
+            JSONObject jsonObject = new JSONObject(scoreCompleted.userObject);
 
-        //
+            String maxScore = jsonObject.getString("total_score");
+            Log.e(TAG, "getCompletedScore: "+maxScore );
+
+            // Create custom dialog object
+            final Dialog dialog = new Dialog(ClientActivity.this);
+            // Include dialog.xml file
+            dialog.setContentView(R.layout.dialog);
+            // Set dialog title
+            dialog.setTitle("Your Score");
+
+            // set values for custom dialog components - text, image and button
+            TextView text = (TextView) dialog.findViewById(R.id.textDialog);
+//            text.setText("Custom dialog Android example.");
+            ImageView image = (ImageView) dialog.findViewById(R.id.imageDialog);
+//            image.setImageResource(R.drawable.image0);
+
+            dialog.show();
+
+            Button declineButton = (Button) dialog.findViewById(R.id.declineButton);
+            // if decline button is clicked, close the custom dialog
+            declineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Close dialog
+                    dialog.dismiss();
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     //The method is called when the process of authetication for any of the data networks is completed, i.e.
     //each time when Facebook authentication is completed, Google authentication is completed etc.
     @Override
-    public void handleReceivedTokenScore(ReceivedTokenScore receivedTokenScore){
+    public void handleReceivedTokenScore(ReceivedTokenScore receivedTokenScore) {
         storeCurrentUserState(receivedTokenScore);
 
         storeSessionKey(receivedTokenScore.session_key);
-        Log.d(TAG,new Gson().toJson(receivedTokenScore));
+        Log.d(TAG, new Gson().toJson(receivedTokenScore));
         // DO NOT CLOSE OR CHANGE UI
     }
 
     //The method is called when the SDK identifies errors that are primarily associated
     //with your implementation of the app or the SDK.
     @Override
-    public  void appErrorMessage(AppErrorForClient appErrorForClient){
-        Log.d(TAG,String.valueOf(appErrorForClient.getErrorNo()));
+    public void appErrorMessage(AppErrorForClient appErrorForClient) {
+        Log.d(TAG, String.valueOf(appErrorForClient.getErrorNo()));
         String message = null;
-        String title= null;
-        switch (appErrorForClient.getErrorNo()){
+        String title = null;
+        switch (appErrorForClient.getErrorNo()) {
             case AppErrorForClient.app_id_not_found:
                 title = "Check your App Id on Friendly Score";
                 message = "Contact App Developer";
-                showErrorDialog(message,title);
+                showErrorDialog(message, title);
                 break;
             case AppErrorForClient.session_key_not_found:
                 title = "User not found";
                 message = "Check user data";
-                showErrorDialog(message,title);
+                showErrorDialog(message, title);
                 break;
             case AppErrorForClient.internalServerError:
                 title = "Problem with our servers";
                 message = "There was problem with our servers, try again soon";
-                showErrorDialog(message,title);
+                showErrorDialog(message, title);
                 break;
         }
 
@@ -653,41 +710,41 @@ public class ClientActivity extends LaunchUI implements
     //with problems with user interaction with the SDK, such as no internet, no data for
     //computing score, slow internet connection.
     @Override
-    public void userErrorMessage(ErrorForUser errorForUser){
-        Log.d(TAG,errorForUser.getErrorMessage());
+    public void userErrorMessage(ErrorForUser errorForUser) {
+        Log.d(TAG, errorForUser.getErrorMessage());
         String message = null;
-        String title= null;
-        switch (errorForUser.getErrorNo()){
+        String title = null;
+        switch (errorForUser.getErrorNo()) {
             case ErrorForUser.no_internet:
                 title = "no internet";
                 message = "Check Your Internet Connection";
-                showErrorDialog(message,title);
+                showErrorDialog(message, title);
 
                 break;
             case ErrorForUser.scoreCalculationError:
                 title = "Problem Calculating Score";
                 message = "There was problem calculating your score, try again in a few moments";
-                showErrorDialog(message,title);
+                showErrorDialog(message, title);
                 break;
             case ErrorForUser.noDataToScore:
                 title = "Problem Calculating Score";
                 message = "Your Profile does not have enough data to calculate the score";
-                showErrorDialog(message,title);
+                showErrorDialog(message, title);
 
                 break;
             case ErrorForUser.poorInternetConnectionError:
                 title = "Problem Calculating Score";
                 message = getResources().getString(R.string.poor_internet_connection);
-                showErrorDialog(message,title);
+                showErrorDialog(message, title);
                 break;
         }
     }
 
     @Override
-    public  boolean checkGooglePlayServicesVersion(){
+    public boolean checkGooglePlayServicesVersion() {
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 
-        switch (status){
+        switch (status) {
             case ConnectionResult.SUCCESS:
                 return true;
             case ConnectionResult.SERVICE_MISSING:
@@ -707,7 +764,7 @@ public class ClientActivity extends LaunchUI implements
 
             case ConnectionResult.SERVICE_DISABLED:
                 showGooglePlayServicesErrorAlert(
-                        getResources().getString( R.string.google_play_services_disabled),
+                        getResources().getString(R.string.google_play_services_disabled),
                         getResources().getString(R.string.google_play_services_disabled_title));
 
             case ConnectionResult.SERVICE_INVALID:
@@ -723,7 +780,7 @@ public class ClientActivity extends LaunchUI implements
 
     //The function displays the dialog when any of the error methods
     //described earlier are triggered.
-    private void showErrorDialog(String message, String title ){
+    private void showErrorDialog(String message, String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setMessage(message)
@@ -752,7 +809,7 @@ public class ClientActivity extends LaunchUI implements
 
     //The function is needed to ensure that Google Play Services, required for Google Authentication
     //are upto date.
-    private void showGooglePlayServicesErrorAlert(String message, String title){
+    private void showGooglePlayServicesErrorAlert(String message, String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setMessage(message)
@@ -780,10 +837,6 @@ public class ClientActivity extends LaunchUI implements
     }
 
 }
-
-
-
-
 
 
 //package com.eduvanz.friendlyscore;

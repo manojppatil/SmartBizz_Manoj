@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -88,12 +89,6 @@ public class Main2ActivityNavigation extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Log.e(TAG, "verifyOtp: ============================" );
-
-        Log.e(TAG, "onCreate: CALLed Once");
-        Intent intent = new Intent(this, MyService.class);
-        startService(intent);
-
 //        Intent intentp = new Intent(Main2ActivityNavigation.this, AlarmReceiver.class);
 //        PendingIntent pendingIntent = PendingIntent.getBroadcast(Main2ActivityNavigation.this, 0, intentp, 0);
 //        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -119,6 +114,34 @@ public class Main2ActivityNavigation extends AppCompatActivity
 
         Log.e(MainApplication.TAG, "firstnameshared: " + firstnameshared + "lastnameshared: " + lastnameshared + "emailshared: " + emailshared + "logged_id: " + sharedPreferences.getString("logged_id", "null"));
 
+
+        startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+
+        if (Build.VERSION.SDK_INT >= 23)
+        {
+            permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.READ_SMS);
+
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                Log.i("TAG", "Permission to record denied");
+                makeRequest();
+//                        ActivityCompat.requestPermissions(SuccessAfterPQForm.this,
+//                                new String[]{Manifest.permission.READ_SMS},
+//                                GET_MY_PERMISSION);
+            } else if(permission == PackageManager.PERMISSION_GRANTED){
+                /** SERVICE CALL **/
+                Log.e(TAG, "onCreate: CALLed Once");
+                Intent intent = new Intent(this, MyService.class);
+                startService(intent);
+            }
+        }
+        else
+        {
+            /** SERVICE CALL **/
+            Log.e(TAG, "onCreate: CALLed Once");
+            Intent intent = new Intent(this, MyService.class);
+            startService(intent);
+        }
 
         MainApplication.mainapp_courseID = "";
         MainApplication.mainapp_instituteID = "";
@@ -251,12 +274,16 @@ public class Main2ActivityNavigation extends AppCompatActivity
             applyFontToMenuItem(mi);
         }
 
-        if (!checkForEligibility.equalsIgnoreCase("1")) {
-            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-            getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new DashBoardFragment()).commit();
-        } else {
-            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-            getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new PqFormFragment1()).commit();
+        try {
+            if (!checkForEligibility.equalsIgnoreCase("1")) {
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new DashBoardFragment()).commit();
+            } else {
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new PqFormFragment1()).commit();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -280,7 +307,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
 
     protected void makeRequest() {
         ActivityCompat.requestPermissions(Main2ActivityNavigation.this,
-                new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE,  Manifest.permission.READ_CONTACTS,  Manifest.permission.WRITE_CONTACTS},
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE,  Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS},
                 GET_MY_PERMISSION);
     }
 

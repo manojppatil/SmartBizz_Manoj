@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.eduvanz.DashBoardFragment;
 import com.eduvanz.Login;
+import com.eduvanz.MyProfile;
 import com.eduvanz.fqform.borrowerdetail.BorrowerEducationFragment;
 import com.eduvanz.fqform.borrowerdetail.BorrowerPersonalFragment;
 import com.eduvanz.fqform.borrowerdetail.BorrowerProfessionNFinancialFragment;
@@ -601,6 +602,19 @@ public class VolleyCall extends Application {
                 jsonDataO = new JSONObject(s);
                 Log.e("CallForData", "getDashBoard"+ s);
                 ((DashBoardFragment)mfragment).getDashBoard(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        else if(screen.equalsIgnoreCase("changeSettings"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                Log.e("CallForData", "changeSettings"+ s);
+                ((MyProfile)mActivity).changeSettings(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             }catch (Exception e){
