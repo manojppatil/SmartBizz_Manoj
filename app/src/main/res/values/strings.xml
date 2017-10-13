@@ -101,6 +101,9 @@
     <string name="google_play_services_updating_title">Google Play Services is being updated.</string>
     <string name="google_play_services_disabled">Google Play Services is disabled on your device. To use the App, Enable it.</string>
     <string name="google_play_services_disabled_title">Google Play Services Disabled</string>
+    <string name="checkEligibility">Have a dream career in mind , than Eduvanz is want you need to get connected with.</string>
+    <string name="completeProfile">Complete your profile to increase eligibility for getting instant loans</string>
+    <string name="congrats">Congratulations ! \nYou are eligible for an instant loan. Apply right now and change your career.</string>
 
     /** END OF FRIENDLY SCORE STRINGS XML CONTENT **/
 </resources>

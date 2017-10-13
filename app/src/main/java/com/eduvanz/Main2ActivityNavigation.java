@@ -248,6 +248,13 @@ public class Main2ActivityNavigation extends AppCompatActivity
         imageView = (ImageView) header.findViewById(R.id.imageView_userpic);
         textViewName.setTypeface(typefaceFontBold);
         textViewEmail.setTypeface(typefaceFontBold);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, UserProfile.class);
+                startActivity(intent);
+            }
+        });
 
 
         if (!userpic.equalsIgnoreCase("null") || !userpic.equalsIgnoreCase("")) {

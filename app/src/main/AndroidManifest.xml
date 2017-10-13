@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:name=".MainActivity"
@@ -96,6 +96,9 @@
         <activity
             android:name=".SuccessSplash"
             android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".UserProfile"
+            android:screenOrientation="sensorPortrait" />
 
         <receiver android:name=".pqformfragments.SmsReceiver">
             <intent-filter>
@@ -114,23 +117,23 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".UsageStatistic"/>
+        <activity android:name=".UsageStatistic" />
 
         <receiver
             android:name=".AlarmReceiver"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.NOTIFY"/>
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.NOTIFY" />
+            </intent-filter>
         </receiver>
 
-        <service android:name=".MyService"
-            android:exported="false"/>
-
-        <service android:name=".MyServiceDemo"
-            android:exported="false"/>
+        <service
+            android:name=".MyService"
+            android:exported="false" />
+        <service
+            android:name=".MyServiceDemo"
+            android:exported="false" />
 
     </application>
-
 
 </manifest>

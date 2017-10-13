@@ -3,8 +3,12 @@
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
 
-    <color name="colorPrimary">#43BB99</color>
-    <color name="colorPrimaryDark">#006b4d</color>
+    <!--<color name="colorPrimary">#43BB99</color>-->
+    <!--<color name="colorPrimaryDark">#006b4d</color> -->
+
+    <color name="colorPrimary">#46A4A4</color>
+    <color name="colorPrimaryDark">#213D64</color>
+
 
     <!--<color name="colorAccent">#D3D3D3</color>-->
     <color name="colorAccent">#43BB99</color>
@@ -15,5 +19,7 @@
     <color name="lightblue">#d2e4ec</color>
     <color name="blacktrasnparent">#50000000</color>
     <color name="bgcolor">#ECF7FD</color>
+    <color name="textColorUserProfile">#494949</color>
+    <color name="background_user_profile">#F1F5F8</color>
 
 </resources>
