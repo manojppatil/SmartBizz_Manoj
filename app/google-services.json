@@ -1,21 +1,19 @@
 {
   "project_info": {
-    "project_number": "249572391666",
-    "firebase_url": "https://eduvanz-61970.firebaseio.com",
-    "project_id": "eduvanz-61970",
-    "storage_bucket": "eduvanz-61970.appspot.com"
+    "project_number": "577641006287",
+    "project_id": "eduvanz-177706"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:249572391666:android:09c2d31eda127d2d",
+        "mobilesdk_app_id": "1:577641006287:android:09c2d31eda127d2d",
         "android_client_info": {
           "package_name": "com.eduvanz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "249572391666-auon4mitte3qvsob59miuvdsglnrlc7u.apps.googleusercontent.com",
+          "client_id": "577641006287-hqi5emmqq8jl0lje2n09d0nkki51ovo6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.eduvanz",
@@ -23,30 +21,28 @@
           }
         },
         {
-          "client_id": "249572391666-pvhil4qd0nrtc8vm2ngrmq8srsi88vno.apps.googleusercontent.com",
+          "client_id": "577641006287-ho7dgruqr7lf9kj39ohnqiek6fh430ur.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA6Db2c8yAxdJVw88zITAT0l1yWD1NhPF8"
+          "current_key": "AIzaSyCtRrHktz7FvSuPLVI2Vte6mBa-5WgRq0g"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 1
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-83860258-1"
+          }
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "249572391666-pvhil4qd0nrtc8vm2ngrmq8srsi88vno.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }
