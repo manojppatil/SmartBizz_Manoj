@@ -89,6 +89,9 @@ public class Main2ActivityNavigation extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//        Intent aaa = new Intent(this, MainActivity.class);
+//        startActivity(aaa);
+
 //        Intent intentp = new Intent(Main2ActivityNavigation.this, AlarmReceiver.class);
 //        PendingIntent pendingIntent = PendingIntent.getBroadcast(Main2ActivityNavigation.this, 0, intentp, 0);
 //        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
