@@ -26,6 +26,7 @@ public class UserProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mToolbar.setTitle("Profile");
         mToolbar.setTitleTextColor(Color.WHITE);
+
         typefaceFontAwesome = Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/droidsans_font.ttf");
         typeFaceReleway = Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/Raleway-Regular.ttf");
         nameText= (TextView) findViewById(R.id.user_name_userProfile);
