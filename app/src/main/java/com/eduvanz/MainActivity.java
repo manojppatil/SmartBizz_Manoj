@@ -41,7 +41,7 @@ public class MainActivity extends Application {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
 
-                Log.e("Hash key", ""+ Base64.encodeToString(md.digest(),Base64.NO_WRAP));
+                Log.e("Hash key", ""+ Base64.encodeToString(md.digest(),Base64.DEFAULT));
             }
         } catch (PackageManager.NameNotFoundException e) {
             Log.e("Teating", e.getMessage(), e);
