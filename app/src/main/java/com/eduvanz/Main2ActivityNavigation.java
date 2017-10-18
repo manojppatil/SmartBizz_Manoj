@@ -1,22 +1,15 @@
 package com.eduvanz;
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
-import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -42,12 +35,9 @@ import com.eduvanz.fqform.borrowerdetail.FqFormBorrower;
 import com.eduvanz.fqform.coborrowerdetail.FqFormCoborrower;
 import com.eduvanz.friendlyscore.StartActivityFS;
 import com.eduvanz.pqformfragments.PqFormFragment1;
-import com.eduvanz.pqformfragments.SuccessAfterPQForm;
 import com.eduvanz.uploaddocs.UploadActivityBorrower;
 import com.eduvanz.uploaddocs.UploadActivityCoBorrower;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -59,11 +49,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Calendar;
 
 import static com.eduvanz.MainApplication.TAG;
 
-/** GET ALL CONTACTS https://stackoverflow.com/questions/12562151/android-get-all-contacts **/
+/**
+ * GET ALL CONTACTS https://stackoverflow.com/questions/12562151/android-get-all-contacts
+ **/
+
 public class Main2ActivityNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -118,10 +110,9 @@ public class Main2ActivityNavigation extends AppCompatActivity
         Log.e(MainApplication.TAG, "firstnameshared: " + firstnameshared + "lastnameshared: " + lastnameshared + "emailshared: " + emailshared + "logged_id: " + sharedPreferences.getString("logged_id", "null"));
 
 
-        startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+//        startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
 
-        if (Build.VERSION.SDK_INT >= 23)
-        {
+        if (Build.VERSION.SDK_INT >= 23) {
             permission = ContextCompat.checkSelfPermission(getApplicationContext(),
                     Manifest.permission.READ_SMS);
 
@@ -131,19 +122,17 @@ public class Main2ActivityNavigation extends AppCompatActivity
 //                        ActivityCompat.requestPermissions(SuccessAfterPQForm.this,
 //                                new String[]{Manifest.permission.READ_SMS},
 //                                GET_MY_PERMISSION);
-            } else if(permission == PackageManager.PERMISSION_GRANTED){
+            } else if (permission == PackageManager.PERMISSION_GRANTED) {
                 /** SERVICE CALL **/
                 Log.e(TAG, "onCreate: CALLed Once");
-                Intent intent = new Intent(this, MyService.class);
-                startService(intent);
+//                Intent intent = new Intent(this, MyService.class);
+//                startService(intent);
             }
-        }
-        else
-        {
+        } else {
             /** SERVICE CALL **/
             Log.e(TAG, "onCreate: CALLed Once");
-            Intent intent = new Intent(this, MyService.class);
-            startService(intent);
+//            Intent intent = new Intent(this, MyService.class);
+//            startService(intent);
         }
 
         MainApplication.mainapp_courseID = "";
@@ -163,63 +152,6 @@ public class Main2ActivityNavigation extends AppCompatActivity
             checkForEligibility = "0";
         }
 
-//        if (!checkForEligibility.equalsIgnoreCase("1")) {
-//            long time = System.currentTimeMillis();
-//            Log.e(TAG, "CURRENT TIME: " + time);
-//            long databasetime;
-//            DBHandler dbHandler = new DBHandler(getApplicationContext());
-//
-//            if (dbHandler.getDate("1").equalsIgnoreCase("")) {
-//                databasetime = 0;
-//            } else {
-//                databasetime = Long.parseLong(dbHandler.getDate("1"));
-//            }
-//            Log.e(TAG, "DATABASE TIME: " + databasetime);
-//            if (time - databasetime > 86400000) {
-//                long a = time - databasetime;
-//                Log.e(TAG, "TIME: " + a);
-
-
-//                if (Build.VERSION.SDK_INT >= 23)
-//                {
-//                    permission = ContextCompat.checkSelfPermission(getApplicationContext(),
-//                            Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//                    permission2 = ContextCompat.checkSelfPermission(getApplicationContext(),
-//                            Manifest.permission.WRITE_CONTACTS);
-//                    permission3 = ContextCompat.checkSelfPermission(getApplicationContext(),
-//                            Manifest.permission.READ_CONTACTS);
-//                    Log.e(TAG, "permission: "+permission );
-//                    if (permission != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED || permission3 != PackageManager.PERMISSION_GRANTED ) {
-//                        Log.i("TAG", "Permission to record denied");
-//                        makeRequest();
-//                        if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED) {
-//                            MainApplication.readSms(getApplicationContext(), userID, userNo);
-//                            Log.e(TAG, "onCreate: " + "AYYYYYAAAA");
-//                            //                                MainApplication.contactsRead(getApplicationContext());
-//                            mReadJsonData();
-//                        }
-//                    } else if(permission == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3== PackageManager.PERMISSION_GRANTED){
-//
-//                        MainApplication.readSms(getApplicationContext(), userNo, userID);
-//                        Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
-//                        mDialogBar = new ProgressDialog(Main2ActivityNavigation.this, R.style.AppTheme_Dark_Dialog);
-//                        mDialogBar.setMessage("Authenticating... ");
-//                        mDialogBar.setCancelable(false);
-//                        mDialogBar.show();
-////                            MainApplication.contactsRead(getApplicationContext());
-//                        mDialogBar.hide();
-//                        mReadJsonData();
-//                    }
-//                }else {
-//                    MainApplication.readSms(getApplicationContext(), userNo, userID);
-//                    Log.e(TAG, "onCreate: "+"AYYYYYAAAA" );
-//                    //                        MainApplication.contactsRead(getApplicationContext());
-//                    mReadJsonData();
-//                }
-//
-//            }
-//        }
-
 
         toolbar.setTitleTextColor(Color.WHITE);
 
@@ -229,7 +161,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
             } else {
                 getSupportActionBar().setTitle("Pq Form");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -284,17 +216,17 @@ public class Main2ActivityNavigation extends AppCompatActivity
             applyFontToMenuItem(mi);
         }
 
-        try {
-            if (!checkForEligibility.equalsIgnoreCase("1")) {
-                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new DashBoardFragment()).commit();
-            } else {
-                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new PqFormFragment1()).commit();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            if (!checkForEligibility.equalsIgnoreCase("1")) {
+//                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+//                getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new DashBoardFragment()).commit();
+//            } else {
+//                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//                getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new PqFormFragment1()).commit();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void onResume() {
@@ -306,10 +238,10 @@ public class Main2ActivityNavigation extends AppCompatActivity
         Picasso.with(Main2ActivityNavigation.this).load(userpic).into(imageView);
 
         if (!checkForEligibility.equalsIgnoreCase("1")) {
-            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+//            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new DashBoardFragment()).commit();
         } else {
-            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new PqFormFragment1()).commit();
         }
 
@@ -317,7 +249,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
 
     protected void makeRequest() {
         ActivityCompat.requestPermissions(Main2ActivityNavigation.this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE,  Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS},
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS},
                 GET_MY_PERMISSION);
     }
 

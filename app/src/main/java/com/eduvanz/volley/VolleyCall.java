@@ -359,13 +359,27 @@ public class VolleyCall extends Application {
             }
         }
 
+//        else if(screen.equalsIgnoreCase("prefillLocationsFragment2"))
+//        {
+//            try {
+//                Log.e("CallForData", "prefillLocationsFragment2"+ s);
+//                jsonDataO = new JSONObject(s);
+//                Log.e("CallForData", "prefillLocationsFragment2"+ s);
+//                ((PqFormFragment2)mfragment).prefillLocationsFragment2(jsonDataO);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
+
         else if(screen.equalsIgnoreCase("prefillLocationsFragment2"))
         {
             try {
                 Log.e("CallForData", "prefillLocationsFragment2"+ s);
                 jsonDataO = new JSONObject(s);
                 Log.e("CallForData", "prefillLocationsFragment2"+ s);
-                ((PqFormFragment2)mfragment).prefillLocationsFragment2(jsonDataO);
+                ((PqFormFragment1)mfragment).prefillLocationsFragment2(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             }catch (Exception e){

@@ -45,13 +45,14 @@ public class PqFormFragment3 extends Fragment {
     public  static Context context;
     Button buttonNext, buttonPrevious;
     Typeface typeface;
-    public static TextView textViewRupeeSymbol, textviewMaxAmount;
+    public static TextView textViewRupeeSymbol, textviewMaxAmount, textViewRupeeSymbol2, textViewRupeeSymbol3;
     public static DiscreteSeekBar discreteSeekBar1;
+    public static DiscreteSeekBar discreteSeekBar2;
     String loandAmount="";
     TextView textView, textView2, textView3;
     View view1, view2, view1Step3, view2Step3;
     ImageView imageViewStep2, imageViewStep3;
-    EditText editTextLoanAmount;
+    EditText editTextLoanAmount, editText, editTextCourseFee;
     Typeface typefaceFont, typefaceFontBold;
     String instituteID="", courseID="", locationID="";
     Fragment mFragment;
@@ -79,20 +80,29 @@ public class PqFormFragment3 extends Fragment {
         typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
 
-        view1 = view.findViewById(R.id.view1_fragment3_step2);
-        view2 = view.findViewById(R.id.view2_fragment3_step2);
-        imageViewStep2 = (ImageView) view.findViewById(R.id.imageView_fragment3_step2);
-        view1Step3 = view.findViewById(R.id.view1_fragment3_step3);
-        view2Step3 = view.findViewById(R.id.view2_fragment3_step3);
-        imageViewStep3 = (ImageView) view.findViewById(R.id.imageView_fragment3_step3);
+//        view1 = view.findViewById(R.id.view1_fragment3_step2);
+//        view2 = view.findViewById(R.id.view2_fragment3_step2);
+//        imageViewStep2 = (ImageView) view.findViewById(R.id.imageView_fragment3_step2);
+//        view1Step3 = view.findViewById(R.id.view1_fragment3_step3);
+//        view2Step3 = view.findViewById(R.id.view2_fragment3_step3);
+//        imageViewStep3 = (ImageView) view.findViewById(R.id.imageView_fragment3_step3);
         textviewMaxAmount = (TextView) view.findViewById(R.id.textview3_maxamount);
         textviewMaxAmount.setTypeface(typefaceFont);
-        view1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        view2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        imageViewStep2.setImageDrawable(getResources().getDrawable(R.drawable.step2_image));
-        view1Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        view2Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        imageViewStep3.setImageDrawable(getResources().getDrawable(R.drawable.step3_image));
+        textViewRupeeSymbol2 = (TextView) view.findViewById(R.id.textviewRupee4);
+        textViewRupeeSymbol2.setTypeface(typeface);
+        textViewRupeeSymbol3 = (TextView) view.findViewById(R.id.textviewRupee1);
+        textViewRupeeSymbol3.setTypeface(typeface);
+        editText = (EditText) view.findViewById(R.id.input_familymonthlyincome);
+        editText.setTypeface(typefaceFont);
+
+        editTextCourseFee = (EditText) view.findViewById(R.id.input_courseamount);
+        editTextCourseFee.setTypeface(typefaceFont);
+//        view1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        view2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        imageViewStep2.setImageDrawable(getResources().getDrawable(R.drawable.step2_image));
+//        view1Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        view2Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        imageViewStep3.setImageDrawable(getResources().getDrawable(R.drawable.step3_image));
 
         textView2 = (TextView) view.findViewById(R.id.textview2_font_fragment3);
         textView2.setTypeface(typefaceFont);
@@ -136,6 +146,27 @@ public class PqFormFragment3 extends Fragment {
             }
         });
 
+        discreteSeekBar2 = (DiscreteSeekBar) view.findViewById(R.id.seekbar_familyincomeamount);
+        discreteSeekBar2.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                MainApplication.mainapp_fammilyincome = loandAmount = String.valueOf(discreteSeekBar2.getProgress());
+                editText.setText(loandAmount);
+            }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+        });
+
+
+
         buttonPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,11 +183,18 @@ public class PqFormFragment3 extends Fragment {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(editTextCourseFee.getText().toString().equalsIgnoreCase("")){
+                    Toast.makeText(context, "Course Fee Cannot be 0",Toast.LENGTH_SHORT).show();
+                    editTextCourseFee.setError("Loan Amount Cannot be 0");
+                }
                 if(editTextLoanAmount.getText().toString().equalsIgnoreCase("") || editTextLoanAmount.getText().toString().equalsIgnoreCase("0"))
                 {
                     Toast.makeText(context, "Loan Amount Cannot be 0",Toast.LENGTH_SHORT).show();
                     editTextLoanAmount.setError("Loan Amount Cannot be 0");
-                }else {
+                }else if(editText.getText().toString().equalsIgnoreCase("") || editText.getText().toString().equalsIgnoreCase("0")){
+                    editText.setError("Loan Amount Cannot be 0");
+
+                } else {
                     PqFormFragment4 pqf4 = new PqFormFragment4 ();
 //                    MainApplication.previous_pq2_courseID = courseID;
 //                    MainApplication.previous_pq2_instituteID = instituteID;

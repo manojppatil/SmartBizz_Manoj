@@ -19,10 +19,10 @@ import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
+import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanz.pqformfragments.pojo.NameOfCoursePOJO;
 import com.eduvanz.pqformfragments.pojo.NameOfInsitituePOJO;
 import com.eduvanz.volley.VolleyCall;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,12 +37,14 @@ import static com.eduvanz.MainApplication.TAG;
  * A simple {@link Fragment} subclass.
  */
 
-/** SEEK BAR LINK - https://github.com/jaredrummler/MaterialSpinner */
+/**
+ * SEEK BAR LINK - https://github.com/jaredrummler/MaterialSpinner
+ */
 
 
 public class PqFormFragment1 extends Fragment {
 
-//    public static MaterialSpinner ;
+    //    public static MaterialSpinner ;
     public static Spinner spinnerNameOfInsititue, spinnerNameOfCourse;
 
     public static ArrayAdapter arrayAdapter_NameOfInsititue;
@@ -51,13 +53,19 @@ public class PqFormFragment1 extends Fragment {
     public static ArrayAdapter arrayAdapter_NameOfCourse;
     public static ArrayList<String> nameofcourse_arrayList;
     public static ArrayList<NameOfCoursePOJO> nameOfCoursePOJOArrayList;
+    public static Context context;
+    public static Fragment mFragment;
     Button buttonNext;
     Typeface typefaceFont, typefaceFontBold;
     TextView textView1, textView2;
-    public static Context context;
-    public static Fragment mFragment;
+    String instituteID = "", courseID = "", locationID="";
 
-    String instituteID="", courseID="";
+    public static Spinner spinnerLocationOfInstitute;
+
+    public static ArrayAdapter arrayAdapter_locations;
+    public static ArrayList<String> locations_arrayList;
+    public static ArrayList<LocationsPOJO> locationPOJOArrayList;
+
     public PqFormFragment1() {
         // Required empty public constructor
     }
@@ -71,8 +79,8 @@ public class PqFormFragment1 extends Fragment {
 
         mFragment = new PqFormFragment1();
 
-        typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf" );
-        typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf" );
+        typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
+        typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -85,26 +93,6 @@ public class PqFormFragment1 extends Fragment {
         buttonNext.setTypeface(typefaceFontBold);
 
         spinnerNameOfInsititue = (Spinner) view.findViewById(R.id.spinner_nameofinsititue);
-//        spinnerNameOfInsititue.setItems("JetKing Infotrain", "Arena Animation", "Performance Enhancement Fitness", "UltraMax IT", "Real Estate Management Institute");
-//        spinnerNameOfInsititue.setTypeface(typefaceFont);
-
-//        spinnerNameOfInsititue.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-//
-//            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                Log.e("I_________D", "onItemClick: " + " CLICK HUA");
-//
-//                String text = item;
-//                int count = nameOfInsitituePOJOArrayList.size();
-//                Log.e("TAG", "count: "+count );
-//                for (int i = 0; i < count; i++) {
-//                    if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase(text)) {
-//                        instituteID = nameOfInsitituePOJOArrayList.get(i).instituteID;
-//                        Log.e("I_________D", "onItemClick: " + instituteID);
-//                    }
-//                }
-//                courseApiCall();
-//            }
-//        });
 
         spinnerNameOfInsititue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -113,7 +101,7 @@ public class PqFormFragment1 extends Fragment {
 
                 String text = spinnerNameOfInsititue.getSelectedItem().toString();
                 int count = nameOfInsitituePOJOArrayList.size();
-                Log.e("TAG", "count: "+count );
+                Log.e("TAG", "count: " + count);
                 for (int i = 0; i < count; i++) {
                     if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase(text)) {
                         MainApplication.mainapp_instituteID = instituteID = nameOfInsitituePOJOArrayList.get(i).instituteID;
@@ -130,36 +118,41 @@ public class PqFormFragment1 extends Fragment {
         });
 
         spinnerNameOfCourse = (Spinner) view.findViewById(R.id.spinner_nameofcourse);
-//        spinnerNameOfCourse.setTypeface(typefaceFont);
-//        spinnerNameOfCourse.setItems("Personal Trainer", "Corporate Finance PG", "Data Analytics PG", "CDSS",
-//                "Change Prodegree", "CIBOP","Personal Trainer", "Corporate Finance PG", "Data Analytics PG", "CDSS", "Change Prodegree", "CIBOP");
-//        spinnerNameOfCourse.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-//
-//            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                Log.e("I_________D", "onItemClick: " );
-//                String text = item;
-//                int count = nameOfCoursePOJOArrayList.size();
-//                Log.e("TAG", "count: "+count );
-//                for (int i = 0; i < count; i++) {
-//                    if (nameOfCoursePOJOArrayList.get(i).courseName.equalsIgnoreCase(text)) {
-//                        courseID = nameOfCoursePOJOArrayList.get(i).courseID;
-//                        Log.e("I_________D", "onItemClick: " + courseID);
-//                    }
-//                }
-//            }
-//        });
 
         spinnerNameOfCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("I_________D", "onItemClick: " );
+                Log.e("I_________D", "onItemClick: ");
                 String text = spinnerNameOfCourse.getSelectedItem().toString();
                 int count = nameOfCoursePOJOArrayList.size();
-                Log.e("TAG", "count: "+count );
+                Log.e("TAG", "count: " + count);
                 for (int i = 0; i < count; i++) {
                     if (nameOfCoursePOJOArrayList.get(i).courseName.equalsIgnoreCase(text)) {
-                       MainApplication.mainapp_courseID = courseID = nameOfCoursePOJOArrayList.get(i).courseID;
+                        MainApplication.mainapp_courseID = courseID = nameOfCoursePOJOArrayList.get(i).courseID;
                         Log.e("I_________D", "onItemClick: " + courseID);
+                    }
+                }
+                locationApiCall();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerLocationOfInstitute = (Spinner) view.findViewById(R.id.spinner_locationofinstitute);
+
+        spinnerLocationOfInstitute.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String text = spinnerLocationOfInstitute.getSelectedItem().toString();
+                int count = locationPOJOArrayList.size();
+                Log.e("TAG", "count: "+count );
+                for (int i = 0; i < count; i++) {
+                    if (locationPOJOArrayList.get(i).locationName.equalsIgnoreCase(text)) {
+                        MainApplication.mainapp_locationID = locationID = locationPOJOArrayList.get(i).locationID;
+                        Log.e("I_________D", "onItemClick: " + locationID);
                     }
                 }
             }
@@ -169,11 +162,12 @@ public class PqFormFragment1 extends Fragment {
 
             }
         });
+
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(instituteID!=""&&courseID!=""){
-                    PqFormFragment2 pqf2 = new PqFormFragment2 ();
+                if (instituteID != "" && courseID != "") {
+                    PqFormFragment3 pqf3 = new PqFormFragment3();
 //                    Bundle args = new Bundle();
 //                    args.putString("institute_id", instituteID);
 //                    args.putString("course_id", courseID);
@@ -181,41 +175,55 @@ public class PqFormFragment1 extends Fragment {
 //                    MainApplication.previous_pq2_courseID = courseID;
 //                    MainApplication.previous_pq2_instituteID = instituteID;
 
-                    transaction.replace(R.id.framelayout_pqform, pqf2).commit();
-                }else {
+                    transaction.replace(R.id.framelayout_pqform, pqf3).commit();
+                } else {
                     Toast.makeText(context, "Please Select Course and Institute", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-        
-            //-----------------------------------------API CALL---------------------------------------//
-            try {
-                String url = MainApplication.mainUrl + "pqform/apiPrefillInstitutes";
-                Map<String, String> params = new HashMap<String, String>();
-                VolleyCall volleyCall = new VolleyCall();
-                volleyCall.sendRequest(context, url, null, mFragment, "PrefillInstitutesFragment1", params);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            //-------------------------------------END OF API CALL------------------------------------//
+
+        //-----------------------------------------API CALL---------------------------------------//
+        try {
+            String url = MainApplication.mainUrl + "pqform/apiPrefillInstitutes";
+            Map<String, String> params = new HashMap<String, String>();
+            VolleyCall volleyCall = new VolleyCall();
+            volleyCall.sendRequest(context, url, null, mFragment, "PrefillInstitutesFragment1", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //-------------------------------------END OF API CALL------------------------------------//
 
         return view;
     }
 
-    public void courseApiCall()
-    {
+    public void courseApiCall() {
         //-------------------------------API CALL FOR COURSES-------------------------------------//
         try {
             String url = MainApplication.mainUrl + "pqform/apiPrefillCourses";
             Map<String, String> params = new HashMap<String, String>();
             params.put("instituteId", instituteID);
             VolleyCall volleyCall = new VolleyCall();
-            volleyCall.sendRequest(context, url, null , mFragment, "PrefillCourseFragment1", params);
+            volleyCall.sendRequest(context, url, null, mFragment, "PrefillCourseFragment1", params);
 
         } catch (Exception e) {
             e.printStackTrace();
         }//------------------------------END API CALL FOR CITY------------------------------------//
+    }
+
+    public void locationApiCall(){
+        //-----------------------------------------API CALL---------------------------------------//
+        try {
+            String url = MainApplication.mainUrl + "pqform/apiPrefillLocations";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("institute_id", MainApplication.mainapp_instituteID);
+            params.put("course_id", MainApplication.mainapp_courseID);
+            VolleyCall volleyCall = new VolleyCall();
+            volleyCall.sendRequest(context, url, null, mFragment, "prefillLocationsFragment2", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //-------------------------------------END OF API CALL------------------------------------//
     }
 
     //---------------------------------RESPONSE OF API CALL---------------------------------------//
@@ -248,7 +256,7 @@ public class PqFormFragment1 extends Fragment {
 
                 loadPrevious();
 
-            }else {
+            } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -257,12 +265,12 @@ public class PqFormFragment1 extends Fragment {
     }
 
     private void loadPrevious() {
-        if(MainApplication.previous == 1) {
+        if (MainApplication.previous == 1) {
             instituteID = MainApplication.mainapp_instituteID;
             courseID = MainApplication.mainapp_courseID;
-            Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID+ " nameOfInsitituePOJOArrayList"+ nameOfInsitituePOJOArrayList.size());
+            Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + " nameOfInsitituePOJOArrayList" + nameOfInsitituePOJOArrayList.size());
             for (int i = 0; i < nameOfInsitituePOJOArrayList.size(); i++) {
-                Log.e(TAG, "for: "+nameOfInsitituePOJOArrayList.size() );
+                Log.e(TAG, "for: " + nameOfInsitituePOJOArrayList.size());
                 if (instituteID.equalsIgnoreCase(nameOfInsitituePOJOArrayList.get(i).instituteID)) {
                     spinnerNameOfInsititue.setSelection(i);
                     Log.e(TAG, "nameOfInsitituePOJOArrayList: " + nameOfInsitituePOJOArrayList.get(i).instituteName);
@@ -300,11 +308,11 @@ public class PqFormFragment1 extends Fragment {
                 spinnerNameOfCourse.setAdapter(arrayAdapter_NameOfCourse);
                 arrayAdapter_NameOfCourse.notifyDataSetChanged();
 
-                if(MainApplication.previous == 1) {
+                if (MainApplication.previous == 1) {
                     courseID = MainApplication.mainapp_courseID;
-                    Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID+ " nameOfInsitituePOJOArrayList"+ nameOfInsitituePOJOArrayList.size());
+                    Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + " nameOfInsitituePOJOArrayList" + nameOfInsitituePOJOArrayList.size());
                     for (int i = 0; i < nameOfCoursePOJOArrayList.size(); i++) {
-                        Log.e(TAG, "for: "+nameOfCoursePOJOArrayList.size() );
+                        Log.e(TAG, "for: " + nameOfCoursePOJOArrayList.size());
                         if (courseID.equalsIgnoreCase(nameOfCoursePOJOArrayList.get(i).courseID)) {
                             spinnerNameOfCourse.setSelection(i);
                             Log.e(TAG, "nameOfInsitituePOJOArrayList: " + nameOfCoursePOJOArrayList.get(i).courseName);
@@ -312,8 +320,59 @@ public class PqFormFragment1 extends Fragment {
                         }
                     }
                 }
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //---------------------------------RESPONSE OF API CALL---------------------------------------//
+    public void prefillLocationsFragment2(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "PrefillInstitutesFragment1" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                JSONArray jsonArray = jsonData.getJSONArray("result");
+
+                locationPOJOArrayList = new ArrayList<>();
+                locations_arrayList = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    LocationsPOJO locationsPOJO = new LocationsPOJO();
+                    JSONObject mJsonti = jsonArray.getJSONObject(i);
+                    locationsPOJO.locationName = mJsonti.getString("location_name");
+                    locations_arrayList.add(mJsonti.getString("location_name"));
+                    locationsPOJO.locationID = mJsonti.getString("location_id");
+                    locationPOJOArrayList.add(locationsPOJO);
+                    Log.e("residential", "Spiner DATA:----------------- " + locationsPOJO.locationName);
+                }
+                arrayAdapter_locations = new ArrayAdapter(context, R.layout.custom_layout_spinner, locations_arrayList);
+//                spinnerLocationOfInstitute.setItems(locations_arrayList);
+//                spinnerLocationOfInstitute.setTextColor(getResources().getColor(R.color.black));
+                spinnerLocationOfInstitute.setAdapter(arrayAdapter_locations);
+                arrayAdapter_locations.notifyDataSetChanged();
+
             }else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+
+            if(MainApplication.previousfragment3 == 1) {
+//                instituteID = MainApplication.previous_pq2_instituteID;
+//                courseID = MainApplication.previous_pq2_courseID;
+                locationID = MainApplication.mainapp_locationID;
+                Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + " locationPOJOArrayList" + locationPOJOArrayList.size());
+                for (int i = 0; i < locationPOJOArrayList.size(); i++) {
+                    Log.e(TAG, "for: " + locationPOJOArrayList.size());
+                    if (locationID.equalsIgnoreCase(locationPOJOArrayList.get(i).locationID)) {
+                        spinnerLocationOfInstitute.setSelection(i);
+                        Log.e(TAG, "locationPOJOArrayList: " + locationPOJOArrayList.get(i).locationName);
+                        break;
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
