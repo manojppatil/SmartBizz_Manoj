@@ -64,31 +64,31 @@ public class PqFormFragment5 extends Fragment {
         imageViewBoth = (ImageView) view.findViewById(R.id.imageView_both);
         imageViewNone = (ImageView) view.findViewById(R.id.imageView_none);
 
-        view1 = view.findViewById(R.id.view1_fragment5_step2);
-        view2 = view.findViewById(R.id.view2_fragment5_step2);
-        imageViewStep2 = (ImageView) view.findViewById(R.id.imageView_fragment5_step2);
-        view1Step3 = view.findViewById(R.id.view1_fragment5_step3);
-        view2Step3 = view.findViewById(R.id.view2_fragment5_step3);
-        imageViewStep3 = (ImageView) view.findViewById(R.id.imageView_fragment5_step3);
-        view1Step4 = view.findViewById(R.id.view1_fragment5_step4);
-        view2Step4 = view.findViewById(R.id.view2_fragment5_step4);
-        imageViewStep4 = (ImageView) view.findViewById(R.id.imageView_fragment5_step4);
-        view1Step5 = view.findViewById(R.id.view1_fragment5_step5);
-        view2Step5 = view.findViewById(R.id.view2_fragment5_step5);
-        imageViewStep5 = (ImageView) view.findViewById(R.id.imageView_fragment5_step5);
+//        view1 = view.findViewById(R.id.view1_fragment5_step2);
+//        view2 = view.findViewById(R.id.view2_fragment5_step2);
+//        imageViewStep2 = (ImageView) view.findViewById(R.id.imageView_fragment5_step2);
+//        view1Step3 = view.findViewById(R.id.view1_fragment5_step3);
+//        view2Step3 = view.findViewById(R.id.view2_fragment5_step3);
+//        imageViewStep3 = (ImageView) view.findViewById(R.id.imageView_fragment5_step3);
+//        view1Step4 = view.findViewById(R.id.view1_fragment5_step4);
+//        view2Step4 = view.findViewById(R.id.view2_fragment5_step4);
+//        imageViewStep4 = (ImageView) view.findViewById(R.id.imageView_fragment5_step4);
+//        view1Step5 = view.findViewById(R.id.view1_fragment5_step5);
+//        view2Step5 = view.findViewById(R.id.view2_fragment5_step5);
+//        imageViewStep5 = (ImageView) view.findViewById(R.id.imageView_fragment5_step5);
 
-        view1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        view2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        imageViewStep2.setImageDrawable(getResources().getDrawable(R.drawable.step2_image));
-        view1Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        view2Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        imageViewStep3.setImageDrawable(getResources().getDrawable(R.drawable.step3_image));
-        view1Step4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        view2Step4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        imageViewStep4.setImageDrawable(getResources().getDrawable(R.drawable.step4_image));
-        view1Step5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        view2Step5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        imageViewStep5.setImageDrawable(getResources().getDrawable(R.drawable.step5_image));
+//        view1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        view2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        imageViewStep2.setImageDrawable(getResources().getDrawable(R.drawable.step2_image));
+//        view1Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        view2Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        imageViewStep3.setImageDrawable(getResources().getDrawable(R.drawable.step3_image));
+//        view1Step4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        view2Step4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        imageViewStep4.setImageDrawable(getResources().getDrawable(R.drawable.step4_image));
+//        view1Step5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        view2Step5.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        imageViewStep5.setImageDrawable(getResources().getDrawable(R.drawable.step5_image));
 
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();

@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.eduvanz.R;
 import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanz.volley.VolleyCall;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.xw.repo.BubbleSeekBar;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 import org.json.JSONArray;
@@ -46,8 +49,8 @@ public class PqFormFragment3 extends Fragment {
     Button buttonNext, buttonPrevious;
     Typeface typeface;
     public static TextView textViewRupeeSymbol, textviewMaxAmount, textViewRupeeSymbol2, textViewRupeeSymbol3;
-    public static DiscreteSeekBar discreteSeekBar1;
-    public static DiscreteSeekBar discreteSeekBar2;
+    public static BubbleSeekBar bubbleSeekBar1;
+    public static BubbleSeekBar bubbleSeekBar2;
     String loandAmount="";
     TextView textView, textView2, textView3;
     View view1, view2, view1Step3, view2Step3;
@@ -86,8 +89,8 @@ public class PqFormFragment3 extends Fragment {
 //        view1Step3 = view.findViewById(R.id.view1_fragment3_step3);
 //        view2Step3 = view.findViewById(R.id.view2_fragment3_step3);
 //        imageViewStep3 = (ImageView) view.findViewById(R.id.imageView_fragment3_step3);
-        textviewMaxAmount = (TextView) view.findViewById(R.id.textview3_maxamount);
-        textviewMaxAmount.setTypeface(typefaceFont);
+//        textviewMaxAmount = (TextView) view.findViewById(R.id.textview3_maxamount);
+//        textviewMaxAmount.setTypeface(typefaceFont);
         textViewRupeeSymbol2 = (TextView) view.findViewById(R.id.textviewRupee4);
         textViewRupeeSymbol2.setTypeface(typeface);
         textViewRupeeSymbol3 = (TextView) view.findViewById(R.id.textviewRupee1);
@@ -97,6 +100,7 @@ public class PqFormFragment3 extends Fragment {
 
         editTextCourseFee = (EditText) view.findViewById(R.id.input_courseamount);
         editTextCourseFee.setTypeface(typefaceFont);
+
 //        view1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 //        view2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 //        imageViewStep2.setImageDrawable(getResources().getDrawable(R.drawable.step2_image));
@@ -104,9 +108,9 @@ public class PqFormFragment3 extends Fragment {
 //        view2Step3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 //        imageViewStep3.setImageDrawable(getResources().getDrawable(R.drawable.step3_image));
 
-        textView2 = (TextView) view.findViewById(R.id.textview2_font_fragment3);
-        textView2.setTypeface(typefaceFont);
-        textView2.setText(MainApplication.indianCurrencyFormat("0"));
+//        textView2 = (TextView) view.findViewById(R.id.textview2_font_fragment3);
+//        textView2.setTypeface(typefaceFont);
+//        textView2.setText(MainApplication.indianCurrencyFormat("0"));
         textViewRupeeSymbol = (TextView) view.findViewById(R.id.textviewRupee);
         textViewRupeeSymbol.setTypeface(typeface);
         buttonPrevious = (Button) view.findViewById(R.id.button_previous_fragment3);
@@ -116,6 +120,29 @@ public class PqFormFragment3 extends Fragment {
 
         editTextLoanAmount = (EditText) view.findViewById(R.id.input_loanamount);
         editTextLoanAmount.setTypeface(typefaceFont);
+        editTextLoanAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String a = editText.getText().toString();
+
+//                Log.e(TAG, "onTextChanged: "+Float.parseFloat(a) );
+//                if(!a.equalsIgnoreCase("") || a != null){
+//                    bubbleSeekBar1.setProgress(20);
+//                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         textView = (TextView) view.findViewById(R.id.textview_loanamountneeded);
         textView.setTypeface(typefaceFontBold);
 
@@ -127,45 +154,44 @@ public class PqFormFragment3 extends Fragment {
         if(!MainApplication.mainapp_loanamount.equalsIgnoreCase("")){
             editTextLoanAmount.setText(MainApplication.mainapp_loanamount);
         }
-        discreteSeekBar1 = (DiscreteSeekBar) view.findViewById(R.id.seekbar_loanamount);
-        discreteSeekBar1.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+
+        bubbleSeekBar1 = (BubbleSeekBar) view.findViewById(R.id.seekbar_loanamount);
+        bubbleSeekBar1.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
             @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                MainApplication.mainapp_loanamount =  loandAmount = String.valueOf(discreteSeekBar1.getProgress());
+            public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+                MainApplication.mainapp_loanamount =  loandAmount = String.valueOf(bubbleSeekBar1.getProgress());
                 editTextLoanAmount.setText(loandAmount);
             }
 
             @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+            public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+            public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
 
             }
         });
 
-        discreteSeekBar2 = (DiscreteSeekBar) view.findViewById(R.id.seekbar_familyincomeamount);
-        discreteSeekBar2.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                MainApplication.mainapp_fammilyincome = loandAmount = String.valueOf(discreteSeekBar2.getProgress());
-                editText.setText(loandAmount);
-            }
+        bubbleSeekBar2 = (BubbleSeekBar) view.findViewById(R.id.seekbar_familyincomeamount);
+        bubbleSeekBar2.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
+           @Override
+           public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+               MainApplication.mainapp_fammilyincome = loandAmount = String.valueOf(bubbleSeekBar2.getProgress());
+               editText.setText(loandAmount);
+           }
 
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+           @Override
+           public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
 
-            }
+           }
 
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+           @Override
+           public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
 
-            }
-        });
-
-
+           }
+       });
 
         buttonPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,8 +257,8 @@ public class PqFormFragment3 extends Fragment {
             if (status.equalsIgnoreCase("1")) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 resultAmount = jsonData.getString("result");
-                discreteSeekBar1.setMax(Integer.parseInt(resultAmount));
-                textviewMaxAmount.setText(MainApplication.indianCurrencyFormat(resultAmount));
+//                bubbleSeekBar1.(Integer.parseInt(resultAmount));
+//                textviewMaxAmount.setText(MainApplication.indianCurrencyFormat(resultAmount));
                 Log.e(TAG, "prefillLoanAmountFragment3: "+resultAmount );
 
 
