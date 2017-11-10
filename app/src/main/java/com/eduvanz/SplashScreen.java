@@ -78,7 +78,7 @@ public class SplashScreen extends AppCompatActivity {
                 try {
                     int waited = 0;
                     // Splash screen pause time
-                    while (waited < 1000) {
+                    while (waited < 2000) {
                         sleep(100);
                         waited += 100;
                     }
@@ -92,7 +92,7 @@ public class SplashScreen extends AppCompatActivity {
                             SplashScreen.this.finish();
                         }
                         else {
-                            Intent intent = new Intent(SplashScreen.this,Login.class);
+                            Intent intent = new Intent(SplashScreen.this, SignupLogin.class);
                             startActivity(intent);
                             finish();
                         }

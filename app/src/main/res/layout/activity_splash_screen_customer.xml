@@ -10,10 +10,11 @@
             android:id="@+id/splash_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/splashimagedemo1"
+            android:src="@drawable/background_splashscreen"
             android:scaleType="centerCrop"
             android:background="@color/bgcolor"/>
         <TextView
+            android:visibility="gone"
             android:layout_marginBottom="450dp"
             android:layout_alignParentBottom="true"
             android:id="@+id/splash_text"

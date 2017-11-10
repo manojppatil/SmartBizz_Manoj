@@ -17,8 +17,8 @@ import com.eduvanz.fqform.borrowerdetail.BorrowerProfessionNFinancialFragment;
 
 public class FqFormCoborrower extends AppCompatActivity {
 
-    LinearLayout linearLayoutPersonal, linearLayoutFinancial;
     TextView textViewPersonal, textViewFinancial;
+    TextView textViewPersonal1, textViewFinancial2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,45 +30,54 @@ public class FqFormCoborrower extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.WHITE);
         getSupportActionBar().setTitle("CoBorrower Details");
 
-        linearLayoutPersonal = (LinearLayout) findViewById(R.id.linearlayout_personal_coborrower);
-        linearLayoutFinancial = (LinearLayout) findViewById(R.id.linearlayout_financial);
-
-        textViewPersonal = (TextView) findViewById(R.id.textview_personal_coborrower);
+        textViewPersonal = (TextView) findViewById(R.id.textview_personal_co);
         textViewFinancial = (TextView) findViewById(R.id.textview_financial);
 
+//        textViewPersonal1 = (TextView) findViewById(R.id.textview_personal_coborrower);
+//        textViewFinancial2 = (TextView) findViewById(R.id.textview_financial);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            textViewPersonal.setBackgroundColor(getColor(R.color.white));
-            linearLayoutPersonal.setBackgroundColor(getColor(R.color.white));
+//            textViewPersonal.setBackgroundColor(getColor(R.color.white));
+            textViewPersonal.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             
-            textViewFinancial.setBackground(getResources().getDrawable(R.drawable.rectanglebackground));
-            linearLayoutFinancial.setBackgroundColor(getColor(R.color.lightblue));
+            textViewFinancial.setTextColor(getResources().getColor(R.color.white));
+//            linearLayoutFinancial.setBackgroundColor(getColor(R.color.lightblue));
         }
         getSupportFragmentManager().beginTransaction().add(R.id.framelayout_fqform_coborrower,new CoBorrowerPersonalFragment()).commit();
 
 
-        linearLayoutPersonal.setOnClickListener(new View.OnClickListener() {
+        textViewPersonal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    textViewPersonal.setBackgroundColor(getColor(R.color.white));
-                    linearLayoutPersonal.setBackgroundColor(getColor(R.color.white));
-                    
-                    textViewFinancial.setBackground(getResources().getDrawable(R.drawable.rectanglebackground));
-                    linearLayoutFinancial.setBackgroundColor(getColor(R.color.lightblue));
+//                    textViewPersonal.setBackgroundColor(getColor(R.color.white));
+//                    linearLayoutPersonal.setBackgroundColor(getColor(R.color.white));
+//
+//                    textViewFinancial.setBackground(getResources().getDrawable(R.drawable.rectanglebackground));
+//                    linearLayoutFinancial.setBackgroundColor(getColor(R.color.lightblue));
+
+                    textViewPersonal.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
+                    textViewFinancial.setTextColor(getResources().getColor(R.color.white));
+
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_fqform_coborrower,new CoBorrowerPersonalFragment()).commit();
             }
         });
 
-        linearLayoutFinancial.setOnClickListener(new View.OnClickListener() {
+        textViewFinancial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    textViewFinancial.setBackgroundColor(getColor(R.color.white));
-                    linearLayoutFinancial.setBackgroundColor(getColor(R.color.white));
-                    
-                    textViewPersonal.setBackground(getResources().getDrawable(R.drawable.rectanglebackground));
-                    linearLayoutPersonal.setBackgroundColor(getColor(R.color.lightblue));
+//                    textViewFinancial.setBackgroundColor(getColor(R.color.white));
+//                    linearLayoutFinancial.setBackgroundColor(getColor(R.color.white));
+//
+//                    textViewPersonal.setBackground(getResources().getDrawable(R.drawable.rectanglebackground));
+//                    linearLayoutPersonal.setBackgroundColor(getColor(R.color.lightblue));
+
+                    textViewPersonal.setTextColor(getResources().getColor(R.color.white));
+
+                    textViewFinancial.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_fqform_coborrower,new CoBorrowerFinancialFragment()).commit();
             }

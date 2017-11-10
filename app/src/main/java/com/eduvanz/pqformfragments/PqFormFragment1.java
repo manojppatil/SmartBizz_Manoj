@@ -234,7 +234,7 @@ public class PqFormFragment1 extends Fragment {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 JSONArray jsonArray = jsonData.getJSONArray("result");
 
                 nameOfInsitituePOJOArrayList = new ArrayList<>();
@@ -257,7 +257,7 @@ public class PqFormFragment1 extends Fragment {
                 loadPrevious();
 
             } else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -288,7 +288,7 @@ public class PqFormFragment1 extends Fragment {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 JSONArray jsonArray = jsonData.getJSONArray("result");
 
                 nameOfCoursePOJOArrayList = new ArrayList<>();
@@ -321,7 +321,7 @@ public class PqFormFragment1 extends Fragment {
                     }
                 }
             } else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -336,7 +336,7 @@ public class PqFormFragment1 extends Fragment {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 JSONArray jsonArray = jsonData.getJSONArray("result");
 
                 locationPOJOArrayList = new ArrayList<>();
@@ -357,7 +357,7 @@ public class PqFormFragment1 extends Fragment {
                 arrayAdapter_locations.notifyDataSetChanged();
 
             }else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
 
             if(MainApplication.previousfragment3 == 1) {

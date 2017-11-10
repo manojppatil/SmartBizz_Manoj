@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/apptoolbar" />
+    <include layout="@layout/apptoolbar_filler" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
                 android:orientation="vertical"
                 android:visibility="gone">
 

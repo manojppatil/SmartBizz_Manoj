@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -17,6 +18,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.eduvanz.pqformfragments.SuccessAfterPQForm;
 
@@ -49,6 +51,18 @@ public class MainApplication {
     public static String mainapp_doccheck = "";
     public static String mainapp_professioncheck = "";
     public static String mainapp_currentCity = "";
+    public static Typeface typefaceFont, typefaceFontBold;
+
+
+    public void applyTypeface(TextView view, Context context) {
+        typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/Raleway-Regular.ttf");
+        view.setTypeface(typefaceFont);
+    }
+
+    public void applyTypefaceBold(TextView view, Context context) {
+        typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
+        view.setTypeface(typefaceFontBold);
+    }
 
     public static String indianCurrencyFormat(String rupees) {
         double a = Double.parseDouble(rupees);

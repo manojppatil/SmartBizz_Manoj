@@ -12,4 +12,5 @@
         android:minHeight="?attr/actionBarSize"
         android:titleTextColor="#ffffff"
         />
+
 </LinearLayout>

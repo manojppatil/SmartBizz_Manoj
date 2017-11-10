@@ -51,7 +51,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -134,6 +134,21 @@
             android:name=".MyServiceDemo"
             android:exported="false" />
 
+        <activity
+            android:name=".SignupLogin"
+            android:screenOrientation="sensorPortrait" />
+        /** NEW UI **/
+        <activity
+            android:name=".newUI.GetMobileNo"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".newUI.OtpValidation"
+            android:screenOrientation="sensorPortrait"/>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.eduvanz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.eduvanz.faqexpandablelistview.FAQ;
 
 
 public class Dashboard extends Fragment {
@@ -25,7 +28,6 @@ public class Dashboard extends Fragment {
     Typeface typefaceFontAwesome,typeFaceReleway;
     Context mContext;
     TextView howItworkText,aboutText,contactText,faqText;
-
 
     public Dashboard() {
         // Required empty public constructor
@@ -62,6 +64,33 @@ public class Dashboard extends Fragment {
         aboutText.setTypeface(typeFaceReleway);
         contactText.setTypeface(typeFaceReleway);
         howItworkText.setTypeface(typeFaceReleway);
+
+        checkEligibility.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, Main2ActivityNavigation.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("checkfor_eligibility", "1");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        linearFaq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FAQ.class);
+                startActivity(intent);
+            }
+        });
+
+        linearAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, WebViewAboutUs.class);
+                startActivity(intent);
+            }
+        });
 
         return mView;
     }

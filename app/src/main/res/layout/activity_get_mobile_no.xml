@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eduvanz.newUI.GetMobileNo"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_getmobileno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="eduvanz"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:id="@+id/textView_getmobileno"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Financing Your Future!"
+        android:textSize="26sp"
+        android:textAllCaps="true"
+        android:textColor="@color/colorSecondary"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please verify ypur mobile no to begin!"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorSecondary"/>
+
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="10 digit mobile number"
+        android:inputType="number"
+        android:maxLength="10"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:elevation="20dp"
+        android:translationZ="3dp"
+        android:stateListAnimator="@null"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/button_getotp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rectanglebackground"
+        android:text="GET OTP"
+        android:textSize="22sp"/>
+
+
+</LinearLayout>

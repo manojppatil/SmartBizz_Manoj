@@ -6,13 +6,15 @@
     <!--<color name="colorPrimary">#43BB99</color>-->
     <!--<color name="colorPrimaryDark">#006b4d</color> -->
 
-    <color name="colorPrimary">#46A4A4</color>
-    <color name="colorPrimaryDark">#213D64</color>
+    <color name="colorPrimary">#2BD3DD</color>
+    <color name="colorPrimaryDark">#2BD3DD</color>
+    <color name="colorSecondary">#4196A0</color>
 
 
     <!--<color name="colorAccent">#D3D3D3</color>-->
-    <color name="colorAccent">#43BB99</color>
+    <color name="colorAccent">#2BD3DD</color>
     <color name="lightGrey">#D3D3D3</color>
+    <color name="grey">#8e8e8e</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="blue">#435692</color>

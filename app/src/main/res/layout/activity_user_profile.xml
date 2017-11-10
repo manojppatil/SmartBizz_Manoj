@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.eduvanz.UserProfile">
-    <include layout="@layout/apptoolbar" android:id="@+id/toolbarUserProfile"></include>
+    <include layout="@layout/apptoolbar_filler" android:id="@+id/toolbarUserProfile"></include>
     <ScrollView
         android:layout_marginBottom="50dp"
         android:layout_below="@id/toolbarUserProfile"

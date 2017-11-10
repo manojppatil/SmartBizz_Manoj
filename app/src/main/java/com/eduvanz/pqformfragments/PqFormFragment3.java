@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,16 +22,11 @@ import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanz.volley.VolleyCall;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.xw.repo.BubbleSeekBar;
 
-import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,24 +36,26 @@ import static com.eduvanz.MainApplication.TAG;
  * A simple {@link Fragment} subclass.
  */
 
-/** SEEK BAR LINK - https://github.com/AnderWeb/discreteSeekBar */
+/**
+ * SEEK BAR LINK - https://github.com/AnderWeb/discreteSeekBar
+ */
 public class PqFormFragment3 extends Fragment {
 
-    public  static Context context;
-    Button buttonNext, buttonPrevious;
-    Typeface typeface;
+    public static Context context;
     public static TextView textViewRupeeSymbol, textviewMaxAmount, textViewRupeeSymbol2, textViewRupeeSymbol3;
     public static BubbleSeekBar bubbleSeekBar1;
     public static BubbleSeekBar bubbleSeekBar2;
-    String loandAmount="";
+    Button buttonNext, buttonPrevious;
+    Typeface typeface;
+    String loandAmount = "";
     TextView textView, textView2, textView3;
     View view1, view2, view1Step3, view2Step3;
     ImageView imageViewStep2, imageViewStep3;
     EditText editTextLoanAmount, editText, editTextCourseFee;
     Typeface typefaceFont, typefaceFontBold;
-    String instituteID="", courseID="", locationID="";
+    String instituteID = "", courseID = "", locationID = "";
     Fragment mFragment;
-    String resultAmount="";
+    String resultAmount = "";
 
     public PqFormFragment3() {
         // Required empty public constructor
@@ -71,14 +67,14 @@ public class PqFormFragment3 extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pq_form_fragment3, container, false);
         context = getContext();
-        mFragment  = new PqFormFragment3();
+        mFragment = new PqFormFragment3();
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        typeface = Typeface.createFromAsset(context.getAssets(),"fontawesome-webfont.ttf");
+        typeface = Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
 
 //        instituteID = getArguments().getString("institute_id");
 //        courseID = getArguments().getString("course_id");
 //        locationID = getArguments().getString("location_id");
-        Log.e(TAG, "instituteID: "+instituteID+    "  courseID "+courseID + "  locationID "+locationID );
+        Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + "  locationID " + locationID);
 
         typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
@@ -151,7 +147,7 @@ public class PqFormFragment3 extends Fragment {
         textView.clearAnimation();
         textView.setAnimation(a);
 
-        if(!MainApplication.mainapp_loanamount.equalsIgnoreCase("")){
+        if (!MainApplication.mainapp_loanamount.equalsIgnoreCase("")) {
             editTextLoanAmount.setText(MainApplication.mainapp_loanamount);
         }
 
@@ -159,7 +155,7 @@ public class PqFormFragment3 extends Fragment {
         bubbleSeekBar1.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
             @Override
             public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
-                MainApplication.mainapp_loanamount =  loandAmount = String.valueOf(bubbleSeekBar1.getProgress());
+                MainApplication.mainapp_loanamount = loandAmount = String.valueOf(bubbleSeekBar1.getProgress());
                 editTextLoanAmount.setText(loandAmount);
             }
 
@@ -176,27 +172,27 @@ public class PqFormFragment3 extends Fragment {
 
         bubbleSeekBar2 = (BubbleSeekBar) view.findViewById(R.id.seekbar_familyincomeamount);
         bubbleSeekBar2.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
-           @Override
-           public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
-               MainApplication.mainapp_fammilyincome = loandAmount = String.valueOf(bubbleSeekBar2.getProgress());
-               editText.setText(loandAmount);
-           }
+            @Override
+            public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+                MainApplication.mainapp_fammilyincome = loandAmount = String.valueOf(bubbleSeekBar2.getProgress());
+                editText.setText(loandAmount);
+            }
 
-           @Override
-           public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+            @Override
+            public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
 
-           }
+            }
 
-           @Override
-           public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+            @Override
+            public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
 
-           }
-       });
+            }
+        });
 
         buttonPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PqFormFragment2 pqf2 = new PqFormFragment2 ();
+                PqFormFragment1 pqf2 = new PqFormFragment1();
 //                MainApplication.previous_pq2_courseID = courseID;
 //                MainApplication.previous_pq2_instituteID = instituteID;
 //                MainApplication.previous_pq3_locationID = locationID;
@@ -209,24 +205,30 @@ public class PqFormFragment3 extends Fragment {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextCourseFee.getText().toString().equalsIgnoreCase("")){
-                    Toast.makeText(context, "Course Fee Cannot be 0",Toast.LENGTH_SHORT).show();
-                    editTextCourseFee.setError("Loan Amount Cannot be 0");
-                }
-                if(editTextLoanAmount.getText().toString().equalsIgnoreCase("") || editTextLoanAmount.getText().toString().equalsIgnoreCase("0"))
-                {
-                    Toast.makeText(context, "Loan Amount Cannot be 0",Toast.LENGTH_SHORT).show();
-                    editTextLoanAmount.setError("Loan Amount Cannot be 0");
-                }else if(editText.getText().toString().equalsIgnoreCase("") || editText.getText().toString().equalsIgnoreCase("0")){
-                    editText.setError("Loan Amount Cannot be 0");
+                if (!editTextCourseFee.getText().toString().equalsIgnoreCase("")) {
+                    if (!editTextLoanAmount.getText().toString().equalsIgnoreCase("") || editTextLoanAmount.getText().toString().equalsIgnoreCase("0")) {
+                        if (!editText.getText().toString().equalsIgnoreCase("") || editText.getText().toString().equalsIgnoreCase("0")) {
 
-                } else {
-                    PqFormFragment4 pqf4 = new PqFormFragment4 ();
+                            PqFormFragment5 pqf5 = new PqFormFragment5();
 //                    MainApplication.previous_pq2_courseID = courseID;
 //                    MainApplication.previous_pq2_instituteID = instituteID;
 //                    MainApplication.previous_pq3_locationID = locationID;
-                    transaction.replace(R.id.framelayout_pqform, pqf4).commit();
+                            transaction.replace(R.id.framelayout_pqform, pqf5).commit();
+
+                        } else {
+                            Toast.makeText(context, "Family Monthly Income Cannot be 0", Toast.LENGTH_SHORT).show();
+                            editText.setError("Family Monthly Income Cannot be 0");
+                        }
+                    } else {
+                        Toast.makeText(context, "Loan Amount Cannot be 0", Toast.LENGTH_SHORT).show();
+                        editTextLoanAmount.setError("Loan Amount Cannot be 0");
+                    }
+
+                } else {
+                    Toast.makeText(context, "Course Fee Cannot be 0", Toast.LENGTH_SHORT).show();
+                    editTextCourseFee.setError("Loan Amount Cannot be 0");
                 }
+
             }
         });
 
@@ -235,8 +237,8 @@ public class PqFormFragment3 extends Fragment {
             String url = MainApplication.mainUrl + "pqform/pqform/apiPrefillSliderAmount";
             Map<String, String> params = new HashMap<String, String>();
             params.put("institute_id", MainApplication.mainapp_instituteID);
-            params.put("course_id",  MainApplication.mainapp_courseID);
-            params.put("location_id",  MainApplication.mainapp_locationID);
+            params.put("course_id", MainApplication.mainapp_courseID);
+            params.put("location_id", MainApplication.mainapp_locationID);
             VolleyCall volleyCall = new VolleyCall();
             volleyCall.sendRequest(context, url, null, mFragment, "prefillLoanAmountFragment3", params);
         } catch (Exception e) {
@@ -255,15 +257,15 @@ public class PqFormFragment3 extends Fragment {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 resultAmount = jsonData.getString("result");
 //                bubbleSeekBar1.(Integer.parseInt(resultAmount));
 //                textviewMaxAmount.setText(MainApplication.indianCurrencyFormat(resultAmount));
-                Log.e(TAG, "prefillLoanAmountFragment3: "+resultAmount );
+                Log.e(TAG, "prefillLoanAmountFragment3: " + resultAmount);
 
 
-            }else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            } else {
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();

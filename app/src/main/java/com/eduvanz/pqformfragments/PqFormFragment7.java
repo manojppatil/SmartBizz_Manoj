@@ -108,7 +108,7 @@ public class PqFormFragment7 extends Fragment {
         buttonPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transaction.replace(R.id.framelayout_pqform, new PqFormFragment6()).commit();
+                transaction.replace(R.id.framelayout_pqform, new PqFormFragment5()).commit();
             }
         });
 

@@ -71,6 +71,7 @@ public class Login extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("checkfor_eligibility", "1");
                 intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             }

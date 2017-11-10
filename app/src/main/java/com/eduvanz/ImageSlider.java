@@ -86,7 +86,7 @@ public class ImageSlider extends AppCompatActivity {
                     finish();
 
                 }else {
-                    Intent intent = new Intent(ImageSlider.this,Login.class);
+                    Intent intent = new Intent(ImageSlider.this,SignupLogin.class);
                     startActivity(intent);
                     finish();
                 }

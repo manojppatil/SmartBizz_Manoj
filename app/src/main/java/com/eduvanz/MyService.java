@@ -431,6 +431,7 @@ public class MyService extends Service {
 
         selectOperations();
 
+        //start sticky means service will be explicity started and stopped
         return Service.START_STICKY;
     }
 

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -14,6 +15,8 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -37,6 +40,7 @@ import com.eduvanz.friendlyscore.StartActivityFS;
 import com.eduvanz.pqformfragments.PqFormFragment1;
 import com.eduvanz.uploaddocs.UploadActivityBorrower;
 import com.eduvanz.uploaddocs.UploadActivityCoBorrower;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
@@ -56,13 +60,21 @@ import static com.eduvanz.MainApplication.TAG;
  * GET ALL CONTACTS https://stackoverflow.com/questions/12562151/android-get-all-contacts
  **/
 
+/**
+ * ROUNDED IMAGE VIEW https://github.com/vinc3m1/RoundedImageView
+ **/
+
+
 public class Main2ActivityNavigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public int GET_MY_PERMISSION = 1;
-    TextView textViewName, textViewEmail;
+    TextView textViewName, textViewEmail, textViewFaq, textViewAboutUs, textViewtnc,
+            textViewMyAccount, textViewCheckEligibility, textViewSetting, textViewLogout,
+            textViewDocupBorrower, textViewDocupCoBorrower, textViewFqBorrower, textViewFqCoBorrower,
+            textViewFriendlyScore;
     Typeface typefaceFont, typefaceFontBold;
-    ImageView imageView;
+    RoundedImageView imageView;
     SharedPref sharedPref;
     String checkForEligibility = "";
     StringBuffer sb;
@@ -176,11 +188,39 @@ public class Main2ActivityNavigation extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View header = navigationView.getHeaderView(0);
+//        View header = navigationView.getHeaderView(0);
 
-        textViewName = (TextView) header.findViewById(R.id.textView_username);
-        textViewEmail = (TextView) header.findViewById(R.id.textView_useremail);
-        imageView = (ImageView) header.findViewById(R.id.imageView_userpic);
+        textViewName = (TextView) findViewById(R.id.textView_username);
+        textViewName.setTypeface(typefaceFont);
+        textViewEmail = (TextView) findViewById(R.id.textView_useremail);
+        textViewEmail.setTypeface(typefaceFont);
+        textViewFaq = (TextView) findViewById(R.id.textView_FAQ);
+        textViewFaq.setTypeface(typefaceFont);
+        textViewAboutUs = (TextView) findViewById(R.id.textView_aboutus);
+        textViewAboutUs.setTypeface(typefaceFont);
+        textViewtnc = (TextView) findViewById(R.id.textView_tnc);
+        textViewtnc.setTypeface(typefaceFont);
+        textViewMyAccount= (TextView) findViewById(R.id.textView_account);
+        textViewMyAccount.setTypeface(typefaceFont);
+        textViewCheckEligibility = (TextView) findViewById(R.id.textView_eligibility);
+        textViewCheckEligibility.setTypeface(typefaceFont);
+        textViewSetting = (TextView) findViewById(R.id.textView_settings);
+        textViewSetting.setTypeface(typefaceFont);
+        textViewLogout = (TextView) findViewById(R.id.textView_logout);
+        textViewLogout.setTypeface(typefaceFont);
+
+        textViewDocupBorrower = (TextView) findViewById(R.id.textView_docupload_borrower);
+        textViewDocupBorrower.setTypeface(typefaceFont);
+        textViewDocupCoBorrower = (TextView) findViewById(R.id.textView_docupload_coborrower);
+        textViewDocupCoBorrower.setTypeface(typefaceFont);
+        textViewFqBorrower = (TextView) findViewById(R.id.textView_fq_borrower);
+        textViewFqBorrower.setTypeface(typefaceFont);
+        textViewFqCoBorrower = (TextView) findViewById(R.id.textView_fq_coborrower);
+        textViewFqCoBorrower.setTypeface(typefaceFont);
+        textViewFriendlyScore = (TextView) findViewById(R.id.textView_friendlyscore);
+        textViewFriendlyScore.setTypeface(typefaceFont);
+
+        imageView = (RoundedImageView) findViewById(R.id.imageView_userpic);
         textViewName.setTypeface(typefaceFontBold);
         textViewEmail.setTypeface(typefaceFontBold);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +231,109 @@ public class Main2ActivityNavigation extends AppCompatActivity
             }
         });
 
+        textViewFaq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, FAQ.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, WebViewAboutUs.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewtnc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, WebViewTermsNCondition.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewMyAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, UserProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewCheckEligibility.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Main2ActivityNavigation.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("checkfor_eligibility", "1");
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        textViewSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, MyProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewDocupBorrower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, UploadActivityBorrower.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewDocupCoBorrower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, UploadActivityCoBorrower.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewFqBorrower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, FqFormBorrower.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewFqCoBorrower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, FqFormCoborrower.class);
+                startActivity(intent);
+            }
+        });
+
+        textViewFriendlyScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2ActivityNavigation.this, StartActivityFS.class);
+                startActivity(intent);
+            }
+        });
+
+
+        textViewLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sharedPref = new SharedPref();
+                sharedPref.clearSharedPreference(Main2ActivityNavigation.this);
+                Intent intent = new Intent(Main2ActivityNavigation.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         if (!userpic.equalsIgnoreCase("null") || !userpic.equalsIgnoreCase("")) {
             Picasso.with(getApplicationContext()).load(userpic).into(imageView);
@@ -239,7 +382,7 @@ public class Main2ActivityNavigation extends AppCompatActivity
 
         if (!checkForEligibility.equalsIgnoreCase("1")) {
 //            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-            getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new DashBoardFragment()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new Dashboard()).commit();
         } else {
 //            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform, new PqFormFragment1()).commit();
