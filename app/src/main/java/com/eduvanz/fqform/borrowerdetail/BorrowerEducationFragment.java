@@ -73,7 +73,7 @@ public class BorrowerEducationFragment extends Fragment {
         editTextIsCgpaNo = (EditText) view.findViewById(R.id.input_degree_percentage);
         editTextPassingYear = (EditText) view.findViewById(R.id.input_passingyear);
 
-        buttonSubmit = (Button) view.findViewById(R.id.button_submit_education_borrower);
+//        buttonSubmit = (Button) view.findViewById(R.id.button_submit_education_borrower);
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

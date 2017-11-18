@@ -297,7 +297,7 @@ public class BorrowerPersonalFragment extends Fragment {
 
         //----------------------------------END SPINNER CLICK-------------------------------------//
 
-        buttonSubmit = (Button) view.findViewById(R.id.button_submit_personalborrower);
+//        buttonSubmit = (Button) view.findViewById(R.id.button_submit_personalborrower);
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

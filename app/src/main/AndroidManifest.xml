@@ -46,15 +46,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashScreen"
-            android:screenOrientation="sensorPortrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".ImageSlider"
             android:screenOrientation="sensorPortrait" />
         <activity
@@ -138,8 +129,9 @@
             android:name=".SignupLogin"
             android:screenOrientation="sensorPortrait" />
         /** NEW UI **/
+
         <activity
-            android:name=".newUI.GetMobileNo"
+            android:name=".SplashScreen"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -147,8 +139,49 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".newUI.OtpValidation"
-            android:screenOrientation="sensorPortrait"/>
+
+        <activity
+            android:name=".newUI.newViews.GetMobileNo"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".newUI.newViews.OtpValidation"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".newUI.newViews.EligibilityCheck"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.LoanApplication"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.MyProfileNew"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.SignIn"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.SignUp"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.ContactUs"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.Faq"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.HowItWorks"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".newUI.newViews.BannerActivity"></activity>
     </application>
 
 </manifest>

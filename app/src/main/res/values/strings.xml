@@ -6,6 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rupeesymbol">&#xf156;</string>
+    <string name="Rs">\u20B9</string>
     <string name="calendar">&#xf073;</string>
     <string name="edit">&#xf044;</string>
 
@@ -104,6 +105,7 @@
     <string name="checkEligibility">Have a dream career in mind , than Eduvanz is want you need to get connected with.</string>
     <string name="completeProfile">Complete your profile to increase eligibility for getting instant loans</string>
     <string name="congrats">Congratulations ! \nYou are eligible for an instant loan. Apply right now and change your career.</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
 
     /** END OF FRIENDLY SCORE STRINGS XML CONTENT **/
 </resources>

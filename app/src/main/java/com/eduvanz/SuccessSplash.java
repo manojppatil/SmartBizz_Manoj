@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.eduvanz.newUI.newViews.DashboardActivity;
+
 public class SuccessSplash extends AppCompatActivity {
 
     Thread splashTread;
@@ -32,11 +34,11 @@ public class SuccessSplash extends AppCompatActivity {
         String emailshared = sharedPreferences.getString("user_email","null");
         String userpic = sharedPreferences.getString("user_image","null");
 
-        textView1 = (TextView) findViewById(R.id.textview1_font_ss);
-        textView1.setTypeface(typefaceFontBold);
-        textView1.setText( "Hi " + firstnameshared + "!");
-        textView2 = (TextView) findViewById(R.id.textview2_font_ss);
-        textView2.setTypeface(typefaceFont);
+//        textView1 = (TextView) findViewById(R.id.textview1_font_ss);
+//        textView1.setTypeface(typefaceFontBold);
+//        textView1.setText( "Hi " + firstnameshared + "!");
+//        textView2 = (TextView) findViewById(R.id.textview2_font_ss);
+//        textView2.setTypeface(typefaceFont);
 
 
         if (Build.VERSION.SDK_INT < 16) {
@@ -62,10 +64,10 @@ public class SuccessSplash extends AppCompatActivity {
                         waited += 100;
                     }
 
-                    Intent intent = new Intent(SuccessSplash.this, Main2ActivityNavigation.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("checkfor_eligibility", "0");
-                    intent.putExtras(bundle);
+                    Intent intent = new Intent(SuccessSplash.this, DashboardActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("checkfor_eligibility", "0");
+//                    intent.putExtras(bundle);
                     startActivity(intent);
                     SuccessSplash.this.finish();
 

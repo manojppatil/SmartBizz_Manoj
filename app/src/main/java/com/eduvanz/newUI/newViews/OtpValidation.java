@@ -1,4 +1,4 @@
-package com.eduvanz.newUI;
+package com.eduvanz.newUI.newViews;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +37,7 @@ public class OtpValidation extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OtpValidation.this, OtpValidation.class);
+                Intent intent = new Intent(OtpValidation.this, DashboardActivity.class);
                 startActivity(intent);
             }
         });

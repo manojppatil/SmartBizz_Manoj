@@ -131,20 +131,22 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                 <TextView
+                    android:layout_weight="1.5"
                     android:paddingTop="2dp"
                     android:gravity="left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Marital status : "
-                    android:layout_gravity="left"
+                    android:layout_gravity="left|center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
                 <RadioGroup
-                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:layout_gravity="center"
                     android:paddingLeft="5dp"
-                    android:layout_marginTop="6dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -522,6 +524,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:layout_gravity="center"

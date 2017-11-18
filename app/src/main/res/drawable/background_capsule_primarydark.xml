@@ -9,7 +9,7 @@
         android:topLeftRadius="30dp"
         android:topRightRadius="30dp" />
 
-    <solid android:color="@color/colorPrimaryDark" />
+    <solid android:color="@color/colorSecondary" />
 
     <!--<stroke android:color="@color/colorPrimary"-->
         <!--android:width="@dimen/common_3_dp"/>-->
@@ -20,8 +20,8 @@
         android:right="0dp"
         android:top="0dp" />
 
-    <!--<size-->
-        <!--android:height="60dp"-->
-        <!--android:width="270dp" />-->
+    <size
+        android:height="25dp"
+         />
 
 </shape>

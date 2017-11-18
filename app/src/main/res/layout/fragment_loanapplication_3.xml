@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.eduvanz.pqformfragments.PqFormFragment1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:background="@drawable/background_capsule_leftsided">
+
+
+            <LinearLayout
+                android:id="@+id/toright"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_capsule_primarydark"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout_leftoff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_capsule_primary"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:layout_width="135dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_capsule_primarydark"
+                android:orientation="horizontal" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView1_l3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_capsule_primarydark"
+                    android:gravity="center"
+                    android:text="Borrower"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView2_l3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_capsule_primarydark"
+                    android:gravity="center"
+                    android:text="Co Borrower"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView3_l3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Documents"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include layout="@layout/activity_upload_borrower" />
+
+                <include layout="@layout/activity_upload_coborrower" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_previous_loanappfragment3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/icon_leftarrow"
+            android:paddingLeft="20dp"
+            android:text="Previous"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_next_loanappfragment3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:drawableRight="@drawable/icon_rightarrow"
+            android:paddingRight="20dp"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

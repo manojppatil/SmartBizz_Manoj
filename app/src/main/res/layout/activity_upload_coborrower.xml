@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/apptoolbar_filler" />
+    <!--<include layout="@layout/apptoolbar_filler" />-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,6 +31,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textview2_font_pu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

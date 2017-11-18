@@ -65,7 +65,7 @@ public class BorrowerProfessionNFinancialFragment extends Fragment {
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
         userID = sharedPreferences.getString("logged_id","null");
 
-        buttonSubmit = (Button) view.findViewById(R.id.button_submit_finance_borrower);
+//        buttonSubmit = (Button) view.findViewById(R.id.button_submit_finance_borrower);
         radioButtonisStudent = (RadioButton) view.findViewById(R.id.radiobutton_isstudent);
         radioButtonisEmployed = (RadioButton) view.findViewById(R.id.radiobutton_isemployed);
         linearLayoutEmployed = (LinearLayout) view.findViewById(R.id.linearlayout_isempoyeed);

@@ -10,9 +10,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- TODO: Update blank fragment layout -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,8 +24,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                 <TextView
+                    android:layout_weight="2"
                     android:paddingTop="2dp"
                     android:gravity="left"
                     android:layout_width="match_parent"
@@ -35,6 +36,7 @@
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
                 <RadioGroup
+                    android:layout_weight="1"
                     android:id="@+id/radiogroup_profession"
                     android:gravity="left"
                     android:layout_marginTop="6dp"
@@ -144,20 +146,20 @@
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:id="@+id/button_submit_finance_borrower"
-                android:background="@color/colorPrimaryDark"
-                android:layout_alignParentBottom="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:text="Submit"
-                android:textColor="@color/white" />
+            <!--<Button-->
+                <!--android:layout_marginTop="25dp"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/button_submit_finance_borrower"-->
+                <!--android:background="@color/colorPrimaryDark"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:text="Submit"-->
+                <!--android:textColor="@color/white" />-->
         </LinearLayout>
 
-        </ScrollView>
+        <!--</ScrollView>-->
     </LinearLayout>

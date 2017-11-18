@@ -21,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.eduvanz.newUI.newViews.GetMobileNo;
+import com.eduvanz.newUI.newViews.OtpValidation;
+
 public class SplashScreen extends AppCompatActivity {
     ImageView  imageViewCustomer;
     View view1;
@@ -39,8 +42,8 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
         context = this;
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
-        checkForImageSlider = sharedPreferences.getString("checkForImageSlider","null");
+//        SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
+//        checkForImageSlider = sharedPreferences.getString("checkForImageSlider","null");
 
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -78,31 +81,37 @@ public class SplashScreen extends AppCompatActivity {
                 try {
                     int waited = 0;
                     // Splash screen pause time
-                    while (waited < 2000) {
+                    while (waited < 3000) {
                         sleep(100);
                         waited += 100;
                     }
 
-                    if(checkForImageSlider.equalsIgnoreCase("1")) {
-                        if(sharedPref.getLoginDone(SplashScreen.this)) {
-                            Intent intent = new Intent(SplashScreen.this,
-                                    Main2ActivityNavigation.class);
+                    Intent intent = new Intent(SplashScreen.this,
+                                    GetMobileNo.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivity(intent);
                             SplashScreen.this.finish();
-                        }
-                        else {
-                            Intent intent = new Intent(SplashScreen.this, SignupLogin.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }else {
-                        Intent intent = new Intent(SplashScreen.this,
-                                ImageSlider.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
-                        SplashScreen.this.finish();
-                    }
+
+//                    if(checkForImageSlider.equalsIgnoreCase("1")) {
+//                        if(sharedPref.getLoginDone(SplashScreen.this)) {
+//                            Intent intent = new Intent(SplashScreen.this,
+//                                    Main2ActivityNavigation.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                            startActivity(intent);
+//                            SplashScreen.this.finish();
+//                        }
+//                        else {
+//                            Intent intent = new Intent(SplashScreen.this, SignupLogin.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    }else {
+//                        Intent intent = new Intent(SplashScreen.this,
+//                                ImageSlider.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                        startActivity(intent);
+//                        SplashScreen.this.finish();
+//                    }
 
                 } catch (InterruptedException e) {
                     // do nothing

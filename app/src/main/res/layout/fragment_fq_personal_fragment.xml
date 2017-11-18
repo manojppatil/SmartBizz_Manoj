@@ -100,8 +100,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                 <TextView
+                    android:layout_weight="1.5"
                     android:paddingTop="2dp"
                     android:gravity="left"
                     android:layout_width="match_parent"
@@ -111,6 +112,7 @@
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
                 <RadioGroup
+                    android:layout_weight="1"
                     android:gravity="left"
                     android:layout_marginTop="6dp"
                     android:layout_width="match_parent"
@@ -461,19 +463,19 @@
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:id="@+id/button_submit_personalborrower"
-                android:background="@color/colorPrimaryDark"
-                android:layout_alignParentBottom="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:text="Submit"
-                android:textColor="@color/white" />
+            <!--<Button-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/button_submit_personalborrower"-->
+                <!--android:background="@color/colorPrimaryDark"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:text="Submit"-->
+                <!--android:textColor="@color/white" />-->
         </LinearLayout>
 
     </ScrollView>
