@@ -47,6 +47,7 @@
         android:textColor="@color/colorSecondary"/>
 
     <EditText
+        android:id="@+id/editText_getmobileno"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"

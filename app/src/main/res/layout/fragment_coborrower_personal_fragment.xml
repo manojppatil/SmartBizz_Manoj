@@ -103,6 +103,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp">
                 <EditText
+                    android:maxLength="10"
                     android:id="@+id/input_coborrowercontactno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -233,6 +234,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp">
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/input_coborrowerrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -462,6 +464,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:hint="Permanent Pin Code no."
+                    android:maxLength="6"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
 
@@ -500,10 +503,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp">
                 <EditText
+                    android:maxLength="12"
                     android:id="@+id/input_adhaar_coborrower"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:hint="Adhaar No."
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -515,10 +518,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp">
                 <EditText
+                    android:maxLength="10"
                     android:id="@+id/input_pan_coborrower"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:hint="PAN No."
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>

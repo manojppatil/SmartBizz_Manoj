@@ -1,9 +1,15 @@
 package com.eduvanz.newUI.fragments;
 
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -11,10 +17,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
@@ -30,6 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.Context.LOCATION_SERVICE;
 import static com.eduvanz.MainApplication.TAG;
 
 /**
@@ -46,22 +56,14 @@ public class EligibilityCheckFragment_3 extends Fragment {
     public static Spinner professionSpinner, documentSpinner;
     public static ArrayAdapter arrayAdapter_profession;
     public static ArrayList<String> document_arrayList;
-    public static ArrayList<NameOfInsitituePOJO> nameOfInsitituePOJOArrayList;
     public static ArrayAdapter arrayAdapter_document;
     public static ArrayList<String> profession_arrayList;
-    public static ArrayList<NameOfCoursePOJO> nameOfCoursePOJOArrayList;
     public static Context context;
     public static Fragment mFragment;
     Button buttonNext, buttonPrevious;
     Typeface typefaceFont, typefaceFontBold;
     TextView textView1, textView2, textView3;
-    String instituteID = "", courseID = "", locationID="";
-
-    public static Spinner spinnerLocationOfInstitute;
-
-    public static ArrayAdapter arrayAdapter_locations;
-    public static ArrayList<String> locations_arrayList;
-    public static ArrayList<LocationsPOJO> locationPOJOArrayList;
+    EditText editTextCity;
 
     public EligibilityCheckFragment_3() {
         // Required empty public constructor
@@ -88,20 +90,23 @@ public class EligibilityCheckFragment_3 extends Fragment {
         textView1.setTypeface(typefaceFont);
         textView2.setTypeface(typefaceFont);
         textView3.setTypeface(typefaceFontBold);
-
+        editTextCity = (EditText) view.findViewById(R.id.editText_cityName_ec);
+        editTextCity.setText(MainApplication.mainapp_currentCity);
         professionSpinner = (Spinner) view.findViewById(R.id.spinner_yourprofession);
         profession_arrayList = new ArrayList<>();
+        profession_arrayList.add("Select Any");
         profession_arrayList.add("Student");
         profession_arrayList.add("Employed");
-        profession_arrayList.add("Unemployed");
+        profession_arrayList.add("Self Employed");
         arrayAdapter_profession = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayList);
         professionSpinner.setAdapter(arrayAdapter_profession);
         arrayAdapter_profession.notifyDataSetChanged();
 
         documentSpinner = (Spinner) view.findViewById(R.id.spinner_document);
         document_arrayList = new ArrayList<>();
-        document_arrayList.add("Pan Card");
+        document_arrayList.add("Select Any");
         document_arrayList.add("Adhaar Card");
+        document_arrayList.add("Pan Card");
         document_arrayList.add("Both");
         document_arrayList.add("Neither");
         arrayAdapter_document = new ArrayAdapter(context, R.layout.custom_layout_spinner, document_arrayList);
@@ -117,8 +122,17 @@ public class EligibilityCheckFragment_3 extends Fragment {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EligibilityCheckFragment_4 eligibilityCheckFragment_4 = new EligibilityCheckFragment_4();
-                transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_4).commit();
+
+                if(!MainApplication.mainapp_userdocument.equalsIgnoreCase("0") &&
+                        !MainApplication.mainapp_userprofession.equalsIgnoreCase("0") &&
+                        !editTextCity.getText().toString().equalsIgnoreCase("")){
+                    MainApplication.mainapp_currentCity = editTextCity.getText().toString();
+                    EligibilityCheckFragment_4 eligibilityCheckFragment_4 = new EligibilityCheckFragment_4();
+                    transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_4).commit();
+                }else {
+                    Toast.makeText(context, "You need to select your profession, document & city to continue", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -130,105 +144,86 @@ public class EligibilityCheckFragment_3 extends Fragment {
             }
         });
 
+        if(!MainApplication.mainapp_userdocument.equals("")){
+
+                if (MainApplication.mainapp_userdocument.equalsIgnoreCase("0")) {
+                    documentSpinner.setSelection(0);
+                }else if(MainApplication.mainapp_userdocument.equalsIgnoreCase("1")){
+                    documentSpinner.setSelection(1);
+                }else if(MainApplication.mainapp_userdocument.equalsIgnoreCase("2")){
+                    documentSpinner.setSelection(2);
+                }else if(MainApplication.mainapp_userdocument.equalsIgnoreCase("3")){
+                    documentSpinner.setSelection(3);
+                }else if(MainApplication.mainapp_userdocument.equalsIgnoreCase("4")){
+                    documentSpinner.setSelection(4);
+                }
+
+        }
+
+        if(!MainApplication.mainapp_userprofession.equals("")){
+            if (MainApplication.mainapp_userprofession.equalsIgnoreCase("0")) {
+                professionSpinner.setSelection(0);
+            }else if(MainApplication.mainapp_userprofession.equalsIgnoreCase("Student")){
+                professionSpinner.setSelection(1);
+            }else if(MainApplication.mainapp_userprofession.equalsIgnoreCase("employed")){
+                professionSpinner.setSelection(2);
+            }else if(MainApplication.mainapp_userprofession.equalsIgnoreCase("selfEmployed")){
+                professionSpinner.setSelection(3);
+            }
+        }
+
+        documentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String text = documentSpinner.getSelectedItem().toString();
+                    if (text.equalsIgnoreCase("Select Any")) {
+                        MainApplication.mainapp_userdocument = "0";
+                    }else if(text.equalsIgnoreCase("Adhaar Card")){
+                        MainApplication.mainapp_userdocument = "1";
+                    }else if(text.equalsIgnoreCase("Pan Card")){
+                        MainApplication.mainapp_userdocument = "2";
+                    }else if(text.equalsIgnoreCase("Both")){
+                        MainApplication.mainapp_userdocument = "3";
+                    }else if(text.equalsIgnoreCase("Neither")){
+                        MainApplication.mainapp_userdocument = "4";
+                    }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        professionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String text = professionSpinner.getSelectedItem().toString();
+                if (text.equalsIgnoreCase("Select Any")) {
+                    MainApplication.mainapp_userprofession = "0";
+                }else if(text.equalsIgnoreCase("Student")){
+                    MainApplication.mainapp_userprofession = "Student";
+                }else if(text.equalsIgnoreCase("Employed")){
+                    MainApplication.mainapp_userprofession = "employed";
+                }else if(text.equalsIgnoreCase("Self Employed")){
+                    MainApplication.mainapp_userprofession = "selfEmployed";
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         return view;
     }
 
-    public void courseApiCall() {
-        //-------------------------------API CALL FOR COURSES-------------------------------------//
-        try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillCourses";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("instituteId", instituteID);
-            VolleyCall volleyCall = new VolleyCall();
-            volleyCall.sendRequest(context, url, null, mFragment, "PrefillCourseFragment1", params);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }//------------------------------END API CALL FOR CITY------------------------------------//
-    }
-
-    public void locationApiCall(){
-        //-----------------------------------------API CALL---------------------------------------//
-        try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillLocations";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("institute_id", MainApplication.mainapp_instituteID);
-            params.put("course_id", MainApplication.mainapp_courseID);
-            VolleyCall volleyCall = new VolleyCall();
-            volleyCall.sendRequest(context, url, null, mFragment, "prefillLocationsFragment2", params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //-------------------------------------END OF API CALL------------------------------------//
-    }
 
 
-    private void loadPrevious() {
-        if (MainApplication.previous == 1) {
-            instituteID = MainApplication.mainapp_instituteID;
-            courseID = MainApplication.mainapp_courseID;
-            Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + " nameOfInsitituePOJOArrayList" + nameOfInsitituePOJOArrayList.size());
-            for (int i = 0; i < nameOfInsitituePOJOArrayList.size(); i++) {
-                Log.e(TAG, "for: " + nameOfInsitituePOJOArrayList.size());
-                if (instituteID.equalsIgnoreCase(nameOfInsitituePOJOArrayList.get(i).instituteID)) {
-                    Log.e(TAG, "nameOfInsitituePOJOArrayList: " + nameOfInsitituePOJOArrayList.get(i).instituteName);
-                    break;
-                }
-            }
-            courseApiCall();
-        }
-    }
-
-
-    //---------------------------------RESPONSE OF API CALL---------------------------------------//
-    public void prefillLocationsFragment2(JSONObject jsonData) {
-        try {
-            Log.e("SERVER CALL", "PrefillInstitutesFragment1" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                JSONArray jsonArray = jsonData.getJSONArray("result");
-
-                locationPOJOArrayList = new ArrayList<>();
-                locations_arrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    LocationsPOJO locationsPOJO = new LocationsPOJO();
-                    JSONObject mJsonti = jsonArray.getJSONObject(i);
-                    locationsPOJO.locationName = mJsonti.getString("location_name");
-                    locations_arrayList.add(mJsonti.getString("location_name"));
-                    locationsPOJO.locationID = mJsonti.getString("location_id");
-                    locationPOJOArrayList.add(locationsPOJO);
-                    Log.e("residential", "Spiner DATA:----------------- " + locationsPOJO.locationName);
-                }
-                arrayAdapter_locations = new ArrayAdapter(context, R.layout.custom_layout_spinner, locations_arrayList);
-//                spinnerLocationOfInstitute.setItems(locations_arrayList);
-//                spinnerLocationOfInstitute.setTextColor(getResources().getColor(R.color.black));
-                spinnerLocationOfInstitute.setAdapter(arrayAdapter_locations);
-                arrayAdapter_locations.notifyDataSetChanged();
-
-            }else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-
-            if(MainApplication.previousfragment3 == 1) {
-//                instituteID = MainApplication.previous_pq2_instituteID;
-//                courseID = MainApplication.previous_pq2_courseID;
-                locationID = MainApplication.mainapp_locationID;
-                Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + " locationPOJOArrayList" + locationPOJOArrayList.size());
-                for (int i = 0; i < locationPOJOArrayList.size(); i++) {
-                    Log.e(TAG, "for: " + locationPOJOArrayList.size());
-                    if (locationID.equalsIgnoreCase(locationPOJOArrayList.get(i).locationID)) {
-                        spinnerLocationOfInstitute.setSelection(i);
-                        Log.e(TAG, "locationPOJOArrayList: " + locationPOJOArrayList.get(i).locationName);
-                        break;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }

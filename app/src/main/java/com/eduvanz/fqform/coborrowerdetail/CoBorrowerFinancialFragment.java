@@ -52,6 +52,7 @@ public class CoBorrowerFinancialFragment extends Fragment {
     Typeface typeface;
     public static TextView lable, textViewDurationofJob, calender;
     public String dateformate="", userID="";
+
     public static EditText anuualincome, employeer;
 
     public static Spinner spinnerProfession;

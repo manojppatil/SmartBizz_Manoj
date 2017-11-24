@@ -69,6 +69,7 @@ public class SuccessSplash extends AppCompatActivity {
 //                    bundle.putString("checkfor_eligibility", "0");
 //                    intent.putExtras(bundle);
                     startActivity(intent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     SuccessSplash.this.finish();
 
                 } catch (InterruptedException e) {

@@ -24,7 +24,7 @@
                 <RelativeLayout
                     android:id="@+id/relativeLayout_viewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
+                    android:layout_height="160dp">
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/viewPager_dashboard"
@@ -51,6 +51,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/linearLayout_eligiblitycheck"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -66,17 +67,19 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/textViewdash_9"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Do you want financial assistance?"
-                            android:textSize="16sp"
+                            android:text="Want financial assistance?"
+                            android:textSize="14sp"
                             android:textColor="@color/colorPrimary"/>
 
                         <TextView
+                            android:id="@+id/textViewdash_10"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Check your Eligibility now!"
-                            android:textSize="18sp"
+                            android:text="Check Eligibility now!"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
 
@@ -93,7 +96,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="140dp"
+                        android:layout_height="80dp"
                         android:layout_weight="2"
                         android:padding="10dp"
                         android:src="@drawable/eduson_eligibility_check" />
@@ -101,6 +104,61 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearLayout_continue_application"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewdash_12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Want financial assistance?"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:id="@+id/textViewdash_13"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Check Eligibility now!"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <Button
+                            android:id="@+id/button_dashboard_continueapplication"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/colorPrimary"
+                            android:text="Continue"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_weight="2"
+                        android:padding="10dp"
+                        android:src="@drawable/incomplete_application" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_applyloan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -109,7 +167,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="140dp"
+                        android:layout_height="90dp"
                         android:layout_weight="2"
                         android:padding="10dp"
                         android:src="@drawable/thank_you" />
@@ -123,19 +181,23 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/textView_congratsmessage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Congrats Vivek you are now eligible for getting loan"
-                            android:textSize="16sp" />
+                            android:text=""
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Get it now."
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorSecondary"/>
 
                         <Button
+                            android:id="@+id/button_applynow_loan"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:layout_marginTop="10dp"
@@ -148,6 +210,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearLayout_dashdeal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -162,6 +225,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/textViewdash_11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -177,14 +241,15 @@
                     <!--android:background="@color/white"-->
                     <!--android:layout_marginRight="10dp"/>-->
                     <TextView
+                        android:id="@+id/textView_dealTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:text="Complete your eligibility check with eduvanz and get the processing fee waived of!"
+                        android:text=""
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -208,9 +273,10 @@
                             android:src="@drawable/icon_howitworks_dashbord" />
 
                         <TextView
+                            android:id="@+id/textViewdash_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             android:text="How it Works?"
                             android:textAllCaps="true"
                             android:textSize="16sp"/>
@@ -224,8 +290,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -236,9 +302,10 @@
                             android:src="@drawable/icon_aboutus_dashboard" />
 
                         <TextView
+                            android:id="@+id/textViewdash_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             android:text="About Us"
                             android:textAllCaps="true"
                             android:textSize="16sp"/>
@@ -272,9 +339,10 @@
                             android:src="@drawable/icon_faq_dashboard" />
 
                         <TextView
+                            android:id="@+id/textViewdash_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             android:text="FAQS"
                             android:textAllCaps="true"
                             android:textSize="16sp"/>
@@ -289,8 +357,8 @@
                         android:id="@+id/linearLayout_dashboard_contactus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -301,15 +369,21 @@
                             android:src="@drawable/icon_contactus_dashboard" />
 
                         <TextView
+                            android:id="@+id/textViewdash_4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             android:text="Contact Us"
                             android:textAllCaps="true"
                             android:textSize="16sp"/>
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey" />
 
             </LinearLayout>
 
@@ -337,6 +411,7 @@
                     android:src="@drawable/icon_myprofile_dashboard" />
 
                 <TextView
+                    android:id="@+id/textViewdash_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="My Profile"
@@ -360,6 +435,7 @@
                     android:src="@drawable/icon_callus_dashboard" />
 
                 <TextView
+                    android:id="@+id/textViewdash_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Call Us"
@@ -383,6 +459,7 @@
                     android:src="@drawable/icon_mailus_dashboard" />
 
                 <TextView
+                    android:id="@+id/textViewdash_7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mail Us"
@@ -405,6 +482,7 @@
                     android:src="@drawable/icon_notification_dashboard" />
 
                 <TextView
+                    android:id="@+id/textViewdash_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Notification"

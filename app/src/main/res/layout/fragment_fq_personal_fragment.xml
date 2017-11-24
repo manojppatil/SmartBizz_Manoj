@@ -173,6 +173,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp">
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/input_borrowerrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -290,6 +291,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
+                    android:maxLength="6"
                     android:hint="Current Pin Code no."
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -426,6 +428,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp">
                 <EditText
+                    android:maxLength="6"
                     android:id="@+id/input_borrowerpermanentpincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -441,6 +444,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp">
                 <EditText
+                    android:maxLength="12"
                     android:id="@+id/input_borroweradharnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -455,10 +459,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp">
                 <EditText
+                    android:maxLength="10"
+                    android:textAllCaps="true"
                     android:id="@+id/input_borrowerpannumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress"
+                    android:inputType="textCapSentences"
                     android:hint="PAN Number."
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>

@@ -7,38 +7,57 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.newUI.adapter.ViewPagerAdapterBanner;
 import com.eduvanz.newUI.pojo.ViewPagerDashboardPOJO;
+import com.eduvanz.volley.VolleyCallNew;
+import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BannerActivity extends AppCompatActivity {
 
-    ViewPager viewPagerBanner;
-    ViewPagerAdapterBanner viewPagerAdapterBanner;
-    CirclePageIndicator circlePageIndicatorBanner;
-    ArrayList<ViewPagerDashboardPOJO> viewPagerBannerPOJOArrayList;
-    ArrayList<Integer> images;
-    TextView textViewBannerDetail;
+    TextView textViewBannerDetail, textViewBannerTitle;
+    ImageView imageViewBanner;
     Button buttonCheckEligiblity;
     MainApplication mainApplication;
-    Context context;
+    static Context context;
+    String image="", id="", title="", fromDeal="";
+    AppCompatActivity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_banner);
         context = this;
+        mActivity = this;
         mainApplication = new MainApplication();
 
+        try {
+            Bundle bundle = getIntent().getExtras();
+            image = bundle.getString("bannerImage");
+            id = bundle.getString("bannerID");
+            title = bundle.getString("bannerTitle");
+            fromDeal = bundle.getString("from_deal","0");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,24 +67,11 @@ public class BannerActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        viewPagerBanner = (ViewPager) findViewById(R.id.viewPager_bannerpage);
-        circlePageIndicatorBanner = (CirclePageIndicator) findViewById(R.id.viewPageIndicator_bannerpage);
-        final float density = getResources().getDisplayMetrics().density;
-        circlePageIndicatorBanner.setRadius(4 * density);
-
-        images = new ArrayList<>();
-        images.add(R.drawable.bannersplaceholder);
-        images.add(R.drawable.bannersplaceholder);
-        images.add(R.drawable.bannersplaceholder);
-
-        viewPagerBannerPOJOArrayList = new ArrayList<>();
-        viewPagerAdapterBanner = new ViewPagerAdapterBanner(context, images);
-
-        viewPagerBanner.setAdapter(viewPagerAdapterBanner);
-        circlePageIndicatorBanner.setViewPager(viewPagerBanner);
-
         textViewBannerDetail = (TextView) findViewById(R.id.textView_bannerDetail);
         mainApplication.applyTypeface(textViewBannerDetail, context);
+
+        textViewBannerTitle = (TextView) findViewById(R.id.textView_bannerTitle);
+        mainApplication.applyTypeface(textViewBannerTitle, context);
 
         buttonCheckEligiblity = (Button) findViewById(R.id.button_bannerdetail_checkeligiblity);
         mainApplication.applyTypeface(buttonCheckEligiblity, context);
@@ -77,6 +83,32 @@ public class BannerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        imageViewBanner = (ImageView) findViewById(R.id.imageView_bannerimage_1);
+
+        /** API CALL**/
+        if(fromDeal.equalsIgnoreCase("1")){
+            try {
+                String url = MainApplication.mainUrl + "mobileadverstisement/getSpecificDealDetails";
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", id);
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "dealDetail", params);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            try {
+                String url = MainApplication.mainUrl + "mobileadverstisement/getSpecificBannerDetails";
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", id);
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "bannerDetail", params);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 
@@ -91,4 +123,70 @@ public class BannerActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
+
+
+    public void setBannerDetail(JSONObject jsonData) {
+        try {
+            Log.e(MainApplication.TAG, "setBannerDetail: "+ jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                JSONObject jsonObject1 = jsonObject.getJSONObject("banner");
+
+                textViewBannerTitle.setText(jsonObject1.getString("title"));
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    textViewBannerDetail.setText(Html.fromHtml(jsonObject1.getString("description"),Html.FROM_HTML_MODE_LEGACY));
+                } else {
+                    textViewBannerDetail.setText(Html.fromHtml(jsonObject1.getString("description")));
+                }
+
+                String image = jsonObject1.getString("image");
+
+                Picasso.with(context).load(image).placeholder(context.getResources().getDrawable(R.drawable.bannersplaceholder)).into(imageViewBanner);
+
+            }else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDealDetail(JSONObject jsonData) {
+        try {
+            Log.e(MainApplication.TAG, "setBannerDetail: "+ jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                JSONObject jsonObject1 = jsonObject.getJSONObject("deal");
+
+                textViewBannerTitle.setText(jsonObject1.getString("title"));
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    textViewBannerDetail.setText(Html.fromHtml(jsonObject1.getString("description"),Html.FROM_HTML_MODE_LEGACY));
+                } else {
+                    textViewBannerDetail.setText(Html.fromHtml(jsonObject1.getString("description")));
+                }
+
+                String image = jsonObject1.getString("image");
+
+                Picasso.with(context).load(image).placeholder(context.getResources().getDrawable(R.drawable.bannersplaceholder)).into(imageViewBanner);
+
+            }else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
+
+import com.eduvanz.newUI.newViews.OtpValidation;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,7 +63,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     if(m.find()) {
 
 
-                            SuccessAfterPQForm otpPageE = new SuccessAfterPQForm();
+                            OtpValidation otpPageE = new OtpValidation();
                             Log.e("TAG", "onReceive:m.group(0) Employee " + m.group(0));
                             otpPageE.setOtp(m.group(0));
 

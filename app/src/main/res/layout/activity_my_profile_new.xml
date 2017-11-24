@@ -56,7 +56,6 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:paddingBottom="20dp"
-                        android:text="Darsh Sanghvi"
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
@@ -103,10 +102,10 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/imageView_myprofile_eliglibilityCheck"
                                 android:layout_width="match_parent"
                                 android:layout_height="32dp"
-                                android:layout_weight="3"
-                                android:src="@drawable/verified" />
+                                android:layout_weight="3" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -126,10 +125,10 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/imageView_myprofile_mobileverification"
                                 android:layout_width="match_parent"
                                 android:layout_height="32dp"
-                                android:layout_weight="3"
-                                android:src="@drawable/verified" />
+                                android:layout_weight="3" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -149,10 +148,10 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/imageView_myprofile_emailVerification"
                                 android:layout_width="match_parent"
                                 android:layout_height="32dp"
-                                android:layout_weight="3"
-                                android:src="@drawable/verified" />
+                                android:layout_weight="3" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -172,10 +171,10 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/imageView_myprofile_socialScore"
                                 android:layout_width="match_parent"
                                 android:layout_height="32dp"
-                                android:layout_weight="3"
-                                android:src="@drawable/crossbox" />
+                                android:layout_weight="3" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -215,7 +214,6 @@
                                 android:layout_centerInParent="true"
                                 android:background="@drawable/background_circle_myprofile"
                                 android:gravity="center"
-                                android:text="75%"
                                 android:textColor="@color/white"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />

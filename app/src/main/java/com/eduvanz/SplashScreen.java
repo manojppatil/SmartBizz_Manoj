@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.eduvanz.newUI.newViews.DashboardActivity;
 import com.eduvanz.newUI.newViews.GetMobileNo;
 import com.eduvanz.newUI.newViews.OtpValidation;
 
@@ -30,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
     TextView textViewCustomer;
     Thread splashTread;
     RelativeLayout relativeLayoutCustomer;
-    String checkForImageSlider="";
+    String checkOTPDone="";
     SharedPref sharedPref = new SharedPref();
     Context context;
 
@@ -42,8 +43,8 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
         context = this;
 
-//        SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
-//        checkForImageSlider = sharedPreferences.getString("checkForImageSlider","null");
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        checkOTPDone = sharedPreferences.getString("otp_done","0");
 
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -86,11 +87,20 @@ public class SplashScreen extends AppCompatActivity {
                         waited += 100;
                     }
 
-                    Intent intent = new Intent(SplashScreen.this,
-                                    GetMobileNo.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                            startActivity(intent);
-                            SplashScreen.this.finish();
+                    if(checkOTPDone.equalsIgnoreCase("1")){
+                        Intent intent = new Intent(SplashScreen.this,
+                                DashboardActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                        SplashScreen.this.finish();
+                    }else {
+                        Intent intent = new Intent(SplashScreen.this,
+                                GetMobileNo.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                        SplashScreen.this.finish();
+                    }
+
 
 //                    if(checkForImageSlider.equalsIgnoreCase("1")) {
 //                        if(sharedPref.getLoginDone(SplashScreen.this)) {

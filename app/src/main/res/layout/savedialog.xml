@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<LinearLayout
+    android:layout_centerInParent="true"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    android:layout_width="250dp"
+    android:layout_height="180dp"
+    android:id="@+id/linearLayout_cancelbelow"
+    android:background="@color/white">
+
+<ImageView
+    android:layout_marginTop="10dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/icon_cancel_dialog"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Do you want to quit?"/>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="90dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/button_dialog_no"
+            android:layout_width="270dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorRed"
+            android:text="no"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/button_dialog_save"
+            android:layout_width="270dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimary"
+            android:text="Save &amp; Quit"
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

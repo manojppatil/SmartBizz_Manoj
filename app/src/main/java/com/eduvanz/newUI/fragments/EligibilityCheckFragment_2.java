@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
@@ -22,6 +24,7 @@ import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanz.pqformfragments.pojo.NameOfCoursePOJO;
 import com.eduvanz.pqformfragments.pojo.NameOfInsitituePOJO;
 import com.eduvanz.volley.VolleyCall;
+import com.eduvanz.volley.VolleyCallNew;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,22 +46,13 @@ import static com.eduvanz.MainApplication.TAG;
 
 public class EligibilityCheckFragment_2 extends Fragment {
 
-    public static ArrayAdapter arrayAdapter_NameOfInsititue;
-    public static ArrayList<String> nameofinstitute_arrayList;
-    public static ArrayList<NameOfInsitituePOJO> nameOfInsitituePOJOArrayList;
-    public static ArrayAdapter arrayAdapter_NameOfCourse;
-    public static ArrayList<String> nameofcourse_arrayList;
-    public static ArrayList<NameOfCoursePOJO> nameOfCoursePOJOArrayList;
     public static Context context;
     public static Fragment mFragment;
-    public static Spinner spinnerLocationOfInstitute;
-    public static ArrayAdapter arrayAdapter_locations;
-    public static ArrayList<String> locations_arrayList;
-    public static ArrayList<LocationsPOJO> locationPOJOArrayList;
     Button buttonNext, buttonPrevious;
     Typeface typefaceFont, typefaceFontBold;
     TextView textView1, textView2, textView3;
-    String instituteID = "", courseID = "", locationID = "";
+    static TextView textViewCourseFee;
+    EditText editTextLoanAmount, editTextFamilyIncome;
 
     public EligibilityCheckFragment_2() {
         // Required empty public constructor
@@ -73,6 +67,8 @@ public class EligibilityCheckFragment_2 extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         mFragment = new EligibilityCheckFragment_2();
+
+        MainApplication.currrentFrag = 2;
 
         typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
@@ -92,11 +88,29 @@ public class EligibilityCheckFragment_2 extends Fragment {
         buttonPrevious = (Button) view.findViewById(R.id.button_previous_eligiblityfragment2);
         buttonPrevious.setTypeface(typefaceFontBold);
 
+        editTextLoanAmount = (EditText) view.findViewById(R.id.editText_loanAmount);
+        editTextFamilyIncome = (EditText) view.findViewById(R.id.editText_familyMonthlyIncome);
+
+        if(!MainApplication.mainapp_fammilyincome.equals("") || !MainApplication.mainapp_loanamount.equals("")){
+            editTextLoanAmount.setText(MainApplication.mainapp_loanamount);
+            editTextFamilyIncome.setText(MainApplication.mainapp_fammilyincome);
+        }
+
+        textViewCourseFee = (TextView) view.findViewById(R.id.textView_coursefee);
+
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EligibilityCheckFragment_3 eligibilityCheckFragment_3 = new EligibilityCheckFragment_3();
-                transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_3).commit();
+
+                if(!editTextLoanAmount.getText().toString().equals("") && !editTextFamilyIncome.getText().toString().equals("")){
+                    MainApplication.mainapp_fammilyincome = editTextFamilyIncome.getText().toString();
+                    MainApplication.mainapp_loanamount= editTextLoanAmount.getText().toString();
+                    EligibilityCheckFragment_3 eligibilityCheckFragment_3 = new EligibilityCheckFragment_3();
+                    transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_3).commit();
+                }else {
+                    Toast.makeText(context, "Please provide your family income and loan amount", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -108,145 +122,34 @@ public class EligibilityCheckFragment_2 extends Fragment {
             }
         });
 
-        return view;
-    }
 
-    public void courseApiCall() {
-        //-------------------------------API CALL FOR COURSES-------------------------------------//
+        /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillCourses";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("instituteId", instituteID);
-            VolleyCall volleyCall = new VolleyCall();
-            volleyCall.sendRequest(context, url, null, mFragment, "PrefillCourseFragment1", params);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }//------------------------------END API CALL FOR CITY------------------------------------//
-    }
-
-    public void locationApiCall() {
-        //-----------------------------------------API CALL---------------------------------------//
-        try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillLocations";
+            String url = MainApplication.mainUrl + "pqform/apiPrefillSliderAmount";
             Map<String, String> params = new HashMap<String, String>();
             params.put("institute_id", MainApplication.mainapp_instituteID);
             params.put("course_id", MainApplication.mainapp_courseID);
-            VolleyCall volleyCall = new VolleyCall();
-            volleyCall.sendRequest(context, url, null, mFragment, "prefillLocationsFragment2", params);
+            params.put("location_id", MainApplication.mainapp_locationID);
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, null, mFragment, "courseFee", params);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //-------------------------------------END OF API CALL------------------------------------//
+
+        return view;
     }
 
 
-    private void loadPrevious() {
-        if (MainApplication.previous == 1) {
-            instituteID = MainApplication.mainapp_instituteID;
-            courseID = MainApplication.mainapp_courseID;
-            Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + " nameOfInsitituePOJOArrayList" + nameOfInsitituePOJOArrayList.size());
-            for (int i = 0; i < nameOfInsitituePOJOArrayList.size(); i++) {
-                Log.e(TAG, "for: " + nameOfInsitituePOJOArrayList.size());
-                if (instituteID.equalsIgnoreCase(nameOfInsitituePOJOArrayList.get(i).instituteID)) {
-                    Log.e(TAG, "nameOfInsitituePOJOArrayList: " + nameOfInsitituePOJOArrayList.get(i).instituteName);
-                    break;
-                }
-            }
-            courseApiCall();
-        }
-    }
-
-    public void PrefillCourseFragment1(JSONObject jsonData) {
+    public void courseFee(JSONObject jsonData) {
         try {
-            Log.e("SERVER CALL", "PrefillCourseFragment1" + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                JSONArray jsonArray = jsonData.getJSONArray("result");
-
-                nameOfCoursePOJOArrayList = new ArrayList<>();
-                nameofcourse_arrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    NameOfCoursePOJO nameOfCoursePOJO = new NameOfCoursePOJO();
-                    JSONObject mJsonti = jsonArray.getJSONObject(i);
-                    nameOfCoursePOJO.courseName = mJsonti.getString("course_name");
-                    nameofcourse_arrayList.add(mJsonti.getString("course_name"));
-                    nameOfCoursePOJO.courseID = mJsonti.getString("course_id");
-                    nameOfCoursePOJOArrayList.add(nameOfCoursePOJO);
-                    Log.e(MainApplication.TAG, "nameOfCoursePOJO Spiner DATA:----------------- " + nameOfCoursePOJO.courseName);
-                }
-                arrayAdapter_NameOfCourse = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofcourse_arrayList);
-//                spinnerNameOfCourse.setItems(nameofcourse_arrayList);
-//                spinnerNameOfCourse.setTextColor(getResources().getColor(R.color.black));
-                arrayAdapter_NameOfCourse.notifyDataSetChanged();
-
-                if (MainApplication.previous == 1) {
-                    courseID = MainApplication.mainapp_courseID;
-                    Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + " nameOfInsitituePOJOArrayList" + nameOfInsitituePOJOArrayList.size());
-                    for (int i = 0; i < nameOfCoursePOJOArrayList.size(); i++) {
-                        Log.e(TAG, "for: " + nameOfCoursePOJOArrayList.size());
-                        if (courseID.equalsIgnoreCase(nameOfCoursePOJOArrayList.get(i).courseID)) {
-                            Log.e(TAG, "nameOfInsitituePOJOArrayList: " + nameOfCoursePOJOArrayList.get(i).courseName);
-                            break;
-                        }
-                    }
-                }
+                textViewCourseFee.setText(jsonData.getString("result"));
+                MainApplication.mainapp_coursefee = jsonData.getString("result");
             } else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    //---------------------------------RESPONSE OF API CALL---------------------------------------//
-    public void prefillLocationsFragment2(JSONObject jsonData) {
-        try {
-            Log.e("SERVER CALL", "PrefillInstitutesFragment1" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                JSONArray jsonArray = jsonData.getJSONArray("result");
-
-                locationPOJOArrayList = new ArrayList<>();
-                locations_arrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    LocationsPOJO locationsPOJO = new LocationsPOJO();
-                    JSONObject mJsonti = jsonArray.getJSONObject(i);
-                    locationsPOJO.locationName = mJsonti.getString("location_name");
-                    locations_arrayList.add(mJsonti.getString("location_name"));
-                    locationsPOJO.locationID = mJsonti.getString("location_id");
-                    locationPOJOArrayList.add(locationsPOJO);
-                    Log.e("residential", "Spiner DATA:----------------- " + locationsPOJO.locationName);
-                }
-                arrayAdapter_locations = new ArrayAdapter(context, R.layout.custom_layout_spinner, locations_arrayList);
-//                spinnerLocationOfInstitute.setItems(locations_arrayList);
-//                spinnerLocationOfInstitute.setTextColor(getResources().getColor(R.color.black));
-                spinnerLocationOfInstitute.setAdapter(arrayAdapter_locations);
-                arrayAdapter_locations.notifyDataSetChanged();
-
-            } else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-
-            if (MainApplication.previousfragment3 == 1) {
-//                instituteID = MainApplication.previous_pq2_instituteID;
-//                courseID = MainApplication.previous_pq2_courseID;
-                locationID = MainApplication.mainapp_locationID;
-                Log.e(TAG, "instituteID: " + instituteID + "  courseID " + courseID + " locationPOJOArrayList" + locationPOJOArrayList.size());
-                for (int i = 0; i < locationPOJOArrayList.size(); i++) {
-                    Log.e(TAG, "for: " + locationPOJOArrayList.size());
-                    if (locationID.equalsIgnoreCase(locationPOJOArrayList.get(i).locationID)) {
-                        spinnerLocationOfInstitute.setSelection(i);
-                        Log.e(TAG, "locationPOJOArrayList: " + locationPOJOArrayList.get(i).locationName);
-                        break;
-                    }
-                }
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();

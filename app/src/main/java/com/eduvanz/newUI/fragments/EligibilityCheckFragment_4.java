@@ -3,10 +3,13 @@ package com.eduvanz.newUI.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +17,21 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
+import com.eduvanz.SharedPref;
 import com.eduvanz.SuccessSplash;
 import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanz.pqformfragments.pojo.NameOfCoursePOJO;
 import com.eduvanz.pqformfragments.pojo.NameOfInsitituePOJO;
 import com.eduvanz.volley.VolleyCall;
+import com.eduvanz.volley.VolleyCallNew;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,13 +58,10 @@ public class EligibilityCheckFragment_4 extends Fragment {
     Button buttonNext, buttonPrevious;
     Typeface typefaceFont, typefaceFontBold;
     TextView textView1, textView2, textView3;
-    String instituteID = "", courseID = "", locationID="";
-
-    public static Spinner spinnerLocationOfInstitute;
-
-    public static ArrayAdapter arrayAdapter_locations;
-    public static ArrayList<String> locations_arrayList;
-    public static ArrayList<LocationsPOJO> locationPOJOArrayList;
+    EditText editTextFirstname, editTextLastname, editTextEmailID;
+    public static String mobileNo="";
+    static ProgressBar progressBar;
+    SharedPref shareP;
 
     public EligibilityCheckFragment_4() {
         // Required empty public constructor
@@ -70,6 +75,14 @@ public class EligibilityCheckFragment_4 extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         mFragment = new EligibilityCheckFragment_4();
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar_eligiblityCheck);
+
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            mobileNo = sharedPreferences.getString("mobile_no", "null");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
@@ -83,6 +96,13 @@ public class EligibilityCheckFragment_4 extends Fragment {
         textView2.setTypeface(typefaceFont);
         textView3.setTypeface(typefaceFontBold);
 
+        editTextFirstname = (EditText) view.findViewById(R.id.editText_firstname_el);
+        editTextFirstname.setText(MainApplication.mainapp_firstname);
+        editTextLastname = (EditText) view.findViewById(R.id.editText_lastname_el);
+        editTextLastname.setText(MainApplication.mainapp_lastname);
+        editTextEmailID = (EditText) view.findViewById(R.id.editText_emailid_el);
+        editTextEmailID.setText(MainApplication.mainapp_emailid);
+
         buttonNext = (Button) view.findViewById(R.id.button_submit_eligibility);
         buttonNext.setTypeface(typefaceFontBold);
 
@@ -92,8 +112,97 @@ public class EligibilityCheckFragment_4 extends Fragment {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SuccessSplash.class);
-                startActivity(intent);
+                if(!MainApplication.mainapp_firstname.equals("")){
+
+                    if(!MainApplication.mainapp_lastname.equals("")){
+
+                        if(!MainApplication.mainapp_emailid.equals("")){
+
+                            /**API CALL**/
+                            try {
+                                progressBar.setVisibility(View.VISIBLE);
+                                String url = MainApplication.mainUrl + "pqform/registerUserForEligibility";
+                                Map<String, String> params = new HashMap<String, String>();
+                                params.put("institute", MainApplication.mainapp_instituteID);
+                                params.put("course", MainApplication.mainapp_courseID);
+                                params.put("location", MainApplication.mainapp_locationID);
+                                params.put("loanAmount", MainApplication.mainapp_loanamount);
+                                params.put("cc", MainApplication.mainapp_userdocument);
+                                params.put("familyIncomeAmount", MainApplication.mainapp_fammilyincome);
+                                params.put("studentProfessional", MainApplication.mainapp_userprofession);
+                                params.put("currentResidence", MainApplication.mainapp_currentCity);
+                                params.put("borrowerFirstName", MainApplication.mainapp_firstname);
+                                params.put("borrowerLastName", MainApplication.mainapp_lastname);
+                                params.put("mobile", mobileNo);
+                                params.put("email", MainApplication.mainapp_emailid);
+                                VolleyCallNew volleyCall = new VolleyCallNew();
+                                volleyCall.sendRequest(context, url, null, mFragment, "checkEligiblity", params);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }else {
+                            editTextEmailID.setError("Please provide Email ID");
+                        }
+
+                    }else {
+                        editTextLastname.setError("Please provide Last Name");
+                    }
+
+                }else {
+                    editTextFirstname.setError("Please provide First Name");
+                }
+            }
+        });
+
+        editTextFirstname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                MainApplication.mainapp_firstname = editTextFirstname.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        editTextLastname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                MainApplication.mainapp_lastname = editTextLastname.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        editTextEmailID.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                MainApplication.mainapp_emailid = editTextEmailID.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -108,5 +217,49 @@ public class EligibilityCheckFragment_4 extends Fragment {
         return view;
     }
 
+    public void checkEligiblity(JSONObject jsonData) {
+        try {
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+                String loggedID = jsonObject.optString("logged_id");
+                String firstName = jsonObject.optString("first_name");
+                String lastName = jsonObject.optString("last_name");
+                String userType = jsonObject.optString("user_type");
+                String userImage = jsonObject.optString("img_profile");
+                String useremail = jsonObject.optString("email");
+                String mobileNo = jsonObject.optString("mobile_no");
+
+                shareP =new SharedPref();
+                shareP.setLoginDone(context,true);
+
+                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("logged_id",loggedID);
+                editor.putString("first_name",firstName);
+                editor.putString("last_name",lastName);
+                editor.putString("user_type",userType);
+                editor.putString("mobile_no",mobileNo);
+                editor.putString("user_image",userImage);
+                editor.putString("user_email",useremail);
+                editor.apply();
+                editor.commit();
+
+                Intent intent = new Intent(context, SuccessSplash.class);
+                context.startActivity(intent);
+
+            }else {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

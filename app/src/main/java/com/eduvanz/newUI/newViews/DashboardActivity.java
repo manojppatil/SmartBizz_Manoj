@@ -2,6 +2,7 @@ package com.eduvanz.newUI.newViews;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -20,11 +21,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eduvanz.CustomTypefaceSpan;
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
+import com.eduvanz.SharedPref;
 import com.eduvanz.newUI.fragments.DashboardFragmentNew;
 
 public class DashboardActivity extends AppCompatActivity
@@ -37,6 +40,9 @@ public class DashboardActivity extends AppCompatActivity
     FrameLayout frameLayoutDashboard;
     public static NavigationView navigationView;
     public static DrawerLayout drawer;
+    SharedPref sharedPref;
+    LinearLayout linearLayoutSignup, linearLayoutUserDetail;
+    String userFirst="", userLast="", userEmail="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,16 @@ public class DashboardActivity extends AppCompatActivity
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
         context = getApplicationContext();
         mainApplication = new MainApplication();
+        sharedPref = new SharedPref();
+
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            userFirst = sharedPreferences.getString("first_name", "");
+            userLast = sharedPreferences.getString("last_name", "");
+            userEmail = sharedPreferences.getString("user_email", "");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -68,13 +84,18 @@ public class DashboardActivity extends AppCompatActivity
 
         textViewName = (TextView) header.findViewById(R.id.textView_name);
         mainApplication.applyTypeface(textViewName, context);
+        textViewName.setText(userFirst +" "+userLast);
         textViewEmail = (TextView) header.findViewById(R.id.textView_emailID);
         mainApplication.applyTypeface(textViewEmail, context);
+        textViewEmail.setText(userEmail);
 
         buttonSignup = (Button) header.findViewById(R.id.button_dashboard_signup);
         mainApplication.applyTypeface(buttonSignup, context);
         buttonSignIn = (Button) header.findViewById(R.id.button_dashboard_signin);
         mainApplication.applyTypeface(buttonSignIn, context);
+
+        linearLayoutSignup = (LinearLayout) header.findViewById(R.id.linearLayout_signupdetail_dashboard);
+        linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
 
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +129,14 @@ public class DashboardActivity extends AppCompatActivity
 
             //the method we have create in activity
             applyFontToMenuItem(mi);
+        }
+
+        if(sharedPref.getLoginDone(context)) {
+            linearLayoutUserDetail.setVisibility(View.VISIBLE);
+            linearLayoutSignup.setVisibility(View.GONE);
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_loanApplication).setVisible(true);
+            nav_Menu.findItem(R.id.nav_eligibility).setVisible(false);
         }
 
         getSupportFragmentManager().beginTransaction().add(R.id.framelayout_dashboard, new DashboardFragmentNew()).commit();
@@ -169,9 +198,7 @@ public class DashboardActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_more) {
             showMenuOptions();
-        }
-
-        else if (id == R.id.nav_privacypolicy) {
+        } else if (id == R.id.nav_privacypolicy) {
 
         } else if (id == R.id.nav_termsandconditions) {
 
@@ -181,6 +208,9 @@ public class DashboardActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_logout) {
 
+        }else if (id == R.id.nav_loanApplication) {
+            Intent intent = new Intent(context, LoanApplication.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -206,6 +236,7 @@ public class DashboardActivity extends AppCompatActivity
         nav_Menu.findItem(R.id.nav_disclaimer).setVisible(false);
         nav_Menu.findItem(R.id.nav_fairpracticscode).setVisible(false);
         nav_Menu.findItem(R.id.nav_logout).setVisible(false);
+        nav_Menu.findItem(R.id.nav_loanApplication).setVisible(false);
     }
 
     private void showMenuOptions() {

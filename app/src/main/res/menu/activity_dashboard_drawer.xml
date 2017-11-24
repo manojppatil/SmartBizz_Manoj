@@ -11,6 +11,10 @@
             android:icon="@drawable/icon_eligibility"
             android:title="Eligibility" />
         <item
+            android:id="@+id/nav_loanApplication"
+            android:icon="@drawable/icon_eligibility"
+            android:title="Loan Application" />
+        <item
             android:id="@+id/nav_howitworks"
             android:icon="@drawable/icon_howitworks"
             android:title="How it works" />

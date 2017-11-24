@@ -51,13 +51,14 @@ public class CoBorrowerPersonalFragment extends Fragment {
 
     public static Context context;
     public static Fragment mFragment;
-    public static RadioButton radioButtonMarried, radioButtonSingle;
     String userID="";
     public Button buttonSubmit;
     private String[] arraySpinner;
     public static TextView birthdaycalender, lable, textViewbirthday;
     Typeface typeface;
     Calendar cal;
+
+    public static RadioButton radioButtonMarried, radioButtonSingle;
     public static EditText fname, lname, adhaarno, panno, currentaddress, currentpincode, permanentaddress, contactno, emailid, permanentpincode, monthlyrent;
     public String dateformate="";
     public static Spinner spinnerPermanentCity, spinnerPermanentCountry, spinnerPermanentState;

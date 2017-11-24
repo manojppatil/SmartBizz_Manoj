@@ -6,7 +6,8 @@ package com.eduvanz.newUI.pojo;
 
 public class ViewPagerDashboardPOJO {
 
-    public  String topSliderImage;
-    public  String topSliderimageID;
+    public  String id;
+    public  String title;
+    public  String image;
 
 }
