@@ -148,7 +148,7 @@
                             android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter firt name"
+                            android:hint="Enter first name"
                             android:inputType="textCapWords"
                             android:background="@drawable/background_edittext"
                             android:textColorHint="@color/grey"

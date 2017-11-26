@@ -9,6 +9,8 @@
     <string name="Rs">\u20B9</string>
     <string name="calendar">&#xf073;</string>
     <string name="edit">&#xf044;</string>
+    <string name="down">&#xf0d7;</string>
+    <string name="up">&#xf0d8;</string>
 
     <string name="title_activity_main2_navigation">Main2ActivityNavigation</string>
 

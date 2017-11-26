@@ -76,7 +76,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@color/colorPrimaryDark"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -128,10 +128,10 @@
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/textview_profilephoto"
                                 android:layout_margin="5dp"
-                                android:background="@color/colorPrimaryDark"
+                                android:background="@color/colorSecondary"
                                 android:text="Upload"
                                 android:textColor="@color/white"
-                                android:visibility="gone" />
+                                android:visibility="visible" />
                         </LinearLayout>
 
                         <ImageView
@@ -362,7 +362,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@color/colorPrimary"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -527,7 +527,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@color/colorPrimary"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -693,7 +693,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@color/colorPrimary"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"

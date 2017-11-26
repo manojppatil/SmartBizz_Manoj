@@ -1122,8 +1122,16 @@ public class LoanApplicationFragment_2 extends Fragment {
                 } else {
                     spinnerPermanentCountry.setSelection(Integer.parseInt(permanentCountryID));
                 }
-                spinnerJobDuration.setSelection(Integer.parseInt(jobDurationID));
-                spinnerProfession.setSelection(Integer.parseInt(professionID));
+                if (jobDurationID.equals("")) {
+                    spinnerJobDuration.setSelection(0);
+                } else {
+                    spinnerJobDuration.setSelection(Integer.parseInt(jobDurationID));
+                }
+                if (professionID.equals("")) {
+                    spinnerProfession.setSelection(0);
+                } else {
+                    spinnerProfession.setSelection(Integer.parseInt(professionID));
+                }
 
                 MainApplication.coborrowerValue1 = currentResidencetypeID;
                 MainApplication.coborrowerValue2 = monthlyrent.getText().toString();

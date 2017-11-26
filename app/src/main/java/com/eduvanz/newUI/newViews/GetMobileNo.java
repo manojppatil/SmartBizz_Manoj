@@ -1,10 +1,16 @@
 package com.eduvanz.newUI.newViews;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +19,7 @@ import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
+import com.eduvanz.pqformfragments.SuccessAfterPQForm;
 import com.eduvanz.volley.VolleyCall;
 import com.eduvanz.volley.VolleyCallNew;
 
@@ -30,6 +37,7 @@ public class GetMobileNo extends AppCompatActivity {
     static EditText editTextGetMobileNo;
     AppCompatActivity mActivity;
     String mobileNO="";
+    public int GET_MY_PERMISSION = 1, permission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,25 +67,52 @@ public class GetMobileNo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /** API CALL GET OTP**/
                 if(!editTextGetMobileNo.getText().toString().equalsIgnoreCase("")){
-                    try {
-                        String url = MainApplication.mainUrl + "authorization/generateOtpCode";
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("mobileno", editTextGetMobileNo.getText().toString());
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "getOtp", params);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    if (Build.VERSION.SDK_INT >= 23)
+                    {
+                        permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                                Manifest.permission.READ_SMS);
+
+                        if (permission != PackageManager.PERMISSION_GRANTED) {
+//                            makeRequest();
+                        ActivityCompat.requestPermissions(GetMobileNo.this,
+                                new String[]{Manifest.permission.READ_SMS},
+                                GET_MY_PERMISSION);
+                        } else {
+                            apiCall();
+                        }
                     }
-                }else {
-                    editTextGetMobileNo.setError("Please Provide Mobile Number");
-                }
+                    else
+                    {
+                        apiCall();
+                    }
+            }else {
+                editTextGetMobileNo.setError("Please Provide Mobile Number");
+            }
 
             }
         });
 
+    }
 
+    protected void makeRequest() {
+        ActivityCompat.requestPermissions(GetMobileNo.this,
+                new String[]{Manifest.permission.READ_SMS},
+                GET_MY_PERMISSION);
+    }
+
+    public void apiCall(){
+        /** API CALL GET OTP**/
+
+            try {
+                String url = MainApplication.mainUrl + "authorization/generateOtpCode";
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mobileno", editTextGetMobileNo.getText().toString());
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "getOtp", params);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
     }
 

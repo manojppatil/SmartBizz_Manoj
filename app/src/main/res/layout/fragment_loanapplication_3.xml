@@ -22,13 +22,6 @@
 
 
             <LinearLayout
-                android:id="@+id/toright"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/background_capsule_primarydark"
-                android:orientation="horizontal" />
-
-            <LinearLayout
                 android:id="@+id/linearLayout_leftoff"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -40,7 +33,12 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/background_capsule_primarydark"
                 android:orientation="horizontal" />
-
+            <LinearLayout
+                android:id="@+id/toright"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_capsule_primarydark"
+                android:orientation="horizontal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,9 +91,15 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <include layout="@layout/activity_upload_borrower" />
+                <include layout="@layout/docupload_borrower_new" />
 
-                <include layout="@layout/activity_upload_coborrower" />
+                <View
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey"/>
+
+                <include layout="@layout/docupload_coborrower_new" />
 
             </LinearLayout>
         </ScrollView>

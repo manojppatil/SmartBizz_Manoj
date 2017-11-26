@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout_borrower">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Borrower"
+                android:textColor="@color/colorSecondary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/texView_borrower_arrowdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/down"
+                android:textColor="@color/colorRed"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_docupload_borrower"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="KYC Documents"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textview_profilephoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="Profile Photo"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView_kyc_profilephoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_profilephoto"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop" />
+
+                        <Button
+                            android:id="@+id/button_kyc_profilephoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_profilephoto"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorSecondary"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textview_kyc_profilephoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Profile Photo"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick9"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textview_photoIDProof"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="PhotoID"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView_kyc_photoId"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_photoIDProof"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop" />
+
+                        <Button
+                            android:id="@+id/button_kyc_photoID"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_profilephoto"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorSecondary"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textview_kyc_photoId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Photo IDs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textview_addressProof"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="Address Proof"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageview_kyc_addressproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_addressProof"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop" />
+
+                        <Button
+                            android:id="@+id/button_kyc_addressproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_addressProof"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorSecondary"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Address Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textview_signatureProof"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="Signature Proof"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageview_kyc_signatureproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_signatureProof"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop" />
+
+                        <Button
+                            android:id="@+id/button_kyc_signatureproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_addressProof"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorSecondary"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Signautre Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="Financial Documents"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textview_incomeproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Income Proof"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
+
+                        <ImageView
+                            android:id="@+id/imageview_finance_incomeproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_incomeproof"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop"/>
+
+                        <Button
+                            android:id="@+id/button_finance_incomeproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_incomeproof"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorSecondary"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:visibility="gone"
+                            android:textSize="11sp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Income Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
+
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick4"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textview_bankstatement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Bank Statement"
+                            android:textColor="@color/grey"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textSize="11sp"/>
+
+                        <ImageView
+                            android:id="@+id/imageview_finance_bankstatement"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_bankstatement"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop"/>
+
+                        <Button
+                            android:id="@+id/button_finance_bankstatement"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_incomeproof"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorPrimaryDark"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:visibility="gone"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Last 6 months Bank Statement"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
+
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick5"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="Educational Documents"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textview_degreeproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Degree Marksheets"
+                            android:textColor="@color/grey"
+                            android:textSize="11sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"/>
+
+                        <ImageView
+                            android:id="@+id/imageview_education_degreemarksheet"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_degreeproof"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop"/>
+
+                        <Button
+                            android:id="@+id/button_education_degreemarksheet"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_degreemarksheets"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorSecondary"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:visibility="gone"
+                            android:textSize="11sp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textview_degreemarksheets"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Degree Marksheets"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
+
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/textview_degreecertificate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Degree Certificate"
+                            android:textColor="@color/grey"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textSize="11sp"/>
+
+                        <ImageView
+                            android:id="@+id/imageview_education_degreecertificate"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_degreecertificate"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop"/>
+
+                        <Button
+                            android:id="@+id/button_education_degreecertificate"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_degreemarksheets"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorSecondary"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:visibility="gone"
+                            android:textSize="11sp"/>
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Degree Certificate"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick7"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="Other Documents"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/textview_otherproof"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Other Documents"
+                            android:textColor="@color/grey"
+                            android:textSize="11sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"/>
+
+                        <ImageView
+                            android:id="@+id/imageview_otherdocument"
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:layout_below="@+id/textview_otherproof"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/background_docupload"
+                            android:scaleType="centerCrop"/>
+
+                        <Button
+                            android:id="@+id/button_otherdocument"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/textview_otherdocument"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorSecondary"
+                            android:text="Upload"
+                            android:textColor="@color/white"
+                            android:visibility="gone"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/textview_otherdocument"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Other Documents"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
+                    <ImageView
+                        android:id="@+id/imageView_uploadtick8"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@drawable/greenrightclick"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

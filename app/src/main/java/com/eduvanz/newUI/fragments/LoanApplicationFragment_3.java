@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -46,9 +48,12 @@ public class LoanApplicationFragment_3 extends Fragment {
     public static Context context;
     public static Fragment mFragment;
     Button buttonNext, buttonPrevious;
-    Typeface typefaceFont, typefaceFontBold;
-    TextView textView1, textView2, textView3;
+    static Typeface typefaceFont, typefaceFontBold, typeface;
+    static TextView textView1, textView2, textView3, textViewArrowDown, textViewArrowDownCo;
     MainApplication mainApplication;
+    LinearLayout linearLayoutBorrower, linearLayoutCoBorrower;
+    RelativeLayout relativeLayoutBorrower, relativeLayoutCoBorrower;
+    int borrowerVisiblity = 0, coborrowerVisiblity = 0;
 
     public LoanApplicationFragment_3() {
         // Required empty public constructor
@@ -67,6 +72,7 @@ public class LoanApplicationFragment_3 extends Fragment {
 
         typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
+        typeface = Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
 
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -76,6 +82,12 @@ public class LoanApplicationFragment_3 extends Fragment {
         mainApplication.applyTypeface(textView2, context);
         textView3 = (TextView) view.findViewById(R.id.textView3_l3);
         mainApplication.applyTypefaceBold(textView3, context);
+
+        textViewArrowDown = (TextView) view.findViewById(R.id.texView_borrower_arrowdown);
+        textViewArrowDown.setTypeface(typeface);
+
+        textViewArrowDownCo = (TextView) view.findViewById(R.id.texView_coborrower_arrowdown);
+        textViewArrowDownCo.setTypeface(typeface);
 
         buttonNext = (Button) view.findViewById(R.id.button_next_loanappfragment3);
         buttonNext.setTypeface(typefaceFontBold);
@@ -96,6 +108,48 @@ public class LoanApplicationFragment_3 extends Fragment {
             public void onClick(View v) {
                 LoanApplicationFragment_2 loanApplicationFragment_2 = new LoanApplicationFragment_2();
                 transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_2).commit();
+            }
+        });
+
+        linearLayoutBorrower = (LinearLayout) view.findViewById(R.id.linearLayout_docupload_borrower);
+        relativeLayoutBorrower = (RelativeLayout) view.findViewById(R.id.relativeLayout_borrower);
+
+        linearLayoutCoBorrower = (LinearLayout) view.findViewById(R.id.linearLayout_docupload_coborrower);
+        relativeLayoutCoBorrower = (RelativeLayout) view.findViewById(R.id.relativeLayout_coborrower);
+
+        relativeLayoutBorrower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(borrowerVisiblity == 0){
+                    linearLayoutBorrower.setVisibility(View.VISIBLE);
+                    borrowerVisiblity = 1;
+                    textViewArrowDown.setText(getResources().getString(R.string.up));
+                    textViewArrowDown.setTypeface(typeface);
+                }else if(borrowerVisiblity == 1) {
+                    linearLayoutBorrower.setVisibility(View.GONE);
+                    borrowerVisiblity = 0;
+                    textViewArrowDown.setText(getResources().getString(R.string.down));
+                    textViewArrowDown.setTypeface(typeface);
+                }
+
+            }
+        });
+
+        relativeLayoutCoBorrower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(coborrowerVisiblity == 0){
+                    linearLayoutCoBorrower.setVisibility(View.VISIBLE);
+                    coborrowerVisiblity = 1;
+                    textViewArrowDownCo.setText(getResources().getString(R.string.up));
+                    textViewArrowDownCo.setTypeface(typeface);
+                }else if(coborrowerVisiblity == 1) {
+                    linearLayoutCoBorrower.setVisibility(View.GONE);
+                    coborrowerVisiblity = 0;
+                    textViewArrowDownCo.setText(getResources().getString(R.string.down));
+                    textViewArrowDownCo.setTypeface(typeface);
+                }
+
             }
         });
 

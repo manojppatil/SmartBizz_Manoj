@@ -125,6 +125,7 @@ public class OtpValidation extends AppCompatActivity {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
+                progressBar.setVisibility(View.GONE);
             }else {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
