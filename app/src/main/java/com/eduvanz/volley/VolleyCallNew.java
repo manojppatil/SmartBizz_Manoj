@@ -526,6 +526,18 @@ public class VolleyCallNew extends Application {
             }
         }
 
+        else if(screen.equalsIgnoreCase("getCoBorrowerDocuments"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_3)mfragment).getCoBorrowerDocuments(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private String createPostBody(Map<String, String> params) {

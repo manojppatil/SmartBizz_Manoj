@@ -78,7 +78,7 @@ public class LoanApplicationFragment_3 extends Fragment {
     RelativeLayout relativeLayoutBorrower, relativeLayoutCoBorrower;
     int borrowerVisiblity = 0, coborrowerVisiblity = 0;
     static View view;
-
+    public String coBorrowerID="";
 
     public Boolean kyc = true, financial = true, education = true, other = true;
     public String documentType = "", documentTypeNo = "", userID = "";
@@ -96,6 +96,13 @@ public class LoanApplicationFragment_3 extends Fragment {
     static ImageView imageViewKycProfilePhoto, imageViewKycPhotoId, imageViewKycAddressProof, imageViewKycSignatureProof,
             imageViewFinanceIncomeProof, imageViewFinanceBankStatement, imageViewEducationDegreeMarksheets, imageViewEducationDegreeCertificate,
             imageViewOtherDocument;
+
+    static ImageView imageViewUploadTick_9_co, imageViewUploadTick_1_co, imageViewUploadTick_2_co, imageViewUploadTick_3_co,
+            imageViewUploadTick_4_co, imageViewUploadTick_5_co, imageViewUploadTick_8_co;
+    static Button buttonKycProfilePhoto_co, buttonKycPhotoId_co, buttonKycAddressProof_co, buttonKycSignatureProof_co,
+            buttonFinanceIncomeProof_co, buttonFinanceBankStatement_co, buttonOtherDocument_co;
+    ImageView imageViewKycProfilePhoto_co, imageViewKycPhotoId_co, imageViewKycAddressProof_co, imageViewKycSignatureProof_co,
+            imageViewFinanceIncomeProof_co, imageViewFinanceBankStatement_co, imageViewOtherDocument_co;
 
     String uploadFilePath = "";
     String urlup = MainApplication.mainUrl + "document/applicantDocumentUpload";
@@ -162,6 +169,14 @@ public class LoanApplicationFragment_3 extends Fragment {
         imageViewUploadTick_6 = (ImageView) view.findViewById(R.id.imageView_uploadtick6);
         imageViewUploadTick_7 = (ImageView) view.findViewById(R.id.imageView_uploadtick7);
         imageViewUploadTick_8 = (ImageView) view.findViewById(R.id.imageView_uploadtick8);
+
+        imageViewUploadTick_9_co = (ImageView) view.findViewById(R.id.imageView_uploadtick9_co);
+        imageViewUploadTick_1_co = (ImageView) view.findViewById(R.id.imageView_uploadtick1_co);
+        imageViewUploadTick_2_co = (ImageView) view.findViewById(R.id.imageView_uploadtick2_co);
+        imageViewUploadTick_3_co = (ImageView) view.findViewById(R.id.imageView_uploadtick3_co);
+        imageViewUploadTick_4_co = (ImageView) view.findViewById(R.id.imageView_uploadtick4_co);
+        imageViewUploadTick_5_co = (ImageView) view.findViewById(R.id.imageView_uploadtick5_co);
+        imageViewUploadTick_8_co = (ImageView) view.findViewById(R.id.imageView_uploadtick8_co);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -515,7 +530,6 @@ public class LoanApplicationFragment_3 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
-                    // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
                     progressBar.setVisibility(View.VISIBLE);
                     new Thread(new Runnable() {
                         @Override
@@ -534,6 +548,252 @@ public class LoanApplicationFragment_3 extends Fragment {
         /**----------------------------------END OF OTHER DOCUMENT-------------------------------**/
 
 
+        /**--------------------------------KYC - PROFILE PHOTO-----------------------------------**/
+        imageViewKycProfilePhoto_co = (ImageView) view.findViewById(R.id.imageView_kyc_profilephoto_co);
+        imageViewKycProfilePhoto_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                documentType = "9_SD_PhotoDoc";
+                documentTypeNo = "9";
+                imageViewUploadTick_9_co.setVisibility(View.GONE);
+                buttonKycProfilePhoto_co.setText("Upload");
+                selectImage();
+            }
+        });
+        buttonKycProfilePhoto_co = (Button) view.findViewById(R.id.button_kyc_profilephoto_co);
+        buttonKycProfilePhoto_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (uploadFilePath != null) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //creating new thread to handle Http Operations
+//                            uploadFile(uploadFilePath);
+                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                            uploadFile(uploadFilePath, "9_SD_PhotoDoc", "9");
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        /**----------------------------END OF KYC - PROFILE PHOTO--------------------------------**/
+
+
+        /**--------------------------------KYC - PHOTO ID----------------------------------------**/
+        imageViewKycPhotoId_co = (ImageView) view.findViewById(R.id.imageView_kyc_photoId_co);
+
+        imageViewKycPhotoId_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewUploadTick_1_co.setVisibility(View.GONE);
+                documentType = "1_SD_PhotoDoc";
+                documentTypeNo = "1";
+                galleryDocIntent();
+                buttonKycPhotoId_co.setText("Upload");
+            }
+        });
+        buttonKycPhotoId_co = (Button) view.findViewById(R.id.button_kyc_photoID_co);
+        buttonKycPhotoId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (uploadFilePath != null) {
+                    // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //creating new thread to handle Http Operations
+//                            uploadFile(uploadFilePath);
+                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                            uploadFile(uploadFilePath, "1_SD_PhotoDoc", "1");
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        /**-------------------------------END OF KYC - PHOTO ID----------------------------------**/
+
+        /**--------------------------------KYC - ADDRESS PROOF-----------------------------------**/
+        imageViewKycAddressProof_co = (ImageView) view.findViewById(R.id.imageview_kyc_addressproof_co);
+        imageViewKycAddressProof_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewUploadTick_2_co.setVisibility(View.GONE);
+                documentType = "2_SD_PhotoDoc";
+                documentTypeNo = "2";
+                buttonKycAddressProof_co.setText("Upload");
+                galleryDocIntent();
+            }
+        });
+        buttonKycAddressProof_co = (Button) view.findViewById(R.id.button_kyc_addressproof_co);
+        buttonKycAddressProof_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (uploadFilePath != null) {
+                    // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //creating new thread to handle Http Operations
+//                            uploadFile(uploadFilePath);
+                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                            uploadFile(uploadFilePath, "2_SD_PhotoDoc", "2");
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        /**-------------------------------END OF KYC - ADDRESS PROOF-----------------------------**/
+
+        /**--------------------------------KYC - SIGNATURE PROOF---------------------------------**/
+        imageViewKycSignatureProof_co = (ImageView) view.findViewById(R.id.imageview_kyc_signatureproof_co);
+        imageViewKycSignatureProof_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewUploadTick_3_co.setVisibility(View.GONE);
+                documentType = "3_SD_PhotoDoc";
+                documentTypeNo = "3";
+                buttonKycSignatureProof_co.setText("Upload");
+                galleryDocIntent();
+            }
+        });
+        buttonKycSignatureProof_co = (Button) view.findViewById(R.id.button_kyc_signatureproof_co);
+        buttonKycSignatureProof_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (uploadFilePath != null) {
+                    // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //creating new thread to handle Http Operations
+//                            uploadFile(uploadFilePath);
+                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                            uploadFile(uploadFilePath, "3_SD_PhotoDoc", "3");
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        /**-------------------------------END OF KYC - SIGNATURE PROOF---------------------------**/
+
+        /**-------------------------------FINANCE - INCOME PROOF---------------------------------**/
+        imageViewFinanceIncomeProof_co = (ImageView) view.findViewById(R.id.imageview_finance_incomeproof_co);
+        imageViewFinanceIncomeProof_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewUploadTick_4_co.setVisibility(View.GONE);
+                documentType = "4_SD_PhotoDoc";
+                documentTypeNo = "4";
+                buttonFinanceIncomeProof_co.setText("Upload");
+                galleryDocIntent();
+            }
+        });
+        buttonFinanceIncomeProof_co = (Button) view.findViewById(R.id.button_finance_incomeproof_co);
+        buttonFinanceIncomeProof_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (uploadFilePath != null) {
+                    // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //creating new thread to handle Http Operations
+//                            uploadFile(uploadFilePath);
+                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                            uploadFile(uploadFilePath, "4_SD_PhotoDoc", "4");
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        /**------------------------------END OF FINANCE - INCOME PROOF---------------------------**/
+
+        /**-------------------------------FINANCE - BANK STATEMENT-------------------------------**/
+        imageViewFinanceBankStatement_co = (ImageView) view.findViewById(R.id.imageview_finance_bankstatement_co);
+        imageViewFinanceBankStatement_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewUploadTick_5_co.setVisibility(View.GONE);
+                documentType = "5_SD_PhotoDoc";
+                documentTypeNo = "5";
+                buttonFinanceBankStatement_co.setText("Upload");
+                galleryDocIntent();
+            }
+        });
+        buttonFinanceBankStatement_co = (Button) view.findViewById(R.id.button_finance_bankstatement_co);
+        buttonFinanceBankStatement_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (uploadFilePath != null) {
+                    // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //creating new thread to handle Http Operations
+//                            uploadFile(uploadFilePath);
+                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                            uploadFile(uploadFilePath, "5_SD_PhotoDoc", "5");
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        /**-----------------------------END OF FINANCE - BANK STATEMENT--------------------------**/
+
+        /**--------------------------------------OTHER DOCUMENT----------------------------------**/
+        imageViewOtherDocument_co = (ImageView) view.findViewById(R.id.imageview_otherdocument_co);
+        imageViewOtherDocument_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewUploadTick_8_co.setVisibility(View.GONE);
+                documentType = "8_SD_PhotoDoc";
+                documentTypeNo = "8";
+                buttonOtherDocument_co.setText("Upload");
+                galleryDocIntent();
+            }
+        });
+        buttonOtherDocument_co = (Button) view.findViewById(R.id.button_otherdocument);
+        buttonOtherDocument_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (uploadFilePath != null) {
+                    // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //creating new thread to handle Http Operations
+//                            uploadFile(uploadFilePath);
+                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                            uploadFile(uploadFilePath, "8_SD_PhotoDoc", "8");
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        /**----------------------------------END OF OTHER DOCUMENT-------------------------------**/
+
         /** API CALL **/
         try {
             String url = MainApplication.mainUrl + "document/getapplicantDocumentDetails";
@@ -544,7 +804,17 @@ public class LoanApplicationFragment_3 extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //-------------------------------------END OF API CALL------------------------------------//
+
+        /**API CALL*/
+        try {
+            String url = MainApplication.mainUrl + "document/getCoApplicantDocumentDetails";
+            Map<String, String> params = new HashMap<String, String>();
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            params.put("studentId", userID);
+            volleyCall.sendRequest(context, url, null, mFragment, "getCoBorrowerDocuments", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return view;
     }
@@ -671,7 +941,6 @@ public class LoanApplicationFragment_3 extends Fragment {
 
         imageViewKycProfilePhoto.setImageBitmap(thumbnail);
         buttonKycProfilePhoto.setVisibility(View.VISIBLE);
-//        imageViewUploadTick.setVisibility(View.VISIBLE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -815,48 +1084,6 @@ public class LoanApplicationFragment_3 extends Fragment {
                     Log.e("TAG", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
                 }
                 Log.e("TAG", "uploadFile: " + sb.toString());
-//                [{"code":1,"file_name":"284f0b39af461ad8ae3ee17ac20ee5f4.pdf","message":"Document uploaded successfully"}]
-
-//                try {
-//                    JSONArray mJson= new JSONArray(sb.toString());
-//                    final JSONObject mData= mJson.getJSONObject(0);
-//                    final int code=mData.optInt("code");
-//                    Log.e("TAG", "uploadFile: code "+code);
-//                    if(code == 1)
-//                    {
-//                        runOnUiThread(new Runnable()
-//                        {
-//                            @Override
-//                            public void run() {
-//                                mDialog.dismiss();
-//                                Log.e("TAG", "uploadFile: code 1 "+code);
-////                                    Toast.makeText(context, mData.getString("message").toString(), Toast.LENGTH_SHORT).show();
-//                                Toast.makeText(context,"File Uploaded Successfully", Toast.LENGTH_SHORT).show();
-//                                imageViewUploadTick.setVisibility(View.VISIBLE);
-//                            }
-//                        });
-//
-////                        finish();
-//
-//                    }else {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                try {
-//                                    mDialog.dismiss();
-//                                    Log.e("TAG", "uploadFile: code 2 "+code);
-//                                    Toast.makeText(context, mData.getString("message").toString(), Toast.LENGTH_SHORT).show();
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        });
-////                        finish();
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
 
                 try {
                     JSONObject mJson = new JSONObject(sb.toString());
@@ -1056,6 +1283,98 @@ public class LoanApplicationFragment_3 extends Fragment {
                 }
 
             } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**---------------------------------RESPONSE OF API CALL-------------------------------------**/
+
+    public void getCoBorrowerDocuments(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "getDocuments" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+                coBorrowerID = jsonObject.getString("coBorrowerId");
+                Log.e(MainApplication.TAG, "coBorrowerID: "+coBorrowerID );
+
+                JSONArray jsonArray = jsonObject.getJSONArray("KycDocument");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                    String s = jsonObject1.getString("document_type_id");
+                    String image = jsonObject1.getString("document_path");
+                    Log.e(MainApplication.TAG, "TYPENO: " + s);
+                    Log.e(MainApplication.TAG, "image: " + image);
+                    if (s.equalsIgnoreCase("1")) {
+                        buttonKycPhotoId.setVisibility(View.VISIBLE);
+                        buttonKycPhotoId.setText("Uploaded");
+                        imageViewUploadTick_1.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycPhotoId);
+                    } else if (s.equalsIgnoreCase("2")) {
+                        buttonKycAddressProof.setVisibility(View.VISIBLE);
+                        buttonKycAddressProof.setText("Uploaded");
+                        imageViewUploadTick_2.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycAddressProof);
+                    } else if (s.equalsIgnoreCase("3")) {
+                        buttonKycSignatureProof.setVisibility(View.VISIBLE);
+                        buttonKycSignatureProof.setText("Uploaded");
+                        imageViewUploadTick_3.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycSignatureProof);
+                    } else if (s.equalsIgnoreCase("9")) {
+                        buttonKycProfilePhoto.setVisibility(View.VISIBLE);
+                        buttonKycProfilePhoto.setText("Uploaded");
+                        imageViewUploadTick_9.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycProfilePhoto);
+                    }
+                }
+
+                JSONArray jsonArray1 = jsonObject.getJSONArray("Financial");
+                Log.e(MainApplication.TAG, "getDocuments: " + jsonArray1);
+                for (int i = 0; i < jsonArray1.length(); i++) {
+                    Log.e(MainApplication.TAG, "FOR LOOP: " + i);
+                    JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
+                    String s = jsonObject1.getString("document_type_id");
+                    String image = jsonObject1.getString("document_path");
+
+                    if (s.equalsIgnoreCase("4")) {
+                        Log.e(MainApplication.TAG, "IF LOOP : 4");
+                        buttonFinanceIncomeProof.setVisibility(View.VISIBLE);
+                        buttonFinanceIncomeProof.setText("Uploaded");
+                        imageViewUploadTick_4.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceIncomeProof);
+                    } else if (s.equalsIgnoreCase("5")) {
+                        buttonFinanceBankStatement.setVisibility(View.VISIBLE);
+                        buttonFinanceBankStatement.setText("Uploaded");
+                        imageViewUploadTick_5.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceBankStatement);
+                    }
+                }
+
+
+                JSONArray jsonArray3 = jsonObject.getJSONArray("Other");
+                for (int i = 0; i < jsonArray3.length(); i++) {
+                    JSONObject jsonObject1 = jsonArray3.getJSONObject(i);
+                    String s = jsonObject1.getString("document_type_id");
+                    String image = jsonObject1.getString("document_path");
+
+                    if (s.equalsIgnoreCase("8")) {
+                        buttonOtherDocument.setVisibility(View.VISIBLE);
+                        buttonOtherDocument.setText("Uploaded");
+                        imageViewUploadTick_8.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewOtherDocument);
+                    }
+                }
+
+            } else {
+//                JSONObject jsonObject = jsonData.getJSONObject("result");
+//                coBorrowerID = jsonObject.getString("coBorrowerId");
+//                Log.e(MainApplication.TAG, "coBorrowerID: "+coBorrowerID );
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
