@@ -62,6 +62,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
+                    <TextView
+                        android:id="@+id/textview_kyc_profilephoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Profile Photo"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -102,21 +112,11 @@
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textview_kyc_profilephoto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload Your Profile Photo"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp" />
 
                     <ImageView
                         android:id="@+id/imageView_uploadtick9"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerInParent="true"
                         android:src="@drawable/greenrightclick"
                         android:visibility="gone" />
@@ -126,6 +126,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_kyc_photoId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Photo IDs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -166,21 +177,10 @@
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textview_kyc_photoId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload One of Your Photo IDs"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp" />
-
                     <ImageView
                         android:id="@+id/imageView_uploadtick1"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@drawable/greenrightclick"
@@ -191,6 +191,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Address Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -231,20 +241,10 @@
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload One of Your Address Proofs"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp" />
-
                     <ImageView
                         android:id="@+id/imageView_uploadtick2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@drawable/greenrightclick"
@@ -255,6 +255,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Signautre Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -296,20 +306,10 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload One of Your Signautre Proofs"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp" />
-
                     <ImageView
                         android:id="@+id/imageView_uploadtick3"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@drawable/greenrightclick"
@@ -338,6 +338,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Income Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -379,20 +388,10 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload One of Your Income Proofs"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp"/>
-
                     <ImageView
                         android:id="@+id/imageView_uploadtick4"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@drawable/greenrightclick"
@@ -404,6 +403,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Last 6 months Bank Statement"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -437,27 +446,17 @@
                             android:layout_alignParentBottom="true"
                             android:layout_below="@+id/textview_incomeproof"
                             android:layout_margin="5dp"
-                            android:background="@color/colorPrimaryDark"
+                            android:background="@color/colorSecondary"
                             android:text="Upload"
                             android:textColor="@color/white"
                             android:visibility="gone"
                             android:textSize="11sp"/>
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload Last 6 months Bank Statement"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp"/>
-
                     <ImageView
                         android:id="@+id/imageView_uploadtick5"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@drawable/greenrightclick"
@@ -495,6 +494,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_degreemarksheets"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Degree Marksheets"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -536,21 +546,10 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textview_degreemarksheets"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload Your Degree Marksheets"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp"/>
-
                     <ImageView
                         android:id="@+id/imageView_uploadtick6"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@drawable/greenrightclick"
@@ -562,6 +561,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Degree Certificate"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -601,19 +610,11 @@
                             android:textSize="11sp"/>
 
                     </LinearLayout>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload Your Degree Certificate"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp"/>
+
                     <ImageView
                         android:id="@+id/imageView_uploadtick7"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@drawable/greenrightclick"
@@ -649,6 +650,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_otherdocument"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Other Documents"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -687,16 +699,7 @@
                             android:visibility="gone"
                             android:textSize="11sp"/>
                     </LinearLayout>
-                    <TextView
-                        android:id="@+id/textview_otherdocument"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload Your Other Documents"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp"/>
+
                     <ImageView
                         android:id="@+id/imageView_uploadtick8"
                         android:layout_width="30dp"

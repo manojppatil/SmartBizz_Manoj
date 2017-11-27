@@ -29,6 +29,7 @@ import com.eduvanz.newUI.fragments.EligibilityCheckFragment_2;
 import com.eduvanz.newUI.fragments.EligibilityCheckFragment_4;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_1;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_2;
+import com.eduvanz.newUI.fragments.LoanApplicationFragment_3;
 import com.eduvanz.newUI.newViews.BannerActivity;
 import com.eduvanz.newUI.newViews.GetMobileNo;
 import com.eduvanz.newUI.newViews.LoanApplication;
@@ -506,6 +507,18 @@ public class VolleyCallNew extends Application {
             try {
                 jsonDataO = new JSONObject(s);
                 ((MyProfileNew)mActivity).myProfile(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        else if(screen.equalsIgnoreCase("getDocumentsBorrower"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_3)mfragment).getBorrowerDocuments(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             }catch (Exception e){

@@ -166,7 +166,6 @@ public class LoanApplicationFragment_2 extends Fragment {
             @Override
             public void onClick(View v) {
 
-                progressBar.setVisibility(View.VISIBLE);
                 if (!fname.getText().toString().equals("")) {
                     if (!lname.getText().toString().equals("")) {
                         if (!textViewbirthday.getText().toString().equals("")) {
@@ -179,6 +178,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                     }else if(radioButtonSingle.isChecked()){
                         maritialstatus = "2";
                     }
+                    progressBar.setVisibility(View.VISIBLE);
                     String url = MainApplication.mainUrl + "algo/setCoBorrowerLoanDetails";
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("logged_id",userID);
