@@ -16,8 +16,8 @@
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MainActivity"
@@ -131,7 +131,6 @@
             android:name=".SignupLogin"
             android:screenOrientation="sensorPortrait" />
         /** NEW UI **/
-
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="sensorPortrait">
@@ -141,7 +140,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".newUI.newViews.GetMobileNo"
             android:screenOrientation="sensorPortrait">
@@ -183,7 +181,10 @@
         <activity
             android:name=".newUI.newViews.HowItWorks"
             android:screenOrientation="sensorPortrait" />
-        <activity android:name=".newUI.newViews.BannerActivity"></activity>
+        <activity android:name=".newUI.newViews.BannerActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".newUI.newViews.Notification"
+            android:screenOrientation="sensorPortrait"/>
     </application>
 
 </manifest>

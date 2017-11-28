@@ -1080,13 +1080,32 @@ public class LoanApplicationFragment_3 extends Fragment {
                 }
                 dataOutputStream.writeBytes(lineEnd);
 
-                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+
+                if(selectUrl == 1){
+                    dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 //                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
 //                        + selectedFilePath + "\"" + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"id\";id=" + userID + "" + lineEnd);
-                dataOutputStream.writeBytes(lineEnd);
-                dataOutputStream.writeBytes(userID);
-                dataOutputStream.writeBytes(lineEnd);
+                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"id\";id=" + coBorrowerID + "" + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd);
+                    dataOutputStream.writeBytes(coBorrowerID);
+                    dataOutputStream.writeBytes(lineEnd);
+
+                    dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+//                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
+//                        + selectedFilePath + "\"" + lineEnd);
+                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"studentId\";studentId=" + userID + "" + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd);
+                    dataOutputStream.writeBytes(userID);
+                    dataOutputStream.writeBytes(lineEnd);
+                }else if(selectUrl == 0){
+                    dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+//                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
+//                        + selectedFilePath + "\"" + lineEnd);
+                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"id\";id=" + userID + "" + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd);
+                    dataOutputStream.writeBytes(userID);
+                    dataOutputStream.writeBytes(lineEnd);
+                }
 
 
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);

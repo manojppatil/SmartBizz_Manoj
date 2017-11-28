@@ -1,14 +1,6 @@
 [
     {
-        "merged": "/home/projetctheena/DARSH/Projects/Eduvanz/eduvanz/C:\\DS\\office\\Eduvanz\\eduvanz\\linkedin-sdk\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
-        "source": "/home/projetctheena/DARSH/Projects/Eduvanz/eduvanz/C:\\DS\\office\\Eduvanz\\eduvanz\\linkedin-sdk\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "/home/projetctheena/DARSH/Projects/Eduvanz/eduvanz/linkedin-sdk/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",
-        "source": "/home/projetctheena/DARSH/Projects/Eduvanz/eduvanz/linkedin-sdk/src/main/res/drawable-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/projetctheena/DARSH/Projects/Eduvanz/eduvanz/C:\\home\\projetctheena\\DARSH\\Projects\\Eduvanz\\eduvanz\\linkedin-sdk\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
-        "source": "/home/projetctheena/DARSH/Projects/Eduvanz/eduvanz/C:\\home\\projetctheena\\DARSH\\Projects\\Eduvanz\\eduvanz\\linkedin-sdk\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+        "merged": "C:\\DS\\office\\Eduvanz\\eduvanz\\linkedin-sdk\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\DS\\office\\Eduvanz\\eduvanz\\linkedin-sdk\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     }
 ]
