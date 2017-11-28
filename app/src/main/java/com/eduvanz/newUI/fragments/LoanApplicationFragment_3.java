@@ -34,7 +34,6 @@ import com.eduvanz.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.uploaddocs.PathFile;
 import com.eduvanz.uploaddocs.Utility;
-import com.eduvanz.volley.VolleyCall;
 import com.eduvanz.volley.VolleyCallNew;
 import com.squareup.picasso.Picasso;
 
@@ -70,44 +69,39 @@ public class LoanApplicationFragment_3 extends Fragment {
 
     public static Context context;
     public static Fragment mFragment;
-    Button buttonNext, buttonPrevious;
     static Typeface typefaceFont, typefaceFontBold, typeface;
     static TextView textView1, textView2, textView3, textViewArrowDown, textViewArrowDownCo;
-    MainApplication mainApplication;
-    LinearLayout linearLayoutBorrower, linearLayoutCoBorrower;
-    RelativeLayout relativeLayoutBorrower, relativeLayoutCoBorrower;
-    int borrowerVisiblity = 0, coborrowerVisiblity = 0;
     static View view;
-    public String coBorrowerID="";
-
-    public Boolean kyc = true, financial = true, education = true, other = true;
-    public String documentType = "", documentTypeNo = "", userID = "";
-    public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
-    public String userChoosenTask;
-
     static ImageView imageViewUploadTick_1, imageViewUploadTick_2, imageViewUploadTick_3,
             imageViewUploadTick_4, imageViewUploadTick_5, imageViewUploadTick_6, imageViewUploadTick_7,
             imageViewUploadTick_8, imageViewUploadTick_9;
-
     static Button buttonKycProfilePhoto, buttonKycPhotoId, buttonKycAddressProof, buttonKycSignatureProof,
             buttonFinanceIncomeProof, buttonFinanceBankStatement, buttonEducationDegreeMarksheets, buttonEducationDegreeCertificate,
             buttonOtherDocument;
-
     static ImageView imageViewKycProfilePhoto, imageViewKycPhotoId, imageViewKycAddressProof, imageViewKycSignatureProof,
             imageViewFinanceIncomeProof, imageViewFinanceBankStatement, imageViewEducationDegreeMarksheets, imageViewEducationDegreeCertificate,
             imageViewOtherDocument;
-
     static ImageView imageViewUploadTick_9_co, imageViewUploadTick_1_co, imageViewUploadTick_2_co, imageViewUploadTick_3_co,
             imageViewUploadTick_4_co, imageViewUploadTick_5_co, imageViewUploadTick_8_co;
     static Button buttonKycProfilePhoto_co, buttonKycPhotoId_co, buttonKycAddressProof_co, buttonKycSignatureProof_co,
             buttonFinanceIncomeProof_co, buttonFinanceBankStatement_co, buttonOtherDocument_co;
+    static ProgressBar progressBar;
+    public String coBorrowerID = "";
+    public Boolean kyc = true, financial = true, education = true, other = true;
+    public String documentType = "", documentTypeNo = "", userID = "";
+    public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
+    public String userChoosenTask;
+    Button buttonNext, buttonPrevious;
+    MainApplication mainApplication;
+    LinearLayout linearLayoutBorrower, linearLayoutCoBorrower;
+    RelativeLayout relativeLayoutBorrower, relativeLayoutCoBorrower;
+    int borrowerVisiblity = 0, coborrowerVisiblity = 0;
     ImageView imageViewKycProfilePhoto_co, imageViewKycPhotoId_co, imageViewKycAddressProof_co, imageViewKycSignatureProof_co,
             imageViewFinanceIncomeProof_co, imageViewFinanceBankStatement_co, imageViewOtherDocument_co;
-
     String uploadFilePath = "";
-    String urlup = MainApplication.mainUrl + "document/applicantDocumentUpload";
+
+    static ImageView imageViewProfilePicSelect;
     StringBuffer sb;
-    static ProgressBar progressBar;
 
     public LoanApplicationFragment_3() {
         // Required empty public constructor
@@ -198,12 +192,12 @@ public class LoanApplicationFragment_3 extends Fragment {
         relativeLayoutBorrower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(borrowerVisiblity == 0){
+                if (borrowerVisiblity == 0) {
                     linearLayoutBorrower.setVisibility(View.VISIBLE);
                     borrowerVisiblity = 1;
                     textViewArrowDown.setText(getResources().getString(R.string.up));
                     textViewArrowDown.setTypeface(typeface);
-                }else if(borrowerVisiblity == 1) {
+                } else if (borrowerVisiblity == 1) {
                     linearLayoutBorrower.setVisibility(View.GONE);
                     borrowerVisiblity = 0;
                     textViewArrowDown.setText(getResources().getString(R.string.down));
@@ -216,12 +210,12 @@ public class LoanApplicationFragment_3 extends Fragment {
         relativeLayoutCoBorrower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(coborrowerVisiblity == 0){
+                if (coborrowerVisiblity == 0) {
                     linearLayoutCoBorrower.setVisibility(View.VISIBLE);
                     coborrowerVisiblity = 1;
                     textViewArrowDownCo.setText(getResources().getString(R.string.up));
                     textViewArrowDownCo.setTypeface(typeface);
-                }else if(coborrowerVisiblity == 1) {
+                } else if (coborrowerVisiblity == 1) {
                     linearLayoutCoBorrower.setVisibility(View.GONE);
                     coborrowerVisiblity = 0;
                     textViewArrowDownCo.setText(getResources().getString(R.string.down));
@@ -236,6 +230,7 @@ public class LoanApplicationFragment_3 extends Fragment {
         imageViewKycProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageViewProfilePicSelect = imageViewKycProfilePhoto;
                 documentType = "9_SD_PhotoDoc";
                 documentTypeNo = "9";
                 imageViewUploadTick_9.setVisibility(View.GONE);
@@ -256,7 +251,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "9_SD_PhotoDoc", "9");
+                            uploadFile(uploadFilePath, "9_SD_PhotoDoc", "9", 0);
                         }
                     }).start();
                 } else {
@@ -293,7 +288,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "1_SD_PhotoDoc", "1");
+                            uploadFile(uploadFilePath, "1_SD_PhotoDoc", "1", 0);
                         }
                     }).start();
                 } else {
@@ -328,7 +323,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "2_SD_PhotoDoc", "2");
+                            uploadFile(uploadFilePath, "2_SD_PhotoDoc", "2", 0);
                         }
                     }).start();
                 } else {
@@ -363,7 +358,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "3_SD_PhotoDoc", "3");
+                            uploadFile(uploadFilePath, "3_SD_PhotoDoc", "3", 0);
                         }
                     }).start();
                 } else {
@@ -398,7 +393,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "4_SD_PhotoDoc", "4");
+                            uploadFile(uploadFilePath, "4_SD_PhotoDoc", "4", 0);
                         }
                     }).start();
                 } else {
@@ -433,7 +428,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "5_SD_PhotoDoc", "5");
+                            uploadFile(uploadFilePath, "5_SD_PhotoDoc", "5", 0);
                         }
                     }).start();
                 } else {
@@ -468,7 +463,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "6_SD_PhotoDoc", "6");
+                            uploadFile(uploadFilePath, "6_SD_PhotoDoc", "6", 0);
                         }
                     }).start();
                 } else {
@@ -503,7 +498,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "7_SD_PhotoDoc", "7");
+                            uploadFile(uploadFilePath, "7_SD_PhotoDoc", "7", 0);
                         }
                     }).start();
                 } else {
@@ -537,7 +532,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "8_SD_PhotoDoc", "8");
+                            uploadFile(uploadFilePath, "8_SD_PhotoDoc", "8", 0);
                         }
                     }).start();
                 } else {
@@ -547,14 +542,16 @@ public class LoanApplicationFragment_3 extends Fragment {
         });
         /**----------------------------------END OF OTHER DOCUMENT-------------------------------**/
 
+                            /** CO BORROWER DOC UPLOAD */
 
         /**--------------------------------KYC - PROFILE PHOTO-----------------------------------**/
         imageViewKycProfilePhoto_co = (ImageView) view.findViewById(R.id.imageView_kyc_profilephoto_co);
         imageViewKycProfilePhoto_co.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageViewProfilePicSelect = imageViewKycProfilePhoto_co;
                 documentType = "9_SD_PhotoDoc";
-                documentTypeNo = "9";
+                documentTypeNo = "9_co";
                 imageViewUploadTick_9_co.setVisibility(View.GONE);
                 buttonKycProfilePhoto_co.setText("Upload");
                 selectImage();
@@ -572,7 +569,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "9_SD_PhotoDoc", "9");
+                            uploadFile(uploadFilePath, "9_SD_PhotoDoc", "9_co", 1);
                         }
                     }).start();
                 } else {
@@ -591,13 +588,13 @@ public class LoanApplicationFragment_3 extends Fragment {
             public void onClick(View v) {
                 imageViewUploadTick_1_co.setVisibility(View.GONE);
                 documentType = "1_SD_PhotoDoc";
-                documentTypeNo = "1";
+                documentTypeNo = "1_co";
                 galleryDocIntent();
                 buttonKycPhotoId_co.setText("Upload");
             }
         });
         buttonKycPhotoId_co = (Button) view.findViewById(R.id.button_kyc_photoID_co);
-        buttonKycPhotoId.setOnClickListener(new View.OnClickListener() {
+        buttonKycPhotoId_co.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (uploadFilePath != null) {
@@ -609,7 +606,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "1_SD_PhotoDoc", "1");
+                            uploadFile(uploadFilePath, "1_SD_PhotoDoc", "1_co", 1);
                         }
                     }).start();
                 } else {
@@ -626,7 +623,7 @@ public class LoanApplicationFragment_3 extends Fragment {
             public void onClick(View v) {
                 imageViewUploadTick_2_co.setVisibility(View.GONE);
                 documentType = "2_SD_PhotoDoc";
-                documentTypeNo = "2";
+                documentTypeNo = "2_co";
                 buttonKycAddressProof_co.setText("Upload");
                 galleryDocIntent();
             }
@@ -644,7 +641,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "2_SD_PhotoDoc", "2");
+                            uploadFile(uploadFilePath, "2_SD_PhotoDoc", "2_co", 1);
                         }
                     }).start();
                 } else {
@@ -661,7 +658,7 @@ public class LoanApplicationFragment_3 extends Fragment {
             public void onClick(View v) {
                 imageViewUploadTick_3_co.setVisibility(View.GONE);
                 documentType = "3_SD_PhotoDoc";
-                documentTypeNo = "3";
+                documentTypeNo = "3_co";
                 buttonKycSignatureProof_co.setText("Upload");
                 galleryDocIntent();
             }
@@ -679,7 +676,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "3_SD_PhotoDoc", "3");
+                            uploadFile(uploadFilePath, "3_SD_PhotoDoc", "3_co", 1);
                         }
                     }).start();
                 } else {
@@ -696,7 +693,7 @@ public class LoanApplicationFragment_3 extends Fragment {
             public void onClick(View v) {
                 imageViewUploadTick_4_co.setVisibility(View.GONE);
                 documentType = "4_SD_PhotoDoc";
-                documentTypeNo = "4";
+                documentTypeNo = "4_co";
                 buttonFinanceIncomeProof_co.setText("Upload");
                 galleryDocIntent();
             }
@@ -714,7 +711,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "4_SD_PhotoDoc", "4");
+                            uploadFile(uploadFilePath, "4_SD_PhotoDoc", "4_co", 1);
                         }
                     }).start();
                 } else {
@@ -731,7 +728,7 @@ public class LoanApplicationFragment_3 extends Fragment {
             public void onClick(View v) {
                 imageViewUploadTick_5_co.setVisibility(View.GONE);
                 documentType = "5_SD_PhotoDoc";
-                documentTypeNo = "5";
+                documentTypeNo = "5_co";
                 buttonFinanceBankStatement_co.setText("Upload");
                 galleryDocIntent();
             }
@@ -749,7 +746,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "5_SD_PhotoDoc", "5");
+                            uploadFile(uploadFilePath, "5_SD_PhotoDoc", "5_co", 1);
                         }
                     }).start();
                 } else {
@@ -766,12 +763,12 @@ public class LoanApplicationFragment_3 extends Fragment {
             public void onClick(View v) {
                 imageViewUploadTick_8_co.setVisibility(View.GONE);
                 documentType = "8_SD_PhotoDoc";
-                documentTypeNo = "8";
+                documentTypeNo = "8_co";
                 buttonOtherDocument_co.setText("Upload");
                 galleryDocIntent();
             }
         });
-        buttonOtherDocument_co = (Button) view.findViewById(R.id.button_otherdocument);
+        buttonOtherDocument_co = (Button) view.findViewById(R.id.button_otherdocument_co);
         buttonOtherDocument_co.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -784,7 +781,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                             //creating new thread to handle Http Operations
 //                            uploadFile(uploadFilePath);
                             Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                            uploadFile(uploadFilePath, "8_SD_PhotoDoc", "8");
+                            uploadFile(uploadFilePath, "8_SD_PhotoDoc", "8_co", 1);
                         }
                     }).start();
                 } else {
@@ -913,6 +910,26 @@ public class LoanApplicationFragment_3 extends Fragment {
                     buttonOtherDocument.setVisibility(View.VISIBLE);
                     imageViewOtherDocument.setImageBitmap(bm);
                 }
+
+                else if (documentTypeNo.equalsIgnoreCase("1_co")) {
+                    buttonKycPhotoId_co.setVisibility(View.VISIBLE);
+                    imageViewKycPhotoId_co.setImageBitmap(bm);
+                } else if (documentTypeNo.equalsIgnoreCase("2_co")) {
+                    buttonKycAddressProof_co.setVisibility(View.VISIBLE);
+                    imageViewKycAddressProof_co.setImageBitmap(bm);
+                } else if (documentTypeNo.equalsIgnoreCase("3_co")) {
+                    buttonKycSignatureProof_co.setVisibility(View.VISIBLE);
+                    imageViewKycSignatureProof_co.setImageBitmap(bm);
+                } else if (documentTypeNo.equalsIgnoreCase("4_co")) {
+                    buttonFinanceIncomeProof_co.setVisibility(View.VISIBLE);
+                    imageViewFinanceIncomeProof_co.setImageBitmap(bm);
+                } else if (documentTypeNo.equalsIgnoreCase("5_co")) {
+                    buttonFinanceBankStatement_co.setVisibility(View.VISIBLE);
+                    imageViewFinanceBankStatement_co.setImageBitmap(bm);
+                } else if (documentTypeNo.equalsIgnoreCase("8_co")) {
+                    buttonOtherDocument_co.setVisibility(View.VISIBLE);
+                    imageViewOtherDocument_co.setImageBitmap(bm);
+                }
             }
         }
     }
@@ -939,8 +956,14 @@ public class LoanApplicationFragment_3 extends Fragment {
             e.printStackTrace();
         }
 
-        imageViewKycProfilePhoto.setImageBitmap(thumbnail);
-        buttonKycProfilePhoto.setVisibility(View.VISIBLE);
+        if(imageViewProfilePicSelect == imageViewKycProfilePhoto){
+            imageViewProfilePicSelect.setImageBitmap(thumbnail);
+            buttonKycProfilePhoto.setVisibility(View.VISIBLE);
+        }else if(imageViewProfilePicSelect == imageViewKycProfilePhoto_co){
+            imageViewProfilePicSelect.setImageBitmap(thumbnail);
+            buttonKycProfilePhoto_co.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -958,11 +981,26 @@ public class LoanApplicationFragment_3 extends Fragment {
                 e.printStackTrace();
             }
         }
-        imageViewKycProfilePhoto.setImageBitmap(bm);
-        buttonKycProfilePhoto.setVisibility(View.VISIBLE);
+        if(imageViewProfilePicSelect == imageViewKycProfilePhoto){
+            imageViewProfilePicSelect.setImageBitmap(bm);
+            buttonKycProfilePhoto.setVisibility(View.VISIBLE);
+        }else if(imageViewProfilePicSelect == imageViewKycProfilePhoto_co){
+            imageViewProfilePicSelect.setImageBitmap(bm);
+            buttonKycProfilePhoto_co.setVisibility(View.VISIBLE);
+        }
     }
 
-    public int uploadFile(final String selectedFilePath, String doctype, String doctypeno) {
+    public int uploadFile(final String selectedFilePath, String doctype, String doctypeno, int selectUrl) {
+        String urlup="";
+
+        Log.e(MainApplication.TAG, "uploadFile++++++: "+selectUrl + "  "+ doctype + "   "+ doctypeno + "  "+selectedFilePath  );
+        if(selectUrl == 0){
+             urlup = MainApplication.mainUrl + "document/applicantDocumentUpload";
+        }else if(selectUrl == 1){
+             urlup = MainApplication.mainUrl + "document/coapplicantDocumentUpload";
+        }
+
+        Log.e(MainApplication.TAG, "urlup++++++: "+urlup  );
 
         int serverResponseCode = 0;
         documentType = doctype;
@@ -1098,7 +1136,6 @@ public class LoanApplicationFragment_3 extends Fragment {
                                 progressBar.setVisibility(View.GONE);
                                 Log.e("TAG", "uploadFile: code 1 " + mData);
                                 Toast.makeText(context, mData1, Toast.LENGTH_SHORT).show();
-//                                Toast.makeText(context,"File Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                 if (documentTypeNo.equalsIgnoreCase("9")) {
                                     imageViewUploadTick_9.setVisibility(View.VISIBLE);
                                     buttonKycProfilePhoto.setText("Uploaded");
@@ -1127,11 +1164,32 @@ public class LoanApplicationFragment_3 extends Fragment {
                                     imageViewUploadTick_8.setVisibility(View.VISIBLE);
                                     buttonOtherDocument.setText("Uploaded");
                                 }
+
+                                else if (documentTypeNo.equalsIgnoreCase("9_co")) {
+                                    imageViewUploadTick_9_co.setVisibility(View.VISIBLE);
+                                    buttonKycProfilePhoto_co.setText("Uploaded");
+                                } else if (documentTypeNo.equalsIgnoreCase("1_co")) {
+                                    imageViewUploadTick_1_co.setVisibility(View.VISIBLE);
+                                    buttonKycPhotoId_co.setText("Uploaded");
+                                } else if (documentTypeNo.equalsIgnoreCase("2_co")) {
+                                    imageViewUploadTick_2_co.setVisibility(View.VISIBLE);
+                                    buttonKycAddressProof_co.setText("Uploaded");
+                                } else if (documentTypeNo.equalsIgnoreCase("3_co")) {
+                                    imageViewUploadTick_3_co.setVisibility(View.VISIBLE);
+                                    buttonKycSignatureProof_co.setText("Uploaded");
+                                } else if (documentTypeNo.equalsIgnoreCase("4_co")) {
+                                    imageViewUploadTick_4_co.setVisibility(View.VISIBLE);
+                                    buttonFinanceIncomeProof_co.setText("Uploaded");
+                                } else if (documentTypeNo.equalsIgnoreCase("5_co")) {
+                                    imageViewUploadTick_5_co.setVisibility(View.VISIBLE);
+                                    buttonFinanceBankStatement_co.setText("Uploaded");
+                                }  else if (documentTypeNo.equalsIgnoreCase("8_co")) {
+                                    imageViewUploadTick_8_co.setVisibility(View.VISIBLE);
+                                    buttonOtherDocument_co.setText("Uploaded");
+                                }
                                 uploadFilePath = "";
                             }
                         });
-
-//                        finish();
 
                     } else {
                         getActivity().runOnUiThread(new Runnable() {
@@ -1171,6 +1229,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                     @Override
                     public void run() {
                         Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
             } catch (MalformedURLException e) {
@@ -1290,11 +1349,13 @@ public class LoanApplicationFragment_3 extends Fragment {
         }
     }
 
-    /**---------------------------------RESPONSE OF API CALL-------------------------------------**/
+    /**
+     * ---------------------------------RESPONSE OF API CALL-------------------------------------
+     **/
 
     public void getCoBorrowerDocuments(JSONObject jsonData) {
         try {
-            Log.e("SERVER CALL", "getDocuments" + jsonData);
+            Log.e("SERVER CALL", "getCoBorrowerDocuments" + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
@@ -1302,7 +1363,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 JSONObject jsonObject = jsonData.getJSONObject("result");
                 coBorrowerID = jsonObject.getString("coBorrowerId");
-                Log.e(MainApplication.TAG, "coBorrowerID: "+coBorrowerID );
+                Log.e(MainApplication.TAG, "coBorrowerID: " + coBorrowerID);
 
                 JSONArray jsonArray = jsonObject.getJSONArray("KycDocument");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -1312,25 +1373,25 @@ public class LoanApplicationFragment_3 extends Fragment {
                     Log.e(MainApplication.TAG, "TYPENO: " + s);
                     Log.e(MainApplication.TAG, "image: " + image);
                     if (s.equalsIgnoreCase("1")) {
-                        buttonKycPhotoId.setVisibility(View.VISIBLE);
-                        buttonKycPhotoId.setText("Uploaded");
-                        imageViewUploadTick_1.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycPhotoId);
+                        buttonKycPhotoId_co.setVisibility(View.VISIBLE);
+                        buttonKycPhotoId_co.setText("Uploaded");
+                        imageViewUploadTick_1_co.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycPhotoId_co);
                     } else if (s.equalsIgnoreCase("2")) {
-                        buttonKycAddressProof.setVisibility(View.VISIBLE);
-                        buttonKycAddressProof.setText("Uploaded");
-                        imageViewUploadTick_2.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycAddressProof);
+                        buttonKycAddressProof_co.setVisibility(View.VISIBLE);
+                        buttonKycAddressProof_co.setText("Uploaded");
+                        imageViewUploadTick_2_co.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycAddressProof_co);
                     } else if (s.equalsIgnoreCase("3")) {
-                        buttonKycSignatureProof.setVisibility(View.VISIBLE);
-                        buttonKycSignatureProof.setText("Uploaded");
-                        imageViewUploadTick_3.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycSignatureProof);
+                        buttonKycSignatureProof_co.setVisibility(View.VISIBLE);
+                        buttonKycSignatureProof_co.setText("Uploaded");
+                        imageViewUploadTick_3_co.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycSignatureProof_co);
                     } else if (s.equalsIgnoreCase("9")) {
-                        buttonKycProfilePhoto.setVisibility(View.VISIBLE);
-                        buttonKycProfilePhoto.setText("Uploaded");
-                        imageViewUploadTick_9.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycProfilePhoto);
+                        buttonKycProfilePhoto_co.setVisibility(View.VISIBLE);
+                        buttonKycProfilePhoto_co.setText("Uploaded");
+                        imageViewUploadTick_9_co.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycProfilePhoto_co);
                     }
                 }
 
@@ -1344,15 +1405,15 @@ public class LoanApplicationFragment_3 extends Fragment {
 
                     if (s.equalsIgnoreCase("4")) {
                         Log.e(MainApplication.TAG, "IF LOOP : 4");
-                        buttonFinanceIncomeProof.setVisibility(View.VISIBLE);
-                        buttonFinanceIncomeProof.setText("Uploaded");
-                        imageViewUploadTick_4.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceIncomeProof);
+                        buttonFinanceIncomeProof_co.setVisibility(View.VISIBLE);
+                        buttonFinanceIncomeProof_co.setText("Uploaded");
+                        imageViewUploadTick_4_co.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceIncomeProof_co);
                     } else if (s.equalsIgnoreCase("5")) {
-                        buttonFinanceBankStatement.setVisibility(View.VISIBLE);
-                        buttonFinanceBankStatement.setText("Uploaded");
-                        imageViewUploadTick_5.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceBankStatement);
+                        buttonFinanceBankStatement_co.setVisibility(View.VISIBLE);
+                        buttonFinanceBankStatement_co.setText("Uploaded");
+                        imageViewUploadTick_5_co.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceBankStatement_co);
                     }
                 }
 
@@ -1364,10 +1425,10 @@ public class LoanApplicationFragment_3 extends Fragment {
                     String image = jsonObject1.getString("document_path");
 
                     if (s.equalsIgnoreCase("8")) {
-                        buttonOtherDocument.setVisibility(View.VISIBLE);
-                        buttonOtherDocument.setText("Uploaded");
-                        imageViewUploadTick_8.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewOtherDocument);
+                        buttonOtherDocument_co.setVisibility(View.VISIBLE);
+                        buttonOtherDocument_co.setText("Uploaded");
+                        imageViewUploadTick_8_co.setVisibility(View.VISIBLE);
+                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewOtherDocument_co);
                     }
                 }
 

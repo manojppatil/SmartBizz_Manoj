@@ -11,9 +11,9 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout_coborrower"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/relativeLayout_coborrower">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,6 +61,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_kyc_profilephoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Profile Photo"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -101,17 +112,6 @@
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textview_kyc_profilephoto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload Your Profile Photo"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp" />
-
                     <ImageView
                         android:id="@+id/imageView_uploadtick9_co"
                         android:layout_width="40dp"
@@ -125,6 +125,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_kyc_photoId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Photo IDs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -165,17 +176,6 @@
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textview_kyc_photoId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload One of Your Photo IDs"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp" />
-
                     <ImageView
                         android:id="@+id/imageView_uploadtick1_co"
                         android:layout_width="40dp"
@@ -190,6 +190,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Address Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -230,15 +240,6 @@
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload One of Your Address Proofs"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp" />
 
                     <ImageView
                         android:id="@+id/imageView_uploadtick2_co"
@@ -254,6 +255,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Signautre Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -295,15 +306,6 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload One of Your Signautre Proofs"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp" />
 
                     <ImageView
                         android:id="@+id/imageView_uploadtick3_co"
@@ -327,9 +329,9 @@
                 android:textSize="14sp" />
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <RelativeLayout
@@ -337,6 +339,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload One of Your Income Proofs"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -347,12 +358,12 @@
                             android:id="@+id/textview_incomeproof"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
                             android:gravity="center"
+                            android:maxLines="1"
                             android:text="Income Proof"
                             android:textColor="@color/grey"
-                            android:textSize="12sp"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textSize="12sp" />
 
                         <ImageView
                             android:id="@+id/imageview_finance_incomeproof_co"
@@ -361,7 +372,7 @@
                             android:layout_below="@+id/textview_incomeproof"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
 
                         <Button
                             android:id="@+id/button_finance_incomeproof_co"
@@ -373,20 +384,11 @@
                             android:background="@color/colorSecondary"
                             android:text="Upload"
                             android:textColor="@color/white"
-                            android:visibility="gone"
-                            android:textSize="11sp"/>
+                            android:textSize="11sp"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload One of Your Income Proofs"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp"/>
 
                     <ImageView
                         android:id="@+id/imageView_uploadtick4_co"
@@ -404,6 +406,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Last 6 months Bank Statement"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -413,12 +425,12 @@
                             android:id="@+id/textview_bankstatement"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
                             android:gravity="center"
+                            android:maxLines="1"
                             android:text="Bank Statement"
                             android:textColor="@color/grey"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:textSize="11sp"/>
+                            android:textSize="11sp" />
 
                         <ImageView
                             android:id="@+id/imageview_finance_bankstatement_co"
@@ -427,7 +439,7 @@
                             android:layout_below="@+id/textview_bankstatement"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
 
                         <Button
                             android:id="@+id/button_finance_bankstatement_co"
@@ -436,22 +448,13 @@
                             android:layout_alignParentBottom="true"
                             android:layout_below="@+id/textview_incomeproof"
                             android:layout_margin="5dp"
-                            android:background="@color/colorPrimaryDark"
+                            android:background="@color/colorSecondary"
                             android:text="Upload"
                             android:textColor="@color/white"
-                            android:visibility="gone"
-                            android:textSize="11sp"/>
+                            android:textSize="11sp"
+                            android:visibility="gone" />
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload Last 6 months Bank Statement"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp"/>
 
                     <ImageView
                         android:id="@+id/imageView_uploadtick5_co"
@@ -466,11 +469,12 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
 
             </LinearLayout>
@@ -490,25 +494,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
+                    <TextView
+                        android:id="@+id/textview_otherdocument"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Upload Your Other Documents"
+                        android:textColor="@color/grey"
+                        android:textSize="11sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/textview_otherproof"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
                             android:gravity="center"
+                            android:maxLines="1"
                             android:text="Other Documents"
                             android:textColor="@color/grey"
-                            android:textSize="11sp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
+                            android:textSize="11sp" />
 
                         <ImageView
                             android:id="@+id/imageview_otherdocument_co"
@@ -517,7 +534,7 @@
                             android:layout_below="@+id/textview_otherproof"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
 
                         <Button
                             android:id="@+id/button_otherdocument_co"
@@ -529,19 +546,11 @@
                             android:background="@color/colorSecondary"
                             android:text="Upload"
                             android:textColor="@color/white"
-                            android:visibility="gone"
-                            android:textSize="11sp"/>
+                            android:textSize="11sp"
+                            android:visibility="gone" />
                     </LinearLayout>
-                    <TextView
-                        android:id="@+id/textview_otherdocument"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Upload Your Other Documents"
-                        android:textColor="@color/grey"
-                        android:textSize="11sp"/>
+
+
                     <ImageView
                         android:id="@+id/imageView_uploadtick8_co"
                         android:layout_width="30dp"
@@ -555,15 +564,17 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
