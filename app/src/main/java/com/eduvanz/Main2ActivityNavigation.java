@@ -124,7 +124,8 @@ public class Main2ActivityNavigation extends AppCompatActivity
 
 //        startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
 
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 23)
+        {
             permission = ContextCompat.checkSelfPermission(getApplicationContext(),
                     Manifest.permission.READ_SMS);
 

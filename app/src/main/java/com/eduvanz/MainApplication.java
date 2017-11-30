@@ -71,6 +71,8 @@ public class MainApplication {
             coborrowerValue7="", coborrowerValue8="", coborrowerValue9="", coborrowerValue10="", coborrowerValue11="", coborrowerValue12="", coborrowerValue13="", coborrowerValue14="",
             coborrowerValue15="", coborrowerValue16="", coborrowerValue17="", coborrowerValue18="", coborrowerValue19="", coborrowerValue20="", coborrowerValue21="", coborrowerValue22="",
             coborrowerValue23="", coborrowerValue24="", coborrowerValue25="", coborrowerValue26="";
+    public static double latitude;
+    public static double longitde;
 
     public void applyTypeface(TextView view, Context context) {
         typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/Raleway-Regular.ttf");

@@ -30,10 +30,13 @@ import com.eduvanz.newUI.fragments.EligibilityCheckFragment_4;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_1;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_2;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_3;
+import com.eduvanz.newUI.fragments.LoanApplicationFragment_4;
 import com.eduvanz.newUI.newViews.BannerActivity;
+import com.eduvanz.newUI.newViews.DashboardActivity;
 import com.eduvanz.newUI.newViews.GetMobileNo;
 import com.eduvanz.newUI.newViews.LoanApplication;
 import com.eduvanz.newUI.newViews.MyProfileNew;
+import com.eduvanz.newUI.newViews.Notification;
 import com.eduvanz.newUI.newViews.OtpValidation;
 import com.eduvanz.pqformfragments.PqFormFragment1;
 import com.eduvanz.pqformfragments.PqFormFragment3;
@@ -531,6 +534,50 @@ public class VolleyCallNew extends Application {
             try {
                 jsonDataO = new JSONObject(s);
                 ((LoanApplicationFragment_3)mfragment).getCoBorrowerDocuments(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(screen.equalsIgnoreCase("Notifications"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((Notification)mActivity).getNotificationContent(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(screen.equalsIgnoreCase("getRecentScrapping"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((DashboardActivity)mActivity).getScrappingdates(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(screen.equalsIgnoreCase("StudentDashbBoardStatus"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((DashboardActivity)mActivity).setProfileDashbBoardStatus(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if(screen.equalsIgnoreCase("ProfileDashbBoardStatusData"))
+        {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_4)mfragment).setProfileDashbBoardStatusData(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             }catch (Exception e){

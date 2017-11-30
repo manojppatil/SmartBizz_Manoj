@@ -20,42 +20,15 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-
-
-    <RelativeLayout
+    <ListView
+        android:background="@color/colorSecondary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout_borrower">
+        android:layout_height="match_parent"
+        android:id="@+id/notification_listview">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="Borrower"
-            android:textColor="@color/colorSecondary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    </ListView>
 
-        <TextView
-            android:id="@+id/texView_borrower_arrowdown1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/down"
-            android:textColor="@color/colorRed"
-            android:textSize="20sp" />
 
-    </RelativeLayout>
 
-    <TextView
-        android:maxLines="1"
-        android:id="@+id/aaa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:text="Borrowerajbhsd kadsf kasbd kajsd kjajsdfk basdkfjj baslkdbf alksdjf aksdbf akjsbdf akjsdbf akskdbf aksdbf kasbdf lkasdbf kasdbf aksjdjb aksdbf kasdbf kabsdf kasbdfk abbsdf kjfabsdf "
-        android:textColor="@color/colorSecondary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
 </LinearLayout>

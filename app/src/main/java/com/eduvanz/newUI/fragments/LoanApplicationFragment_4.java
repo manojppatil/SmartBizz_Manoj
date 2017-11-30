@@ -20,6 +20,12 @@ import android.widget.TextView;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
+import com.eduvanz.volley.VolleyCallNew;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -150,8 +156,22 @@ public class LoanApplicationFragment_4 extends Fragment {
         buttonUpload = (Button) view.findViewById(R.id.button_signnsubmit_uploadApplication);
         mainApplication.applyTypeface(buttonUpload, context);
 
+        /** API CALL GET Dates**/
+        try {
+            String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("studentId","530");
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, null, mFragment, "ProfileDashbBoardStatusData", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 
 
+    public void setProfileDashbBoardStatusData(JSONObject jsonDataO) {
+        Log.e("", "setProfileDashbBoardStatusData: "+jsonDataO );
+    }
 }

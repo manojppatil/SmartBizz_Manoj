@@ -1,11 +1,15 @@
 package com.eduvanz.newUI.newViews;
 
 import android.Manifest;
+import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 
 import com.eduvanz.MainApplication;
 import com.eduvanz.R;
+import com.eduvanz.newUI.services.MyServiceCallLog;
 import com.eduvanz.pqformfragments.SuccessAfterPQForm;
 import com.eduvanz.volley.VolleyCall;
 import com.eduvanz.volley.VolleyCallNew;
@@ -54,6 +59,7 @@ public class GetMobileNo extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
         textViewToolbar = (TextView) findViewById(R.id.textView_getmobileno);
         mainApplication.applyTypeface(textViewToolbar, mContext);
 
@@ -76,7 +82,7 @@ public class GetMobileNo extends AppCompatActivity {
                         if (permission != PackageManager.PERMISSION_GRANTED) {
 //                            makeRequest();
                         ActivityCompat.requestPermissions(GetMobileNo.this,
-                                new String[]{Manifest.permission.READ_SMS},
+                                new String[]{Manifest.permission.READ_SMS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
                                 GET_MY_PERMISSION);
                         } else {
                             apiCall();
@@ -92,9 +98,28 @@ public class GetMobileNo extends AppCompatActivity {
 
             }
         });
+        // permission for Stats
+        if(!isAccessGranted()) {
+            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        }
 
     }
+    private boolean isAccessGranted() {
+        try {
+            PackageManager packageManager = getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(getPackageName(), 0);
+            AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+            int mode = 0;
+            if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.KITKAT) {
+                mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                        applicationInfo.uid, applicationInfo.packageName);
+            }
+            return (mode == AppOpsManager.MODE_ALLOWED);
 
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
     protected void makeRequest() {
         ActivityCompat.requestPermissions(GetMobileNo.this,
                 new String[]{Manifest.permission.READ_SMS},
@@ -133,6 +158,22 @@ public class GetMobileNo extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    apiCall();
+                } else {
+                    //not granted
+                    Log.e(MainApplication.TAG, "not granted: Dashboard " + grantResults[0]);
+                }
+                break;
         }
     }
 }

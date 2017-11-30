@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import com.eduvanz.newUI.newViews.Faq;
 import com.eduvanz.newUI.newViews.HowItWorks;
 import com.eduvanz.newUI.newViews.LoanApplication;
 import com.eduvanz.newUI.newViews.MyProfileNew;
+import com.eduvanz.newUI.newViews.Notification;
 import com.eduvanz.newUI.pojo.ViewPagerDashboardPOJO;
 import com.eduvanz.volley.VolleyCallNew;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -57,6 +59,7 @@ public class DashboardFragmentNew extends Fragment {
     static String dealID="";
     SharedPref sharedPref;
     String userName="";
+    LinearLayout notification_linearLayout;
 
 
     public DashboardFragmentNew() {
@@ -105,6 +108,7 @@ public class DashboardFragmentNew extends Fragment {
         textView12 = (TextView) view.findViewById(R.id.textViewdash_12);
         mainApplication.applyTypeface(textView12, context);
         textView13 = (TextView) view.findViewById(R.id.textViewdash_13);
+
         mainApplication.applyTypeface(textView13, context);
 
         textViewCongrats = (TextView) view.findViewById(R.id.textView_congratsmessage);
@@ -192,6 +196,15 @@ public class DashboardFragmentNew extends Fragment {
         linearLayoutCallUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            }
+        });
+
+        notification_linearLayout = (LinearLayout) view.findViewById(R.id.notification_linearLayout);
+        notification_linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Notification.class);
+                startActivity(intent);
             }
         });
 

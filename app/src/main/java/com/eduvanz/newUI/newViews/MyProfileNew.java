@@ -38,6 +38,9 @@ public class MyProfileNew extends AppCompatActivity {
     Button buttonCompleteNow;
     AppCompatActivity mActivity;
     String userID="", fname="", lname="";
+    TextView applicationStatus,applicationStatusName,loanDetailsHeader,personalDetailsHeader,
+            institute,instituteName,course,courseName,fees,feesName,loanAmount,loanAmountText,
+            mobile,mobileName,email,emailName,address,addressName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +90,48 @@ public class MyProfileNew extends AppCompatActivity {
         buttonCompleteNow = (Button) findViewById(R.id.button_mtprofile_completenow);
         mainApplication.applyTypeface(buttonCompleteNow, context);
 
+        // new View start
+        applicationStatus= (TextView) findViewById(R.id.applicationStatus_textview);
+        applicationStatusName= (TextView) findViewById(R.id.applicationStatus_name_textview);
+        loanDetailsHeader= (TextView) findViewById(R.id.loanDetails_textview);
+        personalDetailsHeader= (TextView) findViewById(R.id.personal_details_textview);
+
+        institute= (TextView) findViewById(R.id.institute_textView);
+        instituteName= (TextView) findViewById(R.id.institute_name_textview);
+        course= (TextView) findViewById(R.id.course_textView);
+        courseName= (TextView) findViewById(R.id.course_name_textView);
+        fees= (TextView) findViewById(R.id.fee_textView);
+        feesName= (TextView) findViewById(R.id.fees_value_textView);
+        loanAmount= (TextView) findViewById(R.id.loan_textview);
+        loanAmountText= (TextView) findViewById(R.id.loan_value_textview);
+
+        mobile= (TextView) findViewById(R.id.mobile_textView);
+        mobileName= (TextView) findViewById(R.id.mobile_name_textview);
+        email= (TextView) findViewById(R.id.email_textView);
+        emailName= (TextView) findViewById(R.id.email_name_textView);
+        address= (TextView) findViewById(R.id.address_textView);
+        addressName= (TextView) findViewById(R.id.address_name_textView);
+
+        applicationStatus.setTypeface(MainApplication.typefaceFont);
+        applicationStatusName.setTypeface(MainApplication.typefaceFont);
+        loanDetailsHeader.setTypeface(MainApplication.typefaceFont);
+        personalDetailsHeader.setTypeface(MainApplication.typefaceFont);
+        institute.setTypeface(MainApplication.typefaceFont);
+        instituteName.setTypeface(MainApplication.typefaceFont);
+        course.setTypeface(MainApplication.typefaceFont);
+        courseName.setTypeface(MainApplication.typefaceFont);
+        fees.setTypeface(MainApplication.typefaceFont);
+        feesName.setTypeface(MainApplication.typefaceFont);
+        loanAmount.setTypeface(MainApplication.typefaceFont);
+        loanAmountText.setTypeface(MainApplication.typefaceFont);
+        mobile.setTypeface(MainApplication.typefaceFont);
+        mobileName.setTypeface(MainApplication.typefaceFont);
+        email.setTypeface(MainApplication.typefaceFont);
+        emailName.setTypeface(MainApplication.typefaceFont);
+        address.setTypeface(MainApplication.typefaceFont);
+        addressName.setTypeface(MainApplication.typefaceFont);
+
+// new View end
         buttonCompleteNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +140,16 @@ public class MyProfileNew extends AppCompatActivity {
         });
 
         /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("studentId", userID);
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, mActivity, null, "myProfile", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /**API CALL Details **/
         try {
             String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
             Map<String, String> params = new HashMap<String, String>();

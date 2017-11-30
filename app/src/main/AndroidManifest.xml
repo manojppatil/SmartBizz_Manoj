@@ -18,6 +18,8 @@
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
     <application
         android:name=".MainActivity"
@@ -92,6 +94,9 @@
         <activity
             android:name=".UserProfile"
             android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.Notification"
+            android:screenOrientation="sensorPortrait" />
 
         <receiver android:name=".pqformfragments.SmsReceiver">
             <intent-filter>
@@ -116,12 +121,27 @@
             android:name=".AlarmReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.NOTIFY" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <service
             android:name=".MyService"
+            android:exported="false" />
+        <service
+            android:name=".newUI.services.MyServiceCallLog"
+            android:exported="false" />
+        <service
+            android:name=".newUI.services.MyServiceReadSms"
+            android:exported="false" />
+        <service
+            android:name=".newUI.services.MyServiceCallStats"
+            android:exported="false" />
+        <service
+            android:name=".newUI.services.MyServiceContacts"
+            android:exported="false" />
+        <service
+            android:name=".newUI.services.LocationService"
             android:exported="false" />
         <service
             android:name=".MyServiceDemo"
@@ -131,6 +151,7 @@
             android:name=".SignupLogin"
             android:screenOrientation="sensorPortrait" />
         /** NEW UI **/
+        <!--replace with splash after testing time.-->
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="sensorPortrait">
@@ -183,8 +204,29 @@
             android:screenOrientation="sensorPortrait" />
         <activity android:name=".newUI.newViews.BannerActivity"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".newUI.newViews.Notification"
-            android:screenOrientation="sensorPortrait"/>
+        <!--<activity android:name=".newUI.newViews.Notification"-->
+            <!--android:screenOrientation="sensorPortrait"/>-->
+        <receiver
+            android:name=".newUI.receiver.AlarmReceiverForFileUpload"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".newUI.receiver.AppStatsForFileUpload"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".newUI.receiver.LocationUploadForFileUpload"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

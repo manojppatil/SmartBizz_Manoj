@@ -5,7 +5,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -35,8 +37,11 @@ import com.eduvanz.volley.VolleyCall;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -92,6 +97,7 @@ public class EligibilityCheckFragment_3 extends Fragment {
         textView3.setTypeface(typefaceFontBold);
         editTextCity = (EditText) view.findViewById(R.id.editText_cityName_ec);
         editTextCity.setText(MainApplication.mainapp_currentCity);
+        getLocationAddress();
         professionSpinner = (Spinner) view.findViewById(R.id.spinner_yourprofession);
         profession_arrayList = new ArrayList<>();
         profession_arrayList.add("Select Any");
@@ -221,6 +227,33 @@ public class EligibilityCheckFragment_3 extends Fragment {
 
 
         return view;
+    }
+    private void getLocationAddress() {
+        String cityName=null;
+        Geocoder gcd = new Geocoder(context, Locale.getDefault());
+        List<Address> addresses;
+        try {
+            addresses = gcd.getFromLocation(MainApplication.latitude, MainApplication.longitde, 1);
+            if (addresses.size() > 0) {
+                String address = addresses.get(0).getAddressLine(0);
+//             If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                String city = addresses.get(0).getLocality();
+                String subLoca = addresses.get(0).getSubLocality();
+                String state = addresses.get(0).getAdminArea();
+                String countryG = addresses.get(0).getCountryName();
+                String postalCode = addresses.get(0).getPostalCode();
+                String knownName = addresses.get(0).getFeatureName();
+                Log.e(MainApplication.TAG, "onResume: Header getLocality"+city+"getSubLocality"+state+"\n country "+countryG );
+//                countryByLoc=countryG;
+                editTextCity.setText(city);
+            }
+            Log.e(TAG, "getLocationAddress: "+MainApplication.latitude);
+            Log.e(TAG, "getLocationAddress: "+MainApplication.longitde);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
