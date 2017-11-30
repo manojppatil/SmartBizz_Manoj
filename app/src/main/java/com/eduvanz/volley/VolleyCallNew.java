@@ -577,7 +577,7 @@ public class VolleyCallNew extends Application {
         {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_4)mfragment).setProfileDashbBoardStatusData(jsonDataO);
+                ((MyProfileNew)mActivity).setProfileDashbBoardStatusData(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             }catch (Exception e){

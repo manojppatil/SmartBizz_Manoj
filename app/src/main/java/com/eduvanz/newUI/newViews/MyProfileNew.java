@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.eduvanz.MainApplication.TAG;
+
 public class MyProfileNew extends AppCompatActivity {
 
     static TextView textViewUserName, textViewPercentage, textView1, textView2, textView3, textView4,
@@ -37,8 +39,8 @@ public class MyProfileNew extends AppCompatActivity {
     static Context context;
     Button buttonCompleteNow;
     AppCompatActivity mActivity;
-    String userID="", fname="", lname="";
-    TextView applicationStatus,applicationStatusName,loanDetailsHeader,personalDetailsHeader,
+    String userID="", fname="", lname="",mobile_no="",user_email="";
+    public static TextView applicationStatus,applicationStatusName,loanDetailsHeader,personalDetailsHeader,
             institute,instituteName,course,courseName,fees,feesName,loanAmount,loanAmountText,
             mobile,mobileName,email,emailName,address,addressName;
     @Override
@@ -54,6 +56,8 @@ public class MyProfileNew extends AppCompatActivity {
             userID = sharedPreferences.getString("logged_id", "");
             fname = sharedPreferences.getString("first_name", "--");
             lname = sharedPreferences.getString("last_name", "--");
+            user_email = sharedPreferences.getString("user_email", "--");
+            mobile_no = sharedPreferences.getString("mobile_no", "--");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -131,6 +135,9 @@ public class MyProfileNew extends AppCompatActivity {
         address.setTypeface(MainApplication.typefaceFont);
         addressName.setTypeface(MainApplication.typefaceFont);
 
+        mobileName.setText("+91 "+mobile_no);
+        mobileName.setText(user_email);
+
 // new View end
         buttonCompleteNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,13 +156,13 @@ public class MyProfileNew extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /**API CALL Details **/
+        /** API CALL GET Dates**/
         try {
             String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId", userID);
+            params.put("studentId",userID);
             VolleyCallNew volleyCall = new VolleyCallNew();
-            volleyCall.sendRequest(context, url, mActivity, null, "myProfile", params);
+            volleyCall.sendRequest(context, url, mActivity, null, "ProfileDashbBoardStatusData", params);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -222,6 +229,33 @@ public class MyProfileNew extends AppCompatActivity {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void setProfileDashbBoardStatusData(JSONObject jsonDataO) {
+        Log.e("", "setProfileDashbBoardStatusData: "+jsonDataO );
+        Log.e(TAG, "getScrappingdates: "+jsonDataO );
+        try {
+            if (jsonDataO.getInt("status") == 1) {
+
+                String courseFees = null, addressT = null, loanAmount = null,
+                        courseT = null, instituteT = null, applicationStatus = null;
+                JSONObject mObject = jsonDataO.optJSONObject("result");
+                applicationStatus= mObject.getString("applicationStatus");
+                instituteT= mObject.getString("institute");
+                courseT= mObject.getString("course");
+                loanAmount= mObject.getString("loanAmount");
+                courseFees= mObject.getString("courseFees");
+                addressT= mObject.getString("address");
+
+                applicationStatusName.setText(applicationStatus);
+                institute.setText(instituteT);
+                course.setText(courseT);
+                addressName.setText(addressT);
+                course.setText(courseFees);
+                loanAmountText.setText(loanAmount);
+            }
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
