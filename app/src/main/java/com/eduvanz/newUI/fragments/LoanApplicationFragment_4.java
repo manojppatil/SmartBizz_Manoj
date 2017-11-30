@@ -2,6 +2,7 @@ package com.eduvanz.newUI.fragments;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -48,6 +49,7 @@ public class LoanApplicationFragment_4 extends Fragment {
     RadioButton radioButtonManual, radioButtonEsign;
     LinearLayout linearLayoutManual;
     MainApplication mainApplication;
+    String userId;
 
     public LoanApplicationFragment_4() {
         // Required empty public constructor
@@ -66,7 +68,8 @@ public class LoanApplicationFragment_4 extends Fragment {
 
         typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
-
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        userId= sharedPreferences.getString("logged_id", "");
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
 
@@ -158,9 +161,9 @@ public class LoanApplicationFragment_4 extends Fragment {
 
         /** API CALL GET Dates**/
         try {
-            String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
+            String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId","530");
+            params.put("studentId",userId);
             VolleyCallNew volleyCall = new VolleyCallNew();
             volleyCall.sendRequest(context, url, null, mFragment, "ProfileDashbBoardStatusData", params);
         } catch (Exception e) {
@@ -173,5 +176,6 @@ public class LoanApplicationFragment_4 extends Fragment {
 
     public void setProfileDashbBoardStatusData(JSONObject jsonDataO) {
         Log.e("", "setProfileDashbBoardStatusData: "+jsonDataO );
+//        jsonDataO
     }
 }

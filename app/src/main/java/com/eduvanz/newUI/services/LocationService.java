@@ -279,7 +279,7 @@ public class LocationService extends Service
             outerOb.accumulate("sim_serial_no", imeiNo);
             outerOb.accumulate("imei", imeiNo);
             outerOb.accumulate("student_id", "");
-            outerOb.accumulate("mobileNo", userMobileNo);
+            outerOb.accumulate("mobile_no", userMobileNo);
             outerOb.put("location_info", jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
