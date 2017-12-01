@@ -89,6 +89,10 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="60dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -430,6 +434,20 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+                <ProgressBar
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBar_signsubmit"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:indeterminate="false"
+                    android:layout_gravity="center" />
+
+            </RelativeLayout>
         </ScrollView>
 
     </LinearLayout>

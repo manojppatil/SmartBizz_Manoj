@@ -563,11 +563,11 @@ public class VolleyCallNew extends Application {
                 e.printStackTrace();
             }
         }
-        else if(screen.equalsIgnoreCase("StudentDashbBoardStatus"))
+        else if(screen.equalsIgnoreCase("studentDashbBoardStatus"))
         {
             try {
                 jsonDataO = new JSONObject(s);
-                ((DashboardActivity)mActivity).setProfileDashbBoardStatus(jsonDataO);
+                ((DashboardFragmentNew)mfragment).setProfileDashbBoardStatus(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             }catch (Exception e){

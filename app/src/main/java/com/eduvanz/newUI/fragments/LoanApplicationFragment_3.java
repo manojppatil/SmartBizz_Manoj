@@ -1040,7 +1040,7 @@ public class LoanApplicationFragment_3 extends Fragment {
 
         if (!selectedFile.isFile()) {
             //dialog.dismiss();
-
+            progressBar.setVisibility(View.GONE);
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -1271,13 +1271,21 @@ public class LoanApplicationFragment_3 extends Fragment {
                 });
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                Toast.makeText(context, "URL error!", Toast.LENGTH_SHORT).show();
-
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
             }
 //            dialog.dismiss();
+            try {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return serverResponseCode;
         }
 

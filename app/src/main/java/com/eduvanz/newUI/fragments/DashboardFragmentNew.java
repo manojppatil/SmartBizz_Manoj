@@ -44,6 +44,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.eduvanz.newUI.MainApplication.TAG;
+
 public class DashboardFragmentNew extends Fragment {
 
     public static Context context;
@@ -51,20 +53,22 @@ public class DashboardFragmentNew extends Fragment {
     static ViewPager viewPagerDashboard;
     static ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     static TextView textViewDealTitle;
-    static String dealID = "";
+    static String dealID = "", userName = "", userId = "";
     CirclePageIndicator circlePageIndicatorDashboard;
     ArrayList<ViewPagerDashboardPOJO> viewPagerDashboardPOJOArrayList;
-    Button buttonCheckeligiblity, buttonApplyNow, buttonContinueLoanApplication, buttonContinueProfile;
-    LinearLayout linearLayoutMyProfile, linearLayoutCallUs, linearLayoutFaq, linearLayoutContactus,
+    static Button buttonCheckeligiblity, buttonApplyNow, buttonContinueLoanApplication, buttonContinueProfile;
+    static LinearLayout linearLayoutMyProfile, linearLayoutCallUs, linearLayoutFaq, linearLayoutContactus,
             linearLayoutHowItWorks, linearLayoutDeal, linearLayoutEligiblityChekck,
             linearLayoutApplyNow, linearLayoutContinueApplication, linearLayoutMailUs, linearLayoutContinueProfile, linearLayoutAboutUs;
     MainApplication mainApplication;
-    TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView8,
+    static TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView8,
             textView9, textView10, textView11, textView12, textView13, textView14, textView15, textViewCongrats;
     SharedPref sharedPref;
 
-    LinearLayout notification_linearLayout;
-    String userName = "";
+    static LinearLayout notification_linearLayout;
+    static String borrower = null, coBorrower = null, coBorrowerDocument = null,
+            eligibility = null, borrowerDocument = null, signDocument = null,
+            kyc = null, profileDashboardStats = null;
 
 
     public DashboardFragmentNew() {
@@ -84,6 +88,7 @@ public class DashboardFragmentNew extends Fragment {
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
             userName = sharedPreferences.getString("first_name", "User");
+            userId = sharedPreferences.getString("logged_id", "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -282,6 +287,15 @@ public class DashboardFragmentNew extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, LoanApplication.class);
+                if(borrowerDocument.equalsIgnoreCase("1")){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("toCoBorrower", "1");
+                    intent.putExtras(bundle);
+                }else if(coBorrowerDocument.equalsIgnoreCase("1") && borrowerDocument.equalsIgnoreCase("1")){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("toDocUpload", "1");
+                    intent.putExtras(bundle);
+                }
                 startActivity(intent);
             }
         });
@@ -313,6 +327,17 @@ public class DashboardFragmentNew extends Fragment {
             Map<String, String> params = new HashMap<String, String>();
             VolleyCallNew volleyCall = new VolleyCallNew();
             volleyCall.sendRequest(context, url, null, mFragment, "getDeal", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /** API CALL POST LOGIN DASHBOARD STATUS **/
+        try {
+            String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("studentId", userId);
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardStatus", params);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -395,4 +420,30 @@ public class DashboardFragmentNew extends Fragment {
     }
 
 
+    public void setProfileDashbBoardStatus(JSONObject jsonDataO) {
+        Log.e(TAG, "getScrappingdates: " + jsonDataO);
+        try {
+            if (jsonDataO.getInt("status") == 1) {
+
+                JSONObject mObject = jsonDataO.optJSONObject("result");
+                borrower = mObject.getString("borrower");
+                coBorrower = mObject.getString("coBorrower");
+                coBorrowerDocument = mObject.getString("coBorrowerDocument");
+                borrowerDocument = mObject.getString("borrowerDocument");
+                signDocument = mObject.getString("signDocument");
+                kyc = mObject.getString("kyc");
+                profileDashboardStats = mObject.getString("profileDashboardStats");
+                eligibility = mObject.getString("eligibility");
+
+                if(borrowerDocument.equalsIgnoreCase("1")){
+                    linearLayoutContinueApplication.setVisibility(View.VISIBLE);
+                    linearLayoutApplyNow.setVisibility(View.GONE);
+                    linearLayoutEligiblityChekck.setVisibility(View.GONE);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

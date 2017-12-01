@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_1;
+import com.eduvanz.newUI.fragments.LoanApplicationFragment_2;
+import com.eduvanz.newUI.fragments.LoanApplicationFragment_3;
 
 import org.json.JSONObject;
 
@@ -26,6 +28,7 @@ public class LoanApplication extends AppCompatActivity {
     static AppCompatActivity mActivity;
     static Context context;
     static String userID="";
+    static String setFragmentCOBorrower="", setFragmentDocUpload="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,15 @@ public class LoanApplication extends AppCompatActivity {
 
         mActivity = this;
         context = this;
+
+        try {
+            Bundle extras = getIntent().getExtras();
+            setFragmentCOBorrower = extras.getString("toCoBorrower");
+            setFragmentDocUpload = extras.getString("toDocUpload");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,7 +54,13 @@ public class LoanApplication extends AppCompatActivity {
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_1()).commit();
+        if (setFragmentCOBorrower.equalsIgnoreCase("1")){
+            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_2()).commit();
+        }else if(setFragmentDocUpload.equalsIgnoreCase("1")){
+            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_3()).commit();
+        } else {
+            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_1()).commit();
+        }
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
         userID = sharedPreferences.getString("logged_id", "null");

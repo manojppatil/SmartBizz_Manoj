@@ -247,18 +247,6 @@ public class DashboardActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        /** API CALL **/
-        try {
-            String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId", userId);
-            VolleyCallNew volleyCall = new VolleyCallNew();
-            volleyCall.sendRequest(context, url, mActivity, null, "StudentDashbBoardStatus", params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//
-
     }
 
     private void Otherpermission() {
@@ -670,27 +658,4 @@ public class DashboardActivity extends AppCompatActivity
         }
     }
 
-    public void setProfileDashbBoardStatus(JSONObject jsonDataO) {
-        Log.e(TAG, "getScrappingdates: " + jsonDataO);
-        try {
-            if (jsonDataO.getInt("status") == 1) {
-
-                String borrower = null, coBorrower = null, coBorrowerDocument = null,
-                        eligibility = null, borrowerDocument = null, signDocument = null,
-                        kyc = null, profileDashboardStats = null;
-                JSONObject mObject = jsonDataO.optJSONObject("result");
-                borrower = mObject.getString("borrower");
-                coBorrower = mObject.getString("coBorrower");
-                coBorrowerDocument = mObject.getString("coBorrowerDocument");
-                borrowerDocument = mObject.getString("borrowerDocument");
-                signDocument = mObject.getString("signDocument");
-                kyc = mObject.getString("kyc");
-                profileDashboardStats = mObject.getString("profileDashboardStats");
-                eligibility = mObject.getString("eligibility");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }

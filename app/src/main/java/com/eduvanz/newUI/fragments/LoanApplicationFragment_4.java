@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -80,6 +81,7 @@ public class LoanApplicationFragment_4 extends Fragment {
     static String uploadFilePath = "", userID="", userFirst="", userLast="", ipaddress="", applicationStatus="";
     StringBuffer sb;
     RadioGroup radioGroupla4;
+    public static ProgressBar progressBar;
 
     public LoanApplicationFragment_4() {
         // Required empty public constructor
@@ -114,6 +116,7 @@ public class LoanApplicationFragment_4 extends Fragment {
 //        userId= sharedPreferences.getString("logged_id", "");
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar_signsubmit);
 
         radioGroupla4 = (RadioGroup) view.findViewById(R.id.radioGroup_la4);
         textView1 = (TextView) view.findViewById(R.id.textView1_l4);
@@ -214,7 +217,7 @@ public class LoanApplicationFragment_4 extends Fragment {
 ////                request.setDescription("Downloading " + "Sample" + ".png");
 //                request.setVisibleInDownloadsUi(true);
 //                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/Eduvanz/"  + "/" + "LAF" + ".pdf");
-
+                progressBar.setVisibility(View.VISIBLE);
                 downLoad(downloadUrl, 1);
 
             }
@@ -225,6 +228,7 @@ public class LoanApplicationFragment_4 extends Fragment {
         buttonDownloadSignedApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 downLoad(downloadSignedUrl, 2);
             }
         });
@@ -334,8 +338,9 @@ public class LoanApplicationFragment_4 extends Fragment {
 //                    TextView showCountries = (TextView) findViewById(R.id.countryData);
 //                    showCountries.setText(countryData.toString());
 
+                    progressBar.setVisibility(View.GONE);
                     Toast toast = Toast.makeText(context,
-                            "Downloading of data just finished", Toast.LENGTH_LONG);
+                            "Downloading of File just finished", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.TOP, 25, 400);
                     toast.show();
 
@@ -367,7 +372,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                 uploadFilePath = PathFile.getPath(context, selectedImage);
                 Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
                  if(!uploadFilePath.equalsIgnoreCase("")){
-
+                     progressBar.setVisibility(View.VISIBLE);
                      new Thread(new Runnable() {
                          @Override
                          public void run() {
@@ -406,7 +411,7 @@ public class LoanApplicationFragment_4 extends Fragment {
 
         if (!selectedFile.isFile()) {
             //dialog.dismiss();
-
+            progressBar.setVisibility(View.GONE);
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -530,6 +535,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                                progressBar.setVisibility(View.GONE);
                             }
                         });
 
@@ -538,6 +544,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                             @Override
                             public void run() {
                                 Toast.makeText(context, mData1, Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
                             }
                         });
 //                        finish();
@@ -569,6 +576,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                     @Override
                     public void run() {
                         Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
             } catch (MalformedURLException e) {
@@ -580,6 +588,12 @@ public class LoanApplicationFragment_4 extends Fragment {
                 Toast.makeText(context, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
             }
 //            dialog.dismiss();
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
             return serverResponseCode;
         }
 

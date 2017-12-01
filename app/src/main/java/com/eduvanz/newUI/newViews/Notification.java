@@ -70,8 +70,8 @@ public class Notification extends AppCompatActivity {
         try {
             String url = MainApplication.mainUrl + "dashboard/getDashBoardNotifications";
             Map<String, String> params = new HashMap<String, String>();
-//            params.put("studentId",userID);
-            params.put("studentId","548");
+            params.put("studentId",userID);
+//            params.put("studentId","548");
             Log.e(MainApplication.TAG, "onCreate: "+params );
             VolleyCallNew volleyCall = new VolleyCallNew();
             volleyCall.sendRequest(context, url, mActivity, null, "Notifications", params);
