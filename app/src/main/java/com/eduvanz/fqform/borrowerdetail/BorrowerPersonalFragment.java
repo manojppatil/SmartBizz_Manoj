@@ -24,14 +24,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentCityPersonalPOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentCountryPersonalPOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceDurationPersonalPOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceTypePersonalPOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentStatePersonalPOJO;
-import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerProfessionFinancePOJO;
 import com.eduvanz.volley.VolleyCall;
 
 import org.json.JSONArray;

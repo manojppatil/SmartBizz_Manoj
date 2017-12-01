@@ -77,12 +77,6 @@
             android:name=".faqexpandablelistview.FAQ"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".WebViewAboutUs"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".WebViewTermsNCondition"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".MyProfile"
             android:screenOrientation="portrait" />
         <activity
@@ -93,9 +87,6 @@
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".UserProfile"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".newUI.newViews.Notification"
             android:screenOrientation="sensorPortrait" />
 
         <receiver android:name=".pqformfragments.SmsReceiver">
@@ -153,7 +144,7 @@
         /** NEW UI **/
         <!--replace with splash after testing time.-->
         <activity
-            android:name=".SplashScreen"
+            android:name=".newUI.newViews.SplashScreen"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -227,6 +218,24 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".newUI.newViews.Notification"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".newUI.webviews.WebViewFairPracticsCode"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".newUI.webviews.WebViewPrivacyPolicy"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".newUI.webviews.WebViewFAQs"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".newUI.webviews.WebViewDisclaimer"
+            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".newUI.webviews.WebViewAboutUs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".newUI.webviews.WebViewTermsNCondition"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

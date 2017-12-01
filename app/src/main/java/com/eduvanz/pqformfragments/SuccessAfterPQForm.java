@@ -2,17 +2,13 @@ package com.eduvanz.pqformfragments;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -28,34 +24,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.AlarmReceiver;
-import com.eduvanz.DashBoardFragment;
-import com.eduvanz.Main2ActivityNavigation;
-import com.eduvanz.MainActivity;
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.SharedPref;
+import com.eduvanz.newUI.SharedPref;
 import com.eduvanz.SuccessSplash;
 import com.eduvanz.volley.VolleyCall;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.eduvanz.MainApplication.TAG;
-import static com.eduvanz.R.string.calendar;
 
 public class SuccessAfterPQForm extends AppCompatActivity {
     Toolbar mToolbar;

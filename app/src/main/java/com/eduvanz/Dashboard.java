@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eduvanz.faqexpandablelistview.FAQ;
+import com.eduvanz.newUI.webviews.WebViewAboutUs;
 
 
 public class Dashboard extends Fragment {

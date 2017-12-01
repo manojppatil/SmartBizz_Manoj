@@ -23,9 +23,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.fqform.borrowerdetail.BorrowerEducationFragment;
 import com.eduvanz.fqform.coborrowerdetail.pojo.CoborrowerCurrentCityPersonalPOJO;
 import com.eduvanz.fqform.coborrowerdetail.pojo.CoborrowerCurrentCountryPersonalPOJO;
 import com.eduvanz.fqform.coborrowerdetail.pojo.CoborrowerCurrentResidenceDurationPersonalPOJO;

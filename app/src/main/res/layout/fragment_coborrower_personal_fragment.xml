@@ -268,7 +268,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Current City : "
+                    android:text="Current Country : "
                     android:layout_gravity="left"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
@@ -281,10 +281,12 @@
                     android:dropDownSelector="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="left"
-                    android:id="@+id/spinner_coborrowercurrentcity"
+                    android:id="@+id/spinner_coborrowercurrentcountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -312,6 +314,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -322,7 +325,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Current Country : "
+                    android:text="Current City : "
                     android:layout_gravity="left"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
@@ -335,10 +338,11 @@
                     android:dropDownSelector="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="left"
-                    android:id="@+id/spinner_coborrowercurrentcountry"
+                    android:id="@+id/spinner_coborrowercurrentcity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
 
             <android.support.design.widget.TextInputLayout
                 android:theme="@style/EditTextStyle"
@@ -347,6 +351,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp">
                 <EditText
+                    android:maxLength="6"
                     android:id="@+id/input_coborrowercurrentpincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -380,7 +385,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Permanent City : "
+                    android:text="Permanent Country : "
                     android:layout_gravity="left"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
@@ -393,10 +398,12 @@
                     android:dropDownSelector="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="left"
-                    android:id="@+id/spinner_coborrowerpermanentcity"
+                    android:id="@+id/spinner_coborrowerpermanentcountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -424,6 +431,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -434,7 +442,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Permanent Country : "
+                    android:text="Permanent City : "
                     android:layout_gravity="left"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
@@ -447,10 +455,11 @@
                     android:dropDownSelector="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="left"
-                    android:id="@+id/spinner_coborrowerpermanentcountry"
+                    android:id="@+id/spinner_coborrowerpermanentcity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
 
             <android.support.design.widget.TextInputLayout
                 android:theme="@style/EditTextStyle"

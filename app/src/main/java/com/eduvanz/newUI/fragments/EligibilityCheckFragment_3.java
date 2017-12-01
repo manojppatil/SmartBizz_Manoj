@@ -1,19 +1,15 @@
 package com.eduvanz.newUI.fragments;
 
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,25 +23,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
-import com.eduvanz.pqformfragments.pojo.NameOfCoursePOJO;
-import com.eduvanz.pqformfragments.pojo.NameOfInsitituePOJO;
-import com.eduvanz.volley.VolleyCall;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-import static android.content.Context.LOCATION_SERVICE;
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,6 +83,22 @@ public class EligibilityCheckFragment_3 extends Fragment {
         textView3.setTypeface(typefaceFontBold);
         editTextCity = (EditText) view.findViewById(R.id.editText_cityName_ec);
         editTextCity.setText(MainApplication.mainapp_currentCity);
+        editTextCity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                MainApplication.mainapp_currentCity = editTextCity.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         getLocationAddress();
         professionSpinner = (Spinner) view.findViewById(R.id.spinner_yourprofession);
         profession_arrayList = new ArrayList<>();

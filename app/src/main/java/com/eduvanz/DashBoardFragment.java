@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.eduvanz.fqform.borrowerdetail.FqFormBorrower;
 import com.eduvanz.fqform.coborrowerdetail.FqFormCoborrower;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.uploaddocs.UploadActivityBorrower;
 import com.eduvanz.uploaddocs.UploadActivityCoBorrower;
 import com.eduvanz.volley.VolleyCall;
@@ -35,9 +36,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
-import ch.halcyon.squareprogressbar.SquareProgressBar;
-import ch.halcyon.squareprogressbar.utils.PercentStyle;
 
 /**
  * A simple {@link Fragment} subclass.

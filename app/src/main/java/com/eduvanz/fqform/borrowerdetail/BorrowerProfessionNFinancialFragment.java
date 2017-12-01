@@ -19,11 +19,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerProfessionFinancePOJO;
 import com.eduvanz.volley.VolleyCall;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -3,7 +3,6 @@ package com.eduvanz.newUI.newViews;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,18 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.newUI.adapter.ViewPagerAdapterBanner;
-import com.eduvanz.newUI.pojo.ViewPagerDashboardPOJO;
-import com.eduvanz.volley.VolleyCallNew;
+import com.eduvanz.newUI.VolleyCallNew;
 import com.squareup.picasso.Picasso;
-import com.viewpagerindicator.CirclePageIndicator;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

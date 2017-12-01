@@ -6,34 +6,23 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
-import com.eduvanz.pqformfragments.pojo.NameOfCoursePOJO;
-import com.eduvanz.pqformfragments.pojo.NameOfInsitituePOJO;
-import com.eduvanz.volley.VolleyCall;
-import com.eduvanz.volley.VolleyCallNew;
+import com.eduvanz.newUI.VolleyCallNew;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.eduvanz.MainApplication.TAG;
 
 /**
  * A simple {@link Fragment} subclass.

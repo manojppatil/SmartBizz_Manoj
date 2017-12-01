@@ -18,12 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
-import com.eduvanz.pqformfragments.pojo.NameOfInsitituePOJO;
 import com.eduvanz.volley.VolleyCall;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 /**
  * A simple {@link Fragment} subclass.

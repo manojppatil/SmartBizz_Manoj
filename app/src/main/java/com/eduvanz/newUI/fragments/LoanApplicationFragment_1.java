@@ -30,7 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentCityPersonalPOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentCountryPersonalPOJO;
@@ -39,7 +39,7 @@ import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceTypePerson
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentStatePersonalPOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerEducationDegreePOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerProfessionFinancePOJO;
-import com.eduvanz.volley.VolleyCallNew;
+import com.eduvanz.newUI.VolleyCallNew;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -51,7 +51,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,7 +70,9 @@ public class LoanApplicationFragment_1 extends Fragment{
     public static EditText fname, lname, adhaarno, panno, monthlyrent, currentaddress, currentpincode, permanentaddress, permanentpincode;
     public static RadioButton radioButtonMarried, radioButtonSingle;
     public static Spinner spinnerPermanentCity, spinnerPermanentCountry, spinnerPermanentState;
+    public static ArrayList<String> permanentstate_arrayList, permanentcity_arrayList;
     public static ArrayAdapter arrayAdapter_permanentCity, arrayAdapter_permanentState, arrayAdapter_permanentCountry;
+    public static ArrayList<BorrowerCurrentCityPersonalPOJO> borrowerPermanentCityPersonalPOJOArrayList;
     public static Spinner spinnerCurrentResidenceType;
     public static ArrayAdapter arrayAdapter_currentResidencetype;
     public static ArrayList<String> currentResidencetype_arrayList;
@@ -82,7 +84,7 @@ public class LoanApplicationFragment_1 extends Fragment{
     public static Spinner spinnerCurrentState;
     public static ArrayAdapter arrayAdapter_currentState;
     public static ArrayList<String> currentstate_arrayList;
-    public static ArrayList<BorrowerCurrentStatePersonalPOJO> borrowerCurrentStatePersonalPOJOArrayList;
+    public static ArrayList<BorrowerCurrentStatePersonalPOJO> borrowerCurrentStatePersonalPOJOArrayList, borrowerPermanentStatePersonalPOJOArrayList;
     public static Spinner spinnerCurrentCountry;
     public static ArrayAdapter arrayAdapter_currentCountry;
     public static ArrayList<String> currentCountry_arrayList;
@@ -200,6 +202,9 @@ public class LoanApplicationFragment_1 extends Fragment{
                                     params.put("student_married", maritialstatus);
                                     params.put("student_pan_card_no", panno.getText().toString());
                                     params.put("student_aadhar_card_no", adhaarno.getText().toString());
+                                    params.put("student_current_address_duration", currentresidenceDurationID);
+
+//                                    Log.e(TAG, "------------------ "+currentcountryID +"   ,  "+ currentstateID + "   ,  "+ currentcityID+ "  ,    "+permanentCountryID +"   ,    "+ permanentstateID + "  ,     "+ permanentcityID  );
 
                                     /** EDUCATION**/
                                     String isCgpa = "";
@@ -259,6 +264,8 @@ public class LoanApplicationFragment_1 extends Fragment{
                                     MainApplication.borrowerValue26 = jobDurationID;
                                     MainApplication.borrowerValue27 = editTextAnualIncome.getText().toString();
                                     MainApplication.borrowerValue28 = editTextAdvancePayment.getText().toString();
+                                    MainApplication.borrowerValue29 = currentresidenceDurationID;
+
 
                                     VolleyCallNew volleyCall = new VolleyCallNew();
                                     volleyCall.sendRequest(context, url, null, mFragment, "sendborrowerDetails", params);
@@ -668,6 +675,7 @@ public class LoanApplicationFragment_1 extends Fragment{
                         MainApplication.borrowerValue4 = currentcityID = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
                     }
                 }
+
             }
 
             @Override
@@ -686,6 +694,7 @@ public class LoanApplicationFragment_1 extends Fragment{
                         MainApplication.borrowerValue5 = currentstateID = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
                     }
                 }
+                cityApiCall();
             }
 
             @Override
@@ -704,6 +713,7 @@ public class LoanApplicationFragment_1 extends Fragment{
                         MainApplication.borrowerValue6 = currentcountryID = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
                     }
                 }
+                stateApiCall();
             }
 
             @Override
@@ -716,10 +726,10 @@ public class LoanApplicationFragment_1 extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String text = spinnerPermanentCity.getSelectedItem().toString();
-                int count = borrowerCurrentCityPersonalPOJOArrayList.size();
+                int count = borrowerPermanentCityPersonalPOJOArrayList.size();
                 for (int i = 0; i < count; i++) {
-                    if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
-                        MainApplication.borrowerValue9 = permanentcityID = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
+                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
+                        MainApplication.borrowerValue9 = permanentcityID = borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID;
                     }
                 }
             }
@@ -734,12 +744,13 @@ public class LoanApplicationFragment_1 extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String text = spinnerPermanentState.getSelectedItem().toString();
-                int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+                int count = borrowerPermanentStatePersonalPOJOArrayList.size();
                 for (int i = 0; i < count; i++) {
-                    if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
-                        MainApplication.borrowerValue10 = permanentstateID = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
+                    if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
+                        MainApplication.borrowerValue10 = permanentstateID = borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID;
                     }
                 }
+                permanentCityApiCall();
             }
 
             @Override
@@ -758,6 +769,7 @@ public class LoanApplicationFragment_1 extends Fragment{
                         MainApplication.borrowerValue11 = permanentCountryID = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
                     }
                 }
+                permanentStateApiCall();
             }
 
             @Override
@@ -891,6 +903,60 @@ public class LoanApplicationFragment_1 extends Fragment{
         return view;
     }
 
+    private void cityApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getCities";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryID);
+            params.put("stateId", currentstateID);
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCity", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void stateApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getStates";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryID);
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStates", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void permanentCityApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getCities";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", permanentCountryID);
+            params.put("stateId", permanentstateID);
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, null, mFragment, "getPermanentCity", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void permanentStateApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getStates";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", permanentCountryID);
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, null, mFragment, "getPermanentStates", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setViews() {
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar_applylona_borrower);
@@ -989,42 +1055,6 @@ public class LoanApplicationFragment_1 extends Fragment{
                 spinnerCurrentResidenceDuration.setAdapter(arrayAdapter_currentResidenceDuration);
                 arrayAdapter_currentResidenceDuration.notifyDataSetChanged();
 
-                JSONArray jsonArray2 = jsonObject.getJSONArray("cities");
-                currentcity_arrayList = new ArrayList<>();
-                borrowerCurrentCityPersonalPOJOArrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray2.length(); i++) {
-                    BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
-                    JSONObject mJsonti = jsonArray2.getJSONObject(i);
-                    borrowerCurrentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
-                    currentcity_arrayList.add(mJsonti.getString("city_name"));
-                    borrowerCurrentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
-                    borrowerCurrentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
-                }
-                arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
-                spinnerCurrentCity.setAdapter(arrayAdapter_currentCity);
-                arrayAdapter_currentCity.notifyDataSetChanged();
-                arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
-                spinnerPermanentCity.setAdapter(arrayAdapter_permanentCity);
-                arrayAdapter_permanentCity.notifyDataSetChanged();
-
-                JSONArray jsonArray3 = jsonObject.getJSONArray("states");
-                currentstate_arrayList = new ArrayList<>();
-                borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray3.length(); i++) {
-                    BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
-                    JSONObject mJsonti = jsonArray3.getJSONObject(i);
-                    borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
-                    currentstate_arrayList.add(mJsonti.getString("state_name"));
-                    borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
-                    borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
-                }
-                arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                spinnerCurrentState.setAdapter(arrayAdapter_currentState);
-                arrayAdapter_currentState.notifyDataSetChanged();
-                arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                spinnerPermanentState.setAdapter(arrayAdapter_permanentState);
-                arrayAdapter_permanentState.notifyDataSetChanged();
-
                 JSONArray jsonArray4 = jsonObject.getJSONArray("country");
                 currentCountry_arrayList = new ArrayList<>();
                 borrowerCurrentCountryPersonalPOJOArrayList = new ArrayList<>();
@@ -1042,6 +1072,67 @@ public class LoanApplicationFragment_1 extends Fragment{
                 arrayAdapter_permanentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayList);
                 spinnerPermanentCountry.setAdapter(arrayAdapter_permanentCountry);
                 arrayAdapter_permanentCountry.notifyDataSetChanged();
+
+//                JSONArray jsonArray2 = jsonObject.getJSONArray("currentCities");
+//                currentcity_arrayList = new ArrayList<>();
+//                borrowerCurrentCityPersonalPOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray2.length(); i++) {
+//                    BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
+//                    JSONObject mJsonti = jsonArray2.getJSONObject(i);
+//                    borrowerCurrentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
+//                    currentcity_arrayList.add(mJsonti.getString("city_name"));
+//                    borrowerCurrentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
+//                    borrowerCurrentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
+//                }
+//                arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
+//                spinnerCurrentCity.setAdapter(arrayAdapter_currentCity);
+//                arrayAdapter_currentCity.notifyDataSetChanged();
+//
+//
+//                JSONArray jsonArray9 = jsonObject.getJSONArray("permanentCities");
+//                permanentcity_arrayList = new ArrayList<>();
+//                borrowerPermanentCityPersonalPOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray9.length(); i++) {
+//                    BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
+//                    JSONObject mJsonti = jsonArray9.getJSONObject(i);
+//                    borrowerCurrentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
+//                    permanentcity_arrayList.add(mJsonti.getString("city_name"));
+//                    borrowerCurrentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
+//                    borrowerPermanentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
+//                }
+//                arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayList);
+//                spinnerPermanentCity.setAdapter(arrayAdapter_permanentCity);
+//                arrayAdapter_permanentCity.notifyDataSetChanged();
+//
+//                JSONArray jsonArray3 = jsonObject.getJSONArray("currentStates");
+//                currentstate_arrayList = new ArrayList<>();
+//                borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray3.length(); i++) {
+//                    BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
+//                    JSONObject mJsonti = jsonArray3.getJSONObject(i);
+//                    borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+//                    currentstate_arrayList.add(mJsonti.getString("state_name"));
+//                    borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+//                    borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
+//                }
+//                arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
+//                spinnerCurrentState.setAdapter(arrayAdapter_currentState);
+//                arrayAdapter_currentState.notifyDataSetChanged();
+//
+//                JSONArray jsonArray10 = jsonObject.getJSONArray("permanentStates");
+//                permanentstate_arrayList = new ArrayList<>();
+//                borrowerPermanentStatePersonalPOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray10.length(); i++) {
+//                    BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
+//                    JSONObject mJsonti = jsonArray10.getJSONObject(i);
+//                    borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+//                    permanentstate_arrayList.add(mJsonti.getString("state_name"));
+//                    borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+//                    borrowerPermanentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
+//                }
+//                arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentstate_arrayList);
+//                spinnerPermanentState.setAdapter(arrayAdapter_permanentState);
+//                arrayAdapter_permanentState.notifyDataSetChanged();
 
                 JSONObject jsonObject1 = jsonObject.getJSONObject("personalDetails");
                 String monthlyRent = jsonObject1.getString("student_monthly_rent");
@@ -1065,6 +1156,9 @@ public class LoanApplicationFragment_1 extends Fragment{
                 permanentCountryID = jsonObject1.getString("student_permanent_country");
                 currentresidenceDurationID = jsonObject1.getString("student_current_address_duration");
 
+//                Log.e(TAG, "++++++++++ "+currentcountryID +"  ,"+ currentstateID + "  ,"+ currentcityID+ "  ,"+permanentCountryID +"  ,"+ permanentstateID + " , "+ permanentcityID  );
+
+
                 if (currentResidencetypeID.equals("")) {
                     monthlyrent.setVisibility(View.GONE);
                     spinnerCurrentResidenceType.setSelection(0);
@@ -1075,35 +1169,48 @@ public class LoanApplicationFragment_1 extends Fragment{
                     monthlyrent.setVisibility(View.GONE);
                     spinnerCurrentResidenceType.setSelection(Integer.parseInt(currentResidencetypeID));
                 }
-                if (currentcityID.equals("")) {
-                    spinnerCurrentCity.setSelection(0);
-                } else {
-                    spinnerCurrentCity.setSelection(Integer.parseInt(currentcityID));
-                }
-                if (currentstateID.equals("")) {
-                    spinnerCurrentState.setSelection(0);
-                } else {
-                    spinnerCurrentState.setSelection(Integer.parseInt(currentstateID));
-                }
+//                if (currentcityID.equals("")) {
+//                    spinnerCurrentCity.setSelection(0);
+//                } else {
+//                    spinnerCurrentCity.setSelection(Integer.parseInt(currentcityID));
+//                }
+//                if (currentstateID.equals("")) {
+//                    spinnerCurrentState.setSelection(0);
+//                } else {
+//                    Log.e(TAG, "currentstateID+++++: "+ currentstateID);
+//                    spinnerCurrentState.setSelection(Integer.parseInt(currentstateID));
+//                }
                 if (currentcountryID.equals("")) {
                     spinnerCurrentCountry.setSelection(0);
                 } else {
                     spinnerCurrentCountry.setSelection(Integer.parseInt(currentcountryID));
                 }
-                if (permanentcityID.equals("")) {
-                    spinnerPermanentCity.setSelection(0);
-                } else {
-                    spinnerPermanentCity.setSelection(Integer.parseInt(permanentcityID));
-                }
-                if (permanentstateID.equals("")) {
-                    spinnerPermanentState.setSelection(0);
-                } else {
-                    spinnerPermanentState.setSelection(Integer.parseInt(permanentstateID));
-                }
+//                if (permanentcityID.equals("")) {
+//                    spinnerPermanentCity.setSelection(0);
+//                } else {
+//                    spinnerPermanentCity.setSelection(Integer.parseInt(permanentcityID));
+//                }
+//                if (permanentstateID.equals("")) {
+//                    spinnerPermanentState.setSelection(0);
+//                } else {
+//                    spinnerPermanentState.setSelection(Integer.parseInt(permanentstateID));
+//                }
                 if (permanentCountryID.equals("")) {
                     spinnerPermanentCountry.setSelection(0);
                 } else {
                     spinnerPermanentCountry.setSelection(Integer.parseInt(permanentCountryID));
+                }
+                if (currentresidenceDurationID.equals("")) {
+                    Log.e(TAG, "888888888: "+ currentresidenceDurationID);
+                    spinnerCurrentResidenceDuration.setSelection(0);
+                } else {
+                    Log.e(TAG, "888888888: "+ currentresidenceDurationID);
+                    int count = currentResidenceDurationPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (currentResidenceDurationPersonalPOJOArrayList.get(i).durationID.equalsIgnoreCase(currentresidenceDurationID)) {
+                            spinnerCurrentResidenceDuration.setSelection(i);
+                        }
+                    }
                 }
 
                 fname.setText(firstname);
@@ -1239,6 +1346,7 @@ public class LoanApplicationFragment_1 extends Fragment{
                 MainApplication.borrowerValue26 = jobDurationID;
                 MainApplication.borrowerValue27 = editTextAnualIncome.getText().toString();
                 MainApplication.borrowerValue28 = editTextAdvancePayment.getText().toString();
+                MainApplication.borrowerValue29 = currentresidenceDurationID;
 
                 progressBar.setVisibility(View.GONE);
             } else {
@@ -1249,7 +1357,6 @@ public class LoanApplicationFragment_1 extends Fragment{
             e.printStackTrace();
         }
     }
-
 
     public void sendBorrowerDetails(JSONObject jsonData) {
         try {
@@ -1272,6 +1379,159 @@ public class LoanApplicationFragment_1 extends Fragment{
             } else {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void getCurrentStates(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "sendBorrowerDetails" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                JSONArray jsonArray3 = jsonObject.getJSONArray("states");
+                currentstate_arrayList = new ArrayList<>();
+                borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
+                for (int i = 0; i < jsonArray3.length(); i++) {
+                    BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
+                    JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                    borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+                    currentstate_arrayList.add(mJsonti.getString("state_name"));
+                    borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+                    borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
+                }
+                arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
+                spinnerCurrentState.setAdapter(arrayAdapter_currentState);
+                arrayAdapter_currentState.notifyDataSetChanged();
+
+                spinnerCurrentState.setSelection(Integer.parseInt(currentstateID));
+
+            } else {
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void getCurrentCities(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "sendBorrowerDetails" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                JSONArray jsonArray2 = jsonObject.getJSONArray("cities");
+                currentcity_arrayList = new ArrayList<>();
+                borrowerCurrentCityPersonalPOJOArrayList = new ArrayList<>();
+                for (int i = 0; i < jsonArray2.length(); i++) {
+                    BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
+                    JSONObject mJsonti = jsonArray2.getJSONObject(i);
+                    borrowerCurrentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
+                    currentcity_arrayList.add(mJsonti.getString("city_name"));
+                    borrowerCurrentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
+                    borrowerCurrentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
+                }
+                arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
+                spinnerCurrentCity.setAdapter(arrayAdapter_currentCity);
+                arrayAdapter_currentCity.notifyDataSetChanged();
+
+                Log.e(TAG, "6666666666: "+ currentcityID);
+
+                int count = borrowerCurrentCityPersonalPOJOArrayList.size();
+                Log.e("TAG", "count: " + count);
+                for (int i = 0; i < count; i++) {
+                    if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                        spinnerCurrentCity.setSelection(i);
+                    }
+                }
+
+            } else {
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void getPermanentStates(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "sendBorrowerDetails" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                JSONArray jsonArray3 = jsonObject.getJSONArray("states");
+                permanentstate_arrayList = new ArrayList<>();
+                borrowerPermanentStatePersonalPOJOArrayList = new ArrayList<>();
+                for (int i = 0; i < jsonArray3.length(); i++) {
+                    BorrowerCurrentStatePersonalPOJO borrowerpermanentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
+                    JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                    borrowerpermanentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+                    permanentstate_arrayList.add(mJsonti.getString("state_name"));
+                    borrowerpermanentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+                    borrowerPermanentStatePersonalPOJOArrayList.add(borrowerpermanentStatePersonalPOJO);
+                }
+                arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentstate_arrayList);
+                spinnerPermanentState.setAdapter(arrayAdapter_permanentState);
+                arrayAdapter_permanentState.notifyDataSetChanged();
+
+                spinnerPermanentState.setSelection(Integer.parseInt(permanentstateID));
+
+                int count = borrowerPermanentStatePersonalPOJOArrayList.size();
+                Log.e("TAG", "count: " + count);
+                for (int i = 0; i < count; i++) {
+                    if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(permanentstateID)) {
+                        spinnerPermanentState.setSelection(i);
+                    }
+                }
+            } else {
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void getPermanentCities(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "sendBorrowerDetails" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                JSONArray jsonArray2 = jsonObject.getJSONArray("cities");
+                permanentcity_arrayList = new ArrayList<>();
+                borrowerPermanentCityPersonalPOJOArrayList = new ArrayList<>();
+                for (int i = 0; i < jsonArray2.length(); i++) {
+                    BorrowerCurrentCityPersonalPOJO borrowerpermanentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
+                    JSONObject mJsonti = jsonArray2.getJSONObject(i);
+                    borrowerpermanentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
+                    permanentcity_arrayList.add(mJsonti.getString("city_name"));
+                    borrowerpermanentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
+                    borrowerPermanentCityPersonalPOJOArrayList.add(borrowerpermanentCityPersonalPOJO);
+                }
+                arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayList);
+                spinnerPermanentCity.setAdapter(arrayAdapter_permanentCity);
+                arrayAdapter_permanentCity.notifyDataSetChanged();
+
+
+                int count = borrowerPermanentCityPersonalPOJOArrayList.size();
+                Log.e("TAG", "count: " + count);
+                for (int i = 0; i < count; i++) {
+                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(permanentcityID)) {
+                        spinnerPermanentCity.setSelection(i);
+                    }
+                }
+            } else {
             }
         } catch (Exception e) {
 

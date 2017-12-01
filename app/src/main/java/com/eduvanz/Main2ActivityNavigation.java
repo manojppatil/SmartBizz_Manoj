@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -15,8 +14,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,7 +26,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +33,10 @@ import com.eduvanz.faqexpandablelistview.FAQ;
 import com.eduvanz.fqform.borrowerdetail.FqFormBorrower;
 import com.eduvanz.fqform.coborrowerdetail.FqFormCoborrower;
 import com.eduvanz.friendlyscore.StartActivityFS;
+import com.eduvanz.newUI.MainApplication;
+import com.eduvanz.newUI.SharedPref;
+import com.eduvanz.newUI.webviews.WebViewAboutUs;
+import com.eduvanz.newUI.webviews.WebViewTermsNCondition;
 import com.eduvanz.pqformfragments.PqFormFragment1;
 import com.eduvanz.uploaddocs.UploadActivityBorrower;
 import com.eduvanz.uploaddocs.UploadActivityCoBorrower;
@@ -54,7 +54,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 /**
  * GET ALL CONTACTS https://stackoverflow.com/questions/12562151/android-get-all-contacts

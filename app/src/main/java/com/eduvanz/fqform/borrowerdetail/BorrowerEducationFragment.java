@@ -19,10 +19,9 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerEducationDegreePOJO;
-import com.eduvanz.pqformfragments.pojo.NameOfCoursePOJO;
 import com.eduvanz.volley.VolleyCall;
 
 import org.json.JSONArray;

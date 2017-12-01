@@ -24,6 +24,8 @@ import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.eduvanz.newUI.MainApplication;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +45,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 /**
  * Created by projetctheena on 19/9/17.

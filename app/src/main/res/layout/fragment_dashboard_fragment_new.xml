@@ -49,7 +49,7 @@
                     android:layout_height="0.5dp"
                     android:background="@color/grey" />
 
-
+                /** CHECK ELIGIBLITY**/
                 <LinearLayout
                     android:id="@+id/linearLayout_eligiblitycheck"
                     android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -81,7 +81,7 @@
                             android:text="Check Eligibility now!"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="@color/colorPrimary"/>
+                            android:textColor="@color/colorSecondary"/>
 
                         <Button
                             android:id="@+id/button_dashboard_checkeligiblity"
@@ -95,14 +95,74 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_weight="2"
+                        android:layout_weight="2.5"
                         android:padding="10dp"
                         android:src="@drawable/eduson_eligibility_check" />
 
                 </LinearLayout>
 
+                /** PROFILE IS INCOMPLETE**/
+                <LinearLayout
+                    android:id="@+id/linearLayout_profileincomplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewdash_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Your profile is incomplete"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:id="@+id/textViewdash_15"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Complete now!"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorSecondary"/>
+
+                        <Button
+                            android:id="@+id/button_dashboard_profileincomplete"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/colorPrimary"
+                            android:text="Continue"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_weight="2.5"
+                        android:padding="10dp"
+                        android:src="@drawable/incomplete_application"  />
+
+                </LinearLayout>
+
+
+                /** LOAN APPLICATION IS INCOMPLETE**/
                 <LinearLayout
                     android:id="@+id/linearLayout_continue_application"
                     android:layout_width="match_parent"
@@ -115,7 +175,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -123,7 +183,7 @@
                             android:id="@+id/textViewdash_12"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Want financial assistance?"
+                            android:text="Your loan application is incomplete"
                             android:textSize="14sp"
                             android:textColor="@color/colorPrimary"/>
 
@@ -131,10 +191,10 @@
                             android:id="@+id/textViewdash_13"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Check Eligibility now!"
+                            android:text="Complete now!"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="@color/colorPrimary"/>
+                            android:textColor="@color/colorSecondary"/>
 
                         <Button
                             android:id="@+id/button_dashboard_continueapplication"
@@ -148,9 +208,11 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_weight="2"
+                        android:layout_weight="2.5"
                         android:padding="10dp"
                         android:src="@drawable/incomplete_application" />
 
@@ -166,16 +228,18 @@
                     android:visibility="gone">
 
                     <ImageView
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
                         android:layout_width="match_parent"
-                        android:layout_height="90dp"
-                        android:layout_weight="2"
+                        android:layout_height="80dp"
+                        android:layout_weight="2.5"
                         android:padding="10dp"
                         android:src="@drawable/thank_you" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -288,6 +352,7 @@
                         android:background="@color/grey" />
 
                     <LinearLayout
+                        android:id="@+id/linearLayout_dashboard_aboutus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
@@ -319,6 +384,7 @@
                     android:background="@color/grey" />
 
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -446,6 +512,7 @@
 
 
             <LinearLayout
+                android:id="@+id/linearLayout_mailUs"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"

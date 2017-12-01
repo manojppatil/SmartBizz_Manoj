@@ -57,7 +57,7 @@
                     android:id="@+id/input_annualincome_coborrower"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapSentences"
+                    android:inputType="number"
                     android:hint="Annual Income"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>

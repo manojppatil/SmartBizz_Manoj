@@ -30,11 +30,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.uploaddocs.PathFile;
 import com.eduvanz.uploaddocs.Utility;
-import com.eduvanz.volley.VolleyCallNew;
+import com.eduvanz.newUI.VolleyCallNew;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -86,9 +86,11 @@ public class LoanApplicationFragment_3 extends Fragment {
     static Button buttonKycProfilePhoto_co, buttonKycPhotoId_co, buttonKycAddressProof_co, buttonKycSignatureProof_co,
             buttonFinanceIncomeProof_co, buttonFinanceBankStatement_co, buttonOtherDocument_co;
     static ProgressBar progressBar;
-    public String coBorrowerID = "";
+    public static String coBorrowerID = "";
     public Boolean kyc = true, financial = true, education = true, other = true;
     public String documentType = "", documentTypeNo = "", userID = "";
+    static int doc_finish, signedAppStatus;
+    static String lafDownloadPath = "";
     public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
     public String userChoosenTask;
     Button buttonNext, buttonPrevious;
@@ -96,7 +98,8 @@ public class LoanApplicationFragment_3 extends Fragment {
     LinearLayout linearLayoutBorrower, linearLayoutCoBorrower;
     RelativeLayout relativeLayoutBorrower, relativeLayoutCoBorrower;
     int borrowerVisiblity = 0, coborrowerVisiblity = 0;
-    ImageView imageViewKycProfilePhoto_co, imageViewKycPhotoId_co, imageViewKycAddressProof_co, imageViewKycSignatureProof_co,
+    static FragmentTransaction transaction;
+    static ImageView imageViewKycProfilePhoto_co, imageViewKycPhotoId_co, imageViewKycAddressProof_co, imageViewKycSignatureProof_co,
             imageViewFinanceIncomeProof_co, imageViewFinanceBankStatement_co, imageViewOtherDocument_co;
     String uploadFilePath = "";
 
@@ -121,11 +124,13 @@ public class LoanApplicationFragment_3 extends Fragment {
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
         userID = sharedPreferences.getString("logged_id", "null");
 
+        MainApplication.currrentFrag = 3;
+
         typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
         typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
         typeface = Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
 
-        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction = getFragmentManager().beginTransaction();
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar_docupload);
 
@@ -175,8 +180,19 @@ public class LoanApplicationFragment_3 extends Fragment {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoanApplicationFragment_4 loanApplicationFragment_4 = new LoanApplicationFragment_4();
-                transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_4).commit();
+                /** API CALL **/
+                try {
+                    String url = MainApplication.mainUrl + "laf/getStudentLaf";
+                    Map<String, String> params = new HashMap<String, String>();
+                    VolleyCallNew volleyCall = new VolleyCallNew();
+                    params.put("studentId", userID);
+                    volleyCall.sendRequest(context, url, null, mFragment, "getStudentLaf", params);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                /**API CALL*/
+
             }
         });
 
@@ -993,7 +1009,7 @@ public class LoanApplicationFragment_3 extends Fragment {
     public int uploadFile(final String selectedFilePath, String doctype, String doctypeno, int selectUrl) {
         String urlup="";
 
-        Log.e(MainApplication.TAG, "uploadFile++++++: "+selectUrl + "  "+ doctype + "   "+ doctypeno + "  "+selectedFilePath  );
+        Log.e(MainApplication.TAG, "uploadFile++++++: selectUrl"+selectUrl + "doctype  "+ doctype + "  doctypeno "+ doctypeno + " selectedFilePath "+selectedFilePath + " coBorrowerID   " + coBorrowerID);
         if(selectUrl == 0){
              urlup = MainApplication.mainUrl + "document/applicantDocumentUpload";
         }else if(selectUrl == 1){
@@ -1152,6 +1168,8 @@ public class LoanApplicationFragment_3 extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
+
                                 progressBar.setVisibility(View.GONE);
                                 Log.e("TAG", "uploadFile: code 1 " + mData);
                                 Toast.makeText(context, mData1, Toast.LENGTH_SHORT).show();
@@ -1265,6 +1283,11 @@ public class LoanApplicationFragment_3 extends Fragment {
 
     }
 
+
+    /**
+     * ---------------------------------RESPONSE OF API CALL-------------------------------------
+     **/
+
     public void getBorrowerDocuments(JSONObject jsonData) {
         try {
             Log.e("SERVER CALL", "getDocuments" + jsonData);
@@ -1272,7 +1295,7 @@ public class LoanApplicationFragment_3 extends Fragment {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
                 JSONObject jsonObject = jsonData.getJSONObject("result");
 
                 JSONArray jsonArray = jsonObject.getJSONArray("KycDocument");
@@ -1368,10 +1391,6 @@ public class LoanApplicationFragment_3 extends Fragment {
         }
     }
 
-    /**
-     * ---------------------------------RESPONSE OF API CALL-------------------------------------
-     **/
-
     public void getCoBorrowerDocuments(JSONObject jsonData) {
         try {
             Log.e("SERVER CALL", "getCoBorrowerDocuments" + jsonData);
@@ -1379,7 +1398,6 @@ public class LoanApplicationFragment_3 extends Fragment {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 JSONObject jsonObject = jsonData.getJSONObject("result");
                 coBorrowerID = jsonObject.getString("coBorrowerId");
                 Log.e(MainApplication.TAG, "coBorrowerID: " + coBorrowerID);
@@ -1455,6 +1473,43 @@ public class LoanApplicationFragment_3 extends Fragment {
 //                JSONObject jsonObject = jsonData.getJSONObject("result");
 //                coBorrowerID = jsonObject.getString("coBorrowerId");
 //                Log.e(MainApplication.TAG, "coBorrowerID: "+coBorrowerID );
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getStudentLaf(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "getStudentLaf" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                doc_finish = jsonObject.getInt("docFinish");
+                lafDownloadPath = jsonObject.getString("lafDownloadPath");
+                signedAppStatus = jsonObject.getInt("signedApplicationStatus");
+
+                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("laf_download_url", lafDownloadPath);
+                editor.putString("signed_application_url", jsonObject.getString("docPath"));
+                editor.putString("signed_appstatus", String.valueOf(signedAppStatus));
+                editor.apply();
+                editor.commit();
+
+                if(doc_finish == 1){
+                    LoanApplicationFragment_4 loanApplicationFragment_4 = new LoanApplicationFragment_4();
+                    transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_4).commit();
+                }else {
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                }
+
+
+            } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {

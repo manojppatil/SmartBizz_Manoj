@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_1;
 
@@ -53,56 +53,109 @@ public class LoanApplication extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==android.R.id.home){
             Log.e(MainApplication.TAG, "onBackPressed: "+ MainApplication.currrentFrag );
-            finish();
+            if(MainApplication.currrentFrag == 1 || MainApplication.currrentFrag == 2) {
+                Log.e(MainApplication.TAG, "onBackPressed: "+ MainApplication.currrentFrag );
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+// ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.savedialog, null);
+                dialogBuilder.setView(dialogView);
+                Button buttonNo = (Button) dialogView.findViewById(R.id.button_dialog_no);
+                Button buttonSave = (Button) dialogView.findViewById(R.id.button_dialog_save);
+                final AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+                buttonNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                buttonSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if(!MainApplication.borrowerValue13.equals("") &&
+                                !MainApplication.borrowerValue14.equals("") &&
+                                !MainApplication.borrowerValue15.equals("") &&
+                                !MainApplication.borrowerValue18.equals("")
+                                ||
+                                !MainApplication.coborrowerValue14.equals("") &&
+                                        !MainApplication.coborrowerValue15.equals("") &&
+                                        !MainApplication.coborrowerValue18.equals("") &&
+                                        !MainApplication.coborrowerValue13.equals(""))
+                        {
+                            if(MainApplication.currrentFrag == 1){
+                                MainApplication.apiCallBorrower(context, mActivity, userID);
+                            }else if(MainApplication.currrentFrag == 2) {
+                                MainApplication.apiCallCoBorrower(context, mActivity, userID);
+                            }
+
+
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }else {
+                finish();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void onBackPressed() {
 
-        Log.e(MainApplication.TAG, "onBackPressed: "+ MainApplication.currrentFrag );
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        if(MainApplication.currrentFrag == 1 || MainApplication.currrentFrag == 2) {
+            Log.e(MainApplication.TAG, "onBackPressed: "+ MainApplication.currrentFrag );
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 // ...Irrelevant code for customizing the buttons and title
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.savedialog, null);
-        dialogBuilder.setView(dialogView);
-        Button buttonNo = (Button) dialogView.findViewById(R.id.button_dialog_no);
-        Button buttonSave = (Button) dialogView.findViewById(R.id.button_dialog_save);
-        final AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        alertDialog.show();
-        buttonNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!MainApplication.borrowerValue13.equals("") &&
-                        !MainApplication.borrowerValue14.equals("") &&
-                        !MainApplication.borrowerValue15.equals("") &&
-                        !MainApplication.borrowerValue18.equals("")
-                                            ||
-                        !MainApplication.coborrowerValue14.equals("") &&
-                                !MainApplication.coborrowerValue15.equals("") &&
-                                !MainApplication.coborrowerValue18.equals("") &&
-                                !MainApplication.coborrowerValue13.equals(""))
-                {
-                    if(MainApplication.currrentFrag == 1){
-                        MainApplication.apiCallBorrower(context, mActivity, userID);
-                    }else if(MainApplication.currrentFrag == 2) {
-                        MainApplication.apiCallCoBorrower(context, mActivity, userID);
-                    }
-
-
-                }else {
-                    Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname. dob and Aadhaar No.", Toast.LENGTH_LONG).show();
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.savedialog, null);
+            dialogBuilder.setView(dialogView);
+            Button buttonNo = (Button) dialogView.findViewById(R.id.button_dialog_no);
+            Button buttonSave = (Button) dialogView.findViewById(R.id.button_dialog_save);
+            final AlertDialog alertDialog = dialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            alertDialog.show();
+            buttonNo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
                 }
-            }
-        });
+            });
+
+            buttonSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(!MainApplication.borrowerValue13.equals("") &&
+                            !MainApplication.borrowerValue14.equals("") &&
+                            !MainApplication.borrowerValue15.equals("") &&
+                            !MainApplication.borrowerValue18.equals("")
+                            ||
+                            !MainApplication.coborrowerValue14.equals("") &&
+                                    !MainApplication.coborrowerValue15.equals("") &&
+                                    !MainApplication.coborrowerValue18.equals("") &&
+                                    !MainApplication.coborrowerValue13.equals(""))
+                    {
+                        if(MainApplication.currrentFrag == 1){
+                            MainApplication.apiCallBorrower(context, mActivity, userID);
+                        }else if(MainApplication.currrentFrag == 2) {
+                            MainApplication.apiCallCoBorrower(context, mActivity, userID);
+                        }
+
+
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }else {
+            finish();
+        }
+
     }
 
 

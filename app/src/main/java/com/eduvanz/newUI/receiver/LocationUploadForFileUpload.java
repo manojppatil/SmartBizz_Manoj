@@ -6,16 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.eduvanz.MainApplication;
-import com.eduvanz.newUI.newViews.DashboardActivity;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.newUI.services.LocationService;
-import com.eduvanz.newUI.services.MyServiceCallStats;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 /**
  * Created by Darsh on 05-09-17.

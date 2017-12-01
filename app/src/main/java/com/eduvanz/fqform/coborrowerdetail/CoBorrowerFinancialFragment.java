@@ -16,19 +16,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.fqform.coborrowerdetail.pojo.CoborrowerJobDurationFinancePOJO;
 import com.eduvanz.fqform.coborrowerdetail.pojo.CoborrowerProfessionFinancePOJO;
 import com.eduvanz.volley.VolleyCall;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

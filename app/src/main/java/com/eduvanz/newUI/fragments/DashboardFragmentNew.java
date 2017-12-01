@@ -3,9 +3,11 @@ package com.eduvanz.newUI.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,24 +15,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.SharedPref;
+import com.eduvanz.newUI.SharedPref;
+import com.eduvanz.newUI.newViews.SignUp;
+import com.eduvanz.newUI.webviews.WebViewAboutUs;
+import com.eduvanz.newUI.webviews.WebViewFAQs;
 import com.eduvanz.newUI.adapter.ViewPagerAdapterDashboard;
 import com.eduvanz.newUI.newViews.BannerActivity;
 import com.eduvanz.newUI.newViews.ContactUs;
 import com.eduvanz.newUI.newViews.EligibilityCheck;
-import com.eduvanz.newUI.newViews.Faq;
 import com.eduvanz.newUI.newViews.HowItWorks;
 import com.eduvanz.newUI.newViews.LoanApplication;
 import com.eduvanz.newUI.newViews.MyProfileNew;
 import com.eduvanz.newUI.newViews.Notification;
 import com.eduvanz.newUI.pojo.ViewPagerDashboardPOJO;
-import com.eduvanz.volley.VolleyCallNew;
+import com.eduvanz.newUI.VolleyCallNew;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
@@ -38,6 +41,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DashboardFragmentNew extends Fragment {
@@ -46,20 +50,21 @@ public class DashboardFragmentNew extends Fragment {
     public static Fragment mFragment;
     static ViewPager viewPagerDashboard;
     static ViewPagerAdapterDashboard viewPagerAdapterDashboard;
+    static TextView textViewDealTitle;
+    static String dealID = "";
     CirclePageIndicator circlePageIndicatorDashboard;
     ArrayList<ViewPagerDashboardPOJO> viewPagerDashboardPOJOArrayList;
-    Button buttonCheckeligiblity, buttonApplyNow;
+    Button buttonCheckeligiblity, buttonApplyNow, buttonContinueLoanApplication, buttonContinueProfile;
     LinearLayout linearLayoutMyProfile, linearLayoutCallUs, linearLayoutFaq, linearLayoutContactus,
-                 linearLayoutHowItWorks, linearLayoutDeal, linearLayoutEligiblityChekck,
-                 linearLayoutApplyNow, linearLayoutContinueApplication;
-    static TextView textViewDealTitle;
+            linearLayoutHowItWorks, linearLayoutDeal, linearLayoutEligiblityChekck,
+            linearLayoutApplyNow, linearLayoutContinueApplication, linearLayoutMailUs, linearLayoutContinueProfile, linearLayoutAboutUs;
     MainApplication mainApplication;
     TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView8,
-            textView9, textView10, textView11, textView12, textView13, textViewCongrats;
-    static String dealID="";
+            textView9, textView10, textView11, textView12, textView13, textView14, textView15, textViewCongrats;
     SharedPref sharedPref;
-    String userName="";
+
     LinearLayout notification_linearLayout;
+    String userName = "";
 
 
     public DashboardFragmentNew() {
@@ -79,7 +84,7 @@ public class DashboardFragmentNew extends Fragment {
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
             userName = sharedPreferences.getString("first_name", "User");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -110,6 +115,10 @@ public class DashboardFragmentNew extends Fragment {
         textView13 = (TextView) view.findViewById(R.id.textViewdash_13);
 
         mainApplication.applyTypeface(textView13, context);
+        textView14 = (TextView) view.findViewById(R.id.textViewdash_14);
+        mainApplication.applyTypeface(textView13, context);
+        textView15 = (TextView) view.findViewById(R.id.textViewdash_15);
+        mainApplication.applyTypefaceBold(textView13, context);
 
         textViewCongrats = (TextView) view.findViewById(R.id.textView_congratsmessage);
         mainApplication.applyTypeface(textViewCongrats, context);
@@ -148,11 +157,14 @@ public class DashboardFragmentNew extends Fragment {
         linearLayoutEligiblityChekck = (LinearLayout) view.findViewById(R.id.linearLayout_eligiblitycheck);
         linearLayoutApplyNow = (LinearLayout) view.findViewById(R.id.linearLayout_applyloan);
         linearLayoutContinueApplication = (LinearLayout) view.findViewById(R.id.linearLayout_continue_application);
+        linearLayoutContinueProfile = (LinearLayout) view.findViewById(R.id.linearLayout_profileincomplete);
 
-        if(sharedPref.getLoginDone(context)) {
+        if (sharedPref.getLoginDone(context)) {
             linearLayoutApplyNow.setVisibility(View.VISIBLE);
             linearLayoutEligiblityChekck.setVisibility(View.GONE);
-            textViewCongrats.setText("Congrats "+userName+" you are now eligible for getting loan");
+            textViewCongrats.setText("Congrats " + userName + " you are now eligible for getting loan");
+        }else {
+
         }
 
 
@@ -160,8 +172,16 @@ public class DashboardFragmentNew extends Fragment {
         linearLayoutMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MyProfileNew.class);
-                startActivity(intent);
+
+                if (sharedPref.getLoginDone(context)) {
+                    Intent intent = new Intent(context, MyProfileNew.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, SignUp.class);
+                    startActivity(intent);
+                }
+
+
             }
         });
 
@@ -178,12 +198,21 @@ public class DashboardFragmentNew extends Fragment {
         linearLayoutFaq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Faq.class);
+                Intent intent = new Intent(context, WebViewFAQs.class);
                 startActivity(intent);
             }
         });
 
-        linearLayoutHowItWorks= (LinearLayout) view.findViewById(R.id.linearLayout_dashboard_howitworks);
+        linearLayoutAboutUs = (LinearLayout) view.findViewById(R.id.linearLayout_dashboard_aboutus);
+        linearLayoutAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebViewAboutUs.class);
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutHowItWorks = (LinearLayout) view.findViewById(R.id.linearLayout_dashboard_howitworks);
         linearLayoutHowItWorks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,6 +225,29 @@ public class DashboardFragmentNew extends Fragment {
         linearLayoutCallUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:0224523689"));
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutMailUs = (LinearLayout) view.findViewById(R.id.linearLayout_mailUs);
+        linearLayoutMailUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//               /* Create the Intent */
+//                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//
+//                /* Fill it with Data */
+//                emailIntent.setType("plain/text");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"support@eduvanz.com"});
+////                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
+////                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text");
+//
+//                /* Send it off to the Activity-Chooser */
+//                context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
+                shareToGMail(new String[]{"support@eduvanz.com"}, "", "");
             }
         });
 
@@ -224,6 +276,27 @@ public class DashboardFragmentNew extends Fragment {
             }
         });
 
+        buttonContinueLoanApplication = (Button) view.findViewById(R.id.button_dashboard_continueapplication);
+        mainApplication.applyTypeface(buttonContinueLoanApplication, context);
+        buttonContinueLoanApplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, LoanApplication.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonContinueProfile = (Button) view.findViewById(R.id.button_dashboard_profileincomplete);
+        mainApplication.applyTypeface(buttonContinueProfile, context);
+        buttonContinueProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MyProfileNew.class);
+                startActivity(intent);
+            }
+        });
+
+
         /** API CALL GET DASHBOARD BANNER**/
         try {
             String url = MainApplication.mainUrl + "mobileadverstisement/getBanner";
@@ -249,7 +322,7 @@ public class DashboardFragmentNew extends Fragment {
 
     public void setDashboardImages(JSONObject jsonData) {
         try {
-            Log.e(MainApplication.TAG, "setDashboardImages: "+jsonData );
+            Log.e(MainApplication.TAG, "setDashboardImages: " + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
@@ -260,7 +333,7 @@ public class DashboardFragmentNew extends Fragment {
                 JSONArray jsonArray = jsonObject.getJSONArray("banner");
 
                 viewPagerDashboardPOJOArrayList = new ArrayList<>();
-                for(int i=0; i<jsonArray.length(); i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                     ViewPagerDashboardPOJO viewPagerDashboardPOJO = new ViewPagerDashboardPOJO();
                     viewPagerDashboardPOJO.id = jsonObject1.getString("id");
@@ -271,7 +344,7 @@ public class DashboardFragmentNew extends Fragment {
                 viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, viewPagerDashboardPOJOArrayList);
                 viewPagerDashboard.setAdapter(viewPagerAdapterDashboard);
 
-            }else {
+            } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -281,7 +354,7 @@ public class DashboardFragmentNew extends Fragment {
 
     public void getDeal(JSONObject jsonData) {
         try {
-            Log.e(MainApplication.TAG, "getDeal: "+jsonData );
+            Log.e(MainApplication.TAG, "getDeal: " + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
@@ -296,12 +369,29 @@ public class DashboardFragmentNew extends Fragment {
                 textViewDealTitle.setText(jsonObject1.getString("title"));
 
                 dealID = jsonObject1.getString("id");
-            }else {
+            } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void shareToGMail(String[] email, String subject, String content) {
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, content);
+        final PackageManager pm = context.getPackageManager();
+        final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
+        ResolveInfo best = null;
+        for(final ResolveInfo info : matches)
+            if (info.activityInfo.packageName.endsWith(".gm") || info.activityInfo.name.toLowerCase().contains("gmail"))
+                best = info;
+        if (best != null)
+            emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+        context.startActivity(emailIntent);
     }
 
 

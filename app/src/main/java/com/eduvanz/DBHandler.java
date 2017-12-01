@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 
 /**
  * Created by projetctheena on 19/8/17.

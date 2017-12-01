@@ -42,7 +42,7 @@
 //import java.util.Date;
 //import java.util.List;
 //
-//import static com.eduvanz.MainApplication.TAG;
+//import static com.eduvanz.newUI.MainApplication.TAG;
 //
 ///**
 // * Created by projetctheena on 19/9/17.

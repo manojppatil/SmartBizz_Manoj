@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.eduvanz.newUI.MainApplication;
 
 /**
  * Created by nikhil on 23/9/16.

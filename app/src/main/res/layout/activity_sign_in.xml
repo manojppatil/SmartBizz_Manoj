@@ -25,6 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -100,6 +104,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/editText_emalID"
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
                             android:layout_width="match_parent"
@@ -132,6 +137,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/editText_password"
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
                             android:layout_width="match_parent"
@@ -175,5 +181,17 @@
             </LinearLayout>
 
         </LinearLayout>
+            <ProgressBar
+                android:visibility="gone"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar_emailsignin"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:indeterminate="false"
+                android:layout_gravity="center" />
+        </RelativeLayout>
+
     </ScrollView>
 </LinearLayout>

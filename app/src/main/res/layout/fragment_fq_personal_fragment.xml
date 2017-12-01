@@ -207,7 +207,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Current City : "
+                    android:text="Current Country : "
                     android:layout_gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
@@ -217,13 +217,16 @@
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:theme="@style/ThemeOverlay.AppCompat.Light"
+
                     android:dropDownSelector="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="center"
-                    android:id="@+id/spinner_currentcity"
+                    android:id="@+id/spinner_currentcountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -251,6 +254,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -261,7 +265,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Current Country : "
+                    android:text="Current City : "
                     android:layout_gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
@@ -271,11 +275,10 @@
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:theme="@style/ThemeOverlay.AppCompat.Light"
-                    
                     android:dropDownSelector="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="center"
-                    android:id="@+id/spinner_currentcountry"
+                    android:id="@+id/spinner_currentcity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -321,7 +324,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Permanent City : "
+                    android:text="Permanent Country : "
                     android:layout_gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
@@ -334,10 +337,11 @@
                     android:dropDownSelector="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="center"
-                    android:id="@+id/spinner_borrowerpermanentcity"
+                    android:id="@+id/spinner_borrowerpermanentcountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -365,6 +369,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -375,7 +380,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Permanent Country : "
+                    android:text="Permanent City : "
                     android:layout_gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimary"/>
@@ -388,10 +393,11 @@
                     android:dropDownSelector="@color/colorPrimary"
                     android:focusable="true"
                     android:gravity="center"
-                    android:id="@+id/spinner_borrowerpermanentcountry"
+                    android:id="@+id/spinner_borrowerpermanentcity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_marginTop="10dp"

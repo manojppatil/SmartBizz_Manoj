@@ -18,14 +18,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
-import com.eduvanz.pqformfragments.PqFormFragment3;
 import com.eduvanz.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanz.pqformfragments.pojo.NameOfCoursePOJO;
 import com.eduvanz.pqformfragments.pojo.NameOfInsitituePOJO;
-import com.eduvanz.volley.VolleyCall;
-import com.eduvanz.volley.VolleyCallNew;
+import com.eduvanz.newUI.VolleyCallNew;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,8 +31,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.eduvanz.MainApplication.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,7 +94,7 @@ public class EligibilityCheckFragment_1 extends Fragment {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!instituteID.equals("") && !courseID.equals("")) {
+                if (!instituteID.equals("") && !courseID.equals("") && !locationID.equals("")) {
                     EligibilityCheckFragment_2 eligibilityCheckFragment_2 = new EligibilityCheckFragment_2();
                     transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_2).commit();
                 }else {

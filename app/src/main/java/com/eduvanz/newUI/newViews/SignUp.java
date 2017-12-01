@@ -1,15 +1,17 @@
 package com.eduvanz.newUI.newViews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.eduvanz.MainApplication;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 
 public class SignUp extends AppCompatActivity {
@@ -42,8 +44,24 @@ public class SignUp extends AppCompatActivity {
         buttonSignIn = (Button) findViewById(R.id.button_signup_signin);
         mainApplication.applyTypeface(buttonSignIn, context);
 
+        buttonSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUp.this, SignIn.class);
+                startActivity(intent);
+            }
+        });
+
         buttonSignUp = (Button) findViewById(R.id.button_signup_signup);
         mainApplication.applyTypeface(buttonSignUp, context);
+
+        buttonSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUp.this, EligibilityCheck.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -159,6 +159,12 @@
                             </LinearLayout>
 
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                            </LinearLayout>
                             <TextView
                                 android:id="@+id/textView_signsubmit_4"
                                 android:layout_width="wrap_content"
@@ -174,6 +180,7 @@
                                 android:orientation="horizontal">
 
                                 <RadioGroup
+                                    android:id="@+id/radioGroup_la4"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
@@ -232,6 +239,21 @@
                             android:textColor="@color/white"
                             android:textSize="16sp" />
                     </LinearLayout>
+
+                    <Button
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+                        android:id="@+id/button_downloadSignedApplication"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="Download Signed Application"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
                 </LinearLayout>
 
 

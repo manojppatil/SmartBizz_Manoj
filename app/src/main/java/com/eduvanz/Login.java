@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanz.newUI.MainApplication;
+import com.eduvanz.newUI.SharedPref;
 import com.eduvanz.volley.VolleyCall;
 
 import org.json.JSONObject;

@@ -1,9 +1,6 @@
 package com.eduvanz;
 
 import android.annotation.TargetApi;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.BroadcastReceiver;
@@ -14,7 +11,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
-import android.media.Ringtone;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -22,12 +18,10 @@ import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.eduvanz.pqformfragments.SuccessAfterPQForm;
+import com.eduvanz.newUI.MainApplication;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +42,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 /**
  * Created by Darsh on 05-09-17.

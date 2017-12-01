@@ -1,9 +1,7 @@
 package com.eduvanz.newUI.newViews;
 
 import android.Manifest;
-import android.app.AlarmManager;
 import android.app.AppOpsManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,68 +13,75 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.SubMenu;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eduvanz.CustomTypefaceSpan;
-import com.eduvanz.MainActivity;
-import com.eduvanz.MainApplication;
-import com.eduvanz.MyService;
 import com.eduvanz.R;
-import com.eduvanz.SharedPref;
+import com.eduvanz.newUI.MainApplication;
+import com.eduvanz.newUI.SharedPref;
+import com.eduvanz.newUI.VolleyCallNew;
 import com.eduvanz.newUI.fragments.DashboardFragmentNew;
-import com.eduvanz.newUI.receiver.AlarmReceiverForFileUpload;
 import com.eduvanz.newUI.services.LocationService;
 import com.eduvanz.newUI.services.MyServiceCallLog;
 import com.eduvanz.newUI.services.MyServiceCallStats;
 import com.eduvanz.newUI.services.MyServiceContacts;
 import com.eduvanz.newUI.services.MyServiceReadSms;
-import com.eduvanz.volley.VolleyCallNew;
+import com.eduvanz.newUI.webviews.WebViewAboutUs;
+import com.eduvanz.newUI.webviews.WebViewDisclaimer;
+import com.eduvanz.newUI.webviews.WebViewFAQs;
+import com.eduvanz.newUI.webviews.WebViewFairPracticsCode;
+import com.eduvanz.newUI.webviews.WebViewPrivacyPolicy;
+import com.eduvanz.newUI.webviews.WebViewTermsNCondition;
+import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static NavigationView navigationView;
+    public static DrawerLayout drawer;
     Context context;
     TextView textViewName, textViewEmail;
     Button buttonSignup, buttonSignIn;
     MainApplication mainApplication;
     FrameLayout frameLayoutDashboard;
-    public static NavigationView navigationView;
-    public static DrawerLayout drawer;
     SharedPref sharedPref;
     LinearLayout linearLayoutSignup, linearLayoutUserDetail;
-    String userFirst="", userLast="", userEmail="",userMobileNo="",userId="",appInstallationTimeStamp=null;
+
+    String userMobileNo = "", userId = "", appInstallationTimeStamp = null;
     AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
+
+    String userFirst = "", userLast = "", userEmail = "", userPic = "";
+    ImageView imageViewProfilePic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +107,7 @@ public class DashboardActivity extends AppCompatActivity
 //        Otherpermission();
 
 
-        Log.e(TAG, "onCreate: START SERVICE " );
-
+        Log.e(TAG, "onCreate: START SERVICE ");
 
 
         try {
@@ -112,36 +116,39 @@ public class DashboardActivity extends AppCompatActivity
             userLast = sharedPreferences.getString("last_name", "");
             userEmail = sharedPreferences.getString("user_email", "");
             userMobileNo = sharedPreferences.getString("mobile_no", "");
-            userId= sharedPreferences.getString("logged_id", "");
+            userId = sharedPreferences.getString("logged_id", "");
+            userPic = sharedPreferences.getString("user_image", "");
             appInstallationTimeStamp = sharedPreferences.getString("appInstallationTimeStamp", "null");
-            Log.e(TAG, "onCreate: "+userMobileNo );
-        }catch (Exception e){
+            Log.e(TAG, "onCreate: " + userMobileNo);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
             Log.e(MainApplication.TAG, "Alarm received!: ");
-            Log.e(TAG, "MyService CALL LOG  : 11111111111111111111111111" );
+            Log.e(TAG, "MyService CALL LOG  : 11111111111111111111111111");
             /** getting data from shared preference **/
 
-            Log.e(TAG, "onCreate: "+appInstallationTimeStamp );
+            Log.e(TAG, "onCreate: " + appInstallationTimeStamp);
             try {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date lLocationDate= simpleDateFormat.parse(appInstallationTimeStamp);
-                long installationTime=lLocationDate.getTime()+(5 * 12 * 60 * 60 * 1000);
-                Log.e(TAG, "onCreate: "+installationTime );
-                Log.e(TAG, "onCreate: "+installationTime );
+                Date lLocationDate = simpleDateFormat.parse(appInstallationTimeStamp);
+                long installationTime = lLocationDate.getTime() + (5 * 12 * 60 * 60 * 1000);
+                Log.e(TAG, "onCreate: " + installationTime);
+                Log.e(TAG, "onCreate: " + installationTime);
 
-                if(installationTime<System.currentTimeMillis()){
+                if (installationTime < System.currentTimeMillis()) {
                     Intent myService = new Intent(DashboardActivity.this, LocationService.class);
                     stopService(myService);
-                }else {
+                } else {
                     startService(new Intent(context, LocationService.class));
-                    Log.e(TAG, "onCreate: SERVICE IS " );
+                    Log.e(TAG, "onCreate: SERVICE IS ");
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        }catch (Exception e){
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -162,10 +169,15 @@ public class DashboardActivity extends AppCompatActivity
 
         textViewName = (TextView) header.findViewById(R.id.textView_name);
         mainApplication.applyTypeface(textViewName, context);
-        textViewName.setText(userFirst +" "+userLast);
+        textViewName.setText(userFirst + " " + userLast);
         textViewEmail = (TextView) header.findViewById(R.id.textView_emailID);
         mainApplication.applyTypeface(textViewEmail, context);
         textViewEmail.setText(userEmail);
+
+        imageViewProfilePic = (ImageView) header.findViewById(R.id.imageView_userpic);
+        if (!userPic.equalsIgnoreCase("")) {
+            Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
+        }
 
         buttonSignup = (Button) header.findViewById(R.id.button_dashboard_signup);
         mainApplication.applyTypeface(buttonSignup, context);
@@ -209,12 +221,15 @@ public class DashboardActivity extends AppCompatActivity
             applyFontToMenuItem(mi);
         }
 
-        if(sharedPref.getLoginDone(context)) {
+        if (sharedPref.getLoginDone(context)) {
             linearLayoutUserDetail.setVisibility(View.VISIBLE);
             linearLayoutSignup.setVisibility(View.GONE);
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_loanApplication).setVisible(true);
             nav_Menu.findItem(R.id.nav_eligibility).setVisible(false);
+        }else {
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_logout).setVisible(false);
         }
 
         getSupportFragmentManager().beginTransaction().add(R.id.framelayout_dashboard, new DashboardFragmentNew()).commit();
@@ -225,18 +240,18 @@ public class DashboardActivity extends AppCompatActivity
         try {
             String url = MainApplication.mainUrl + "mobilescrap/getRecentScrappingDetails";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("mobileNo",userMobileNo);
+            params.put("mobileNo", userMobileNo);
             VolleyCallNew volleyCall = new VolleyCallNew();
             volleyCall.sendRequest(context, url, mActivity, null, "getRecentScrapping", params);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        /** API CALL GET Dates**/
+        /** API CALL **/
         try {
             String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId",userId);
+            params.put("studentId", userId);
             VolleyCallNew volleyCall = new VolleyCallNew();
             volleyCall.sendRequest(context, url, mActivity, null, "StudentDashbBoardStatus", params);
         } catch (Exception e) {
@@ -248,18 +263,16 @@ public class DashboardActivity extends AppCompatActivity
 
     private void Otherpermission() {
         Log.i("TAG", "Permission permissionContacts");
-        if (Build.VERSION.SDK_INT >= 23)
-        {
+        if (Build.VERSION.SDK_INT >= 23) {
             boolean permission = checkIfAlreadyhavePermissionLocation();
 
-            Log.e(TAG, "permissionContacts: "+permission );
+            Log.e(TAG, "permissionContacts: " + permission);
             if (!permission) {
                 Log.i("TAG", "Permission to record denied");
                 requestPermissions(
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
                         }, 105);
-            } else
-                {
+            } else {
                 /** SERVICE CALL **/
                 Log.e(TAG, "onCreate: else CALLed Once");
                 setScheduleIntent(LocationService.class);
@@ -282,17 +295,16 @@ public class DashboardActivity extends AppCompatActivity
 
     private void permissionContacts() {
         Log.i("TAG", "Permission permissionContacts");
-        if (Build.VERSION.SDK_INT >= 23)
-        {
+        if (Build.VERSION.SDK_INT >= 23) {
             boolean permission = checkIfAlreadyhavePermissionContact();
 
-            Log.e(TAG, "permissionContacts: "+permission );
+            Log.e(TAG, "permissionContacts: " + permission);
             if (!permission) {
                 Log.i("TAG", "Permission to record denied");
                 requestPermissions(
                         new String[]{Manifest.permission.READ_CONTACTS,
                         }, 104);
-            } else{
+            } else {
                 /** SERVICE CALL **/
                 Log.e(TAG, "onCreate: else CALLed Once");
                 setScheduleIntent(MyServiceContacts.class);
@@ -315,14 +327,15 @@ public class DashboardActivity extends AppCompatActivity
 
     private void permissionAppStats() {
         Log.i("TAG", "Permission permissionAppStats");
-        if(!isAccessGranted()) {
+        if (!isAccessGranted()) {
             startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-        }else {
+        } else {
             setScheduleIntent(MyServiceCallStats.class);
 //            Intent intent = new Intent(this, MyServiceCallStats.class);
 //            startService(intent);
         }
     }
+
     private boolean isAccessGranted() {
         try {
             PackageManager packageManager = getPackageManager();
@@ -347,16 +360,15 @@ public class DashboardActivity extends AppCompatActivity
 
     private void permissionReadSMS() {
         Log.i("TAG", "Permission permissionReadSMS");
-        if (Build.VERSION.SDK_INT >= 23)
-        {
+        if (Build.VERSION.SDK_INT >= 23) {
             boolean permission = checkIfAlreadyhavePermissionSMS();
-            Log.e(TAG, "permissionContacts: "+permission );
+            Log.e(TAG, "permissionContacts: " + permission);
             if (!permission) {
                 Log.i("TAG", "Permission to record denied");
                 requestPermissions(
                         new String[]{Manifest.permission.READ_SMS,
                         }, 102);
-            } else{
+            } else {
                 /** SERVICE CALL **/
                 Log.e(TAG, "onCreate: CALLed Once");
                 setScheduleIntent(MyServiceReadSms.class);
@@ -377,19 +389,17 @@ public class DashboardActivity extends AppCompatActivity
         return result == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void permissionCall()
-    {
+    private void permissionCall() {
         Log.e("TAG", "Permission permissionCall");
-        if (Build.VERSION.SDK_INT >= 23)
-        {
+        if (Build.VERSION.SDK_INT >= 23) {
             boolean permission = checkIfAlreadyhavePermission();
-            Log.e(TAG, "permissionContacts: "+permission );
+            Log.e(TAG, "permissionContacts: " + permission);
             if (!permission) {
                 Log.i("TAG", "Permission to record denied");
                 requestPermissions(
-                        new String[]{Manifest.permission.READ_CALL_LOG,Manifest.permission.READ_PHONE_STATE,
-                                }, 101);
-            } else{
+                        new String[]{Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_PHONE_STATE,
+                        }, 101);
+            } else {
                 /** SERVICE CALL **/
                 setScheduleIntent(MyServiceCallLog.class);
                 Log.e(TAG, "onCreate: CALLed Once");
@@ -463,9 +473,10 @@ public class DashboardActivity extends AppCompatActivity
             Intent intent = new Intent(context, HowItWorks.class);
             startActivity(intent);
         } else if (id == R.id.nav_aboutus) {
-
+            Intent intent = new Intent(DashboardActivity.this, WebViewAboutUs.class);
+            startActivity(intent);
         } else if (id == R.id.nav_faq) {
-            Intent intent = new Intent(DashboardActivity.this, Faq.class);
+            Intent intent = new Intent(DashboardActivity.this, WebViewFAQs.class);
             startActivity(intent);
         } else if (id == R.id.nav_contactus) {
             Intent intent = new Intent(DashboardActivity.this, ContactUs.class);
@@ -473,24 +484,45 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_more) {
             showMenuOptions();
         } else if (id == R.id.nav_privacypolicy) {
-
+            Intent intent = new Intent(DashboardActivity.this, WebViewPrivacyPolicy.class);
+            startActivity(intent);
         } else if (id == R.id.nav_termsandconditions) {
+            Intent intent = new Intent(DashboardActivity.this, WebViewTermsNCondition.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_disclaimer) {
-
+            Intent intent = new Intent(DashboardActivity.this, WebViewDisclaimer.class);
+            startActivity(intent);
         } else if (id == R.id.nav_fairpracticscode) {
-
+            Intent intent = new Intent(DashboardActivity.this, WebViewFairPracticsCode.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logout) {
 
-        }else if (id == R.id.nav_loanApplication) {
+            SharedPref sharedPref = new SharedPref();
+            sharedPref.clearSharedPreference(DashboardActivity.this);
+
+//            /** STORING THE COLOR and BOOLEAN VALUE FOR FIRST TIME DEFAULT COLOR STORE INTO SHARED PREFERENCE **/
+//            SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString("primary_color", "#4FC0E8");
+//            editor.putString("primary_color_dark", "#197b9d");
+//            editor.putString("fcm_id", fcmID);
+//            editor.apply();
+//            editor.commit();
+            Intent intent = new Intent(DashboardActivity.this, DashboardActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+
+        } else if (id == R.id.nav_loanApplication) {
             Intent intent = new Intent(context, LoanApplication.class);
             startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if(id == R.id.nav_more){
+        if (id == R.id.nav_more) {
             drawer.openDrawer(GravityCompat.START);
-        }else {
+        } else {
             drawer.closeDrawer(GravityCompat.START);
         }
         return true;
@@ -520,7 +552,9 @@ public class DashboardActivity extends AppCompatActivity
         nav_Menu.findItem(R.id.nav_termsandconditions).setVisible(true);
         nav_Menu.findItem(R.id.nav_disclaimer).setVisible(true);
         nav_Menu.findItem(R.id.nav_fairpracticscode).setVisible(true);
-        nav_Menu.findItem(R.id.nav_logout).setVisible(true);
+        if (sharedPref.getLoginDone(context)) {
+            nav_Menu.findItem(R.id.nav_logout).setVisible(true);
+        }
     }
 
     @Override
@@ -574,50 +608,55 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     public void getScrappingdates(JSONObject jsonDataO) {
-        Log.e(TAG, "getScrappingdates: "+jsonDataO );
+        Log.e(TAG, "getScrappingdates: " + jsonDataO);
         try {
-            String smsTimeStamp = null,callTimeStamp=null,contactTimeStamp=null,
-                    appTimeStamp=null,appInstallationDateTime=null,locationTimeStamp=null;
-            JSONObject mobject=jsonDataO.optJSONObject("result");
+            String smsTimeStamp = null, callTimeStamp = null, contactTimeStamp = null,
+                    appTimeStamp = null, appInstallationDateTime = null, locationTimeStamp = null;
+            JSONObject mobject = jsonDataO.optJSONObject("result");
             try {
-                smsTimeStamp=mobject.getString("smsTimeStamp");
-            }catch (Exception e){
+                smsTimeStamp = mobject.getString("smsTimeStamp");
+            } catch (Exception e) {
                 e.printStackTrace();
-            }  try {
-                callTimeStamp=mobject.getString("callTimeStamp");
-            }catch (Exception e){
+            }
+            try {
+                callTimeStamp = mobject.getString("callTimeStamp");
+            } catch (Exception e) {
                 e.printStackTrace();
-            }  try {
-                contactTimeStamp=mobject.getString("contactTimeStamp");
-            }catch (Exception e){
+            }
+            try {
+                contactTimeStamp = mobject.getString("contactTimeStamp");
+            } catch (Exception e) {
                 e.printStackTrace();
-            }  try {
-                appTimeStamp=mobject.getString("appTimeStamp");
-            }catch (Exception e){
+            }
+            try {
+                appTimeStamp = mobject.getString("appTimeStamp");
+            } catch (Exception e) {
                 e.printStackTrace();
-            }  try {
-                appInstallationDateTime=mobject.getString("appInstallationDateTime");
-            }catch (Exception e){
+            }
+            try {
+                appInstallationDateTime = mobject.getString("appInstallationDateTime");
+            } catch (Exception e) {
                 e.printStackTrace();
-            } try {
-                locationTimeStamp=mobject.getString("locationTimeStamp");
-            }catch (Exception e){
+            }
+            try {
+                locationTimeStamp = mobject.getString("locationTimeStamp");
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             try {
-                Log.e(TAG, "getScrappingdates: callTimeStamp "+callTimeStamp );
-            SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("smsTimeStamp",smsTimeStamp);
-            editor.putString("callTimeStamp",callTimeStamp);
-            editor.putString("contactTimeStamp",contactTimeStamp);
-            editor.putString("appTimeStamp",appTimeStamp);
-            editor.putString("locationTimeStamp",locationTimeStamp);
-            editor.putString("appInstallationTimeStamp",appInstallationDateTime);
-            editor.apply();
-            editor.commit();
-            }catch (Exception e){
+                Log.e(TAG, "getScrappingdates: callTimeStamp " + callTimeStamp);
+                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("smsTimeStamp", smsTimeStamp);
+                editor.putString("callTimeStamp", callTimeStamp);
+                editor.putString("contactTimeStamp", contactTimeStamp);
+                editor.putString("appTimeStamp", appTimeStamp);
+                editor.putString("locationTimeStamp", locationTimeStamp);
+                editor.putString("appInstallationTimeStamp", appInstallationDateTime);
+                editor.apply();
+                editor.commit();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             startService(new Intent(context, LocationService.class));
@@ -632,24 +671,24 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     public void setProfileDashbBoardStatus(JSONObject jsonDataO) {
-        Log.e(TAG, "getScrappingdates: "+jsonDataO );
+        Log.e(TAG, "getScrappingdates: " + jsonDataO);
         try {
-            if(jsonDataO.getInt("status") ==1) {
+            if (jsonDataO.getInt("status") == 1) {
 
                 String borrower = null, coBorrower = null, coBorrowerDocument = null,
-                        eligibility = null, borrowerDocument = null,signDocument=null,
-                        kyc= null,profileDashboardStats=null;
+                        eligibility = null, borrowerDocument = null, signDocument = null,
+                        kyc = null, profileDashboardStats = null;
                 JSONObject mObject = jsonDataO.optJSONObject("result");
-                borrower= mObject.getString("borrower");
-                coBorrower= mObject.getString("coBorrower");
-                coBorrowerDocument= mObject.getString("coBorrowerDocument");
-                borrowerDocument= mObject.getString("borrowerDocument");
-                signDocument= mObject.getString("signDocument");
-                kyc= mObject.getString("kyc");
-                profileDashboardStats= mObject.getString("profileDashboardStats");
-                eligibility= mObject.getString("eligibility");
+                borrower = mObject.getString("borrower");
+                coBorrower = mObject.getString("coBorrower");
+                coBorrowerDocument = mObject.getString("coBorrowerDocument");
+                borrowerDocument = mObject.getString("borrowerDocument");
+                signDocument = mObject.getString("signDocument");
+                kyc = mObject.getString("kyc");
+                profileDashboardStats = mObject.getString("profileDashboardStats");
+                eligibility = mObject.getString("eligibility");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

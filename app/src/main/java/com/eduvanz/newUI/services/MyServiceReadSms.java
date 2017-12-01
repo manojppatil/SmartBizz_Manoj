@@ -6,7 +6,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
@@ -14,15 +13,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
-import android.provider.CallLog;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.eduvanz.MainApplication;
-import com.eduvanz.MyService;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.SmsPojo;
 import com.eduvanz.Utils;
 import com.eduvanz.newUI.receiver.AlarmReceiverForFileUpload;
@@ -47,7 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.eduvanz.MainApplication.TAG;
+import static com.eduvanz.newUI.MainApplication.TAG;
 
 /**
  * Created by projetctheena on 19/9/17.

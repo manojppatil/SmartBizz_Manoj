@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.eduvanz.newUI.MainApplication;
+
 import java.util.Calendar;
 import java.util.List;
 
