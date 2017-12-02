@@ -287,13 +287,17 @@ public class DashboardFragmentNew extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, LoanApplication.class);
-                if(borrowerDocument.equalsIgnoreCase("1")){
+                if(borrower.equalsIgnoreCase("1")){
                     Bundle bundle = new Bundle();
                     bundle.putString("toCoBorrower", "1");
                     intent.putExtras(bundle);
-                }else if(coBorrowerDocument.equalsIgnoreCase("1") && borrowerDocument.equalsIgnoreCase("1")){
+                }else if(coBorrower.equalsIgnoreCase("1") && borrower.equalsIgnoreCase("1")){
                     Bundle bundle = new Bundle();
                     bundle.putString("toDocUpload", "1");
+                    intent.putExtras(bundle);
+                }else if(coBorrowerDocument.equalsIgnoreCase("1") && borrowerDocument.equalsIgnoreCase("1")){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("toSignSubmit", "1");
                     intent.putExtras(bundle);
                 }
                 startActivity(intent);
@@ -421,7 +425,7 @@ public class DashboardFragmentNew extends Fragment {
 
 
     public void setProfileDashbBoardStatus(JSONObject jsonDataO) {
-        Log.e(TAG, "getScrappingdates: " + jsonDataO);
+        Log.e(TAG, "setProfileDashbBoardStatus: " + jsonDataO);
         try {
             if (jsonDataO.getInt("status") == 1) {
 
@@ -435,7 +439,13 @@ public class DashboardFragmentNew extends Fragment {
                 profileDashboardStats = mObject.getString("profileDashboardStats");
                 eligibility = mObject.getString("eligibility");
 
-                if(borrowerDocument.equalsIgnoreCase("1")){
+                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("signed_appstatus", signDocument);
+                editor.apply();
+                editor.commit();
+
+                if(borrower.equalsIgnoreCase("1")){
                     linearLayoutContinueApplication.setVisibility(View.VISIBLE);
                     linearLayoutApplyNow.setVisibility(View.GONE);
                     linearLayoutEligiblityChekck.setVisibility(View.GONE);

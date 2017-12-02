@@ -98,18 +98,6 @@ public class DashboardActivity extends AppCompatActivity
         sharedPref = new SharedPref();
         mActivity = this;
 
-//        // dummy code
-//        SharedPreferences sharedPreferences1 = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences1.edit();
-//        editor.putString("mobile_no","8108659592");
-//        editor.apply();
-//        editor.commit();
-//        Otherpermission();
-
-
-        Log.e(TAG, "onCreate: START SERVICE ");
-
-
         try {
             sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
             userFirst = sharedPreferences.getString("first_name", "");
@@ -647,7 +635,6 @@ public class DashboardActivity extends AppCompatActivity
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            startService(new Intent(context, LocationService.class));
 
             permissionCall();       //101
             permissionReadSMS();   // 102

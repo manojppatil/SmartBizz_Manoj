@@ -20,6 +20,7 @@ import com.eduvanz.R;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_1;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_2;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_3;
+import com.eduvanz.newUI.fragments.LoanApplicationFragment_4;
 
 import org.json.JSONObject;
 
@@ -28,7 +29,7 @@ public class LoanApplication extends AppCompatActivity {
     static AppCompatActivity mActivity;
     static Context context;
     static String userID="";
-    static String setFragmentCOBorrower="", setFragmentDocUpload="";
+    static String setFragmentCOBorrower="", setFragmentDocUpload="", setFragmentSignSubnit="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +40,9 @@ public class LoanApplication extends AppCompatActivity {
 
         try {
             Bundle extras = getIntent().getExtras();
-            setFragmentCOBorrower = extras.getString("toCoBorrower");
-            setFragmentDocUpload = extras.getString("toDocUpload");
+            setFragmentCOBorrower = extras.getString("toCoBorrower","0");
+            setFragmentDocUpload = extras.getString("toDocUpload","0");
+            setFragmentSignSubnit = extras.getString("toSignSubmit","0");
 
         }catch (Exception e){
             e.printStackTrace();
@@ -54,10 +56,12 @@ public class LoanApplication extends AppCompatActivity {
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        if (setFragmentCOBorrower.equalsIgnoreCase("1")){
+        if (setFragmentCOBorrower.equalsIgnoreCase("1")&&setFragmentDocUpload.equalsIgnoreCase("0")){
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_2()).commit();
-        }else if(setFragmentDocUpload.equalsIgnoreCase("1")){
+        }else if(setFragmentDocUpload.equalsIgnoreCase("1") && setFragmentCOBorrower.equalsIgnoreCase("1")&& setFragmentSignSubnit.equalsIgnoreCase("0")){
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_3()).commit();
+        }else if(setFragmentSignSubnit.equalsIgnoreCase("1") && setFragmentDocUpload.equalsIgnoreCase("1") && setFragmentCOBorrower.equalsIgnoreCase("1")){
+            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
         } else {
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_1()).commit();
         }

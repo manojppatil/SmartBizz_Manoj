@@ -158,12 +158,15 @@ public class OtpValidation extends AppCompatActivity {
             }else {
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("otp_done","1");
+                editor.putString("otp_done","0");
                 editor.putString("mobile_no", mobileNO);
                 editor.apply();
                 editor.commit();
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(OtpValidation.this, DashboardActivity.class);
+//                startActivity(intent);
+//                finish();
             }
         } catch (Exception e) {
             e.printStackTrace();

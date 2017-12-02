@@ -265,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:text="Processing"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
                 <ImageView
                     android:paddingBottom="10dp"
                     android:layout_marginLeft="10dp"

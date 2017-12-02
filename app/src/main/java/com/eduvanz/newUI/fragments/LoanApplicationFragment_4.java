@@ -32,6 +32,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.atom.mobilepaymentsdk.PayActivity;
 import com.eduvanz.Utils;
 import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
@@ -65,7 +66,8 @@ public class LoanApplicationFragment_4 extends Fragment {
 
     public static Context context;
     public static Fragment mFragment;
-    Button buttonNext, buttonPrevious, buttonUpload, buttonDownload, buttonDownloadSignedApplication;
+    Button buttonNext, buttonPrevious, buttonUpload, buttonDownload,
+            buttonDownloadSignedApplication, buttonPay;
     Typeface typefaceFont, typefaceFontBold;
     TextView textView1, textView2, textView3, textView17, textView4,textView5,textView6,textView7,
             textView8,textView9,textView10,textView11,textView12,textView13,textView14, textView19,
@@ -202,6 +204,49 @@ public class LoanApplicationFragment_4 extends Fragment {
 
         buttonDownload = (Button) view.findViewById(R.id.button_signnsubmit_downloadApplication);
         mainApplication.applyTypeface(buttonDownload, context);
+
+        buttonPay = (Button) view.findViewById(R.id.button_signnsubmit_payment);
+        buttonPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newPayIntent = new Intent(context,	PayActivity.class);
+
+                String myamount="500";
+
+                newPayIntent.putExtra("merchantId", "197");
+                newPayIntent.putExtra("txnscamt", "0"); //Fixed. Must be 0
+                newPayIntent.putExtra("loginid", "197");
+                newPayIntent.putExtra("password", "Test@123");
+                newPayIntent.putExtra("prodid", "NSE");
+                newPayIntent.putExtra("txncurr", "INR"); //Fixed. Must be ?INR?
+                newPayIntent.putExtra("clientcode", "001");
+                newPayIntent.putExtra("custacc", "100000036600");
+                newPayIntent.putExtra("amt", myamount);//Should be 3 decimal number i.e 51.000
+                newPayIntent.putExtra("txnid", "013");
+                newPayIntent.putExtra("date", "25/08/2015 18:31:00");//Should be in same format
+                newPayIntent.putExtra("bankid", "2001"); //Should be valid bank id // Optional
+                newPayIntent.putExtra("discriminator", "NB"); // NB or IMPS or All ONLY (value should be same as commented)
+                newPayIntent.putExtra("signature_request", "KEY123657234");
+                newPayIntent.putExtra("signature_response", "KEYRESP123657234");
+
+
+                //use below Production url only with Production "Library-MobilePaymentSDK", Located inside PROD folder
+                //newPayIntent.putExtra("ru","https://payment.atomtech.in/mobilesdk/param"); //ru FOR Production
+
+                //use below UAT url only with UAT "Library-MobilePaymentSDK", Located inside UAT folder
+                newPayIntent.putExtra("ru", "https://paynetzuat.atomtech.in/mobilesdk/param"); // FOR UAT (Testing)
+
+                //Optinal Parameters
+                newPayIntent.putExtra("customerName", "JKL PQR"); //Only for Name
+                newPayIntent.putExtra("customerEmailID", "jkl.pqr@atomtech.in");//Only for Email ID
+                newPayIntent.putExtra("customerMobileNo", "9876543210");//Only for Mobile Number
+                newPayIntent.putExtra("billingAddress", "Mumbai");//Only for Address
+                newPayIntent.putExtra("optionalUdf9", "OPTIONAL DATA 1");// Can pass any data
+//                newPayIntent.putExtra("mprod", mprod); // Pass data in XML format, only for Multi product
+
+                startActivityForResult(newPayIntent, 1);
+            }
+        });
 
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -381,6 +426,24 @@ public class LoanApplicationFragment_4 extends Fragment {
                          }
                      }).start();
                  }
+
+            }
+        }
+
+        if (requestCode == 1)
+        {
+            if (data != null)
+            {
+                String message = data.getStringExtra("status");
+                String[] resKey = data.getStringArrayExtra("responseKeyArray");
+                String[] resValue = data.getStringArrayExtra("responseValueArray");
+
+                if(resKey!=null && resValue!=null)
+                {
+                    for(int i=0; i<resKey.length; i++)
+                        System.out.println("  "+i+" resKey : "+resKey[i]+" resValue : "+resValue[i]);
+                }
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
             }
         }
@@ -598,6 +661,7 @@ public class LoanApplicationFragment_4 extends Fragment {
         }
 
     }
+
 
 
 }

@@ -1,1 +1,2 @@
 include ':app', ':FriendlyScoreAndroidSDK-release', ':FriendlyScoreAndroidSDK-UI-release', ':linkedin-sdk'
+include ':libraryMobilePaymentSDK'

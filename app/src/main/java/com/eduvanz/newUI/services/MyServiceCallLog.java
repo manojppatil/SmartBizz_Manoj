@@ -146,12 +146,9 @@ public class MyServiceCallLog extends Service {
             Date callDayTime = new Date(Long.valueOf(callDate));
             callDuration = cursor.getString(duration);
             String dir = null;
-            Log.e(TAG, "callLogs: "+callDayTime.getDay() );
 
             if(lDateCall != null)
             {
-                 Log.e(TAG, "callLogs: lDateCall Notnull "+lDateCall.getTime() );
-                 Log.e(TAG, "callLogs: callDayTime "+callDayTime.getTime() );
                 if (lDateCall.getTime() < callDayTime.getTime()) {
                     JSONObject mObject = new JSONObject();
                     try {
@@ -168,7 +165,6 @@ public class MyServiceCallLog extends Service {
                     Log.e(TAG, "callLogs: previous date");
                 }
             }else {
-                Log.e(TAG, "callLogs: Data call is null");
                 JSONObject mObject = new JSONObject();
                 try {
                     mObject.accumulate("callee_number", phNumber);
@@ -196,7 +192,7 @@ public class MyServiceCallLog extends Service {
             e.printStackTrace();
         }
         Log.e(TAG, "callLogs: "+jsonArray );
-        if(jsonArray.length()>2)
+        if(jsonArray.length()>0)
         {
             logs = outerOb.toString();
             mCreateAndSaveFile("saveCallLogs.json", logs);
