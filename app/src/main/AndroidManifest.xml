@@ -249,6 +249,10 @@
             android:name=".newUI.webviews.WebViewTermsNCondition"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.digio.in.esignsdk.DigioEsignActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
+
     </application>
 
 </manifest>

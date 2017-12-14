@@ -126,7 +126,7 @@ public class GetMobileNo extends AppCompatActivity {
         /** API CALL GET OTP**/
 
             try {
-                String url = MainApplication.mainUrl + "authorization/generateOtpCode";
+                String url = MainApplication.mainUrl + "pqform/thirdPartyGenerateOtpCode";
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("mobileno", editTextGetMobileNo.getText().toString());
                 VolleyCallNew volleyCall = new VolleyCallNew();

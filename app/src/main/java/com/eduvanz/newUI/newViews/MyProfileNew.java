@@ -205,16 +205,6 @@ public class MyProfileNew extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /** API CALL GET Dates**/
-        try {
-            String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId",userID);
-            VolleyCallNew volleyCall = new VolleyCallNew();
-            volleyCall.sendRequest(context, url, mActivity, null, "ProfileDashbBoardStatusData", params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -249,6 +239,23 @@ public class MyProfileNew extends AppCompatActivity {
 
                 textViewPercentage.setText(profilePercentage+"%");
 
+                String courseFees = null, addressT = null, loanAmount = null,
+                        courseT = null, instituteT = null, applicationStatus = null;
+                JSONObject mObject = jsonData.optJSONObject("result");
+                applicationStatus= mObject.getString("applicationStatus");
+                instituteT= mObject.getString("institute");
+                courseT= mObject.getString("course");
+                loanAmount= mObject.getString("loanAmount");
+                courseFees= mObject.getString("courseFees");
+                addressT= mObject.getString("address");
+
+                applicationStatusName.setText(applicationStatus);
+                instituteName.setText(instituteT);
+                courseName.setText(courseT);
+                addressName.setText(addressT);
+                feesName.setText(courseFees);
+                loanAmountText.setText(loanAmount);
+
                 if(ec.equalsIgnoreCase("1")){
                     imageViewEligiblityCheck.setImageDrawable(getResources().getDrawable(R.drawable.verified));
                 }else {
@@ -281,36 +288,6 @@ public class MyProfileNew extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    public void setProfileDashbBoardStatusData(JSONObject jsonDataO) {
-        Log.e("", "setProfileDashbBoardStatusData: "+jsonDataO );
-        Log.e(TAG, "getScrappingdates: "+jsonDataO );
-        try {
-            if (jsonDataO.getInt("status") == 1) {
-
-                String courseFees = null, addressT = null, loanAmount = null,
-                        courseT = null, instituteT = null, applicationStatus = null;
-                JSONObject mObject = jsonDataO.optJSONObject("result");
-                applicationStatus= mObject.getString("applicationStatus");
-                instituteT= mObject.getString("institute");
-                courseT= mObject.getString("course");
-                loanAmount= mObject.getString("loanAmount");
-                courseFees= mObject.getString("courseFees");
-                addressT= mObject.getString("address");
-
-                applicationStatusName.setText(applicationStatus);
-                instituteName.setText(instituteT);
-                courseName.setText(courseT);
-                addressName.setText(addressT);
-                feesName.setText(courseFees);
-                loanAmountText.setText(loanAmount);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-
 
     private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",

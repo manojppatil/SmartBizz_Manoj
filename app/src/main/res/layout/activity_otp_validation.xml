@@ -187,6 +187,22 @@
             android:textSize="22sp"
             android:translationZ="3dp" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:visibility="gone"
+            android:id="@+id/button_skip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rectanglebackground"
+            android:elevation="20dp"
+            android:stateListAnimator="@null"
+            android:text="SKIP"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp"
+            android:translationZ="3dp" />
+
 
     </LinearLayout>
 </RelativeLayout>

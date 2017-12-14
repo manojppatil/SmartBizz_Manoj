@@ -186,7 +186,7 @@ public class DashboardActivity extends AppCompatActivity
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, SignUp.class);
+                Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
                 startActivity(intent);
             }
         });

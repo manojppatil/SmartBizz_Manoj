@@ -324,7 +324,7 @@
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Pending"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -351,7 +351,7 @@
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="1503"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -390,7 +390,7 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="500"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -430,7 +430,7 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="500"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -493,7 +493,7 @@
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="9887654345"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -520,7 +520,7 @@
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="viviek.ku@gmail.com"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -548,8 +548,7 @@
                         android:maxLines="4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Subhash Rd, Victory Society, Navpada, Vile Parle East, Vile Parle, Mumbai, Maharashtra 400057
-"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>

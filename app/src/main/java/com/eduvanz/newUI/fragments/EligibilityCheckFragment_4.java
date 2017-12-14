@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -125,6 +128,7 @@ public class EligibilityCheckFragment_4 extends Fragment {
                                 params.put("mobile", mobileNo);
                                 params.put("email", MainApplication.mainapp_emailid);
                                 VolleyCallNew volleyCall = new VolleyCallNew();
+                                Log.e(TAG, "sendRequestsendRequest: " );
                                 volleyCall.sendRequest(context, url, null, mFragment, "checkEligiblity", params);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -208,6 +212,7 @@ public class EligibilityCheckFragment_4 extends Fragment {
 
     public void checkEligiblity(JSONObject jsonData) {
         try {
+            Log.e(MainApplication.TAG, "jsonDatajsonData: "+jsonData );
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 

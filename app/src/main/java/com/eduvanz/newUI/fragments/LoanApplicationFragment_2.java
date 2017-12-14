@@ -244,15 +244,19 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
                             } else {
                                 adhaarno.setError("Aadhaar Number is Required");
+                                adhaarno.requestFocus();
                             }
                         } else {
                             textViewbirthday.setError("Birthdate is Required");
+                            textViewbirthday.requestFocus();
                         }
                     } else {
                         lname.setError("Last Name is Required");
+                        lname.requestFocus();
                     }
                 } else {
                     fname.setError("First Name is Required");
+                    fname.requestFocus();
                 }
             }
         });

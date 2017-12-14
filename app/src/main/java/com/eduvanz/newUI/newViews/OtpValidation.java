@@ -3,8 +3,8 @@ package com.eduvanz.newUI.newViews;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,8 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.newUI.VolleyCallNew;
 
 import org.json.JSONObject;
@@ -24,15 +24,15 @@ import java.util.Map;
 
 public class OtpValidation extends AppCompatActivity {
 
+    static Context mContext;
+    static EditText editTextRecivedOtp;
+    static ProgressBar progressBar;
     TextView textViewToolbar, textMobileNo, textViewResend;
     MainApplication mainApplication;
-    static Context mContext;
-    Button button;
+    static Button button, buttonSkip;
     LinearLayout linearLayoutResendOtp;
-    static EditText editTextRecivedOtp;
-    String mobileNO="";
+    String mobileNO = "", userID="";
     AppCompatActivity mActivity;
-    static ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,12 @@ public class OtpValidation extends AppCompatActivity {
         try {
             Bundle bundle = getIntent().getExtras();
             mobileNO = bundle.getString("mobile_no");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        userID = sharedPreferences.getString("logged_id", "null");
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar_otpvalidation);
 
@@ -61,6 +64,9 @@ public class OtpValidation extends AppCompatActivity {
         button = (Button) findViewById(R.id.button_continue_validateotp);
         mainApplication.applyTypeface(button, mContext);
 
+        buttonSkip = (Button) findViewById(R.id.button_skip);
+        mainApplication.applyTypeface(buttonSkip, mContext);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,10 +74,11 @@ public class OtpValidation extends AppCompatActivity {
                 /** API CALL GET OTP**/
                 try {
                     progressBar.setVisibility(View.VISIBLE);
-                    String url = MainApplication.mainUrl + "authorization/verifyOtpCode";
+                    String url = MainApplication.mainUrl + "pqform/thirdPartyVerifyOtpCode";
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("mobileno", textMobileNo.getText().toString());
                     params.put("otpcode", editTextRecivedOtp.getText().toString());
+                    params.put("studentId", userID);
                     VolleyCallNew volleyCall = new VolleyCallNew();
                     volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "setOtpValidation", params);
                 } catch (Exception e) {
@@ -81,22 +88,31 @@ public class OtpValidation extends AppCompatActivity {
             }
         });
 
+        buttonSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OtpValidation.this, DashboardActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         textViewResend = (TextView) findViewById(R.id.textView_resendOtp);
         textViewResend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /** API CALL GET OTP**/
 
-                    try {
-                        progressBar.setVisibility(View.VISIBLE);
-                        String url = MainApplication.mainUrl + "authorization/generateOtpCode";
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("mobileno", textMobileNo.getText().toString());
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "getOtpValidation", params);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    progressBar.setVisibility(View.VISIBLE);
+                    String url = MainApplication.mainUrl + "pqform/thirdPartyGenerateOtpCode";
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("mobileno", textMobileNo.getText().toString());
+                    VolleyCallNew volleyCall = new VolleyCallNew();
+                    volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "getOtpValidation", params);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -126,7 +142,13 @@ public class OtpValidation extends AppCompatActivity {
 
             if (status.equalsIgnoreCase("1")) {
                 progressBar.setVisibility(View.GONE);
-            }else {
+                int otpsendcount = jsonData.getInt("otpSentCount");
+                if(otpsendcount == 3){
+                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                    button.setVisibility(View.GONE);
+                    buttonSkip.setVisibility(View.VISIBLE);
+                }
+            } else {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
             }
@@ -146,7 +168,7 @@ public class OtpValidation extends AppCompatActivity {
 
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("otp_done","1");
+                editor.putString("otp_done", "1");
                 editor.putString("mobile_no", mobileNO);
                 editor.apply();
                 editor.commit();
@@ -155,10 +177,10 @@ public class OtpValidation extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-            }else {
+            } else {
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("otp_done","0");
+                editor.putString("otp_done", "0");
                 editor.putString("mobile_no", mobileNO);
                 editor.apply();
                 editor.commit();

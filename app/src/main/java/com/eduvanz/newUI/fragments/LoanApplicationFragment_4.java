@@ -33,15 +33,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atom.mobilepaymentsdk.PayActivity;
+import com.digio.in.esignsdk.Digio;
+import com.digio.in.esignsdk.DigioConfig;
+import com.digio.in.esignsdk.DigioEnvironment;
+import com.eduvanz.R;
 import com.eduvanz.Utils;
 import com.eduvanz.newUI.MainApplication;
-import com.eduvanz.R;
-
-import org.json.JSONObject;
-
 import com.eduvanz.uploaddocs.PathFile;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -66,29 +67,83 @@ public class LoanApplicationFragment_4 extends Fragment {
 
     public static Context context;
     public static Fragment mFragment;
+    public static ProgressBar progressBar;
+    static String uploadFilePath = "", userID = "", userFirst = "", userLast = "", ipaddress = "",
+            applicationStatus = "", userEmailid="";
+    public int SELECT_DOC = 2;
     Button buttonNext, buttonPrevious, buttonUpload, buttonDownload,
             buttonDownloadSignedApplication, buttonPay;
     Typeface typefaceFont, typefaceFontBold;
-    TextView textView1, textView2, textView3, textView17, textView4,textView5,textView6,textView7,
-            textView8,textView9,textView10,textView11,textView12,textView13,textView14, textView19,
-            textView15,textView16,textView18;
+    TextView textView1, textView2, textView3, textView17, textView4, textView5, textView6, textView7,
+            textView8, textView9, textView10, textView11, textView12, textView13, textView14, textView19,
+            textView15, textView16, textView18;
     RadioButton radioButtonManual, radioButtonEsign;
     LinearLayout linearLayoutManual;
     MainApplication mainApplication;
     String userId;
-    String downloadUrl="", downloadSignedUrl="";
+    String downloadUrl = "", downloadSignedUrl = "";
     long downloadReference;
     DownloadManager downloadManager;
-    public int SELECT_DOC = 2;
-    static String uploadFilePath = "", userID="", userFirst="", userLast="", ipaddress="", applicationStatus="";
     StringBuffer sb;
     RadioGroup radioGroupla4;
-    public static ProgressBar progressBar;
+    private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            //check if the broadcast message is for our Enqueued download
+            long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if (downloadReference == referenceId) {
+
+//                Button cancelDownload = (Button) findViewById(R.id.cancelDownload);
+//                cancelDownload.setEnabled(false);
+
+                int ch;
+                ParcelFileDescriptor file;
+                StringBuffer strContent = new StringBuffer("");
+                StringBuffer countryData = new StringBuffer("");
+
+                //parse the JSON data and display on the screen
+                try {
+                    file = downloadManager.openDownloadedFile(downloadReference);
+                    FileInputStream fileInputStream
+                            = new ParcelFileDescriptor.AutoCloseInputStream(file);
+
+                    while ((ch = fileInputStream.read()) != -1)
+                        strContent.append((char) ch);
+
+//                    JSONObject responseObj = new JSONObject(strContent.toString());
+//                    JSONArray countriesObj = responseObj.getJSONArray("countries");
+//
+//                    for (int i = 0; i < countriesObj.length(); i++) {
+//                        Gson gson = new Gson();
+//                        String countryInfo = countriesObj.getJSONObject(i).toString();
+//                        Country country = gson.fromJson(countryInfo, Country.class);
+//                        countryData.append(country.getCode() + ": " + country.getName() + "\n");
+//                    }
+//
+//                    TextView showCountries = (TextView) findViewById(R.id.countryData);
+//                    showCountries.setText(countryData.toString());
+
+                    progressBar.setVisibility(View.GONE);
+                    Toast toast = Toast.makeText(context,
+                            "Downloading of File just finished", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP, 25, 400);
+                    toast.show();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
 
     public LoanApplicationFragment_4() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,6 +160,7 @@ public class LoanApplicationFragment_4 extends Fragment {
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
         downloadUrl = sharedPreferences.getString("laf_download_url", "");
         userID = sharedPreferences.getString("logged_id", "");
+        userEmailid = sharedPreferences.getString("user_email", "");
         userFirst = sharedPreferences.getString("first_name", "");
         userLast = sharedPreferences.getString("last_name", "");
         downloadSignedUrl = sharedPreferences.getString("signed_application_url", "");
@@ -191,9 +247,9 @@ public class LoanApplicationFragment_4 extends Fragment {
         radioButtonManual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(radioButtonManual.isChecked()){
+                if (radioButtonManual.isChecked()) {
                     linearLayoutManual.setVisibility(View.VISIBLE);
-                }else if (!radioButtonManual.isChecked()){
+                } else if (!radioButtonManual.isChecked()) {
                     linearLayoutManual.setVisibility(View.GONE);
                 }
             }
@@ -202,6 +258,35 @@ public class LoanApplicationFragment_4 extends Fragment {
         radioButtonEsign = (RadioButton) view.findViewById(R.id.radioButton_esign);
         mainApplication.applyTypeface(radioButtonEsign, context);
 
+        radioButtonEsign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                // Invoke Esign
+                if (radioButtonEsign.isChecked()) {
+                    final Digio digio = new Digio();
+                    DigioConfig digioConfig = new DigioConfig();
+                    digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
+                    digioConfig.setEnvironment(DigioEnvironment.STAGE);   //Stage is sandbox
+
+                    try {
+                        digio.init(getActivity(), digioConfig);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+//                        digio.esign(downloadUrl, userEmailid);
+//                        digio.esign("DID171007110855527S3VA38L78RLU4Q", "apsaini25@gmail.com");
+                        digio.esign(downloadUrl, "apsaini25@gmail.com");
+                        Log.e(MainApplication.TAG, "downloadUrldownloadUrl: "+downloadUrl + " userEmailiduserEmailid"+ userEmailid );
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
         buttonDownload = (Button) view.findViewById(R.id.button_signnsubmit_downloadApplication);
         mainApplication.applyTypeface(buttonDownload, context);
 
@@ -209,9 +294,9 @@ public class LoanApplicationFragment_4 extends Fragment {
         buttonPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newPayIntent = new Intent(context,	PayActivity.class);
+                Intent newPayIntent = new Intent(context, PayActivity.class);
 
-                String myamount="500";
+                String myamount = "500";
 
                 newPayIntent.putExtra("merchantId", "197");
                 newPayIntent.putExtra("txnscamt", "0"); //Fixed. Must be 0
@@ -252,7 +337,7 @@ public class LoanApplicationFragment_4 extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.e(MainApplication.TAG, "downloadUrl+++++: "+downloadUrl);
+                Log.e(MainApplication.TAG, "downloadUrl+++++: " + downloadUrl);
 //               Uri Download_Uri = Uri.parse(downloadUrl);
 
 //                DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
@@ -291,7 +376,7 @@ public class LoanApplicationFragment_4 extends Fragment {
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         context.registerReceiver(downloadReceiver, filter);
 
-        if(applicationStatus.equalsIgnoreCase("1")){
+        if (applicationStatus.equalsIgnoreCase("1")) {
             linearLayoutManual.setVisibility(View.GONE);
             buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
             textView7.setVisibility(View.GONE);
@@ -303,15 +388,24 @@ public class LoanApplicationFragment_4 extends Fragment {
         return view;
     }
 
-    public void downLoad(String uri, int status)
-    {
+    // Callback listener functions
+    public void onSigningSuccess(String documentId){
+        Toast.makeText(context, documentId+" signed successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onSigningFailure(String documentId, int code, String response){
+        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void downLoad(String uri, int status) {
         String fname = "";
-        if(status == 1){
-            fname = "LAF"+userFirst+userLast+System.currentTimeMillis()+".pdf";
-        }else if(status == 2){
-            fname = "SIGNED APPLICATION"+userFirst+userLast+System.currentTimeMillis()+".pdf";
+        if (status == 1) {
+            fname = "LAF" + userFirst + userLast + System.currentTimeMillis() + ".pdf";
+        } else if (status == 2) {
+            fname = "SIGNED APPLICATION" + userFirst + userLast + System.currentTimeMillis() + ".pdf";
         }
-        downloadManager = (DownloadManager)context.getSystemService(context.DOWNLOAD_SERVICE);
+        downloadManager = (DownloadManager) context.getSystemService(context.DOWNLOAD_SERVICE);
         Uri Download_Uri = Uri.parse(uri);
         DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
 
@@ -342,62 +436,6 @@ public class LoanApplicationFragment_4 extends Fragment {
 //        cancelDownload.setEnabled(true);
     }
 
-
-    private BroadcastReceiver downloadReceiver = new BroadcastReceiver()
-    {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            //check if the broadcast message is for our Enqueued download
-            long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-            if (downloadReference == referenceId) {
-
-//                Button cancelDownload = (Button) findViewById(R.id.cancelDownload);
-//                cancelDownload.setEnabled(false);
-
-                int ch;
-                ParcelFileDescriptor file;
-                StringBuffer strContent = new StringBuffer("");
-                StringBuffer countryData = new StringBuffer("");
-
-                //parse the JSON data and display on the screen
-                try {
-                    file = downloadManager.openDownloadedFile(downloadReference);
-                    FileInputStream fileInputStream
-                            = new ParcelFileDescriptor.AutoCloseInputStream(file);
-
-                    while ((ch = fileInputStream.read()) != -1)
-                        strContent.append((char) ch);
-
-//                    JSONObject responseObj = new JSONObject(strContent.toString());
-//                    JSONArray countriesObj = responseObj.getJSONArray("countries");
-//
-//                    for (int i = 0; i < countriesObj.length(); i++) {
-//                        Gson gson = new Gson();
-//                        String countryInfo = countriesObj.getJSONObject(i).toString();
-//                        Country country = gson.fromJson(countryInfo, Country.class);
-//                        countryData.append(country.getCode() + ": " + country.getName() + "\n");
-//                    }
-//
-//                    TextView showCountries = (TextView) findViewById(R.id.countryData);
-//                    showCountries.setText(countryData.toString());
-
-                    progressBar.setVisibility(View.GONE);
-                    Toast toast = Toast.makeText(context,
-                            "Downloading of File just finished", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP, 25, 400);
-                    toast.show();
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    };
-
     private void galleryDocIntent() {
         Intent intent = new Intent();
         intent.setType("application/pdf");  // for all types of file
@@ -411,37 +449,34 @@ public class LoanApplicationFragment_4 extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
-             if (requestCode == SELECT_DOC) {
+            if (requestCode == SELECT_DOC) {
 
                 Uri selectedImage = data.getData();
                 uploadFilePath = PathFile.getPath(context, selectedImage);
                 Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
-                 if(!uploadFilePath.equalsIgnoreCase("")){
-                     progressBar.setVisibility(View.VISIBLE);
-                     new Thread(new Runnable() {
-                         @Override
-                         public void run() {
-                             //creating new thread to handle Http Operations
-                             uploadFile(uploadFilePath);
-                         }
-                     }).start();
-                 }
+                if (!uploadFilePath.equalsIgnoreCase("")) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //creating new thread to handle Http Operations
+                            uploadFile(uploadFilePath);
+                        }
+                    }).start();
+                }
 
             }
         }
 
-        if (requestCode == 1)
-        {
-            if (data != null)
-            {
+        if (requestCode == 1) {
+            if (data != null) {
                 String message = data.getStringExtra("status");
                 String[] resKey = data.getStringArrayExtra("responseKeyArray");
                 String[] resValue = data.getStringArrayExtra("responseValueArray");
 
-                if(resKey!=null && resValue!=null)
-                {
-                    for(int i=0; i<resKey.length; i++)
-                        System.out.println("  "+i+" resKey : "+resKey[i]+" resValue : "+resValue[i]);
+                if (resKey != null && resValue != null) {
+                    for (int i = 0; i < resKey.length; i++)
+                        System.out.println("  " + i + " resKey : " + resKey[i] + " resValue : " + resValue[i]);
                 }
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
@@ -450,10 +485,10 @@ public class LoanApplicationFragment_4 extends Fragment {
     }
 
     public int uploadFile(final String selectedFilePath) {
-        String urlup=MainApplication.mainUrl + "laf/lafDocumentUpload";
+        String urlup = MainApplication.mainUrl + "laf/lafDocumentUpload";
 
 
-        Log.e(MainApplication.TAG, "urlup++++++: "+selectedFilePath + ", ipaddress : "+ipaddress  );
+        Log.e(MainApplication.TAG, "urlup++++++: " + selectedFilePath + ", ipaddress : " + ipaddress);
 
         int serverResponseCode = 0;
         HttpURLConnection connection;
@@ -531,14 +566,13 @@ public class LoanApplicationFragment_4 extends Fragment {
                 dataOutputStream.writeBytes(lineEnd);
 
 
-
-                    dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 //                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
 //                        + selectedFilePath + "\"" + lineEnd);
-                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"logged_id\";logged_id=" + userID + "" + lineEnd);
-                    dataOutputStream.writeBytes(lineEnd);
-                    dataOutputStream.writeBytes(userID);
-                    dataOutputStream.writeBytes(lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"logged_id\";logged_id=" + userID + "" + lineEnd);
+                dataOutputStream.writeBytes(lineEnd);
+                dataOutputStream.writeBytes(userID);
+                dataOutputStream.writeBytes(lineEnd);
 
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 //                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
@@ -661,7 +695,6 @@ public class LoanApplicationFragment_4 extends Fragment {
         }
 
     }
-
 
 
 }
