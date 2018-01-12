@@ -70,6 +70,7 @@
                     android:textColor="@color/white" />
 
                 <TextView
+                    android:ellipsize="end"
                     android:id="@+id/textView3_l4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -315,8 +316,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:gravity="right"
-                                        android:text="Payment Status :  "
+                                        android:text="Payment Status :"
                                         android:textSize="16sp" />
 
                                     <TextView
@@ -369,7 +369,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginLeft="2dp"
-                                                android:text="500"
+                                                android:text=""
                                                 android:textSize="16sp" />
                                         </LinearLayout>
 
@@ -395,7 +395,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:text="1503"
+                                            android:text=""
                                             android:textSize="16sp" />
                                     </LinearLayout>
 
@@ -419,7 +419,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:text="10/10/17"
+                                            android:text=""
                                             android:textSize="16sp" />
                                     </LinearLayout>
                                 </LinearLayout>
@@ -478,11 +478,13 @@
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/icon_leftarrow"
             android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="Previous"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/button_submit_loanappfragment4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

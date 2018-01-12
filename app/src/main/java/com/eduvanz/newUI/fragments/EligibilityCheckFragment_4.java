@@ -104,11 +104,8 @@ public class EligibilityCheckFragment_4 extends Fragment {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!MainApplication.mainapp_firstname.equals("")){
-
-                    if(!MainApplication.mainapp_lastname.equals("")){
-
-                        if(!MainApplication.mainapp_emailid.equals("")){
+                if(!MainApplication.mainapp_firstname.equals("") && !MainApplication.mainapp_lastname.equals("") &&
+                        !MainApplication.mainapp_emailid.equals("")){
 
                             /**API CALL**/
                             try {
@@ -134,16 +131,18 @@ public class EligibilityCheckFragment_4 extends Fragment {
                                 e.printStackTrace();
                             }
 
-                        }else {
-                            editTextEmailID.setError("Please provide Email ID");
-                        }
 
-                    }else {
+                }else {
+                    if(editTextFirstname.getText().toString().equalsIgnoreCase("")){
+                        editTextFirstname.setError("Please provide First Name");
+                    }
+                    if(editTextEmailID.getText().toString().equalsIgnoreCase("")){
+                        editTextEmailID.setError("Please provide Email ID");
+                    }
+                    if(editTextLastname.getText().toString().equalsIgnoreCase("")){
                         editTextLastname.setError("Please provide Last Name");
                     }
 
-                }else {
-                    editTextFirstname.setError("Please provide First Name");
                 }
             }
         });
@@ -218,7 +217,7 @@ public class EligibilityCheckFragment_4 extends Fragment {
 
             if (status.equalsIgnoreCase("1")) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
                 JSONObject jsonObject = jsonData.getJSONObject("result");
                 String loggedID = jsonObject.optString("logged_id");

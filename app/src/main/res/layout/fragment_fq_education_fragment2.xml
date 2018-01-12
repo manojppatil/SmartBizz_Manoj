@@ -1,6 +1,6 @@
 <LinearLayout
     android:background="@color/white"
-    android:paddingTop="20dp"
+    android:layout_marginTop="5dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -31,12 +30,10 @@
                     android:layout_height="wrap_content"
                     android:text="Last Completed Degree : "
                     android:layout_gravity="left"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/colorPrimary"/>
                 <Spinner
-                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:theme="@style/ThemeOverlay.AppCompat.Light"
                     android:dropDownSelector="@color/colorPrimary"
@@ -52,7 +49,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:layout_weight="2"
                     android:paddingTop="2dp"
@@ -61,14 +58,12 @@
                     android:layout_height="wrap_content"
                     android:text="Is CGPA : "
                     android:layout_gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/colorPrimary"/>
                 <RadioGroup
                     android:layout_weight="1"
-                    android:paddingLeft="5dp"
                     android:id="@+id/radiogroup_iscgpa"
                     android:gravity="left"
-                    android:layout_marginTop="6dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -76,7 +71,6 @@
                         android:theme="@style/EditTextStyle"
                         android:textColor="@color/black"
                         android:checked="false"
-                        android:padding="5dp"
                         android:id="@+id/radiobutton_iscgpa_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -85,10 +79,9 @@
                         android:checked="false"
                         android:theme="@style/EditTextStyle"
                         android:textColor="@color/black"
-                        android:padding="5dp"
                         android:layout_marginLeft="5dp"
                         android:id="@+id/radiobutton_iscgpa_no"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="No" />
                 </RadioGroup>
@@ -99,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <android.support.design.widget.TextInputLayout
+                    app:hintTextAppearance="@style/CustomTextAppearance"
                     android:theme="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,10 +105,12 @@
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
                         android:hint="Last Degree CGPA"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    app:hintTextAppearance="@style/CustomTextAppearance"
                     android:theme="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -127,7 +123,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
                         android:hint="Last Degree Percentage"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -137,14 +134,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="8dp">
+                app:hintTextAppearance="@style/CustomTextAppearance">
                 <EditText
                     android:id="@+id/input_passingyear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapSentences"
+                    android:inputType="number"
                     android:hint="Passing Year"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
             </android.support.design.widget.TextInputLayout>
 
             <!--<Button-->

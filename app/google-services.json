@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "577641006287",
-    "project_id": "eduvanz-177706"
+    "firebase_url": "https://eduvanz-177706.firebaseio.com",
+    "project_id": "eduvanz-177706",
+    "storage_bucket": "eduvanz-177706.appspot.com"
   },
   "client": [
     {
@@ -13,12 +15,20 @@
       },
       "oauth_client": [
         {
-          "client_id": "577641006287-hqi5emmqq8jl0lje2n09d0nkki51ovo6.apps.googleusercontent.com",
+          "client_id": "577641006287-jjudtfkcio2t3asvqehul59n4tq8o7ta.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.eduvanz",
-            "certificate_hash": "6de2fb7cc32dc3e2aebdbc5e308914e7d6e05234"
+            "certificate_hash": "b76f26f5d775f6fa42a63ca4d7b865322d7f9ba6"
           }
+        },
+        {
+          "client_id": "577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "577641006287-pen73mqtqlgq3eobaoo6jhkporsa8286.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "577641006287-ho7dgruqr7lf9kj39ohnqiek6fh430ur.apps.googleusercontent.com",
@@ -38,11 +48,16 @@
           }
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

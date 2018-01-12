@@ -18,8 +18,9 @@
             android:layout_height="wrap_content"
             android:text="eduvanz"
             android:textColor="@color/white"
-            android:textSize="22sp"
-            android:id="@+id/textView_getmobileno"/>
+            android:textSize="24sp"
+            android:id="@+id/textView_getmobileno"
+            android:textStyle="bold"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -58,8 +59,7 @@
         android:maxLength="10"/>
 
     <android.support.v7.widget.AppCompatButton
-        android:elevation="20dp"
-        android:translationZ="3dp"
+        android:translationZ="1.5dp"
         android:stateListAnimator="@null"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

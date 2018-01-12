@@ -91,7 +91,7 @@ public class EligibilityCheckFragment_3 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                MainApplication.mainapp_currentCity = editTextCity.getText().toString();
+                MainApplication.mainapp_currentCity = editTextCity.getText().toString();
             }
 
             @Override
@@ -247,7 +247,10 @@ public class EligibilityCheckFragment_3 extends Fragment {
                 String knownName = addresses.get(0).getFeatureName();
                 Log.e(MainApplication.TAG, "onResume: Header getLocality"+city+"getSubLocality"+state+"\n country "+countryG );
 //                countryByLoc=countryG;
-                editTextCity.setText(city);
+                if(MainApplication.mainapp_currentCity.equalsIgnoreCase("")){
+                    editTextCity.setText(city);
+                }
+
             }
             Log.e(TAG, "getLocationAddress: "+MainApplication.latitude);
             Log.e(TAG, "getLocationAddress: "+MainApplication.longitde);

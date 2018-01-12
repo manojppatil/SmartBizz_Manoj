@@ -28,6 +28,8 @@
         android:visibility="gone">
 
         <TextView
+            android:maxLines="1"
+            android:ellipsize="end"
             android:id="@+id/textView_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,11 +38,13 @@
             android:textSize="16sp" />
 
         <TextView
+            android:maxLines="1"
+            android:ellipsize="end"
             android:id="@+id/textView_emailID"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout

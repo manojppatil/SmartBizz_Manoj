@@ -23,6 +23,7 @@ import com.eduvanz.newUI.fragments.EligibilityCheckFragment_4;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_1;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_2;
 import com.eduvanz.newUI.fragments.LoanApplicationFragment_3;
+import com.eduvanz.newUI.fragments.LoanApplicationFragment_4;
 import com.eduvanz.newUI.newViews.BannerActivity;
 import com.eduvanz.newUI.newViews.DashboardActivity;
 import com.eduvanz.newUI.newViews.GetMobileNo;
@@ -234,6 +235,7 @@ public class VolleyCallNew extends Application {
             }
         } else if (screen.equalsIgnoreCase("borrowerLoanDetails")) {
             try {
+                Log.e(TAG, "borrowerLoanDetails: "+s );
                 jsonDataO = new JSONObject(s);
                 ((LoanApplicationFragment_1) mfragment).borrowerLoanDetails(jsonDataO);
             } catch (JSONException e) {
@@ -331,6 +333,15 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }  else if (screen.equalsIgnoreCase("dashbBoardStatusBannerPage")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((BannerActivity) mActivity).setProfileDashbBoardStatus(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (screen.equalsIgnoreCase("getCurrentStates")) {
             try {
                 jsonDataO = new JSONObject(s);
@@ -416,6 +427,42 @@ public class VolleyCallNew extends Application {
             try {
                 jsonDataO = new JSONObject(s);
                 ((LoanApplicationFragment_3) mfragment).getStudentLaf(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("getDigioDocumentIdForStudent")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_4) mfragment).getDigioDocumentIdForStudent(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("onSuccessfulRegisterStudentESignCase")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_4) mfragment).onSuccessfulRegisterStudentESignCase(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("getKycPaymentRelatedInfo")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_4) mfragment).getKycPaymentRelatedInfo(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("getSignAndSubmitDetails")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_4) mfragment).getSignAndSubmitDetails(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

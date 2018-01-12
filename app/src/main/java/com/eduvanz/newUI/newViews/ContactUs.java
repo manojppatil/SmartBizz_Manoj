@@ -2,6 +2,8 @@ package com.eduvanz.newUI.newViews;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
+
+import java.util.List;
 
 public class ContactUs extends AppCompatActivity {
 
@@ -22,6 +27,7 @@ public class ContactUs extends AppCompatActivity {
     MainApplication mainApplication;
     Context context;
     ImageView imageViewOfficeLocation;
+    LinearLayout linearLayoutNumber, linearLayoutEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +61,9 @@ public class ContactUs extends AppCompatActivity {
         mainApplication.applyTypeface(textView7, context);
         textView8 = (TextView) findViewById(R.id.textview8_contactus);
         mainApplication.applyTypeface(textView8, context);
-
         imageViewOfficeLocation = (ImageView) findViewById(R.id.imageView_officelocation);
+        linearLayoutEmail = (LinearLayout) findViewById(R.id.linearLayout_email_contactus);
+        linearLayoutNumber = (LinearLayout) findViewById(R.id.linearLayout_number_contactus);
 
         imageViewOfficeLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +75,22 @@ public class ContactUs extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
                 context.startActivity(intent);
 
+            }
+        });
+
+        linearLayoutNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:0224523689"));
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareToGMail(new String[]{"support@eduvanz.com"}, "", "");
             }
         });
 
@@ -83,5 +106,22 @@ public class ContactUs extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         super.onBackPressed();
+    }
+
+    public void shareToGMail(String[] email, String subject, String content) {
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, content);
+        final PackageManager pm = context.getPackageManager();
+        final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
+        ResolveInfo best = null;
+        for(final ResolveInfo info : matches)
+            if (info.activityInfo.packageName.endsWith(".gm") || info.activityInfo.name.toLowerCase().contains("gmail"))
+                best = info;
+        if (best != null)
+            emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+        context.startActivity(emailIntent);
     }
 }

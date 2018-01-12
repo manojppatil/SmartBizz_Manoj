@@ -3,6 +3,7 @@ package com.eduvanz.newUI;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.NumberFormat;

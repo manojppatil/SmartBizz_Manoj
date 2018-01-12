@@ -22,8 +22,10 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,13 +73,14 @@ public class LoanApplicationFragment_2 extends Fragment {
     public static TextView birthdaycalender, lable, textViewbirthday;
     Typeface typeface;
     Calendar cal;
-    public String dateformate="", userID="";
+    public static String dateformate="", userID="", coBorrowerBackground="";
     MainApplication mainApplication;
     static View view;
     static FragmentTransaction transaction;
     public static ProgressBar progressBar;
 
     public static RadioButton radioButtonMarried, radioButtonSingle;
+    public static RadioGroup radioGroupMaritialStatus;
     public static EditText fname, lname, adhaarno, panno, currentaddress, currentpincode, permanentaddress, contactno, emailid, permanentpincode, monthlyrent;
 
     public static Spinner spinnerPermanentCity, spinnerPermanentCountry, spinnerPermanentState;
@@ -135,6 +138,8 @@ public class LoanApplicationFragment_2 extends Fragment {
     public static ArrayList<CoborrowerJobDurationFinancePOJO> coborrowerJobDurationFinancePOJOArrayList;
     public String jobDurationID="";
 
+    public static LinearLayout linearLayoutLeftOffcoBorrower;
+
     public LoanApplicationFragment_2() {
         // Required empty public constructor
     }
@@ -151,6 +156,7 @@ public class LoanApplicationFragment_2 extends Fragment {
         transaction = getFragmentManager().beginTransaction();
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
         userID = sharedPreferences.getString("logged_id","null");
+        coBorrowerBackground = sharedPreferences.getString("coBorrowerBackground_dark","0");
 
         MainApplication.currrentFrag = 2;
 
@@ -162,101 +168,158 @@ public class LoanApplicationFragment_2 extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (!fname.getText().toString().equals("")) {
-                    if (!lname.getText().toString().equals("")) {
-                        if (!textViewbirthday.getText().toString().equals("")) {
-                            if (!adhaarno.getText().toString().equals("")) {
-                try {
-                    String maritialstatus="";
-                    if(radioButtonMarried.isChecked())
-                    {
-                        maritialstatus = "1";
-                    }else if(radioButtonSingle.isChecked()){
-                        maritialstatus = "2";
-                    }
-                    progressBar.setVisibility(View.VISIBLE);
-                    String url = MainApplication.mainUrl + "algo/setCoBorrowerLoanDetails";
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("logged_id",userID);
-                    params.put("coborrower_address_type",currentResidencetypeID);
-                    params.put("coborrower_monthly_rent",monthlyrent.getText().toString());
-                    params.put("coborrower_current_address",currentaddress.getText().toString());
-                    params.put("coborrower_current_city",currentcityID);
-                    params.put("coborrower_current_state",currentstateID);
-                    params.put("coborrower_current_country",currentcountryID);
-                    params.put("coborrower_current_pincode",currentpincode.getText().toString());
-                    params.put("coborrower_permanent_address",permanentaddress.getText().toString());
-                    params.put("coborrower_permanent_city",permanentcityID);
-                    params.put("coborrower_permanent_state",permanentstateID);
-                    params.put("coborrower_permanent_country",permanentCountryID);
-                    params.put("coborrower_permanent_pincode",permanentpincode.getText().toString());
-                    params.put("coborrower_first_name",fname.getText().toString());
-                    params.put("coborrower_last_name",lname.getText().toString());
-                    params.put("coborrower_dob",textViewbirthday.getText().toString());
-                    params.put("coborrower_is_married",maritialstatus);
-                    params.put("coborrower_pan_no",panno.getText().toString());
-                    params.put("coborrower_aadhar_no",adhaarno.getText().toString());
+                if (!fname.getText().toString().equals("") && !lname.getText().toString().equals("") &&
+                        !textViewbirthday.getText().toString().equals("") && !adhaarno.getText().toString().equals("") &&
+                        !panno.getText().toString().equals("") &&
+                        !currentaddress.getText().toString().equals("") &&
+                        !currentpincode.getText().toString().equals("") &&
+                        !permanentaddress.getText().toString().equals("") &&
+                        !permanentpincode.getText().toString().equals("") &&
+                        !contactno.getText().toString().equals("") &&
+                        !emailid.getText().toString().equals("")&&
+                        !anuualincome.getText().toString().equals("") &&
+                        !employeer.getText().toString().equals("")) {
 
-                    params.put("coborrower_email",emailid.getText().toString());
-                    params.put("coborrower_mobile",contactno.getText().toString());
-                    params.put("coborrower_living_since",currentresidenceDurationID);
-                    params.put("coborrower_relationship", relationshipwithborrowerID);
+                    if(radioGroupMaritialStatus.getCheckedRadioButtonId()>0) {
 
-                    params.put("coborrower_profession",professionID);
-                    params.put("coborrower_income", anuualincome.getText().toString());
-                    params.put("coborrower_organization", employeer.getText().toString());
-                    params.put("coborrower_working_organization_since",jobDurationID);
+                        if(!currentcityID.equalsIgnoreCase("") && !currentstateID.equalsIgnoreCase("") &&
+                                !currentcountryID.equalsIgnoreCase("") && !permanentcityID.equalsIgnoreCase("") &&
+                                !permanentstateID.equalsIgnoreCase("") && !permanentCountryID.equalsIgnoreCase("") &&
+                                !currentResidencetypeID.equalsIgnoreCase("") && !currentresidenceDurationID.equalsIgnoreCase("") &&
+                                !relationshipwithborrowerID.equalsIgnoreCase("") && !professionID.equalsIgnoreCase("") &&
+                                !jobDurationID.equalsIgnoreCase("")) {
 
-                    Log.e(TAG, "deeeeeeeeeeeeeeeeeeeeeeee: "+professionID );
+                            try {
+                                String maritialstatus = "";
+                                if (radioButtonMarried.isChecked()) {
+                                    maritialstatus = "1";
+                                } else if (radioButtonSingle.isChecked()) {
+                                    maritialstatus = "2";
+                                }
+                                progressBar.setVisibility(View.VISIBLE);
+                                String url = MainApplication.mainUrl + "algo/setCoBorrowerLoanDetails";
+                                Map<String, String> params = new HashMap<String, String>();
+                                params.put("logged_id", userID);
+                                params.put("coborrower_address_type", currentResidencetypeID);
+                                params.put("coborrower_monthly_rent", monthlyrent.getText().toString());
+                                params.put("coborrower_current_address", currentaddress.getText().toString());
+                                params.put("coborrower_current_city", currentcityID);
+                                params.put("coborrower_current_state", currentstateID);
+                                params.put("coborrower_current_country", currentcountryID);
+                                params.put("coborrower_current_pincode", currentpincode.getText().toString());
+                                params.put("coborrower_permanent_address", permanentaddress.getText().toString());
+                                params.put("coborrower_permanent_city", permanentcityID);
+                                params.put("coborrower_permanent_state", permanentstateID);
+                                params.put("coborrower_permanent_country", permanentCountryID);
+                                params.put("coborrower_permanent_pincode", permanentpincode.getText().toString());
+                                params.put("coborrower_first_name", fname.getText().toString());
+                                params.put("coborrower_last_name", lname.getText().toString());
+                                params.put("coborrower_dob", textViewbirthday.getText().toString());
+                                params.put("coborrower_is_married", maritialstatus);
+                                params.put("coborrower_pan_no", panno.getText().toString());
+                                params.put("coborrower_aadhar_no", adhaarno.getText().toString());
 
-                    MainApplication.coborrowerValue1 = currentResidencetypeID;
-                    MainApplication.coborrowerValue2 = monthlyrent.getText().toString();
-                    MainApplication.coborrowerValue3 = currentaddress.getText().toString();
-                    MainApplication.coborrowerValue4 = currentcityID;
-                    MainApplication.coborrowerValue5 = currentstateID;
-                    MainApplication.coborrowerValue6 = currentcountryID;
-                    MainApplication.coborrowerValue7 = currentpincode.getText().toString();
-                    MainApplication.coborrowerValue8 = permanentaddress.getText().toString();
-                    MainApplication.coborrowerValue9 = permanentcityID;
-                    MainApplication.coborrowerValue10 = permanentstateID;
-                    MainApplication.coborrowerValue11 = permanentCountryID;
-                    MainApplication.coborrowerValue12 = permanentpincode.getText().toString();
-                    MainApplication.coborrowerValue13 = fname.getText().toString();
-                    MainApplication.coborrowerValue14 = lname.getText().toString();
-                    MainApplication.coborrowerValue15 = textViewbirthday.getText().toString();
-                    MainApplication.coborrowerValue16 = maritialstatus;
-                    MainApplication.coborrowerValue17 = panno.getText().toString();
-                    MainApplication.coborrowerValue18 = adhaarno.getText().toString();
+                                params.put("coborrower_email", emailid.getText().toString());
+                                params.put("coborrower_mobile", contactno.getText().toString());
+                                params.put("coborrower_living_since", currentresidenceDurationID);
+                                params.put("coborrower_relationship", relationshipwithborrowerID);
 
-                    MainApplication.coborrowerValue19 = emailid.getText().toString();
-                    MainApplication.coborrowerValue20 = contactno.getText().toString();
-                    MainApplication.coborrowerValue21 = currentresidenceDurationID;
-                    MainApplication.coborrowerValue22 = relationshipwithborrowerID;
-                    MainApplication.coborrowerValue23 = professionID;
-                    MainApplication.coborrowerValue24 = anuualincome.getText().toString();
-                    MainApplication.coborrowerValue25 = employeer.getText().toString();
-                    MainApplication.coborrowerValue26 = jobDurationID;
+                                params.put("coborrower_profession", professionID);
+                                params.put("coborrower_income", anuualincome.getText().toString());
+                                params.put("coborrower_organization", employeer.getText().toString());
+                                params.put("coborrower_working_organization_since", jobDurationID);
 
-                    VolleyCallNew volleyCall = new VolleyCallNew();
-                    volleyCall.sendRequest(context, url, null, mFragment, "sendcoboorrowerDetails", params);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                            } else {
-                                adhaarno.setError("Aadhaar Number is Required");
-                                adhaarno.requestFocus();
+                                MainApplication.coborrowerValue1 = currentResidencetypeID;
+                                MainApplication.coborrowerValue2 = monthlyrent.getText().toString();
+                                MainApplication.coborrowerValue3 = currentaddress.getText().toString();
+                                MainApplication.coborrowerValue4 = currentcityID;
+                                MainApplication.coborrowerValue5 = currentstateID;
+                                MainApplication.coborrowerValue6 = currentcountryID;
+                                MainApplication.coborrowerValue7 = currentpincode.getText().toString();
+                                MainApplication.coborrowerValue8 = permanentaddress.getText().toString();
+                                MainApplication.coborrowerValue9 = permanentcityID;
+                                MainApplication.coborrowerValue10 = permanentstateID;
+                                MainApplication.coborrowerValue11 = permanentCountryID;
+                                MainApplication.coborrowerValue12 = permanentpincode.getText().toString();
+                                MainApplication.coborrowerValue13 = fname.getText().toString();
+                                MainApplication.coborrowerValue14 = lname.getText().toString();
+                                MainApplication.coborrowerValue15 = textViewbirthday.getText().toString();
+                                MainApplication.coborrowerValue16 = maritialstatus;
+                                MainApplication.coborrowerValue17 = panno.getText().toString();
+                                MainApplication.coborrowerValue18 = adhaarno.getText().toString();
+
+                                MainApplication.coborrowerValue19 = emailid.getText().toString();
+                                MainApplication.coborrowerValue20 = contactno.getText().toString();
+                                MainApplication.coborrowerValue21 = currentresidenceDurationID;
+                                MainApplication.coborrowerValue22 = relationshipwithborrowerID;
+                                MainApplication.coborrowerValue23 = professionID;
+                                MainApplication.coborrowerValue24 = anuualincome.getText().toString();
+                                MainApplication.coborrowerValue25 = employeer.getText().toString();
+                                MainApplication.coborrowerValue26 = jobDurationID;
+
+                                VolleyCallNew volleyCall = new VolleyCallNew();
+                                volleyCall.sendRequest(context, url, null, mFragment, "sendcoboorrowerDetails", params);
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } else {
-                            textViewbirthday.setError("Birthdate is Required");
-                            textViewbirthday.requestFocus();
+                        }else {
+                            Toast.makeText(context, "Please fill up all the details to continue", Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        lname.setError("Last Name is Required");
-                        lname.requestFocus();
-                    }
+                    }else {
+                            radioButtonSingle.setError("You need to select Maritial status");
+                            emailid.requestFocus();
+                        }
+
                 } else {
-                    fname.setError("First Name is Required");
-                    fname.requestFocus();
+
+                    if (fname.getText().toString().equalsIgnoreCase("")) {
+                        fname.setError("First Name is Required");
+                        fname.requestFocus();
+                    }
+                    if (adhaarno.getText().toString().equalsIgnoreCase("")) {
+                        adhaarno.setError("Aadhaar Number is Required");
+                    }
+                    if (textViewbirthday.getText().toString().equalsIgnoreCase("")) {
+                        textViewbirthday.setError("Birthdate is Required");
+                    }
+                    if (lname.getText().toString().equalsIgnoreCase("")) {
+                        lname.setError("Last Name is Required");
+                    }
+
+
+                    if (panno.getText().toString().equalsIgnoreCase("")) {
+                        panno.setError("PAN number is required is Required");
+                    }
+
+                    if (currentaddress.getText().toString().equalsIgnoreCase("")) {
+                        currentaddress.setError("Current Address is Required");
+                    }
+
+                    if (currentpincode.getText().toString().equalsIgnoreCase("")) {
+                        currentpincode.setError("Current Pin code is Required");
+                    }
+
+                    if (permanentaddress.getText().toString().equalsIgnoreCase("")) {
+                        permanentaddress.setError("Permanent Address is Required");
+                    }
+
+                    if (permanentpincode.getText().toString().equalsIgnoreCase("")) {
+                        permanentpincode.setError("Permanent Pin code is Required");
+                    }
+
+                    if (contactno.getText().toString().equalsIgnoreCase("")) {
+                        contactno.setError("Contact Number is Required");
+                    }
+
+                    if (emailid.getText().toString().equalsIgnoreCase("")) {
+                        emailid.setError("Email Id is Required");
+                    }
+                    if (anuualincome.getText().toString().equalsIgnoreCase("")) {
+                        anuualincome.setError("Annual Income is Required");
+                    }
+                    if (employeer.getText().toString().equalsIgnoreCase("")) {
+                        employeer.setError("Employeer name is Required");
+                    }
                 }
             }
         });
@@ -330,7 +393,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue13 = fname.getText().toString();
+                MainApplication.coborrowerValue13 = fname.getText().toString();
             }
 
             @Override
@@ -347,7 +410,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue14 = lname.getText().toString();
+                MainApplication.coborrowerValue14 = lname.getText().toString();
             }
 
             @Override
@@ -363,7 +426,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue18 = adhaarno.getText().toString();
+                MainApplication.coborrowerValue18 = adhaarno.getText().toString();
             }
 
             @Override
@@ -380,7 +443,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue17 = panno.getText().toString();
+                MainApplication.coborrowerValue17 = panno.getText().toString();
             }
 
             @Override
@@ -397,7 +460,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue2 = monthlyrent.getText().toString();
+                MainApplication.coborrowerValue2 = monthlyrent.getText().toString();
             }
 
             @Override
@@ -414,7 +477,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue3 = currentaddress.getText().toString();
+                MainApplication.coborrowerValue3 = currentaddress.getText().toString();
             }
 
             @Override
@@ -431,7 +494,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue7 = currentpincode.getText().toString();
+                MainApplication.coborrowerValue7 = currentpincode.getText().toString();
             }
 
             @Override
@@ -448,7 +511,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue8 = permanentaddress.getText().toString();
+                MainApplication.coborrowerValue8 = permanentaddress.getText().toString();
             }
 
             @Override
@@ -465,7 +528,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainApplication.borrowerValue12 = permanentpincode.getText().toString();
+                MainApplication.coborrowerValue12 = permanentpincode.getText().toString();
             }
 
             @Override
@@ -852,9 +915,14 @@ public class LoanApplicationFragment_2 extends Fragment {
 
     private void setViews() {
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar_applylona_coborrower);
+        linearLayoutLeftOffcoBorrower = (LinearLayout) view.findViewById(R.id.linearLayout_leftoff);
         textView1 = (TextView) view.findViewById(R.id.textView1_l2);
         mainApplication.applyTypeface(textView1, context);
         textView2 = (TextView) view.findViewById(R.id.textView2_l2);
+        if(coBorrowerBackground.equalsIgnoreCase("1")){
+            textView2.setBackground(getResources().getDrawable(R.drawable.background_capsule_primarydark));
+            linearLayoutLeftOffcoBorrower.setBackground(getResources().getDrawable(R.drawable.background_capsule_primarydark));
+        }
         mainApplication.applyTypefaceBold(textView2, context);
         textView3 = (TextView) view.findViewById(R.id.textView3_l2);
         mainApplication.applyTypeface(textView3, context);
@@ -884,6 +952,7 @@ public class LoanApplicationFragment_2 extends Fragment {
         permanentpincode = (EditText) view.findViewById(R.id.input_coborrowerpermanentpincode);
         radioButtonMarried = (RadioButton) view.findViewById(R.id.input_coborrowermarriedRadioButton);
         radioButtonSingle = (RadioButton) view.findViewById(R.id.input_coborrowersingleRadioButton);
+        radioGroupMaritialStatus = (RadioGroup) view.findViewById(R.id.radioGroup_coborrower_maritialstatus);
 
         spinnerCurrentResidenceType = (Spinner) view.findViewById(R.id.spinner_coborrowercurrentresidencytype);
         spinnerCurrentCity = (Spinner) view.findViewById(R.id.spinner_coborrowercurrentcity);
@@ -902,8 +971,7 @@ public class LoanApplicationFragment_2 extends Fragment {
         employeer = (EditText) view.findViewById(R.id.input_employeer_coborrower);
     }
 
-    public static String dateFormateSystem(String date)
-    {
+    public static String dateFormateSystem(String date) {
         String dateformate2 = null;
         try {
             String birthDate = date;
@@ -917,7 +985,6 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
         return dateformate2;
     }
-
 
     /** RESPONSE OF API CALL **/
     public void coBorrowerLoanDetails(JSONObject jsonData) {
@@ -1298,6 +1365,13 @@ public class LoanApplicationFragment_2 extends Fragment {
                 int docupload = jsonObject.getInt("docUpload");
 
                 if(docupload == 1){
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("coBorrowerBackground_dark", "1");
+                    Log.e(TAG, "onCreateView:++++++++ sharedPreferences"+coBorrowerBackground );
+                    editor.apply();
+                    editor.commit();
+
                     LoanApplicationFragment_3 loanApplicationFragment_3 = new LoanApplicationFragment_3();
                     transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_3).commit();
                 }else if(docupload == 0){

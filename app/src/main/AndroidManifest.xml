@@ -22,16 +22,23 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <supports-screens
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:anyDensity="true"
+        />
 
     <application
         android:name=".MainActivity"
-        android:allowBackup="true"
-        android:icon="@drawable/eduvanz_logo"
+        android:icon="@drawable/eduvanz_logo_new"
         android:label="@string/app_name"
+        android:allowBackup="false"
+        tools:replace="android:allowBackup,android:icon,android:label,android:theme"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:icon,android:label,android:theme">
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

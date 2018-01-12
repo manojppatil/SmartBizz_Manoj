@@ -39,8 +39,10 @@ import com.digio.in.esignsdk.DigioEnvironment;
 import com.eduvanz.R;
 import com.eduvanz.Utils;
 import com.eduvanz.newUI.MainApplication;
+import com.eduvanz.newUI.VolleyCallNew;
 import com.eduvanz.uploaddocs.PathFile;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,6 +56,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -68,24 +72,25 @@ public class LoanApplicationFragment_4 extends Fragment {
     public static Context context;
     public static Fragment mFragment;
     public static ProgressBar progressBar;
-    static String uploadFilePath = "", userID = "", userFirst = "", userLast = "", ipaddress = "",
-            applicationStatus = "", userEmailid="";
+    public static String uploadFilePath = "", userID = "", userFirst = "", userLast = "", ipaddress = "",
+            applicationStatus = "", userEmailid="", amount="", transactionId="";
     public int SELECT_DOC = 2;
-    Button buttonNext, buttonPrevious, buttonUpload, buttonDownload,
+    public static Button buttonNext, buttonPrevious, buttonUpload, buttonDownload,
             buttonDownloadSignedApplication, buttonPay;
     Typeface typefaceFont, typefaceFontBold;
-    TextView textView1, textView2, textView3, textView17, textView4, textView5, textView6, textView7,
+    public static TextView textView1, textView2, textView3, textView17, textView4, textView5, textView6, textView7,
             textView8, textView9, textView10, textView11, textView12, textView13, textView14, textView19,
             textView15, textView16, textView18;
-    RadioButton radioButtonManual, radioButtonEsign;
-    LinearLayout linearLayoutManual;
+    public static RadioButton radioButtonManual, radioButtonEsign;
+    public static LinearLayout linearLayoutManual, linearLayout_paymentDetails;
     MainApplication mainApplication;
     String userId;
     String downloadUrl = "", downloadSignedUrl = "";
     long downloadReference;
     DownloadManager downloadManager;
     StringBuffer sb;
-    RadioGroup radioGroupla4;
+    public static RadioGroup radioGroupla4;
+
     private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
 
         @Override
@@ -242,6 +247,8 @@ public class LoanApplicationFragment_4 extends Fragment {
 
         linearLayoutManual = (LinearLayout) view.findViewById(R.id.linearLayout_manual);
 
+        linearLayout_paymentDetails = (LinearLayout) view.findViewById(R.id.linearLayout_paymentdetails);
+
         radioButtonManual = (RadioButton) view.findViewById(R.id.radioButton_manual);
         mainApplication.applyTypeface(radioButtonManual, context);
         radioButtonManual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -262,24 +269,16 @@ public class LoanApplicationFragment_4 extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                // Invoke Esign
                 if (radioButtonEsign.isChecked()) {
-                    final Digio digio = new Digio();
-                    DigioConfig digioConfig = new DigioConfig();
-                    digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
-                    digioConfig.setEnvironment(DigioEnvironment.STAGE);   //Stage is sandbox
-
+                    /** API CALL **/
                     try {
-                        digio.init(getActivity(), digioConfig);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-//                        digio.esign(downloadUrl, userEmailid);
-//                        digio.esign("DID171007110855527S3VA38L78RLU4Q", "apsaini25@gmail.com");
-                        digio.esign(downloadUrl, "apsaini25@gmail.com");
-                        Log.e(MainApplication.TAG, "downloadUrldownloadUrl: "+downloadUrl + " userEmailiduserEmailid"+ userEmailid );
+                        String ipaddress = Utils.getIPAddress(true);
+                        String url = MainApplication.mainUrl + "laf/getDigioDocumentIdForStudent";
+                        Map<String, String> params = new HashMap<String, String>();
+                        VolleyCallNew volleyCall = new VolleyCallNew();
+                        params.put("logged_id", userID);
+                        params.put("created_by_ip", ipaddress);
+                        volleyCall.sendRequest(context, url, null, mFragment, "getDigioDocumentIdForStudent", params);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -294,42 +293,17 @@ public class LoanApplicationFragment_4 extends Fragment {
         buttonPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newPayIntent = new Intent(context, PayActivity.class);
 
-                String myamount = "500";
-
-                newPayIntent.putExtra("merchantId", "197");
-                newPayIntent.putExtra("txnscamt", "0"); //Fixed. Must be 0
-                newPayIntent.putExtra("loginid", "197");
-                newPayIntent.putExtra("password", "Test@123");
-                newPayIntent.putExtra("prodid", "NSE");
-                newPayIntent.putExtra("txncurr", "INR"); //Fixed. Must be ?INR?
-                newPayIntent.putExtra("clientcode", "001");
-                newPayIntent.putExtra("custacc", "100000036600");
-                newPayIntent.putExtra("amt", myamount);//Should be 3 decimal number i.e 51.000
-                newPayIntent.putExtra("txnid", "013");
-                newPayIntent.putExtra("date", "25/08/2015 18:31:00");//Should be in same format
-                newPayIntent.putExtra("bankid", "2001"); //Should be valid bank id // Optional
-                newPayIntent.putExtra("discriminator", "NB"); // NB or IMPS or All ONLY (value should be same as commented)
-                newPayIntent.putExtra("signature_request", "KEY123657234");
-                newPayIntent.putExtra("signature_response", "KEYRESP123657234");
-
-
-                //use below Production url only with Production "Library-MobilePaymentSDK", Located inside PROD folder
-                //newPayIntent.putExtra("ru","https://payment.atomtech.in/mobilesdk/param"); //ru FOR Production
-
-                //use below UAT url only with UAT "Library-MobilePaymentSDK", Located inside UAT folder
-                newPayIntent.putExtra("ru", "https://paynetzuat.atomtech.in/mobilesdk/param"); // FOR UAT (Testing)
-
-                //Optinal Parameters
-                newPayIntent.putExtra("customerName", "JKL PQR"); //Only for Name
-                newPayIntent.putExtra("customerEmailID", "jkl.pqr@atomtech.in");//Only for Email ID
-                newPayIntent.putExtra("customerMobileNo", "9876543210");//Only for Mobile Number
-                newPayIntent.putExtra("billingAddress", "Mumbai");//Only for Address
-                newPayIntent.putExtra("optionalUdf9", "OPTIONAL DATA 1");// Can pass any data
-//                newPayIntent.putExtra("mprod", mprod); // Pass data in XML format, only for Multi product
-
-                startActivityForResult(newPayIntent, 1);
+                /** API CALL **/
+                try {
+                    String url = MainApplication.mainUrl + "epayment/getKycPaymentRelatedInfo";
+                    Map<String, String> params = new HashMap<String, String>();
+                    VolleyCallNew volleyCall = new VolleyCallNew();
+                    params.put("studentId", userID);
+                    volleyCall.sendRequest(context, url, null, mFragment, "getKycPaymentRelatedInfo", params);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -359,7 +333,12 @@ public class LoanApplicationFragment_4 extends Fragment {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                downLoad(downloadSignedUrl, 2);
+                if(!downloadSignedUrl.equalsIgnoreCase("")){
+                    downLoad(downloadSignedUrl, 2);
+                }else {
+                    Toast.makeText(context, "Something went wrong, please try again later.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -385,47 +364,85 @@ public class LoanApplicationFragment_4 extends Fragment {
             textView6.setTextColor(getResources().getColor(R.color.colorPrimary));
         }
 
+
+        /** API CALL Status of payment and esign**/
+        try {
+            String url = MainApplication.mainUrl + "epayment/getSignAndSubmitDetails";
+            Map<String, String> params = new HashMap<String, String>();
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            params.put("loggedId", userID);
+            volleyCall.sendRequest(context, url, null, mFragment, "getSignAndSubmitDetails", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 
-    // Callback listener functions
-    public void onSigningSuccess(String documentId){
-        Toast.makeText(context, documentId+" signed successfully", Toast.LENGTH_SHORT).show();
+    // Callback listener functions for Digio
+    public void digioSuccess(String documentId){
+
+        /** API CALL **/
+        try {
+            String ipaddress = Utils.getIPAddress(true);
+            String url = MainApplication.mainUrl + "laf/onSuccessfulRegisterStudentESignCase";
+            Map<String, String> params = new HashMap<String, String>();
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            params.put("logged_id", userID);
+            params.put("created_by_ip", ipaddress);
+            volleyCall.sendRequest(context, url, null, mFragment, "onSuccessfulRegisterStudentESignCase", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        linearLayoutManual.setVisibility(View.GONE);
+        buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
+        textView7.setVisibility(View.GONE);
+        radioGroupla4.setVisibility(View.GONE);
+        textView6.setText("Signed");
+        textView6.setTextColor(getResources().getColor(R.color.colorPrimary));
     }
 
-    public void onSigningFailure(String documentId, int code, String response){
-        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+    public void digioFailure(String documentId, int code, String response){
+        radioButtonEsign.setChecked(false);
+    }
+
+    public void atomPaymentSuccessful(){
+        linearLayout_paymentDetails.setVisibility(View.VISIBLE);
+        textView11.setText("Paid");
+        textView11.setTextColor(getResources().getColor(R.color.colorPrimary));
     }
 
 
     public void downLoad(String uri, int status) {
-        String fname = "";
-        if (status == 1) {
-            fname = "LAF" + userFirst + userLast + System.currentTimeMillis() + ".pdf";
-        } else if (status == 2) {
-            fname = "SIGNED APPLICATION" + userFirst + userLast + System.currentTimeMillis() + ".pdf";
-        }
-        downloadManager = (DownloadManager) context.getSystemService(context.DOWNLOAD_SERVICE);
-        Uri Download_Uri = Uri.parse(uri);
-        DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+        try {
+            String fname = "";
+            if (status == 1) {
+                fname = "LAF" + userFirst + userLast + System.currentTimeMillis() + ".pdf";
+            } else if (status == 2) {
+                fname = "SIGNED APPLICATION" + userFirst + userLast + System.currentTimeMillis() + ".pdf";
+            }
+            downloadManager = (DownloadManager) context.getSystemService(context.DOWNLOAD_SERVICE);
+            Uri Download_Uri = Uri.parse(uri);
+            DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
 
-        //Restrict the types of networks over which this download may proceed.
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-        //Set whether this download may proceed over a roaming connection.
-        request.setAllowedOverRoaming(false);
-        //Set the title of this download, to be displayed in notifications (if enabled).
-        request.setTitle("Your Document is Downloading");
-        //Set a description of this download, to be displayed in notifications (if enabled)
-        request.setDescription("Android Data download using DownloadManager.");
-        //Set the local destination for the downloaded file to a path within the application's external files directory
+            //Restrict the types of networks over which this download may proceed.
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+            //Set whether this download may proceed over a roaming connection.
+            request.setAllowedOverRoaming(false);
+            //Set the title of this download, to be displayed in notifications (if enabled).
+            request.setTitle("Your Document is Downloading");
+            //Set a description of this download, to be displayed in notifications (if enabled)
+            request.setDescription("Android Data download using DownloadManager.");
+            //Set the local destination for the downloaded file to a path within the application's external files directory
 //        if(isImage) {
 
-        request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, fname);
+            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, fname);
 //        }else {
 //            request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_PICTURES, "DATA"+System.currentTimeMillis()+".pdf");
 //        }
-        //Enqueue a new download and same the referenceId
-        downloadReference = downloadManager.enqueue(request);
+            //Enqueue a new download and same the referenceId
+            downloadReference = downloadManager.enqueue(request);
 
 //        TextView showCountries = (TextView) findViewById(R.id.countryData);
 //        showCountries.setText("Getting data from Server, Please WAIT...");
@@ -434,6 +451,10 @@ public class LoanApplicationFragment_4 extends Fragment {
 //        checkStatus.setEnabled(true);
 //        Button cancelDownload = (Button) findViewById(R.id.cancelDownload);
 //        cancelDownload.setEnabled(true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     private void galleryDocIntent() {
@@ -468,20 +489,6 @@ public class LoanApplicationFragment_4 extends Fragment {
             }
         }
 
-        if (requestCode == 1) {
-            if (data != null) {
-                String message = data.getStringExtra("status");
-                String[] resKey = data.getStringArrayExtra("responseKeyArray");
-                String[] resValue = data.getStringArrayExtra("responseValueArray");
-
-                if (resKey != null && resValue != null) {
-                    for (int i = 0; i < resKey.length; i++)
-                        System.out.println("  " + i + " resKey : " + resKey[i] + " resValue : " + resValue[i]);
-                }
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-
-            }
-        }
     }
 
     public int uploadFile(final String selectedFilePath) {
@@ -697,4 +704,177 @@ public class LoanApplicationFragment_4 extends Fragment {
     }
 
 
+    /**
+     * ---------------------------------RESPONSE OF API CALL-------------------------------------
+     **/
+
+    public void getDigioDocumentIdForStudent(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "getDocuments" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                String documentID = jsonObject.getString("documentId");
+                String email = jsonObject.getString("email");
+
+                // Invoke Esign
+                    final Digio digio = new Digio();
+                    DigioConfig digioConfig = new DigioConfig();
+                    digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
+                    digioConfig.setEnvironment(DigioEnvironment.PRODUCTION);   //Stage is sandbox
+
+                    try {
+                        digio.init((Activity)context, digioConfig);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        digio.esign(documentID, email);
+                        Log.e(MainApplication.TAG, "downloadUrldownloadUrl: "+downloadUrl + " userEmailiduserEmailid"+ userEmailid );
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onSuccessfulRegisterStudentESignCase(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "onSuccessfulRegisterStudentESignCase" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                downloadSignedUrl = jsonObject.getString("docPath");
+
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getKycPaymentRelatedInfo(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "getKycPaymentRelatedInfo" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                amount = jsonObject.getString("amount");
+                transactionId = jsonObject.getString("transactionId");
+
+                Intent newPayIntent = new Intent(context, PayActivity.class);
+                newPayIntent.putExtra("merchantId", "197");
+                newPayIntent.putExtra("txnscamt", "0"); //Fixed. Must be 0
+                newPayIntent.putExtra("loginid", "41554");
+                newPayIntent.putExtra("password", "EDUVANZ@123");
+                newPayIntent.putExtra("prodid", "EDUVANZ");
+                newPayIntent.putExtra("txncurr", "INR"); //Fixed. Must be ?INR?
+                newPayIntent.putExtra("clientcode", "001");
+                newPayIntent.putExtra("custacc", "100000036600");
+                newPayIntent.putExtra("amt", amount);//Should be 3 decimal number i.e 51.000
+                newPayIntent.putExtra("txnid", transactionId);
+                newPayIntent.putExtra("date", "25/08/2015 18:31:00");//Should be in same format
+                newPayIntent.putExtra("bankid", ""); //Should be valid bank id // Optional
+                newPayIntent.putExtra("discriminator", "All"); // NB or IMPS or All ONLY (value should be same as commented)
+                newPayIntent.putExtra("signature_request", "32caffa3053906fef7");
+                newPayIntent.putExtra("signature_response", "e65db3704c7b4a7b3b");
+//                newPayIntent.putExtra("ru", "https://payment.atomtech.in/paynetz/epi/fts"); // FOR PRODUCTION
+                newPayIntent.putExtra("ru", "https://payment.atomtech.in/mobilesdk/param"); // FOR PRODUCTION
+
+//                newPayIntent.putExtra("merchantId", "197");
+//                newPayIntent.putExtra("txnscamt", "0"); //Fixed. Must be 0
+//                newPayIntent.putExtra("loginid", "41554");
+//                newPayIntent.putExtra("password", "EDUVANZ@123");
+//                newPayIntent.putExtra("prodid", "EDUVANZ");
+//                newPayIntent.putExtra("txncurr", "INR"); //Fixed. Must be INR
+//                newPayIntent.putExtra("clientcode", "007");
+//                newPayIntent.putExtra("custacc", "100000036600");
+//                newPayIntent.putExtra("channelid", "INT");
+//                newPayIntent.putExtra("amt", myamount);//Should be 3 decimal number i.e 100.000
+//                newPayIntent.putExtra("txnid", "2365F315");
+//                newPayIntent.putExtra("date", "30/12/2015 18:31:00");//Should be in same format
+//                newPayIntent.putExtra("cardtype", "CC");// CC or DC ONLY (value should be same as commented)
+//                newPayIntent.putExtra("cardAssociate", "VISA");// for VISA and MASTER.  MAESTRO ONLY (value should be same as commented)
+//                newPayIntent.putExtra("surcharge", "NO");// Should be passed YES if surcharge is applicable else pass NO
+//                newPayIntent.putExtra("signature_request", "32caffa3053906fef7");
+//                newPayIntent.putExtra("signature_response", "e65db3704c7b4a7b3b");
+//                newPayIntent.putExtra("ru", "https://payment.atomtech.in/paynetz/epi/fts"); // FOR UAT (Testing)
+
+                //Optinal Parameters
+                newPayIntent.putExtra("customerName", "Anil Saini"); //Only for Name
+                newPayIntent.putExtra("customerEmailID", "anilsaini81155@gmail.com");//Only for Email ID
+                newPayIntent.putExtra("customerMobileNo", "8108659592");//Only for Mobile Number
+                newPayIntent.putExtra("billingAddress", "Mumbai");//Only for Address
+                newPayIntent.putExtra("optionalUdf9", "OPTIONAL DATA 1");// Can pass any data
+//                newPayIntent.putExtra("mprod", mprod); // Pass data in XML format, only for Multi product
+                ((Activity)context).startActivityForResult(newPayIntent, 1);
+
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getSignAndSubmitDetails(JSONObject jsonData) {
+        try {
+            Log.e("SERVER CALL", "getSignAndSubmitDetails" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                downloadSignedUrl = jsonObject.getString("docPath");
+                String paymentStatus = jsonObject.getString("paymentStatus");
+
+                if(jsonObject.getString("signedApplicationStatus").equalsIgnoreCase("1")){
+                    linearLayoutManual.setVisibility(View.GONE);
+                    buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
+                    textView7.setVisibility(View.GONE);
+                    radioGroupla4.setVisibility(View.GONE);
+                    textView6.setText("Signed");
+                    textView6.setTextColor(getResources().getColor(R.color.colorPrimary));
+                }
+
+                if(paymentStatus.equalsIgnoreCase("1")){
+                    linearLayout_paymentDetails.setVisibility(View.VISIBLE);
+                    textView11.setText("Paid");
+                    textView11.setTextColor(((Activity)context).getResources().getColor(R.color.colorPrimary));
+                    textView14.setText(jsonObject.getString("transactionAmount"));
+                    textView16.setText(jsonObject.getString("transactionId"));
+                    textView18.setText(jsonObject.getString("transactionDate"));
+                    buttonPay.setVisibility(View.GONE);
+                }
+
+
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

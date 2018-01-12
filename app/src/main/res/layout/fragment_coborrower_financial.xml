@@ -1,6 +1,6 @@
 <LinearLayout
     android:background="@color/white"
-    android:paddingTop="20dp"
+    android:layout_marginTop="5dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -31,12 +30,10 @@
                     android:layout_height="wrap_content"
                     android:text="Profession : "
                     android:layout_gravity="left"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/colorPrimary"/>
                 <Spinner
-                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:theme="@style/ThemeOverlay.AppCompat.Light"
                     android:dropDownSelector="@color/colorPrimary"
@@ -48,6 +45,7 @@
             </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
                 android:theme="@style/EditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,6 +61,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
                 android:theme="@style/EditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,7 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Duration of job/business"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="#808080"/>
                     <View
                         android:background="@color/colorPrimary"
@@ -112,7 +111,7 @@
                         android:layout_height="1dp"/>
                 </LinearLayout>
                 <TextView
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/colorPrimary"
                     android:text="@string/calendar"
                     android:paddingBottom="4dp"
@@ -126,7 +125,7 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -137,12 +136,10 @@
                     android:layout_height="wrap_content"
                     android:text="Duration of Job/Business : "
                     android:layout_gravity="left"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/colorPrimary"/>
                 <Spinner
-                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:theme="@style/ThemeOverlay.AppCompat.Light"
                     android:dropDownSelector="@color/colorPrimary"

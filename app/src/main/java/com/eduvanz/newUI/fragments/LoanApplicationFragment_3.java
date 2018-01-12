@@ -67,7 +67,7 @@ import java.util.Map;
 
 public class LoanApplicationFragment_3 extends Fragment {
 
-    public static Context context;
+    static Context context;
     public static Fragment mFragment;
     static Typeface typefaceFont, typefaceFontBold, typeface;
     static TextView textView1, textView2, textView3, textViewArrowDown, textViewArrowDownCo;
@@ -97,7 +97,7 @@ public class LoanApplicationFragment_3 extends Fragment {
     MainApplication mainApplication;
     LinearLayout linearLayoutBorrower, linearLayoutCoBorrower;
     RelativeLayout relativeLayoutBorrower, relativeLayoutCoBorrower;
-    int borrowerVisiblity = 0, coborrowerVisiblity = 0;
+    int borrowerVisiblity = 1, coborrowerVisiblity = 1;
     static FragmentTransaction transaction;
     static ImageView imageViewKycProfilePhoto_co, imageViewKycPhotoId_co, imageViewKycAddressProof_co, imageViewKycSignatureProof_co,
             imageViewFinanceIncomeProof_co, imageViewFinanceBankStatement_co, imageViewOtherDocument_co;
@@ -203,7 +203,6 @@ public class LoanApplicationFragment_3 extends Fragment {
                 transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_2).commit();
             }
         });
-
 
         relativeLayoutBorrower.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1504,7 +1503,9 @@ public class LoanApplicationFragment_3 extends Fragment {
                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("laf_download_url", lafDownloadPath);
-                editor.putString("signed_application_url", jsonObject.getString("docPath"));
+                if(!jsonObject.getString("docPath").equalsIgnoreCase("")){
+                    editor.putString("signed_application_url", jsonObject.getString("docPath"));
+                }
                 editor.putString("signed_appstatus", String.valueOf(signedAppStatus));
                 editor.apply();
                 editor.commit();

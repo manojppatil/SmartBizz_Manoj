@@ -110,7 +110,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Enter your emailid"
-                            android:inputType="textCapWords"
+                            android:inputType="textEmailAddress"
                             android:background="@drawable/background_edittext"
                             android:textColorHint="@color/grey"
                             android:textSize="14sp"/>

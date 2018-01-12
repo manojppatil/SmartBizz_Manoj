@@ -34,7 +34,8 @@
                 android:layout_height="wrap_content"
                 android:text="eduvanz"
                 android:textColor="@color/white"
-                android:textSize="22sp" />
+                android:textSize="24sp"
+                android:textStyle="bold"/>
 
         </android.support.v7.widget.Toolbar>
 
@@ -56,7 +57,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
-            android:text="Please verify your mobile no to begin!"
+            android:text="Please verify your mobile number to begin!"
             android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
             android:textSize="16sp" />
@@ -175,33 +176,31 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_continue_validateotp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/rectanglebackground"
-            android:elevation="20dp"
+            android:background="@color/colorPrimary"
             android:stateListAnimator="@null"
             android:text="CONTINUE"
-            android:textColor="@color/colorPrimary"
-            android:textSize="22sp"
-            android:translationZ="3dp" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:translationZ="1.5dp" />
 
         <android.support.v7.widget.AppCompatButton
             android:visibility="gone"
             android:id="@+id/button_skip"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/rectanglebackground"
-            android:elevation="20dp"
+            android:background="@color/colorPrimary"
             android:stateListAnimator="@null"
             android:text="SKIP"
-            android:textColor="@color/colorPrimary"
-            android:textSize="22sp"
-            android:translationZ="3dp" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:translationZ="1.5dp" />
 
 
     </LinearLayout>

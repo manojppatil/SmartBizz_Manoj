@@ -151,6 +151,7 @@ public class ClientActivity extends LaunchUI implements
         Log.d(TAG, "Session Key: " + getSessionKey());
 
         String appid = clientIntent.getStringExtra("app_id");
+//        Log.e("FRIENDLY SCORE", appid);
         Credentials credentials = null;
         String session_key = null;
         mContext = this;

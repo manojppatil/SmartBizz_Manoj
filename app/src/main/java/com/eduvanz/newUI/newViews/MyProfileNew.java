@@ -21,10 +21,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanz.friendlyscore.ClientActivity;
+import com.eduvanz.friendlyscore.StartActivityFS;
 import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.R;
 import com.eduvanz.uploaddocs.PathFile;
@@ -66,6 +69,7 @@ public class MyProfileNew extends AppCompatActivity {
     public static TextView applicationStatus,applicationStatusName,loanDetailsHeader,personalDetailsHeader,
             institute,instituteName,course,courseName,fees,feesName,loanAmount,loanAmountText,
             mobile,mobileName,email,emailName,address,addressName;
+    LinearLayout linearLayoutProfileCompletion, linearLayoutApplicationDetails;
 
     String userID="", fname="", lname="", profilePic="";
     StringBuffer sb;
@@ -74,6 +78,7 @@ public class MyProfileNew extends AppCompatActivity {
     String uploadFilePath = "";
     String urlup = MainApplication.mainUrl + "dashboard/changeImage";
     public static ProgressBar progressBar;
+    public static  String ec="", mv="", ev="", ss="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +97,7 @@ public class MyProfileNew extends AppCompatActivity {
             user_email = sharedPreferences.getString("user_email", "--");
             mobile_no = sharedPreferences.getString("mobile_no", "--");
 
+            Log.e(TAG, "mobile_no "+mobile_no );
             profilePic = sharedPreferences.getString("user_image", "");
         }catch (Exception e){
             e.printStackTrace();
@@ -105,6 +111,8 @@ public class MyProfileNew extends AppCompatActivity {
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
+        linearLayoutProfileCompletion = (LinearLayout) findViewById(R.id.linearLayout_profileCompetionDetails);
+        linearLayoutApplicationDetails = (LinearLayout) findViewById(R.id.linearLayout_applicationDetails);
         progressBar = (ProgressBar) findViewById(R.id.progressBar_myprofile);
         textViewUserName = (TextView) findViewById(R.id.textView_profile_username);
         textViewUserName.setText(fname + " "+ lname);
@@ -185,6 +193,26 @@ public class MyProfileNew extends AppCompatActivity {
         buttonCompleteNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent intent = new Intent(context, ClientActivity.class);
+//                startActivity(intent);
+
+                if(!ec.equalsIgnoreCase("1")){
+                    Intent intent = new Intent(context, EligibilityCheck.class);
+                    startActivity(intent);
+                    finish();
+                }else if(ec.equalsIgnoreCase("1") && !mv.equalsIgnoreCase("1")){
+                    Intent intent = new Intent(context, GetMobileNo.class);
+                    startActivity(intent);
+                    finish();
+                }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && !ev.equalsIgnoreCase("1")){
+                    Intent intent = new Intent(context, EligibilityCheck.class);
+                    startActivity(intent);
+                    finish();
+                }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && ev.equalsIgnoreCase("1") && !ss.equalsIgnoreCase("1")){
+                    Intent intent = new Intent(context, StartActivityFS.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -230,10 +258,10 @@ public class MyProfileNew extends AppCompatActivity {
             if (status.equalsIgnoreCase("1")) {
                 JSONObject jsonObject = jsonData.getJSONObject("result");
 
-                String ec = jsonObject.getString("eligibility");
-                String mv = jsonObject.getString("mobileVerified");
-                String ev = jsonObject.getString("emailVerified");
-                String ss = jsonObject.getString("friendlyScore");
+                ec = jsonObject.getString("eligibility");
+                mv = jsonObject.getString("mobileVerified");
+                ev = jsonObject.getString("emailVerified");
+                ss = jsonObject.getString("friendlyScore");
 
                 String profilePercentage = jsonObject.getString("profileDashboardStats");
 
@@ -278,6 +306,12 @@ public class MyProfileNew extends AppCompatActivity {
                     imageViewSocialScore.setImageDrawable(getResources().getDrawable(R.drawable.verified));
                 }else {
                     imageViewSocialScore.setImageDrawable(getResources().getDrawable(R.drawable.crossbox));
+                }
+
+                if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && ev.equalsIgnoreCase("1") && ss.equalsIgnoreCase("1")){
+
+                    buttonCompleteNow.setVisibility(View.GONE);
+                    linearLayoutApplicationDetails.setVisibility(View.VISIBLE);
                 }
 
             }else {
@@ -675,6 +709,6 @@ public class MyProfileNew extends AppCompatActivity {
             return serverResponseCode;
         }
 
-    }//---------------------------------------END OF UPLOAD FILE----------------------------------//
+    }
 
 }

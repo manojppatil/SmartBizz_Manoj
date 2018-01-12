@@ -441,7 +441,13 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_myprofile) {
-            // Handle the camera action
+            if (sharedPref.getLoginDone(context)) {
+                Intent intent = new Intent(context, MyProfileNew.class);
+                startActivity(intent);
+            }else {
+                Intent intent = new Intent(context, SignUp.class);
+                startActivity(intent);
+            }
         } else if (id == R.id.nav_eligibility) {
             Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
             startActivity(intent);

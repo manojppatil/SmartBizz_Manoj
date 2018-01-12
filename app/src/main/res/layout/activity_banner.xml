@@ -64,6 +64,7 @@
     </RelativeLayout>
 
     <View
+        android:visibility="gone"
         android:id="@+id/viewaward"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -103,6 +104,32 @@
         android:text="Check Eligiblity"
         android:textSize="16sp"
         android:textColor="@color/white"/>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/button_bannerdetail_applynow"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@color/colorPrimary"
+                android:text="Apply Now"
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/button_bannerdetail_continue"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@color/colorPrimary"
+                android:text="Continue"
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 

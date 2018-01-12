@@ -30,8 +30,9 @@
                 android:orientation="horizontal" />
 
             <LinearLayout
+                android:id="@+id/linearLayout_leftoff1"
                 android:layout_marginLeft="20dp"
-                android:layout_width="match_parent"
+                android:layout_width="165dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/background_capsule_primary"
                 android:orientation="horizontal" />

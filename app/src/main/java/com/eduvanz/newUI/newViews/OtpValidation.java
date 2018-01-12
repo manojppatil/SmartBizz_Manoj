@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,17 +56,17 @@ public class OtpValidation extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar_otpvalidation);
 
         textViewToolbar = (TextView) findViewById(R.id.textView_validateotp);
-        mainApplication.applyTypeface(textViewToolbar, mContext);
+        mainApplication.applyTypefaceBold(textViewToolbar, mContext);
 
         editTextRecivedOtp = (EditText) findViewById(R.id.editText_recievedOtp);
         textMobileNo = (TextView) findViewById(R.id.textView_mobileNo_otpValidation);
         textMobileNo.setText(mobileNO);
 
         button = (Button) findViewById(R.id.button_continue_validateotp);
-        mainApplication.applyTypeface(button, mContext);
+        mainApplication.applyTypefaceBold(button, mContext);
 
         buttonSkip = (Button) findViewById(R.id.button_skip);
-        mainApplication.applyTypeface(buttonSkip, mContext);
+        mainApplication.applyTypefaceBold(buttonSkip, mContext);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +151,7 @@ public class OtpValidation extends AppCompatActivity {
                 }
             } else {
                 progressBar.setVisibility(View.GONE);
+                Log.e(MainApplication.TAG, "getOTPValidation: ");
                 Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -185,7 +187,7 @@ public class OtpValidation extends AppCompatActivity {
                 editor.apply();
                 editor.commit();
                 progressBar.setVisibility(View.GONE);
-//                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent(OtpValidation.this, DashboardActivity.class);
 //                startActivity(intent);
 //                finish();

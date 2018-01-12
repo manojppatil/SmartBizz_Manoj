@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetMobileNo extends AppCompatActivity {
+public class  GetMobileNo extends AppCompatActivity {
 
     TextView textViewToolbar;
     MainApplication mainApplication;
@@ -57,7 +57,7 @@ public class GetMobileNo extends AppCompatActivity {
 
 
         textViewToolbar = (TextView) findViewById(R.id.textView_getmobileno);
-        mainApplication.applyTypeface(textViewToolbar, mContext);
+        mainApplication.applyTypefaceBold(textViewToolbar, mContext);
 
         button = (Button) findViewById(R.id.button_getotp);
         mainApplication.applyTypeface(button, mContext);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -69,7 +70,7 @@ public class DashboardFragmentNew extends Fragment {
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
             kyc = null, profileDashboardStats = null;
-
+    View view;
 
     public DashboardFragmentNew() {
         // Required empty public constructor
@@ -79,7 +80,13 @@ public class DashboardFragmentNew extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dashboard_fragment_new, container, false);
+
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+        if(height<1080){
+            view = inflater.inflate(R.layout.demo1, container, false);
+        }else {
+            view = inflater.inflate(R.layout.fragment_dashboard_fragment_new, container, false);
+        }
         context = getContext();
         sharedPref = new SharedPref();
         mFragment = new DashboardFragmentNew();
@@ -114,7 +121,7 @@ public class DashboardFragmentNew extends Fragment {
         textView10 = (TextView) view.findViewById(R.id.textViewdash_10);
         mainApplication.applyTypeface(textView10, context);
         textView11 = (TextView) view.findViewById(R.id.textViewdash_11);
-        mainApplication.applyTypeface(textView11, context);
+        mainApplication.applyTypefaceBold(textView11, context);
         textView12 = (TextView) view.findViewById(R.id.textViewdash_12);
         mainApplication.applyTypeface(textView12, context);
         textView13 = (TextView) view.findViewById(R.id.textViewdash_13);
@@ -287,11 +294,12 @@ public class DashboardFragmentNew extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, LoanApplication.class);
-                if(borrower.equalsIgnoreCase("1")){
+                if(borrower.equalsIgnoreCase("1") && coBorrower.equalsIgnoreCase("0")){
                     Bundle bundle = new Bundle();
                     bundle.putString("toCoBorrower", "1");
                     intent.putExtras(bundle);
-                }else if(coBorrower.equalsIgnoreCase("1") && borrower.equalsIgnoreCase("1")){
+                }else if(borrower.equalsIgnoreCase("1") && coBorrower.equalsIgnoreCase("1") &&
+                        coBorrowerDocument.equalsIgnoreCase("0") && borrowerDocument.equalsIgnoreCase("0")){
                     Bundle bundle = new Bundle();
                     bundle.putString("toDocUpload", "1");
                     intent.putExtras(bundle);
@@ -348,6 +356,21 @@ public class DashboardFragmentNew extends Fragment {
 
         return view;
     }//-----------------------------------END OF ON CREATE----------------------------------------//
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        /** API CALL POST LOGIN DASHBOARD STATUS **/
+        try {
+            String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("studentId", userId);
+            VolleyCallNew volleyCall = new VolleyCallNew();
+            volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardStatus", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void setDashboardImages(JSONObject jsonData) {
         try {

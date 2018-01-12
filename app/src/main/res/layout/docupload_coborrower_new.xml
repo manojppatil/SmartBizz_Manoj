@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:padding="10dp"
             android:id="@+id/relativeLayout_coborrower"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -29,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="@string/down"
+                android:text="@string/up"
                 android:textColor="@color/colorRed"
                 android:textSize="20sp" />
 
@@ -40,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +72,7 @@
                         android:padding="10dp"
                         android:text="Upload Your Profile Photo"
                         android:textColor="@color/grey"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                             android:maxLines="1"
                             android:text="Profile Photo"
                             android:textColor="@color/grey"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:id="@+id/imageView_kyc_profilephoto_co"
@@ -133,9 +134,9 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Upload One of Your Photo IDs"
+                        android:text="Upload your Aadhar Card"
                         android:textColor="@color/grey"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -149,9 +150,9 @@
                             android:ellipsize="end"
                             android:gravity="center"
                             android:maxLines="1"
-                            android:text="PhotoID"
+                            android:text="Aadhar Card"
                             android:textColor="@color/grey"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:id="@+id/imageView_kyc_photoId_co"
@@ -197,9 +198,9 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Upload One of Your Address Proofs"
+                        android:text="Upload your PAN Card"
                         android:textColor="@color/grey"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -213,9 +214,9 @@
                             android:ellipsize="end"
                             android:gravity="center"
                             android:maxLines="1"
-                            android:text="Address Proof"
+                            android:text="PAN Card"
                             android:textColor="@color/grey"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:id="@+id/imageview_kyc_addressproof_co"
@@ -262,9 +263,9 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Upload One of Your Signautre Proofs"
+                        android:text="Upload One of Your Address Proofs"
                         android:textColor="@color/grey"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -278,9 +279,9 @@
                             android:ellipsize="end"
                             android:gravity="center"
                             android:maxLines="1"
-                            android:text="Signature Proof"
+                            android:text="Address Proof"
                             android:textColor="@color/grey"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:id="@+id/imageview_kyc_signatureproof_co"
@@ -347,7 +348,7 @@
                         android:padding="10dp"
                         android:text="Upload One of Your Income Proofs"
                         android:textColor="@color/grey"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -363,7 +364,7 @@
                             android:maxLines="1"
                             android:text="Income Proof"
                             android:textColor="@color/grey"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:id="@+id/imageview_finance_incomeproof_co"
@@ -384,7 +385,7 @@
                             android:background="@color/colorSecondary"
                             android:text="Upload"
                             android:textColor="@color/white"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             android:visibility="gone" />
 
                     </LinearLayout>
@@ -414,7 +415,7 @@
                         android:padding="10dp"
                         android:text="Upload Last 6 months Bank Statement"
                         android:textColor="@color/grey"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -430,7 +431,7 @@
                             android:maxLines="1"
                             android:text="Bank Statement"
                             android:textColor="@color/grey"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:id="@+id/imageview_finance_bankstatement_co"
@@ -451,7 +452,7 @@
                             android:background="@color/colorSecondary"
                             android:text="Upload"
                             android:textColor="@color/white"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             android:visibility="gone" />
                     </LinearLayout>
 
@@ -509,7 +510,7 @@
                         android:padding="10dp"
                         android:text="Upload Your Other Documents"
                         android:textColor="@color/grey"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -525,7 +526,7 @@
                             android:maxLines="1"
                             android:text="Other Documents"
                             android:textColor="@color/grey"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:id="@+id/imageview_otherdocument_co"
@@ -546,7 +547,7 @@
                             android:background="@color/colorSecondary"
                             android:text="Upload"
                             android:textColor="@color/white"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             android:visibility="gone" />
                     </LinearLayout>
 
