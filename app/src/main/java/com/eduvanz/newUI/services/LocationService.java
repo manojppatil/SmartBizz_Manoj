@@ -17,9 +17,8 @@ import android.support.annotation.RequiresApi;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-
-import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.Utils;
+import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.newUI.receiver.LocationUploadForFileUpload;
 
 import org.json.JSONArray;
@@ -41,107 +40,210 @@ import java.util.Calendar;
 
 /**
  * Created by nikhil on 26/10/17.
- */
+ **/
 
-public class LocationService extends Service
-{
+public class LocationService extends Service {
     private static final String TAG = "BOOMBOOMTESTGPS";
-    private LocationManager mLocationManager = null;
-    private static final int LOCATION_INTERVAL = 600000;
-    private static final float LOCATION_DISTANCE = 1f;
+    private static final int LOCATION_INTERVAL = 60 * 60 * 1000;
+    private static final float LOCATION_DISTANCE = 0f;
     public static Context mContext;
-    public static String userId,imeiNo = "",appInstallationTimeStamp="", simImei = "", ipaddress = "",userMobileNo="";
-
-    private class LocationListener implements android.location.LocationListener
-    {
-        Location mLastLocation;
-
-        public LocationListener(String provider)
-        {
-            Log.e(TAG, "LocationListener " + provider);
-            mLastLocation = new Location(provider);
-        }
-
-        @Override
-        public void onLocationChanged(Location location)
-        {
-            SharedPreferences mShared= mContext.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//            userMobileNo = mShared.getString("mobile_no", "null");
-
-//            userId = mShared.getString("user_id", null);
-            Log.e(TAG, "onLocationChanged: " + location);
-            mLastLocation.set(location);
-            MainApplication.latitude=location.getLatitude();
-            MainApplication.longitde=location.getLongitude();
-
-//            Map<String, String> params = new HashMap<String, String>();
-//            params.put("user_id",userId);
-////            params.put("emergency_id",MainApplication.emergencyID);
-//            params.put("latitude",String.valueOf(location.getLatitude()));
-//            params.put("longitude",String.valueOf(location.getLongitude()));
-//            String url = MainApplication.mainUrl + "/mobilescrap/send_message_post";
-//            VolleyCall mCallv= new VolleyCall();
-//            mCallv.sendRequest(mContext,url,null,null,"update-location",params);
-        }
-
-        @Override
-        public void onProviderDisabled(String provider)
-        {
-            Log.e(TAG, "onProviderDisabled: " + provider);
-        }
-
-        @Override
-        public void onProviderEnabled(String provider)
-        {
-            Log.e(TAG, "onProviderEnabled: " + provider);
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras)
-        {
-            Log.e(TAG, "onStatusChanged: " + provider);
-        }
-    }
-
-    LocationListener[] mLocationListeners = new LocationListener[] {
+    public static String imeiNo = "", ipaddress = "", userMobileNo = "";
+    LocationListener[] mLocationListeners = new LocationListener[]{
             new LocationListener(LocationManager.GPS_PROVIDER),
             new LocationListener(LocationManager.NETWORK_PROVIDER)
     };
+    private LocationManager mLocationManager = null;
+
+    public static void mCreateAndSaveFile(String params, String mJsonResponse) {
+        try {
+            final File dir = new File(Environment.getExternalStorageDirectory() + "/");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            File f = new File(dir, params);
+            f.getAbsolutePath();
+            FileWriter file = new FileWriter(f.getAbsolutePath());
+            file.write(mJsonResponse);
+            file.flush();
+            file.close();
+            mReadJsonData(params);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void mReadJsonData(final String filename) {
+        final File dir = new File(Environment.getExternalStorageDirectory() + "/");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        final File f = new File(dir, filename);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.e(TAG, "run: getAbsolutePath:::LOCATION::: " + f.getAbsolutePath());
+//                uploadFile(f.getAbsolutePath(), filename);
+            }
+        }).start();
+    }
+
+    public static int uploadFile(final String selectedFilePath, String fileType) {
+        String a = fileType;
+        a = a.substring(0, a.lastIndexOf('.'));
+
+        StringBuffer sb;
+        long total = 0;
+        String urlup = MainApplication.mainUrl + "mobilescrap/send_message";
+        int serverResponseCode = 0;
+
+        HttpURLConnection connection;
+        DataOutputStream dataOutputStream;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+
+        final int count, fileLength;
+
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        File selectedFile = new File(selectedFilePath);
+
+        String[] parts = selectedFilePath.split("/");
+        final String fileName = parts[parts.length - 1];
+
+        if (!selectedFile.isFile()) {
+            Log.e("ReadSms", "run: " + "Source File Doesn't Exist: " + selectedFilePath);
+            return 0;
+        } else {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(selectedFile);
+                URL url = new URL(urlup);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoInput(true);//Allow Inputs
+                connection.setDoOutput(true);//Allow Outputs
+                connection.setUseCaches(false);//Don't use a cached Copy
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Connection", "Keep-Alive");
+                connection.setRequestProperty("ENCTYPE", "multipart/form-data");
+                connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                connection.setRequestProperty(a, selectedFilePath);
+//                connection.setRequestProperty("file_name", "saveSMS");
+                Log.e("ReadSms", "Server property" + connection.getRequestMethod() + ":property " + connection.getRequestProperties());
 
 
-    @Override
-    public IBinder onBind(Intent arg0)
-    {
-        return null;
+                //creating new dataoutputstream
+                dataOutputStream = new DataOutputStream(connection.getOutputStream());
+
+                //writing bytes to data outputstream
+                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" + a + "\";filename=\""
+//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"saveCallLogs\";filename=\""
+                        + selectedFilePath + "\"" + lineEnd);
+                dataOutputStream.writeBytes(lineEnd);
+
+                //returns no. of bytes present in fileInputStream
+                bytesAvailable = fileInputStream.available();
+                //selecting the buffer size as minimum of available bytes or 1 MB
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                //setting the buffer as byte array of size of bufferSize
+                buffer = new byte[bufferSize];
+                fileLength = bufferSize;
+                //reads bytes from FileInputStream(from 0th index of buffer to buffersize)
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                Log.e(TAG, "uploadFile: TOTAL bytes to read " + bytesRead + "total" + bufferSize);
+                //loop repeats till bytesRead = -1, i.e., no bytes are left to read
+                total = 0;
+
+                while (bytesRead > 0) {
+                    total += bytesRead;
+                    //write the bytes read from inputstream
+                    dataOutputStream.write(buffer, 0, bufferSize);
+                    Log.e("ReadSms", " here: \n\n" + buffer + "\n" + bufferSize);
+                    bytesAvailable = fileInputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                    Log.e(TAG, "uploadFile: " + bytesRead + total);
+                    Log.e(TAG, "uploadFile: percentage " + ((int) Math.round(total * 100 / fileLength)));
+                    // Publish the progress
+
+                }
+                dataOutputStream.writeBytes(lineEnd);
+                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"file_name\"" + lineEnd);
+                dataOutputStream.writeBytes(lineEnd);
+                dataOutputStream.writeBytes("1");
+                dataOutputStream.writeBytes(lineEnd);
+                dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+//                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
+//                        + selectedFilePath + "\"" + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"mobileNo\";mobileNo=" + userMobileNo + "" + lineEnd);
+                dataOutputStream.writeBytes(lineEnd);
+                dataOutputStream.writeBytes(userMobileNo);
+                dataOutputStream.writeBytes(lineEnd);
+
+//                Log.e(TAG, "uploadFile: userMobileNo"+userMobileNo );
+
+                //dataOutputStream.writeBytes(URLEncoder.encode("user_id", "UTF-8")
+                //        + "=" + URLEncoder.encode("1", "UTF-8"));
+
+                serverResponseCode = connection.getResponseCode();
+                Log.e("ReadSms", " here:server response \n\n" + serverResponseCode);
+                String serverResponseMessage = connection.getResponseMessage();
+                Log.e("ReadSms", " here: server message \n\n" + serverResponseMessage.toString() + "\n" + bufferSize);
+                BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+                String output = "";
+                sb = new StringBuffer();
+
+                while ((output = br.readLine()) != null) {
+                    sb.append(output);
+                }
+
+                //response code of 200 indicates the server status OK
+                if (serverResponseCode == 200) {
+                    Log.e(TAG, "uploadFile: *********MY SERVICE JSON RESONSE LOCATION********** " + "\n" + sb.toString());
+
+                    Log.e("ReadSms", " here: LOCATION LOG \n\n" + fileName);
+                }
+
+                //closing the input and output streams
+                fileInputStream.close();
+                dataOutputStream.flush();
+                dataOutputStream.close();
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.e(TAG, "uploadFile: " + "File Not Found");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                Log.e(TAG, "uploadFile: " + "URL error!");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(TAG, "uploadFile: " + "Cannot Read/Write File!");
+            }
+            return serverResponseCode;
+        }
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
-        Log.e(TAG, "onStartCommand");
-        super.onStartCommand(intent, flags, startId);
-        Log.e(MainApplication.TAG, "Service onStartCommand");
-        Log.e(TAG, "selectOperations: " );
-        LongOperation longOperation3 = new LongOperation();
-        longOperation3.execute("calllogs");
-        return START_STICKY;
-    }
-
-    @Override
-    public void onCreate()
-    {
-        Log.e(TAG, "onCreate SET PENDING INTENT " );
+    public void onCreate() {
+        Log.e(TAG, " ******************MyService  LOCATION*******************");
         initializeLocationManager();
-        mContext=getApplicationContext();
-        SharedPreferences mShared= mContext.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//        appInstallationTimeStamp = mShared.getString("appInstallationTimeStamp", "");
+        mContext = getApplicationContext();
+        SharedPreferences mShared = mContext.getSharedPreferences("UserData", Context.MODE_PRIVATE);
         userMobileNo = mShared.getString("mobile_no", "null");
         try {
             TelephonyManager telephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
             imeiNo = telephonyManager.getDeviceId();
             ipaddress = Utils.getIPAddress(true);
-            Log.e(MainApplication.TAG, "PHONE DATA " + "IMEINO:=" + imeiNo + "ipaddress:" + ipaddress );
-        }catch (Exception e){
+            Log.e(MainApplication.TAG, "PHONE DATA " + "IMEINO:=" + imeiNo + "ipaddress:" + ipaddress);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
@@ -176,9 +278,53 @@ public class LocationService extends Service
     }
 
     @Override
-    public void onDestroy()
-    {
-        Log.e(TAG, "onDestroy");
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
+//        LongOperation longOperation3 = new LongOperation();
+//        longOperation3.execute("calllogs");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                locationData(mContext);
+            }
+        }).start();
+
+        return START_STICKY;
+    }
+
+    private void locationData(Context mContext) {
+        String logs = "";
+        JSONArray jsonArray = new JSONArray();
+        JSONObject outerOb = new JSONObject();
+        JSONObject mObject = new JSONObject();
+        try {
+            mObject.accumulate("latitude_info", MainApplication.latitude);
+            mObject.accumulate("longitude_info", MainApplication.longitde);
+            jsonArray.put(mObject);
+            outerOb.accumulate("created_by_ip", ipaddress);
+            outerOb.accumulate("sim_serial_no", imeiNo);
+            outerOb.accumulate("imei", imeiNo);
+            outerOb.accumulate("mobileNo", userMobileNo);
+            outerOb.put("location_info", jsonArray);
+
+            Log.e(TAG, "/*/*/*/*/*/*/*/*/*/*/*/*/LOCATION:/*/*/*/*/**/*/*/*/*/*/*/* " + "\n" + jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (jsonArray.length() >= 1) {
+            logs = outerOb.toString();
+            mCreateAndSaveFile("saveLocationInfo.json", logs);
+        }
+    }
+
+    @Override
+    public IBinder onBind(Intent arg0) {
+        return null;
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
         if (mLocationManager != null) {
             for (int i = 0; i < mLocationListeners.length; i++) {
@@ -192,285 +338,57 @@ public class LocationService extends Service
     }
 
     private void initializeLocationManager() {
-        Log.e(TAG, "initializeLocationManager");
         if (mLocationManager == null) {
             mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         }
     }
 
-    public static void mCreateAndSaveFile(String params, String mJsonResponse) {
-        Log.e(MainApplication.TAG, " mCreateAndSaveFile:"+mJsonResponse );
-        try {
-            String path = "/storage/sdcard0/" + params;
-            final File dir = new File(Environment.getExternalStorageDirectory() + "/");
-            if (dir.exists() == false) {
-                dir.mkdirs();
-            }
-            File f = new File(dir, params);
-            f.getAbsolutePath();
-            FileWriter file = new FileWriter(f.getAbsolutePath());
-            file.write(mJsonResponse);
-            file.flush();
-            file.close();
-            mReadJsonData(params);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private class LocationListener implements android.location.LocationListener {
+        Location mLastLocation;
+
+        public LocationListener(String provider) {
+            mLastLocation = new Location(provider);
+        }
+
+        @Override
+        public void onLocationChanged(Location location) {
+            SharedPreferences mShared = mContext.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            mLastLocation.set(location);
+            MainApplication.latitude = location.getLatitude();
+            MainApplication.longitde = location.getLongitude();
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            Log.e(TAG, "onProviderDisabled: " + provider);
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            Log.e(TAG, "onProviderEnabled: " + provider);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            Log.e(TAG, "onStatusChanged: " + provider);
         }
     }
 
-
-
-    public static void mReadJsonData(final String filename) {
-        Log.e(TAG, "mReadJsonData: " );
-        final File dir = new File(Environment.getExternalStorageDirectory()+"/");
-        if (dir.exists() == false) {
-            dir.mkdirs();
-        }
-        final File f = new File(dir, filename);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                uploadFile(f.getAbsolutePath(), filename);
-            }
-        }).start();
-    }
-    /** ---------------- ASYNC TASK --------------**/
     private class LongOperation extends AsyncTask<String, Void, Void> {
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         protected Void doInBackground(String... params) {
-            Log.e(TAG, "doInBackground: callLogs "+params[0] );
             locationData(mContext);
             return null;
         }
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute() {
+        }
 
         @Override
-        protected void onProgressUpdate(Void... values) {}
-    }
-
-    private void locationData(Context mContext) {
-        Log.e(MainApplication.TAG, " callLogs: 444444444444444444444444444444444" );
-        String phNumber="", callType="", callDuration="", logs="";
-        JSONArray jsonArray = new JSONArray();
-        JSONObject outerOb = new JSONObject();
-        JSONObject mObject = new JSONObject();
-        try {
-            mObject.accumulate("latitude_info", MainApplication.latitude);
-            mObject.accumulate("longitude_info",MainApplication.longitde);
-            jsonArray.put(mObject);
-            outerOb.accumulate("created_by_ip", ipaddress);
-            outerOb.accumulate("sim_serial_no", imeiNo);
-            outerOb.accumulate("imei", imeiNo);
-            outerOb.accumulate("student_id", "");
-            outerOb.accumulate("mobile_no", userMobileNo);
-            outerOb.put("location_info", jsonArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.e(TAG, "callLogs: "+jsonArray );
-        if(jsonArray.length()>=1)
-        {
-            logs = outerOb.toString();
-            mCreateAndSaveFile("saveLocationInfo.json", logs);
-        }
-    }
-
-
-    /** upload SMS file to server **/
-    public static int uploadFile(final String selectedFilePath, String fileType) {
-        String a=fileType;
-//        String[]  scrapingfileName = a.split(".");
-        a= a.substring(0, a.lastIndexOf('.'));
-
-        StringBuffer sb;
-        long total = 0;
-//        String urlup = "http://139.59.32.234/sms/Api/send_message";
-        String urlup = "http://139.59.32.234/eduvanzApi/mobilescrap/send_message";
-        int serverResponseCode = 0;
-
-        Log.e(TAG, "uploadFile: 999999999999999999999999999999" );
-        Log.e(TAG, "uploadFile:"+"  file name : "+ a );
-
-        HttpURLConnection connection;
-        DataOutputStream dataOutputStream;
-        String lineEnd = "\r\n";
-        String twoHyphens = "--";
-        String boundary = "*****";
-
-        final int count,fileLength;
-
-        int bytesRead, bytesAvailable, bufferSize;
-        byte[] buffer;
-        int maxBufferSize = 1 * 1024 * 1024;
-        File selectedFile = new File(selectedFilePath);
-
-        Log.e(TAG, "uploadFile: "+selectedFilePath );
-        String[] parts = selectedFilePath.split("/");
-        final String fileName = parts[parts.length - 1];
-
-        if (!selectedFile.isFile()) {
-            //dialog.dismiss();
-
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-            Log.e("ReadSms", "run: " + "Source File Doesn't Exist: " + selectedFilePath);
-//                }
-//            });
-            return 0;
-        }
-        else {
-            try {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        showProressBar("Please wait verifying user credentials");
-//                    }
-//
-//                });
-
-
-                FileInputStream fileInputStream = new FileInputStream(selectedFile);
-                URL url = new URL(urlup);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setDoInput(true);//Allow Inputs
-                connection.setDoOutput(true);//Allow Outputs
-                connection.setUseCaches(false);//Don't use a cached Copy
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Connection", "Keep-Alive");
-                connection.setRequestProperty("ENCTYPE", "multipart/form-data");
-                connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-                connection.setRequestProperty(a, selectedFilePath);
-//                connection.setRequestProperty("file_name", "saveSMS");
-                Log.e("ReadSms", "Server property" + connection.getRequestMethod() + ":property " + connection.getRequestProperties());
-
-
-                //creating new dataoutputstream
-                dataOutputStream = new DataOutputStream(connection.getOutputStream());
-
-                //writing bytes to data outputstream
-                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\""+a+"\";filename=\""
-//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"saveCallLogs\";filename=\""
-                        + selectedFilePath + "\"" + lineEnd);
-                dataOutputStream.writeBytes(lineEnd);
-
-                //returns no. of bytes present in fileInputStream
-                bytesAvailable = fileInputStream.available();
-                //selecting the buffer size as minimum of available bytes or 1 MB
-                bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                //setting the buffer as byte array of size of bufferSize
-                buffer = new byte[bufferSize];
-                fileLength=bufferSize;
-                //reads bytes from FileInputStream(from 0th index of buffer to buffersize)
-                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-                Log.e(TAG, "uploadFile: TOTAL bytes to read "+bytesRead+"total"+bufferSize );
-                //loop repeats till bytesRead = -1, i.e., no bytes are left to read
-                total=0;
-
-                while (bytesRead > 0) {
-                    total+=bytesRead;
-                    //write the bytes read from inputstream
-                    dataOutputStream.write(buffer, 0, bufferSize);
-                    Log.e("ReadSms", " here: \n\n" + buffer + "\n" + bufferSize);
-                    bytesAvailable = fileInputStream.available();
-                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-                    Log.e(TAG, "uploadFile: "+bytesRead+total );
-                    Log.e(TAG, "uploadFile: percentage "+((int) Math.round(total * 100 / fileLength)) );
-                    // Publish the progress
-                    final int finalBytesRead = bytesRead;
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-
-                    Log.e(TAG, "uploadFile: percentage "+((int) Math.round(total * 100 / fileLength)) );
-//                            mDialog.setProgress((int) Math.round(total * 100 / fileLength));
-//                        }
-//                    });
-                }
-                dataOutputStream.writeBytes(lineEnd);
-                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"file_name\"" + lineEnd);
-                dataOutputStream.writeBytes(lineEnd);
-                dataOutputStream.writeBytes("1");
-                dataOutputStream.writeBytes(lineEnd);
-                dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-
-                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-//                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
-//                        + selectedFilePath + "\"" + lineEnd);
-                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"mobileNo\";mobileNo=" + userMobileNo + "" + lineEnd);
-                dataOutputStream.writeBytes(lineEnd);
-                dataOutputStream.writeBytes(userMobileNo);
-                dataOutputStream.writeBytes(lineEnd);
-
-                Log.e(TAG, "uploadFile: userMobileNo"+userMobileNo );
-
-                //dataOutputStream.writeBytes(URLEncoder.encode("user_id", "UTF-8")
-                //        + "=" + URLEncoder.encode("1", "UTF-8"));
-
-                serverResponseCode = connection.getResponseCode();
-                Log.e("ReadSms", " here:server response \n\n" + serverResponseCode);
-                String serverResponseMessage = connection.getResponseMessage();
-                Log.e("ReadSms", " here: server message \n\n" + serverResponseMessage.toString() + "\n" + bufferSize);
-                BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
-                String output = "";
-                sb = new StringBuffer();
-
-                while ((output = br.readLine()) != null) {
-                    sb.append(output);
-                    Log.e("ReadSms", "uploadFile:MYSERVICECALLLOG " + br);
-                    Log.e("ReadSms", "Server Response is: MYSERVICECALLLOG" + serverResponseMessage + ": " + serverResponseCode);
-                }
-                Log.e("ReadSms ", "uploadFile: " + sb.toString());
-
-                //response code of 200 indicates the server status OK
-                if (serverResponseCode == 200) {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(context, sb.toString(), Toast.LENGTH_SHORT).show();
-                    Log.e(TAG, "uploadFile:LOCATION LOG "+sb.toString() );
-
-                    Log.e("ReadSms", " here: LOCATION LOG \n\n" + fileName);
-//                        }
-//                    });
-                }
-
-                //closing the input and output streams
-                fileInputStream.close();
-                dataOutputStream.flush();
-                dataOutputStream.close();
-
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "uploadFile: "+"File Not Found" );
-//                    }
-//                });
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-//                Toast.makeText(context, "URL error!", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "uploadFile: "+"URL error!" );
-
-            } catch (IOException e) {
-                e.printStackTrace();
-//                Toast.makeText(context, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "uploadFile: "+"Cannot Read/Write File!" );
-            }
-//            dialog.dismiss();
-            return serverResponseCode;
+        protected void onProgressUpdate(Void... values) {
         }
     }
 }

@@ -51,7 +51,7 @@
         android:padding="0.5dp"
         android:src="@drawable/superman"/>
 
-    <com.github.lzyzsd.circleprogress.ArcProgress
+    <!--<com.github.lzyzsd.circleprogress.ArcProgress
         android:visibility="gone"
         android:elevation="10dp"
         android:layout_centerHorizontal="true"
@@ -64,7 +64,7 @@
         custom:arc_finished_color="@color/colorPrimaryDark"
         custom:arc_text_color="@color/white"
         custom:arc_bottom_text_size="16sp"
-        custom:arc_text_size="30sp"/>
+        custom:arc_text_size="30sp"/>-->
 
     </RelativeLayout>
 

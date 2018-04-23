@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <com.github.lzyzsd.circleprogress.ArcProgress
+                <!--<com.github.lzyzsd.circleprogress.ArcProgress
                     android:layout_gravity="center"
                     xmlns:custom="http://schemas.android.com/apk/res-auto"
                     android:elevation="10dp"
@@ -98,7 +98,7 @@
                     custom:arc_finished_color="@color/colorPrimaryDark"
                     custom:arc_text_color="@color/colorPrimaryDark"
                     custom:arc_bottom_text_size="16sp"
-                    custom:arc_text_size="30sp"/>
+                    custom:arc_text_size="30sp"/>-->
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -246,7 +246,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/grey_400"></View>
+                android:background="@color/grey"></View>
             <LinearLayout
                 android:gravity="center"
                 android:layout_weight="1"
@@ -283,7 +283,7 @@
             android:layout_marginRight="45dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/grey_400"></View>
+            android:background="@color/grey"></View>
         <LinearLayout
 
             android:layout_marginBottom="25dp"
@@ -326,7 +326,7 @@
                 android:layout_marginBottom="25dp"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/grey_400"></View>
+                android:background="@color/grey"></View>
             <LinearLayout
                 android:gravity="center"
                 android:layout_weight="1"

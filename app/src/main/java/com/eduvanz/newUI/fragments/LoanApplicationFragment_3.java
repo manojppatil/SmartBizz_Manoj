@@ -86,7 +86,7 @@ public class LoanApplicationFragment_3 extends Fragment {
     static Button buttonKycProfilePhoto_co, buttonKycPhotoId_co, buttonKycAddressProof_co, buttonKycSignatureProof_co,
             buttonFinanceIncomeProof_co, buttonFinanceBankStatement_co, buttonOtherDocument_co;
     static ProgressBar progressBar;
-    public static String coBorrowerID = "";
+    public static String coBorrowerID = "", baseUrl="";
     public Boolean kyc = true, financial = true, education = true, other = true;
     public String documentType = "", documentTypeNo = "", userID = "";
     static int doc_finish, signedAppStatus;
@@ -1264,7 +1264,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                     }
                 });
@@ -1278,7 +1278,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                     }
                 });
@@ -1305,6 +1305,8 @@ public class LoanApplicationFragment_3 extends Fragment {
 
                 JSONObject jsonObject = jsonData.getJSONObject("result");
 
+                String baseUrl = jsonObject.getString("baseUrl");
+
                 JSONArray jsonArray = jsonObject.getJSONArray("KycDocument");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -1316,22 +1318,22 @@ public class LoanApplicationFragment_3 extends Fragment {
                         buttonKycPhotoId.setVisibility(View.VISIBLE);
                         buttonKycPhotoId.setText("Uploaded");
                         imageViewUploadTick_1.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycPhotoId);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewKycPhotoId);
                     } else if (s.equalsIgnoreCase("2")) {
                         buttonKycAddressProof.setVisibility(View.VISIBLE);
                         buttonKycAddressProof.setText("Uploaded");
                         imageViewUploadTick_2.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycAddressProof);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewKycAddressProof);
                     } else if (s.equalsIgnoreCase("3")) {
                         buttonKycSignatureProof.setVisibility(View.VISIBLE);
                         buttonKycSignatureProof.setText("Uploaded");
                         imageViewUploadTick_3.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycSignatureProof);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewKycSignatureProof);
                     } else if (s.equalsIgnoreCase("9")) {
                         buttonKycProfilePhoto.setVisibility(View.VISIBLE);
                         buttonKycProfilePhoto.setText("Uploaded");
                         imageViewUploadTick_9.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycProfilePhoto);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewKycProfilePhoto);
                     }
                 }
 
@@ -1348,12 +1350,12 @@ public class LoanApplicationFragment_3 extends Fragment {
                         buttonFinanceIncomeProof.setVisibility(View.VISIBLE);
                         buttonFinanceIncomeProof.setText("Uploaded");
                         imageViewUploadTick_4.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceIncomeProof);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewFinanceIncomeProof);
                     } else if (s.equalsIgnoreCase("5")) {
                         buttonFinanceBankStatement.setVisibility(View.VISIBLE);
                         buttonFinanceBankStatement.setText("Uploaded");
                         imageViewUploadTick_5.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceBankStatement);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewFinanceBankStatement);
                     }
                 }
 
@@ -1367,12 +1369,12 @@ public class LoanApplicationFragment_3 extends Fragment {
                         buttonEducationDegreeMarksheets.setVisibility(View.VISIBLE);
                         buttonEducationDegreeMarksheets.setText("Uploaded");
                         imageViewUploadTick_6.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewEducationDegreeMarksheets);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewEducationDegreeMarksheets);
                     } else if (s.equalsIgnoreCase("7")) {
                         buttonEducationDegreeCertificate.setVisibility(View.VISIBLE);
                         buttonEducationDegreeCertificate.setText("Uploaded");
                         imageViewUploadTick_7.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewEducationDegreeCertificate);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewEducationDegreeCertificate);
                     }
                 }
 
@@ -1386,7 +1388,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                         buttonOtherDocument.setVisibility(View.VISIBLE);
                         buttonOtherDocument.setText("Uploaded");
                         imageViewUploadTick_8.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewOtherDocument);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewOtherDocument);
                     }
                 }
 
@@ -1407,6 +1409,7 @@ public class LoanApplicationFragment_3 extends Fragment {
             if (status.equalsIgnoreCase("1")) {
                 JSONObject jsonObject = jsonData.getJSONObject("result");
                 coBorrowerID = jsonObject.getString("coBorrowerId");
+                String baseUrl = jsonObject.getString("baseUrl");
                 Log.e(MainApplication.TAG, "coBorrowerID: " + coBorrowerID);
 
                 JSONArray jsonArray = jsonObject.getJSONArray("KycDocument");
@@ -1420,22 +1423,22 @@ public class LoanApplicationFragment_3 extends Fragment {
                         buttonKycPhotoId_co.setVisibility(View.VISIBLE);
                         buttonKycPhotoId_co.setText("Uploaded");
                         imageViewUploadTick_1_co.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycPhotoId_co);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewKycPhotoId_co);
                     } else if (s.equalsIgnoreCase("2")) {
                         buttonKycAddressProof_co.setVisibility(View.VISIBLE);
                         buttonKycAddressProof_co.setText("Uploaded");
                         imageViewUploadTick_2_co.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycAddressProof_co);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewKycAddressProof_co);
                     } else if (s.equalsIgnoreCase("3")) {
                         buttonKycSignatureProof_co.setVisibility(View.VISIBLE);
                         buttonKycSignatureProof_co.setText("Uploaded");
                         imageViewUploadTick_3_co.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycSignatureProof_co);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewKycSignatureProof_co);
                     } else if (s.equalsIgnoreCase("9")) {
                         buttonKycProfilePhoto_co.setVisibility(View.VISIBLE);
                         buttonKycProfilePhoto_co.setText("Uploaded");
                         imageViewUploadTick_9_co.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewKycProfilePhoto_co);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewKycProfilePhoto_co);
                     }
                 }
 
@@ -1452,12 +1455,12 @@ public class LoanApplicationFragment_3 extends Fragment {
                         buttonFinanceIncomeProof_co.setVisibility(View.VISIBLE);
                         buttonFinanceIncomeProof_co.setText("Uploaded");
                         imageViewUploadTick_4_co.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceIncomeProof_co);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewFinanceIncomeProof_co);
                     } else if (s.equalsIgnoreCase("5")) {
                         buttonFinanceBankStatement_co.setVisibility(View.VISIBLE);
                         buttonFinanceBankStatement_co.setText("Uploaded");
                         imageViewUploadTick_5_co.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewFinanceBankStatement_co);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewFinanceBankStatement_co);
                     }
                 }
 
@@ -1472,7 +1475,7 @@ public class LoanApplicationFragment_3 extends Fragment {
                         buttonOtherDocument_co.setVisibility(View.VISIBLE);
                         buttonOtherDocument_co.setText("Uploaded");
                         imageViewUploadTick_8_co.setVisibility(View.VISIBLE);
-                        Picasso.with(context).load("http://139.59.32.234/eduvanz/" + image).into(imageViewOtherDocument_co);
+                        Picasso.with(context).load(baseUrl + image).into(imageViewOtherDocument_co);
                     }
                 }
 

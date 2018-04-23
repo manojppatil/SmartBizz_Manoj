@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.eduvanz.newUI.MainApplication;
-import com.eduvanz.newUI.services.MyServiceCallStats;
+import com.eduvanz.newUI.services.MyServiceAppStats;
 
 import static com.eduvanz.newUI.MainApplication.TAG;
 
@@ -31,7 +31,7 @@ public class AppStatsForFileUpload extends BroadcastReceiver {
         String userMobileNo = sharedPreferences.getString("logged_id", "null");
         String userLoggedinID = sharedPreferences.getString("mobile_no", "null");
 
-        Intent intentCallStats = new Intent(mcontext, MyServiceCallStats.class);
+        Intent intentCallStats = new Intent(mcontext, MyServiceAppStats.class);
         mcontext.startService(intentCallStats);
 
     }

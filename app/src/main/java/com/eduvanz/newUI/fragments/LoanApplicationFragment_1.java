@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanz.R;
+import com.eduvanz.Utils;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentCityPersonalPOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentCountryPersonalPOJO;
 import com.eduvanz.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceDurationPersonalPOJO;
@@ -52,7 +53,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.eduvanz.newUI.MainApplication.TAG;
-import static com.eduvanz.newUI.MainApplication.longitde;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,9 +68,10 @@ public class LoanApplicationFragment_1 extends Fragment {
     public static Context context;
     public static Fragment mFragment;
     public static TextView birthdaycalender, lable, textViewbirthday;
-    public static EditText fname, lname, adhaarno, panno, monthlyrent, currentaddress, currentpincode, permanentaddress, permanentpincode;
-    public static RadioGroup radioGroupMaritailStatus;
-    public static RadioButton radioButtonMarried, radioButtonSingle;
+    public static EditText fname, lname, adhaarno, panno, monthlyrent, currentaddress, currentpincode, permanentaddress, permanentpincode, previousemi;
+    public static RadioGroup radioGroupMaritailStatus, radioGroupPreviousEmi, radioGroupGender, radioGroupGaps;
+    public static RadioButton radioButtonMarried, radioButtonSingle, radioButtonPreviousEmiYes,
+            radioButtonPreviousEmiNo, radioButtonMale, radioButtonFemale, radioButtonGapYes, radioButtonGapNO;
     public static Spinner spinnerPermanentCity, spinnerPermanentCountry, spinnerPermanentState;
     public static ArrayList<String> permanentstate_arrayList, permanentcity_arrayList;
     public static ArrayAdapter arrayAdapter_permanentCity, arrayAdapter_permanentState, arrayAdapter_permanentCountry;
@@ -102,15 +103,17 @@ public class LoanApplicationFragment_1 extends Fragment {
     public static ArrayAdapter arrayAdapter_lastcompleteddegree;
     public static ArrayList<String> lastCompletedDegree_arratList;
     public static ArrayList<BorrowerEducationDegreePOJO> borrowerEducationDegreePOJOArrayList;
-    public static RadioButton radioButtonisEmployed, radioButtonisStudent;
+    public static RadioButton radioButtonisEmployed, radioButtonisStudent, radioButtonGovernment,
+            radioButtonPrivate;
     public static EditText editTextAdvancePayment, editTextAnualIncome, editTextNameofCompany;
     public static Spinner spinnerJobDuration;
     public static ArrayAdapter arrayAdapter;
     public static ArrayList<String> professionfinance_arratList;
     public static ArrayList<BorrowerProfessionFinancePOJO> borrowerProfessionFinancePOJOArrayList;
-    public static RadioGroup radioGroup_profession;
+    public static RadioGroup radioGroup_profession, radioGroupEmployerType;
     public static FragmentTransaction transaction;
     public static ProgressBar progressBar;
+    public static String userID = "", borrowerBackground = "", coBorrowerBackground = "";
     static View view;
     public String dateformate = "";
     public String permanentcityID = "", permanentstateID = "", permanentCountryID;
@@ -126,9 +129,7 @@ public class LoanApplicationFragment_1 extends Fragment {
     Calendar cal;
     MainApplication mainApplication;
     Typeface typeface;
-    public static String userID = "", borrowerBackground="", coBorrowerBackground="";
     LinearLayout linearLayoutEmployed, linearLayoutLeftoff;
-
 
 
     public LoanApplicationFragment_1() {
@@ -164,8 +165,8 @@ public class LoanApplicationFragment_1 extends Fragment {
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
         userID = sharedPreferences.getString("logged_id", "null");
         borrowerBackground = sharedPreferences.getString("borrowerBackground_dark", "0");
-        coBorrowerBackground = sharedPreferences.getString("coBorrowerBackground_dark","0");
-        Log.e(TAG, "onCreateView:++++++++ "+borrowerBackground );
+        coBorrowerBackground = sharedPreferences.getString("coBorrowerBackground_dark", "0");
+        Log.e(TAG, "onCreateView:++++++++ " + borrowerBackground);
 
         setViews();
 
@@ -186,129 +187,205 @@ public class LoanApplicationFragment_1 extends Fragment {
 //                    !editTextAnualIncome.getText().toString().equals("") &&
 //                    !editTextNameofCompany.getText().toString().equals("") &&
 
-                    if(radioGroupMaritailStatus.getCheckedRadioButtonId()>0) {
+                    if (radioGroupGender.getCheckedRadioButtonId() > 0) {
 
-                        if(radioGroup.getCheckedRadioButtonId()>0) {
+                        if (radioGroupMaritailStatus.getCheckedRadioButtonId() > 0) {
 
-                            if(radioGroup_profession.getCheckedRadioButtonId()>0) {
+                            if(radioGroupGaps.getCheckedRadioButtonId() > 0) {
 
-                                if(!currentcityID.equalsIgnoreCase("") && !currentstateID.equalsIgnoreCase("") &&
-                                        !currentcountryID.equalsIgnoreCase("") && !permanentcityID.equalsIgnoreCase("") &&
-                                        !permanentstateID.equalsIgnoreCase("") && !permanentCountryID.equalsIgnoreCase("") &&
-                                        !currentResidencetypeID.equalsIgnoreCase("") && !currentresidenceDurationID.equalsIgnoreCase("") &&
-                                        !degreeID.equalsIgnoreCase("")) {
+                                if (radioGroup.getCheckedRadioButtonId() > 0) {
 
-                                    /**API CALL**/
-                                    try {
-                                        String maritialstatus = "";
-                                        if (radioButtonMarried.isChecked()) {
-                                            maritialstatus = "1";
+                                    if (radioGroup_profession.getCheckedRadioButtonId() > 0) {
+
+                                        if(radioGroupEmployerType.getCheckedRadioButtonId() > 0) {
+
+                                            if (radioGroupPreviousEmi.getCheckedRadioButtonId() > 0) {
+
+//                                            if (!previousemi.getText().toString().equalsIgnoreCase("")) {
+
+                                                if (!currentcityID.equalsIgnoreCase("") && !currentstateID.equalsIgnoreCase("") &&
+                                                        !currentcountryID.equalsIgnoreCase("") && !permanentcityID.equalsIgnoreCase("") &&
+                                                        !permanentstateID.equalsIgnoreCase("") && !permanentCountryID.equalsIgnoreCase("") &&
+                                                        !currentResidencetypeID.equalsIgnoreCase("") && !currentresidenceDurationID.equalsIgnoreCase("") &&
+                                                        !degreeID.equalsIgnoreCase("")) {
+
+                                                    /**API CALL**/
+                                                    try {
+                                                        String maritialstatus = "";
+                                                        if (radioButtonMarried.isChecked()) {
+                                                            maritialstatus = "1";
+                                                        }
+                                                        if (radioButtonSingle.isChecked()) {
+                                                            maritialstatus = "2";
+                                                        }
+
+                                                        String gender = "";
+                                                        if (radioButtonMale.isChecked()) {
+                                                            gender = "1";
+                                                        }
+                                                        if (radioButtonFemale.isChecked()) {
+                                                            gender = "2";
+                                                        }
+
+                                                        String gap = "";
+                                                        if (radioButtonGapYes.isChecked()) {
+                                                            gap = "1";
+                                                        }
+                                                        if (radioButtonGapNO.isChecked()) {
+                                                            gap = "2";
+                                                        }
+
+                                                        String empType = "";
+                                                        if (radioButtonGovernment.isChecked()) {
+                                                            empType = "0";
+                                                        }
+                                                        if (radioButtonPrivate.isChecked()) {
+                                                            empType = "1";
+                                                        }
+
+
+                                                        progressBar.setVisibility(View.VISIBLE);
+                                                        String url = MainApplication.mainUrl + "algo/setBorrowerLoanDetails";
+                                                        Map<String, String> params = new HashMap<String, String>();
+                                                        params.put("logged_id", userID);
+                                                        params.put("student_address_type", currentResidencetypeID);
+                                                        params.put("student_monthly_rent", monthlyrent.getText().toString());
+                                                        params.put("student_current_address", currentaddress.getText().toString());
+                                                        params.put("student_current_city", currentcityID);
+                                                        params.put("student_current_state", currentstateID);
+                                                        params.put("student_current_country", currentcountryID);
+                                                        params.put("student_current_pincode", currentpincode.getText().toString());
+                                                        params.put("student_permanent_address", permanentaddress.getText().toString());
+                                                        params.put("student_permanent_city", permanentcityID);
+                                                        params.put("student_permanent_state", permanentstateID);
+                                                        params.put("student_permanent_country", permanentCountryID);
+                                                        params.put("student_gender", gender);
+                                                        params.put("any_gaps", gap);
+                                                        params.put("student_permanent_pincode", permanentpincode.getText().toString());
+                                                        params.put("borrower_previous_emi_amount", previousemi.getText().toString());
+                                                        params.put("student_first_name", fname.getText().toString());
+                                                        params.put("student_last_name", lname.getText().toString());
+                                                        params.put("student_dob", textViewbirthday.getText().toString());
+                                                        params.put("student_married", maritialstatus);
+                                                        params.put("student_pan_card_no", panno.getText().toString());
+                                                        params.put("student_aadhar_card_no", adhaarno.getText().toString());
+                                                        params.put("student_current_address_duration", currentresidenceDurationID);
+                                                        params.put("borrower_employer_type", empType);
+
+                                                        /** EDUCATION**/
+                                                        String isCgpa = "";
+                                                        if (radioButtonisCgpaYes.isChecked()) {
+                                                            isCgpa = "1";
+                                                        }
+                                                        if (radioButtonisCgpaNo.isChecked()) {
+                                                            isCgpa = "2";
+                                                        }
+
+                                                        params.put("last_degree_completed", degreeID);
+                                                        params.put("is_cgpa", isCgpa);
+                                                        params.put("last_degree_percentage", editTextIsCgpaNo.getText().toString());
+                                                        params.put("last_degree_cgpa", editTextIsCgpaYes.getText().toString());
+                                                        params.put("last_degree_year_completion", editTextPassingYear.getText().toString());
+
+                                                        /** PROFESSION AND FINANCIAL **/
+                                                        String isWorking = "";
+                                                        if (radioButtonisEmployed.isChecked()) {
+                                                            isWorking = "1";
+                                                        }
+                                                        if (radioButtonisStudent.isChecked()) {
+                                                            isWorking = "2";
+                                                        }
+
+                                                        String previousEmi = "";
+                                                        if (radioButtonPreviousEmiYes.isChecked()) {
+                                                            previousEmi = "1";
+                                                        } else if (radioButtonPreviousEmiNo.isChecked()) {
+                                                            previousEmi = "0";
+                                                        }
+
+                                                        params.put("is_student_working", isWorking);
+                                                        params.put("student_working_organization", editTextNameofCompany.getText().toString());
+                                                        params.put("working_organization_since", jobDurationID);
+                                                        params.put("student_income", editTextAnualIncome.getText().toString());
+                                                        params.put("advance_payment", editTextAdvancePayment.getText().toString());
+                                                        params.put("borrower_has_any_emi", previousEmi);
+                                                        params.put("ip_address", Utils.getIPAddress(true));
+
+                                                        MainApplication.borrowerValue1 = currentResidencetypeID;
+                                                        MainApplication.borrowerValue2 = monthlyrent.getText().toString();
+                                                        MainApplication.borrowerValue3 = currentaddress.getText().toString();
+                                                        MainApplication.borrowerValue4 = currentcityID;
+                                                        MainApplication.borrowerValue5 = currentstateID;
+                                                        MainApplication.borrowerValue6 = currentcountryID;
+                                                        MainApplication.borrowerValue7 = currentpincode.getText().toString();
+                                                        MainApplication.borrowerValue8 = permanentaddress.getText().toString();
+                                                        MainApplication.borrowerValue9 = permanentcityID;
+                                                        MainApplication.borrowerValue10 = permanentstateID;
+                                                        MainApplication.borrowerValue11 = permanentCountryID;
+                                                        MainApplication.borrowerValue12 = permanentpincode.getText().toString();
+                                                        MainApplication.borrowerValue31 = previousemi.getText().toString();
+                                                        MainApplication.borrowerValue32 = gender;
+                                                        MainApplication.borrowerValue33 = gap;
+                                                        MainApplication.borrowerValue13 = fname.getText().toString();
+                                                        MainApplication.borrowerValue14 = lname.getText().toString();
+                                                        MainApplication.borrowerValue15 = textViewbirthday.getText().toString();
+                                                        MainApplication.borrowerValue16 = maritialstatus;
+                                                        MainApplication.borrowerValue17 = panno.getText().toString();
+                                                        MainApplication.borrowerValue18 = adhaarno.getText().toString();
+                                                        MainApplication.borrowerValue19 = degreeID;
+                                                        MainApplication.borrowerValue20 = isCgpa;
+                                                        MainApplication.borrowerValue21 = editTextIsCgpaNo.getText().toString();
+                                                        MainApplication.borrowerValue22 = editTextIsCgpaYes.getText().toString();
+                                                        MainApplication.borrowerValue23 = editTextPassingYear.getText().toString();
+                                                        MainApplication.borrowerValue24 = isWorking;
+                                                        MainApplication.borrowerValue25 = editTextNameofCompany.getText().toString();
+                                                        MainApplication.borrowerValue26 = jobDurationID;
+                                                        MainApplication.borrowerValue27 = editTextAnualIncome.getText().toString();
+                                                        MainApplication.borrowerValue28 = editTextAdvancePayment.getText().toString();
+                                                        MainApplication.borrowerValue30 = previousEmi;
+                                                        MainApplication.borrowerValue34 = empType;
+                                                        VolleyCallNew volleyCall = new VolleyCallNew();
+                                                        volleyCall.sendRequest(context, url, null, mFragment, "sendborrowerDetails", params);
+
+                                                        Log.e(TAG, "currentresidenceDurationID: SEND" + currentResidencetypeID);
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                } else {
+                                                    Toast.makeText(context, "Please fill up all the details to continue", Toast.LENGTH_LONG).show();
+                                                }
+
+//                                            } else {
+//                                                Toast.makeText(context, "Please fill up previous EMI to continue", Toast.LENGTH_LONG).show();
+//
+//                                            }
+
+
+                                            } else {
+                                                radioButtonPreviousEmiNo.setError("You need to select Previous Emi status");
+                                            }
+
+                                        } else {
+                                            radioButtonPrivate.setError("You need to select Employer Type");
                                         }
-                                        if (radioButtonSingle.isChecked()) {
-                                            maritialstatus = "2";
-                                        }
-                                        progressBar.setVisibility(View.VISIBLE);
-                                        String url = MainApplication.mainUrl + "algo/setBorrowerLoanDetails";
-                                        Map<String, String> params = new HashMap<String, String>();
-                                        params.put("logged_id", userID);
-                                        params.put("student_address_type", currentResidencetypeID);
-                                        params.put("student_monthly_rent", monthlyrent.getText().toString());
-                                        params.put("student_current_address", currentaddress.getText().toString());
-                                        params.put("student_current_city", currentcityID);
-                                        params.put("student_current_state", currentstateID);
-                                        params.put("student_current_country", currentcountryID);
-                                        params.put("student_current_pincode", currentpincode.getText().toString());
-                                        params.put("student_permanent_address", permanentaddress.getText().toString());
-                                        params.put("student_permanent_city", permanentcityID);
-                                        params.put("student_permanent_state", permanentstateID);
-                                        params.put("student_permanent_country", permanentCountryID);
-                                        params.put("student_permanent_pincode", permanentpincode.getText().toString());
-                                        params.put("student_first_name", fname.getText().toString());
-                                        params.put("student_last_name", lname.getText().toString());
-                                        params.put("student_dob", textViewbirthday.getText().toString());
-                                        params.put("student_married", maritialstatus);
-                                        params.put("student_pan_card_no", panno.getText().toString());
-                                        params.put("student_aadhar_card_no", adhaarno.getText().toString());
-                                        params.put("student_current_address_duration", currentresidenceDurationID);
-
-                                        /** EDUCATION**/
-                                        String isCgpa = "";
-                                        if (radioButtonisCgpaYes.isChecked()) {
-                                            isCgpa = "1";
-                                        }
-                                        if (radioButtonisCgpaNo.isChecked()) {
-                                            isCgpa = "2";
-                                        }
-
-                                        params.put("last_degree_completed", degreeID);
-                                        params.put("is_cgpa", isCgpa);
-                                        params.put("last_degree_percentage", editTextIsCgpaNo.getText().toString());
-                                        params.put("last_degree_cgpa", editTextIsCgpaYes.getText().toString());
-                                        params.put("last_degree_year_completion", editTextPassingYear.getText().toString());
-
-                                        /** PROFESSION AND FINANCIAL **/
-                                        String isWorking = "";
-                                        if (radioButtonisEmployed.isChecked()) {
-                                            isWorking = "1";
-                                        }
-                                        if (radioButtonisStudent.isChecked()) {
-                                            isWorking = "2";
-                                        }
-
-                                        params.put("is_student_working", isWorking);
-                                        params.put("student_working_organization", editTextNameofCompany.getText().toString());
-                                        params.put("working_organization_since", jobDurationID);
-                                        params.put("student_income", editTextAnualIncome.getText().toString());
-                                        params.put("advance_payment", editTextAdvancePayment.getText().toString());
-
-                                        MainApplication.borrowerValue1 = currentResidencetypeID;
-                                        MainApplication.borrowerValue2 = monthlyrent.getText().toString();
-                                        MainApplication.borrowerValue3 = currentaddress.getText().toString();
-                                        MainApplication.borrowerValue4 = currentcityID;
-                                        MainApplication.borrowerValue5 = currentstateID;
-                                        MainApplication.borrowerValue6 = currentcountryID;
-                                        MainApplication.borrowerValue7 = currentpincode.getText().toString();
-                                        MainApplication.borrowerValue8 = permanentaddress.getText().toString();
-                                        MainApplication.borrowerValue9 = permanentcityID;
-                                        MainApplication.borrowerValue10 = permanentstateID;
-                                        MainApplication.borrowerValue11 = permanentCountryID;
-                                        MainApplication.borrowerValue12 = permanentpincode.getText().toString();
-                                        MainApplication.borrowerValue13 = fname.getText().toString();
-                                        MainApplication.borrowerValue14 = lname.getText().toString();
-                                        MainApplication.borrowerValue15 = textViewbirthday.getText().toString();
-                                        MainApplication.borrowerValue16 = maritialstatus;
-                                        MainApplication.borrowerValue17 = panno.getText().toString();
-                                        MainApplication.borrowerValue18 = adhaarno.getText().toString();
-                                        MainApplication.borrowerValue19 = degreeID;
-                                        MainApplication.borrowerValue20 = isCgpa;
-                                        MainApplication.borrowerValue21 = editTextIsCgpaNo.getText().toString();
-                                        MainApplication.borrowerValue22 = editTextIsCgpaYes.getText().toString();
-                                        MainApplication.borrowerValue23 = editTextPassingYear.getText().toString();
-                                        MainApplication.borrowerValue24 = isWorking;
-                                        MainApplication.borrowerValue25 = editTextNameofCompany.getText().toString();
-                                        MainApplication.borrowerValue26 = jobDurationID;
-                                        MainApplication.borrowerValue27 = editTextAnualIncome.getText().toString();
-                                        MainApplication.borrowerValue28 = editTextAdvancePayment.getText().toString();
-                                        MainApplication.borrowerValue29 = currentresidenceDurationID;
-                                        VolleyCallNew volleyCall = new VolleyCallNew();
-                                        volleyCall.sendRequest(context, url, null, mFragment, "sendborrowerDetails", params);
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
+                                    } else {
+                                        radioButtonisStudent.setError("You need to select Profession status");
+                                        radioButtonisStudent.requestFocus();
+                                        fname.requestFocus();
                                     }
-                                }else {
-                                    Toast.makeText(context, "Please fill up all the details to continue", Toast.LENGTH_LONG).show();
+                                } else {
+                                    radioButtonisCgpaNo.setError("You need to select CGPA status");
                                 }
+
                             }else {
-                                radioButtonisStudent.setError("You need to select Profession status");
-                                radioButtonisStudent.requestFocus();
-                                fname.requestFocus();
+                                radioButtonGapNO.setError("You need to select Education Gap status");
                             }
-                        }else {
-                            radioButtonisCgpaNo.setError("You need to select CGPA status");
+                        } else {
+                            radioButtonSingle.setError("You need to select Maritial status");
                         }
-                    }else {
-                        radioButtonSingle.setError("You need to select Maritial status");
+
+                    } else {
+                        radioButtonFemale.setError("You need to select Gender");
                     }
                 } else {
 
@@ -347,6 +424,10 @@ public class LoanApplicationFragment_1 extends Fragment {
                     if (permanentpincode.getText().toString().equalsIgnoreCase("")) {
                         permanentpincode.setError("Permanent Pin code is Required");
                     }
+
+//                    if (previousemi.getText().toString().equalsIgnoreCase("")) {
+//                        previousemi.setError("Previous EMI is Required");
+//                    }
 
                     if (editTextPassingYear.getText().toString().equalsIgnoreCase("")) {
                         editTextPassingYear.setError("Passing year is Required");
@@ -454,6 +535,24 @@ public class LoanApplicationFragment_1 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (radioButtonisStudent.isChecked()) {
                     MainApplication.borrowerValue24 = "2";
+                }
+            }
+        });
+
+        radioButtonPreviousEmiYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (radioButtonPreviousEmiYes.isChecked()) {
+                    MainApplication.borrowerValue30 = "1";
+                }
+            }
+        });
+
+        radioButtonPreviousEmiNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (radioButtonPreviousEmiNo.isChecked()) {
+                    MainApplication.borrowerValue30 = "0";
                 }
             }
         });
@@ -613,6 +712,24 @@ public class LoanApplicationFragment_1 extends Fragment {
             }
         });
 
+
+        previousemi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                MainApplication.borrowerValue31 = previousemi.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         editTextIsCgpaYes.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -724,16 +841,26 @@ public class LoanApplicationFragment_1 extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String text = spinnerCurrentResidenceType.getSelectedItem().toString();
                 Log.e(TAG, "onItemSelected:" + text);
-                if (text.equalsIgnoreCase("Renting with Family/Friends")) {
-                    monthlyrent.setVisibility(View.VISIBLE);
-                } else {
-                    monthlyrent.setVisibility(View.GONE);
-                }
+
                 int count = borrowerCurrentResidencePersonalPOJOArrayList.size();
-                Log.e("TAG", "count: " + count);
+
                 for (int i = 0; i < count; i++) {
                     if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).residencetypeName.equalsIgnoreCase(text)) {
                         MainApplication.borrowerValue1 = currentResidencetypeID = borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID;
+
+                        Log.e(TAG, "ididididididid:" + borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID);
+                        if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
+                            monthlyrent.setVisibility(View.GONE);
+                            monthlyrent.setText("");
+                        } else if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("3")) {
+                            monthlyrent.setVisibility(View.GONE);
+                            monthlyrent.setText("");
+                        } else if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("8")) {
+                            monthlyrent.setVisibility(View.GONE);
+                            monthlyrent.setText("");
+                        } else {
+                            monthlyrent.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
@@ -928,8 +1055,6 @@ public class LoanApplicationFragment_1 extends Fragment {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Log.e("TAG", "onCheckedChanged: ");
-                Log.e("TAG", "onCheckedChanged: " + radioGroup.getCheckedRadioButtonId());
                 switch (radioGroup.getCheckedRadioButtonId()) {
                     case R.id.radiobutton_iscgpa_yes:
                         Log.e("TAG", "yes: ");
@@ -940,6 +1065,26 @@ public class LoanApplicationFragment_1 extends Fragment {
                         Log.e("TAG", "no: ");
                         editTextIsCgpaYes.setVisibility(View.GONE);
                         editTextIsCgpaNo.setVisibility(View.VISIBLE);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        radioGroupPreviousEmi.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.e("TAG", "onCheckedChanged: ");
+                Log.e("TAG", "onCheckedChanged: " + radioGroupPreviousEmi.getCheckedRadioButtonId());
+                switch (radioGroupPreviousEmi.getCheckedRadioButtonId()) {
+                    case R.id.radiobutton_emiyes:
+                        Log.e("TAG", "yes: ");
+                        previousemi.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.radiobutton_emino:
+                        Log.e("TAG", "no: ");
+                        previousemi.setVisibility(View.GONE);
                         break;
                     default:
                         break;
@@ -1045,10 +1190,10 @@ public class LoanApplicationFragment_1 extends Fragment {
         linearLayoutLeftoff = (LinearLayout) view.findViewById(R.id.linearLayout_leftoff1);
         textView1 = (TextView) view.findViewById(R.id.textView_l1);
         textView2 = (TextView) view.findViewById(R.id.textView_l2);
-        if(borrowerBackground.equalsIgnoreCase("1")){
+        if (borrowerBackground.equalsIgnoreCase("1")) {
             textView1.setBackground(getResources().getDrawable(R.drawable.background_capsule_primarydark));
         }
-        if(borrowerBackground.equalsIgnoreCase("1") && coBorrowerBackground.equalsIgnoreCase("1")){
+        if (borrowerBackground.equalsIgnoreCase("1") && coBorrowerBackground.equalsIgnoreCase("1")) {
             textView2.setBackground(getResources().getDrawable(R.drawable.background_capsule_primarydark));
             linearLayoutLeftoff.setBackground(getResources().getDrawable(R.drawable.background_capsule_primarydark));
         }
@@ -1070,10 +1215,23 @@ public class LoanApplicationFragment_1 extends Fragment {
         permanentaddress = (EditText) view.findViewById(R.id.input_borrowerpermanentaddress);
         currentpincode = (EditText) view.findViewById(R.id.input_borrowercurrentpincode);
         permanentpincode = (EditText) view.findViewById(R.id.input_borrowerpermanentpincode);
+        previousemi = (EditText) view.findViewById(R.id.input_previousemiamount);
 
         radioGroupMaritailStatus = (RadioGroup) view.findViewById(R.id.radioGroup_borrower_maritialStatus);
+        radioGroupGaps = (RadioGroup) view.findViewById(R.id.radioGroup_borrower_gaps);
+        radioGroupGender = (RadioGroup) view.findViewById(R.id.radioGroup_borrower_gender);
         radioButtonMarried = (RadioButton) view.findViewById(R.id.radioButton_married_borrower);
         radioButtonSingle = (RadioButton) view.findViewById(R.id.radioButton_single_borrower);
+
+        radioGroupPreviousEmi = (RadioGroup) view.findViewById(R.id.radiogroup_hasanypreviousemi);
+        radioButtonPreviousEmiYes = (RadioButton) view.findViewById(R.id.radiobutton_emiyes);
+        radioButtonPreviousEmiNo = (RadioButton) view.findViewById(R.id.radiobutton_emino);
+
+        radioButtonMale = (RadioButton) view.findViewById(R.id.radioButton_male_borrower);
+        radioButtonFemale = (RadioButton) view.findViewById(R.id.radioButton_female_borrower);
+
+        radioButtonGapYes = (RadioButton) view.findViewById(R.id.radioButton_gaps_yes_borrower);
+        radioButtonGapNO = (RadioButton) view.findViewById(R.id.radioButton_gaps_no_borrower);
 
         spinnerCurrentResidenceType = (Spinner) view.findViewById(R.id.spinner_currentresidencytype_borrower);
         spinnerCurrentCity = (Spinner) view.findViewById(R.id.spinner_currentcity);
@@ -1096,12 +1254,15 @@ public class LoanApplicationFragment_1 extends Fragment {
         /** PROFESSION AND FINANCIAL **/
         radioButtonisStudent = (RadioButton) view.findViewById(R.id.radiobutton_isstudent);
         radioButtonisEmployed = (RadioButton) view.findViewById(R.id.radiobutton_isemployed);
+        radioButtonGovernment = (RadioButton) view.findViewById(R.id.radiobutton_empType_gov);
+        radioButtonPrivate = (RadioButton) view.findViewById(R.id.radiobutton_empType_private);
         linearLayoutEmployed = (LinearLayout) view.findViewById(R.id.linearlayout_isempoyeed);
         spinnerJobDuration = (Spinner) view.findViewById(R.id.spinner_jobduration);
         editTextAdvancePayment = (EditText) view.findViewById(R.id.input_advancepayment);
         editTextAnualIncome = (EditText) view.findViewById(R.id.input_annualincome);
         editTextNameofCompany = (EditText) view.findViewById(R.id.input_nameofcompany);
         radioGroup_profession = (RadioGroup) view.findViewById(R.id.radiogroup_profession);
+        radioGroupEmployerType= (RadioGroup) view.findViewById(R.id.radiogroup_emptype);
     }
 
     /**
@@ -1227,6 +1388,8 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 JSONObject jsonObject1 = jsonObject.getJSONObject("personalDetails");
                 String monthlyRent = jsonObject1.getString("student_monthly_rent");
+                String borrower_gender = jsonObject1.getString("student_gender");
+                String borrower_gaps = jsonObject1.getString("any_gaps");
                 String currentadd = jsonObject1.getString("student_current_address");
                 String currentPincode = jsonObject1.getString("student_current_pincode");
                 String permanentadd = jsonObject1.getString("student_permanent_address");
@@ -1247,17 +1410,30 @@ public class LoanApplicationFragment_1 extends Fragment {
                 permanentCountryID = jsonObject1.getString("student_permanent_country");
                 currentresidenceDurationID = jsonObject1.getString("student_current_address_duration");
 
-                Log.e(TAG, "currentresidenceDurationID: RECIEVE" + currentresidenceDurationID);
+                Log.e(TAG, "currentresidenceDurationID: RECIEVE" + currentResidencetypeID);
 
-                if (currentResidencetypeID.equals("")) {
-                    monthlyrent.setVisibility(View.GONE);
-                    spinnerCurrentResidenceType.setSelection(0);
-                } else if (currentResidencetypeID.equals("2")) {
-                    monthlyrent.setVisibility(View.VISIBLE);
-                    spinnerCurrentResidenceType.setSelection(Integer.parseInt(currentResidencetypeID));
-                } else {
-                    monthlyrent.setVisibility(View.GONE);
-                    spinnerCurrentResidenceType.setSelection(Integer.parseInt(currentResidencetypeID));
+                int counts = borrowerCurrentResidencePersonalPOJOArrayList.size();
+
+                for (int i = 0; i < counts; i++) {
+                    if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase(currentResidencetypeID)) {
+
+                        if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
+                            monthlyrent.setVisibility(View.GONE);
+                            monthlyrent.setText("");
+                            spinnerCurrentResidenceType.setSelection(i);
+                        } else if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("3")) {
+                            monthlyrent.setVisibility(View.GONE);
+                            monthlyrent.setText("");
+                            spinnerCurrentResidenceType.setSelection(i);
+                        } else if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("8")) {
+                            monthlyrent.setVisibility(View.GONE);
+                            monthlyrent.setText("");
+                            spinnerCurrentResidenceType.setSelection(i);
+                        } else {
+                            monthlyrent.setVisibility(View.VISIBLE);
+                            spinnerCurrentResidenceType.setSelection(i);
+                        }
+                    }
                 }
 //                if (currentcityID.equals("")) {
 //                    spinnerCurrentCity.setSelection(0);
@@ -1309,6 +1485,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                 currentaddress.setText(currentadd);
                 currentpincode.setText(currentPincode);
                 permanentpincode.setText(permanentpin);
+
                 permanentaddress.setText(permanentadd);
                 if (!dob.equalsIgnoreCase("") || !dob.isEmpty()) {
                     textViewbirthday.setText(dob);
@@ -1325,6 +1502,18 @@ public class LoanApplicationFragment_1 extends Fragment {
                     radioButtonSingle.setChecked(true);
                 }
 
+                if (borrower_gaps.equalsIgnoreCase("1")) {
+                    radioButtonGapYes.setChecked(true);
+                } else if (borrower_gaps.equalsIgnoreCase("2")) {
+                    radioButtonGapNO.setChecked(true);
+                }
+
+                if (borrower_gender.equalsIgnoreCase("1")) {
+                    radioButtonMale.setChecked(true);
+                } else if (borrower_gender.equalsIgnoreCase("2")) {
+                    radioButtonFemale.setChecked(true);
+                }
+
                 /** EDUCATION **/
                 JSONArray jsonArray6 = jsonObject.getJSONArray("degrees");
                 lastCompletedDegree_arratList = new ArrayList<>();
@@ -1336,9 +1525,9 @@ public class LoanApplicationFragment_1 extends Fragment {
                     lastCompletedDegree_arratList.add(mJsonti.getString("name"));
                     borrowerEducationDegreePOJO.degreeID = mJsonti.getString("id");
                     borrowerEducationDegreePOJOArrayList.add(borrowerEducationDegreePOJO);
-                    Log.e(MainApplication.TAG, "borrowerEducationDegreePOJO Spiner DATA:----------------- " + borrowerEducationDegreePOJO.degreeName);
                 }
-                arrayAdapter_lastcompleteddegree = new ArrayAdapter(context, R.layout.custom_layout_spinner, lastCompletedDegree_arratList);
+                arrayAdapter_lastcompleteddegree =
+                        new ArrayAdapter(context, R.layout.custom_layout_spinner, lastCompletedDegree_arratList);
                 spinnerLastCompletedDegree.setAdapter(arrayAdapter_lastcompleteddegree);
                 arrayAdapter_lastcompleteddegree.notifyDataSetChanged();
 
@@ -1383,15 +1572,20 @@ public class LoanApplicationFragment_1 extends Fragment {
                 arrayAdapter.notifyDataSetChanged();
 
                 JSONObject jsonObject7 = jsonObject.getJSONObject("financialDetails");
+                String previous_emi = jsonObject7.getString("borrower_previous_emi_amount");
                 String isWorking = jsonObject7.getString("is_student_working");
                 String advancePayment = jsonObject7.getString("advance_payment");
                 String nameofCompany = jsonObject7.getString("student_working_organization");
                 jobDurationID = jsonObject7.getString("working_organization_since");
                 String anualIncome = jsonObject7.getString("student_income");
+                String previousEmi = jsonObject7.getString("borrower_has_any_extra_loan");
+                String employerType = jsonObject7.getString("borrower_employer_type");
+
 
                 editTextAdvancePayment.setText(advancePayment);
                 editTextAnualIncome.setText(anualIncome);
                 editTextNameofCompany.setText(nameofCompany);
+                previousemi.setText(previous_emi);
 
                 if (jobDurationID.equals("")) {
                     spinnerJobDuration.setSelection(0);
@@ -1403,6 +1597,18 @@ public class LoanApplicationFragment_1 extends Fragment {
                     radioButtonisEmployed.setChecked(true);
                 } else if (isWorking.equalsIgnoreCase("2")) {
                     radioButtonisStudent.setChecked(true);
+                }
+
+                if (previousEmi.equalsIgnoreCase("1")) {
+                    radioButtonPreviousEmiYes.setChecked(true);
+                } else if (previousEmi.equalsIgnoreCase("0")) {
+                    radioButtonPreviousEmiNo.setChecked(true);
+                }
+
+                if (employerType.equalsIgnoreCase("1")) {
+                    radioButtonPrivate.setChecked(true);
+                } else if (employerType.equalsIgnoreCase("0")) {
+                    radioButtonGovernment.setChecked(true);
                 }
 
                 MainApplication.borrowerValue1 = currentResidencetypeID;
@@ -1417,6 +1623,9 @@ public class LoanApplicationFragment_1 extends Fragment {
                 MainApplication.borrowerValue10 = permanentstateID;
                 MainApplication.borrowerValue11 = permanentCountryID;
                 MainApplication.borrowerValue12 = permanentpincode.getText().toString();
+                MainApplication.borrowerValue31 = previousemi.getText().toString();
+                MainApplication.borrowerValue32 = borrower_gender;
+                MainApplication.borrowerValue33 = borrower_gaps;
                 MainApplication.borrowerValue13 = fname.getText().toString();
                 MainApplication.borrowerValue14 = lname.getText().toString();
                 MainApplication.borrowerValue15 = textViewbirthday.getText().toString();
@@ -1434,6 +1643,8 @@ public class LoanApplicationFragment_1 extends Fragment {
                 MainApplication.borrowerValue27 = editTextAnualIncome.getText().toString();
                 MainApplication.borrowerValue28 = editTextAdvancePayment.getText().toString();
                 MainApplication.borrowerValue29 = currentresidenceDurationID;
+                MainApplication.borrowerValue30 = previousEmi;
+                MainApplication.borrowerValue34 = employerType;
 
                 progressBar.setVisibility(View.GONE);
             } else {

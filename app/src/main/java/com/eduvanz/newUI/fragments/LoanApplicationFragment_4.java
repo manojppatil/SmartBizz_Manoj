@@ -33,16 +33,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atom.mobilepaymentsdk.PayActivity;
-import com.digio.in.esignsdk.Digio;
-import com.digio.in.esignsdk.DigioConfig;
-import com.digio.in.esignsdk.DigioEnvironment;
 import com.eduvanz.R;
 import com.eduvanz.Utils;
 import com.eduvanz.newUI.MainApplication;
 import com.eduvanz.newUI.VolleyCallNew;
 import com.eduvanz.uploaddocs.PathFile;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -705,7 +701,7 @@ public class LoanApplicationFragment_4 extends Fragment {
 
 
     /**
-     * ---------------------------------RESPONSE OF API CALL-------------------------------------
+     * RESPONSE OF API CALL
      **/
 
     public void getDigioDocumentIdForStudent(JSONObject jsonData) {
@@ -722,6 +718,8 @@ public class LoanApplicationFragment_4 extends Fragment {
                 String email = jsonObject.getString("email");
 
                 // Invoke Esign
+
+                /**
                     final Digio digio = new Digio();
                     DigioConfig digioConfig = new DigioConfig();
                     digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
@@ -739,6 +737,8 @@ public class LoanApplicationFragment_4 extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                 */
 
 
             } else {
@@ -821,10 +821,10 @@ public class LoanApplicationFragment_4 extends Fragment {
 //                newPayIntent.putExtra("ru", "https://payment.atomtech.in/paynetz/epi/fts"); // FOR UAT (Testing)
 
                 //Optinal Parameters
-                newPayIntent.putExtra("customerName", "Anil Saini"); //Only for Name
-                newPayIntent.putExtra("customerEmailID", "anilsaini81155@gmail.com");//Only for Email ID
-                newPayIntent.putExtra("customerMobileNo", "8108659592");//Only for Mobile Number
-                newPayIntent.putExtra("billingAddress", "Mumbai");//Only for Address
+                newPayIntent.putExtra("customerName", jsonObject.getString("fullName")); //Only for Name
+                newPayIntent.putExtra("customerEmailID", jsonObject.getString("email"));//Only for Email ID
+                newPayIntent.putExtra("customerMobileNo", jsonObject.getString("mobile"));//Only for Mobile Number
+                newPayIntent.putExtra("billingAddress", jsonObject.getString("mobile"));//Only for Address
                 newPayIntent.putExtra("optionalUdf9", "OPTIONAL DATA 1");// Can pass any data
 //                newPayIntent.putExtra("mprod", mprod); // Pass data in XML format, only for Multi product
                 ((Activity)context).startActivityForResult(newPayIntent, 1);

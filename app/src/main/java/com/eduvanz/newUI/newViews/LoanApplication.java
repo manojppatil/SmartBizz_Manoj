@@ -161,15 +161,15 @@ public class LoanApplication extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    if (!MainApplication.borrowerValue13.equals("") &&
-                            !MainApplication.borrowerValue14.equals("") &&
-                            !MainApplication.borrowerValue15.equals("") &&
-                            !MainApplication.borrowerValue18.equals("")
-                            ||
-                            !MainApplication.coborrowerValue14.equals("") &&
-                                    !MainApplication.coborrowerValue15.equals("") &&
-                                    !MainApplication.coborrowerValue18.equals("") &&
-                                    !MainApplication.coborrowerValue13.equals("")) {
+//                    if (!MainApplication.borrowerValue13.equals("") &&
+//                            !MainApplication.borrowerValue14.equals("") &&
+//                            !MainApplication.borrowerValue15.equals("") &&
+//                            !MainApplication.borrowerValue18.equals("")
+//                            ||
+//                            !MainApplication.coborrowerValue14.equals("") &&
+//                                    !MainApplication.coborrowerValue15.equals("") &&
+//                                    !MainApplication.coborrowerValue18.equals("") &&
+//                                    !MainApplication.coborrowerValue13.equals("")) {
                         if (MainApplication.currrentFrag == 1) {
                             MainApplication.apiCallBorrower(context, mActivity, userID);
                         } else if (MainApplication.currrentFrag == 2) {
@@ -177,10 +177,10 @@ public class LoanApplication extends AppCompatActivity {
                         }
 
 
-                    } else {
-                        alertDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
-                    }
+//                    } else {
+//                        alertDialog.dismiss();
+//                        Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
+//                    }
                 }
             });
         } else {

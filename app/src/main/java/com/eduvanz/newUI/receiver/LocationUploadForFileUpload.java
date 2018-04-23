@@ -37,7 +37,6 @@ public class LocationUploadForFileUpload extends BroadcastReceiver {
         appInstallationTimeStamp = sharedPreferences.getString("appInstallationTimeStamp", "");
         try {
             Log.e(MainApplication.TAG, "Alarm received!: ");
-            Log.e(TAG, "MyService CALL LOG  : 11111111111111111111111111" );
             /** getting data from shared preference **/
 
             Log.e(TAG, "onCreate: "+appInstallationTimeStamp );

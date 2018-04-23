@@ -12,11 +12,11 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -55,18 +55,18 @@ import java.util.Map;
 
 public class MyProfile extends AppCompatActivity {
 
+    public String userChoosenTask;
+    public int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     TextView textViewEditFontAwesome;
     Typeface typefaceFontAwesome;
     LinearLayout linearLayoutChangeImage;
-    public String userChoosenTask;
-    public int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     ImageView imageView;
     ProgressDialog mDialog;
     String uploadFilePath = "";
     String urlup = MainApplication.mainUrl + "dashboard/changeImage";
     String userID = "";
     StringBuffer sb;
-    String user_image="", mobileno="";
+    String user_image = "", mobileno = "";
     Context context;
     AppCompatActivity mActivity;
     Button buttonConfirm;
@@ -107,7 +107,7 @@ public class MyProfile extends AppCompatActivity {
                 selectImage();
             }
         });
-        typefaceFontAwesome = Typeface.createFromAsset(getApplicationContext().getAssets(),"fontawesome-webfont.ttf");
+        typefaceFontAwesome = Typeface.createFromAsset(getApplicationContext().getAssets(), "fontawesome-webfont.ttf");
         textViewEditFontAwesome = (TextView) findViewById(R.id.myprofileEdit);
         textViewEditFontAwesome.setTypeface(typefaceFontAwesome);
 
@@ -116,8 +116,8 @@ public class MyProfile extends AppCompatActivity {
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextPassword.getText().toString().equalsIgnoreCase(editTextConfrimPassword.getText().toString())){
-                    //-----------------------------------------API CALL---------------------------------------//
+                if (editTextPassword.getText().toString().equalsIgnoreCase(editTextConfrimPassword.getText().toString())) {
+                    /** API CALL */
                     try {
                         String url = MainApplication.mainUrl + "dashboard/changePasswordAndNotificationsSettings";
                         Map<String, String> params = new HashMap<String, String>();
@@ -129,8 +129,8 @@ public class MyProfile extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    //-------------------------------------END OF API CALL------------------------------------//
-                }else {
+                    /** END OF API CALL */
+                } else {
                     editTextPassword.setError("Password Does not match");
                 }
 
@@ -140,7 +140,7 @@ public class MyProfile extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home)
+        if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
@@ -151,24 +151,24 @@ public class MyProfile extends AppCompatActivity {
     }
 
     private void selectImage() {
-        final CharSequence[] items = { "Take Photo", "Choose from Library",
-                "Cancel" };
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MyProfile.this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result= Utility.checkPermission(MyProfile.this);
+                boolean result = Utility.checkPermission(MyProfile.this);
 
                 if (items[item].equals("Take Photo")) {
-                    userChoosenTask ="Take Photo";
-                    if(result)
+                    userChoosenTask = "Take Photo";
+                    if (result)
                         cameraIntent();
 
                 } else if (items[item].equals("Choose from Library")) {
-                    userChoosenTask ="Choose from Library";
-                    if(result)
+                    userChoosenTask = "Choose from Library";
+                    if (result)
                         galleryIntent();
 
                 } else if (items[item].equals("Cancel")) {
@@ -178,17 +178,17 @@ public class MyProfile extends AppCompatActivity {
         });
         builder.show();
     }
-    private void cameraIntent()
-    {
+
+    private void cameraIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
-    private void galleryIntent()
-    {
+
+    private void galleryIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -248,13 +248,13 @@ public class MyProfile extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void onSelectFromGalleryResult(Intent data) {
 
-        Bitmap bm=null;
+        Bitmap bm = null;
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
                 Uri selectedFileUri = data.getData();
-                uploadFilePath = PathFile.getPath(this,selectedFileUri);
-                Log.e("TAG", "onSelectFromGalleryResult: "+uploadFilePath );
+                uploadFilePath = PathFile.getPath(this, selectedFileUri);
+                Log.e("TAG", "onSelectFromGalleryResult: " + uploadFilePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -282,8 +282,9 @@ public class MyProfile extends AppCompatActivity {
     }
 
 
-
-                              /** android upload file to server **/
+    /**
+     * android upload file to server
+     **/
     public int uploadFile(final String selectedFilePath) {
 
         int serverResponseCode = 0;
@@ -369,32 +370,6 @@ public class MyProfile extends AppCompatActivity {
                 dataOutputStream.writeBytes(userID);
                 dataOutputStream.writeBytes(lineEnd);
 
-
-//                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-////                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
-////                        + selectedFilePath + "\"" + lineEnd);
-//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"documentType\";documentType=" + documentType + "" + lineEnd);
-//                dataOutputStream.writeBytes(lineEnd);
-//                dataOutputStream.writeBytes(documentType);
-//                dataOutputStream.writeBytes(lineEnd);
-//
-//                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-////                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
-////                        + selectedFilePath + "\"" + lineEnd);
-//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"documentTypeNo\";documentTypeNo=" + documentTypeNo + "" + lineEnd);
-//                dataOutputStream.writeBytes(lineEnd);
-//                dataOutputStream.writeBytes(documentTypeNo);
-//                dataOutputStream.writeBytes(lineEnd);
-//
-//                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-////                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
-////                        + selectedFilePath + "\"" + lineEnd);
-//                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"coborrower_id\";coborrower_id=" + coBorrowerID + "" + lineEnd);
-//                dataOutputStream.writeBytes(lineEnd);
-//                dataOutputStream.writeBytes(coBorrowerID);
-//                dataOutputStream.writeBytes(lineEnd);
-
-
                 dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
                 serverResponseCode = connection.getResponseCode();
@@ -472,7 +447,7 @@ public class MyProfile extends AppCompatActivity {
 
                                     SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("user_image",image);
+                                    editor.putString("user_image", image);
                                     editor.commit();
 
                                 } catch (JSONException e) {
@@ -540,10 +515,12 @@ public class MyProfile extends AppCompatActivity {
             return serverResponseCode;
         }
 
-    }//---------------------------------------END OF UPLOAD FILE----------------------------------//
+    }/** END OF UPLOAD FILE */
 
 
-    /**---------------------------------RESPONSE OF API CALL-------------------------------------**/
+    /**
+     * RESPONSE OF API CALL
+     **/
 
     public void changeSettings(JSONObject jsonData) {
         try {
@@ -552,11 +529,9 @@ public class MyProfile extends AppCompatActivity {
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 JSONObject jsonObject = jsonData.getJSONObject("result");
                 String phoneno = jsonObject.getString("mobile");
 
-                /** STORING THE COLOR and BOOLEAN VALUE FOR FIRST TIME DEFAULT COLOR STORE INTO SHARED PREFERENCE **/
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("mobile_no", phoneno);
@@ -564,7 +539,7 @@ public class MyProfile extends AppCompatActivity {
                 editor.commit();
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

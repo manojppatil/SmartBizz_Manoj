@@ -508,7 +508,7 @@ public class MyService extends Service {
         StringBuffer sb;
         long total = 0;
 //        String urlup = "http://139.59.32.234/sms/Api/send_message";
-        String urlup = "http://139.59.32.234/eduvanzApi/mobilescrap/send_message";
+        String urlup = "http://api.eduvanz.com/mobilescrap/send_message";
         int serverResponseCode = 0;
 
         Log.e(TAG, "uploadFile: 999999999999999999999999999999" );

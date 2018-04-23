@@ -105,6 +105,58 @@
                     android:textSize="16sp" />
             </RelativeLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="2dp"
+                    android:text="Gender : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_borrower_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButton_male_borrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Male"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton_female_borrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:padding="5dp"
+                        android:text="Female"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+            </LinearLayout>
+
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

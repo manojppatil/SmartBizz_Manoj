@@ -106,7 +106,6 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:background="@color/grey_400"
             android:layout_height="1dp">
 
         </View>
@@ -160,7 +159,6 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:background="@color/grey_400"
             android:layout_height="1dp">
 
         </View>

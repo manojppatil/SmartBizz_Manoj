@@ -53,6 +53,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -170,6 +171,11 @@ public class ClientActivity extends LaunchUI implements
 
 
         }
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+
+        }
+
         //Log.d(TAG,session_key);
         credentials = new Credentials(appid, session_key);
 

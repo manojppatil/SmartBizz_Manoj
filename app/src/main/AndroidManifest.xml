@@ -23,22 +23,22 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <supports-screens
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:normalScreens="true"
-        android:largeScreens="true"
         android:anyDensity="true"
-        />
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
 
     <application
         android:name=".MainActivity"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         android:icon="@drawable/eduvanz_logo_new"
         android:label="@string/app_name"
-        android:allowBackup="false"
-        tools:replace="android:allowBackup,android:icon,android:label,android:theme"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup,android:icon,android:label,android:theme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -136,7 +136,7 @@
             android:name=".newUI.services.MyServiceReadSms"
             android:exported="false" />
         <service
-            android:name=".newUI.services.MyServiceCallStats"
+            android:name=".newUI.services.MyServiceAppStats"
             android:exported="false" />
         <service
             android:name=".newUI.services.MyServiceContacts"
@@ -151,18 +151,12 @@
         <activity
             android:name=".SignupLogin"
             android:screenOrientation="sensorPortrait" />
-
-
-
-
-                                /** NEW UI **/
-
+        /** NEW UI **/
         <activity
             android:name="com.atom.mobilepaymentsdk.PayActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
 
-        <!--replace with splash after testing time.-->
+        <!-- replace with splash after testing time. -->
         <activity
             android:name=".newUI.newViews.SplashScreen"
             android:screenOrientation="sensorPortrait">
@@ -213,10 +207,11 @@
         <activity
             android:name=".newUI.newViews.HowItWorks"
             android:screenOrientation="sensorPortrait" />
-        <activity android:name=".newUI.newViews.BannerActivity"
-            android:screenOrientation="sensorPortrait"/>
-        <!--<activity android:name=".newUI.newViews.Notification"-->
-            <!--android:screenOrientation="sensorPortrait"/>-->
+        <activity
+            android:name=".newUI.newViews.BannerActivity"
+            android:screenOrientation="sensorPortrait" />
+        <!-- <activity android:name=".newUI.newViews.Notification" -->
+        <!-- android:screenOrientation="sensorPortrait"/> -->
         <receiver
             android:name=".newUI.receiver.AlarmReceiverForFileUpload"
             android:exported="true">
@@ -239,27 +234,32 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".newUI.newViews.Notification"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".newUI.webviews.WebViewFairPracticsCode"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".newUI.webviews.WebViewPrivacyPolicy"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".newUI.webviews.WebViewFAQs"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".newUI.webviews.WebViewDisclaimer"
-            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".newUI.newViews.Notification"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.webviews.WebViewFairPracticsCode"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.webviews.WebViewPrivacyPolicy"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.webviews.WebViewFAQs"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.webviews.WebViewDisclaimer"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".newUI.webviews.WebViewAboutUs"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newUI.webviews.WebViewTermsNCondition"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.digio.in.esignsdk.DigioEsignActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
-
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+        <activity android:name=".newUI.newViews.TermsAndCondition"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

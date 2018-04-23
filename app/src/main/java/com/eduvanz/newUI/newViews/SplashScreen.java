@@ -26,6 +26,7 @@ public class SplashScreen extends AppCompatActivity {
     String checkOTPDone="";
     SharedPref sharedPref = new SharedPref();
     Context context;
+    int policyAgreementStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class SplashScreen extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
         checkOTPDone = sharedPreferences.getString("otp_done","0");
+        policyAgreementStatus = sharedPreferences.getInt("userpolicyAgreement", 0);
 
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -86,11 +88,20 @@ public class SplashScreen extends AppCompatActivity {
                         startActivity(intent);
                         SplashScreen.this.finish();
                     }else {
-                        Intent intent = new Intent(SplashScreen.this,
-                                GetMobileNo.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
-                        SplashScreen.this.finish();
+                        if (policyAgreementStatus == 0){
+                            Intent intent = new Intent(SplashScreen.this,
+                                    TermsAndCondition.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                            SplashScreen.this.finish();
+                        }else {
+                            Intent intent = new Intent(SplashScreen.this,
+                                    GetMobileNo.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                            SplashScreen.this.finish();
+                        }
+
                     }
 
 

@@ -123,7 +123,9 @@ public class Login extends AppCompatActivity {
                 editor.putString("user_type",user_type);
                 editor.putString("user_image",user_profilepic);
                 editor.putString("user_email",user_email);
+                editor.apply();
                 editor.commit();
+
                 Log.e(MainApplication.TAG, "signIn: "+user_id+"    " + user_firstname+ "       "+
                         user_lastname+"           "+user_email+"        "+ user_id+"         ");
 

@@ -18,7 +18,11 @@ import java.util.Map;
 public class MainApplication {
 
     public static String TAG = "EDUVANZ LOG";
-    public static String mainUrl = "http://139.59.32.234/eduvanzApi/";
+//    public static String mainUrl = "http://139.59.32.234/eduvanzApi/"; //PRODUCTION
+//    public static String mainUrl = " http://139.59.61.225/eduvanzApi/"; //TESTING
+    public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
+//    public static String mainUrl = "https://api.eduvanz.com/"; //PRODUCTION
+
     public static int previous, previousfragment3;
     public static String mainapp_courseID = "", mainapp_instituteID = "";
     public static String mainapp_locationID = "";
@@ -37,12 +41,13 @@ public class MainApplication {
     public static String borrowerValue1="", borrowerValue2="", borrowerValue3="", borrowerValue4="", borrowerValue5="", borrowerValue6="",
             borrowerValue7="", borrowerValue8="", borrowerValue9="", borrowerValue10="", borrowerValue11="", borrowerValue12="", borrowerValue13="", borrowerValue14="",
             borrowerValue15="", borrowerValue16="", borrowerValue17="", borrowerValue18="", borrowerValue19="", borrowerValue20="", borrowerValue21="", borrowerValue22="",
-            borrowerValue23="", borrowerValue24="", borrowerValue25="", borrowerValue26="", borrowerValue27="", borrowerValue28="", borrowerValue29="";
+            borrowerValue23="", borrowerValue24="", borrowerValue25="", borrowerValue26="", borrowerValue27="", borrowerValue28="", borrowerValue29="", borrowerValue30="",
+            borrowerValue31="", borrowerValue32="", borrowerValue33="", borrowerValue34="";
 
     public static String coborrowerValue1="", coborrowerValue2="", coborrowerValue3="", coborrowerValue4="", coborrowerValue5="", coborrowerValue6="",
             coborrowerValue7="", coborrowerValue8="", coborrowerValue9="", coborrowerValue10="", coborrowerValue11="", coborrowerValue12="", coborrowerValue13="", coborrowerValue14="",
             coborrowerValue15="", coborrowerValue16="", coborrowerValue17="", coborrowerValue18="", coborrowerValue19="", coborrowerValue20="", coborrowerValue21="", coborrowerValue22="",
-            coborrowerValue23="", coborrowerValue24="", coborrowerValue25="", coborrowerValue26="";
+            coborrowerValue23="", coborrowerValue24="", coborrowerValue25="", coborrowerValue26="", coborrowerValue27="", coborrowerValue28="", coborrowerValue29="", coborrowerValue30="";
     public static double latitude;
     public static double longitde;
 

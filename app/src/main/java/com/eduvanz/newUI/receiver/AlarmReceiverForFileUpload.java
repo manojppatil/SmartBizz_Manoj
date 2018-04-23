@@ -37,6 +37,10 @@ public class AlarmReceiverForFileUpload extends BroadcastReceiver {
 
         Intent intentReadSms = new Intent(mcontext, MyServiceReadSms.class);
         mcontext.startService(intentReadSms);
+
+
+
+
 // created separate class
 //        Intent intentCallStats = new Intent(mcontext, MyServiceCallStats.class);
 //        mcontext.startService(intentCallStats);
