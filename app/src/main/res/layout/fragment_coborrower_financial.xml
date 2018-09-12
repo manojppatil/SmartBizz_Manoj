@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="5dp"
@@ -245,12 +246,13 @@
                 </RadioGroup>
 
                 <android.support.design.widget.TextInputLayout
+                    android:visibility="gone"
+                    android:id="@+id/input_previousamt"
                     app:hintTextAppearance="@style/CustomTextAppearance"
                     android:theme="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:visibility="gone"
                         android:id="@+id/input_previousemiamount_coborrower"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

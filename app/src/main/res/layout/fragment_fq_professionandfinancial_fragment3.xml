@@ -221,12 +221,13 @@
             </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:visibility="gone"
+                android:id="@+id/input_previousamt"
                 app:hintTextAppearance="@style/CustomTextAppearance"
                 android:theme="@style/EditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:visibility="gone"
                     android:id="@+id/input_previousemiamount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

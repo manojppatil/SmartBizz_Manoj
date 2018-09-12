@@ -9,6 +9,9 @@
     <color name="colorPrimary">#2BD3DD</color>
     <color name="colorPrimaryDark">#2BD3DD</color>
     <color name="colorSecondary">#4196A0</color>
+    <!--<color name="colorPrimary">#0099CC</color>-->
+    <!--<color name="colorPrimaryDark">#2BD3DD</color>-->
+    <!--<color name="colorSecondary">#4196A0</color>-->
     <color name="colorRed">#EE415E</color>
 
 
@@ -24,5 +27,6 @@
     <color name="bgcolor">#ECF7FD</color>
     <color name="textColorUserProfile">#494949</color>
     <color name="background_user_profile">#F1F5F8</color>
+    <color name="permissioncolor">#4196a0</color>
 
 </resources>

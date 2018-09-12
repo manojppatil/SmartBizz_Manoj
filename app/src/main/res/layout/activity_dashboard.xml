@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--<include layout="@layout/app_bar_dashboard" />-->
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,15 +22,23 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:background="@color/colorPrimary"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/framelayout_dashboard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <!-- **** Place Your Content Here **** -->
+            <View android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:elevation="10dp"
+                android:background="@drawable/toolbar_dropshadow"/>
+
+        </FrameLayout>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

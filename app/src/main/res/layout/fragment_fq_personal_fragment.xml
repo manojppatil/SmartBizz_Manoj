@@ -31,6 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="First Name"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890@. "
                     android:inputType="textCapSentences"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -371,6 +372,16 @@
                     android:maxLength="6"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/checkBox_sameasabove_fqpersonal"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Same as current Address"/>
 
             <android.support.design.widget.TextInputLayout
                 app:hintTextAppearance="@style/CustomTextAppearance"

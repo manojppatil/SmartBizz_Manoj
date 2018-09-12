@@ -430,6 +430,17 @@
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
 
+            <CheckBox
+                android:id="@+id/checkBox_sameasabove_fqpersonal_coborrower"
+                android:enabled="false"
+                android:clickable="false"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Same as current Address"/>
+
+
             <android.support.design.widget.TextInputLayout
                 app:hintTextAppearance="@style/CustomTextAppearance"
                 android:layout_width="match_parent"

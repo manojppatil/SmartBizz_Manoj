@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.eduvanz.pqformfragments.PqFormFragment1"
+    tools:context="com.eduvanzapplication.pqformfragments.PqFormFragment1"
     android:background="@color/white">
 
     <!-- TODO: Update blank fragment layout -->

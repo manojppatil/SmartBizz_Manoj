@@ -59,7 +59,7 @@
         android:id="@+id/arc_progress"
         android:layout_width="115dp"
         android:layout_height="115dp"
-        custom:arc_bottom_text="Darsh"
+        custom:arc_bottom_text="Vijay"
         custom:arc_unfinished_color="@color/white"
         custom:arc_finished_color="@color/colorPrimaryDark"
         custom:arc_text_color="@color/white"

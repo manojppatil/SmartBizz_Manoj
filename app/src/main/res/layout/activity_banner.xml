@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.eduvanz.newUI.newViews.BannerActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.eduvanzapplication.newUI.newViews.BannerActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,6 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,82 +31,87 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-    <RelativeLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@drawable/toolbar_dropshadow"
+                android:elevation="10dp" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager_bannerpage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone">
 
-        <com.viewpagerindicator.CirclePageIndicator
-            android:id="@+id/viewPageIndicator_bannerpage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            app:fillColor="@color/colorSecondary"
-            app:pageColor="@color/colorPrimary" />
-    </RelativeLayout>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager_bannerpage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
+                <com.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/viewPageIndicator_bannerpage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    app:fillColor="@color/colorSecondary"
+                    app:pageColor="@color/colorPrimary" />
+            </RelativeLayout>
 
-       <ImageView
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:id="@+id/imageView_bannerimage_1"/>
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
 
-    <View
-        android:visibility="gone"
-        android:id="@+id/viewaward"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/grey" />
+                <ImageView
+                    android:id="@+id/imageView_bannerimage_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
 
-    <TextView
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:id="@+id/textView_bannerTitle"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="18sp"
-        android:textColor="@color/colorPrimary"/>
+            <View
+                android:id="@+id/viewaward"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textView_bannerTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
 
 
-    <TextView
-        android:id="@+id/textView_bannerDetail"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""/>
-
-    <Button
-        android:id="@+id/button_bannerdetail_checkeligiblity"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:background="@color/colorRed"
-        android:text="Check Eligiblity"
-        android:textSize="16sp"
-        android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/textView_bannerDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="25dp"
+                android:text="" />
 
             <Button
-                android:visibility="gone"
+                android:id="@+id/button_bannerdetail_checkeligiblity"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@color/colorRed"
+                android:text="Check Eligiblity"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
                 android:id="@+id/button_bannerdetail_applynow"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -115,11 +120,11 @@
                 android:layout_marginRight="40dp"
                 android:background="@color/colorPrimary"
                 android:text="Apply Now"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textColor="@color/white"/>
+                android:visibility="gone" />
 
             <Button
-                android:visibility="gone"
                 android:id="@+id/button_bannerdetail_continue"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -128,8 +133,9 @@
                 android:layout_marginRight="40dp"
                 android:background="@color/colorPrimary"
                 android:text="Continue"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textColor="@color/white"/>
+                android:visibility="gone" />
 
         </LinearLayout>
 

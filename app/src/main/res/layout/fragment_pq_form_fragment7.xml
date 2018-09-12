@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.eduvanz.pqformfragments.PqFormFragment1"
+    tools:context="com.eduvanzapplication.pqformfragments.PqFormFragment1"
     android:orientation="vertical"
     android:background="@color/white">
 

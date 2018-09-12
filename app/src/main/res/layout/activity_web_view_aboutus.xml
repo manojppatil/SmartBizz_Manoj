@@ -19,10 +19,24 @@
 
     </android.support.design.widget.AppBarLayout>
 
-<WebView
-    android:id="@+id/webView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:elevation="10dp"
+            android:background="@drawable/toolbar_dropshadow"/>
+
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

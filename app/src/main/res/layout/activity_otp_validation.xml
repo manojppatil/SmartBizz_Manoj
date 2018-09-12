@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.eduvanz.newUI.newViews.GetMobileNo">
+        tools:context="com.eduvanzapplication.newUI.newViews.GetMobileNo">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_getmobileno"
@@ -38,6 +38,10 @@
                 android:textStyle="bold"/>
 
         </android.support.v7.widget.Toolbar>
+
+        <View android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/toolbar_dropshadow"/>
 
         <TextView
             android:layout_width="match_parent"

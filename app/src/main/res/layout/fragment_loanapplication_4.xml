@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.eduvanz.pqformfragments.PqFormFragment1">
+    tools:context="com.eduvanzapplication.pqformfragments.PqFormFragment1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
 
 
             <LinearLayout
-                android:id="@+id/toright"
+                android:id="@+id/tooright"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/background_capsule_primarydark"
@@ -41,7 +41,12 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/background_capsule_primarydark"
                 android:orientation="horizontal" />
-
+            <LinearLayout
+                android:id="@+id/toright"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_capsule_primarydark"
+                android:orientation="horizontal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -330,6 +335,42 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/linpaymentoptions"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:orientation="horizontal">
+
+                                    <RadioGroup
+                                        android:id="@+id/radioGroupPayment"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <RadioButton
+                                            android:id="@+id/rdpaytm"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/grey"
+                                            android:text="Paytm"
+                                            android:checked="true"
+                                            android:textColor="@color/grey" />
+
+                                        <RadioButton
+                                            android:visibility="gone"
+                                            android:id="@+id/rdatom"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="50dp"
+                                            android:text="Atom"
+                                            android:textColor="@color/grey" />
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+
+
+                                <LinearLayout
                                     android:id="@+id/linearLayout_paymentdetails"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -427,6 +468,22 @@
                             </LinearLayout>
 
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linnote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/paymentoptions"
+                                android:textColor="@color/colorRed"
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <Button

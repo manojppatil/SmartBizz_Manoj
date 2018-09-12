@@ -60,6 +60,7 @@
     <string name="desc_firebase_lockup">Firebase logo and name</string>
     <string name="auth_failed">Authentication failed</string>
 
+
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="firebase_user_management">Firebase User Management</string>
 
@@ -89,6 +90,7 @@
     <string name="desc_linkedin_login">Use Linkedin Login</string>
     <string name="desc_paypal_login">Login with Paypal</string>
     <string name="title_activity_test_google_login">TestGoogleLoginActivity</string>
+    <string name="title_activity_test_facebook_login">TestFacebookActivity</string>
     <string name="title_activity_main2">Connect &amp; Score</string>
     <string name="title_activity_start">New Scoring</string>
 
@@ -105,10 +107,40 @@
     <string name="google_play_services_updating_title">Google Play Services is being updated.</string>
     <string name="google_play_services_disabled">Google Play Services is disabled on your device. To use the App, Enable it.</string>
     <string name="google_play_services_disabled_title">Google Play Services Disabled</string>
+
+
+
+    /** END OF FRIENDLY SCORE STRINGS XML CONTENT **/
+
+    <!--B7:6F:26:F5:D7:75:F6:FA:42:A6:3C:A4:D7:B8:65:32:2D:7F:9B:A6-->
+    <!--<string name="partnerKey">kjwhT8f2db2ac53514980885a1529862f88f5</string>-->
+    <!--<string name="partnerKey">uDeFm5010fc3011a5463bbc9d3432f58a9a93</string>-->
+    <!--<string name="partnerKey">aak3ic1e9446639b24f7a90d8d0a7937aa235</string>-->
+    <!--<string name="partnerKey">9rFQI2f51afe0a2ac4ea5adb9bf722b80a037</string>-->
+    <string name="partnerKey">CCesL1c389d78081845e8b661a1d47689fe1a</string>
+    <!--<string name="partnerKey">XY9ofd126bf7b42994bd39dbd2b05c5a2cd27</string>-->
+    <!--<string name="partnerKey">2OHKE8e1828977d22434d9d2671863ce3b371</string>    &lt;!&ndash;eduvanz 1&ndash;&gt;-->
+    <!--<string name="partnerKey">7tVcz12206778a90042c7908a54d45b10320d</string>    &lt;!&ndash;eduvanz 1&ndash;&gt;-->
+    <!--<string name="partnerKey">ma4U8974ef9549cc74aa29fc2a7f4d5b14b60</string>    &lt;!&ndash;eduvanz 1&ndash;&gt;-->
     <string name="checkEligibility">Have a dream career in mind , than Eduvanz is want you need to get connected with.</string>
     <string name="completeProfile">Complete your profile to increase eligibility for getting instant loans</string>
     <string name="congrats">Congratulations ! \nYou are eligible for an instant loan. Apply right now and change your career.</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
 
-    /** END OF FRIENDLY SCORE STRINGS XML CONTENT **/
+    <string name="permissionsms">To collect and monitor information about bank transactions, names of transacting parties, description of the transactions
+    and amount for faster loan processing.</string>
+    <string name="permissioncontacts"><b>Contacts -</b> To automatically identify potential references for your loan application.
+        \n<b>Call History -</b> To gain information from your call logs that may be useful in the processing of your loan application.</string>
+    <string name="permissiondevice">To collect and monitor specific information about your device including IMEI number , call logs and phone number , in order to uniquely identify the device
+        and ensure unauthorized devices are not able to act on your behalf, thereby help us prevent fraudulent activity.</string>
+    <string name="permissioncamera"><b>Camera -</b> To allow to take pictures required for loan application.\n<b>Storage -</b> To allow to upload documents and pictures for your loan application.</string>
+    <string name="permissionlocation"><b>Location -</b>To collect and monitor information about location of your device.\n<b>App Usage -</b> To gain information about your interest and likings to generate your credit score that may be useful in the processing of your loan application.</string>
+    <string name="paymentoptions"><b>Paytm Payment-</b> with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.</string>
+    <!--<string name="paymentoptions"><b>Paytm -</b> With options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.\n<b>Atom -</b> With options like Credit Card, Debit Card, Net banking..</string>-->
+    <string name="strgetmobilenonotetruecaller"> SignIn with truecaller <b>or</b> verify your mobile no to begin!.</string>
+    <string name="strsigninwithtruecaller"> SignIn with truecaller</string>
+    <string name="strgetmobilenonote">Verify your mobile no to begin!.</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
+    <string name="nonetwork">Please check your internet connection.</string>
+    <string name="settings">Settings</string>
 </resources>

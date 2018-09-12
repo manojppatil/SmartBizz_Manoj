@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.eduvanz.newUI.newViews.EligibilityCheck">
+    tools:context="com.eduvanzapplication.newUI.newViews.EligibilityCheck">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     </android.support.design.widget.AppBarLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,6 +36,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:background="@color/colorPrimary">
+
+                <View android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:elevation="10dp"
+                    android:background="@drawable/toolbar_dropshadow"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -25,14 +25,6 @@
         {
           "client_id": "577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com",
           "client_type": 3
-        },
-        {
-          "client_id": "577641006287-pen73mqtqlgq3eobaoo6jhkporsa8286.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "577641006287-ho7dgruqr7lf9kj39ohnqiek6fh430ur.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -46,6 +38,58 @@
           "analytics_property": {
             "tracking_id": "UA-83860258-1"
           }
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577641006287:android:11ea30761fa20029",
+        "android_client_info": {
+          "package_name": "com.eduvanzapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577641006287-6hfrn89shk4covsnttkeqhcsrfcshcku.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eduvanzapplication",
+            "certificate_hash": "a21bb846bb15174d151aabf3da9f61eebee526bd"
+          }
+        },
+        {
+          "client_id": "577641006287-973j1sik6nqhqmdgsj73hsljbi84gh0f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eduvanzapplication",
+            "certificate_hash": "b76f26f5d775f6fa42a63ca4d7b865322d7f9ba6"
+          }
+        },
+        {
+          "client_id": "577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtRrHktz7FvSuPLVI2Vte6mBa-5WgRq0g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
         },
         "appinvite_service": {
           "status": 2,

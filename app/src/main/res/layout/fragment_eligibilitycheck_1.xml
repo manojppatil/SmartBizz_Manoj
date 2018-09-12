@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.eduvanz.pqformfragments.PqFormFragment1">
+    tools:context="com.eduvanzapplication.pqformfragments.PqFormFragment1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:id="@+id/linearLayout_leftoff"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/background_capsule_primary"
+                    android:background="@drawable/background_capsule_primary"
                 android:orientation="horizontal" />
 
             <LinearLayout
@@ -70,11 +70,11 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="25dp">
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_gravity="center"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -136,22 +136,36 @@
                                 android:id="@+id/spinner_institutename_eligiblity"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:background="@android:color/transparent"
-                                android:gravity="center"
-                                android:paddingRight="30dp"
-                                android:popupBackground="@color/white"
-                                android:spinnerMode="dropdown" />
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="left"
+                                android:theme="@style/ThemeOverlay.AppCompat.Light"></Spinner>
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_drop" />
+                            <!--<Spinner-->
+                                <!--android:id="@+id/spinner_institutename_eligiblity"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginLeft="5dp"-->
+                                <!--android:background="@android:color/transparent"-->
+                                <!--android:gravity="center"-->
+                                <!--android:paddingRight="30dp"-->
+                                <!--android:popupBackground="@color/white"-->
+                                <!--android:spinnerMode="dropdown" />-->
+
+                            <!--<ImageView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:src="@drawable/ic_drop" />-->
 
                         </RelativeLayout>
 
@@ -218,22 +232,37 @@
                                 android:id="@+id/spinner_coursename_eligiblity"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:background="@android:color/transparent"
-                                android:gravity="center"
-                                android:paddingRight="30dp"
-                                android:popupBackground="@color/white"
-                                android:spinnerMode="dropdown" />
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="left"
+                                android:theme="@style/ThemeOverlay.AppCompat.Light"></Spinner>
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_drop" />
+
+                            <!--<Spinner-->
+                                <!--android:id="@+id/spinner_coursename_eligiblity"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginLeft="5dp"-->
+                                <!--android:background="@android:color/transparent"-->
+                                <!--android:gravity="center"-->
+                                <!--android:paddingRight="30dp"-->
+                                <!--android:popupBackground="@color/white"-->
+                                <!--android:spinnerMode="dropdown" />-->
+
+                            <!--<ImageView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:src="@drawable/ic_drop" />-->
 
                         </RelativeLayout>
 
@@ -299,22 +328,37 @@
                                 android:id="@+id/spinner_institutelocation_eligiblity"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:background="@android:color/transparent"
-                                android:gravity="center"
-                                android:paddingRight="30dp"
-                                android:popupBackground="@color/white"
-                                android:spinnerMode="dropdown" />
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="left"
+                                android:theme="@style/ThemeOverlay.AppCompat.Light"></Spinner>
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_drop" />
+
+                            <!--<Spinner-->
+                                <!--android:id="@+id/spinner_institutelocation_eligiblity"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginLeft="5dp"-->
+                                <!--android:background="@android:color/transparent"-->
+                                <!--android:gravity="center"-->
+                                <!--android:paddingRight="30dp"-->
+                                <!--android:popupBackground="@color/white"-->
+                                <!--android:spinnerMode="dropdown" />-->
+
+                            <!--<ImageView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:src="@drawable/ic_drop" />-->
 
                         </RelativeLayout>
                     </LinearLayout>

@@ -106,7 +106,7 @@
                     android:gravity="left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Is CGPA : "
+                    android:text="Marks Obtained in : "
                     android:layout_gravity="center"
                     android:textSize="16sp"
                     android:textColor="@color/colorPrimary"/>
@@ -124,7 +124,7 @@
                         android:id="@+id/radiobutton_iscgpa_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Yes" />
+                        android:text="CGPA" />
                     <RadioButton
                         android:checked="false"
                         android:theme="@style/EditTextStyle"
@@ -133,7 +133,7 @@
                         android:id="@+id/radiobutton_iscgpa_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="No" />
+                        android:text="Percentage" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -142,6 +142,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <android.support.design.widget.TextInputLayout
+                    android:visibility="gone"
+                    android:id="@+id/input_cgpa"
                     app:hintTextAppearance="@style/CustomTextAppearance"
                     android:theme="@style/EditTextStyle"
                     android:layout_width="match_parent"
@@ -149,7 +151,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="8dp">
                     <EditText
-                        android:visibility="gone"
                         android:id="@+id/input_degree_cgpa"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,6 +161,8 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:visibility="gone"
+                    android:id="@+id/input_degree"
                     app:hintTextAppearance="@style/CustomTextAppearance"
                     android:theme="@style/EditTextStyle"
                     android:layout_width="match_parent"
@@ -167,7 +170,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="8dp">
                     <EditText
-                        android:visibility="gone"
                         android:id="@+id/input_degree_percentage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

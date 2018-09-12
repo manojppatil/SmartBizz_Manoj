@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.eduvanz.pqformfragments.PqFormFragment1">
+    tools:context="com.eduvanzapplication.pqformfragments.PqFormFragment1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,11 +69,11 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="25dp">
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_gravity="center"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -208,7 +208,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Family Income"
+                            android:text="Monthly Family Income"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.eduvanz.newUI.newViews.EligibilityCheck">
+    tools:context="com.eduvanzapplication.newUI.newViews.EligibilityCheck">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +21,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
+    <View android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/toolbar_dropshadow"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,7 +99,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="022-4523689" />
+                            android:text="022-49733674" />
 
                     </LinearLayout>
 
@@ -226,7 +228,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="A-101, Planet Industrial Estate" />
+                            android:text="801, Jai Antriksh," />
 
                     </LinearLayout>
 
@@ -251,7 +253,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Subhash Road, Ville Parle East" />
+                            android:text="Makwana Road, Marol, Andheri East," />
 
                     </LinearLayout>
 
@@ -277,7 +279,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Mumbai - 400057" />
+                            android:text="Mumbai 400059." />
 
                     </LinearLayout>
 
@@ -299,7 +301,7 @@
                     android:id="@+id/imageView_officelocation"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/officelocationmap" />
+                    android:src="@drawable/image_location" />
 
             </LinearLayout>
 

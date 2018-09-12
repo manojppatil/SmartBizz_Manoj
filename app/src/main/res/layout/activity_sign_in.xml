@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.eduvanz.newUI.newViews.EligibilityCheck">
+    tools:context="com.eduvanzapplication.newUI.newViews.EligibilityCheck">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,9 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     </android.support.design.widget.AppBarLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,11 +35,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:background="@color/colorPrimary">
+
+                <View android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@drawable/toolbar_dropshadow"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -109,7 +115,7 @@
                             android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter your emailid"
+                            android:hint="Enter your email id"
                             android:inputType="textEmailAddress"
                             android:background="@drawable/background_edittext"
                             android:textColorHint="@color/grey"
@@ -150,7 +156,8 @@
                     </LinearLayout>
 
                     <TextView
-                        android:layout_marginTop="10dp"
+                        android:visibility="gone"
+                        android:layout_marginTop="12dp"
                         android:layout_marginRight="1dp"
                         android:id="@+id/textView_signin_3"
                         android:layout_width="match_parent"
