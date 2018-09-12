@@ -1,0 +1,216 @@
+<LinearLayout
+    android:background="@color/white"
+    android:layout_marginTop="5dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Last Completed Degree : "
+                    android:layout_gravity="left"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"/>
+                <Spinner
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:id="@+id/spinner_lastdegreecompleted"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="2dp"
+                    android:text="Do you have any gaps in education : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_borrower_gaps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButton_gaps_yes_borrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="yes"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton_gaps_no_borrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:padding="5dp"
+                        android:text="no"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:paddingLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_weight="2"
+                    android:paddingTop="2dp"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Marks Obtained in : "
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"/>
+                <RadioGroup
+                    android:layout_weight="1"
+                    android:id="@+id/radiogroup_iscgpa"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:theme="@style/EditTextStyle"
+                        android:textColor="@color/black"
+                        android:checked="false"
+                        android:id="@+id/radiobutton_iscgpa_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CGPA" />
+                    <RadioButton
+                        android:checked="false"
+                        android:theme="@style/EditTextStyle"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/radiobutton_iscgpa_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Percentage" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <android.support.design.widget.TextInputLayout
+                    android:visibility="gone"
+                    android:id="@+id/input_cgpa"
+                    app:hintTextAppearance="@style/CustomTextAppearance"
+                    android:theme="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText
+                        android:id="@+id/input_degree_cgpa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:hint="Last Degree CGPA"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:visibility="gone"
+                    android:id="@+id/input_degree"
+                    app:hintTextAppearance="@style/CustomTextAppearance"
+                    android:theme="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText
+                        android:id="@+id/input_degree_percentage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:hint="Last Degree Percentage"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:theme="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+                <EditText
+                    android:id="@+id/input_passingyear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Passing Year"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!--<Button-->
+                <!--android:layout_marginTop="25dp"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/button_submit_education_borrower"-->
+                <!--android:background="@color/colorPrimaryDark"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:text="Submit"-->
+                <!--android:textColor="@color/white" />-->
+        </LinearLayout>
+
+        <!--</ScrollView>-->
+    </LinearLayout>

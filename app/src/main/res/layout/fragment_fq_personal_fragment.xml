@@ -1,0 +1,590 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="20dp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle">
+
+                <EditText
+                    android:textSize="16sp"
+                    android:id="@+id/input_borrowerfirstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890@. "
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <EditText
+                    android:id="@+id/input_borrowerlastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Last Name"
+                    android:inputType="textCapSentences"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:orientation="vertical"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:id="@+id/lable_personal_fqform"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="8dp"
+                        android:text="Birthdate"
+                        android:textColor="#808080"
+                        android:textSize="16sp"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/userInfoEdit_birthdateborrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="1dp"
+                        android:text="Birthdate"
+                        android:textColor="#808080"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPrimary"
+                        android:paddingBottom="4dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/birthdayCalender_fqform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="4dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/calendar"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="2dp"
+                    android:text="Gender : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_borrower_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButton_male_borrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Male"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton_female_borrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:padding="5dp"
+                        android:text="Female"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="2dp"
+                    android:text="Marital status : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_borrower_maritialStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButton_married_borrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Married"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton_single_borrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:padding="5dp"
+                        android:text="Single"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Current Residency type : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_currentresidencytype_borrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="left"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextStyle">
+
+                <EditText
+                    android:textSize="16sp"
+                    android:id="@+id/input_borrowerrent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Monthly Rent"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:visibility="gone" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="5dp"
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:theme="@style/EditTextStyle">
+
+                <EditText
+                    android:textSize="16sp"
+                    android:id="@+id/input_borrowercurrentaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Current Address"
+                    android:inputType="textPostalAddress"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Current Country : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_currentcountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Current State : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_currentstate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Current City : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_currentcity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle">
+
+                <EditText
+                    android:textSize="16sp"
+                    android:id="@+id/input_borrowercurrentpincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Current Pin Code no."
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/checkBox_sameasabove_fqpersonal"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Same as current Address"/>
+
+            <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle">
+
+                <EditText
+                    android:textSize="16sp"
+                    android:id="@+id/input_borrowerpermanentaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Permanent Address"
+                    android:inputType="textPostalAddress"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Permanent Country : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_borrowerpermanentcountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Permanent State : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_borrowerpermanentstate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Permanent City : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_borrowerpermanentcity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Duration of stay at current address : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_currentresidenceduration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle">
+
+                <EditText
+                    android:textSize="16sp"
+                    android:id="@+id/input_borrowerpermanentpincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Permanent Pin Code no."
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle">
+
+                <EditText
+                    android:textSize="16sp"
+                    android:id="@+id/input_borroweradharnumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Adhaar Number."
+                    android:inputType="number"
+                    android:maxLength="12"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                app:hintTextAppearance="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle">
+
+                <EditText
+                    android:textSize="16sp"
+                    android:id="@+id/input_borrowerpannumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="PAN Number."
+                    android:inputType="text|textCapCharacters"
+                    android:maxLength="10"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!--<Button-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/button_submit_personalborrower"-->
+            <!--android:background="@color/colorPrimaryDark"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:text="Submit"-->
+            <!--android:textColor="@color/white" />-->
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

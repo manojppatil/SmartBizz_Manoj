@@ -1,0 +1,283 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:background="@color/white"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Profession : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_profession_coborrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="left"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_weight="2"
+                    android:paddingTop="2dp"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Employer Type : "
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"/>
+                <RadioGroup
+                    android:layout_weight="1"
+                    android:id="@+id/radiogroup_emptype_coborrower"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:theme="@style/EditTextStyle"
+                        android:textColor="@color/black"
+                        android:checked="false"
+                        android:id="@+id/radiobutton_empType_gov_coborrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Government" />
+                    <RadioButton
+                        android:checked="false"
+                        android:theme="@style/EditTextStyle"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="5dp"
+                        android:id="@+id/radiobutton_empType_private_coborrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Private" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <EditText
+                    android:id="@+id/input_annualincome_coborrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Annual Income"
+                    android:inputType="number"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <EditText
+                    android:id="@+id/input_employeer_coborrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Employer"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:orientation="vertical"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:id="@+id/lable_fqformcoborrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="8dp"
+                        android:text="Duration of job/business"
+                        android:textColor="#808080"
+                        android:textSize="12sp"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/input_durationofjob_coborrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="1dp"
+                        android:text="Duration of job/business"
+                        android:textColor="#808080"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPrimary"
+                        android:paddingBottom="4dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/durationofjob_coborrower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="4dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/calendar"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Duration of Job/Business : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_durationofjob_coborrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="left"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="5dp"
+                    android:text="Has Any Previous Emi : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/radiogroup_hasanypreviousemi_coborrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_emiyes_coborrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Yes"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_emino_coborrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:checked="false"
+                        android:text="No"
+                        android:textColor="@color/black"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+
+                <android.support.design.widget.TextInputLayout
+                    android:visibility="gone"
+                    android:id="@+id/input_previousamt"
+                    app:hintTextAppearance="@style/CustomTextAppearance"
+                    android:theme="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/input_previousemiamount_coborrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:hint="Amount of previous EMI"
+                        android:textColor="@color/black" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_submit_financial_coborrower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryDark"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

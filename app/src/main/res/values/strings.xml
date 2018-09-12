@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY google_play_services_link "Google Play Store">]>
+
+<resources>
+    <string name="app_name">Eduvanz</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rupeesymbol">&#xf156;</string>
+    <string name="Rs">\u20B9</string>
+    <string name="calendar">&#xf073;</string>
+    <string name="edit">&#xf044;</string>
+    <string name="down">&#xf0d7;</string>
+    <string name="up">&#xf0d8;</string>
+    <string name="circle">&#xf111;</string>
+
+    <string name="title_activity_main2_navigation">Main2ActivityNavigation</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+
+    /** FRIENDLY SCORE STRINGS XML CONTENT **/
+
+    <string name="label_google_sign_in">Firebase + Google Sign In</string>
+    <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
+
+    <string name="label_facebook_login"></string>
+    <string name="desc_facebook_login">Use a Facebook Login credential to authenticate with Firebase.</string>
+
+    <string name="label_twitter_login">Firebase + Twitter Login</string>
+    <string name="desc_twitter_login">Use a Twitter Login credential to authenticate with Firebase.</string>
+
+    <string name="label_emailpassword">Email/Password Authentication</string>
+    <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
+
+    <string name="label_anonymous_auth">Anonymous Authentication</string>
+    <string name="desc_anonymous_auth">Sign in anonymously and then later upgrade to a full Firebase Auth user.</string>
+
+    <string name="label_custom_auth">Custom Authentication</string>
+    <string name="desc_custom_auth">Use a custom token signed by your own server to authenticate with Firebase.</string>
+
+    <string name="label_firebase_ui">FirebaseUI Auth</string>
+    <string name="desc_firebase_ui">Use the FirebaseUI-Android library to authenticate with Firebase.</string>
+
+    <string name="hint_user_id">User ID</string>
+    <string name="get_custom_token">Get Token</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="loading">Loading…</string>
+    <string name="custom_token">Custom Token</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="token_null">Token: null</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="desc_firebase_lockup">Firebase logo and name</string>
+    <string name="auth_failed">Authentication failed</string>
+
+
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="firebase_user_management">Firebase User Management</string>
+
+    <string name="google_status_fmt">Google User: %s</string>
+    <string name="google_title_text">Google Sign In</string>
+
+    <string name="facebook_status_fmt">Facebook User: %s</string>
+    <string name="facebook_title_text">Facebook Login</string>
+
+    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+    <string name="emailpassword_title_text">Email and Password</string>
+
+    <string name="twitter_status_fmt">Twitter User: %s</string>
+    <string name="twitter_title_text">Twitter Login</string>
+
+    <string name="firebaseui_status_fmt">Firebase User: %s</string>
+    <string name="firebaseui_title_text">FirebaseUI Auth</string>
+
+    <string name="id_fmt">User ID: %s</string>
+    <string name="email_fmt">Email: %s</string>
+    <string name="facebook_app_id">2033654490205621</string>
+    <string name="fb_login_protocol_scheme">fb2033654490205621</string>
+
+    <string name="twitter_consumer_key">Cn3lPUubSrtsJWw1se1OmrDIp</string>
+    <string name="twitter_consumer_secret">sA5B4ol5mXoYMEyWivBT2rHIsJwTIjLtdqgjzqpgHeuIsMc2b5</string>
+
+    <string name="desc_linkedin_login">Use Linkedin Login</string>
+    <string name="desc_paypal_login">Login with Paypal</string>
+    <string name="title_activity_test_google_login">TestGoogleLoginActivity</string>
+    <string name="title_activity_test_facebook_login">TestFacebookActivity</string>
+    <string name="title_activity_main2">Connect &amp; Score</string>
+    <string name="title_activity_start">New Scoring</string>
+
+
+    <string name="ok">I understand</string>
+    <string name="google_play_services_invalid">Google Play Service Version on your device is invalid</string>
+    <string name="google_play_services_invalid_title">Invalid Google Play Services</string>
+    <string name="no_google_play_services">Your device does not have Google Pay Services. Install From &google_play_services_link;</string>
+    <string name="no_google_play_services_title">Google Play Services Missing</string>
+    <string name="google_play_services_update">Update Google Play Services on your devices. Update from &google_play_services_link;</string>
+    <string name="google_play_services_title_update">Google Play Services is not updated on your device.</string>
+
+    <string name="google_play_services_updating">Google Play Services is being updated on your device. Check from &google_play_services_link;</string>
+    <string name="google_play_services_updating_title">Google Play Services is being updated.</string>
+    <string name="google_play_services_disabled">Google Play Services is disabled on your device. To use the App, Enable it.</string>
+    <string name="google_play_services_disabled_title">Google Play Services Disabled</string>
+
+
+
+    /** END OF FRIENDLY SCORE STRINGS XML CONTENT **/
+
+    <!--B7:6F:26:F5:D7:75:F6:FA:42:A6:3C:A4:D7:B8:65:32:2D:7F:9B:A6-->
+    <!--<string name="partnerKey">kjwhT8f2db2ac53514980885a1529862f88f5</string>-->
+    <!--<string name="partnerKey">uDeFm5010fc3011a5463bbc9d3432f58a9a93</string>-->
+    <!--<string name="partnerKey">aak3ic1e9446639b24f7a90d8d0a7937aa235</string>-->
+    <!--<string name="partnerKey">9rFQI2f51afe0a2ac4ea5adb9bf722b80a037</string>-->
+    <string name="partnerKey">CCesL1c389d78081845e8b661a1d47689fe1a</string>
+    <!--<string name="partnerKey">XY9ofd126bf7b42994bd39dbd2b05c5a2cd27</string>-->
+    <!--<string name="partnerKey">2OHKE8e1828977d22434d9d2671863ce3b371</string>    &lt;!&ndash;eduvanz 1&ndash;&gt;-->
+    <!--<string name="partnerKey">7tVcz12206778a90042c7908a54d45b10320d</string>    &lt;!&ndash;eduvanz 1&ndash;&gt;-->
+    <!--<string name="partnerKey">ma4U8974ef9549cc74aa29fc2a7f4d5b14b60</string>    &lt;!&ndash;eduvanz 1&ndash;&gt;-->
+    <string name="checkEligibility">Have a dream career in mind , than Eduvanz is want you need to get connected with.</string>
+    <string name="completeProfile">Complete your profile to increase eligibility for getting instant loans</string>
+    <string name="congrats">Congratulations ! \nYou are eligible for an instant loan. Apply right now and change your career.</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+
+    <string name="permissionsms">To collect and monitor information about bank transactions, names of transacting parties, description of the transactions
+    and amount for faster loan processing.</string>
+    <string name="permissioncontacts"><b>Contacts -</b> To automatically identify potential references for your loan application.
+        \n<b>Call History -</b> To gain information from your call logs that may be useful in the processing of your loan application.</string>
+    <string name="permissiondevice">To collect and monitor specific information about your device including IMEI number , call logs and phone number , in order to uniquely identify the device
+        and ensure unauthorized devices are not able to act on your behalf, thereby help us prevent fraudulent activity.</string>
+    <string name="permissioncamera"><b>Camera -</b> To allow to take pictures required for loan application.\n<b>Storage -</b> To allow to upload documents and pictures for your loan application.</string>
+    <string name="permissionlocation"><b>Location -</b>To collect and monitor information about location of your device.\n<b>App Usage -</b> To gain information about your interest and likings to generate your credit score that may be useful in the processing of your loan application.</string>
+    <string name="paymentoptions"><b>Paytm Payment-</b> with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.</string>
+    <!--<string name="paymentoptions"><b>Paytm -</b> With options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.\n<b>Atom -</b> With options like Credit Card, Debit Card, Net banking..</string>-->
+    <string name="strgetmobilenonotetruecaller"> SignIn with truecaller <b>or</b> verify your mobile no to begin!.</string>
+    <string name="strsigninwithtruecaller"> SignIn with truecaller</string>
+    <string name="strgetmobilenonote">Verify your mobile no to begin!.</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
+    <string name="nonetwork">Please check your internet connection.</string>
+    <string name="settings">Settings</string>
+</resources>

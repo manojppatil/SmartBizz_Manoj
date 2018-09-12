@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/lightGrey"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/Viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true">
+    </android.support.v4.view.ViewPager>
+    <ImageView
+        android:visibility="gone"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:id="@+id/imageview1"
+        android:background="@color/white"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/step2_image" />
+
+    <ImageView
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/imageview2"
+        android:background="@color/white"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/step3_image"
+        />
+    <Button
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:visibility="visible"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:layout_marginBottom="0dp"
+        android:textStyle="bold"
+        android:background="@color/blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nextbtn"
+        android:layout_above="@+id/indicator"
+        android:textAllCaps="false"
+        android:text="Proceed"/>
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:id="@+id/indicator"
+        app:fillColor="@color/colorPrimary"
+        app:strokeColor="@color/colorPrimaryDark"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

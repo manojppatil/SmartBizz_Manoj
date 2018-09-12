@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.eduvanzapplication">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <application
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:icon="@drawable/eduvanz_logo_new"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/eduvanz_logo_new"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup,android:icon,android:label,android:theme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data android:name="com.truecaller.android.sdk.PartnerKey" android:value="@string/partnerKey"/>
+
+
+        <!--<activity android:name="com.eduvanzapplication.MainActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+        <activity
+            android:name="com.eduvanzapplication.Main2ActivityNavigation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.eduvanzapplication.ImageSlider"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.fqform.borrowerdetail.FqFormBorrower"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.fqform.coborrowerdetail.FqFormCoborrower"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.uploaddocs.UploadActivityBorrower"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.uploaddocs.UploadActivityCoBorrower"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.pqformfragments.SuccessAfterPQForm"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.friendlyscore.ClientActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.friendlyscore.StartActivityFS"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.faqexpandablelistview.FAQ"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.MyProfile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.Login"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.SuccessSplash"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.UserProfile"
+            android:screenOrientation="sensorPortrait" />
+
+        <receiver android:name="com.eduvanzapplication.pqformfragments.SmsReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.eduvanzapplication.FCM.NotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.eduvanzapplication.FCM.GettingDeviceTokenService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name="com.eduvanzapplication.UsageStatistic" />
+
+        <!--<receiver-->
+            <!--android:name="com.eduvanzapplication.AlarmReceiver"-->
+            <!--android:exported="true">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+                <!--<action android:name="com.myapp.mycustomaction" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <service
+            android:name="com.eduvanzapplication.MyService"
+            android:exported="false" />
+        <service
+            android:name="com.eduvanzapplication.newUI.services.MyServiceCallLog"
+            android:exported="false" />
+        <service
+            android:name="com.eduvanzapplication.newUI.services.MyServiceReadSms"
+            android:exported="false" />
+        <service
+            android:name="com.eduvanzapplication.newUI.services.MyServiceAppStats"
+            android:exported="false" />
+        <service
+            android:name="com.eduvanzapplication.newUI.services.MyServiceContacts"
+            android:exported="false" />
+        <service
+            android:name="com.eduvanzapplication.newUI.services.LocationService"
+            android:exported="false" />
+        <!--<service-->
+            <!--android:name=".MyServiceDemo"-->
+            <!--android:exported="false" />-->
+
+        <activity
+            android:name="com.eduvanzapplication.SignupLogin"
+            android:screenOrientation="sensorPortrait" />
+        
+        /** NEW UI **/
+        <activity
+            android:name="com.atom.mobilepaymentsdk.PayActivity"
+            android:label="@string/app_name"/>
+
+        <!-- replace with splash after testing time. -->
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.SplashScreen"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.SingInWithTruecaller"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.GetMobileNo"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.OtpValidation"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.EligibilityCheck"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.LoanApplication"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.MyProfileNew"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.SignIn"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.ForgotPassword"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.SignUp"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.ContactUs"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.Faq"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.HowItWorks"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.BannerActivity"
+            android:screenOrientation="sensorPortrait" />
+        <!-- <activity android:name=".newUI.newViews.Notification" -->
+        <!-- android:screenOrientation="sensorPortrait"/> -->
+        <receiver
+            android:name="com.eduvanzapplication.newUI.receiver.AlarmReceiverForFileUpload"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.myapp.mycustomaction" />
+
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.eduvanzapplication.newUI.receiver.AppStatsForFileUpload"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.myapp.mycustomaction" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.eduvanzapplication.newUI.receiver.LocationUploadForFileUpload"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.myapp.mycustomaction" />
+
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.eduvanzapplication.newUI.newViews.Notification"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.webviews.WebViewFairPracticsCode"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.webviews.WebViewPrivacyPolicy"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.webviews.WebViewFAQs"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.webviews.WebViewDisclaimer"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.webviews.WebViewAboutUs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.eduvanzapplication.newUI.webviews.WebViewTermsNCondition"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.digio.in.esignsdk.DigioEsignActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <activity android:name="com.eduvanzapplication.newUI.newViews.TermsAndCondition"
+            android:screenOrientation="portrait"/>
+
+    </application>
+
+</manifest>

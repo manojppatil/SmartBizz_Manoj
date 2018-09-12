@@ -1,0 +1,2 @@
+include ':app', ':linkedin-sdk', ':digio-android-sdk-0.1.0', ':FriendlyScoreAndroidSDK-release', ':FriendlyScoreAndroidSDK-UI-release'
+include ':libraryMobilePaymentSDK'

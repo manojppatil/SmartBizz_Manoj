@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+
+    <!--<color name="colorPrimary">#43BB99</color>-->
+    <!--<color name="colorPrimaryDark">#006b4d</color> -->
+
+    <color name="colorPrimary">#2BD3DD</color>
+    <color name="colorPrimaryDark">#2BD3DD</color>
+    <color name="colorSecondary">#4196A0</color>
+    <!--<color name="colorPrimary">#0099CC</color>-->
+    <!--<color name="colorPrimaryDark">#2BD3DD</color>-->
+    <!--<color name="colorSecondary">#4196A0</color>-->
+    <color name="colorRed">#EE415E</color>
+
+
+    <!--<color name="colorAccent">#D3D3D3</color>-->
+    <color name="colorAccent">#2BD3DD</color>
+    <color name="lightGrey">#D3D3D3</color>
+    <color name="grey">#8e8e8e</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="blue">#435692</color>
+    <color name="lightblue">#d2e4ec</color>
+    <color name="blacktrasnparent">#50000000</color>
+    <color name="bgcolor">#ECF7FD</color>
+    <color name="textColorUserProfile">#494949</color>
+    <color name="background_user_profile">#F1F5F8</color>
+    <color name="permissioncolor">#4196a0</color>
+
+</resources>

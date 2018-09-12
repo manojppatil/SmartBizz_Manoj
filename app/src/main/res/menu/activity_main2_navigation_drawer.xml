@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group >
+        <item
+            android:id="@+id/nav_borrowerdetails"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Borrower Details" />
+        <item
+            android:id="@+id/nav_coborrowerdetail"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Co-Borrower Details" />
+        <!--<item-->
+            <!--android:id="@+id/nav_upload_docs"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Documents Upload" />-->
+        <item
+            android:id="@+id/nav_upload_docs_view"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Upload Docs Borrower" />
+
+        <item
+            android:id="@+id/nav_upload_docs_coborrower"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Upload Docs Co-Borrower" />
+
+        <item
+            android:id="@+id/nav_account_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Account Setting" />
+
+        <item
+            android:id="@+id/nav_friendlyscore"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Friendly Score" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_faq"
+                android:icon="@drawable/ic_menu_send"
+                android:title="FAQ" />
+            <item
+                android:id="@+id/nav_aboutus"
+                android:icon="@drawable/ic_menu_share"
+                android:title="About Us" />
+            <item
+                android:id="@+id/nav_termsncondition"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Terms and Condition" />
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/met_ic_clear"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+
+</menu>
