@@ -30,7 +30,7 @@ public class WebViewDisclaimer extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Disclaimer");
+        getSupportActionBar().setTitle(R.string.title_disclaimer);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));

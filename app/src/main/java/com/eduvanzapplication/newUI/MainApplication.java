@@ -21,13 +21,19 @@ public class MainApplication {
 //    public static String mainUrl = " http://139.59.61.225/eduvanzApi/"; //TESTING
 
     public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
+
+//    public static String mainUrl = "http://192.168.0.110/eduvanzapi/"; //Sachin
+
 //    public static String mainUrl = "https://api.eduvanz.com/"; //PRODUCTION
+
+
 
     public static int previous, previousfragment3;
     public static String mainapp_courseID = "", mainapp_instituteID = "";
     public static String mainapp_locationID = "";
     public static String mainapp_coursefee = "";
     public static String mainapp_loanamount = "";
+
     public static String mainapp_fammilyincome = "";
     public static String mainapp_doccheck = "";
     public static String mainapp_professioncheck = "";

@@ -428,7 +428,7 @@ public class MyServiceReadSms extends Service {
                 while ((output = br.readLine()) != null) {
                     sb.append(output);
 //                    Log.e("ReadSms", "uploadFile: SMS " + br);
-                    Log.e("ReadSms1", "Server Response is: SMS " + serverResponseMessage + ": " + serverResponseCode);
+//                    Log.e("ReadSms1", "Server Response is: SMS " + serverResponseMessage + ": " + serverResponseCode);
                 }
                 Log.e("ReadSms2", "uploadFile: " + sb.toString());
 
@@ -436,7 +436,7 @@ public class MyServiceReadSms extends Service {
                 if (serverResponseCode == 200) {
                     Log.e(TAG, "uploadFile: *********MY SERVICE READ SMS********** " + "\n" + sb.toString());
 
-                    Log.e("ReadSms", " here: SMS \n\n" + fileName);
+//                    Log.e("ReadSms", " here: SMS \n\n" + fileName);
 
 //                    if(f.exists()){
 //                        f.delete();

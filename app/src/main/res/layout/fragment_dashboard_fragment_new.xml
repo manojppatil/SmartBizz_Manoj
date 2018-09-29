@@ -68,7 +68,7 @@
                         android:id="@+id/textViewdash_9"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Want financial assistance?"
+                        android:text="@string/want_financial_assistance"
                         android:textSize="15sp"
                         android:textColor="@color/colorPrimary"/>
 
@@ -76,7 +76,7 @@
                         android:id="@+id/textViewdash_10"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Check Eligibility now!"
+                        android:text="@string/check_eligibility_now"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorSecondary" />
@@ -89,7 +89,7 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="5dp"
                         android:background="@color/colorPrimary"
-                        android:text="Continue"
+                        android:text="@string/continu"
                         android:textSize="17sp"
                         android:textAllCaps="true"
                         android:textColor="@color/white" />
@@ -128,7 +128,7 @@
                         android:id="@+id/textViewdash_14"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Your profile is incomplete"
+                        android:text="@string/your_profile_is_incomplete"
                         android:textSize="15sp"
                         android:textColor="@color/colorPrimary"/>
 
@@ -136,7 +136,7 @@
                         android:id="@+id/textViewdash_15"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Complete now!"
+                        android:text="@string/complete_now"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorSecondary"/>
@@ -147,7 +147,7 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
                         android:background="@color/colorPrimary"
-                        android:text="Continue"
+                        android:text="@string/continu"
                         android:textAllCaps="true"
                         android:textColor="@color/white" />
                 </LinearLayout>
@@ -186,7 +186,7 @@
                         android:id="@+id/textViewdash_12"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Your loan application is incomplete"
+                        android:text="@string/your_loan_application_is_incomplete"
                         android:textSize="15sp"
                         android:textColor="@color/colorPrimary"/>
 
@@ -194,7 +194,7 @@
                         android:id="@+id/textViewdash_13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Complete now!"
+                        android:text="@string/complete_now"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorSecondary"/>
@@ -205,7 +205,7 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
                         android:background="@color/colorPrimary"
-                        android:text="Continue"
+                        android:text="@string/continu"
                         android:textAllCaps="true"
                         android:textColor="@color/white" />
                 </LinearLayout>
@@ -259,7 +259,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Get it now."
+                        android:text="@string/get_it_now"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorSecondary"/>
@@ -270,7 +270,7 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
                         android:background="@color/colorPrimary"
-                        android:text="Apply Now"
+                        android:text="@string/apply_now"
                         android:textAllCaps="true"
                         android:textColor="@color/white" />
                 </LinearLayout>
@@ -300,7 +300,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Deal Alert!"
+                        android:text="@string/deal_alert"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="18sp"
@@ -359,7 +359,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="How it Works?"
+                        android:text="@string/how_it_works"
                         android:textAllCaps="true"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -389,7 +389,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="About Us"
+                        android:text="@string/about_us"
                         android:textAllCaps="true"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -427,7 +427,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="FAQS"
+                        android:text="@string/faqs"
                         android:textAllCaps="true"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -457,7 +457,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Contact Us"
+                        android:text="@string/contact_us"
                         android:textAllCaps="true"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -492,7 +492,7 @@
                 android:id="@+id/textViewdash_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Profile"
+                android:text="@string/my_profile"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
 
@@ -516,7 +516,7 @@
                 android:id="@+id/textViewdash_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Call Us"
+                android:text="@string/call_us"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
 
@@ -541,7 +541,7 @@
                 android:id="@+id/textViewdash_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mail Us"
+                android:text="@string/mail_us"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
 
@@ -565,7 +565,7 @@
                 android:id="@+id/textViewdash_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notification"
+                android:text="@string/notification"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 

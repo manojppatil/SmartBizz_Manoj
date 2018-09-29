@@ -66,6 +66,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.eduvanzapplication.Util.Globle.payment_partner;
+import static com.eduvanzapplication.Util.Globle.payment_platform;
+import static com.eduvanzapplication.Util.Globle.status;
 import static com.eduvanzapplication.newUI.MainApplication.staticdownloadurl;
 /**
  * A simple {@link Fragment} subclass.
@@ -578,7 +581,6 @@ public class LoanApplicationFragment_4 extends Fragment {
     public int uploadFile(final String selectedFilePath) {
         String urlup = MainApplication.mainUrl + "laf/lafDocumentUpload";
 
-
         Log.e(MainApplication.TAG, "urlup++++++: " + selectedFilePath + ", ipaddress : " + ipaddress);
 
         int serverResponseCode = 0;
@@ -1086,6 +1088,10 @@ public class LoanApplicationFragment_4 extends Fragment {
                                 Log.e(MainApplication.TAG, "onActivityResult: " + "Transaction Successful!");
                                 /** API CALL **/
                                 try {
+
+                                    //payment_platform = 2 (1-web, 2-app)
+                                    //payment_partner = 1 (1-paytm, 2-atom)
+
                                     String ipaddress = Utils.getIPAddress(true);
                                     String url = MainApplication.mainUrl + "epayment/kycPaymentCaptureWizard";
                                     Map<String, String> params = new HashMap<String, String>();
@@ -1094,9 +1100,11 @@ public class LoanApplicationFragment_4 extends Fragment {
                                     params.put("amount",TXNAMOUNT );
                                     params.put("txnId", TXNID); // merchant ID
                                     params.put("bankTxnId", BANKTXNID); // Bank ID
-                                    params.put("status", "1");
+                                    params.put("status", status);
                                     params.put("created_by_ip", ipaddress);
-                                    params.put("gateway_type", "Paytm");
+                                    params.put("payment_partner", payment_partner);
+                                    params.put("payment_platform", payment_platform);
+//                                    params.put("gateway_type", "Paytm");
                                     if(!Globle.isNetworkAvailable(context))
                                     {
                                         Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
@@ -1122,9 +1130,11 @@ public class LoanApplicationFragment_4 extends Fragment {
                                     params.put("amount",TXNAMOUNT );
                                     params.put("txnId", TXNID); // merchant ID
                                     params.put("bankTxnId", BANKTXNID); // Bank ID
-                                    params.put("status", "1");
+                                    params.put("status", status);
                                     params.put("created_by_ip", ipaddress);
-                                    params.put("gateway_type", "Paytm");
+                                    params.put("payment_partner", payment_partner);
+                                    params.put("payment_platform", payment_platform);
+//                                    params.put("gateway_type", "Paytm");
                                     if(!Globle.isNetworkAvailable(context))
                                     {
                                         Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();

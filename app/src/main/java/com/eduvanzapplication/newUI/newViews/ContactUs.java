@@ -39,7 +39,7 @@ public class ContactUs extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Contact Us");
+        getSupportActionBar().setTitle(R.string.title_contact_us);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -82,7 +82,7 @@ public class ContactUs extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:0224523689"));
+                intent.setData(Uri.parse(getString(R.string.tel_0224523689)));
                 startActivity(intent);
             }
         });

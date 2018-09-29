@@ -83,7 +83,7 @@ public class LoanApplication extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Loan Application");
+        getSupportActionBar().setTitle(R.string.title_loan_application);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));

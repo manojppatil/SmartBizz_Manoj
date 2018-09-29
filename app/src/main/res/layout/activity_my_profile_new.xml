@@ -110,7 +110,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Eligiblity Chek"
+                                    android:text="@string/eligiblity_chek"
                                     android:textSize="16sp" />
 
                                 <ImageView
@@ -133,7 +133,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Mobile Verification"
+                                    android:text="@string/mobile_verification"
                                     android:textSize="16sp" />
 
                                 <ImageView
@@ -156,7 +156,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Email Verification"
+                                    android:text="@string/email_verification"
                                     android:textSize="16sp" />
 
                                 <ImageView
@@ -179,7 +179,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Social Score"
+                                    android:text="@string/social_score"
                                     android:textSize="16sp" />
 
                                 <ImageView
@@ -208,7 +208,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="8dp"
                                 android:gravity="center"
-                                android:text="Profile Completion"
+                                android:text="@string/profile_completion"
                                 android:textSize="16sp" />
 
                             <RelativeLayout
@@ -244,7 +244,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="2dp"
                         android:background="@color/colorPrimary"
-                        android:text="Complete Now"
+                        android:text="@string/complete_now1"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -270,7 +270,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingTop="7dp"
-                            android:text="Application Status "
+                            android:text="@string/application_status"
                             android:textColor="@color/colorSecondary"
                             android:textSize="18sp" />
 
@@ -281,7 +281,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_weight="1.2"
                             android:paddingBottom="10dp"
-                            android:text="Processing"
+                            android:text="@string/processing"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
@@ -318,7 +318,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="7dp"
-                                android:text="Loan Details :"
+                                android:text="@string/loan_details"
                                 android:textColor="@color/colorSecondary"
                                 android:textSize="18sp" />
 
@@ -334,7 +334,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="right"
-                                    android:text="Institute "
+                                    android:text="@string/institute"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="16sp" />
 
@@ -361,7 +361,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="right"
-                                    android:text="Course   "
+                                    android:text="@string/course"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="16sp" />
 
@@ -388,7 +388,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="right"
-                                    android:text="Fees   "
+                                    android:text="@string/fees"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="16sp" />
 
@@ -431,7 +431,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="right"
-                                    android:text="Loan Amount :  "
+                                    android:text="@string/loan_amount1"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="16sp" />
 
@@ -489,7 +489,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:paddingTop="7dp"
-                            android:text="Personal Details :"
+                            android:text="@string/personal_details"
                             android:textColor="@color/colorSecondary"
                             android:textSize="18sp" />
 
@@ -505,7 +505,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="Mobile "
+                                android:text="@string/mobile"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp" />
 
@@ -532,7 +532,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="Email   "
+                                android:text="@string/email1"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp" />
 
@@ -560,7 +560,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="Address   "
+                                android:text="@string/address"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="16sp" />
 

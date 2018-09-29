@@ -23,7 +23,7 @@ public class Faq extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("FAQ");
+        getSupportActionBar().setTitle(R.string.title_faq);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));

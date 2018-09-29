@@ -38,7 +38,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
-                    android:text="Education"
+                    android:text="@string/education"
                     android:textColor="@color/white"
                     android:textStyle="bold|italic"
                     android:textSize="17sp"/>
@@ -50,7 +50,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
-                    android:text="Financial"
+                    android:text="@string/financial"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
-                    android:text="Personal"
+                    android:text="@string/personal"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -109,7 +109,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Institute Name"
+                            android:text="@string/institute_name"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -205,7 +205,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Course Name"
+                            android:text="@string/course_name"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -301,7 +301,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Institute Location"
+                            android:text="@string/institute_location"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -379,7 +379,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:text="Next"
+        android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

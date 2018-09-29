@@ -106,7 +106,6 @@
 	                    android:inputType="textFilter"
 	                    android:hint="Card Name"
 	                    android:maxLength="45"
-	                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
 	                    android:maxLines="1"
 	                    android:singleLine="true"
 	                    android:padding="10dip"

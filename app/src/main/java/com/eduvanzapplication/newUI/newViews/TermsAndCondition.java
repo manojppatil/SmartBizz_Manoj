@@ -43,12 +43,14 @@ public class TermsAndCondition extends AppCompatActivity {
         below5 = findViewById(R.id.below5);
         scrollView = findViewById(R.id.scrollView_tnc);
 
-        String mystring=new String(" terms of service");
+        String mystring = " " +getResources().getString(R.string.terms_of_service) + " ";
+//        String mystring=new String(" terms of service");
         SpannableString content = new SpannableString(mystring);
         content.setSpan(new UnderlineSpan(), 0, mystring.length(), 0);
         below3.setText(content);
 
-        String mystring1=new String(" privacy policy.");
+        String mystring1 = " " +getResources().getString(R.string.privacy_policy);
+//        String mystring1=new String(" privacy policy.");
         SpannableString content1 = new SpannableString(mystring1);
         content1.setSpan(new UnderlineSpan(), 0, mystring1.length(), 0);
         below5.setText(content1);

@@ -13,7 +13,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="PERMISSIONS REQUIRED"
+            android:text="@string/permissions_required"
             android:textColor="@color/permissioncolor"
             android:textSize="22sp" />
 
@@ -79,7 +79,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="SMS Data"
+                            android:text="@string/sms_data"
                             android:textColor="@color/permissioncolor"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -135,7 +135,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Contacts and Call Info"
+                            android:text="@string/contacts_and_call_info"
                             android:textColor="@color/permissioncolor"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -190,7 +190,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Device Info"
+                            android:text="@string/device_info"
                             android:textColor="@color/permissioncolor"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -245,7 +245,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Camera and Storage"
+                            android:text="@string/camera_and_storage"
                             android:textColor="@color/permissioncolor"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -300,7 +300,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Location Info and AppUsage"
+                            android:text="@string/location_info_and_appusage"
                             android:textColor="@color/permissioncolor"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -352,7 +352,7 @@
         android:layout_marginStart="2dp"
         android:padding="1dp"
         android:gravity="center"
-        android:text="By proceeding you accept"
+        android:text="@string/by_proceeding_you_accept"
         android:textSize="12sp" />
 
     <TextView
@@ -375,7 +375,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text=" and "
+        android:text="@string/and"
         android:textSize="12sp" />
 
     <TextView
@@ -399,7 +399,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@color/colorPrimary"
-            android:text="Continue"
+            android:text="@string/continu"
             android:textColor="@color/white"
             android:visibility="visible" />
 

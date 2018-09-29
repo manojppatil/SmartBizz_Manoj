@@ -18,7 +18,7 @@
             android:id="@+id/textView_validateotp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="eduvanz"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"/>
@@ -35,7 +35,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Financing Your Future!"
+        android:text="@string/financing_your_future"
         android:textSize="26sp"
         android:textAllCaps="true"
         android:textColor="@color/colorSecondary"
@@ -68,7 +68,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="10 digit mobile number"
+            android:hint="@string/_10_digit_mobile_number"
             android:inputType="number"
             android:maxLength="10"/>
 
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/rectanglebackground"
-            android:text="GET OTP"
+            android:text="@string/get_otp"
             android:textSize="22sp"/>
 
 

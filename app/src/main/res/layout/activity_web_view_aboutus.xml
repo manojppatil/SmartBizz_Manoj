@@ -29,7 +29,6 @@
             android:elevation="10dp"
             android:background="@drawable/toolbar_dropshadow"/>
 
-
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"

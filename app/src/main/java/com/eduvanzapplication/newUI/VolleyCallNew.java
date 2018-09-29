@@ -33,6 +33,7 @@ import com.eduvanzapplication.newUI.newViews.MyProfileNew;
 import com.eduvanzapplication.newUI.newViews.Notification;
 import com.eduvanzapplication.newUI.newViews.OtpValidation;
 import com.eduvanzapplication.newUI.newViews.SignIn;
+import com.eduvanzapplication.newUI.newViews.SplashScreen;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -127,7 +128,17 @@ public class VolleyCallNew extends Application {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void showJSON(String s) {
-        if (screen.equalsIgnoreCase("getOtp")) {
+        if (screen.equalsIgnoreCase("checkVersion")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((SplashScreen) mActivity).CheckVersion(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("getOtp")) {
             try {
 
                 jsonDataO = new JSONObject(s);

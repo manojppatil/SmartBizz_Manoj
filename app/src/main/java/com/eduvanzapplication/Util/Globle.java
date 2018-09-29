@@ -3,6 +3,7 @@ package com.eduvanzapplication.Util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.format.DateFormat;
 
 import com.eduvanzapplication.Util.Paytm;
 import com.eduvanzapplication.uploaddocs.PathFile;
@@ -13,6 +14,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 
 public class Globle {
@@ -24,6 +28,13 @@ public class Globle {
 
     public Paytm paytm;
 
+    public static final String status = "1"; //For Success
+    public static final String payment_platform = "2"; //(1-web, 2-app)
+    public static final String payment_partner = "1"; //(1-paytm, 2-atom)
+
+    //payment_platform = 2 (1-web, 2-app)
+    //payment_partner = 1 (1-paytm, 2-atom)
+
     public static synchronized Globle getInstance() {
         if (instance == null) {
             instance = new Globle();
@@ -31,6 +42,15 @@ public class Globle {
         return instance;
     }
 
+    public static String formatDate(long milliseconds) /* This is your topStory.getTime()*1000 */ {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy' 'HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliseconds);
+        TimeZone tz = TimeZone.getDefault();
+        sdf.setTimeZone(tz);
+        return sdf.format(calendar.getTime());
+    }
 
     public static void appendLog(String text) {
         File logFile = new File("sdcard/" +

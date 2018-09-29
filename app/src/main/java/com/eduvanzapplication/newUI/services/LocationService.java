@@ -210,6 +210,7 @@ public class LocationService extends Service {
                 while ((output = br.readLine()) != null) {
                     sb.append(output);
                 }
+                Log.e("Location ", "uploadFile: " + sb.toString());
 
                 //response code of 200 indicates the server status OK
                 if (serverResponseCode == 200) {
@@ -222,9 +223,9 @@ public class LocationService extends Service {
 //                            System.out.println("file not Deleted :" + uri.getPath());
 //                        }
 //                    }
-                   // Log.e(TAG, "uploadFile: *********MY SERVICE JSON RESONSE LOCATION********** " + "\n" + sb.toString());
+                    Log.e(TAG, "uploadFile: *********MY SERVICE JSON RESONSE LOCATION********** " + "\n" + sb.toString());
 
-                    Log.e("ReadSms", " here: LOCATION LOG \n\n" + fileName);
+//                    Log.e("ReadSms", " here: LOCATION LOG \n\n" + fileName);
                 }
 
                 //closing the input and output streams

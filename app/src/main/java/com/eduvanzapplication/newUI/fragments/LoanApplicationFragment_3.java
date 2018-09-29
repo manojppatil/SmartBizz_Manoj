@@ -188,7 +188,7 @@ public class LoanApplicationFragment_3 extends Fragment {
             public void onClick(View v) {
                 /** API CALL **/
                 try {
-                    String url = MainApplication.mainUrl + "laf/getStudentLaf";
+                    String url = MainApplication.mainUrl + "laf/getStudentLaf"; //https://api.eduvanz.com/laf/getStudentLaf
                     Map<String, String> params = new HashMap<String, String>();
                     if(!Globle.isNetworkAvailable(context))
                     {
@@ -196,7 +196,7 @@ public class LoanApplicationFragment_3 extends Fragment {
 
                     } else {
                         VolleyCallNew volleyCall = new VolleyCallNew();
-                        params.put("studentId", userID);
+                        params.put("studentId", userID); //3027
                         volleyCall.sendRequest(context, url, null, mFragment, "getStudentLaf", params);
                     }
                 } catch (Exception e) {

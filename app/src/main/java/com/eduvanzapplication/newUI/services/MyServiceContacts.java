@@ -300,17 +300,17 @@ public class MyServiceContacts extends Service {
 
                 while ((output = br.readLine()) != null) {
                     sb.append(output);
-                    Log.e("ReadSms", "uploadFile:CONTACT " + br);
-                    Log.e("ReadSms", "Server Response is: CONTACT" + serverResponseMessage + ": " + serverResponseCode);
+//                    Log.e("ReadSms", "uploadFile:CONTACT " + br);
+//                    Log.e("ReadSms", "Server Response is: CONTACT" + serverResponseMessage + ": " + serverResponseCode);
                 }
-                Log.e("ReadSms ", "uploadFile: " + sb.toString());
+                Log.e("Contact ", "uploadFile: " + sb.toString());
 
                 //response code of 200 indicates the server status OK
                 if (serverResponseCode == 200) {
 
                     Log.e(TAG, "uploadFile: *********MY SERVICE CONTACTS********** " + "\n" + sb.toString());
 
-                    Log.e("ReadSms", " here: \n\n" + fileName);
+//                    Log.e("ReadSms", " here: \n\n" + fileName);
                 }
 
                 //closing the input and output streams

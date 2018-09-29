@@ -38,7 +38,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primarydark"
                     android:gravity="center"
-                    android:text="Education"
+                    android:text="@string/education"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
-                    android:text="Financial"
+                    android:text="@string/financial"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold|italic" />
@@ -59,7 +59,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
-                    android:text="Personal"
+                    android:text="@string/personal"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -108,7 +108,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Course Fee"
+                            android:text="@string/course_fee"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -157,7 +157,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Loan Amount"
+                            android:text="@string/loan_amount"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -208,7 +208,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Monthly Family Income"
+                            android:text="@string/monthly_family_income"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -251,7 +251,7 @@
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/icon_leftarrow"
             android:paddingLeft="20dp"
-            android:text="Previous"
+            android:text="@string/previous"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -264,7 +264,7 @@
             android:background="@color/colorPrimary"
             android:drawableRight="@drawable/icon_rightarrow"
             android:paddingRight="20dp"
-            android:text="Next"
+            android:text="@string/next"
             android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>

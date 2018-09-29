@@ -105,7 +105,7 @@ public class DashboardActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Dashboard");
+        getSupportActionBar().setTitle(R.string.title_dashboard);
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
         context = getApplicationContext();

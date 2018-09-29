@@ -66,7 +66,7 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:paddingBottom="20dp"
-                        android:text="Your Name"
+                        android:text="@string/your_name"
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
@@ -104,7 +104,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Email Id"
+                            android:text="@string/email_id1"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -115,7 +115,7 @@
                             android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter your email id"
+                            android:hint="@string/enter_your_email_id"
                             android:inputType="textEmailAddress"
                             android:background="@drawable/background_edittext"
                             android:textColorHint="@color/grey"
@@ -137,7 +137,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Password"
+                            android:text="@string/password"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -148,7 +148,7 @@
                             android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter your password"
+                            android:hint="@string/enter_your_password"
                             android:inputType="textPassword"
                             android:background="@drawable/background_edittext"
                             android:textColorHint="@color/grey"
@@ -164,7 +164,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center|right"
-                        android:text="Forgot Password?"
+                        android:text="@string/forgot_password"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -181,7 +181,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="30dp"
                     android:background="@color/colorPrimary"
-                    android:text="Sign In"
+                    android:text="@string/sign_in"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 

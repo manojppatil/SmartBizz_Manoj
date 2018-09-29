@@ -358,7 +358,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                                                         }else {
                                                             VolleyCallNew volleyCall = new VolleyCallNew();
-                                                            volleyCall.sendRequest(context, url, null, mFragment, "sendborrowerDetails", params);
+                                                            volleyCall.sendRequest(context, url, null, mFragment, "sendborrowerDetails", params);//http://159.89.204.41/eduvanzApi/algo/setBorrowerLoanDetails
                                                         }
 
                                                     } catch (Exception e) {
@@ -1415,10 +1415,10 @@ public class LoanApplicationFragment_1 extends Fragment {
     private void cityApiCall() {
         /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "algo/getCities";
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
             Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", currentcountryID);
-            params.put("stateId", currentstateID);
+            params.put("countryId", currentcountryID);//1
+            params.put("stateId", currentstateID);//2
             if(!Globle.isNetworkAvailable(context))
             {
                 Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();

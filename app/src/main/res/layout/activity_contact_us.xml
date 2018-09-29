@@ -71,7 +71,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Contact Number"
+                            android:text="@string/contact_number"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -99,7 +99,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="022-49733674" />
+                            android:text="@string/_022_49733674" />
 
                     </LinearLayout>
 
@@ -136,7 +136,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Email"
+                            android:text="@string/email"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -164,7 +164,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="contact@eduvanz.com" />
+                            android:text="@string/contact_eduvanz_com" />
 
                     </LinearLayout>
 
@@ -200,7 +200,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Office"
+                            android:text="@string/office"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -228,7 +228,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="801, Jai Antriksh," />
+                            android:text="@string/_801_jai_antriksh" />
 
                     </LinearLayout>
 
@@ -253,7 +253,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Makwana Road, Marol, Andheri East," />
+                            android:text="@string/makwana_road_marol_andheri_east" />
 
                     </LinearLayout>
 
@@ -279,7 +279,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Mumbai 400059." />
+                            android:text="@string/mumbai_400059" />
 
                     </LinearLayout>
 

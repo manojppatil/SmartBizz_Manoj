@@ -107,7 +107,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:background="@color/colorRed"
-                android:text="Check Eligiblity"
+                android:text="@string/check_eligiblity"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -119,7 +119,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:background="@color/colorPrimary"
-                android:text="Apply Now"
+                android:text="@string/apply_now1"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:visibility="gone" />
@@ -132,7 +132,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:background="@color/colorPrimary"
-                android:text="Continue"
+                android:text="@string/continue1"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:visibility="gone" />

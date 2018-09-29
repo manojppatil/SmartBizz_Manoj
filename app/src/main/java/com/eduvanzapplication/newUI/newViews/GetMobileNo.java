@@ -265,7 +265,7 @@ public class  GetMobileNo extends AppCompatActivity {
         /** API CALL GET OTP**/
 
             try {
-                String url = MainApplication.mainUrl + "pqform/thirdPartyGenerateOtpCode";
+                String url = MainApplication.mainUrl + "pqform/thirdPartyGenerateOtpCode";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("mobileno", editTextGetMobileNo.getText().toString());
                 if(!Globle.isNetworkAvailable(GetMobileNo.this))

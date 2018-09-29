@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,7 +54,7 @@ public class SignIn extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sign In");
+        getSupportActionBar().setTitle(R.string.title_sign_in);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -83,13 +84,18 @@ public class SignIn extends AppCompatActivity {
                     String url = MainApplication.mainUrl + "authorization/email_login";//http://159.89.204.41/eduvanzApi/authorization/email_login
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("username",editTextEmailId.getText().toString());
-                    params.put("password", editTextPassword.getText().toString());
+//                    params.put("password", editTextPassword.getText().toString());
 //                    params.put("password", CryptoHelper.encrypt(editTextPassword.getText().toString()));
+                    byte[] data = editTextPassword.getText().toString().getBytes("UTF-8");
+                    String base64 = Base64.encodeToString(data, Base64.DEFAULT);
+                    params.put("password", base64);
                     if(!Globle.isNetworkAvailable(SignIn.this))
                     {
                         Toast.makeText(SignIn.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
 
                     } else {
+                        // "password" -> "3ft/XFOHN1Kg6Jgba9U6aA=="
+                        // "username" -> "vijay.shukla@eduvanz.in"
                         VolleyCallNew volleyCall = new VolleyCallNew();
                         volleyCall.sendRequest(context, url, mActivity, null, "emailSignIn", params);
                     }

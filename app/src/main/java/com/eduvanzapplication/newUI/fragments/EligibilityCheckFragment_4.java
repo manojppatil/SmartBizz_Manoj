@@ -138,6 +138,19 @@ public class EligibilityCheckFragment_4 extends Fragment {
                                 e.printStackTrace();
                             }
 
+//                    https://api.eduvanz.com/pqform/registerUserForEligibility
+//                     cc : 1
+//                     studentProfessional : Student
+//                     currentResidence : Mumbai
+//                     borrowerFirstName : Tester123
+//                     mobile : 7787838985
+//                     course : 133
+//                     borrowerLastName : Tester123
+//                     institute : 2
+//                     location : 54
+//                    loanAmount : 50000
+//                     email : vijay.shukla@eduvanz.in
+//                     familyIncomeAmount : 40000
 
                 }else {
                     if(editTextFirstname.getText().toString().equalsIgnoreCase("")){

@@ -62,7 +62,7 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:paddingBottom="20dp"
-                        android:text="Your Name"
+                        android:text="@string/your_name"
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
@@ -85,7 +85,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="50dp"
                     android:background="@color/colorPrimary"
-                    android:text="Sign In"
+                    android:text="@string/sign_in"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -96,7 +96,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Not register yet? Register now."
+                    android:text="@string/not_register_yet_register_now"
                     android:textSize="14sp" />
 
                 <Button
@@ -106,7 +106,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="10dp"
                     android:background="#EE415E"
-                    android:text="Sign Up"
+                    android:text="@string/sign_up"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 

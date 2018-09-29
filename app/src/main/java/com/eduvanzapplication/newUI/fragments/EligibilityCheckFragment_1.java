@@ -192,7 +192,7 @@ public class EligibilityCheckFragment_1 extends Fragment {
 
         /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillInstitutes";
+            String url = MainApplication.mainUrl + "pqform/apiPrefillInstitutes";  //http://159.89.204.41/eduvanzApi/pqform/apiPrefillInstitutes
             Map<String, String> params = new HashMap<String, String>();
             VolleyCallNew volleyCall = new VolleyCallNew();
             if(!Globle.isNetworkAvailable(context))

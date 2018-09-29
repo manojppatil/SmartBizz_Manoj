@@ -322,6 +322,7 @@ public class MyServiceCallLog extends Service {
                 while ((output = br.readLine()) != null) {
                     sb.append(output);
                 }
+                Log.e("CallLog ", "uploadFile: " + sb.toString());
 
                 //response code of 200 indicates the server status OK
                 if (serverResponseCode == 200) {

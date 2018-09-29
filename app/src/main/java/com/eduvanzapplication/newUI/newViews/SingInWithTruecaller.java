@@ -261,6 +261,44 @@ public class SingInWithTruecaller extends AppCompatActivity implements ITrueCall
 
         sr.append("Sim changed: ").append(trueProfile.isSimChanged).append("\n");
         sr.append("RequestNonce: ").append(trueProfile.requestNonce).append("\n");
+        try {
+            String url = MainApplication.mainUrl + "truecallerresponse/insert";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
+            Map<String, String> params = new HashMap<String, String>();
+
+            params.put("avatarUrl", trueProfile.avatarUrl);
+            params.put("city", trueProfile.city);
+            params.put("companyName", trueProfile.companyName);
+            params.put("countryCode", trueProfile.countryCode);
+            params.put("email", trueProfile.email);
+            params.put("facebookId", trueProfile.facebookId);
+            params.put("firstName", trueProfile.firstName);
+            params.put("gender", trueProfile.gender);
+            params.put("isAmbassador", String.valueOf(trueProfile.isAmbassador));
+            params.put("isSimChanged", String.valueOf(trueProfile.isSimChanged));
+            params.put("isTrueName", String.valueOf(trueProfile.isTrueName));
+            params.put("jobTitle", trueProfile.jobTitle);
+            params.put("lastName", trueProfile.lastName);
+            params.put("payload", trueProfile.payload);
+            params.put("phoneNumber", trueProfile.phoneNumber);
+            params.put("requestNonce", trueProfile.requestNonce);
+            params.put("signature", trueProfile.signature);
+            params.put("street", trueProfile.street);
+            params.put("twitterId", trueProfile.twitterId);
+            params.put("url", trueProfile.url);
+            params.put("verificationMode", trueProfile.verificationMode);
+            params.put("verificationTimestamp", String.valueOf(trueProfile.verificationTimestamp));
+            params.put("zipcode", trueProfile.zipcode);
+            if(!Globle.isNetworkAvailable(SingInWithTruecaller.this))
+            {
+                Toast.makeText(SingInWithTruecaller.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "updateTrueData", params);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -268,6 +306,7 @@ public class SingInWithTruecaller extends AppCompatActivity implements ITrueCall
         editor.putString("mobile_no", trueProfile.phoneNumber);
         editor.apply();
         editor.commit();
+
 
         Intent intent = new Intent(SingInWithTruecaller.this, DashboardActivity.class);
         startActivity(intent);
