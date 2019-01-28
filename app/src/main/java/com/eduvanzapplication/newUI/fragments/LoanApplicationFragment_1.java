@@ -1440,12 +1440,32 @@ public class LoanApplicationFragment_1 extends Fragment {
                     if (!Bremail_id.equals("null")) {
                         edtEmailIdBr.setText(Bremail_id);
                     }
-                    if (!Brpan_number.equals("null")) {
-                        edtPanBr.setText(Brpan_number);
+                    if(Brhas_aadhar_pan.equals("1")){
+                        edtAadhaarBr.setVisibility(View.VISIBLE);
+                        edtPanBr.setVisibility(View.GONE);
+                        if (!Braadhar_number.equals("null")) {
+                            edtAadhaarBr.setText(Braadhar_number);
+                        }
+                    }else if(Brhas_aadhar_pan.equals("2")){
+                        edtPanBr.setVisibility(View.VISIBLE);
+                        edtAadhaarBr.setVisibility(View.GONE);
+                        if (!Brpan_number.equals("null")) {
+                            edtPanBr.setText(Brpan_number);
+                        }
+                    }else if(Brhas_aadhar_pan.equals("3") || Brhas_aadhar_pan.equals("0")){
+                        edtAadhaarBr.setVisibility(View.VISIBLE);
+                        edtPanBr.setVisibility(View.VISIBLE);
+                        if (!Braadhar_number.equals("null")) {
+                            edtAadhaarBr.setText(Braadhar_number);
+                        }
+                        if (!Brpan_number.equals("null")) {
+                            edtPanBr.setText(Brpan_number);
+                        }
+                    }else{
+                        edtAadhaarBr.setVisibility(View.GONE);
+                        edtPanBr.setVisibility(View.GONE);
                     }
-                    if (!Braadhar_number.equals("null")) {
-                        edtAadhaarBr.setText(Braadhar_number);
-                    }
+
                     if (!Bremployer_name.equals("null")) {
                         edtCompanyBr.setText(Bremployer_name);
                     }
@@ -1480,7 +1500,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                     if (!Brprofession.equals("null")) {
                         professionID = Brprofession;
-//                        spProfessionBr.setSelection(Integer.parseInt(Brprofession));
+                        spProfessionBr.setSelection(Integer.parseInt(professionID));
                     }
                     if (!Brkyc_address_country.equals("null")) {
                         currentcountryID = "1";
@@ -2644,6 +2664,9 @@ public class LoanApplicationFragment_1 extends Fragment {
                 try {
                     currentstate_arrayListCoBr = new ArrayList<>();
                     currentstate_arrayListCoBr.add("Select Any");
+                    currentstate_arrayListCoBr.add("Maharashtra");
+                    currentstate_arrayListCoBr.add("Maharashtra");
+                    currentstate_arrayListCoBr.add("Maharashtra");
                     arrayAdapter_currentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayListCoBr);
                     spCurrentStateCoBr.setAdapter(arrayAdapter_currentStateCoBr);
                     arrayAdapter_currentStateCoBr.notifyDataSetChanged();

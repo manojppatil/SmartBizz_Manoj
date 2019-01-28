@@ -369,6 +369,7 @@
                         android:hint="@string/pan_number"
                         android:inputType="text|textCapCharacters"
                         android:maxLength="10"
+                        android:visibility="gone"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -388,6 +389,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/adhaar_number"
                         android:inputType="number"
+                        android:visibility="gone"
                         android:maxLength="12"
                         android:textColor="@color/black"
                         android:textSize="16sp" />

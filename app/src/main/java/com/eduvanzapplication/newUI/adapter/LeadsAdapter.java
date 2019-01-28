@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class LeadsAdapter extends RecyclerView.Adapter<LeadsAdapter.MyViewHolder
                         Intent intent = new Intent(context, EligibilityCheck.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("lead_id", card_view.getTag().toString());
+                        Log.d("LeadId","ID - "+card_view.getTag().toString());
                         bundle.putString("application_id", txtlafid.getText().toString());
                         bundle.putString("fillinstutute", txtlafid.getText().toString());
                         intent.putExtras(bundle);

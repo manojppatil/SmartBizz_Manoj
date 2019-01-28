@@ -136,7 +136,7 @@ public class LoanApplication extends AppCompatActivity {
                 buttonSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                    LoanApplication.super.onBackPressed();
 //                        if(!MainApplication.borrowerValue13.equals("") &&
 //                                !MainApplication.borrowerValue14.equals("") &&
 //                                !MainApplication.borrowerValue15.equals("") &&
@@ -191,7 +191,7 @@ public class LoanApplication extends AppCompatActivity {
                 buttonSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        LoanApplication.super.onBackPressed();
                         finish();//coment this line
                         //                    if (!MainApplication.borrowerValue13.equals("") &&
                         //                            !MainApplication.borrowerValue14.equals("") &&

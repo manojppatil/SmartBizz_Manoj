@@ -389,7 +389,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_5sdp"
-                        android:padding="@dimen/_5sdp"                        android:layout_weight="4.5"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_weight="4.5"
                         android:scaleType="fitCenter"
                         android:tint="@color/colorSecondary"
                         app:srcCompat="@drawable/ic_id_card" />
@@ -432,7 +433,9 @@
                                 android:dropDownSelector="@color/colorPrimary"
                                 android:focusable="true"
                                 android:gravity="left"
-                                android:theme="@style/ThemeOverlay.AppCompat.Light"></Spinner>
+                                android:theme="@style/ThemeOverlay.AppCompat.Light">
+
+                            </Spinner>
 
                         </RelativeLayout>
 
