@@ -2,6 +2,7 @@ package com.eduvanzapplication.newUI.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
 import com.eduvanzapplication.newUI.pojo.ViewPagerDashboardPOJO;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -54,6 +56,24 @@ public class ViewPagerAdapterDashboard extends PagerAdapter {
 
             Log.e(MainApplication.TAG, "instantiateItem: "+mData.size() );
 
+//            Picasso.with(mContext).load(mData.get(position).image).into(myImage);
+
+//
+//            try {
+//                Picasso.with(mContext).load(mData.get(position).image).placeholder(mContext.getResources().getDrawable(R.drawable.bannersplaceholder)).fit().into(myImage, new Callback() {
+//                    @Override public void onSuccess() {
+//                       String success;
+//                    }
+//                    @Override public void onError() {
+//                        String fail;
+//
+//                    }
+//                });
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            //http://159.89.204.41/eduvanzbeta/uploads/mobileadvertisement/1/image_1513427852.png
+            //http://eduvanz.com/admin/uploads/mobileadvertisement/1/image_1513427852.png
             Picasso.with(mContext).load(mData.get(position).image).placeholder(mContext.getResources().getDrawable(R.drawable.bannersplaceholder)).into(myImage);
 
             myImage.setOnClickListener(new View.OnClickListener() {

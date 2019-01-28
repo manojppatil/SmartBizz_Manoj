@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.eduvanzins.newUI.newViews.DashboardLeads">
+
+    <item
+        android:id="@+id/action_notes"
+        android:visible="true"
+        app:showAsAction="always|withText"
+        style="@android:style/Widget.ActionButton"
+        android:title="@string/change_language" />
+
+
+</menu>

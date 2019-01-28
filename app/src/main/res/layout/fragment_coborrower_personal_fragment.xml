@@ -29,7 +29,7 @@
                     android:id="@+id/input_coborrowerfirstname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="First Name"
+                    android:hint="@string/laf_first_name"
                     android:inputType="textCapSentences"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -46,7 +46,7 @@
                     android:id="@+id/input_coborrowerlastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Last Name"
+                    android:hint="@string/laf_last_name"
                     android:inputType="textCapSentences"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="4dp"
                         android:paddingTop="8dp"
-                        android:text="Birthdate"
+                        android:text="@string/birthdate"
                         android:textColor="#808080"
                         android:textSize="12sp"
                         android:visibility="invisible" />
@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="4dp"
                         android:paddingLeft="1dp"
-                        android:text="Birthdate"
+                        android:text="@string/birthdate"
                         android:textColor="#808080"
                         android:textSize="16sp" />
 
@@ -115,7 +115,7 @@
                     android:id="@+id/input_coborrowercontactno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Contact No."
+                    android:hint="@string/contact_number"
                     android:inputType="number"
                     android:maxLength="10"
                     android:textColor="@color/black" />
@@ -133,7 +133,7 @@
                     android:id="@+id/input_coborroweremailid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email ID"
+                    android:hint="@string/email_id"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -152,7 +152,7 @@
                     android:layout_weight="1.5"
                     android:gravity="left"
                     android:paddingTop="2dp"
-                    android:text="Gender : "
+                    android:text="@string/gender"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -170,7 +170,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Male"
+                        android:text="@string/male"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
 
@@ -180,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:padding="5dp"
-                        android:text="Female"
+                        android:text="@string/female"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
                 </RadioGroup>
@@ -201,7 +201,7 @@
                     android:layout_weight="1.5"
                     android:gravity="left"
                     android:paddingTop="2dp"
-                    android:text="Marital status : "
+                    android:text="@string/marital_status"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -219,7 +219,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Married"
+                        android:text="@string/married"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
 
@@ -229,7 +229,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:padding="5dp"
-                        android:text="Single"
+                        android:text="@string/single"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
                 </RadioGroup>
@@ -247,7 +247,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Relationship with Borrower : "
+                    android:text="@string/relationship_with_borrower"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -275,7 +275,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Current Residency type : "
+                    android:text="@string/current_residency_type"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -303,7 +303,7 @@
                     android:id="@+id/input_coborrowerrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Monthly Rent"
+                    android:hint="@string/monthly_rent"
                     android:inputType="number"
                     android:textColor="@color/black"
                     android:visibility="gone" />
@@ -321,7 +321,7 @@
                     android:id="@+id/input_coborrowercurrentaddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Current Address"
+                    android:hint="@string/current_address"
                     android:inputType="textPostalAddress"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -338,7 +338,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Current Country : "
+                    android:text="@string/current_country"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -367,7 +367,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Current State : "
+                    android:text="@string/current_state"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -395,7 +395,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Current City : "
+                    android:text="@string/current_city1"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -424,7 +424,7 @@
                     android:id="@+id/input_coborrowercurrentpincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Current Pin Code no."
+                    android:hint="@string/current_pin_code_no"
                     android:inputType="number"
                     android:maxLength="6"
                     android:textColor="@color/black" />
@@ -438,7 +438,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Same as current Address"/>
+                android:text="@string/same_as_current_address"/>
 
             <android.support.design.widget.TextInputLayout
                 app:hintTextAppearance="@style/CustomTextAppearance"
@@ -452,7 +452,7 @@
                     android:id="@+id/input_coborrowerpermanentaddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Permanent Address"
+                    android:hint="@string/permanent_address"
                     android:inputType="textPostalAddress"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -469,7 +469,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Permanent Country : "
+                    android:text="@string/permanent_country"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -498,7 +498,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Permanent State : "
+                    android:text="@string/permanent_state"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -526,7 +526,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Permanent City : "
+                    android:text="@string/permanent_city"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -555,7 +555,7 @@
                     android:id="@+id/input_coborrowerpermanentpincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Permanent Pin Code no."
+                    android:hint="@string/permanent_pin_code_no"
                     android:inputType="number"
                     android:maxLength="6"
                     android:textColor="@color/black" />
@@ -573,7 +573,7 @@
                     android:layout_gravity="left"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Duration of stay at current address : "
+                    android:text="@string/duration_of_stay_at_current_address"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -601,7 +601,7 @@
                     android:id="@+id/input_adhaar_coborrower"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Adhaar No."
+                    android:hint="@string/adhaar_number"
                     android:inputType="number"
                     android:maxLength="12"
                     android:textAllCaps="true"
@@ -620,14 +620,13 @@
                     android:id="@+id/input_pan_coborrower"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="PAN No."
+                    android:hint="@string/pan_number"
                     android:inputType="text|textCapCharacters"
                     android:maxLength="10"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/button_submit_personalcoborrower"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -636,7 +635,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:visibility="gone" />>

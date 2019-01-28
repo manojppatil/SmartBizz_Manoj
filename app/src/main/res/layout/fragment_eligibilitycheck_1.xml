@@ -5,24 +5,36 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.eduvanzapplication.pqformfragments.PqFormFragment1">
+    tools:context="com.eduvanzapplication.newUI.fragments.EligibilityCheckFragment_1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/button_next_eligiblityfragment1"
         android:orientation="vertical">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/background_capsule_leftsided"
             android:gravity="center">
 
             <LinearLayout
                 android:id="@+id/linearLayout_leftoff"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                    android:background="@drawable/background_capsule_primary"
+                android:background="@drawable/background_capsule_primary"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout_leftoff1"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/background_capsule_primary"
                 android:orientation="horizontal" />
 
             <LinearLayout
@@ -32,35 +44,45 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView_e1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_capsule_primary"
-                    android:gravity="center"
-                    android:text="@string/education"
-                    android:textColor="@color/white"
-                    android:textStyle="bold|italic"
-                    android:textSize="17sp"/>
-
-                <TextView
-                    android:id="@+id/textView_e2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_capsule_primary"
-                    android:gravity="center"
-                    android:text="@string/financial"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/textView_e3"
+                    android:id="@+id/textView_l1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
                     android:text="@string/personal"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/textView_l2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_capsule_primary"
+                    android:gravity="center"
+                    android:text="@string/documents"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView_l3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_capsule_primary"
+                    android:gravity="center"
+                    android:text="@string/address"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView_l4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_capsule_primary"
+                    android:gravity="center"
+                    android:text="@string/employment"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -69,14 +91,12 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="20dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -84,6 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingLeft="15dp"
@@ -92,94 +113,50 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="4.5"
-                        android:src="@drawable/icon_institute_eligibility" />
+                        android:layout_margin="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"                        android:layout_weight="4.5"
+                        android:scaleType="fitCenter"
+                        android:tint="@color/colorSecondary"
+                        app:srcCompat="@drawable/ic_user" />
 
                     <LinearLayout
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
-
                         <TextView
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/textview1_font"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="@string/institute_name"
+                            android:text="First Name"
+                            android:textAllCaps="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
-                            android:visibility="gone"
-                            android:padding="10dp"
+                            android:id="@+id/edtFirstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter Institute Name"
+                            android:background="@drawable/background_edittext"
+                            android:hint="Enter first name"
                             android:inputType="textCapWords"
-                            android:background="@drawable/background_edittext"
+                            android:maxLength="15"
+                            android:padding="10dp"
                             android:textColorHint="@color/grey"
-                            android:textSize="14sp"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_margin="2dp"
-                            android:background="@drawable/background_edittext"
-                            android:orientation="horizontal">
-
-                            <Spinner
-                                android:id="@+id/spinner_institutename_eligiblity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:dropDownSelector="@color/colorPrimary"
-                                android:focusable="true"
-                                android:gravity="left"
-                                android:theme="@style/ThemeOverlay.AppCompat.Light"></Spinner>
-
-                            <!--<Spinner-->
-                                <!--android:id="@+id/spinner_institutename_eligiblity"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_centerVertical="true"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:layout_marginLeft="5dp"-->
-                                <!--android:background="@android:color/transparent"-->
-                                <!--android:gravity="center"-->
-                                <!--android:paddingRight="30dp"-->
-                                <!--android:popupBackground="@color/white"-->
-                                <!--android:spinnerMode="dropdown" />-->
-
-                            <!--<ImageView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_alignParentRight="true"-->
-                                <!--android:layout_centerVertical="true"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:src="@drawable/ic_drop" />-->
-
-                        </RelativeLayout>
-
+                            android:textSize="14sp" />
                     </LinearLayout>
-
-
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingLeft="15dp"
@@ -188,95 +165,49 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="4.5"
-                        android:src="@drawable/icon_coursename_eligibility" />
+                        android:layout_margin="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"                        android:layout_weight="4.5"
+                        android:scaleType="fitCenter"
+                        android:tint="@color/colorSecondary"
+                        app:srcCompat="@drawable/ic_user" />
 
                     <LinearLayout
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
-
                         <TextView
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/textview1_font2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
                             android:layout_weight="1"
-                            android:gravity="center|left"
-                            android:text="@string/course_name"
+                            android:text="Middle Name"
+                            android:textAllCaps="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
-                            android:visibility="gone"
-                            android:padding="10dp"
+                            android:id="@+id/edtMiddleName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter Course Name"
+                            android:background="@drawable/background_edittext"
+                            android:hint="Enter middle name"
                             android:inputType="textCapWords"
-                            android:background="@drawable/background_edittext"
+                            android:maxLength="15"
+                            android:padding="10dp"
                             android:textColorHint="@color/grey"
-                            android:textSize="14sp"/>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_margin="2dp"
-                            android:background="@drawable/background_edittext"
-                            android:orientation="horizontal">
-
-                            <Spinner
-                                android:id="@+id/spinner_coursename_eligiblity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:dropDownSelector="@color/colorPrimary"
-                                android:focusable="true"
-                                android:gravity="left"
-                                android:theme="@style/ThemeOverlay.AppCompat.Light"></Spinner>
-
-
-                            <!--<Spinner-->
-                                <!--android:id="@+id/spinner_coursename_eligiblity"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_centerVertical="true"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:layout_marginLeft="5dp"-->
-                                <!--android:background="@android:color/transparent"-->
-                                <!--android:gravity="center"-->
-                                <!--android:paddingRight="30dp"-->
-                                <!--android:popupBackground="@color/white"-->
-                                <!--android:spinnerMode="dropdown" />-->
-
-                            <!--<ImageView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_alignParentRight="true"-->
-                                <!--android:layout_centerVertical="true"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:src="@drawable/ic_drop" />-->
-
-                        </RelativeLayout>
-
+                            android:textSize="14sp" />
                     </LinearLayout>
-
-
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingLeft="15dp"
@@ -285,87 +216,282 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="4.5"
-                        android:src="@drawable/icon_institutelocation_eligiblity" />
+                        android:layout_margin="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"                        android:layout_weight="4.5"
+                        android:scaleType="fitCenter"
+                        android:tint="@color/colorSecondary"
+                        app:srcCompat="@drawable/ic_user" />
 
                     <LinearLayout
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
-
                         <TextView
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/textview1_font3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
                             android:layout_weight="1"
-                            android:text="@string/institute_location"
+                            android:text="Last Name"
+                            android:textAllCaps="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
-                            android:visibility="gone"
-                            android:padding="10dp"
+                            android:id="@+id/edtLastName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter Institute Location"
-                            android:inputType="textCapWords"
                             android:background="@drawable/background_edittext"
+                            android:hint="Enter last name"
+                            android:inputType="textCapWords"
+                            android:maxLength="15"
+                            android:padding="10dp"
                             android:textColorHint="@color/grey"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"                        android:layout_weight="4.5"
+                        android:scaleType="fitCenter"
+                        android:tint="@color/colorSecondary"
+                        app:srcCompat="@drawable/ic_birthday_cake" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:text="BirthDate"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/edtBirthDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_edittext"
+                            android:hint="Enter birthdate"
+                            android:padding="10dp"
+                            android:textColorHint="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"                        android:layout_weight="4.5"
+                        android:scaleType="fitCenter"
+                        android:tint="@color/colorSecondary"
+                        app:srcCompat="@drawable/ic_transgender_alt" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:gravity="left"
+                            android:paddingTop="2dp"
+                            android:text="@string/gender"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <RadioGroup
+                            android:id="@+id/rgGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rbMale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/male"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:theme="@style/EditTextStyle" />
+
+                            <RadioButton
+                                android:id="@+id/rbFemale"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:padding="5dp"
+                                android:text="@string/female"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:theme="@style/EditTextStyle" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linRelationship"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"                        android:layout_weight="4.5"
+                        android:scaleType="fitCenter"
+                        android:tint="@color/colorSecondary"
+                        app:srcCompat="@drawable/ic_id_card" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center|left"
+                            android:text="Relationship with borrower"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_margin="2dp"
+                            android:layout_weight=".28"
                             android:background="@drawable/background_edittext"
                             android:orientation="horizontal">
 
                             <Spinner
-                                android:id="@+id/spinner_institutelocation_eligiblity"
+                                android:id="@+id/spRelation"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
+                                android:layout_marginRight="10dp"
                                 android:layout_weight="1"
                                 android:dropDownSelector="@color/colorPrimary"
                                 android:focusable="true"
                                 android:gravity="left"
                                 android:theme="@style/ThemeOverlay.AppCompat.Light"></Spinner>
 
-
-                            <!--<Spinner-->
-                                <!--android:id="@+id/spinner_institutelocation_eligiblity"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_centerVertical="true"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:layout_marginLeft="5dp"-->
-                                <!--android:background="@android:color/transparent"-->
-                                <!--android:gravity="center"-->
-                                <!--android:paddingRight="30dp"-->
-                                <!--android:popupBackground="@color/white"-->
-                                <!--android:spinnerMode="dropdown" />-->
-
-                            <!--<ImageView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_alignParentRight="true"-->
-                                <!--android:layout_centerVertical="true"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:src="@drawable/ic_drop" />-->
-
                         </RelativeLayout>
+
                     </LinearLayout>
 
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"                        android:layout_weight="4.5"
+                        android:scaleType="fitCenter"
+                        android:tint="@color/colorSecondary"
+                        app:srcCompat="@drawable/ic_mobile_android" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:text="Mobile Number"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edtCoMobileNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_edittext"
+                            android:hint="Enter birthdate"
+                            android:inputType="date"
+                            android:maxLength="8"
+                            android:padding="10dp"
+                            android:textColorHint="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
+
 
             </LinearLayout>
 

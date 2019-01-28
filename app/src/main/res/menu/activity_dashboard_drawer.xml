@@ -5,57 +5,66 @@
         <item
             android:id="@+id/nav_myprofile"
             android:icon="@drawable/icon_myprofile"
-            android:title="My Profile" />
+            android:title="@string/title_profile" />
         <item
             android:id="@+id/nav_eligibility"
             android:icon="@drawable/icon_eligibility"
-            android:title="Eligibility" />
+            android:title="@string/title_eligibility_check" />
         <item
             android:id="@+id/nav_loanApplication"
             android:icon="@drawable/icon_eligibility"
-            android:title="Loan Application" />
+            android:title="@string/title_loan_application" />
         <item
             android:id="@+id/nav_howitworks"
             android:icon="@drawable/icon_howitworks"
-            android:title="How it works" />
+            android:title="@string/title_how_it_works" />
+        <!--<item-->
+            <!--android:id="@+id/nav_language"-->
+            <!--android:title="Language" />-->
         <item
             android:id="@+id/nav_aboutus"
             android:icon="@drawable/icon_aboutus"
-            android:title="About us" />
+            android:title="@string/title_about_us" />
         <item
             android:id="@+id/nav_faq"
             android:icon="@drawable/icon_faq"
-            android:title="FAQ's" />
+            android:title="@string/title_faq" />
         <item
             android:id="@+id/nav_contactus"
             android:icon="@drawable/icon_contactus"
-            android:title="Contact us" />
+            android:title="@string/title_contact_us" />
         <item
             android:id="@+id/nav_more"
             android:icon="@drawable/icon_more"
-            android:title="More" />
-
-
+            android:title="@string/more" />
         <item
-            android:id="@+id/nav_privacypolicy"
+            android:id="@+id/nav_blog"
             android:icon="@drawable/icon_privacypolicy"
-            android:title="Privacy Policy" />
-        <item
-            android:id="@+id/nav_termsandconditions"
-            android:icon="@drawable/icon_t_c"
-            android:title="Term &amp; Conditions" />
+            android:title="@string/title_blog" />
         <item
             android:id="@+id/nav_disclaimer"
             android:icon="@drawable/icon_disclaimer"
-            android:title="Disclaimer" />
+            android:title="@string/title_disclaimer" />
+        <item
+            android:id="@+id/nav_termsandconditions"
+            android:icon="@drawable/icon_t_c"
+            android:title="@string/title_terms_and_condition" />
+        <item
+            android:id="@+id/nav_privacypolicy"
+            android:icon="@drawable/icon_privacypolicy"
+            android:title="@string/title_privacy_policy" />
+        <item
+            android:id="@+id/nav_interestratepolicy"
+            android:icon="@drawable/icon_fairpractice"
+            android:title="@string/title_interest_rate_policy" />
         <item
             android:id="@+id/nav_fairpracticscode"
             android:icon="@drawable/icon_fairpractice"
-            android:title="Fair Practics Code" />
+            android:title="@string/title_fair_practics_code" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/icon_logout"
-            android:title="Log Out" />
+            android:title="@string/title_log_out" />
     </group>
 
 </menu>

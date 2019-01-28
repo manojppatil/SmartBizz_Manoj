@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 
@@ -34,65 +35,75 @@ public class ContactUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
 
-        context = this;
-        mainApplication = new MainApplication();
+        try {
+            context = this;
+            mainApplication = new MainApplication();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_contact_us);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(R.string.title_contact_us);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        textView1 = (TextView) findViewById(R.id.textview1_contactus);
-        mainApplication.applyTypeface(textView1, context);
-        textView2 = (TextView) findViewById(R.id.textview2_contactus);
-        mainApplication.applyTypeface(textView2, context);
-        textView3 = (TextView) findViewById(R.id.textview3_contactus);
-        mainApplication.applyTypeface(textView3, context);
-        textView4 = (TextView) findViewById(R.id.textview4_contactus);
-        mainApplication.applyTypeface(textView4, context);
-        textView5 = (TextView) findViewById(R.id.textview5_contactus);
-        mainApplication.applyTypeface(textView5, context);
-        textView6 = (TextView) findViewById(R.id.textview6_contactus);
-        mainApplication.applyTypeface(textView6, context);
-        textView7 = (TextView) findViewById(R.id.textview7_contactus);
-        mainApplication.applyTypeface(textView7, context);
-        textView8 = (TextView) findViewById(R.id.textview8_contactus);
-        mainApplication.applyTypeface(textView8, context);
-        imageViewOfficeLocation = (ImageView) findViewById(R.id.imageView_officelocation);
-        linearLayoutEmail = (LinearLayout) findViewById(R.id.linearLayout_email_contactus);
-        linearLayoutNumber = (LinearLayout) findViewById(R.id.linearLayout_number_contactus);
+            textView1 = (TextView) findViewById(R.id.textview1_contactus);
+            mainApplication.applyTypeface(textView1, context);
+            textView2 = (TextView) findViewById(R.id.textview2_contactus);
+            mainApplication.applyTypeface(textView2, context);
+            textView3 = (TextView) findViewById(R.id.textview3_contactus);
+            mainApplication.applyTypeface(textView3, context);
+            textView4 = (TextView) findViewById(R.id.textview4_contactus);
+            mainApplication.applyTypeface(textView4, context);
+            textView5 = (TextView) findViewById(R.id.textview5_contactus);
+            mainApplication.applyTypeface(textView5, context);
+            textView6 = (TextView) findViewById(R.id.textview6_contactus);
+            mainApplication.applyTypeface(textView6, context);
+            textView7 = (TextView) findViewById(R.id.textview7_contactus);
+            mainApplication.applyTypeface(textView7, context);
+            textView8 = (TextView) findViewById(R.id.textview8_contactus);
+            mainApplication.applyTypeface(textView8, context);
+            imageViewOfficeLocation = (ImageView) findViewById(R.id.imageView_officelocation);
+            linearLayoutEmail = (LinearLayout) findViewById(R.id.linearLayout_email_contactus);
+            linearLayoutNumber = (LinearLayout) findViewById(R.id.linearLayout_number_contactus);
 
-        imageViewOfficeLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            imageViewOfficeLocation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-//                String geoUri = "http://maps.google.com/maps?q=loc:" + 19.1066177 + "," + 72.8526924 + " (" + "Eduvanz" + ")";
-//                geo:0,0?q=my+street+address
-                String map = "http://maps.google.co.in/maps?q=" + "Eduvanz";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
-                context.startActivity(intent);
+    //                String geoUri = "http://maps.google.com/maps?q=loc:" + 19.1066177 + "," + 72.8526924 + " (" + "Eduvanz" + ")";
+    //                geo:0,0?q=my+street+address
+                    String map = "http://maps.google.co.in/maps?q=" + "Eduvanz";
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                    context.startActivity(intent);
 
-            }
-        });
+                }
+            });
 
-        linearLayoutNumber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse(getString(R.string.tel_0224523689)));
-                startActivity(intent);
-            }
-        });
+            linearLayoutNumber.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse(getString(R.string.tel_0224523689)));
+                    startActivity(intent);
+                }
+            });
 
-        linearLayoutEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareToGMail(new String[]{"support@eduvanz.com"}, "", "");
-            }
-        });
+            linearLayoutEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    shareToGMail(new String[]{"support@eduvanz.com"}, "", "");
+                }
+            });
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(ContactUs.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
 
     }
 
@@ -109,19 +120,30 @@ public class ContactUs extends AppCompatActivity {
     }
 
     public void shareToGMail(String[] email, String subject, String content) {
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        emailIntent.setType("text/plain");
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, content);
-        final PackageManager pm = context.getPackageManager();
-        final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
-        ResolveInfo best = null;
-        for(final ResolveInfo info : matches)
-            if (info.activityInfo.packageName.endsWith(".gm") || info.activityInfo.name.toLowerCase().contains("gmail"))
-                best = info;
-        if (best != null)
-            emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
-        context.startActivity(emailIntent);
+        try {
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            emailIntent.setType("text/plain");
+            emailIntent.putExtra(Intent.EXTRA_TEXT, content);
+            final PackageManager pm = context.getPackageManager();
+            final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
+            ResolveInfo best = null;
+            for(final ResolveInfo info : matches)
+                if (info.activityInfo.packageName.endsWith(".gm") || info.activityInfo.name.toLowerCase().contains("gmail"))
+                    best = info;
+            if (best != null)
+                emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+            context.startActivity(emailIntent);
+
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(ContactUs.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
     }
 }

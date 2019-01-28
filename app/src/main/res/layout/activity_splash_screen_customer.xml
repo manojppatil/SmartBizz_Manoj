@@ -23,7 +23,7 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eduvanz"
+            android:text="@string/eduvanz"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:textSize="50sp"/>

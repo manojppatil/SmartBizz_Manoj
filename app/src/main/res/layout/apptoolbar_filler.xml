@@ -10,8 +10,7 @@
         android:layout_width="fill_parent"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:titleTextColor="#ffffff"
-        />
+        android:titleTextColor="#ffffff" />
 
     <View android:layout_width="match_parent"
         android:layout_height="5dp"

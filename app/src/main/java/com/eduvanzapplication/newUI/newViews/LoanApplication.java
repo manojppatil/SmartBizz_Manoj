@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,8 +14,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanzapplication.R;
@@ -28,17 +25,10 @@ import com.eduvanzapplication.newUI.fragments.LoanApplicationFragment_1;
 import com.eduvanzapplication.newUI.fragments.LoanApplicationFragment_2;
 import com.eduvanzapplication.newUI.fragments.LoanApplicationFragment_3;
 import com.eduvanzapplication.newUI.fragments.LoanApplicationFragment_4;
-import com.eduvanzapplication.Util.Paytm;
-import com.paytm.pgsdk.PaytmOrder;
-import com.paytm.pgsdk.PaytmPGService;
-import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,60 +37,78 @@ public class LoanApplication extends AppCompatActivity {
     public static AppCompatActivity mActivity;
     public AppCompatActivity mActivity1;
     static Context context;
-    static String userID = "";
+    static String userID = "", leadid;
+    public static String userName = "", userId = "", student_id = "", mobile_no = "", auth_token = "";
     static String setFragmentCOBorrower = "", setFragmentDocUpload = "", setFragmentSignSubnit = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loan_application);
-
-        mActivity = this;
-        context = this;
-        mActivity1 = this;
-
         try {
-            Bundle extras = getIntent().getExtras();
-            setFragmentCOBorrower = extras.getString("toCoBorrower", "0");
-            setFragmentDocUpload = extras.getString("toDocUpload", "0");
-            setFragmentSignSubnit = extras.getString("toSignSubmit", "0");
+            setContentView(R.layout.activity_loan_application);
+
+            mActivity = this;
+            context = this;
+            mActivity1 = this;
+
+            try {
+                Bundle bundle = getIntent().getExtras();
+                leadid = bundle.getString("lead_id");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            MainApplication.lead_id = leadid;
+            try {
+                Bundle extras = getIntent().getExtras();
+                setFragmentCOBorrower = extras.getString("toCoBorrower", "0");
+                setFragmentDocUpload = extras.getString("toDocUpload", "0");
+                setFragmentSignSubnit = extras.getString("toSignSubmit", "0");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                userName = sharedPreferences.getString("first_name", "User");
+                userId = sharedPreferences.getString("logged_id", "");
+                mobile_no = sharedPreferences.getString("mobile_no", "");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(R.string.title_loan_application);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+
+            if (setFragmentCOBorrower.equalsIgnoreCase("1") && setFragmentDocUpload.equalsIgnoreCase("0")) {
+                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_2()).commit();
+            } else if (setFragmentDocUpload.equalsIgnoreCase("1") && setFragmentCOBorrower.equalsIgnoreCase("0") && setFragmentSignSubnit.equalsIgnoreCase("0")) {
+                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_3()).commit();
+            } else if (setFragmentSignSubnit.equalsIgnoreCase("1") && setFragmentDocUpload.equalsIgnoreCase("0") && setFragmentCOBorrower.equalsIgnoreCase("0")) {
+                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
+            } else {
+                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_1()).commit();
+//                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_2()).commit();
+            }
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            userID = sharedPreferences.getString("logged_id", "null");
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(LoanApplication.this, className, name, errorMsg, errorMsgDetails, errorLine);
         }
-
-//        StringBuilder s = new StringBuilder();
-//        s.append("\n ");
-//        s.append("setFragmentCOBorrower : ");
-//        s.append(setFragmentCOBorrower);
-//        s.append(" setFragmentDocUpload : ");
-//        s.append(setFragmentDocUpload);
-//        s.append(" setFragmentSignSubnit : ");
-//        s.append(setFragmentSignSubnit);
-//
-//
-//        appendLog(String.valueOf(s));
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_loan_application);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
-
-        if (setFragmentCOBorrower.equalsIgnoreCase("1") && setFragmentDocUpload.equalsIgnoreCase("0")) {
-            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_2()).commit();
-        } else if (setFragmentDocUpload.equalsIgnoreCase("1") && setFragmentCOBorrower.equalsIgnoreCase("0") && setFragmentSignSubnit.equalsIgnoreCase("0")) {
-            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_3()).commit();
-        } else if (setFragmentSignSubnit.equalsIgnoreCase("1") && setFragmentDocUpload.equalsIgnoreCase("0") && setFragmentCOBorrower.equalsIgnoreCase("0")) {
-            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
-        } else {
-            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_1()).commit();
-        }
-
-        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        userID = sharedPreferences.getString("logged_id", "null");
 
     }
 
@@ -139,16 +147,16 @@ public class LoanApplication extends AppCompatActivity {
 //                                        !MainApplication.coborrowerValue18.equals("") &&
 //                                        !MainApplication.coborrowerValue13.equals(""))
 //                        {
-                        if (MainApplication.currrentFrag == 1) {
-                            MainApplication.apiCallBorrower(context, mActivity, userID);
-                        } else if (MainApplication.currrentFrag == 2) {
-                            MainApplication.apiCallCoBorrower(context, mActivity, userID);
-                        }
+// //                       if (MainApplication.currrentFrag == 1) {
+//   //                         MainApplication.apiCallBorrower(context, mActivity, userID);
+//     //                   } else if (MainApplication.currrentFrag == 2) {
+//       //                     MainApplication.apiCallCoBorrower(context, mActivity, userID);
+//         //               }
+//           //             }else {
+//             //               alertDialog.dismiss();
+//               //             Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
+//                 //       }
 
-//                        }else {
-//                            alertDialog.dismiss();
-//                            Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
-//                        }
                     }
                 });
             } else {
@@ -158,61 +166,68 @@ public class LoanApplication extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     public void onBackPressed() {
 
-        if (MainApplication.currrentFrag == 1 || MainApplication.currrentFrag == 2) {
-            Log.e(MainApplication.TAG, "onBackPressed: " + MainApplication.currrentFrag);
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-// ...Irrelevant code for customizing the buttons and title
-            LayoutInflater inflater = this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.savedialog, null);
-            dialogBuilder.setView(dialogView);
-            Button buttonNo = (Button) dialogView.findViewById(R.id.button_dialog_no);
-            Button buttonSave = (Button) dialogView.findViewById(R.id.button_dialog_save);
-            final AlertDialog alertDialog = dialogBuilder.create();
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            alertDialog.show();
-            buttonNo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    alertDialog.dismiss();
-                }
-            });
-
-            buttonSave.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-//                    if (!MainApplication.borrowerValue13.equals("") &&
-//                            !MainApplication.borrowerValue14.equals("") &&
-//                            !MainApplication.borrowerValue15.equals("") &&
-//                            !MainApplication.borrowerValue18.equals("")
-//                            ||
-//                            !MainApplication.coborrowerValue14.equals("") &&
-//                                    !MainApplication.coborrowerValue15.equals("") &&
-//                                    !MainApplication.coborrowerValue18.equals("") &&
-//                                    !MainApplication.coborrowerValue13.equals("")) {
-                    if (MainApplication.currrentFrag == 1) {
-                        MainApplication.apiCallBorrower(context, mActivity, userID);
-                    } else if (MainApplication.currrentFrag == 2) {
-                        MainApplication.apiCallCoBorrower(context, mActivity, userID);
+        try {
+            if (MainApplication.currrentFrag == 1 || MainApplication.currrentFrag == 2) {
+                Log.e(MainApplication.TAG, "onBackPressed: " + MainApplication.currrentFrag);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.savedialog, null);
+                dialogBuilder.setView(dialogView);
+                Button buttonNo = (Button) dialogView.findViewById(R.id.button_dialog_no);
+                Button buttonSave = (Button) dialogView.findViewById(R.id.button_dialog_save);
+                final AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+                buttonNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
                     }
+                });
 
+                buttonSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-//                    } else {
-//                        alertDialog.dismiss();
-//                        Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
-//                    }
-                }
-            });
-        } else {
-            finish();
+                        finish();//coment this line
+                        //                    if (!MainApplication.borrowerValue13.equals("") &&
+                        //                            !MainApplication.borrowerValue14.equals("") &&
+                        //                            !MainApplication.borrowerValue15.equals("") &&
+                        //                            !MainApplication.borrowerValue18.equals("")
+                        //                            ||
+                        //                            !MainApplication.coborrowerValue14.equals("") &&
+                        //                                    !MainApplication.coborrowerValue15.equals("") &&
+                        //                                    !MainApplication.coborrowerValue18.equals("") &&
+                        //                                    !MainApplication.coborrowerValue13.equals("")) {
+//                        if (MainApplication.currrentFrag == 1) {
+//                            MainApplication.apiCallBorrower(context, mActivity, userID);
+//                        } else if (MainApplication.currrentFrag == 2) {
+//                            MainApplication.apiCallCoBorrower(context, mActivity, userID);
+//                        }
+
+                        //                    } else {
+                        //                        alertDialog.dismiss();
+                        //                        Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
+                        //                    }
+                    }
+                });
+            } else {
+                finish();
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(LoanApplication.this, className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }
-
 
     public void fromMain(JSONObject jsonData) {
         try {
@@ -236,15 +251,20 @@ public class LoanApplication extends AppCompatActivity {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(LoanApplication.this, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
-
 
     // Callback listener functions for Digio
     public void onSigningSuccess(String documentId) {
         Log.e(MainApplication.TAG, "onSigningSuccess: ");
-        Toast.makeText(context, documentId + " signed successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, documentId + getString(R.string.signed_successfully), Toast.LENGTH_SHORT).show();
         LoanApplicationFragment_4 loanApplicationFragment_4 = new LoanApplicationFragment_4();
         loanApplicationFragment_4.digioSuccess(documentId);//DID180802180658447Q6OOLIITSFR2DJ
     }
@@ -254,29 +274,6 @@ public class LoanApplication extends AppCompatActivity {
         Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
         LoanApplicationFragment_4 loanApplicationFragment_4 = new LoanApplicationFragment_4();
         loanApplicationFragment_4.digioFailure(documentId, code, response);
-    }
-
-
-    public static void appendLog(String text) {
-        File logFile = new File("sdcard/EduvanzLog.txt");
-        if (!logFile.exists()) {
-            try {
-                logFile.createNewFile();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        try {
-            //BufferedWriter for performance, true to set append to file flag
-            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
-            buf.append(text);
-            buf.newLine();
-            buf.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
 //    public void initializePaytmPayment(JSONObject jsonData) {
@@ -514,121 +511,103 @@ public class LoanApplication extends AppCompatActivity {
 //
 //    }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        try {
-//            StringBuilder s = new StringBuilder();
-//            s.append("\n ");
-//            s.append("resultCode : ");
-//            s.append(resultCode);
-//            appendLog(String.valueOf(s));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            StringBuilder s1 = new StringBuilder();
-//            s1.append("\n ");
-//            s1.append("message : ");
-//            s1.append(String.valueOf(data.getStringExtra("status")));
-//            appendLog(String.valueOf(s1));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            StringBuilder s2 = new StringBuilder();
-//            s2.append("\n ");
-//            s2.append("resKey : ");
-//            s2.append(String.valueOf(data.getStringArrayExtra("responseKeyArray")));
-//            appendLog(String.valueOf(s2));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            StringBuilder s3 = new StringBuilder();
-//            s3.append("\n ");
-//            s3.append("resValue : ");
-//            s3.append(String.valueOf(data.getStringArrayExtra("responseValueArray")));
-//            appendLog(String.valueOf(s3));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
 
-        if (requestCode == 1) {
-            if (data != null) {
-                String message = data.getStringExtra("status");
-                String[] resKey = data.getStringArrayExtra("responseKeyArray");
-                String[] resValue = data.getStringArrayExtra("responseValueArray");
-                String merTxn = "", bnkTxn = "", amt = "";
+            if (requestCode == 1) {
+                if (data != null) {
+                    String message = data.getStringExtra("status");
+                    String[] resKey = data.getStringArrayExtra("responseKeyArray");
+                    String[] resValue = data.getStringArrayExtra("responseValueArray");
+                    String merTxn = "", bnkTxn = "", amt = "";
 
-                if (resKey != null && resValue != null) {
-                    for (int i = 0; i < resKey.length; i++) {
-                        System.out.println("  " + i + " resKey : " + resKey[i] + " resValue : " + resValue[i]);
+                    if (resKey != null && resValue != null) {
+                        for (int i = 0; i < resKey.length; i++) {
+                            System.out.println("  " + i + " resKey : " + resKey[i] + " resValue : " + resValue[i]);
 
-                        if (resKey[i].equalsIgnoreCase("mer_txn")) {
-                            merTxn = resValue[i];
-                        } else if (resKey[i].equalsIgnoreCase("bank_txn")) {
-                            bnkTxn = resValue[i];
-                        } else if (resKey[i].equalsIgnoreCase("amt")) {
-                            amt = resValue[i];
+                            if (resKey[i].equalsIgnoreCase("mer_txn")) {
+                                merTxn = resValue[i];
+                            } else if (resKey[i].equalsIgnoreCase("bank_txn")) {
+                                bnkTxn = resValue[i];
+                            } else if (resKey[i].equalsIgnoreCase("amt")) {
+                                amt = resValue[i];
+                            }
                         }
+                        System.out.println(" status " + message);
                     }
-                    System.out.println(" status " + message);
-                }
 
-                if (message.equalsIgnoreCase("Transaction Failed!")) {
-                    Log.e(MainApplication.TAG, "onActivityResult: " + "Transaction Failed!");
-                    /** API CALL **/
-                    try {
-                        String ipaddress = Utils.getIPAddress(true);
-                        String url = MainApplication.mainUrl + "epayment/kycPaymentCaptureWizard";
-                        Map<String, String> params = new HashMap<String, String>();
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        params.put("studentId", userID);
-                        params.put("amount", amt);
-                        params.put("txnId", merTxn); // merchant ID
-                        params.put("bankTxnId", "null"); // Bank ID
-                        params.put("status", "0");
-                        params.put("created_by_ip", ipaddress);
-                        volleyCall.sendRequest(LoanApplication.this, url, mActivity, null, "kycPaymentCaptureWizard", params);
+                    if (message.equalsIgnoreCase("Transaction Failed!")) {
+                        Log.e(MainApplication.TAG, "onActivityResult: " + "Transaction Failed!");
+                        /** API CALL **/
+                        try {
+                            String ipaddress = Utils.getIPAddress(true);
+                            String url = MainApplication.mainUrl + "epayment/kycPaymentCaptureWizard";
+                            Map<String, String> params = new HashMap<String, String>();
+                            VolleyCallNew volleyCall = new VolleyCallNew();
+                            params.put("studentId", userID);
+                            params.put("amount", amt);
+                            params.put("txnId", merTxn); // merchant ID
+                            params.put("bankTxnId", "null"); // Bank ID
+                            params.put("status", "0");
+                            params.put("created_by_ip", ipaddress);
+                            volleyCall.sendRequest(LoanApplication.this, url, mActivity, null, "kycPaymentCaptureWizard", params, MainApplication.auth_token);
+                            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
+                        } catch (Exception e) {
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(LoanApplication.this, className, name, errorMsg, errorMsgDetails, errorLine);
+                        }
+                    } else {
+                        Log.e(MainApplication.TAG, "onActivityResult: " + "Transaction Successful!");
+                        /** API CALL **/
+                        try {
+                            String ipaddress = Utils.getIPAddress(true);
+                            String url = MainApplication.mainUrl + "epayment/kycPaymentCaptureWizard";
+                            Map<String, String> params = new HashMap<String, String>();
+                            VolleyCallNew volleyCall = new VolleyCallNew();
+                            params.put("studentId", userID);
+                            params.put("amount", amt);
+                            params.put("txnId", merTxn); // merchant ID
+                            params.put("bankTxnId", bnkTxn); // Bank ID
+                            params.put("status", "1");
+                            params.put("created_by_ip", ipaddress);
+                            volleyCall.sendRequest(LoanApplication.this, url, mActivity, null, "kycPaymentCaptureWizard", params, MainApplication.auth_token);
+                        } catch (Exception e) {
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(LoanApplication.this, className, name, errorMsg, errorMsgDetails, errorLine);
+                        }
+                        //                    LoanApplicationFragment_4 loanApplicationFragment_4 = new LoanApplicationFragment_4();
+                        //                    loanApplicationFragment_4.atomPaymentSuccessful();
                         getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                    Toast.makeText(LoanApplication.this, message, Toast.LENGTH_LONG).show();
+
                 } else {
-                    Log.e(MainApplication.TAG, "onActivityResult: " + "Transaction Successful!");
-                    /** API CALL **/
-                    try {
-                        String ipaddress = Utils.getIPAddress(true);
-                        String url = MainApplication.mainUrl + "epayment/kycPaymentCaptureWizard";
-                        Map<String, String> params = new HashMap<String, String>();
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        params.put("studentId", userID);
-                        params.put("amount", amt);
-                        params.put("txnId", merTxn); // merchant ID
-                        params.put("bankTxnId", bnkTxn); // Bank ID
-                        params.put("status", "1");
-                        params.put("created_by_ip", ipaddress);
-                        volleyCall.sendRequest(LoanApplication.this, url, mActivity, null, "kycPaymentCaptureWizard", params);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-//                    LoanApplicationFragment_4 loanApplicationFragment_4 = new LoanApplicationFragment_4();
-//                    loanApplicationFragment_4.atomPaymentSuccessful();
+                    Toast.makeText(LoanApplication.this, R.string.payment_not_successful, Toast.LENGTH_LONG).show();
                     getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
                 }
-                Toast.makeText(LoanApplication.this, message, Toast.LENGTH_LONG).show();
 
-            } else {
-                Toast.makeText(LoanApplication.this, "Payment not successful ", Toast.LENGTH_LONG).show();
-                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
             }
-
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(LoanApplication.this, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 }

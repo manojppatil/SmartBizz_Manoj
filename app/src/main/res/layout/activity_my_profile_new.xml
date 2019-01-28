@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.eduvanzapplication.newUI.newViews.EligibilityCheck">
+    tools:context="com.eduvanzapplication.newUI.newViews.MyProfileNew">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

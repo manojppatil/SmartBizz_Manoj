@@ -1,9 +1,7 @@
 package com.eduvanzapplication.newUI.newViews;
 
 import android.Manifest;
-import android.app.AlarmManager;
 import android.app.AppOpsManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,11 +38,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.eduvanzapplication.AlarmReceiver;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
-import com.eduvanzapplication.Main2ActivityNavigation;
-import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
@@ -56,17 +51,19 @@ import com.eduvanzapplication.newUI.services.MyServiceAppStats;
 import com.eduvanzapplication.newUI.services.MyServiceCallLog;
 import com.eduvanzapplication.newUI.services.MyServiceContacts;
 import com.eduvanzapplication.newUI.services.MyServiceReadSms;
+//import com.eduvanzapplication.newUI.services.MyServiceReadSmsbck;
 import com.eduvanzapplication.newUI.webviews.WebViewAboutUs;
+import com.eduvanzapplication.newUI.webviews.WebViewBlog;
 import com.eduvanzapplication.newUI.webviews.WebViewDisclaimer;
 import com.eduvanzapplication.newUI.webviews.WebViewFAQs;
 import com.eduvanzapplication.newUI.webviews.WebViewFairPracticsCode;
+import com.eduvanzapplication.newUI.webviews.WebViewInterestRatePolicy;
 import com.eduvanzapplication.newUI.webviews.WebViewPrivacyPolicy;
 import com.eduvanzapplication.newUI.webviews.WebViewTermsNCondition;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -96,136 +93,141 @@ public class DashboardActivity extends AppCompatActivity
 
     static int firstTimeScrape = 0;
 
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_dashboard);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
-        context = getApplicationContext();
-        mainApplication = new MainApplication();
-        sharedPref = new SharedPref();
-        mActivity = this;
-
         try {
-            sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-            userFirst = sharedPreferences.getString("first_name", "");
-            userLast = sharedPreferences.getString("last_name", "");
-            userEmail = sharedPreferences.getString("user_email", "");
-            userMobileNo = sharedPreferences.getString("mobile_no", "");
-            userId = sharedPreferences.getString("logged_id", "");
-            userPic = sharedPreferences.getString("user_image", "");
-            firstTimeScrape= sharedPreferences.getInt("firstTimeScrape", 0);
-            appInstallationTimeStamp = sharedPreferences.getString("appInstallationTimeStamp", "null");
-        } catch (Exception e) {
-            e.printStackTrace();
-            firstTimeScrape = 0;
-        }
+            setContentView(R.layout.activity_dashboard);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-        //**To change the hamburger color on dashboard **/
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorPrimary));
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(R.string.title_dashboard);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+            context = getApplicationContext();
+            mainApplication = new MainApplication();
+            sharedPref = new SharedPref();
+            mActivity = this;
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        View header = navigationView.getHeaderView(0);
-
-        hideMenuOptions();
-
-        textViewName = (TextView) header.findViewById(R.id.textView_name);
-        mainApplication.applyTypeface(textViewName, context);
-        textViewName.setText(userFirst + " " + userLast);
-        textViewEmail = (TextView) header.findViewById(R.id.textView_emailID);
-        mainApplication.applyTypeface(textViewEmail, context);
-        textViewEmail.setText(userEmail);
-
-        imageViewProfilePic = (ImageView) header.findViewById(R.id.imageView_userpic);
-        if (!userPic.equalsIgnoreCase("")) {
-            Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
-        }
-
-        buttonSignup = (Button) header.findViewById(R.id.button_dashboard_signup);
-        mainApplication.applyTypeface(buttonSignup, context);
-        buttonSignIn = (Button) header.findViewById(R.id.button_dashboard_signin);
-        mainApplication.applyTypeface(buttonSignIn, context);
-
-        linearLayoutSignup = (LinearLayout) header.findViewById(R.id.linearLayout_signupdetail_dashboard);
-        linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
-
-        buttonSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, SignIn.class);
-                startActivity(intent);
+            try {
+                sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                userFirst = sharedPreferences.getString("first_name", "");
+                userLast = sharedPreferences.getString("last_name", "");
+                userEmail = sharedPreferences.getString("user_email", "");
+                userMobileNo = sharedPreferences.getString("mobile_no", "");
+                userId = sharedPreferences.getString("logged_id", "");
+                userPic = sharedPreferences.getString("user_image", "");
+                firstTimeScrape = sharedPreferences.getInt("firstTimeScrape", 0);
+                appInstallationTimeStamp = sharedPreferences.getString("appInstallationTimeStamp", "null");
+            } catch (Exception e) {
+                e.printStackTrace();
+                firstTimeScrape = 0;
             }
-        });
 
-        buttonSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
-                startActivity(intent);
+            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.setDrawerListener(toggle);
+            toggle.syncState();
+            //**To change the hamburger color on dashboard **/
+            toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorPrimary));
+
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+
+            View header = navigationView.getHeaderView(0);
+
+            hideMenuOptions();
+
+            textViewName = (TextView) header.findViewById(R.id.textView_name);
+            mainApplication.applyTypeface(textViewName, context);
+            textViewName.setText(userFirst + " " + userLast);
+            textViewEmail = (TextView) header.findViewById(R.id.textView_emailID);
+            mainApplication.applyTypeface(textViewEmail, context);
+            textViewEmail.setText(userEmail);
+
+            imageViewProfilePic = (ImageView) header.findViewById(R.id.imageView_userpic);
+            if (!userPic.equalsIgnoreCase("")) {
+                Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
             }
-        });
 
-        frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
-        Menu m = navigationView.getMenu();
-        for (int i = 0; i < m.size(); i++) {
-            MenuItem mi = m.getItem(i);
+            buttonSignup = (Button) header.findViewById(R.id.button_dashboard_signup);
+            mainApplication.applyTypeface(buttonSignup, context);
+            buttonSignIn = (Button) header.findViewById(R.id.button_dashboard_signin);
+            mainApplication.applyTypeface(buttonSignIn, context);
 
-            //for applying a font to subMenu ...
-            SubMenu subMenu = mi.getSubMenu();
-            if (subMenu != null && subMenu.size() > 0) {
-                for (int j = 0; j < subMenu.size(); j++) {
-                    MenuItem subMenuItem = subMenu.getItem(j);
-                    applyFontToMenuItem(subMenuItem);
+            linearLayoutSignup = (LinearLayout) header.findViewById(R.id.linearLayout_signupdetail_dashboard);
+            linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
+
+            buttonSignIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DashboardActivity.this, SignIn.class);
+                    startActivity(intent);
                 }
+            });
+
+            buttonSignup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
+                    startActivity(intent);
+                }
+            });
+
+            frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
+            Menu m = navigationView.getMenu();
+            for (int i = 0; i < m.size(); i++) {
+                MenuItem mi = m.getItem(i);
+
+                //for applying a font to subMenu ...
+                SubMenu subMenu = mi.getSubMenu();
+                if (subMenu != null && subMenu.size() > 0) {
+                    for (int j = 0; j < subMenu.size(); j++) {
+                        MenuItem subMenuItem = subMenu.getItem(j);
+                        applyFontToMenuItem(subMenuItem);
+                    }
+                }
+
+                //the method we have create in activity
+                applyFontToMenuItem(mi);
             }
 
-            //the method we have create in activity
-            applyFontToMenuItem(mi);
-        }
-
-        if (sharedPref.getLoginDone(context)) {
-            linearLayoutUserDetail.setVisibility(View.VISIBLE);
-            linearLayoutSignup.setVisibility(View.GONE);
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_loanApplication).setVisible(true);
-            nav_Menu.findItem(R.id.nav_eligibility).setVisible(false);
-        }else {
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_logout).setVisible(false);
-        }
-
-        getSupportFragmentManager().beginTransaction().add(R.id.framelayout_dashboard, new DashboardFragmentNew()).commit();
-        // services for upload scapping data
-
-        /** API CALL GET Dates**/
-        try {
-            String url = MainApplication.mainUrl + "mobilescrap/getRecentScrappingDetails";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("mobileNo", userMobileNo);
-           if(!Globle.isNetworkAvailable(DashboardActivity.this)){
-
+            if (sharedPref.getLoginDone(context)) {
+                linearLayoutUserDetail.setVisibility(View.VISIBLE);
+                linearLayoutSignup.setVisibility(View.GONE);
+                Menu nav_Menu = navigationView.getMenu();
+                nav_Menu.findItem(R.id.nav_loanApplication).setVisible(true);
+                nav_Menu.findItem(R.id.nav_eligibility).setVisible(false);
+            }else {
+                Menu nav_Menu = navigationView.getMenu();
+                nav_Menu.findItem(R.id.nav_logout).setVisible(false);
             }
-            else{
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, mActivity, null, "getRecentScrapping", params);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+            getSupportFragmentManager().beginTransaction().add(R.id.framelayout_dashboard, new DashboardFragmentNew()).commit();
+            // services for upload scapping data
+
+//            /** API CALL GET Dates**/
+//            try {
+//                String url = MainApplication.mainUrl + "mobilescrap/getRecentScrappingDetails";
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("mobileNo", userMobileNo);
+//                if (!Globle.isNetworkAvailable(DashboardActivity.this)) {
+//
+//                } else {
+//                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobilescrap/getRecentScrappingDetails
+//                    volleyCall.sendRequest(context, url, mActivity, null, "getRecentScrapping", params);
+//                }
+//            } catch (Exception e) {
+//                String className = this.getClass().getSimpleName();
+//                String name = new Object() {
+//                }.getClass().getEnclosingMethod().getName();
+//                String errorMsg = e.getMessage();
+//                String errorMsgDetails = e.getStackTrace().toString();
+//                String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
+//            }
 
 //        permissionCallLogs();     //101
 //        permissionReadSMS();      //102
@@ -233,8 +235,124 @@ public class DashboardActivity extends AppCompatActivity
 //        permissionContacts();    //104
 //        Otherpermission();
 
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        super.onCreateOptionsMenu(menu);
+//        getMenuInflater().inflate(R.menu.menu_notes, menu);
+//
+//        MenuItem myActionMenuItem = menu.findItem( R.id.action_notes);
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        try {
+//            int id = item.getItemId();
+//            if (id == R.id.action_notes) {
+//
+//                AlertDialog.Builder builderSingle = new AlertDialog.Builder(DashboardActivity.this);
+//                builderSingle.setIcon(R.drawable.eduvanz_logo_new);
+//                builderSingle.setTitle("Select Language:-");
+//
+//                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(DashboardActivity.this, android.R.layout.select_dialog_singlechoice);
+//                arrayAdapter.add("English");
+//                arrayAdapter.add("Marathi");
+//                arrayAdapter.add("Hindi");
+//
+//                builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        Resources res = getApplicationContext().getResources();
+//// Change locale settings in the app.
+//                        DisplayMetrics dm = res.getDisplayMetrics();
+//                        Configuration conf = res.getConfiguration();
+//                        if(which == 0)
+//                        {
+//                            conf.setLocale(new Locale("En".toLowerCase())); // API 17+ only.
+//                        }
+//                        if(which == 1)
+//                        {
+//                            conf.setLocale(new Locale("Mr".toLowerCase())); // API 17+ only.
+//                        }
+//                        if(which == 2) {
+//                            conf.setLocale(new Locale("Hi".toLowerCase())); // API 17+ only.
+//                        }
+//// Use conf.locale = new Locale(...) if targeting lower versions
+//                        res.updateConfiguration(conf, dm);
+//
+//                        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+//                        SharedPreferences.Editor editor = sharedPreferences.edit();
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                            editor.putString("AppLanguage", conf.getLocales().toLanguageTags().toUpperCase());
+//                            editor.commit();
+//                        }
+//                        dialog.dismiss();
+//
+////                        String strName = arrayAdapter.getItem(which);
+////                        AlertDialog.Builder builderInner = new AlertDialog.Builder(DashboardActivity.this);
+////                        builderInner.setMessage(strName);
+////                        builderInner.setTitle("Your Selected Item is");
+////                        builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog,int which) {
+////
+////                                Resources res = context.getResources();
+////// Change locale settings in the app.
+////                                DisplayMetrics dm = res.getDisplayMetrics();
+////                                android.content.res.Configuration conf = res.getConfiguration();
+//////        conf.setLocale(new Locale("HI".toLowerCase())); // API 17+ only.
+////                                conf.setLocale(new Locale("EN".toLowerCase())); // API 17+ only.
+////// Use conf.locale = new Locale(...) if targeting lower versions
+////                                res.updateConfiguration(conf, dm);
+////                                dialog.dismiss();
+////                            }
+////                        });
+////                        builderInner.show();
+//                        Intent i = new Intent(DashboardActivity.this, SplashScreen.class);
+//                        startActivity(i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION));
+//                        System.exit(0);
+//
+////                        if (true) {
+////                            System.exit(0);
+////                        } else {
+////                            Toast.makeText(DashboardActivity.this, "Activity restarted", Toast.LENGTH_SHORT).show();
+////                        }
+//                    }
+//                });
+//                builderSingle.show();
+//            }
+//
+//        } catch (Exception e) {
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
     private void Otherpermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             boolean permission = checkIfAlreadyhavePermissionLocation();
@@ -385,7 +503,7 @@ public class DashboardActivity extends AppCompatActivity
             if (sharedPref.getLoginDone(context)) {
                 Intent intent = new Intent(context, MyProfileNew.class);
                 startActivity(intent);
-            }else {
+            } else {
                 Intent intent = new Intent(context, SignUp.class);
                 startActivity(intent);
             }
@@ -395,7 +513,12 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_howitworks) {
             Intent intent = new Intent(context, HowItWorks.class);
             startActivity(intent);
-        } else if (id == R.id.nav_aboutus) {
+        }
+//        else if (id == R.id.nav_language) {
+//            Intent intent = new Intent(DashboardActivity.this, Language.class);
+//            startActivity(intent);
+//        }
+        else if (id == R.id.nav_aboutus) {
             Intent intent = new Intent(DashboardActivity.this, WebViewAboutUs.class);
             startActivity(intent);
         } else if (id == R.id.nav_faq) {
@@ -406,17 +529,22 @@ public class DashboardActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_more) {
             showMenuOptions();
-        } else if (id == R.id.nav_privacypolicy) {
-            Intent intent = new Intent(DashboardActivity.this, WebViewPrivacyPolicy.class);
+        } else if (id == R.id.nav_blog) {
+            Intent intent = new Intent(DashboardActivity.this, WebViewBlog.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_disclaimer) {
+            Intent intent = new Intent(DashboardActivity.this, WebViewDisclaimer.class);
             startActivity(intent);
         } else if (id == R.id.nav_termsandconditions) {
             Intent intent = new Intent(DashboardActivity.this, WebViewTermsNCondition.class);
             startActivity(intent);
-
-        } else if (id == R.id.nav_disclaimer) {
-            Intent intent = new Intent(DashboardActivity.this, WebViewDisclaimer.class);
+        }else if (id == R.id.nav_privacypolicy) {
+            Intent intent = new Intent(DashboardActivity.this, WebViewPrivacyPolicy.class);
             startActivity(intent);
-        } else if (id == R.id.nav_fairpracticscode) {
+        } else if (id == R.id.nav_interestratepolicy) {
+            Intent intent = new Intent(DashboardActivity.this, WebViewInterestRatePolicy.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_fairpracticscode) {
             Intent intent = new Intent(DashboardActivity.this, WebViewFairPracticsCode.class);
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
@@ -424,7 +552,7 @@ public class DashboardActivity extends AppCompatActivity
             AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
             builder.setTitle(R.string.app_name);
             builder.setIcon(R.drawable.eduvanz_logo_new);
-            builder.setMessage("Are you sure, You want to exit ?")
+            builder.setMessage(R.string.are_you_sure_you_waqnt_to_exit)
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -441,9 +569,11 @@ public class DashboardActivity extends AppCompatActivity
 //            editor.apply();
 //            editor.commit();
                             Intent intent = new Intent(DashboardActivity.this, SingInWithTruecaller.class);
+//                            Intent intent = new Intent(DashboardActivity.this, NewTruecallerSignIn.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-                            finish();                        }
+                            finish();
+                        }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -477,9 +607,11 @@ public class DashboardActivity extends AppCompatActivity
 
     private void hideMenuOptions() {
         Menu nav_Menu = navigationView.getMenu();
-        nav_Menu.findItem(R.id.nav_privacypolicy).setVisible(false);
-        nav_Menu.findItem(R.id.nav_termsandconditions).setVisible(false);
+        nav_Menu.findItem(R.id.nav_blog).setVisible(false);
         nav_Menu.findItem(R.id.nav_disclaimer).setVisible(false);
+        nav_Menu.findItem(R.id.nav_termsandconditions).setVisible(false);
+        nav_Menu.findItem(R.id.nav_privacypolicy).setVisible(false);
+        nav_Menu.findItem(R.id.nav_interestratepolicy).setVisible(false);
         nav_Menu.findItem(R.id.nav_fairpracticscode).setVisible(false);
         nav_Menu.findItem(R.id.nav_logout).setVisible(false);
         nav_Menu.findItem(R.id.nav_loanApplication).setVisible(false);
@@ -488,9 +620,11 @@ public class DashboardActivity extends AppCompatActivity
     private void showMenuOptions() {
         Menu nav_Menu = navigationView.getMenu();
         nav_Menu.findItem(R.id.nav_more).setVisible(false);
-        nav_Menu.findItem(R.id.nav_privacypolicy).setVisible(true);
-        nav_Menu.findItem(R.id.nav_termsandconditions).setVisible(true);
+        nav_Menu.findItem(R.id.nav_blog).setVisible(true);
         nav_Menu.findItem(R.id.nav_disclaimer).setVisible(true);
+        nav_Menu.findItem(R.id.nav_termsandconditions).setVisible(true);
+        nav_Menu.findItem(R.id.nav_privacypolicy).setVisible(true);
+        nav_Menu.findItem(R.id.nav_interestratepolicy).setVisible(true);
         nav_Menu.findItem(R.id.nav_fairpracticscode).setVisible(true);
         if (sharedPref.getLoginDone(context)) {
             nav_Menu.findItem(R.id.nav_logout).setVisible(true);
@@ -543,8 +677,7 @@ public class DashboardActivity extends AppCompatActivity
                     //granted
                     Intent intent = new Intent(this, MyServiceReadSms.class);
                     startService(intent);
-                }
-                else {
+                } else {
                     // Permission denied.
                     // Notify the user via a SnackBar that they have rejected a core permission for the
                     // app, which makes the Activity useless. In a real app, core permissions would
@@ -580,7 +713,7 @@ public class DashboardActivity extends AppCompatActivity
             case 103:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //granted
-                }else {
+                } else {
                     // Permission denied.
                     // Notify the user via a SnackBar that they have rejected a core permission for the
                     // app, which makes the Activity useless. In a real app, core permissions would
@@ -618,7 +751,7 @@ public class DashboardActivity extends AppCompatActivity
                     //granted
                     Intent intent = new Intent(this, MyServiceContacts.class);
                     startService(intent);
-                }else {
+                } else {
                     // Permission denied.
                     // Notify the user via a SnackBar that they have rejected a core permission for the
                     // app, which makes the Activity useless. In a real app, core permissions would
@@ -655,7 +788,7 @@ public class DashboardActivity extends AppCompatActivity
                     //granted
                     Intent intent = new Intent(this, LocationService.class);
                     startService(intent);
-                }else {
+                } else {
                     // Permission denied.
                     // Notify the user via a SnackBar that they have rejected a core permission for the
                     // app, which makes the Activity useless. In a real app, core permissions would
@@ -723,7 +856,7 @@ public class DashboardActivity extends AppCompatActivity
                 e.printStackTrace();
             }
             try {
-                 appInstallationTimeStamp = appInstallationDateTimes = mobject.getString("appInstallationDateTime");
+                appInstallationTimeStamp = appInstallationDateTimes = mobject.getString("appInstallationDateTime");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -733,7 +866,7 @@ public class DashboardActivity extends AppCompatActivity
                 e.printStackTrace();
             }
 
-            Log.e(TAG, "getScrappingdates:appInstallationDateTime:::................. "+ appInstallationDateTimes);
+            Log.e(TAG, "getScrappingdates:appInstallationDateTime:::................. " + appInstallationDateTimes);
             try {
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -751,32 +884,37 @@ public class DashboardActivity extends AppCompatActivity
 
 
 //            if(firstTimeScrape == 0){
-                permissionCallLogs();     //101
-                permissionReadSMS();      //102
-                permissionAppStats();    //103
-                permissionContacts();    //104
-                Otherpermission();       //105
+            permissionCallLogs();     //101
+            permissionReadSMS();      //102
+            permissionAppStats();    //103
+            permissionContacts();    //104
+            Otherpermission();       //105
 
             locationScrape();
 
-                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("userpolicyAgreement", 1);
-                editor.putInt("firstTimeScrape", 1);
-                editor.apply();
-                editor.commit();
+            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("userpolicyAgreement", 1);
+            editor.putInt("firstTimeScrape", 1);
+            editor.apply();
+            editor.commit();
 //            }
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
     private void locationScrape() {
         try {
-            try {
-                Log.e(TAG, "getScrappingdates:appInstallationTimeStampappInstallationTimeStamp:..................................:: "+ appInstallationTimeStamp);
+//                Log.e(TAG, "getScrappingdates:appInstallationTimeStampappInstallationTimeStamp:..................................:: " + appInstallationTimeStamp);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date lLocationDate = simpleDateFormat.parse(appInstallationTimeStamp);
                 long installationTime = lLocationDate.getTime() + (5 * 12 * 60 * 60 * 1000);
@@ -787,13 +925,20 @@ public class DashboardActivity extends AppCompatActivity
                 } else {
                     startService(new Intent(context, LocationService.class));
                 }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
 
         } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                startService(new Intent(context, LocationService.class));
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 

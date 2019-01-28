@@ -54,36 +54,52 @@ public class Notification extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
-        context = this;
-        mActivity = this;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_notifications);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
-        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        userID = sharedPreferences.getString("logged_id", "null");
-        mListOfNotification = (ListView) findViewById(R.id.notification_listview);
-        /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "dashboard/getDashBoardNotifications";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId",userID);
-//            params.put("studentId","548");
-            Log.e(MainApplication.TAG, "onCreate: "+params );
-            if(!Globle.isNetworkAvailable(Notification.this))
-            {
-                Toast.makeText(Notification.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.activity_notification);
+            context = this;
+            mActivity = this;
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(R.string.title_notifications);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            userID = sharedPreferences.getString("logged_id", "null");
+            mListOfNotification = (ListView) findViewById(R.id.notification_listview);
+            /**API CALL**/
+            try {
+                String url = MainApplication.mainUrl + "dashboard/getDashBoardNotifications";
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("studentId",userID);
+    //            params.put("studentId","548");
+                Log.e(MainApplication.TAG, "onCreate: "+params );
+                if(!Globle.isNetworkAvailable(Notification.this))
+                {
+                    Toast.makeText(Notification.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, mActivity, null, "Notifications", params);
+                } else {
+                    VolleyCallNew volleyCall = new VolleyCallNew();
+                    volleyCall.sendRequest(context, url, mActivity, null, "Notifications", params, MainApplication.auth_token);
+                }
+            } catch (Exception e) {
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(Notification.this,className, name, errorMsg, errorMsgDetails, errorLine);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(Notification.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -119,7 +135,13 @@ public class Notification extends AppCompatActivity {
             adapter = new NotificationAdapter(context,mDataList);
             mListOfNotification.setAdapter(adapter);
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(Notification.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 

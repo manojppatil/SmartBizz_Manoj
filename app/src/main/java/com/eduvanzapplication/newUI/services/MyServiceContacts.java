@@ -91,7 +91,6 @@ public class MyServiceContacts extends Service {
         ContentResolver cr = c.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
-
         try {
 
             if (cur.getCount() > 0) {

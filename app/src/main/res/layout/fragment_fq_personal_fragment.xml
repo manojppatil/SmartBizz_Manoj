@@ -30,8 +30,26 @@
                     android:id="@+id/input_borrowerfirstname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="First Name"
+                    android:hint="@string/first_name"
                     android:inputType="textCapSentences"
+                    android:textColor="@color/black" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <EditText
+                    android:id="@+id/input_borrowermiddlename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name"
+                    android:inputType="textCapSentences"
+                    android:textSize="16sp"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
 
@@ -47,11 +65,12 @@
                     android:id="@+id/input_borrowerlastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Last Name"
+                    android:hint="@string/last_name"
                     android:inputType="textCapSentences"
                     android:textSize="16sp"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -69,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="4dp"
                         android:paddingTop="8dp"
-                        android:text="Birthdate"
+                        android:text="@string/birthdate"
                         android:textColor="#808080"
                         android:textSize="16sp"
                         android:visibility="invisible" />
@@ -80,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="4dp"
                         android:paddingLeft="1dp"
-                        android:text="Birthdate"
+                        android:text="@string/birthdate"
                         android:textColor="#808080"
                         android:textSize="16sp" />
 
@@ -105,7 +124,6 @@
                     android:textSize="16sp" />
             </RelativeLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -120,7 +138,7 @@
                     android:layout_weight="1.5"
                     android:gravity="left"
                     android:paddingTop="2dp"
-                    android:text="Gender : "
+                    android:text="@string/gender"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -138,7 +156,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Male"
+                        android:text="@string/male"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
 
@@ -148,14 +166,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:padding="5dp"
-                        android:text="Female"
+                        android:text="@string/female"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
                 </RadioGroup>
             </LinearLayout>
-
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -171,7 +186,7 @@
                     android:layout_weight="1.5"
                     android:gravity="left"
                     android:paddingTop="2dp"
-                    android:text="Marital status : "
+                    android:text="@string/marital_status"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -189,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Married"
+                        android:text="@string/married"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
 
@@ -199,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:padding="5dp"
-                        android:text="Single"
+                        android:text="@string/single"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
                 </RadioGroup>
@@ -217,7 +232,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Current Residency type : "
+                    android:text="@string/current_residency_type"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -244,7 +259,7 @@
                     android:id="@+id/input_borrowerrent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Monthly Rent"
+                    android:hint="@string/monthly_rent"
                     android:inputType="number"
                     android:textColor="@color/black"
                     android:visibility="gone" />
@@ -263,7 +278,7 @@
                     android:id="@+id/input_borrowercurrentaddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Current Address"
+                    android:hint="@string/current_address"
                     android:inputType="textPostalAddress"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -280,7 +295,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Current Country : "
+                    android:text="@string/current_country"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -309,7 +324,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Current State : "
+                    android:text="@string/current_state"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -337,7 +352,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Current City : "
+                    android:text="@string/current_city1"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -366,7 +381,7 @@
                     android:id="@+id/input_borrowercurrentpincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Current Pin Code no."
+                    android:hint="@string/current_pin_code_no"
                     android:inputType="number"
                     android:maxLength="6"
                     android:textColor="@color/black" />
@@ -380,7 +395,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Same as current Address"/>
+                android:text="@string/same_as_current_address"/>
 
             <android.support.design.widget.TextInputLayout
                 app:hintTextAppearance="@style/CustomTextAppearance"
@@ -395,7 +410,7 @@
                     android:id="@+id/input_borrowerpermanentaddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Permanent Address"
+                    android:hint="@string/permanent_address"
                     android:inputType="textPostalAddress"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
@@ -412,7 +427,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Permanent Country : "
+                    android:text="@string/permanent_country"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -440,7 +455,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Permanent State : "
+                    android:text="@string/permanent_state"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -468,7 +483,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Permanent City : "
+                    android:text="@string/permanent_city"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -497,7 +512,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:paddingLeft="5dp"
-                    android:text="Duration of stay at current address : "
+                    android:text="@string/duration_of_stay_at_current_address"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -526,7 +541,7 @@
                     android:id="@+id/input_borrowerpermanentpincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Permanent Pin Code no."
+                    android:hint="@string/permanent_pin_code_no"
                     android:inputType="number"
                     android:maxLength="6"
                     android:textColor="@color/black" />
@@ -545,7 +560,7 @@
                     android:id="@+id/input_borroweradharnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Adhaar Number."
+                    android:hint="@string/adhaar_number"
                     android:inputType="number"
                     android:maxLength="12"
                     android:textColor="@color/black" />
@@ -563,7 +578,7 @@
                     android:id="@+id/input_borrowerpannumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="PAN Number."
+                    android:hint="@string/pan_number"
                     android:inputType="text|textCapCharacters"
                     android:maxLength="10"
                     android:textAllCaps="true"

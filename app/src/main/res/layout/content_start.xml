@@ -16,7 +16,7 @@
         android:layout_margin="20dp"
 
         android:background="@drawable/button_drawable"
-        android:text="New User"/>
+        android:text="@string/new_user"/>
     <Button
         android:id="@+id/currentUser"
         android:layout_width="match_parent"
@@ -25,5 +25,5 @@
         android:layout_margin="20dp"
         android:background="@drawable/button_drawable"
 
-        android:text="Existing User"/>
+        android:text="@string/existing_user"/>
 </RelativeLayout>

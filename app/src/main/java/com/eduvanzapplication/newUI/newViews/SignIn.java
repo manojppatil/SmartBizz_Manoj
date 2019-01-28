@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanzapplication.Util.CryptoHelper;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
@@ -46,76 +45,99 @@ public class SignIn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
-        mainApplication = new MainApplication();
-        context = this;
-        mActivity = this;
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        try {
+            setContentView(R.layout.activity_sign_in);
+            mainApplication = new MainApplication();
+            context = this;
+            mActivity = this;
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_sign_in);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(R.string.title_sign_in);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar_emailsignin);
-        textViewUserName = (TextView) findViewById(R.id.textView_signin_username);
-        mainApplication.applyTypeface(textViewUserName, context);
-        textView1 = (TextView) findViewById(R.id.textView_signin_1);
-        mainApplication.applyTypeface(textView1, context);
-        textView2 = (TextView) findViewById(R.id.textView_signin_2);
-        mainApplication.applyTypeface(textView2, context);
-        textView3 = (TextView) findViewById(R.id.textView_signin_3);
-        mainApplication.applyTypeface(textView3, context);
-        buttonSignIn = (Button) findViewById(R.id.button_signin_signin);
-        mainApplication.applyTypeface(buttonSignIn, context);
+            progressBar = (ProgressBar) findViewById(R.id.progressBar_emailsignin);
+            textViewUserName = (TextView) findViewById(R.id.textView_signin_username);
+            mainApplication.applyTypeface(textViewUserName, context);
+            textView1 = (TextView) findViewById(R.id.textView_signin_1);
+            mainApplication.applyTypeface(textView1, context);
+            textView2 = (TextView) findViewById(R.id.textView_signin_2);
+            mainApplication.applyTypeface(textView2, context);
+            textView3 = (TextView) findViewById(R.id.textView_signin_3);
+            mainApplication.applyTypeface(textView3, context);
+            buttonSignIn = (Button) findViewById(R.id.button_signin_signin);
+            mainApplication.applyTypeface(buttonSignIn, context);
 
-        editTextEmailId = (EditText) findViewById(R.id.editText_emalID);
-        editTextPassword = (EditText) findViewById(R.id.editText_password);
+            editTextEmailId = (EditText) findViewById(R.id.editText_emalID);
+            editTextPassword = (EditText) findViewById(R.id.editText_password);
 
-        buttonSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /** API CALL **/
-                try {
-                    progressBar.setVisibility(View.VISIBLE);
-                    String url = MainApplication.mainUrl + "authorization/email_login";//http://159.89.204.41/eduvanzApi/authorization/email_login
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("username",editTextEmailId.getText().toString());
-//                    params.put("password", editTextPassword.getText().toString());
-//                    params.put("password", CryptoHelper.encrypt(editTextPassword.getText().toString()));
-                    byte[] data = editTextPassword.getText().toString().getBytes("UTF-8");
-                    String base64 = Base64.encodeToString(data, Base64.DEFAULT);
-                    params.put("password", base64);
-                    if(!Globle.isNetworkAvailable(SignIn.this))
-                    {
-                        Toast.makeText(SignIn.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            buttonSignIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /** API CALL **/
+                    try {
+                        progressBar.setVisibility(View.VISIBLE);
+                        String url = MainApplication.mainUrl + "authorization/email_login";//http://159.89.204.41/eduvanzApi/authorization/email_login
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("username",editTextEmailId.getText().toString());
+    //                    params.put("password", editTextPassword.getText().toString());
+    //                    params.put("password", CryptoHelper.encrypt(editTextPassword.getText().toString()));
+                        byte[] data = editTextPassword.getText().toString().getBytes("UTF-8");
+                        String base64 = Base64.encodeToString(data, Base64.DEFAULT);
+                        params.put("password", base64);
+                        if(!Globle.isNetworkAvailable(SignIn.this))
+                        {
+                            Toast.makeText(SignIn.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
-                    } else {
-                        // "password" -> "3ft/XFOHN1Kg6Jgba9U6aA=="
-                        // "username" -> "vijay.shukla@eduvanz.in"
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        volleyCall.sendRequest(context, url, mActivity, null, "emailSignIn", params);
+                        } else {
+                            // "password" -> "3ft/XFOHN1Kg6Jgba9U6aA=="
+                            // "username" -> "vijay.shukla@eduvanz.in"
+                            VolleyCallNew volleyCall = new VolleyCallNew();
+                            volleyCall.sendRequest(context, url, mActivity, null, "emailSignIn", params, MainApplication.auth_token);
+                        }
+                    } catch (Exception e) {
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(SignIn.this,className, name, errorMsg, errorMsgDetails, errorLine);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    /** END OF API CALL **/
                 }
-                /** END OF API CALL **/            }
-        });
+            });
 
-        textView3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(context, ForgotPassword.class);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
+            textView3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Intent intent = new Intent(context, ForgotPassword.class);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(SignIn.this,className, name, errorMsg, errorMsgDetails, errorLine);
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(SignIn.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
     }
 
     @Override
@@ -129,7 +151,6 @@ public class SignIn extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
-
 
     /**RESPONSE OF API CALL **/
     public void emailSignin(JSONObject jsonData) {
@@ -174,7 +195,13 @@ public class SignIn extends AppCompatActivity {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(SignIn.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 }

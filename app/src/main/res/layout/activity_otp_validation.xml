@@ -23,7 +23,6 @@
         tools:context="com.eduvanzapplication.newUI.newViews.GetMobileNo">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_getmobileno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary">
@@ -40,15 +39,27 @@
         </android.support.v7.widget.Toolbar>
 
         <View android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="@dimen/_5sdp"
             android:background="@drawable/toolbar_dropshadow"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_weight="5"
+                android:src="@drawable/eduvanz_logo_new" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/financing_your_future"
             android:textAllCaps="true"
             android:textColor="@color/colorSecondary"
@@ -58,9 +69,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/please_verify_your_mobile_number_to_begin"
             android:textAllCaps="false"
             android:textColor="@color/colorSecondary"
@@ -69,13 +80,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mobile_number"
@@ -87,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -108,20 +118,19 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:layout_marginLeft="@dimen/_15sdp"
                         android:src="@drawable/edit" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/edit1"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp" />
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -130,15 +139,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/otp"
+                android:text="Enter OTP Here"
                 android:textColor="@color/grey"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -151,7 +160,7 @@
                 <EditText
                     android:id="@+id/editText_recievedOtp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_gravity="center"
                     android:layout_weight="2"
                     android:gravity="center"
@@ -180,31 +189,31 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_continue_validateotp"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:background="@color/colorPrimary"
             android:stateListAnimator="@null"
             android:text="@string/continu"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:translationZ="1.5dp" />
+            android:translationZ="@dimen/_1sdp" />
 
         <android.support.v7.widget.AppCompatButton
             android:visibility="gone"
             android:id="@+id/button_skip"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:background="@color/colorPrimary"
             android:stateListAnimator="@null"
             android:text="@string/skip"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:translationZ="1.5dp" />
+            android:translationZ="@dimen/_1sdp" />
 
 
     </LinearLayout>

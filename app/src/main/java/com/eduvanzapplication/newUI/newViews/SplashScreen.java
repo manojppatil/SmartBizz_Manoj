@@ -7,12 +7,16 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.content.res.Resources;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,6 +29,7 @@ import android.widget.Toast;
 
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.database.DBAdapter;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCallNew;
@@ -33,15 +38,20 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
+import static com.eduvanzapplication.database.DBAdapter.ExecuteSql;
+import static com.eduvanzapplication.database.DBAdapter.getLocalData;
+
 public class SplashScreen extends AppCompatActivity {
-    ImageView imageViewCustomer;
+    public ImageView imageViewCustomer;
     View view1;
-    TextView textViewCustomer;
+    public TextView textViewCustomer;
     Thread splashTread;
-    RelativeLayout relativeLayoutCustomer;
+    public RelativeLayout relativeLayoutCustomer;
     String checkOTPDone = "";
     SharedPref sharedPref = new SharedPref();
     static Context context;
@@ -49,44 +59,93 @@ public class SplashScreen extends AppCompatActivity {
     AppCompatActivity mActivity;
     static Context mContext;
     private String isMandateToUpdate;
-    private String updatedVersion;
-    private String currentAppVersion;
-
+    private String AppLanguage;
+    private String SpinnerSet;
+    ArrayList<String> errorLogIDArraylist;
+    ArrayList<String> appNameArraylist;
+    ArrayList<String> appVersionArraylist;
+    ArrayList<String> userIDArraylist;
+    ArrayList<String> errorDateArraylist;
+    ArrayList<String> moduleNameArraylist;
+    ArrayList<String> methodNameArraylist;
+    ArrayList<String> errorMessageArraylist;
+    ArrayList<String> errorMessageDtlsArraylist;
+    ArrayList<String> OSVersionArraylist;
+    ArrayList<String> IPAddressArraylist;
+    ArrayList<String> deviceNameArraylist;
+    ArrayList<String> lineNumberArraylist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view1 = getLayoutInflater().inflate(R.layout.activity_splash_screen_customer, null);
-        setContentView(view1);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
-        context = this;
-        mActivity = this;
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        checkOTPDone = sharedPreferences.getString("otp_done", "0");
-        policyAgreementStatus = sharedPreferences.getInt("userpolicyAgreement", 0);
+        try {
+            view1 = getLayoutInflater().inflate(R.layout.activity_splash_screen_customer, null);
+            setContentView(view1);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
+            context = this;
+            mActivity = this;
 
-        if (Build.VERSION.SDK_INT < 16) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else {
-            View decorView = getWindow().getDecorView();
-            // Hide Status Bar.
-            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
-        }
+            DBAdapter.Init(this);
 
-        imageViewCustomer = (ImageView) findViewById(R.id.splash_image);
+            SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            SpinnerSet = sharedPreferences.getString("SpinnerSet", "0");
+            checkOTPDone = sharedPreferences.getString("otp_done", "0");
+            policyAgreementStatus = sharedPreferences.getInt("userpolicyAgreement", 0);
+
+            AppLanguage = sharedPreferences.getString("AppLanguage", "");
+
+            if (Build.VERSION.SDK_INT < 16) {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else {
+                View decorView = getWindow().getDecorView();
+                // Hide Status Bar.
+                int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+                decorView.setSystemUiVisibility(uiOptions);
+            }
+
+            imageViewCustomer = (ImageView) view1.findViewById(R.id.splash_image);
 //            imageViewCustomer.setAlpha(80);
-        textViewCustomer = (TextView) findViewById(R.id.splash_text);
-        relativeLayoutCustomer = (RelativeLayout) findViewById(R.id.rel_lay);
+            textViewCustomer = (TextView) view1.findViewById(R.id.splash_text);
+            relativeLayoutCustomer = (RelativeLayout) view1.findViewById(R.id.rel_lay);
 
-        apiCall();
+            Resources res = context.getResources();
+// Change locale settings in the app.
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+//        conf.setLocale(new Locale("HI".toLowerCase())); // API 17+ only.
+            conf.setLocale(new Locale(AppLanguage.toLowerCase())); // API 17+ only.
+// Use conf.locale = new Locale(...) if targeting lower versions
 
-//        StartAnimationsCustomer();
-//        displayDialogWindow();
+            res.updateConfiguration(conf, dm);
 
+            apiCall();
+//            StartAnimationsCustomer();
 
-        //printHashKey(getApplicationContext());
+            //printHashKey(getApplicationContext());
+
+            if (SpinnerSet.equals("0")) {
+                InsertData();
+            }
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("SpinnerSet", "1");
+            editor.apply();
+            editor.commit();
+
+            if (Globle.isNetworkAvailable(SplashScreen.this)) {
+                BackgroundThread bv = new BackgroundThread();
+                bv.execute(10);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(SplashScreen.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
 
     }
 
@@ -100,14 +159,23 @@ public class SplashScreen extends AppCompatActivity {
             Map<String, String> params = new HashMap<String, String>();
             params.put("app_current_version", String.valueOf(currentAppVersion));
             if (!Globle.isNetworkAvailable(SplashScreen.this)) {
-                Toast.makeText(SplashScreen.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SplashScreen.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+                StartAnimationsCustomer();
 
             } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "checkVersion", params);
+                StartAnimationsCustomer();//coment this
+
+//                VolleyCallNew volleyCall = new VolleyCallNew();
+//                volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "checkVersion", params);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(SplashScreen.this, className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }
@@ -130,7 +198,13 @@ public class SplashScreen extends AppCompatActivity {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(SplashScreen.this, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -194,10 +268,12 @@ public class SplashScreen extends AppCompatActivity {
 
                             Intent intent = new Intent(SplashScreen.this,
                                     SingInWithTruecaller.class);
+//                            Intent intent = new Intent(SplashScreen.this,
+//                                    NewTruecallerSignIn.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivity(intent);
                             SplashScreen.this.finish();
-//
+
 //                            Intent intent = new Intent(SplashScreen.this,
 //                                    DashboardActivity.class);
 //                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -233,11 +309,9 @@ public class SplashScreen extends AppCompatActivity {
                 } finally {
                     SplashScreen.this.finish();
                 }
-
             }
         };
         splashTread.start();
-
     }
 
     public void displayDialogWindow() {
@@ -245,7 +319,7 @@ public class SplashScreen extends AppCompatActivity {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(SplashScreen.this);
             builder1.setTitle(R.string.app_name);
             builder1.setIcon(R.drawable.eduvanz_logo_new);
-            builder1.setMessage("New version is available , please update");
+            builder1.setMessage(R.string.new_version_is_available_please_update);
             builder1.setCancelable(false);
 
             builder1.setPositiveButton(
@@ -274,7 +348,135 @@ public class SplashScreen extends AppCompatActivity {
             AlertDialog alert11 = builder1.create();
             alert11.show();
         } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(SplashScreen.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
 
+    void InsertData() {
+
+        try {
+            ExecuteSql(Globle.sSqlStateInsert);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            ExecuteSql(Globle.sSqlCityInsert1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            ExecuteSql(Globle.sSqlCityInsert2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            ExecuteSql(Globle.sSqlCityInsert3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            ExecuteSql(Globle.sSqlCityInsert4);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void ErrorLogUpdate() {
+
+        try {
+            errorLogIDArraylist = new ArrayList<>();
+            appNameArraylist = new ArrayList<>();
+            appVersionArraylist = new ArrayList<>();
+            userIDArraylist = new ArrayList<>();
+            errorDateArraylist = new ArrayList<>();
+            moduleNameArraylist = new ArrayList<>();
+            methodNameArraylist = new ArrayList<>();
+            errorMessageArraylist = new ArrayList<>();
+            errorMessageDtlsArraylist = new ArrayList<>();
+            OSVersionArraylist = new ArrayList<>();
+            IPAddressArraylist = new ArrayList<>();
+            deviceNameArraylist = new ArrayList<>();
+            lineNumberArraylist = new ArrayList<>();
+
+            String sSQL = "select errorLogID, appName, appVersion, userID, errorDate, moduleName, methodName, errorMessage, " +
+                    "errorMessageDtls, OSVersion, IPAddress, deviceName, lineNumber, ISSaved, ISUploaded " +
+                    "FROM ErrorLog WHERE ISUploaded = 'false'";
+
+            Cursor cursor = getLocalData(context, sSQL);
+            if (cursor.getCount() >= 1) {
+
+                if (cursor.moveToFirst()) {
+                    do {
+                        errorLogIDArraylist.add(cursor.getString(0));
+                        appNameArraylist.add(cursor.getString(1));
+                        appVersionArraylist.add(cursor.getString(2));
+                        userIDArraylist.add(cursor.getString(3));
+                        errorDateArraylist.add(cursor.getString(4));
+                        moduleNameArraylist.add(cursor.getString(5));
+                        methodNameArraylist.add(cursor.getString(6));
+                        errorMessageArraylist.add(cursor.getString(7));
+                        errorMessageDtlsArraylist.add(cursor.getString(8));
+                        OSVersionArraylist.add(cursor.getString(9));
+                        IPAddressArraylist.add(cursor.getString(10));
+                        deviceNameArraylist.add(cursor.getString(11));
+                        lineNumberArraylist.add(cursor.getString(12));
+
+                    }
+                    while (cursor.moveToNext());
+                    cursor.close();
+                }
+            }
+
+            String url = MainApplication.mainUrl + "applog/apiErrorLog";
+
+            for (int i = 0; i < errorLogIDArraylist.size(); i++) {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("errorLogID", errorLogIDArraylist.get(i));
+                params.put("appName", appNameArraylist.get(i));
+                params.put("appVersion", appVersionArraylist.get(i));
+                params.put("userID", userIDArraylist.get(i));
+                params.put("errorDate", errorDateArraylist.get(i));
+                params.put("moduleName", moduleNameArraylist.get(i));
+                params.put("methodName", methodNameArraylist.get(i));
+                params.put("errorMessage", errorMessageArraylist.get(i));
+                params.put("errorMessageDtls", errorMessageDtlsArraylist.get(i));
+                params.put("OSVersion", OSVersionArraylist.get(i));
+                params.put("IPAddress", IPAddressArraylist.get(i));
+                params.put("deviceName", deviceNameArraylist.get(i));
+                params.put("lineNumber", lineNumberArraylist.get(i));
+
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest1(getApplicationContext(), url, mActivity, null, "getUploadErrorLog", params,errorLogIDArraylist.get(i));
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(SplashScreen.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+    }
+
+    protected class BackgroundThread extends AsyncTask<Integer, Integer, Void> {
+
+        @Override
+        protected Void doInBackground(Integer... arg0) {
+            try {
+                ErrorLogUpdate();
+            } catch (Exception e) {
+            }
+            return null;
         }
     }
 }

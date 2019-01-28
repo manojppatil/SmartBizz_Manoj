@@ -22,9 +22,11 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.eduvanzapplication.Util.CryptoHelper;
+import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.SmsPojo;
 import com.eduvanzapplication.Utils;
+import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.receiver.AlarmReceiverForFileUpload;
 
 import org.json.JSONArray;
@@ -286,7 +288,17 @@ public class MyServiceReadSms extends Service {
 
         @Override
         protected Void doInBackground(String... params) {
-            readSms(context, userMobileNo, userID);
+            try {
+                readSms(context, userMobileNo, userID);
+            } catch (Exception e) {
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(context,className, name, errorMsg, errorMsgDetails, errorLine);
+            }
             return null;
         }
 

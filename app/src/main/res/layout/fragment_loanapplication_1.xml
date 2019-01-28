@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.eduvanzapplication.pqformfragments.PqFormFragment1">
-
+    tools:context="com.eduvanzapplication.newUI.fragments.LoanApplicationFragment_1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +49,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
-                    android:text="Borrower"
+                    android:text="@string/kyc_details"
                     android:textColor="@color/white"
                     android:textStyle="bold|italic"
                     android:textSize="17sp"/>
@@ -62,7 +61,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
-                    android:text="Co Borrower"
+                    android:text="@string/detailed_info"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -72,7 +71,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primary"
                     android:gravity="center"
-                    android:text="Documents"
+                    android:text="@string/laf_documents"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -89,9 +88,83 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-            <include layout="@layout/fragment_fq_personal_fragment" />
-            <include layout="@layout/fragment_fq_education_fragment2" />
-            <include layout="@layout/fragment_fq_professionandfinancial_fragment3" />
+                <RelativeLayout
+                    android:id="@+id/relborrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/borrower"
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtBorrowerArrowKey"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/up"
+                        android:textColor="@color/colorRed"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/linBorrowerForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <include layout="@layout/borrowerfq" />
+
+                    <include layout="@layout/fragment_fq_education_fragment2" />
+
+                    <include layout="@layout/fragment_fq_professionandfinancial_fragment3" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relCoborrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/co_borrower"
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtCoBorrowerArrowKey"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/up"
+                        android:textColor="@color/colorRed"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/linCoCorrowerForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <include layout="@layout/fragment_coborrower_personal_fragment" />
+
+                    <include layout="@layout/fragment_coborrower_financial" />
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
@@ -104,7 +177,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:text="Next"
+        android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

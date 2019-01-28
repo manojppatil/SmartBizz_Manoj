@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/vijay/Documents/Vijay/eduvanz/libraryMobilePaymentSDK/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/home/vijay/Documents/Vijay/eduvanz/libraryMobilePaymentSDK/src/debug/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/vijay/Documents/Vijay/NightOutAtEduvanz/eduvanzoffline/libraryMobilePaymentSDK/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/home/vijay/Documents/Vijay/NightOutAtEduvanz/eduvanzoffline/libraryMobilePaymentSDK/src/debug/shaders"/></dataSet></merger>

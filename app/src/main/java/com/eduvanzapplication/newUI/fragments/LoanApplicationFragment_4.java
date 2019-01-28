@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -18,7 +17,6 @@ import android.os.ParcelFileDescriptor;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -43,8 +41,8 @@ import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.VolleyCallNew;
-import com.eduvanzapplication.newUI.newViews.LoanApplication;
 import com.eduvanzapplication.Util.Paytm;
+import com.eduvanzapplication.newUI.newViews.LoanApplication;
 import com.eduvanzapplication.uploaddocs.PathFile;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
@@ -85,7 +83,7 @@ public class LoanApplicationFragment_4 extends Fragment {
     public static Fragment mFragment;
     public static ProgressBar progressBar;
     public static String uploadFilePath = "", userID = "", userFirst = "", userLast = "", ipaddress = "",
-            applicationStatus = "", userEmailid="", amount="", transactionId="";
+            applicationStatus = "", userEmailid = "", amount = "", transactionId = "";
     public int SELECT_DOC = 2;
     public static Button buttonNext, buttonPrevious, buttonUpload, buttonDownload,
             buttonDownloadSignedApplication, buttonPay;
@@ -93,8 +91,8 @@ public class LoanApplicationFragment_4 extends Fragment {
     public static TextView textView1, textView2, textView3, textView17, textView4, textView5, textView6, textView7,
             textView8, textView9, textView10, textView11, textView12, textView13, textView14, textView19,
             textView15, textView16, textView18;
-    public static RadioButton radioButtonManual, radioButtonEsign,rdpaytm,rdatom;
-    public static LinearLayout linearLayoutManual, linearLayout_paymentDetails,linpaymentoptions,linnote;
+    public static RadioButton radioButtonManual, radioButtonEsign, rdpaytm, rdatom;
+    public static LinearLayout linearLayoutManual, linearLayout_paymentDetails, linpaymentoptions, linnote;
     MainApplication mainApplication;
     String userId;
     String downloadUrl = "", downloadSignedUrl = "";
@@ -102,7 +100,7 @@ public class LoanApplicationFragment_4 extends Fragment {
     SharedPreferences sharedPreferences;
     DownloadManager downloadManager;
     StringBuffer sb;
-    public static RadioGroup radioGroupla4,radioGroupPayment;
+    public static RadioGroup radioGroupla4, radioGroupPayment;
 
     private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
 
@@ -116,6 +114,7 @@ public class LoanApplicationFragment_4 extends Fragment {
 //                Button cancelDownload = (Button) findViewById(R.id.cancelDownload);
 //                cancelDownload.setEnabled(false);
 //file:///storage/emulated/0/Android/data/com.eduvanzapplication/files/Download/SIGNED APPLICATIONEdutesterEduvanz1530095441962.pdf
+
                 int ch;
                 ParcelFileDescriptor file;
                 StringBuffer strContent = new StringBuffer("");
@@ -130,6 +129,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                     while ((ch = fileInputStream.read()) != -1)
                         strContent.append((char) ch);
 
+//milind.desai@gmail.com
 //                    JSONObject responseObj = new JSONObject(strContent.toString());
 //                    JSONArray countriesObj = responseObj.getJSONArray("countries");
 //
@@ -144,15 +144,20 @@ public class LoanApplicationFragment_4 extends Fragment {
 //                    showCountries.setText(countryData.toString());
 
                     progressBar.setVisibility(View.GONE);
-                    Toast toast = Toast.makeText(context,
-                            "Downloading of File just finished", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(context, R.string.downloading_of_file_just_finished, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.TOP, 25, 400);
                     toast.show();
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                 }
             }
         }
@@ -167,293 +172,302 @@ public class LoanApplicationFragment_4 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_loanapplication_4, container, false);
-        context = getContext();
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        mainApplication = new MainApplication();
-        mFragment = new LoanApplicationFragment_4();
+        try {
+            context = getContext();
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+            mainApplication = new MainApplication();
+            mFragment = new LoanApplicationFragment_4();
 
-        MainApplication.currrentFrag = 4;
+            MainApplication.currrentFrag = 4;
 
-        sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+            sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        downloadUrl = sharedPreferences.getString("laf_download_url", "");
-        userID = sharedPreferences.getString("logged_id", "");
-        userEmailid = sharedPreferences.getString("user_email", "");
-        userFirst = sharedPreferences.getString("first_name", "");
-        userLast = sharedPreferences.getString("last_name", "");
-        downloadSignedUrl = sharedPreferences.getString("signed_application_url", "");
-        applicationStatus = sharedPreferences.getString("signed_appstatus", "0");
+            downloadUrl = sharedPreferences.getString("laf_download_url", "");
+            userID = sharedPreferences.getString("logged_id", "");
+            userEmailid = sharedPreferences.getString("user_email", "");
+            userFirst = sharedPreferences.getString("first_name", "");
+            userLast = sharedPreferences.getString("last_name", "");
+            downloadSignedUrl = sharedPreferences.getString("signed_application_url", "");
+            applicationStatus = sharedPreferences.getString("signed_appstatus", "0");
 
-        ipaddress = Utils.getIPAddress(true);
+            ipaddress = Utils.getIPAddress(true);
 
-        typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
-        typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
+            typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
+            typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
 //        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
 //        userId= sharedPreferences.getString("logged_id", "");
-        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            final FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar_signsubmit);
+            progressBar = (ProgressBar) view.findViewById(R.id.progressBar_signsubmit);
 
-        radioGroupla4 = (RadioGroup) view.findViewById(R.id.radioGroup_la4);
-        radioGroupPayment = (RadioGroup) view.findViewById(R.id.radioGroupPayment);
-        textView1 = (TextView) view.findViewById(R.id.textView1_l4);
-        mainApplication.applyTypeface(textView1, context);
-        textView2 = (TextView) view.findViewById(R.id.textView2_l4);
-        mainApplication.applyTypeface(textView2, context);
-        textView3 = (TextView) view.findViewById(R.id.textView3_l4);
-        mainApplication.applyTypefaceBold(textView3, context);
+            radioGroupla4 = (RadioGroup) view.findViewById(R.id.radioGroup_la4);
+            radioGroupPayment = (RadioGroup) view.findViewById(R.id.radioGroupPayment);
+            textView1 = (TextView) view.findViewById(R.id.textView1_l4);
+            mainApplication.applyTypeface(textView1, context);
+            textView2 = (TextView) view.findViewById(R.id.textView2_l4);
+            mainApplication.applyTypeface(textView2, context);
+            textView3 = (TextView) view.findViewById(R.id.textView3_l4);
+            mainApplication.applyTypefaceBold(textView3, context);
 
-        textView4 = (TextView) view.findViewById(R.id.textView_signsubmit_1);
-        mainApplication.applyTypeface(textView4, context);
-        textView5 = (TextView) view.findViewById(R.id.textView_signsubmit_2);
-        mainApplication.applyTypeface(textView5, context);
+            textView4 = (TextView) view.findViewById(R.id.textView_signsubmit_1);
+            mainApplication.applyTypeface(textView4, context);
+            textView5 = (TextView) view.findViewById(R.id.textView_signsubmit_2);
+            mainApplication.applyTypeface(textView5, context);
 
-        textView6 = (TextView) view.findViewById(R.id.textView_signsubmit_3);
-        mainApplication.applyTypeface(textView6, context);
-        textView7 = (TextView) view.findViewById(R.id.textView_signsubmit_4);
-        mainApplication.applyTypeface(textView7, context);
-        textView8 = (TextView) view.findViewById(R.id.textView_signsubmit_5);
-        mainApplication.applyTypeface(textView8, context);
-        textView9 = (TextView) view.findViewById(R.id.textView_signsubmit_6);
-        mainApplication.applyTypeface(textView9, context);
-        textView10 = (TextView) view.findViewById(R.id.textView_signsubmit_7);
-        mainApplication.applyTypeface(textView10, context);
-        textView11 = (TextView) view.findViewById(R.id.textView_signsubmit_8);
-        mainApplication.applyTypeface(textView11, context);
-        textView12 = (TextView) view.findViewById(R.id.textView_signsubmit_9);
-        mainApplication.applyTypeface(textView12, context);
-        textView13 = (TextView) view.findViewById(R.id.textView_signsubmit_10);
-        mainApplication.applyTypeface(textView13, context);
-        textView14 = (TextView) view.findViewById(R.id.textView_signsubmit_11);
-        mainApplication.applyTypeface(textView14, context);
-        textView15 = (TextView) view.findViewById(R.id.textView_signsubmit_12);
-        mainApplication.applyTypeface(textView15, context);
-        textView16 = (TextView) view.findViewById(R.id.textView_signsubmit_13);
-        mainApplication.applyTypeface(textView16, context);
-        textView17 = (TextView) view.findViewById(R.id.textView_signsubmit_14);
-        mainApplication.applyTypeface(textView17, context);
-        textView18 = (TextView) view.findViewById(R.id.textView_signsubmit_15);
-        mainApplication.applyTypeface(textView18, context);
-        textView19 = (TextView) view.findViewById(R.id.textView_signsubmit_0);
-        mainApplication.applyTypeface(textView19, context);
+            textView6 = (TextView) view.findViewById(R.id.textView_signsubmit_3);
+            mainApplication.applyTypeface(textView6, context);
+            textView7 = (TextView) view.findViewById(R.id.textView_signsubmit_4);
+            mainApplication.applyTypeface(textView7, context);
+            textView8 = (TextView) view.findViewById(R.id.textView_signsubmit_5);
+            mainApplication.applyTypeface(textView8, context);
+            textView9 = (TextView) view.findViewById(R.id.textView_signsubmit_6);
+            mainApplication.applyTypeface(textView9, context);
+            textView10 = (TextView) view.findViewById(R.id.textView_signsubmit_7);
+            mainApplication.applyTypeface(textView10, context);
+            textView11 = (TextView) view.findViewById(R.id.textView_signsubmit_8);
+            mainApplication.applyTypeface(textView11, context);
+            textView12 = (TextView) view.findViewById(R.id.textView_signsubmit_9);
+            mainApplication.applyTypeface(textView12, context);
+            textView13 = (TextView) view.findViewById(R.id.textView_signsubmit_10);
+            mainApplication.applyTypeface(textView13, context);
+            textView14 = (TextView) view.findViewById(R.id.textView_signsubmit_11);
+            mainApplication.applyTypeface(textView14, context);
+            textView15 = (TextView) view.findViewById(R.id.textView_signsubmit_12);
+            mainApplication.applyTypeface(textView15, context);
+            textView16 = (TextView) view.findViewById(R.id.textView_signsubmit_13);
+            mainApplication.applyTypeface(textView16, context);
+            textView17 = (TextView) view.findViewById(R.id.textView_signsubmit_14);
+            mainApplication.applyTypeface(textView17, context);
+            textView18 = (TextView) view.findViewById(R.id.textView_signsubmit_15);
+            mainApplication.applyTypeface(textView18, context);
+            textView19 = (TextView) view.findViewById(R.id.textView_signsubmit_0);
+            mainApplication.applyTypeface(textView19, context);
 
-        buttonNext = (Button) view.findViewById(R.id.button_submit_loanappfragment4);
-        buttonNext.setTypeface(typefaceFontBold);
+            buttonNext = (Button) view.findViewById(R.id.button_submit_loanappfragment4);
+            buttonNext.setTypeface(typefaceFontBold);
 
-        buttonPrevious = (Button) view.findViewById(R.id.button_previous_loanappfragment4);
-        buttonPrevious.setTypeface(typefaceFontBold);
+            buttonPrevious = (Button) view.findViewById(R.id.button_previous_loanappfragment4);
+            buttonPrevious.setTypeface(typefaceFontBold);
 
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                EligibilityCheckFragment_4 eligibilityCheckFragment_4 = new EligibilityCheckFragment_4();
-//                transaction.replace(R.id.frameLayout_loanapplication, eligibilityCheckFragment_4).commit();
-            }
-        });
-
-        buttonPrevious.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoanApplicationFragment_3 loanApplicationFragment_3 = new LoanApplicationFragment_3();
-                transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_3).commit();
-            }
-        });
-
-        linearLayoutManual = (LinearLayout) view.findViewById(R.id.linearLayout_manual);
-
-        linearLayout_paymentDetails = (LinearLayout) view.findViewById(R.id.linearLayout_paymentdetails);
-        linpaymentoptions = (LinearLayout) view.findViewById(R.id.linpaymentoptions);
-        linnote = (LinearLayout) view.findViewById(R.id.linnote);
-
-        radioButtonManual = (RadioButton) view.findViewById(R.id.radioButton_manual);
-        rdpaytm = (RadioButton) view.findViewById(R.id.rdpaytm);
-        rdatom = (RadioButton) view.findViewById(R.id.rdatom);
-
-        mainApplication.applyTypeface(radioButtonManual, context);
-        radioButtonManual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (radioButtonManual.isChecked()) {
-                    linearLayoutManual.setVisibility(View.VISIBLE);
-                } else if (!radioButtonManual.isChecked()) {
-                    linearLayoutManual.setVisibility(View.GONE);
+            buttonNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+    //                EligibilityCheckFragment_4 eligibilityCheckFragment_4 = new EligibilityCheckFragment_4();
+    //                transaction.replace(R.id.frameLayout_loanapplication, eligibilityCheckFragment_4).commit();
                 }
-            }
-        });
+            });
 
-        radioButtonEsign = (RadioButton) view.findViewById(R.id.radioButton_esign);
-        mainApplication.applyTypeface(radioButtonEsign, context);
+            buttonPrevious.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LoanApplicationFragment_3 loanApplicationFragment_3 = new LoanApplicationFragment_3();
+                    transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_3).commit();
+                }
+            });
 
-        radioButtonEsign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            linearLayoutManual = (LinearLayout) view.findViewById(R.id.linearLayout_manual);
 
-                if (radioButtonEsign.isChecked()) {
-                    /** API CALL **/
-                    try {
-                        String ipaddress = Utils.getIPAddress(true);
-                        String url = MainApplication.mainUrl + "laf/getDigioDocumentIdForStudent";
-                        Map<String, String> params = new HashMap<String, String>();
-                        if(!Globle.isNetworkAvailable(context))
-                        {
-                            Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            linearLayout_paymentDetails = (LinearLayout) view.findViewById(R.id.linearLayout_paymentdetails);
+            linpaymentoptions = (LinearLayout) view.findViewById(R.id.linpaymentoptions);
+            linnote = (LinearLayout) view.findViewById(R.id.linnote);
 
-                        } else {
-                            VolleyCallNew volleyCall = new VolleyCallNew();
-                            params.put("logged_id", userID);
-                            params.put("created_by_ip", ipaddress);
-                            if(!Globle.isNetworkAvailable(context))
-                            {
-                                Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            radioButtonManual = (RadioButton) view.findViewById(R.id.radioButton_manual);
+            rdpaytm = (RadioButton) view.findViewById(R.id.rdpaytm);
+            rdatom = (RadioButton) view.findViewById(R.id.rdatom);
+
+            mainApplication.applyTypeface(radioButtonManual, context);
+            radioButtonManual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (radioButtonManual.isChecked()) {
+                        linearLayoutManual.setVisibility(View.VISIBLE);
+                    } else if (!radioButtonManual.isChecked()) {
+                        linearLayoutManual.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+            radioButtonEsign = (RadioButton) view.findViewById(R.id.radioButton_esign);
+            mainApplication.applyTypeface(radioButtonEsign, context);
+
+            radioButtonEsign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    if (radioButtonEsign.isChecked()) {
+                        /** API CALL **/
+                        try {
+                            String ipaddress = Utils.getIPAddress(true);
+                            String url = MainApplication.mainUrl + "laf/getDigioDocumentIdForStudent";
+                            Map<String, String> params = new HashMap<String, String>();
+                            if (!Globle.isNetworkAvailable(context)) {
+                                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
                             } else {
-                                volleyCall.sendRequest(context, url, null, mFragment, "getDigioDocumentIdForStudent", params);
+                                VolleyCallNew volleyCall = new VolleyCallNew();
+                                params.put("logged_id", userID);
+                                params.put("created_by_ip", ipaddress);
+                                if (!Globle.isNetworkAvailable(context)) {
+                                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    volleyCall.sendRequest(context, url, null, mFragment, "getDigioDocumentIdForStudent", params, MainApplication.auth_token);
+                                }
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
+                    }
+                }
+            });
+
+
+            buttonDownload = (Button) view.findViewById(R.id.button_signnsubmit_downloadApplication);
+            mainApplication.applyTypeface(buttonDownload, context);
+
+            buttonPay = (Button) view.findViewById(R.id.button_signnsubmit_payment);
+            buttonPay.setBackgroundColor(((Activity) context).getResources().getColor(R.color.grey));
+//        buttonPay.setEnabled(false);
+
+            buttonPay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (textView6.getText().toString().trim().equals("Signed")) {
+                        /** API CALL **/
+                        try {
+                            String url = MainApplication.mainUrl + "epayment/getKycPaymentRelatedInfo";
+                            Map<String, String> params = new HashMap<String, String>();
+                            if (!Globle.isNetworkAvailable(context)) {
+                                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                VolleyCallNew volleyCall = new VolleyCallNew();
+                                params.put("studentId", userID);
+                                if (!Globle.isNetworkAvailable(context)) {
+                                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    volleyCall.sendRequest(context, url, null, mFragment, "getKycPaymentRelatedInfo", params, MainApplication.auth_token);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(context, R.string.please_sign_the_documents_first, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+            });
+
+            buttonDownload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    try {
+                        Log.e(MainApplication.TAG, "downloadUrl+++++: " + downloadUrl);
+                        Uri Download_Uri = Uri.parse(downloadUrl);
+
+                        DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+                        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+                        request.setAllowedOverRoaming(false);
+                        request.setTitle("Downloading LAF Document");
+    //                request.setDescription("Downloading " + "Sample" + ".png");
+                        request.setVisibleInDownloadsUi(true);
+                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/Eduvanz/" + "/" + "LAF" + ".pdf");
+                        progressBar.setVisibility(View.VISIBLE);
+                        downLoad(downloadUrl, 1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-            }
-        });
-
-
-        buttonDownload = (Button) view.findViewById(R.id.button_signnsubmit_downloadApplication);
-        mainApplication.applyTypeface(buttonDownload, context);
-
-        buttonPay = (Button) view.findViewById(R.id.button_signnsubmit_payment);
-        buttonPay.setBackgroundColor(((Activity)context).getResources().getColor(R.color.grey));
-//        buttonPay.setEnabled(false);
-
-        buttonPay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(textView6.getText().toString().trim().equals("Signed")) {
-                 /** API CALL **/
-                try {
-                String url = MainApplication.mainUrl + "epayment/getKycPaymentRelatedInfo";
-                Map<String, String> params = new HashMap<String, String>();
-                    if(!Globle.isNetworkAvailable(context))
-                    {
-                        Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        params.put("studentId", userID);
-                        if(!Globle.isNetworkAvailable(context))
-                        {
-                            Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            volleyCall.sendRequest(context, url, null, mFragment, "getKycPaymentRelatedInfo", params);
-                        }
-                    }
-                } catch (Exception e) {
-                     e.printStackTrace(); }
-            }
-            else {
-                    Toast.makeText(context, "Please Sign the documents first", Toast.LENGTH_SHORT).show();
 
                 }
 
-            }
-        });
+            });
 
-        buttonDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                try {
-                    Log.e(MainApplication.TAG, "downloadUrl+++++: " + downloadUrl);
-                    Uri Download_Uri = Uri.parse(downloadUrl);
-
-                    DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
-                    request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-                    request.setAllowedOverRoaming(false);
-                    request.setTitle("Downloading LAF Document");
-//                request.setDescription("Downloading " + "Sample" + ".png");
-                    request.setVisibleInDownloadsUi(true);
-                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/Eduvanz/"  + "/" + "LAF" + ".pdf");
+            buttonDownloadSignedApplication = (Button) view.findViewById(R.id.button_downloadSignedApplication);
+            buttonDownloadSignedApplication.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     progressBar.setVisibility(View.VISIBLE);
-                    downLoad(downloadUrl, 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    if (!downloadSignedUrl.equalsIgnoreCase("")) {
+                        if (downloadSignedUrl.length() < 5) {
+                            downloadSignedUrl = staticdownloadurl;
+                        }
+                        downLoad(downloadSignedUrl, 2);
+                    } else {
+                        Toast.makeText(context, R.string.something_went_wrong_please_try_again_later, Toast.LENGTH_SHORT).show();
 
-            }
-
-        });
-
-        buttonDownloadSignedApplication = (Button) view.findViewById(R.id.button_downloadSignedApplication);
-        buttonDownloadSignedApplication.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                if(!downloadSignedUrl.equalsIgnoreCase("")){
-                    if(downloadSignedUrl.length()<5)
-                    {
-                        downloadSignedUrl = staticdownloadurl;
                     }
-                    downLoad(downloadSignedUrl, 2);
-                }else {
-                    Toast.makeText(context, "Something went wrong, please try again later.", Toast.LENGTH_SHORT).show();
 
                 }
+            });
+
+            buttonUpload = (Button) view.findViewById(R.id.button_signnsubmit_uploadApplication);
+            mainApplication.applyTypeface(buttonUpload, context);
+
+            buttonUpload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    galleryDocIntent();
+
+                }
+            });
+
+            IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+            context.registerReceiver(downloadReceiver, filter);
+
+            if (applicationStatus.equalsIgnoreCase("1")) {
+                linearLayoutManual.setVisibility(View.GONE);
+                buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
+                textView7.setVisibility(View.GONE);
+                radioGroupla4.setVisibility(View.GONE);
+                textView6.setText("Signed");
+                textView6.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
+    //            buttonPay.setEnabled(true);
+                buttonPay.setBackgroundColor(((Activity) context).getResources().getColor(R.color.colorRed));
 
             }
-        });
-
-        buttonUpload = (Button) view.findViewById(R.id.button_signnsubmit_uploadApplication);
-        mainApplication.applyTypeface(buttonUpload, context);
-
-        buttonUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                galleryDocIntent();
-
-            }
-        });
-
-        IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-        context.registerReceiver(downloadReceiver, filter);
-
-        if (applicationStatus.equalsIgnoreCase("1")) {
-            linearLayoutManual.setVisibility(View.GONE);
-            buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
-            textView7.setVisibility(View.GONE);
-            radioGroupla4.setVisibility(View.GONE);
-            textView6.setText("Signed");
-            textView6.setTextColor(((Activity)context).getResources().getColor(R.color.colorPrimary));
-//            buttonPay.setEnabled(true);
-            buttonPay.setBackgroundColor(((Activity)context).getResources().getColor(R.color.colorRed));
-
-        }
 
 
-        /** API CALL Status of payment and esign**/
-        try {
-            String url = MainApplication.mainUrl + "epayment/getSignAndSubmitDetails";
-            Map<String, String> params = new HashMap<String, String>();
-            if(!Globle.isNetworkAvailable(context))
-            {
-                Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
-
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                params.put("loggedId", userID);
-                if(!Globle.isNetworkAvailable(context))
-                {
-                    Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            /** API CALL Status of payment and esign**/
+            try {
+                String url = MainApplication.mainUrl + "epayment/getSignAndSubmitDetails";
+                Map<String, String> params = new HashMap<String, String>();
+                if (!Globle.isNetworkAvailable(context)) {
+                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    volleyCall.sendRequest(context, url, null, mFragment, "getSignAndSubmitDetails", params);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                    VolleyCallNew volleyCall = new VolleyCallNew();
+                    params.put("loggedId", userID);
+                    if (!Globle.isNetworkAvailable(context)) {
+                        Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
+                    } else {
+                        volleyCall.sendRequest(context, url, null, mFragment, "getSignAndSubmitDetails", params, MainApplication.auth_token);//"loggedId" -> "2953"
+                    }
+                }
+            } catch (Exception e) {
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+            }
+
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+        }
 
 
         return view;
@@ -461,7 +475,7 @@ public class LoanApplicationFragment_4 extends Fragment {
 
 
     // Callback listener functions for Digio
-    public void digioSuccess(String documentId){
+    public void digioSuccess(String documentId) {
 
         /** API CALL **/
         try {
@@ -469,17 +483,22 @@ public class LoanApplicationFragment_4 extends Fragment {
             String url = MainApplication.mainUrl + "laf/onSuccessfulRegisterStudentESignCase";
             Map<String, String> params = new HashMap<String, String>();
             VolleyCallNew volleyCall = new VolleyCallNew();
-            if(!Globle.isNetworkAvailable(context))
-            {
-                Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
             } else {
                 params.put("logged_id", userID);                //610
                 params.put("created_by_ip", ipaddress);         //192.168.1.16
-                volleyCall.sendRequest(context, url, null, mFragment, "onSuccessfulRegisterStudentESignCase", params);
+                volleyCall.sendRequest(context, url, null, mFragment, "onSuccessfulRegisterStudentESignCase", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
         linearLayoutManual.setVisibility(View.GONE);
@@ -487,17 +506,17 @@ public class LoanApplicationFragment_4 extends Fragment {
         textView7.setVisibility(View.GONE);
         radioGroupla4.setVisibility(View.GONE);
         textView6.setText("Signed");
-        textView6.setTextColor(((Activity)context).getResources().getColor(R.color.colorPrimary));
+        textView6.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
     }
 
-    public void digioFailure(String documentId, int code, String response){
+    public void digioFailure(String documentId, int code, String response) {
         radioButtonEsign.setChecked(false);
     }
 
-    public void atomPaymentSuccessful(){
+    public void atomPaymentSuccessful() {
         linearLayout_paymentDetails.setVisibility(View.VISIBLE);
-        textView11.setText("Paid");
-        textView11.setTextColor(((Activity)context).getResources().getColor(R.color.colorPrimary));
+        textView11.setText(R.string.paid);
+        textView11.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
     }
 
 
@@ -530,7 +549,6 @@ public class LoanApplicationFragment_4 extends Fragment {
 //        }
             //Enqueue a new download and same the referenceId
             downloadReference = downloadManager.enqueue(request);
-
 //        TextView showCountries = (TextView) findViewById(R.id.countryData);
 //        showCountries.setText("Getting data from Server, Please WAIT...");
 
@@ -538,8 +556,14 @@ public class LoanApplicationFragment_4 extends Fragment {
 //        checkStatus.setEnabled(true);
 //        Button cancelDownload = (Button) findViewById(R.id.cancelDownload);
 //        cancelDownload.setEnabled(true);
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }
@@ -556,24 +580,34 @@ public class LoanApplicationFragment_4 extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_DOC) {
+        try {
+            if (resultCode == Activity.RESULT_OK) {
+                if (requestCode == SELECT_DOC) {
 
-                Uri selectedImage = data.getData();
-                uploadFilePath = PathFile.getPath(context, selectedImage);
-                Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
-                if (!uploadFilePath.equalsIgnoreCase("")) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //creating new thread to handle Http Operations
-                            uploadFile(uploadFilePath);
-                        }
-                    }).start();
+                    Uri selectedImage = data.getData();
+                    uploadFilePath = PathFile.getPath(context, selectedImage);
+                    Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
+                    if (!uploadFilePath.equalsIgnoreCase("")) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //creating new thread to handle Http Operations
+                                uploadFile(uploadFilePath);
+                            }
+                        }).start();
+                    }
+
                 }
-
             }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }
@@ -627,7 +661,6 @@ public class LoanApplicationFragment_4 extends Fragment {
 //                connection.setRequestProperty("user_id", user_id);
                 Log.e("TAG", "Server property" + connection.getRequestMethod() + ":property " + connection.getRequestProperties());
 
-
                 //creating new dataoutputstream
                 dataOutputStream = new DataOutputStream(connection.getOutputStream());
 
@@ -657,7 +690,6 @@ public class LoanApplicationFragment_4 extends Fragment {
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
                 }
                 dataOutputStream.writeBytes(lineEnd);
-
 
                 dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 //                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
@@ -710,7 +742,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                                 textView7.setVisibility(View.GONE);
                                 radioGroupla4.setVisibility(View.GONE);
                                 textView6.setText("Signed");
-                                textView6.setTextColor(((Activity)context).getResources().getColor(R.color.colorPrimary));
+                                textView6.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
                                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 try {
@@ -765,17 +797,17 @@ public class LoanApplicationFragment_4 extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(context, "File Not Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.file_not_found, Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                     }
                 });
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                Toast.makeText(context, "URL error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.url_error, Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.cannot_read_write_file, Toast.LENGTH_SHORT).show();
             }
 //            dialog.dismiss();
             getActivity().runOnUiThread(new Runnable() {
@@ -809,32 +841,42 @@ public class LoanApplicationFragment_4 extends Fragment {
 
                 // Invoke Esign
 
+                final Digio digio = new Digio();
+                DigioConfig digioConfig = new DigioConfig();
+                digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
+                digioConfig.setEnvironment(DigioEnvironment.PRODUCTION);   //Stage is sandbox
 
-                    final Digio digio = new Digio();
-                    DigioConfig digioConfig = new DigioConfig();
-                    digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
-                    digioConfig.setEnvironment(DigioEnvironment.PRODUCTION);   //Stage is sandbox
+                try {
+                    digio.init((Activity) context, digioConfig);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                    try {
-                        digio.init((Activity)context, digioConfig);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        digio.esign(documentID, email);
-                        Log.e(MainApplication.TAG, "downloadUrldownloadUrl: "+downloadUrl + " userEmailiduserEmailid"+ userEmailid );
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
+                try {
+                    digio.esign(documentID, email);
+                    Log.e(MainApplication.TAG, "downloadUrldownloadUrl: " + downloadUrl + " userEmailiduserEmailid" + userEmailid);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+                }
 
 
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -855,7 +897,13 @@ public class LoanApplicationFragment_4 extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -872,21 +920,26 @@ public class LoanApplicationFragment_4 extends Fragment {
                 amount = jsonObject.getString("amount");
                 transactionId = jsonObject.getString("transactionId");
 
-                if(rdpaytm.isChecked())
-                {
+                if (rdpaytm.isChecked()) {
                     try {
                         try {
-                        Globle.getInstance().paytm = new Paytm(
-                            "Eduvan80947867008828",
-                            "WAP",
-                            amount,
-                            "APPPROD",
-                            "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp",
-                            "Retail109"
+                            Globle.getInstance().paytm = new Paytm(
+                                    "Eduvan80947867008828",
+                                    "WAP",
+                                    amount,
+                                    "APPPROD",
+                                    "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp",
+                                    "Retail109"
                             );
                         } catch (Exception e) {
-                          e.printStackTrace();
-                       }
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+                        }
 
                         String url = "https://eduvanz.com/Paytm/generateChecksum.php/";
                         Map<String, String> params = new HashMap<String, String>();
@@ -901,20 +954,23 @@ public class LoanApplicationFragment_4 extends Fragment {
                         params.put("WEBSITE", Globle.getInstance().paytm.getWebsite());
                         params.put("CALLBACK_URL", Globle.getInstance().paytm.getCallBackUrl());
                         params.put("INDUSTRY_TYPE_ID", Globle.getInstance().paytm.getIndustryTypeId());
-                        if(!Globle.isNetworkAvailable(context))
-                        {
-                            Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
-
+                        if (!Globle.isNetworkAvailable(context)) {
+                            Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
                         } else {
-                            volleyCall.sendRequest(context, url, null, mFragment, "initializePaytmPayment", params);
+                            volleyCall.sendRequest(context, url, null, mFragment, "initializePaytmPayment", params,MainApplication.auth_token);
                         }
 //                        volleyCall.sendRequest(context, url,((LoanApplication) context).mActivity1 , null, "initializePaytmPayment", params);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
-                 if(rdatom.isChecked())
-                {
+                if (rdatom.isChecked()) {
                     Intent newPayIntent = new Intent(context, PayActivity.class);
                     newPayIntent.putExtra("merchantId", "197");
                     newPayIntent.putExtra("txnscamt", "0"); //Fixed. Must be 0
@@ -960,7 +1016,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                     newPayIntent.putExtra("billingAddress", jsonObject.getString("mobile"));//Only for Address
                     newPayIntent.putExtra("optionalUdf9", "OPTIONAL DATA 1");// Can pass any data
 //                newPayIntent.putExtra("mprod", mprod); // Pass data in XML format, only for Multi product
-                    ((Activity)context).startActivityForResult(newPayIntent, 1);
+                    ((Activity) context).startActivityForResult(newPayIntent, 1);
                 }
 
 
@@ -968,7 +1024,13 @@ public class LoanApplicationFragment_4 extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -1027,10 +1089,10 @@ public class LoanApplicationFragment_4 extends Fragment {
                     // Payment Gateway Activity or may be due to //
                     // initialization of webview. // Error Message details
                     // the error occurred.
-                    Toast.makeText(context, "Payment Transaction response " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inErrorMessage-");
-                    s.append(inErrorMessage);
+                    Toast.makeText(context, getString(R.string.payment_transaction_response) + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inErrorMessage-");
+//                    s.append(inErrorMessage);
 //                    Globle.appendLog(String.valueOf(s));
 
                 }
@@ -1039,10 +1101,10 @@ public class LoanApplicationFragment_4 extends Fragment {
                 @Override
                 public void onTransactionResponse(Bundle inResponse) {
                     Log.d("LOG", "Payment Transaction is successful " + inResponse);
-                    Toast.makeText(context, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inResponse-");
-                    s.append(inResponse);
+                    Toast.makeText(context, getString(R.string.payment_transaction_response) + inResponse.toString(), Toast.LENGTH_LONG).show();
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inResponse-");
+//                    s.append(inResponse);
 //                    Globle.appendLog(String.valueOf(s));
 //"Bundle[{STATUS=TXN_SUCCESS,
 // CHECKSUMHASH=ENXZLPAIk3AlC/rdD7EfpMnG8Okxe0819nIQvFBjJL+aGnTrGIQfHHtGLFoiI+sWxVEFmOer+UCZiNaRNaRyOGbE4NMF66qRldhhHLJFaUs=,
@@ -1050,7 +1112,7 @@ public class LoanApplicationFragment_4 extends Fragment {
 // TXNDATE=2018-07-10 14:23:01.0, MID=Eduvan80947867008828, TXNID=20180710111212800110168845030370887,
 // RESPCODE=01, PAYMENTMODE=DC, BANKTXNID=201819106425560, CURRENCY=INR, GATEWAYNAME=SBIFSS,
 // RESPMSG=Txn Success}]"
-                    if(inResponse.get("STATUS").equals("TXN_SUCCESS"))
+                    if (inResponse.get("STATUS").equals("TXN_SUCCESS"))
 //                    if(inResponse.get("STATUS").equals("TXN_FAILURE"))
                     {
                         if (inResponse != null) {
@@ -1084,7 +1146,8 @@ public class LoanApplicationFragment_4 extends Fragment {
 //                                }
 //                                System.out.println(" status " + message);
 //                            }
-                               if(message.equalsIgnoreCase("TXN_SUCCESS")) {
+
+                            if (message.equalsIgnoreCase("TXN_SUCCESS")) {
                                 Log.e(MainApplication.TAG, "onActivityResult: " + "Transaction Successful!");
                                 /** API CALL **/
                                 try {
@@ -1097,7 +1160,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                                     Map<String, String> params = new HashMap<String, String>();
                                     VolleyCallNew volleyCall = new VolleyCallNew();
                                     params.put("studentId", userID);
-                                    params.put("amount",TXNAMOUNT );
+                                    params.put("amount", TXNAMOUNT);
                                     params.put("txnId", TXNID); // merchant ID
                                     params.put("bankTxnId", BANKTXNID); // Bank ID
                                     params.put("status", status);
@@ -1105,20 +1168,23 @@ public class LoanApplicationFragment_4 extends Fragment {
                                     params.put("payment_partner", payment_partner);
                                     params.put("payment_platform", payment_platform);
 //                                    params.put("gateway_type", "Paytm");
-                                    if(!Globle.isNetworkAvailable(context))
-                                    {
-                                        Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+                                    if (!Globle.isNetworkAvailable(context)) {
+                                        Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
                                     } else {
-                                        volleyCall.sendRequest(context, url, null, mFragment, "kycPaymentCaptureWizard", params);
+                                        volleyCall.sendRequest(context, url, null, mFragment, "kycPaymentCaptureWizard", params, MainApplication.auth_token);
                                     }
                                 } catch (Exception e) {
-                                    e.printStackTrace();
+                                    String className = this.getClass().getSimpleName();
+                                    String name = new Object() {
+                                    }.getClass().getEnclosingMethod().getName();
+                                    String errorMsg = e.getMessage();
+                                    String errorMsgDetails = e.getStackTrace().toString();
+                                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                                    Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                                 }
 //                                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
-                            }
-
-                            else {
+                            } else {
                                 Log.e(MainApplication.TAG, "onActivityResult: " + "Transaction Successful!");
                                 /** API CALL **/
                                 try {
@@ -1127,7 +1193,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                                     Map<String, String> params = new HashMap<String, String>();
                                     VolleyCallNew volleyCall = new VolleyCallNew();
                                     params.put("studentId", userID);
-                                    params.put("amount",TXNAMOUNT );
+                                    params.put("amount", TXNAMOUNT);
                                     params.put("txnId", TXNID); // merchant ID
                                     params.put("bankTxnId", BANKTXNID); // Bank ID
                                     params.put("status", status);
@@ -1135,22 +1201,27 @@ public class LoanApplicationFragment_4 extends Fragment {
                                     params.put("payment_partner", payment_partner);
                                     params.put("payment_platform", payment_platform);
 //                                    params.put("gateway_type", "Paytm");
-                                    if(!Globle.isNetworkAvailable(context))
-                                    {
-                                        Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+                                    if (!Globle.isNetworkAvailable(context)) {
+                                        Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
                                     } else {
-                                        volleyCall.sendRequest(context, url, null, mFragment, "kycPaymentCaptureWizard", params);
+                                        volleyCall.sendRequest(context, url, null, mFragment, "kycPaymentCaptureWizard", params, MainApplication.auth_token);
                                     }
                                 } catch (Exception e) {
-                                    e.printStackTrace();
+                                    String className = this.getClass().getSimpleName();
+                                    String name = new Object() {
+                                    }.getClass().getEnclosingMethod().getName();
+                                    String errorMsg = e.getMessage();
+                                    String errorMsgDetails = e.getStackTrace().toString();
+                                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                                    Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                                 }
                                 //getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
                             }
                             Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                         } else {
-                            Toast.makeText(context, "Payment not successful ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.payment_not_successful, Toast.LENGTH_LONG).show();
 //                            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
                         }
 
@@ -1172,11 +1243,11 @@ public class LoanApplicationFragment_4 extends Fragment {
                     // proper format. // 3. Server failed to authenticate
                     // that client. That is value of payt_STATUS is 2. //
                     // Error Message describes the reason for failure.
-                    Toast.makeText(context,"Back pressed. Transaction cancelled",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.authentication_failed, Toast.LENGTH_LONG).show();
 //                    Globle.appendLog(inErrorMessage);
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inErrorMessage-");
-                    s.append(inErrorMessage);
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inErrorMessage-");
+//                    s.append(inErrorMessage);
 //                    Globle.appendLog(String.valueOf(s));
 
                 }
@@ -1184,13 +1255,13 @@ public class LoanApplicationFragment_4 extends Fragment {
                 @Override
                 public void onErrorLoadingWebPage(int iniErrorCode,
                                                   String inErrorMessage, String inFailingUrl) {
-                    Toast.makeText(context,"Back pressed. Transaction cancelled",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.back_pressed_transaction_cancelled, Toast.LENGTH_LONG).show();
 
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inErrorMessage-");
-                    s.append(inErrorMessage);
-                    s.append(" inFailingUrl-");
-                    s.append(inFailingUrl);
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inErrorMessage-");
+//                    s.append(inErrorMessage);
+//                    s.append(" inFailingUrl-");
+//                    s.append(inFailingUrl);
 //                    Globle.appendLog(String.valueOf(s));
 
                 }
@@ -1198,23 +1269,29 @@ public class LoanApplicationFragment_4 extends Fragment {
                 // had to be added: NOTE
                 @Override
                 public void onBackPressedCancelTransaction() {
-                    Toast.makeText(context,"Back pressed. Transaction cancelled",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.back_pressed_transaction_cancelled, Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {
                     Log.d("LOG", "Payment Transaction Failed " + inErrorMessage);
-                    Toast.makeText(context, "Payment Transaction Failed ", Toast.LENGTH_LONG).show();
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inErrorMessage-");
-                    s.append(inErrorMessage);
+                    Toast.makeText(context, R.string.payment_tansaction_failed, Toast.LENGTH_LONG).show();
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inErrorMessage-");
+//                    s.append(inErrorMessage);
 //                    Globle.appendLog(String.valueOf(s));
 
                 }
 
             });
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
 
@@ -1237,25 +1314,31 @@ public class LoanApplicationFragment_4 extends Fragment {
 //                edi.putString("checkForImageSlider",checkForImageSlider);
 //                editor.commit();
 
-                if(jsonObject.getString("signedApplicationStatus").equalsIgnoreCase("1")){
+                if (jsonObject.getString("signedApplicationStatus").equalsIgnoreCase("1")) {
                     try {
                         linearLayoutManual.setVisibility(View.GONE);
                         buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
                         textView7.setVisibility(View.GONE);
                         radioGroupla4.setVisibility(View.GONE);
                         textView6.setText("Signed");
-                        textView6.setTextColor(((Activity)context).getResources().getColor(R.color.colorPrimary));
-                    } catch (Resources.NotFoundException e) {
-                        e.printStackTrace();
+                        textView6.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
+                    } catch (Exception e) {
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
 
-                if(paymentStatus.equalsIgnoreCase("1")){
+                if (paymentStatus.equalsIgnoreCase("1")) {
                     linearLayout_paymentDetails.setVisibility(View.VISIBLE);
                     linpaymentoptions.setVisibility(View.GONE);
                     linnote.setVisibility(View.GONE);
-                    textView11.setText("Paid");
-                    textView11.setTextColor(((Activity)context).getResources().getColor(R.color.colorPrimary));
+                    textView11.setText(R.string.paid);
+                    textView11.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
                     textView14.setText(jsonObject.getString("transactionAmount"));
                     textView16.setText(jsonObject.getString("transactionId"));
                     textView18.setText(jsonObject.getString("transactionDate"));
@@ -1268,7 +1351,13 @@ public class LoanApplicationFragment_4 extends Fragment {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 }

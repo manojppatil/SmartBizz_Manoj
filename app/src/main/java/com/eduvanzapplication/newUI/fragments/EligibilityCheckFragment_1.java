@@ -1,8 +1,8 @@
 package com.eduvanzapplication.newUI.fragments;
 
 
+import android.app.DatePickerDialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,381 +12,346 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.R;
-import com.eduvanzapplication.pqformfragments.pojo.LocationsPOJO;
-import com.eduvanzapplication.pqformfragments.pojo.NameOfCoursePOJO;
-import com.eduvanzapplication.pqformfragments.pojo.NameOfInsitituePOJO;
 import com.eduvanzapplication.newUI.VolleyCallNew;
+import com.eduvanzapplication.newUI.pojo.RelationShipPOJO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 
-/**
- * SEEK BAR LINK - https://github.com/jaredrummler/MaterialSpinner
- */
-
-
 public class EligibilityCheckFragment_1 extends Fragment {
 
-    public static Spinner insititutenameSpinner, insitituteLocationSpinner, coursenameSpinner;
+    Calendar cal;
     public static Context context;
     public static Fragment mFragment;
     Button buttonNext;
     Typeface typefaceFont, typefaceFontBold;
-    TextView textView1, textView2, textView3;
-    String instituteID = "", courseID = "", locationID="";
-    public static ArrayAdapter arrayAdapter_NameOfInsititue;
-    public static ArrayList<String> nameofinstitute_arrayList;
-    public static ArrayList<NameOfInsitituePOJO> nameOfInsitituePOJOArrayList;
-    public static ArrayAdapter arrayAdapter_NameOfCourse;
-    public static ArrayList<String> nameofcourse_arrayList;
-    public static ArrayList<NameOfCoursePOJO> nameOfCoursePOJOArrayList;
-    public static ArrayAdapter arrayAdapter_locations;
-    public static ArrayList<String> locations_arrayList;
-    public static ArrayList<LocationsPOJO> locationPOJOArrayList;
+    EditText edtFirstName, edtMiddleName, edtLastName, edtCoMobileNo;
+    TextView edtBirthDate;
+    RadioGroup rgGender;
+    RadioButton rbMale, rbFemale;
+    public static String dateformate = "";
+    public static Spinner spRelation;
+    public LinearLayout linRelationship;
+    public String relationshipID = "";
 
+    public static ArrayAdapter arrayAdapter_spRelation;
+    public static ArrayList<String> spRelation_arrayList;
+    public static ArrayList<RelationShipPOJO> relationShipPOJOArrayList;
 
     public EligibilityCheckFragment_1() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_eligibilitycheck_1, container, false);
-        context = getContext();
-
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        mFragment = new EligibilityCheckFragment_1();
-
-        typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/Raleway-Regular.ttf");
-        typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
-
-        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-        textView1 = (TextView) view.findViewById(R.id.textView_e1);
-        textView2 = (TextView) view.findViewById(R.id.textView_e2);
-        textView3 = (TextView) view.findViewById(R.id.textView_e3);
-        textView1.setTypeface(typefaceFontBold);
-        textView2.setTypeface(typefaceFont);
-        textView3.setTypeface(typefaceFont);
-
-        buttonNext = (Button) view.findViewById(R.id.button_next_eligiblityfragment1);
-        buttonNext.setTypeface(typefaceFontBold);
-
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!instituteID.equals("") && !courseID.equals("") && !locationID.equals("")) {
-                    EligibilityCheckFragment_2 eligibilityCheckFragment_2 = new EligibilityCheckFragment_2();
-                    transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_2).commit();
-                }else {
-                    if(insititutenameSpinner.getSelectedItemPosition() <= 0)
-                    {
-                        setSpinnerError(insititutenameSpinner,"Please select institute name");
-
-                    } if(coursenameSpinner.getSelectedItemPosition() <= 0)
-                    {
-                        setSpinnerError(coursenameSpinner,"Please select course name");
-
-                    } if(insitituteLocationSpinner.getSelectedItemPosition() <= 0)
-                    {
-                        setSpinnerError(insitituteLocationSpinner,"Please select institute location");
-
-                    }
-                    //Toast.makeText(context, "Please Select Course, Institute & Institute Location to Continue", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-        });
-
-        insititutenameSpinner = (Spinner) view.findViewById(R.id.spinner_institutename_eligiblity);
-        insitituteLocationSpinner = (Spinner) view.findViewById(R.id.spinner_institutelocation_eligiblity);
-        coursenameSpinner = (Spinner) view.findViewById(R.id.spinner_coursename_eligiblity);
-
-
-        insititutenameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("I_________D", "onItemClick: " + " CLICK HUA");
-
-                String text = insititutenameSpinner.getSelectedItem().toString();
-                int count = nameOfInsitituePOJOArrayList.size();
-                Log.e("TAG", "count: " + count);
-                for (int i = 0; i < count; i++) {
-                    if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase(text)) {
-                        MainApplication.mainapp_instituteID = instituteID = nameOfInsitituePOJOArrayList.get(i).instituteID;
-                        Log.e("I_________D", "onItemClick: " + instituteID);
-                    }
-                }
-                courseApiCall();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        coursenameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("I_________D", "onItemClick: ");
-                String text = coursenameSpinner.getSelectedItem().toString();
-                int count = nameOfCoursePOJOArrayList.size();
-                Log.e("TAG", "count: " + count);
-                for (int i = 0; i < count; i++) {
-                    if (nameOfCoursePOJOArrayList.get(i).courseName.equalsIgnoreCase(text)) {
-                        MainApplication.mainapp_courseID = courseID = nameOfCoursePOJOArrayList.get(i).courseID;
-                        Log.e("I_________D", "onItemClick: " + courseID);
-                    }
-                }
-                locationApiCall();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        insitituteLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String text = insitituteLocationSpinner.getSelectedItem().toString();
-                int count = locationPOJOArrayList.size();
-                for (int i = 0; i < count; i++) {
-                    if (locationPOJOArrayList.get(i).locationName.equalsIgnoreCase(text)) {
-                        MainApplication.mainapp_locationID = locationID = locationPOJOArrayList.get(i).locationID;
-                        Log.e("I_________D", "onItemClick: " + locationID);
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillInstitutes";  //http://159.89.204.41/eduvanzApi/pqform/apiPrefillInstitutes
-            Map<String, String> params = new HashMap<String, String>();
-            VolleyCallNew volleyCall = new VolleyCallNew();
-            if(!Globle.isNetworkAvailable(context))
-            {
-                Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            context = getContext();
 
-            } else {
-                volleyCall.sendRequest(context, url, null, mFragment, "instituteName", params);
-            }
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+            mFragment = new EligibilityCheckFragment_1();
+
+            typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/Raleway-Regular.ttf");
+            typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
+
+            final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+            edtFirstName = (EditText) view.findViewById(R.id.edtFirstName);
+            edtMiddleName = (EditText) view.findViewById(R.id.edtMiddleName);
+            edtLastName = (EditText) view.findViewById(R.id.edtLastName);
+            edtBirthDate = (TextView) view.findViewById(R.id.edtBirthDate);
+            edtCoMobileNo = (EditText) view.findViewById(R.id.edtCoMobileNo);
+
+            rgGender = (RadioGroup) view.findViewById(R.id.rgGender);
+            rbMale = (RadioButton) view.findViewById(R.id.rbMale);
+            rbFemale = (RadioButton) view.findViewById(R.id.rbFemale);
+
+            spRelation = (Spinner) view.findViewById(R.id.spRelation);
+
+            linRelationship = (LinearLayout) view.findViewById(R.id.linRelationship);
+
+            buttonNext = (Button) view.findViewById(R.id.button_next_eligiblityfragment1);
+            buttonNext.setTypeface(typefaceFontBold);
+
+//            spRelation_arrayList = new ArrayList<>();
+//            spRelation_arrayList.add("Select Relationship");
+//            spRelation_arrayList.add("Father");
+//            spRelation_arrayList.add("Wife");
+//            spRelation_arrayList.add("Sister");
+//            spRelation_arrayList.add("Grand-Mother");
+//            spRelation_arrayList.add("Mother");
+//            spRelation_arrayList.add("Husband");
+//            spRelation_arrayList.add("Brother");
+//            spRelation_arrayList.add("Grand-Father");
+//            spRelation_arrayList.add("Legal Guardian");
+//            spRelation_arrayList.add("Other");
+//
+//            arrayAdapter_spRelation = new ArrayAdapter(context, R.layout.custom_layout_spinner, spRelation_arrayList);
+//            spRelation.setAdapter(arrayAdapter_spRelation);
+
+            relationshipwithapplicantApiCall();
+
+            final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+                    // TODO Auto-generated method stub
+                    cal.set(Calendar.YEAR, year);
+                    cal.set(Calendar.MONTH, monthOfYear);
+                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    int month = monthOfYear + 1;
+                    String datenew = dayOfMonth + "/" + month + "/" + year;
+                    dateformate = dateFormateSystem(datenew);
+                    edtBirthDate.setText(dateformate);
+                    MainApplication.coborrowerValue15 = edtBirthDate.getText().toString();
+                    edtBirthDate.setTextColor(getResources().getColor(R.color.black));
+                }
+
+            };
+
+            cal = Calendar.getInstance();
+            edtBirthDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cal = Calendar.getInstance();
+                    cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
+                    DatePickerDialog data = new DatePickerDialog(context, date, cal
+                            .get(Calendar.YEAR) - 18, 1,
+                            1);
+                    data.getDatePicker().setMaxDate(System.currentTimeMillis() - 1234564);
+                    data.show();
+                }
+            });
+
+            spRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spRelation.getSelectedItem().toString();
+                        int count = relationShipPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (relationShipPOJOArrayList.get(i).relatioship.equalsIgnoreCase(text)) {
+                                MainApplication.relationship_with_applicant = relationshipID = relationShipPOJOArrayList.get(i).relatioship;
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            buttonNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!edtFirstName.getText().toString().equals("") && !edtLastName.getText().toString().equals("") &&
+                            !edtBirthDate.getText().toString().equals("")) {
+
+                        if (rgGender.getCheckedRadioButtonId() > 0) {
+
+                            String gender = "";
+                            if (rbMale.isChecked()) {
+                                gender = "1";
+                                MainApplication.gender_id = gender;
+//                                MainApplication.cogender_id = gender;
+                            }
+
+                            if (rbFemale.isChecked()) {
+                                gender = "2";
+                                MainApplication.gender_id = gender;
+//                                MainApplication.cogender_id = gender;
+                            }
+
+                            MainApplication.first_name = edtFirstName.getText().toString().trim();
+                            MainApplication.middle_name = edtMiddleName.getText().toString().trim();
+                            MainApplication.last_name = edtLastName.getText().toString().trim();
+                            MainApplication.dob = edtBirthDate.getText().toString().trim();
+
+//                            MainApplication.cofirst_name = edtFirstName.getText().toString().trim();
+//                            MainApplication.comiddle_name = edtMiddleName.getText().toString().trim();
+//                            MainApplication.colast_name = edtLastName.getText().toString().trim();
+//                            MainApplication.codob = edtBirthDate.getText().toString().trim();
+//                            MainApplication.comobile_number = edtCoMobileNo.getText().toString().trim();
+
+                            EligibilityCheckFragment_2 eligibilityCheckFragment_2 = new EligibilityCheckFragment_2();
+                            transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_2).commit();
+                        } else {
+                            rbFemale.setError(getString(R.string.you_need_to_select_gender));
+                            rbFemale.requestFocus();
+                        }
+                    } else {
+                        if (edtFirstName.getText().toString().equalsIgnoreCase("")) {
+                            edtFirstName.setError(getString(R.string.first_name_is_required));
+                            edtFirstName.requestFocus();
+                        } else {
+                            edtFirstName.setError(null);
+                        }
+                        if (edtLastName.getText().toString().equalsIgnoreCase("")) {
+                            edtLastName.setError(getString(R.string.last_name_is_required));
+                            edtLastName.requestFocus();
+                        } else {
+                            edtLastName.setError(null);
+
+                        }
+                        if (edtBirthDate.getText().toString().equalsIgnoreCase("")) {
+                            edtBirthDate.setError(getString(R.string.birthdate_is_required));
+                            edtBirthDate.requestFocus();
+                        } else if (edtBirthDate.getText().toString().toLowerCase().equals("birthdate")) {
+                            edtBirthDate.setError(getString(R.string.birthdate_is_required));
+                            edtBirthDate.requestFocus();
+                        } else {
+                            edtBirthDate.setError(null);
+
+                        }
+                    }
+
+                }
+            });
+
+
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
-
 
         return view;
     }
 
-    private void setSpinnerError(Spinner spinner, String error){
-        View selectedView = spinner.getSelectedView();
-        if (selectedView != null && selectedView instanceof TextView) {
-            spinner.requestFocus();
-            TextView selectedTextView = (TextView) selectedView;
-            selectedTextView.setError("error"); // any name of the error will do
-            selectedTextView.setTextColor(Color.RED); //text color in which you want your error message to be displayed
-            selectedTextView.setText(error); // actual error message
-            //spinner.performClick();
-            // to open the spinner list if error is found.
-
-        }
-    }
-
-    public void courseApiCall() {
+    private void relationshipwithapplicantApiCall() {
+        /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillCourses";
+            String url = MainApplication.mainUrl + "dashboard/getAllRelationshipWithCoborrower";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("instituteId", instituteID);
-            VolleyCallNew volleyCall = new VolleyCallNew();
-            if(!Globle.isNetworkAvailable(context))
-            {
-                Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
             } else {
-                volleyCall.sendRequest(context, url, null, mFragment, "courseName", params);
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "getAllRelationshipWithCoborrower", params, MainApplication.auth_token);
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
-    public void locationApiCall(){
+    public void getAllRelationshipWithCoborrower(JSONObject jsonData) {
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillLocations";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("institute_id", MainApplication.mainapp_instituteID);
-            params.put("course_id", MainApplication.mainapp_courseID);
-            VolleyCallNew volleyCall = new VolleyCallNew();
-            if(!Globle.isNetworkAvailable(context))
-            {
-                Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    spRelation_arrayList = new ArrayList<>();
+                    spRelation_arrayList.add("Select Relationship");
+                    arrayAdapter_spRelation = new ArrayAdapter(context, R.layout.custom_layout_spinner, spRelation_arrayList);
+                    spRelation.setAdapter(arrayAdapter_spRelation);
+                    arrayAdapter_spRelation.notifyDataSetChanged();
+                    spRelation.setSelection(0);
 
-            } else {
-                volleyCall.sendRequest(context, url, null, mFragment, "locationName", params);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /** RESPONSE OF API CALL **/
-    public void instituteName(JSONObject jsonData) {
-        try {
-            Log.e("SERVER CALL", "PrefillInstitutesFragment1" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                JSONArray jsonArray = jsonData.getJSONArray("result");
-
-                nameOfInsitituePOJOArrayList = new ArrayList<>();
-                nameofinstitute_arrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    NameOfInsitituePOJO nameOfInsitituePOJO = new NameOfInsitituePOJO();
-                    JSONObject mJsonti = jsonArray.getJSONObject(i);
-                    nameOfInsitituePOJO.instituteName = mJsonti.getString("institute_name");
-                    nameofinstitute_arrayList.add(mJsonti.getString("institute_name"));
-                    nameOfInsitituePOJO.instituteID = mJsonti.getString("institute_id");
-                    nameOfInsitituePOJOArrayList.add(nameOfInsitituePOJO);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                 }
-                arrayAdapter_NameOfInsititue = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofinstitute_arrayList);
-                insititutenameSpinner.setAdapter(arrayAdapter_NameOfInsititue);
-                arrayAdapter_NameOfInsititue.notifyDataSetChanged();
 
-                if(!MainApplication.mainapp_instituteID.equals("")){
-                    for (int i = 0; i < nameOfInsitituePOJOArrayList.size(); i++) {
-                        if (MainApplication.mainapp_instituteID.equalsIgnoreCase(nameOfInsitituePOJOArrayList.get(i).instituteID)) {
-                            insititutenameSpinner.setSelection(i);
-                        }
+            } else {
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray3 = jsonObject.getJSONArray("relatioship");
+                    spRelation_arrayList = new ArrayList<>();
+                    relationShipPOJOArrayList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        RelationShipPOJO borrowerCurrentStatePersonalPOJO = new RelationShipPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        borrowerCurrentStatePersonalPOJO.relatioship = mJsonti.getString("relatioship");
+                        spRelation_arrayList.add(mJsonti.getString("relatioship"));
+                        borrowerCurrentStatePersonalPOJO.id = mJsonti.getString("id");
+                        relationShipPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
                     }
-                }
+                    arrayAdapter_spRelation = new ArrayAdapter(context, R.layout.custom_layout_spinner, spRelation_arrayList);
+                    spRelation.setAdapter(arrayAdapter_spRelation);
+                    arrayAdapter_spRelation.notifyDataSetChanged();
 
-            } else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    spRelation.setSelection(Integer.parseInt(relationshipID));
+
+                } else {
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
-
-    public void courseName(JSONObject jsonData) {
+    public static String dateFormateSystem(String date) {
+        String dateformate2 = null;
         try {
-            Log.e("SERVER CALL", "PrefillCourseFragment1" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                JSONArray jsonArray = jsonData.getJSONArray("result");
-
-                nameOfCoursePOJOArrayList = new ArrayList<>();
-                nameofcourse_arrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    NameOfCoursePOJO nameOfCoursePOJO = new NameOfCoursePOJO();
-                    JSONObject mJsonti = jsonArray.getJSONObject(i);
-                    nameOfCoursePOJO.courseName = mJsonti.getString("course_name");
-                    nameofcourse_arrayList.add(mJsonti.getString("course_name"));
-                    nameOfCoursePOJO.courseID = mJsonti.getString("course_id");
-                    nameOfCoursePOJOArrayList.add(nameOfCoursePOJO);
-                }
-                arrayAdapter_NameOfCourse = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofcourse_arrayList);
-                coursenameSpinner.setAdapter(arrayAdapter_NameOfCourse);
-                arrayAdapter_NameOfCourse.notifyDataSetChanged();
-
-                if(!MainApplication.mainapp_courseID.equals("")){
-
-                    for (int i = 0; i < nameOfCoursePOJOArrayList.size(); i++) {
-                        if (MainApplication.mainapp_courseID.equalsIgnoreCase(nameOfCoursePOJOArrayList.get(i).courseID)) {
-                            coursenameSpinner.setSelection(i);
-                        }
-                    }
-                }
-
-            } else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
+            String birthDate = date;
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+            Date dateformate = fmt.parse(birthDate);
+            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MMM-yyyy");
+            dateformate2 = fmtOut.format(dateformate);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void locationName(JSONObject jsonData) {
-        try {
-            Log.e("SERVER CALL", "PrefillInstitutesFragment1" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                JSONArray jsonArray = jsonData.getJSONArray("result");
-
-                locationPOJOArrayList = new ArrayList<>();
-                locations_arrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    LocationsPOJO locationsPOJO = new LocationsPOJO();
-                    JSONObject mJsonti = jsonArray.getJSONObject(i);
-                    locationsPOJO.locationName = mJsonti.getString("location_name");
-                    locations_arrayList.add(mJsonti.getString("location_name"));
-                    locationsPOJO.locationID = mJsonti.getString("location_id");
-                    locationPOJOArrayList.add(locationsPOJO);
-                }
-                arrayAdapter_locations = new ArrayAdapter(context, R.layout.custom_layout_spinner, locations_arrayList);
-                insitituteLocationSpinner.setAdapter(arrayAdapter_locations);
-                arrayAdapter_locations.notifyDataSetChanged();
-
-                if(!MainApplication.mainapp_locationID.equals("")){
-
-                    for (int i = 0; i <  locationPOJOArrayList.size(); i++) {
-                        if (MainApplication.mainapp_locationID.equalsIgnoreCase(locationPOJOArrayList.get(i).locationID)) {
-                            insitituteLocationSpinner.setSelection(i);
-                        }
-                    }
-                }
-
-
-            }else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return dateformate2;
     }
 
 }

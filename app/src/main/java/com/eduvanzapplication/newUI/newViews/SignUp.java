@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 
@@ -24,46 +25,56 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-        mainApplication = new MainApplication();
-        context = this;
+        try {
+            setContentView(R.layout.activity_sign_up);
+            mainApplication = new MainApplication();
+            context = this;
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_sign_up);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(R.string.title_sign_up);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        textViewUserName = (TextView) findViewById(R.id.textView_signup_username);
-        mainApplication.applyTypeface(textViewUserName, context);
-        textView1 = (TextView) findViewById(R.id.textView_signup_1);
-        mainApplication.applyTypeface(textView1, context);
+            textViewUserName = (TextView) findViewById(R.id.textView_signup_username);
+            mainApplication.applyTypeface(textViewUserName, context);
+            textView1 = (TextView) findViewById(R.id.textView_signup_1);
+            mainApplication.applyTypeface(textView1, context);
 
-        buttonSignIn = (Button) findViewById(R.id.button_signup_signin);
-        mainApplication.applyTypeface(buttonSignIn, context);
+            buttonSignIn = (Button) findViewById(R.id.button_signup_signin);
+            mainApplication.applyTypeface(buttonSignIn, context);
 
-        buttonSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUp.this, SignIn.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+            buttonSignIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(SignUp.this, SignIn.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
 
-        buttonSignUp = (Button) findViewById(R.id.button_signup_signup);
-        mainApplication.applyTypeface(buttonSignUp, context);
+            buttonSignUp = (Button) findViewById(R.id.button_signup_signup);
+            mainApplication.applyTypeface(buttonSignUp, context);
 
-        buttonSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignUp.this, EligibilityCheck.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+            buttonSignUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(SignUp.this, EligibilityCheck.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(SignUp.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
 
     }
 

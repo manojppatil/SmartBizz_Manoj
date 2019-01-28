@@ -1,8 +1,6 @@
 package com.eduvanzapplication.newUI.newViews;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +12,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 
 import org.json.JSONObject;
@@ -40,50 +36,67 @@ public class ForgotPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgotpassword);
-        mainApplication = new MainApplication();
-        context = this;
-        mActivity = this;
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        try {
+            setContentView(R.layout.activity_forgotpassword);
+            mainApplication = new MainApplication();
+            context = this;
+            mActivity = this;
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_forgot_password);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(R.string.title_forgot_password);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar_emailsignin);
-        edtEmailId = (EditText) findViewById(R.id.edtEmailId);
-        mainApplication.applyTypeface(edtEmailId, context);
-        btnResetPassword = (Button) findViewById(R.id.btnResetPassword);
-        mainApplication.applyTypeface(btnResetPassword, context);
+            progressBar = (ProgressBar) findViewById(R.id.progressBar_emailsignin);
+            edtEmailId = (EditText) findViewById(R.id.edtEmailId);
+            mainApplication.applyTypeface(edtEmailId, context);
+            btnResetPassword = (Button) findViewById(R.id.btnResetPassword);
+            mainApplication.applyTypeface(btnResetPassword, context);
 
 //        edtEmailId = (EditText) findViewById(R.id.edtEmailId);
 
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /** API CALL **/
-                try {
-                    progressBar.setVisibility(View.VISIBLE);
-                    String url = MainApplication.mainUrl + "authorization/submitforgotpassworddetails";
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("username",edtEmailId.getText().toString());
-                    if(!Globle.isNetworkAvailable(ForgotPassword.this))
-                    {
-                        Toast.makeText(ForgotPassword.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
+            btnResetPassword.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /** API CALL **/
+                    try {
+                        progressBar.setVisibility(View.VISIBLE);
+                        String url = MainApplication.mainUrl + "authorization/submitforgotpassworddetails";
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("username",edtEmailId.getText().toString());
+                        if(!Globle.isNetworkAvailable(ForgotPassword.this))
+                        {
+                            Toast.makeText(ForgotPassword.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
-                    } else {
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        volleyCall.sendRequest(context, url, mActivity, null, "resetPassword", params);
+                        } else {
+                            VolleyCallNew volleyCall = new VolleyCallNew();
+                            volleyCall.sendRequest(context, url, mActivity, null, "resetPassword", params, MainApplication.auth_token);
+                        }
+                    } catch (Exception e) {
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(ForgotPassword.this,className, name, errorMsg, errorMsgDetails, errorLine);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    /** END OF API CALL **/
                 }
-                /** END OF API CALL **/            }
-        });
+            });
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(ForgotPassword.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
 
     }
 
@@ -124,7 +137,13 @@ public class ForgotPassword extends AppCompatActivity {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(ForgotPassword.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 }

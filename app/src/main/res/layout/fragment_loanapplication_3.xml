@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.eduvanzapplication.pqformfragments.PqFormFragment1">
+    tools:context="com.eduvanzapplication.newUI.fragments.LoanApplicationFragment_3">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,6 @@
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:background="@drawable/background_capsule_leftsided">
-
 
             <LinearLayout
                 android:id="@+id/linearLayout_leftoff"
@@ -53,7 +52,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primarydark"
                     android:gravity="center"
-                    android:text="Borrower"
+                    android:text="@string/kyc_details"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -63,7 +62,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primarydark"
                     android:gravity="center"
-                    android:text="Co Borrower"
+                    android:text="@string/documents"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -72,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Documents"
+                    android:text="@string/documentation"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold|italic" />
@@ -121,7 +120,7 @@
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/icon_leftarrow"
             android:paddingLeft="20dp"
-            android:text="Previous"
+            android:text="@string/previous"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -134,7 +133,7 @@
             android:background="@color/colorPrimary"
             android:drawableRight="@drawable/icon_rightarrow"
             android:paddingRight="20dp"
-            android:text="Next"
+            android:text="@string/next"
             android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>

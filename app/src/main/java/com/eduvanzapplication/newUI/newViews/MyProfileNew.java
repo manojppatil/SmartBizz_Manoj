@@ -83,162 +83,178 @@ public class MyProfileNew extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_profile_new);
-        mainApplication = new MainApplication();
-        context = this;
-        mActivity = this;
-
         try {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-            userID = sharedPreferences.getString("logged_id", "");
-            fname = sharedPreferences.getString("first_name", "--");
-            lname = sharedPreferences.getString("last_name", "--");
+            setContentView(R.layout.activity_my_profile_new);
+            mainApplication = new MainApplication();
+            context = this;
+            mActivity = this;
 
-            user_email = sharedPreferences.getString("user_email", "--");
-            mobile_no = sharedPreferences.getString("mobile_no", "--");
+            try {
+                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                userID = sharedPreferences.getString("logged_id", "");
+                fname = sharedPreferences.getString("first_name", "--");
+                lname = sharedPreferences.getString("last_name", "--");
 
-            Log.e(TAG, "mobile_no "+mobile_no );
-            profilePic = sharedPreferences.getString("user_image", "");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+                user_email = sharedPreferences.getString("user_email", "--");
+                mobile_no = sharedPreferences.getString("mobile_no", "--");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_profile);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+                Log.e(TAG, "mobile_no "+mobile_no );
+                profilePic = sharedPreferences.getString("user_image", "");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
-        linearLayoutProfileCompletion = (LinearLayout) findViewById(R.id.linearLayout_profileCompetionDetails);
-        linearLayoutApplicationDetails = (LinearLayout) findViewById(R.id.linearLayout_applicationDetails);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar_myprofile);
-        textViewUserName = (TextView) findViewById(R.id.textView_profile_username);
-        textViewUserName.setText(fname + " "+ lname);
-        mainApplication.applyTypeface(textViewUserName, context);
-        textViewPercentage = (TextView) findViewById(R.id.textView_profilecomplete_percentage);
-        mainApplication.applyTypeface(textViewPercentage, context);
-        textView1 = (TextView) findViewById(R.id.textView_profile1);
-        mainApplication.applyTypeface(textView1, context);
-        textView2 = (TextView) findViewById(R.id.textView_profile2);
-        mainApplication.applyTypeface(textView2, context);
-        textView3 = (TextView) findViewById(R.id.textView_profile3);
-        mainApplication.applyTypeface(textView3, context);
-        textView4 = (TextView) findViewById(R.id.textView_profile4);
-        mainApplication.applyTypeface(textView4, context);
-        textView5 = (TextView) findViewById(R.id.textView_profile5);
-        mainApplication.applyTypeface(textView5, context);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(R.string.title_profile);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        imageViewEligiblityCheck = (ImageView) findViewById(R.id.imageView_myprofile_eliglibilityCheck);
-        imageViewMobileVerification = (ImageView) findViewById(R.id.imageView_myprofile_mobileverification);
-        imageViewEmailVerification = (ImageView) findViewById(R.id.imageView_myprofile_emailVerification);
-        imageViewSocialScore = (ImageView) findViewById(R.id.imageView_myprofile_socialScore);
+            linearLayoutProfileCompletion = (LinearLayout) findViewById(R.id.linearLayout_profileCompetionDetails);
+            linearLayoutApplicationDetails = (LinearLayout) findViewById(R.id.linearLayout_applicationDetails);
+            progressBar = (ProgressBar) findViewById(R.id.progressBar_myprofile);
+            textViewUserName = (TextView) findViewById(R.id.textView_profile_username);
+            textViewUserName.setText(fname + " "+ lname);
+            mainApplication.applyTypeface(textViewUserName, context);
+            textViewPercentage = (TextView) findViewById(R.id.textView_profilecomplete_percentage);
+            mainApplication.applyTypeface(textViewPercentage, context);
+            textView1 = (TextView) findViewById(R.id.textView_profile1);
+            mainApplication.applyTypeface(textView1, context);
+            textView2 = (TextView) findViewById(R.id.textView_profile2);
+            mainApplication.applyTypeface(textView2, context);
+            textView3 = (TextView) findViewById(R.id.textView_profile3);
+            mainApplication.applyTypeface(textView3, context);
+            textView4 = (TextView) findViewById(R.id.textView_profile4);
+            mainApplication.applyTypeface(textView4, context);
+            textView5 = (TextView) findViewById(R.id.textView_profile5);
+            mainApplication.applyTypeface(textView5, context);
 
-        imageViewProfilePic= (ImageView) findViewById(R.id.imageView_newuserpic);
-        if(!profilePic.equalsIgnoreCase("")){
-            Picasso.with(context).load(profilePic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
-        }
+            imageViewEligiblityCheck = (ImageView) findViewById(R.id.imageView_myprofile_eliglibilityCheck);
+            imageViewMobileVerification = (ImageView) findViewById(R.id.imageView_myprofile_mobileverification);
+            imageViewEmailVerification = (ImageView) findViewById(R.id.imageView_myprofile_emailVerification);
+            imageViewSocialScore = (ImageView) findViewById(R.id.imageView_myprofile_socialScore);
 
-        buttonCompleteNow = (Button) findViewById(R.id.button_mtprofile_completenow);
-        mainApplication.applyTypeface(buttonCompleteNow, context);
+            imageViewProfilePic= (ImageView) findViewById(R.id.imageView_newuserpic);
+            if(!profilePic.equalsIgnoreCase("")){
+                Picasso.with(context).load(profilePic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
+            }
 
-        // new View start
-        applicationStatus= (TextView) findViewById(R.id.applicationStatus_textview);
-        applicationStatusName= (TextView) findViewById(R.id.applicationStatus_name_textview);
-        loanDetailsHeader= (TextView) findViewById(R.id.loanDetails_textview);
-        personalDetailsHeader= (TextView) findViewById(R.id.personal_details_textview);
+            buttonCompleteNow = (Button) findViewById(R.id.button_mtprofile_completenow);
+            mainApplication.applyTypeface(buttonCompleteNow, context);
 
-        institute= (TextView) findViewById(R.id.institute_textviewN);
-        instituteName= (TextView) findViewById(R.id.institute_name_textview);
-        course= (TextView) findViewById(R.id.course_textView);
-        courseName= (TextView) findViewById(R.id.course_name_textView);
-        fees= (TextView) findViewById(R.id.fees_textViewN);
-        feesName= (TextView) findViewById(R.id.fees_value_textView);
-        loanAmount= (TextView) findViewById(R.id.loan_textview);
-        loanAmountText= (TextView) findViewById(R.id.loan_value_textview);
+            // new View start
+            applicationStatus= (TextView) findViewById(R.id.applicationStatus_textview);
+            applicationStatusName= (TextView) findViewById(R.id.applicationStatus_name_textview);
+            loanDetailsHeader= (TextView) findViewById(R.id.loanDetails_textview);
+            personalDetailsHeader= (TextView) findViewById(R.id.personal_details_textview);
 
-        mobile= (TextView) findViewById(R.id.mobile_textviewN);
-        mobileName= (TextView) findViewById(R.id.mobile_name_textview);
-        email= (TextView) findViewById(R.id.email_textViewN);
-        emailName= (TextView) findViewById(R.id.email_name_textView);
-        address= (TextView) findViewById(R.id.address_textViewN);
-        addressName= (TextView) findViewById(R.id.address_name_textView);
+            institute= (TextView) findViewById(R.id.institute_textviewN);
+            instituteName= (TextView) findViewById(R.id.institute_name_textview);
+            course= (TextView) findViewById(R.id.course_textView);
+            courseName= (TextView) findViewById(R.id.course_name_textView);
+            fees= (TextView) findViewById(R.id.fees_textViewN);
+            feesName= (TextView) findViewById(R.id.fees_value_textView);
+            loanAmount= (TextView) findViewById(R.id.loan_textview);
+            loanAmountText= (TextView) findViewById(R.id.loan_value_textview);
 
-        applicationStatus.setTypeface(MainApplication.typefaceFont);
-        applicationStatusName.setTypeface(MainApplication.typefaceFont);
-        loanDetailsHeader.setTypeface(MainApplication.typefaceFont);
-        personalDetailsHeader.setTypeface(MainApplication.typefaceFont);
-        mainApplication.applyTypeface(institute, context);
-        mainApplication.applyTypeface(instituteName, context);
-        mainApplication.applyTypeface(course, context);
-        mainApplication.applyTypeface(courseName, context);
+            mobile= (TextView) findViewById(R.id.mobile_textviewN);
+            mobileName= (TextView) findViewById(R.id.mobile_name_textview);
+            email= (TextView) findViewById(R.id.email_textViewN);
+            emailName= (TextView) findViewById(R.id.email_name_textView);
+            address= (TextView) findViewById(R.id.address_textViewN);
+            addressName= (TextView) findViewById(R.id.address_name_textView);
 
-        mainApplication.applyTypeface(fees, context);
-        mainApplication.applyTypeface(feesName, context);
-        mainApplication.applyTypeface(loanAmount, context);
-        mainApplication.applyTypeface(loanAmountText, context);
-        mainApplication.applyTypeface(mobile, context);
-        mainApplication.applyTypeface(mobileName, context);
-        mainApplication.applyTypeface(email, context);
-        mainApplication.applyTypeface(emailName, context);
-        mainApplication.applyTypeface(address, context);
-        mainApplication.applyTypeface(courseName, context);
-        mainApplication.applyTypeface(addressName, context);
+            applicationStatus.setTypeface(MainApplication.typefaceFont);
+            applicationStatusName.setTypeface(MainApplication.typefaceFont);
+            loanDetailsHeader.setTypeface(MainApplication.typefaceFont);
+            personalDetailsHeader.setTypeface(MainApplication.typefaceFont);
+            mainApplication.applyTypeface(institute, context);
+            mainApplication.applyTypeface(instituteName, context);
+            mainApplication.applyTypeface(course, context);
+            mainApplication.applyTypeface(courseName, context);
 
-        mobileName.setText("+91 "+mobile_no);
-        emailName.setText(user_email);
+            mainApplication.applyTypeface(fees, context);
+            mainApplication.applyTypeface(feesName, context);
+            mainApplication.applyTypeface(loanAmount, context);
+            mainApplication.applyTypeface(loanAmountText, context);
+            mainApplication.applyTypeface(mobile, context);
+            mainApplication.applyTypeface(mobileName, context);
+            mainApplication.applyTypeface(email, context);
+            mainApplication.applyTypeface(emailName, context);
+            mainApplication.applyTypeface(address, context);
+            mainApplication.applyTypeface(courseName, context);
+            mainApplication.applyTypeface(addressName, context);
+
+            mobileName.setText("+91 "+mobile_no);
+            emailName.setText(user_email);
 
 // new View end
-        buttonCompleteNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(context, ClientActivity.class);
-//                startActivity(intent);
+            buttonCompleteNow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+    //                Intent intent = new Intent(context, ClientActivity.class);
+    //                startActivity(intent);
 
-                if(!ec.equalsIgnoreCase("1")){
-                    Intent intent = new Intent(context, EligibilityCheck.class);
-                    startActivity(intent);
-                    finish();
-                }else if(ec.equalsIgnoreCase("1") && !mv.equalsIgnoreCase("1")){
-                    Intent intent = new Intent(context, GetMobileNo.class);
-                    startActivity(intent);
-                    finish();
-                }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && !ev.equalsIgnoreCase("1")){
-                    Intent intent = new Intent(context, EligibilityCheck.class);
-                    startActivity(intent);
-                    finish();
-                }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && ev.equalsIgnoreCase("1") && !ss.equalsIgnoreCase("1")){
-                    Intent intent = new Intent(context, StartActivityFS.class);
-                    startActivity(intent);//        applicationId "com.eduvanzapplication"
+                    if(!ec.equalsIgnoreCase("1")){
+                        Intent intent = new Intent(context, EligibilityCheck.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(ec.equalsIgnoreCase("1") && !mv.equalsIgnoreCase("1")){
+                        Intent intent = new Intent(context, GetMobileNo.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && !ev.equalsIgnoreCase("1")){
+                        Intent intent = new Intent(context, EligibilityCheck.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && ev.equalsIgnoreCase("1") && !ss.equalsIgnoreCase("1")){
+                        Intent intent = new Intent(context, StartActivityFS.class);
+                        startActivity(intent);//        applicationId "com.eduvanzapplication"
+
+                    }
 
                 }
+            });
 
-            }
-        });
+            imageViewProfilePic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectImage();
+                }
+            });
 
-        imageViewProfilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectImage();
-            }
-        });
+            /**API CALL**/
+            try {
+                String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("studentId", userID);
+                if(!Globle.isNetworkAvailable(MyProfileNew.this))
+                {
+                    Toast.makeText(MyProfileNew.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
-        /**API CALL**/
-        try {
-            String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId", userID);
-            if(!Globle.isNetworkAvailable(MyProfileNew.this))
-            {
-                Toast.makeText(MyProfileNew.this, "Please check your network connection", Toast.LENGTH_SHORT).show();
-
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, mActivity, null, "myProfile", params);
+                } else {
+                    VolleyCallNew volleyCall = new VolleyCallNew();
+                    volleyCall.sendRequest(context, url, mActivity, null, "myProfile", params, MainApplication.auth_token);
+                }
+            } catch (Exception e) {
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(MyProfileNew.this,className, name, errorMsg, errorMsgDetails, errorLine);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(MyProfileNew.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -326,37 +342,54 @@ public class MyProfileNew extends AppCompatActivity {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(MyProfileNew.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
     private void selectImage() {
-        final CharSequence[] items = { "Take Photo", "Choose from Library",
-                "Cancel" };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MyProfileNew.this);
-        builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                boolean result= Utility.checkPermission(MyProfileNew.this);
+        try {
+            final CharSequence[] items = { "Take Photo", "Choose from Library",
+                    "Cancel" };
 
-                if (items[item].equals("Take Photo")) {
-                    userChoosenTask ="Take Photo";
-                    if(result)
-                        cameraIntent();
+            AlertDialog.Builder builder = new AlertDialog.Builder(MyProfileNew.this);
+            builder.setTitle("Add Photo!");
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    boolean result= Utility.checkPermission(MyProfileNew.this);
 
-                } else if (items[item].equals("Choose from Library")) {
-                    userChoosenTask ="Choose from Library";
-                    if(result)
-                        galleryIntent();
+                    if (items[item].equals("Take Photo")) {
+                        userChoosenTask ="Take Photo";
+                        if(result)
+                            cameraIntent();
 
-                } else if (items[item].equals("Cancel")) {
-                    dialog.dismiss();
+                    } else if (items[item].equals("Choose from Library")) {
+                        userChoosenTask ="Choose from Library";
+                        if(result)
+                            galleryIntent();
+
+                    } else if (items[item].equals("Cancel")) {
+                        dialog.dismiss();
+                    }
                 }
-            }
-        });
-        builder.show();
+            });
+            builder.show();
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(MyProfileNew.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
     }
     private void cameraIntent()
     {
@@ -375,84 +408,115 @@ public class MyProfileNew extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
+        try {
+            if (resultCode == Activity.RESULT_OK) {
+                if (requestCode == SELECT_FILE)
+                    onSelectFromGalleryResult(data);
+                else if (requestCode == REQUEST_CAMERA)
+                    onCaptureImageResult(data);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(MyProfileNew.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
     private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-
-        uploadFilePath = destination.toString();
-//        Log.e("TAG", "onCaptureImageResult: "+uploadFilePath );
-        FileOutputStream fo;
         try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-        imageViewProfilePic.setImageBitmap(thumbnail);
-        if (uploadFilePath != null) {
-            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-            progressBar.setVisibility(View.VISIBLE);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    //creating new thread to handle Http Operations
-//                            uploadFile(uploadFilePath);
-                    Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                    uploadFile(uploadFilePath);
-                }
-            }).start();
-        } else {
-            Toast.makeText(MyProfileNew.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+            File destination = new File(Environment.getExternalStorageDirectory(),
+                    System.currentTimeMillis() + ".jpg");
+
+            uploadFilePath = destination.toString();
+//        Log.e("TAG", "onCaptureImageResult: "+uploadFilePath );
+            FileOutputStream fo;
+            try {
+                destination.createNewFile();
+                fo = new FileOutputStream(destination);
+                fo.write(bytes.toByteArray());
+                fo.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            imageViewProfilePic.setImageBitmap(thumbnail);
+            if (uploadFilePath != null) {
+                // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                progressBar.setVisibility(View.VISIBLE);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //creating new thread to handle Http Operations
+    //                            uploadFile(uploadFilePath);
+                        Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                        uploadFile(uploadFilePath);
+                    }
+                }).start();
+            } else {
+                Toast.makeText(MyProfileNew.this, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(MyProfileNew.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void onSelectFromGalleryResult(Intent data) {
 
-        Bitmap bm=null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-                Uri selectedFileUri = data.getData();
-                uploadFilePath = PathFile.getPath(this,selectedFileUri);
-                Log.e("TAG", "onSelectFromGalleryResult: "+uploadFilePath );
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        imageViewProfilePic.setImageBitmap(bm);
-
-        if (uploadFilePath != null) {
-            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-            progressBar.setVisibility(View.VISIBLE);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    //creating new thread to handle Http Operations
-//                            uploadFile(uploadFilePath);
-                    Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
-                    uploadFile(uploadFilePath);
+        try {
+            Bitmap bm=null;
+            if (data != null) {
+                try {
+                    bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+                    Uri selectedFileUri = data.getData();
+                    uploadFilePath = PathFile.getPath(this,selectedFileUri);
+                    Log.e("TAG", "onSelectFromGalleryResult: "+uploadFilePath );
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            }).start();
-        } else {
-            Toast.makeText(MyProfileNew.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
+            }
+            imageViewProfilePic.setImageBitmap(bm);
+
+            if (uploadFilePath != null) {
+                // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                progressBar.setVisibility(View.VISIBLE);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //creating new thread to handle Http Operations
+    //                            uploadFile(uploadFilePath);
+                        Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                        uploadFile(uploadFilePath);
+                    }
+                }).start();
+            } else {
+                Toast.makeText(MyProfileNew.this, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(MyProfileNew.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }
@@ -469,12 +533,10 @@ public class MyProfileNew extends AppCompatActivity {
         String twoHyphens = "--";
         String boundary = "*****";
 
-
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
         int maxBufferSize = 1 * 1024 * 1024;
         File selectedFile = new File(selectedFilePath);
-
 
         String[] parts = selectedFilePath.split("/");
         final String fileName = parts[parts.length - 1];
@@ -545,7 +607,6 @@ public class MyProfileNew extends AppCompatActivity {
                 dataOutputStream.writeBytes(userID);
                 dataOutputStream.writeBytes(lineEnd);
 
-
 //                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
 ////                taOutputStream.writeBytes("Content-Disposition: form-data; name=\"document\";filename=\""
 ////                        + selectedFilePath + "\"" + lineEnd);
@@ -569,7 +630,6 @@ public class MyProfileNew extends AppCompatActivity {
 //                dataOutputStream.writeBytes(lineEnd);
 //                dataOutputStream.writeBytes(coBorrowerID);
 //                dataOutputStream.writeBytes(lineEnd);
-
 
                 dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
@@ -701,16 +761,16 @@ public class MyProfileNew extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MyProfileNew.this, "File Not Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyProfileNew.this, R.string.file_not_found, Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                Toast.makeText(MyProfileNew.this, "URL error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyProfileNew.this, R.string.url_error, Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(MyProfileNew.this, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyProfileNew.this, R.string.cannot_read_write_file, Toast.LENGTH_SHORT).show();
             }
 //            dialog.dismiss();
             return serverResponseCode;

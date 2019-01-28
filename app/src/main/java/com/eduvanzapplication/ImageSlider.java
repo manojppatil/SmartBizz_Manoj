@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.eduvanzapplication.newUI.SharedPref;
+import com.eduvanzapplication.newUI.newViews.DashboardActivity;
+//import com.eduvanzapplication.newUI.newViews.NewTruecallerSignIn;
+import com.eduvanzapplication.newUI.newViews.SingInWithTruecaller;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.nio.charset.StandardCharsets;
@@ -78,12 +81,13 @@ public class ImageSlider extends AppCompatActivity {
 
                sharedPref = new SharedPref();
                 if(sharedPref.getLoginDone(ImageSlider.this)){
-                    Intent intent = new Intent(ImageSlider.this,Main2ActivityNavigation.class);
+                    Intent intent = new Intent(ImageSlider.this,DashboardActivity.class);
                     startActivity(intent);
                     finish();
 
                 }else {
-                    Intent intent = new Intent(ImageSlider.this,SignupLogin.class);
+                    Intent intent = new Intent(ImageSlider.this,SingInWithTruecaller.class);
+//                    Intent intent = new Intent(ImageSlider.this,NewTruecallerSignIn.class);
                     startActivity(intent);
                     finish();
                 }

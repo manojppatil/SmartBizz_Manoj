@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    style="@style/com_truecaller_truebutton_text_style"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:onClick="onGetStarted"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="5"
+                android:src="@drawable/eduvanz_logo_new" />
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            style="@style/com_truecaller_truebutton_text_style"
+            android:translationZ="1.5dp"
+            android:stateListAnimator="@null"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/btnStart"
+            android:onClick="onGetStarted"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rectanglebackground"
+            android:text="verify mobile"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

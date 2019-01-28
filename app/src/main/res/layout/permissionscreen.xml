@@ -130,7 +130,6 @@
 
                         <TextView
                             android:layout_marginLeft="10dp"
-                            android:id="@+id/textview1_font2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -296,7 +295,6 @@
 
                         <TextView
                             android:layout_marginLeft="10dp"
-                            android:id="@+id/textview1_font3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -310,7 +308,7 @@
                             android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter Institute Location"
+                            android:hint="@string/enter_institute_location"
                             android:inputType="textCapWords"
                             android:background="@drawable/background_edittext"
                             android:textColorHint="@color/grey"

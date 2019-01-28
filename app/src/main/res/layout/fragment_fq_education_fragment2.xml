@@ -28,7 +28,7 @@
                     android:paddingLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Last Completed Degree : "
+                    android:text="@string/last_completed_degree"
                     android:layout_gravity="left"
                     android:textSize="16sp"
                     android:textColor="@color/colorPrimary"/>
@@ -44,7 +44,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +58,7 @@
                     android:layout_weight="1.5"
                     android:gravity="left"
                     android:paddingTop="2dp"
-                    android:text="Do you have any gaps in education : "
+                    android:text="@string/do_you_have_any_gaps_in_education"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -77,7 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="yes"
+                        android:text="@string/lbr_Ok"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
 
@@ -87,12 +86,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:padding="5dp"
-                        android:text="no"
+                        android:text="@string/lbr_No"
                         android:textColor="@color/black"
                         android:theme="@style/EditTextStyle" />
                 </RadioGroup>
             </LinearLayout>
-
 
             <LinearLayout
                 android:paddingLeft="5dp"
@@ -106,7 +104,7 @@
                     android:gravity="left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Marks Obtained in : "
+                    android:text="@string/marks_obtained_in"
                     android:layout_gravity="center"
                     android:textSize="16sp"
                     android:textColor="@color/colorPrimary"/>
@@ -124,7 +122,7 @@
                         android:id="@+id/radiobutton_iscgpa_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CGPA" />
+                        android:text="@string/cgpa" />
                     <RadioButton
                         android:checked="false"
                         android:theme="@style/EditTextStyle"
@@ -133,7 +131,7 @@
                         android:id="@+id/radiobutton_iscgpa_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Percentage" />
+                        android:text="@string/percentage" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -155,7 +153,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:hint="Last Degree CGPA"
+                        android:hint="@string/last_degree_cgpa"
                         android:textColor="@color/black"
                         android:textSize="16sp"/>
                 </android.support.design.widget.TextInputLayout>
@@ -174,12 +172,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:hint="Last Degree Percentage"
+                        android:hint="@string/last_degree_percentage"
                         android:textColor="@color/black"
                         android:textSize="16sp"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-
 
             <android.support.design.widget.TextInputLayout
                 android:theme="@style/EditTextStyle"
@@ -192,7 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="Passing Year"
+                    android:hint="@string/passing_year"
                     android:textColor="@color/black"
                     android:textSize="16sp"/>
             </android.support.design.widget.TextInputLayout>
