@@ -738,6 +738,14 @@
                         android:theme="@style/ThemeOverlay.AppCompat.Light" />
                 </LinearLayout>
 
+                <!--Office Details-->
+                <LinearLayout
+                    android:id="@+id/linOfficeDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -967,6 +975,8 @@
                         android:focusable="true"
                         android:gravity="center"
                         android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+                </LinearLayout>
 
                 </LinearLayout>
 

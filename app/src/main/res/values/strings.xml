@@ -263,7 +263,7 @@
     <string name="cgpa">CGPA</string>
     <string name="percentage">Percentage</string>
     <string name="last_degree_percentage">Last Degree Percentage</string>
-    <string name="passing_year">Passing Year</string>
+    <string name="passing_year">Graduation Year</string>
     <string name="last_degree_cgpa">Last Degree CGPA</string>
     <string name="name_of_company">Name of Company</string>
     <string name="annual_income">Annual Income</string>
@@ -274,8 +274,8 @@
     <string name="student">Student</string>
     <string name="duration_of_job_business">Duration of Work</string>
     <string name="employer_type">Employer Type :</string>
-    <string name="government">Government</string>
-    <string name="private1">Private</string>
+    <string name="government">Government Sector</string>
+    <string name="private1">Private Sector</string>
     <string name="has_any_previous_emi">Has Any Previous Emi :</string>
     <string name="relationship_with_borrower">Relationship with Borrower :</string>
     <string name="employer">Employer</string>
