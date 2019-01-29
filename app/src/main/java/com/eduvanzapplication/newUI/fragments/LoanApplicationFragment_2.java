@@ -38,6 +38,8 @@ import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCityPersonalPOJO;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCountryPersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceDurationPersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceTypePersonalPOJO;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentStatePersonalPOJO;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
@@ -48,7 +50,9 @@ import com.eduvanzapplication.fqform.coborrowerdetail.pojo.CoborrowerProfessionF
 import com.eduvanzapplication.fqform.coborrowerdetail.pojo.RelationshipwithBorrowerPOJO;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.newUI.newViews.LoanApplication;
+import com.eduvanzapplication.newUI.pojo.AddressSameAsCurrentPOJO;
 import com.eduvanzapplication.newUI.pojo.ProfessionPOJO;
+import com.eduvanzapplication.newUI.pojo.RelationShipPOJO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -73,9 +77,8 @@ public class LoanApplicationFragment_2 extends Fragment {
 
     public static Context context;
     public static Fragment mFragment;
-    LinearLayout linBorrowerForm, linCoCorrowerForm, linCurrentAddress, linPermanentAddress;
+    LinearLayout linBorrowerForm, linCoCorrowerForm, linCurrentAddress, linPermanentAddress,linOfficeDetails;
     RelativeLayout relborrower, relCoborrower;
-    int borrowerVisiblity = 1, coborrowerVisiblity = 1;
     Button buttonNext, buttonPrevious;
     Typeface typefaceFont, typefaceFontBold;
     TextView textView1, textView2, textView3, txtBorrowerArrowKey, txtCoBorrowerArrowKey;
@@ -83,11 +86,12 @@ public class LoanApplicationFragment_2 extends Fragment {
     public static TextInputLayout input_cgpa, input_degree, input_previousamt;
     Typeface typeface;
     Calendar cal;
-    public static String dateformate = "", userID = "", coBorrowerBackground = "";
+    public static String userID = "", coBorrowerBackground = "";
     MainApplication mainApplication;
     static View view;
     static FragmentTransaction transaction;
     public static ProgressBar progressBar;
+    int borrowerVisiblity = 0, coborrowerVisiblity = 1;
 
     //Borrower
     public static EditText edtCourseFeeBr, edtLoanAmtBr, edtFnameBr, edtMnameBr, edtLnameBr, edtEmailIdBr, edtPanBr, edtAadhaarBr,
@@ -108,52 +112,65 @@ public class LoanApplicationFragment_2 extends Fragment {
 
     public static Spinner spCurrentCountryCoBr, spCurrentStateCoBr, spCurrentCityCoBr;
 
+    public static TextView txtBirthdayCalenderBr, txtBirthdayCalenderCoBr, lblBirthdayBr, lblBirthdayCoBr, txtBirthdateBr, txtBirthdateCoBr;
+
     public static RadioButton radioButtonPreviousEmiYes, radioButtonPreviousEmiNo, radioButtonMale, radioButtonFemale;
-    public static RadioButton radioButtonMarried, radioButtonSingle, radioButtonGovernment,
+    public static RadioButton rbMarriedBr, rbSingleBr, radioButtonGovernment,
             radioButtonPrivate;
 
-    public static RadioGroup radioGroupMaritialStatus, radioGroupPreviousEmi, radioGroupGender, radioGroupEmployerType;
+    public static RadioGroup rgMaritalStatusBr, radioGroupPreviousEmi, radioGroupGender, radioGroupEmployerType;
     public static EditText fname, lname, adhaarno, panno, currentaddress, currentpincode, permanentaddress,
-            contactno, emailid, permanentpincode, monthlyrent, previousemi;
+            contactno, emailid, permanentpincode, edtMonthlyRent, previousemi;
 
     public static Spinner spinnerPermanentCity, spinnerPermanentCountry, spinnerPermanentState;
     public static ArrayAdapter arrayAdapter_permanentCity, arrayAdapter_permanentState, arrayAdapter_permanentCountry;
-    public String permanentcityID = "", permanentstateID = "", permanentCountryID = "";
+    public String dateformate = "", mobileNo = "";
+    public String currentcityID = "", currentstateID = "", currentcountryID = "1",
+            currentcityIDCoBr = "", currentstateIDCoBr = "", currentcountryIDCoBr = "1";
 
-    public static Spinner spinnerCurrentResidenceType;
+    public static ArrayList<BorrowerCurrentResidenceTypePersonalPOJO> borrowerCurrentResidencePersonalPOJOArrayList;
+
+    public static Spinner spDurationStayAtCurrentAddress;
+
+    public static Spinner spResidentTypeBr;
     public static ArrayAdapter arrayAdapter_currentResidencetype;
     public static ArrayList<String> currentResidencetype_arrayList;
     public static ArrayList<CoborrowerCurrentResidenceTypePersonalPOJO> coborrowerCurrentResidenceTypePersonalPOJOArrayList;
     public String currentResidencetypeID = "";
+
+    public static ArrayAdapter arrayAdapter_currentResidenceDuration;
+    public static ArrayList<String> currentresidenceduration_arrayList;
+    public static ArrayList<BorrowerCurrentResidenceDurationPersonalPOJO> currentResidenceDurationPersonalPOJOArrayList;
+
+    public static ArrayAdapter arrayAdapter_currentAddressSameAs;
+    public static ArrayList<String> currentAddressSameAs_arrayList;
+    public static ArrayList<AddressSameAsCurrentPOJO> addressSameAsCurrentPOJOArrayList;
+
+    public static ArrayAdapter arrayAdapter_permanentAddressSameAs;
+    public static ArrayList<String> permanentAddressSameAs_arrayList;
+    public static ArrayList<AddressSameAsCurrentPOJO> addressSameAspermanentPOJOArrayList;
 
     public static ArrayAdapter arrayAdapter_profession;
     public static ArrayList<String> profession_arrayList;
     public static ArrayList<ProfessionPOJO> professionPOJOArrayList;
     public String professionID = "";
 
-    public static Spinner spinnerCurrentCity;
-    public static ArrayAdapter arrayAdapter_currentCity;
-    public static ArrayList<String> currentcity_arrayList, permanentcity_arrayList;
-    public static ArrayList<BorrowerCurrentCityPersonalPOJO> borrowerCurrentCityPersonalPOJOArrayList, borrowerPermanentCityPersonalPOJOArrayList;
-    public String currentcityID = "";
+    public static ArrayAdapter arrayAdapter_currentCity, arrayAdapter_currentCityCoBr;
+    public static ArrayList<String> currentcity_arrayList, currentcity_arrayListCoBr;
+    public static ArrayList<BorrowerCurrentCityPersonalPOJO> borrowerCurrentCityPersonalPOJOArrayList, borrowerCurrentCityPersonalPOJOArrayListCoBr;
 
-    public static Spinner spinnerCurrentState;
-    public static ArrayAdapter arrayAdapter_currentState;
-    public static ArrayList<String> currentstate_arrayList;
-    public static ArrayList<BorrowerCurrentStatePersonalPOJO> borrowerCurrentStatePersonalPOJOArrayList, borrowerPermanentStatePersonalPOJOArrayList;
-    public String currentstateID = "";
+    public static ArrayAdapter arrayAdapter_currentState, arrayAdapter_currentStateCoBr;
+    public static ArrayList<String> currentstate_arrayList, currentstate_arrayListCoBr;
+    public static ArrayList<BorrowerCurrentStatePersonalPOJO> borrowerCurrentStatePersonalPOJOArrayList, borrowerCurrentStatePersonalPOJOArrayListCoBr;
 
-    public static Spinner spinnerCurrentCountry;
-    public static ArrayAdapter arrayAdapter_currentCountry;
-    public static ArrayList<String> currentCountry_arrayList;
-    public static ArrayList<BorrowerCurrentCountryPersonalPOJO> borrowerCurrentCountryPersonalPOJOArrayList;
-    public String currentcountryID = "";
+    public static ArrayAdapter arrayAdapter_currentCountry, arrayAdapter_currentCountryCoBr;
+    public static ArrayList<String> currentCountry_arrayList, currentCountry_arrayListCoBr;
+    public static ArrayList<BorrowerCurrentCountryPersonalPOJO> borrowerCurrentCountryPersonalPOJOArrayList, borrowerCurrentCountryPersonalPOJOArrayListCoBr;
 
-    public static Spinner spinnerCurrentResidenceDuration;
-    public static ArrayAdapter arrayAdapter_currentResidenceDuration;
-    public static ArrayList<String> currentresidenceduration_arrayList;
-    public static ArrayList<CoborrowerCurrentResidenceDurationPersonalPOJO> coborrowerCurrentResidenceDurationPersonalPOJOArrayList;
-    public String currentresidenceDurationID = "";
+    public static Spinner spCurrentAddressSameAsKyc,spCurrentAddressSameAsKycOrBorrower;
+    public String currentAddressSameAsKycID = "";
+
+    public String relationshipID = "";
 
     public static Spinner spinnerRelationshipwithBorrower;
     public static ArrayAdapter arrayAdapter_relationshipwithborrower;
@@ -256,6 +273,20 @@ public class LoanApplicationFragment_2 extends Fragment {
         // Required empty public constructor
     }
 
+    public static String dateFormateSystem(String date) {
+        String dateformate2 = null;
+        try {
+            String birthDate = date;
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+            Date dateformate = fmt.parse(birthDate);
+            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MMM-yyyy");
+            dateformate2 = fmtOut.format(dateformate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dateformate2;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -342,351 +373,358 @@ public class LoanApplicationFragment_2 extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    boolean isIDNull = !adhaarno.getText().toString().equals("") ||
-                            !panno.getText().toString().equals("");
-
-                    if (!fname.getText().toString().equals("") && !lname.getText().toString().equals("") &&
-                            !textViewbirthday.getText().toString().equals("") &&
-                            !currentaddress.getText().toString().equals("") &&
-                            !currentpincode.getText().toString().equals("") &&
-                            !permanentaddress.getText().toString().equals("") &&
-                            !permanentpincode.getText().toString().equals("") &&
-                            !contactno.getText().toString().equals("") &&
-                            !emailid.getText().toString().equals("") &&
-                            !anuualincome.getText().toString().equals("") &&
-                            !employeer.getText().toString().equals("") && isIDNull) {
-
-                        if (radioGroupGender.getCheckedRadioButtonId() > 0) {
-                            radioButtonFemale.setError(null);
-
-                            if (radioGroupMaritialStatus.getCheckedRadioButtonId() > 0) {
-                                radioButtonSingle.setError(null);
-
-                                if (radioGroupPreviousEmi.getCheckedRadioButtonId() > 0) {
-                                    radioButtonPreviousEmiNo.setError(null);
-
-                                    if (radioGroupEmployerType.getCheckedRadioButtonId() > 0) {
-                                        radioButtonPrivate.setError(null);
-
-                                        if (!currentcityID.equalsIgnoreCase("") && !currentstateID.equalsIgnoreCase("") &&
-                                                !currentcountryID.equalsIgnoreCase("") && !permanentcityID.equalsIgnoreCase("") &&
-                                                !permanentstateID.equalsIgnoreCase("") && !permanentCountryID.equalsIgnoreCase("") &&
-                                                !currentResidencetypeID.equalsIgnoreCase("") && !currentresidenceDurationID.equalsIgnoreCase("") &&
-                                                !relationshipwithborrowerID.equalsIgnoreCase("") && !professionID.equalsIgnoreCase("") &&
-                                                !jobDurationID.equalsIgnoreCase("")) {
-
-                                            try {
-                                                String maritialstatus = "";
-                                                if (radioButtonMarried.isChecked()) {
-                                                    maritialstatus = "1";
-                                                } else if (radioButtonSingle.isChecked()) {
-                                                    maritialstatus = "2";
-                                                }
-
-                                                String previousEmi = "";
-                                                if (radioButtonPreviousEmiYes.isChecked()) {
-                                                    previousEmi = "1";
-                                                } else if (radioButtonPreviousEmiNo.isChecked()) {
-                                                    previousEmi = "0";
-                                                }
-
-                                                String gender = "";
-                                                if (radioButtonMale.isChecked()) {
-                                                    gender = "1";
-                                                }
-                                                if (radioButtonFemale.isChecked()) {
-                                                    gender = "2";
-                                                }
-
-                                                String empType = "";
-                                                if (radioButtonGovernment.isChecked()) {
-                                                    empType = "0";
-                                                }
-                                                if (radioButtonPrivate.isChecked()) {
-                                                    empType = "1";
-                                                }
-
-                                                progressBar.setVisibility(View.VISIBLE);
-                                                String url = MainApplication.mainUrl + "algo/setCoBorrowerLoanDetails";
-                                                Map<String, String> params = new HashMap<String, String>();
-                                                params.put("logged_id", userID);
-                                                params.put("coborrower_address_type", currentResidencetypeID);
-                                                params.put("coborrower_monthly_rent", monthlyrent.getText().toString());
-                                                params.put("coborrower_current_address", currentaddress.getText().toString());
-                                                params.put("coborrower_current_city", currentcityID);
-                                                params.put("coborrower_current_state", currentstateID);
-                                                params.put("coborrower_current_country", currentcountryID);
-                                                params.put("coborrower_current_pincode", currentpincode.getText().toString());
-                                                params.put("coborrower_permanent_address", permanentaddress.getText().toString());
-                                                params.put("coborrower_permanent_city", permanentcityID);
-                                                params.put("coborrower_permanent_state", permanentstateID);
-                                                params.put("coborrower_permanent_country", permanentCountryID);
-                                                params.put("coborrower_permanent_pincode", permanentpincode.getText().toString());
-                                                params.put("coborrower_first_name", fname.getText().toString());
-                                                params.put("coborrower_last_name", lname.getText().toString());
-                                                params.put("coborrower_dob", textViewbirthday.getText().toString());
-                                                params.put("coborrower_is_married", maritialstatus);
-                                                params.put("coborrower_pan_no", panno.getText().toString());
-                                                params.put("coborrower_aadhar_no", adhaarno.getText().toString());
-
-                                                params.put("coborrower_email", emailid.getText().toString());
-                                                params.put("coborrower_mobile", contactno.getText().toString());
-                                                params.put("coborrower_living_since", currentresidenceDurationID);
-                                                params.put("coborrower_relationship", relationshipwithborrowerID);
-
-                                                params.put("coborrower_profession", professionID);
-                                                params.put("coborrower_income", anuualincome.getText().toString());
-                                                params.put("coborrower_organization", employeer.getText().toString());
-                                                params.put("coborrower_working_organization_since", jobDurationID);
-                                                params.put("coborrower_has_any_emi", previousEmi);
-                                                params.put("ip_address", Utils.getIPAddress(true));
-
-                                                params.put("coborrower_previous_emi_amount", previousemi.getText().toString());
-
-                                                params.put("coborrower_gender_id", gender);
-
-                                                params.put("coborrower_employer_type", empType);
-
-                                                MainApplication.coborrowerValue1 = currentResidencetypeID;
-                                                MainApplication.coborrowerValue2 = monthlyrent.getText().toString();
-                                                MainApplication.coborrowerValue3 = currentaddress.getText().toString();
-                                                MainApplication.coborrowerValue4 = currentcityID;
-                                                MainApplication.coborrowerValue5 = currentstateID;
-                                                MainApplication.coborrowerValue6 = currentcountryID;
-                                                MainApplication.coborrowerValue7 = currentpincode.getText().toString();
-                                                MainApplication.coborrowerValue8 = permanentaddress.getText().toString();
-                                                MainApplication.coborrowerValue9 = permanentcityID;
-                                                MainApplication.coborrowerValue10 = permanentstateID;
-                                                MainApplication.coborrowerValue11 = permanentCountryID;
-                                                MainApplication.coborrowerValue12 = permanentpincode.getText().toString();
-                                                MainApplication.coborrowerValue13 = fname.getText().toString();
-                                                MainApplication.coborrowerValue14 = lname.getText().toString();
-                                                MainApplication.coborrowerValue15 = textViewbirthday.getText().toString();
-                                                MainApplication.coborrowerValue16 = maritialstatus;
-                                                MainApplication.coborrowerValue17 = panno.getText().toString();
-                                                MainApplication.coborrowerValue18 = adhaarno.getText().toString();
-
-                                                MainApplication.coborrowerValue19 = emailid.getText().toString();
-                                                MainApplication.coborrowerValue20 = contactno.getText().toString();
-                                                MainApplication.coborrowerValue21 = currentresidenceDurationID;
-                                                MainApplication.coborrowerValue22 = relationshipwithborrowerID;
-                                                MainApplication.coborrowerValue23 = professionID;
-                                                MainApplication.coborrowerValue24 = anuualincome.getText().toString();
-                                                MainApplication.coborrowerValue25 = employeer.getText().toString();
-                                                MainApplication.coborrowerValue26 = jobDurationID;
-                                                MainApplication.coborrowerValue27 = previousEmi;
-                                                MainApplication.coborrowerValue28 = previousemi.getText().toString();
-                                                MainApplication.coborrowerValue29 = gender;
-                                                MainApplication.coborrowerValue30 = empType;
-                                                if (!Globle.isNetworkAvailable(context)) {
-                                                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-                                                } else {
-
-                                                    VolleyCallNew volleyCall = new VolleyCallNew();
-                                                    volleyCall.sendRequest(context, url, null, mFragment, "sendcoboorrowerDetails", params, MainApplication.auth_token);
-                                                }
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        } else {
-                                            if (spinnerCurrentResidenceDuration.getSelectedItemPosition() <= 0) {
-                                                setSpinnerError(spinnerCurrentResidenceDuration, getString(R.string.please_select_duration_of_stay_at_current_address));
-                                                spinnerCurrentResidenceDuration.requestFocus();
-                                            }
-                                            if (spinnerProfession.getSelectedItemPosition() <= 0) {
-                                                setSpinnerError(spinnerProfession, getString(R.string.please_select_profession));
-                                                spinnerProfession.requestFocus();
-                                            }
-                                            if (spinnerJobDuration.getSelectedItemPosition() <= 0) {
-                                                setSpinnerError(spinnerJobDuration, getString(R.string.please_select_duration_of_job_business));
-                                                spinnerJobDuration.requestFocus();
-                                            }
-                                            Toast.makeText(context, R.string.please_fill_up_all_the_details_to_continue, Toast.LENGTH_LONG).show();
-                                        }
-                                    } else {
-                                        radioButtonPrivate.setError(getString(R.string.you_need_to_select_employer_type));
-                                        radioButtonPrivate.requestFocus();
-                                    }
-
-                                } else {
-                                    radioButtonPreviousEmiNo.setError(getString(R.string.you_need_to_select_previous_emi_status));
-                                    radioButtonPreviousEmiNo.requestFocus();
-                                }
-
-                            } else {
-                                radioButtonSingle.setError(getString(R.string.you_need_to_select_maritial_status));
-                                radioButtonSingle.requestFocus();
-                            }
-                        } else {
-                            radioButtonFemale.setError(getString(R.string.you_need_to_select_gender));
-                            radioButtonFemale.requestFocus();
-                        }
-
-                    } else {
-
-                        if (fname.getText().toString().equalsIgnoreCase("")) {
-                            fname.setError(getString(R.string.first_name_is_required));
-                            fname.requestFocus();
-                        } else {
-                            fname.setError(null);
-
-                        }
-
-                        if (lname.getText().toString().equalsIgnoreCase("")) {
-                            lname.setError(getString(R.string.last_name_is_required));
-                            lname.requestFocus();
-                        } else {
-                            lname.setError(null);
-
-                        }
-
-                        if (textViewbirthday.getText().toString().equalsIgnoreCase("")) {
-                            textViewbirthday.setError(getString(R.string.birthdate_is_required));
-                            textViewbirthday.requestFocus();
-                        } else if (textViewbirthday.getText().toString().toLowerCase().equals("birthdate")) {
-                            textViewbirthday.setError(getString(R.string.birthdate_is_required));
-                            textViewbirthday.requestFocus();
-                        } else {
-                            textViewbirthday.setError(null);
-                        }
-
-                        if (adhaarno.getText().toString().equalsIgnoreCase("")) {
-                            adhaarno.setError(getString(R.string.adhaar_number_is_required));
-                            adhaarno.requestFocus();
-                        } else {
-                            adhaarno.setError(null);
-                        }
-                        if (panno.getText().toString().equalsIgnoreCase("")) {
-                            panno.setError(getString(R.string.pan_number_is_required));
-                            panno.requestFocus();
-                        } else {
-                            panno.setError(null);
-                        }
-
-                        //                    if (adhaarno.getText().toString().equalsIgnoreCase("") && panno.getText().toString().equalsIgnoreCase("")) {
-                        //                        adhaarno.setError("Aadhaar Number is Required");
-                        //                        adhaarno.requestFocus();
-                        //                    }
-                        //                    else {
-                        //                        adhaarno.setError(null);
-                        //
-                        //                    }
-                        //                    if (panno.getText().toString().equalsIgnoreCase("") && adhaarno.getText().toString().equalsIgnoreCase("")) {
-                        //                        panno.setError("PAN number is required is Required");
-                        //                        panno.requestFocus();
-                        //                    }else {
-                        //                        panno.setError(null);
-                        //
-                        //                    }
-
-                        if (currentaddress.getText().toString().equalsIgnoreCase("")) {
-                            currentaddress.setError(getString(R.string.current_address_is_required));
-                            currentaddress.requestFocus();
-                        } else {
-                            currentaddress.setError(null);
-                        }
-
-                        if (currentpincode.getText().toString().equalsIgnoreCase("")) {
-                            currentpincode.setError(getString(R.string.current_pin_code_is_required));
-                            currentpincode.requestFocus();
-                        } else {
-                            currentpincode.setError(null);
-
-                        }
-
-                        if (permanentaddress.getText().toString().equalsIgnoreCase("")) {
-                            permanentaddress.setError(getString(R.string.permanent_address_is_required));
-                            permanentaddress.requestFocus();
-                        } else {
-                            permanentaddress.setError(null);
-                        }
-
-                        if (permanentpincode.getText().toString().equalsIgnoreCase("")) {
-                            permanentpincode.setError(getString(R.string.permanent_pin_is_required));
-                            permanentpincode.requestFocus();
-                        } else {
-                            permanentpincode.setError(null);
-                        }
-
-                        if (contactno.getText().toString().equalsIgnoreCase("")) {
-                            contactno.setError(getString(R.string.contact_number_is_required));
-                            contactno.requestFocus();
-                        } else {
-                            contactno.setError(null);
-                        }
-
-                        if (emailid.getText().toString().equalsIgnoreCase("")) {
-                            emailid.setError(getString(R.string.emailid_is_required));
-                            emailid.requestFocus();
-                        } else {
-                            emailid.setError(null);
-
-                        }
-
-                        if (anuualincome.getText().toString().equalsIgnoreCase("")) {
-                            anuualincome.setError(getString(R.string.annual_income_is_required));
-                            anuualincome.requestFocus();
-                        } else {
-                            anuualincome.setError(null);
-
-                        }
-                        if (employeer.getText().toString().equalsIgnoreCase("")) {
-                            employeer.setError(getString(R.string.employer_name_is_required));
-                        }
-                        if (!employeer.getText().toString().equalsIgnoreCase("")) {
-                            employeer.setError(null);
-                        }
-                        if (spinnerRelationshipwithBorrower.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerRelationshipwithBorrower, getString(R.string.please_select_relationship_with_borrower));
-                            spinnerRelationshipwithBorrower.requestFocus();
-                        }
-
-                        if (spinnerCurrentResidenceType.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerCurrentResidenceType, getString(R.string.please_select_resideny_type));
-                            spinnerCurrentResidenceType.requestFocus();
-
-                        }
-                        if (spinnerCurrentCountry.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerCurrentCountry, getString(R.string.please_select_current_country));
-
-                        }
-                        if (spinnerCurrentState.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerCurrentState, getString(R.string.please_select_current_state));
-
-                        }
-                        if (spinnerCurrentCity.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerCurrentCity, getString(R.string.please_select_current_city));
-
-                        }
-                        if (spinnerPermanentCountry.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerPermanentCountry, getString(R.string.please_select_permanent_country));
-                            spinnerPermanentCountry.requestFocus();
-
-                        }
-                        if (spinnerPermanentState.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerPermanentState, getString(R.string.please_select_permanent_state));
-
-                        }
-                        if (spinnerPermanentCity.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerPermanentCity, getString(R.string.please_select_permanent_city));
-
-                        }
-                        if (spinnerCurrentResidenceDuration.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerCurrentResidenceDuration, getString(R.string.please_select_duration_of_stay_at_current_address));
-                            spinnerCurrentResidenceDuration.requestFocus();
-
-                        }
-                        if (spinnerProfession.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerProfession, getString(R.string.please_select_profession));
-                            spinnerProfession.requestFocus();
-
-                        }
-                        if (spinnerJobDuration.getSelectedItemPosition() <= 0) {
-                            setSpinnerError(spinnerJobDuration, getString(R.string.please_select_duration_of_job_business));
-                            spinnerJobDuration.requestFocus();
-                        }
-                    }
+                    LoanApplicationFragment_3 loanApplicationFragment_3 = new LoanApplicationFragment_3();
+                    transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_3).commit();
                 }
+
+//                @Override
+//                public void onClick(View v) {
+//
+//                    boolean isIDNull = !adhaarno.getText().toString().equals("") ||
+//                            !panno.getText().toString().equals("");
+//
+//                    if (!fname.getText().toString().equals("") && !lname.getText().toString().equals("") &&
+//                            !textViewbirthday.getText().toString().equals("") &&
+//                            !currentaddress.getText().toString().equals("") &&
+//                            !currentpincode.getText().toString().equals("") &&
+//                            !permanentaddress.getText().toString().equals("") &&
+//                            !permanentpincode.getText().toString().equals("") &&
+//                            !contactno.getText().toString().equals("") &&
+//                            !emailid.getText().toString().equals("") &&
+//                            !anuualincome.getText().toString().equals("") &&
+//                            !employeer.getText().toString().equals("") && isIDNull) {
+//
+//                        if (radioGroupGender.getCheckedRadioButtonId() > 0) {
+//                            radioButtonFemale.setError(null);
+//
+//                            if (rgMaritalStatusBr.getCheckedRadioButtonId() > 0) {
+//                                rbSingleBr.setError(null);
+//
+//                                if (radioGroupPreviousEmi.getCheckedRadioButtonId() > 0) {
+//                                    radioButtonPreviousEmiNo.setError(null);
+//
+//                                    if (radioGroupEmployerType.getCheckedRadioButtonId() > 0) {
+//                                        radioButtonPrivate.setError(null);
+//
+//                                        if (!currentcityID.equalsIgnoreCase("") && !currentstateID.equalsIgnoreCase("") &&
+//                                                !currentcountryID.equalsIgnoreCase("") && !permanentcityID.equalsIgnoreCase("") &&
+//                                                !permanentstateID.equalsIgnoreCase("") && !permanentCountryID.equalsIgnoreCase("") &&
+//                                                !currentResidencetypeID.equalsIgnoreCase("") && !currentresidenceDurationID.equalsIgnoreCase("") &&
+//                                                !relationshipwithborrowerID.equalsIgnoreCase("") && !professionID.equalsIgnoreCase("") &&
+//                                                !jobDurationID.equalsIgnoreCase("")) {
+//
+//                                            try {
+//                                                String maritialstatus = "";
+//                                                if (rbMarriedBr.isChecked()) {
+//                                                    maritialstatus = "1";
+//                                                } else if (rbSingleBr.isChecked()) {
+//                                                    maritialstatus = "2";
+//                                                }
+//
+//                                                String previousEmi = "";
+//                                                if (radioButtonPreviousEmiYes.isChecked()) {
+//                                                    previousEmi = "1";
+//                                                } else if (radioButtonPreviousEmiNo.isChecked()) {
+//                                                    previousEmi = "0";
+//                                                }
+//
+//                                                String gender = "";
+//                                                if (radioButtonMale.isChecked()) {
+//                                                    gender = "1";
+//                                                }
+//                                                if (radioButtonFemale.isChecked()) {
+//                                                    gender = "2";
+//                                                }
+//
+//                                                String empType = "";
+//                                                if (radioButtonGovernment.isChecked()) {
+//                                                    empType = "0";
+//                                                }
+//                                                if (radioButtonPrivate.isChecked()) {
+//                                                    empType = "1";
+//                                                }
+//
+//                                                progressBar.setVisibility(View.VISIBLE);
+//                                                String url = MainApplication.mainUrl + "algo/setCoBorrowerLoanDetails";
+//                                                Map<String, String> params = new HashMap<String, String>();
+//                                                params.put("logged_id", userID);
+//                                                params.put("coborrower_address_type", currentResidencetypeID);
+//                                                params.put("coborrower_monthly_rent", edtMonthlyRent.getText().toString());
+//                                                params.put("coborrower_current_address", currentaddress.getText().toString());
+//                                                params.put("coborrower_current_city", currentcityID);
+//                                                params.put("coborrower_current_state", currentstateID);
+//                                                params.put("coborrower_current_country", currentcountryID);
+//                                                params.put("coborrower_current_pincode", currentpincode.getText().toString());
+//                                                params.put("coborrower_permanent_address", permanentaddress.getText().toString());
+//                                                params.put("coborrower_permanent_city", permanentcityID);
+//                                                params.put("coborrower_permanent_state", permanentstateID);
+//                                                params.put("coborrower_permanent_country", permanentCountryID);
+//                                                params.put("coborrower_permanent_pincode", permanentpincode.getText().toString());
+//                                                params.put("coborrower_first_name", fname.getText().toString());
+//                                                params.put("coborrower_last_name", lname.getText().toString());
+//                                                params.put("coborrower_dob", textViewbirthday.getText().toString());
+//                                                params.put("coborrower_is_married", maritialstatus);
+//                                                params.put("coborrower_pan_no", panno.getText().toString());
+//                                                params.put("coborrower_aadhar_no", adhaarno.getText().toString());
+//
+//                                                params.put("coborrower_email", emailid.getText().toString());
+//                                                params.put("coborrower_mobile", contactno.getText().toString());
+//                                                params.put("coborrower_living_since", currentresidenceDurationID);
+//                                                params.put("coborrower_relationship", relationshipwithborrowerID);
+//
+//                                                params.put("coborrower_profession", professionID);
+//                                                params.put("coborrower_income", anuualincome.getText().toString());
+//                                                params.put("coborrower_organization", employeer.getText().toString());
+//                                                params.put("coborrower_working_organization_since", jobDurationID);
+//                                                params.put("coborrower_has_any_emi", previousEmi);
+//                                                params.put("ip_address", Utils.getIPAddress(true));
+//
+//                                                params.put("coborrower_previous_emi_amount", previousemi.getText().toString());
+//
+//                                                params.put("coborrower_gender_id", gender);
+//
+//                                                params.put("coborrower_employer_type", empType);
+//
+//                                                MainApplication.coborrowerValue1 = currentResidencetypeID;
+//                                                MainApplication.coborrowerValue2 = edtMonthlyRent.getText().toString();
+//                                                MainApplication.coborrowerValue3 = currentaddress.getText().toString();
+//                                                MainApplication.coborrowerValue4 = currentcityID;
+//                                                MainApplication.coborrowerValue5 = currentstateID;
+//                                                MainApplication.coborrowerValue6 = currentcountryID;
+//                                                MainApplication.coborrowerValue7 = currentpincode.getText().toString();
+//                                                MainApplication.coborrowerValue8 = permanentaddress.getText().toString();
+//                                                MainApplication.coborrowerValue9 = permanentcityID;
+//                                                MainApplication.coborrowerValue10 = permanentstateID;
+//                                                MainApplication.coborrowerValue11 = permanentCountryID;
+//                                                MainApplication.coborrowerValue12 = permanentpincode.getText().toString();
+//                                                MainApplication.coborrowerValue13 = fname.getText().toString();
+//                                                MainApplication.coborrowerValue14 = lname.getText().toString();
+//                                                MainApplication.coborrowerValue15 = textViewbirthday.getText().toString();
+//                                                MainApplication.coborrowerValue16 = maritialstatus;
+//                                                MainApplication.coborrowerValue17 = panno.getText().toString();
+//                                                MainApplication.coborrowerValue18 = adhaarno.getText().toString();
+//
+//                                                MainApplication.coborrowerValue19 = emailid.getText().toString();
+//                                                MainApplication.coborrowerValue20 = contactno.getText().toString();
+//                                                MainApplication.coborrowerValue21 = currentresidenceDurationID;
+//                                                MainApplication.coborrowerValue22 = relationshipwithborrowerID;
+//                                                MainApplication.coborrowerValue23 = professionID;
+//                                                MainApplication.coborrowerValue24 = anuualincome.getText().toString();
+//                                                MainApplication.coborrowerValue25 = employeer.getText().toString();
+//                                                MainApplication.coborrowerValue26 = jobDurationID;
+//                                                MainApplication.coborrowerValue27 = previousEmi;
+//                                                MainApplication.coborrowerValue28 = previousemi.getText().toString();
+//                                                MainApplication.coborrowerValue29 = gender;
+//                                                MainApplication.coborrowerValue30 = empType;
+//                                                if (!Globle.isNetworkAvailable(context)) {
+//                                                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                                                } else {
+//
+//                                                    VolleyCallNew volleyCall = new VolleyCallNew();
+//                                                    volleyCall.sendRequest(context, url, null, mFragment, "sendcoboorrowerDetails", params, MainApplication.auth_token);
+//                                                }
+//                                            } catch (Exception e) {
+//                                                e.printStackTrace();
+//                                            }
+//                                        } else {
+//                                            if (spResidentTypeBr.getSelectedItemPosition() <= 0) {
+//                                                setSpinnerError(spResidentTypeBr, getString(R.string.please_select_duration_of_stay_at_current_address));
+//                                                spResidentTypeBr.requestFocus();
+//                                            }
+//                                            if (spinnerProfession.getSelectedItemPosition() <= 0) {
+//                                                setSpinnerError(spinnerProfession, getString(R.string.please_select_profession));
+//                                                spinnerProfession.requestFocus();
+//                                            }
+//                                            if (spinnerJobDuration.getSelectedItemPosition() <= 0) {
+//                                                setSpinnerError(spinnerJobDuration, getString(R.string.please_select_duration_of_job_business));
+//                                                spinnerJobDuration.requestFocus();
+//                                            }
+//                                            Toast.makeText(context, R.string.please_fill_up_all_the_details_to_continue, Toast.LENGTH_LONG).show();
+//                                        }
+//                                    } else {
+//                                        radioButtonPrivate.setError(getString(R.string.you_need_to_select_employer_type));
+//                                        radioButtonPrivate.requestFocus();
+//                                    }
+//
+//                                } else {
+//                                    radioButtonPreviousEmiNo.setError(getString(R.string.you_need_to_select_previous_emi_status));
+//                                    radioButtonPreviousEmiNo.requestFocus();
+//                                }
+//
+//                            } else {
+//                                rbSingleBr.setError(getString(R.string.you_need_to_select_maritial_status));
+//                                rbSingleBr.requestFocus();
+//                            }
+//                        } else {
+//                            radioButtonFemale.setError(getString(R.string.you_need_to_select_gender));
+//                            radioButtonFemale.requestFocus();
+//                        }
+//
+//                    } else {
+//
+//                        if (fname.getText().toString().equalsIgnoreCase("")) {
+//                            fname.setError(getString(R.string.first_name_is_required));
+//                            fname.requestFocus();
+//                        } else {
+//                            fname.setError(null);
+//
+//                        }
+//
+//                        if (lname.getText().toString().equalsIgnoreCase("")) {
+//                            lname.setError(getString(R.string.last_name_is_required));
+//                            lname.requestFocus();
+//                        } else {
+//                            lname.setError(null);
+//
+//                        }
+//
+//                        if (textViewbirthday.getText().toString().equalsIgnoreCase("")) {
+//                            textViewbirthday.setError(getString(R.string.birthdate_is_required));
+//                            textViewbirthday.requestFocus();
+//                        } else if (textViewbirthday.getText().toString().toLowerCase().equals("birthdate")) {
+//                            textViewbirthday.setError(getString(R.string.birthdate_is_required));
+//                            textViewbirthday.requestFocus();
+//                        } else {
+//                            textViewbirthday.setError(null);
+//                        }
+//
+//                        if (adhaarno.getText().toString().equalsIgnoreCase("")) {
+//                            adhaarno.setError(getString(R.string.adhaar_number_is_required));
+//                            adhaarno.requestFocus();
+//                        } else {
+//                            adhaarno.setError(null);
+//                        }
+//                        if (panno.getText().toString().equalsIgnoreCase("")) {
+//                            panno.setError(getString(R.string.pan_number_is_required));
+//                            panno.requestFocus();
+//                        } else {
+//                            panno.setError(null);
+//                        }
+//
+//                        //                    if (adhaarno.getText().toString().equalsIgnoreCase("") && panno.getText().toString().equalsIgnoreCase("")) {
+//                        //                        adhaarno.setError("Aadhaar Number is Required");
+//                        //                        adhaarno.requestFocus();
+//                        //                    }
+//                        //                    else {
+//                        //                        adhaarno.setError(null);
+//                        //
+//                        //                    }
+//                        //                    if (panno.getText().toString().equalsIgnoreCase("") && adhaarno.getText().toString().equalsIgnoreCase("")) {
+//                        //                        panno.setError("PAN number is required is Required");
+//                        //                        panno.requestFocus();
+//                        //                    }else {
+//                        //                        panno.setError(null);
+//                        //
+//                        //                    }
+//
+//                        if (currentaddress.getText().toString().equalsIgnoreCase("")) {
+//                            currentaddress.setError(getString(R.string.current_address_is_required));
+//                            currentaddress.requestFocus();
+//                        } else {
+//                            currentaddress.setError(null);
+//                        }
+//
+//                        if (currentpincode.getText().toString().equalsIgnoreCase("")) {
+//                            currentpincode.setError(getString(R.string.current_pin_code_is_required));
+//                            currentpincode.requestFocus();
+//                        } else {
+//                            currentpincode.setError(null);
+//
+//                        }
+//
+//                        if (permanentaddress.getText().toString().equalsIgnoreCase("")) {
+//                            permanentaddress.setError(getString(R.string.permanent_address_is_required));
+//                            permanentaddress.requestFocus();
+//                        } else {
+//                            permanentaddress.setError(null);
+//                        }
+//
+//                        if (permanentpincode.getText().toString().equalsIgnoreCase("")) {
+//                            permanentpincode.setError(getString(R.string.permanent_pin_is_required));
+//                            permanentpincode.requestFocus();
+//                        } else {
+//                            permanentpincode.setError(null);
+//                        }
+//
+//                        if (contactno.getText().toString().equalsIgnoreCase("")) {
+//                            contactno.setError(getString(R.string.contact_number_is_required));
+//                            contactno.requestFocus();
+//                        } else {
+//                            contactno.setError(null);
+//                        }
+//
+//                        if (emailid.getText().toString().equalsIgnoreCase("")) {
+//                            emailid.setError(getString(R.string.emailid_is_required));
+//                            emailid.requestFocus();
+//                        } else {
+//                            emailid.setError(null);
+//
+//                        }
+//
+//                        if (anuualincome.getText().toString().equalsIgnoreCase("")) {
+//                            anuualincome.setError(getString(R.string.annual_income_is_required));
+//                            anuualincome.requestFocus();
+//                        } else {
+//                            anuualincome.setError(null);
+//
+//                        }
+//                        if (employeer.getText().toString().equalsIgnoreCase("")) {
+//                            employeer.setError(getString(R.string.employer_name_is_required));
+//                        }
+//                        if (!employeer.getText().toString().equalsIgnoreCase("")) {
+//                            employeer.setError(null);
+//                        }
+//                        if (spinnerRelationshipwithBorrower.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerRelationshipwithBorrower, getString(R.string.please_select_relationship_with_borrower));
+//                            spinnerRelationshipwithBorrower.requestFocus();
+//                        }
+//
+//                        if (spResidentTypeBr.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spResidentTypeBr, getString(R.string.please_select_resideny_type));
+//                            spResidentTypeBr.requestFocus();
+//
+//                        }
+//                        if (spinnerCurrentCountry.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerCurrentCountry, getString(R.string.please_select_current_country));
+//
+//                        }
+//                        if (spinnerCurrentState.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerCurrentState, getString(R.string.please_select_current_state));
+//
+//                        }
+//                        if (spinnerCurrentCity.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerCurrentCity, getString(R.string.please_select_current_city));
+//
+//                        }
+//                        if (spinnerPermanentCountry.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerPermanentCountry, getString(R.string.please_select_permanent_country));
+//                            spinnerPermanentCountry.requestFocus();
+//
+//                        }
+//                        if (spinnerPermanentState.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerPermanentState, getString(R.string.please_select_permanent_state));
+//
+//                        }
+//                        if (spinnerPermanentCity.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerPermanentCity, getString(R.string.please_select_permanent_city));
+//
+//                        }
+//                        if (spResidentTypeBr.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spResidentTypeBr, getString(R.string.please_select_duration_of_stay_at_current_address));
+//                            spResidentTypeBr.requestFocus();
+//
+//                        }
+//                        if (spinnerProfession.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerProfession, getString(R.string.please_select_profession));
+//                            spinnerProfession.requestFocus();
+//
+//                        }
+//                        if (spinnerJobDuration.getSelectedItemPosition() <= 0) {
+//                            setSpinnerError(spinnerJobDuration, getString(R.string.please_select_duration_of_job_business));
+//                            spinnerJobDuration.requestFocus();
+//                        }
+//                    }
+//                }
             });
 
             buttonPrevious.setOnClickListener(new View.OnClickListener() {
@@ -735,7 +773,18 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            lblBirthdayBr = (TextView) view.findViewById(R.id.lblBirthdayBr);
+            lblBirthdayCoBr = (TextView) view.findViewById(R.id.lblBirthdayCoBr);
+            txtBirthdateBr = (TextView) view.findViewById(R.id.txtBirthdateBr);
+            txtBirthdateCoBr = (TextView) view.findViewById(R.id.txtBirthdateCoBr);
+            txtBirthdayCalenderBr = (TextView) view.findViewById(R.id.txtBirthdayCalenderBr);
+            txtBirthdayCalenderBr.setTypeface(typeface);
+
+            txtBirthdayCalenderCoBr = (TextView) view.findViewById(R.id.txtBirthdayCalenderCoBr);
+            txtBirthdayCalenderCoBr.setTypeface(typeface);
+
+            final DatePickerDialog.OnDateSetListener dateBr = new DatePickerDialog.OnDateSetListener() {
 
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -747,20 +796,21 @@ public class LoanApplicationFragment_2 extends Fragment {
                     int month = monthOfYear + 1;
                     String datenew = dayOfMonth + "/" + month + "/" + year;
                     dateformate = dateFormateSystem(datenew);
-                    textViewbirthday.setText(dateformate);
-                    MainApplication.coborrowerValue15 = textViewbirthday.getText().toString();
-                    textViewbirthday.setTextColor(getResources().getColor(R.color.black));
-                    lable.setVisibility(View.VISIBLE);
+                    txtBirthdateBr.setText(dateformate);
+                    MainApplication.borrowerValue15 = dateformate;
+                    txtBirthdateBr.setTextColor(getResources().getColor(R.color.black));
+                    lblBirthdayBr.setVisibility(View.VISIBLE);
                 }
 
             };
             cal = Calendar.getInstance();
-            birthdaycalender.setOnClickListener(new View.OnClickListener() {
+
+            txtBirthdayCalenderCoBr.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     cal = Calendar.getInstance();
                     cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
-                    DatePickerDialog data = new DatePickerDialog(context, date, cal
+                    DatePickerDialog data = new DatePickerDialog(context, dateBr, cal
                             .get(Calendar.YEAR) - 18, 1,
                             1);
                     data.getDatePicker().setMaxDate(System.currentTimeMillis() - 1234564);
@@ -768,69 +818,116 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            radioButtonMarried.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            final DatePickerDialog.OnDateSetListener dateCoBr = new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+                    // TODO Auto-generated method stub
+                    cal.set(Calendar.YEAR, year);
+                    cal.set(Calendar.MONTH, monthOfYear);
+                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    int month = monthOfYear + 1;
+                    String datenew = dayOfMonth + "/" + month + "/" + year;
+                    dateformate = dateFormateSystem(datenew);
+                    txtBirthdateCoBr.setText(dateformate);
+                    MainApplication.borrowerValue15 = dateformate;
+                    txtBirthdateCoBr.setTextColor(getResources().getColor(R.color.black));
+                    lblBirthdayBr.setVisibility(View.VISIBLE);
+                }
+
+            };
+            cal = Calendar.getInstance();
+
+            txtBirthdayCalenderCoBr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cal = Calendar.getInstance();
+                    cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
+                    DatePickerDialog data = new DatePickerDialog(context, dateCoBr, cal
+                            .get(Calendar.YEAR) - 18, 1,
+                            1);
+                    data.getDatePicker().setMaxDate(System.currentTimeMillis() - 1234564);
+                    data.show();
+                }
+            });
+
+
+            txtBirthdayCalenderCoBr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cal = Calendar.getInstance();
+                    cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
+                    DatePickerDialog data = new DatePickerDialog(context, dateCoBr, cal
+                            .get(Calendar.YEAR) - 18, 1,
+                            1);
+                    data.getDatePicker().setMaxDate(System.currentTimeMillis() - 1234564);
+                    data.show();
+                }
+            });
+
+            rbMarriedBr.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (radioButtonMarried.isChecked()) {
+                    if (rbMarriedBr.isChecked()) {
                         MainApplication.coborrowerValue16 = "1";
                     }
                 }
             });
 
-            radioButtonSingle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            rbSingleBr.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (radioButtonSingle.isChecked()) {
+                    if (rbSingleBr.isChecked()) {
                         MainApplication.coborrowerValue16 = "2";
                     }
                 }
             });
 
-            radioButtonPreviousEmiYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (radioButtonPreviousEmiYes.isChecked()) {
-                        MainApplication.coborrowerValue27 = "1";
-                    }
-                }
-            });
-
-            radioButtonPreviousEmiNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (radioButtonPreviousEmiNo.isChecked()) {
-                        MainApplication.coborrowerValue27 = "0";
-                    }
-                }
-            });
-
-
-            radioGroupPreviousEmi.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    Log.e("TAG", "onCheckedChanged: ");
-                    Log.e("TAG", "onCheckedChanged: " + radioGroupPreviousEmi.getCheckedRadioButtonId());
-                    switch (radioGroupPreviousEmi.getCheckedRadioButtonId()) {
-                        case R.id.radiobutton_emiyes_coborrower:
-                            Log.e("TAG", "yes: ");
-                            input_previousamt.setVisibility(View.VISIBLE);
-                            previousemi.requestFocus();
-                            //previousemi.setVisibility(View.VISIBLE);
-                            break;
-                        case R.id.radiobutton_emino_coborrower:
-                            Log.e("TAG", "no: ");
-                            input_previousamt.setVisibility(View.GONE);
-                            //previousemi.setVisibility(View.GONE);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
+//            radioButtonPreviousEmiYes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    if (radioButtonPreviousEmiYes.isChecked()) {
+//                        MainApplication.coborrowerValue27 = "1";
+//                    }
+//                }
+//            });
+//
+//            radioButtonPreviousEmiNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    if (radioButtonPreviousEmiNo.isChecked()) {
+//                        MainApplication.coborrowerValue27 = "0";
+//                    }
+//                }
+//            });
+//
+//            radioGroupPreviousEmi.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                    Log.e("TAG", "onCheckedChanged: ");
+//                    Log.e("TAG", "onCheckedChanged: " + radioGroupPreviousEmi.getCheckedRadioButtonId());
+//                    switch (radioGroupPreviousEmi.getCheckedRadioButtonId()) {
+//                        case R.id.radiobutton_emiyes_coborrower:
+//                            Log.e("TAG", "yes: ");
+//                            input_previousamt.setVisibility(View.VISIBLE);
+//                            previousemi.requestFocus();
+//                            //previousemi.setVisibility(View.VISIBLE);
+//                            break;
+//                        case R.id.radiobutton_emino_coborrower:
+//                            Log.e("TAG", "no: ");
+//                            input_previousamt.setVisibility(View.GONE);
+//                            //previousemi.setVisibility(View.GONE);
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                }
+//            });
 
             /** EDIT TEXT CHANGE LISTENER FOR PARTIAL SAVING **/
 
-            fname.addTextChangedListener(new TextWatcher() {
+            edtFnameBr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -838,7 +935,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue13 = fname.getText().toString();
+                    MainApplication.coborrowerValue13 = edtFnameBr.getText().toString();
                 }
 
                 @Override
@@ -847,7 +944,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            lname.addTextChangedListener(new TextWatcher() {
+            edtMnameBr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -855,23 +952,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue14 = lname.getText().toString();
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-            adhaarno.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue18 = adhaarno.getText().toString();
+                    MainApplication.coborrowerValue13 = edtMnameBr.getText().toString();
                 }
 
                 @Override
@@ -880,7 +961,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            panno.addTextChangedListener(new TextWatcher() {
+            edtLnameBr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -888,7 +969,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue17 = panno.getText().toString();
+                    MainApplication.coborrowerValue14 = edtLnameBr.getText().toString();
                 }
 
                 @Override
@@ -897,7 +978,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            monthlyrent.addTextChangedListener(new TextWatcher() {
+            edtAadhaarBr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -905,7 +986,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue2 = monthlyrent.getText().toString();
+                    MainApplication.coborrowerValue18 = edtAadhaarBr.getText().toString();
                 }
 
                 @Override
@@ -914,7 +995,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            currentaddress.addTextChangedListener(new TextWatcher() {
+            edtPanBr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -922,7 +1003,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue3 = currentaddress.getText().toString();
+                    MainApplication.coborrowerValue17 = edtPanBr.getText().toString();
                 }
 
                 @Override
@@ -931,7 +1012,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            currentpincode.addTextChangedListener(new TextWatcher() {
+            edtMonthlyRent.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -939,7 +1020,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue7 = currentpincode.getText().toString();
+                    MainApplication.coborrowerValue2 = edtMonthlyRent.getText().toString();
                 }
 
                 @Override
@@ -948,7 +1029,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            permanentaddress.addTextChangedListener(new TextWatcher() {
+            edtCurrentAddressBr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -956,7 +1037,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue8 = permanentaddress.getText().toString();
+                    MainApplication.coborrowerValue3 = edtCurrentAddressBr.getText().toString();
                 }
 
                 @Override
@@ -965,7 +1046,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            permanentpincode.addTextChangedListener(new TextWatcher() {
+            edtCurrentPincodeBr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -973,7 +1054,41 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue12 = permanentpincode.getText().toString();
+                    MainApplication.coborrowerValue7 = edtCurrentPincodeBr.getText().toString();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
+            edtCurrentAddressCoBr.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    MainApplication.coborrowerValue8 = edtCurrentAddressCoBr.getText().toString();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
+            edtCurrentPincodeCoBr.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    MainApplication.coborrowerValue12 = edtCurrentPincodeCoBr.getText().toString();
                 }
 
                 @Override
@@ -999,7 +1114,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            employeer.addTextChangedListener(new TextWatcher() {
+            edtCompanyBr.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -1007,7 +1122,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue25 = employeer.getText().toString();
+                    MainApplication.coborrowerValue25 = edtCompanyBr.getText().toString();
                 }
 
                 @Override
@@ -1016,66 +1131,66 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            contactno.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue20 = contactno.getText().toString();
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-
-            emailid.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.coborrowerValue19 = emailid.getText().toString();
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
+//            contactno.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                    MainApplication.coborrowerValue20 = contactno.getText().toString();
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//
+//                }
+//            });
+//
+//            emailid.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                    MainApplication.coborrowerValue19 = emailid.getText().toString();
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//
+//                }
+//            });
 
             /** END OF EDIT TEXT CHANGE LISTENER FOR PARTIAL SAVING**/
 
             /** SPINNER CLICK **/
 
-            spinnerCurrentResidenceType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spResidentTypeBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
-                        String text = spinnerCurrentResidenceType.getSelectedItem().toString();
+                        String text = spResidentTypeBr.getSelectedItem().toString();
                         int count = coborrowerCurrentResidenceTypePersonalPOJOArrayList.size();
 //                        Log.e("TAG", "count: " + count);
                         for (int i = 0; i < count; i++) {
                             if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).residencetypeName.equalsIgnoreCase(text)) {
                                 MainApplication.coborrowerValue1 = currentResidencetypeID = coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID;
-                                Log.e(TAG, "ididididididid:" + coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID);
+                                Log.e(TAG, "id:" + coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID);
                                 if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
-                                    monthlyrent.setVisibility(View.GONE);
-                                    monthlyrent.setText("");
+                                    edtMonthlyRent.setVisibility(View.GONE);
+                                    edtMonthlyRent.setText("");
                                 } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("3")) {
-                                    monthlyrent.setVisibility(View.GONE);
-                                    monthlyrent.setText("");
+                                    edtMonthlyRent.setVisibility(View.GONE);
+                                    edtMonthlyRent.setText("");
                                 } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("8")) {
-                                    monthlyrent.setVisibility(View.GONE);
-                                    monthlyrent.setText("");
+                                    edtMonthlyRent.setVisibility(View.GONE);
+                                    edtMonthlyRent.setText("");
                                 } else {
-                                    monthlyrent.setVisibility(View.VISIBLE);
+                                    edtMonthlyRent.setVisibility(View.VISIBLE);
                                 }
                             }
                         }
@@ -1090,35 +1205,81 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            spinnerCurrentCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spProfessionBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    String text = spProfessionBr.getSelectedItem().toString();
+                    if (text.equalsIgnoreCase("Select Any")) {
+                        MainApplication.mainapp_userprofession = "0";
+                        MainApplication.profession = "0";
+                        try {
+                            linOfficeDetails.setVisibility(View.GONE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } else if (text.equalsIgnoreCase("Student")) {
+                        MainApplication.mainapp_userprofession = "Student";
+                        MainApplication.mainapp_userprofession = "1";
+                        MainApplication.profession = "1";
+                        try {
+                            linOfficeDetails.setVisibility(View.GONE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } else if (text.equalsIgnoreCase("Employed")) {
+                        MainApplication.mainapp_userprofession = "employed";
+                        MainApplication.mainapp_userprofession = "2";
+                        MainApplication.profession = "2";
+                        try {
+                            linOfficeDetails.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } else if (text.equalsIgnoreCase("Self Employed")) {
+                        MainApplication.mainapp_userprofession = "selfEmployed";
+                        MainApplication.mainapp_userprofession = "3";
+                        MainApplication.profession = "3";
+                        try {
+                            linOfficeDetails.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spCurrentCityBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
-                        if (spinnerCurrentCity.getSelectedItemPosition() > 0) {
-                            checkBoxSameasAbove.setEnabled(true);
-                            checkBoxSameasAbove.setClickable(true);
-                        } else {
-                            checkBoxSameasAbove.setEnabled(false);
-                            checkBoxSameasAbove.setClickable(false);
-                        }
-                        String text = spinnerCurrentCity.getSelectedItem().toString();
+//                        if (spCurrentCityBr.getSelectedItemPosition() > 0) {
+//                            cbSameAsAboveBr.setEnabled(true);
+//                            cbSameAsAboveBr.setClickable(true);
+//                        } else {
+//                            cbSameAsAboveBr.setEnabled(false);
+//                            cbSameAsAboveBr.setClickable(false);
+//                        }
+                        String text = spCurrentCityBr.getSelectedItem().toString();
                         int count = borrowerCurrentCityPersonalPOJOArrayList.size();
-//                        Log.e("TAG", "count: " + count);
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue4 = currentcityID = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
-                                Log.e("I_________D", "currentcityID: " + currentcityID);
+                                MainApplication.borrowerValue4 = currentcityID = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
+                                Log.e(TAG, "spCurrentCityBr: +++++++++++++++++++*********************" + currentcityID);
                             }
                         }
                     } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+                        e.printStackTrace();
                     }
+
                 }
 
                 @Override
@@ -1127,29 +1288,22 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            spinnerCurrentState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spCurrentStateBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
-                        String text = spinnerCurrentState.getSelectedItem().toString();
+                        String text = spCurrentStateBr.getSelectedItem().toString();
                         int count = borrowerCurrentStatePersonalPOJOArrayList.size();
-//                        Log.e("TAG", "count: " + count);
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue5 = currentstateID = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
-//                                Log.e("I_________D", "currentstateID: " + currentstateID);
+                                MainApplication.borrowerValue5 = currentstateID = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
                             }
                         }
                     } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+
                     }
                     cityApiCall();
+
                 }
 
                 @Override
@@ -1158,33 +1312,24 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            spinnerCurrentCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spCurrentCountryBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
-                        String text = spinnerCurrentCountry.getSelectedItem().toString();
+                        String text = spCurrentCountryBr.getSelectedItem().toString();
                         int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
-                        Log.e("TAG", "count: " + count);
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue6 = currentcountryID = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
-                                Log.e("I_________D", "currentcountryID: " + currentcountryID);
+                                MainApplication.borrowerValue6 = currentcountryID = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
                             }
                         }
                         stateApiCall();
                         if (currentcityID.equals("")) {
-                            spinnerCurrentCity.setSelection(0);
+                            spCurrentCityBr.setSelection(0);
                         } else {
-                            spinnerCurrentCity.setSelection(Integer.parseInt(currentcityID) - 1);
+                            spCurrentCityBr.setSelection(Integer.parseInt(currentcityID) - 1);
                         }
                     } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
 
@@ -1194,133 +1339,111 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            spinnerPermanentCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spCurrentCityCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
-                        String text = spinnerPermanentCity.getSelectedItem().toString();
-                        int count = borrowerPermanentCityPersonalPOJOArrayList.size();
-//                        Log.e("TAG", "count: " + count);
+//                        if (spCurrentCityCoBr.getSelectedItemPosition() > 0) {
+//                            cbSameAsAboveCoBr.setEnabled(true);
+//                            cbSameAsAboveCoBr.setClickable(true);
+//                        } else {
+//                            cbSameAsAboveCoBr.setEnabled(false);
+//                            cbSameAsAboveCoBr.setClickable(false);
+//                        }
+                        String text = spCurrentCityCoBr.getSelectedItem().toString();
+                        int count = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
                         for (int i = 0; i < count; i++) {
-                            if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue9 = permanentcityID = borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID;
-//                                Log.e("I_________D", "permanentcityID: " + permanentcityID);
+                            if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityName.equalsIgnoreCase(text)) {
+                                MainApplication.borrowerValue4 = currentcityIDCoBr = borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID;
+//                                Log.e(TAG, "spCurrentCityCoBr: +++++++++++++++++++*********************" + currentcityIDCoBr);
                             }
                         }
+                    } catch (Exception e) {
+                    }
 
-                        if (count > 0) {
-                            if (checkBoxSameasAbove.isChecked()) {
-                                for (int i = 0; i < borrowerPermanentCityPersonalPOJOArrayList.size(); i++) {
-                                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-                                        spinnerPermanentCity.setSelection(i);
-                                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spCurrentStateCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spCurrentStateCoBr.getSelectedItem().toString();
+                        int count = borrowerCurrentStatePersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerCurrentStatePersonalPOJOArrayListCoBr.get(i).stateName.equalsIgnoreCase(text)) {
+                                MainApplication.borrowerValue5 = currentstateIDCoBr = borrowerCurrentStatePersonalPOJOArrayListCoBr.get(i).stateID;
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                    cityApiCallCoBr();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spCurrentCountryCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spCurrentCountryCoBr.getSelectedItem().toString();
+                        int count = borrowerCurrentCountryPersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerCurrentCountryPersonalPOJOArrayListCoBr.get(i).countryName.equalsIgnoreCase(text)) {
+                                MainApplication.borrowerValue6 = currentcountryIDCoBr = borrowerCurrentCountryPersonalPOJOArrayListCoBr.get(i).countryID;
+                            }
+                        }
+                        stateApiCallCoBr();
+//                        if (currentcityIDCoBr.equals("")) {
+//                            spCurrentCityCoBr.setSelection(0);
+//                        } else {
+//                            spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr) - 1);
+//                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spResidentTypeBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spResidentTypeBr.getSelectedItem().toString();
+
+                        int count = borrowerCurrentResidencePersonalPOJOArrayList.size();
+
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).residencetypeName.equalsIgnoreCase(text)) {
+                                MainApplication.borrowerValue1 = currentResidencetypeID = borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID;
+
+                                if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
+                                    edtMonthlyRent.setVisibility(View.GONE);
+                                    edtMonthlyRent.setText("");
+                                } else if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("3")) {
+                                    edtMonthlyRent.setVisibility(View.GONE);
+                                    edtMonthlyRent.setText("");
+                                } else if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("8")) {
+                                    edtMonthlyRent.setVisibility(View.GONE);
+                                    edtMonthlyRent.setText("");
+                                } else {
+                                    edtMonthlyRent.setVisibility(View.VISIBLE);
                                 }
-
-                            }
-                        }
-                    } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
-                    }
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-
-            spinnerPermanentState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String text = spinnerPermanentState.getSelectedItem().toString();
-                    try {
-//                        int count = borrowerPermanentStatePersonalPOJOArrayList.size();
-                        int count = borrowerCurrentStatePersonalPOJOArrayList.size();
-                        Log.e("TAG", "count: " + count);
-                        for (int i = 0; i < count; i++) {
-                            if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue10 = permanentstateID = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
-                                Log.e("I_________D", "permanentstateID: " + permanentstateID);
-                            }
-                        }
-
-                        if (checkBoxSameasAbove.isChecked()) {
-                            Log.e(TAG, "getPermanentStates: +++++++++++++++++++*********************" + currentstateID);
-                            spinnerPermanentState.setSelection(Integer.parseInt(currentstateID));
-                        }
-
-                    } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
-                    }
-                    permanentCityApiCall();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-
-            spinnerPermanentCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    try {
-                        String text = spinnerPermanentCountry.getSelectedItem().toString();
-                        int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
-                        Log.e("TAG", "count: " + count);
-                        for (int i = 0; i < count; i++) {
-                            if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue10 = permanentCountryID = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
-                                Log.e("I_________D", "permanentCountryID: " + permanentCountryID);
-                            }
-                        }
-                        permanentStateApiCall();
-                        if (permanentcityID.equals("")) {
-                            spinnerPermanentCity.setSelection(0);
-                        } else {
-                            spinnerPermanentCity.setSelection(Integer.parseInt(permanentcityID) - 1);
-                        }
-                    } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-
-            spinnerCurrentResidenceDuration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    try {
-                        String text = spinnerCurrentResidenceDuration.getSelectedItem().toString();
-                        int count = coborrowerCurrentResidenceDurationPersonalPOJOArrayList.size();
-                        Log.e("TAG", "count: " + count);
-                        for (int i = 0; i < count; i++) {
-                            if (coborrowerCurrentResidenceDurationPersonalPOJOArrayList.get(i).durationName.equalsIgnoreCase(text)) {
-                                currentresidenceDurationID = coborrowerCurrentResidenceDurationPersonalPOJOArrayList.get(i).durationID;
-                                Log.e("I_________D", "currentresidenceDurationID: " + currentresidenceDurationID);
                             }
                         }
                     } catch (NullPointerException e) {
@@ -1422,7 +1545,6 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-
 //            /** PROFESSION AND FINANCIAL **/
 //            radioGroup_profession.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 //                @Override
@@ -1439,7 +1561,6 @@ public class LoanApplicationFragment_2 extends Fragment {
 //                    }
 //                }
 //            });
-
 
             spinnerProfession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -1468,77 +1589,76 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             /** END SPINNER CLICK **/
 
-            checkBoxSameasAbove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (checkBoxSameasAbove.isChecked()) {
-                        permanentaddress.setText(currentaddress.getText().toString());
-                        permanentpincode.setText(currentpincode.getText().toString());
-
-                        try {
-                            spinnerPermanentCountry.setSelection(Integer.parseInt(currentcountryID));
-                            spinnerPermanentState.setSelection(Integer.parseInt(currentstateID));
-                            spinnerPermanentCity.setSelection(Integer.parseInt(currentcityID));
-
-                            try {
-                                spinnerPermanentCountry.setEnabled(false);
-                                spinnerPermanentState.setEnabled(false);
-                                spinnerPermanentCity.setEnabled(false);
-                                permanentaddress.setEnabled(false);
-                                permanentpincode.setEnabled(false);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
-                        }
-
-                    } else {
-                        permanentaddress.setText("");
-                        permanentpincode.setText("");
-
-                        try {
-                            spinnerPermanentCountry.setSelection(1);
-                            spinnerPermanentState.setSelection(0);
-                            spinnerPermanentCity.setSelection(0);
-
-                            try {
-                                spinnerPermanentCountry.setEnabled(true);
-                                spinnerPermanentState.setEnabled(true);
-                                spinnerPermanentCity.setEnabled(true);
-                                permanentaddress.setEnabled(true);
-                                permanentpincode.setEnabled(true);
-                            } catch (Exception e) {
-                                String className = this.getClass().getSimpleName();
-                                String name = new Object() {
-                                }.getClass().getEnclosingMethod().getName();
-                                String errorMsg = e.getMessage();
-                                String errorMsgDetails = e.getStackTrace().toString();
-                                String errorLine = String.valueOf(e.getStackTrace()[0]);
-                                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-                            }
-                        } catch (Exception e) {
-                            String className = this.getClass().getSimpleName();
-                            String name = new Object() {
-                            }.getClass().getEnclosingMethod().getName();
-                            String errorMsg = e.getMessage();
-                            String errorMsgDetails = e.getStackTrace().toString();
-                            String errorLine = String.valueOf(e.getStackTrace()[0]);
-                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-                        }
-                    }
-                }
-            });
-
+//            checkBoxSameasAbove.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (checkBoxSameasAbove.isChecked()) {
+//                        permanentaddress.setText(currentaddress.getText().toString());
+//                        permanentpincode.setText(currentpincode.getText().toString());
+//
+//                        try {
+//                            spinnerPermanentCountry.setSelection(Integer.parseInt(currentcountryID));
+//                            spinnerPermanentState.setSelection(Integer.parseInt(currentstateID));
+//                            spinnerPermanentCity.setSelection(Integer.parseInt(currentcityID));
+//
+//                            try {
+//                                spinnerPermanentCountry.setEnabled(false);
+//                                spinnerPermanentState.setEnabled(false);
+//                                spinnerPermanentCity.setEnabled(false);
+//                                permanentaddress.setEnabled(false);
+//                                permanentpincode.setEnabled(false);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                        } catch (NullPointerException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    } else {
+//                        permanentaddress.setText("");
+//                        permanentpincode.setText("");
+//
+//                        try {
+//                            spinnerPermanentCountry.setSelection(1);
+//                            spinnerPermanentState.setSelection(0);
+//                            spinnerPermanentCity.setSelection(0);
+//
+//                            try {
+//                                spinnerPermanentCountry.setEnabled(true);
+//                                spinnerPermanentState.setEnabled(true);
+//                                spinnerPermanentCity.setEnabled(true);
+//                                permanentaddress.setEnabled(true);
+//                                permanentpincode.setEnabled(true);
+//                            } catch (Exception e) {
+//                                String className = this.getClass().getSimpleName();
+//                                String name = new Object() {
+//                                }.getClass().getEnclosingMethod().getName();
+//                                String errorMsg = e.getMessage();
+//                                String errorMsgDetails = e.getStackTrace().toString();
+//                                String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//                            }
+//                        } catch (Exception e) {
+//                            String className = this.getClass().getSimpleName();
+//                            String name = new Object() {
+//                            }.getClass().getEnclosingMethod().getName();
+//                            String errorMsg = e.getMessage();
+//                            String errorMsgDetails = e.getStackTrace().toString();
+//                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//                        }
+//                    }
+//                }
+//            });
 
             if (!Globle.isNetworkAvailable(context)) {
 
             } else {
                 JSONObject jsonObject = new JSONObject();
 
-                getCurrentStatesCo(jsonObject);
-                getCurrentCitiesCo(jsonObject);
+                getCurrentStates(jsonObject);
+                getCurrentCities(jsonObject);
                 ProfessionApiCall();
             }
 
@@ -1655,7 +1775,6 @@ public class LoanApplicationFragment_2 extends Fragment {
                     JSONArray jsonArraycocities = jsonData.getJSONArray("cocities");
                 }
 
-                jsonData.getJSONObject("leadId");
                 JSONObject jsonkycDetails = jsonData.getJSONObject("kycDetails");
                 JSONObject jsondetailedInformation = jsonData.getJSONObject("detailedInformation");
                 JSONObject jsonborrowerDetails = jsonData.getJSONObject("borrowerDetails");
@@ -2026,20 +2145,19 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-
     private void cityApiCall() {
         /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "algo/getCities";
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
             Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", currentcountryID);
-            params.put("stateId", currentstateID);
+            params.put("countryId", currentcountryID);//1
+            params.put("stateId", currentstateID);//2
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getCurrentCities(currentstateID, currentcountryID);
+//                getCurrentCities(currentstateID,currentcountryID);
             } else {
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCityCo", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCity", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -2061,9 +2179,10 @@ public class LoanApplicationFragment_2 extends Fragment {
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 //                getCurrentStates(currentcountryID);
+
             } else {
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStatesCo", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStates", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -2076,20 +2195,19 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    private void permanentCityApiCall() {
+    private void cityApiCallCoBr() {
         /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "algo/getCities";
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
             Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", permanentCountryID);
-            params.put("stateId", permanentstateID);
+            params.put("countryId", currentcountryIDCoBr);//1
+            params.put("stateId", currentstateIDCoBr);//2
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getPermanentCities(permanentstateID, permanentCountryID);
-
+//                getCurrentCities(currentstateID,currentcountryID);
             } else {
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getPermanentCityCo", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCitiesCoBr", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -2102,19 +2220,19 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    private void permanentStateApiCall() {
+    private void stateApiCallCoBr() {
         /**API CALL**/
         try {
             String url = MainApplication.mainUrl + "algo/getStates";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", permanentCountryID);
+            params.put("countryId", currentcountryIDCoBr);
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getPermanentStates(permanentCountryID);
+//                getCurrentStates(currentcountryID);
 
             } else {
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getPermanentStatesCo", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStatesCoBr", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -2132,6 +2250,7 @@ public class LoanApplicationFragment_2 extends Fragment {
         try {
             progressBar = (ProgressBar) view.findViewById(R.id.progressBar_applylona_coborrower);
 
+            linOfficeDetails = (LinearLayout) view.findViewById(R.id.linOfficeDetails);
             linBorrowerForm = (LinearLayout) view.findViewById(R.id.linBorrowerForm);
             linCoCorrowerForm = (LinearLayout) view.findViewById(R.id.linCoCorrowerForm);
 
@@ -2162,11 +2281,6 @@ public class LoanApplicationFragment_2 extends Fragment {
             buttonPrevious = (Button) view.findViewById(R.id.button_previous_loanappfragment2);
             buttonPrevious.setTypeface(typefaceFontBold);
 
-            lable = (TextView) view.findViewById(R.id.lable_fqform);
-            textViewbirthday = (TextView) view.findViewById(R.id.userInfoEdit_birthdatecoborrower);
-            birthdaycalender = (TextView) view.findViewById(R.id.birthdayCalender_fqform);
-            birthdaycalender.setTypeface(typeface);
-
             edtCourseFeeBr = (EditText) view.findViewById(R.id.edtCourseFeeBr);
             edtLoanAmtBr = (EditText) view.findViewById(R.id.edtLoanAmtBr);
             edtFnameBr = (EditText) view.findViewById(R.id.edtFnameBr);
@@ -2178,16 +2292,17 @@ public class LoanApplicationFragment_2 extends Fragment {
             edtCompanyBr = (EditText) view.findViewById(R.id.edtCompanyBr);
             edtAnnualSalBr = (EditText) view.findViewById(R.id.edtAnnualSalBr);
             edtCurrentAddressBr = (EditText) view.findViewById(R.id.edtCurrentAddressBr);
-            edtCurrentLandmarkBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkBr);
             edtCurrentPincodeBr = (EditText) view.findViewById(R.id.edtCurrentPincodeBr);
-            edtCurrentLandmarkBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkBr);
-            edtCurrentLandmarkBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkBr);
+            edtMonthlyRent = (EditText) view.findViewById(R.id.edtMonthlyRent);
 
             rgGenderBr = (RadioGroup) view.findViewById(R.id.rgGenderBr);
             radiogroup_iscgpa = (RadioGroup) view.findViewById(R.id.radiogroup_iscgpa);
 
             rbMaleBr = (RadioButton) view.findViewById(R.id.rbMaleBr);
             rbFemaleBr = (RadioButton) view.findViewById(R.id.rbFemaleBr);
+
+            rbMarriedBr = (RadioButton) view.findViewById(R.id.rbMarriedBr);
+            rbSingleBr = (RadioButton) view.findViewById(R.id.rbSingleBr);
 
             spInstituteBr = (Spinner) view.findViewById(R.id.spInstituteBr);
             spInsLocationBr = (Spinner) view.findViewById(R.id.spInsLocationBr);
@@ -2196,6 +2311,10 @@ public class LoanApplicationFragment_2 extends Fragment {
             spCurrentCountryBr = (Spinner) view.findViewById(R.id.spCurrentCountryBr);
             spCurrentStateBr = (Spinner) view.findViewById(R.id.spCurrentStateBr);
             spCurrentCityBr = (Spinner) view.findViewById(R.id.spCurrentCityBr);
+
+            spResidentTypeBr = (Spinner) view.findViewById(R.id.spResidentTypeBr);
+            spDurationStayAtCurrentAddress = (Spinner) view.findViewById(R.id.spDurationStayAtCurrentAddress);
+
 
             //CoBorrower
 
@@ -2221,24 +2340,62 @@ public class LoanApplicationFragment_2 extends Fragment {
             spCurrentCountryCoBr = (Spinner) view.findViewById(R.id.spCurrentCountryCoBr);
             spCurrentStateCoBr = (Spinner) view.findViewById(R.id.spCurrentStateCoBr);
             spCurrentCityCoBr = (Spinner) view.findViewById(R.id.spCurrentCityCoBr);
+            spCurrentAddressSameAsKyc = (Spinner) view.findViewById(R.id.spCurrentAddressSameAsKyc);
+            spCurrentAddressSameAsKycOrBorrower = (Spinner) view.findViewById(R.id.spCurrentAddressSameAsKycOrBorrower);
+
+            //CoBorrower
+            edtFnameCoBr = (EditText) view.findViewById(R.id.edtFnameCoBr);
+            edtMnameCoBr = (EditText) view.findViewById(R.id.edtMnameCoBr);
+            edtLnameCoBr = (EditText) view.findViewById(R.id.edtLnameCoBr);
+            edtEmailIdCoBr = (EditText) view.findViewById(R.id.edtEmailIdCoBr);
+            edtPanCoBr = (EditText) view.findViewById(R.id.edtPanCoBr);
+            edtAadhaarCoBr = (EditText) view.findViewById(R.id.edtAadhaarCoBr);
+            edtCompanyCoBr = (EditText) view.findViewById(R.id.edtCompanyCoBr);
+            edtAnnualSalCoBr = (EditText) view.findViewById(R.id.edtAnnualSalCoBr);
+            edtCurrentAddressCoBr = (EditText) view.findViewById(R.id.edtCurrentAddressCoBr);
+            edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
+            edtCurrentPincodeCoBr = (EditText) view.findViewById(R.id.edtCurrentPincodeCoBr);
+            edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
+            edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
+
+            rgGenderCoBr = (RadioGroup) view.findViewById(R.id.rgGenderCoBr);
+
+            rbMaleCoBr = (RadioButton) view.findViewById(R.id.rbMaleCoBr);
+            rbFemaleCoBr = (RadioButton) view.findViewById(R.id.rbFemaleCoBr);
+
+            spCurrentCountryCoBr = (Spinner) view.findViewById(R.id.spCurrentCountryCoBr);
+            spCurrentStateCoBr = (Spinner) view.findViewById(R.id.spCurrentStateCoBr);
+            spCurrentCityCoBr = (Spinner) view.findViewById(R.id.spCurrentCityCoBr);
+
+            currentCountry_arrayList = new ArrayList<>();
+            borrowerCurrentCountryPersonalPOJOArrayList = new ArrayList<>();
+
+            BorrowerCurrentCountryPersonalPOJO borrowerCurrentCountryPersonalPOJO = new BorrowerCurrentCountryPersonalPOJO();
+            borrowerCurrentCountryPersonalPOJO.countryName = "Select Any";
+            currentCountry_arrayList.add("Select Any");
+            borrowerCurrentCountryPersonalPOJO.countryID = "";
+            borrowerCurrentCountryPersonalPOJOArrayList.add(borrowerCurrentCountryPersonalPOJO);
+
+            BorrowerCurrentCountryPersonalPOJO borrowerCurrentCountryPersonalPOJO1 = new BorrowerCurrentCountryPersonalPOJO();
+            borrowerCurrentCountryPersonalPOJO1.countryName = "India";
+            currentCountry_arrayList.add("India");
+            borrowerCurrentCountryPersonalPOJO1.countryID = "1";
+            borrowerCurrentCountryPersonalPOJOArrayList.add(borrowerCurrentCountryPersonalPOJO1);
+
+            arrayAdapter_currentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayList);
+            spCurrentCountryBr.setAdapter(arrayAdapter_currentCountry);
+            arrayAdapter_currentCountry.notifyDataSetChanged();
 
 
             /** PERSONAL DETAILS **/
-            fname = (EditText) view.findViewById(R.id.input_coborrowerfirstname);
-            lname = (EditText) view.findViewById(R.id.input_coborrowerlastname);
-            adhaarno = (EditText) view.findViewById(R.id.input_adhaar_coborrower);
-            panno = (EditText) view.findViewById(R.id.input_pan_coborrower);
             currentaddress = (EditText) view.findViewById(R.id.input_coborrowercurrentaddress);
             permanentaddress = (EditText) view.findViewById(R.id.input_coborrowerpermanentaddress);
             currentpincode = (EditText) view.findViewById(R.id.input_coborrowercurrentpincode);
             contactno = (EditText) view.findViewById(R.id.input_coborrowercontactno);
             emailid = (EditText) view.findViewById(R.id.input_coborroweremailid);
-            monthlyrent = (EditText) view.findViewById(R.id.input_coborrowerrent);
+            edtMonthlyRent = (EditText) view.findViewById(R.id.input_coborrowerrent);
             previousemi = (EditText) view.findViewById(R.id.input_previousemiamount_coborrower);
             permanentpincode = (EditText) view.findViewById(R.id.input_coborrowerpermanentpincode);
-            radioButtonMarried = (RadioButton) view.findViewById(R.id.input_coborrowermarriedRadioButton);
-            radioButtonSingle = (RadioButton) view.findViewById(R.id.input_coborrowersingleRadioButton);
-            radioGroupMaritialStatus = (RadioGroup) view.findViewById(R.id.radioGroup_coborrower_maritialstatus);
 
             radioGroupEmployerType = (RadioGroup) view.findViewById(R.id.radiogroup_emptype_coborrower);
             radioGroupPreviousEmi = (RadioGroup) view.findViewById(R.id.radiogroup_hasanypreviousemi_coborrower);
@@ -2246,20 +2403,12 @@ public class LoanApplicationFragment_2 extends Fragment {
             radioButtonPreviousEmiYes = (RadioButton) view.findViewById(R.id.radiobutton_emiyes_coborrower);
             radioButtonPreviousEmiNo = (RadioButton) view.findViewById(R.id.radiobutton_emino_coborrower);
 
-            radioButtonMale = (RadioButton) view.findViewById(R.id.radioButton_male_coborrower);
-            radioButtonFemale = (RadioButton) view.findViewById(R.id.radioButton_female_coborrower);
-
             radioButtonGovernment = (RadioButton) view.findViewById(R.id.radiobutton_empType_gov_coborrower);
             radioButtonPrivate = (RadioButton) view.findViewById(R.id.radiobutton_empType_private_coborrower);
 
-            spinnerCurrentResidenceType = (Spinner) view.findViewById(R.id.spinner_coborrowercurrentresidencytype);
-            spinnerCurrentCity = (Spinner) view.findViewById(R.id.spinner_coborrowercurrentcity);
-            spinnerCurrentCountry = (Spinner) view.findViewById(R.id.spinner_coborrowercurrentcountry);
-            spinnerCurrentState = (Spinner) view.findViewById(R.id.spinner_coborrowercurrentstate);
             spinnerPermanentCity = (Spinner) view.findViewById(R.id.spinner_coborrowerpermanentcity);
             spinnerPermanentState = (Spinner) view.findViewById(R.id.spinner_coborrowerpermanentstate);
             spinnerPermanentCountry = (Spinner) view.findViewById(R.id.spinner_coborrowerpermanentcountry);
-            spinnerCurrentResidenceDuration = (Spinner) view.findViewById(R.id.spinner_coborrowerdurationofstayatcurrentaddress);
             spinnerRelationshipwithBorrower = (Spinner) view.findViewById(R.id.spinner_coborrowerrelationshipwithborrower);
 
             /** FINANCIAL DETAILS**/
@@ -2272,518 +2421,583 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             checkBoxSameasAbove = view.findViewById(R.id.checkBox_sameasabove_fqpersonal_coborrower);
 
+            currentResidencetype_arrayList = new ArrayList<>();
+            borrowerCurrentResidencePersonalPOJOArrayList = new ArrayList<>();
+
+            BorrowerCurrentResidenceTypePersonalPOJO currentResidenceTypePersonalPOJO = new BorrowerCurrentResidenceTypePersonalPOJO();
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Select Any";
+            currentResidencetype_arrayList.add("Select Any");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Owned by Self/Spouse/Parents/Sibling";
+            currentResidencetype_arrayList.add("Owned by Self/Spouse/Parents/Sibling");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "0";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Rented With Family";
+            currentResidencetype_arrayList.add("Rented With Family");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "1";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Company Provided";
+            currentResidencetype_arrayList.add("Company Provided");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "2";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Rented With Friends";
+            currentResidencetype_arrayList.add("Rented With Friends");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "3";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Rented Staying Alone";
+            currentResidencetype_arrayList.add("Rented Staying Alone");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "4";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Paying Guest";
+            currentResidencetype_arrayList.add("Paying Guest");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "5";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Hostel";
+            currentResidencetype_arrayList.add("Hostel");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "6";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            currentResidenceTypePersonalPOJO.residencetypeName = "Owned By Parents/Siblings";
+            currentResidencetype_arrayList.add("Owned By Parents/Siblings");
+            currentResidenceTypePersonalPOJO.dresidencetypeID = "7";
+            borrowerCurrentResidencePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+
+            arrayAdapter_currentResidenceDuration = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentResidencetype_arrayList);
+            spResidentTypeBr.setAdapter(arrayAdapter_currentResidenceDuration);
+            arrayAdapter_currentResidenceDuration.notifyDataSetChanged();
+
+            currentresidenceduration_arrayList = new ArrayList<>();
+            currentResidenceDurationPersonalPOJOArrayList = new ArrayList<>();
+
+            BorrowerCurrentResidenceDurationPersonalPOJO borrowerCurrentResidenceDurationPersonalPOJO = new BorrowerCurrentResidenceDurationPersonalPOJO();
+            borrowerCurrentResidenceDurationPersonalPOJO.durationName = "Select Any";
+            currentresidenceduration_arrayList.add("Select Any");
+            borrowerCurrentResidenceDurationPersonalPOJO.durationID = "";
+            currentResidenceDurationPersonalPOJOArrayList.add(borrowerCurrentResidenceDurationPersonalPOJO);
+
+            BorrowerCurrentResidenceDurationPersonalPOJO borrowerCurrentResidenceDurationPersonalPOJO1 = new BorrowerCurrentResidenceDurationPersonalPOJO();
+            borrowerCurrentResidenceDurationPersonalPOJO1.durationName = "Less Than 6 Months";
+            currentresidenceduration_arrayList.add("Less Than 6 Months");
+            borrowerCurrentResidenceDurationPersonalPOJO1.durationID = "1";
+            currentResidenceDurationPersonalPOJOArrayList.add(borrowerCurrentResidenceDurationPersonalPOJO1);
+
+            BorrowerCurrentResidenceDurationPersonalPOJO borrowerCurrentResidenceDurationPersonalPOJO2 = new BorrowerCurrentResidenceDurationPersonalPOJO();
+            borrowerCurrentResidenceDurationPersonalPOJO2.durationName = "6 Months to 1 Year";
+            currentresidenceduration_arrayList.add("6 Months to 1 Year");
+            borrowerCurrentResidenceDurationPersonalPOJO2.durationID = "2";
+            currentResidenceDurationPersonalPOJOArrayList.add(borrowerCurrentResidenceDurationPersonalPOJO2);
+
+            BorrowerCurrentResidenceDurationPersonalPOJO borrowerCurrentResidenceDurationPersonalPOJO3 = new BorrowerCurrentResidenceDurationPersonalPOJO();
+            borrowerCurrentResidenceDurationPersonalPOJO3.durationName = "1 Year to 2 Years";
+            currentresidenceduration_arrayList.add("1 Year to 2 Years");
+            borrowerCurrentResidenceDurationPersonalPOJO3.durationID = "3";
+            currentResidenceDurationPersonalPOJOArrayList.add(borrowerCurrentResidenceDurationPersonalPOJO3);
+
+            BorrowerCurrentResidenceDurationPersonalPOJO borrowerCurrentResidenceDurationPersonalPOJO4 = new BorrowerCurrentResidenceDurationPersonalPOJO();
+            borrowerCurrentResidenceDurationPersonalPOJO4.durationName = "More Than 2 Years";
+            currentresidenceduration_arrayList.add("More Than 2 Years");
+            borrowerCurrentResidenceDurationPersonalPOJO4.durationID = "4";
+            currentResidenceDurationPersonalPOJOArrayList.add(borrowerCurrentResidenceDurationPersonalPOJO4);
+
+            arrayAdapter_currentResidenceDuration = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentresidenceduration_arrayList);
+            spDurationStayAtCurrentAddress.setAdapter(arrayAdapter_currentResidenceDuration);
+            arrayAdapter_currentResidenceDuration.notifyDataSetChanged();
+
+
+            currentAddressSameAs_arrayList = new ArrayList<>();
+            addressSameAsCurrentPOJOArrayList = new ArrayList<>();
+
+            AddressSameAsCurrentPOJO addressSameAsCurrentPOJO = new AddressSameAsCurrentPOJO();
+            addressSameAsCurrentPOJO.address = "Select Any";
+            currentAddressSameAs_arrayList.add("Select Any");
+            addressSameAsCurrentPOJO.id = "";
+            addressSameAsCurrentPOJOArrayList.add(addressSameAsCurrentPOJO);
+
+            addressSameAsCurrentPOJO.address = "Borrower Kyc Address";
+            currentAddressSameAs_arrayList.add("Borrower Kyc Address");
+            addressSameAsCurrentPOJO.id = "1";
+            addressSameAsCurrentPOJOArrayList.add(addressSameAsCurrentPOJO);
+
+            addressSameAsCurrentPOJO.address = "None";
+            currentAddressSameAs_arrayList.add("None");
+            addressSameAsCurrentPOJO.id = "2";
+            addressSameAsCurrentPOJOArrayList.add(addressSameAsCurrentPOJO);
+
+            arrayAdapter_currentAddressSameAs = new ArrayAdapter(context, R.layout.custom_layout_spinner, addressSameAsCurrentPOJOArrayList);
+            spCurrentAddressSameAsKyc.setAdapter(arrayAdapter_currentAddressSameAs);
+            arrayAdapter_currentAddressSameAs.notifyDataSetChanged();
+
+            permanentAddressSameAs_arrayList = new ArrayList<>();
+            addressSameAsCurrentPOJOArrayList = new ArrayList<>();
+
+            AddressSameAsCurrentPOJO addressSameAsCurrentPOJO1 = new AddressSameAsCurrentPOJO();
+            addressSameAsCurrentPOJO1.address = "Select Any";
+            permanentAddressSameAs_arrayList.add("Select Any");
+            addressSameAsCurrentPOJO1.id = "";
+            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO);
+
+            addressSameAsCurrentPOJO1.address = "Borrower Kyc Address";
+            permanentAddressSameAs_arrayList.add("Borrower Kyc Address");
+            addressSameAsCurrentPOJO1.id = "1";
+            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO);
+
+            addressSameAsCurrentPOJO1.address = "Borrower Current Address";
+            permanentAddressSameAs_arrayList.add("Borrower Current Address");
+            addressSameAsCurrentPOJO1.id = "2";
+            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO);
+
+            addressSameAsCurrentPOJO1.address = "None";
+            permanentAddressSameAs_arrayList.add("None");
+            addressSameAsCurrentPOJO1.id = "3";
+            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO);
+
+
+            arrayAdapter_permanentAddressSameAs = new ArrayAdapter(context, R.layout.custom_layout_spinner, addressSameAspermanentPOJOArrayList);
+            spCurrentAddressSameAsKycOrBorrower.setAdapter(arrayAdapter_permanentAddressSameAs);
+            arrayAdapter_permanentAddressSameAs.notifyDataSetChanged();
+
 //        checkBoxSameasAbove.setEnabled(false);
 //        checkBoxSameasAbove.setClickable(false);
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-
+    } catch (Exception e) {
+        String className = this.getClass().getSimpleName();
+        String name = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        String errorMsg = e.getMessage();
+        String errorMsgDetails = e.getStackTrace().toString();
+        String errorLine = String.valueOf(e.getStackTrace()[0]);
+        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
     }
 
-    public static String dateFormateSystem(String date) {
-        String dateformate2 = null;
-        try {
-            String birthDate = date;
-            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-            Date dateformate = fmt.parse(birthDate);
-            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MMM-yyyy");
-            dateformate2 = fmtOut.format(dateformate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return dateformate2;
-    }
+}
 
     /**
      * RESPONSE OF API CALL
      **/
-    public void coBorrowerLoanDetails(JSONObject jsonData) {
+//    public void coBorrowerLoanDetails(JSONObject jsonData) {
+//        try {
+//            Log.e("SERVER CALL", "borrowerPersonal" + jsonData);
+//            String status = jsonData.optString("status");
+//            String message = jsonData.optString("message");
+//
+//            if (status.equalsIgnoreCase("1")) {
+//                JSONObject jsonObject = jsonData.getJSONObject("result");
+//
+//                JSONArray jsonArray1 = jsonObject.getJSONArray("addressType");
+//                currentResidencetype_arrayList = new ArrayList<>();
+//                coborrowerCurrentResidenceTypePersonalPOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray1.length(); i++) {
+//                    CoborrowerCurrentResidenceTypePersonalPOJO currentResidenceTypePersonalPOJO = new CoborrowerCurrentResidenceTypePersonalPOJO();
+//                    JSONObject mJsonti = jsonArray1.getJSONObject(i);
+//                    currentResidenceTypePersonalPOJO.residencetypeName = mJsonti.getString("name");
+//                    currentResidencetype_arrayList.add(mJsonti.getString("name"));
+//                    currentResidenceTypePersonalPOJO.dresidencetypeID = mJsonti.getString("id");
+//                    coborrowerCurrentResidenceTypePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
+//                    Log.e(MainApplication.TAG, "currentResidenceTypePersonalPOJO Spiner DATA:----------------- " + currentResidenceTypePersonalPOJO.residencetypeName);
+//                }
+//                arrayAdapter_currentResidencetype = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentResidencetype_arrayList);
+//                spResidentTypeBr.setAdapter(arrayAdapter_currentResidencetype);
+//                arrayAdapter_currentResidencetype.notifyDataSetChanged();
+//
+//                JSONArray jsonArray5 = jsonObject.getJSONArray("currentResidence");
+//                currentresidenceduration_arrayList = new ArrayList<>();
+//                coborrowerCurrentResidenceDurationPersonalPOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray5.length(); i++) {
+//                    CoborrowerCurrentResidenceDurationPersonalPOJO borrowerCurrentResidenceDurationPersonalPOJO = new CoborrowerCurrentResidenceDurationPersonalPOJO();
+//                    JSONObject mJsonti = jsonArray5.getJSONObject(i);
+//                    borrowerCurrentResidenceDurationPersonalPOJO.durationName = mJsonti.getString("name");
+//                    currentresidenceduration_arrayList.add(mJsonti.getString("name"));
+//                    borrowerCurrentResidenceDurationPersonalPOJO.durationID = mJsonti.getString("id");
+//                    coborrowerCurrentResidenceDurationPersonalPOJOArrayList.add(borrowerCurrentResidenceDurationPersonalPOJO);
+//                    Log.e(MainApplication.TAG, "currentResidenceTypePersonalPOJO Spiner DATA:----------------- " + borrowerCurrentResidenceDurationPersonalPOJO.durationName);
+//                }
+//                arrayAdapter_currentResidenceDuration = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentresidenceduration_arrayList);
+//                spResidentTypeBr.setAdapter(arrayAdapter_currentResidenceDuration);
+//                arrayAdapter_currentResidenceDuration.notifyDataSetChanged();
+//
+//
+//                JSONArray jsonArray4 = jsonObject.getJSONArray("country");
+//                currentCountry_arrayList = new ArrayList<>();
+//                borrowerCurrentCountryPersonalPOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray4.length(); i++) {
+//                    BorrowerCurrentCountryPersonalPOJO borrowerCurrentCountryPersonalPOJO = new BorrowerCurrentCountryPersonalPOJO();
+//                    JSONObject mJsonti = jsonArray4.getJSONObject(i);
+//                    borrowerCurrentCountryPersonalPOJO.countryName = mJsonti.getString("country_name");
+//                    currentCountry_arrayList.add(mJsonti.getString("country_name"));
+//                    borrowerCurrentCountryPersonalPOJO.countryID = mJsonti.getString("country_id");
+//                    borrowerCurrentCountryPersonalPOJOArrayList.add(borrowerCurrentCountryPersonalPOJO);
+//                    Log.e(MainApplication.TAG, "borrowerCurrentCountryPersonalPOJO Spiner DATA:----------------- " + borrowerCurrentCountryPersonalPOJO.countryName);
+//                }
+//                arrayAdapter_currentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayList);
+//                spCurrentCountryBr.setAdapter(arrayAdapter_currentCountry);
+//                arrayAdapter_currentCountry.notifyDataSetChanged();
+//                arrayAdapter_permanentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayList);
+//                spinnerPermanentCountry.setAdapter(arrayAdapter_permanentCountry);
+//                arrayAdapter_permanentCountry.notifyDataSetChanged();
+//
+//                JSONArray jsonArray6 = jsonObject.getJSONArray("coborrower_relationship");
+//                relationshipwithborrower_arrayList = new ArrayList<>();
+//                relationshipwithBorrowerPOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray6.length(); i++) {
+//                    RelationshipwithBorrowerPOJO relationshipwithBorrowerPOJO = new RelationshipwithBorrowerPOJO();
+//                    JSONObject mJsonti = jsonArray6.getJSONObject(i);
+//                    relationshipwithBorrowerPOJO.relationName = mJsonti.getString("name");
+//                    relationshipwithborrower_arrayList.add(mJsonti.getString("name"));
+//                    relationshipwithBorrowerPOJO.relationID = mJsonti.getString("id");
+//                    relationshipwithBorrowerPOJOArrayList.add(relationshipwithBorrowerPOJO);
+//                }
+//                arrayAdapter_relationshipwithborrower = new ArrayAdapter(context, R.layout.custom_layout_spinner, relationshipwithborrower_arrayList);
+//                spinnerRelationshipwithBorrower.setAdapter(arrayAdapter_relationshipwithborrower);
+//                arrayAdapter_relationshipwithborrower.notifyDataSetChanged();
+//
+//                JSONObject jsonObject1 = jsonObject.getJSONObject("coBorrowerDetails");
+//                String previous_emi = jsonObject1.getString("coborrower_previous_emi_amount");
+//                String currentadd = jsonObject1.getString("coborrower_current_address");
+//                String coborrower_gender = jsonObject1.getString("coborrower_gender_id");
+//                String currentPincode = jsonObject1.getString("coborrower_current_pincode");
+//                String permanentadd = jsonObject1.getString("coborrower_permanent_address");
+//                String permanentpin = jsonObject1.getString("coborrower_permanent_pincode");
+//                String firstname = jsonObject1.getString("coborrower_first_name");
+//                String lastname = jsonObject1.getString("coborrower_last_name");
+//                String dob = jsonObject1.getString("coborrower_dob");
+//                String panNo = jsonObject1.getString("coborrower_pan_no");
+//                String aadhaarno = jsonObject1.getString("coborrower_aadhar_no");
+//                String contactNo = jsonObject1.getString("coborrower_mobile");
+//                String email = jsonObject1.getString("coborrower_email");
+//                String maritialstatus = jsonObject1.getString("coborrower_is_married");
+//                String monthlyRent = jsonObject1.getString("coborrower_monthly_rent");
+//                String previousEmi = jsonObject1.getString("coborrower_has_any_extra_loan");
+//
+//
+//                currentResidencetypeID = jsonObject1.getString("coborrower_address_type");
+//                currentcityID = jsonObject1.getString("coborrower_current_city");
+//                currentstateID = jsonObject1.getString("coborrower_current_state");
+//                if (jsonObject1.getString("coborrower_current_country").equals("0")) {
+//                    currentcountryID = "1";
+//                } else if (jsonObject1.getString("coborrower_current_country").equals("")) {
+//                    currentcountryID = "1";
+//                } else {
+//                    currentcountryID = jsonObject1.getString("coborrower_current_country");
+//                }
+//                if (jsonObject1.getString("coborrower_permanent_country").equals("0")) {
+//                    permanentCountryID = "1";
+//                } else if (jsonObject1.getString("coborrower_permanent_country").equals("")) {
+//                    permanentCountryID = "1";
+//                } else {
+//                    permanentCountryID = jsonObject1.getString("coborrower_permanent_country");
+//                }
+////                permanentCountryID = jsonObject1.getString("coborrower_permanent_country");
+//                permanentcityID = jsonObject1.getString("coborrower_permanent_city");
+//                permanentstateID = jsonObject1.getString("coborrower_permanent_state");
+//                currentresidenceDurationID = jsonObject1.getString("coborrower_living_since");
+//                relationshipwithborrowerID = jsonObject1.getString("coborrower_relationship");
+//
+//                if (coborrower_gender.equalsIgnoreCase("1")) {
+//                    radioButtonMale.setChecked(true);
+//                } else if (coborrower_gender.equalsIgnoreCase("2")) {
+//                    radioButtonFemale.setChecked(true);
+//                }
+//
+//                int counts = coborrowerCurrentResidenceTypePersonalPOJOArrayList.size();
+//
+//                for (int i = 0; i < counts; i++) {
+//                    if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase(currentResidencetypeID)) {
+//
+//                        if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
+//                            edtMonthlyRent.setVisibility(View.GONE);
+//                            edtMonthlyRent.setText("");
+//                            spResidentTypeBr.setSelection(i);
+//                        } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("3")) {
+//                            edtMonthlyRent.setVisibility(View.GONE);
+//                            edtMonthlyRent.setText("");
+//                            spResidentTypeBr.setSelection(i);
+//                        } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("8")) {
+//                            edtMonthlyRent.setVisibility(View.GONE);
+//                            edtMonthlyRent.setText("");
+//                            spResidentTypeBr.setSelection(i);
+//                        } else {
+//                            edtMonthlyRent.setVisibility(View.VISIBLE);
+//                            spResidentTypeBr.setSelection(i);
+//                        }
+//                    }
+//                }
+////                if (currentcityID.equals("")) {
+////                    spinnerCurrentCity.setSelection(0);
+////                } else {
+////                    spinnerCurrentCity.setSelection(Integer.parseInt(currentcityID));
+////                }
+////                if (currentstateID.equals("")) {
+////                    spinnerCurrentState.setSelection(0);
+////                } else {
+////                    spinnerCurrentState.setSelection(Integer.parseInt(currentstateID));
+////                }
+//                if (currentcountryID.equals("")) {
+//                    spinnerCurrentCountry.setSelection(1);
+//                } else {
+//                    spinnerCurrentCountry.setSelection(Integer.parseInt(currentcountryID));
+//                }
+////                if (permanentcityID.equals("")) {
+////                    spinnerPermanentCity.setSelection(0);
+////                } else {
+////                    spinnerPermanentCity.setSelection(Integer.parseInt(permanentcityID));
+////                }
+////                if (permanentstateID.equals("")) {
+////                    spinnerPermanentState.setSelection(0);
+////                } else {
+////                    spinnerPermanentState.setSelection(Integer.parseInt(permanentstateID));
+////                }
+//                if (permanentCountryID.equals("")) {
+//                    spinnerPermanentCountry.setSelection(1);
+//                } else {
+//                    spinnerPermanentCountry.setSelection(Integer.parseInt(permanentCountryID));
+//                }
+//
+//                if (relationshipwithborrowerID.equals("")) {
+//                    spinnerRelationshipwithBorrower.setSelection(0);
+//                } else {
+//                    spinnerRelationshipwithBorrower.setSelection(Integer.parseInt(relationshipwithborrowerID));
+//                }
+//
+//                if (currentresidenceDurationID.equals("")) {
+//                    spinnerCurrentResidenceDuration.setSelection(0);
+//                } else {
+//                    spinnerCurrentResidenceDuration.setSelection(Integer.parseInt(currentresidenceDurationID));
+//                }
+//
+//                if (previousEmi.equalsIgnoreCase("1")) {
+//                    radioButtonPreviousEmiYes.setChecked(true);
+//                } else if (previousEmi.equalsIgnoreCase("0")) {
+//                    radioButtonPreviousEmiNo.setChecked(true);
+//                }
+//
+//
+//                fname.setText(firstname);
+//                lname.setText(lastname);
+//                adhaarno.setText(aadhaarno);
+//                panno.setText(panNo);
+//                currentaddress.setText(currentadd);
+//                // currentpincode.setText(currentPincode);
+//                if (currentPincode.equals("0")) {
+//                    currentpincode.setText("");
+//                } else {
+//                    currentpincode.setText(currentPincode);
+//
+//                }
+//                permanentaddress.setText(permanentadd);
+//                // permanentpincode.setText(permanentpin);
+//                if (permanentpin.equals("0")) {
+//                    permanentpincode.setText("");
+//                } else {
+//                    permanentpincode.setText(permanentpin);
+//
+//                }
+//                emailid.setText(email);
+//                contactno.setText(contactNo);
+//                edtMonthlyRent.setText(monthlyRent);
+//
+//                if (!dob.equalsIgnoreCase("") || !dob.isEmpty()) {
+//                    textViewbirthday.setText(dob);
+//                    textViewbirthday.setTextColor(Color.BLACK);
+//                    lable.setVisibility(View.VISIBLE);
+//                } else {
+//                    textViewbirthday.setText(R.string.birthdate);
+////                    textViewbirthday.setTextColor(808080);
+//                }
+//
+//                if (maritialstatus.equalsIgnoreCase("1")) {
+//                    rbMarriedBr.setChecked(true);
+//                } else if (maritialstatus.equalsIgnoreCase("2")) {
+//                    rbSingleBr.setChecked(true);
+//                }
+//
+//                /** FINANCIAL DETAILS**/
+//                JSONArray jsonArray7 = jsonObject.getJSONArray("jobDuration");
+//
+//                jobduration_arratList = new ArrayList<>();
+//                coborrowerJobDurationFinancePOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray7.length(); i++) {
+//                    CoborrowerJobDurationFinancePOJO coborrowerJobDurationFinancePOJO = new CoborrowerJobDurationFinancePOJO();
+//                    JSONObject mJsonti = jsonArray7.getJSONObject(i);
+//                    coborrowerJobDurationFinancePOJO.durationName = mJsonti.getString("name");
+//                    jobduration_arratList.add(mJsonti.getString("name"));
+//                    coborrowerJobDurationFinancePOJO.durationID = mJsonti.getString("id");
+//                    coborrowerJobDurationFinancePOJOArrayList.add(coborrowerJobDurationFinancePOJO);
+//                }
+//                jobduration_arrayAdapter = new ArrayAdapter(context, R.layout.custom_layout_spinner, jobduration_arratList);
+//                spinnerJobDuration.setAdapter(jobduration_arrayAdapter);
+//                jobduration_arrayAdapter.notifyDataSetChanged();
+//
+//                JSONArray jsonArray8 = jsonObject.getJSONArray("coBorrowerProfession");
+//                professionfinance_arratList = new ArrayList<>();
+//                coborrowerProfessionFinancePOJOArrayList = new ArrayList<>();
+//                for (int i = 0; i < jsonArray8.length(); i++) {
+//                    CoborrowerProfessionFinancePOJO coborrowerProfessionFinancePOJO = new CoborrowerProfessionFinancePOJO();
+//                    JSONObject mJsonti = jsonArray8.getJSONObject(i);
+//                    coborrowerProfessionFinancePOJO.professionName = mJsonti.getString("name");
+//                    professionfinance_arratList.add(mJsonti.getString("name"));
+//                    coborrowerProfessionFinancePOJO.professionID = mJsonti.getString("id");
+//                    coborrowerProfessionFinancePOJOArrayList.add(coborrowerProfessionFinancePOJO);
+//                    Log.e(MainApplication.TAG, "coborrowerProfessionFinancePOJO Spiner DATA:----------------- " + coborrowerProfessionFinancePOJO.professionName);
+//                }
+//                profession_arrayAdapter = new ArrayAdapter(context, R.layout.custom_layout_spinner, professionfinance_arratList);
+//                spinnerProfession.setAdapter(profession_arrayAdapter);
+//                profession_arrayAdapter.notifyDataSetChanged();
+//
+//                JSONObject jsonObject6 = jsonObject.getJSONObject("coBorrowerFinancialDetails");
+//                String organization = jsonObject6.getString("coborrower_organization");
+//                String anualIncome = jsonObject6.getString("coborrower_income");
+//                professionID = jsonObject6.getString("coborrower_profession");
+//                jobDurationID = jsonObject6.getString("coborrower_working_organization_since");
+//                String employerType = jsonObject6.getString("coborrower_employer_type");
+//
+//                anuualincome.setText(anualIncome);
+//                employeer.setText(organization);
+//                previousemi.setText(previous_emi);
+//
+//                if (permanentCountryID.equals("")) {
+//                    spinnerPermanentCountry.setSelection(1);
+//                } else {
+//                    spinnerPermanentCountry.setSelection(Integer.parseInt(permanentCountryID));
+//                }
+//                if (permanentCountryID.equals("")) {
+//                    spinnerPermanentCountry.setSelection(1);
+//                } else {
+//                    spinnerPermanentCountry.setSelection(Integer.parseInt(permanentCountryID));
+//                }
+//                if (jobDurationID.equals("")) {
+//                    spinnerJobDuration.setSelection(0);
+//                } else {
+//                    spinnerJobDuration.setSelection(Integer.parseInt(jobDurationID));
+//                }
+//                if (professionID.equals("")) {
+//                    spinnerProfession.setSelection(0);
+//                } else {
+//                    int count = coborrowerProfessionFinancePOJOArrayList.size();
+//                    Log.e("TAG", "count: " + count);
+//                    for (int i = 0; i < count; i++) {
+//                        if (coborrowerProfessionFinancePOJOArrayList.get(i).professionID.equalsIgnoreCase(professionID)) {
+//                            spinnerProfession.setSelection(i);
+//                        }
+//                    }
+//
+//                }
+//
+//                if (employerType.equalsIgnoreCase("1")) {
+//                    radioButtonPrivate.setChecked(true);
+//                } else if (employerType.equalsIgnoreCase("0")) {
+//                    radioButtonGovernment.setChecked(true);
+//                }
+//
+//                MainApplication.coborrowerValue1 = currentResidencetypeID;
+//                MainApplication.coborrowerValue2 = edtMonthlyRent.getText().toString();
+//                MainApplication.coborrowerValue3 = currentaddress.getText().toString();
+//                MainApplication.coborrowerValue4 = currentcityID;
+//                MainApplication.coborrowerValue5 = currentstateID;
+//                MainApplication.coborrowerValue6 = currentcountryID;
+//                MainApplication.coborrowerValue7 = currentpincode.getText().toString();
+//                MainApplication.coborrowerValue8 = permanentaddress.getText().toString();
+//                MainApplication.coborrowerValue9 = permanentcityID;
+//                MainApplication.coborrowerValue10 = permanentstateID;
+//                MainApplication.coborrowerValue11 = permanentCountryID;
+//                MainApplication.coborrowerValue12 = permanentpincode.getText().toString();
+//                MainApplication.coborrowerValue13 = fname.getText().toString();
+//                MainApplication.coborrowerValue14 = lname.getText().toString();
+//                MainApplication.coborrowerValue15 = textViewbirthday.getText().toString();
+//                MainApplication.coborrowerValue16 = maritialstatus;
+//                MainApplication.coborrowerValue17 = panno.getText().toString();
+//                MainApplication.coborrowerValue18 = adhaarno.getText().toString();
+//
+//                MainApplication.coborrowerValue19 = emailid.getText().toString();
+//                MainApplication.coborrowerValue20 = contactno.getText().toString();
+//                MainApplication.coborrowerValue21 = currentresidenceDurationID;
+//                MainApplication.coborrowerValue22 = relationshipwithborrowerID;
+//                MainApplication.coborrowerValue23 = professionID;
+//                MainApplication.coborrowerValue24 = anuualincome.getText().toString();
+//                MainApplication.coborrowerValue25 = employeer.getText().toString();
+//                MainApplication.coborrowerValue26 = jobDurationID;
+//                MainApplication.coborrowerValue28 = previousemi.getText().toString();
+//                MainApplication.coborrowerValue29 = coborrower_gender;
+//                MainApplication.coborrowerValue30 = employerType;
+//
+//                progressBar.setVisibility(View.GONE);
+//            } else {
+//                progressBar.setVisibility(View.GONE);
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//            }
+//        } catch (Exception e) {
+//            String className = this.getClass().getSimpleName();
+//            String name = new Object() {
+//            }.getClass().getEnclosingMethod().getName();
+//            String errorMsg = e.getMessage();
+//            String errorMsgDetails = e.getStackTrace().toString();
+//            String errorLine = String.valueOf(e.getStackTrace()[0]);
+//            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//        }
+//    }
+
+//    public void sendCoborrowerPersonal(JSONObject jsonData) {
+//        try {
+//            Log.e("SERVER CALL", "sendCoborrowerPersonal" + jsonData);
+//            String status = jsonData.optString("status");
+//            String message = jsonData.optString("message");
+//
+//            if (status.equalsIgnoreCase("1")) {
+//                progressBar.setVisibility(View.GONE);
+//
+//                JSONObject jsonObject = jsonData.getJSONObject("result");
+//                int docupload = jsonObject.getInt("docUpload");
+//
+//                if (docupload == 1) {
+//
+//                    String LocalsSql = "UPDATE CoBorrowerLAF SET ISUploaded = '" + true + "' WHERE logged_id = '" + userID + "'";
+//                    ExecuteSql(LocalsSql);
+//
+//                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("coBorrowerBackground_dark", "1");
+//                    Log.e(TAG, "onCreateView:++++++++ sharedPreferences" + coBorrowerBackground);
+//                    editor.apply();
+//                    editor.commit();
+//
+//                    LoanApplicationFragment_3 loanApplicationFragment_3 = new LoanApplicationFragment_3();
+//                    transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_3).commit();
+//                } else if (docupload == 0) {
+//                    Toast.makeText(context, R.string.please_complete_borrower_and_co_borrower_forms, Toast.LENGTH_SHORT).show();
+//                }
+//
+//            } else {
+//                progressBar.setVisibility(View.GONE);
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//            }
+//        } catch (Exception e) {
+//            String className = this.getClass().getSimpleName();
+//            String name = new Object() {
+//            }.getClass().getEnclosingMethod().getName();
+//            String errorMsg = e.getMessage();
+//            String errorMsgDetails = e.getStackTrace().toString();
+//            String errorLine = String.valueOf(e.getStackTrace()[0]);
+//            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//        }
+//    }
+
+    public void getCurrentStates(JSONObject jsonData) {
         try {
-            Log.e("SERVER CALL", "borrowerPersonal" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-                JSONObject jsonObject = jsonData.getJSONObject("result");
-
-                JSONArray jsonArray1 = jsonObject.getJSONArray("addressType");
-                currentResidencetype_arrayList = new ArrayList<>();
-                coborrowerCurrentResidenceTypePersonalPOJOArrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray1.length(); i++) {
-                    CoborrowerCurrentResidenceTypePersonalPOJO currentResidenceTypePersonalPOJO = new CoborrowerCurrentResidenceTypePersonalPOJO();
-                    JSONObject mJsonti = jsonArray1.getJSONObject(i);
-                    currentResidenceTypePersonalPOJO.residencetypeName = mJsonti.getString("name");
-                    currentResidencetype_arrayList.add(mJsonti.getString("name"));
-                    currentResidenceTypePersonalPOJO.dresidencetypeID = mJsonti.getString("id");
-                    coborrowerCurrentResidenceTypePersonalPOJOArrayList.add(currentResidenceTypePersonalPOJO);
-                    Log.e(MainApplication.TAG, "currentResidenceTypePersonalPOJO Spiner DATA:----------------- " + currentResidenceTypePersonalPOJO.residencetypeName);
-                }
-                arrayAdapter_currentResidencetype = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentResidencetype_arrayList);
-                spinnerCurrentResidenceType.setAdapter(arrayAdapter_currentResidencetype);
-                arrayAdapter_currentResidencetype.notifyDataSetChanged();
-
-                JSONArray jsonArray5 = jsonObject.getJSONArray("currentResidence");
-                currentresidenceduration_arrayList = new ArrayList<>();
-                coborrowerCurrentResidenceDurationPersonalPOJOArrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray5.length(); i++) {
-                    CoborrowerCurrentResidenceDurationPersonalPOJO borrowerCurrentResidenceDurationPersonalPOJO = new CoborrowerCurrentResidenceDurationPersonalPOJO();
-                    JSONObject mJsonti = jsonArray5.getJSONObject(i);
-                    borrowerCurrentResidenceDurationPersonalPOJO.durationName = mJsonti.getString("name");
-                    currentresidenceduration_arrayList.add(mJsonti.getString("name"));
-                    borrowerCurrentResidenceDurationPersonalPOJO.durationID = mJsonti.getString("id");
-                    coborrowerCurrentResidenceDurationPersonalPOJOArrayList.add(borrowerCurrentResidenceDurationPersonalPOJO);
-                    Log.e(MainApplication.TAG, "currentResidenceTypePersonalPOJO Spiner DATA:----------------- " + borrowerCurrentResidenceDurationPersonalPOJO.durationName);
-                }
-                arrayAdapter_currentResidenceDuration = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentresidenceduration_arrayList);
-                spinnerCurrentResidenceDuration.setAdapter(arrayAdapter_currentResidenceDuration);
-                arrayAdapter_currentResidenceDuration.notifyDataSetChanged();
-
-
-                JSONArray jsonArray4 = jsonObject.getJSONArray("country");
-                currentCountry_arrayList = new ArrayList<>();
-                borrowerCurrentCountryPersonalPOJOArrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray4.length(); i++) {
-                    BorrowerCurrentCountryPersonalPOJO borrowerCurrentCountryPersonalPOJO = new BorrowerCurrentCountryPersonalPOJO();
-                    JSONObject mJsonti = jsonArray4.getJSONObject(i);
-                    borrowerCurrentCountryPersonalPOJO.countryName = mJsonti.getString("country_name");
-                    currentCountry_arrayList.add(mJsonti.getString("country_name"));
-                    borrowerCurrentCountryPersonalPOJO.countryID = mJsonti.getString("country_id");
-                    borrowerCurrentCountryPersonalPOJOArrayList.add(borrowerCurrentCountryPersonalPOJO);
-                    Log.e(MainApplication.TAG, "borrowerCurrentCountryPersonalPOJO Spiner DATA:----------------- " + borrowerCurrentCountryPersonalPOJO.countryName);
-                }
-                arrayAdapter_currentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayList);
-                spinnerCurrentCountry.setAdapter(arrayAdapter_currentCountry);
-                arrayAdapter_currentCountry.notifyDataSetChanged();
-                arrayAdapter_permanentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayList);
-                spinnerPermanentCountry.setAdapter(arrayAdapter_permanentCountry);
-                arrayAdapter_permanentCountry.notifyDataSetChanged();
-
-                JSONArray jsonArray6 = jsonObject.getJSONArray("coborrower_relationship");
-                relationshipwithborrower_arrayList = new ArrayList<>();
-                relationshipwithBorrowerPOJOArrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray6.length(); i++) {
-                    RelationshipwithBorrowerPOJO relationshipwithBorrowerPOJO = new RelationshipwithBorrowerPOJO();
-                    JSONObject mJsonti = jsonArray6.getJSONObject(i);
-                    relationshipwithBorrowerPOJO.relationName = mJsonti.getString("name");
-                    relationshipwithborrower_arrayList.add(mJsonti.getString("name"));
-                    relationshipwithBorrowerPOJO.relationID = mJsonti.getString("id");
-                    relationshipwithBorrowerPOJOArrayList.add(relationshipwithBorrowerPOJO);
-                }
-                arrayAdapter_relationshipwithborrower = new ArrayAdapter(context, R.layout.custom_layout_spinner, relationshipwithborrower_arrayList);
-                spinnerRelationshipwithBorrower.setAdapter(arrayAdapter_relationshipwithborrower);
-                arrayAdapter_relationshipwithborrower.notifyDataSetChanged();
-
-//                JSONArray jsonArray2 = jsonObject.getJSONArray("currentCities");
-//                currentcity_arrayList = new ArrayList<>();
-//                borrowerCurrentCityPersonalPOJOArrayList = new ArrayList<>();
-//                for (int i = 0; i < jsonArray2.length(); i++) {
-//                    BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
-//                    JSONObject mJsonti = jsonArray2.getJSONObject(i);
-//                    borrowerCurrentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
-//                    currentcity_arrayList.add(mJsonti.getString("city_name"));
-//                    borrowerCurrentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
-//                    borrowerCurrentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
-//                }
-//                arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
-//                spinnerCurrentCity.setAdapter(arrayAdapter_currentCity);
-//                arrayAdapter_currentCity.notifyDataSetChanged();
-//
-//                JSONArray jsonArray3 = jsonObject.getJSONArray("currentStates");
-//                currentstate_arrayList = new ArrayList<>();
-//                borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
-//                for (int i = 0; i < jsonArray3.length(); i++) {
-//                    BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
-//                    JSONObject mJsonti = jsonArray3.getJSONObject(i);
-//                    borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
-//                    currentstate_arrayList.add(mJsonti.getString("state_name"));
-//                    borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
-//                    borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
-//                }
-//                arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-//                spinnerCurrentState.setAdapter(arrayAdapter_currentState);
-//                arrayAdapter_currentState.notifyDataSetChanged();
-//
-//
-//
-//
-//                JSONArray jsonArray9 = jsonObject.getJSONArray("permanentCities");
-//                currentcity_arrayList = new ArrayList<>();
-//                borrowerCurrentCityPersonalPOJOArrayList = new ArrayList<>();
-//                for (int i = 0; i < jsonArray9.length(); i++) {
-//                    BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
-//                    JSONObject mJsonti = jsonArray9.getJSONObject(i);
-//                    borrowerCurrentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
-//                    currentcity_arrayList.add(mJsonti.getString("city_name"));
-//                    borrowerCurrentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
-//                    borrowerCurrentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
-//                }
-//                arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
-//                spinnerPermanentCity.setAdapter(arrayAdapter_permanentCity);
-//                arrayAdapter_permanentCity.notifyDataSetChanged();
-//
-//                JSONArray jsonArray10 = jsonObject.getJSONArray("permanentStates");
-//                currentstate_arrayList = new ArrayList<>();
-//                borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
-//                for (int i = 0; i < jsonArray10.length(); i++) {
-//                    BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
-//                    JSONObject mJsonti = jsonArray10.getJSONObject(i);
-//                    borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
-//                    currentstate_arrayList.add(mJsonti.getString("state_name"));
-//                    borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
-//                    borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
-//                }
-//                arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-//                spinnerPermanentState.setAdapter(arrayAdapter_permanentState);
-//                arrayAdapter_permanentState.notifyDataSetChanged();
-
-                JSONObject jsonObject1 = jsonObject.getJSONObject("coBorrowerDetails");
-                String previous_emi = jsonObject1.getString("coborrower_previous_emi_amount");
-                String currentadd = jsonObject1.getString("coborrower_current_address");
-                String coborrower_gender = jsonObject1.getString("coborrower_gender_id");
-                String currentPincode = jsonObject1.getString("coborrower_current_pincode");
-                String permanentadd = jsonObject1.getString("coborrower_permanent_address");
-                String permanentpin = jsonObject1.getString("coborrower_permanent_pincode");
-                String firstname = jsonObject1.getString("coborrower_first_name");
-                String lastname = jsonObject1.getString("coborrower_last_name");
-                String dob = jsonObject1.getString("coborrower_dob");
-                String panNo = jsonObject1.getString("coborrower_pan_no");
-                String aadhaarno = jsonObject1.getString("coborrower_aadhar_no");
-                String contactNo = jsonObject1.getString("coborrower_mobile");
-                String email = jsonObject1.getString("coborrower_email");
-                String maritialstatus = jsonObject1.getString("coborrower_is_married");
-                String monthlyRent = jsonObject1.getString("coborrower_monthly_rent");
-                String previousEmi = jsonObject1.getString("coborrower_has_any_extra_loan");
-
-
-                currentResidencetypeID = jsonObject1.getString("coborrower_address_type");
-                currentcityID = jsonObject1.getString("coborrower_current_city");
-                currentstateID = jsonObject1.getString("coborrower_current_state");
-                if (jsonObject1.getString("coborrower_current_country").equals("0")) {
-                    currentcountryID = "1";
-                } else if (jsonObject1.getString("coborrower_current_country").equals("")) {
-                    currentcountryID = "1";
-                } else {
-                    currentcountryID = jsonObject1.getString("coborrower_current_country");
-                }
-//                currentcountryID = jsonObject1.getString("coborrower_current_country");
-                if (jsonObject1.getString("coborrower_permanent_country").equals("0")) {
-                    permanentCountryID = "1";
-                } else if (jsonObject1.getString("coborrower_permanent_country").equals("")) {
-                    permanentCountryID = "1";
-                } else {
-                    permanentCountryID = jsonObject1.getString("coborrower_permanent_country");
-                }
-//                permanentCountryID = jsonObject1.getString("coborrower_permanent_country");
-                permanentcityID = jsonObject1.getString("coborrower_permanent_city");
-                permanentstateID = jsonObject1.getString("coborrower_permanent_state");
-                currentresidenceDurationID = jsonObject1.getString("coborrower_living_since");
-                relationshipwithborrowerID = jsonObject1.getString("coborrower_relationship");
-
-                if (coborrower_gender.equalsIgnoreCase("1")) {
-                    radioButtonMale.setChecked(true);
-                } else if (coborrower_gender.equalsIgnoreCase("2")) {
-                    radioButtonFemale.setChecked(true);
-                }
-
-                int counts = coborrowerCurrentResidenceTypePersonalPOJOArrayList.size();
-
-                for (int i = 0; i < counts; i++) {
-                    if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase(currentResidencetypeID)) {
-
-                        if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
-                            monthlyrent.setVisibility(View.GONE);
-                            monthlyrent.setText("");
-                            spinnerCurrentResidenceType.setSelection(i);
-                        } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("3")) {
-                            monthlyrent.setVisibility(View.GONE);
-                            monthlyrent.setText("");
-                            spinnerCurrentResidenceType.setSelection(i);
-                        } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("8")) {
-                            monthlyrent.setVisibility(View.GONE);
-                            monthlyrent.setText("");
-                            spinnerCurrentResidenceType.setSelection(i);
-                        } else {
-                            monthlyrent.setVisibility(View.VISIBLE);
-                            spinnerCurrentResidenceType.setSelection(i);
-                        }
-                    }
-                }
-//                if (currentcityID.equals("")) {
-//                    spinnerCurrentCity.setSelection(0);
-//                } else {
-//                    spinnerCurrentCity.setSelection(Integer.parseInt(currentcityID));
-//                }
-//                if (currentstateID.equals("")) {
-//                    spinnerCurrentState.setSelection(0);
-//                } else {
-//                    spinnerCurrentState.setSelection(Integer.parseInt(currentstateID));
-//                }
-                if (currentcountryID.equals("")) {
-                    spinnerCurrentCountry.setSelection(1);
-                } else {
-                    spinnerCurrentCountry.setSelection(Integer.parseInt(currentcountryID));
-                }
-//                if (permanentcityID.equals("")) {
-//                    spinnerPermanentCity.setSelection(0);
-//                } else {
-//                    spinnerPermanentCity.setSelection(Integer.parseInt(permanentcityID));
-//                }
-//                if (permanentstateID.equals("")) {
-//                    spinnerPermanentState.setSelection(0);
-//                } else {
-//                    spinnerPermanentState.setSelection(Integer.parseInt(permanentstateID));
-//                }
-                if (permanentCountryID.equals("")) {
-                    spinnerPermanentCountry.setSelection(1);
-                } else {
-                    spinnerPermanentCountry.setSelection(Integer.parseInt(permanentCountryID));
-                }
-
-                if (relationshipwithborrowerID.equals("")) {
-                    spinnerRelationshipwithBorrower.setSelection(0);
-                } else {
-                    spinnerRelationshipwithBorrower.setSelection(Integer.parseInt(relationshipwithborrowerID));
-                }
-
-                if (currentresidenceDurationID.equals("")) {
-                    spinnerCurrentResidenceDuration.setSelection(0);
-                } else {
-                    spinnerCurrentResidenceDuration.setSelection(Integer.parseInt(currentresidenceDurationID));
-                }
-
-                if (previousEmi.equalsIgnoreCase("1")) {
-                    radioButtonPreviousEmiYes.setChecked(true);
-                } else if (previousEmi.equalsIgnoreCase("0")) {
-                    radioButtonPreviousEmiNo.setChecked(true);
-                }
-
-
-                fname.setText(firstname);
-                lname.setText(lastname);
-                adhaarno.setText(aadhaarno);
-                panno.setText(panNo);
-                currentaddress.setText(currentadd);
-                // currentpincode.setText(currentPincode);
-                if (currentPincode.equals("0")) {
-                    currentpincode.setText("");
-                } else {
-                    currentpincode.setText(currentPincode);
-
-                }
-                permanentaddress.setText(permanentadd);
-                // permanentpincode.setText(permanentpin);
-                if (permanentpin.equals("0")) {
-                    permanentpincode.setText("");
-                } else {
-                    permanentpincode.setText(permanentpin);
-
-                }
-                emailid.setText(email);
-                contactno.setText(contactNo);
-                monthlyrent.setText(monthlyRent);
-
-                if (!dob.equalsIgnoreCase("") || !dob.isEmpty()) {
-                    textViewbirthday.setText(dob);
-                    textViewbirthday.setTextColor(Color.BLACK);
-                    lable.setVisibility(View.VISIBLE);
-                } else {
-                    textViewbirthday.setText(R.string.birthdate);
-//                    textViewbirthday.setTextColor(808080);
-                }
-
-                if (maritialstatus.equalsIgnoreCase("1")) {
-                    radioButtonMarried.setChecked(true);
-                } else if (maritialstatus.equalsIgnoreCase("2")) {
-                    radioButtonSingle.setChecked(true);
-                }
-
-                /** FINANCIAL DETAILS**/
-                JSONArray jsonArray7 = jsonObject.getJSONArray("jobDuration");
-
-                jobduration_arratList = new ArrayList<>();
-                coborrowerJobDurationFinancePOJOArrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray7.length(); i++) {
-                    CoborrowerJobDurationFinancePOJO coborrowerJobDurationFinancePOJO = new CoborrowerJobDurationFinancePOJO();
-                    JSONObject mJsonti = jsonArray7.getJSONObject(i);
-                    coborrowerJobDurationFinancePOJO.durationName = mJsonti.getString("name");
-                    jobduration_arratList.add(mJsonti.getString("name"));
-                    coborrowerJobDurationFinancePOJO.durationID = mJsonti.getString("id");
-                    coborrowerJobDurationFinancePOJOArrayList.add(coborrowerJobDurationFinancePOJO);
-                }
-                jobduration_arrayAdapter = new ArrayAdapter(context, R.layout.custom_layout_spinner, jobduration_arratList);
-                spinnerJobDuration.setAdapter(jobduration_arrayAdapter);
-                jobduration_arrayAdapter.notifyDataSetChanged();
-
-                JSONArray jsonArray8 = jsonObject.getJSONArray("coBorrowerProfession");
-                professionfinance_arratList = new ArrayList<>();
-                coborrowerProfessionFinancePOJOArrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray8.length(); i++) {
-                    CoborrowerProfessionFinancePOJO coborrowerProfessionFinancePOJO = new CoborrowerProfessionFinancePOJO();
-                    JSONObject mJsonti = jsonArray8.getJSONObject(i);
-                    coborrowerProfessionFinancePOJO.professionName = mJsonti.getString("name");
-                    professionfinance_arratList.add(mJsonti.getString("name"));
-                    coborrowerProfessionFinancePOJO.professionID = mJsonti.getString("id");
-                    coborrowerProfessionFinancePOJOArrayList.add(coborrowerProfessionFinancePOJO);
-                    Log.e(MainApplication.TAG, "coborrowerProfessionFinancePOJO Spiner DATA:----------------- " + coborrowerProfessionFinancePOJO.professionName);
-                }
-                profession_arrayAdapter = new ArrayAdapter(context, R.layout.custom_layout_spinner, professionfinance_arratList);
-                spinnerProfession.setAdapter(profession_arrayAdapter);
-                profession_arrayAdapter.notifyDataSetChanged();
-
-                JSONObject jsonObject6 = jsonObject.getJSONObject("coBorrowerFinancialDetails");
-                String organization = jsonObject6.getString("coborrower_organization");
-                String anualIncome = jsonObject6.getString("coborrower_income");
-                professionID = jsonObject6.getString("coborrower_profession");
-                jobDurationID = jsonObject6.getString("coborrower_working_organization_since");
-                String employerType = jsonObject6.getString("coborrower_employer_type");
-
-                anuualincome.setText(anualIncome);
-                employeer.setText(organization);
-                previousemi.setText(previous_emi);
-
-                if (permanentCountryID.equals("")) {
-                    spinnerPermanentCountry.setSelection(1);
-                } else {
-                    spinnerPermanentCountry.setSelection(Integer.parseInt(permanentCountryID));
-                }
-                if (permanentCountryID.equals("")) {
-                    spinnerPermanentCountry.setSelection(1);
-                } else {
-                    spinnerPermanentCountry.setSelection(Integer.parseInt(permanentCountryID));
-                }
-                if (jobDurationID.equals("")) {
-                    spinnerJobDuration.setSelection(0);
-                } else {
-                    spinnerJobDuration.setSelection(Integer.parseInt(jobDurationID));
-                }
-                if (professionID.equals("")) {
-                    spinnerProfession.setSelection(0);
-                } else {
-                    int count = coborrowerProfessionFinancePOJOArrayList.size();
-                    Log.e("TAG", "count: " + count);
-                    for (int i = 0; i < count; i++) {
-                        if (coborrowerProfessionFinancePOJOArrayList.get(i).professionID.equalsIgnoreCase(professionID)) {
-                            spinnerProfession.setSelection(i);
-                        }
-                    }
-
-                }
-
-                if (employerType.equalsIgnoreCase("1")) {
-                    radioButtonPrivate.setChecked(true);
-                } else if (employerType.equalsIgnoreCase("0")) {
-                    radioButtonGovernment.setChecked(true);
-                }
-
-                MainApplication.coborrowerValue1 = currentResidencetypeID;
-                MainApplication.coborrowerValue2 = monthlyrent.getText().toString();
-                MainApplication.coborrowerValue3 = currentaddress.getText().toString();
-                MainApplication.coborrowerValue4 = currentcityID;
-                MainApplication.coborrowerValue5 = currentstateID;
-                MainApplication.coborrowerValue6 = currentcountryID;
-                MainApplication.coborrowerValue7 = currentpincode.getText().toString();
-                MainApplication.coborrowerValue8 = permanentaddress.getText().toString();
-                MainApplication.coborrowerValue9 = permanentcityID;
-                MainApplication.coborrowerValue10 = permanentstateID;
-                MainApplication.coborrowerValue11 = permanentCountryID;
-                MainApplication.coborrowerValue12 = permanentpincode.getText().toString();
-                MainApplication.coborrowerValue13 = fname.getText().toString();
-                MainApplication.coborrowerValue14 = lname.getText().toString();
-                MainApplication.coborrowerValue15 = textViewbirthday.getText().toString();
-                MainApplication.coborrowerValue16 = maritialstatus;
-                MainApplication.coborrowerValue17 = panno.getText().toString();
-                MainApplication.coborrowerValue18 = adhaarno.getText().toString();
-
-                MainApplication.coborrowerValue19 = emailid.getText().toString();
-                MainApplication.coborrowerValue20 = contactno.getText().toString();
-                MainApplication.coborrowerValue21 = currentresidenceDurationID;
-                MainApplication.coborrowerValue22 = relationshipwithborrowerID;
-                MainApplication.coborrowerValue23 = professionID;
-                MainApplication.coborrowerValue24 = anuualincome.getText().toString();
-                MainApplication.coborrowerValue25 = employeer.getText().toString();
-                MainApplication.coborrowerValue26 = jobDurationID;
-                MainApplication.coborrowerValue28 = previousemi.getText().toString();
-                MainApplication.coborrowerValue29 = coborrower_gender;
-                MainApplication.coborrowerValue30 = employerType;
-
-                progressBar.setVisibility(View.GONE);
-            } else {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    public void sendCoborrowerPersonal(JSONObject jsonData) {
-        try {
-            Log.e("SERVER CALL", "sendCoborrowerPersonal" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-                progressBar.setVisibility(View.GONE);
-
-                JSONObject jsonObject = jsonData.getJSONObject("result");
-                int docupload = jsonObject.getInt("docUpload");
-
-                if (docupload == 1) {
-
-                    String LocalsSql = "UPDATE CoBorrowerLAF SET ISUploaded = '" + true + "' WHERE logged_id = '" + userID + "'";
-                    ExecuteSql(LocalsSql);
-
-                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("coBorrowerBackground_dark", "1");
-                    Log.e(TAG, "onCreateView:++++++++ sharedPreferences" + coBorrowerBackground);
-                    editor.apply();
-                    editor.commit();
-
-                    LoanApplicationFragment_3 loanApplicationFragment_3 = new LoanApplicationFragment_3();
-                    transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_3).commit();
-                } else if (docupload == 0) {
-                    Toast.makeText(context, R.string.please_complete_borrower_and_co_borrower_forms, Toast.LENGTH_SHORT).show();
-                }
-
-            } else {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    public void getCurrentStatesCo(JSONObject jsonData) {
-        try {
-
             if (jsonData.toString().equals("{}")) {
                 try {
                     currentstate_arrayList = new ArrayList<>();
                     currentstate_arrayList.add("Select Any");
                     arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                    spinnerCurrentState.setAdapter(arrayAdapter_currentState);
+                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
                     arrayAdapter_currentState.notifyDataSetChanged();
-                    spinnerCurrentState.setSelection(0);
+                    spCurrentStateBr.setSelection(0);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
                     String name = new Object() {
@@ -2795,7 +3009,6 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
 
             } else {
-                Log.e("SERVER CALL", "sendBorrowerDetails" + jsonData);
                 String status = jsonData.optString("status");
                 String message = jsonData.optString("message");
 
@@ -2814,15 +3027,10 @@ public class LoanApplicationFragment_2 extends Fragment {
                         borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
                     }
                     arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                    spinnerCurrentState.setAdapter(arrayAdapter_currentState);
+                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
                     arrayAdapter_currentState.notifyDataSetChanged();
 
-                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
-                    for (int i = 0; i < count; i++) {
-                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
-                            spinnerCurrentState.setSelection(i);
-                        }
-                    }
+                    spCurrentStateBr.setSelection(Integer.parseInt(currentstateID));
 
                 } else {
                 }
@@ -2838,17 +3046,16 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    public void getCurrentCitiesCo(JSONObject jsonData) {
+    public void getCurrentCities(JSONObject jsonData) {
         try {
-
             if (jsonData.toString().equals("{}")) {
                 try {
                     currentcity_arrayList = new ArrayList<>();
                     currentcity_arrayList.add("Select Any");
                     arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
-                    spinnerCurrentCity.setAdapter(arrayAdapter_currentCity);
+                    spCurrentCityBr.setAdapter(arrayAdapter_currentCity);
                     arrayAdapter_currentCity.notifyDataSetChanged();
-                    spinnerCurrentCity.setSelection(0);
+                    spCurrentCityBr.setSelection(0);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
                     String name = new Object() {
@@ -2860,8 +3067,8 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
 
             } else {
+                Log.e("SERVER CALL", "getCurrentCities+++" + jsonData);
 
-                Log.e("SERVER CALL", "sendBorrowerDetails" + jsonData);
                 String status = jsonData.optString("status");
                 String message = jsonData.optString("message");
 
@@ -2880,20 +3087,19 @@ public class LoanApplicationFragment_2 extends Fragment {
                         borrowerCurrentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
                     }
                     arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
-                    spinnerCurrentCity.setAdapter(arrayAdapter_currentCity);
+                    spCurrentCityBr.setAdapter(arrayAdapter_currentCity);
                     arrayAdapter_currentCity.notifyDataSetChanged();
 
                     int count = borrowerCurrentCityPersonalPOJOArrayList.size();
                     for (int i = 0; i < count; i++) {
                         if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-                            spinnerCurrentCity.setSelection(i);
+                            spCurrentCityBr.setSelection(i);
                         }
                     }
 
                 } else {
                 }
             }
-
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
@@ -2905,16 +3111,16 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    public void getPermanentStatesCo(JSONObject jsonData) {
+    public void getCurrentStatesCoBr(JSONObject jsonData) {
         try {
             if (jsonData.toString().equals("{}")) {
                 try {
-                    currentstate_arrayList = new ArrayList<>();
-                    currentstate_arrayList.add("Select Any");
-                    arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                    spinnerPermanentState.setAdapter(arrayAdapter_permanentState);
-                    arrayAdapter_permanentState.notifyDataSetChanged();
-                    spinnerPermanentState.setSelection(0);
+                    currentstate_arrayListCoBr = new ArrayList<>();
+                    currentstate_arrayListCoBr.add("Select Any");
+                    arrayAdapter_currentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayListCoBr);
+                    spCurrentStateCoBr.setAdapter(arrayAdapter_currentStateCoBr);
+                    arrayAdapter_currentStateCoBr.notifyDataSetChanged();
+                    spCurrentStateCoBr.setSelection(0);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
                     String name = new Object() {
@@ -2926,7 +3132,6 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
 
             } else {
-                Log.e("SERVER CALL", "sendBorrowerDetails" + jsonData);
                 String status = jsonData.optString("status");
                 String message = jsonData.optString("message");
 
@@ -2934,27 +3139,21 @@ public class LoanApplicationFragment_2 extends Fragment {
                     JSONObject jsonObject = jsonData.getJSONObject("result");
 
                     JSONArray jsonArray3 = jsonObject.getJSONArray("states");
-                    currentstate_arrayList = new ArrayList<>();
-                    borrowerPermanentStatePersonalPOJOArrayList = new ArrayList<>();
+                    currentstate_arrayListCoBr = new ArrayList<>();
+                    borrowerCurrentStatePersonalPOJOArrayListCoBr = new ArrayList<>();
                     for (int i = 0; i < jsonArray3.length(); i++) {
-                        BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
+                        BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJOCoBr = new BorrowerCurrentStatePersonalPOJO();
                         JSONObject mJsonti = jsonArray3.getJSONObject(i);
-                        borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
-                        currentstate_arrayList.add(mJsonti.getString("state_name"));
-                        borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
-                        borrowerPermanentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
+                        borrowerCurrentStatePersonalPOJOCoBr.stateName = mJsonti.getString("state_name");
+                        currentstate_arrayListCoBr.add(mJsonti.getString("state_name"));
+                        borrowerCurrentStatePersonalPOJOCoBr.stateID = mJsonti.getString("state_id");
+                        borrowerCurrentStatePersonalPOJOArrayListCoBr.add(borrowerCurrentStatePersonalPOJOCoBr);
                     }
-                    arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                    spinnerPermanentState.setAdapter(arrayAdapter_permanentState);
-                    arrayAdapter_permanentState.notifyDataSetChanged();
+                    arrayAdapter_currentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayListCoBr);
+                    spCurrentStateBr.setAdapter(arrayAdapter_currentStateCoBr);
+                    arrayAdapter_currentStateCoBr.notifyDataSetChanged();
 
-
-                    int count = borrowerPermanentStatePersonalPOJOArrayList.size();
-                    for (int i = 0; i < count; i++) {
-                        if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(permanentstateID)) {
-                            spinnerPermanentState.setSelection(i);
-                        }
-                    }
+                    spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
 
                 } else {
                 }
@@ -2970,17 +3169,16 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    public void getPermanentCitiesCo(JSONObject jsonData) {
+    public void getCurrentCitiesCoBr(JSONObject jsonData) {
         try {
-
             if (jsonData.toString().equals("{}")) {
                 try {
-                    permanentcity_arrayList = new ArrayList<>();
-                    permanentcity_arrayList.add("Select Any");
-                    arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayList);
-                    spinnerPermanentCity.setAdapter(arrayAdapter_permanentCity);
-                    arrayAdapter_permanentCity.notifyDataSetChanged();
-                    spinnerPermanentCity.setSelection(0);
+                    currentcity_arrayListCoBr = new ArrayList<>();
+                    currentcity_arrayListCoBr.add("Select Any");
+                    arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayListCoBr);
+                    spCurrentCityBr.setAdapter(arrayAdapter_currentCityCoBr);
+                    arrayAdapter_currentCityCoBr.notifyDataSetChanged();
+                    spCurrentCityCoBr.setSelection(0);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
                     String name = new Object() {
@@ -2992,7 +3190,8 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
 
             } else {
-                Log.e("SERVER CALL", "sendBorrowerDetails" + jsonData);
+                Log.e("SERVER CALL", "getCurrentCities+++" + jsonData);
+
                 String status = jsonData.optString("status");
                 String message = jsonData.optString("message");
 
@@ -3000,26 +3199,24 @@ public class LoanApplicationFragment_2 extends Fragment {
                     JSONObject jsonObject = jsonData.getJSONObject("result");
 
                     JSONArray jsonArray2 = jsonObject.getJSONArray("cities");
-                    permanentcity_arrayList = new ArrayList<>();
-                    borrowerPermanentCityPersonalPOJOArrayList = new ArrayList<>();
+                    currentcity_arrayListCoBr = new ArrayList<>();
+                    borrowerCurrentCityPersonalPOJOArrayListCoBr = new ArrayList<>();
                     for (int i = 0; i < jsonArray2.length(); i++) {
-                        BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
+                        BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJOCoBr = new BorrowerCurrentCityPersonalPOJO();
                         JSONObject mJsonti = jsonArray2.getJSONObject(i);
-                        borrowerCurrentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
-                        permanentcity_arrayList.add(mJsonti.getString("city_name"));
-                        borrowerCurrentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
-                        borrowerPermanentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
+                        borrowerCurrentCityPersonalPOJOCoBr.cityName = mJsonti.getString("city_name");
+                        currentcity_arrayList.add(mJsonti.getString("city_name"));
+                        borrowerCurrentCityPersonalPOJOCoBr.cityID = mJsonti.getString("city_id");
+                        borrowerCurrentCityPersonalPOJOArrayListCoBr.add(borrowerCurrentCityPersonalPOJOCoBr);
                     }
-                    arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayList);
-                    spinnerPermanentCity.setAdapter(arrayAdapter_permanentCity);
-                    arrayAdapter_permanentCity.notifyDataSetChanged();
+                    arrayAdapter_currentCityCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayListCoBr);
+                    spCurrentCityCoBr.setAdapter(arrayAdapter_currentCityCoBr);
+                    arrayAdapter_currentCityCoBr.notifyDataSetChanged();
 
-//                    Log.e(TAG, "999999999: " + permanentcityID);
-
-                    int count = borrowerPermanentCityPersonalPOJOArrayList.size();
+                    int count = borrowerCurrentCityPersonalPOJOArrayList.size();
                     for (int i = 0; i < count; i++) {
-                        if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(permanentcityID)) {
-                            spinnerPermanentCity.setSelection(i);
+                        if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(currentcityIDCoBr)) {
+                            spCurrentCityCoBr.setSelection(i);
                         }
                     }
 

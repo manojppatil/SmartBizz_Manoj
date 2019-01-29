@@ -94,8 +94,8 @@ public class LoanApplication extends AppCompatActivity {
             } else if (setFragmentSignSubnit.equalsIgnoreCase("1") && setFragmentDocUpload.equalsIgnoreCase("0") && setFragmentCOBorrower.equalsIgnoreCase("0")) {
                 getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_4()).commit();
             } else {
-                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_1()).commit();
-//                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_2()).commit();
+//                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_1()).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_loanapplication, new LoanApplicationFragment_2()).commit();
             }
 
             SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);

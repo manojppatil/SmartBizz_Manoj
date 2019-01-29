@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/light_blue_50"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                         android:padding="2dp">
 
                         <TextView
-                            android:id="@+id/lable_personal_fqform"
+                            android:id="@+id/lblBirthdayBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingTop="8dp"
@@ -100,7 +100,7 @@
                             android:visibility="invisible" />
 
                         <TextView
-                            android:id="@+id/userInfoEdit_birthdatecoborrower"
+                            android:id="@+id/txtBirthdateBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="1dp"
@@ -117,7 +117,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/birthdayCalender_fqform"
+                        android:id="@+id/txtBirthdayCalenderBr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -176,6 +176,7 @@
                             android:textColor="@color/black"
                             android:theme="@style/EditTextStyle" />
                     </RadioGroup>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -292,7 +293,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_currentresidencytype_borrower"
+                        android:id="@+id/spResidentTypeBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -310,7 +311,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/input_borrowerrent"
+                        android:id="@+id/edtMonthlyRent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/monthly_rent"
@@ -366,7 +367,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_currentresidenceduration"
+                        android:id="@+id/spDurationStayAtCurrentAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -420,24 +421,6 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </android.support.design.widget.TextInputLayout>
-
-                    <!--<android.support.design.widget.TextInputLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="5dp"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:theme="@style/EditTextStyle"-->
-                        <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
-
-                        <!--<EditText-->
-                            <!--android:id="@+id/edtCurrentLandmarkBr"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:hint="Landmark"-->
-                            <!--android:inputType="textPostalAddress"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="16sp" />-->
-                    <!--</android.support.design.widget.TextInputLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -596,24 +579,6 @@
                             android:textSize="16sp" />
                     </android.support.design.widget.TextInputLayout>
 
-                    <!--<android.support.design.widget.TextInputLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="5dp"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:theme="@style/EditTextStyle"-->
-                        <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
-
-                        <!--<EditText-->
-                            <!--android:id="@+id/edtPermanentLandmarkBr"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:hint="Land mark"-->
-                            <!--android:inputType="textPostalAddress"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="16sp" />-->
-                    <!--</android.support.design.widget.TextInputLayout>-->
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -705,9 +670,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@color/light_blue_50"
                 android:orientation="vertical"
-                android:layout_marginTop="10dp"
                 android:visibility="visible">
 
                 <LinearLayout
@@ -743,240 +708,240 @@
                     android:id="@+id/linOfficeDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="2"
-                        android:gravity="left"
-                        android:paddingTop="2dp"
-                        android:text="@string/employer_type"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:orientation="vertical">
 
-                    <RadioGroup
-                        android:id="@+id/radiogroup_emptype"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/radiobutton_empType_gov"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="false"
-                            android:text="@string/government"
-                            android:textColor="@color/black"
-                            android:theme="@style/EditTextStyle" />
-
-                        <RadioButton
-                            android:id="@+id/radiobutton_empType_private"
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:checked="false"
-                            android:text="@string/private1"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:paddingTop="2dp"
+                            android:text="@string/employer_type"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <RadioGroup
+                            android:id="@+id/radiogroup_emptype"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radiobutton_empType_gov"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="false"
+                                android:text="@string/government"
+                                android:textColor="@color/black"
+                                android:theme="@style/EditTextStyle" />
+
+                            <RadioButton
+                                android:id="@+id/radiobutton_empType_private"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:checked="false"
+                                android:text="@string/private1"
+                                android:textColor="@color/black"
+                                android:theme="@style/EditTextStyle" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:theme="@style/EditTextStyle"
+                        app:hintTextAppearance="@style/CustomTextAppearance">
+
+                        <EditText
+                            android:id="@+id/edtCompanyBr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/name_of_company"
+                            android:inputType="textCapSentences"
                             android:textColor="@color/black"
-                            android:theme="@style/EditTextStyle" />
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
 
-                    </RadioGroup>
-
-                </LinearLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtCompanyBr"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/name_of_company"
-                        android:inputType="textCapSentences"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                        android:theme="@style/EditTextStyle"
+                        app:hintTextAppearance="@style/CustomTextAppearance">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
+                        <EditText
+                            android:id="@+id/edtAnnualSalBr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/annual_income"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/edtAnnualSalBr"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/annual_income"
-                        android:inputType="numberDecimal"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_weight="1.5"
+                            android:paddingLeft="5dp"
+                            android:text="@string/duration_of_job_business"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
 
-                    <TextView
+                        <Spinner
+                            android:id="@+id/spinner_durationofjob_coborrower"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:layout_weight="1"
+                            android:dropDownSelector="@color/colorPrimary"
+                            android:focusable="true"
+                            android:gravity="left"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="@string/duration_of_job_business"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:theme="@style/EditTextStyle"
+                        app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <Spinner
-                        android:id="@+id/spinner_durationofjob_coborrower"
+                        <EditText
+                            android:id="@+id/edtPincodeOff"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Pincode"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="left"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:theme="@style/EditTextStyle"
+                        app:hintTextAppearance="@style/CustomTextAppearance">
 
-                </LinearLayout>
+                        <EditText
+                            android:id="@+id/edtAddressOff"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/permanent_address"
+                            android:inputType="textPostalAddress"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtPincodeOff"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Pincode"
-                        android:inputType="number"
-                        android:maxLength="6"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:paddingLeft="5dp"
+                            android:text="Country"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
 
-                    <EditText
-                        android:id="@+id/edtAddressOff"
+                        <Spinner
+                            android:id="@+id/spCountryOff"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:layout_weight="1"
+                            android:dropDownSelector="@color/colorPrimary"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/permanent_address"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:paddingLeft="5dp"
+                            android:text="State"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
 
-                    <TextView
+                        <Spinner
+                            android:id="@+id/spStateOff"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:layout_weight="1"
+                            android:dropDownSelector="@color/colorPrimary"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="Country"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
 
-                    <Spinner
-                        android:id="@+id/spCountryOff"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:paddingLeft="5dp"
+                            android:text="City"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
+                        <Spinner
+                            android:id="@+id/spCityOff"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:layout_weight="1"
+                            android:dropDownSelector="@color/colorPrimary"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="State"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <Spinner
-                        android:id="@+id/spStateOff"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="City"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <Spinner
-                        android:id="@+id/spCityOff"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
-
-                </LinearLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 

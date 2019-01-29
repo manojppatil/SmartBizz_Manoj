@@ -391,25 +391,26 @@ public class VolleyCallLogin extends Application {
                 e.printStackTrace();
             }
         }
-        else if (screen.equalsIgnoreCase("coBorrowerLoanDetails")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).coBorrowerLoanDetails(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("sendcoboorrowerDetails")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).sendCoborrowerPersonal(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("myProfile")) {
+//        else if (screen.equalsIgnoreCase("coBorrowerLoanDetails")) {
+//            try {
+//                jsonDataO = new JSONObject(s);
+//                ((LoanApplicationFragment_2) mfragment).coBorrowerLoanDetails(jsonDataO);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else if (screen.equalsIgnoreCase("sendcoboorrowerDetails")) {
+//            try {
+//                jsonDataO = new JSONObject(s);
+//                ((LoanApplicationFragment_2) mfragment).sendCoborrowerPersonal(jsonDataO);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+ else if (screen.equalsIgnoreCase("myProfile")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((MyProfileNew) mActivity).myProfile(jsonDataO);
@@ -517,43 +518,7 @@ public class VolleyCallLogin extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }  else if (screen.equalsIgnoreCase("getCurrentStatesCo")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getCurrentStatesCo(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("getCurrentCityCo")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getCurrentCitiesCo(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("getPermanentStatesCo")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getPermanentStatesCo(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("getPermanentCityCo")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getPermanentCitiesCo(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("emailSignIn")) {
+        }  else if (screen.equalsIgnoreCase("emailSignIn")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((SignIn) mActivity).emailSignin(jsonDataO);

@@ -470,10 +470,20 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("addborrower")) {
+        }
+        else if (screen.equalsIgnoreCase("addborrower")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((EligibilityCheckFragment_4) mfragment).setaddborrower(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("addcoborrower")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((EligibilityCheckFragment_4) mfragment).setaddcoborrower(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -527,25 +537,26 @@ public class VolleyCallNew extends Application {
                 e.printStackTrace();
             }
         }
-        else if (screen.equalsIgnoreCase("coBorrowerLoanDetails")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).coBorrowerLoanDetails(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("sendcoboorrowerDetails")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).sendCoborrowerPersonal(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("myProfile")) {
+//        else if (screen.equalsIgnoreCase("coBorrowerLoanDetails")) {
+//            try {
+//                jsonDataO = new JSONObject(s);
+//                ((LoanApplicationFragment_2) mfragment).coBorrowerLoanDetails(jsonDataO);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else if (screen.equalsIgnoreCase("sendcoboorrowerDetails")) {
+//            try {
+//                jsonDataO = new JSONObject(s);
+//                ((LoanApplicationFragment_2) mfragment).sendCoborrowerPersonal(jsonDataO);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+        else if (screen.equalsIgnoreCase("myProfile")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((MyProfileNew) mActivity).myProfile(jsonDataO);
@@ -681,37 +692,39 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }  else if (screen.equalsIgnoreCase("getCurrentStatesCo")) {
+        }
+        else if (screen.equalsIgnoreCase("getCurrentStates")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getCurrentStatesCo(jsonDataO);
+                ((LoanApplicationFragment_2) mfragment).getCurrentStates(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getCurrentCityCo")) {
+        } else if (screen.equalsIgnoreCase("getCurrentCity")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getCurrentCitiesCo(jsonDataO);
+                ((LoanApplicationFragment_2) mfragment).getCurrentCities(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getPermanentStatesCo")) {
+        }
+        else if (screen.equalsIgnoreCase("getCurrentStatesCoBr")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getPermanentStatesCo(jsonDataO);
+                ((LoanApplicationFragment_2) mfragment).getCurrentStatesCoBr(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getPermanentCityCo")) {
+        } else if (screen.equalsIgnoreCase("getCurrentCitiesCoBr")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getPermanentCitiesCo(jsonDataO);
+                ((LoanApplicationFragment_2) mfragment).getCurrentCitiesCoBr(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
