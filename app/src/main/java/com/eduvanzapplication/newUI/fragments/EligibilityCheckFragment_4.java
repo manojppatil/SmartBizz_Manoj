@@ -27,7 +27,6 @@ import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCallNew;
-import com.eduvanzapplication.newUI.VolleyCallNewContentType;
 import com.eduvanzapplication.newUI.pojo.ProfessionPOJO;
 
 
@@ -423,7 +422,7 @@ public class EligibilityCheckFragment_4 extends Fragment {
             params.put("lead_id", MainApplication.lead_id);
             params.put("application_id", MainApplication.application_id);
 
-            VolleyCallNewContentType volleyCall = new VolleyCallNewContentType();
+            VolleyCallNew volleyCall = new VolleyCallNew();
             volleyCall.sendRequest(getApplicationContext(), url, null, mFragment, "addborrower", params, MainApplication.auth_token);
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -464,7 +463,7 @@ public class EligibilityCheckFragment_4 extends Fragment {
             params.put("employer_name", MainApplication.employer_name);
             params.put("annual_income", MainApplication.annual_income);
 
-            VolleyCallNewContentType volleyCall = new VolleyCallNewContentType();
+            VolleyCallNew volleyCall = new VolleyCallNew();
             volleyCall.sendRequest(getApplicationContext(), url, null, mFragment, "addcoborrower", params, MainApplication.auth_token);
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
