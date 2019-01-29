@@ -88,6 +88,20 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/btnAddCoborrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/_30sdp"
+                    android:layout_marginRight="@dimen/_30sdp"
+                    android:layout_marginTop="20dp"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimary"
+                    android:text="Add Co-Borrower"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
                 <RelativeLayout
                     android:id="@+id/relborrower"
                     android:layout_width="match_parent"
@@ -130,6 +144,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:padding="10dp">
 
                     <TextView

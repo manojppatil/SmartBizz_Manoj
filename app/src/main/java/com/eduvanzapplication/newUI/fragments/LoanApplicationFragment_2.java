@@ -2386,7 +2386,6 @@ public class LoanApplicationFragment_2 extends Fragment {
             spCurrentCountryBr.setAdapter(arrayAdapter_currentCountry);
             arrayAdapter_currentCountry.notifyDataSetChanged();
 
-
             /** PERSONAL DETAILS **/
             currentaddress = (EditText) view.findViewById(R.id.input_coborrowercurrentaddress);
             permanentaddress = (EditText) view.findViewById(R.id.input_coborrowerpermanentaddress);

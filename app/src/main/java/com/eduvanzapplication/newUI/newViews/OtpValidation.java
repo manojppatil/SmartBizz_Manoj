@@ -159,8 +159,8 @@ public class OtpValidation extends AppCompatActivity {
                         params.put("email", emailId);
                         params.put("name", firstName);
 //                        params.put("studentId", userID);
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "setOtpValidation", params, MainApplication.auth_token);
+                        VolleyCallLogin volleyCall = new VolleyCallLogin();
+                        volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "setOtpValidation", params);
                     } catch (Exception e) {
                         String className = this.getClass().getSimpleName();
                         String name = new Object() {

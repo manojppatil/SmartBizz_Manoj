@@ -378,6 +378,15 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else if (screen.equalsIgnoreCase("getAllProfessionkycCoBr")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_1) mfragment).getAllProfessionkycCoBr(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }else if (screen.equalsIgnoreCase("getAllProfessiondetailedinfo")) {
             try {
                 jsonDataO = new JSONObject(s);

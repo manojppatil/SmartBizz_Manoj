@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eduvanzapplication.R;
+import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.newViews.EligibilityCheck;
 import com.eduvanzapplication.newUI.newViews.LoanApplication;
 import com.eduvanzapplication.newUI.pojo.MLeads;
@@ -65,6 +66,8 @@ public class LeadsAdapter extends RecyclerView.Adapter<LeadsAdapter.MyViewHolder
 
                         Intent intent = new Intent(context, EligibilityCheck.class);
                         Bundle bundle = new Bundle();
+                        MainApplication.lead_id = card_view.getTag().toString();
+                        MainApplication.application_id = txtlafid.getText().toString();
                         bundle.putString("lead_id", card_view.getTag().toString());
                         bundle.putString("application_id", txtlafid.getText().toString());
                         bundle.putString("fillinstutute", txtlafid.getText().toString());
