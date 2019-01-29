@@ -22,7 +22,37 @@
                 android:layout_height="wrap_content"
                 android:background="@color/light_blue_50"
                 android:orientation="vertical"
+                android:padding="6dp"
                 android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:paddingLeft="5dp"
+                        android:text="@string/reln_borr"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_coborrowerrelationshipwithborrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:dropDownSelector="@color/colorPrimary"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                </LinearLayout>
+
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -33,7 +63,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtFnameBr"
+                        android:id="@+id/edtFnameCoBrDet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/first_name"
@@ -393,7 +423,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                            android:id="@+id/edtCurrentPincodeBr"
+                            android:id="@+id/edtCurrentPincodeCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Pincode"
@@ -412,7 +442,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                            android:id="@+id/edtCurrentAddressBr"
+                            android:id="@+id/edtCurrentAddressCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Address"
@@ -438,7 +468,7 @@
                             android:textSize="16sp" />
 
                         <Spinner
-                            android:id="@+id/spCurrentCountryBr"
+                            android:id="@+id/spCurrentCountryCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -466,7 +496,7 @@
                             android:textSize="16sp" />
 
                         <Spinner
-                            android:id="@+id/spCurrentStateBr"
+                            android:id="@+id/spCurrentStateCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -494,7 +524,7 @@
                             android:textSize="16sp" />
 
                         <Spinner
-                            android:id="@+id/spCurrentCityBr"
+                            android:id="@+id/spCurrentCityCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -709,7 +739,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spProfessionBr"
+                        android:id="@+id/spProfessionCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -784,7 +814,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtCompanyBr"
+                        android:id="@+id/edtCompanyCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/name_of_company"
@@ -800,7 +830,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtAnnualSalBr"
+                        android:id="@+id/edtAnnualSalCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/annual_income"
@@ -970,7 +1000,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/gray_background"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"

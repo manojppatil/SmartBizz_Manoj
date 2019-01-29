@@ -393,5 +393,6 @@
     <string name="change_language"><font fgcolor="#EE415E">भाषा बदलो</font></string>
 
     <string name="street_name_locality_land_mark">Street Name,Locality,Land mark <font fgcolor="#EE415E">*</font></string>
+    <string name="reln_borr">Relation with borrower</string>
 
 </resources>

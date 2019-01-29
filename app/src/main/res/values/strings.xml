@@ -447,6 +447,7 @@
     <string name="kyc_details">KYC Details</string>
     <string name="detailed_info">Detailed Info</string>
     <string name="documentation">Documentation</string>
+    <string name="reln_borr">Relation with borrower</string>
 
 
 </resources>
