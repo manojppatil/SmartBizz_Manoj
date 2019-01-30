@@ -39,9 +39,7 @@ import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCityPersonalPOJO;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCountryPersonalPOJO;
-import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceTypePersonalPOJO;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentStatePersonalPOJO;
-import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerProfessionFinancePOJO;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.newUI.pojo.ProfessionPOJO;
@@ -61,13 +59,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
-import static com.eduvanzapplication.newUI.MainApplication.first_name;
-
 
 public class LoanApplicationFragment_1 extends Fragment {
 
     public static Context context;
     public static Fragment mFragment;
+
+    public static Button btnAddCoborrower;
 
     //Borrower
     public static EditText edtCourseFeeBr, edtLoanAmtBr, edtFnameBr, edtMnameBr, edtLnameBr, edtEmailIdBr, edtPanBr, edtAadhaarBr,
@@ -86,7 +84,7 @@ public class LoanApplicationFragment_1 extends Fragment {
     public static RadioGroup rgGenderCoBr;
     public static RadioButton rbMaleCoBr, rbFemaleCoBr;
 
-    public static Spinner spCurrentCountryCoBr, spCurrentStateCoBr, spCurrentCityCoBr;
+    public static Spinner spProfessionCoBr,spCurrentCountryCoBr, spCurrentStateCoBr, spCurrentCityCoBr;
 
     public static TextView txtBirthdayCalenderBr, txtBirthdayCalenderCoBr, lblBirthdayBr, lblBirthdayCoBr, txtBirthdateBr, txtBirthdateCoBr;
 
@@ -108,9 +106,8 @@ public class LoanApplicationFragment_1 extends Fragment {
     public static ArrayList<ProfessionPOJO> professionPOJOArrayList;
 
     public static ArrayAdapter arrayAdapter_professionCoBr;
-    public static ArrayList<String> profession_arrayLisCoBrt;
+    public static ArrayList<String> profession_arrayListCoBr;
     public static ArrayList<ProfessionPOJO> professionPOJOArrayListCoBr;
-
 
     public static ArrayAdapter arrayAdapter_NameOfInsititue;
     public static ArrayList<String> nameofinstitute_arrayList;
@@ -128,10 +125,10 @@ public class LoanApplicationFragment_1 extends Fragment {
     public static ProgressBar progressBar;
     public static String userID = "", borrowerBackground = "", coBorrowerBackground = "";
     static View view;
-    public String dateformate = "", mobileNo = "";
-    public String currentcityID = "", currentstateID = "", currentcountryID = "1",
+    public static String dateformate = "", mobileNo = "";
+    public static String currentcityID = "", currentstateID = "", currentcountryID = "1",
             currentcityIDCoBr = "", currentstateIDCoBr = "", currentcountryIDCoBr = "1";
-    public String instituteID = "", courseID = "", locationID = "", professionID = "", professionIDCoBr = "";
+    public static String instituteID = "", courseID = "", locationID = "", professionID = "", professionIDCoBr = "";
 
     Button buttonNext;
     TextView textView1, textView2, textView3;
@@ -140,16 +137,16 @@ public class LoanApplicationFragment_1 extends Fragment {
     Typeface typeface;
     LinearLayout linearLayoutEmployed, linearLayoutLeftoff, linEmployed;
     public static CheckBox cbSameAsAboveBr;
-    RelativeLayout relborrower, relCoborrower;
-    LinearLayout linBorrowerForm, linCoCorrowerForm;
-    TextView txtBorrowerArrowKey, txtCoBorrowerArrowKey;
-    int borrowerVisiblity = 0, coborrowerVisiblity = 1;
+    public static RelativeLayout relborrower, relCoborrower;
+    public static LinearLayout linBorrowerForm, linCoCorrowerForm;
+    public static TextView txtBorrowerArrowKey, txtCoBorrowerArrowKey;
+    public static int borrowerVisiblity = 0, coborrowerVisiblity = 1;
 
-    public String lead_id = "", has_coborrower = "", application_id = "", requested_loan_amount = "", institute_name = "",
+    public static String lead_id = "", has_coborrower = "", application_id = "", requested_loan_amount = "", institute_name = "",
             location_name = "", course_name = "", course_cost = "", fk_institutes_id = "", fk_insitutes_location_id = "",
             fk_course_id = "";
 
-    public String Brapplicant_id = "", Brfk_lead_id = "", Brfk_applicant_type_id = "", Brfirst_name = "", Brmiddle_name = "",
+    public static String Brapplicant_id = "", Brfk_lead_id = "", Brfk_applicant_type_id = "", Brfirst_name = "", Brmiddle_name = "",
             Brlast_name = "", Brhas_aadhar_pan = "", Brdob = "", Brpan_number = "", Braadhar_number = "", Brmarital_status = "",
             Brgender_id = "", Brmobile_number = "", Bremail_id = "", Brrelationship_with_applicant = "", Brprofession = "",
             Bremployer_type = "", Bremployer_name = "", Brannual_income = "", Brcurrent_employment_duration = "",
@@ -168,7 +165,7 @@ public class LoanApplicationFragment_1 extends Fragment {
             Brpassing_year = "", Brgap_in_education = "", Brfull_name_pan_response = "", Brcreated_by_id = "", Brcreated_date_time = "",
             Brcreated_ip_address = "", Brmodified_by = "", Brmodified_date_time = "", Brmodified_ip_address = "", Bris_deleted = "";
 
-    public String CoBrapplicant_id = "", CoBrfk_lead_id = "", CoBrfk_applicant_type_id = "", CoBrfirst_name = "", CoBrmiddle_name = "",
+    public static String CoBrapplicant_id = "", CoBrfk_lead_id = "", CoBrfk_applicant_type_id = "", CoBrfirst_name = "", CoBrmiddle_name = "",
             CoBrlast_name = "", CoBrhas_aadhar_pan = "", CoBrdob = "", CoBrpan_number = "", CoBraadhar_number = "",
             CoBrmarital_status = "", CoBrgender_id = "", CoBrmobile_number = "", CoBremail_id = "",
             CoBrrelationship_with_applicant = "", CoBrprofession = "", CoBremployer_type = "", CoBremployer_name = "",
@@ -189,7 +186,7 @@ public class LoanApplicationFragment_1 extends Fragment {
             CoBrcreated_by_id = "", CoBrcreated_date_time = "", CoBrcreated_ip_address = "", CoBrmodified_by = "",
             CoBrmodified_date_time = "", CoBrmodified_ip_address = "", CoBris_deleted = "";
 
-    public String lead_status_id = "", fk_lead_id = "", lead_status = "", lead_sub_status = "", current_stage = "",
+    public static String lead_status_id = "", fk_lead_id = "", lead_status = "", lead_sub_status = "", current_stage = "",
             current_status = "", lead_drop_status = "", lead_reject_status = "", lead_initiated_datetime = "",
             is_lead_owner_added = "", lead_owner_added_datetime = "", lead_owner_added_by = "", is_lead_counsellor_added = "",
             lead_counsellor_added_datetime = "", lead_counsellor_added_by = "", is_kyc_details_filled = "",
@@ -316,7 +313,6 @@ public class LoanApplicationFragment_1 extends Fragment {
                         coborrowerVisiblity = 1;
                         txtCoBorrowerArrowKey.setText(getResources().getString(R.string.up));
                         txtCoBorrowerArrowKey.setTypeface(typeface);
-
                         setCoborrower();
 
                     } else if (coborrowerVisiblity == 1) {
@@ -325,6 +321,21 @@ public class LoanApplicationFragment_1 extends Fragment {
                         txtCoBorrowerArrowKey.setText(getResources().getString(R.string.down));
                         txtCoBorrowerArrowKey.setTypeface(typeface);
                     }
+
+                }
+            });
+
+            btnAddCoborrower.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    btnAddCoborrower.setVisibility(View.GONE);
+                    relCoborrower.setVisibility(View.VISIBLE);
+                    linCoCorrowerForm.setVisibility(View.VISIBLE);
+                    coborrowerVisiblity = 1;
+                    txtCoBorrowerArrowKey.setText(getResources().getString(R.string.up));
+                    txtCoBorrowerArrowKey.setTypeface(typeface);
+                    setCoborrower();
 
                 }
             });
@@ -895,46 +906,124 @@ public class LoanApplicationFragment_1 extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                    String text = spProfessionBr.getSelectedItem().toString();
-                    if (text.equalsIgnoreCase("Select Any")) {
-                        MainApplication.mainapp_userprofession = "0";
-                        MainApplication.profession = "0";
+                    String text = spProfessionCoBr.getSelectedItem().toString();
+
+                    int count = professionPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (professionPOJOArrayList.get(i).Salaried.equalsIgnoreCase(text)) {
+                            professionID = professionPOJOArrayList.get(i).id;
+                        }
+                    }
+                    if(professionID.equals("0") || professionID.equals("2"))
+                    {
                         try {
                             linEmployed.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-                    } else if (text.equalsIgnoreCase("Student")) {
-                        MainApplication.mainapp_userprofession = "Student";
-                        MainApplication.mainapp_userprofession = "1";
-                        MainApplication.profession = "1";
-                        try {
-                            linEmployed.setVisibility(View.GONE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    } else if (text.equalsIgnoreCase("Employed")) {
-                        MainApplication.mainapp_userprofession = "employed";
-                        MainApplication.mainapp_userprofession = "2";
-                        MainApplication.profession = "2";
-                        try {
-                            linEmployed.setVisibility(View.VISIBLE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    } else if (text.equalsIgnoreCase("Self Employed")) {
-                        MainApplication.mainapp_userprofession = "selfEmployed";
-                        MainApplication.mainapp_userprofession = "3";
-                        MainApplication.profession = "3";
+                    }else{
                         try {
                             linEmployed.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+
+//                    String text = spProfessionBr.getSelectedItem().toString();
+//                    if (text.equalsIgnoreCase("Select Any")) {
+//                        MainApplication.mainapp_userprofession = "0";
+//                        MainApplication.profession = "0";
+//                        try {
+//                            linEmployed.setVisibility(View.GONE);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    } else if (text.equalsIgnoreCase("Student")) {
+//                        MainApplication.mainapp_userprofession = "Student";
+//                        MainApplication.mainapp_userprofession = "1";
+//                        MainApplication.profession = "1";
+//                        try {
+//                            linEmployed.setVisibility(View.GONE);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    } else if (text.equalsIgnoreCase("Employed")) {
+//                        MainApplication.mainapp_userprofession = "employed";
+//                        MainApplication.mainapp_userprofession = "2";
+//                        MainApplication.profession = "2";
+//                        try {
+//                            linEmployed.setVisibility(View.VISIBLE);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    } else if (text.equalsIgnoreCase("Self Employed")) {
+//                        MainApplication.mainapp_userprofession = "selfEmployed";
+//                        MainApplication.mainapp_userprofession = "3";
+//                        MainApplication.profession = "3";
+//                        try {
+//                            linEmployed.setVisibility(View.VISIBLE);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spProfessionCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                    String text = spProfessionCoBr.getSelectedItem().toString();
+
+                    int count = professionPOJOArrayListCoBr.size();
+                    for (int i = 0; i < count; i++) {
+                        if (professionPOJOArrayListCoBr.get(i).Salaried.equalsIgnoreCase(text)) {
+                             professionIDCoBr = professionPOJOArrayListCoBr.get(i).id;
+                        }
+                    }
+                    if(professionIDCoBr.equals("0") || professionIDCoBr.equals("2"))
+                    {
+//                        try {
+//                            linEmployed.setVisibility(View.GONE);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+                    }else{
+//                        try {
+//                            linEmployed.setVisibility(View.VISIBLE);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+                    }
+//                    if (text.equalsIgnoreCase("Select Any")) {
+//                        MainApplication.mainapp_userprofession = "0";
+//                        MainApplication.profession = "0";
+//
+//                    } else if (text.equalsIgnoreCase("Student")) {
+//                        MainApplication.mainapp_userprofession = "Student";
+//                        MainApplication.mainapp_userprofession = "1";
+//                        MainApplication.profession = "1";
+//
+//                    } else if (text.equalsIgnoreCase("Employed")) {
+//                        MainApplication.mainapp_userprofession = "employed";
+//                        MainApplication.mainapp_userprofession = "2";
+//                        MainApplication.profession = "2";
+//
+//                    } else if (text.equalsIgnoreCase("Self Employed")) {
+//                        MainApplication.mainapp_userprofession = "selfEmployed";
+//                        MainApplication.mainapp_userprofession = "3";
+//                        MainApplication.profession = "3";
+//
+//                    }
                 }
 
                 @Override
@@ -947,13 +1036,13 @@ public class LoanApplicationFragment_1 extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
-                        if (spCurrentCityBr.getSelectedItemPosition() > 0) {
-                            cbSameAsAboveBr.setEnabled(true);
-                            cbSameAsAboveBr.setClickable(true);
-                        } else {
-                            cbSameAsAboveBr.setEnabled(false);
-                            cbSameAsAboveBr.setClickable(false);
-                        }
+//                        if (spCurrentCityBr.getSelectedItemPosition() > 0) {
+//                            cbSameAsAboveBr.setEnabled(true);
+//                            cbSameAsAboveBr.setClickable(true);
+//                        } else {
+//                            cbSameAsAboveBr.setEnabled(false);
+//                            cbSameAsAboveBr.setClickable(false);
+//                        }
                         String text = spCurrentCityBr.getSelectedItem().toString();
                         int count = borrowerCurrentCityPersonalPOJOArrayList.size();
                         for (int i = 0; i < count; i++) {
@@ -1029,13 +1118,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
-//                        if (spCurrentCityCoBr.getSelectedItemPosition() > 0) {
-//                            cbSameAsAboveCoBr.setEnabled(true);
-//                            cbSameAsAboveCoBr.setClickable(true);
-//                        } else {
-//                            cbSameAsAboveCoBr.setEnabled(false);
-//                            cbSameAsAboveCoBr.setClickable(false);
-//                        }
+
                         String text = spCurrentCityCoBr.getSelectedItem().toString();
                         int count = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
                         for (int i = 0; i < count; i++) {
@@ -1091,11 +1174,11 @@ public class LoanApplicationFragment_1 extends Fragment {
                             }
                         }
                         stateApiCallCoBr();
-//                        if (currentcityIDCoBr.equals("")) {
-//                            spCurrentCityCoBr.setSelection(0);
-//                        } else {
-//                            spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr) - 1);
-//                        }
+                        if (currentcityIDCoBr.equals("")) {
+                            spCurrentCityCoBr.setSelection(0);
+                        } else {
+                            spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr) - 1);
+                        }
                     } catch (Exception e) {
                     }
                 }
@@ -1108,42 +1191,46 @@ public class LoanApplicationFragment_1 extends Fragment {
 
             /** END SPINNER CLICK **/
 
-            JSONObject jsonObject = new JSONObject();
 
             if (!Globle.isNetworkAvailable(context)) {
 
             } else {
+                JSONObject jsonObject = new JSONObject();
 //                instituteName(jsonObject);
 //                courseName(jsonObject);
 //                locationName(jsonObject);
                 instituteApiCall();
 //              getAllProfessionkyc(jsonObject);
                 ProfessionApiCall();
+                ProfessionApiCallCoBr();
                 getCurrentStates(jsonObject);
                 getCurrentCities(jsonObject);
-
+                getCurrentStatesCoBr(jsonObject);
+                getCurrentCitiesCoBr(jsonObject);
             }
 
             /** API CALL POST LOGIN DASHBOARD STATUS **/
 
-//            /**API CALL**/
-//            try {
-//                progressBar.setVisibility(View.VISIBLE);
-//                String url = MainApplication.mainUrl + "algo/getBorrowerLoanDetails";
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("logged_id", userID);
-//                if (!Globle.isNetworkAvailable(context)) {
-//                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-////                    oflineborrowerLoanDetails();
-//
-//                } else {
-//                    VolleyCallNew volleyCall = new VolleyCallNew();
-//                    volleyCall.sendRequest(context, url, null, mFragment, "borrowerLoanDetails", params, MainApplication.auth_token);
-//                }
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+            try {
+                String url = MainApplication.mainUrl + "dashboard/getKycDetails";
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("lead_id", MainApplication.lead_id);
+//                params.put("student_id", MainApplication.student_id);
+                if (!Globle.isNetworkAvailable(context)) {
+                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+                } else {
+                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                    volleyCall.sendRequest(context, url, null, mFragment, "studentKycDetails", params, MainApplication.auth_token);
+                }
+            } catch (Exception e) {
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+            }
 
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -1154,35 +1241,6 @@ public class LoanApplicationFragment_1 extends Fragment {
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
-//
-//        Handler handler = new Handler();
-//
-//        final Runnable r = new Runnable() {
-//            public void run() {
-        try {
-            String url = MainApplication.mainUrl + "dashboard/getKycDetails";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("lead_id", MainApplication.lead_id);
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
-                volleyCall.sendRequest(context, url, null, mFragment, "studentKycDetails", params, MainApplication.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-//                handler.postDelayed(this, 1000);
-//            }
-//        };
-//
-//        handler.postDelayed(r, 1000);
 
         return view;
     }
@@ -1214,12 +1272,18 @@ public class LoanApplicationFragment_1 extends Fragment {
     public void setStudentKycDetails(JSONObject jsonData) {
         try {
 //            String status = jsonData.optString("status");
-//            String message = jsonData.optString("message");
+            String message = jsonData.optString("message");
 
             if (jsonData.getInt("status") == 1) {
 
                 if (jsonData.getJSONArray("countries").length() > 0) {
                     JSONArray jsonArraycountries = jsonData.getJSONArray("countries");
+                }else {
+//                    JSONObject jsonObject = new JSONObject();
+//                    getCurrentStates(jsonObject);
+//                    getCurrentCities(jsonObject);
+////                getCurrentStatesCoBr(jsonObject);
+////                getCurrentCitiesCoBr(jsonObject);
                 }
 
                 if (jsonData.getJSONArray("states").length() > 0) {
@@ -1238,7 +1302,6 @@ public class LoanApplicationFragment_1 extends Fragment {
                     spCurrentStateBr.setAdapter(arrayAdapter_currentState);
                     arrayAdapter_currentState.notifyDataSetChanged();
 
-//                    spCurrentStateBr.setSelection(Integer.parseInt(currentstateID));
                 }
 
                 if (jsonData.getJSONArray("cities").length() > 0) {
@@ -1341,19 +1404,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                         MainApplication.mainapp_locationID = locationID = fk_insitutes_location_id;
                         spInsLocationBr.setSelection(Integer.parseInt(locationID));
                     }
-//                    Handler handler = new Handler();
-//
-//                    final Runnable r = new Runnable() {
-//                        public void run() {
-//                            if (!fk_insitutes_location_id.equals("null")) {
-//                                MainApplication.mainapp_locationID = locationID = fk_insitutes_location_id;
-//                                spInsLocationBr.setSelection(Integer.parseInt(locationID));
-//                            }
-//                            handler.postDelayed(this, 600);
-//                        }
-//                    };
-//
-//                    handler.postDelayed(r, 1000);
+
                 }
 
                 if (!jsonData.get("borrowerDetails").equals(null)) {
@@ -1444,19 +1495,19 @@ public class LoanApplicationFragment_1 extends Fragment {
                     if (!Bremail_id.equals("null")) {
                         edtEmailIdBr.setText(Bremail_id);
                     }
-                    if(Brhas_aadhar_pan.equals("1")){
+                    if (Brhas_aadhar_pan.equals("1")) {
                         edtAadhaarBr.setVisibility(View.VISIBLE);
                         edtPanBr.setVisibility(View.GONE);
                         if (!Braadhar_number.equals("null")) {
                             edtAadhaarBr.setText(Braadhar_number);
                         }
-                    }else if(Brhas_aadhar_pan.equals("2")){
+                    } else if (Brhas_aadhar_pan.equals("2")) {
                         edtPanBr.setVisibility(View.VISIBLE);
                         edtAadhaarBr.setVisibility(View.GONE);
                         if (!Brpan_number.equals("null")) {
                             edtPanBr.setText(Brpan_number);
                         }
-                    }else if(Brhas_aadhar_pan.equals("3") || Brhas_aadhar_pan.equals("0")){
+                    } else if (Brhas_aadhar_pan.equals("3") || Brhas_aadhar_pan.equals("0")) {
                         edtAadhaarBr.setVisibility(View.VISIBLE);
                         edtPanBr.setVisibility(View.VISIBLE);
                         if (!Braadhar_number.equals("null")) {
@@ -1465,7 +1516,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                         if (!Brpan_number.equals("null")) {
                             edtPanBr.setText(Brpan_number);
                         }
-                    }else{
+                    } else {
                         edtAadhaarBr.setVisibility(View.GONE);
                         edtPanBr.setVisibility(View.GONE);
                     }
@@ -1503,13 +1554,16 @@ public class LoanApplicationFragment_1 extends Fragment {
                     }
 
                     if (!Brprofession.equals("null")) {
-                        professionID = Brprofession;
+                        if (Brprofession.equals("")) {
+                            professionID = "0";
+                        } else {
+                            professionID = "1";
+                        }
                         spProfessionBr.setSelection(Integer.parseInt(professionID));
                     }
                     if (!Brkyc_address_country.equals("null")) {
                         currentcountryID = "1";
                         spCurrentCountryBr.setSelection(Integer.parseInt(currentcountryID));
-                        spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryID));
                     }
                     if (!Brkyc_address_state.equals("null")) {
                         currentstateID = Brkyc_address_state;
@@ -1518,151 +1572,6 @@ public class LoanApplicationFragment_1 extends Fragment {
                     if (!Brkyc_address_city.equals("null")) {
                         currentcityID = Brkyc_address_city;
                         spCurrentCityBr.setSelection(Integer.parseInt(currentcityID));
-                    }
-
-                }
-
-                if (!jsonData.get("coborrowerDetails").equals(null)) {
-                    JSONObject jsoncoborrowerDetails = jsonData.getJSONObject("coborrowerDetails");
-                    CoBrapplicant_id = jsoncoborrowerDetails.getString("applicant_id");
-                    CoBrfk_lead_id = jsoncoborrowerDetails.getString("fk_lead_id");
-                    CoBrfk_applicant_type_id = jsoncoborrowerDetails.getString("fk_applicant_type_id");
-                    CoBrfirst_name = jsoncoborrowerDetails.getString("first_name");
-                    CoBrmiddle_name = jsoncoborrowerDetails.getString("middle_name");
-                    CoBrlast_name = jsoncoborrowerDetails.getString("last_name");
-                    CoBrhas_aadhar_pan = jsoncoborrowerDetails.getString("has_aadhar_pan");
-                    CoBrdob = jsoncoborrowerDetails.getString("dob");
-                    CoBrpan_number = jsoncoborrowerDetails.getString("pan_number");
-                    CoBraadhar_number = jsoncoborrowerDetails.getString("aadhar_number");
-                    CoBrmarital_status = jsoncoborrowerDetails.getString("marital_status");
-                    CoBrgender_id = jsoncoborrowerDetails.getString("gender_id");
-                    CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
-                    CoBremail_id = jsoncoborrowerDetails.getString("email_id");
-                    CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
-                    CoBrprofession = jsoncoborrowerDetails.getString("profession");
-                    CoBremployer_type = jsoncoborrowerDetails.getString("employer_type");
-                    CoBremployer_name = jsoncoborrowerDetails.getString("employer_name");
-                    CoBrannual_income = jsoncoborrowerDetails.getString("annual_income");
-                    CoBrcurrent_employment_duration = jsoncoborrowerDetails.getString("current_employment_duration");
-                    CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("total_employement_duration");
-                    CoBremployer_mobile_number = jsoncoborrowerDetails.getString("employer_mobile_number");
-                    CoBremployer_landline_number = jsoncoborrowerDetails.getString("employer_landline_number");
-                    CoBroffice_landmark = jsoncoborrowerDetails.getString("office_landmark");
-                    CoBroffice_address = jsoncoborrowerDetails.getString("office_address");
-                    CoBroffice_address_city = jsoncoborrowerDetails.getString("office_address_city");
-                    CoBroffice_address_state = jsoncoborrowerDetails.getString("office_address_state");
-                    CoBroffice_address_country = jsoncoborrowerDetails.getString("office_address_country");
-                    CoBroffice_address_pin = jsoncoborrowerDetails.getString("office_address_pin");
-                    CoBrhas_active_loan = jsoncoborrowerDetails.getString("has_active_loan");
-                    CoBrEMI_Amount = jsoncoborrowerDetails.getString("EMI_Amount");
-                    CoBrkyc_landmark = jsoncoborrowerDetails.getString("kyc_landmark");
-                    CoBrkyc_address = jsoncoborrowerDetails.getString("kyc_address");
-                    CoBrkyc_address_city = jsoncoborrowerDetails.getString("kyc_address_city");
-                    CoBrkyc_address_state = jsoncoborrowerDetails.getString("kyc_address_state");
-                    CoBrkyc_address_country = jsoncoborrowerDetails.getString("kyc_address_country");
-                    CoBrkyc_address_pin = jsoncoborrowerDetails.getString("kyc_address_pin");
-                    CoBris_borrower_current_address_same_as = jsoncoborrowerDetails.getString("is_borrower_current_address_same_as");
-                    CoBris_coborrower_current_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as");
-                    CoBrcurrent_residence_type = jsoncoborrowerDetails.getString("current_residence_type");
-                    CoBrcurrent_landmark = jsoncoborrowerDetails.getString("current_landmark");
-                    CoBrcurrent_address = jsoncoborrowerDetails.getString("current_address");
-                    CoBrcurrent_address_city = jsoncoborrowerDetails.getString("current_address_city");
-                    CoBrcurrent_address_state = jsoncoborrowerDetails.getString("current_address_state");
-                    CoBrcurrent_address_country = jsoncoborrowerDetails.getString("current_address_country");
-                    CoBrcurrent_address_pin = jsoncoborrowerDetails.getString("current_address_pin");
-                    CoBrcurrent_address_rent = jsoncoborrowerDetails.getString("current_address_rent");
-                    CoBrcurrent_address_stay_duration = jsoncoborrowerDetails.getString("current_address_stay_duration");
-                    CoBris_borrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_borrower_permanent_address_same_as");
-                    CoBris_coborrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as");
-                    CoBrpermanent_residence_type = jsoncoborrowerDetails.getString("permanent_residence_type");
-                    CoBrpermanent_landmark = jsoncoborrowerDetails.getString("permanent_landmark");
-                    CoBrpermanent_address = jsoncoborrowerDetails.getString("permanent_address");
-                    CoBrpermanent_address_city = jsoncoborrowerDetails.getString("permanent_address_city");
-                    CoBrpermanent_address_state = jsoncoborrowerDetails.getString("permanent_address_state");
-                    CoBrpermanent_address_country = jsoncoborrowerDetails.getString("permanent_address_country");
-                    CoBrpermanent_address_pin = jsoncoborrowerDetails.getString("permanent_address_pin");
-                    CoBrpermanent_address_rent = jsoncoborrowerDetails.getString("permanent_address_rent");
-                    CoBrpermanent_address_stay_duration = jsoncoborrowerDetails.getString("permanent_address_stay_duration");
-                    CoBrlast_completed_degree = jsoncoborrowerDetails.getString("last_completed_degree");
-                    CoBrscore_unit = jsoncoborrowerDetails.getString("score_unit");
-                    CoBrcgpa = jsoncoborrowerDetails.getString("cgpa");
-                    CoBrpercentage = jsoncoborrowerDetails.getString("percentage");
-                    CoBrpassing_year = jsoncoborrowerDetails.getString("passing_year");
-                    CoBrgap_in_education = jsoncoborrowerDetails.getString("gap_in_education");
-                    CoBrfull_name_pan_response = jsoncoborrowerDetails.getString("full_name_pan_response");
-                    CoBrcreated_by_id = jsoncoborrowerDetails.getString("created_by_id");
-                    CoBrcreated_date_time = jsoncoborrowerDetails.getString("created_date_time");
-                    CoBrcreated_ip_address = jsoncoborrowerDetails.getString("created_ip_address");
-                    CoBrmodified_by = jsoncoborrowerDetails.getString("modified_by");
-                    CoBrmodified_date_time = jsoncoborrowerDetails.getString("modified_date_time");
-                    CoBrmodified_ip_address = jsoncoborrowerDetails.getString("modified_ip_address");
-                    CoBris_deleted = jsoncoborrowerDetails.getString("is_deleted");
-
-                    if (!CoBrfirst_name.equals("null")) {
-                        edtFnameCoBr.setText(CoBrfirst_name);
-                    }
-                    if (!CoBrmiddle_name.equals("null")) {
-                        edtMnameCoBr.setText(CoBrmiddle_name);
-                    }
-                    if (!CoBrlast_name.equals("null")) {
-                        edtLnameCoBr.setText(CoBrlast_name);
-                    }
-                    if (!CoBremail_id.equals("null")) {
-                        edtEmailIdCoBr.setText(CoBremail_id);
-                    }
-                    if (!CoBrpan_number.equals("null")) {
-                        edtPanCoBr.setText(CoBrpan_number);
-                    }
-                    if (!CoBraadhar_number.equals("null")) {
-                        edtAadhaarCoBr.setText(CoBraadhar_number);
-                    }
-                    if (!CoBremployer_name.equals("null")) {
-                        edtCompanyCoBr.setText(CoBremployer_name);
-                    }
-                    if (!CoBrannual_income.equals("null")) {
-                        edtAnnualSalCoBr.setText(CoBrannual_income);
-                    }
-                    if (!CoBrkyc_address.equals("null")) {
-                        edtCurrentAddressCoBr.setText(CoBrkyc_address);
-                    }
-                    if (!CoBrkyc_landmark.equals("null")) {
-                        edtCurrentLandmarkCoBr.setText(CoBrkyc_landmark);
-                    }
-                    if (!CoBrkyc_address_pin.equals("null")) {
-                        edtCurrentPincodeCoBr.setText(CoBrkyc_address_pin);
-                    }
-
-                    if (!CoBrdob.equals("null")) {
-                        txtBirthdateCoBr.setText(CoBrdob);
-                        txtBirthdateCoBr.setTextColor(Color.BLACK);
-                        lblBirthdayCoBr.setVisibility(View.VISIBLE);
-                    } else {
-                        txtBirthdateCoBr.setText(R.string.birthdate);
-                    }
-
-                    if (!CoBrgender_id.equals("null")) {
-                        if (CoBrgender_id.equalsIgnoreCase("1")) {
-                            rbMaleCoBr.setChecked(true);
-                        } else if (CoBrgender_id.equalsIgnoreCase("2")) {
-                            rbFemaleCoBr.setChecked(true);
-                        }
-                    }
-
-                    if (!CoBrprofession.equals("null")) {
-                        professionIDCoBr = CoBrprofession;
-//                        spProfessionCoBr.setSelection(Integer.parseInt(professionIDCoBr));
-                    }
-                    if (!CoBrkyc_address_country.equals("null")) {
-                        currentcountryIDCoBr = "1";
-                        spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryIDCoBr));
-                    }
-                    if (!CoBrkyc_address_state.equals("null")) {
-                        currentstateIDCoBr = CoBrkyc_address_state;
-                        spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
-                    }
-                    if (!CoBrkyc_address_city.equals("null")) {
-                        currentcityIDCoBr = CoBrkyc_address_city;
-                        spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr));
                     }
 
                 }
@@ -1763,12 +1672,128 @@ public class LoanApplicationFragment_1 extends Fragment {
                     id = jsonleadStatus.getString("id");
                     status_name = jsonleadStatus.getString("status_name");
                     stage_id = jsonleadStatus.getString("stage_id");
+
                 }
+
+                if (!jsonData.get("coborrowerDetails").equals(null)) {
+                    JSONObject jsoncoborrowerDetails = jsonData.getJSONObject("coborrowerDetails");
+                    CoBrapplicant_id = jsoncoborrowerDetails.getString("applicant_id");
+                    CoBrfk_lead_id = jsoncoborrowerDetails.getString("fk_lead_id");
+                    CoBrfk_applicant_type_id = jsoncoborrowerDetails.getString("fk_applicant_type_id");
+                    CoBrfirst_name = jsoncoborrowerDetails.getString("first_name");
+                    CoBrmiddle_name = jsoncoborrowerDetails.getString("middle_name");
+                    CoBrlast_name = jsoncoborrowerDetails.getString("last_name");
+                    CoBrhas_aadhar_pan = jsoncoborrowerDetails.getString("has_aadhar_pan");
+                    CoBrdob = jsoncoborrowerDetails.getString("dob");
+                    CoBrpan_number = jsoncoborrowerDetails.getString("pan_number");
+                    CoBraadhar_number = jsoncoborrowerDetails.getString("aadhar_number");
+                    CoBrmarital_status = jsoncoborrowerDetails.getString("marital_status");
+                    CoBrgender_id = jsoncoborrowerDetails.getString("gender_id");
+                    CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
+                    CoBremail_id = jsoncoborrowerDetails.getString("email_id");
+                    CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
+                    CoBrprofession = jsoncoborrowerDetails.getString("profession");
+                    CoBremployer_type = jsoncoborrowerDetails.getString("employer_type");
+                    CoBremployer_name = jsoncoborrowerDetails.getString("employer_name");
+                    CoBrannual_income = jsoncoborrowerDetails.getString("annual_income");
+                    CoBrcurrent_employment_duration = jsoncoborrowerDetails.getString("current_employment_duration");
+                    CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("total_employement_duration");
+                    CoBremployer_mobile_number = jsoncoborrowerDetails.getString("employer_mobile_number");
+                    CoBremployer_landline_number = jsoncoborrowerDetails.getString("employer_landline_number");
+                    CoBroffice_landmark = jsoncoborrowerDetails.getString("office_landmark");
+                    CoBroffice_address = jsoncoborrowerDetails.getString("office_address");
+                    CoBroffice_address_city = jsoncoborrowerDetails.getString("office_address_city");
+                    CoBroffice_address_state = jsoncoborrowerDetails.getString("office_address_state");
+                    CoBroffice_address_country = jsoncoborrowerDetails.getString("office_address_country");
+                    CoBroffice_address_pin = jsoncoborrowerDetails.getString("office_address_pin");
+                    CoBrhas_active_loan = jsoncoborrowerDetails.getString("has_active_loan");
+                    CoBrEMI_Amount = jsoncoborrowerDetails.getString("EMI_Amount");
+                    CoBrkyc_landmark = jsoncoborrowerDetails.getString("kyc_landmark");
+                    CoBrkyc_address = jsoncoborrowerDetails.getString("kyc_address");
+                    CoBrkyc_address_city = jsoncoborrowerDetails.getString("kyc_address_city");
+                    CoBrkyc_address_state = jsoncoborrowerDetails.getString("kyc_address_state");
+                    CoBrkyc_address_country = jsoncoborrowerDetails.getString("kyc_address_country");
+                    CoBrkyc_address_pin = jsoncoborrowerDetails.getString("kyc_address_pin");
+                    CoBris_borrower_current_address_same_as = jsoncoborrowerDetails.getString("is_borrower_current_address_same_as");
+                    CoBris_coborrower_current_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as");
+                    CoBrcurrent_residence_type = jsoncoborrowerDetails.getString("current_residence_type");
+                    CoBrcurrent_landmark = jsoncoborrowerDetails.getString("current_landmark");
+                    CoBrcurrent_address = jsoncoborrowerDetails.getString("current_address");
+                    CoBrcurrent_address_city = jsoncoborrowerDetails.getString("current_address_city");
+                    CoBrcurrent_address_state = jsoncoborrowerDetails.getString("current_address_state");
+                    CoBrcurrent_address_country = jsoncoborrowerDetails.getString("current_address_country");
+                    CoBrcurrent_address_pin = jsoncoborrowerDetails.getString("current_address_pin");
+                    CoBrcurrent_address_rent = jsoncoborrowerDetails.getString("current_address_rent");
+                    CoBrcurrent_address_stay_duration = jsoncoborrowerDetails.getString("current_address_stay_duration");
+                    CoBris_borrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_borrower_permanent_address_same_as");
+                    CoBris_coborrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as");
+                    CoBrpermanent_residence_type = jsoncoborrowerDetails.getString("permanent_residence_type");
+                    CoBrpermanent_landmark = jsoncoborrowerDetails.getString("permanent_landmark");
+                    CoBrpermanent_address = jsoncoborrowerDetails.getString("permanent_address");
+                    CoBrpermanent_address_city = jsoncoborrowerDetails.getString("permanent_address_city");
+                    CoBrpermanent_address_state = jsoncoborrowerDetails.getString("permanent_address_state");
+                    CoBrpermanent_address_country = jsoncoborrowerDetails.getString("permanent_address_country");
+                    CoBrpermanent_address_pin = jsoncoborrowerDetails.getString("permanent_address_pin");
+                    CoBrpermanent_address_rent = jsoncoborrowerDetails.getString("permanent_address_rent");
+                    CoBrpermanent_address_stay_duration = jsoncoborrowerDetails.getString("permanent_address_stay_duration");
+                    CoBrlast_completed_degree = jsoncoborrowerDetails.getString("last_completed_degree");
+                    CoBrscore_unit = jsoncoborrowerDetails.getString("score_unit");
+                    CoBrcgpa = jsoncoborrowerDetails.getString("cgpa");
+                    CoBrpercentage = jsoncoborrowerDetails.getString("percentage");
+                    CoBrpassing_year = jsoncoborrowerDetails.getString("passing_year");
+                    CoBrgap_in_education = jsoncoborrowerDetails.getString("gap_in_education");
+                    CoBrfull_name_pan_response = jsoncoborrowerDetails.getString("full_name_pan_response");
+                    CoBrcreated_by_id = jsoncoborrowerDetails.getString("created_by_id");
+                    CoBrcreated_date_time = jsoncoborrowerDetails.getString("created_date_time");
+                    CoBrcreated_ip_address = jsoncoborrowerDetails.getString("created_ip_address");
+                    CoBrmodified_by = jsoncoborrowerDetails.getString("modified_by");
+                    CoBrmodified_date_time = jsoncoborrowerDetails.getString("modified_date_time");
+                    CoBrmodified_ip_address = jsoncoborrowerDetails.getString("modified_ip_address");
+                    CoBris_deleted = jsoncoborrowerDetails.getString("is_deleted");
+
+                }
+
                 String courseAmount = String.valueOf(jsonData.get("courseAmount"));
+
+                if (has_coborrower.equals("0") && current_status.equals("1")) {
+                    try {
+                        btnAddCoborrower.setVisibility(View.VISIBLE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        btnAddCoborrower.setVisibility(View.GONE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (has_coborrower.equals("0")) {
+                    try {
+                        coborrowerVisiblity = 1;
+                        relCoborrower.setVisibility(View.GONE);
+                        linCoCorrowerForm.setVisibility(View.GONE);
+                        txtCoBorrowerArrowKey.setText(getResources().getString(R.string.down));
+                        txtCoBorrowerArrowKey.setTypeface(typeface);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        coborrowerVisiblity = 0;
+                        relCoborrower.setVisibility(View.VISIBLE);
+                        linCoCorrowerForm.setVisibility(View.VISIBLE);
+                        txtCoBorrowerArrowKey.setText(getResources().getString(R.string.up));
+                        txtCoBorrowerArrowKey.setTypeface(typeface);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
 
 
             } else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -2204,7 +2229,88 @@ public class LoanApplicationFragment_1 extends Fragment {
                     spProfessionBr.setAdapter(arrayAdapter_profession);
                     arrayAdapter_profession.notifyDataSetChanged();
 
-//                    spProfessionBr.setSelection(Integer.parseInt(professionID));
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void ProfessionApiCallCoBr() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "dashboard/getAllProfession";
+            Map<String, String> params = new HashMap<String, String>();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "getAllProfessionkycCoBr", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void getAllProfessionkycCoBr(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    profession_arrayListCoBr = new ArrayList<>();
+                    profession_arrayListCoBr.add("Select Profession");
+                    arrayAdapter_professionCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayListCoBr);
+                    spProfessionCoBr.setAdapter(arrayAdapter_professionCoBr);
+                    arrayAdapter_professionCoBr.notifyDataSetChanged();
+                    spProfessionCoBr.setSelection(0);
+
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+
+                    JSONArray jsonArray3 = jsonData.getJSONArray("profession");
+                    profession_arrayListCoBr = new ArrayList<>();
+                    professionPOJOArrayListCoBr = new ArrayList<>();
+                    profession_arrayListCoBr.add("Select Profession");
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        ProfessionPOJO professionPOJO = new ProfessionPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        if(mJsonti.getString("id").equals("2")){
+                        }else {
+                            professionPOJO.Salaried = mJsonti.getString("profession");
+                            profession_arrayListCoBr.add(mJsonti.getString("profession"));
+                            professionPOJO.id = mJsonti.getString("id");
+                            professionPOJOArrayListCoBr.add(professionPOJO);
+                        }
+                    }
+                    arrayAdapter_professionCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayListCoBr);
+                    spProfessionCoBr.setAdapter(arrayAdapter_professionCoBr);
+                    arrayAdapter_professionCoBr.notifyDataSetChanged();
 
                 } else {
                 }
@@ -2353,6 +2459,8 @@ public class LoanApplicationFragment_1 extends Fragment {
             buttonNext = (Button) view.findViewById(R.id.button_next_borrower_loanapplication);
             mainApplication.applyTypeface(buttonNext, context);
 
+            btnAddCoborrower = (Button) view.findViewById(R.id.btnAddCoborrower);
+
             edtCourseFeeBr = (EditText) view.findViewById(R.id.edtCourseFeeBr);
             edtLoanAmtBr = (EditText) view.findViewById(R.id.edtLoanAmtBr);
             edtFnameBr = (EditText) view.findViewById(R.id.edtFnameBr);
@@ -2366,8 +2474,6 @@ public class LoanApplicationFragment_1 extends Fragment {
             edtCurrentAddressBr = (EditText) view.findViewById(R.id.edtCurrentAddressBr);
             edtCurrentLandmarkBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkBr);
             edtCurrentPincodeBr = (EditText) view.findViewById(R.id.edtCurrentPincodeBr);
-            edtCurrentLandmarkBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkBr);
-            edtCurrentLandmarkBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkBr);
 
             rgGenderBr = (RadioGroup) view.findViewById(R.id.rgGenderBr);
 
@@ -2395,14 +2501,13 @@ public class LoanApplicationFragment_1 extends Fragment {
             edtCurrentAddressCoBr = (EditText) view.findViewById(R.id.edtCurrentAddressCoBr);
             edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
             edtCurrentPincodeCoBr = (EditText) view.findViewById(R.id.edtCurrentPincodeCoBr);
-            edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
-            edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
 
             rgGenderCoBr = (RadioGroup) view.findViewById(R.id.rgGenderCoBr);
 
             rbMaleCoBr = (RadioButton) view.findViewById(R.id.rbMaleCoBr);
             rbFemaleCoBr = (RadioButton) view.findViewById(R.id.rbFemaleCoBr);
 
+            spProfessionCoBr = (Spinner) view.findViewById(R.id.spProfessionCoBr);
             spCurrentCountryCoBr = (Spinner) view.findViewById(R.id.spCurrentCountryCoBr);
             spCurrentStateCoBr = (Spinner) view.findViewById(R.id.spCurrentStateCoBr);
             spCurrentCityCoBr = (Spinner) view.findViewById(R.id.spCurrentCityCoBr);
@@ -2426,48 +2531,6 @@ public class LoanApplicationFragment_1 extends Fragment {
             spCurrentCountryBr.setAdapter(arrayAdapter_currentCountry);
             arrayAdapter_currentCountry.notifyDataSetChanged();
 
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-
-    }
-
-    private void setCoborrower() {
-
-        try {
-
-
-            //CoBorrower
-
-            edtFnameCoBr = (EditText) view.findViewById(R.id.edtFnameCoBr);
-            edtMnameCoBr = (EditText) view.findViewById(R.id.edtMnameCoBr);
-            edtLnameCoBr = (EditText) view.findViewById(R.id.edtLnameCoBr);
-            edtEmailIdCoBr = (EditText) view.findViewById(R.id.edtEmailIdCoBr);
-            edtPanCoBr = (EditText) view.findViewById(R.id.edtPanCoBr);
-            edtAadhaarCoBr = (EditText) view.findViewById(R.id.edtAadhaarCoBr);
-            edtCompanyCoBr = (EditText) view.findViewById(R.id.edtCompanyCoBr);
-            edtAnnualSalCoBr = (EditText) view.findViewById(R.id.edtAnnualSalCoBr);
-            edtCurrentAddressCoBr = (EditText) view.findViewById(R.id.edtCurrentAddressCoBr);
-            edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
-            edtCurrentPincodeCoBr = (EditText) view.findViewById(R.id.edtCurrentPincodeCoBr);
-            edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
-            edtCurrentLandmarkCoBr = (EditText) view.findViewById(R.id.edtCurrentLandmarkCoBr);
-
-            rgGenderCoBr = (RadioGroup) view.findViewById(R.id.rgGenderCoBr);
-
-            rbMaleCoBr = (RadioButton) view.findViewById(R.id.rbMaleCoBr);
-            rbFemaleCoBr = (RadioButton) view.findViewById(R.id.rbFemaleCoBr);
-
-            spCurrentCountryCoBr = (Spinner) view.findViewById(R.id.spCurrentCountryCoBr);
-            spCurrentStateCoBr = (Spinner) view.findViewById(R.id.spCurrentStateCoBr);
-            spCurrentCityCoBr = (Spinner) view.findViewById(R.id.spCurrentCityCoBr);
-
             currentCountry_arrayListCoBr = new ArrayList<>();
             borrowerCurrentCountryPersonalPOJOArrayListCoBr = new ArrayList<>();
 
@@ -2486,11 +2549,91 @@ public class LoanApplicationFragment_1 extends Fragment {
             arrayAdapter_currentCountryCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayListCoBr);
             spCurrentCountryCoBr.setAdapter(arrayAdapter_currentCountryCoBr);
             arrayAdapter_currentCountryCoBr.notifyDataSetChanged();
-            spCurrentCountryCoBr.setSelection(1);
+//            spCurrentCountryCoBr.setSelection(1);
 
-            getCurrentStatesCoBr(new JSONObject());
-            getCurrentCitiesCoBr(new JSONObject());
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
 
+    }
+
+    private void setCoborrower() {
+
+        try {
+
+            if (!CoBrfirst_name.equals("null")) {
+                edtFnameCoBr.setText(CoBrfirst_name);
+            }
+            if (!CoBrmiddle_name.equals("null")) {
+                edtMnameCoBr.setText(CoBrmiddle_name);
+            }
+            if (!CoBrlast_name.equals("null")) {
+                edtLnameCoBr.setText(CoBrlast_name);
+            }
+            if (!CoBremail_id.equals("null")) {
+                edtEmailIdCoBr.setText(CoBremail_id);
+            }
+            if (!CoBrpan_number.equals("null")) {
+                edtPanCoBr.setText(CoBrpan_number);
+            }
+            if (!CoBraadhar_number.equals("null")) {
+                edtAadhaarCoBr.setText(CoBraadhar_number);
+            }
+            if (!CoBremployer_name.equals("null")) {
+                edtCompanyCoBr.setText(CoBremployer_name);
+            }
+            if (!CoBrannual_income.equals("null")) {
+                edtAnnualSalCoBr.setText(CoBrannual_income);
+            }
+            if (!CoBrkyc_address.equals("null")) {
+                edtCurrentAddressCoBr.setText(CoBrkyc_address);
+            }
+            if (!CoBrkyc_landmark.equals("null")) {
+                edtCurrentLandmarkCoBr.setText(CoBrkyc_landmark);
+            }
+            if (!CoBrkyc_address_pin.equals("null")) {
+                edtCurrentPincodeCoBr.setText(CoBrkyc_address_pin);
+            }
+
+            if (!CoBrdob.equals("null")) {
+                txtBirthdateCoBr.setText(CoBrdob);
+                txtBirthdateCoBr.setTextColor(Color.BLACK);
+                lblBirthdayCoBr.setVisibility(View.VISIBLE);
+            } else {
+                txtBirthdateCoBr.setText(R.string.birthdate);
+            }
+
+            if (!CoBrgender_id.equals("null")) {
+                if (CoBrgender_id.equalsIgnoreCase("1")) {
+                    rbMaleCoBr.setChecked(true);
+                } else if (CoBrgender_id.equalsIgnoreCase("2")) {
+                    rbFemaleCoBr.setChecked(true);
+                }
+            }
+
+            if (!CoBrprofession.equals("null")) {
+                professionIDCoBr = CoBrprofession;
+               spProfessionCoBr.setSelection(Integer.parseInt(professionIDCoBr));
+            }
+
+            if (!CoBrkyc_address.equals("null")) {
+                currentcountryIDCoBr = "1";
+                spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryIDCoBr));
+            }
+            if (!CoBrkyc_address_state.equals("null")) {
+                currentstateIDCoBr = CoBrkyc_address_state;
+                spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
+            }
+            if (!CoBrkyc_address_city.equals("null")) {
+                currentcityIDCoBr = CoBrkyc_address_city;
+                spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr));
+            }
 
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -2668,9 +2811,6 @@ public class LoanApplicationFragment_1 extends Fragment {
                 try {
                     currentstate_arrayListCoBr = new ArrayList<>();
                     currentstate_arrayListCoBr.add("Select Any");
-                    currentstate_arrayListCoBr.add("Maharashtra");
-                    currentstate_arrayListCoBr.add("Maharashtra");
-                    currentstate_arrayListCoBr.add("Maharashtra");
                     arrayAdapter_currentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayListCoBr);
                     spCurrentStateCoBr.setAdapter(arrayAdapter_currentStateCoBr);
                     arrayAdapter_currentStateCoBr.notifyDataSetChanged();
@@ -2704,10 +2844,11 @@ public class LoanApplicationFragment_1 extends Fragment {
                         borrowerCurrentStatePersonalPOJOArrayListCoBr.add(borrowerCurrentStatePersonalPOJOCoBr);
                     }
                     arrayAdapter_currentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayListCoBr);
-                    spCurrentStateBr.setAdapter(arrayAdapter_currentStateCoBr);
+                    spCurrentStateCoBr.setAdapter(arrayAdapter_currentStateCoBr);
                     arrayAdapter_currentStateCoBr.notifyDataSetChanged();
-
-                    spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
+                    if (!currentstateIDCoBr.equals("")) {
+                        spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
+                    }
 
                 } else {
                 }
@@ -2730,7 +2871,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                     currentcity_arrayListCoBr = new ArrayList<>();
                     currentcity_arrayListCoBr.add("Select Any");
                     arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayListCoBr);
-                    spCurrentCityBr.setAdapter(arrayAdapter_currentCityCoBr);
+                    spCurrentCityCoBr.setAdapter(arrayAdapter_currentCityCoBr);
                     arrayAdapter_currentCityCoBr.notifyDataSetChanged();
                     spCurrentCityCoBr.setSelection(0);
                 } catch (Exception e) {
@@ -2744,7 +2885,6 @@ public class LoanApplicationFragment_1 extends Fragment {
                 }
 
             } else {
-                Log.e("SERVER CALL", "getCurrentCities+++" + jsonData);
 
                 String status = jsonData.optString("status");
                 String message = jsonData.optString("message");
