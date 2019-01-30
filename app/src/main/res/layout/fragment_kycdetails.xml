@@ -144,6 +144,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:visibility="gone"
                     android:padding="10dp">
 
@@ -189,6 +190,18 @@
         android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/white" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        android:background="@color/colorSecondary"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        app:srcCompat="@drawable/icon_signapplication" />
 
     <ProgressBar
         android:visibility="gone"

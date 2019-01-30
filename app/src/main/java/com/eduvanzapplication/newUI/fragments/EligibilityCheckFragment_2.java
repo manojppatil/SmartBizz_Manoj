@@ -201,7 +201,6 @@ public class EligibilityCheckFragment_2 extends Fragment {
         }
 
         if (!MainApplication.mainapp_userdocument.equals("")) {
-
             if (MainApplication.mainapp_userdocument.equalsIgnoreCase("0")) {
                 documentSpinner.setSelection(0);
             }
@@ -280,7 +279,6 @@ public class EligibilityCheckFragment_2 extends Fragment {
 
             }
         });
-
 
         return view;
     }
