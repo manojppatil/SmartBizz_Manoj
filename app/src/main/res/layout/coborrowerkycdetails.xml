@@ -292,16 +292,17 @@
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        app:hintTextAppearance="@style/CustomTextAppearance"
-                        android:theme="@style/EditTextStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditTextStyle"
+                        app:hintTextAppearance="@style/CustomTextAppearance">
+
                         <EditText
                             android:id="@+id/edtAnnualSalCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
                             android:hint="@string/annual_income"
+                            android:inputType="numberDecimal"
                             android:textColor="@color/black" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -312,6 +313,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/gray_background"
                 android:orientation="vertical"
                 android:paddingLeft="5dp">
@@ -447,6 +449,7 @@
                         android:id="@+id/spCurrentCityCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
                         android:dropDownSelector="@color/colorPrimary"

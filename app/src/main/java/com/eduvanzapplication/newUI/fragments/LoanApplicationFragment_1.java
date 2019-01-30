@@ -136,7 +136,6 @@ public class LoanApplicationFragment_1 extends Fragment {
     MainApplication mainApplication;
     Typeface typeface;
     LinearLayout linearLayoutEmployed, linearLayoutLeftoff, linEmployed;
-    public static CheckBox cbSameAsAboveBr;
     public static RelativeLayout relborrower, relCoborrower;
     public static LinearLayout linBorrowerForm, linCoCorrowerForm;
     public static TextView txtBorrowerArrowKey, txtCoBorrowerArrowKey;
@@ -1036,13 +1035,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
-//                        if (spCurrentCityBr.getSelectedItemPosition() > 0) {
-//                            cbSameAsAboveBr.setEnabled(true);
-//                            cbSameAsAboveBr.setClickable(true);
-//                        } else {
-//                            cbSameAsAboveBr.setEnabled(false);
-//                            cbSameAsAboveBr.setClickable(false);
-//                        }
+
                         String text = spCurrentCityBr.getSelectedItem().toString();
                         int count = borrowerCurrentCityPersonalPOJOArrayList.size();
                         for (int i = 0; i < count; i++) {
@@ -1099,11 +1092,11 @@ public class LoanApplicationFragment_1 extends Fragment {
                             }
                         }
                         stateApiCall();
-                        if (currentcityID.equals("")) {
-                            spCurrentCityBr.setSelection(0);
-                        } else {
-                            spCurrentCityBr.setSelection(Integer.parseInt(currentcityID) - 1);
-                        }
+//                        if (currentcityID.equals("")) {
+//                            spCurrentCityBr.setSelection(0);
+//                        } else {
+//                            spCurrentCityBr.setSelection(Integer.parseInt(currentcityID));
+//                        }
                     } catch (Exception e) {
                     }
                 }
@@ -1174,11 +1167,11 @@ public class LoanApplicationFragment_1 extends Fragment {
                             }
                         }
                         stateApiCallCoBr();
-                        if (currentcityIDCoBr.equals("")) {
-                            spCurrentCityCoBr.setSelection(0);
-                        } else {
-                            spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr) - 1);
-                        }
+//                        if (currentcityIDCoBr.equals("")) {
+//                            spCurrentCityCoBr.setSelection(0);
+//                        } else {
+//                            spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr));
+//                        }
                     } catch (Exception e) {
                     }
                 }
@@ -1205,8 +1198,8 @@ public class LoanApplicationFragment_1 extends Fragment {
                 ProfessionApiCallCoBr();
                 getCurrentStates(jsonObject);
                 getCurrentCities(jsonObject);
-                getCurrentStatesCoBr(jsonObject);
-                getCurrentCitiesCoBr(jsonObject);
+//                getCurrentStatesCoBr(jsonObject);
+//                getCurrentCitiesCoBr(jsonObject);
             }
 
             /** API CALL POST LOGIN DASHBOARD STATUS **/
@@ -1282,8 +1275,8 @@ public class LoanApplicationFragment_1 extends Fragment {
 //                    JSONObject jsonObject = new JSONObject();
 //                    getCurrentStates(jsonObject);
 //                    getCurrentCities(jsonObject);
-////                getCurrentStatesCoBr(jsonObject);
-////                getCurrentCitiesCoBr(jsonObject);
+//                getCurrentStatesCoBr(jsonObject);
+//                getCurrentCitiesCoBr(jsonObject);
                 }
 
                 if (jsonData.getJSONArray("states").length() > 0) {
@@ -1561,17 +1554,33 @@ public class LoanApplicationFragment_1 extends Fragment {
                         }
                         spProfessionBr.setSelection(Integer.parseInt(professionID));
                     }
-                    if (!Brkyc_address_country.equals("null")) {
+
+                    if (!Brkyc_address_state.equals("null")) {
                         currentcountryID = "1";
                         spCurrentCountryBr.setSelection(Integer.parseInt(currentcountryID));
                     }
                     if (!Brkyc_address_state.equals("null")) {
                         currentstateID = Brkyc_address_state;
-                        spCurrentStateBr.setSelection(Integer.parseInt(currentstateID));
+
+                        int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                spCurrentStateBr.setSelection(i);
+                            }
+                        }
+//                        spCurrentStateBr.setSelection(Integer.parseInt(currentstateID));
                     }
                     if (!Brkyc_address_city.equals("null")) {
                         currentcityID = Brkyc_address_city;
-                        spCurrentCityBr.setSelection(Integer.parseInt(currentcityID));
+
+                        int count = borrowerCurrentCityPersonalPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                spCurrentCityBr.setSelection(i);
+                            }
+                        }
+//                        spCurrentCityBr.setSelection(Integer.parseInt(currentcityID));
                     }
 
                 }
@@ -1783,14 +1792,26 @@ public class LoanApplicationFragment_1 extends Fragment {
                     try {
                         coborrowerVisiblity = 0;
                         relCoborrower.setVisibility(View.VISIBLE);
-                        linCoCorrowerForm.setVisibility(View.VISIBLE);
-                        txtCoBorrowerArrowKey.setText(getResources().getString(R.string.up));
+//                        linCoCorrowerForm.setVisibility(View.VISIBLE);
+                        txtCoBorrowerArrowKey.setText(getResources().getString(R.string.down));
                         txtCoBorrowerArrowKey.setTypeface(typeface);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
 
+//                if (!CoBrkyc_address_state.equals("null")) {
+//                    currentcountryIDCoBr = "1";
+//                    spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryIDCoBr));
+//                }
+//                if (!CoBrkyc_address_state.equals("null")) {
+//                    currentstateIDCoBr = CoBrkyc_address_state;
+//                    spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
+//                }
+//                if (!CoBrkyc_address_city.equals("null")) {
+//                    currentcityIDCoBr = CoBrkyc_address_city;
+//                    spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr));
+//                }
 
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -2567,6 +2588,14 @@ public class LoanApplicationFragment_1 extends Fragment {
 
         try {
 
+//            try {
+//                JSONObject jsonObject = new JSONObject();
+//                getCurrentStatesCoBr(jsonObject);
+//                getCurrentCitiesCoBr(jsonObject);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
             if (!CoBrfirst_name.equals("null")) {
                 edtFnameCoBr.setText(CoBrfirst_name);
             }
@@ -2622,17 +2651,34 @@ public class LoanApplicationFragment_1 extends Fragment {
                spProfessionCoBr.setSelection(Integer.parseInt(professionIDCoBr));
             }
 
-            if (!CoBrkyc_address.equals("null")) {
+            if (!CoBrkyc_address_country.equals("null")) {
                 currentcountryIDCoBr = "1";
                 spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryIDCoBr));
             }
             if (!CoBrkyc_address_state.equals("null")) {
                 currentstateIDCoBr = CoBrkyc_address_state;
-                spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
+
+                int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                for (int i = 0; i < count; i++) {
+                    if (borrowerCurrentStatePersonalPOJOArrayListCoBr.get(i).stateID.equalsIgnoreCase(currentstateIDCoBr)) {
+                        spCurrentStateCoBr.setSelection(i);
+                    }
+                }
+
+//                spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
             }
             if (!CoBrkyc_address_city.equals("null")) {
                 currentcityIDCoBr = CoBrkyc_address_city;
-                spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr));
+
+                int count = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
+                for (int i = 0; i < count; i++) {
+                    if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(currentcityIDCoBr)) {
+                        spCurrentCityCoBr.setSelection(i);
+                    }
+                }
+
+//                spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr));
             }
 
         } catch (Exception e) {
@@ -2685,22 +2731,22 @@ public class LoanApplicationFragment_1 extends Fragment {
     public void getCurrentStates(JSONObject jsonData) {
         try {
             if (jsonData.toString().equals("{}")) {
-                try {
-                    currentstate_arrayList = new ArrayList<>();
-                    currentstate_arrayList.add("Select Any");
-                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
-                    arrayAdapter_currentState.notifyDataSetChanged();
-                    spCurrentStateBr.setSelection(0);
-                } catch (Exception e) {
-                    String className = this.getClass().getSimpleName();
-                    String name = new Object() {
-                    }.getClass().getEnclosingMethod().getName();
-                    String errorMsg = e.getMessage();
-                    String errorMsgDetails = e.getStackTrace().toString();
-                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-                }
+//                try {
+//                    currentstate_arrayList = new ArrayList<>();
+//                    currentstate_arrayList.add("Select Any");
+//                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
+//                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
+//                    arrayAdapter_currentState.notifyDataSetChanged();
+//                    spCurrentStateBr.setSelection(0);
+//                } catch (Exception e) {
+//                    String className = this.getClass().getSimpleName();
+//                    String name = new Object() {
+//                    }.getClass().getEnclosingMethod().getName();
+//                    String errorMsg = e.getMessage();
+//                    String errorMsgDetails = e.getStackTrace().toString();
+//                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//                }
 
             } else {
                 String status = jsonData.optString("status");
@@ -2724,7 +2770,13 @@ public class LoanApplicationFragment_1 extends Fragment {
                     spCurrentStateBr.setAdapter(arrayAdapter_currentState);
                     arrayAdapter_currentState.notifyDataSetChanged();
 
-                    spCurrentStateBr.setSelection(Integer.parseInt(currentstateID));
+                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                            spCurrentStateBr.setSelection(i);
+                        }
+                    }
 
                 } else {
                 }
@@ -2743,22 +2795,22 @@ public class LoanApplicationFragment_1 extends Fragment {
     public void getCurrentCities(JSONObject jsonData) {
         try {
             if (jsonData.toString().equals("{}")) {
-                try {
-                    currentcity_arrayList = new ArrayList<>();
-                    currentcity_arrayList.add("Select Any");
-                    arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
-                    spCurrentCityBr.setAdapter(arrayAdapter_currentCity);
-                    arrayAdapter_currentCity.notifyDataSetChanged();
-                    spCurrentCityBr.setSelection(0);
-                } catch (Exception e) {
-                    String className = this.getClass().getSimpleName();
-                    String name = new Object() {
-                    }.getClass().getEnclosingMethod().getName();
-                    String errorMsg = e.getMessage();
-                    String errorMsgDetails = e.getStackTrace().toString();
-                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-                }
+//                try {
+//                    currentcity_arrayList = new ArrayList<>();
+//                    currentcity_arrayList.add("Select Any");
+//                    arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
+//                    spCurrentCityBr.setAdapter(arrayAdapter_currentCity);
+//                    arrayAdapter_currentCity.notifyDataSetChanged();
+//                    spCurrentCityBr.setSelection(0);
+//                } catch (Exception e) {
+//                    String className = this.getClass().getSimpleName();
+//                    String name = new Object() {
+//                    }.getClass().getEnclosingMethod().getName();
+//                    String errorMsg = e.getMessage();
+//                    String errorMsgDetails = e.getStackTrace().toString();
+//                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//                }
 
             } else {
                 Log.e("SERVER CALL", "getCurrentCities+++" + jsonData);
@@ -2846,8 +2898,13 @@ public class LoanApplicationFragment_1 extends Fragment {
                     arrayAdapter_currentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayListCoBr);
                     spCurrentStateCoBr.setAdapter(arrayAdapter_currentStateCoBr);
                     arrayAdapter_currentStateCoBr.notifyDataSetChanged();
-                    if (!currentstateIDCoBr.equals("")) {
-                        spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
+
+                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentStatePersonalPOJOArrayListCoBr.get(i).stateID.equalsIgnoreCase(currentstateIDCoBr)) {
+                            spCurrentStateCoBr.setSelection(i);
+                        }
                     }
 
                 } else {
@@ -2870,10 +2927,10 @@ public class LoanApplicationFragment_1 extends Fragment {
                 try {
                     currentcity_arrayListCoBr = new ArrayList<>();
                     currentcity_arrayListCoBr.add("Select Any");
-                    arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayListCoBr);
+                    arrayAdapter_currentCityCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayListCoBr);
                     spCurrentCityCoBr.setAdapter(arrayAdapter_currentCityCoBr);
                     arrayAdapter_currentCityCoBr.notifyDataSetChanged();
-                    spCurrentCityCoBr.setSelection(0);
+//                    spCurrentCityCoBr.setSelection(0);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
                     String name = new Object() {
@@ -2907,7 +2964,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                     spCurrentCityCoBr.setAdapter(arrayAdapter_currentCityCoBr);
                     arrayAdapter_currentCityCoBr.notifyDataSetChanged();
 
-                    int count = borrowerCurrentCityPersonalPOJOArrayList.size();
+                    int count = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
                     for (int i = 0; i < count; i++) {
                         if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(currentcityIDCoBr)) {
                             spCurrentCityCoBr.setSelection(i);
