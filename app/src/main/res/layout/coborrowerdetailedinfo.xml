@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -81,7 +82,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtMnameBr"
+                        android:id="@+id/edtMnameCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/middle_name"
@@ -99,7 +100,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtLnameBr"
+                        android:id="@+id/edtLnameCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/last_name"
@@ -179,7 +180,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/rgGenderBr"
+                        android:id="@+id/rgGenderCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
@@ -188,7 +189,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/rbMaleBr"
+                            android:id="@+id/rbMaleCoBr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -197,7 +198,7 @@
                             android:theme="@style/EditTextStyle" />
 
                         <RadioButton
-                            android:id="@+id/rbFemaleBr"
+                            android:id="@+id/rbFemaleCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -227,7 +228,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/rgMaritalStatusBr"
+                        android:id="@+id/rgMaritalStatusCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
@@ -236,7 +237,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/rbMarriedBr"
+                            android:id="@+id/rbMarriedCoBr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -245,7 +246,7 @@
                             android:theme="@style/EditTextStyle" />
 
                         <RadioButton
-                            android:id="@+id/rbSingleBr"
+                            android:id="@+id/rbSingleCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -264,7 +265,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtPanBr"
+                        android:id="@+id/edtPanCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/pan_number"
@@ -284,7 +285,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtAadhaarBr"
+                        android:id="@+id/edtAadhaarCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/adhaar_number"
@@ -322,7 +323,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_currentresidencytype_borrower"
+                        android:id="@+id/spinner_currentresidencytype_coborrower"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -340,7 +341,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/input_borrowerrent"
+                        android:id="@+id/input_coborrowerrent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/monthly_rent"
@@ -396,7 +397,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_currentresidenceduration"
+                        android:id="@+id/spinner_currentresidenceduration_CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -580,7 +581,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                            android:id="@+id/edtPermanentPincodeBr"
+                            android:id="@+id/edtPermanentPincodeCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Pincode"
@@ -599,7 +600,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                            android:id="@+id/edtPermanentAddressBr"
+                            android:id="@+id/edtPermanentAddressCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/permanent_address"
@@ -643,7 +644,7 @@
                             android:textSize="16sp" />
 
                         <Spinner
-                            android:id="@+id/spPermanentCountryBr"
+                            android:id="@+id/spPermanentCountryCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -671,7 +672,7 @@
                             android:textSize="16sp" />
 
                         <Spinner
-                            android:id="@+id/spPermanentStateBr"
+                            android:id="@+id/spPermanentStateCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -699,7 +700,7 @@
                             android:textSize="16sp" />
 
                         <Spinner
-                            android:id="@+id/spPermanentCityBr"
+                            android:id="@+id/spPermanentCityCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -752,10 +753,10 @@
 
                 <!--Office Details-->
                 <LinearLayout
-                    android:id="@+id/linOfficeDetails"
+                    android:id="@+id/linOfficeDetailsCoBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:orientation="vertical">
 
                 <LinearLayout
@@ -775,7 +776,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/radiogroup_emptype"
+                        android:id="@+id/radiogroup_emptypeCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -783,7 +784,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/radiobutton_empType_gov"
+                            android:id="@+id/radiobutton_empType_govCoBr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
@@ -792,7 +793,7 @@
                             android:theme="@style/EditTextStyle" />
 
                         <RadioButton
-                            android:id="@+id/radiobutton_empType_private"
+                            android:id="@+id/radiobutton_empType_privateCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -877,7 +878,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtPincodeOff"
+                        android:id="@+id/edtPincodeOffCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Pincode"
@@ -922,7 +923,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spCountryOff"
+                        android:id="@+id/spCountryOffCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -950,7 +951,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spStateOff"
+                        android:id="@+id/spStateOffCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -978,7 +979,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spCityOff"
+                        android:id="@+id/spCityOffCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -1018,7 +1019,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_lastdegreecompleted"
+                        android:id="@+id/spinner_lastdegreecompleted_CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -1074,7 +1075,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/radioButton_gaps_yes_borrower"
+                            android:id="@+id/radioButton_gaps_yes_coborrower"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -1083,7 +1084,7 @@
                             android:theme="@style/EditTextStyle" />
 
                         <RadioButton
-                            android:id="@+id/radioButton_gaps_no_borrower"
+                            android:id="@+id/radioButton_gaps_no_coborrower"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -1113,7 +1114,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/radiogroup_iscgpa"
+                        android:id="@+id/radiogroup_iscgpaCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -1121,7 +1122,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/radiobutton_iscgpa_yes"
+                            android:id="@+id/radiobutton_iscgpa_yesCoBr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
@@ -1130,7 +1131,7 @@
                             android:theme="@style/EditTextStyle" />
 
                         <RadioButton
-                            android:id="@+id/radiobutton_iscgpa_no"
+                            android:id="@+id/radiobutton_iscgpa_noCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -1147,7 +1148,7 @@
                     android:orientation="vertical">
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_cgpa"
+                        android:id="@+id/input_cgpa_Co-Br"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"

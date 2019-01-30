@@ -853,7 +853,7 @@
                             android:id="@+id/edtAddressOff"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/permanent_address"
+                            android:hint="@string/offc_address"
                             android:inputType="textPostalAddress"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
