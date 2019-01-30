@@ -492,6 +492,7 @@ public class DashboardFragmentNew extends Fragment {
                     mLeadsArrayList.add(mLeads);
 
                 }
+                //146  150 184 217
 
                 leadsAdapter = new LeadsAdapter(mLeadsArrayList,context);
                 LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

@@ -2402,7 +2402,6 @@ public class LoanApplicationFragment_2 extends Fragment {
             spCurrentCountryBr.setAdapter(arrayAdapter_currentCountry);
             arrayAdapter_currentCountry.notifyDataSetChanged();
 
-
             /** PERSONAL DETAILS **/
             currentaddress = (EditText) view.findViewById(R.id.input_coborrowercurrentaddress);
             permanentaddress = (EditText) view.findViewById(R.id.input_coborrowerpermanentaddress);
@@ -2554,22 +2553,22 @@ public class LoanApplicationFragment_2 extends Fragment {
             addressSameAsCurrentPOJO1.address = "Select Any";
             permanentAddressSameAs_arrayList.add("Select Any");
             addressSameAsCurrentPOJO1.id = "";
-            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO);
+            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO1);
 
             addressSameAsCurrentPOJO1.address = "Borrower Kyc Address";
             permanentAddressSameAs_arrayList.add("Borrower Kyc Address");
             addressSameAsCurrentPOJO1.id = "1";
-            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO);
+            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO1);
 
             addressSameAsCurrentPOJO1.address = "Borrower Current Address";
             permanentAddressSameAs_arrayList.add("Borrower Current Address");
             addressSameAsCurrentPOJO1.id = "2";
-            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO);
+            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO1);
 
             addressSameAsCurrentPOJO1.address = "None";
             permanentAddressSameAs_arrayList.add("None");
             addressSameAsCurrentPOJO1.id = "3";
-            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO);
+            addressSameAspermanentPOJOArrayList.add(addressSameAsCurrentPOJO1);
 
 
             arrayAdapter_permanentAddressSameAs = new ArrayAdapter(context, R.layout.custom_layout_spinner, addressSameAspermanentPOJOArrayList);
