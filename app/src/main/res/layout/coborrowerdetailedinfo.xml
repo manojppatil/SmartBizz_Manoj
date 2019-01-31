@@ -64,7 +64,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtFnameCoBrDet"
+                        android:id="@+id/edtFnameCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/first_name"
@@ -323,7 +323,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_currentresidencytype_coborrower"
+                        android:id="@+id/spResidentTypeCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -341,7 +341,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/input_coborrowerrent"
+                        android:id="@+id/edtMonthlyRentCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/monthly_rent"
@@ -368,7 +368,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spCurrentAddressSameAsKyc"
+                        android:id="@+id/spCurrentAddressSameAsKycCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -397,7 +397,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_currentresidenceduration_CoBr"
+                        android:id="@+id/spDurationStayAtCurrentAddressCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -410,7 +410,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linCurrentAddress"
+                    android:id="@+id/linCurrentAddressCoBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -555,7 +555,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spCurrentAddressSameAsKycOrBorrower"
+                        android:id="@+id/spCurrentAddressSameAsKycOrBorrowerCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -567,7 +567,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linPermanentAddress"
+                    android:id="@+id/linPermanentAddressCoBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -608,24 +608,6 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </android.support.design.widget.TextInputLayout>
-
-                    <!--<android.support.design.widget.TextInputLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="5dp"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:theme="@style/EditTextStyle"-->
-                        <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
-
-                        <!--<EditText-->
-                            <!--android:id="@+id/edtPermanentLandmarkBr"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:hint="Land mark"-->
-                            <!--android:inputType="textPostalAddress"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="16sp" />-->
-                    <!--</android.support.design.widget.TextInputLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -756,51 +738,51 @@
                     android:id="@+id/linOfficeDetailsCoBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="2"
-                        android:gravity="left"
-                        android:paddingTop="2dp"
-                        android:text="@string/employer_type"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:orientation="vertical">
 
-                    <RadioGroup
-                        android:id="@+id/radiogroup_emptypeCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/radiobutton_empType_govCoBr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="false"
-                            android:text="@string/government"
-                            android:textColor="@color/black"
-                            android:theme="@style/EditTextStyle" />
-
-                        <RadioButton
-                            android:id="@+id/radiobutton_empType_privateCoBr"
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:checked="false"
-                            android:text="@string/private1"
-                            android:textColor="@color/black"
-                            android:theme="@style/EditTextStyle" />
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:paddingTop="2dp"
+                            android:text="@string/employer_type"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <RadioGroup
+                            android:id="@+id/rgemptypeCoBr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rbempType_govCoBr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="false"
+                                android:text="@string/government"
+                                android:textColor="@color/black"
+                                android:theme="@style/EditTextStyle" />
+
+                            <RadioButton
+                                android:id="@+id/rbempType_privateCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:checked="false"
+                                android:text="@string/private1"
+                                android:textColor="@color/black"
+                                android:theme="@style/EditTextStyle" />
 
                     </RadioGroup>
 
@@ -856,16 +838,16 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
-                    <Spinner
-                        android:id="@+id/spinner_durationofjob_coborrower"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="left"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                        <Spinner
+                            android:id="@+id/spdurationofjobCoBr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:layout_weight="1"
+                            android:dropDownSelector="@color/colorPrimary"
+                            android:focusable="true"
+                            android:gravity="left"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
                 </LinearLayout>
 
@@ -897,7 +879,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/edtAddressOff"
+                        android:id="@+id/edtAddressOffCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/permanent_address"
@@ -1001,7 +983,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/gray_background"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1019,7 +1001,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_lastdegreecompleted_CoBr"
+                        android:id="@+id/splastdegreecompletedCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -1038,7 +1020,7 @@
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
                     <EditText
-                        android:id="@+id/input_passingyear"
+                        android:id="@+id/input_passingyearCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/passing_year"
@@ -1066,7 +1048,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/radioGroup_borrower_gaps"
+                        android:id="@+id/rgborrower_gapsCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
@@ -1075,7 +1057,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/radioButton_gaps_yes_coborrower"
+                            android:id="@+id/rbgaps_yesCoBr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -1084,7 +1066,7 @@
                             android:theme="@style/EditTextStyle" />
 
                         <RadioButton
-                            android:id="@+id/radioButton_gaps_no_coborrower"
+                            android:id="@+id/rbgaps_noCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -1114,7 +1096,7 @@
                         android:textSize="16sp" />
 
                     <RadioGroup
-                        android:id="@+id/radiogroup_iscgpaCoBr"
+                        android:id="@+id/rgiscgpaCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -1122,7 +1104,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/radiobutton_iscgpa_yesCoBr"
+                            android:id="@+id/rbiscgpa_yesCoBr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
@@ -1131,7 +1113,7 @@
                             android:theme="@style/EditTextStyle" />
 
                         <RadioButton
-                            android:id="@+id/radiobutton_iscgpa_noCoBr"
+                            android:id="@+id/rbiscgpa_noCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -1148,7 +1130,7 @@
                     android:orientation="vertical">
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_cgpa_Co-Br"
+                        android:id="@+id/input_cgpaCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -1158,7 +1140,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                            android:id="@+id/input_degree_cgpa"
+                            android:id="@+id/input_degree_cgpaCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/last_degree_cgpa"
@@ -1168,7 +1150,7 @@
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_degree"
+                        android:id="@+id/input_degreeCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -1178,7 +1160,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                            android:id="@+id/input_degree_percentage"
+                            android:id="@+id/input_degree_percentageCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/last_degree_percentage"

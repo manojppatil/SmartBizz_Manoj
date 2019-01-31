@@ -142,6 +142,85 @@ public class MainApplication {
             co_borrower_extra_required_docskyc = "", idkyc = "", status_namekyc = "", stage_idkyc = "";
 
 
+    //Detailed Info
+
+    public static String lead_iddtl = "", application_iddtl = "", requested_loan_amountdtl = "", institute_namedtl = "", location_namedtl = "",
+            course_namedtl = "", course_costdtl = "", has_coborrowerdtl = "";
+
+    public static String Brapplicant_iddtl = "", Brfk_lead_iddtl = "", Brfk_applicant_type_iddtl = "", Brfirst_namedtl = "", Brmiddle_namedtl = "",
+            Brlast_namedtl = "", Brhas_aadhar_pandtl = "", Brdobdtl = "", Brpan_numberdtl = "", Braadhar_numberdtl = "", Brmarital_statusdtl = "",
+            Brgender_iddtl = "", Brmobile_numberdtl = "", Bremail_iddtl = "", Brrelationship_with_applicantdtl = "", Brprofessiondtl = "",
+            Bremployer_typedtl = "", Bremployer_namedtl = "", Brannual_incomedtl = "", Brcurrent_employment_durationdtl = "",
+            Brtotal_employement_durationdtl = "", Bremployer_mobile_numberdtl = "", Bremployer_landline_numberdtl = "", Broffice_landmarkdtl = "",
+            Broffice_addressdtl = "", Broffice_address_citydtl = "", Broffice_address_statedtl = "", Broffice_address_countrydtl = "",
+            Broffice_address_pindtl = "", Brhas_active_loandtl = "", BrEMI_Amountdtl = "", Brkyc_landmarkdtl = "", Brkyc_addressdtl = "",
+            Brkyc_address_citydtl = "", Brkyc_address_statedtl = "", Brkyc_address_countrydtl = "", Brkyc_address_pindtl = "",
+            Bris_borrower_current_address_same_asdtl = "", Bris_coborrower_current_address_same_asdtl = "", Brcurrent_residence_typedtl = "",
+            Brcurrent_landmarkdtl = "", Brcurrent_addressdtl = "", Brcurrent_address_citydtl = "", Brcurrent_address_statedtl = "",
+            Brcurrent_address_countrydtl = "", Brcurrent_address_pindtl = "", Brcurrent_address_rentdtl = "",
+            Brcurrent_address_stay_durationdtl = "", Bris_borrower_permanent_address_same_asdtl = "",
+            Bris_coborrower_permanent_address_same_asdtl = "", Brpermanent_residence_typedtl = "", Brpermanent_landmarkdtl = "",
+            Brpermanent_addressdtl = "", Brpermanent_address_citydtl = "", Brpermanent_address_statedtl = "",
+            Brpermanent_address_countrydtl = "", Brpermanent_address_pindtl = "", Brpermanent_address_rentdtl = "",
+            Brpermanent_address_stay_durationdtl = "", Brlast_completed_degreedtl = "", Brscore_unitdtl = "", Brcgpadtl = "",
+            Brpercentagedtl = "", Brpassing_yeardtl = "", Brgap_in_educationdtl = "", Brfull_name_pan_responsedtl = "",
+            Brcreated_by_iddtl = "", Brcreated_date_timedtl = "", Brcreated_ip_addressdtl = "", Brmodified_bydtl = "",
+            Brmodified_date_timedtl = "", Brmodified_ip_addressdtl = "", Bris_deleteddtl = "";
+
+    public static String CoBrapplicant_iddtl = "", CoBrfk_lead_iddtl = "", CoBrfk_applicant_type_iddtl = "", CoBrfirst_namedtl = "",
+            CoBrmiddle_namedtl = "", CoBrlast_namedtl = "", CoBrhas_aadhar_pandtl = "", CoBrdobdtl = "", CoBrpan_numberdtl = "",
+            CoBraadhar_numberdtl = "", CoBrmarital_statusdtl = "", CoBrgender_iddtl = "", CoBrmobile_numberdtl = "", CoBremail_iddtl = "",
+            CoBrrelationship_with_applicantdtl = "", CoBrprofessiondtl = "", CoBremployer_typedtl = "", CoBremployer_namedtl = "",
+            CoBrannual_incomedtl = "", CoBrcurrent_employment_durationdtl = "", CoBrtotal_employement_durationdtl = "",
+            CoBremployer_mobile_numberdtl = "", CoBremployer_landline_numberdtl = "", CoBroffice_landmarkdtl = "",
+            CoBroffice_addressdtl = "", CoBroffice_address_citydtl = "", CoBroffice_address_statedtl = "", CoBroffice_address_countrydtl = "",
+            CoBroffice_address_pindtl = "", CoBrhas_active_loandtl = "", CoBrEMI_Amountdtl = "", CoBrkyc_landmarkdtl = "",
+            CoBrkyc_addressdtl = "", CoBrkyc_address_citydtl = "", CoBrkyc_address_statedtl = "", CoBrkyc_address_countrydtl = "",
+            CoBrkyc_address_pindtl = "", CoBris_borrower_current_address_same_asdtl = "", CoBris_coborrower_current_address_same_asdtl = "",
+            CoBrcurrent_residence_typedtl = "", CoBrcurrent_landmarkdtl = "", CoBrcurrent_addressdtl = "", CoBrcurrent_address_citydtl = "",
+            CoBrcurrent_address_statedtl = "", CoBrcurrent_address_countrydtl = "", CoBrcurrent_address_pindtl = "",
+            CoBrcurrent_address_rentdtl = "", CoBrcurrent_address_stay_durationdtl = "", CoBris_borrower_permanent_address_same_asdtl = "",
+            CoBris_coborrower_permanent_address_same_asdtl = "", CoBrpermanent_residence_typedtl = "", CoBrpermanent_landmarkdtl = "",
+            CoBrpermanent_addressdtl = "", CoBrpermanent_address_citydtl = "", CoBrpermanent_address_statedtl = "",
+            CoBrpermanent_address_countrydtl = "", CoBrpermanent_address_pindtl = "", CoBrpermanent_address_rentdtl = "",
+            CoBrpermanent_address_stay_durationdtl = "", CoBrlast_completed_degreedtl = "", CoBrscore_unitdtl = "", CoBrcgpadtl = "",
+            CoBrpercentagedtl = "", CoBrpassing_yeardtl = "", CoBrgap_in_educationdtl = "", CoBrfull_name_pan_responsedtl = "",
+            CoBrcreated_by_iddtl = "", CoBrcreated_date_timedtl = "", CoBrcreated_ip_addressdtl = "", CoBrmodified_bydtl = "",
+            CoBrmodified_date_timedtl = "", CoBrmodified_ip_addressdtl = "", CoBris_deleteddtl = "";
+
+    public static String lead_status_iddtl = "", fk_lead_iddtl = "", lead_statusdtl = "", lead_sub_statusdtl = "", current_stagedtl = "",
+            current_statusdtl = "", lead_drop_statusdtl = "", lead_reject_statusdtl = "", lead_initiated_datetimedtl = "",
+            is_lead_owner_addeddtl = "", lead_owner_added_datetimedtl = "", lead_owner_added_bydtl = "", is_lead_counsellor_addeddtl = "",
+            lead_counsellor_added_datetimedtl = "", lead_counsellor_added_bydtl = "", is_kyc_details_filleddtl = "",
+            kyc_details_filled_datetimedtl = "", kyc_details_filled_bydtl = "", coborrower_added_datetimedtl = "",
+            coborrower_added_by_iddtl = "", is_detailed_info_filleddtl = "", detailed_info_filled_datetimedtl = "",
+            detailed_info_filled_by_iddtl = "", approval_request_sales_statusdtl = "", approval_request_sales_status_datetimedtl = "",
+            approval_request_sales_status_by_iddtl = "", list_of_LAF_info_pendingdtl = "", list_of_LAF_info_filleddtl = "", IPA_statusdtl = "",
+            IPA_datetimedtl = "", IPA_by_iddtl = "", docs_upload_statusdtl = "", docs_upload_datetimedtl = "", list_of_uplaoded_docsdtl = "",
+            list_of_pendingdocsdtl = "", docs_verification_statusdtl = "", docs_verification_datetimedtl = "",
+            credit_approval_request_statusdtl = "", credit_approval_request_status_datetimedtl = "",
+            credit_approval_request_status_by_iddtl = "", applicant_ekyc_statusdtl = "", applicant_ekyc_datetimedtl = "",
+            co_applicant_ekyc_statusdtl = "", co_applicant_ekyc_datetimedtl = "", credit_assessment_statusdtl = "",
+            credit_assessment_by_iddtl = "", credit_assessment_datetimedtl = "", loan_product_selection_statusdtl = "",
+            loan_product_by_iddtl = "", loan_product_datetimedtl = "", underwriting_statusdtl = "", underwriting_by_iddtl = "",
+            underwriting_datetimedtl = "", is_processing_fees_setdtl = "", processing_fees_set_datetimedtl = "",
+            processing_fees_set_by_iddtl = "", processing_fees_paiddtl = "", processing_fees_paid_datetimedtl = "",
+            processing_fees_paid_bydtl = "", lender_creation_statusdtl = "", lender_creation_modified_datetimedtl = "",
+            lender_creation_modified_bydtl = "", amort_creation_statusdtl = "", amort_creation_modified_datetimedtl = "",
+            amort_creation_modified_bydtl = "", borrower_pan_ekyc_responsedtl = "", borrower_aadhar_ekyc_responsedtl = "",
+            borrower_pan_ekyc_statusdtl = "", borrower_aadhar_ekyc_statusdtl = "", coborrower_pan_ekyc_responsedtl = "",
+            coborrower_aadhar_ekyc_responsedtl = "", coborrower_aadhar_ekyc_statusdtl = "", coborrower_pan_ekyc_statusdtl = "",
+            is_cam_uploadeddtl = "", is_finbit_uploadeddtl = "", is_exception_uploadeddtl = "", is_loan_agreement_uploadeddtl = "",
+            loan_agreement_uploaded_bydtl = "", applicant_pan_verified_bydtl = "", coapplicant_pan_verified_bydtl = "",
+            applicant_aadhar_verified_bydtl = "", applicant_pan_verified_ondtl = "", coapplicant_pan_verified_ondtl = "",
+            applicant_aadhar_verified_ondtl = "", coapplicant_aadhar_verified_ondtl = "", coapplicant_aadhar_verified_bydtl = "",
+            created_date_timedtl = "", created_ip_addressdtl = "", modified_bydtl = "", modified_date_timedtl = "", modified_ip_addressdtl = "",
+            is_deleteddtl = "", borrower_required_docsdtl = "", co_borrower_required_docsdtl = "", co_borrower_pending_docsdtl = "",
+            borrower_extra_required_docsdtl = "", co_borrower_extra_required_docsdtl = "", iddtl = "", status_namedtl = "", stage_iddtl = "";
+
+
+
+
     public static double latitude;
     public static double longitde;
 

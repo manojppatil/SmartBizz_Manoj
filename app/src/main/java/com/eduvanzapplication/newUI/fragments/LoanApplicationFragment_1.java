@@ -91,7 +91,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 
     public static TextView txtBirthdayCalenderBr, txtBirthdayCalenderCoBr, lblBirthdayBr, lblBirthdayCoBr, txtBirthdateBr, txtBirthdateCoBr;
 
-    //Borrower
+
     public static ArrayAdapter arrayAdapter_currentCity, arrayAdapter_currentCityCoBr;
     public static ArrayList<String> currentcity_arrayList, currentcity_arrayListCoBr;
     public static ArrayList<BorrowerCurrentCityPersonalPOJO> borrowerCurrentCityPersonalPOJOArrayList, borrowerCurrentCityPersonalPOJOArrayListCoBr;
@@ -141,7 +141,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 
     Button buttonNext;
     TextView textView1, textView2, textView3;
-    Calendar cal;
+    Calendar Brcal,CoBrcal;
     MainApplication mainApplication;
     Typeface typeface;
     LinearLayout linearLayoutEmployed, linearLayoutLeftoff, linEmployed;
@@ -635,9 +635,9 @@ public class LoanApplicationFragment_1 extends Fragment {
                 public void onDateSet(DatePicker view, int year, int monthOfYear,
                                       int dayOfMonth) {
                     // TODO Auto-generated method stub
-                    cal.set(Calendar.YEAR, year);
-                    cal.set(Calendar.MONTH, monthOfYear);
-                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    Brcal.set(Calendar.YEAR, year);
+                    Brcal.set(Calendar.MONTH, monthOfYear);
+                    Brcal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     int month = monthOfYear + 1;
                     String datenew = dayOfMonth + "/" + month + "/" + year;
                     dateformate = dateFormateSystem(datenew);
@@ -648,14 +648,14 @@ public class LoanApplicationFragment_1 extends Fragment {
                 }
 
             };
-            cal = Calendar.getInstance();
+            Brcal = Calendar.getInstance();
 
-            txtBirthdayCalenderCoBr.setOnClickListener(new View.OnClickListener() {
+            txtBirthdayCalenderBr.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    cal = Calendar.getInstance();
-                    cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
-                    DatePickerDialog data = new DatePickerDialog(context, dateBr, cal
+                    Brcal = Calendar.getInstance();
+                    Brcal.set(Calendar.YEAR, Brcal.get(Calendar.YEAR));
+                    DatePickerDialog data = new DatePickerDialog(context, dateBr, Brcal
                             .get(Calendar.YEAR) - 18, 1,
                             1);
                     data.getDatePicker().setMaxDate(System.currentTimeMillis() - 1234564);
@@ -669,9 +669,9 @@ public class LoanApplicationFragment_1 extends Fragment {
                 public void onDateSet(DatePicker view, int year, int monthOfYear,
                                       int dayOfMonth) {
                     // TODO Auto-generated method stub
-                    cal.set(Calendar.YEAR, year);
-                    cal.set(Calendar.MONTH, monthOfYear);
-                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    CoBrcal.set(Calendar.YEAR, year);
+                    CoBrcal.set(Calendar.MONTH, monthOfYear);
+                    CoBrcal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     int month = monthOfYear + 1;
                     String datenew = dayOfMonth + "/" + month + "/" + year;
                     dateformate = dateFormateSystem(datenew);
@@ -682,14 +682,14 @@ public class LoanApplicationFragment_1 extends Fragment {
                 }
 
             };
-            cal = Calendar.getInstance();
+            CoBrcal = Calendar.getInstance();
 
             txtBirthdayCalenderCoBr.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    cal = Calendar.getInstance();
-                    cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
-                    DatePickerDialog data = new DatePickerDialog(context, dateCoBr, cal
+                    CoBrcal = Calendar.getInstance();
+                    CoBrcal.set(Calendar.YEAR, CoBrcal.get(Calendar.YEAR));
+                    DatePickerDialog data = new DatePickerDialog(context, dateCoBr, CoBrcal
                             .get(Calendar.YEAR) - 18, 1,
                             1);
                     data.getDatePicker().setMaxDate(System.currentTimeMillis() - 1234564);
@@ -1102,46 +1102,6 @@ public class LoanApplicationFragment_1 extends Fragment {
                         }
                     }
 
-//                    String text = spProfessionBr.getSelectedItem().toString();
-//                    if (text.equalsIgnoreCase("Select Any")) {
-//                        MainApplication.mainapp_userprofession = "0";
-//                        MainApplication.profession = "0";
-//                        try {
-//                            linEmployed.setVisibility(View.GONE);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    } else if (text.equalsIgnoreCase("Student")) {
-//                        MainApplication.mainapp_userprofession = "Student";
-//                        MainApplication.mainapp_userprofession = "1";
-//                        MainApplication.profession = "1";
-//                        try {
-//                            linEmployed.setVisibility(View.GONE);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    } else if (text.equalsIgnoreCase("Employed")) {
-//                        MainApplication.mainapp_userprofession = "employed";
-//                        MainApplication.mainapp_userprofession = "2";
-//                        MainApplication.profession = "2";
-//                        try {
-//                            linEmployed.setVisibility(View.VISIBLE);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    } else if (text.equalsIgnoreCase("Self Employed")) {
-//                        MainApplication.mainapp_userprofession = "selfEmployed";
-//                        MainApplication.mainapp_userprofession = "3";
-//                        MainApplication.profession = "3";
-//                        try {
-//                            linEmployed.setVisibility(View.VISIBLE);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
                 }
 
                 @Override
@@ -1510,12 +1470,6 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 if (jsonData.getJSONArray("countries").length() > 0) {
                     JSONArray jsonArraycountries = jsonData.getJSONArray("countries");
-                } else {
-//                    JSONObject jsonObject = new JSONObject();
-//                    getCurrentStates(jsonObject);
-//                    getCurrentCities(jsonObject);
-//                getCurrentStatesCoBr(jsonObject);
-//                getCurrentCitiesCoBr(jsonObject);
                 }
 
                 if (jsonData.getJSONArray("states").length() > 0) {
@@ -1643,80 +1597,6 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 if (!jsonData.get("borrowerDetails").equals(null)) {
                     JSONObject jsonborrowerDetails = jsonData.getJSONObject("borrowerDetails");
-
-//                    Brapplicant_id = jsonborrowerDetails.getString("applicant_id");
-//                    Brfk_lead_id = jsonborrowerDetails.getString("fk_lead_id");
-//                    Brfk_applicant_type_id = jsonborrowerDetails.getString("fk_applicant_type_id");
-//                    Brfirst_name = jsonborrowerDetails.getString("first_name");
-//                    Brmiddle_name = jsonborrowerDetails.getString("middle_name");
-//                    Brlast_name = jsonborrowerDetails.getString("last_name");
-//                    Brhas_aadhar_pan = jsonborrowerDetails.getString("has_aadhar_pan");
-//                    Brdob = jsonborrowerDetails.getString("dob");
-//                    Brpan_number = jsonborrowerDetails.getString("pan_number");
-//                    Braadhar_number = jsonborrowerDetails.getString("aadhar_number");
-//                    Brmarital_status = jsonborrowerDetails.getString("marital_status");
-//                    Brgender_id = jsonborrowerDetails.getString("gender_id");
-//                    Brmobile_number = jsonborrowerDetails.getString("mobile_number");
-//                    Bremail_id = jsonborrowerDetails.getString("email_id");
-//                    Brrelationship_with_applicant = jsonborrowerDetails.getString("relationship_with_applicant");
-//                    Brprofession = jsonborrowerDetails.getString("profession");
-//                    Bremployer_type = jsonborrowerDetails.getString("employer_type");
-//                    Bremployer_name = jsonborrowerDetails.getString("employer_name");
-//                    Brannual_income = jsonborrowerDetails.getString("annual_income");
-//                    Brcurrent_employment_duration = jsonborrowerDetails.getString("current_employment_duration");
-//                    Brtotal_employement_duration = jsonborrowerDetails.getString("total_employement_duration");
-//                    Bremployer_mobile_number = jsonborrowerDetails.getString("employer_mobile_number");
-//                    Bremployer_landline_number = jsonborrowerDetails.getString("employer_landline_number");
-//                    Broffice_landmark = jsonborrowerDetails.getString("office_landmark");
-//                    Broffice_address = jsonborrowerDetails.getString("office_address");
-//                    Broffice_address_city = jsonborrowerDetails.getString("office_address_city");
-//                    Broffice_address_state = jsonborrowerDetails.getString("office_address_state");
-//                    Broffice_address_country = jsonborrowerDetails.getString("office_address_country");
-//                    Broffice_address_pin = jsonborrowerDetails.getString("office_address_pin");
-//                    Brhas_active_loan = jsonborrowerDetails.getString("has_active_loan");
-//                    BrEMI_Amount = jsonborrowerDetails.getString("EMI_Amount");
-//                    Brkyc_landmark = jsonborrowerDetails.getString("kyc_landmark");
-//                    Brkyc_address = jsonborrowerDetails.getString("kyc_address");
-//                    Brkyc_address_city = jsonborrowerDetails.getString("kyc_address_city");
-//                    Brkyc_address_state = jsonborrowerDetails.getString("kyc_address_state");
-//                    Brkyc_address_country = jsonborrowerDetails.getString("kyc_address_country");
-//                    Brkyc_address_pin = jsonborrowerDetails.getString("kyc_address_pin");
-//                    Bris_borrower_current_address_same_as = jsonborrowerDetails.getString("is_borrower_current_address_same_as");
-//                    Bris_coborrower_current_address_same_as = jsonborrowerDetails.getString("is_coborrower_current_address_same_as");
-//                    Brcurrent_residence_type = jsonborrowerDetails.getString("current_residence_type");
-//                    Brcurrent_landmark = jsonborrowerDetails.getString("current_landmark");
-//                    Brcurrent_address = jsonborrowerDetails.getString("current_address");
-//                    Brcurrent_address_city = jsonborrowerDetails.getString("current_address_city");
-//                    Brcurrent_address_state = jsonborrowerDetails.getString("current_address_state");
-//                    Brcurrent_address_country = jsonborrowerDetails.getString("current_address_country");
-//                    Brcurrent_address_pin = jsonborrowerDetails.getString("current_address_pin");
-//                    Brcurrent_address_rent = jsonborrowerDetails.getString("current_address_rent");
-//                    Brcurrent_address_stay_duration = jsonborrowerDetails.getString("current_address_stay_duration");
-//                    Bris_borrower_permanent_address_same_as = jsonborrowerDetails.getString("is_borrower_permanent_address_same_as");
-//                    Bris_coborrower_permanent_address_same_as = jsonborrowerDetails.getString("is_coborrower_permanent_address_same_as");
-//                    Brpermanent_residence_type = jsonborrowerDetails.getString("permanent_residence_type");
-//                    Brpermanent_landmark = jsonborrowerDetails.getString("permanent_landmark");
-//                    Brpermanent_address = jsonborrowerDetails.getString("permanent_address");
-//                    Brpermanent_address_city = jsonborrowerDetails.getString("permanent_address_city");
-//                    Brpermanent_address_state = jsonborrowerDetails.getString("permanent_address_state");
-//                    Brpermanent_address_country = jsonborrowerDetails.getString("permanent_address_country");
-//                    Brpermanent_address_pin = jsonborrowerDetails.getString("permanent_address_pin");
-//                    Brpermanent_address_rent = jsonborrowerDetails.getString("permanent_address_rent");
-//                    Brpermanent_address_stay_duration = jsonborrowerDetails.getString("permanent_address_stay_duration");
-//                    Brlast_completed_degree = jsonborrowerDetails.getString("last_completed_degree");
-//                    Brscore_unit = jsonborrowerDetails.getString("score_unit");
-//                    Brcgpa = jsonborrowerDetails.getString("cgpa");
-//                    Brpercentage = jsonborrowerDetails.getString("percentage");
-//                    Brpassing_year = jsonborrowerDetails.getString("passing_year");
-//                    Brgap_in_education = jsonborrowerDetails.getString("gap_in_education");
-//                    Brfull_name_pan_response = jsonborrowerDetails.getString("full_name_pan_response");
-//                    Brcreated_by_id = jsonborrowerDetails.getString("created_by_id");
-//                    Brcreated_date_time = jsonborrowerDetails.getString("created_date_time");
-//                    Brcreated_ip_address = jsonborrowerDetails.getString("created_ip_address");
-//                    Brmodified_by = jsonborrowerDetails.getString("modified_by");
-//                    Brmodified_date_time = jsonborrowerDetails.getString("modified_date_time");
-//                    Brmodified_ip_address = jsonborrowerDetails.getString("modified_ip_address");
-//                    Bris_deleted = jsonborrowerDetails.getString("is_deleted");
 
                     MainApplication.Brapplicant_idkyc = Brapplicant_id = jsonborrowerDetails.getString("applicant_id");
                     MainApplication.Brfk_lead_idkyc = Brfk_lead_id = jsonborrowerDetails.getString("fk_lead_id");
@@ -1866,7 +1746,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                         if (Brprofession.equals("")) {
                             professionID = "0";
                         } else {
-                            professionID = "1";
+                            professionID = Brprofession;
                         }
                         spProfessionBr.setSelection(Integer.parseInt(professionID));
                     }
@@ -1885,7 +1765,6 @@ public class LoanApplicationFragment_1 extends Fragment {
                                 spCurrentStateBr.setSelection(i);
                             }
                         }
-//                        spCurrentStateBr.setSelection(Integer.parseInt(currentstateID));
                     }
                     if (!Brkyc_address_city.equals("null")) {
                         currentcityID = Brkyc_address_city;
@@ -1896,108 +1775,12 @@ public class LoanApplicationFragment_1 extends Fragment {
                                 spCurrentCityBr.setSelection(i);
                             }
                         }
-//                        spCurrentCityBr.setSelection(Integer.parseInt(currentcityID));
                     }
 
                 }
 
                 if (!jsonData.get("leadStatus").equals(null)) {
                     JSONObject jsonleadStatus = jsonData.getJSONObject("leadStatus");
-
-//                    lead_status_id = jsonleadStatus.getString("lead_status_id");
-//                    fk_lead_id = jsonleadStatus.getString("fk_lead_id");
-//                    lead_status = jsonleadStatus.getString("lead_status");
-//                    lead_sub_status = jsonleadStatus.getString("lead_sub_status");
-//                    current_stage = jsonleadStatus.getString("current_stage");
-//                    current_status = jsonleadStatus.getString("current_status");
-//                    lead_drop_status = jsonleadStatus.getString("lead_drop_status");
-//                    lead_reject_status = jsonleadStatus.getString("lead_reject_status");
-//                    lead_initiated_datetime = jsonleadStatus.getString("lead_initiated_datetime");
-//                    is_lead_owner_added = jsonleadStatus.getString("is_lead_owner_added");
-//                    lead_owner_added_datetime = jsonleadStatus.getString("lead_owner_added_datetime");
-//                    lead_owner_added_by = jsonleadStatus.getString("lead_owner_added_by");
-//                    is_lead_counsellor_added = jsonleadStatus.getString("is_lead_counsellor_added");
-//                    lead_counsellor_added_datetime = jsonleadStatus.getString("lead_counsellor_added_datetime");
-//                    lead_counsellor_added_by = jsonleadStatus.getString("lead_counsellor_added_by");
-//                    is_kyc_details_filled = jsonleadStatus.getString("is_kyc_details_filled");
-//                    kyc_details_filled_datetime = jsonleadStatus.getString("kyc_details_filled_datetime");
-//                    kyc_details_filled_by = jsonleadStatus.getString("kyc_details_filled_by");
-//                    coborrower_added_datetime = jsonleadStatus.getString("coborrower_added_datetime");
-//                    coborrower_added_by_id = jsonleadStatus.getString("coborrower_added_by_id");
-//                    is_detailed_info_filled = jsonleadStatus.getString("is_detailed_info_filled");
-//                    detailed_info_filled_datetime = jsonleadStatus.getString("detailed_info_filled_datetime");
-//                    detailed_info_filled_by_id = jsonleadStatus.getString("detailed_info_filled_by_id");
-//                    approval_request_sales_status = jsonleadStatus.getString("approval_request_sales_status");
-//                    approval_request_sales_status_datetime = jsonleadStatus.getString("approval_request_sales_status_datetime");
-//                    approval_request_sales_status_by_id = jsonleadStatus.getString("approval_request_sales_status_by_id");
-//                    list_of_LAF_info_pending = jsonleadStatus.getString("list_of_LAF_info_pending");
-//                    list_of_LAF_info_filled = jsonleadStatus.getString("list_of_LAF_info_filled");
-//                    IPA_status = jsonleadStatus.getString("IPA_status");
-//                    IPA_datetime = jsonleadStatus.getString("IPA_datetime");
-//                    IPA_by_id = jsonleadStatus.getString("IPA_by_id");
-//                    docs_upload_status = jsonleadStatus.getString("docs_upload_status");
-//                    docs_upload_datetime = jsonleadStatus.getString("docs_upload_datetime");
-//                    list_of_uplaoded_docs = jsonleadStatus.getString("list_of_uplaoded_docs");
-//                    list_of_pendingdocs = jsonleadStatus.getString("list_of_pendingdocs");
-//                    docs_verification_status = jsonleadStatus.getString("docs_verification_status");
-//                    docs_verification_datetime = jsonleadStatus.getString("docs_verification_datetime");
-//                    credit_approval_request_status = jsonleadStatus.getString("credit_approval_request_status");
-//                    credit_approval_request_status_datetime = jsonleadStatus.getString("credit_approval_request_status_datetime");
-//                    credit_approval_request_status_by_id = jsonleadStatus.getString("credit_approval_request_status_by_id");
-//                    applicant_ekyc_status = jsonleadStatus.getString("applicant_ekyc_status");
-//                    applicant_ekyc_datetime = jsonleadStatus.getString("applicant_ekyc_datetime");
-//                    co_applicant_ekyc_status = jsonleadStatus.getString("co_applicant_ekyc_status");
-//                    co_applicant_ekyc_datetime = jsonleadStatus.getString("co_applicant_ekyc_datetime");
-//                    credit_assessment_status = jsonleadStatus.getString("credit_assessment_status");
-//                    credit_assessment_by_id = jsonleadStatus.getString("credit_assessment_by_id");
-//                    credit_assessment_datetime = jsonleadStatus.getString("credit_assessment_datetime");
-//                    loan_product_selection_status = jsonleadStatus.getString("loan_product_selection_status");
-//                    loan_product_by_id = jsonleadStatus.getString("loan_product_by_id");
-//                    loan_product_datetime = jsonleadStatus.getString("loan_product_datetime");
-//                    underwriting_status = jsonleadStatus.getString("underwriting_status");
-//                    underwriting_by_id = jsonleadStatus.getString("underwriting_by_id");
-//                    underwriting_datetime = jsonleadStatus.getString("underwriting_datetime");
-//                    is_processing_fees_set = jsonleadStatus.getString("is_processing_fees_set");
-//                    processing_fees_set_datetime = jsonleadStatus.getString("processing_fees_set_datetime");
-//                    processing_fees_set_by_id = jsonleadStatus.getString("processing_fees_set_by_id");
-//                    processing_fees_paid = jsonleadStatus.getString("processing_fees_paid");
-//                    processing_fees_paid_datetime = jsonleadStatus.getString("processing_fees_paid_datetime");
-//                    processing_fees_paid_by = jsonleadStatus.getString("processing_fees_paid_by");
-//                    lender_creation_status = jsonleadStatus.getString("lender_creation_status");
-//                    lender_creation_modified_datetime = jsonleadStatus.getString("lender_creation_modified_datetime");
-//                    lender_creation_modified_by = jsonleadStatus.getString("lender_creation_modified_by");
-//                    amort_creation_status = jsonleadStatus.getString("amort_creation_status");
-//                    amort_creation_modified_datetime = jsonleadStatus.getString("amort_creation_modified_datetime");
-//                    amort_creation_modified_by = jsonleadStatus.getString("amort_creation_modified_by");
-//                    borrower_pan_ekyc_response = jsonleadStatus.getString("borrower_pan_ekyc_response");
-//                    borrower_aadhar_ekyc_response = jsonleadStatus.getString("borrower_aadhar_ekyc_response");
-//                    borrower_pan_ekyc_status = jsonleadStatus.getString("borrower_pan_ekyc_status");
-//                    borrower_aadhar_ekyc_status = jsonleadStatus.getString("borrower_aadhar_ekyc_status");
-//                    coborrower_pan_ekyc_response = jsonleadStatus.getString("coborrower_pan_ekyc_response");
-//                    coborrower_aadhar_ekyc_response = jsonleadStatus.getString("coborrower_aadhar_ekyc_response");
-//                    coborrower_aadhar_ekyc_status = jsonleadStatus.getString("coborrower_aadhar_ekyc_status");
-//                    coborrower_pan_ekyc_status = jsonleadStatus.getString("coborrower_pan_ekyc_status");
-//                    is_cam_uploaded = jsonleadStatus.getString("is_cam_uploaded");
-//                    is_finbit_uploaded = jsonleadStatus.getString("is_finbit_uploaded");
-//                    is_exception_uploaded = jsonleadStatus.getString("is_exception_uploaded");
-//                    is_loan_agreement_uploaded = jsonleadStatus.getString("is_loan_agreement_uploaded");
-//                    loan_agreement_uploaded_by = jsonleadStatus.getString("loan_agreement_uploaded_by");
-//                    applicant_pan_verified_by = jsonleadStatus.getString("applicant_pan_verified_by");
-//                    applicant_pan_verified_on = jsonleadStatus.getString("applicant_pan_verified_on");
-//                    created_date_time = jsonleadStatus.getString("created_date_time");
-//                    created_ip_address = jsonleadStatus.getString("created_ip_address");
-//                    modified_by = jsonleadStatus.getString("modified_by");
-//                    modified_date_time = jsonleadStatus.getString("modified_date_time");
-//                    modified_ip_address = jsonleadStatus.getString("modified_ip_address");
-//                    is_deleted = jsonleadStatus.getString("is_deleted");
-//                    borrower_required_docs = jsonleadStatus.getString("borrower_required_docs");
-//                    co_borrower_required_docs = jsonleadStatus.getString("co_borrower_required_docs");
-//                    co_borrower_pending_docs = jsonleadStatus.getString("co_borrower_pending_docs");
-//                    borrower_extra_required_docs = jsonleadStatus.getString("borrower_extra_required_docs");
-//                    co_borrower_extra_required_docs = jsonleadStatus.getString("co_borrower_extra_required_docs");
-//                    id = jsonleadStatus.getString("id");
-//                    status_name = jsonleadStatus.getString("status_name");
-//                    stage_id = jsonleadStatus.getString("stage_id");
 
                     MainApplication.lead_status_idkyc = lead_status_id = jsonleadStatus.getString("lead_status_id");
                     MainApplication.fk_lead_idkyc = fk_lead_id = jsonleadStatus.getString("fk_lead_id");
@@ -2836,106 +2619,6 @@ public class LoanApplicationFragment_1 extends Fragment {
         }
     }
 
-    private void cityApiCall() {
-        /**API CALL**/
-        try {
-            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", currentcountryID);//1
-            params.put("stateId", currentstateID);//2
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getCurrentCities(currentstateID,currentcountryID);
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCity", params, MainApplication.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    private void stateApiCall() {
-        /**API CALL**/
-        try {
-            String url = MainApplication.mainUrl + "algo/getStates";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", currentcountryID);
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getCurrentStates(currentcountryID);
-
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStates", params, MainApplication.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    private void cityApiCallCoBr() {
-        /**API CALL**/
-        try {
-            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", currentcountryIDCoBr);//1
-            params.put("stateId", currentstateIDCoBr);//2
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getCurrentCities(currentstateID,currentcountryID);
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCitiesCoBr", params, MainApplication.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    private void stateApiCallCoBr() {
-        /**API CALL**/
-        try {
-            String url = MainApplication.mainUrl + "algo/getStates";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", currentcountryIDCoBr);
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getCurrentStates(currentcountryID);
-
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStatesCoBr", params, MainApplication.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
     private void setViews() {
 
         try {
@@ -3221,7 +2904,6 @@ public class LoanApplicationFragment_1 extends Fragment {
 
     }
 
-
     private void setCoborrower() {
 
         try {
@@ -3354,6 +3036,106 @@ public class LoanApplicationFragment_1 extends Fragment {
             } else {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void cityApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryID);//1
+            params.put("stateId", currentstateID);//2
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentCities(currentstateID,currentcountryID);
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCity", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void stateApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getStates";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryID);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentStates(currentcountryID);
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStates", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void cityApiCallCoBr() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryIDCoBr);//1
+            params.put("stateId", currentstateIDCoBr);//2
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentCities(currentstateID,currentcountryID);
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCitiesCoBr", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void stateApiCallCoBr() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getStates";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryIDCoBr);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentStates(currentcountryID);
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStatesCoBr", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
