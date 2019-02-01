@@ -1332,7 +1332,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             MainApplication.Brprofessionkyc = professionID = professionPOJOArrayList.get(i).id;
                         }
                     }
-                    if (professionID.equals("0") || professionID.equals("2")) {
+                    if (position ==2 || position == 0 ) {
                         try {
                             linEmployed.setVisibility(View.GONE);
                         } catch (Exception e) {
