@@ -1324,7 +1324,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                    String text = spProfessionCoBr.getSelectedItem().toString();
+                    String text = spProfessionBr.getSelectedItem().toString();
 
                     int count = professionPOJOArrayList.size();
                     for (int i = 0; i < count; i++) {

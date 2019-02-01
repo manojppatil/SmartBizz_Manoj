@@ -42,6 +42,14 @@ import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCountryP
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceDurationPersonalPOJO;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentResidenceTypePersonalPOJO;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentStatePersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerJobDurationFinancePOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerOffCityPersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerOffCountryPersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerOffStatePersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerPermanentCityPersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerPermanentCountryPersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerPermanentStatePersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerProfessionFinancePOJO;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.fqform.coborrowerdetail.pojo.CoborrowerCurrentResidenceDurationPersonalPOJO;
@@ -69,6 +77,7 @@ import java.util.Map;
 import static com.eduvanzapplication.database.DBAdapter.ExecuteSql;
 import static com.eduvanzapplication.database.DBAdapter.getLocalData;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
+import static com.eduvanzapplication.newUI.fragments.LoanApplicationFragment_111.edtPermanentPincodeCoBr;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,7 +112,9 @@ public class LoanApplicationFragment_2 extends Fragment {
     public static RadioGroup rgGenderBr,rgiscgpaBr, rgemptypeBr, rgborrower_gapsBr,rgMaritalStatusBr;
     public static RadioButton rbMaleBr, rbFemaleBr;
 
-    public static Spinner spProfessionBr, spCurrentCountryBr, spCurrentStateBr, spCurrentCityBr, 
+    public static Spinner spProfessionBr, spCurrentCountryBr, spCurrentStateBr, spCurrentCityBr,
+            spPermanentCountryBr, spPermanentStateBr, spPermanentCityBr,
+            spCountryOffBr,spStateOffBr ,spCityOffBr,
             spCurrentAddressSameAsKycBr,spCurrentAddressSameAsKycOrBorrowerBr,spDurationStayAtCurrentAddressBr;
 
     //CoBorrower
@@ -114,7 +125,7 @@ public class LoanApplicationFragment_2 extends Fragment {
     public static RadioGroup rgGenderCoBr, rgMaritalStatusCoBr, rgemptypeCoBr;
     public static RadioButton rbMaleCoBr, rbFemaleCoBr, rbMarriedCoBr, rbSingleCoBr ;
 
-    public static Spinner spCurrentCountryCoBr, spCurrentStateCoBr, spCurrentCityCoBr,spPermanentCountryBr,
+    public static Spinner spCurrentCountryCoBr, spCurrentStateCoBr, spCurrentCityCoBr,spPermanentCountryCoBr,
             spPermanentStateCoBr, spPermanentCityCoBr,spCountryOffCoBr, spStateOffCoBr , spCityOffCoBr,spResidentTypeBr,
             spCurrentAddressSameAsKycCoBr,spCurrentAddressSameAsKycOrBorrowerCoBr,spResidentTypeCoBr,spDurationStayAtCurrentAddressCoBr,
             spProfessionCoBr;
@@ -127,18 +138,23 @@ public class LoanApplicationFragment_2 extends Fragment {
 
     public static String dateformate = "", mobileNo = "";
     public static String currentcityID = "", currentstateID = "", currentcountryID = "1",
-            currentcityIDCoBr = "", currentstateIDCoBr = "", currentcountryIDCoBr = "1";
+            currentcityIDCoBr = "", currentstateIDCoBr = "", currentcountryIDCoBr = "1",
+            offcityIDBr = "", offstateIDBr = "", offcountryIDBr = "1",
+            permanentcityID = "", permanentstateID = "", permanentcountryID = "1",
+            permanentcityIDCoBr = "", permanentstateIDCoBr = "", permanentcountryIDCoBr = "1",
+            offcityIDCoBr = "", offstateIDCoBr = "", offcountryIDCoBr = "1";
 
+
+    public static ArrayAdapter arrayAdapter_currentResidencetype,arrayAdapter_currentResidencetypeCoBr;
+    public static ArrayList<String> currentResidencetype_arrayList,currentResidencetype_arrayListCoBr;
     public static ArrayList<BorrowerCurrentResidenceTypePersonalPOJO> borrowerCurrentResidencePersonalPOJOArrayList;
-    
-    public static ArrayAdapter arrayAdapter_currentResidencetype;
-    public static ArrayList<String> currentResidencetype_arrayList;
-    public static ArrayList<CoborrowerCurrentResidenceTypePersonalPOJO> coborrowerCurrentResidenceTypePersonalPOJOArrayList;
-    public static String currentResidencetypeID = "";
+    public static ArrayList<CoborrowerCurrentResidenceTypePersonalPOJO> coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr;
+    public static String currentResidencetypeID = "",currentResidencetypeIDCoBr ="";
 
-    public static ArrayAdapter arrayAdapter_currentResidenceDuration;
-    public static ArrayList<String> currentresidenceduration_arrayList;
+    public static ArrayAdapter arrayAdapter_currentResidenceDuration,arrayAdapter_currentResidenceDurationCoBr;
+    public static ArrayList<String> currentresidenceduration_arrayList,currentresidenceduration_arrayListCoBr;
     public static ArrayList<BorrowerCurrentResidenceDurationPersonalPOJO> currentResidenceDurationPersonalPOJOArrayList;
+    public static ArrayList<CoborrowerCurrentResidenceDurationPersonalPOJO> currentResidenceDurationPersonalPOJOArrayListCoBr;
 
     public static ArrayAdapter arrayAdapter_currentAddressSameAsBr,arrayAdapter_currentAddressSameAsCoBr;
     public static ArrayList<String> currentAddressSameAs_arrayListBr,currentAddressSameAs_arrayListCoBr;
@@ -148,22 +164,34 @@ public class LoanApplicationFragment_2 extends Fragment {
     public static ArrayList<String> permanentAddressSameAs_arrayListBr,permanentAddressSameAs_arrayListCoBr;
     public static ArrayList<AddressSameAsCurrentPOJO> addressSameAspermanentPOJOArrayListBr,addressSameAspermanentPOJOArrayListCoBr;
 
-    public static ArrayAdapter arrayAdapter_profession;
-    public static ArrayList<String> profession_arrayList;
-    public static ArrayList<ProfessionPOJO> professionPOJOArrayList;
-    public String professionID = "";
+    public static ArrayAdapter arrayAdapter_profession,arrayAdapter_professionCoBr;
+    public static ArrayList<String> profession_arrayList,profession_arrayListCoBr;
+    public static ArrayList<ProfessionPOJO> professionPOJOArrayList,professionPOJOArrayListCoBr;
+    public String professionID = "",professionIDCoBr = "";
 
-    public static ArrayAdapter arrayAdapter_currentCity, arrayAdapter_currentCityCoBr;
-    public static ArrayList<String> currentcity_arrayList, currentcity_arrayListCoBr;
+    public static ArrayAdapter arrayAdapter_currentCity,arrayAdapter_permanentCity,arrayAdapter_offCity,
+            arrayAdapter_currentCityCoBr,arrayAdapter_permanentCityCoBr,arrayAdapter_offCityCoBr;
+    public static ArrayList<String> currentcity_arrayList,permanentcity_arrayList,offcity_arrayList,
+            currentcity_arrayListCoBr,permanentcity_arrayListCoBr, offcity_arrayListCoBr;
     public static ArrayList<BorrowerCurrentCityPersonalPOJO> borrowerCurrentCityPersonalPOJOArrayList, borrowerCurrentCityPersonalPOJOArrayListCoBr;
+    public static ArrayList<BorrowerPermanentCityPersonalPOJO>  borrowerPermanentCityPersonalPOJOArrayList,borrowerPermanentCityPersonalPOJOArrayListCoBr;
+    public static ArrayList<BorrowerOffCityPersonalPOJO>  borrowerOffCityPersonalPOJOArrayList,borrowerOffCityPersonalPOJOArrayListCoBr;
 
-    public static ArrayAdapter arrayAdapter_currentState, arrayAdapter_currentStateCoBr;
-    public static ArrayList<String> currentstate_arrayList, currentstate_arrayListCoBr;
-    public static ArrayList<BorrowerCurrentStatePersonalPOJO> borrowerCurrentStatePersonalPOJOArrayList, borrowerCurrentStatePersonalPOJOArrayListCoBr;
+    public static ArrayAdapter arrayAdapter_currentState,arrayAdapter_permanentState,arrayAdapter_offState,
+            arrayAdapter_currentStateCoBr,arrayAdapter_permanentStateCoBr,arrayAdapter_offStateCoBr;
+    public static ArrayList<String> currentstate_arrayList,permanentstate_arrayList,offstate_arrayList,
+            currentstate_arrayListCoBr,permanentstate_arrayListCoBr,offstate_arrayListCoBr;
+    public static ArrayList<BorrowerCurrentStatePersonalPOJO> borrowerCurrentStatePersonalPOJOArrayList,borrowerCurrentStatePersonalPOJOArrayListCoBr;
+    public static ArrayList<BorrowerPermanentStatePersonalPOJO> borrowerPermanentStatePersonalPOJOArrayList,borrowerPermanentStatePersonalPOJOArrayListCoBr;
+    public static ArrayList<BorrowerOffStatePersonalPOJO> borrowerOffStatePersonalPOJOArrayList,borrowerOffStatePersonalPOJOArrayListCoBr;
 
-    public static ArrayAdapter arrayAdapter_currentCountry, arrayAdapter_currentCountryCoBr;
-    public static ArrayList<String> currentCountry_arrayList, currentCountry_arrayListCoBr;
+    public static ArrayAdapter arrayAdapter_currentCountry, arrayAdapter_permanentCountry,arrayAdapter_offCountry,
+            arrayAdapter_currentCountryCoBr,arrayAdapter_permanentCountryCoBr,arrayAdapter_offCountryCoBr;
+    public static ArrayList<String> currentCountry_arrayList, permanentCountry_arrayList,offCountry_arrayList,
+            currentCountry_arrayListCoBr ,permanentCountry_arrayListCoBr,offCountry_arrayListCoBr;
     public static ArrayList<BorrowerCurrentCountryPersonalPOJO> borrowerCurrentCountryPersonalPOJOArrayList, borrowerCurrentCountryPersonalPOJOArrayListCoBr;
+    public static ArrayList<BorrowerPermanentCountryPersonalPOJO>  borrowerPermanentCountryPersonalPOJOArrayList,borrowerPermanentCountryPersonalPOJOArrayListCoBr;
+    public static ArrayList<BorrowerOffCountryPersonalPOJO>  borrowerOffCountryPersonalPOJOArrayList,borrowerOffCountryPersonalPOJOArrayListCoBr;
 
     public String currentAddressSameAsKycID = "";
 
@@ -179,14 +207,16 @@ public class LoanApplicationFragment_2 extends Fragment {
      * FINANCIAL DETAILS
      **/
 
-    public static ArrayAdapter profession_arrayAdapter;
-    public static ArrayList<String> professionfinance_arratList;
-    public static ArrayList<CoborrowerProfessionFinancePOJO> coborrowerProfessionFinancePOJOArrayList;
+    public static ArrayAdapter profession_arrayAdapter,profession_arrayAdapterCoBr;
+    public static ArrayList<String> professionfinance_arratList,professionfinance_arratListCoBr;
+    public static ArrayList<BorrowerProfessionFinancePOJO> borrowerProfessionFinancePOJOArrayListCo;
+    public static ArrayList<CoborrowerProfessionFinancePOJO> coborrowerProfessionFinancePOJOArrayListCoBr;
 
-    public static ArrayAdapter jobduration_arrayAdapter;
-    public static ArrayList<String> jobduration_arratList;
-    public static ArrayList<CoborrowerJobDurationFinancePOJO> coborrowerJobDurationFinancePOJOArrayList;
-    public String jobDurationID = "";
+    public static ArrayAdapter jobduration_arrayAdapter,jobduration_arrayAdapterCoBr;
+    public static ArrayList<String> jobduration_arratList,jobduration_arratListCoBr;
+    public static ArrayList<BorrowerJobDurationFinancePOJO> borrowerJobDurationFinancePOJOArrayListCoBr;
+    public static ArrayList<CoborrowerJobDurationFinancePOJO> coborrowerJobDurationFinancePOJOArrayListCoBr;
+    public String jobDurationID = "",jobDurationIDCoBr = "";
 
     public static LinearLayout linearLayoutLeftOffcoBorrower;
 
@@ -260,7 +290,6 @@ public class LoanApplicationFragment_2 extends Fragment {
             created_date_time = "", created_ip_address = "", modified_by = "", modified_date_time = "", modified_ip_address = "",
             is_deleted = "", borrower_required_docs = "", co_borrower_required_docs = "", co_borrower_pending_docs = "",
             borrower_extra_required_docs = "", co_borrower_extra_required_docs = "", id = "", status_name = "", stage_id = "";
-
 
     public LoanApplicationFragment_2() {
 
@@ -1277,16 +1306,16 @@ public class LoanApplicationFragment_2 extends Fragment {
                             edtPermanentAddressBr.setText(Brkyc_address);
 
                             if (!Brkyc_address_state.equals("null")) {
-                                currentcountryID = "1";
-                                spPermanentCountryBr.setSelection(Integer.parseInt(currentcountryID));
+                                permanentcountryID = "1";
+                                spPermanentCountryBr.setSelection(Integer.parseInt(permanentcountryID));
                             }
                             if (!Brkyc_address_state.equals("null")) {
-                                currentstateID = Brkyc_address_state;
+                                permanentstateID = Brkyc_address_state;
 
-                                int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+                                int count1 = borrowerPermanentStatePersonalPOJOArrayList.size();
 
                                 for (int i = 0; i < count1; i++) {
-                                    if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                    if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(permanentstateID)) {
                                         spPermanentStateCoBr.setSelection(i);
                                     }
                                 }
@@ -1294,10 +1323,10 @@ public class LoanApplicationFragment_2 extends Fragment {
                             if (!Brkyc_address_city.equals("null")) {
                                 currentcityID = Brkyc_address_city;
 
-                                int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
+                                int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
                                 for (int i = 0; i < count2; i++) {
-                                    if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-                                        spCurrentCityBr.setSelection(i);
+                                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                        spPermanentCityBr.setSelection(i);
                                     }
                                 }
                             }
@@ -1309,8 +1338,8 @@ public class LoanApplicationFragment_2 extends Fragment {
                             MainApplication.Brcurrent_address_pindtl = Brcurrent_address_pin;
                             MainApplication.Brcurrent_addressdtl = Brcurrent_address;
 
-                            edtCurrentPincodeBr.setText(Brcurrent_address_pin);
-                            edtCurrentAddressBr.setText(Brcurrent_address);
+                            edtPermanentPincodeBr.setText(Brcurrent_address_pin);
+                            edtPermanentAddressBr.setText(Brcurrent_address);
 
                             if (!Brcurrent_address_city.equals("null")) {
                                 currentcountryID = "1";
@@ -1319,10 +1348,10 @@ public class LoanApplicationFragment_2 extends Fragment {
                             if (!Brcurrent_address_state.equals("null")) {
                                 currentstateID = Brkyc_address_state;
 
-                                int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+                                int count1 = borrowerPermanentStatePersonalPOJOArrayList.size();
 
                                 for (int i = 0; i < count1; i++) {
-                                    if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                    if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
                                         spPermanentStateCoBr.setSelection(i);
                                     }
                                 }
@@ -1330,10 +1359,10 @@ public class LoanApplicationFragment_2 extends Fragment {
                             if (!Brcurrent_address_city.equals("null")) {
                                 currentcityID = Brkyc_address_city;
 
-                                int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
+                                int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
                                 for (int i = 0; i < count2; i++) {
-                                    if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-                                        spCurrentCityBr.setSelection(i);
+                                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                        spPermanentCityBr.setSelection(i);
                                     }
                                 }
                             }
@@ -1345,8 +1374,8 @@ public class LoanApplicationFragment_2 extends Fragment {
                             MainApplication.Brpermanent_address_pindtl = Brpermanent_address_pin;
                             MainApplication.Brpermanent_addressdtl = Brpermanent_address;
 
-                            edtCurrentPincodeBr.setText(Brpermanent_address_pin);
-                            edtCurrentAddressBr.setText(Brpermanent_address);
+                            edtPermanentPincodeBr.setText(Brpermanent_address_pin);
+                            edtPermanentAddressBr.setText(Brpermanent_address);
 
                             if (!Brcurrent_address_city.equals("null")) {
                                 currentcountryID = "1";
@@ -1355,10 +1384,10 @@ public class LoanApplicationFragment_2 extends Fragment {
                             if (!Brcurrent_address_state.equals("null")) {
                                 currentstateID = Brkyc_address_state;
 
-                                int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+                                int count1 = borrowerPermanentStatePersonalPOJOArrayList.size();
 
                                 for (int i = 0; i < count1; i++) {
-                                    if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                    if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
                                         spPermanentStateCoBr.setSelection(i);
                                     }
                                 }
@@ -1366,10 +1395,10 @@ public class LoanApplicationFragment_2 extends Fragment {
                             if (!Brcurrent_address_city.equals("null")) {
                                 currentcityID = Brkyc_address_city;
 
-                                int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
+                                int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
                                 for (int i = 0; i < count2; i++) {
-                                    if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-                                        spCurrentCityBr.setSelection(i);
+                                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                        spPermanentCityBr.setSelection(i);
                                     }
                                 }
                             }
@@ -1391,34 +1420,100 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            spResidentTypeBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spCurrentAddressSameAsKycCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    try {
-                        String text = spResidentTypeBr.getSelectedItem().toString();
-                        int count = coborrowerCurrentResidenceTypePersonalPOJOArrayList.size();
-//                        Log.e("TAG", "count: " + count);
-                        for (int i = 0; i < count; i++) {
-                            if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).residencetypeName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue1 = currentResidencetypeID = coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID;
-                                Log.e(TAG, "id:" + coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID);
-                                if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
-                                    edtMonthlyRentBr.setVisibility(View.GONE);
-                                    edtMonthlyRentBr.setText("");
-                                } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("3")) {
-                                    edtMonthlyRentBr.setVisibility(View.GONE);
-                                    edtMonthlyRentBr.setText("");
-                                } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("8")) {
-                                    edtMonthlyRentBr.setVisibility(View.GONE);
-                                    edtMonthlyRentBr.setText("");
-                                } else {
-                                    edtMonthlyRentBr.setVisibility(View.VISIBLE);
+
+                    String text = spCurrentAddressSameAsKycCoBr.getSelectedItem().toString();
+
+                    int count = addressSameAsCurrentPOJOArrayListCoBr.size();
+                    for (int i = 0; i < count; i++) {
+                        if (addressSameAsCurrentPOJOArrayListCoBr.get(i).address.equalsIgnoreCase(text)) {
+                            MainApplication.CoBris_borrower_current_address_same_asdtl = professionIDCoBr = addressSameAsCurrentPOJOArrayListCoBr.get(i).id;
+                        }
+                    }
+
+                    switch (MainApplication.CoBris_borrower_current_address_same_asdtl)
+                    {
+                        case "0"://<option value="" selected="selected">Select</option>
+                            break;
+
+                        case "1"://<option value="1">Borrower Kyc Address</option>
+
+                            MainApplication.CoBrkyc_address_pindtl = CoBrkyc_address_pin;
+                            MainApplication.CoBrkyc_addressdtl = CoBrkyc_address;
+
+                            edtCurrentPincodeCoBr.setText(CoBrkyc_address_pin);
+                            edtCurrentAddressCoBr.setText(CoBrkyc_address);
+
+                            if (!CoBrkyc_address_state.equals("null")) {
+                                currentcountryID = "1";
+                                spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryID));
+                            }
+                            if (!CoBrkyc_address_state.equals("null")) {
+                                currentstateID = CoBrkyc_address_state;
+
+                                int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                                for (int i = 0; i < count1; i++) {
+                                    if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                        spCurrentStateCoBr.setSelection(i);
+                                    }
                                 }
                             }
-                        }
-                    } catch (NullPointerException e) {
-                        e.printStackTrace();
+                            if (!CoBrkyc_address_city.equals("null")) {
+                                currentcityID = CoBrkyc_address_city;
+
+                                int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
+                                for (int i = 0; i < count2; i++) {
+                                    if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                        spCurrentCityCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+
+                            break;
+
+                        case "2"://<option value="2">None</option>
+
+                            MainApplication.CoBrcurrent_address_pindtl = CoBrcurrent_address_pin;
+                            MainApplication.CoBrcurrent_addressdtl = CoBrcurrent_address;
+
+                            edtCurrentPincodeCoBr.setText(CoBrcurrent_address_pin);
+                            edtCurrentAddressCoBr.setText(CoBrcurrent_address);
+
+                            if (!CoBrkyc_address_state.equals("null")) {
+                                currentcountryID = "1";
+                                spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryID));
+                            }
+                            if (!CoBrkyc_address_state.equals("null")) {
+                                currentstateID = CoBrkyc_address_state;
+
+                                int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                                for (int i = 0; i < count1; i++) {
+                                    if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                        spCurrentStateCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+                            if (!CoBrkyc_address_city.equals("null")) {
+                                currentcityID = CoBrkyc_address_city;
+
+                                int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
+                                for (int i = 0; i < count2; i++) {
+                                    if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                        spCurrentCityCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+
+                            break;
+
+                        default:
+                            break;
                     }
+
                 }
 
                 @Override
@@ -1427,50 +1522,138 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            spProfessionBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spCurrentAddressSameAsKycOrBorrowerCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                    String text = spProfessionBr.getSelectedItem().toString();
-                    if (text.equalsIgnoreCase("Select Any")) {
-                        MainApplication.mainapp_userprofession = "0";
-                        MainApplication.profession = "0";
-                        try {
-                            linOfficeDetails.setVisibility(View.GONE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    String text = spCurrentAddressSameAsKycOrBorrowerCoBr.getSelectedItem().toString();
 
-                    } else if (text.equalsIgnoreCase("Student")) {
-                        MainApplication.mainapp_userprofession = "Student";
-                        MainApplication.mainapp_userprofession = "1";
-                        MainApplication.profession = "1";
-                        try {
-                            linOfficeDetails.setVisibility(View.GONE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    } else if (text.equalsIgnoreCase("Employed")) {
-                        MainApplication.mainapp_userprofession = "employed";
-                        MainApplication.mainapp_userprofession = "2";
-                        MainApplication.profession = "2";
-                        try {
-                            linOfficeDetails.setVisibility(View.VISIBLE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    } else if (text.equalsIgnoreCase("Self Employed")) {
-                        MainApplication.mainapp_userprofession = "selfEmployed";
-                        MainApplication.mainapp_userprofession = "3";
-                        MainApplication.profession = "3";
-                        try {
-                            linOfficeDetails.setVisibility(View.VISIBLE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                    int count = addressSameAspermanentPOJOArrayListCoBr.size();
+                    for (int i = 0; i < count; i++) {
+                        if (addressSameAspermanentPOJOArrayListCoBr.get(i).address.equalsIgnoreCase(text)) {
+                            MainApplication.CoBris_borrower_permanent_address_same_askyc = professionIDCoBr = addressSameAspermanentPOJOArrayListCoBr.get(i).id;
                         }
                     }
+
+                    switch (MainApplication.CoBris_borrower_permanent_address_same_askyc)
+                    {
+                        case "0"://<option value="" selected="selected">Select</option>
+                            break;
+
+                        case "1"://<option value="1">Borrower Kyc Address</option>
+
+                            MainApplication.CoBrkyc_address_pindtl = CoBrkyc_address_pin;
+                            MainApplication.CoBrkyc_addressdtl = CoBrkyc_address;
+
+                            edtPermanentPincodeCoBr.setText(CoBrkyc_address_pin);
+                            edtPermanentAddressCoBr.setText(CoBrkyc_address);
+
+                            if (!CoBrkyc_address_state.equals("null")) {
+                                permanentcountryID = "1";
+                                spPermanentCountryCoBr.setSelection(Integer.parseInt(permanentcountryID));
+                            }
+                            if (!CoBrkyc_address_state.equals("null")) {
+                                permanentstateID = CoBrkyc_address_state;
+
+                                int count1 = borrowerPermanentStatePersonalPOJOArrayList.size();
+
+                                for (int i = 0; i < count1; i++) {
+                                    if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(permanentstateID)) {
+                                        spPermanentStateCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+                            if (!CoBrkyc_address_city.equals("null")) {
+                                currentcityID = CoBrkyc_address_city;
+
+                                int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
+                                for (int i = 0; i < count2; i++) {
+                                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                        spPermanentCityCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+
+                            break;
+
+                        case "2"://<option value="2">Borrower Current Address</option>
+
+                            MainApplication.CoBrcurrent_address_pindtl = CoBrcurrent_address_pin;
+                            MainApplication.CoBrcurrent_addressdtl = CoBrcurrent_address;
+
+                            edtPermanentPincodeCoBr.setText(CoBrcurrent_address_pin);
+                            edtPermanentAddressCoBr.setText(CoBrcurrent_address);
+
+                            if (!CoBrcurrent_address_city.equals("null")) {
+                                currentcountryID = "1";
+                                spPermanentCountryCoBr.setSelection(Integer.parseInt(currentcountryID));
+                            }
+                            if (!CoBrcurrent_address_state.equals("null")) {
+                                currentstateID = CoBrkyc_address_state;
+
+                                int count1 = borrowerPermanentStatePersonalPOJOArrayList.size();
+
+                                for (int i = 0; i < count1; i++) {
+                                    if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                        spPermanentStateCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+                            if (!CoBrcurrent_address_city.equals("null")) {
+                                currentcityID = CoBrkyc_address_city;
+
+                                int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
+                                for (int i = 0; i < count2; i++) {
+                                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                        spPermanentCityCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+
+                            break;
+
+                        case "3"://<option value="3">none</option>
+
+                            MainApplication.CoBrpermanent_address_pindtl = CoBrpermanent_address_pin;
+                            MainApplication.CoBrpermanent_addressdtl = CoBrpermanent_address;
+
+                            edtPermanentPincodeCoBr.setText(CoBrpermanent_address_pin);
+                            edtPermanentAddressCoBr.setText(CoBrpermanent_address);
+
+                            if (!CoBrcurrent_address_city.equals("null")) {
+                                currentcountryID = "1";
+                                spPermanentCountryCoBr.setSelection(Integer.parseInt(currentcountryID));
+                            }
+                            if (!CoBrcurrent_address_state.equals("null")) {
+                                currentstateID = CoBrkyc_address_state;
+
+                                int count1 = borrowerPermanentStatePersonalPOJOArrayList.size();
+
+                                for (int i = 0; i < count1; i++) {
+                                    if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                        spPermanentStateCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+                            if (!CoBrcurrent_address_city.equals("null")) {
+                                currentcityID = CoBrkyc_address_city;
+
+                                int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
+                                for (int i = 0; i < count2; i++) {
+                                    if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                        spPermanentCityCoBr.setSelection(i);
+                                    }
+                                }
+                            }
+
+                            break;
+
+
+
+                        default:
+                            break;
+                    }
+
                 }
 
                 @Override
@@ -1489,7 +1672,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).residencetypeName.equalsIgnoreCase(text)) {
-                                MainApplication.borrowerValue1 = currentResidencetypeID = borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID;
+                                MainApplication.borrowerValue1 = currentResidencetypeIDCoBr = borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID;
 
                                 if (borrowerCurrentResidencePersonalPOJOArrayList.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
                                     edtMonthlyRentBr.setVisibility(View.GONE);
@@ -1516,6 +1699,116 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
+            spResidentTypeCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        currentResidencetype_arrayListCoBr = new ArrayList<>();
+                        coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr = new ArrayList<>();
+
+                        CoborrowerCurrentResidenceTypePersonalPOJO coborrowerCurrentResidenceTypePersonalPOJO = new CoborrowerCurrentResidenceTypePersonalPOJO();
+
+                        coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Select Any";
+                        currentResidencetype_arrayListCoBr.add("Select Any");
+                        coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "";
+                        coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+
+                        String text = spResidentTypeBr.getSelectedItem().toString();
+                        int count = coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.size();
+//                        Log.e("TAG", "count: " + count);
+                        for (int i = 0; i < count; i++) {
+                            if (coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.get(i).residencetypeName.equalsIgnoreCase(text)) {
+                                MainApplication.coborrowerValue1 = currentResidencetypeID = coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.get(i).dresidencetypeID;
+                                Log.e(TAG, "id:" + coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.get(i).dresidencetypeID);
+                                if (coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.get(i).dresidencetypeID.equalsIgnoreCase("1")) {
+                                    edtMonthlyRentCoBr.setVisibility(View.GONE);
+                                    edtMonthlyRentCoBr.setText("");
+                                } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.get(i).dresidencetypeID.equalsIgnoreCase("3")) {
+                                    edtMonthlyRentCoBr.setVisibility(View.GONE);
+                                    edtMonthlyRentCoBr.setText("");
+                                } else if (coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.get(i).dresidencetypeID.equalsIgnoreCase("8")) {
+                                    edtMonthlyRentCoBr.setVisibility(View.GONE);
+                                    edtMonthlyRentCoBr.setText("");
+                                } else {
+                                    edtMonthlyRentCoBr.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spProfessionBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    String text = spProfessionBr.getSelectedItem().toString();
+
+                    int count = professionPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (professionPOJOArrayList.get(i).Salaried.equalsIgnoreCase(text)) {
+                            MainApplication.Brprofessionkyc = professionID = professionPOJOArrayList.get(i).id;
+                        }
+                    }
+                    if (position ==2 || position == 0 ) {
+                        try {
+                            linOfficeDetails.setVisibility(View.GONE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            linOfficeDetails.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spProfessionCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                    String text = spProfessionCoBr.getSelectedItem().toString();
+
+                    int count = professionPOJOArrayListCoBr.size();
+                    for (int i = 0; i < count; i++) {
+                        if (professionPOJOArrayListCoBr.get(i).Salaried.equalsIgnoreCase(text)) {
+                            MainApplication.CoBrprofessionkyc = professionIDCoBr = professionPOJOArrayListCoBr.get(i).id;
+                        }
+                    }
+                    if (professionIDCoBr.equals("0") || professionIDCoBr.equals("2")) {
+//                        try {
+//                            linEmployed.setVisibility(View.GONE);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
             spinnerRelationshipwithBorrower.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1540,18 +1833,43 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
+            spDurationStayAtCurrentAddressBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        Log.e("I_________D", "onItemClick: ");
+                        String text = spDurationStayAtCurrentAddressBr.getSelectedItem().toString();
+                        int count = currentResidenceDurationPersonalPOJOArrayList.size();
+                        Log.e("TAG", "count: " + count);
+                        for (int i = 0; i < count; i++) {
+                            if (currentResidenceDurationPersonalPOJOArrayList.get(i).durationName.equalsIgnoreCase(text)) {
+                                MainApplication.coborrowerValue26 = jobDurationID = currentResidenceDurationPersonalPOJOArrayList.get(i).durationID;
+                                Log.e("I_________D", "jobDurationID: " + jobDurationID);
+                            }
+                        }
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
             spDurationStayAtCurrentAddressCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     try {
                         Log.e("I_________D", "onItemClick: ");
                         String text = spDurationStayAtCurrentAddressCoBr.getSelectedItem().toString();
-                        int count = coborrowerJobDurationFinancePOJOArrayList.size();
+                        int count = currentResidenceDurationPersonalPOJOArrayListCoBr.size();
                         Log.e("TAG", "count: " + count);
                         for (int i = 0; i < count; i++) {
-                            if (coborrowerJobDurationFinancePOJOArrayList.get(i).durationName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue26 = jobDurationID = coborrowerJobDurationFinancePOJOArrayList.get(i).durationID;
-                                Log.e("I_________D", "jobDurationID: " + jobDurationID);
+                            if (currentResidenceDurationPersonalPOJOArrayListCoBr.get(i).durationName.equalsIgnoreCase(text)) {
+                                MainApplication.coborrowerValue26 = jobDurationIDCoBr = currentResidenceDurationPersonalPOJOArrayListCoBr.get(i).durationID;
+                                Log.e("I_________D", "jobDurationID: " + jobDurationIDCoBr);
                             }
                         }
                     } catch (NullPointerException e) {
@@ -1583,31 +1901,9 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
-            spProfessionCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    try {
-                        Log.e("I_________D", "onItemClick: ");
-                        String text = spProfessionCoBr.getSelectedItem().toString();
-                        int count = coborrowerProfessionFinancePOJOArrayList.size();
-                        Log.e("TAG", "count: " + count);
-                        for (int i = 0; i < count; i++) {
-                            if (coborrowerProfessionFinancePOJOArrayList.get(i).professionName.equalsIgnoreCase(text)) {
-                                MainApplication.coborrowerValue23 = professionID = coborrowerProfessionFinancePOJOArrayList.get(i).professionID;
-                                Log.e("I_________D", "professionID: " + professionID);
-                            }
-                        }
-                    } catch (NullPointerException e) {
-                        e.printStackTrace();
-                    }
-                }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
 
-                }
-            });
-
+            //Address Br
             spCurrentCityBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1684,6 +1980,161 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
+            spPermanentCityBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+
+                        String text = spPermanentCityBr.getSelectedItem().toString();
+                        int count = borrowerPermanentCityPersonalPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
+                                MainApplication.Brkyc_address_citykyc = permanentcityID = borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID;
+                                Log.e(TAG, "sppermanentCityBr: +++++++++++++++++++*********************" + permanentcityID);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spPermanentStateBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spPermanentStateBr.getSelectedItem().toString();
+                        int count = borrowerPermanentStatePersonalPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
+                                MainApplication.Brkyc_address_statekyc = permanentstateID = borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID;
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                    permanentcityApiCall();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spPermanentCountryBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spPermanentCountryBr.getSelectedItem().toString();
+                        int count = borrowerPermanentCountryPersonalPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerPermanentCountryPersonalPOJOArrayList.get(i).countryName.equalsIgnoreCase(text)) {
+                                MainApplication.Brkyc_address_countrykyc = permanentcountryID = borrowerPermanentCountryPersonalPOJOArrayList.get(i).countryID;
+                            }
+                        }
+                        permanentstateApiCall();
+//                        if (permanentcityID.equals("")) {
+//                            sppermanentCityBr.setSelection(0);
+//                        } else {
+//                            spPermanentCityBr.setSelection(Integer.parseInt(permanentcityID));
+//                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            spCityOffBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+
+                        String text = spCityOffBr.getSelectedItem().toString();
+                        int count = borrowerOffCityPersonalPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerOffCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
+                                MainApplication.Brkyc_address_citykyc = offcityIDBr = borrowerOffCityPersonalPOJOArrayList.get(i).cityID;
+                                Log.e(TAG, "spOffCityBr: +++++++++++++++++++*********************" + offcityIDBr);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spStateOffBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spStateOffBr.getSelectedItem().toString();
+                        int count = borrowerOffStatePersonalPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerOffStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
+                                MainApplication.Brkyc_address_statekyc = offstateIDBr = borrowerOffStatePersonalPOJOArrayList.get(i).stateID;
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                    offcityApiCall();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spCountryOffBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spCountryOffBr.getSelectedItem().toString();
+                        int count = borrowerOffCountryPersonalPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerOffCountryPersonalPOJOArrayList.get(i).countryName.equalsIgnoreCase(text)) {
+                                MainApplication.Brkyc_address_countrykyc = offcountryIDBr = borrowerOffCountryPersonalPOJOArrayList.get(i).countryID;
+                            }
+                        }
+                        offstateApiCall();
+//                        if (OffcityID.equals("")) {
+//                            spOffCityBr.setSelection(0);
+//                        } else {
+//                            spOffCityBr.setSelection(Integer.parseInt(OffcityID));
+//                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            //Address CoBr
             spCurrentCityCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1759,6 +2210,157 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
+            spPermanentCityCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+
+                        String text = spPermanentCityCoBr.getSelectedItem().toString();
+                        int count = borrowerPermanentCityPersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerPermanentCityPersonalPOJOArrayListCoBr.get(i).cityName.equalsIgnoreCase(text)) {
+                                MainApplication.CoBrkyc_address_citykyc = permanentcityIDCoBr = borrowerPermanentCityPersonalPOJOArrayListCoBr.get(i).cityID;
+//                                Log.e(TAG, "spPermanentCityCoBr: +++++++++++++++++++*********************" + permanentcityIDCoBr);
+                            }
+                        }
+                    } catch (Exception e) {
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spPermanentStateCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spPermanentStateCoBr.getSelectedItem().toString();
+                        int count = borrowerPermanentStatePersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerPermanentStatePersonalPOJOArrayListCoBr.get(i).stateName.equalsIgnoreCase(text)) {
+                                MainApplication.CoBrkyc_address_statekyc = permanentstateIDCoBr = borrowerPermanentStatePersonalPOJOArrayListCoBr.get(i).stateID;
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                    permanentcityApiCallCoBr();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spPermanentCountryCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spPermanentCountryCoBr.getSelectedItem().toString();
+                        int count = borrowerPermanentCountryPersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerPermanentCountryPersonalPOJOArrayListCoBr.get(i).countryName.equalsIgnoreCase(text)) {
+                                MainApplication.CoBrkyc_address_countrykyc = permanentcountryIDCoBr = borrowerPermanentCountryPersonalPOJOArrayListCoBr.get(i).countryID;
+                            }
+                        }
+                        permanentstateApiCallCoBr();
+//                        if (PermanentcityIDCoBr.equals("")) {
+//                            spPermanentCityCoBr.setSelection(0);
+//                        } else {
+//                            spPermanentCityCoBr.setSelection(Integer.parseInt(PermanentcityIDCoBr));
+//                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            spCityOffCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+
+                        String text = spCityOffCoBr.getSelectedItem().toString();
+                        int count = borrowerOffCityPersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerOffCityPersonalPOJOArrayListCoBr.get(i).cityName.equalsIgnoreCase(text)) {
+                                MainApplication.CoBrkyc_address_citykyc = offcityIDCoBr = borrowerOffCityPersonalPOJOArrayListCoBr.get(i).cityID;
+//                                Log.e(TAG, "spOffCityCoBr: +++++++++++++++++++*********************" + OffcityIDCoBr);
+                            }
+                        }
+                    } catch (Exception e) {
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spStateOffCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spStateOffCoBr.getSelectedItem().toString();
+                        int count = borrowerOffStatePersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerOffStatePersonalPOJOArrayListCoBr.get(i).stateName.equalsIgnoreCase(text)) {
+                                MainApplication.CoBrkyc_address_statekyc = offstateIDCoBr = borrowerOffStatePersonalPOJOArrayListCoBr.get(i).stateID;
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                    cityApiCallCoBr();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spCountryOffCoBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spCountryOffCoBr.getSelectedItem().toString();
+                        int count = borrowerOffCountryPersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerOffCountryPersonalPOJOArrayListCoBr.get(i).countryName.equalsIgnoreCase(text)) {
+                                MainApplication.CoBrkyc_address_countrykyc = offcountryIDCoBr = borrowerOffCountryPersonalPOJOArrayListCoBr.get(i).countryID;
+                            }
+                        }
+                        stateApiCallCoBr();
+//                        if (OffcityIDCoBr.equals("")) {
+//                            spOffCityCoBr.setSelection(0);
+//                        } else {
+//                            spOffCityCoBr.setSelection(Integer.parseInt(OffcityIDCoBr));
+//                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
 
             /** END SPINNER CLICK **/
 
@@ -1768,8 +2370,15 @@ public class LoanApplicationFragment_2 extends Fragment {
             } else {
                 JSONObject jsonObject = new JSONObject();
 
-                getCurrentStates(jsonObject);
-                getCurrentCities(jsonObject);
+                dtlgetCurrentStates(jsonObject);
+                dtlgetCurrentCities(jsonObject);
+                dtlgetPermanentStates(jsonObject);
+                dtlgetPermanentCities(jsonObject);
+
+                dtlgetCurrentStatesCoBr(jsonObject);
+                dtlgetCurrentCitiesCoBr(jsonObject);
+                dtlgetPermanentStatesCoBr(jsonObject);
+                dtlgetPermanentCitiesCoBr(jsonObject);
                 ProfessionApiCall();
             }
 
@@ -1830,12 +2439,16 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 if (jsonData.getJSONArray("countries").length() > 0) {
                     JSONArray jsonArraycountries = jsonData.getJSONArray("countries");
+
                 }
 
                 if (jsonData.getJSONArray("states").length() > 0) {
                     JSONArray jsonArraystates = jsonData.getJSONArray("states");
+
+                    //Current State Br
                     currentstate_arrayList = new ArrayList<>();
                     borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
+                    currentstate_arrayList.add("Select Any");
                     for (int i = 0; i < jsonArraystates.length(); i++) {
                         BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
                         JSONObject mJsonti = jsonArraystates.getJSONObject(i);
@@ -1848,13 +2461,32 @@ public class LoanApplicationFragment_2 extends Fragment {
                     spCurrentStateBr.setAdapter(arrayAdapter_currentState);
                     arrayAdapter_currentState.notifyDataSetChanged();
 
+                    //Permanent state Br
+                    permanentstate_arrayList = new ArrayList<>();
+                    borrowerPermanentStatePersonalPOJOArrayList = new ArrayList<>();
+                    permanentstate_arrayList.add("Select Any");
+                    for (int i = 0; i < jsonArraystates.length(); i++) {
+                        BorrowerPermanentStatePersonalPOJO borrowerpermanentStatePersonalPOJO = new BorrowerPermanentStatePersonalPOJO();
+                        JSONObject mJsonti = jsonArraystates.getJSONObject(i);
+                        borrowerpermanentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+                        permanentstate_arrayList.add(mJsonti.getString("state_name"));
+                        borrowerpermanentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+                        borrowerPermanentStatePersonalPOJOArrayList.add(borrowerpermanentStatePersonalPOJO);
+                    }
+                    arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentstate_arrayList);
+                    spPermanentStateBr.setAdapter(arrayAdapter_permanentState);
+                    arrayAdapter_permanentState.notifyDataSetChanged();
+
                 }
 
                 if (jsonData.getJSONArray("cities").length() > 0) {
 
                     JSONArray jsonArraycities = jsonData.getJSONArray("cities");
+
+                    //Current City Br
                     currentcity_arrayList = new ArrayList<>();
                     borrowerCurrentCityPersonalPOJOArrayList = new ArrayList<>();
+                    currentcity_arrayList.add("Select Any");
                     for (int i = 0; i < jsonArraycities.length(); i++) {
                         BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
                         JSONObject mJsonti = jsonArraycities.getJSONObject(i);
@@ -1873,15 +2505,42 @@ public class LoanApplicationFragment_2 extends Fragment {
                             spCurrentCityBr.setSelection(i);
                         }
                     }
+
+                    //Permanent City Br
+                    permanentcity_arrayList = new ArrayList<>();
+                    borrowerPermanentCityPersonalPOJOArrayList = new ArrayList<>();
+                    permanentcity_arrayList.add("Select Any");
+                    for (int i = 0; i < jsonArraycities.length(); i++) {
+                        BorrowerPermanentCityPersonalPOJO borrowerpermanentCityPersonalPOJO = new BorrowerPermanentCityPersonalPOJO();
+                        JSONObject mJsonti = jsonArraycities.getJSONObject(i);
+                        borrowerpermanentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
+                        permanentcity_arrayList.add(mJsonti.getString("city_name"));
+                        borrowerpermanentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
+                        borrowerPermanentCityPersonalPOJOArrayList.add(borrowerpermanentCityPersonalPOJO);
+                    }
+                    arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayList);
+                    spPermanentCityBr.setAdapter(arrayAdapter_permanentCity);
+                    arrayAdapter_permanentCity.notifyDataSetChanged();
+
+                    int count1 = borrowerPermanentCityPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count1; i++) {
+                        if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(permanentcityID)) {
+                            spPermanentCityBr.setSelection(i);
+                        }
+                    }
                 }
 
                 if (jsonData.getJSONArray("cocountries").length() > 0) {
                     JSONArray jsonArraycocountries = jsonData.getJSONArray("cocountries");
                 }
                 if (jsonData.getJSONArray("costates").length() > 0) {
+
                     JSONArray jsonArraycostates = jsonData.getJSONArray("costates");
+
+                    //Current State CoBr
                     currentstate_arrayListCoBr = new ArrayList<>();
                     borrowerCurrentStatePersonalPOJOArrayListCoBr = new ArrayList<>();
+                    currentstate_arrayListCoBr.add("Select Any");
                     for (int i = 0; i < jsonArraycostates.length(); i++) {
                         BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJOCoBr = new BorrowerCurrentStatePersonalPOJO();
                         JSONObject mJsonti = jsonArraycostates.getJSONObject(i);
@@ -1893,11 +2552,31 @@ public class LoanApplicationFragment_2 extends Fragment {
                     arrayAdapter_currentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayListCoBr);
                     spCurrentStateCoBr.setAdapter(arrayAdapter_currentStateCoBr);
                     arrayAdapter_currentStateCoBr.notifyDataSetChanged();
+
+                    //Permanent state CoBr
+                    permanentstate_arrayListCoBr = new ArrayList<>();
+                    borrowerPermanentStatePersonalPOJOArrayListCoBr = new ArrayList<>();
+                    permanentstate_arrayListCoBr.add("Select Any");
+                    for (int i = 0; i < jsonArraycostates.length(); i++) {
+                        BorrowerPermanentStatePersonalPOJO borrowerpermanentStatePersonalPOJOCoBr = new BorrowerPermanentStatePersonalPOJO();
+                        JSONObject mJsonti = jsonArraycostates.getJSONObject(i);
+                        borrowerpermanentStatePersonalPOJOCoBr.stateName = mJsonti.getString("state_name");
+                        permanentstate_arrayListCoBr.add(mJsonti.getString("state_name"));
+                        borrowerpermanentStatePersonalPOJOCoBr.stateID = mJsonti.getString("state_id");
+                        borrowerPermanentStatePersonalPOJOArrayListCoBr.add(borrowerpermanentStatePersonalPOJOCoBr);
+                    }
+                    arrayAdapter_permanentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentstate_arrayListCoBr);
+                    spPermanentStateCoBr.setAdapter(arrayAdapter_permanentStateCoBr);
+                    arrayAdapter_permanentStateCoBr.notifyDataSetChanged();
                 }
+
                 if (jsonData.getJSONArray("cocities").length() > 0) {
                     JSONArray jsonArraycocities = jsonData.getJSONArray("cocities");
+
+                    //Current City CoBr
                     currentcity_arrayListCoBr = new ArrayList<>();
                     borrowerCurrentCityPersonalPOJOArrayListCoBr = new ArrayList<>();
+                    currentcity_arrayListCoBr.add("Select Any");
                     for (int i = 0; i < jsonArraycocities.length(); i++) {
                         BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJOCoBr = new BorrowerCurrentCityPersonalPOJO();
                         JSONObject mJsonti = jsonArraycocities.getJSONObject(i);
@@ -1916,6 +2595,29 @@ public class LoanApplicationFragment_2 extends Fragment {
                             spCurrentCityCoBr.setSelection(i);
                         }
                     }
+
+                    //Permanent City CoBr
+                    permanentcity_arrayListCoBr = new ArrayList<>();
+                    borrowerPermanentCityPersonalPOJOArrayListCoBr = new ArrayList<>();
+                    permanentcity_arrayListCoBr.add("Select Any");
+                    for (int i = 0; i < jsonArraycocities.length(); i++) {
+                        BorrowerPermanentCityPersonalPOJO borrowerpermanentCityPersonalPOJOCoBr = new BorrowerPermanentCityPersonalPOJO();
+                        JSONObject mJsonti = jsonArraycocities.getJSONObject(i);
+                        borrowerpermanentCityPersonalPOJOCoBr.cityName = mJsonti.getString("city_name");
+                        permanentcity_arrayListCoBr.add(mJsonti.getString("city_name"));
+                        borrowerpermanentCityPersonalPOJOCoBr.cityID = mJsonti.getString("city_id");
+                        borrowerPermanentCityPersonalPOJOArrayListCoBr.add(borrowerpermanentCityPersonalPOJOCoBr);
+                    }
+                    arrayAdapter_permanentCityCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayListCoBr);
+                    spPermanentCityCoBr.setAdapter(arrayAdapter_permanentCityCoBr);
+                    arrayAdapter_permanentCityCoBr.notifyDataSetChanged();
+
+                    int count1 = borrowerPermanentCityPersonalPOJOArrayListCoBr.size();
+                    for (int i = 0; i < count1; i++) {
+                        if (borrowerPermanentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(permanentcityIDCoBr)) {
+                            spPermanentCityCoBr.setSelection(i);
+                        }
+                    }
                 }
 
                 JSONObject jsondetailedInformation = jsonData.getJSONObject("detailedInformation");
@@ -1925,7 +2627,6 @@ public class LoanApplicationFragment_2 extends Fragment {
 //                JSONObject jsoncourseAmount = jsonData.getJSONObject("courseAmount");
 //                JSONObject jsonleadid = jsonData.getJSONObject("leadid");
 //                JSONObject jsonapplicantID = jsonData.getJSONObject("applicantID");
-
 
                 MainApplication.lead_iddtl = lead_id =  jsondetailedInformation.getString("lead_id");
                 MainApplication.application_iddtl = application_id =  jsondetailedInformation.getString("application_id");
@@ -2026,8 +2727,6 @@ public class LoanApplicationFragment_2 extends Fragment {
                 if (!Brcurrent_residence_type.equals("")) {
                     spResidentTypeBr.setSelection((Integer.parseInt(Brcurrent_residence_type) + 1));
                 }
-
-
 
                 edtCompanyBr.setText(Bremployer_name);
                 edtAnnualSalBr.setText(Brannual_income);
@@ -2243,90 +2942,10 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    private void ProfessionApiCall() {
-        /**API CALL**/
-        try {
-            String url = MainApplication.mainUrl + "dashboard/getAllProfession";
-            Map<String, String> params = new HashMap<String, String>();
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getAllProfessiondetailedinfo", params, MainApplication.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    public void getAllProfessiondetailedinfo(JSONObject jsonData) {
-        try {
-            if (jsonData.toString().equals("{}")) {
-                try {
-                    profession_arrayList = new ArrayList<>();
-                    profession_arrayList.add("Select Profession");
-                    arrayAdapter_profession = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayList);
-                    spProfessionBr.setAdapter(arrayAdapter_profession);
-                    arrayAdapter_profession.notifyDataSetChanged();
-                    spProfessionBr.setSelection(0);
-
-                } catch (Exception e) {
-                    String className = this.getClass().getSimpleName();
-                    String name = new Object() {
-                    }.getClass().getEnclosingMethod().getName();
-                    String errorMsg = e.getMessage();
-                    String errorMsgDetails = e.getStackTrace().toString();
-                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-                }
-
-            } else {
-                String status = jsonData.optString("status");
-                String message = jsonData.optString("message");
-
-                if (status.equalsIgnoreCase("1")) {
-
-                    JSONArray jsonArray3 = jsonData.getJSONArray("profession");
-                    profession_arrayList = new ArrayList<>();
-                    professionPOJOArrayList = new ArrayList<>();
-                    profession_arrayList.add("Select Profession");
-                    for (int i = 0; i < jsonArray3.length(); i++) {
-                        ProfessionPOJO professionPOJO = new ProfessionPOJO();
-                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
-                        professionPOJO.Salaried = mJsonti.getString("profession");
-                        profession_arrayList.add(mJsonti.getString("profession"));
-                        professionPOJO.id = mJsonti.getString("id");
-                        professionPOJOArrayList.add(professionPOJO);
-                    }
-                    arrayAdapter_profession = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayList);
-                    spProfessionBr.setAdapter(arrayAdapter_profession);
-                    arrayAdapter_profession.notifyDataSetChanged();
-
-                } else {
-                }
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-
     private void setViews() {
 
         try {
+
             progressBar = (ProgressBar) view.findViewById(R.id.progressBar_applylona_coborrower);
 
             linBorrowerForm = (LinearLayout) view.findViewById(R.id.linBorrowerForm);
@@ -2398,6 +3017,15 @@ public class LoanApplicationFragment_2 extends Fragment {
             spCurrentCountryBr = (Spinner) view.findViewById(R.id.spCurrentCountryBr);
             spCurrentStateBr = (Spinner) view.findViewById(R.id.spCurrentStateBr);
             spCurrentCityBr = (Spinner) view.findViewById(R.id.spCurrentCityBr);
+
+            spPermanentCountryBr = (Spinner) view.findViewById(R.id.spPermanentCountryBr);
+            spPermanentStateBr = (Spinner) view.findViewById(R.id.spPermanentStateBr);
+            spPermanentCityBr = (Spinner) view.findViewById(R.id.spPermanentCityBr);
+
+            spCountryOffBr = (Spinner) view.findViewById(R.id.spCountryOffBr);
+            spStateOffBr = (Spinner) view.findViewById(R.id.spStateOffBr);
+            spCityOffBr = (Spinner) view.findViewById(R.id.spCityOffBr);
+
             spResidentTypeBr = (Spinner) view.findViewById(R.id.spResidentTypeBr);
             spDurationStayAtCurrentAddressBr = (Spinner) view.findViewById(R.id.spDurationStayAtCurrentAddressBr);
             spCurrentAddressSameAsKycBr = (Spinner) view.findViewById(R.id.spCurrentAddressSameAsKycBr);
@@ -2436,13 +3064,16 @@ public class LoanApplicationFragment_2 extends Fragment {
             spCurrentCountryCoBr = (Spinner) view.findViewById(R.id.spCurrentCountryCoBr);
             spCurrentStateCoBr = (Spinner) view.findViewById(R.id.spCurrentStateCoBr);
             spCurrentCityCoBr = (Spinner) view.findViewById(R.id.spCurrentCityCoBr);
-            spPermanentCountryBr = (Spinner) view.findViewById(R.id.spPermanentCountryCoBr);
+
+            spPermanentCountryCoBr = (Spinner) view.findViewById(R.id.spPermanentCountryCoBr);
             spPermanentStateCoBr= (Spinner) view.findViewById(R.id.spPermanentStateCoBr);
-            spResidentTypeCoBr = (Spinner) view.findViewById(R.id.spResidentTypeCoBr);
             spPermanentCityCoBr = (Spinner) view.findViewById(R.id.spPermanentCityCoBr);
+
             spCountryOffCoBr = (Spinner) view.findViewById(R.id.spCountryOffCoBr);
             spStateOffCoBr =(Spinner) view.findViewById(R.id.spStateOffCoBr);
             spCityOffCoBr = (Spinner) view.findViewById(R.id.spCityOffCoBr);
+
+            spResidentTypeCoBr = (Spinner) view.findViewById(R.id.spResidentTypeCoBr);
             spCurrentAddressSameAsKycCoBr = (Spinner) view.findViewById(R.id.spCurrentAddressSameAsKycCoBr);
             spCurrentAddressSameAsKycOrBorrowerCoBr = (Spinner) view.findViewById(R.id.spCurrentAddressSameAsKycOrBorrowerCoBr);
             /** PERSONAL DETAILS **/
@@ -2487,6 +3118,46 @@ public class LoanApplicationFragment_2 extends Fragment {
             spCurrentCountryBr.setAdapter(arrayAdapter_currentCountry);
             arrayAdapter_currentCountry.notifyDataSetChanged();
 
+
+            permanentCountry_arrayList = new ArrayList<>();
+            borrowerPermanentCountryPersonalPOJOArrayList = new ArrayList<>();
+
+            BorrowerPermanentCountryPersonalPOJO borrowerPermanentCountryPersonalPOJO = new BorrowerPermanentCountryPersonalPOJO();
+            borrowerPermanentCountryPersonalPOJO.countryName = "Select Any";
+            permanentCountry_arrayList.add("Select Any");
+            borrowerPermanentCountryPersonalPOJO.countryID = "";
+            borrowerPermanentCountryPersonalPOJOArrayList.add(borrowerPermanentCountryPersonalPOJO);
+
+            BorrowerPermanentCountryPersonalPOJO borrowerPermanentCountryPersonalPOJO1 = new BorrowerPermanentCountryPersonalPOJO();
+            borrowerPermanentCountryPersonalPOJO1.countryName = "India";
+            permanentCountry_arrayList.add("India");
+            borrowerPermanentCountryPersonalPOJO1.countryID = "1";
+            borrowerPermanentCountryPersonalPOJOArrayList.add(borrowerPermanentCountryPersonalPOJO1);
+
+            arrayAdapter_permanentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentCountry_arrayList);
+            spPermanentCountryBr.setAdapter(arrayAdapter_permanentCountry);
+            arrayAdapter_permanentCountry.notifyDataSetChanged();
+
+            offCountry_arrayList = new ArrayList<>();
+            borrowerOffCountryPersonalPOJOArrayList = new ArrayList<>();
+
+            BorrowerOffCountryPersonalPOJO borrowerOffCountryPersonalPOJO = new BorrowerOffCountryPersonalPOJO();
+            borrowerOffCountryPersonalPOJO.countryName = "Select Any";
+            offCountry_arrayList.add("Select Any");
+            borrowerOffCountryPersonalPOJO.countryID = "";
+            borrowerOffCountryPersonalPOJOArrayList.add(borrowerOffCountryPersonalPOJO);
+
+            BorrowerOffCountryPersonalPOJO borrowerOffCountryPersonalPOJO1 = new BorrowerOffCountryPersonalPOJO();
+            borrowerOffCountryPersonalPOJO1.countryName = "India";
+            offCountry_arrayList.add("India");
+            borrowerOffCountryPersonalPOJO1.countryID = "1";
+            borrowerOffCountryPersonalPOJOArrayList.add(borrowerOffCountryPersonalPOJO1);
+
+            arrayAdapter_offCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, offCountry_arrayList);
+            spCountryOffBr.setAdapter(arrayAdapter_offCountry);
+            arrayAdapter_offCountry.notifyDataSetChanged();
+
+            //Co Br
             currentCountry_arrayListCoBr = new ArrayList<>();
             borrowerCurrentCountryPersonalPOJOArrayListCoBr = new ArrayList<>();
 
@@ -2505,6 +3176,45 @@ public class LoanApplicationFragment_2 extends Fragment {
             arrayAdapter_currentCountryCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayListCoBr);
             spCurrentCountryCoBr.setAdapter(arrayAdapter_currentCountryCoBr);
             arrayAdapter_currentCountryCoBr.notifyDataSetChanged();
+
+
+            permanentCountry_arrayListCoBr = new ArrayList<>();
+            borrowerPermanentCountryPersonalPOJOArrayListCoBr = new ArrayList<>();
+
+            BorrowerPermanentCountryPersonalPOJO borrowerPermanentCountryPersonalPOJOCoBr = new BorrowerPermanentCountryPersonalPOJO();
+            borrowerPermanentCountryPersonalPOJOCoBr.countryName = "Select Any";
+            permanentCountry_arrayListCoBr.add("Select Any");
+            borrowerPermanentCountryPersonalPOJOCoBr.countryID = "";
+            borrowerPermanentCountryPersonalPOJOArrayListCoBr.add(borrowerPermanentCountryPersonalPOJOCoBr);
+
+            BorrowerPermanentCountryPersonalPOJO borrowerPermanentCountryPersonalPOJO1CoBr = new BorrowerPermanentCountryPersonalPOJO();
+            borrowerPermanentCountryPersonalPOJO1CoBr.countryName = "India";
+            permanentCountry_arrayListCoBr.add("India");
+            borrowerPermanentCountryPersonalPOJO1CoBr.countryID = "1";
+            borrowerPermanentCountryPersonalPOJOArrayListCoBr.add(borrowerPermanentCountryPersonalPOJO1CoBr);
+
+            arrayAdapter_permanentCountryCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentCountry_arrayListCoBr);
+            spPermanentCountryCoBr.setAdapter(arrayAdapter_permanentCountryCoBr);
+            arrayAdapter_permanentCountryCoBr.notifyDataSetChanged();
+
+            offCountry_arrayListCoBr = new ArrayList<>();
+            borrowerOffCountryPersonalPOJOArrayListCoBr = new ArrayList<>();
+
+            BorrowerOffCountryPersonalPOJO borrowerOffCountryPersonalPOJOCoBr = new BorrowerOffCountryPersonalPOJO();
+            borrowerOffCountryPersonalPOJOCoBr.countryName = "Select Any";
+            offCountry_arrayListCoBr.add("Select Any");
+            borrowerOffCountryPersonalPOJOCoBr.countryID = "";
+            borrowerOffCountryPersonalPOJOArrayListCoBr.add(borrowerOffCountryPersonalPOJOCoBr);
+
+            BorrowerOffCountryPersonalPOJO borrowerOffCountryPersonalPOJO1CoBr = new BorrowerOffCountryPersonalPOJO();
+            borrowerOffCountryPersonalPOJO1CoBr.countryName = "India";
+            offCountry_arrayListCoBr.add("India");
+            borrowerOffCountryPersonalPOJO1CoBr.countryID = "1";
+            borrowerOffCountryPersonalPOJOArrayListCoBr.add(borrowerOffCountryPersonalPOJO1CoBr);
+
+            arrayAdapter_offCountryCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, offCountry_arrayListCoBr);
+            spCountryOffCoBr.setAdapter(arrayAdapter_offCountryCoBr);
+            arrayAdapter_offCountryCoBr.notifyDataSetChanged();
 
             //CurrentResidence Type
             currentResidencetype_arrayList = new ArrayList<>();
@@ -2561,6 +3271,61 @@ public class LoanApplicationFragment_2 extends Fragment {
             spResidentTypeBr.setAdapter(arrayAdapter_currentResidenceDuration);
             arrayAdapter_currentResidenceDuration.notifyDataSetChanged();
 
+            //CurrentResidence Type CoBr
+            currentResidencetype_arrayListCoBr = new ArrayList<>();
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr = new ArrayList<>();
+
+            CoborrowerCurrentResidenceTypePersonalPOJO coborrowerCurrentResidenceTypePersonalPOJO = new CoborrowerCurrentResidenceTypePersonalPOJO();
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Select Any";
+            currentResidencetype_arrayListCoBr.add("Select Any");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Owned by Self/Spouse/Parents/Sibling";
+            currentResidencetype_arrayListCoBr.add("Owned by Self/Spouse/Parents/Sibling");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "0";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Rented With Family";
+            currentResidencetype_arrayListCoBr.add("Rented With Family");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "1";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Company Provided";
+            currentResidencetype_arrayListCoBr.add("Company Provided");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "2";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Rented With Friends";
+            currentResidencetype_arrayListCoBr.add("Rented With Friends");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "3";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Rented Staying Alone";
+            currentResidencetype_arrayListCoBr.add("Rented Staying Alone");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "4";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Paying Guest";
+            currentResidencetype_arrayListCoBr.add("Paying Guest");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "5";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Hostel";
+            currentResidencetype_arrayListCoBr.add("Hostel");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "6";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            coborrowerCurrentResidenceTypePersonalPOJO.residencetypeName = "Owned By Parents/Siblings";
+            currentResidencetype_arrayListCoBr.add("Owned By Parents/Siblings");
+            coborrowerCurrentResidenceTypePersonalPOJO.dresidencetypeID = "7";
+            coborrowerCurrentResidenceTypePersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceTypePersonalPOJO);
+
+            arrayAdapter_currentResidenceDuration = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentResidencetype_arrayListCoBr);
+            spResidentTypeCoBr.setAdapter(arrayAdapter_currentResidenceDuration);
+            arrayAdapter_currentResidenceDuration.notifyDataSetChanged();
+
             //CurrentResidence Duration
             currentresidenceduration_arrayList = new ArrayList<>();
             currentResidenceDurationPersonalPOJOArrayList = new ArrayList<>();
@@ -2598,6 +3363,44 @@ public class LoanApplicationFragment_2 extends Fragment {
             arrayAdapter_currentResidenceDuration = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentresidenceduration_arrayList);
             spDurationStayAtCurrentAddressBr.setAdapter(arrayAdapter_currentResidenceDuration);
             arrayAdapter_currentResidenceDuration.notifyDataSetChanged();
+
+            //CurrentResidence Duration CoBr
+            currentresidenceduration_arrayListCoBr = new ArrayList<>();
+            currentResidenceDurationPersonalPOJOArrayListCoBr = new ArrayList<>();
+
+            CoborrowerCurrentResidenceDurationPersonalPOJO coborrowerCurrentResidenceDurationPersonalPOJO = new CoborrowerCurrentResidenceDurationPersonalPOJO();
+            coborrowerCurrentResidenceDurationPersonalPOJO.durationName = "Select Any";
+            currentresidenceduration_arrayListCoBr.add("Select Any");
+            coborrowerCurrentResidenceDurationPersonalPOJO.durationID = "";
+            currentResidenceDurationPersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceDurationPersonalPOJO);
+
+            CoborrowerCurrentResidenceDurationPersonalPOJO coborrowerCurrentResidenceDurationPersonalPOJO1 = new CoborrowerCurrentResidenceDurationPersonalPOJO();
+            coborrowerCurrentResidenceDurationPersonalPOJO1.durationName = "Less Than 6 Months";
+            currentresidenceduration_arrayListCoBr.add("Less Than 6 Months");
+            coborrowerCurrentResidenceDurationPersonalPOJO1.durationID = "1";
+            currentResidenceDurationPersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceDurationPersonalPOJO1);
+
+            CoborrowerCurrentResidenceDurationPersonalPOJO coborrowerCurrentResidenceDurationPersonalPOJO2 = new CoborrowerCurrentResidenceDurationPersonalPOJO();
+            coborrowerCurrentResidenceDurationPersonalPOJO2.durationName = "6 Months to 1 Year";
+            currentresidenceduration_arrayListCoBr.add("6 Months to 1 Year");
+            coborrowerCurrentResidenceDurationPersonalPOJO2.durationID = "2";
+            currentResidenceDurationPersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceDurationPersonalPOJO2);
+
+            CoborrowerCurrentResidenceDurationPersonalPOJO coborrowerCurrentResidenceDurationPersonalPOJO3 = new CoborrowerCurrentResidenceDurationPersonalPOJO();
+            coborrowerCurrentResidenceDurationPersonalPOJO3.durationName = "1 Year to 2 Years";
+            currentresidenceduration_arrayListCoBr.add("1 Year to 2 Years");
+            coborrowerCurrentResidenceDurationPersonalPOJO3.durationID = "3";
+            currentResidenceDurationPersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceDurationPersonalPOJO3);
+
+            CoborrowerCurrentResidenceDurationPersonalPOJO coborrowerCurrentResidenceDurationPersonalPOJO4 = new CoborrowerCurrentResidenceDurationPersonalPOJO();
+            coborrowerCurrentResidenceDurationPersonalPOJO4.durationName = "More Than 2 Years";
+            currentresidenceduration_arrayListCoBr.add("More Than 2 Years");
+            coborrowerCurrentResidenceDurationPersonalPOJO4.durationID = "4";
+            currentResidenceDurationPersonalPOJOArrayListCoBr.add(coborrowerCurrentResidenceDurationPersonalPOJO4);
+
+            arrayAdapter_currentResidenceDurationCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentresidenceduration_arrayListCoBr);
+            spDurationStayAtCurrentAddressCoBr.setAdapter(arrayAdapter_currentResidenceDurationCoBr);
+            arrayAdapter_currentResidenceDurationCoBr.notifyDataSetChanged();
 
 
             //Current Address same as borrower Br
@@ -2729,6 +3532,169 @@ public class LoanApplicationFragment_2 extends Fragment {
 
 }
 
+    private void ProfessionApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "dashboard/getAllProfession";
+            Map<String, String> params = new HashMap<String, String>();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "getAllProfessiondetailedinfo", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void getAllProfessiondetailedinfo(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    profession_arrayList = new ArrayList<>();
+                    profession_arrayList.add("Select Profession");
+                    arrayAdapter_profession = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayList);
+                    spProfessionBr.setAdapter(arrayAdapter_profession);
+                    arrayAdapter_profession.notifyDataSetChanged();
+                    spProfessionBr.setSelection(0);
+
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+
+                    JSONArray jsonArray3 = jsonData.getJSONArray("profession");
+                    profession_arrayList = new ArrayList<>();
+                    professionPOJOArrayList = new ArrayList<>();
+                    profession_arrayList.add("Select Profession");
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        ProfessionPOJO professionPOJO = new ProfessionPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        professionPOJO.Salaried = mJsonti.getString("profession");
+                        profession_arrayList.add(mJsonti.getString("profession"));
+                        professionPOJO.id = mJsonti.getString("id");
+                        professionPOJOArrayList.add(professionPOJO);
+                    }
+                    arrayAdapter_profession = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayList);
+                    spProfessionBr.setAdapter(arrayAdapter_profession);
+                    arrayAdapter_profession.notifyDataSetChanged();
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void ProfessionApiCallCoBr() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "dashboard/getAllProfession";
+            Map<String, String> params = new HashMap<String, String>();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "getAllProfessiondetailedinfoCoBr", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void getAllProfessiondetailedinfoCoBr(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    profession_arrayListCoBr = new ArrayList<>();
+                    profession_arrayListCoBr.add("Select Profession");
+                    arrayAdapter_professionCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayListCoBr);
+                    spProfessionCoBr.setAdapter(arrayAdapter_professionCoBr);
+                    arrayAdapter_professionCoBr.notifyDataSetChanged();
+                    spProfessionCoBr.setSelection(0);
+
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+
+                    JSONArray jsonArray3 = jsonData.getJSONArray("profession");
+                    profession_arrayListCoBr = new ArrayList<>();
+                    professionPOJOArrayListCoBr = new ArrayList<>();
+                    profession_arrayListCoBr.add("Select Profession");
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        ProfessionPOJO professionPOJO = new ProfessionPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        if (mJsonti.getString("id").equals("2")) {
+                        } else {
+                            professionPOJO.Salaried = mJsonti.getString("profession");
+                            profession_arrayListCoBr.add(mJsonti.getString("profession"));
+                            professionPOJO.id = mJsonti.getString("id");
+                            professionPOJOArrayListCoBr.add(professionPOJO);
+                        }
+                    }
+                    arrayAdapter_professionCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, profession_arrayListCoBr);
+                    spProfessionCoBr.setAdapter(arrayAdapter_professionCoBr);
+                    arrayAdapter_professionCoBr.notifyDataSetChanged();
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
     private void cityApiCall() {
         /**API CALL**/
         try {
@@ -2741,7 +3707,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 //                getCurrentCities(currentstateID,currentcountryID);
             } else {
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCity", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetCurrentCity", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -2766,7 +3732,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             } else {
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStates", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetCurrentStates", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -2779,121 +3745,7 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    private void cityApiCallCoBr() {
-        /**API CALL**/
-        try {
-            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", currentcountryIDCoBr);//1
-            params.put("stateId", currentstateIDCoBr);//2
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getCurrentCities(currentstateID,currentcountryID);
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentCitiesCoBr", params, MainApplication.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    private void stateApiCallCoBr() {
-        /**API CALL**/
-        try {
-            String url = MainApplication.mainUrl + "algo/getStates";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", currentcountryIDCoBr);
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                getCurrentStates(currentcountryID);
-
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "getCurrentStatesCoBr", params, MainApplication.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    public void getCurrentStates(JSONObject jsonData) {
-        try {
-            if (jsonData.toString().equals("{}")) {
-                try {
-                    currentstate_arrayList = new ArrayList<>();
-                    currentstate_arrayList.add("Select Any");
-                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
-                    arrayAdapter_currentState.notifyDataSetChanged();
-                    spCurrentStateBr.setSelection(0);
-                } catch (Exception e) {
-                    String className = this.getClass().getSimpleName();
-                    String name = new Object() {
-                    }.getClass().getEnclosingMethod().getName();
-                    String errorMsg = e.getMessage();
-                    String errorMsgDetails = e.getStackTrace().toString();
-                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-                }
-
-            } else {
-                String status = jsonData.optString("status");
-                String message = jsonData.optString("message");
-
-                if (status.equalsIgnoreCase("1")) {
-                    JSONObject jsonObject = jsonData.getJSONObject("result");
-
-                    JSONArray jsonArray3 = jsonObject.getJSONArray("states");
-                    currentstate_arrayList = new ArrayList<>();
-                    borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
-                    for (int i = 0; i < jsonArray3.length(); i++) {
-                        BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
-                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
-                        borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
-                        currentstate_arrayList.add(mJsonti.getString("state_name"));
-                        borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
-                        borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
-                    }
-                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
-                    arrayAdapter_currentState.notifyDataSetChanged();
-
-                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
-
-                    for (int i = 0; i < count; i++) {
-                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
-                            spCurrentStateBr.setSelection(i);
-                        }
-                    }
-
-                } else {
-                }
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    public void getCurrentCities(JSONObject jsonData) {
+    public void dtlgetCurrentCities(JSONObject jsonData) {
         try {
             if (jsonData.toString().equals("{}")) {
                 try {
@@ -2958,7 +3810,484 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    public void getCurrentStatesCoBr(JSONObject jsonData) {
+    public void dtlgetCurrentStates(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    currentstate_arrayList = new ArrayList<>();
+                    currentstate_arrayList.add("Select Any");
+                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
+                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
+                    arrayAdapter_currentState.notifyDataSetChanged();
+                    spCurrentStateBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray3 = jsonObject.getJSONArray("states");
+                    currentstate_arrayList = new ArrayList<>();
+                    borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+                        currentstate_arrayList.add(mJsonti.getString("state_name"));
+                        borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+                        borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
+                    }
+                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
+                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
+                    arrayAdapter_currentState.notifyDataSetChanged();
+
+                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                            spCurrentStateBr.setSelection(i);
+                        }
+                    }
+
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+
+    private void permanentcityApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", permanentcountryID);//1
+            params.put("stateId", permanentstateID);//2
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentCities(currentstateID,currentcountryID);
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetPermanentCity", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void permanentstateApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getStates";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", permanentcountryID);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentStates(currentcountryID);
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetPermanentStates", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void dtlgetPermanentCities(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    permanentcity_arrayList = new ArrayList<>();
+                    permanentcity_arrayList.add("Select Any");
+                    arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayList);
+                    spPermanentCityBr.setAdapter(arrayAdapter_permanentCity);
+                    arrayAdapter_permanentCity.notifyDataSetChanged();
+                    spPermanentCityBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                Log.e("SERVER CALL", "getpermanentCities+++" + jsonData);
+
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray2 = jsonObject.getJSONArray("cities");
+                    permanentcity_arrayList = new ArrayList<>();
+                    borrowerPermanentCityPersonalPOJOArrayList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray2.length(); i++) {
+                        BorrowerPermanentCityPersonalPOJO borrowerpermanentCityPersonalPOJO = new BorrowerPermanentCityPersonalPOJO();
+                        JSONObject mJsonti = jsonArray2.getJSONObject(i);
+                        borrowerpermanentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
+                        permanentcity_arrayList.add(mJsonti.getString("city_name"));
+                        borrowerpermanentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
+                        borrowerPermanentCityPersonalPOJOArrayList.add(borrowerpermanentCityPersonalPOJO);
+                    }
+                    arrayAdapter_permanentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayList);
+                    spPermanentCityBr.setAdapter(arrayAdapter_permanentCity);
+                    arrayAdapter_permanentCity.notifyDataSetChanged();
+
+                    int count = borrowerPermanentCityPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(permanentcityID)) {
+                            spPermanentCityBr.setSelection(i);
+                        }
+                    }
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void dtlgetPermanentStates(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    permanentstate_arrayList = new ArrayList<>();
+                    permanentstate_arrayList.add("Select Any");
+                    arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentstate_arrayList);
+                    spPermanentStateBr.setAdapter(arrayAdapter_permanentState);
+                    arrayAdapter_permanentState.notifyDataSetChanged();
+                    spPermanentStateBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray3 = jsonObject.getJSONArray("states");
+                    permanentstate_arrayList = new ArrayList<>();
+                    borrowerPermanentStatePersonalPOJOArrayList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        BorrowerPermanentStatePersonalPOJO borrowerPermanentStatePersonalPOJO = new BorrowerPermanentStatePersonalPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        borrowerPermanentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+                        permanentstate_arrayList.add(mJsonti.getString("state_name"));
+                        borrowerPermanentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+                        borrowerPermanentStatePersonalPOJOArrayList.add(borrowerPermanentStatePersonalPOJO);
+                    }
+                    arrayAdapter_permanentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentstate_arrayList);
+                    spPermanentStateBr.setAdapter(arrayAdapter_permanentState);
+                    arrayAdapter_permanentState.notifyDataSetChanged();
+
+                    int count = borrowerPermanentStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(permanentstateID)) {
+                            spPermanentStateBr.setSelection(i);
+                        }
+                    }
+
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+
+    private void offcityApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", offcountryIDBr);//1
+            params.put("stateId", offstateIDBr);//2
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentCities(currentstateID,currentcountryID);
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetOffCities", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void offstateApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getStates";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", offcountryIDBr);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentStates(currentcountryID);
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetOffStates", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void dtlgetOffCities(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    offcity_arrayList = new ArrayList<>();
+                    offcity_arrayList.add("Select Any");
+                    arrayAdapter_offCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, offcity_arrayList);
+                    spCityOffBr.setAdapter(arrayAdapter_offCity);
+                    arrayAdapter_offCity.notifyDataSetChanged();
+                    spCityOffBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                Log.e("SERVER CALL", "getoffCities+++" + jsonData);
+
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray2 = jsonObject.getJSONArray("cities");
+                    offcity_arrayList = new ArrayList<>();
+                    borrowerOffCityPersonalPOJOArrayList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray2.length(); i++) {
+                        BorrowerOffCityPersonalPOJO borroweroffCityPersonalPOJO = new BorrowerOffCityPersonalPOJO();
+                        JSONObject mJsonti = jsonArray2.getJSONObject(i);
+                        borroweroffCityPersonalPOJO.cityName = mJsonti.getString("city_name");
+                        offcity_arrayList.add(mJsonti.getString("city_name"));
+                        borroweroffCityPersonalPOJO.cityID = mJsonti.getString("city_id");
+                        borrowerOffCityPersonalPOJOArrayList.add(borroweroffCityPersonalPOJO);
+                    }
+                    arrayAdapter_offCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, offcity_arrayList);
+                    spCityOffBr.setAdapter(arrayAdapter_offCity);
+                    arrayAdapter_offCity.notifyDataSetChanged();
+
+                    int count = borrowerOffCityPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerOffCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(offcityIDBr)) {
+                            spCityOffBr.setSelection(i);
+                        }
+                    }
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void dtlgetOffStates(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    offstate_arrayList = new ArrayList<>();
+                    offstate_arrayList.add("Select Any");
+                    arrayAdapter_offState = new ArrayAdapter(context, R.layout.custom_layout_spinner, offstate_arrayList);
+                    spStateOffBr.setAdapter(arrayAdapter_offState);
+                    arrayAdapter_offState.notifyDataSetChanged();
+                    spStateOffBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray3 = jsonObject.getJSONArray("states");
+                    offstate_arrayList = new ArrayList<>();
+                    borrowerOffStatePersonalPOJOArrayList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        BorrowerOffStatePersonalPOJO borrowerOffStatePersonalPOJO = new BorrowerOffStatePersonalPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        borrowerOffStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+                        offstate_arrayList.add(mJsonti.getString("state_name"));
+                        borrowerOffStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+                        borrowerOffStatePersonalPOJOArrayList.add(borrowerOffStatePersonalPOJO);
+                    }
+                    arrayAdapter_offState = new ArrayAdapter(context, R.layout.custom_layout_spinner, offstate_arrayList);
+                    spStateOffBr.setAdapter(arrayAdapter_offState);
+                    arrayAdapter_offState.notifyDataSetChanged();
+
+                    int count = borrowerOffStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerOffStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(offstateIDBr)) {
+                            spStateOffBr.setSelection(i);
+                        }
+                    }
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+
+    private void cityApiCallCoBr() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryIDCoBr);//1
+            params.put("stateId", currentstateIDCoBr);//2
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentCities(currentstateID,currentcountryID);
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetCurrentCitiesCoBr", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void stateApiCallCoBr() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getStates";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryIDCoBr);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentStates(currentcountryID);
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetCurrentStatesCoBr", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void dtlgetCurrentStatesCoBr(JSONObject jsonData) {
         try {
             if (jsonData.toString().equals("{}")) {
                 try {
@@ -3022,7 +4351,7 @@ public class LoanApplicationFragment_2 extends Fragment {
         }
     }
 
-    public void getCurrentCitiesCoBr(JSONObject jsonData) {
+    public void dtlgetCurrentCitiesCoBr(JSONObject jsonData) {
         try {
             if (jsonData.toString().equals("{}")) {
                 try {
@@ -3057,7 +4386,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                         BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJOCoBr = new BorrowerCurrentCityPersonalPOJO();
                         JSONObject mJsonti = jsonArray2.getJSONObject(i);
                         borrowerCurrentCityPersonalPOJOCoBr.cityName = mJsonti.getString("city_name");
-                        currentcity_arrayList.add(mJsonti.getString("city_name"));
+                        currentcity_arrayListCoBr.add(mJsonti.getString("city_name"));
                         borrowerCurrentCityPersonalPOJOCoBr.cityID = mJsonti.getString("city_id");
                         borrowerCurrentCityPersonalPOJOArrayListCoBr.add(borrowerCurrentCityPersonalPOJOCoBr);
                     }
@@ -3069,6 +4398,184 @@ public class LoanApplicationFragment_2 extends Fragment {
                     for (int i = 0; i < count; i++) {
                         if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(currentcityIDCoBr)) {
                             spCurrentCityCoBr.setSelection(i);
+                        }
+                    }
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void permanentcityApiCallCoBr() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", permanentcountryIDCoBr);//1
+            params.put("stateId", permanentstateIDCoBr);//2
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentCities(currentstateID,currentcountryID);
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetPermanentCitiesCoBr", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void permanentstateApiCallCoBr() {
+        /**API CALL**/
+        try {
+            String url = MainApplication.mainUrl + "algo/getStates";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("countryId", currentcountryIDCoBr);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentStates(currentcountryID);
+
+            } else {
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(context, url, null, mFragment, "dtlgetPermanentStatesCoBr", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void dtlgetPermanentCitiesCoBr(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    permanentcity_arrayListCoBr = new ArrayList<>();
+                    permanentcity_arrayListCoBr.add("Select Any");
+                    arrayAdapter_permanentCityCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayListCoBr);
+                    spPermanentCityCoBr.setAdapter(arrayAdapter_permanentCityCoBr);
+                    arrayAdapter_permanentCityCoBr.notifyDataSetChanged();
+//                    sppermanentCityCoBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray2 = jsonObject.getJSONArray("cities");
+                    permanentcity_arrayListCoBr = new ArrayList<>();
+                    borrowerPermanentCityPersonalPOJOArrayListCoBr = new ArrayList<>();
+                    for (int i = 0; i < jsonArray2.length(); i++) {
+                        BorrowerPermanentCityPersonalPOJO borrowerpermanentCityPersonalPOJOCoBr = new BorrowerPermanentCityPersonalPOJO();
+                        JSONObject mJsonti = jsonArray2.getJSONObject(i);
+                        borrowerpermanentCityPersonalPOJOCoBr.cityName = mJsonti.getString("city_name");
+                        permanentcity_arrayListCoBr.add(mJsonti.getString("city_name"));
+                        borrowerpermanentCityPersonalPOJOCoBr.cityID = mJsonti.getString("city_id");
+                        borrowerPermanentCityPersonalPOJOArrayListCoBr.add(borrowerpermanentCityPersonalPOJOCoBr);
+                    }
+                    arrayAdapter_permanentCityCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentcity_arrayListCoBr);
+                    spPermanentCityCoBr.setAdapter(arrayAdapter_permanentCityCoBr);
+                    arrayAdapter_permanentCityCoBr.notifyDataSetChanged();
+
+                    int count = borrowerPermanentCityPersonalPOJOArrayListCoBr.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerPermanentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(permanentcityIDCoBr)) {
+                            spPermanentCityCoBr.setSelection(i);
+                        }
+                    }
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void dtlgetPermanentStatesCoBr(JSONObject jsonData) {
+        try {
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    permanentstate_arrayListCoBr = new ArrayList<>();
+                    permanentstate_arrayListCoBr.add("Select Any");
+                    arrayAdapter_permanentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentstate_arrayListCoBr);
+                    spPermanentStateCoBr.setAdapter(arrayAdapter_permanentStateCoBr);
+                    arrayAdapter_permanentStateCoBr.notifyDataSetChanged();
+                    spPermanentStateCoBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+
+            } else {
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray3 = jsonObject.getJSONArray("states");
+                    permanentstate_arrayListCoBr = new ArrayList<>();
+                    borrowerPermanentStatePersonalPOJOArrayListCoBr = new ArrayList<>();
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        BorrowerPermanentStatePersonalPOJO borrowerpermanentStatePersonalPOJOCoBr = new BorrowerPermanentStatePersonalPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        borrowerpermanentStatePersonalPOJOCoBr.stateName = mJsonti.getString("state_name");
+                        permanentstate_arrayListCoBr.add(mJsonti.getString("state_name"));
+                        borrowerpermanentStatePersonalPOJOCoBr.stateID = mJsonti.getString("state_id");
+                        borrowerPermanentStatePersonalPOJOArrayListCoBr.add(borrowerpermanentStatePersonalPOJOCoBr);
+                    }
+                    arrayAdapter_permanentStateCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, permanentstate_arrayListCoBr);
+                    spPermanentStateCoBr.setAdapter(arrayAdapter_permanentStateCoBr);
+                    arrayAdapter_permanentStateCoBr.notifyDataSetChanged();
+
+                    int count = borrowerPermanentStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerPermanentStatePersonalPOJOArrayListCoBr.get(i).stateID.equalsIgnoreCase(permanentstateIDCoBr)) {
+                            spPermanentStateCoBr.setSelection(i);
                         }
                     }
 

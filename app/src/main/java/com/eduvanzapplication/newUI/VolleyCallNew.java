@@ -405,6 +405,16 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        else if (screen.equalsIgnoreCase("getAllProfessiondetailedinfoCoBr")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).getAllProfessiondetailedinfoCoBr(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }else if (screen.equalsIgnoreCase("instituteName")) {
             try {
                 jsonDataO = new JSONObject(s);
@@ -692,7 +702,8 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getCurrentStatesCoBr")) {
+        }
+        else if (screen.equalsIgnoreCase("getCurrentStatesCoBr")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((LoanApplicationFragment_1) mfragment).getCurrentStatesCoBr(jsonDataO);
@@ -711,44 +722,101 @@ public class VolleyCallNew extends Application {
                 e.printStackTrace();
             }
         }
-        else if (screen.equalsIgnoreCase("getCurrentStates")) {
+        else if (screen.equalsIgnoreCase("dtlgetCurrentStates")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getCurrentStates(jsonDataO);
+                ((LoanApplicationFragment_2) mfragment).dtlgetCurrentStates(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getCurrentCity")) {
+        } else if (screen.equalsIgnoreCase("dtlgetCurrentCity")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getCurrentCities(jsonDataO);
+                ((LoanApplicationFragment_2) mfragment).dtlgetCurrentCities(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        else if (screen.equalsIgnoreCase("getCurrentStatesCoBr")) {
+        else if (screen.equalsIgnoreCase("dtlgetPermanentStates")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getCurrentStatesCoBr(jsonDataO);
+                ((LoanApplicationFragment_2) mfragment).dtlgetPermanentStates(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getCurrentCitiesCoBr")) {
+        } else if (screen.equalsIgnoreCase("dtlgetPermanentCity")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((LoanApplicationFragment_2) mfragment).getCurrentCitiesCoBr(jsonDataO);
+                ((LoanApplicationFragment_2) mfragment).dtlgetPermanentCities(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("emailSignIn")) {
+        }
+        else if (screen.equalsIgnoreCase("dtlgetCurrentStatesCoBr")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).dtlgetCurrentStatesCoBr(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("dtlgetCurrentCitiesCoBr")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).dtlgetCurrentCitiesCoBr(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("dtlgetPermanentStatesCoBr")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).dtlgetPermanentStatesCoBr(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("dtlgetPermanentCitiesCoBr")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).dtlgetPermanentCitiesCoBr(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("dtlgetOffStates")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).dtlgetOffStates(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("dtlgetOffCities")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).dtlgetOffCities(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("emailSignIn")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((SignIn) mActivity).emailSignin(jsonDataO);

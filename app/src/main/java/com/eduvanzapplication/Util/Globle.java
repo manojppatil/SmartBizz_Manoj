@@ -17,7 +17,6 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Paytm;
 import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.newUI.VolleyCallEligibility;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.uploaddocs.PathFile;
 
@@ -136,25 +135,6 @@ public class Globle {
 
             } else {
 
-//                String url = MainApplication.mainUrl + "applog/apiErrorLog";
-//                Map<String, String> params = new HashMap<String, String>();
-//
-//                params.put("errorLogID", UUID.randomUUID().toString());
-//                params.put("appName", "Eduvanz Student App");
-//                params.put("appVersion", versionName);
-//                params.put("userID", userID);
-//                params.put("errorDate", currentDateTimeString);
-//                params.put("moduleName", className);
-//                params.put("methodName", name);
-//                params.put("errorMessage", errorMsg);
-//                params.put("errorMessageDtls", errorMsgDetails);
-//                params.put("OSVersion", osVersion);
-//                params.put("IPAddress", ipaddress);
-//                params.put("deviceName", device);
-//                params.put("lineNumber", errorLine);
-//
-//                VolleyCallEligibility volleyCall = new VolleyCallEligibility();
-//                volleyCall.sendRequest(context, url, null, mFragment, "checkEligiblity", params);
 
                 String LocalsSql = "INSERT INTO ErrorLog (errorLogID, appName, appVersion, userID, errorDate, moduleName, " +
                         "methodName, errorMessage, errorMessageDtls, OSVersion, IPAddress, deviceName,lineNumber, ISSaved, ISUploaded) VALUES" +
