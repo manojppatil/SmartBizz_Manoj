@@ -2832,22 +2832,22 @@ public class LoanApplicationFragment_2 extends Fragment {
     public void getCurrentStates(JSONObject jsonData) {
         try {
             if (jsonData.toString().equals("{}")) {
-//                try {
-//                    currentstate_arrayList = new ArrayList<>();
-//                    currentstate_arrayList.add("Select Any");
-//                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
-//                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
-//                    arrayAdapter_currentState.notifyDataSetChanged();
-//                    spCurrentStateBr.setSelection(0);
-//                } catch (Exception e) {
-//                    String className = this.getClass().getSimpleName();
-//                    String name = new Object() {
-//                    }.getClass().getEnclosingMethod().getName();
-//                    String errorMsg = e.getMessage();
-//                    String errorMsgDetails = e.getStackTrace().toString();
-//                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-//                }
+                try {
+                    currentstate_arrayList = new ArrayList<>();
+                    currentstate_arrayList.add("Select Any");
+                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
+                    spCurrentStateBr.setAdapter(arrayAdapter_currentState);
+                    arrayAdapter_currentState.notifyDataSetChanged();
+                    spCurrentStateBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
 
             } else {
                 String status = jsonData.optString("status");
@@ -2896,22 +2896,22 @@ public class LoanApplicationFragment_2 extends Fragment {
     public void getCurrentCities(JSONObject jsonData) {
         try {
             if (jsonData.toString().equals("{}")) {
-//                try {
-//                    currentcity_arrayList = new ArrayList<>();
-//                    currentcity_arrayList.add("Select Any");
-//                    arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
-//                    spCurrentCityBr.setAdapter(arrayAdapter_currentCity);
-//                    arrayAdapter_currentCity.notifyDataSetChanged();
-//                    spCurrentCityBr.setSelection(0);
-//                } catch (Exception e) {
-//                    String className = this.getClass().getSimpleName();
-//                    String name = new Object() {
-//                    }.getClass().getEnclosingMethod().getName();
-//                    String errorMsg = e.getMessage();
-//                    String errorMsgDetails = e.getStackTrace().toString();
-//                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-//                }
+                try {
+                    currentcity_arrayList = new ArrayList<>();
+                    currentcity_arrayList.add("Select Any");
+                    arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
+                    spCurrentCityBr.setAdapter(arrayAdapter_currentCity);
+                    arrayAdapter_currentCity.notifyDataSetChanged();
+                    spCurrentCityBr.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
 
             } else {
                 Log.e("SERVER CALL", "getCurrentCities+++" + jsonData);
