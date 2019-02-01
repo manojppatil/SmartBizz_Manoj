@@ -405,6 +405,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                                                     }
                                                 }else rbFemaleCoBr.setError(getString(R.string.you_need_to_select_gender));
                                         }else{
+
                                             if (edtFnameCoBr.getText().toString().equals("")) edtFnameCoBr.setError(getString(R.string.first_name_is_required));
                                             else edtFnameCoBr.setError(null);
 
@@ -1966,6 +1967,16 @@ public class LoanApplicationFragment_1 extends Fragment {
                                 spCurrentCityBr.setSelection(i);
                             }
                         }
+                    }
+
+                    try{
+                        int p=Integer.parseInt(Brhas_aadhar_pan);
+                        if(!Brhas_aadhar_pan.equals("null") && p <= 4){
+                            if (Brhas_aadhar_pan.equals("")) spDocumentBr.setSelection(0);
+                            else spDocumentBr.setSelection(p);
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
                     }
 
                 }
