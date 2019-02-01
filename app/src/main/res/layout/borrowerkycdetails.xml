@@ -348,9 +348,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/email_id"
-                        android:inputType="text|textCapCharacters"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:theme="@style/EditTextStyle"
+                    app:hintTextAppearance="@style/CustomTextAppearance">
+
+                    <EditText
+                        android:id="@+id/edtMobileNoBr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Phone(10 digits)"
+                        android:inputType="phone"
                         android:maxLength="10"
-                        android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </android.support.design.widget.TextInputLayout>
@@ -384,6 +400,7 @@
                 </LinearLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edtPanLayoutBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -404,6 +421,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edtAadhaarLayoutBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

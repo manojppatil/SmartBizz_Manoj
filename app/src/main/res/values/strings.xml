@@ -450,5 +450,7 @@
     <string name="reln_borr">Relation with borrower</string>
     <string name="offc_address">Office Address</string>
 
-
+    <string name="err_country">Select Country Name</string>
+    <string name="err_state">Select State</string>
+    <string name="err_city">Enter city</string>
 </resources>
