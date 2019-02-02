@@ -1406,8 +1406,6 @@ public class LoanApplicationFragment_2 extends Fragment {
                             break;
 
 
-
-
                         default:
                             break;
                     }
