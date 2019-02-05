@@ -62,7 +62,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/background_capsule_primarydark"
                     android:gravity="center"
-                    android:text="@string/documents"
+                    android:text="@string/detailed_info"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/documentation"
+                    android:text="@string/laf_documents"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold|italic" />

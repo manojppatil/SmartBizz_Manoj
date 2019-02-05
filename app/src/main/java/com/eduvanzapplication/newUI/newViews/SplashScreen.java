@@ -267,7 +267,10 @@ public class SplashScreen extends AppCompatActivity {
                         } else {
 
                             Intent intent = new Intent(SplashScreen.this,
-                                    SingInWithTruecaller.class);
+                                    GetMobileNo.class);
+
+//                            Intent intent = new Intent(SplashScreen.this,
+//                                    SingInWithTruecaller.class);
 //                            Intent intent = new Intent(SplashScreen.this,
 //                                    NewTruecallerSignIn.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

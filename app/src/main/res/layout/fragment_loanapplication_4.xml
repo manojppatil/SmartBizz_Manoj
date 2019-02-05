@@ -20,7 +20,6 @@
             android:background="@drawable/background_capsule_rightsided"
             android:gravity="center">
 
-
             <LinearLayout
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
@@ -79,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/documentation"
+                    android:text="@string/post_approval"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold|italic" />
@@ -102,6 +101,169 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="25dp"-->
+                        <!--android:layout_marginRight="25dp"-->
+                        <!--android:layout_marginTop="15dp"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/textView_signsubmit_0"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="@string/step_1"-->
+                            <!--android:textColor="@color/colorPrimary"-->
+                            <!--android:textSize="16sp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content">-->
+
+                            <!--<ImageView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_gravity="top"-->
+                                <!--android:src="@drawable/icon_signapplication" />-->
+
+                            <!--<LinearLayout-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginLeft="10dp"-->
+                                <!--android:orientation="vertical">-->
+
+                                <!--<TextView-->
+                                    <!--android:id="@+id/textView_signsubmit_1"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:paddingTop="7dp"-->
+                                    <!--android:text="@string/sign_the_application"-->
+                                    <!--android:textSize="16sp" />-->
+
+                                <!--<LinearLayout-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="12dp"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/txtdisbursedString"-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:text="Disbursal Status"-->
+                                        <!--android:textSize="16sp" />-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/txtDirsbursdStatus"-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:text="@string/pending"-->
+                                        <!--android:textColor="@color/colorRed"-->
+                                        <!--android:textSize="16sp" />-->
+                                <!--</LinearLayout>-->
+
+
+                                <!--<LinearLayout-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:orientation="vertical">-->
+
+                                <!--</LinearLayout>-->
+
+                                <!--<TextView-->
+                                    <!--android:id="@+id/textView_signsubmit_4"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="20dp"-->
+                                    <!--android:text="@string/choose_a_signing_method"-->
+                                    <!--android:textSize="16sp" />-->
+
+                                <!--<LinearLayout-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="5dp"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<RadioGroup-->
+                                        <!--android:id="@+id/radioGroup_la4"-->
+                                        <!--android:layout_width="match_parent"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:orientation="horizontal">-->
+
+                                        <!--<RadioButton-->
+                                            <!--android:id="@+id/radioButton_manual"-->
+                                            <!--android:layout_width="wrap_content"-->
+                                            <!--android:layout_height="wrap_content"-->
+                                            <!--android:backgroundTint="@color/grey"-->
+                                            <!--android:text="@string/manual"-->
+                                            <!--android:textColor="@color/grey" />-->
+
+                                        <!--<RadioButton-->
+                                            <!--android:id="@+id/radioButton_esign"-->
+                                            <!--android:layout_width="wrap_content"-->
+                                            <!--android:layout_height="wrap_content"-->
+                                            <!--android:layout_marginLeft="50dp"-->
+                                            <!--android:text="@string/esign"-->
+                                            <!--android:textColor="@color/grey" />-->
+                                    <!--</RadioGroup>-->
+
+                                <!--</LinearLayout>-->
+                            <!--</LinearLayout>-->
+
+
+                        <!--</LinearLayout>-->
+
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/linearLayout_manual"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="20dp"-->
+                            <!--android:orientation="horizontal"-->
+                            <!--android:visibility="gone">-->
+
+                            <!--<Button-->
+                                <!--android:id="@+id/button_signnsubmit_downloadApplication"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="40dp"-->
+                                <!--android:layout_marginBottom="20dp"-->
+                                <!--android:layout_marginRight="5dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:background="@color/colorPrimary"-->
+                                <!--android:text="@string/download_application"-->
+                                <!--android:textColor="@color/white"-->
+                                <!--android:textSize="16sp" />-->
+
+                            <!--<Button-->
+                                <!--android:id="@+id/button_signnsubmit_uploadApplication"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="40dp"-->
+                                <!--android:layout_marginBottom="20dp"-->
+                                <!--android:layout_marginLeft="5dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:background="@color/colorPrimary"-->
+                                <!--android:text="@string/upload_application"-->
+                                <!--android:textColor="@color/white"-->
+                                <!--android:textSize="16sp" />-->
+                        <!--</LinearLayout>-->
+
+                        <!--<Button-->
+                            <!--android:id="@+id/button_downloadSignedApplication"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="30dp"-->
+                            <!--android:layout_marginBottom="20dp"-->
+                            <!--android:layout_marginRight="5dp"-->
+                            <!--android:layout_marginTop="20dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@color/colorPrimary"-->
+                            <!--android:text="@string/download_signed_application"-->
+                            <!--android:textColor="@color/white"-->
+                            <!--android:textSize="16sp"-->
+                            <!--android:visibility="gone" />-->
+
+                    <!--</LinearLayout>-->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -114,7 +276,7 @@
                             android:id="@+id/textView_signsubmit_0"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/step_1"
+                            android:text="@string/step_2"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
 
@@ -136,7 +298,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/textView_signsubmit_1"
+                                    android:id="@+id/txtSignTitle2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:paddingTop="7dp"
@@ -150,14 +312,14 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:id="@+id/textView_signsubmit_2"
+                                        android:id="@+id/txtSubmitString2"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/signing_status"
                                         android:textSize="16sp" />
 
                                     <TextView
-                                        android:id="@+id/textView_signsubmit_3"
+                                        android:id="@+id/txtSubmitstatus2"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/pending"
@@ -174,7 +336,7 @@
                                 </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/textView_signsubmit_4"
+                                    android:id="@+id/txtChooseSignType"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="20dp"
@@ -188,13 +350,13 @@
                                     android:orientation="horizontal">
 
                                     <RadioGroup
-                                        android:id="@+id/radioGroup_la4"
+                                        android:id="@+id/rgSignType"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal">
 
                                         <RadioButton
-                                            android:id="@+id/radioButton_manual"
+                                            android:id="@+id/rbManual"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:backgroundTint="@color/grey"
@@ -202,7 +364,7 @@
                                             android:textColor="@color/grey" />
 
                                         <RadioButton
-                                            android:id="@+id/radioButton_esign"
+                                            android:id="@+id/rbEsign"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="50dp"
@@ -217,7 +379,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/linearLayout_manual"
+                            android:id="@+id/linManual"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
@@ -225,7 +387,7 @@
                             android:visibility="gone">
 
                             <Button
-                                android:id="@+id/button_signnsubmit_downloadApplication"
+                                android:id="@+id/btnSignDownloadApplication"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginBottom="20dp"
@@ -237,7 +399,7 @@
                                 android:textSize="16sp" />
 
                             <Button
-                                android:id="@+id/button_signnsubmit_uploadApplication"
+                                android:id="@+id/btnSignUplaodApplication"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginBottom="20dp"
@@ -250,7 +412,7 @@
                         </LinearLayout>
 
                         <Button
-                            android:id="@+id/button_downloadSignedApplication"
+                            android:id="@+id/btnDownloadSignedApplication"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginBottom="20dp"
@@ -265,7 +427,6 @@
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -278,7 +439,7 @@
                             android:id="@+id/textView_signsubmit_5"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/step_2"
+                            android:text="Step 3"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
 
@@ -300,7 +461,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/textView_signsubmit_6"
+                                    android:id="@+id/txtSignTitle3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:paddingTop="7dp"
@@ -314,7 +475,7 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:id="@+id/textView_signsubmit_7"
+                                        android:id="@+id/txtPaymentString"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -322,7 +483,7 @@
                                         android:textSize="16sp" />
 
                                     <TextView
-                                        android:id="@+id/textView_signsubmit_8"
+                                        android:id="@+id/txtPaymentStatus"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -339,7 +500,7 @@
                                     android:orientation="horizontal">
 
                                     <RadioGroup
-                                        android:id="@+id/radioGroupPayment"
+                                        android:id="@+id/rgPayment"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal">

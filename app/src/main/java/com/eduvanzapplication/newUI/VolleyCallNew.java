@@ -898,6 +898,27 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else if (screen.equalsIgnoreCase("dtlgetOffCitiesCoBr")) {
+            try {//{"result":{"docFinish":1,"lafDownloadPath":"http:\/\/159.89.204.41\/eduvanzbeta\/uploads\/lafdocumentstore\/610\/A180626002_Loan_Application_1530083542.pdf","signedApplicationStatus":0,"docPath":[],"paymentStatus":0,"transactionId":"","transactionAmount":800,"transactionDate":""},"status":0,"message":"failure"}
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).dtlgetOffCitiesCoBr(jsonDataO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("dtlgetOffStatesCoBr")) {
+            try {//{"result":{"docFinish":1,"lafDownloadPath":"http:\/\/159.89.204.41\/eduvanzbeta\/uploads\/lafdocumentstore\/610\/A180626002_Loan_Application_1530083542.pdf","signedApplicationStatus":0,"docPath":[],"paymentStatus":0,"transactionId":"","transactionAmount":800,"transactionDate":""},"status":0,"message":"failure"}
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).dtlgetOffStatesCoBr(jsonDataO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("editDetailedInformation")) {
+            try {//{"result":{"docFinish":1,"lafDownloadPath":"http:\/\/159.89.204.41\/eduvanzbeta\/uploads\/lafdocumentstore\/610\/A180626002_Loan_Application_1530083542.pdf","signedApplicationStatus":0,"docPath":[],"paymentStatus":0,"transactionId":"","transactionAmount":800,"transactionDate":""},"status":0,"message":"failure"}
+                jsonDataO = new JSONObject(s);
+                ((LoanApplicationFragment_2) mfragment).editDetailedInformation(jsonDataO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }

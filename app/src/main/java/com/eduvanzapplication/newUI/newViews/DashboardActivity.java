@@ -568,7 +568,8 @@ public class DashboardActivity extends AppCompatActivity
 //            editor.putString("fcm_id", fcmID);
 //            editor.apply();
 //            editor.commit();
-                            Intent intent = new Intent(DashboardActivity.this, SingInWithTruecaller.class);
+                            Intent intent = new Intent(DashboardActivity.this, GetMobileNo.class);
+//                            Intent intent = new Intent(DashboardActivity.this, SingInWithTruecaller.class);
 //                            Intent intent = new Intent(DashboardActivity.this, NewTruecallerSignIn.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);

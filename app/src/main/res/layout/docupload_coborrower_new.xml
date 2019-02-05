@@ -64,7 +64,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txt_kyc_profilephoto_co"
+                        android:id="@+id/txtPhoto1CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -80,7 +80,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txt_profilephoto_co"
+                            android:id="@+id/txtPhotoTitle1CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -91,20 +91,20 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageView_kyc_profilephoto_co"
+                            android:id="@+id/imgPhoto1CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="75dp"
-                            android:layout_below="@+id/txt_profilephoto_co"
+                            android:layout_below="@+id/txtPhotoTitle1CoBr"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
                             android:scaleType="centerCrop" />
 
                         <Button
-                            android:id="@+id/button_kyc_profilephoto_co"
+                            android:id="@+id/btnPhoto1CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:layout_alignParentBottom="true"
-                            android:layout_below="@+id/txt_profilephoto_co"
+                            android:layout_below="@+id/txtPhotoTitle1CoBr"
                             android:layout_margin="5dp"
                             android:background="@color/colorSecondary"
                             android:text="@string/upload"
@@ -114,7 +114,7 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView_uploadtick9_co"
+                        android:id="@+id/imgPhotoUploadTickCoBr"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
@@ -128,7 +128,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txt_kyc_photoId_co"
+                        android:id="@+id/txtAadhaar3CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -144,7 +144,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txt_photoIDProof_co"
+                            android:id="@+id/txtAadhaarTitle3CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -155,20 +155,20 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageView_kyc_photoId_co"
+                            android:id="@+id/imgAadhaar3CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="75dp"
-                            android:layout_below="@+id/txt_photoIDProof_co"
+                            android:layout_below="@+id/txtAadhaarTitle3CoBr"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
                             android:scaleType="centerCrop" />
 
                         <Button
-                            android:id="@+id/button_kyc_photoID_co"
+                            android:id="@+id/btnAadhaar3CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:layout_alignParentBottom="true"
-                            android:layout_below="@+id/txt_profilephoto_co"
+                            android:layout_below="@+id/txtAadhaarTitle3CoBr"
                             android:layout_margin="5dp"
                             android:background="@color/colorSecondary"
                             android:text="@string/upload"
@@ -178,7 +178,7 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView_uploadtick1_co"
+                        android:id="@+id/imgAadhaarUploadTick3CoBr"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
@@ -193,7 +193,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txt_address_co"
+                        android:id="@+id/txtPan2CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -209,7 +209,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txt_addressProof_co"
+                            android:id="@+id/txtPanTitleCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -220,20 +220,20 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageview_kyc_addressproof_co"
+                            android:id="@+id/imgPan2CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="75dp"
-                            android:layout_below="@+id/txt_addressProof_co"
+                            android:layout_below="@+id/imgPan2CoBr"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
                             android:scaleType="centerCrop" />
 
                         <Button
-                            android:id="@+id/button_kyc_addressproof_co"
+                            android:id="@+id/btnPan2CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:layout_alignParentBottom="true"
-                            android:layout_below="@+id/txt_addressProof_co"
+                            android:layout_below="@+id/imgPan2CoBr"
                             android:layout_margin="5dp"
                             android:background="@color/colorSecondary"
                             android:text="@string/upload"
@@ -244,7 +244,7 @@
 
 
                     <ImageView
-                        android:id="@+id/imageView_uploadtick2_co"
+                        android:id="@+id/imgPanUploadTick2CoBr"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
@@ -259,7 +259,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txt_signature_co"
+                        android:id="@+id/txtAddress30CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -275,7 +275,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txt_signatureProof_co"
+                            android:id="@+id/txtAddress30TitleCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -286,20 +286,20 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageview_kyc_signatureproof_co"
+                            android:id="@+id/imgAddress30CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="75dp"
-                            android:layout_below="@+id/txt_signatureProof_co"
+                            android:layout_below="@+id/txtAddress30TitleCoBr"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
                             android:scaleType="centerCrop" />
 
                         <Button
-                            android:id="@+id/button_kyc_signatureproof_co"
+                            android:id="@+id/btnAddress30CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:layout_alignParentBottom="true"
-                            android:layout_below="@+id/txt_addressProof_co"
+                            android:layout_below="@+id/txtAddress30TitleCoBr"
                             android:layout_margin="5dp"
                             android:background="@color/colorSecondary"
                             android:text="@string/upload"
@@ -310,7 +310,7 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView_uploadtick3_co"
+                        android:id="@+id/imgAddressUploadTick30CoBr"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
@@ -342,7 +342,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txt_income_co"
+                        android:id="@+id/txtSalarySlip18CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -358,7 +358,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txt_incomeproof_co"
+                            android:id="@+id/txtSalarySlipTitle18CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -369,20 +369,20 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageview_finance_incomeproof_co"
+                            android:id="@+id/imgSalarySlip18CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="75dp"
-                            android:layout_below="@+id/txt_incomeproof_co"
+                            android:layout_below="@+id/txtSalarySlipTitle18CoBr"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
                             android:scaleType="centerCrop" />
 
                         <Button
-                            android:id="@+id/button_finance_incomeproof_co"
+                            android:id="@+id/btnSalarySlip18CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:layout_alignParentBottom="true"
-                            android:layout_below="@+id/txt_incomeproof_co"
+                            android:layout_below="@+id/txtSalarySlipTitle18CoBr"
                             android:layout_margin="5dp"
                             android:background="@color/colorSecondary"
                             android:text="@string/upload"
@@ -393,7 +393,7 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView_uploadtick4_co"
+                        android:id="@+id/imgSalarySlipUploadTick18CoBr"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
@@ -409,7 +409,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txt_bank_co"
+                        android:id="@+id/txtBankStmt19CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -425,6 +425,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/txtBankStmtTitle19CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -435,20 +436,20 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageview_finance_bankstatement_co"
+                            android:id="@+id/imgBankStmt19CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="75dp"
-                            android:layout_below="@+id/txt_bankstatement"
+                            android:layout_below="@+id/txtBankStmtTitle19CoBr"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
                             android:scaleType="centerCrop" />
 
                         <Button
-                            android:id="@+id/button_finance_bankstatement_co"
+                            android:id="@+id/btnBankStmt19CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:layout_alignParentBottom="true"
-                            android:layout_below="@+id/txt_incomeproof_co"
+                            android:layout_below="@+id/txtBankStmtTitle19CoBr"
                             android:layout_margin="5dp"
                             android:background="@color/colorSecondary"
                             android:text="@string/upload"
@@ -458,7 +459,7 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView_uploadtick5_co"
+                        android:id="@+id/imgBankStmtUploadTick19CoBr"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
@@ -500,7 +501,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txt_otherdocument_co"
+                        android:id="@+id/txtOtherDoc31CoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -516,7 +517,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txt_otherproof_co"
+                            android:id="@+id/txtOtherDocTitle31CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -527,20 +528,20 @@
                             android:textSize="10sp" />
 
                         <ImageView
-                            android:id="@+id/imageview_otherdocument_co"
+                            android:id="@+id/imgOtherDoc31CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="75dp"
-                            android:layout_below="@+id/txt_otherproof_co"
+                            android:layout_below="@+id/txtOtherDocTitle31CoBr"
                             android:layout_margin="5dp"
                             android:background="@drawable/background_docupload"
                             android:scaleType="centerCrop" />
 
                         <Button
-                            android:id="@+id/button_otherdocument_co"
+                            android:id="@+id/btnOtherDoc31CoBr"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:layout_alignParentBottom="true"
-                            android:layout_below="@+id/txt_otherdocument_co"
+                            android:layout_below="@+id/txtOtherDocTitle31CoBr"
                             android:layout_margin="5dp"
                             android:background="@color/colorSecondary"
                             android:text="@string/upload"
@@ -550,7 +551,7 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/imageView_uploadtick8_co"
+                        android:id="@+id/imgOtherDocUploadTick31CoBr"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerInParent="true"

@@ -70,7 +70,7 @@ public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequested
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.txtTenure.setText(horizontalList.get(position).tenure);
+        holder.txtTenure.setText(horizontalList.get(position).tenure +" Months");
         holder.txtRoi.setText(horizontalList.get(position).emi_amount);
         holder.txtLoanAmount.setText(horizontalList.get(position).loan_amount);
         holder.txtEMIAmount.setText(horizontalList.get(position).emi_amount);

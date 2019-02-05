@@ -264,8 +264,8 @@ public class EligibilityCheckFragment_5 extends Fragment {
             String url = MainApplication.mainUrl + "dashboard/saveInstitute";
             Map<String, String> params = new HashMap<String, String>();
 
-            params.put("lead_id", lead_id);
-            params.put("applicant_id", application_id);
+                                                                                                                                                                params.put("lead_id", MainApplication.lead_id);
+            params.put("applicant_id", MainApplication.applicant_id);
             params.put("institute", instituteID);
             params.put("course_name", courseID);
             params.put("location", locationID);

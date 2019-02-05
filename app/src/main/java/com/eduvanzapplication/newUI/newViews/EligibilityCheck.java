@@ -17,6 +17,7 @@ import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.fragments.EligibilityCheckFragment_1;
 import com.eduvanzapplication.newUI.fragments.EligibilityCheckFragment_3;
+import com.eduvanzapplication.newUI.fragments.EligibilityCheckFragment_4;
 import com.eduvanzapplication.newUI.fragments.EligibilityCheckFragment_5;
 import com.eduvanzapplication.newUI.fragments.EligibilityCheckFragment_6;
 import com.eduvanzapplication.newUI.services.LocationService;
@@ -35,7 +36,7 @@ public class EligibilityCheck extends AppCompatActivity {
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle(R.string.title_eligibility_check);
+            getSupportActionBar().setTitle("Eduvanz");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
             toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));

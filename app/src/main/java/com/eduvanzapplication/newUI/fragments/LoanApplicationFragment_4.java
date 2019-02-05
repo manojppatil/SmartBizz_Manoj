@@ -72,10 +72,6 @@ import static com.eduvanzapplication.newUI.MainApplication.staticdownloadurl;
  * A simple {@link Fragment} subclass.
  */
 
-/**
- * SEEK BAR LINK - https://github.com/jaredrummler/MaterialSpinner
- */
-
 
 public class LoanApplicationFragment_4 extends Fragment {
 
@@ -85,14 +81,14 @@ public class LoanApplicationFragment_4 extends Fragment {
     public static String uploadFilePath = "", userID = "", userFirst = "", userLast = "", ipaddress = "",
             applicationStatus = "", userEmailid = "", amount = "", transactionId = "";
     public int SELECT_DOC = 2;
-    public static Button buttonNext, buttonPrevious, buttonUpload, buttonDownload,
-            buttonDownloadSignedApplication, buttonPay;
+    public static Button buttonNext, buttonPrevious, btnSignUplaodApplication, btnSignDownloadApplication,
+            btnDownloadSignedApplication, buttonPay;
     Typeface typefaceFont, typefaceFontBold;
-    public static TextView textView1, textView2, textView3, textView17, textView4, textView5, textView6, textView7,
-            textView8, textView9, textView10, textView11, textView12, textView13, textView14, textView19,
+    public static TextView textView1, textView2, textView3, textView17, txtSignTitle2, txtSubmitString2, txtSubmitstatus2, txtChooseSignType,
+            textView8, txtSignTitle3, txtPaymentString, txtPaymentStatus, textView12, textView13, textView14, textView19,
             textView15, textView16, textView18;
-    public static RadioButton radioButtonManual, radioButtonEsign, rdpaytm, rdatom;
-    public static LinearLayout linearLayoutManual, linearLayout_paymentDetails, linpaymentoptions, linnote;
+    public static RadioButton rbManual, rbEsign, rdpaytm, rdatom;
+    public static LinearLayout linManual, linearLayout_paymentDetails, linpaymentoptions, linnote;
     MainApplication mainApplication;
     String userId;
     String downloadUrl = "", downloadSignedUrl = "";
@@ -100,7 +96,7 @@ public class LoanApplicationFragment_4 extends Fragment {
     SharedPreferences sharedPreferences;
     DownloadManager downloadManager;
     StringBuffer sb;
-    public static RadioGroup radioGroupla4, radioGroupPayment;
+    public static RadioGroup rgSignType, rgPayment;
 
     private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
 
@@ -129,7 +125,6 @@ public class LoanApplicationFragment_4 extends Fragment {
                     while ((ch = fileInputStream.read()) != -1)
                         strContent.append((char) ch);
 
-//milind.desai@gmail.com
 //                    JSONObject responseObj = new JSONObject(strContent.toString());
 //                    JSONArray countriesObj = responseObj.getJSONArray("countries");
 //
@@ -201,8 +196,8 @@ public class LoanApplicationFragment_4 extends Fragment {
 
             progressBar = (ProgressBar) view.findViewById(R.id.progressBar_signsubmit);
 
-            radioGroupla4 = (RadioGroup) view.findViewById(R.id.radioGroup_la4);
-            radioGroupPayment = (RadioGroup) view.findViewById(R.id.radioGroupPayment);
+            rgSignType = (RadioGroup) view.findViewById(R.id.rgSignType);
+            rgPayment = (RadioGroup) view.findViewById(R.id.rgPayment);
             textView1 = (TextView) view.findViewById(R.id.textView1_l4);
             mainApplication.applyTypeface(textView1, context);
             textView2 = (TextView) view.findViewById(R.id.textView2_l4);
@@ -210,23 +205,23 @@ public class LoanApplicationFragment_4 extends Fragment {
             textView3 = (TextView) view.findViewById(R.id.textView3_l4);
             mainApplication.applyTypefaceBold(textView3, context);
 
-            textView4 = (TextView) view.findViewById(R.id.textView_signsubmit_1);
-            mainApplication.applyTypeface(textView4, context);
-            textView5 = (TextView) view.findViewById(R.id.textView_signsubmit_2);
-            mainApplication.applyTypeface(textView5, context);
+            txtSignTitle2 = (TextView) view.findViewById(R.id.txtSignTitle2);
+            mainApplication.applyTypeface(txtSignTitle2, context);
+            txtSubmitString2 = (TextView) view.findViewById(R.id.txtSubmitString2);
+            mainApplication.applyTypeface(txtSubmitString2, context);
 
-            textView6 = (TextView) view.findViewById(R.id.textView_signsubmit_3);
-            mainApplication.applyTypeface(textView6, context);
-            textView7 = (TextView) view.findViewById(R.id.textView_signsubmit_4);
-            mainApplication.applyTypeface(textView7, context);
+            txtSubmitstatus2 = (TextView) view.findViewById(R.id.txtSubmitstatus2);
+            mainApplication.applyTypeface(txtSubmitstatus2, context);
+            txtChooseSignType = (TextView) view.findViewById(R.id.txtChooseSignType);
+            mainApplication.applyTypeface(txtChooseSignType, context);
             textView8 = (TextView) view.findViewById(R.id.textView_signsubmit_5);
             mainApplication.applyTypeface(textView8, context);
-            textView9 = (TextView) view.findViewById(R.id.textView_signsubmit_6);
-            mainApplication.applyTypeface(textView9, context);
-            textView10 = (TextView) view.findViewById(R.id.textView_signsubmit_7);
-            mainApplication.applyTypeface(textView10, context);
-            textView11 = (TextView) view.findViewById(R.id.textView_signsubmit_8);
-            mainApplication.applyTypeface(textView11, context);
+            txtSignTitle3 = (TextView) view.findViewById(R.id.txtSignTitle3);
+            mainApplication.applyTypeface(txtSignTitle3, context);
+            txtPaymentString = (TextView) view.findViewById(R.id.txtPaymentString);
+            mainApplication.applyTypeface(txtPaymentString, context);
+            txtPaymentStatus = (TextView) view.findViewById(R.id.txtPaymentStatus);
+            mainApplication.applyTypeface(txtPaymentStatus, context);
             textView12 = (TextView) view.findViewById(R.id.textView_signsubmit_9);
             mainApplication.applyTypeface(textView12, context);
             textView13 = (TextView) view.findViewById(R.id.textView_signsubmit_10);
@@ -266,36 +261,36 @@ public class LoanApplicationFragment_4 extends Fragment {
                 }
             });
 
-            linearLayoutManual = (LinearLayout) view.findViewById(R.id.linearLayout_manual);
+            linManual = (LinearLayout) view.findViewById(R.id.linManual);
 
             linearLayout_paymentDetails = (LinearLayout) view.findViewById(R.id.linearLayout_paymentdetails);
             linpaymentoptions = (LinearLayout) view.findViewById(R.id.linpaymentoptions);
             linnote = (LinearLayout) view.findViewById(R.id.linnote);
 
-            radioButtonManual = (RadioButton) view.findViewById(R.id.radioButton_manual);
+            rbManual = (RadioButton) view.findViewById(R.id.rbManual);
             rdpaytm = (RadioButton) view.findViewById(R.id.rdpaytm);
             rdatom = (RadioButton) view.findViewById(R.id.rdatom);
 
-            mainApplication.applyTypeface(radioButtonManual, context);
-            radioButtonManual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            mainApplication.applyTypeface(rbManual, context);
+            rbManual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (radioButtonManual.isChecked()) {
-                        linearLayoutManual.setVisibility(View.VISIBLE);
-                    } else if (!radioButtonManual.isChecked()) {
-                        linearLayoutManual.setVisibility(View.GONE);
+                    if (rbManual.isChecked()) {
+                        linManual.setVisibility(View.VISIBLE);
+                    } else if (!rbManual.isChecked()) {
+                        linManual.setVisibility(View.GONE);
                     }
                 }
             });
 
-            radioButtonEsign = (RadioButton) view.findViewById(R.id.radioButton_esign);
-            mainApplication.applyTypeface(radioButtonEsign, context);
+            rbEsign = (RadioButton) view.findViewById(R.id.rbEsign);
+            mainApplication.applyTypeface(rbEsign, context);
 
-            radioButtonEsign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            rbEsign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    if (radioButtonEsign.isChecked()) {
+                    if (rbEsign.isChecked()) {
                         /** API CALL **/
                         try {
                             String ipaddress = Utils.getIPAddress(true);
@@ -323,8 +318,8 @@ public class LoanApplicationFragment_4 extends Fragment {
             });
 
 
-            buttonDownload = (Button) view.findViewById(R.id.button_signnsubmit_downloadApplication);
-            mainApplication.applyTypeface(buttonDownload, context);
+            btnSignDownloadApplication = (Button) view.findViewById(R.id.btnSignDownloadApplication);
+            mainApplication.applyTypeface(btnSignDownloadApplication, context);
 
             buttonPay = (Button) view.findViewById(R.id.button_signnsubmit_payment);
             buttonPay.setBackgroundColor(((Activity) context).getResources().getColor(R.color.grey));
@@ -333,7 +328,7 @@ public class LoanApplicationFragment_4 extends Fragment {
             buttonPay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (textView6.getText().toString().trim().equals("Signed")) {
+                    if (txtSubmitstatus2.getText().toString().trim().equals("Signed")) {
                         /** API CALL **/
                         try {
                             String url = MainApplication.mainUrl + "epayment/getKycPaymentRelatedInfo";
@@ -362,7 +357,7 @@ public class LoanApplicationFragment_4 extends Fragment {
                 }
             });
 
-            buttonDownload.setOnClickListener(new View.OnClickListener() {
+            btnSignDownloadApplication.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -387,8 +382,8 @@ public class LoanApplicationFragment_4 extends Fragment {
 
             });
 
-            buttonDownloadSignedApplication = (Button) view.findViewById(R.id.button_downloadSignedApplication);
-            buttonDownloadSignedApplication.setOnClickListener(new View.OnClickListener() {
+            btnDownloadSignedApplication = (Button) view.findViewById(R.id.btnDownloadSignedApplication);
+            btnDownloadSignedApplication.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     progressBar.setVisibility(View.VISIBLE);
@@ -405,10 +400,10 @@ public class LoanApplicationFragment_4 extends Fragment {
                 }
             });
 
-            buttonUpload = (Button) view.findViewById(R.id.button_signnsubmit_uploadApplication);
-            mainApplication.applyTypeface(buttonUpload, context);
+            btnSignUplaodApplication = (Button) view.findViewById(R.id.btnSignUplaodApplication);
+            mainApplication.applyTypeface(btnSignUplaodApplication, context);
 
-            buttonUpload.setOnClickListener(new View.OnClickListener() {
+            btnSignUplaodApplication.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     galleryDocIntent();
@@ -420,12 +415,12 @@ public class LoanApplicationFragment_4 extends Fragment {
             context.registerReceiver(downloadReceiver, filter);
 
             if (applicationStatus.equalsIgnoreCase("1")) {
-                linearLayoutManual.setVisibility(View.GONE);
-                buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
-                textView7.setVisibility(View.GONE);
-                radioGroupla4.setVisibility(View.GONE);
-                textView6.setText("Signed");
-                textView6.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
+                linManual.setVisibility(View.GONE);
+                btnDownloadSignedApplication.setVisibility(View.VISIBLE);
+                txtChooseSignType.setVisibility(View.GONE);
+                rgSignType.setVisibility(View.GONE);
+                txtSubmitstatus2.setText("Signed");
+                txtSubmitstatus2.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
     //            buttonPay.setEnabled(true);
                 buttonPay.setBackgroundColor(((Activity) context).getResources().getColor(R.color.colorRed));
 
@@ -501,24 +496,23 @@ public class LoanApplicationFragment_4 extends Fragment {
             Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
-        linearLayoutManual.setVisibility(View.GONE);
-        buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
-        textView7.setVisibility(View.GONE);
-        radioGroupla4.setVisibility(View.GONE);
-        textView6.setText("Signed");
-        textView6.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
+        linManual.setVisibility(View.GONE);
+        btnDownloadSignedApplication.setVisibility(View.VISIBLE);
+        txtChooseSignType.setVisibility(View.GONE);
+        rgSignType.setVisibility(View.GONE);
+        txtSubmitstatus2.setText("Signed");
+        txtSubmitstatus2.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
     }
 
     public void digioFailure(String documentId, int code, String response) {
-        radioButtonEsign.setChecked(false);
+        rbEsign.setChecked(false);
     }
 
     public void atomPaymentSuccessful() {
         linearLayout_paymentDetails.setVisibility(View.VISIBLE);
-        textView11.setText(R.string.paid);
-        textView11.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
+        txtPaymentStatus.setText(R.string.paid);
+        txtPaymentStatus.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
     }
-
 
     public void downLoad(String uri, int status) {
         try {
@@ -737,12 +731,12 @@ public class LoanApplicationFragment_4 extends Fragment {
                             public void run() {
                                 Toast.makeText(context, mData1, Toast.LENGTH_SHORT).show();
 
-                                linearLayoutManual.setVisibility(View.GONE);
-                                buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
-                                textView7.setVisibility(View.GONE);
-                                radioGroupla4.setVisibility(View.GONE);
-                                textView6.setText("Signed");
-                                textView6.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
+                                linManual.setVisibility(View.GONE);
+                                btnDownloadSignedApplication.setVisibility(View.VISIBLE);
+                                txtChooseSignType.setVisibility(View.GONE);
+                                rgSignType.setVisibility(View.GONE);
+                                txtSubmitstatus2.setText("Signed");
+                                txtSubmitstatus2.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
                                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 try {
@@ -1316,12 +1310,12 @@ public class LoanApplicationFragment_4 extends Fragment {
 
                 if (jsonObject.getString("signedApplicationStatus").equalsIgnoreCase("1")) {
                     try {
-                        linearLayoutManual.setVisibility(View.GONE);
-                        buttonDownloadSignedApplication.setVisibility(View.VISIBLE);
-                        textView7.setVisibility(View.GONE);
-                        radioGroupla4.setVisibility(View.GONE);
-                        textView6.setText("Signed");
-                        textView6.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
+                        linManual.setVisibility(View.GONE);
+                        btnDownloadSignedApplication.setVisibility(View.VISIBLE);
+                        txtChooseSignType.setVisibility(View.GONE);
+                        rgSignType.setVisibility(View.GONE);
+                        txtSubmitstatus2.setText("Signed");
+                        txtSubmitstatus2.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
                     } catch (Exception e) {
                         String className = this.getClass().getSimpleName();
                         String name = new Object() {
@@ -1337,8 +1331,8 @@ public class LoanApplicationFragment_4 extends Fragment {
                     linearLayout_paymentDetails.setVisibility(View.VISIBLE);
                     linpaymentoptions.setVisibility(View.GONE);
                     linnote.setVisibility(View.GONE);
-                    textView11.setText(R.string.paid);
-                    textView11.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
+                    txtPaymentStatus.setText(R.string.paid);
+                    txtPaymentStatus.setTextColor(((Activity) context).getResources().getColor(R.color.colorPrimary));
                     textView14.setText(jsonObject.getString("transactionAmount"));
                     textView16.setText(jsonObject.getString("transactionId"));
                     textView18.setText(jsonObject.getString("transactionDate"));

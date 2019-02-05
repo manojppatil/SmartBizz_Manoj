@@ -25,6 +25,7 @@
                 android:id="@+id/relid"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_5sdp"
                 android:layout_alignParentLeft="true"
                 android:orientation="vertical">
 
@@ -32,6 +33,7 @@
                     android:id="@+id/rbOffered"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:minWidth="@dimen/_25sdp"
                     android:gravity="center"
                     android:checked="false"
                     android:clickable="false"
@@ -45,6 +47,7 @@
                 android:layout_width="@dimen/_55sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_toLeftOf="@+id/linlaf1"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
@@ -71,6 +74,7 @@
                             android:id="@+id/txtTenure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:padding="@dimen/_1sdp"
                             android:maxWidth="@dimen/_80sdp"
                             android:layout_marginLeft="@dimen/_2sdp"
                             android:text="6 Months"
@@ -115,6 +119,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_2sdp"
+                            android:padding="@dimen/_1sdp"
                             android:text="₹ "
                             android:textColor="@color/textcolordark"
                             android:textSize="14sp" />
@@ -123,6 +128,7 @@
                             android:id="@+id/txtEMIAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:padding="@dimen/_1sdp"
                             android:text="3,500"
                             android:textColor="@color/textcolordark"
                             android:textSize="14sp" />
@@ -149,6 +155,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="@dimen/_1sdp"
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:text="ROI(Flat%)"
                         android:textColor="@color/colorPrimary"
@@ -199,6 +206,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_2sdp"
+                            android:padding="@dimen/_1sdp"
                             android:text="₹ "
                             android:textColor="@color/textcolordark"
                             android:textSize="14sp" />
@@ -207,6 +215,7 @@
                             android:id="@+id/txtLoanAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:padding="@dimen/_1sdp"
                             android:text="35,500"
                             android:textColor="@color/textcolordark"
                             android:textSize="14sp" />

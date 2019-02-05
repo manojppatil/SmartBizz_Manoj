@@ -22,6 +22,7 @@ public class MainApplication {
 
     public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
 
+//    public static String mainUrl = "http://192.168.1.26/eduvanzapi/"; //Dharam
 //    public static String mainUrl = "http://192.168.0.115/eduvanzapi/"; //Sachin
 //    public static String mainUrl = "http://192.168.1.78/eduvanzapi/"; //Sachin
 //    public static String mainUrl = "http://192.168.0.108/eduvanzapi/"; //Samir
@@ -29,12 +30,14 @@ public class MainApplication {
 
 //    public static String mainUrl = "https://api.eduvanz.com/"; //PRODUCTION
 //SELECT `id`, `application_id`, `student_id`,`created_datetime`, `status`,`algo_score`, `calulated_algo_score`, `calculated_algo_mapped_id`, `friendly_score`, `app_stats_score`, `has_friendly_score_opted`, `is_email_verified`, `is_mobile_verified`, `pq_score`, `cibil_status`, `cibil_application_id`, `cibil_score`, `cibil_response`, `ntc_score`, `co_cibil_status`, `co_cibil_application_id`, `co_cibil_score`, `co_ntc_score`, `co_cibil_response`,`modified_datetime`, `modified_by_id`, `modified_by_ip`, `modified_by_type`, `created_by_type`, `deleted_by_type`, `coborrower_created_by_ip`, `coborrower_created_datetime`, `lead_id`, `is_updated`, `lead_source`, `instant_sanction_status` FROM `pq_form` WHERE `lead_source` = 2 ORDER BY `created_datetime` DESC
-    public static String auth_token ="",lead_id ="", application_id = "" ;
+    public static String auth_token ="",lead_id ="", application_id = "",applicant_id ="" ;
     public static int previous, previousfragment3;
     public static String mainapp_courseID = "", mainapp_instituteID = "";
     public static String mainapp_locationID = "";
     public static String mainapp_coursefee = "";
     public static String mainapp_loanamount = "";
+    public static Boolean isBorrower = true;
+
 
     public static String mainapp_fammilyincome = "";
     public static String mainapp_doccheck = "";

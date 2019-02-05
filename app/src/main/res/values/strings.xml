@@ -453,4 +453,5 @@
     <string name="err_country">Select Country Name</string>
     <string name="err_state">Select State</string>
     <string name="err_city">Enter city</string>
+    <string name="post_approval">Post Approval</string>
 </resources>

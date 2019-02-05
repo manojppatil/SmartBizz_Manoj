@@ -21,8 +21,8 @@ android {
     }
     lintOptions {
         disable 'MissingTranslation'
-//        checkReleaseBuilds false
-//        abortOnError false
+        checkReleaseBuilds false
+        abortOnError false
     }
     configurations {
         all*.exclude group: 'com.android.volley'

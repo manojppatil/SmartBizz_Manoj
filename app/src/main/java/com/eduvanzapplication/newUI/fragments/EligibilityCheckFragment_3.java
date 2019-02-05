@@ -50,7 +50,7 @@ import static com.eduvanzapplication.newUI.MainApplication.TAG;
 public class EligibilityCheckFragment_3 extends Fragment {
 
     public static Spinner spCity, spCountry, spState;
-    EditText edtPincode, edtAddressline1, edtAddressline2;
+    public static EditText edtPincode, edtAddressline1, edtAddressline2;
     public static Context context;
     public static Fragment mFragment;
     Button buttonNext, buttonPrevious;
@@ -133,6 +133,14 @@ public class EligibilityCheckFragment_3 extends Fragment {
                         if (!currentcityID.equalsIgnoreCase("") && !currentstateID.equalsIgnoreCase("") &&
                                 !currentcountryID.equalsIgnoreCase("")) {
 
+//                            try {
+//                                setSpinnerError(spCountry, null);
+//                                setSpinnerError(spState, null);
+//                                setSpinnerError(spCity, null);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+
                             if (edtPincode.getText().toString().length() == 6) {
 
                                 MainApplication.pincode = edtPincode.getText().toString().trim();
@@ -151,31 +159,40 @@ public class EligibilityCheckFragment_3 extends Fragment {
                                 edtPincode.requestFocus();
                                 return;
                             }
+                        }else{
+                            if (spCountry.getSelectedItemPosition() <= 0) {
+                                setSpinnerError(spCountry, "Please select country");
+                            }
+                            if (spState.getSelectedItemPosition() <= 0) {
+                                setSpinnerError(spState, "Please select state");
+                            } if (spCity.getSelectedItemPosition() <= 0) {
+                                setSpinnerError(spCity, "Please select city");
+                            }
                         }
 
                     } else {
 
-                        EligibilityCheckFragment_4 eligibilityCheckFragment_4 = new EligibilityCheckFragment_4();
-                        transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_4).commit();
-//
-//                        if (edtPincode.getText().toString().equalsIgnoreCase("")) {
-//                            edtPincode.setError(getString(R.string.current_pin_code_is_required));
-//                            edtPincode.requestFocus();
-//                        } else {
-//                            edtPincode.setError(null);
-//                        }
-//                        if (edtAddressline1.getText().toString().equalsIgnoreCase("")) {
-//                            edtAddressline1.setError(getString(R.string.current_address_is_required));
-//                            edtAddressline1.requestFocus();
-//                        } else {
-//                            edtAddressline1.setError(null);
-//                        }
-//                        if (edtAddressline2.getText().toString().equalsIgnoreCase("")) {
-//                            edtAddressline2.setError(getString(R.string.current_address_is_required));
-//                            edtAddressline2.requestFocus();
-//                        } else {
-//                            edtAddressline2.setError(null);
-//                        }
+//                        EligibilityCheckFragment_4 eligibilityCheckFragment_4 = new EligibilityCheckFragment_4();
+//                        transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_4).commit();
+
+                        if (edtPincode.getText().toString().equalsIgnoreCase("")) {
+                            edtPincode.setError(getString(R.string.current_pin_code_is_required));
+                            edtPincode.requestFocus();
+                        } else {
+                            edtPincode.setError(null);
+                        }
+                        if (edtAddressline1.getText().toString().equalsIgnoreCase("")) {
+                            edtAddressline1.setError(getString(R.string.current_address_is_required));
+                            edtAddressline1.requestFocus();
+                        } else {
+                            edtAddressline1.setError(null);
+                        }
+                        if (edtAddressline2.getText().toString().equalsIgnoreCase("")) {
+                            edtAddressline2.setError(getString(R.string.current_address_is_required));
+                            edtAddressline2.requestFocus();
+                        } else {
+                            edtAddressline2.setError(null);
+                        }
                     }
 
                 }

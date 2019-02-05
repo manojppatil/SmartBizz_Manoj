@@ -3,6 +3,7 @@ package com.eduvanzapplication.newUI.fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -53,13 +54,13 @@ public class EligibilityCheckFragment_1 extends Fragment {
     public static Fragment mFragment;
     Button buttonNext;
     Typeface typefaceFont, typefaceFontBold;
-    EditText edtFirstName, edtMiddleName, edtLastName, edtCoMobileNo;
-    TextView edtBirthDate;
-    RadioGroup rgGender;
-    RadioButton rbMale, rbFemale;
+    public static EditText edtFirstName, edtMiddleName, edtLastName, edtCoMobileNo;
+    public static TextView edtBirthDate;
+    public static RadioGroup rgGender;
+    public static RadioButton rbMale, rbFemale;
     public static String dateformate = "";
     public static Spinner spRelation;
-    public LinearLayout linRelationship;
+    public static LinearLayout linRelationship, linMobileNo;
     public String relationshipID = "";
 
     public static ArrayAdapter arrayAdapter_spRelation;
@@ -99,6 +100,7 @@ public class EligibilityCheckFragment_1 extends Fragment {
             spRelation = (Spinner) view.findViewById(R.id.spRelation);
 
             linRelationship = (LinearLayout) view.findViewById(R.id.linRelationship);
+            linMobileNo = (LinearLayout) view.findViewById(R.id.linMobileNo);
 
             buttonNext = (Button) view.findViewById(R.id.button_next_eligiblityfragment1);
             buttonNext.setTypeface(typefaceFontBold);
@@ -119,7 +121,15 @@ public class EligibilityCheckFragment_1 extends Fragment {
 //            arrayAdapter_spRelation = new ArrayAdapter(context, R.layout.custom_layout_spinner, spRelation_arrayList);
 //            spRelation.setAdapter(arrayAdapter_spRelation);
 
-            relationshipwithapplicantApiCall();
+            if (MainApplication.isBorrower) {
+                linRelationship.setVisibility(View.GONE);
+                linMobileNo.setVisibility(View.GONE);
+            } else {
+                relationshipwithapplicantApiCall();
+                linRelationship.setVisibility(View.VISIBLE);
+                linMobileNo.setVisibility(View.VISIBLE);
+            }
+
 
             final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -162,7 +172,7 @@ public class EligibilityCheckFragment_1 extends Fragment {
                         int count = relationShipPOJOArrayList.size();
                         for (int i = 0; i < count; i++) {
                             if (relationShipPOJOArrayList.get(i).relatioship.equalsIgnoreCase(text)) {
-                                MainApplication.relationship_with_applicant = relationshipID = relationShipPOJOArrayList.get(i).relatioship;
+                                MainApplication.relationship_with_applicant = relationshipID = relationShipPOJOArrayList.get(i).id;
                             }
                         }
                     } catch (Exception e) {
@@ -202,6 +212,33 @@ public class EligibilityCheckFragment_1 extends Fragment {
                             MainApplication.middle_name = edtMiddleName.getText().toString().trim();
                             MainApplication.last_name = edtLastName.getText().toString().trim();
                             MainApplication.dob = edtBirthDate.getText().toString().trim();
+                            if (MainApplication.isBorrower) {
+                                EligibilityCheckFragment_2 eligibilityCheckFragment_2 = new EligibilityCheckFragment_2();
+                                transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_2).commit();
+                            } else {
+
+                                if (!MainApplication.relationship_with_applicant.equalsIgnoreCase("0")) {
+
+                                    if (edtCoMobileNo.getText().toString().equalsIgnoreCase("")) {
+                                        edtCoMobileNo.setError("Mobile number is required");
+                                        edtCoMobileNo.requestFocus();
+                                    } else {
+                                        if (edtCoMobileNo.getText().toString().length() == 10) {
+                                            edtCoMobileNo.setError(null);
+                                            MainApplication.mobile_number = edtCoMobileNo.getText().toString();
+                                            EligibilityCheckFragment_2 eligibilityCheckFragment_2 = new EligibilityCheckFragment_2();
+                                            transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_2).commit();
+                                        } else {
+                                            edtCoMobileNo.setError("Please enter correct mobile number");
+                                        }
+                                    }
+
+                                } else {
+                                    if (spRelation.getSelectedItemPosition() <= 0) {
+                                        setSpinnerError(spRelation, getString(R.string.please_select_relationship_with_borrower));
+                                    }
+                                }
+                            }
 
 //                            MainApplication.cofirst_name = edtFirstName.getText().toString().trim();
 //                            MainApplication.comiddle_name = edtMiddleName.getText().toString().trim();
@@ -209,8 +246,6 @@ public class EligibilityCheckFragment_1 extends Fragment {
 //                            MainApplication.codob = edtBirthDate.getText().toString().trim();
 //                            MainApplication.comobile_number = edtCoMobileNo.getText().toString().trim();
 
-                            EligibilityCheckFragment_2 eligibilityCheckFragment_2 = new EligibilityCheckFragment_2();
-                            transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_2).commit();
                         } else {
                             rbFemale.setError(getString(R.string.you_need_to_select_gender));
                             rbFemale.requestFocus();
@@ -307,11 +342,11 @@ public class EligibilityCheckFragment_1 extends Fragment {
                 String message = jsonData.optString("message");
 
                 if (status.equalsIgnoreCase("1")) {
-                    JSONObject jsonObject = jsonData.getJSONObject("result");
 
-                    JSONArray jsonArray3 = jsonObject.getJSONArray("relatioship");
+                    JSONArray jsonArray3 = jsonData.getJSONArray("relationship");
                     spRelation_arrayList = new ArrayList<>();
                     relationShipPOJOArrayList = new ArrayList<>();
+                    spRelation_arrayList.add("Select Relationship");
                     for (int i = 0; i < jsonArray3.length(); i++) {
                         RelationShipPOJO borrowerCurrentStatePersonalPOJO = new RelationShipPOJO();
                         JSONObject mJsonti = jsonArray3.getJSONObject(i);
@@ -324,7 +359,7 @@ public class EligibilityCheckFragment_1 extends Fragment {
                     spRelation.setAdapter(arrayAdapter_spRelation);
                     arrayAdapter_spRelation.notifyDataSetChanged();
 
-                    spRelation.setSelection(Integer.parseInt(relationshipID));
+                    spRelation.setSelection(0);
 
                 } else {
                 }
@@ -352,6 +387,28 @@ public class EligibilityCheckFragment_1 extends Fragment {
             e.printStackTrace();
         }
         return dateformate2;
+    }
+
+    private void setSpinnerError(Spinner spinner, String error) {
+        try {
+            View selectedView = spinner.getSelectedView();
+            if (selectedView != null && selectedView instanceof TextView) {
+                spinner.requestFocus();
+                TextView selectedTextView = (TextView) selectedView;
+                selectedTextView.setError(getString(R.string.error)); // any name of the error will do
+                selectedTextView.setTextColor(Color.RED); //text color in which you want your error message to be displayed
+                selectedTextView.setText(error); // actual error message
+                //spinner.performClick(); // to open the spinner list if error is found.
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
     }
 
 }

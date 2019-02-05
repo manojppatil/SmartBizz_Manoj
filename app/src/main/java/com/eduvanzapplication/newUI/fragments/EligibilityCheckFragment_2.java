@@ -44,9 +44,9 @@ public class EligibilityCheckFragment_2 extends Fragment {
     public static ArrayList<String> document_arrayList;
     public static ArrayAdapter arrayAdapter_document;
     Button buttonNext, buttonPrevious;
-    EditText edtAadhaar, edtPan;
+    public static EditText edtAadhaar, edtPan;
     Typeface typefaceFont, typefaceFontBold;
-    LinearLayout linAadhaar, linPAN;
+    public static LinearLayout linAadhaar, linPAN;
 
     public EligibilityCheckFragment_2() {
         // Required empty public constructor
@@ -115,7 +115,6 @@ public class EligibilityCheckFragment_2 extends Fragment {
                                     EligibilityCheckFragment_3 eligibilityCheckFragment_3 = new EligibilityCheckFragment_3();
                                     transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_3).commit();
                                 }
-
                             }
                         } else if (MainApplication.mainapp_userdocument.equalsIgnoreCase("2")) {
 

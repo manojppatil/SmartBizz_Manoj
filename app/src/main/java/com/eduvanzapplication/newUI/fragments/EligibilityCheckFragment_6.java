@@ -47,14 +47,14 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
 
     public static Context context;
     public static Fragment mFragment;
-    public static Button btnSubmitEl6;
+    public static Button btnAddCoborrower, btnSubmitEl6;
     Typeface typefaceFont, typefaceFontBold;
     public static RecyclerView recyclerTenureOffered, recyclerTenureRequested;
     public TenureOfferedAdapter tenureOfferedAdapter;
     public TenureRequestedAdapter tenureRequestedAdapter;
     public List<Mforrequestedloan> mforrequestedloanArrayList = new ArrayList<>();
     public List<Mforoferedloan> mforoferedloanArrayList = new ArrayList<>();
-    public static LinearLayout linOffered, linRequested,linAddBorrower;
+    public static LinearLayout linOffered, linRequested,linAddBorrower, linOffTenureTitle, linReqTenureTitle;
     String lead_id = "", application_id = "";
     public static FragmentTransaction transaction;
     public static String leadid, requestedtenure, requestedroi, requestedemi, offeredamount, requestedloanamount, studentid, SLA, RLA;
@@ -85,14 +85,17 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
             linRequested = (LinearLayout) view.findViewById(R.id.linRequested);
             linAddBorrower = (LinearLayout) view.findViewById(R.id.linAddBorrower);
 
+            linOffTenureTitle = (LinearLayout) view.findViewById(R.id.linOffTenureTitle);
+            linReqTenureTitle = (LinearLayout) view.findViewById(R.id.linReqTenureTitle);
+
             typefaceFont = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_font.ttf");
             typefaceFontBold = Typeface.createFromAsset(context.getAssets(), "fonts/droidsans_bold.ttf");
 
             final FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+            btnAddCoborrower = (Button) view.findViewById(R.id.btnAddCoborrower);
             btnSubmitEl6 = (Button) view.findViewById(R.id.btnSubmitEl6);
             btnSubmitEl6.setTypeface(typefaceFontBold);
-
 
             btnSubmitEl6.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -100,6 +103,16 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
 
                     saveTenureApiCall();
 
+                }
+            });
+
+            btnAddCoborrower.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    MainApplication.isBorrower = false;
+                    EligibilityCheckFragment_1 eligibilityCheckFragment_1 = new EligibilityCheckFragment_1();
+                    transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_1).commit();
                 }
             });
 
@@ -173,6 +186,7 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
                 if (jsonData.getJSONArray("forrequestedloan").length() > 0) {
 
                     try {
+                        linReqTenureTitle.setVisibility(View.VISIBLE);
                         linRequested.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -207,6 +221,7 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
                 } else {
 
                     try {
+                        linReqTenureTitle.setVisibility(View.GONE);
                         linRequested.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -216,6 +231,7 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
                 if (jsonData.getJSONArray("foroferedloan").length() > 0) {
 
                     try {
+                        linOffTenureTitle.setVisibility(View.VISIBLE);
                         linOffered.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -249,6 +265,7 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
                     tenureOfferedAdapter.setOnItemClickListener(this);
                 } else {
                     try {
+                        linOffTenureTitle.setVisibility(View.GONE);
                         linOffered.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();

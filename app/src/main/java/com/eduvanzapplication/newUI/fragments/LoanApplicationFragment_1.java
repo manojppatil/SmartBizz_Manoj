@@ -809,11 +809,14 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (!Globle.validateAadharNumber(s.toString())){
-                        edtAadhaarBr.setError("Please enter valid aadhar number");
-                        edtAadhaarBr.requestFocus();
-                    }
-                    else MainApplication.Braadhar_numberkyc = edtAadhaarBr.getText().toString();
+//                    if (!Globle.validateAadharNumber(s.toString())){
+//                        edtAadhaarBr.setError("Please enter valid aadhar number");
+//                        edtAadhaarBr.requestFocus();
+//                    }
+//                    else {
+                        MainApplication.Braadhar_numberkyc = edtAadhaarBr.getText().toString();
+//                        edtAadhaarBr.setError(null);
+//                    }
                 }
 
                 @Override
@@ -830,7 +833,15 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                     MainApplication.Brpan_numberkyc = edtPanBr.getText().toString();
+
+//                    if (!s.toString().matches(Globle.panPattern)){
+//                        edtPanBr.setError("Please enter valid pan number");
+//                        edtPanBr.requestFocus();
+//                    }
+//                    else {
+                        MainApplication.Brpan_numberkyc = edtPanBr.getText().toString();
+//                        edtPanBr.setError(null);
+//                    }
                 }
 
                 @Override
@@ -882,7 +893,15 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.Brkyc_address_pinkyc = edtCurrentPincodeBr.getText().toString();
+
+//                    if (s.length() != 6){
+//                        edtCurrentPincodeBr.setError("Please enter valid pin code");
+//                        edtCurrentPincodeBr.requestFocus();
+//                    }
+//                    else {
+                        MainApplication.Brkyc_address_pinkyc = edtCurrentPincodeBr.getText().toString();
+//                        edtCurrentPincodeBr.setError(null);
+//                    }
                 }
 
                 @Override
@@ -933,7 +952,16 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.Brmobile_numberkyc = Brmobile_number = edtMobileNoBr.getText().toString();
+
+//                    if (s.length() != 10){
+//                        edtMobileNoBr.setError("Please enter valid emailid");
+//                        edtMobileNoBr.requestFocus();
+//                    }
+//                    else {
+                        MainApplication.Brmobile_numberkyc = Brmobile_number = edtMobileNoBr.getText().toString();
+//                        edtMobileNoBr.setError(null);
+//                    }
+
                 }
 
                 @Override
@@ -950,7 +978,15 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.Bremail_idkyc = Bremail_id = edtEmailIdBr.getText().toString();
+
+//                    if (!s.toString().matches(Globle.emailPattern)){
+//                        edtEmailIdBr.setError("Please enter valid emailid");
+//                        edtEmailIdBr.requestFocus();
+//                    }
+//                    else {
+                        MainApplication.Bremail_idkyc = Bremail_id = edtEmailIdBr.getText().toString();
+//                        edtEmailIdBr.setError(null);
+//                    }
                 }
 
                 @Override
@@ -1001,7 +1037,16 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.CoBremail_idkyc = CoBremail_id = edtEmailIdCoBr.getText().toString();
+
+//                    if (!s.toString().matches(Globle.emailPattern)){
+//                        edtEmailIdCoBr.setError("Please enter valid emailid");
+//                        edtEmailIdCoBr.requestFocus();
+//                    }
+//                    else {
+                        MainApplication.CoBremail_idkyc = CoBremail_id = edtEmailIdCoBr.getText().toString();
+//                        edtEmailIdCoBr.setError(null);
+//                    }
+
                 }
 
                 @Override
@@ -1052,7 +1097,16 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.CoBrcurrent_address_citykyc = CoBrcurrent_address = edtCurrentAddressCoBr.getText().toString();
+
+                    if (!s.toString().matches(Globle.panPattern) && s.length() == 6){
+                        edtCurrentAddressCoBr.setError("Please enter valid aadhar number");
+                        edtCurrentAddressCoBr.requestFocus();
+                    }
+                    else {
+                        MainApplication.CoBrcurrent_address_citykyc = CoBrcurrent_address = edtCurrentAddressCoBr.getText().toString();
+                        edtCurrentAddressCoBr.setError(null);
+                    }
+
                 }
 
                 @Override
@@ -1086,7 +1140,15 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.CoBrcurrent_address_pinkyc = CoBrcurrent_address = edtCurrentAddressCoBr.getText().toString();
+
+                    if (s.length() != 6){
+                        edtCurrentPincodeCoBr.setError("Please enter valid pin code");
+                        edtCurrentPincodeCoBr.requestFocus();
+                    }
+                    else {
+                        MainApplication.CoBrcurrent_address_pinkyc = CoBrcurrent_address = edtCurrentPincodeCoBr.getText().toString();
+                        edtCurrentPincodeCoBr.setError(null);
+                    }
                 }
 
                 @Override
@@ -1103,7 +1165,16 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    MainApplication.CoBrmobile_numberkyc = CoBrmobile_number = edtMobileNoCoBr.getText().toString();
+
+//                    if (s.length() != 10){
+//                        edtMobileNoCoBr.setError("Please enter valid mobile number");
+//                        edtMobileNoCoBr.requestFocus();
+//                    }
+//                    else {
+                        MainApplication.CoBrmobile_numberkyc = CoBrmobile_number = edtMobileNoCoBr.getText().toString();
+//                        edtMobileNoCoBr.setError(null);
+//                    }
+
                 }
 
                 @Override
@@ -1764,7 +1835,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                     if (!requested_loan_amount.equals("null")) {
                         edtLoanAmtBr.setText(requested_loan_amount);
                     }
-                    if (!fk_institutes_id.equals("null")) {
+                    if (!fk_institutes_id.equals("null") &&!fk_institutes_id.equals("")) {
                         MainApplication.mainapp_instituteID = instituteID = fk_institutes_id;
                         int count = nameOfInsitituePOJOArrayList.size();
                         for (int i = 0; i < count; i++) {
@@ -1777,7 +1848,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                         MainApplication.mainapp_courseID = courseID = fk_course_id;
                         spCourseBr.setSelection(Integer.parseInt(courseID));
                     }
-                    if (!fk_insitutes_location_id.equals("null")) {
+                    if (!fk_insitutes_location_id.equals("null") &&!fk_insitutes_location_id.equals("")) {
                         MainApplication.mainapp_locationID = locationID = fk_insitutes_location_id;
                         spInsLocationBr.setSelection(Integer.parseInt(locationID));
                     }
@@ -1947,7 +2018,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                         currentcountryID = "1";
                         spCurrentCountryBr.setSelection(Integer.parseInt(currentcountryID));
                     }
-                    if (!Brkyc_address_state.equals("null")) {
+                    if (!Brkyc_address_state.equals("null") &&!Brkyc_address_state.equals("")) {
                         currentstateID = Brkyc_address_state;
 
                         int count = borrowerCurrentStatePersonalPOJOArrayList.size();
@@ -1958,7 +2029,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             }
                         }
                     }
-                    if (!Brkyc_address_city.equals("null")) {
+                    if (!Brkyc_address_city.equals("null")  &&!Brkyc_address_city.equals("")) {
                         currentcityID = Brkyc_address_city;
 
                         int count = borrowerCurrentCityPersonalPOJOArrayList.size();
@@ -2084,80 +2155,6 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 if (!jsonData.get("coborrowerDetails").equals(null)) {
                     JSONObject jsoncoborrowerDetails = jsonData.getJSONObject("coborrowerDetails");
-
-//                    CoBrapplicant_id = jsoncoborrowerDetails.getString("applicant_id");
-//                    CoBrfk_lead_id = jsoncoborrowerDetails.getString("fk_lead_id");
-//                    CoBrfk_applicant_type_id = jsoncoborrowerDetails.getString("fk_applicant_type_id");
-//                    CoBrfirst_name = jsoncoborrowerDetails.getString("first_name");
-//                    CoBrmiddle_name = jsoncoborrowerDetails.getString("middle_name");
-//                    CoBrlast_name = jsoncoborrowerDetails.getString("last_name");
-//                    CoBrhas_aadhar_pan = jsoncoborrowerDetails.getString("has_aadhar_pan");
-//                    CoBrdob = jsoncoborrowerDetails.getString("dob");
-//                    CoBrpan_number = jsoncoborrowerDetails.getString("pan_number");
-//                    CoBraadhar_number = jsoncoborrowerDetails.getString("aadhar_number");
-//                    CoBrmarital_status = jsoncoborrowerDetails.getString("marital_status");
-//                    CoBrgender_id = jsoncoborrowerDetails.getString("gender_id");
-//                    CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
-//                    CoBremail_id = jsoncoborrowerDetails.getString("email_id");
-//                    CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
-//                    CoBrprofession = jsoncoborrowerDetails.getString("profession");
-//                    CoBremployer_type = jsoncoborrowerDetails.getString("employer_type");
-//                    CoBremployer_name = jsoncoborrowerDetails.getString("employer_name");
-//                    CoBrannual_income = jsoncoborrowerDetails.getString("annual_income");
-//                    CoBrcurrent_employment_duration = jsoncoborrowerDetails.getString("current_employment_duration");
-//                    CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("total_employement_duration");
-//                    CoBremployer_mobile_number = jsoncoborrowerDetails.getString("employer_mobile_number");
-//                    CoBremployer_landline_number = jsoncoborrowerDetails.getString("employer_landline_number");
-//                    CoBroffice_landmark = jsoncoborrowerDetails.getString("office_landmark");
-//                    CoBroffice_address = jsoncoborrowerDetails.getString("office_address");
-//                    CoBroffice_address_city = jsoncoborrowerDetails.getString("office_address_city");
-//                    CoBroffice_address_state = jsoncoborrowerDetails.getString("office_address_state");
-//                    CoBroffice_address_country = jsoncoborrowerDetails.getString("office_address_country");
-//                    CoBroffice_address_pin = jsoncoborrowerDetails.getString("office_address_pin");
-//                    CoBrhas_active_loan = jsoncoborrowerDetails.getString("has_active_loan");
-//                    CoBrEMI_Amount = jsoncoborrowerDetails.getString("EMI_Amount");
-//                    CoBrkyc_landmark = jsoncoborrowerDetails.getString("kyc_landmark");
-//                    CoBrkyc_address = jsoncoborrowerDetails.getString("kyc_address");
-//                    CoBrkyc_address_city = jsoncoborrowerDetails.getString("kyc_address_city");
-//                    CoBrkyc_address_state = jsoncoborrowerDetails.getString("kyc_address_state");
-//                    CoBrkyc_address_country = jsoncoborrowerDetails.getString("kyc_address_country");
-//                    CoBrkyc_address_pin = jsoncoborrowerDetails.getString("kyc_address_pin");
-//                    CoBris_borrower_current_address_same_as = jsoncoborrowerDetails.getString("is_borrower_current_address_same_as");
-//                    CoBris_coborrower_current_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as");
-//                    CoBrcurrent_residence_type = jsoncoborrowerDetails.getString("current_residence_type");
-//                    CoBrcurrent_landmark = jsoncoborrowerDetails.getString("current_landmark");
-//                    CoBrcurrent_address = jsoncoborrowerDetails.getString("current_address");
-//                    CoBrcurrent_address_city = jsoncoborrowerDetails.getString("current_address_city");
-//                    CoBrcurrent_address_state = jsoncoborrowerDetails.getString("current_address_state");
-//                    CoBrcurrent_address_country = jsoncoborrowerDetails.getString("current_address_country");
-//                    CoBrcurrent_address_pin = jsoncoborrowerDetails.getString("current_address_pin");
-//                    CoBrcurrent_address_rent = jsoncoborrowerDetails.getString("current_address_rent");
-//                    CoBrcurrent_address_stay_duration = jsoncoborrowerDetails.getString("current_address_stay_duration");
-//                    CoBris_borrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_borrower_permanent_address_same_as");
-//                    CoBris_coborrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as");
-//                    CoBrpermanent_residence_type = jsoncoborrowerDetails.getString("permanent_residence_type");
-//                    CoBrpermanent_landmark = jsoncoborrowerDetails.getString("permanent_landmark");
-//                    CoBrpermanent_address = jsoncoborrowerDetails.getString("permanent_address");
-//                    CoBrpermanent_address_city = jsoncoborrowerDetails.getString("permanent_address_city");
-//                    CoBrpermanent_address_state = jsoncoborrowerDetails.getString("permanent_address_state");
-//                    CoBrpermanent_address_country = jsoncoborrowerDetails.getString("permanent_address_country");
-//                    CoBrpermanent_address_pin = jsoncoborrowerDetails.getString("permanent_address_pin");
-//                    CoBrpermanent_address_rent = jsoncoborrowerDetails.getString("permanent_address_rent");
-//                    CoBrpermanent_address_stay_duration = jsoncoborrowerDetails.getString("permanent_address_stay_duration");
-//                    CoBrlast_completed_degree = jsoncoborrowerDetails.getString("last_completed_degree");
-//                    CoBrscore_unit = jsoncoborrowerDetails.getString("score_unit");
-//                    CoBrcgpa = jsoncoborrowerDetails.getString("cgpa");
-//                    CoBrpercentage = jsoncoborrowerDetails.getString("percentage");
-//                    CoBrpassing_year = jsoncoborrowerDetails.getString("passing_year");
-//                    CoBrgap_in_education = jsoncoborrowerDetails.getString("gap_in_education");
-//                    CoBrfull_name_pan_response = jsoncoborrowerDetails.getString("full_name_pan_response");
-//                    CoBrcreated_by_id = jsoncoborrowerDetails.getString("created_by_id");
-//                    CoBrcreated_date_time = jsoncoborrowerDetails.getString("created_date_time");
-//                    CoBrcreated_ip_address = jsoncoborrowerDetails.getString("created_ip_address");
-//                    CoBrmodified_by = jsoncoborrowerDetails.getString("modified_by");
-//                    CoBrmodified_date_time = jsoncoborrowerDetails.getString("modified_date_time");
-//                    CoBrmodified_ip_address = jsoncoborrowerDetails.getString("modified_ip_address");
-//                    CoBris_deleted = jsoncoborrowerDetails.getString("is_deleted");
 
                     MainApplication.CoBrapplicant_idkyc = CoBrapplicant_id = jsoncoborrowerDetails.getString("applicant_id");
                     MainApplication.CoBrfk_lead_idkyc = CoBrfk_lead_id = jsoncoborrowerDetails.getString("fk_lead_id");
@@ -3246,7 +3243,6 @@ public class LoanApplicationFragment_1 extends Fragment {
 
     }
 
-
     private void setCoborrower() {
 
         try {
@@ -3312,7 +3308,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                 }
             }
 
-            if (!CoBrprofession.equals("null")) {
+            if (!CoBrprofession.equals("null") &&!CoBrprofession.equals("")) {
                 professionIDCoBr = CoBrprofession;
                 spProfessionCoBr.setSelection(Integer.parseInt(professionIDCoBr));
             }
@@ -3321,7 +3317,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                 currentcountryIDCoBr = "1";
                 spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryIDCoBr));
             }
-            if (!CoBrkyc_address_state.equals("null")) {
+            if (!CoBrkyc_address_state.equals("null") &&!CoBrkyc_address_state.equals("")) {
                 currentstateIDCoBr = CoBrkyc_address_state;
 
                 int count = borrowerCurrentStatePersonalPOJOArrayList.size();
@@ -3331,10 +3327,9 @@ public class LoanApplicationFragment_1 extends Fragment {
                         spCurrentStateCoBr.setSelection(i);
                     }
                 }
-
 //                spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
             }
-            if (!CoBrkyc_address_city.equals("null")) {
+            if (!CoBrkyc_address_city.equals("null") &&!CoBrkyc_address_city.equals("")) {
                 currentcityIDCoBr = CoBrkyc_address_city;
 
                 int count = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();

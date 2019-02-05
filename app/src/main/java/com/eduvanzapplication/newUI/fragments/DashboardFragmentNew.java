@@ -88,6 +88,7 @@ public class DashboardFragmentNew extends Fragment {
                              Bundle savedInstanceState) {
 
         int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+
 //        if (height < 1080) {
 //            view = inflater.inflate(R.layout.demo1, container, false);
 //        } else {
@@ -113,6 +114,17 @@ public class DashboardFragmentNew extends Fragment {
             }
             MainApplication.student_id = student_id;
             MainApplication.auth_token = auth_token;
+            MainApplication.lead_id = lead_id;
+
+            try {
+                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("lead_id", "");
+                editor.apply();
+                editor.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             textView5 = (TextView) view.findViewById(R.id.textViewdash_5);
             mainApplication.applyTypeface(textView5, context);
@@ -151,7 +163,6 @@ public class DashboardFragmentNew extends Fragment {
                     startActivity(intent);
                 }
             });
-
 
             linearLayoutMyProfile = (LinearLayout) view.findViewById(R.id.linearLayout_dashboard_myprofile);
             linearLayoutMyProfile.setOnClickListener(new View.OnClickListener() {
@@ -223,54 +234,54 @@ public class DashboardFragmentNew extends Fragment {
                 }
             });
 
+            if(!MainApplication.lead_id.contains("null") && MainApplication.lead_id.length() > 0) {
+                Intent intent = new Intent(context, EligibilityCheck.class);
+                startActivity(intent);
+            }
 
-//            /** API CALL GET DASHBOARD BANNER**/
-//            try {
-//                String url = MainApplication.mainUrl + "mobileadverstisement/getBanner";//http://159.89.204.41/eduvanzApi/mobileadverstisement/getBanner
-//                Map<String, String> params = new HashMap<String, String>();
-//                if(!Globle.isNetworkAvailable(context))
-//                {
-//                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//
-////{"result":{"banner":[{"id":"1","title":"FINANCING YOUR FUTURE",
-//// "image":"http:\/\/159.89.204.41\/eduvanzbeta\/uploads\/mobileadvertisement\/1\/image_1513427852.png"}]},
-//// "status":1,"message":"success"}
-//
-//                } else {
-//                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getBanner
-//                    volleyCall.sendRequest(context, url, null, mFragment, "dashboardBanner", params);
-//                }
-//            } catch (Exception e) {
-//                String className = this.getClass().getSimpleName();
-//                String name = new Object() {
-//                }.getClass().getEnclosingMethod().getName();
-//                String errorMsg = e.getMessage();
-//                String errorMsgDetails = e.getStackTrace().toString();
-//                String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
-//            }
+            /** API CALL GET DASHBOARD BANNER**/
+            try {
+                String url = MainApplication.mainUrl + "mobileadverstisement/getBanner";//http://159.89.204.41/eduvanzApi/mobileadverstisement/getBanner
+                Map<String, String> params = new HashMap<String, String>();
+                if(!Globle.isNetworkAvailable(context))
+                {
+                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
-//            /** API CALL GET DEAL**/
-//            try {
-//                String url = MainApplication.mainUrl + "mobileadverstisement/getDeal";
-//                Map<String, String> params = new HashMap<String, String>();
-//                if(!Globle.isNetworkAvailable(context))
-//                {
-//                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//
-//                } else {
-//                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getDeal
-//                    volleyCall.sendRequest(context, url, null, mFragment, "getDeal", params);
-//                }
-//            } catch (Exception e) {
-//                String className = this.getClass().getSimpleName();
-//                String name = new Object() {
-//                }.getClass().getEnclosingMethod().getName();
-//                String errorMsg = e.getMessage();
-//                String errorMsgDetails = e.getStackTrace().toString();
-//                String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
-//            }
+                } else {
+                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getBanner
+                    volleyCall.sendRequest(context, url, null, mFragment, "dashboardBanner", params,MainApplication.auth_token);
+                }
+            } catch (Exception e) {
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+            }
+
+            /** API CALL GET DEAL**/
+            try {
+                String url = MainApplication.mainUrl + "mobileadverstisement/getDeal";
+                Map<String, String> params = new HashMap<String, String>();
+                if(!Globle.isNetworkAvailable(context))
+                {
+                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+                } else {
+                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getDeal
+                    volleyCall.sendRequest(context, url, null, mFragment, "getDeal", params,MainApplication.auth_token);
+                }
+            } catch (Exception e) {
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+            }
 
             /** API CALL POST LOGIN DASHBOARD Details **/
             try {
@@ -315,6 +326,9 @@ public class DashboardFragmentNew extends Fragment {
 //                String errorLine = String.valueOf(e.getStackTrace()[0]);
 //                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
 //            }
+
+//            Intent intent = new Intent(context, LoanApplication.class);
+//            startActivity(intent);
 
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -469,22 +483,71 @@ public class DashboardFragmentNew extends Fragment {
 
                     try {
 
-                        mLeads.requested_loan_amount = jsonleadStatus.getString("requested_loan_amount");
+                        if (!jsonleadStatus.getString("requested_loan_amount").toString().equals("null"))
+                            mLeads.requested_loan_amount  = jsonleadStatus.getString("requested_loan_amount");
+
+                        if (!jsonleadStatus.getString("lead_id").toString().equals("null"))
                         mLeads.lead_id = jsonleadStatus.getString("lead_id");
-                        mLeads.application_id = jsonleadStatus.getString("application_id");
-                        mLeads.first_name = jsonleadStatus.getString("first_name");
-                        mLeads.middle_name = jsonleadStatus.getString("middle_name");
-                        mLeads.last_name = jsonleadStatus.getString("last_name");
-                        mLeads.created_date_time = jsonleadStatus.getString("created_date_time");
-                        mLeads.profession = jsonleadStatus.getString("profession");
-                        mLeads.fk_applicant_type_id = jsonleadStatus.getString("fk_applicant_type_id");
-                        mLeads.has_coborrower = jsonleadStatus.getString("has_coborrower");
-                        mLeads.course_name = jsonleadStatus.getString("course_name");
-                        mLeads.course_cost = jsonleadStatus.getString("course_cost");
-                        mLeads.status_name = jsonleadStatus.getString("status_name");
-                        mLeads.location_name = jsonleadStatus.getString("location_name");
-                        mLeads.institute_name = jsonleadStatus.getString("institute_name");
-                        mLeads.student_id = jsonleadStatus.getString("student_id");
+
+                        if (!jsonleadStatus.getString("application_id").toString().equals("null"))
+                            mLeads.application_id = jsonleadStatus.getString("application_id");
+
+                        if (!jsonleadStatus.getString("first_name").toString().equals("null"))
+                            mLeads.first_name = jsonleadStatus.getString("first_name");
+
+                        if (!jsonleadStatus.getString("middle_name").toString().equals("null"))
+                            mLeads.middle_name = jsonleadStatus.getString("middle_name");
+
+                        if (!jsonleadStatus.getString("last_name").toString().equals("null"))
+                            mLeads.last_name = jsonleadStatus.getString("last_name");
+
+                        if (!jsonleadStatus.getString("created_date_time").toString().equals("null"))
+                            mLeads.created_date_time = jsonleadStatus.getString("created_date_time");
+
+                        if (!jsonleadStatus.getString("profession").toString().equals("null"))
+                            mLeads.profession = jsonleadStatus.getString("profession");
+
+                        if (!jsonleadStatus.getString("fk_applicant_type_id").toString().equals("null"))
+                            mLeads.fk_applicant_type_id = jsonleadStatus.getString("fk_applicant_type_id");
+
+                        if (!jsonleadStatus.getString("has_coborrower").toString().equals("null"))
+                            mLeads.has_coborrower = jsonleadStatus.getString("has_coborrower");
+
+                        if (!jsonleadStatus.getString("course_name").toString().equals("null"))
+                            mLeads.course_name = jsonleadStatus.getString("course_name");
+
+                        if (!jsonleadStatus.getString("course_cost").toString().equals("null"))
+                            mLeads.course_cost = jsonleadStatus.getString("course_cost");
+
+                        if (!jsonleadStatus.getString("status_name").toString().equals("null"))
+                            mLeads.status_name = jsonleadStatus.getString("status_name");
+
+                        if (!jsonleadStatus.getString("location_name").toString().equals("null"))
+                            mLeads.location_name = jsonleadStatus.getString("location_name");
+
+                        if (!jsonleadStatus.getString("institute_name").toString().equals("null"))
+                            mLeads.institute_name = jsonleadStatus.getString("institute_name");
+
+                        if (!jsonleadStatus.getString("student_id").toString().equals("null"))
+                            mLeads.student_id = jsonleadStatus.getString("student_id");
+
+
+//                        mLeads.requested_loan_amount = jsonleadStatus.getString("requested_loan_amount");
+//                        mLeads.lead_id = jsonleadStatus.getString("lead_id");
+//                        mLeads.application_id = jsonleadStatus.getString("application_id");
+//                        mLeads.first_name = jsonleadStatus.getString("first_name");
+//                        mLeads.middle_name = jsonleadStatus.getString("middle_name");
+//                        mLeads.last_name = jsonleadStatus.getString("last_name");
+//                        mLeads.created_date_time = jsonleadStatus.getString("created_date_time");
+//                        mLeads.profession = jsonleadStatus.getString("profession");
+//                        mLeads.fk_applicant_type_id = jsonleadStatus.getString("fk_applicant_type_id");
+//                        mLeads.has_coborrower = jsonleadStatus.getString("has_coborrower");
+//                        mLeads.course_name = jsonleadStatus.getString("course_name");
+//                        mLeads.course_cost = jsonleadStatus.getString("course_cost");
+//                        mLeads.status_name = jsonleadStatus.getString("status_name");
+//                        mLeads.location_name = jsonleadStatus.getString("location_name");
+//                        mLeads.institute_name = jsonleadStatus.getString("institute_name");
+//                        mLeads.student_id = jsonleadStatus.getString("student_id");
 
                     } catch (JSONException e) {
                         e.printStackTrace();

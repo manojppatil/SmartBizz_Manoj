@@ -67,8 +67,6 @@ public class LeadsAdapter extends RecyclerView.Adapter<LeadsAdapter.MyViewHolder
 
                         Intent intent = new Intent(context, EligibilityCheck.class);
                         Bundle bundle = new Bundle();
-                        MainApplication.lead_id = card_view.getTag().toString();
-                        MainApplication.application_id = txtlafid.getText().toString();
                         bundle.putString("lead_id", card_view.getTag().toString());
                         Log.d("LeadId","ID - "+card_view.getTag().toString());
                         bundle.putString("application_id", txtlafid.getText().toString());
@@ -76,15 +74,13 @@ public class LeadsAdapter extends RecyclerView.Adapter<LeadsAdapter.MyViewHolder
                         intent.putExtras(bundle);
                         context.startActivity(intent);
 
-                    }else {
-
-//                        Intent intent = new Intent(context, EligibilityCheck.class);
+//                        Intent intent = new Intent(context, LoanApplication.class);
 //                        Bundle bundle = new Bundle();
 //                        bundle.putString("lead_id", card_view.getTag().toString());
-//                        bundle.putString("application_id", txtlafid.getText().toString());
-//                        bundle.putString("fillinstutute", txtlafid.getText().toString());
 //                        intent.putExtras(bundle);
 //                        context.startActivity(intent);
+
+                    }else {
 
                         Intent intent = new Intent(context, LoanApplication.class);
                         Bundle bundle = new Bundle();
@@ -92,6 +88,9 @@ public class LeadsAdapter extends RecyclerView.Adapter<LeadsAdapter.MyViewHolder
                         intent.putExtras(bundle);
                         context.startActivity(intent);
                     }
+
+                    MainApplication.lead_id = card_view.getTag().toString();
+                    MainApplication.application_id = txtlafid.getText().toString();
                 }
             });
         }
@@ -109,7 +108,7 @@ public class LeadsAdapter extends RecyclerView.Adapter<LeadsAdapter.MyViewHolder
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         holder.txtFName.setText(horizontalList.get(position).first_name);
-        holder.txtLName.setText(horizontalList.get(position).last_name);
+//        holder.txtLName.setText(horizontalList.get(position).last_name);
         holder.txtlafid.setText(horizontalList.get(position).application_id);
         holder.txtInstitute.setText(horizontalList.get(position).institute_name);
         if (horizontalList.get(position).status_name.toString().toLowerCase().contains("pending")) {

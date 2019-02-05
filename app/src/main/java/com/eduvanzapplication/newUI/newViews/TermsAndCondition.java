@@ -60,7 +60,10 @@ public class TermsAndCondition extends AppCompatActivity {
                         editor.commit();
 
                     Intent intent = new Intent(TermsAndCondition.this,
-                            SingInWithTruecaller.class);
+                            GetMobileNo.class);
+
+//                    Intent intent = new Intent(TermsAndCondition.this,
+//                            SingInWithTruecaller.class);
 //                    Intent intent = new Intent(TermsAndCondition.this,
 //                            NewTruecallerSignIn.class);
                     startActivity(intent);

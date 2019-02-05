@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 //import com.eduvanzapplication.newUI.newViews.NewTruecallerSignIn;
+import com.eduvanzapplication.newUI.newViews.GetMobileNo;
 import com.eduvanzapplication.newUI.newViews.SingInWithTruecaller;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -86,7 +87,8 @@ public class ImageSlider extends AppCompatActivity {
                     finish();
 
                 }else {
-                    Intent intent = new Intent(ImageSlider.this,SingInWithTruecaller.class);
+                    Intent intent = new Intent(ImageSlider.this, GetMobileNo.class);
+//                    Intent intent = new Intent(ImageSlider.this,SingInWithTruecaller.class);
 //                    Intent intent = new Intent(ImageSlider.this,NewTruecallerSignIn.class);
                     startActivity(intent);
                     finish();
