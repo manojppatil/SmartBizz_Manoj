@@ -385,13 +385,14 @@ public class LoanApplicationFragment_1 extends Fragment {
                                         !MainApplication.Brkyc_address_countrykyc.equalsIgnoreCase("") && !MainApplication.fk_institutes_idkyc.equalsIgnoreCase("") &&
                                         !MainApplication.fk_course_idkyc.equalsIgnoreCase("") && !MainApplication.fk_insitutes_location_idkyc.equalsIgnoreCase("")) {
 
+                                    boolean isAdharVisible = (edtAadhaarCoBr.getVisibility() == View.VISIBLE) && (!edtAadhaarCoBr.getText().toString().equals(""));
                                     //coborrower checkings
                                     if (!has_coborrower.equals("0")){
-                                        if (!MainApplication.CoBrfirst_namekyc.equals("") && !MainApplication.CoBrlast_namekyc.equals("") &&
-                                            !MainApplication.CoBrdobkyc.equals("") && !MainApplication.CoBremail_idkyc.equals("") &&
-                                            !MainApplication.CoBrmobile_numberkyc.equals("")  &&
-                                            !MainApplication.CoBraadhar_numberkyc.equals("") &&  !MainApplication.CoBremployer_namekyc.equals("") &&
-                                            !MainApplication.CoBrkyc_addresskyc.equals("") && !MainApplication.CoBrkyc_address_pinkyc.equals("") ){
+                                        if (!edtFnameCoBr.getText().toString().equals("") && !edtLnameCoBr.getText().equals("") &&
+                                            !txtBirthdateCoBr.getText().equals("") && !edtEmailIdCoBr.getText().toString().equals("") &&
+                                            !edtMobileNoCoBr.getText().toString().equals("")  &&
+                                            !isAdharVisible &&  !edtCompanyCoBr.getText().toString().equals("") &&
+                                            !edtCurrentAddressCoBr.getText().toString().equals("") && !edtCurrentPincodeCoBr.getText().toString().equals("") ){
 
                                                 if( (rbFemaleCoBr.isChecked() || rbMaleCoBr.isChecked()) ){
                                                     rbFemaleCoBr.setError(null);
@@ -1142,8 +1143,8 @@ public class LoanApplicationFragment_1 extends Fragment {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                     if (s.length() != 6){
-                        edtCurrentPincodeCoBr.setError("Please enter valid pin code");
-                        edtCurrentPincodeCoBr.requestFocus();
+//                        edtCurrentPincodeCoBr.setError("Please enter valid pin code");
+//                        edtCurrentPincodeCoBr.requestFocus();
                     }
                     else {
                         MainApplication.CoBrcurrent_address_pinkyc = CoBrcurrent_address = edtCurrentPincodeCoBr.getText().toString();
@@ -1234,6 +1235,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             if (nameOfCoursePOJOArrayList.get(i).courseName.equalsIgnoreCase(text)) {
                                 MainApplication.fk_course_idkyc = courseID = nameOfCoursePOJOArrayList.get(i).courseID;
                                 Log.e("I_________D", "onItemClickCourse: " + courseID);
+                                break;
                             }
                         }
                     } catch (Exception e) {
@@ -1399,10 +1401,14 @@ public class LoanApplicationFragment_1 extends Fragment {
                     String text = spProfessionBr.getSelectedItem().toString();
 
                     int count = professionPOJOArrayList.size();
-                    for (int i = 0; i < count; i++) {
-                        if (professionPOJOArrayList.get(i).Salaried.equalsIgnoreCase(text)) {
-                            MainApplication.Brprofessionkyc = professionID = professionPOJOArrayList.get(i).id;
+                    try{
+                        for (int i = 0; i < count; i++) {
+                            if (professionPOJOArrayList.get(i).Salaried.equalsIgnoreCase(text)) {
+                                MainApplication.Brprofessionkyc = professionID = professionPOJOArrayList.get(i).id;
+                            }
                         }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
                     if (position ==2 || position == 0 ) {
                         try {
@@ -1434,10 +1440,14 @@ public class LoanApplicationFragment_1 extends Fragment {
                     String text = spProfessionCoBr.getSelectedItem().toString();
 
                     int count = professionPOJOArrayListCoBr.size();
-                    for (int i = 0; i < count; i++) {
-                        if (professionPOJOArrayListCoBr.get(i).Salaried.equalsIgnoreCase(text)) {
-                            MainApplication.CoBrprofessionkyc = professionIDCoBr = professionPOJOArrayListCoBr.get(i).id;
+                    try{
+                        for (int i = 0; i < count; i++) {
+                            if (professionPOJOArrayListCoBr.get(i).Salaried.equalsIgnoreCase(text)) {
+                                MainApplication.CoBrprofessionkyc = professionIDCoBr = professionPOJOArrayListCoBr.get(i).id;
+                            }
                         }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
                     if (professionIDCoBr.equals("0") || professionIDCoBr.equals("2")) {
 //                        try {
@@ -1765,10 +1775,14 @@ public class LoanApplicationFragment_1 extends Fragment {
                     arrayAdapter_currentCity.notifyDataSetChanged();
 
                     int count = borrowerCurrentCityPersonalPOJOArrayList.size();
-                    for (int i = 0; i < count; i++) {
-                        if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-                            spCurrentCityBr.setSelection(i);
+                    try{
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                spCurrentCityBr.setSelection(i);
+                            }
                         }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
                 }
 
@@ -1808,10 +1822,14 @@ public class LoanApplicationFragment_1 extends Fragment {
                     arrayAdapter_currentCityCoBr.notifyDataSetChanged();
 
                     int count = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
-                    for (int i = 0; i < count; i++) {
-                        if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(currentcityIDCoBr)) {
-                            spCurrentCityCoBr.setSelection(i);
+                    try{
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(currentcityIDCoBr)) {
+                                spCurrentCityCoBr.setSelection(i);
+                            }
                         }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
                 }
 
@@ -1840,10 +1858,14 @@ public class LoanApplicationFragment_1 extends Fragment {
                     if (!fk_institutes_id.equals("null") &&!fk_institutes_id.equals("")) {
                         MainApplication.mainapp_instituteID = instituteID = fk_institutes_id;
                         int count = nameOfInsitituePOJOArrayList.size();
-                        for (int i = 0; i < count; i++) {
-                            if (nameOfInsitituePOJOArrayList.get(i).instituteID.equalsIgnoreCase(instituteID)) {
-                                spInstituteBr.setSelection(i);
+                        try{
+                            for (int i = 0; i < count; i++) {
+                                if (nameOfInsitituePOJOArrayList.get(i).instituteID.equalsIgnoreCase(instituteID)) {
+                                    spInstituteBr.setSelection(i);
+                                }
                             }
+                        }catch ( Exception e){
+                            e.printStackTrace();
                         }
                     }
                     if (!fk_course_id.equals("null")) {
@@ -2024,21 +2046,28 @@ public class LoanApplicationFragment_1 extends Fragment {
                         currentstateID = Brkyc_address_state;
 
                         int count = borrowerCurrentStatePersonalPOJOArrayList.size();
-
-                        for (int i = 0; i < count; i++) {
-                            if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
-                                spCurrentStateBr.setSelection(i);
+                        try{
+                            for (int i = 0; i < count; i++) {
+                                if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                    spCurrentStateBr.setSelection(i);
+                                }
                             }
+                        }catch (Exception e){
+                            e.printStackTrace();
                         }
                     }
                     if (!Brkyc_address_city.equals("null")  &&!Brkyc_address_city.equals("")) {
                         currentcityID = Brkyc_address_city;
 
                         int count = borrowerCurrentCityPersonalPOJOArrayList.size();
-                        for (int i = 0; i < count; i++) {
-                            if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-                                spCurrentCityBr.setSelection(i);
+                        try{
+                            for (int i = 0; i < count; i++) {
+                                if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                    spCurrentCityBr.setSelection(i);
+                                }
                             }
+                        }catch (Exception e){
+                            e.printStackTrace();
                         }
                     }
 
@@ -3324,10 +3353,14 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 int count = borrowerCurrentStatePersonalPOJOArrayList.size();
 
-                for (int i = 0; i < count; i++) {
-                    if (borrowerCurrentStatePersonalPOJOArrayListCoBr.get(i).stateID.equalsIgnoreCase(currentstateIDCoBr)) {
-                        spCurrentStateCoBr.setSelection(i);
+                try {
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentStatePersonalPOJOArrayListCoBr.get(i).stateID.equalsIgnoreCase(currentstateIDCoBr)) {
+                            spCurrentStateCoBr.setSelection(i);
+                        }
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
 //                spCurrentStateCoBr.setSelection(Integer.parseInt(currentstateIDCoBr));
             }
