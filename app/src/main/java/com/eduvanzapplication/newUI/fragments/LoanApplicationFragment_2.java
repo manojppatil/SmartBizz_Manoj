@@ -105,7 +105,7 @@ public class LoanApplicationFragment_2 extends Fragment {
             edtPermanentAddressBr, edtPincodeOffBr, edtAddressOffBr, input_passingyearBr, edtMonthlyRentBr;
 
     public static RadioGroup rgGenderBr, rgiscgpaBr, rgemptypeBr, rgborrower_gapsBr, rgMaritalStatusBr;
-    public static RadioButton rbMaleBr, rbFemaleBr;
+    public static RadioButton rbMaleBr, rbFemaleBr,rbgaps_yesBr,rbgaps_noBr,rbiscgpa_yesBr,rbiscgpa_noBr;
 
     public static Spinner spProfessionBr, spCurrentCountryBr, spCurrentStateBr, spCurrentCityBr,
             spPermanentCountryBr, spPermanentStateBr, spPermanentCityBr,
@@ -120,7 +120,7 @@ public class LoanApplicationFragment_2 extends Fragment {
     public static TextInputLayout edtMonthlyRentLayoutCoBr;
 
     public static RadioGroup rgGenderCoBr, rgMaritalStatusCoBr, rgemptypeCoBr;
-    public static RadioButton rbMaleCoBr, rbFemaleCoBr, rbMarriedCoBr, rbSingleCoBr;
+    public static RadioButton rbMaleCoBr, rbFemaleCoBr, rbMarriedCoBr, rbSingleCoBr,rbempType_govCoBr,rbempType_privateCoBr;
 
     public static Spinner spCurrentCountryCoBr, spCurrentStateCoBr, spCurrentCityCoBr, spPermanentCountryCoBr,
             spPermanentStateCoBr, spPermanentCityCoBr, spCountryOffCoBr, spStateOffCoBr, spCityOffCoBr, spResidentTypeBr,
@@ -448,6 +448,9 @@ public class LoanApplicationFragment_2 extends Fragment {
                             boolean isProfessionValidCoBr = spProfessionCoBr.getSelectedItemPosition() != 0;
                             boolean isEmployerTypeValidCoBr = (rgemptypeCoBr.getCheckedRadioButtonId() == R.id.rbempType_privateCoBr) || (rgemptypeBr.getCheckedRadioButtonId() == R.id.rbempType_govCoBr);
                             boolean isEmployementDurationValidCoBr = spdurationofjobCoBr.getSelectedItemPosition() != 0;
+                            boolean isEmploymentCountryValidCoBr  = spCountryOffCoBr.getSelectedItemPosition() != 0;
+                            boolean isEmploymentStateValidCoBr = spStateOffCoBr.getSelectedItemPosition() != 0;
+                            boolean isEmploymentCityValidCoBr = spCityOffCoBr.getSelectedItemPosition() != 0;
 
 
                             if (!edtFnameBr.getText().toString().equals("") && !edtLnameBr.getText().toString().equals("") &&
@@ -489,7 +492,10 @@ public class LoanApplicationFragment_2 extends Fragment {
                                                     //emplyement chevking cobr
                                                     if (!edtCompanyCoBr.getText().toString().equals("") && !edtAddressOffCoBr.getText().toString().equals("")
                                                             && !edtPincodeOffCoBr.getText().toString().equals("") && !edtAnnualSalCoBr.getText().toString().equals("")
-                                                            && isEmployerTypeValidCoBr && isEmployementDurationValidCoBr) {
+                                                            && isEmployerTypeValidCoBr && isEmployementDurationValidCoBr
+                                                            && isEmploymentCountryValidCoBr
+                                                            && isEmploymentStateValidCoBr
+                                                            && isEmploymentCityValidCoBr) {
 
                                                         Toast.makeText(context, "Valid", Toast.LENGTH_LONG).show();
                                                         submitDetailedInfo();
@@ -503,6 +509,11 @@ public class LoanApplicationFragment_2 extends Fragment {
                                                             edtPincodeOffCoBr.setError("Enter company Pincode");
                                                         if (edtAnnualSalCoBr.getText().toString().equals(""))
                                                             edtAnnualSalCoBr.setError("Enter annual salary");
+                                                        if (!isEmployementDurationValidCoBr) setSpinnerError(spdurationofjobCoBr,"Please select duration");
+                                                        if (!isEmploymentCountryValidCoBr) setSpinnerError(spCountryOffCoBr,"Please select country");
+                                                        if (!isEmploymentStateValidCoBr) setSpinnerError(spStateOffCoBr,"Please selec state");
+                                                        if (!isEmploymentCityValidCoBr) setSpinnerError(spCityOffCoBr,"Please select city");
+
                                                     }
                                                 } else { //no profession case coborrower
                                                     submitDetailedInfo();
@@ -543,7 +554,6 @@ public class LoanApplicationFragment_2 extends Fragment {
                                                 if (!isPermanentStateValidCoBr) setSpinnerError(spPermanentStateCoBr, "Please select state");
                                                 if (!isPermanentCityValidCoBr) setSpinnerError(spPermanentCityCoBr, "Please select city");
                                                 if (!isProfessionValidCoBr) setSpinnerError(spProfessionCoBr, "Please select profession");
-                                                if (!isEmployementDurationValidCoBr) setSpinnerError(spdurationofjobCoBr,"Please select duration");
 
                                             }
 
@@ -587,6 +597,18 @@ public class LoanApplicationFragment_2 extends Fragment {
                                     edtPermanentPincodeBr.setError("Enter Pincode");
                                 if (input_passingyearBr.getText().toString().equals(""))
                                     input_passingyearBr.setError("Enter Passing year");
+
+                                if (!isSpCurrentResiValidBr) setSpinnerError(spResidentTypeBr ,"Please select residence type");
+                                if (!isSpCurrentStayDurationValidBr) setSpinnerError(spDurationStayAtCurrentAddressBr, "Please select duration");
+                                if (!isSpCurrentCountryValidBr) setSpinnerError(spCurrentCountryBr , "Please select country");
+                                if (!isSpCurrentStateValidBr) setSpinnerError(spCurrentStateBr, "Please select state");
+                                if (!isSpCurrentCityValidBr) setSpinnerError(spCurrentCityBr, "Please select city");
+                                if (!isSpPermanentResiValidBr) setSpinnerError(spCurrentAddressSameAsKycOrBorrowerCoBr, "Please select residence type");
+                                if (!isSpPermanentCountryValidBr) setSpinnerError(spPermanentCountryBr, "Please select country");
+                                if (!isPermanentStateValidBr) setSpinnerError(spPermanentStateBr, "Please select state");
+                                if (!isPermanentCityValidBr) setSpinnerError(spPermanentCityBr, "Please select city");
+                                if (!isProfessionValidBr) setSpinnerError(spProfessionBr, "Please select profession");
+                                if (!isEmployementDurationValidBr) setSpinnerError(spdurationofjobBr, "Please select duration");
                             }
                         }else{
                     try {
@@ -2392,7 +2414,7 @@ public class LoanApplicationFragment_2 extends Fragment {
         edtFnameBr.setEnabled(f);
         edtMnameBr.setEnabled(f);
         edtLnameBr.setEnabled(f);
-        txtBirthdayCalenderBr.setClickable(f);
+//        txtBirthdayCalenderBr.setClickable(f);
         rgGenderBr.setEnabled(f);
         rbMaleBr.setEnabled(f);
         rbFemaleBr.setEnabled(f);
@@ -2428,6 +2450,51 @@ public class LoanApplicationFragment_2 extends Fragment {
         spCityOffBr.setEnabled(f);
         splastdegreecompletedBr.setEnabled(f);
         input_passingyearBr.setEnabled(f);
+        rbgaps_yesBr.setEnabled(f);
+        rbgaps_noBr.setEnabled(f);
+        rbiscgpa_yesBr.setEnabled(f);
+        rbiscgpa_noBr.setEnabled(f);
+        input_cgpaBr.setEnabled(f);
+        input_degreeBr.setEnabled(f);
+
+        edtFnameCoBr.setEnabled(f);
+        edtMnameCoBr.setEnabled(f);
+        edtLnameCoBr.setEnabled(f);
+        edtMobileCoBr.setEnabled(f);
+        edtEmailCoBr.setEnabled(f);
+        rbMarriedCoBr.setEnabled(f);
+        rbFemaleCoBr.setEnabled(f);
+        rbMarriedCoBr.setEnabled(f);
+        rbSingleCoBr.setEnabled(f);
+        edtPanCoBr.setEnabled(f);
+        edtAadhaarCoBr.setEnabled(f);
+        spResidentTypeCoBr.setEnabled(f);
+        edtMonthlyRentCoBr.setEnabled(f);
+        spCurrentAddressSameAsKycCoBr.setEnabled(f);
+        spDurationStayAtCurrentAddressCoBr.setEnabled(f);
+        edtCurrentPincodeCoBr.setEnabled(f);
+        edtCurrentAddressCoBr.setEnabled(f);
+        spCurrentCountryCoBr.setEnabled(f);
+        spCurrentStateCoBr.setEnabled(f);
+        spCurrentCityCoBr.setEnabled(f);
+        spCurrentAddressSameAsKycOrBorrowerCoBr.setEnabled(f);
+        edtPermanentPincodeCoBr.setEnabled(f);
+        edtPermanentAddressCoBr.setEnabled(f);
+        spPermanentCountryCoBr.setEnabled(f);
+        spPermanentStateCoBr.setEnabled(f);
+        spPermanentCityCoBr.setEnabled(f);
+        spProfessionCoBr.setEnabled(f);
+        rbempType_govCoBr.setEnabled(f);
+        rbempType_privateCoBr.setEnabled(f);
+        edtCompanyCoBr.setEnabled(f);
+        edtAnnualSalCoBr.setEnabled(f);
+        spdurationofjobCoBr.setEnabled(f);
+        edtPincodeOffCoBr.setEnabled(f);
+        edtAddressOffCoBr.setEnabled(f);
+        spCountryOffCoBr.setEnabled(f);
+        spStateOffCoBr.setEnabled(f);
+        spCityOffCoBr.setEnabled(f);
+
 
     }
 
@@ -3309,6 +3376,10 @@ public class LoanApplicationFragment_2 extends Fragment {
             rbFemaleBr = (RadioButton) view.findViewById(R.id.rbFemaleBr);
             rbMarriedBr = (RadioButton) view.findViewById(R.id.rbMarriedBr);
             rbSingleBr = (RadioButton) view.findViewById(R.id.rbSingleBr);
+            rbgaps_yesBr = view.findViewById(R.id.rbgaps_yesBr);
+            rbgaps_noBr=  view.findViewById(R.id.rbgaps_noBr);
+            rbiscgpa_yesBr= view.findViewById(R.id.rbiscgpa_yesBr);
+            rbiscgpa_noBr = view.findViewById(R.id.rbiscgpa_noBr);
 
             input_cgpaBr = (TextInputLayout) view.findViewById(R.id.input_cgpaBr);
             input_degreeBr = (TextInputLayout) view.findViewById(R.id.input_degreeBr);
@@ -3366,7 +3437,8 @@ public class LoanApplicationFragment_2 extends Fragment {
             rbSingleCoBr = view.findViewById(R.id.rbSingleCoBr);
             rbempType_govBr = view.findViewById(R.id.rbempType_govBr);
             rbempType_privateBr = view.findViewById(R.id.rbempType_privateBr);
-
+            rbempType_govCoBr =view.findViewById(R.id.rbempType_govCoBr);
+            rbempType_privateCoBr = view.findViewById(R.id.rbempType_privateCoBr);
             spCurrentCountryCoBr = (Spinner) view.findViewById(R.id.spCurrentCountryCoBr);
             spCurrentStateCoBr = (Spinner) view.findViewById(R.id.spCurrentStateCoBr);
             spCurrentCityCoBr = (Spinner) view.findViewById(R.id.spCurrentCityCoBr);
@@ -5304,7 +5376,7 @@ public class LoanApplicationFragment_2 extends Fragment {
             params.put("last_completed_degree", splastdegreecompletedBr.getSelectedItemPosition() + ""); ////////////////////Make model for list
             params.put("passing_year", input_passingyearBr.getText().toString());
             params.put("score_unit", Brscore_unit);
-            params.put("cgpa", input_degreeBr.getEditText().getText().toString());
+            params.put("cgpa", input_cgpaBr.getEditText().getText().toString());
             params.put("percentage", input_degreeBr.getEditText().getText().toString());
             params.put("gap_in_education", BrGap);
 
