@@ -1167,6 +1167,8 @@ public class LoanApplicationFragment_2 extends Fragment {
                 }
             });
 
+
+            //is Borrower Permanent Address same as...
             spCurrentAddressSameAsKycOrBorrowerBr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1203,7 +1205,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                                 for (int i = 0; i < count1; i++) {
                                     if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(permanentstateID)) {
-                                        spPermanentStateCoBr.setSelection(i);
+                                        spPermanentStateBr.setSelection(i);
                                     }
                                 }
                             }
@@ -2774,9 +2776,9 @@ public class LoanApplicationFragment_2 extends Fragment {
                 if (!jsonborrowerDetails.getString("office_address").toString().equals("null"))
                     MainApplication.Broffice_addressdtl = Broffice_address = jsonborrowerDetails.getString("office_address");
                 if (!jsonborrowerDetails.getString("office_address_city").toString().equals("null"))
-                    MainApplication.Broffice_address_citydtl = Broffice_address_city = jsonborrowerDetails.getString("office_address_city");
+                    MainApplication.Broffice_address_citydtl = Broffice_address_city = offcityIDBr = jsonborrowerDetails.getString("office_address_city");
                 if (!jsonborrowerDetails.getString("office_address_state").toString().equals("null"))
-                    MainApplication.Broffice_address_statedtl = Broffice_address_state = jsonborrowerDetails.getString("office_address_state");
+                    MainApplication.Broffice_address_statedtl = Broffice_address_state =offstateIDBr = jsonborrowerDetails.getString("office_address_state");
                 if (!jsonborrowerDetails.getString("office_address_country").toString().equals("null"))
                     MainApplication.Broffice_address_countrydtl = Broffice_address_country = jsonborrowerDetails.getString("office_address_country");
                 if (!jsonborrowerDetails.getString("office_address_pin").toString().equals("null"))
@@ -2810,7 +2812,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                 if (!jsonborrowerDetails.getString("current_address_city").toString().equals("null"))
                     MainApplication.Brcurrent_address_citydtl = Brcurrent_address_city = jsonborrowerDetails.getString("current_address_city");
                 if (!jsonborrowerDetails.getString("current_address_state").toString().equals("null"))
-                    MainApplication.Brcurrent_address_statedtl = Brcurrent_address_state = jsonborrowerDetails.getString("current_address_state");
+                    MainApplication.Brcurrent_address_statedtl = Brcurrent_address_state = currentstateID = jsonborrowerDetails.getString("current_address_state");
                 if (!jsonborrowerDetails.getString("current_address_country").toString().equals("null"))
                     MainApplication.Brcurrent_address_countrydtl = Brcurrent_address_country = jsonborrowerDetails.getString("current_address_country");
                 if (!jsonborrowerDetails.getString("current_address_pin").toString().equals("null"))
@@ -2849,6 +2851,11 @@ public class LoanApplicationFragment_2 extends Fragment {
                     MainApplication.Brcgpadtl = Brcgpa = jsonborrowerDetails.getString("cgpa");
                 if (!jsonborrowerDetails.getString("percentage").toString().equals("null"))
                     MainApplication.Brpercentagedtl = Brpercentage = jsonborrowerDetails.getString("percentage");
+
+                if (!jsonborrowerDetails.getString("gap_in_education").toString().equals("null"))
+                    MainApplication.Brgap_in_educationdtl = Brgap_in_education = jsonborrowerDetails.getString("gap_in_education");
+
+
                 if (!jsonborrowerDetails.getString("passing_year").toString().equals("null"))
                     MainApplication.Brpassing_yeardtl = Brpassing_year = jsonborrowerDetails.getString("passing_year");
                 if (!jsonborrowerDetails.getString("gap_in_education").toString().equals("null"))
@@ -2885,6 +2892,15 @@ public class LoanApplicationFragment_2 extends Fragment {
                     {e.printStackTrace();}
                 }
 
+                if (!Brcurrent_address_country.equals("")){
+                    try{
+                        spCurrentCountryBr.setSelection(Integer.parseInt(Brcurrent_address_country));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        spCurrentCountryBr.setSelection(1);
+                    }
+                }
+
                 edtMonthlyRentBr.setText(Brcurrent_address_rent);
                 if (Brgender_id.equals("1")) rbMaleBr.setChecked(true);
                 else rbFemaleBr.setChecked(true);
@@ -2904,8 +2920,8 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 if (!Brgap_in_education.equals("")) {
                     if (Brgap_in_education.equals("1"))
-                        rgborrower_gapsBr.check(R.id.radioButton_gaps_yes_borrower);
-                    else rgborrower_gapsBr.check(R.id.radioButton_gaps_no_borrower);
+                        rgborrower_gapsBr.check(R.id.rbgaps_yesBr);
+                    else rgborrower_gapsBr.check(R.id.rbgaps_noBr);
                 }
 
                 if (!Brprofession.equals("")){
@@ -2944,7 +2960,22 @@ public class LoanApplicationFragment_2 extends Fragment {
                     else rgiscgpaBr.check(R.id.rbiscgpa_noBr);
                 }
 
+                if (!Brlast_completed_degree.equals("")){
+                    try{
+                        splastdegreecompletedBr.setSelection(Integer.parseInt(Brlast_completed_degree));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        splastdegreecompletedBr.setSelection(0);
+                    }
+                }
 
+                if (!Brpercentage.equals("")){
+                    input_degreeBr.getEditText().setText(Brpercentage);
+                }
+
+                if(!Brcgpa.equals("")){
+                    input_cgpaBr.getEditText().setText(Brcgpa);
+                }
 
 
                 if (Bris_borrower_current_address_same_as.equals("")) {
@@ -4390,18 +4421,13 @@ public class LoanApplicationFragment_2 extends Fragment {
                     arrayAdapter_currentState.notifyDataSetChanged();
 
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            int count = borrowerCurrentStatePersonalPOJOArrayList.size();
-                            for (int i = 0; i < count; i++) {
-                                if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
-                                    spCurrentStateBr.setSelection(i);
-                                }
-                            }
+                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                            spCurrentStateBr.setSelection(i);
+                            break;
                         }
-                    },500);
-
+                    }
 
                 } else {
                 }
