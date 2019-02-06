@@ -1570,6 +1570,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             }
                         }
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
                 }
@@ -1592,7 +1593,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             }
                         }
                     } catch (Exception e) {
-
+                        e.printStackTrace();
                     }
                     cityApiCallCoBr();
 
@@ -1622,6 +1623,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 //                            spCurrentCityCoBr.setSelection(Integer.parseInt(currentcityIDCoBr));
 //                        }
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
 

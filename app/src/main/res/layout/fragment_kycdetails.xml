@@ -201,7 +201,7 @@
         android:background="@color/colorSecondary"
         android:layout_marginBottom="@dimen/_50sdp"
         android:layout_marginEnd="@dimen/_25sdp"
-        app:srcCompat="@drawable/icon_signapplication" />
+        app:srcCompat="@drawable/ic_edit_new" />
 
     <ProgressBar
         android:visibility="gone"

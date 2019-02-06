@@ -628,47 +628,53 @@ public class LoanApplicationFragment_2 extends Fragment {
             buttonPrevious.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
-                        String url = MainApplication.mainUrl + "algo/setCoBorrowerLoanDetails";
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("logged_id", userID);
-                        params.put("coborrower_address_type", MainApplication.coborrowerValue1);
-                        params.put("coborrower_monthly_rent", MainApplication.coborrowerValue2);
-                        params.put("coborrower_current_address", MainApplication.coborrowerValue3);
-                        params.put("coborrower_current_city", MainApplication.coborrowerValue4);
-                        params.put("coborrower_current_state", MainApplication.coborrowerValue5);
-                        params.put("coborrower_current_country", MainApplication.coborrowerValue6);
-                        params.put("coborrower_current_pincode", MainApplication.coborrowerValue7);
-                        params.put("coborrower_permanent_address", MainApplication.coborrowerValue8);
-                        params.put("coborrower_permanent_city", MainApplication.coborrowerValue9);
-                        params.put("coborrower_permanent_state", MainApplication.coborrowerValue10);
-                        params.put("coborrower_permanent_country", MainApplication.coborrowerValue11);
-                        params.put("coborrower_permanent_pincode", MainApplication.coborrowerValue12);
-                        params.put("coborrower_first_name", MainApplication.coborrowerValue13);
-                        params.put("coborrower_last_name", MainApplication.coborrowerValue14);
-                        params.put("coborrower_dob", MainApplication.coborrowerValue15);
-                        params.put("coborrower_is_married", MainApplication.coborrowerValue16);
-                        params.put("coborrower_pan_no", MainApplication.coborrowerValue17);
-                        params.put("coborrower_aadhar_no", MainApplication.coborrowerValue18);
-
-                        params.put("coborrower_email", MainApplication.coborrowerValue19);
-                        params.put("coborrower_mobile", MainApplication.coborrowerValue20);
-                        params.put("coborrower_living_since", MainApplication.coborrowerValue21);
-                        params.put("coborrower_relationship", MainApplication.coborrowerValue22);
-
-                        params.put("coborrower_profession", MainApplication.coborrowerValue23);
-                        params.put("coborrower_income", MainApplication.coborrowerValue24);
-                        params.put("coborrower_organization", MainApplication.coborrowerValue25);
-                        params.put("coborrower_working_organization_since", MainApplication.coborrowerValue26);
-
-                        VolleyCallNew volleyCall = new VolleyCallNew();
-                        volleyCall.sendRequest(context, url, null, mFragment, "autosave", params, MainApplication.auth_token);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                     LoanApplicationFragment_1 loanApplicationFragment_1 = new LoanApplicationFragment_1();
                     transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_1).commit();
+
                 }
+//                @Override
+//                public void onClick(View v) {
+//                    try {
+//                        String url = MainApplication.mainUrl + "algo/setCoBorrowerLoanDetails";
+//                        Map<String, String> params = new HashMap<String, String>();
+//                        params.put("logged_id", userID);
+//                        params.put("coborrower_address_type", MainApplication.coborrowerValue1);
+//                        params.put("coborrower_monthly_rent", MainApplication.coborrowerValue2);
+//                        params.put("coborrower_current_address", MainApplication.coborrowerValue3);
+//                        params.put("coborrower_current_city", MainApplication.coborrowerValue4);
+//                        params.put("coborrower_current_state", MainApplication.coborrowerValue5);
+//                        params.put("coborrower_current_country", MainApplication.coborrowerValue6);
+//                        params.put("coborrower_current_pincode", MainApplication.coborrowerValue7);
+//                        params.put("coborrower_permanent_address", MainApplication.coborrowerValue8);
+//                        params.put("coborrower_permanent_city", MainApplication.coborrowerValue9);
+//                        params.put("coborrower_permanent_state", MainApplication.coborrowerValue10);
+//                        params.put("coborrower_permanent_country", MainApplication.coborrowerValue11);
+//                        params.put("coborrower_permanent_pincode", MainApplication.coborrowerValue12);
+//                        params.put("coborrower_first_name", MainApplication.coborrowerValue13);
+//                        params.put("coborrower_last_name", MainApplication.coborrowerValue14);
+//                        params.put("coborrower_dob", MainApplication.coborrowerValue15);
+//                        params.put("coborrower_is_married", MainApplication.coborrowerValue16);
+//                        params.put("coborrower_pan_no", MainApplication.coborrowerValue17);
+//                        params.put("coborrower_aadhar_no", MainApplication.coborrowerValue18);
+//
+//                        params.put("coborrower_email", MainApplication.coborrowerValue19);
+//                        params.put("coborrower_mobile", MainApplication.coborrowerValue20);
+//                        params.put("coborrower_living_since", MainApplication.coborrowerValue21);
+//                        params.put("coborrower_relationship", MainApplication.coborrowerValue22);
+//
+//                        params.put("coborrower_profession", MainApplication.coborrowerValue23);
+//                        params.put("coborrower_income", MainApplication.coborrowerValue24);
+//                        params.put("coborrower_organization", MainApplication.coborrowerValue25);
+//                        params.put("coborrower_working_organization_since", MainApplication.coborrowerValue26);
+//
+//                        VolleyCallNew volleyCall = new VolleyCallNew();
+//                        volleyCall.sendRequest(context, url, null, mFragment, "autosave", params, MainApplication.auth_token);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                    LoanApplicationFragment_1 loanApplicationFragment_1 = new LoanApplicationFragment_1();
+//                    transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_1).commit();
+//                }
             });
 
             lblBirthdayBr = (TextView) view.findViewById(R.id.lblBirthdayBr);
