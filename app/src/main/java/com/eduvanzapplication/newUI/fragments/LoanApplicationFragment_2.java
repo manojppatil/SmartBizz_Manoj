@@ -534,6 +534,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                                                     edtEmailCoBr.setError("Enter email");
                                                 if (edtMobileCoBr.getText().toString().equals(""))
                                                     edtMobileCoBr.setError("Enter mobile");
+                                                if(!isSpCurrentResiValidCoBr) setSpinnerError(spResidentTypeCoBr, "Please select residency type");
                                                 if (!isSpCurrentStayDurationValidCoBr) setSpinnerError(spDurationStayAtCurrentAddressCoBr,"Please select duration");
                                                 if (!isSpCurrentCountryValidCoBr) setSpinnerError(spCurrentCountryCoBr, "Please select country");
                                                 if (!isSpCurrentStateValidCoBr) setSpinnerError(spCurrentStateCoBr, "Please select state");
@@ -542,7 +543,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                                                 if (!isPermanentStateValidCoBr) setSpinnerError(spPermanentStateCoBr, "Please select state");
                                                 if (!isPermanentCityValidCoBr) setSpinnerError(spPermanentCityCoBr, "Please select city");
                                                 if (!isProfessionValidCoBr) setSpinnerError(spProfessionCoBr, "Please select profession");
-
+                                                if (!isEmployementDurationValidCoBr) setSpinnerError(spdurationofjobCoBr,"Please select duration");
 
                                             }
 

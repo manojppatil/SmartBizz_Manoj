@@ -352,26 +352,26 @@ public class LoanApplicationFragment_3 extends Fragment {
                 @Override
                 public void onClick(View v) {
                     /** API CALL **/
-                    try {
-                        String url = MainApplication.mainUrl + "laf/getStudentLaf"; //https://api.eduvanz.com/laf/getStudentLaf
-                        Map<String, String> params = new HashMap<String, String>();
-                        if (!Globle.isNetworkAvailable(context)) {
-                            Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            VolleyCallNew volleyCall = new VolleyCallNew();
-                            params.put("studentId", userID); //2953
-                            volleyCall.sendRequest(context, url, null, mFragment, "getStudentLaf", params, MainApplication.auth_token);
-                        }
-                    } catch (Exception e) {
-                        String className = this.getClass().getSimpleName();
-                        String name = new Object() {
-                        }.getClass().getEnclosingMethod().getName();
-                        String errorMsg = e.getMessage();
-                        String errorMsgDetails = e.getStackTrace().toString();
-                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-                    }
+//                    try {
+//                        String url = MainApplication.mainUrl + "laf/getStudentLaf"; //https://api.eduvanz.com/laf/getStudentLaf
+//                        Map<String, String> params = new HashMap<String, String>();
+//                        if (!Globle.isNetworkAvailable(context)) {
+//                            Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//
+//                        } else {
+//                            VolleyCallNew volleyCall = new VolleyCallNew();
+//                            params.put("studentId", userID); //2953
+//                            volleyCall.sendRequest(context, url, null, mFragment, "getStudentLaf", params, MainApplication.auth_token);
+//                        }
+//                    } catch (Exception e) {
+//                        String className = this.getClass().getSimpleName();
+//                        String name = new Object() {
+//                        }.getClass().getEnclosingMethod().getName();
+//                        String errorMsg = e.getMessage();
+//                        String errorMsgDetails = e.getStackTrace().toString();
+//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//                    }
 
                     /**API CALL*/
 
