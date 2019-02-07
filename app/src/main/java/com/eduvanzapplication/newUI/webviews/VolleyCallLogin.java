@@ -107,13 +107,13 @@ public class VolleyCallLogin extends Application {
                 return dataForPost;
             }
 
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-////auth_token":"90a876cf5617b74f1e034c6561669803
-//                HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("auth_token", "90a876cf5617b74f1e034c6561669803");
-//                return headers;
-//            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+//auth_token":"90a876cf5617b74f1e034c6561669803
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("auth_token", "90a876cf5617b74f1e034c6561669803");
+                return headers;
+            }
 
             @Override
             protected VolleyError parseNetworkError(VolleyError volleyError) {

@@ -63,6 +63,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
+            android:visibility="gone"
             android:background="@drawable/background_button_signup"
             android:text="@string/title_sign_up"
             android:textSize="16sp" />
@@ -78,6 +79,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_button_signup"
             android:text="@string/title_sign_in"
+            android:visibility="gone"
             android:textSize="16sp" />
     </LinearLayout>
 

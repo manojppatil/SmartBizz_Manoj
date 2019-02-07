@@ -165,8 +165,8 @@ public class SplashScreen extends AppCompatActivity {
             } else {
                 StartAnimationsCustomer();//coment this
 
-//                VolleyCallNew volleyCall = new VolleyCallNew();
-//                volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "checkVersion", params);
+                VolleyCallNew volleyCall = new VolleyCallNew();
+                volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "checkVersion", params,MainApplication.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();

@@ -1132,7 +1132,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                                 currentcountryID = "1";
                                 spCurrentCountryBr.setSelection(Integer.parseInt(currentcountryID));
                             }
-                            if (!Brcurrent_address_state.equals("null")) {
+                            if (!Brcurrent_address_state.equals("null") && !Brcurrent_address_state.equals("")) {
                                 currentstateID = Brcurrent_address_state;
 
                                 int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
