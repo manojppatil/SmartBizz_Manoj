@@ -1340,7 +1340,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                             }
 
                             //state
-                            if (!CoBrkyc_address_state.equals("null")) {
+                            if (!CoBrkyc_address_state.equals("null") && !CoBrkyc_address_state.equals("")) {
                                 currentstateIDCoBr = CoBrkyc_address_state;
                                 int count1 = borrowerCurrentStatePersonalPOJOArrayListCoBr.size();
 
@@ -1352,7 +1352,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                             }
 
                             //city
-                            if (!CoBrkyc_address_city.equals("null")) {
+                            if (!CoBrkyc_address_city.equals("null") && !CoBrkyc_address_city.equals("")) {
                                 currentcityIDCoBr = CoBrkyc_address_city;
 
                                 int count2 = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
@@ -1377,7 +1377,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                                 spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryIDCoBr));
                             }
                             //set state spinner as Borrower Current
-                            if (!Brcurrent_address_state.equals("null")) {
+                            if (!Brcurrent_address_state.equals("null") && !Brcurrent_address_state.equals("")) {
                                 currentstateIDCoBr = Brcurrent_address_state;
                                 int count1 = borrowerCurrentStatePersonalPOJOArrayListCoBr.size();
                                 for (int i = 0; i < count1; i++) {
@@ -1389,7 +1389,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                             }
 
                             //set city spinner as Borrower Current
-                            if (!Brcurrent_address_city.equals("null")) {
+                            if (!Brcurrent_address_city.equals("null") && !Brcurrent_address_city.equals("")) {
                                 currentcityIDCoBr = Brcurrent_address_city;
 
                                 int count2 = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
@@ -1414,7 +1414,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                                 spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryIDCoBr));
                             }
                             //set state spinner as Borrower Permanent
-                            if (!Brpermanent_address_state.equals("null")) {
+                            if (!Brpermanent_address_state.equals("null") && !Brpermanent_address_state.equals("")) {
                                 currentstateIDCoBr = Brpermanent_address_state;
                                 int count1 = borrowerPermanentStatePersonalPOJOArrayListCoBr.size();
                                 for (int i = 0; i < count1; i++) {
@@ -1426,7 +1426,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                             }
 
                             //set city spinner as Borrower Permanent
-                            if (!Brpermanent_address_city.equals("null")) {
+                            if (!Brpermanent_address_city.equals("null") && !Brpermanent_address_city.equals("")) {
                                 currentcityIDCoBr = Brpermanent_address_city;
 
                                 int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
@@ -1448,7 +1448,7 @@ public class LoanApplicationFragment_2 extends Fragment {
                             edtCurrentPincodeCoBr.setText(CoBrcurrent_address_pin);
                             edtCurrentAddressCoBr.setText(CoBrcurrent_address);
 
-                            if (!CoBrcurrent_address_country.equals("null")) {
+                            if (!CoBrcurrent_address_country.equals("null") && !CoBrcurrent_address_country.equals("")) {
                                 currentcountryIDCoBr = "1";
                                 spCurrentCountryCoBr.setSelection(Integer.parseInt(currentcountryIDCoBr));
                             }
@@ -2711,7 +2711,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
                 JSONObject jsondetailedInformation = jsonData.getJSONObject("detailedInformation");
                 JSONObject jsonborrowerDetails = jsonData.getJSONObject("borrowerDetails");
-                JSONObject jsoncoborrowerDetails = jsonData.getJSONObject("coborrowerDetails");
+//                JSONObject jsoncoborrowerDetails = jsonData.getJSONObject("coborrowerDetails");
                 JSONObject jsonleadStatus = jsonData.getJSONObject("leadStatus");
 //                JSONObject jsoncourseAmount = jsonData.getJSONObject("courseAmount");
 //                JSONObject jsonleadid = jsonData.getJSONObject("leadid");
@@ -2904,8 +2904,10 @@ public class LoanApplicationFragment_2 extends Fragment {
                 edtMonthlyRentBr.setText(Brcurrent_address_rent);
                 if (Brgender_id.equals("1")) rbMaleBr.setChecked(true);
                 else rbFemaleBr.setChecked(true);
-                if (Brmarital_status.equals("2")) rbSingleBr.setChecked(true);
-                else rbMarriedBr.setChecked(true);
+
+                if (!Brmarital_status.equals(""))
+                    if (Brmarital_status.equals("2")) rbSingleBr.setChecked(true);
+                    else rbMarriedBr.setChecked(true);
 
                 if (!Brcurrent_residence_type.equals("")) {
                     spResidentTypeBr.setSelection((Integer.parseInt(Brcurrent_residence_type) + 1));
@@ -2994,240 +2996,246 @@ public class LoanApplicationFragment_2 extends Fragment {
                     spCurrentAddressSameAsKycOrBorrowerBr.setSelection(Integer.parseInt(MainApplication.Bris_borrower_permanent_address_same_asdtl));
                 }
 
-                if (!jsoncoborrowerDetails.getString("relationship_with_applicant").toString().equals("null"))
-                    MainApplication.CoBrrelationship_with_applicantdtl = CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
 
-                if (!jsoncoborrowerDetails.getString("applicant_id").toString().equals("null"))
-                    MainApplication.CoBrapplicant_iddtl = CoBrapplicant_id = jsoncoborrowerDetails.getString("applicant_id");
-                if (!jsoncoborrowerDetails.getString("fk_applicant_type_id").toString().equals("null"))
-                    MainApplication.CoBrfk_applicant_type_iddtl = CoBrfk_applicant_type_id = jsoncoborrowerDetails.getString("fk_applicant_type_id");
-                if (!jsoncoborrowerDetails.getString("first_name").toString().equals("null"))
-                    MainApplication.CoBrfirst_namedtl = CoBrfirst_name = jsoncoborrowerDetails.getString("first_name");
-                if (!jsoncoborrowerDetails.getString("middle_name").toString().equals("null"))
-                    MainApplication.CoBrmiddle_namedtl = CoBrmiddle_name = jsoncoborrowerDetails.getString("middle_name");
-                if (!jsoncoborrowerDetails.getString("last_name").toString().equals("null"))
-                    MainApplication.CoBrlast_namedtl = CoBrlast_name = jsoncoborrowerDetails.getString("last_name");
-                if (!jsoncoborrowerDetails.getString("dob").toString().equals("null"))
-                    MainApplication.CoBrdobdtl = CoBrdob = jsoncoborrowerDetails.getString("dob");
-                if (!jsoncoborrowerDetails.getString("gender_id").toString().equals("null"))
-                    MainApplication.CoBrgender_iddtl = CoBrgender_id = jsoncoborrowerDetails.getString("gender_id");
-
-                if (!jsoncoborrowerDetails.getString("mobile_number").toString().equals("null"))
-                    MainApplication.CoBrmobile_numberdtl = CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
-
-                if (!jsoncoborrowerDetails.getString("email_id").toString().equals("null"))
-                    MainApplication.CoBremail_iddtl = CoBremail_id = jsoncoborrowerDetails.getString("email_id");
-
-                if (!jsoncoborrowerDetails.getString("has_aadhar_pan").toString().equals("null"))
-                    MainApplication.CoBrhas_aadhar_pandtl = CoBrhas_aadhar_pan = jsoncoborrowerDetails.getString("has_aadhar_pan");
-                if (!jsoncoborrowerDetails.getString("pan_number").toString().equals("null"))
-                    MainApplication.CoBrpan_numberdtl = CoBrpan_number = jsoncoborrowerDetails.getString("pan_number");
-                if (!jsoncoborrowerDetails.getString("aadhar_number").toString().equals("null"))
-                    MainApplication.CoBraadhar_numberdtl = CoBraadhar_number = jsoncoborrowerDetails.getString("aadhar_number");
-                if (!jsoncoborrowerDetails.getString("marital_status").toString().equals("null"))
-                    MainApplication.CoBrmarital_statusdtl = CoBrmarital_status = jsoncoborrowerDetails.getString("marital_status");
-                if (!jsoncoborrowerDetails.getString("mobile_number").toString().equals("null"))
-                    MainApplication.CoBrmobile_numberdtl = CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
-                if (!jsoncoborrowerDetails.getString("relationship_with_applicant").toString().equals("null"))
-                    MainApplication.CoBrrelationship_with_applicantdtl = CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
-
-                if (!jsoncoborrowerDetails.getString("profession").toString().equals("null"))
-                    MainApplication.CoBrprofessiondtl = CoBrprofession = jsoncoborrowerDetails.getString("profession");
-
-                if (!jsoncoborrowerDetails.getString("employer_type").toString().equals("null"))
-                    MainApplication.CoBremployer_typedtl = CoBremployer_type = jsoncoborrowerDetails.getString("employer_type");
-                if (!jsoncoborrowerDetails.getString("employer_name").toString().equals("null"))
-                    MainApplication.CoBremployer_namedtl = CoBremployer_name = jsoncoborrowerDetails.getString("employer_name");
-                if (!jsoncoborrowerDetails.getString("current_employment_duration").toString().equals("null"))
-                    MainApplication.CoBrtotal_employement_durationdtl = CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("current_employment_duration");
+                if (jsonData.getJSONObject("coborrowerDetails") != null) {
+                    JSONObject jsoncoborrowerDetails = jsonData.getJSONObject("coborrowerDetails");
 
 
-                if (!jsoncoborrowerDetails.getString("annual_income").toString().equals("null"))
-                    MainApplication.CoBrannual_incomedtl = CoBrannual_income = jsoncoborrowerDetails.getString("annual_income");
-                if (!jsoncoborrowerDetails.getString("total_employement_duration").toString().equals("null"))
-                    MainApplication.CoBrtotal_employement_durationdtl = CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("total_employement_duration");
-                if (!jsoncoborrowerDetails.getString("employer_landline_number").toString().equals("null"))
-                    MainApplication.CoBremployer_landline_numberdtl = CoBremployer_landline_number = jsoncoborrowerDetails.getString("employer_landline_number");
-                if (!jsoncoborrowerDetails.getString("office_address").toString().equals("null"))
-                    MainApplication.CoBroffice_addressdtl = CoBroffice_address = jsoncoborrowerDetails.getString("office_address");
-                if (!jsoncoborrowerDetails.getString("office_address_state").toString().equals("null"))
-                    MainApplication.CoBroffice_address_statedtl = CoBroffice_address_state = offstateIDCoBr = jsoncoborrowerDetails.getString("office_address_state");
-                if (!jsoncoborrowerDetails.getString("office_address_pin").toString().equals("null"))
-                    MainApplication.CoBroffice_address_pindtl = CoBroffice_address_pin = jsoncoborrowerDetails.getString("office_address_pin");
-                if (!jsoncoborrowerDetails.getString("office_address_country").toString().equals("null"))
-                    MainApplication.CoBroffice_address_countrydtl = CoBroffice_address_country = jsoncoborrowerDetails.getString("office_address_country");
-                if (!jsoncoborrowerDetails.getString("office_address_city").toString().equals("null"))
-                    MainApplication.CoBroffice_address_citydtl = CoBroffice_address_city = offcityIDCoBr = jsoncoborrowerDetails.getString("office_address_city");
+                    if (!jsoncoborrowerDetails.getString("relationship_with_applicant").toString().equals("null"))
+                        MainApplication.CoBrrelationship_with_applicantdtl = CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
 
-                if (!jsoncoborrowerDetails.getString("EMI_Amount").toString().equals("null"))
-                    MainApplication.CoBrEMI_Amountdtl = CoBrEMI_Amount = jsoncoborrowerDetails.getString("EMI_Amount");
-                if (!jsoncoborrowerDetails.getString("kyc_address").toString().equals("null"))
-                    MainApplication.CoBrkyc_addressdtl = CoBrkyc_address = jsoncoborrowerDetails.getString("kyc_address");
-                if (!jsoncoborrowerDetails.getString("kyc_address_state").toString().equals("null"))
-                    MainApplication.CoBrkyc_address_statedtl = CoBrkyc_address_state = jsoncoborrowerDetails.getString("kyc_address_state");
+                    if (!jsoncoborrowerDetails.getString("applicant_id").toString().equals("null"))
+                        MainApplication.CoBrapplicant_iddtl = CoBrapplicant_id = jsoncoborrowerDetails.getString("applicant_id");
+                    if (!jsoncoborrowerDetails.getString("fk_applicant_type_id").toString().equals("null"))
+                        MainApplication.CoBrfk_applicant_type_iddtl = CoBrfk_applicant_type_id = jsoncoborrowerDetails.getString("fk_applicant_type_id");
+                    if (!jsoncoborrowerDetails.getString("first_name").toString().equals("null"))
+                        MainApplication.CoBrfirst_namedtl = CoBrfirst_name = jsoncoborrowerDetails.getString("first_name");
+                    if (!jsoncoborrowerDetails.getString("middle_name").toString().equals("null"))
+                        MainApplication.CoBrmiddle_namedtl = CoBrmiddle_name = jsoncoborrowerDetails.getString("middle_name");
+                    if (!jsoncoborrowerDetails.getString("last_name").toString().equals("null"))
+                        MainApplication.CoBrlast_namedtl = CoBrlast_name = jsoncoborrowerDetails.getString("last_name");
+                    if (!jsoncoborrowerDetails.getString("dob").toString().equals("null"))
+                        MainApplication.CoBrdobdtl = CoBrdob = jsoncoborrowerDetails.getString("dob");
+                    if (!jsoncoborrowerDetails.getString("gender_id").toString().equals("null"))
+                        MainApplication.CoBrgender_iddtl = CoBrgender_id = jsoncoborrowerDetails.getString("gender_id");
 
-                if (!jsoncoborrowerDetails.getString("kyc_address_city").toString().equals("null"))
-                    MainApplication.CoBrkyc_address_citydtl = CoBrkyc_address_city = jsoncoborrowerDetails.getString("kyc_address_city");
+                    if (!jsoncoborrowerDetails.getString("mobile_number").toString().equals("null"))
+                        MainApplication.CoBrmobile_numberdtl = CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
 
-                if (!jsoncoborrowerDetails.getString("kyc_address_pin").toString().equals("null"))
-                    MainApplication.CoBrkyc_address_pindtl = CoBrkyc_address_pin = jsoncoborrowerDetails.getString("kyc_address_pin");
-                if (!jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as").toString().equals("null"))
-                    MainApplication.CoBris_coborrower_current_address_same_asdtl = CoBris_coborrower_current_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as");
+                    if (!jsoncoborrowerDetails.getString("email_id").toString().equals("null"))
+                        MainApplication.CoBremail_iddtl = CoBremail_id = jsoncoborrowerDetails.getString("email_id");
 
+                    if (!jsoncoborrowerDetails.getString("has_aadhar_pan").toString().equals("null"))
+                        MainApplication.CoBrhas_aadhar_pandtl = CoBrhas_aadhar_pan = jsoncoborrowerDetails.getString("has_aadhar_pan");
+                    if (!jsoncoborrowerDetails.getString("pan_number").toString().equals("null"))
+                        MainApplication.CoBrpan_numberdtl = CoBrpan_number = jsoncoborrowerDetails.getString("pan_number");
+                    if (!jsoncoborrowerDetails.getString("aadhar_number").toString().equals("null"))
+                        MainApplication.CoBraadhar_numberdtl = CoBraadhar_number = jsoncoborrowerDetails.getString("aadhar_number");
+                    if (!jsoncoborrowerDetails.getString("marital_status").toString().equals("null"))
+                        MainApplication.CoBrmarital_statusdtl = CoBrmarital_status = jsoncoborrowerDetails.getString("marital_status");
+                    if (!jsoncoborrowerDetails.getString("mobile_number").toString().equals("null"))
+                        MainApplication.CoBrmobile_numberdtl = CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
+                    if (!jsoncoborrowerDetails.getString("relationship_with_applicant").toString().equals("null"))
+                        MainApplication.CoBrrelationship_with_applicantdtl = CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
 
-                if (!jsoncoborrowerDetails.getString("current_residence_type").toString().equals("null"))
-                    MainApplication.CoBrcurrent_residence_typedtl = CoBrcurrent_residence_type = jsoncoborrowerDetails.getString("current_residence_type");
+                    if (!jsoncoborrowerDetails.getString("profession").toString().equals("null"))
+                        MainApplication.CoBrprofessiondtl = CoBrprofession = jsoncoborrowerDetails.getString("profession");
 
-                if (!jsoncoborrowerDetails.getString("current_landmark").toString().equals("null"))
-                    MainApplication.CoBrcurrent_landmarkdtl = CoBrcurrent_landmark = jsoncoborrowerDetails.getString("current_landmark");
-                if (!jsoncoborrowerDetails.getString("current_address_city").toString().equals("null"))
-                    MainApplication.CoBrcurrent_address_citydtl = CoBrcurrent_address_city = jsoncoborrowerDetails.getString("current_address_city");
-                if (!jsoncoborrowerDetails.getString("current_address_country").toString().equals("null"))
-                    MainApplication.CoBrcurrent_address_countrydtl = CoBrcurrent_address_country = jsoncoborrowerDetails.getString("current_address_country");
-
-                if (!jsoncoborrowerDetails.getString("current_address_state").toString().equals("null"))
-                    MainApplication.CoBrcurrent_address_statedtl = CoBrcurrent_address_state = jsoncoborrowerDetails.getString("current_address_state");
-
-                if (!jsoncoborrowerDetails.getString("current_address_rent").toString().equals("null"))
-                    MainApplication.CoBrcurrent_address_rentdtl = CoBrcurrent_address_rent = jsoncoborrowerDetails.getString("current_address_rent");
-                if (!jsoncoborrowerDetails.getString("current_address_pin").toString().equals("null"))
-                    MainApplication.CoBrcurrent_address_pindtl = CoBrcurrent_address_pin = jsoncoborrowerDetails.getString("current_address_pin");
-                if (!jsoncoborrowerDetails.getString("current_address_stay_duration").toString().equals("null"))
-                    MainApplication.CoBrcurrent_address_stay_durationdtl = CoBrcurrent_address_stay_duration = jsoncoborrowerDetails.getString("current_address_stay_duration");
-
-                if (!jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as").toString().equals("null"))
-                    MainApplication.CoBris_coborrower_permanent_address_same_asdtl = CoBris_coborrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as");
-
-                if (!jsoncoborrowerDetails.getString("permanent_residence_type").toString().equals("null"))
-                    MainApplication.CoBrpermanent_residence_typedtl = CoBrpermanent_residence_type = jsoncoborrowerDetails.getString("permanent_residence_type");
-                if (!jsoncoborrowerDetails.getString("permanent_address").toString().equals("null"))
-                    MainApplication.CoBrpermanent_addressdtl = CoBrpermanent_address = jsoncoborrowerDetails.getString("permanent_address");
-                if (!jsoncoborrowerDetails.getString("permanent_address_state").toString().equals("null"))
-                    MainApplication.CoBrpermanent_address_statedtl = CoBrpermanent_address_state = jsoncoborrowerDetails.getString("permanent_address_state");
-
-                if (!jsoncoborrowerDetails.getString("permanent_address_country").toString().equals("null"))
-                    MainApplication.CoBrpermanent_address_countrydtl = CoBrpermanent_address_country = jsoncoborrowerDetails.getString("permanent_address_country");
-                if (!jsoncoborrowerDetails.getString("permanent_address_city").toString().equals("null"))
-                    MainApplication.CoBrpermanent_address_citydtl = CoBrpermanent_address_city = jsoncoborrowerDetails.getString("permanent_address_city");
+                    if (!jsoncoborrowerDetails.getString("employer_type").toString().equals("null"))
+                        MainApplication.CoBremployer_typedtl = CoBremployer_type = jsoncoborrowerDetails.getString("employer_type");
+                    if (!jsoncoborrowerDetails.getString("employer_name").toString().equals("null"))
+                        MainApplication.CoBremployer_namedtl = CoBremployer_name = jsoncoborrowerDetails.getString("employer_name");
+                    if (!jsoncoborrowerDetails.getString("current_employment_duration").toString().equals("null"))
+                        MainApplication.CoBrtotal_employement_durationdtl = CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("current_employment_duration");
 
 
-                if (!jsoncoborrowerDetails.getString("permanent_address_pin").toString().equals("null"))
-                    MainApplication.CoBrpermanent_address_pindtl = CoBrpermanent_address_pin = jsoncoborrowerDetails.getString("permanent_address_pin");
-                if (!jsoncoborrowerDetails.getString("permanent_address_stay_duration").toString().equals("null"))
-                    MainApplication.CoBrpermanent_address_stay_durationdtl = CoBrpermanent_address_stay_duration = jsoncoborrowerDetails.getString("permanent_address_stay_duration");
-                if (!jsoncoborrowerDetails.getString("score_unit").toString().equals("null"))
-                    MainApplication.CoBrscore_unitdtl = CoBrscore_unit = jsoncoborrowerDetails.getString("score_unit");
-                if (!jsoncoborrowerDetails.getString("percentage").toString().equals("null"))
-                    MainApplication.CoBrpercentagedtl = CoBrpercentage = jsoncoborrowerDetails.getString("percentage");
-                if (!jsoncoborrowerDetails.getString("gap_in_education").toString().equals("null"))
-                    MainApplication.CoBrgap_in_educationdtl = CoBrgap_in_education = jsoncoborrowerDetails.getString("gap_in_education");
-                if (!jsoncoborrowerDetails.getString("created_by_id").toString().equals("null"))
-                    MainApplication.CoBrcreated_by_iddtl = CoBrcreated_by_id = jsoncoborrowerDetails.getString("created_by_id");
-                if (!jsoncoborrowerDetails.getString("created_ip_address").toString().equals("null"))
-                    MainApplication.CoBrcreated_ip_addressdtl = CoBrcreated_ip_address = jsoncoborrowerDetails.getString("created_ip_address");
-                if (!jsoncoborrowerDetails.getString("modified_date_time").toString().equals("null"))
-                    MainApplication.CoBrmodified_date_timedtl = CoBrmodified_date_time = jsoncoborrowerDetails.getString("modified_date_time");
-                if (!jsoncoborrowerDetails.getString("is_deleted").toString().equals("null"))
-                    MainApplication.CoBris_deleteddtl = CoBris_deleted = jsoncoborrowerDetails.getString("is_deleted");
+                    if (!jsoncoborrowerDetails.getString("annual_income").toString().equals("null"))
+                        MainApplication.CoBrannual_incomedtl = CoBrannual_income = jsoncoborrowerDetails.getString("annual_income");
+                    if (!jsoncoborrowerDetails.getString("total_employement_duration").toString().equals("null"))
+                        MainApplication.CoBrtotal_employement_durationdtl = CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("total_employement_duration");
+                    if (!jsoncoborrowerDetails.getString("employer_landline_number").toString().equals("null"))
+                        MainApplication.CoBremployer_landline_numberdtl = CoBremployer_landline_number = jsoncoborrowerDetails.getString("employer_landline_number");
+                    if (!jsoncoborrowerDetails.getString("office_address").toString().equals("null"))
+                        MainApplication.CoBroffice_addressdtl = CoBroffice_address = jsoncoborrowerDetails.getString("office_address");
+                    if (!jsoncoborrowerDetails.getString("office_address_state").toString().equals("null"))
+                        MainApplication.CoBroffice_address_statedtl = CoBroffice_address_state = offstateIDCoBr = jsoncoborrowerDetails.getString("office_address_state");
+                    if (!jsoncoborrowerDetails.getString("office_address_pin").toString().equals("null"))
+                        MainApplication.CoBroffice_address_pindtl = CoBroffice_address_pin = jsoncoborrowerDetails.getString("office_address_pin");
+                    if (!jsoncoborrowerDetails.getString("office_address_country").toString().equals("null"))
+                        MainApplication.CoBroffice_address_countrydtl = CoBroffice_address_country = jsoncoborrowerDetails.getString("office_address_country");
+                    if (!jsoncoborrowerDetails.getString("office_address_city").toString().equals("null"))
+                        MainApplication.CoBroffice_address_citydtl = CoBroffice_address_city = offcityIDCoBr = jsoncoborrowerDetails.getString("office_address_city");
+
+                    if (!jsoncoborrowerDetails.getString("EMI_Amount").toString().equals("null"))
+                        MainApplication.CoBrEMI_Amountdtl = CoBrEMI_Amount = jsoncoborrowerDetails.getString("EMI_Amount");
+                    if (!jsoncoborrowerDetails.getString("kyc_address").toString().equals("null"))
+                        MainApplication.CoBrkyc_addressdtl = CoBrkyc_address = jsoncoborrowerDetails.getString("kyc_address");
+                    if (!jsoncoborrowerDetails.getString("kyc_address_state").toString().equals("null"))
+                        MainApplication.CoBrkyc_address_statedtl = CoBrkyc_address_state = jsoncoborrowerDetails.getString("kyc_address_state");
+
+                    if (!jsoncoborrowerDetails.getString("kyc_address_city").toString().equals("null"))
+                        MainApplication.CoBrkyc_address_citydtl = CoBrkyc_address_city = jsoncoborrowerDetails.getString("kyc_address_city");
+
+                    if (!jsoncoborrowerDetails.getString("kyc_address_pin").toString().equals("null"))
+                        MainApplication.CoBrkyc_address_pindtl = CoBrkyc_address_pin = jsoncoborrowerDetails.getString("kyc_address_pin");
+                    if (!jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as").toString().equals("null"))
+                        MainApplication.CoBris_coborrower_current_address_same_asdtl = CoBris_coborrower_current_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as");
 
 
-                edtFnameCoBr.setText(CoBrfirst_name);
-                edtMnameCoBr.setText(CoBrmiddle_name);
-                edtLnameCoBr.setText(CoBrlast_name);
-                txtBirthdateCoBr.setText(CoBrdob);
-                edtMobileCoBr.setText(CoBrmobile_number);
-                edtEmailCoBr.setText(CoBremail_id);
-                if (!CoBrgender_id.equals(""))
-                    if (CoBrgender_id.equals("1")) rgGenderCoBr.check(R.id.rbMaleCoBr);
-                    else rgGenderCoBr.check(R.id.rbFemaleCoBr);
-                if (!CoBrmarital_status.equals(""))
-                    if (CoBrmarital_status.equals("1"))
-                        rgMaritalStatusCoBr.check(R.id.rbMarriedCoBr);
-                    else rgMaritalStatusCoBr.check(R.id.rbSingleCoBr);
+                    if (!jsoncoborrowerDetails.getString("current_residence_type").toString().equals("null"))
+                        MainApplication.CoBrcurrent_residence_typedtl = CoBrcurrent_residence_type = jsoncoborrowerDetails.getString("current_residence_type");
 
-                if (!CoBremployer_type.equals(""))
-                    if (CoBremployer_type.equals("0"))
-                        rgemptypeCoBr.check(R.id.rbempType_privateCoBr);
-                    else rgemptypeCoBr.check(R.id.rbempType_govCoBr);
+                    if (!jsoncoborrowerDetails.getString("current_landmark").toString().equals("null"))
+                        MainApplication.CoBrcurrent_landmarkdtl = CoBrcurrent_landmark = jsoncoborrowerDetails.getString("current_landmark");
+                    if (!jsoncoborrowerDetails.getString("current_address_city").toString().equals("null"))
+                        MainApplication.CoBrcurrent_address_citydtl = CoBrcurrent_address_city = jsoncoborrowerDetails.getString("current_address_city");
+                    if (!jsoncoborrowerDetails.getString("current_address_country").toString().equals("null"))
+                        MainApplication.CoBrcurrent_address_countrydtl = CoBrcurrent_address_country = jsoncoborrowerDetails.getString("current_address_country");
 
-                if (!CoBrcurrent_residence_type.equals("")) {
-                    try {
-                        spResidentTypeCoBr.setSelection((Integer.parseInt(CoBrcurrent_residence_type) + 1));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        spResidentTypeCoBr.setSelection(0);
+                    if (!jsoncoborrowerDetails.getString("current_address_state").toString().equals("null"))
+                        MainApplication.CoBrcurrent_address_statedtl = CoBrcurrent_address_state = jsoncoborrowerDetails.getString("current_address_state");
+
+                    if (!jsoncoborrowerDetails.getString("current_address_rent").toString().equals("null"))
+                        MainApplication.CoBrcurrent_address_rentdtl = CoBrcurrent_address_rent = jsoncoborrowerDetails.getString("current_address_rent");
+                    if (!jsoncoborrowerDetails.getString("current_address_pin").toString().equals("null"))
+                        MainApplication.CoBrcurrent_address_pindtl = CoBrcurrent_address_pin = jsoncoborrowerDetails.getString("current_address_pin");
+                    if (!jsoncoborrowerDetails.getString("current_address_stay_duration").toString().equals("null"))
+                        MainApplication.CoBrcurrent_address_stay_durationdtl = CoBrcurrent_address_stay_duration = jsoncoborrowerDetails.getString("current_address_stay_duration");
+
+                    if (!jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as").toString().equals("null"))
+                        MainApplication.CoBris_coborrower_permanent_address_same_asdtl = CoBris_coborrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as");
+
+                    if (!jsoncoborrowerDetails.getString("permanent_residence_type").toString().equals("null"))
+                        MainApplication.CoBrpermanent_residence_typedtl = CoBrpermanent_residence_type = jsoncoborrowerDetails.getString("permanent_residence_type");
+                    if (!jsoncoborrowerDetails.getString("permanent_address").toString().equals("null"))
+                        MainApplication.CoBrpermanent_addressdtl = CoBrpermanent_address = jsoncoborrowerDetails.getString("permanent_address");
+                    if (!jsoncoborrowerDetails.getString("permanent_address_state").toString().equals("null"))
+                        MainApplication.CoBrpermanent_address_statedtl = CoBrpermanent_address_state = jsoncoborrowerDetails.getString("permanent_address_state");
+
+                    if (!jsoncoborrowerDetails.getString("permanent_address_country").toString().equals("null"))
+                        MainApplication.CoBrpermanent_address_countrydtl = CoBrpermanent_address_country = jsoncoborrowerDetails.getString("permanent_address_country");
+                    if (!jsoncoborrowerDetails.getString("permanent_address_city").toString().equals("null"))
+                        MainApplication.CoBrpermanent_address_citydtl = CoBrpermanent_address_city = jsoncoborrowerDetails.getString("permanent_address_city");
+
+
+                    if (!jsoncoborrowerDetails.getString("permanent_address_pin").toString().equals("null"))
+                        MainApplication.CoBrpermanent_address_pindtl = CoBrpermanent_address_pin = jsoncoborrowerDetails.getString("permanent_address_pin");
+                    if (!jsoncoborrowerDetails.getString("permanent_address_stay_duration").toString().equals("null"))
+                        MainApplication.CoBrpermanent_address_stay_durationdtl = CoBrpermanent_address_stay_duration = jsoncoborrowerDetails.getString("permanent_address_stay_duration");
+                    if (!jsoncoborrowerDetails.getString("score_unit").toString().equals("null"))
+                        MainApplication.CoBrscore_unitdtl = CoBrscore_unit = jsoncoborrowerDetails.getString("score_unit");
+                    if (!jsoncoborrowerDetails.getString("percentage").toString().equals("null"))
+                        MainApplication.CoBrpercentagedtl = CoBrpercentage = jsoncoborrowerDetails.getString("percentage");
+                    if (!jsoncoborrowerDetails.getString("gap_in_education").toString().equals("null"))
+                        MainApplication.CoBrgap_in_educationdtl = CoBrgap_in_education = jsoncoborrowerDetails.getString("gap_in_education");
+                    if (!jsoncoborrowerDetails.getString("created_by_id").toString().equals("null"))
+                        MainApplication.CoBrcreated_by_iddtl = CoBrcreated_by_id = jsoncoborrowerDetails.getString("created_by_id");
+                    if (!jsoncoborrowerDetails.getString("created_ip_address").toString().equals("null"))
+                        MainApplication.CoBrcreated_ip_addressdtl = CoBrcreated_ip_address = jsoncoborrowerDetails.getString("created_ip_address");
+                    if (!jsoncoborrowerDetails.getString("modified_date_time").toString().equals("null"))
+                        MainApplication.CoBrmodified_date_timedtl = CoBrmodified_date_time = jsoncoborrowerDetails.getString("modified_date_time");
+                    if (!jsoncoborrowerDetails.getString("is_deleted").toString().equals("null"))
+                        MainApplication.CoBris_deleteddtl = CoBris_deleted = jsoncoborrowerDetails.getString("is_deleted");
+
+
+                    edtFnameCoBr.setText(CoBrfirst_name);
+                    edtMnameCoBr.setText(CoBrmiddle_name);
+                    edtLnameCoBr.setText(CoBrlast_name);
+                    txtBirthdateCoBr.setText(CoBrdob);
+                    edtMobileCoBr.setText(CoBrmobile_number);
+                    edtEmailCoBr.setText(CoBremail_id);
+                    if (!CoBrgender_id.equals(""))
+                        if (CoBrgender_id.equals("1")) rgGenderCoBr.check(R.id.rbMaleCoBr);
+                        else rgGenderCoBr.check(R.id.rbFemaleCoBr);
+                    if (!CoBrmarital_status.equals(""))
+                        if (CoBrmarital_status.equals("1"))
+                            rgMaritalStatusCoBr.check(R.id.rbMarriedCoBr);
+                        else rgMaritalStatusCoBr.check(R.id.rbSingleCoBr);
+
+                    if (!CoBremployer_type.equals(""))
+                        if (CoBremployer_type.equals("0"))
+                            rgemptypeCoBr.check(R.id.rbempType_privateCoBr);
+                        else rgemptypeCoBr.check(R.id.rbempType_govCoBr);
+
+                    if (!CoBrcurrent_residence_type.equals("")) {
+                        try {
+                            spResidentTypeCoBr.setSelection((Integer.parseInt(CoBrcurrent_residence_type) + 1));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            spResidentTypeCoBr.setSelection(0);
+                        }
                     }
-                }
 
-                if (!CoBris_coborrower_current_address_same_as.equals("")) {
-                    if (Integer.parseInt(CoBris_coborrower_current_address_same_as) < spResidentTypeCoBr.getAdapter().getCount())
-                        spCurrentAddressSameAsKycCoBr.setSelection(Integer.parseInt(CoBris_coborrower_current_address_same_as));
-                    else
-                        spCurrentAddressSameAsKycCoBr.setSelection(0);
-                }
-
-                if (!CoBrcurrent_address_stay_duration.equals("")) {
-                    if (Integer.parseInt(CoBrcurrent_address_stay_duration) < spDurationStayAtCurrentAddressCoBr.getAdapter().getCount())
-                        spDurationStayAtCurrentAddressCoBr.setSelection(Integer.parseInt(CoBrcurrent_address_stay_duration));
-                    else spDurationStayAtCurrentAddressCoBr.setSelection(0);
-                }
-
-                edtMonthlyRentCoBr.setText(CoBrcurrent_address_rent);
-                edtPanCoBr.setText(CoBrpan_number);
-                edtAadhaarCoBr.setText(CoBraadhar_number);
-                edtCompanyCoBr.setText(CoBremployer_name);
-                edtAnnualSalCoBr.setText(CoBrannual_income);
-
-                if (!CoBrprofession.equals("")) {
-                    try {
-                        spProfessionCoBr.setSelection(Integer.parseInt(CoBrprofession));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        spProfessionCoBr.setSelection(0);
+                    if (!CoBris_coborrower_current_address_same_as.equals("")) {
+                        if (Integer.parseInt(CoBris_coborrower_current_address_same_as) < spResidentTypeCoBr.getAdapter().getCount())
+                            spCurrentAddressSameAsKycCoBr.setSelection(Integer.parseInt(CoBris_coborrower_current_address_same_as));
+                        else
+                            spCurrentAddressSameAsKycCoBr.setSelection(0);
                     }
-                }
 
-                if (!CoBrtotal_employement_duration.equals("")) {
-                    if (Integer.parseInt(CoBrtotal_employement_duration) < spdurationofjobCoBr.getAdapter().getCount())
-                        spdurationofjobCoBr.setSelection(Integer.parseInt(CoBrtotal_employement_duration));
-                    else
-                        spdurationofjobCoBr.setSelection(0);
-                }
-
-                if (!CoBroffice_address_country.equals("")) {
-                    try {
-                        spCountryOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_country));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        spCountryOffCoBr.setSelection(0);
+                    if (!CoBrcurrent_address_stay_duration.equals("")) {
+                        if (Integer.parseInt(CoBrcurrent_address_stay_duration) < spDurationStayAtCurrentAddressCoBr.getAdapter().getCount())
+                            spDurationStayAtCurrentAddressCoBr.setSelection(Integer.parseInt(CoBrcurrent_address_stay_duration));
+                        else spDurationStayAtCurrentAddressCoBr.setSelection(0);
                     }
-                }
 
-                if (!CoBroffice_address_state.equals("")) {
-                    try {
-                        spStateOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_state));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        spStateOffCoBr.setSelection(0);
+                    edtMonthlyRentCoBr.setText(CoBrcurrent_address_rent);
+                    edtPanCoBr.setText(CoBrpan_number);
+                    edtAadhaarCoBr.setText(CoBraadhar_number);
+                    edtCompanyCoBr.setText(CoBremployer_name);
+                    edtAnnualSalCoBr.setText(CoBrannual_income);
+
+                    if (!CoBrprofession.equals("")) {
+                        try {
+                            spProfessionCoBr.setSelection(Integer.parseInt(CoBrprofession));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            spProfessionCoBr.setSelection(0);
+                        }
                     }
-                }
 
-                if (!CoBroffice_address_city.equals("")) {
-                    try {
-                        spCountryOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_city));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        spCountryOffCoBr.setSelection(0);
+                    if (!CoBrtotal_employement_duration.equals("")) {
+                        if (Integer.parseInt(CoBrtotal_employement_duration) < spdurationofjobCoBr.getAdapter().getCount())
+                            spdurationofjobCoBr.setSelection(Integer.parseInt(CoBrtotal_employement_duration));
+                        else
+                            spdurationofjobCoBr.setSelection(0);
                     }
+
+                    if (!CoBroffice_address_country.equals("")) {
+                        try {
+                            spCountryOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_country));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            spCountryOffCoBr.setSelection(0);
+                        }
+                    }
+
+                    if (!CoBroffice_address_state.equals("")) {
+                        try {
+                            spStateOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_state));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            spStateOffCoBr.setSelection(0);
+                        }
+                    }
+
+                    if (!CoBroffice_address_city.equals("")) {
+                        try {
+                            spCountryOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_city));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            spCountryOffCoBr.setSelection(0);
+                        }
+                    }
+
+
+                    edtPincodeOffCoBr.setText(CoBroffice_address_pin);
+                    edtAddressOffCoBr.setText(CoBroffice_address);
+                    edtCurrentPincodeCoBr.setText(CoBrcurrent_address_pin);
+                    edtCurrentAddressCoBr.setText(CoBrcurrent_address);
+                    edtPermanentPincodeCoBr.setText(CoBrpermanent_address_pin);
+                    edtPermanentAddressCoBr.setText(CoBrpermanent_address);
                 }
-
-
-                edtPincodeOffCoBr.setText(CoBroffice_address_pin);
-                edtAddressOffCoBr.setText(CoBroffice_address);
-                edtCurrentPincodeCoBr.setText(CoBrcurrent_address_pin);
-                edtCurrentAddressCoBr.setText(CoBrcurrent_address);
-                edtPermanentPincodeCoBr.setText(CoBrpermanent_address_pin);
-                edtPermanentAddressCoBr.setText(CoBrpermanent_address);
 
 
                 lead_status_id = jsonleadStatus.getString("lead_status_id");
