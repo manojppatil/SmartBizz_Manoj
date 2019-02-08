@@ -1666,6 +1666,7 @@ public class LoanApplicationFragment_1 extends Fragment {
             /** API CALL POST LOGIN DASHBOARD STATUS **/
 
             try {
+                progressBar.setVisibility(View.VISIBLE);
                 String url = MainApplication.mainUrl + "dashboard/getKycDetails";
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("lead_id", MainApplication.lead_id);
@@ -1725,6 +1726,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 
     public void setStudentKycDetails(JSONObject jsonData) {
         try {
+            progressBar.setVisibility(View.GONE);
             String message = jsonData.optString("message");
 
             if (jsonData.getInt("status") == 1) {

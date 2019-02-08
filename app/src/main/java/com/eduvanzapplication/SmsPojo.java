@@ -1,8 +1,5 @@
 package com.eduvanzapplication;
 
-/**
- * Created by nikhil on 9/8/16.
- */
 public class SmsPojo {
     private String _id;
     private String _address;

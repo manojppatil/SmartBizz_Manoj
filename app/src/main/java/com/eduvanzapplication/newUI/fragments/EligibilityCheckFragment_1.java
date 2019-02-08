@@ -157,7 +157,7 @@ public class EligibilityCheckFragment_1 extends Fragment {
                     cal = Calendar.getInstance();
                     cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
                     DatePickerDialog data = new DatePickerDialog(context, date, cal
-                            .get(Calendar.YEAR) - 18, 1,
+                            .get(Calendar.YEAR) - 18, cal.get(Calendar.MONTH),
                             1);
                     data.getDatePicker().setMaxDate(System.currentTimeMillis() - 1234564);
                     data.show();

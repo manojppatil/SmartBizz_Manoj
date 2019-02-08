@@ -2385,6 +2385,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             /** API CALL POST LOGIN DASHBOARD STATUS **/
             try {
+                progressBar.setVisibility(View.VISIBLE);
                 String url = MainApplication.mainUrl + "dashboard/getDetailedInformation";
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("lead_id", MainApplication.lead_id);
@@ -2521,6 +2522,7 @@ public class LoanApplicationFragment_2 extends Fragment {
 
     public void setDetailedInformation(JSONObject jsonData) {
         try {
+            progressBar.setVisibility(View.GONE);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
@@ -3378,7 +3380,7 @@ public class LoanApplicationFragment_2 extends Fragment {
             }
             mainApplication.applyTypefaceBold(textView2, context);
             textView3 = (TextView) view.findViewById(R.id.textView3_l2);
-            mainApplication.applyTypeface(textView3, context);
+
 
             buttonNext = (Button) view.findViewById(R.id.button_next_loanappfragment2);
             buttonNext.setTypeface(typefaceFontBold);

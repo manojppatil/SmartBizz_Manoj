@@ -99,10 +99,17 @@ public class  GetMobileNo extends AppCompatActivity {
                             && !edtEmailId.getText().toString().equalsIgnoreCase("")){
                         if (Build.VERSION.SDK_INT >= 23)
                         {
-                            permission = ContextCompat.checkSelfPermission(getApplicationContext(),
-                                    Manifest.permission.READ_SMS);
+                            permission = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_SMS);
+                            permission1  =ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.READ_CONTACTS);
+                            permission2 = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+                            permission3 = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE);
+                            permission4 = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                            permission5 = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
 
-                            if (permission != PackageManager.PERMISSION_GRANTED)
+
+                            if (permission != PackageManager.PERMISSION_GRANTED || permission1!=PackageManager.PERMISSION_GRANTED ||
+                                    permission2 != PackageManager.PERMISSION_GRANTED || permission3!=PackageManager.PERMISSION_GRANTED ||
+                                    permission4 != PackageManager.PERMISSION_GRANTED || permission5!=PackageManager.PERMISSION_GRANTED )
     //                        {//Permission with disclaimer dialog
     ////                            makeRequest();
     //
