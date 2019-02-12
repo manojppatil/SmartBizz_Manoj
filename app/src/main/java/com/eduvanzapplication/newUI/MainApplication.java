@@ -28,7 +28,8 @@ public class MainApplication {
 //    public static String mainUrl = "http://192.168.0.108/eduvanzapi/"; //Samir
 //    public static String mainUrl = "http://192.168.0.101/eduvanzapi/index.php/"; //Vijay
 
-    public static String mainUrl = "https://api.eduvanz.com/"; //PRODUCTION
+    public static String mainUrl = "https://api.eduvanz.com/"; ///////////////////L I V E//////////////
+
 //SELECT `id`, `application_id`, `student_id`,`created_datetime`, `status`,`algo_score`, `calulated_algo_score`, `calculated_algo_mapped_id`, `friendly_score`, `app_stats_score`, `has_friendly_score_opted`, `is_email_verified`, `is_mobile_verified`, `pq_score`, `cibil_status`, `cibil_application_id`, `cibil_score`, `cibil_response`, `ntc_score`, `co_cibil_status`, `co_cibil_application_id`, `co_cibil_score`, `co_ntc_score`, `co_cibil_response`,`modified_datetime`, `modified_by_id`, `modified_by_ip`, `modified_by_type`, `created_by_type`, `deleted_by_type`, `coborrower_created_by_ip`, `coborrower_created_datetime`, `lead_id`, `is_updated`, `lead_source`, `instant_sanction_status` FROM `pq_form` WHERE `lead_source` = 2 ORDER BY `created_datetime` DESC
     public static String auth_token ="",lead_id ="", application_id = "",applicant_id ="" ;
     public static int previous, previousfragment3;
@@ -64,7 +65,7 @@ public class MainApplication {
    public static String student_id= "",sourceId= "",first_name= "",middle_name= "",last_name= "",pincode= "",dob= "",kyc_address= ""
         ,kyc_address_city= "", kyc_address_state= "",pan_number= "", aadhar_number= "",mobile_number= "",loan_amount= "",
         kyc_landmark= "",kyc_address_country= "",gender_id= "", has_aadhar_pan= "",profession= "",employer_name= "",annual_income = "",
-        relationship_with_applicant = "", brmobile_number ="";
+        relationship_with_applicant = "", brmobile_number ="",cobrEmail="";
 
 
    //Kyc Details

@@ -122,7 +122,7 @@ public class EligibilityCheckFragment_2 extends Fragment {
                                 edtPan.setError(getString(R.string.pan_number_is_required));
                                 edtPan.requestFocus();
                             } else {
-                                if (!edtPan.getText().toString().matches(Globle.panPattern) && edtPan.getText().toString().length() == 10) {
+                                if (!edtPan.getText().toString().matches(Globle.panPattern) && edtPan.getText().toString().length() != 10) {
                                     edtPan.setError("Please enter valid PAN number");
                                     edtPan.requestFocus();
                                     return;
@@ -149,7 +149,7 @@ public class EligibilityCheckFragment_2 extends Fragment {
                                     edtAadhaar.requestFocus();
                                     return;
                                 } else {
-                                    if (!edtPan.getText().toString().matches(Globle.panPattern) && edtPan.getText().toString().length() == 10) {
+                                    if (!edtPan.getText().toString().matches(Globle.panPattern) && edtPan.getText().toString().length() != 10) {
                                         edtPan.setError("Please enter valid PAN number");
                                         edtPan.requestFocus();
                                         return;
@@ -232,7 +232,13 @@ public class EligibilityCheckFragment_2 extends Fragment {
                         linAadhaar.setVisibility(View.GONE);
                         linPAN.setVisibility(View.GONE);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 } else if (text.equalsIgnoreCase("Adhaar Card")) {
                     MainApplication.mainapp_userdocument = "1";
@@ -241,7 +247,13 @@ public class EligibilityCheckFragment_2 extends Fragment {
                         linAadhaar.setVisibility(View.VISIBLE);
                         linPAN.setVisibility(View.GONE);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 } else if (text.equalsIgnoreCase("Pan Card")) {
                     MainApplication.mainapp_userdocument = "2";
@@ -250,7 +262,13 @@ public class EligibilityCheckFragment_2 extends Fragment {
                         linPAN.setVisibility(View.VISIBLE);
                         linAadhaar.setVisibility(View.GONE);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 } else if (text.equalsIgnoreCase("Both")) {
                     MainApplication.mainapp_userdocument = "3";
@@ -259,7 +277,13 @@ public class EligibilityCheckFragment_2 extends Fragment {
                         linAadhaar.setVisibility(View.VISIBLE);
                         linPAN.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 } else if (text.equalsIgnoreCase("Neither")) {
                     MainApplication.mainapp_userdocument = "4";
@@ -268,7 +292,13 @@ public class EligibilityCheckFragment_2 extends Fragment {
                         linAadhaar.setVisibility(View.GONE);
                         linPAN.setVisibility(View.GONE);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
             }

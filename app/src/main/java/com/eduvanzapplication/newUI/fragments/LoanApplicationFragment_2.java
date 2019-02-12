@@ -619,7 +619,13 @@ public class LoanApplicationFragment_2 extends Fragment {
                     }
                         }
                     }catch (Exception e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
             });
@@ -1665,8 +1671,14 @@ public class LoanApplicationFragment_2 extends Fragment {
                                 }
                             }
                         }
-                    } catch (NullPointerException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
 
@@ -1865,17 +1877,28 @@ public class LoanApplicationFragment_2 extends Fragment {
             rgiscgpaBr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    switch (rgiscgpaBr.getCheckedRadioButtonId()) {
-                        case R.id.rbiscgpa_yesBr:
-                            input_cgpaBr.setVisibility(View.VISIBLE);
-                            input_degreeBr.setVisibility(View.GONE);
-                            break;
-                        case R.id.rbiscgpa_noBr:
-                            input_cgpaBr.setVisibility(View.GONE);
-                            input_degreeBr.setVisibility(View.VISIBLE);
-                            break;
-                        default:
-                            break;
+                    try {
+                        switch (rgiscgpaBr.getCheckedRadioButtonId()) {
+                            case R.id.rbiscgpa_yesBr:
+                                input_cgpaBr.setVisibility(View.VISIBLE);
+                                input_degreeBr.setVisibility(View.GONE);
+                                break;
+                            case R.id.rbiscgpa_noBr:
+                                input_cgpaBr.setVisibility(View.GONE);
+                                input_degreeBr.setVisibility(View.VISIBLE);
+                                break;
+                            default:
+                                break;
+                        }
+                    } catch (Exception e) {
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+
                     }
                 }
             });
@@ -1895,7 +1918,13 @@ public class LoanApplicationFragment_2 extends Fragment {
                             }
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
 
                 }
@@ -2932,7 +2961,13 @@ public class LoanApplicationFragment_2 extends Fragment {
                     try{
                     spProfessionBr.setSelection(Integer.parseInt(Brprofession));
                     }catch(Exception e){
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
 
@@ -2947,7 +2982,13 @@ public class LoanApplicationFragment_2 extends Fragment {
                     try{
                         spdurationofjobBr.setSelection(Integer.parseInt(Brcurrent_employment_duration));
                     }catch (Exception e){
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
 
@@ -2955,7 +2996,13 @@ public class LoanApplicationFragment_2 extends Fragment {
                     try{
                         spCountryOffBr.setSelection(Integer.parseInt(Broffice_address_country));
                     }catch(Exception e){
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
 
@@ -2968,6 +3015,14 @@ public class LoanApplicationFragment_2 extends Fragment {
                     try{
                         splastdegreecompletedBr.setSelection(Integer.parseInt(Brlast_completed_degree));
                     }catch (Exception e){
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+
                         e.printStackTrace();
                         splastdegreecompletedBr.setSelection(0);
                     }
@@ -3163,6 +3218,15 @@ public class LoanApplicationFragment_2 extends Fragment {
                         try {
                             spResidentTypeCoBr.setSelection((Integer.parseInt(CoBrcurrent_residence_type) + 1));
                         } catch (Exception e) {
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+
+
                             e.printStackTrace();
                             spResidentTypeCoBr.setSelection(0);
                         }
@@ -3191,6 +3255,14 @@ public class LoanApplicationFragment_2 extends Fragment {
                         try {
                             spProfessionCoBr.setSelection(Integer.parseInt(CoBrprofession));
                         } catch (Exception e) {
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+
                             e.printStackTrace();
                             spProfessionCoBr.setSelection(0);
                         }
@@ -3207,6 +3279,14 @@ public class LoanApplicationFragment_2 extends Fragment {
                         try {
                             spCountryOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_country));
                         } catch (Exception e) {
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+
                             e.printStackTrace();
                             spCountryOffCoBr.setSelection(0);
                         }
@@ -3217,6 +3297,14 @@ public class LoanApplicationFragment_2 extends Fragment {
                             spStateOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_state));
                         } catch (Exception e) {
                             e.printStackTrace();
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+
                             spStateOffCoBr.setSelection(0);
                         }
                     }
@@ -3225,6 +3313,14 @@ public class LoanApplicationFragment_2 extends Fragment {
                         try {
                             spCountryOffCoBr.setSelection(Integer.parseInt(CoBroffice_address_city));
                         } catch (Exception e) {
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+
                             e.printStackTrace();
                             spCountryOffCoBr.setSelection(0);
                         }
@@ -5466,7 +5562,13 @@ public class LoanApplicationFragment_2 extends Fragment {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -5480,7 +5582,13 @@ public class LoanApplicationFragment_2 extends Fragment {
 
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 }

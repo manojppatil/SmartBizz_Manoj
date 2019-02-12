@@ -462,7 +462,13 @@ public class LoanApplicationFragment_3 extends Fragment {
                             try {
                                 downLoadClick(String.valueOf(btnPhoto1.getTag()));
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                String className = this.getClass().getSimpleName();
+                                String name = new Object() {
+                                }.getClass().getEnclosingMethod().getName();
+                                String errorMsg = e.getMessage();
+                                String errorMsgDetails = e.getStackTrace().toString();
+                                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                             }
                         }
 
@@ -470,7 +476,13 @@ public class LoanApplicationFragment_3 extends Fragment {
                         try {
                             openImage(String.valueOf(btnPhoto1.getTag()));
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            String className = this.getClass().getSimpleName();
+                            String name = new Object() {
+                            }.getClass().getEnclosingMethod().getName();
+                            String errorMsg = e.getMessage();
+                            String errorMsgDetails = e.getStackTrace().toString();
+                            String errorLine = String.valueOf(e.getStackTrace()[0]);
+                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                         }
                     }
 
@@ -2337,7 +2349,13 @@ public class LoanApplicationFragment_3 extends Fragment {
                     }
                 });
             } catch (Exception e) {
-                e.printStackTrace();
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
             }
 
             Log.e("TAG", " 2342: " + new Date().toLocaleString());//1538546658896.jpg/
@@ -2586,7 +2604,13 @@ public class LoanApplicationFragment_3 extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -2789,7 +2813,13 @@ public class LoanApplicationFragment_3 extends Fragment {
             editor.commit();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -2828,7 +2858,13 @@ public class LoanApplicationFragment_3 extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -2882,7 +2918,13 @@ public class LoanApplicationFragment_3 extends Fragment {
                                 downloadReference = downloadManager.enqueue(request);
 
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                String className = this.getClass().getSimpleName();
+                                String name = new Object() {
+                                }.getClass().getEnclosingMethod().getName();
+                                String errorMsg = e.getMessage();
+                                String errorMsgDetails = e.getStackTrace().toString();
+                                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                             }
                         }
                     });
@@ -2894,7 +2936,13 @@ public class LoanApplicationFragment_3 extends Fragment {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }
@@ -2923,7 +2971,13 @@ public class LoanApplicationFragment_3 extends Fragment {
             downloadReference = downloadManager.enqueue(request);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }

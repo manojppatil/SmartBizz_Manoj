@@ -158,7 +158,7 @@ public class DashboardFragmentNew extends Fragment {
             buttonApplyNow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    MainApplication.isBorrower = true;
                     Intent intent = new Intent(context, EligibilityCheck.class);
                     startActivity(intent);
                 }
@@ -236,6 +236,7 @@ public class DashboardFragmentNew extends Fragment {
 
             if(!MainApplication.lead_id.contains("null") && MainApplication.lead_id.length() > 0) {
                 Intent intent = new Intent(context, EligibilityCheck.class);
+                intent.putExtra("lead_id",MainApplication.lead_id);
                 startActivity(intent);
             }
 
@@ -550,7 +551,13 @@ public class DashboardFragmentNew extends Fragment {
 //                        mLeads.student_id = jsonleadStatus.getString("student_id");
 
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                     mLeadsArrayList.add(mLeads);
 

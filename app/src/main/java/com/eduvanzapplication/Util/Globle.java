@@ -158,7 +158,6 @@ public class Globle {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

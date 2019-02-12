@@ -391,7 +391,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                                         if (!edtFnameCoBr.getText().toString().equals("") && !edtLnameCoBr.getText().equals("") &&
                                             !txtBirthdateCoBr.getText().equals("") && !edtEmailIdCoBr.getText().toString().equals("") &&
                                             !edtMobileNoCoBr.getText().toString().equals("")  &&
-                                            !isAdharVisible &&  !edtCompanyCoBr.getText().toString().equals("") &&
+                                            isAdharVisible &&  !edtCompanyCoBr.getText().toString().equals("") &&
                                             !edtCurrentAddressCoBr.getText().toString().equals("") && !edtCurrentPincodeCoBr.getText().toString().equals("") ){
 
                                                 if( (rbFemaleCoBr.isChecked() || rbMaleCoBr.isChecked()) ){
@@ -1098,16 +1098,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    if (!s.toString().matches(Globle.panPattern) && s.length() == 6){
-                        edtCurrentAddressCoBr.setError("Please enter valid aadhar number");
-                        edtCurrentAddressCoBr.requestFocus();
-                    }
-                    else {
                         MainApplication.CoBrcurrent_address_citykyc = CoBrcurrent_address = edtCurrentAddressCoBr.getText().toString();
-                        edtCurrentAddressCoBr.setError(null);
-                    }
-
                 }
 
                 @Override
@@ -1892,71 +1883,139 @@ public class LoanApplicationFragment_1 extends Fragment {
                     MainApplication.Brlast_namekyc = Brlast_name = jsonborrowerDetails.getString("last_name");
                     MainApplication.Brhas_aadhar_pankyc = Brhas_aadhar_pan = jsonborrowerDetails.getString("has_aadhar_pan");
                     MainApplication.Brdobkyc = Brdob = jsonborrowerDetails.getString("dob");
-                    MainApplication.Brpan_numberkyc = Brpan_number = jsonborrowerDetails.getString("pan_number");
-                    MainApplication.Braadhar_numberkyc = Braadhar_number = jsonborrowerDetails.getString("aadhar_number");
-                    MainApplication.Brmarital_statuskyc = Brmarital_status = jsonborrowerDetails.getString("marital_status");
-                    MainApplication.Brgender_idkyc = Brgender_id = jsonborrowerDetails.getString("gender_id");
-                    MainApplication.Brmobile_numberkyc = Brmobile_number = jsonborrowerDetails.getString("mobile_number");
-                    MainApplication.Bremail_idkyc = Bremail_id = jsonborrowerDetails.getString("email_id");
-                    MainApplication.Brrelationship_with_applicantkyc = Brrelationship_with_applicant = jsonborrowerDetails.getString("relationship_with_applicant");
-                    MainApplication.Brprofessionkyc = Brprofession = jsonborrowerDetails.getString("profession");
-                    MainApplication.Bremployer_typekyc = Bremployer_type = jsonborrowerDetails.getString("employer_type");
-                    MainApplication.Bremployer_namekyc = Bremployer_name = jsonborrowerDetails.getString("employer_name");
-                    MainApplication.Brannual_incomekyc = Brannual_income = jsonborrowerDetails.getString("annual_income");
-                    MainApplication.Brcurrent_employment_durationkyc = Brcurrent_employment_duration = jsonborrowerDetails.getString("current_employment_duration");
-                    MainApplication.Brtotal_employement_durationkyc = Brtotal_employement_duration = jsonborrowerDetails.getString("total_employement_duration");
-                    MainApplication.Bremployer_mobile_numberkyc = Bremployer_mobile_number = jsonborrowerDetails.getString("employer_mobile_number");
-                    MainApplication.Bremployer_landline_numberkyc = Bremployer_landline_number = jsonborrowerDetails.getString("employer_landline_number");
-                    MainApplication.Broffice_landmarkkyc = Broffice_landmark = jsonborrowerDetails.getString("office_landmark");
-                    MainApplication.Broffice_addresskyc = Broffice_address = jsonborrowerDetails.getString("office_address");
-                    MainApplication.Broffice_address_citykyc = Broffice_address_city = jsonborrowerDetails.getString("office_address_city");
-                    MainApplication.Broffice_address_statekyc = Broffice_address_state = jsonborrowerDetails.getString("office_address_state");
-                    MainApplication.Broffice_address_countrykyc = Broffice_address_country = jsonborrowerDetails.getString("office_address_country");
-                    MainApplication.Broffice_address_pinkyc = Broffice_address_pin = jsonborrowerDetails.getString("office_address_pin");
-                    MainApplication.Brhas_active_loankyc = Brhas_active_loan = jsonborrowerDetails.getString("has_active_loan");
-                    MainApplication.BrEMI_Amountkyc = BrEMI_Amount = jsonborrowerDetails.getString("EMI_Amount");
-                    MainApplication.Brkyc_landmarkkyc = Brkyc_landmark = jsonborrowerDetails.getString("kyc_landmark");
-                    MainApplication.Brkyc_addresskyc = Brkyc_address = jsonborrowerDetails.getString("kyc_address");
-                    MainApplication.Brkyc_address_citykyc = Brkyc_address_city = jsonborrowerDetails.getString("kyc_address_city");
-                    MainApplication.Brkyc_address_statekyc = Brkyc_address_state = jsonborrowerDetails.getString("kyc_address_state");
-                    MainApplication.Brkyc_address_countrykyc = Brkyc_address_country = jsonborrowerDetails.getString("kyc_address_country");
-                    MainApplication.Brkyc_address_pinkyc = Brkyc_address_pin = jsonborrowerDetails.getString("kyc_address_pin");
-                    MainApplication.Bris_borrower_current_address_same_askyc = Bris_borrower_current_address_same_as = jsonborrowerDetails.getString("is_borrower_current_address_same_as");
-                    MainApplication.Bris_coborrower_current_address_same_askyc = Bris_coborrower_current_address_same_as = jsonborrowerDetails.getString("is_coborrower_current_address_same_as");
-                    MainApplication.Brcurrent_residence_typekyc = Brcurrent_residence_type = jsonborrowerDetails.getString("current_residence_type");
-                    MainApplication.Brcurrent_landmarkkyc = Brcurrent_landmark = jsonborrowerDetails.getString("current_landmark");
-                    MainApplication.Brcurrent_addresskyc = Brcurrent_address = jsonborrowerDetails.getString("current_address");
-                    MainApplication.Brcurrent_address_citykyc = Brcurrent_address_city = jsonborrowerDetails.getString("current_address_city");
-                    MainApplication.Brcurrent_address_statekyc = Brcurrent_address_state = jsonborrowerDetails.getString("current_address_state");
-                    MainApplication.Brcurrent_address_countrykyc = Brcurrent_address_country = jsonborrowerDetails.getString("current_address_country");
-                    MainApplication.Brcurrent_address_pinkyc = Brcurrent_address_pin = jsonborrowerDetails.getString("current_address_pin");
-                    MainApplication.Brcurrent_address_rentkyc = Brcurrent_address_rent = jsonborrowerDetails.getString("current_address_rent");
-                    MainApplication.Brcurrent_address_stay_durationkyc = Brcurrent_address_stay_duration = jsonborrowerDetails.getString("current_address_stay_duration");
-                    MainApplication.Bris_borrower_permanent_address_same_askyc = Bris_borrower_permanent_address_same_as = jsonborrowerDetails.getString("is_borrower_permanent_address_same_as");
-                    MainApplication.Bris_coborrower_permanent_address_same_askyc = Bris_coborrower_permanent_address_same_as = jsonborrowerDetails.getString("is_coborrower_permanent_address_same_as");
-                    MainApplication.Brpermanent_residence_typekyc = Brpermanent_residence_type = jsonborrowerDetails.getString("permanent_residence_type");
-                    MainApplication.Brpermanent_landmarkkyc = Brpermanent_landmark = jsonborrowerDetails.getString("permanent_landmark");
-                    MainApplication.Brpermanent_addresskyc = Brpermanent_address = jsonborrowerDetails.getString("permanent_address");
-                    MainApplication.Brpermanent_address_citykyc = Brpermanent_address_city = jsonborrowerDetails.getString("permanent_address_city");
-                    MainApplication.Brpermanent_address_statekyc = Brpermanent_address_state = jsonborrowerDetails.getString("permanent_address_state");
-                    MainApplication.Brpermanent_address_countrykyc = Brpermanent_address_country = jsonborrowerDetails.getString("permanent_address_country");
-                    MainApplication.Brpermanent_address_pinkyc = Brpermanent_address_pin = jsonborrowerDetails.getString("permanent_address_pin");
-                    MainApplication.Brpermanent_address_rentkyc = Brpermanent_address_rent = jsonborrowerDetails.getString("permanent_address_rent");
-                    MainApplication.Brpermanent_address_stay_durationkyc = Brpermanent_address_stay_duration = jsonborrowerDetails.getString("permanent_address_stay_duration");
-                    MainApplication.Brlast_completed_degreekyc = Brlast_completed_degree = jsonborrowerDetails.getString("last_completed_degree");
-                    MainApplication.Brscore_unitkyc = Brscore_unit = jsonborrowerDetails.getString("score_unit");
-                    MainApplication.Brcgpakyc = Brcgpa = jsonborrowerDetails.getString("cgpa");
-                    MainApplication.Brpercentagekyc = Brpercentage = jsonborrowerDetails.getString("percentage");
-                    MainApplication.Brpassing_yearkyc = Brpassing_year = jsonborrowerDetails.getString("passing_year");
-                    MainApplication.Brgap_in_educationkyc = Brgap_in_education = jsonborrowerDetails.getString("gap_in_education");
-                    MainApplication.Brfull_name_pan_responsekyc = Brfull_name_pan_response = jsonborrowerDetails.getString("full_name_pan_response");
-                    MainApplication.Brcreated_by_idkyc = Brcreated_by_id = jsonborrowerDetails.getString("created_by_id");
-                    MainApplication.Brcreated_date_timekyc = Brcreated_date_time = jsonborrowerDetails.getString("created_date_time");
-                    MainApplication.Brcreated_ip_addresskyc = Brcreated_ip_address = jsonborrowerDetails.getString("created_ip_address");
-                    MainApplication.Brmodified_bykyc = Brmodified_by = jsonborrowerDetails.getString("modified_by");
-                    MainApplication.Brmodified_date_timekyc = Brmodified_date_time = jsonborrowerDetails.getString("modified_date_time");
-                    MainApplication.Brmodified_ip_addresskyc = Brmodified_ip_address = jsonborrowerDetails.getString("modified_ip_address");
-                    MainApplication.Bris_deletedkyc = Bris_deleted = jsonborrowerDetails.getString("is_deleted");
+                    if (jsonborrowerDetails.getString("pan_number") != null)
+                        MainApplication.Brpan_numberkyc = Brpan_number = jsonborrowerDetails.getString("pan_number");
+
+                    if (jsonborrowerDetails.getString("aadhar_number") != null)
+                        MainApplication.Braadhar_numberkyc = Braadhar_number = jsonborrowerDetails.getString("aadhar_number");
+
+                    if (jsonborrowerDetails.getString("marital_status") != null)
+                        MainApplication.Brmarital_statuskyc = Brmarital_status = jsonborrowerDetails.getString("marital_status");
+                    if (jsonborrowerDetails.getString("gender_id") != null)
+                        MainApplication.Brgender_idkyc = Brgender_id = jsonborrowerDetails.getString("gender_id");
+                    if (jsonborrowerDetails.getString("mobile_number") != null)
+                        MainApplication.Brmobile_numberkyc = Brmobile_number = jsonborrowerDetails.getString("mobile_number");
+                    if (jsonborrowerDetails.getString("email_id") != null)
+                        MainApplication.Bremail_idkyc = Bremail_id = jsonborrowerDetails.getString("email_id");
+                    if (jsonborrowerDetails.getString("relationship_with_applicant") != null)
+                        MainApplication.Brrelationship_with_applicantkyc = Brrelationship_with_applicant = jsonborrowerDetails.getString("relationship_with_applicant");
+                    if (jsonborrowerDetails.getString("profession") != null)
+                        MainApplication.Brprofessionkyc = Brprofession = jsonborrowerDetails.getString("profession");
+                    if (jsonborrowerDetails.getString("employer_type") != null)
+                        MainApplication.Bremployer_typekyc = Bremployer_type = jsonborrowerDetails.getString("employer_type");
+                    if (jsonborrowerDetails.getString("employer_name") != null)
+                        MainApplication.Bremployer_namekyc = Bremployer_name = jsonborrowerDetails.getString("employer_name");
+                    if (jsonborrowerDetails.getString("annual_income") != null)
+                        MainApplication.Brannual_incomekyc = Brannual_income = jsonborrowerDetails.getString("annual_income");
+                    if (jsonborrowerDetails.getString("current_employment_duration") != null)
+                        MainApplication.Brcurrent_employment_durationkyc = Brcurrent_employment_duration = jsonborrowerDetails.getString("current_employment_duration");
+
+                    if (jsonborrowerDetails.getString("total_employement_duration") != null)
+                        MainApplication.Brtotal_employement_durationkyc = Brtotal_employement_duration = jsonborrowerDetails.getString("total_employement_duration");
+                    if (jsonborrowerDetails.getString("employer_mobile_number") != null)
+                        MainApplication.Bremployer_mobile_numberkyc = Bremployer_mobile_number = jsonborrowerDetails.getString("employer_mobile_number");
+                    if (jsonborrowerDetails.getString("employer_landline_number") != null)
+                        MainApplication.Bremployer_landline_numberkyc = Bremployer_landline_number = jsonborrowerDetails.getString("employer_landline_number");
+                    if (jsonborrowerDetails.getString("office_landmark") != null)
+                        MainApplication.Broffice_landmarkkyc = Broffice_landmark = jsonborrowerDetails.getString("office_landmark");
+                    if (jsonborrowerDetails.getString("office_address") != null)
+                        MainApplication.Broffice_addresskyc = Broffice_address = jsonborrowerDetails.getString("office_address");
+                    if (jsonborrowerDetails.getString("office_address_city") != null)
+                        MainApplication.Broffice_address_citykyc = Broffice_address_city = jsonborrowerDetails.getString("office_address_city");
+                    if (jsonborrowerDetails.getString("office_address_state") != null)
+                        MainApplication.Broffice_address_statekyc = Broffice_address_state = jsonborrowerDetails.getString("office_address_state");
+                    if (jsonborrowerDetails.getString("office_address_country") != null)
+                        MainApplication.Broffice_address_countrykyc = Broffice_address_country = jsonborrowerDetails.getString("office_address_country");
+                    if (jsonborrowerDetails.getString("office_address_pin") != null)
+                        MainApplication.Broffice_address_pinkyc = Broffice_address_pin = jsonborrowerDetails.getString("office_address_pin");
+                    if (jsonborrowerDetails.getString("has_active_loan") != null)
+                        MainApplication.Brhas_active_loankyc = Brhas_active_loan = jsonborrowerDetails.getString("has_active_loan");
+                    if (jsonborrowerDetails.getString("EMI_Amount") != null)
+                        MainApplication.BrEMI_Amountkyc = BrEMI_Amount = jsonborrowerDetails.getString("EMI_Amount");
+                    if (jsonborrowerDetails.getString("kyc_landmark") != null)
+                        MainApplication.Brkyc_landmarkkyc = Brkyc_landmark = jsonborrowerDetails.getString("kyc_landmark");
+                    if (jsonborrowerDetails.getString("kyc_address") != null)
+                        MainApplication.Brkyc_addresskyc = Brkyc_address = jsonborrowerDetails.getString("kyc_address");
+                    if (jsonborrowerDetails.getString("kyc_address_city") != null)
+                        MainApplication.Brkyc_address_citykyc = Brkyc_address_city = jsonborrowerDetails.getString("kyc_address_city");
+                    if (jsonborrowerDetails.getString("kyc_address_state") != null)
+                        MainApplication.Brkyc_address_statekyc = Brkyc_address_state = jsonborrowerDetails.getString("kyc_address_state");
+                    if (jsonborrowerDetails.getString("kyc_address_country") != null)
+                        MainApplication.Brkyc_address_countrykyc = Brkyc_address_country = jsonborrowerDetails.getString("kyc_address_country");
+                    if (jsonborrowerDetails.getString("kyc_address_pin") != null)
+                        MainApplication.Brkyc_address_pinkyc = Brkyc_address_pin = jsonborrowerDetails.getString("kyc_address_pin");
+                    if (jsonborrowerDetails.getString("is_borrower_current_address_same_as") != null)
+                        MainApplication.Bris_borrower_current_address_same_askyc = Bris_borrower_current_address_same_as = jsonborrowerDetails.getString("is_borrower_current_address_same_as");
+                    if (jsonborrowerDetails.getString("is_coborrower_current_address_same_as") != null)
+                        MainApplication.Bris_coborrower_current_address_same_askyc = Bris_coborrower_current_address_same_as = jsonborrowerDetails.getString("is_coborrower_current_address_same_as");
+                    if (jsonborrowerDetails.getString("current_residence_type") != null)
+                        MainApplication.Brcurrent_residence_typekyc = Brcurrent_residence_type = jsonborrowerDetails.getString("current_residence_type");
+                    if (jsonborrowerDetails.getString("current_landmark") != null)
+                        MainApplication.Brcurrent_landmarkkyc = Brcurrent_landmark = jsonborrowerDetails.getString("current_landmark");
+                    if (jsonborrowerDetails.getString("current_address") != null)
+                        MainApplication.Brcurrent_addresskyc = Brcurrent_address = jsonborrowerDetails.getString("current_address");
+                    if (jsonborrowerDetails.getString("current_address_city") != null)
+                        MainApplication.Brcurrent_address_citykyc = Brcurrent_address_city = jsonborrowerDetails.getString("current_address_city");
+                    if (jsonborrowerDetails.getString("current_address_state") != null)
+                        MainApplication.Brcurrent_address_statekyc = Brcurrent_address_state = jsonborrowerDetails.getString("current_address_state");
+                    if (jsonborrowerDetails.getString("current_address_country") != null)
+                        MainApplication.Brcurrent_address_countrykyc = Brcurrent_address_country = jsonborrowerDetails.getString("current_address_country");
+                    if (jsonborrowerDetails.getString("current_address_pin") != null)
+                        MainApplication.Brcurrent_address_pinkyc = Brcurrent_address_pin = jsonborrowerDetails.getString("current_address_pin");
+                    if (jsonborrowerDetails.getString("current_address_rent") != null)
+                        MainApplication.Brcurrent_address_rentkyc = Brcurrent_address_rent = jsonborrowerDetails.getString("current_address_rent");
+                    if (jsonborrowerDetails.getString("current_address_stay_duration") != null)
+                        MainApplication.Brcurrent_address_stay_durationkyc = Brcurrent_address_stay_duration = jsonborrowerDetails.getString("current_address_stay_duration");
+                    if (jsonborrowerDetails.getString("is_borrower_permanent_address_same_as") != null)
+                        MainApplication.Bris_borrower_permanent_address_same_askyc = Bris_borrower_permanent_address_same_as = jsonborrowerDetails.getString("is_borrower_permanent_address_same_as");
+                    if (jsonborrowerDetails.getString("is_coborrower_permanent_address_same_as") != null)
+                        MainApplication.Bris_coborrower_permanent_address_same_askyc = Bris_coborrower_permanent_address_same_as = jsonborrowerDetails.getString("is_coborrower_permanent_address_same_as");
+                    if (jsonborrowerDetails.getString("permanent_residence_type") != null)
+                        MainApplication.Brpermanent_residence_typekyc = Brpermanent_residence_type = jsonborrowerDetails.getString("permanent_residence_type");
+                    if (jsonborrowerDetails.getString("permanent_landmark") != null)
+                        MainApplication.Brpermanent_landmarkkyc = Brpermanent_landmark = jsonborrowerDetails.getString("permanent_landmark");
+                    if (jsonborrowerDetails.getString("permanent_address") != null)
+                        MainApplication.Brpermanent_addresskyc = Brpermanent_address = jsonborrowerDetails.getString("permanent_address");
+                    if (jsonborrowerDetails.getString("permanent_address_city") != null)
+                        MainApplication.Brpermanent_address_citykyc = Brpermanent_address_city = jsonborrowerDetails.getString("permanent_address_city");
+                    if (jsonborrowerDetails.getString("permanent_address_state") != null)
+                        MainApplication.Brpermanent_address_statekyc = Brpermanent_address_state = jsonborrowerDetails.getString("permanent_address_state");
+                    if (jsonborrowerDetails.getString("permanent_address_country") != null)
+                        MainApplication.Brpermanent_address_countrykyc = Brpermanent_address_country = jsonborrowerDetails.getString("permanent_address_country");
+                    if (jsonborrowerDetails.getString("permanent_address_pin") != null)
+                        MainApplication.Brpermanent_address_pinkyc = Brpermanent_address_pin = jsonborrowerDetails.getString("permanent_address_pin");
+                    if (jsonborrowerDetails.getString("permanent_address_rent") != null)
+                        MainApplication.Brpermanent_address_rentkyc = Brpermanent_address_rent = jsonborrowerDetails.getString("permanent_address_rent");
+                    if (jsonborrowerDetails.getString("permanent_address_stay_duration") != null)
+                        MainApplication.Brpermanent_address_stay_durationkyc = Brpermanent_address_stay_duration = jsonborrowerDetails.getString("permanent_address_stay_duration");
+                    if (jsonborrowerDetails.getString("last_completed_degree") != null)
+                        MainApplication.Brlast_completed_degreekyc = Brlast_completed_degree = jsonborrowerDetails.getString("last_completed_degree");
+                    if (jsonborrowerDetails.getString("score_unit") != null)
+                        MainApplication.Brscore_unitkyc = Brscore_unit = jsonborrowerDetails.getString("score_unit");
+                    if (jsonborrowerDetails.getString("cgpa") != null)
+                        MainApplication.Brcgpakyc = Brcgpa = jsonborrowerDetails.getString("cgpa");
+                    if (jsonborrowerDetails.getString("percentage") != null)
+                        MainApplication.Brpercentagekyc = Brpercentage = jsonborrowerDetails.getString("percentage");
+                    if (jsonborrowerDetails.getString("passing_year") != null)
+                        MainApplication.Brpassing_yearkyc = Brpassing_year = jsonborrowerDetails.getString("passing_year");
+                    if (jsonborrowerDetails.getString("gap_in_education") != null)
+                        MainApplication.Brgap_in_educationkyc = Brgap_in_education = jsonborrowerDetails.getString("gap_in_education");
+                    if (jsonborrowerDetails.getString("full_name_pan_response") != null)
+                        MainApplication.Brfull_name_pan_responsekyc = Brfull_name_pan_response = jsonborrowerDetails.getString("full_name_pan_response");
+                    if (jsonborrowerDetails.getString("created_by_id") != null)
+                        MainApplication.Brcreated_by_idkyc = Brcreated_by_id = jsonborrowerDetails.getString("created_by_id");
+                    if (jsonborrowerDetails.getString("created_date_time") != null)
+                        MainApplication.Brcreated_date_timekyc = Brcreated_date_time = jsonborrowerDetails.getString("created_date_time");
+                    if (jsonborrowerDetails.getString("created_ip_address") != null)
+                        MainApplication.Brcreated_ip_addresskyc = Brcreated_ip_address = jsonborrowerDetails.getString("created_ip_address");
+                    if (jsonborrowerDetails.getString("modified_by") != null)
+                        MainApplication.Brmodified_bykyc = Brmodified_by = jsonborrowerDetails.getString("modified_by");
+                    if (jsonborrowerDetails.getString("modified_date_time") != null)
+                        MainApplication.Brmodified_date_timekyc = Brmodified_date_time = jsonborrowerDetails.getString("modified_date_time");
+                    if (jsonborrowerDetails.getString("modified_ip_address") != null)
+                        MainApplication.Brmodified_ip_addresskyc = Brmodified_ip_address = jsonborrowerDetails.getString("modified_ip_address");
+                    if (jsonborrowerDetails.getString("is_deleted") != null)
+                        MainApplication.Bris_deletedkyc = Bris_deleted = jsonborrowerDetails.getString("is_deleted");
 
                     if (!Brfirst_name.equals("null")) {
                         edtFnameBr.setText(Brfirst_name);
@@ -2146,7 +2205,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                     MainApplication.processing_fees_set_by_idkyc = processing_fees_set_by_id = jsonleadStatus.getString("processing_fees_set_by_id");
                     MainApplication.processing_fees_paidkyc = processing_fees_paid = jsonleadStatus.getString("processing_fees_paid");
                     MainApplication.processing_fees_paid_datetimekyc = processing_fees_paid_datetime = jsonleadStatus.getString("processing_fees_paid_datetime");
-                    MainApplication.processing_fees_paid_bykyc = processing_fees_paid_by = jsonleadStatus.getString("processing_fees_paid_by");
+//                    MainApplication.processing_fees_paid_bykyc = processing_fees_paid_by = jsonleadStatus.getString("processing_fees_paid_by");
                     MainApplication.lender_creation_statuskyc = lender_creation_status = jsonleadStatus.getString("lender_creation_status");
                     MainApplication.lender_creation_modified_datetimekyc = lender_creation_modified_datetime = jsonleadStatus.getString("lender_creation_modified_datetime");
                     MainApplication.lender_creation_modified_bykyc = lender_creation_modified_by = jsonleadStatus.getString("lender_creation_modified_by");
@@ -2164,10 +2223,10 @@ public class LoanApplicationFragment_1 extends Fragment {
                     MainApplication.is_cam_uploadedkyc = is_cam_uploaded = jsonleadStatus.getString("is_cam_uploaded");
                     MainApplication.is_finbit_uploadedkyc = is_finbit_uploaded = jsonleadStatus.getString("is_finbit_uploaded");
                     MainApplication.is_exception_uploadedkyc = is_exception_uploaded = jsonleadStatus.getString("is_exception_uploaded");
-                    MainApplication.is_loan_agreement_uploadedkyc = is_loan_agreement_uploaded = jsonleadStatus.getString("is_loan_agreement_uploaded");
-                    MainApplication.loan_agreement_uploaded_bykyc = loan_agreement_uploaded_by = jsonleadStatus.getString("loan_agreement_uploaded_by");
-                    MainApplication.applicant_pan_verified_bykyc = applicant_pan_verified_by = jsonleadStatus.getString("applicant_pan_verified_by");
-                    MainApplication.applicant_pan_verified_onkyc = applicant_pan_verified_on = jsonleadStatus.getString("applicant_pan_verified_on");
+//                    MainApplication.is_loan_agreement_uploadedkyc = is_loan_agreement_uploaded = jsonleadStatus.getString("is_loan_agreement_uploaded");
+//                    MainApplication.loan_agreement_uploaded_bykyc = loan_agreement_uploaded_by = jsonleadStatus.getString("loan_agreement_uploaded_by");
+//                    MainApplication.applicant_pan_verified_bykyc = applicant_pan_verified_by = jsonleadStatus.getString("applicant_pan_verified_by");
+//                    MainApplication.applicant_pan_verified_onkyc = applicant_pan_verified_on = jsonleadStatus.getString("applicant_pan_verified_on");
                     MainApplication.created_date_timekyc = created_date_time = jsonleadStatus.getString("created_date_time");
                     MainApplication.created_ip_addresskyc = created_ip_address = jsonleadStatus.getString("created_ip_address");
                     MainApplication.modified_bykyc = modified_by = jsonleadStatus.getString("modified_by");
@@ -2189,79 +2248,152 @@ public class LoanApplicationFragment_1 extends Fragment {
                 if (!jsonData.get("coborrowerDetails").equals(null)) {
                     JSONObject jsoncoborrowerDetails = jsonData.getJSONObject("coborrowerDetails");
 
-                    MainApplication.CoBrapplicant_idkyc = CoBrapplicant_id = jsoncoborrowerDetails.getString("applicant_id");
-                    MainApplication.CoBrfk_lead_idkyc = CoBrfk_lead_id = jsoncoborrowerDetails.getString("fk_lead_id");
-                    MainApplication.CoBrfk_applicant_type_idkyc = CoBrfk_applicant_type_id = jsoncoborrowerDetails.getString("fk_applicant_type_id");
-                    MainApplication.CoBrfirst_namekyc = CoBrfirst_name = jsoncoborrowerDetails.getString("first_name");
-                    MainApplication.CoBrmiddle_namekyc = CoBrmiddle_name = jsoncoborrowerDetails.getString("middle_name");
-                    MainApplication.CoBrlast_namekyc = CoBrlast_name = jsoncoborrowerDetails.getString("last_name");
-                    MainApplication.CoBrhas_aadhar_pankyc = CoBrhas_aadhar_pan = jsoncoborrowerDetails.getString("has_aadhar_pan");
-                    MainApplication.CoBrdobkyc = CoBrdob = jsoncoborrowerDetails.getString("dob");
-                    MainApplication.CoBrpan_numberkyc = CoBrpan_number = jsoncoborrowerDetails.getString("pan_number");
-                    MainApplication.CoBraadhar_numberkyc = CoBraadhar_number = jsoncoborrowerDetails.getString("aadhar_number");
-                    MainApplication.CoBrmarital_statuskyc = CoBrmarital_status = jsoncoborrowerDetails.getString("marital_status");
-                    MainApplication.CoBrgender_idkyc = CoBrgender_id = jsoncoborrowerDetails.getString("gender_id");
-                    MainApplication.CoBrmobile_numberkyc = CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
-                    MainApplication.CoBremail_idkyc = CoBremail_id = jsoncoborrowerDetails.getString("email_id");
-                    MainApplication.CoBrrelationship_with_applicantkyc = CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
-                    MainApplication.CoBrprofessionkyc = CoBrprofession = jsoncoborrowerDetails.getString("profession");
-                    MainApplication.CoBremployer_typekyc = CoBremployer_type = jsoncoborrowerDetails.getString("employer_type");
-                    MainApplication.CoBremployer_namekyc = CoBremployer_name = jsoncoborrowerDetails.getString("employer_name");
-                    MainApplication.CoBrannual_incomekyc = CoBrannual_income = jsoncoborrowerDetails.getString("annual_income");
-                    MainApplication.CoBrcurrent_employment_durationkyc = CoBrcurrent_employment_duration = jsoncoborrowerDetails.getString("current_employment_duration");
-                    MainApplication.CoBrtotal_employement_durationkyc = CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("total_employement_duration");
-                    MainApplication.CoBremployer_mobile_numberkyc = CoBremployer_mobile_number = jsoncoborrowerDetails.getString("employer_mobile_number");
-                    MainApplication.CoBremployer_landline_numberkyc = CoBremployer_landline_number = jsoncoborrowerDetails.getString("employer_landline_number");
-                    MainApplication.CoBroffice_landmarkkyc = CoBroffice_landmark = jsoncoborrowerDetails.getString("office_landmark");
-                    MainApplication.CoBroffice_addresskyc = CoBroffice_address = jsoncoborrowerDetails.getString("office_address");
-                    MainApplication.CoBroffice_address_citykyc = CoBroffice_address_city = jsoncoborrowerDetails.getString("office_address_city");
-                    MainApplication.CoBroffice_address_statekyc = CoBroffice_address_state = jsoncoborrowerDetails.getString("office_address_state");
-                    MainApplication.CoBroffice_address_countrykyc = CoBroffice_address_country = jsoncoborrowerDetails.getString("office_address_country");
-                    MainApplication.CoBroffice_address_pinkyc = CoBroffice_address_pin = jsoncoborrowerDetails.getString("office_address_pin");
-                    MainApplication.CoBrhas_active_loankyc = CoBrhas_active_loan = jsoncoborrowerDetails.getString("has_active_loan");
-                    MainApplication.CoBrEMI_Amountkyc = CoBrEMI_Amount = jsoncoborrowerDetails.getString("EMI_Amount");
-                    MainApplication.CoBrkyc_landmarkkyc = CoBrkyc_landmark = jsoncoborrowerDetails.getString("kyc_landmark");
-                    MainApplication.CoBrkyc_addresskyc = CoBrkyc_address = jsoncoborrowerDetails.getString("kyc_address");
-                    MainApplication.CoBrkyc_address_citykyc = CoBrkyc_address_city = jsoncoborrowerDetails.getString("kyc_address_city");
-                    MainApplication.CoBrkyc_address_statekyc = CoBrkyc_address_state = jsoncoborrowerDetails.getString("kyc_address_state");
-                    MainApplication.CoBrkyc_address_countrykyc = CoBrkyc_address_country = jsoncoborrowerDetails.getString("kyc_address_country");
-                    MainApplication.CoBrkyc_address_pinkyc = CoBrkyc_address_pin = jsoncoborrowerDetails.getString("kyc_address_pin");
-                    MainApplication.CoBris_borrower_current_address_same_askyc = CoBris_borrower_current_address_same_as = jsoncoborrowerDetails.getString("is_borrower_current_address_same_as");
-                    MainApplication.CoBris_coborrower_current_address_same_askyc = CoBris_coborrower_current_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as");
-                    MainApplication.CoBrcurrent_residence_typekyc = CoBrcurrent_residence_type = jsoncoborrowerDetails.getString("current_residence_type");
-                    MainApplication.CoBrcurrent_landmarkkyc = CoBrcurrent_landmark = jsoncoborrowerDetails.getString("current_landmark");
-                    MainApplication.CoBrcurrent_addresskyc = CoBrcurrent_address = jsoncoborrowerDetails.getString("current_address");
-                    MainApplication.CoBrcurrent_address_citykyc = CoBrcurrent_address_city = jsoncoborrowerDetails.getString("current_address_city");
-                    MainApplication.CoBrcurrent_address_statekyc = CoBrcurrent_address_state = jsoncoborrowerDetails.getString("current_address_state");
-                    MainApplication.CoBrcurrent_address_countrykyc = CoBrcurrent_address_country = jsoncoborrowerDetails.getString("current_address_country");
-                    MainApplication.CoBrcurrent_address_pinkyc = CoBrcurrent_address_pin = jsoncoborrowerDetails.getString("current_address_pin");
-                    MainApplication.CoBrcurrent_address_rentkyc = CoBrcurrent_address_rent = jsoncoborrowerDetails.getString("current_address_rent");
-                    MainApplication.CoBrcurrent_address_stay_durationkyc = CoBrcurrent_address_stay_duration = jsoncoborrowerDetails.getString("current_address_stay_duration");
-                    MainApplication.CoBris_borrower_permanent_address_same_askyc = CoBris_borrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_borrower_permanent_address_same_as");
-                    MainApplication.CoBris_coborrower_permanent_address_same_askyc = CoBris_coborrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as");
-                    MainApplication.CoBrpermanent_residence_typekyc = CoBrpermanent_residence_type = jsoncoborrowerDetails.getString("permanent_residence_type");
-                    MainApplication.CoBrpermanent_landmarkkyc = CoBrpermanent_landmark = jsoncoborrowerDetails.getString("permanent_landmark");
-                    MainApplication.CoBrpermanent_addresskyc = CoBrpermanent_address = jsoncoborrowerDetails.getString("permanent_address");
-                    MainApplication.CoBrpermanent_address_citykyc = CoBrpermanent_address_city = jsoncoborrowerDetails.getString("permanent_address_city");
-                    MainApplication.CoBrpermanent_address_statekyc = CoBrpermanent_address_state = jsoncoborrowerDetails.getString("permanent_address_state");
-                    MainApplication.CoBrpermanent_address_countrykyc = CoBrpermanent_address_country = jsoncoborrowerDetails.getString("permanent_address_country");
-                    MainApplication.CoBrpermanent_address_pinkyc = CoBrpermanent_address_pin = jsoncoborrowerDetails.getString("permanent_address_pin");
-                    MainApplication.CoBrpermanent_address_rentkyc = CoBrpermanent_address_rent = jsoncoborrowerDetails.getString("permanent_address_rent");
-                    MainApplication.CoBrpermanent_address_stay_durationkyc = CoBrpermanent_address_stay_duration = jsoncoborrowerDetails.getString("permanent_address_stay_duration");
-                    MainApplication.CoBrlast_completed_degreekyc = CoBrlast_completed_degree = jsoncoborrowerDetails.getString("last_completed_degree");
-                    MainApplication.CoBrscore_unitkyc = CoBrscore_unit = jsoncoborrowerDetails.getString("score_unit");
-                    MainApplication.CoBrcgpakyc = CoBrcgpa = jsoncoborrowerDetails.getString("cgpa");
-                    MainApplication.CoBrpercentagekyc = CoBrpercentage = jsoncoborrowerDetails.getString("percentage");
-                    MainApplication.CoBrpassing_yearkyc = CoBrpassing_year = jsoncoborrowerDetails.getString("passing_year");
-                    MainApplication.CoBrgap_in_educationkyc = CoBrgap_in_education = jsoncoborrowerDetails.getString("gap_in_education");
-                    MainApplication.CoBrfull_name_pan_responsekyc = CoBrfull_name_pan_response = jsoncoborrowerDetails.getString("full_name_pan_response");
-                    MainApplication.CoBrcreated_by_idkyc = CoBrcreated_by_id = jsoncoborrowerDetails.getString("created_by_id");
-                    MainApplication.CoBrcreated_date_timekyc = CoBrcreated_date_time = jsoncoborrowerDetails.getString("created_date_time");
-                    MainApplication.CoBrcreated_ip_addresskyc = CoBrcreated_ip_address = jsoncoborrowerDetails.getString("created_ip_address");
-                    MainApplication.CoBrmodified_bykyc = CoBrmodified_by = jsoncoborrowerDetails.getString("modified_by");
-                    MainApplication.CoBrmodified_date_timekyc = CoBrmodified_date_time = jsoncoborrowerDetails.getString("modified_date_time");
-                    MainApplication.CoBrmodified_ip_addresskyc = CoBrmodified_ip_address = jsoncoborrowerDetails.getString("modified_ip_address");
-                    MainApplication.CoBris_deletedkyc = CoBris_deleted = jsoncoborrowerDetails.getString("is_deleted");
+                    if (jsoncoborrowerDetails.getString("applicant_id") != null)
+                        MainApplication.CoBrapplicant_idkyc = CoBrapplicant_id = jsoncoborrowerDetails.getString("applicant_id");
+                    if (jsoncoborrowerDetails.getString("fk_lead_id") != null)
+                        MainApplication.CoBrfk_lead_idkyc = CoBrfk_lead_id = jsoncoborrowerDetails.getString("fk_lead_id");
+                    if (jsoncoborrowerDetails.getString("fk_applicant_type_id") != null)
+                        MainApplication.CoBrfk_applicant_type_idkyc = CoBrfk_applicant_type_id = jsoncoborrowerDetails.getString("fk_applicant_type_id");
+                    if (jsoncoborrowerDetails.getString("first_name") != null)
+                        MainApplication.CoBrfirst_namekyc = CoBrfirst_name = jsoncoborrowerDetails.getString("first_name");
+                    if (jsoncoborrowerDetails.getString("middle_name") != null)
+                        MainApplication.CoBrmiddle_namekyc = CoBrmiddle_name = jsoncoborrowerDetails.getString("middle_name");
+                    if (jsoncoborrowerDetails.getString("last_name") != null)
+                        MainApplication.CoBrlast_namekyc = CoBrlast_name = jsoncoborrowerDetails.getString("last_name");
+                    if (jsoncoborrowerDetails.getString("has_aadhar_pan") != null)
+                            MainApplication.CoBrhas_aadhar_pankyc = CoBrhas_aadhar_pan = jsoncoborrowerDetails.getString("has_aadhar_pan");
+                    if (jsoncoborrowerDetails.getString("dob") != null)
+                        MainApplication.CoBrdobkyc = CoBrdob = jsoncoborrowerDetails.getString("dob");
+                    if (jsoncoborrowerDetails.getString("pan_number") != null)
+                        MainApplication.CoBrpan_numberkyc = CoBrpan_number = jsoncoborrowerDetails.getString("pan_number");
+                    if (jsoncoborrowerDetails.getString("aadhar_number") != null)
+                        MainApplication.CoBraadhar_numberkyc = CoBraadhar_number = jsoncoborrowerDetails.getString("aadhar_number");
+                    if (jsoncoborrowerDetails.getString("marital_status") != null)
+                        MainApplication.CoBrmarital_statuskyc = CoBrmarital_status = jsoncoborrowerDetails.getString("marital_status");
+                    if (jsoncoborrowerDetails.getString("gender_id") != null)
+                        MainApplication.CoBrgender_idkyc = CoBrgender_id = jsoncoborrowerDetails.getString("gender_id");
+                    if (jsoncoborrowerDetails.getString("mobile_number") != null)
+                        MainApplication.CoBrmobile_numberkyc = CoBrmobile_number = jsoncoborrowerDetails.getString("mobile_number");
+                    if (jsoncoborrowerDetails.getString("email_id") != null)
+                        MainApplication.CoBremail_idkyc = CoBremail_id = jsoncoborrowerDetails.getString("email_id");
+                    if (jsoncoborrowerDetails.getString("relationship_with_applicant") != null)
+                        MainApplication.CoBrrelationship_with_applicantkyc = CoBrrelationship_with_applicant = jsoncoborrowerDetails.getString("relationship_with_applicant");
+                    if (jsoncoborrowerDetails.getString("profession") != null)
+                        MainApplication.CoBrprofessionkyc = CoBrprofession = jsoncoborrowerDetails.getString("profession");
+                    if (jsoncoborrowerDetails.getString("employer_type") != null)
+                        MainApplication.CoBremployer_typekyc = CoBremployer_type = jsoncoborrowerDetails.getString("employer_type");
+                    if (jsoncoborrowerDetails.getString("employer_name") != null)
+                        MainApplication.CoBremployer_namekyc = CoBremployer_name = jsoncoborrowerDetails.getString("employer_name");
+                    if (jsoncoborrowerDetails.getString("annual_income") != null)
+                        MainApplication.CoBrannual_incomekyc = CoBrannual_income = jsoncoborrowerDetails.getString("annual_income");
+                    if (jsoncoborrowerDetails.getString("current_employment_duration") != null)
+                        MainApplication.CoBrcurrent_employment_durationkyc = CoBrcurrent_employment_duration = jsoncoborrowerDetails.getString("current_employment_duration");
+                    if (jsoncoborrowerDetails.getString("total_employement_duration") != null)
+                        MainApplication.CoBrtotal_employement_durationkyc = CoBrtotal_employement_duration = jsoncoborrowerDetails.getString("total_employement_duration");
+                    if (jsoncoborrowerDetails.getString("employer_mobile_number") != null)
+                        MainApplication.CoBremployer_mobile_numberkyc = CoBremployer_mobile_number = jsoncoborrowerDetails.getString("employer_mobile_number");
+                    if (jsoncoborrowerDetails.getString("employer_landline_number") != null)
+                        MainApplication.CoBremployer_landline_numberkyc = CoBremployer_landline_number = jsoncoborrowerDetails.getString("employer_landline_number");
+                    if (jsoncoborrowerDetails.getString("office_landmark") != null)
+                        MainApplication.CoBroffice_landmarkkyc = CoBroffice_landmark = jsoncoborrowerDetails.getString("office_landmark");
+                    if (jsoncoborrowerDetails.getString("office_address") != null)
+                        MainApplication.CoBroffice_addresskyc = CoBroffice_address = jsoncoborrowerDetails.getString("office_address");
+                    if (jsoncoborrowerDetails.getString("office_address_city") != null)
+                        MainApplication.CoBroffice_address_citykyc = CoBroffice_address_city = jsoncoborrowerDetails.getString("office_address_city");
+                    if (jsoncoborrowerDetails.getString("office_address_state") != null)
+                        MainApplication.CoBroffice_address_statekyc = CoBroffice_address_state = jsoncoborrowerDetails.getString("office_address_state");
+                    if (jsoncoborrowerDetails.getString("office_address_country") != null)
+                        MainApplication.CoBroffice_address_countrykyc = CoBroffice_address_country = jsoncoborrowerDetails.getString("office_address_country");
+                    if (jsoncoborrowerDetails.getString("office_address_pin") != null)
+                        MainApplication.CoBroffice_address_pinkyc = CoBroffice_address_pin = jsoncoborrowerDetails.getString("office_address_pin");
+                    if (jsoncoborrowerDetails.getString("has_active_loan") != null)
+                        MainApplication.CoBrhas_active_loankyc = CoBrhas_active_loan = jsoncoborrowerDetails.getString("has_active_loan");
+                    if (jsoncoborrowerDetails.getString("EMI_Amount") != null)
+                        MainApplication.CoBrEMI_Amountkyc = CoBrEMI_Amount = jsoncoborrowerDetails.getString("EMI_Amount");
+                    if (jsoncoborrowerDetails.getString("kyc_landmark") != null)
+                        MainApplication.CoBrkyc_landmarkkyc = CoBrkyc_landmark = jsoncoborrowerDetails.getString("kyc_landmark");
+                    if (jsoncoborrowerDetails.getString("kyc_address") != null)
+                        MainApplication.CoBrkyc_addresskyc = CoBrkyc_address = jsoncoborrowerDetails.getString("kyc_address");
+                    if (jsoncoborrowerDetails.getString("kyc_address_city") != null)
+                        MainApplication.CoBrkyc_address_citykyc = CoBrkyc_address_city = jsoncoborrowerDetails.getString("kyc_address_city");
+                    if (jsoncoborrowerDetails.getString("kyc_address_state") != null)
+                        MainApplication.CoBrkyc_address_statekyc = CoBrkyc_address_state = jsoncoborrowerDetails.getString("kyc_address_state");
+                    if (jsoncoborrowerDetails.getString("kyc_address_country") != null)
+                        MainApplication.CoBrkyc_address_countrykyc = CoBrkyc_address_country = jsoncoborrowerDetails.getString("kyc_address_country");
+                    if (jsoncoborrowerDetails.getString("kyc_address_pin") != null)
+                        MainApplication.CoBrkyc_address_pinkyc = CoBrkyc_address_pin = jsoncoborrowerDetails.getString("kyc_address_pin");
+                    if (jsoncoborrowerDetails.getString("is_borrower_current_address_same_as") != null)
+                        MainApplication.CoBris_borrower_current_address_same_askyc = CoBris_borrower_current_address_same_as = jsoncoborrowerDetails.getString("is_borrower_current_address_same_as");
+                    if (jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as") != null)
+                        MainApplication.CoBris_coborrower_current_address_same_askyc = CoBris_coborrower_current_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_current_address_same_as");
+                    if (jsoncoborrowerDetails.getString("current_residence_type") != null)
+                        MainApplication.CoBrcurrent_residence_typekyc = CoBrcurrent_residence_type = jsoncoborrowerDetails.getString("current_residence_type");
+                    if (jsoncoborrowerDetails.getString("current_address") != null)
+                        MainApplication.CoBrcurrent_landmarkkyc = CoBrcurrent_landmark = jsoncoborrowerDetails.getString("current_landmark");
+                    if (jsoncoborrowerDetails.getString("applicant_id") != null)
+                        MainApplication.CoBrcurrent_addresskyc = CoBrcurrent_address = jsoncoborrowerDetails.getString("current_address");
+                    if (jsoncoborrowerDetails.getString("current_address_city") != null)
+                        MainApplication.CoBrcurrent_address_citykyc = CoBrcurrent_address_city = jsoncoborrowerDetails.getString("current_address_city");
+                    if (jsoncoborrowerDetails.getString("current_address_state") != null)
+                        MainApplication.CoBrcurrent_address_statekyc = CoBrcurrent_address_state = jsoncoborrowerDetails.getString("current_address_state");
+                    if (jsoncoborrowerDetails.getString("current_address_country") != null)
+                        MainApplication.CoBrcurrent_address_countrykyc = CoBrcurrent_address_country = jsoncoborrowerDetails.getString("current_address_country");
+                    if (jsoncoborrowerDetails.getString("current_address_pin") != null)
+                        MainApplication.CoBrcurrent_address_pinkyc = CoBrcurrent_address_pin = jsoncoborrowerDetails.getString("current_address_pin");
+                    if (jsoncoborrowerDetails.getString("current_address_rent") != null)
+                        MainApplication.CoBrcurrent_address_rentkyc = CoBrcurrent_address_rent = jsoncoborrowerDetails.getString("current_address_rent");
+                    if (jsoncoborrowerDetails.getString("current_address_stay_duration") != null)
+                        MainApplication.CoBrcurrent_address_stay_durationkyc = CoBrcurrent_address_stay_duration = jsoncoborrowerDetails.getString("current_address_stay_duration");
+                    if (jsoncoborrowerDetails.getString("is_borrower_permanent_address_same_as") != null)
+                        MainApplication.CoBris_borrower_permanent_address_same_askyc = CoBris_borrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_borrower_permanent_address_same_as");
+                    if (jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as") != null)
+                        MainApplication.CoBris_coborrower_permanent_address_same_askyc = CoBris_coborrower_permanent_address_same_as = jsoncoborrowerDetails.getString("is_coborrower_permanent_address_same_as");
+                    if (jsoncoborrowerDetails.getString("permanent_residence_type") != null)
+                        MainApplication.CoBrpermanent_residence_typekyc = CoBrpermanent_residence_type = jsoncoborrowerDetails.getString("permanent_residence_type");
+                    if (jsoncoborrowerDetails.getString("permanent_landmark") != null)
+                        MainApplication.CoBrpermanent_landmarkkyc = CoBrpermanent_landmark = jsoncoborrowerDetails.getString("permanent_landmark");
+                    if (jsoncoborrowerDetails.getString("permanent_address") != null)
+                        MainApplication.CoBrpermanent_addresskyc = CoBrpermanent_address = jsoncoborrowerDetails.getString("permanent_address");
+                    if (jsoncoborrowerDetails.getString("permanent_address_city") != null)
+                        MainApplication.CoBrpermanent_address_citykyc = CoBrpermanent_address_city = jsoncoborrowerDetails.getString("permanent_address_city");
+                    if (jsoncoborrowerDetails.getString("permanent_address_state") != null)
+                        MainApplication.CoBrpermanent_address_statekyc = CoBrpermanent_address_state = jsoncoborrowerDetails.getString("permanent_address_state");
+                    if (jsoncoborrowerDetails.getString("permanent_address_country") != null)
+                        MainApplication.CoBrpermanent_address_countrykyc = CoBrpermanent_address_country = jsoncoborrowerDetails.getString("permanent_address_country");
+                    if (jsoncoborrowerDetails.getString("permanent_address_pin") != null)
+                        MainApplication.CoBrpermanent_address_pinkyc = CoBrpermanent_address_pin = jsoncoborrowerDetails.getString("permanent_address_pin");
+                    if (jsoncoborrowerDetails.getString("permanent_address_rent") != null)
+                        MainApplication.CoBrpermanent_address_rentkyc = CoBrpermanent_address_rent = jsoncoborrowerDetails.getString("permanent_address_rent");
+                    if (jsoncoborrowerDetails.getString("permanent_address_stay_duration") != null)
+                        MainApplication.CoBrpermanent_address_stay_durationkyc = CoBrpermanent_address_stay_duration = jsoncoborrowerDetails.getString("permanent_address_stay_duration");
+                    if (jsoncoborrowerDetails.getString("last_completed_degree") != null)
+                        MainApplication.CoBrlast_completed_degreekyc = CoBrlast_completed_degree = jsoncoborrowerDetails.getString("last_completed_degree");
+                    if (jsoncoborrowerDetails.getString("score_unit") != null)
+                        MainApplication.CoBrscore_unitkyc = CoBrscore_unit = jsoncoborrowerDetails.getString("score_unit");
+                    if (jsoncoborrowerDetails.getString("cgpa") != null)
+                        MainApplication.CoBrcgpakyc = CoBrcgpa = jsoncoborrowerDetails.getString("cgpa");
+                    if (jsoncoborrowerDetails.getString("percentage") != null)
+                        MainApplication.CoBrpercentagekyc = CoBrpercentage = jsoncoborrowerDetails.getString("percentage");
+                    if (jsoncoborrowerDetails.getString("passing_year") != null)
+                        MainApplication.CoBrpassing_yearkyc = CoBrpassing_year = jsoncoborrowerDetails.getString("passing_year");
+                    if (jsoncoborrowerDetails.getString("gap_in_education") != null)
+                        MainApplication.CoBrgap_in_educationkyc = CoBrgap_in_education = jsoncoborrowerDetails.getString("gap_in_education");
+                    if (jsoncoborrowerDetails.getString("full_name_pan_response") != null)
+                        MainApplication.CoBrfull_name_pan_responsekyc = CoBrfull_name_pan_response = jsoncoborrowerDetails.getString("full_name_pan_response");
+                    if (jsoncoborrowerDetails.getString("created_by_id") != null)
+                        MainApplication.CoBrcreated_by_idkyc = CoBrcreated_by_id = jsoncoborrowerDetails.getString("created_by_id");
+                    if (jsoncoborrowerDetails.getString("created_date_time") != null)
+                        MainApplication.CoBrcreated_date_timekyc = CoBrcreated_date_time = jsoncoborrowerDetails.getString("created_date_time");
+                    if (jsoncoborrowerDetails.getString("created_ip_address") != null)
+                        MainApplication.CoBrcreated_ip_addresskyc = CoBrcreated_ip_address = jsoncoborrowerDetails.getString("created_ip_address");
+                    if (jsoncoborrowerDetails.getString("modified_by") != null)
+                        MainApplication.CoBrmodified_bykyc = CoBrmodified_by = jsoncoborrowerDetails.getString("modified_by");
+                    if (jsoncoborrowerDetails.getString("modified_date_time") != null)
+                        MainApplication.CoBrmodified_date_timekyc = CoBrmodified_date_time = jsoncoborrowerDetails.getString("modified_date_time");
+                    if (jsoncoborrowerDetails.getString("modified_ip_address") != null)
+                        MainApplication.CoBrmodified_ip_addresskyc = CoBrmodified_ip_address = jsoncoborrowerDetails.getString("modified_ip_address");
+                    if (jsoncoborrowerDetails.getString("is_deleted") != null)
+                        MainApplication.CoBris_deletedkyc = CoBris_deleted = jsoncoborrowerDetails.getString("is_deleted");
 
 
                 }  setCoborrower();
@@ -3655,25 +3787,28 @@ public class LoanApplicationFragment_1 extends Fragment {
                 if (status.equalsIgnoreCase("1")) {
                     JSONObject jsonObject = jsonData.getJSONObject("result");
 
-                    JSONArray jsonArray2 = jsonObject.getJSONArray("cocities");
-                    currentcity_arrayListCoBr = new ArrayList<>();
-                    borrowerCurrentCityPersonalPOJOArrayListCoBr = new ArrayList<>();
-                    for (int i = 0; i < jsonArray2.length(); i++) {
-                        BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJOCoBr = new BorrowerCurrentCityPersonalPOJO();
-                        JSONObject mJsonti = jsonArray2.getJSONObject(i);
-                        borrowerCurrentCityPersonalPOJOCoBr.cityName = mJsonti.getString("city_name");
-                        currentcity_arrayList.add(mJsonti.getString("city_name"));
-                        borrowerCurrentCityPersonalPOJOCoBr.cityID = mJsonti.getString("city_id");
-                        borrowerCurrentCityPersonalPOJOArrayListCoBr.add(borrowerCurrentCityPersonalPOJOCoBr);
-                    }
-                    arrayAdapter_currentCityCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayListCoBr);
-                    spCurrentCityCoBr.setAdapter(arrayAdapter_currentCityCoBr);
-                    arrayAdapter_currentCityCoBr.notifyDataSetChanged();
+                    if (jsonObject.has("cocities") && !jsonObject.getJSONArray("cocities").toString().equals("")){
 
-                    int count = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
-                    for (int i = 0; i < count; i++) {
-                        if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(currentcityIDCoBr)) {
-                            spCurrentCityCoBr.setSelection(i);
+                        JSONArray jsonArray2 = jsonObject.getJSONArray("cocities");
+                        currentcity_arrayListCoBr = new ArrayList<>();
+                        borrowerCurrentCityPersonalPOJOArrayListCoBr = new ArrayList<>();
+                        for (int i = 0; i < jsonArray2.length(); i++) {
+                            BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJOCoBr = new BorrowerCurrentCityPersonalPOJO();
+                            JSONObject mJsonti = jsonArray2.getJSONObject(i);
+                            borrowerCurrentCityPersonalPOJOCoBr.cityName = mJsonti.getString("city_name");
+                            currentcity_arrayList.add(mJsonti.getString("city_name"));
+                            borrowerCurrentCityPersonalPOJOCoBr.cityID = mJsonti.getString("city_id");
+                            borrowerCurrentCityPersonalPOJOArrayListCoBr.add(borrowerCurrentCityPersonalPOJOCoBr);
+                        }
+                        arrayAdapter_currentCityCoBr = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayListCoBr);
+                        spCurrentCityCoBr.setAdapter(arrayAdapter_currentCityCoBr);
+                        arrayAdapter_currentCityCoBr.notifyDataSetChanged();
+
+                        int count = borrowerCurrentCityPersonalPOJOArrayListCoBr.size();
+                        for (int i = 0; i < count; i++) {
+                            if (borrowerCurrentCityPersonalPOJOArrayListCoBr.get(i).cityID.equalsIgnoreCase(currentcityIDCoBr)) {
+                                spCurrentCityCoBr.setSelection(i);
+                            }
                         }
                     }
 

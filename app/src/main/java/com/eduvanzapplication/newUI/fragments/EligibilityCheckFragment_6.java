@@ -337,8 +337,9 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
                 bundle.putString("application_id", MainApplication.application_id);
                 bundle.putString("fillinstutute", "filled");
                 intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-                getActivity().finish();
+//                getActivity().finish();
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
             } else {
@@ -368,7 +369,7 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
                 requestedroi = mforrequestedloanArrayList.get(position).roi;
                 requestedemi = mforrequestedloanArrayList.get(position).emi_amount;
                 offeredamount = mforrequestedloanArrayList.get(position).loan_amount;
-                SLA = "";
+                SLA = "0";
                 RLA = requestedloanamount;
 
                 break;
@@ -381,7 +382,7 @@ public class EligibilityCheckFragment_6 extends Fragment implements TenureReques
                 requestedemi = mforoferedloanArrayList.get(position).emi_amount;
                 offeredamount = mforoferedloanArrayList.get(position).loan_amount;
                 SLA = offeredamount;
-                RLA = "";
+                RLA = "0";
                 break;
         }
 

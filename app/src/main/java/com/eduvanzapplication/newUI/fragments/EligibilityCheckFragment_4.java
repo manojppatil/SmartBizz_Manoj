@@ -172,7 +172,8 @@ public class EligibilityCheckFragment_4 extends Fragment {
                                 edtAnnualSal.setError(getString(R.string.annual_income_is_required));
                                 edtAnnualSal.requestFocus();
                             } else {
-
+                                MainApplication.employer_name = edtCompanyName.getText().toString().trim();
+                                MainApplication.annual_income = edtAnnualSal.getText().toString().trim();
                                 if (MainApplication.isBorrower) {
                                     saveBorrowerData();
                                 } else {
@@ -195,7 +196,8 @@ public class EligibilityCheckFragment_4 extends Fragment {
                                 edtAnnualSal.setError(getString(R.string.annual_income_is_required));
                                 edtAnnualSal.requestFocus();
                             } else {
-
+                                MainApplication.employer_name = edtCompanyName.getText().toString().trim();
+                                MainApplication.annual_income = edtAnnualSal.getText().toString().trim();
                                 if (MainApplication.isBorrower) {
                                     saveBorrowerData();
                                 } else {
@@ -217,7 +219,8 @@ public class EligibilityCheckFragment_4 extends Fragment {
                                 edtAnnualSal.setError(getString(R.string.annual_income_is_required));
                                 edtAnnualSal.requestFocus();
                             } else {
-
+                                MainApplication.employer_name = edtCompanyName.getText().toString().trim();
+                                MainApplication.annual_income = edtAnnualSal.getText().toString().trim();
                                 if (MainApplication.isBorrower) {
                                     saveBorrowerData();
                                 } else {
@@ -240,7 +243,8 @@ public class EligibilityCheckFragment_4 extends Fragment {
                                 edtAnnualSal.setError(getString(R.string.annual_income_is_required));
                                 edtAnnualSal.requestFocus();
                             } else {
-
+                                MainApplication.employer_name = edtCompanyName.getText().toString().trim();
+                                MainApplication.annual_income = edtAnnualSal.getText().toString().trim();
                                 if (MainApplication.isBorrower) {
                                     saveBorrowerData();
                                 } else {
@@ -254,7 +258,8 @@ public class EligibilityCheckFragment_4 extends Fragment {
 
                             }
                         }else {
-
+                            MainApplication.employer_name = edtCompanyName.getText().toString().trim();
+                            MainApplication.annual_income = edtAnnualSal.getText().toString().trim();
                             if (MainApplication.isBorrower) {
                                 saveBorrowerData();
                             } else {
@@ -297,106 +302,146 @@ public class EligibilityCheckFragment_4 extends Fragment {
 
                     String text = spProfession.getSelectedItem().toString();
 
-                    switch (position) {
+                    if (MainApplication.isBorrower){
+                        switch (position) {
 
-                        case 0:
+                            case 0:
 
-                            MainApplication.mainapp_userprofession = String.valueOf(position);
-                            MainApplication.profession = String.valueOf(position);
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
 
-                            try {
-                                linCompanyName.setVisibility(View.GONE);
-                                linSalary.setVisibility(View.GONE);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                                try {
+                                    linCompanyName.setVisibility(View.GONE);
+                                    linSalary.setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                            break;
+                                break;
 
-                        case 1:
+                            case 1:
 
-                            MainApplication.mainapp_userprofession = String.valueOf(position);
-                            MainApplication.profession = String.valueOf(position);
-                            try {
-                                linCompanyName.setVisibility(View.VISIBLE);
-                                linSalary.setVisibility(View.VISIBLE);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
+                                try {
+                                    linCompanyName.setVisibility(View.VISIBLE);
+                                    linSalary.setVisibility(View.VISIBLE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                            break;
+                                break;
 
-                        case 2:
+                            case 2:
 
-                            MainApplication.mainapp_userprofession = String.valueOf(position);
-                            MainApplication.profession = String.valueOf(position);
-                            try {
-                                linCompanyName.setVisibility(View.GONE);
-                                linSalary.setVisibility(View.GONE);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
+                                try {
+                                    linCompanyName.setVisibility(View.GONE);
+                                    linSalary.setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                            break;
+                                break;
 
-                        case 3:
+                            case 3:
 
-                            MainApplication.mainapp_userprofession = String.valueOf(position);
-                            MainApplication.profession = String.valueOf(position);
-                            try {
-                                linCompanyName.setVisibility(View.VISIBLE);
-                                linSalary.setVisibility(View.VISIBLE);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
+                                try {
+                                    linCompanyName.setVisibility(View.VISIBLE);
+                                    linSalary.setVisibility(View.VISIBLE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
-                            break;
+                                break;
 
-                        case 4:
+                            case 4:
 
-                            MainApplication.mainapp_userprofession = String.valueOf(position);
-                            MainApplication.profession = String.valueOf(position);
-                            try {
-                                linCompanyName.setVisibility(View.VISIBLE);
-                                linSalary.setVisibility(View.VISIBLE);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
+                                try {
+                                    linCompanyName.setVisibility(View.VISIBLE);
+                                    linSalary.setVisibility(View.VISIBLE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
 
-                            break;
+                            case 5:
 
-                        case 5:
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
+                                try {
+                                    linCompanyName.setVisibility(View.VISIBLE);
+                                    linSalary.setVisibility(View.VISIBLE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
 
-                            MainApplication.mainapp_userprofession = String.valueOf(position);
-                            MainApplication.profession = String.valueOf(position);
-                            try {
-                                linCompanyName.setVisibility(View.VISIBLE);
-                                linSalary.setVisibility(View.VISIBLE);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            case 6:
 
-                            break;
-
-                        case 6:
-
-                            MainApplication.mainapp_userprofession = String.valueOf(position);
-                            MainApplication.profession = String.valueOf(position);
-                            try {
-                                linCompanyName.setVisibility(View.VISIBLE);
-                                linSalary.setVisibility(View.VISIBLE);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                            break;
-
-                        default:
-                            break;
-
-
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
+                                try {
+                                    linCompanyName.setVisibility(View.VISIBLE);
+                                    linSalary.setVisibility(View.VISIBLE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                     }
+                    else {  //coborrower case
 
+                        switch (position) {
+
+                            case 0:
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
+                                try {
+                                    linCompanyName.setVisibility(View.GONE);
+                                    linSalary.setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+
+                            case 1:
+
+                                MainApplication.mainapp_userprofession = String.valueOf(position);
+                                MainApplication.profession = String.valueOf(position);
+                                try {
+                                    linCompanyName.setVisibility(View.VISIBLE);
+                                    linSalary.setVisibility(View.VISIBLE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                                MainApplication.mainapp_userprofession = String.valueOf(position+1);
+                                MainApplication.profession = String.valueOf(position+1);
+                                try {
+                                    linCompanyName.setVisibility(View.VISIBLE);
+                                    linSalary.setVisibility(View.VISIBLE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
 
                 @Override
@@ -497,6 +542,8 @@ public class EligibilityCheckFragment_4 extends Fragment {
                     for (int i = 0; i < jsonArray3.length(); i++) {
                         ProfessionPOJO borrowerCurrentStatePersonalPOJO = new ProfessionPOJO();
                         JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        if (mJsonti.getString("profession").equalsIgnoreCase("student") && !MainApplication.isBorrower)
+                            continue;
                         borrowerCurrentStatePersonalPOJO.Salaried = mJsonti.getString("profession");
                         profession_arrayList.add(mJsonti.getString("profession"));
                         borrowerCurrentStatePersonalPOJO.id = mJsonti.getString("id");
@@ -601,7 +648,7 @@ public class EligibilityCheckFragment_4 extends Fragment {
     }
 
     private void saveCoBorrowerData() {
-        /** API CALL GET OTP**/
+        /** API CALL **/
         try {//auth_token
             progressBar.setVisibility(View.VISIBLE);
             String url = MainApplication.mainUrl + "dashboard/addcoborrower";
@@ -614,10 +661,11 @@ public class EligibilityCheckFragment_4 extends Fragment {
             params.put("gender_id", MainApplication.gender_id);
             params.put("dob", MainApplication.dob);
             params.put("mobile_number", MainApplication.mobile_number);
+            params.put("email",MainApplication.cobrEmail);
             params.put("relationship_with_applicant", MainApplication.relationship_with_applicant);
             params.put("has_aadhar_pan", MainApplication.has_aadhar_pan);
             params.put("aadhar_number", MainApplication.aadhar_number);
-            params.put("PAN_number", MainApplication.pan_number);
+            params.put("pan_number", MainApplication.pan_number);
             params.put("documentry_pincode", MainApplication.pincode);
             params.put("kyc_address_country", MainApplication.kyc_address_country);
             params.put("kyc_address_state", MainApplication.kyc_address_state);
@@ -694,11 +742,8 @@ public class EligibilityCheckFragment_4 extends Fragment {
 
             if (jsonData.getInt("status") == 1) {
 
-//                JSONObject jsonObject = jsonData.getJSONObject("result");
-//                JSONArray jsonArray = jsonObject.getJSONArray("leadId");
-
-                EligibilityCheckFragment_5 eligibilityCheckFragment_5 = new EligibilityCheckFragment_5();
-                transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_5).commit();
+                EligibilityCheckFragment_6 eligibilityCheckFragment_6 = new EligibilityCheckFragment_6();
+                transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_6).commit();
 
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

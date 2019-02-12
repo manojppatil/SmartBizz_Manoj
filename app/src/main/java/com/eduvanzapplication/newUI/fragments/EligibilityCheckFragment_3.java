@@ -245,13 +245,13 @@ public class EligibilityCheckFragment_3 extends Fragment {
                             spCity.setSelection(Integer.parseInt(currentcityID) - 1);
                         }
                     } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                 }
 
@@ -275,13 +275,13 @@ public class EligibilityCheckFragment_3 extends Fragment {
                             }
                         }
                     } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                     cityApiCall();
 
@@ -308,13 +308,13 @@ public class EligibilityCheckFragment_3 extends Fragment {
                             }
                         }
                     } catch (Exception e) {
-//                        String className = this.getClass().getSimpleName();
-//                        String name = new Object() {
-//                        }.getClass().getEnclosingMethod().getName();
-//                        String errorMsg = e.getMessage();
-//                        String errorMsgDetails = e.getStackTrace().toString();
-//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
                     }
 
                 }

@@ -54,13 +54,13 @@ public class EligibilityCheckFragment_1 extends Fragment {
     public static Fragment mFragment;
     Button buttonNext;
     Typeface typefaceFont, typefaceFontBold;
-    public static EditText edtFirstName, edtMiddleName, edtLastName, edtCoMobileNo;
+    public static EditText edtFirstName, edtMiddleName, edtLastName, edtCoMobileNo,edtEmail;
     public static TextView edtBirthDate;
     public static RadioGroup rgGender;
     public static RadioButton rbMale, rbFemale;
     public static String dateformate = "";
     public static Spinner spRelation;
-    public static LinearLayout linRelationship, linMobileNo;
+    public static LinearLayout linRelationship, linMobileNo,linEmail;
     public String relationshipID = "";
 
     public static ArrayAdapter arrayAdapter_spRelation;
@@ -92,6 +92,7 @@ public class EligibilityCheckFragment_1 extends Fragment {
             edtLastName = (EditText) view.findViewById(R.id.edtLastName);
             edtBirthDate = (TextView) view.findViewById(R.id.edtBirthDate);
             edtCoMobileNo = (EditText) view.findViewById(R.id.edtCoMobileNo);
+            edtEmail = view.findViewById(R.id.edtEmail);
 
             rgGender = (RadioGroup) view.findViewById(R.id.rgGender);
             rbMale = (RadioButton) view.findViewById(R.id.rbMale);
@@ -101,6 +102,7 @@ public class EligibilityCheckFragment_1 extends Fragment {
 
             linRelationship = (LinearLayout) view.findViewById(R.id.linRelationship);
             linMobileNo = (LinearLayout) view.findViewById(R.id.linMobileNo);
+            linEmail = view.findViewById(R.id.linEmail);
 
             buttonNext = (Button) view.findViewById(R.id.button_next_eligiblityfragment1);
             buttonNext.setTypeface(typefaceFontBold);
@@ -124,10 +126,12 @@ public class EligibilityCheckFragment_1 extends Fragment {
             if (MainApplication.isBorrower) {
                 linRelationship.setVisibility(View.GONE);
                 linMobileNo.setVisibility(View.GONE);
+                linEmail.setVisibility(View.GONE);
             } else {
                 relationshipwithapplicantApiCall();
                 linRelationship.setVisibility(View.VISIBLE);
                 linMobileNo.setVisibility(View.VISIBLE);
+                linEmail.setVisibility(View.VISIBLE);
             }
 
 
@@ -176,6 +180,14 @@ public class EligibilityCheckFragment_1 extends Fragment {
                             }
                         }
                     } catch (Exception e) {
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+
 
                     }
 
@@ -190,8 +202,8 @@ public class EligibilityCheckFragment_1 extends Fragment {
             buttonNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!edtFirstName.getText().toString().equals("") && !edtLastName.getText().toString().equals("") &&
-                            !edtBirthDate.getText().toString().equals("")) {
+                    if ( !edtFirstName.getText().toString().equals("") && !edtLastName.getText().toString().equals("") &&
+                            !edtBirthDate.getText().toString().equals("") ) {
 
                         if (rgGender.getCheckedRadioButtonId() > 0) {
 
@@ -212,6 +224,8 @@ public class EligibilityCheckFragment_1 extends Fragment {
                             MainApplication.middle_name = edtMiddleName.getText().toString().trim();
                             MainApplication.last_name = edtLastName.getText().toString().trim();
                             MainApplication.dob = edtBirthDate.getText().toString().trim();
+                            MainApplication.cobrEmail = edtEmail.getText().toString().trim();
+
                             if (MainApplication.isBorrower) {
                                 EligibilityCheckFragment_2 eligibilityCheckFragment_2 = new EligibilityCheckFragment_2();
                                 transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_2).commit();
@@ -232,6 +246,11 @@ public class EligibilityCheckFragment_1 extends Fragment {
                                             edtCoMobileNo.setError("Please enter correct mobile number");
                                         }
                                     }
+                                    if (edtEmail.getText().toString().equals("")){
+                                        edtEmail.setError(getString(R.string.email));
+                                    }else
+                                        MainApplication.cobrEmail = edtEmail.getText().toString().trim();
+
 
                                 } else {
                                     if (spRelation.getSelectedItemPosition() <= 0) {
