@@ -354,7 +354,7 @@
     <string name="last_name_is_required">Last Name is Required</string>
     <string name="birthdate_is_required">Birthdate is Required</string>
     <string name="adhaar_number_is_required">Aadhaar Number is Required</string>
-    <string name="pan_number_is_required">PAN number is required is Required</string>
+    <string name="pan_number_is_required">PAN number is required</string>
     <string name="current_address_is_required">Current Address is Required</string>
     <string name="current_pin_code_is_required">Current Pin code is Required</string>
     <string name="permanent_address_is_required">Permanent Address is Required</string>

@@ -373,25 +373,61 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                 public void onClick(View v) {
                     if (isEdit) {
+                        boolean isAdhaarPanValidBr= false;
+                        if (MainApplication.CoBrhas_aadhar_pankyc.equals("0")){
+                            setSpinnerError(spDocumentBr,"Please select documents");
+                            isAdhaarPanValidBr=  false;
+                        }
+                        else if (MainApplication.Brhas_aadhar_pankyc.equals("1") && edtAadhaarBr.getText().toString().equals("")){
+                            isAdhaarPanValidBr=  false;
+                        }
+                        else if (MainApplication.Brhas_aadhar_pankyc.equals("2") && edtPanBr.getText().toString().equals("")){
+                            isAdhaarPanValidBr=  false;
+                        }
+                        else if (MainApplication.Brhas_aadhar_pankyc.equals("3") ){
+                            if (edtAadhaarBr.getText().toString().equals("")) isAdhaarPanValidBr =  false;
+                            else if (edtPanBr.getText().toString().equals("")) isAdhaarPanValidBr =  false;
+                            else isAdhaarPanValidBr = true;
+                        }
+                        else if (MainApplication.Brhas_aadhar_pankyc.equals("4") ) isAdhaarPanValidBr = true;
+                        else isAdhaarPanValidBr = true;
+
                         if (!MainApplication.Brfirst_namekyc.equals("") && !MainApplication.Brlast_namekyc.equals("") &&
                                 !MainApplication.Brdobkyc.equals("") && !MainApplication.Bremail_idkyc.equals("") &&
                                 !MainApplication.Brmobile_numberkyc.equals("")  &&
                                 !MainApplication.course_costkyc.equals("") && !MainApplication.requested_loan_amountkyc.equals("") &&
-                                !MainApplication.Brkyc_addresskyc.toString().equals("") && !MainApplication.Brkyc_address_pinkyc.equals("")) {
+                                !MainApplication.Brkyc_addresskyc.toString().equals("") && !MainApplication.Brkyc_address_pinkyc.equals("") && isAdhaarPanValidBr) {
 
                             if (rbFemaleBr.isChecked() || rbMaleBr.isChecked()) {
                                 rbFemaleBr.setError(null);
                                 if (!MainApplication.Brkyc_address_citykyc.equalsIgnoreCase("") && !MainApplication.Brkyc_address_statekyc.equalsIgnoreCase("") &&
                                         !MainApplication.Brkyc_address_countrykyc.equalsIgnoreCase("") && !MainApplication.fk_institutes_idkyc.equalsIgnoreCase("") &&
                                         !MainApplication.fk_course_idkyc.equalsIgnoreCase("") && !MainApplication.fk_insitutes_location_idkyc.equalsIgnoreCase("")) {
+                                    boolean isAdhaarPanValidCoBr= false;
+                                    if (MainApplication.CoBrhas_aadhar_pankyc.equals("0")){
+                                        setSpinnerError(spDocumentCoBr,"Please select documents");
+                                        isAdhaarPanValidCoBr=  false;
+                                    }
+                                    else if (MainApplication.CoBrhas_aadhar_pankyc.equals("1") && edtAadhaarCoBr.getText().toString().equals("")){
+                                        isAdhaarPanValidCoBr=  false;
+                                    }
+                                    else if (MainApplication.CoBrhas_aadhar_pankyc.equals("2") && edtPanCoBr.getText().toString().equals("")){
+                                        isAdhaarPanValidCoBr=  false;
+                                    }
+                                    else if (MainApplication.CoBrhas_aadhar_pankyc.equals("3") ){
+                                        if (edtAadhaarCoBr.getText().toString().equals("")) isAdhaarPanValidCoBr =  false;
+                                        else if (edtPanCoBr.getText().toString().equals("")) isAdhaarPanValidCoBr =  false;
+                                        else isAdhaarPanValidCoBr = true;
+                                    }
+                                    else if (MainApplication.CoBrhas_aadhar_pankyc.equals("4") ) isAdhaarPanValidCoBr = true;
+                                    else isAdhaarPanValidCoBr = true;
 
-                                    boolean isAdharVisible = (edtAadhaarCoBr.getVisibility() == View.VISIBLE) && (!edtAadhaarCoBr.getText().toString().equals(""));
                                     //coborrower checkings
                                     if (!has_coborrower.equals("0")){
                                         if (!edtFnameCoBr.getText().toString().equals("") && !edtLnameCoBr.getText().equals("") &&
                                             !txtBirthdateCoBr.getText().equals("") && !edtEmailIdCoBr.getText().toString().equals("") &&
                                             !edtMobileNoCoBr.getText().toString().equals("")  &&
-                                            isAdharVisible &&  !edtCompanyCoBr.getText().toString().equals("") &&
+                                                isAdhaarPanValidCoBr &&  !edtCompanyCoBr.getText().toString().equals("") &&
                                             !edtCurrentAddressCoBr.getText().toString().equals("") && !edtCurrentPincodeCoBr.getText().toString().equals("") ){
 
                                                 if( (rbFemaleCoBr.isChecked() || rbMaleCoBr.isChecked()) ){
@@ -433,6 +469,9 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                                             if (edtMobileNoCoBr.getText().toString().equals("")) edtMobileNoCoBr.setError(getString(R.string.please_provide_mobile_number));
                                             else edtMobileNoCoBr.setError(null);
+
+                                            if (edtPanCoBr.getText().toString().equals("")) edtPanCoBr.setError(getString(R.string.pan_number_is_required));
+                                            if (edtAadhaarCoBr.getText().toString().equals("")) edtAadhaarCoBr.setError(getString(R.string.adhaar_number_is_required));
                                         }
 
                                     }else{
@@ -660,7 +699,8 @@ public class LoanApplicationFragment_1 extends Fragment {
                                 setSpinnerError(spCurrentCityBr, getString(R.string.please_select_current_city));
 
                             }
-
+                            if (edtPanBr.getText().toString().equals("")) edtPanBr.setError(getString(R.string.pan_number_is_required));
+                            if (edtAadhaarBr.getText().toString().equals("")) edtAadhaarBr.setError(getString(R.string.adhaar_number_is_required));
                         }
                     }else{
                         LoanApplicationFragment_2 loanApplicationFragment_2 = new LoanApplicationFragment_2();
@@ -1273,8 +1313,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                     String text = spDocumentBr.getSelectedItem().toString();
                     if (text.equalsIgnoreCase("Select Any")) {
-                        MainApplication.mainapp_userdocument = "0";
-                        MainApplication.has_aadhar_pan = "0";
+                        MainApplication.Brhas_aadhar_pankyc = Brhas_aadhar_pan ="0";
                         try {
                             edtAadhaarLayoutBr.setVisibility(View.GONE);
                             edtPanLayoutBr.setVisibility(View.GONE);
@@ -1282,8 +1321,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             e.printStackTrace();
                         }
                     } else if (text.equalsIgnoreCase("Adhaar Card")) {
-                        MainApplication.mainapp_userdocument = "1";
-                        MainApplication.has_aadhar_pan = "1";
+                        MainApplication.Brhas_aadhar_pankyc = Brhas_aadhar_pan ="1";
                         try {
                             edtPanLayoutBr.setVisibility(View.GONE);
                             edtAadhaarLayoutBr.setVisibility(View.VISIBLE);
@@ -1291,8 +1329,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             e.printStackTrace();
                         }
                     } else if (text.equalsIgnoreCase("Pan Card")) {
-                        MainApplication.mainapp_userdocument = "2";
-                        MainApplication.has_aadhar_pan = "2";
+                        MainApplication.Brhas_aadhar_pankyc = Brhas_aadhar_pan ="2";
                         try {
                             edtPanLayoutBr.setVisibility(View.VISIBLE);
                             edtAadhaarLayoutBr.setVisibility(View.GONE);
@@ -1300,8 +1337,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             e.printStackTrace();
                         }
                     } else if (text.equalsIgnoreCase("Both")) {
-                        MainApplication.mainapp_userdocument = "3";
-                        MainApplication.has_aadhar_pan = "3";
+                        MainApplication.Brhas_aadhar_pankyc = Brhas_aadhar_pan ="3";
                         try {
                             edtPanLayoutBr.setVisibility(View.VISIBLE);
                             edtAadhaarLayoutBr.setVisibility(View.VISIBLE);
@@ -1309,8 +1345,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             e.printStackTrace();
                         }
                     } else if (text.equalsIgnoreCase("Neither")) {
-                        MainApplication.mainapp_userdocument = "4";
-                        MainApplication.has_aadhar_pan = "4";
+                        MainApplication.Brhas_aadhar_pankyc = Brhas_aadhar_pan ="4";
                         try {
                             edtPanLayoutBr.setVisibility(View.GONE);
                             edtAadhaarLayoutBr.setVisibility(View.GONE);
@@ -1332,8 +1367,7 @@ public class LoanApplicationFragment_1 extends Fragment {
 
                     String text = spDocumentCoBr.getSelectedItem().toString();
                     if (text.equalsIgnoreCase("Select Any")) {
-                        MainApplication.mainapp_userdocument = "0";
-                        MainApplication.has_aadhar_pan = "0";
+                        MainApplication.CoBrhas_aadhar_pankyc = CoBrhas_aadhar_pan ="0";
                         try {
                             edtPanLayoutCoBr.setVisibility(View.GONE);
                             edtAadhaarLayoutCoBr.setVisibility(View.GONE);
@@ -1341,8 +1375,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             e.printStackTrace();
                         }
                     } else if (text.equalsIgnoreCase("Adhaar Card")) {
-                        MainApplication.mainapp_userdocument = "1";
-                        MainApplication.has_aadhar_pan = "1";
+                        MainApplication.CoBrhas_aadhar_pankyc = CoBrhas_aadhar_pan ="1";
                         try {
                             edtPanLayoutCoBr.setVisibility(View.GONE);
                             edtAadhaarLayoutCoBr.setVisibility(View.VISIBLE);
@@ -1350,8 +1383,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             e.printStackTrace();
                         }
                     } else if (text.equalsIgnoreCase("Pan Card")) {
-                        MainApplication.mainapp_userdocument = "2";
-                        MainApplication.has_aadhar_pan = "2";
+                        MainApplication.CoBrhas_aadhar_pankyc = CoBrhas_aadhar_pan ="2";
                         try {
                             edtPanLayoutCoBr.setVisibility(View.VISIBLE);
                             edtAadhaarLayoutCoBr.setVisibility(View.GONE);
@@ -1359,8 +1391,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             e.printStackTrace();
                         }
                     } else if (text.equalsIgnoreCase("Both")) {
-                        MainApplication.mainapp_userdocument = "3";
-                        MainApplication.has_aadhar_pan = "3";
+                        MainApplication.CoBrhas_aadhar_pankyc = CoBrhas_aadhar_pan ="3";
                         try {
                             edtPanLayoutCoBr.setVisibility(View.VISIBLE);
                             edtAadhaarLayoutCoBr.setVisibility(View.VISIBLE);
@@ -1368,8 +1399,7 @@ public class LoanApplicationFragment_1 extends Fragment {
                             e.printStackTrace();
                         }
                     } else if (text.equalsIgnoreCase("Neither")) {
-                        MainApplication.mainapp_userdocument = "4";
-                        MainApplication.has_aadhar_pan = "4";
+                        MainApplication.CoBrhas_aadhar_pankyc = CoBrhas_aadhar_pan ="4";
                         try {
                             edtPanLayoutCoBr.setVisibility(View.GONE);
                             edtAadhaarLayoutCoBr.setVisibility(View.GONE);
@@ -2032,31 +2062,33 @@ public class LoanApplicationFragment_1 extends Fragment {
                     if(!Brmobile_number.equals("null")){
                         edtMobileNoBr.setText(Brmobile_number);
                     }
+
                     if (Brhas_aadhar_pan.equals("1")) {
-                        edtAadhaarBr.setVisibility(View.VISIBLE);
-                        edtPanBr.setVisibility(View.GONE);
+                        edtAadhaarLayoutBr.setVisibility(View.VISIBLE);
+                        edtPanLayoutBr.setVisibility(View.GONE);
                         if (!Braadhar_number.equals("null")) {
                             edtAadhaarBr.setText(Braadhar_number);
                         }
                     } else if (Brhas_aadhar_pan.equals("2")) {
-                        edtPanBr.setVisibility(View.VISIBLE);
-                        edtAadhaarBr.setVisibility(View.GONE);
+                        edtPanLayoutBr.setVisibility(View.VISIBLE);
+                        edtAadhaarLayoutBr.setVisibility(View.GONE);
                         if (!Brpan_number.equals("null")) {
                             edtPanBr.setText(Brpan_number);
                         }
-                    } else if (Brhas_aadhar_pan.equals("3") || Brhas_aadhar_pan.equals("0")) {
-                        edtAadhaarBr.setVisibility(View.VISIBLE);
-                        edtPanBr.setVisibility(View.VISIBLE);
+                    } else if (Brhas_aadhar_pan.equals("3") ) {
+                        edtAadhaarLayoutBr.setVisibility(View.VISIBLE);
+                        edtPanLayoutBr.setVisibility(View.VISIBLE);
                         if (!Braadhar_number.equals("null")) {
                             edtAadhaarBr.setText(Braadhar_number);
                         }
                         if (!Brpan_number.equals("null")) {
                             edtPanBr.setText(Brpan_number);
                         }
-                    } else {
-                        edtAadhaarBr.setVisibility(View.GONE);
-                        edtPanBr.setVisibility(View.GONE);
+                    } else if (Brhas_aadhar_pan.equals("0")){
+                        edtAadhaarLayoutBr.setVisibility(View.GONE);
+                        edtPanLayoutBr.setVisibility(View.GONE);
                     }
+
 
                     if (!Bremployer_name.equals("null")) {
                         edtCompanyBr.setText(Bremployer_name);

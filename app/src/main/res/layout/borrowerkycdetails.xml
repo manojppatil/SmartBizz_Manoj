@@ -403,6 +403,7 @@
                     android:id="@+id/edtPanLayoutBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="5dp"
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
@@ -414,7 +415,6 @@
                         android:hint="@string/pan_number"
                         android:inputType="text|textCapCharacters"
                         android:maxLength="10"
-                        android:visibility="gone"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -424,6 +424,7 @@
                     android:id="@+id/edtAadhaarLayoutBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="8dp"
                     android:theme="@style/EditTextStyle"
@@ -435,7 +436,6 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/adhaar_number"
                         android:inputType="number"
-                        android:visibility="gone"
                         android:maxLength="12"
                         android:textColor="@color/black"
                         android:textSize="16sp" />

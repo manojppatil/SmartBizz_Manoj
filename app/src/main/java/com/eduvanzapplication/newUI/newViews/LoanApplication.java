@@ -192,6 +192,7 @@ public class LoanApplication extends AppCompatActivity {
                 buttonSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        alertDialog.dismiss();
                         LoanApplication.super.onBackPressed();
                         finish();//coment this line
                         //                    if (!MainApplication.borrowerValue13.equals("") &&
