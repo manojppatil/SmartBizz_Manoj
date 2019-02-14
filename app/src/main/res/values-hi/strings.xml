@@ -47,7 +47,6 @@
     <string name="title_loan_application">कर्ज अर्ज</string>
     <string name="title_how_it_works">हे कसे कार्य करते</string>
     <string name="title_forgot_password">पासवर्ड विसरला</string>
-    <string name="title_eligibility_check">पात्रता तपास</string>
     <string name="title_dashboard">डॅशबोर्ड</string>
     <string name="title_contact_us">आमच्याशी संपर्क साधा</string>
     <string name="title_fair_practics_code">उचित व्यवहार कोड</string>
@@ -87,26 +86,13 @@
     <string name="want_financial_assistance">आर्थिक सहाय्य पाहिजे?</string>
     <string name="check_eligibility_now">पात्रता तपासा!</string>
     <string name="continu">सुरू</string>
-    <string name="your_profile_is_incomplete">तुमचा प्रोफाइल अपूर्ण</string>
-    <string name="complete_now">पूर्ण आता!</string>
-    <string name="your_loan_application_is_incomplete">तुमचा कर्जाचा अर्ज अपूर्ण आहे</string>
-    <string name="get_it_now">आता ते घे.</string>
-    <string name="apply_now">आता लागू</string>
     <string name="deal_alert">डील अलर्ट!</string>
-    <string name="how_it_works">हे कसे कार्य करते?</string>
-    <string name="about_us">आमच्याबद्दल</string>
-    <string name="faqs">एफएक्यूएस</string>
-    <string name="contact_us">आमच्याशी संपर्क साधा</string>
     <string name="my_profile">माझे प्रोफाइल</string>
     <string name="call_us">आम्हाला कॉल करा</string>
     <string name="mail_us">मेल आम्हाला</string>
     <string name="notification">अधिसूचना</string>
 
-    <string name="education">शिक्षण</string>
-    <string name="financial">आर्थिक</string>
     <string name="personal">व्यक्तिगत</string>
-    <string name="document">Document</string>
-    <string name="paddress">Address</string>
     <string name="employment">Employment</string>
     <string name="institute_name">संस्थेचे नाव</string>
     <string name="course_name">कोर्सचे नाव</string>
@@ -114,17 +100,12 @@
     <string name="next">पुढे</string>
     <string name="course_fee">कोर्स फी</string>
     <string name="loan_amount">कर्ज रक्कम</string>
-    <string name="monthly_family_income">मासिक कौटुंबिक उत्पन्न</string>
     <string name="previous">मागील</string>
     <string name="your_profession">तुझा व्यवसाय</string>
     <string name="document_you_have">दस्तऐवज आपल्याकडे</string>
-    <string name="current_city">सध्याचे शहर</string>
-    <string name="enter_current_city">वर्तमान शहर प्रविष्ट करा</string>
     <string name="first_name">पहिले नाव</string>
-    <string name="enter_first_name">प्रथम नाव प्रविष्ट करा</string>
     <string name="last_name">आडनाव</string>
     <string name="email_id">ई - मेल आयडी</string>
-    <string name="enter_email_id">ई-मेल आयडी एंटर करा</string>
     <string name="submit">जमा</string>
 
     <string name="check_eligiblity">पात्रता तपासा</string>
@@ -146,7 +127,6 @@
 
 
     <string name="financing_your_future">तुमच्या भविष्यातील वित्तपोषण!</string>
-    <string name="_10_digit_mobile_number">१० अंकी मोबाइल नंबर</string>
     <string name="get_otp">ओटीपी मिळवा</string>
     <string name="eligiblity_chek">पात्रता तपास</string>
     <string name="mobile_verification">मोबाइल सत्यापन</string>
@@ -169,7 +149,6 @@
     <string name="please_verify_your_mobile_number_to_begin">कृपया सुरू करण्यासाठी तुमचा मोबाइल नंबर सत्यापित करा!</string>
     <string name="mobile_number">मोबाइल नंबर</string>
     <string name="edit1">संपादन</string>
-    <string name="otp">ओटीपी</string>
     <string name="resend_otp">ओटीपी पुन्हा पाठवा</string>
     <string name="skip">स्किप</string>
 
@@ -204,17 +183,9 @@
     <string name="permissionlocation">स्थान - आपल्या डिव्हाइसच्या स्थानाबद्दल माहिती गोळा आणि तिचा आढावा घेण्यासाठी. अनुप्रयोग वापर - आपल्या कर्जाच्या अर्ज प्रक्रियेत उपयुक्त ठरणार्या आपल्या क्रेडिट स्कोअरची निर्मिती करण्यासाठी आपल्या स्वारस्य आणि आवडींबद्दल माहिती मिळविण्यासाठी.</string>
     <string name="paymentoptions">पेटीएम- पेटीएम वॉलेट, डेबिट कार्ड, बीएचआयएम यूपीआय, नेट बँकिंग यासारख्या पर्यायांसह. एटम- क्रेडिट कार्ड, डेबिट कार्ड, नेट बँकिंगसारखे पर्याय.</string>
 
-    <string name="laf_borrower">कर्जदार</string>
-    <string name="laf_co_borrower">सह कर्जदार</string>
     <string name="laf_documents">दस्तऐवज</string>
-    <string name="laf_sign_amp_submit">साइन आणि सबमिट करा</string>
-    <string name="laf_first_name">पहिले नाव</string>
-    <string name="laf_last_name">आडनाव</string>
     <string name="monthly_rent">मासिक भाडे</string>
-    <string name="current_address">सध्या राहत असलेला पत्ता, सध्याचा पत्ता, सध्या राहत्या घराचा पत्ता</string>
-    <string name="current_pin_code_no">वर्तमान पिन कोड नं.</string>
     <string name="permanent_address">कायमचा पत्ता</string>
-    <string name="permanent_pin_code_no">कायम पिन कोड नं.</string>
     <string name="adhaar_number">आधार क्रमांक.</string>
     <string name="pan_number">पॅन क्रमांक</string>
     <string name="marital_status">वैवाहिक स्थिती :</string>
@@ -224,7 +195,6 @@
     <string name="current_country">वर्तमान देशः</string>
     <string name="current_state">वर्तमान स्थितीः</string>
     <string name="current_city1">सध्याचे शहर :</string>
-    <string name="same_as_current_address">वर्तमान पत्ता म्हणून</string>
     <string name="permanent_country">स्थायी देशः</string>
     <string name="permanent_state">स्थायी स्थितीः</string>
     <string name="permanent_city">स्थायी शहर:</string>
@@ -243,20 +213,11 @@
     <string name="last_degree_cgpa">अंतिम पद सीजीपीए</string>
     <string name="name_of_company">कंपनीचे नाव</string>
     <string name="annual_income">वार्षिक उत्पन्न</string>
-    <string name="advance_payment_you_would_like_to_give">आगाऊ देयक आपण देऊ इच्छिता</string>
-    <string name="amount_of_previous_emi">मागील ईएमआय</string>
-    <string name="profession">पेशीः</string>
-    <string name="employed">नियोजित</string>
-    <string name="student">विद्यार्थी</string>
     <string name="duration_of_job_business">नोकरी / व्यवसायाची कालावधीः</string>
     <string name="employer_type">नियोक्ता प्रकारः</string>
     <string name="government">सरकारी</string>
     <string name="private1">खाजगी</string>
-    <string name="has_any_previous_emi">पूर्वीचे एमी आहे:</string>
-    <string name="relationship_with_borrower">कर्जदारासह संबंधः</string>
-    <string name="employer">नियोक्ता</string>
 
-    <string name="step_1">पायरी १</string>
     <string name="sign_the_application">अनुप्रयोग चिन्हांकित करा</string>
     <string name="signing_status">साइनिंग स्थितीः</string>
     <string name="pending">प्रलंबित</string>
@@ -279,23 +240,10 @@
 
 
     <string name="error">त्रुटी</string>
-    <string name="please_provide_first_name">कृपया प्रथम नाव द्या</string>
-    <string name="please_provide_email_id">ई-मेल आयडी प्रदान करा</string>
-    <string name="please_provide_last_name">कृपया शेवटचे नाव द्या</string>
     <string name="please_provide_mobile_number">कृपया मोबाइल नंबर प्रदान करा</string>
-    <string name="please_enter_city">कृपया शहर प्रविष्ट करा</string>
     <string name="please_select_profession">कृपया व्यवसाय निवडा</string>
     <string name="please_select_document_type">कृपया दस्तऐवज प्रकार निवडा</string>
-    <string name="please_provide_your_loan_amount">कृपया आपली कर्जाची रक्कम</string>
-    <string name="please_provide_your_family_income">कृपया आपल्या कौटुंबिक उत्पन्नाची</string>
-    <string name="you_need_to_select_previous_emi_status">आपल्याला पूर्वीची एमी स्थिती निवडण्याची गरज आहे</string>
-    <string name="you_need_to_select_profession_status">आपल्याला व्यावसायिक स्थिती निवडण्याची गरज आहे</string>
-    <string name="you_need_to_select_CGPA_status">आपणास सीजीपीए स्थिती निवडण्याची गरज आहे</string>
-    <string name="you_need_to_select_education_gap_status">आपण शिक्षण गप स्थिती निवडण्याची गरज आहे</string>
-    <string name="you_need_to_select_marital_status">आपण वैवाहिक स्थिती निवडण्याची गरज आहे</string>
     <string name="you_need_to_select_gender">आपण लिंग निवडण्याची गरज आहे</string>
-    <string name="you_need_to_select_employer_type">आपण नियोक्ता प्रकार निवडण्याची गरज आहे</string>
-    <string name="you_need_to_select_maritial_status">आपण वैवाहिक स्थिती निवडण्याची गरज आहे</string>
     <string name="first_name_is_required">प्रथम नाव आवश्यक आहे</string>
     <string name="last_name_is_required">आडनाव आवश्यक आहे</string>
     <string name="birthdate_is_required">जन्मतारीख आवश्यक आहे</string>
@@ -303,37 +251,23 @@
     <string name="pan_number_is_required">पॅन नंबर आवश्यक आहे</string>
     <string name="current_address_is_required">वर्तमान पत्ता आवश्यक</string>
     <string name="current_pin_code_is_required">वर्तमान पिन कोड आवश्यक आहे</string>
-    <string name="permanent_address_is_required">स्थायी पत्ता आवश्यक आहे</string>
-    <string name="permanent_pin_is_required">कायम पिन कोड आवश्यक आहे</string>
-    <string name="passing_year_is_required">पासिंग वर्ष आवश्यक आहे</string>
     <string name="name_of_the_company_is_required">कंपनीचे नाव आवश्यक आहे</string>
     <string name="annual_income_is_required">वार्षिक उत्पन्न आवश्यक आहे</string>
-    <string name="advance_payment_is_required">आगाऊ भरणा आवश्यक आहे</string>
-    <string name="please_select_residency_type">कृपया निवासी प्रकार निवडा</string>
     <string name="please_select_current_country">कृपया वर्तमान देश निवडा</string>
     <string name="please_select_current_state">कृपया वर्तमान स्थिती निवडा</string>
     <string name="please_select_current_city">कृपया वर्तमान शहर निवडा</string>
-    <string name="please_select_permanent_country">कृपया स्थायी देश निवडा</string>
-    <string name="please_select_permanent_state">कृपया स्थायी राज्य निवडा</string>
-    <string name="please_select_permanent_city">कृपया स्थायी शहर निवडा</string>
     <string name="please_select_duration_of_stay_at_current_address">कृपया वर्तमान पत्त्यावर राहण्याच्या कालावधीची निवड करा</string>
     <string name="please_select_last_degree_completed">कृपया शेवटची पदवी पूर्ण निवडा</string>
     <string name="please_select_duration_of_job_business">नोकरी / व्यवसाय कालावधी निवडा</string>
-    <string name="contact_number_is_required">संपर्क क्रमांक आवश्यक आहे</string>
     <string name="emailid_is_required">ईमेल आयडी आवश्यक आहे</string>
-    <string name="employer_name_is_required">नियोक्ता नाव आवश्यक आहे</string>
     <string name="please_select_relationship_with_borrower">कृपया कर्जदारासह नातेसंबंध निवडा</string>
-    <string name="please_select_resideny_type">कृपया निवासी प्रकार निवडा</string>
     <string name="please_fill_up_all_the_details_to_continue">कृपया सुरू ठेवण्यासाठी सर्व तपशील भरा</string>
     <string name="please_select_institue_name">कृपया संस्थेचे नाव निवडा</string>
     <string name="please_select_course_name">कृपया कोर्सचे नाव निवडा</string>
     <string name="please_select_institue_location">कृपया संस्था स्थान निवडा</string>
-    <string name="congrats1">अभिनंदन</string>
-    <string name="you_are_now_eligible_for_getting_loan">आपण आता कर्ज मिळविण्यासाठी पात्र आहात</string>
 
     <string name="please_check_your_network_connection">कृपया तुमचा नेटवर्क कनेक्शन तपासा</string>
     <string name="please_choose_a_file_first">कृपया प्रथम फाइल निवडा</string>
-    <string name="you_need_to_select_your_profession_document_and_city_to_continue">आपण आपला व्यवसाय, दस्तऐवज आणि शहर निवडण्यासाठी</string>
     <string name="file_size_exceeds_limit_of_30_mb">फाइल आकार ३० एमबी मर्यादा ओलांडला</string>
     <string name="file_is_not_in_supported_format">फाइल समर्थीत स्वरूपनात नाही</string>
     <string name="file_not_found">फाइल सापडली नाही</string>
@@ -348,10 +282,8 @@
     <string name="payment_tansaction_failed">पेमेंट ट्रान्झॅक्शन अयशस्वी</string>
     <string name="back_pressed_transaction_cancelled">परत दाबा. व्यवहार रद्द</string>
     <string name="authentication_failed">प्रमाणीकरण अयशस्वी</string>
-    <string name="please_complete_borrower_and_co_borrower_forms">कृपया कर्जदार आणि सहकारी कर्जदार अर्ज पूर्ण करा</string>
     <string name="new_version_is_available_please_update">नवीन आवृत्ती उपलब्ध आहे, कृपया</string>
     <string name="are_you_sure_you_waqnt_to_exit">आपण निश्चितपणे बाहेर पडू इच्छिता?</string>
-    <string name="authenticating" tools:ignore="ExtraTranslation">प्रमाणित करत आहे ...</string>
     <string name="external_storage_permission_is_necessary">बाह्य स्टोरेज परवानगी आवश्यक आहे</string>
     <string name="permission_necessary">परवानगी आवश्यक</string>
     <string name="fair_practise_code">योग्य व्यवहार कोड</string>
@@ -363,8 +295,6 @@
     <string name="new_user">नवीन वापरकर्ता</string>
     <string name="existing_user">विद्यमान वापरकर्ता</string>
     <string name="enter_loan_amount">कर्जाची रक्कम एंटर करा</string>
-    <string name="enter_family_income">कुटुंब मिळकत</string>
-    <string name="enter_last_name">आडनाव एंटर करा</string>
     <string name="enter_institute_location">इन्स्टिट्यूट स्थान प्रविष्ट करा</string>
     <string name="upload_adhaar_card">आधार कार्ड अपलोड करा</string>
     <string name="applicant_adhaar_card_front_and_backside">अर्जदाराचे आधार कार्ड - पुढील आणि मागील बाजू</string>
@@ -390,9 +320,8 @@
     <string name="no_application_available_ro_view_pdf">पीडीएफ पाहण्यासाठी कोणताही अनुप्रयोग उपलब्ध नाही</string>
     <string name="file_size_exceeds_limits_of_30_mb">फाइल आकार ३० एमबी मर्यादा ओलांडला</string>
     <string name="more">अधिक</string>
-    <string name="change_language"><font fgcolor="#EE415E">भाषा बदलो</font></string>
 
-    <string name="street_name_locality_land_mark">Street Name,Locality,Land mark <font fgcolor="#EE415E">*</font></string>
+    <string name="street_name_locality_land_mark">Street Name,Locality,Land mark </string>
     <string name="reln_borr">Relation with borrower</string>
     <string name="offc_address">Office Address</string>
     <string name="err_country">Select Country Name</string>

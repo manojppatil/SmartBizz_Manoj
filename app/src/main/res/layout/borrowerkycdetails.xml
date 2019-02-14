@@ -108,7 +108,7 @@
                         android:theme="@style/ThemeOverlay.AppCompat.Light" />
                 </LinearLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -116,7 +116,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtCourseFeeBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -124,9 +124,9 @@
                         android:hint="Course Fee"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -134,7 +134,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtLoanAmtBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                         android:maxLength="10"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -182,7 +182,7 @@
                 android:orientation="vertical"
                 android:visibility="visible">
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -190,7 +190,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtFnameBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -198,9 +198,9 @@
                         android:inputType="textCapSentences"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -208,7 +208,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtMnameBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -216,9 +216,9 @@
                         android:inputType="textCapSentences"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -226,7 +226,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtLnameBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
                         android:inputType="textCapSentences"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -336,14 +336,14 @@
                     </RadioGroup>
                 </LinearLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtEmailIdBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -351,16 +351,16 @@
                         android:inputType="textEmailAddress"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtMobileNoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -369,7 +369,7 @@
                         android:maxLength="10"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -399,7 +399,7 @@
                         android:theme="@style/ThemeOverlay.AppCompat.Light" />
                 </LinearLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:id="@+id/edtPanLayoutBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -408,7 +408,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtPanBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -418,9 +418,9 @@
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:id="@+id/edtAadhaarLayoutBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -430,7 +430,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtAadhaarBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -439,7 +439,7 @@
                         android:maxLength="12"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
                 <LinearLayout
                     android:id="@+id/linEmployed"
@@ -450,7 +450,7 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.eduvanzins.Font.InpLayoutLight
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -458,7 +458,7 @@
                         android:theme="@style/EditTextStyle"
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
-                        <EditText
+                        <com.eduvanzins.Font.EdtLight
                             android:id="@+id/edtCompanyBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -466,21 +466,21 @@
                             android:inputType="textCapSentences"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.eduvanzins.Font.InpLayoutLight>
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.eduvanzins.Font.InpLayoutLight
                         app:hintTextAppearance="@style/CustomTextAppearance"
                         android:theme="@style/EditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <EditText
+                        <com.eduvanzins.Font.EdtLight
                             android:id="@+id/edtAnnualSalBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
                             android:hint="@string/annual_income"
                             android:textColor="@color/black" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.eduvanzins.Font.InpLayoutLight>
                 </LinearLayout>
 
             </LinearLayout>
@@ -493,7 +493,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="5dp">
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -501,7 +501,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtCurrentAddressBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -509,9 +509,9 @@
                         android:inputType="textPostalAddress"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -519,7 +519,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtCurrentLandmarkBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -527,9 +527,9 @@
                         android:inputType="textPostalAddress"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
-                <android.support.design.widget.TextInputLayout
+                <com.eduvanzins.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -537,7 +537,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <EditText
+                    <com.eduvanzins.Font.EdtLight
                         android:id="@+id/edtCurrentPincodeBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -546,7 +546,7 @@
                         android:maxLength="6"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.eduvanzins.Font.InpLayoutLight>
 
                 <LinearLayout
                     android:layout_width="match_parent"

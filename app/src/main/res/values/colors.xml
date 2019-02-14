@@ -31,14 +31,10 @@
     <color name="colorGreen">#1ac31a</color>
     <color name="colorYellow">#ffc015</color>
     <color name="colorRed">#ee415e</color>
-    <color name="colorGrey">#b2b2b2</color>
-    <color name="colorDarkGrey">#444a62</color>
-    <color name="colorBluishGrey">#074764</color>
 
 
     <color name="card">#f9fbfb</color>
     <color name="white1">#f9fbfb</color>
-    <color name="textcolor">#818181</color>
     <color name="textcolordark">#666666</color>
 
 </resources>

@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dip">
 
-	                <EditText
+	                <com.eduvanzins.Font.EdtLight
 	                    android:id="@+id/et_Card_No"
 	                    android:layout_width="match_parent"
 	                    android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
 	                    android:imeOptions="actionNext"
 	                    android:layout_alignParentTop="true" />
 	
-	                <EditText
+	                <com.eduvanzins.Font.EdtLight
 	                    android:id="@+id/et_Card_Name"
 	                    android:layout_width="match_parent"
 	                    android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
 	                    android:layout_below="@id/et_Card_No"
 	                    android:imeOptions="actionNext"/>
 	                
-	                 <EditText
+	                 <com.eduvanzins.Font.EdtLight
 	                    android:id="@+id/et_CVV"
 	                    android:layout_width="fill_parent"
 	                    android:layout_height="wrap_content"
