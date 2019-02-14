@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.database.DBAdapter;
@@ -34,6 +35,7 @@ import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONObject;
 
 import java.security.MessageDigest;
@@ -77,6 +79,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
 
         try {
             view1 = getLayoutInflater().inflate(R.layout.activity_splash_screen_customer, null);
