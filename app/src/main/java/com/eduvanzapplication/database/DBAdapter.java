@@ -24,15 +24,7 @@ public class DBAdapter {
     public static final String DATABASE_NAME = "EDUVANZ.DB";
     public static final int DATABASE_VERSION = 2;
 
-    public static final String[] ALL_TABLES = {Utils.InstituteName_INFO_TABLE,
-            Utils.CourseName_INFO_TABLE,
-            Utils.InstituteLocation_INFO_TABLE,
-            Utils.UserEligibility_INFO_TABLE,
-            Utils.BorrowerLAF_INFO_TABLE,
-            Utils.CoBorrowerLAF_INFO_TABLE,
-            Utils.City_INFO_TABLE,
-            Utils.State_INFO_TABLE,
-            Utils.DocumentUpload_INFO_TABLE,
+    public static final String[] ALL_TABLES = {
             Utils.ErrorLog_INFO_TABLE};
 
     private static Context mcontext;
@@ -62,15 +54,7 @@ public class DBAdapter {
         public void onCreate(SQLiteDatabase db) {
 
             try {
-                db.execSQL(Utils.InstituteName_CREATE_TABLE);
-                db.execSQL(Utils.CourseName_CREATE_TABLE);
-                db.execSQL(Utils.InstituteLocation_CREATE_TABLE);
-                db.execSQL(Utils.UserEligibility_CREATE_TABLE);
-                db.execSQL(Utils.BorrowerLAF_CREATE_TABLE);
-                db.execSQL(Utils.CoBorrowerLAF_CREATE_TABLE);
-                db.execSQL(Utils.City_CREATE_TABLE);
-                db.execSQL(Utils.State_CREATE_TABLE);
-                db.execSQL(Utils.DocumentUpload_CREATE_TABLE);
+
                 db.execSQL(Utils.ErrorLog_CREATE_TABLE);
 
             } catch (SQLException e) {

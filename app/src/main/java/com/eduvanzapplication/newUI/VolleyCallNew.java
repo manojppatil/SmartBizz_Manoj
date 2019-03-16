@@ -20,14 +20,12 @@ import com.android.volley.toolbox.Volley;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
-import com.eduvanzapplication.newUI.newViews.ForgotPassword;
 import com.eduvanzapplication.newUI.newViews.GetMobileNo;
 import com.eduvanzapplication.newUI.newViews.MyProfileNew;
 //import com.eduvanzapplication.newUI.newViews.NewTruecallerSignIn;
 import com.eduvanzapplication.newUI.newViews.Notification;
 import com.eduvanzapplication.newUI.newViews.OtpValidation;
 import com.eduvanzapplication.newUI.newViews.SignIn;
-import com.eduvanzapplication.newUI.newViews.SingInWithTruecaller;
 import com.eduvanzapplication.newUI.newViews.SplashScreen;
 
 import org.json.JSONArray;
@@ -243,16 +241,16 @@ public class VolleyCallNew extends Application {
                 e.printStackTrace();
             }
         }
-        else if (screen.equalsIgnoreCase("updateTrueData")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((SingInWithTruecaller) mActivity).UpdateTrueData(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//        else if (screen.equalsIgnoreCase("updateTrueData")) {
+//            try {
+//                jsonDataO = new JSONObject(s);
+//                ((SingInWithTruecaller) mActivity).UpdateTrueData(jsonDataO);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
         else if (screen.equalsIgnoreCase("getOtp")) {
             try {
                 jsonDataO = new JSONObject(s);
@@ -816,16 +814,7 @@ public class VolleyCallNew extends Application {
                 e.printStackTrace();
             }
         }
-        else if (screen.equalsIgnoreCase("resetPassword")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((ForgotPassword) mActivity).resetPassword(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
         else if (screen.equalsIgnoreCase("getStudentLaf")) {
             try {
                 jsonDataO = new JSONObject(s);

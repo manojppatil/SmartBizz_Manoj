@@ -144,16 +144,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.eduvanzapplication.newUI.newViews.SingInWithTruecaller"
-            android:screenOrientation="sensorPortrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <!--<activity-->
             <!--android:name="com.eduvanzapplication.newUI.newViews.NewTruecallerSignIn"-->
             <!--android:screenOrientation="sensorPortrait">-->
@@ -203,12 +193,6 @@
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name="com.eduvanzapplication.newUI.newViews.SignIn"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name="com.eduvanzapplication.newUI.newViews.ForgotPassword"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name="com.eduvanzapplication.newUI.newViews.SignUp"
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name="com.eduvanzapplication.newUI.newViews.ContactUs"

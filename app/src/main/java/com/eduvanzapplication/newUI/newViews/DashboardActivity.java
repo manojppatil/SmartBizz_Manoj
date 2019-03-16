@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -44,7 +43,6 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
-import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 import com.eduvanzapplication.newUI.services.LocationService;
 import com.eduvanzapplication.newUI.services.MyServiceAppStats;
@@ -66,8 +64,6 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 
@@ -77,6 +73,7 @@ public class DashboardActivity extends AppCompatActivity
     public static NavigationView navigationView;
     public static DrawerLayout drawer;
     Context context;
+//    com.eduvanzapplication.newUI.newViews.CustomDrawerButton customDrawerButton;
     TextView textViewName, textViewEmail;
     Button buttonSignup, buttonSignIn;
     MainApplication mainApplication;
@@ -102,9 +99,9 @@ public class DashboardActivity extends AppCompatActivity
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle(R.string.title_dashboard);
-            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+//            getSupportActionBar().setTitle(R.string.title_dashboard);
+//            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
             context = getApplicationContext();
             mainApplication = new MainApplication();
             sharedPref = new SharedPref();
@@ -124,6 +121,16 @@ public class DashboardActivity extends AppCompatActivity
                 e.printStackTrace();
                 firstTimeScrape = 0;
             }
+
+//            customDrawerButton = findViewById(R.id.btnOpenDrawer);
+//            customDrawerButton.setDrawerLayout( mDrawer );
+//            customDrawerButton.getDrawerLayout().addDrawerListener( customDrawerButton );
+//            customDrawerButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    customDrawerButton.changeState();
+//                }
+//            });
 
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -399,13 +406,13 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_myprofile) {
-            if (sharedPref.getLoginDone(context)) {
-                Intent intent = new Intent(context, MyProfileNew.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(context, SignUp.class);
-                startActivity(intent);
-            }
+//            if (sharedPref.getLoginDone(context)) {
+//                Intent intent = new Intent(context, MyProfileNew.class);
+//                startActivity(intent);
+//            } else {
+//                Intent intent = new Intent(context, SignUp.class);
+//                startActivity(intent);
+//            }
         } else if (id == R.id.nav_eligibility) {
 //            Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
 //            startActivity(intent);

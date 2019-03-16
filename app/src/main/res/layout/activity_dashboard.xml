@@ -13,19 +13,74 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_150sdp">
+
+            <!--<android.support.design.widget.AppBarLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_120sdp"-->
+            <!--android:background="@drawable/topbg">-->
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+                android:layout_height="@dimen/_120sdp"
+                android:background="@drawable/topbg"/>
 
-        </android.support.design.widget.AppBarLayout>
+            <!--</android.support.design.widget.AppBarLayout>-->
+
+
+            <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_120sdp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:background="@drawable/topbg" />-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/banner_drawable"
+                android:orientation="vertical">
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@drawable/banner_drawable"-->
+                <!--android:orientation="vertical">-->
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager_dashboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_110sdp" />
+
+                <com.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/viewPageIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    app:fillColor="@color/colorSecondary"
+                    app:pageColor="@color/colorPrimary" />
+                <!--</LinearLayout>-->
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/toolbar_dropshadow"
+                android:elevation="10dp" />
+        </RelativeLayout>
+
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:background="@color/grey" />-->
 
         <FrameLayout
             android:id="@+id/framelayout_dashboard"
@@ -33,10 +88,7 @@
             android:layout_height="match_parent">
 
             <!-- **** Place Your Content Here **** -->
-            <View android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:elevation="10dp"
-                android:background="@drawable/toolbar_dropshadow"/>
+
 
         </FrameLayout>
     </LinearLayout>

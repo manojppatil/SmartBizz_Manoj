@@ -130,12 +130,6 @@ public class DashboardFragmentNew extends Fragment {
             textView7 = (TextView) view.findViewById(R.id.textViewdash_7);
             mainApplication.applyTypeface(textView7, context);
             textView8 = (TextView) view.findViewById(R.id.textViewdash_8);
-            mainApplication.applyTypeface(textView8, context);
-            textView9 = (TextView) view.findViewById(R.id.textViewdash_9);
-            mainApplication.applyTypeface(textView9, context);
-            textView10 = (TextView) view.findViewById(R.id.textViewdash_10);
-            mainApplication.applyTypeface(textView10, context);
-            textView11 = (TextView) view.findViewById(R.id.textViewdash_11);
 
             recyclerLeads = (RecyclerView) view.findViewById(R.id.recyclerLeads);
 
@@ -149,10 +143,6 @@ public class DashboardFragmentNew extends Fragment {
 
             viewPagerDashboard.setAdapter(viewPagerAdapterDashboard);
             circlePageIndicatorDashboard.setViewPager(viewPagerDashboard);
-
-            buttonApplyNow = (Button) view.findViewById(R.id.btnApplyNow);
-            mainApplication.applyTypeface(buttonApplyNow, context);
-
 
             linearLayoutMyProfile = (LinearLayout) view.findViewById(R.id.linearLayout_dashboard_myprofile);
             linearLayoutMyProfile.setOnClickListener(new View.OnClickListener() {
@@ -201,21 +191,7 @@ public class DashboardFragmentNew extends Fragment {
                 }
             });
 
-            textViewDealTitle = (TextView) view.findViewById(R.id.textView_dealTitle);
-            mainApplication.applyTypeface(textViewDealTitle, context);
 
-            linearLayoutDeal = (LinearLayout) view.findViewById(R.id.linearLayout_dashdeal);
-            linearLayoutDeal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, BannerActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("bannerID", dealID);
-                    bundle.putString("from_deal", "1");
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
 
 //            if(!MainApplication.lead_id.contains("null") && MainApplication.lead_id.length() > 0) {
 //                Intent intent = new Intent(context, EligibilityCheck.class);

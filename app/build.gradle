@@ -17,8 +17,8 @@ android {
         applicationId "com.eduvanzapplication"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 62
-        versionName "4.1.2"
+        versionCode 70
+        versionName "5.1.1"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -58,18 +58,14 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     //Dotted View For View pager
-//    implementation project(':FriendlyScoreAndroidSDK-release')
-//    implementation project(':FriendlyScoreAndroidSDK-UI-release')
 
-    //implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
     implementation project(':libraryMobilePaymentSDK')
     implementation project(':linkedin-sdk')
     implementation 'com.paytm:pgplussdk:1.1.2'
     implementation project(':digio-android-sdk-0.1.0')
 
-    implementation (name: "truesdk-0.6", ext: "aar")
-//    implementation (name: "truesdk-0.7-releasePartner", ext: "aar")
-    implementation files('libs/commons-codec-1.10-rep.jar')
+     implementation files('libs/commons-codec-1.10-rep.jar')
     implementation (name: "imgtopdf", ext: "aar")
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
@@ -88,9 +84,9 @@ dependencies {
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
-    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'ch.halcyon:squareprogressbar:1.6.2'
     implementation 'com.facebook.android:facebook-android-sdk:4.28.0'
     implementation 'com.twitter.sdk.android:twitter:3.1.1'
@@ -109,15 +105,14 @@ dependencies {
         transitive = true;
     }
     compile 'com.pnikosis:materialish-progress:1.7'
-    /*
-                             If you implement Linkedin Authentication via Linkedin SDK, Linkedin requires their app download.
+    /*If you implement Linkedin Authentication via Linkedin SDK, Linkedin requires their app download.
 
                              Better to implement using OAuth.
                                                                                                                        */
     /*    compile(project(':linkedin-sdk')) {
                              exclude group: 'com.android.volley', module: 'volley'
+    }*/
 
-                           }*/
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
     implementation project(':friendlyscore-libs')
     /*

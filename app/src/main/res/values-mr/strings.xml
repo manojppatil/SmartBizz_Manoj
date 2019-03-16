@@ -3,7 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Rs">\u20B9</string>
-    <string name="calendar">&#xf073;</string>
     <string name="down">&#xf0d7;</string>
     <string name="up">&#xf0d8;</string>
     <string name="circle">&#xf111;</string>
@@ -14,25 +13,11 @@
 
     <string name="facebook_app_id">2033654490205621</string>
 
-    <string name="twitter_consumer_key">Cn3lPUubSrtsJWw1se1OmrDIp</string>
-    <string name="twitter_consumer_secret">sA5B4ol5mXoYMEyWivBT2rHIsJwTIjLtdqgjzqpgHeuIsMc2b5</string>
-
     <!--B7:6F:26:F5:D7:75:F6:FA:42:A6:3C:A4:D7:B8:65:32:2D:7F:9B:A6-->
     <string name="partnerKey">CCesL1c389d78081845e8b661a1d47689fe1a</string>
     <string name="app_name">एडुवांझ</string>
 
     <string name="ok">मला समजले</string>
-    <string name="google_play_services_invalid">गूगल प्ले सेवा आवृत्ती अवैध आहे</string>
-    <string name="google_play_services_invalid_title">अवैध गूगल प्ले सेवा</string>
-    <string name="no_google_play_services">आपल्या डिव्हाइसमध्ये गूगल पे सेवा नाहीत. पासून स्थापित करा</string>
-    <string name="no_google_play_services_title">गूगल प्ले सेवा गहाळ</string>
-    <string name="google_play_services_update">आपल्या डिव्हाइसेसवर गूगल प्ले सेवा अद्यतनित करा. पासून अद्ययावत</string>
-    <string name="google_play_services_title_update">गूगल प्ले सेवा आपल्या डिव्हाइसवर अद्यतनित केलेली नाहीत.</string>
-
-    <string name="google_play_services_updating">आपल्या डिव्हाइसवर गूगल प्ले सेवा अद्यतनित होत आहेत. पासून तपासा</string>
-    <string name="google_play_services_updating_title">गूगल प्ले सेवा अद्ययावत केल्या जात आहेत.</string>
-    <string name="google_play_services_disabled">आपल्या डिव्हाइसवर गूगल प्ले सेवा अक्षम आहेत. अॅप वापरण्यासाठी, ते सक्षम करा.</string>
-    <string name="google_play_services_disabled_title">गूगल प्ले सेवा अक्षम</string>
 
     <string name="title_activity_dashboard">डॅशबोर्ड क्रिया</string>
     <string name="title_privacy_policy">निजता धोरण</string>
@@ -46,7 +31,6 @@
     <string name="title_profile">प्रोफाइल</string>
     <string name="title_loan_application">कर्ज अर्ज</string>
     <string name="title_how_it_works">हे कसे कार्य करते</string>
-    <string name="title_forgot_password">पासवर्ड विसरला</string>
     <string name="title_dashboard">डॅशबोर्ड</string>
     <string name="title_contact_us">आमच्याशी संपर्क साधा</string>
     <string name="title_fair_practics_code">योग्य व्यवहार कोड</string>
@@ -56,56 +40,13 @@
     <string name="permission_denied_explanation">परवानगी नाकारली गेली, परंतु कोर फंक्शनॅलिटीसाठी आवश्यक आहे.</string>
     <string name="settings">सेटिंग्ज</string>
     <string name="lbr_Ok">होय</string>
-    <string name="lbr_No">नाही</string>
 
-    <string name="profile_photo">प्रोफाइल फोटो</string>
-    <string name="aadhar_card">आधार कार्ड</string>
-    <string name="pan_card">पॅन कार्ड</string>
-    <string name="address_proof">पत्त्याचा पुरावा</string>
-    <string name="income_proof">उत्पन्न पुरावा</string>
-    <string name="bank_statement">बँक स्टेटमेंट</string>
-    <string name="degree_marksheets">पदवीपत्रके</string>
-    <string name="degree_certificate">पदवी प्रमाणपत्र</string>
-    <string name="other_documents">इतर दस्तऐवज</string>
-    <string name="upload">अपलोड</string>
-    <string name="borrower">कर्जदार</string>
-    <string name="kyc_documents">केवायसी दस्तऐवज</string>
-    <string name="upload_your_profile_photo">आपले प्रोफाइल फोटो अपलोड करा</string>
-    <string name="upload_your_aadhar_card">आपला आधार कार्ड अपलोड करा</string>
-    <string name="upload_your_pan_card">तुमचा पॅन कार्ड</string>
-    <string name="upload_one_of_your_address_proofs">आपल्या पत्त्यातील एक पुरावा अपलोड करा</string>
-    <string name="financial_documents">आर्थिक दस्तऐवज</string>
-    <string name="upload_one_of_your_income_proofs">आपल्या उत्पन्नाच्या पुराव्यांपैकी एक अपलोड करा</string>
-    <string name="upload_last_6_months_bank_statement">शेवटचा ६ महिन्यांचा बँक स्टेटमेंट</string>
-    <string name="upload_your_degree_marksheets">आपली डिग्री मार्कशीट्स अपलोड करा</string>
-    <string name="upload_your_degree_certificate">आपली डिग्री प्रमाणपत्र अपलोड करा</string>
-    <string name="upload_your_other_documents">आपली इतर कागदपत्रे</string>
-    <string name="co_borrower">सह-कर्जदार</string>
-    <string name="educational_documents">शैक्षणिक दस्तऐवज</string>
-
-    <string name="want_financial_assistance">आर्थिक सहाय्य पाहिजे?</string>
-    <string name="check_eligibility_now">पात्रता तपासा!</string>
     <string name="continu">सुरू</string>
-    <string name="deal_alert">डील अलर्ट!</string>
     <string name="my_profile">माझे प्रोफाइल</string>
     <string name="call_us">आम्हाला कॉल करा</string>
     <string name="mail_us">मेल आम्हाला</string>
     <string name="notification">अधिसूचना</string>
 
-    <string name="personal">व्यक्तिगत</string>
-    <string name="employment">Employment</string>
-    <string name="institute_name">संस्थेचे नाव</string>
-    <string name="course_name">कोर्सचे नाव</string>
-    <string name="institute_location">संस्था स्थान</string>
-    <string name="next">पुढे</string>
-    <string name="course_fee">कोर्स फी</string>
-    <string name="loan_amount">कर्ज रक्कम</string>
-    <string name="previous">मागील</string>
-    <string name="your_profession">तुझा व्यवसाय</string>
-    <string name="document_you_have">दस्तऐवज आपल्याकडे</string>
-    <string name="first_name">पहिले नाव</string>
-    <string name="last_name">आडनाव</string>
-    <string name="email_id">ई - मेल आयडी</string>
     <string name="submit">जमा</string>
 
     <string name="check_eligiblity">पात्रता तपासा</string>
@@ -122,7 +63,6 @@
     <string name="mumbai_400059">मुंबई ४०००९५</string>
 
     <string name="email_id1">ई - मेल आयडी</string>
-    <string name="reset_password">पासवर्ड रीसेट करा</string>
     <string name="enter_your_email_id">तुमचा ईमेल आयडी एंटर करा</string>
 
 
@@ -158,9 +98,6 @@
     <string name="enter_your_password">तुमचा पासवर्ड प्रविष्ट करा</string>
     <string name="sign_in">साइन इन</string>
 
-    <string name="not_register_yet_register_now">अद्याप नोंदणीकृत नाही? अाता नोंदणी करा.</string>
-    <string name="sign_up">साइन अप</string>
-
     <string name="sms_data">एसएमएस डेटा</string>
     <string name="permissions_required">परवानग्या आवश्यक</string>
     <string name="contacts_and_call_info">संपर्क आणि कॉल माहिती</string>
@@ -181,151 +118,23 @@
 
     <string name="permissioncamera">कॅमेरा - लोन ऍप्लिकेशनसाठी आवश्यक चित्रे घेण्याची परवानगी देण्यासाठी. स्टोरेज - आपल्या कर्जाच्या अनुप्रयोगासाठी दस्तऐवज आणि चित्रे अपलोड करण्याची परवानगी देण्यासाठी.</string>
     <string name="permissionlocation">स्थान - आपल्या डिव्हाइसच्या स्थानाबद्दल माहिती गोळा आणि तिचा आढावा घेण्यासाठी. अनुप्रयोग वापर - आपल्या कर्जाच्या अर्ज प्रक्रियेत उपयुक्त ठरणार्या आपल्या क्रेडिट स्कोअरची निर्मिती करण्यासाठी आपल्या स्वारस्य आणि आवडींबद्दल माहिती मिळविण्यासाठी.</string>
-    <string name="paymentoptions">पेटीएम- पेटीएम वॉलेट, डेबिट कार्ड, बीएचआयएम यूपीआय, नेट बँकिंग यासारख्या पर्यायांसह. एटम- क्रेडिट कार्ड, डेबिट कार्ड, नेट बँकिंगसारखे पर्याय.</string>
-
-    <string name="laf_documents">दस्तऐवज</string>
-    <string name="monthly_rent">मासिक भाडे</string>
-    <string name="permanent_address">कायमचा पत्ता</string>
-    <string name="adhaar_number">आधार क्रमांक.</string>
-    <string name="pan_number">पॅन क्रमांक</string>
-    <string name="marital_status">वैवाहिक स्थिती :</string>
-    <string name="married">विवाहित</string>
-    <string name="single">सिंगल</string>
-    <string name="current_residency_type">वर्तमान रेजीडेंसी प्रकारः</string>
-    <string name="current_country">वर्तमान देशः</string>
-    <string name="current_state">वर्तमान स्थितीः</string>
-    <string name="current_city1">सध्याचे शहर :</string>
-    <string name="permanent_country">स्थायी देशः</string>
-    <string name="permanent_state">स्थायी स्थितीः</string>
-    <string name="permanent_city">स्थायी शहर:</string>
-    <string name="duration_of_stay_at_current_address">वर्तमान पत्त्यावर राहण्याची कालावधीः</string>
-    <string name="birthdate">जन्मदिनांक</string>
-    <string name="gender">लिंगः</string>
-    <string name="male">पुरुष</string>
-    <string name="female">स्त्री</string>
-    <string name="last_completed_degree">पूर्ण पूर्ण पदवी:</string>
-    <string name="do_you_have_any_gaps_in_education">आपल्याकडे शिक्षणात काही अंतर आहेत:</string>
-    <string name="marks_obtained_in">गुण प्राप्त झालेः</string>
-    <string name="cgpa">सीजीपीए</string>
-    <string name="percentage">टक्केवारी</string>
-    <string name="last_degree_percentage">अंतिम पद टक्केवारी</string>
-    <string name="passing_year">पासिंग वर्ष</string>
-    <string name="last_degree_cgpa">अंतिम पद सीजीपीए</string>
-    <string name="name_of_company">कंपनीचे नाव</string>
-    <string name="annual_income">वार्षिक उत्पन्न</string>
-    <string name="duration_of_job_business">नोकरी / व्यवसायाची कालावधीः</string>
-    <string name="employer_type">नियोक्ता प्रकारः</string>
-    <string name="government">सरकारी</string>
-    <string name="private1">खाजगी</string>
-
-    <string name="sign_the_application">अनुप्रयोग चिन्हांकित करा</string>
-    <string name="signing_status">साइनिंग स्थितीः</string>
-    <string name="pending">प्रलंबित</string>
-    <string name="choose_a_signing_method">चिन्हांकन पद्धत निवडा</string>
-    <string name="manual">मॅन्युअल</string>
-    <string name="esign">ईसाइन</string>
-    <string name="download_application">अनुप्रयोग डाउनलोड करा</string>
-    <string name="upload_application">अप्लिकेशन अपलोड करा</string>
-    <string name="download_signed_application">साइन केलेले अनुप्रयोग डाउनलोड करा</string>
-    <string name="step_2">पायरी २</string>
-    <string name="processing_fee_payment">प्रोसेसिंग फी भरणा</string>
-    <string name="payment_status">पैसे भरल्याची स्थिती :</string>
-    <string name="paytm">पेटीएम</string>
-    <string name="atom">एटम</string>
-    <string name="amount">रक्कमः</string>
-    <string name="transaction_id">ट्रान्झॅक्शन आयडी:</string>
-    <string name="payment_date">पगाराची तारीख :</string>
-    <string name="pay_now">आता द्या</string>
-    <string name="paid">सशुल्क</string>
 
 
-    <string name="error">त्रुटी</string>
     <string name="please_provide_mobile_number">कृपया मोबाइल नंबर प्रदान करा</string>
-    <string name="please_select_profession">कृपया व्यवसाय निवडा</string>
-    <string name="please_select_document_type">कृपया दस्तऐवज प्रकार निवडा</string>
-    <string name="you_need_to_select_gender">आपण लिंग निवडण्याची गरज आहे</string>
-    <string name="first_name_is_required">प्रथम नाव आवश्यक आहे</string>
-    <string name="last_name_is_required">आडनाव आवश्यक आहे</string>
-    <string name="birthdate_is_required">जन्मतारीख आवश्यक आहे</string>
-    <string name="adhaar_number_is_required">आधार क्रमांक आवश्यक आहे</string>
-    <string name="pan_number_is_required">पॅन नंबर आवश्यक आहे</string>
-    <string name="current_address_is_required">वर्तमान पत्ता आवश्यक</string>
-    <string name="current_pin_code_is_required">वर्तमान पिन कोड आवश्यक आहे</string>
-    <string name="name_of_the_company_is_required">कंपनीचे नाव आवश्यक आहे</string>
-    <string name="annual_income_is_required">वार्षिक उत्पन्न आवश्यक आहे</string>
-    <string name="please_select_current_country">कृपया वर्तमान देश निवडा</string>
-    <string name="please_select_current_state">कृपया वर्तमान स्थिती निवडा</string>
-    <string name="please_select_current_city">कृपया वर्तमान शहर निवडा</string>
-    <string name="please_select_duration_of_stay_at_current_address">कृपया वर्तमान पत्त्यावर राहण्याच्या कालावधीची निवड करा</string>
-    <string name="please_select_last_degree_completed">कृपया शेवटची पदवी पूर्ण निवडा</string>
-    <string name="please_select_duration_of_job_business">नोकरी / व्यवसाय कालावधी निवडा</string>
-    <string name="emailid_is_required">ईमेल आयडी आवश्यक आहे</string>
-    <string name="please_select_relationship_with_borrower">कृपया कर्जदारासह नातेसंबंध निवडा</string>
-    <string name="please_fill_up_all_the_details_to_continue">कृपया सुरू ठेवण्यासाठी सर्व तपशील भरा</string>
-    <string name="please_select_institue_name">कृपया संस्थेचे नाव निवडा</string>
-    <string name="please_select_course_name">कृपया कोर्सचे नाव निवडा</string>
-    <string name="please_select_institue_location">कृपया संस्था स्थान निवडा</string>
 
     <string name="please_check_your_network_connection">कृपया तुमचा नेटवर्क कनेक्शन तपासा</string>
     <string name="please_choose_a_file_first">कृपया प्रथम फाइल निवडा</string>
-    <string name="file_size_exceeds_limit_of_30_mb">फाइल आकार ३० एमबी मर्यादा ओलांडला</string>
-    <string name="file_is_not_in_supported_format">फाइल समर्थीत स्वरूपनात नाही</string>
     <string name="file_not_found">फाइल सापडली नाही</string>
     <string name="url_error">यूआरएल त्रुटी!</string>
     <string name="cannot_read_write_file">वाचू शकत नाही / फाइल लिहू शकत नाही!</string>
-    <string name="payment_not_successful">पेमेंट यशस्वी</string>
-    <string name="signed_successfully">यशस्वीपणे</string>
-    <string name="downloading_of_file_just_finished">फाइल डाउनलोड करणे नुकतेच</string>
-    <string name="please_sign_the_documents_first">कृपया प्रथम कागदजत्रांवर स्वाक्षरी करा</string>
-    <string name="something_went_wrong_please_try_again_later">काहीतरी चुकीचे घडले आहे, कृपया थोड्यावेळाने प्रयत्न करा.</string>
-    <string name="payment_transaction_response">पेमेंट ट्रान्झॅक्शन प्रतिसाद</string>
-    <string name="payment_tansaction_failed">पेमेंट ट्रान्झॅक्शन अयशस्वी</string>
-    <string name="back_pressed_transaction_cancelled">परत दाबा. व्यवहार रद्द</string>
-    <string name="authentication_failed">प्रमाणीकरण अयशस्वी</string>
     <string name="new_version_is_available_please_update">नवीन आवृत्ती उपलब्ध आहे, कृपया</string>
     <string name="are_you_sure_you_waqnt_to_exit">आपण निश्चितपणे बाहेर पडू इच्छिता?</string>
     <string name="external_storage_permission_is_necessary">बाह्य स्टोरेज परवानगी आवश्यक आहे</string>
     <string name="permission_necessary">परवानगी आवश्यक</string>
     <string name="fair_practise_code">योग्य व्यवहार कोड</string>
     <string name="eduvanz_push_notification">एडुवांझ पुश अधिसूचना</string>
-    <string name="upload_profile_picture">प्रोफाइल अपलोड करा</string>
-    <string name="applicant_single_picture_required_to_be_uploaded">अर्जदाराचे एकल चित्र अपलोड करणे आवश्यक आहे</string>
-    <string name="co_applicant_single_picture_required_to_be_uploaded">सह-अर्जदारांची सिंगल पिक्चर अपलोड करणे आवश्यक आहे</string>
     <string name="eduvanz">एडुवांझ</string>
-    <string name="new_user">नवीन वापरकर्ता</string>
-    <string name="existing_user">विद्यमान वापरकर्ता</string>
-    <string name="enter_loan_amount">कर्जाची रक्कम एंटर करा</string>
     <string name="enter_institute_location">इन्स्टिट्यूट स्थान प्रविष्ट करा</string>
-    <string name="upload_adhaar_card">आधार कार्ड अपलोड करा</string>
-    <string name="applicant_adhaar_card_front_and_backside">अर्जदाराचे आधार कार्ड - पुढील आणि मागील बाजू</string>
-    <string name="co_applicant_adhaar_card_front_and_backside">सह-अर्जदारांचा आधार कार्ड - पुढील आणि मागील बाजू</string>
-    <string name="upload_pan_card">पॅन कार्ड अपलोड करा</string>
-    <string name="applicant_pan_card">अर्जदाराचे पॅन कार्ड</string>
-    <string name="co_applicant_pan_card">सह-अर्जदारांचे पॅन कार्ड</string>
-    <string name="upload_address_proof">पत्त्याचा पुरावा पुरावा</string>
-    <string name="applicant_address_proof">अर्जदाराचा पत्ता पुरावा</string>
-    <string name="co_applicant_address_proof">सह-अर्जदारचा पत्ता पुरावा</string>
-    <string name="upload_income_proof">उत्पन्न उत्पन्न पुरावा</string>
-    <string name="salary_slip_of_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">अर्जदाराच्या पगाराची पर्वा (मागील ३ महिने, जर उपलब्ध नसेल तर समान तपशील सांगणारे पगार प्रमाणपत्र स्वीकारले जाईल)</string>
-    <string name="salary_slip_of_co_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">सह-अर्जदारांची वेतन पगार (ताज्या ३ महिन्यांत, जर उपलब्ध नसेल तर समान तपशील सांगणारे वेतन प्रमाणपत्र मान्य केले जाईल)</string>
-    <string name="upload_bank_statement">बँक स्टेटमेंट अपलोड</string>
-    <string name="current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page">वर्तमान ३ महिन्यांचा बँकेचा आवेदक अर्जदारास वेतन दर्शविताना समोरच्या पानासह</string>
-    <string name="current_3_months_bank_statement_of_co_applicant_reflecting_salary_along_with_the_front_page">सध्याच्या ३ महिन्यांसह पगार दर्शविणारे सह-अर्जदारचे वर्तमान 3 महिन्यांचे बँक स्टेटमेंट</string>
-    <string name="upload_latest_marksheet">नवीनतम चिन्हपत्र अपलोड करा</string>
-    <string name="latest_marksheet_of_the_applicant">अर्जदाराचे ताजे चिन्हपत्र</string>
-    <string name="upload_latest_certificate">नवीनतम प्रमाणपत्र अपलोड करा</string>
-    <string name="latest_certificate_of_the_applicant">अर्जदाराचे ताजे प्रमाणपत्र</string>
-    <string name="upload_other_document">इतर दस्तऐवज अपलोड करा</string>
-    <string name="recent_utility_bill_if_the_house_is_owned_or_rent_agreement_if_the_house_is_rented_rent_agreement_should_be_noterised">घर भाड्याने घेतल्यास घर मालकीचे किंवा भाडे करार असल्यास अलीकडील उपयुक्तता विधेयक. भाड्याने घेण्याचे करार केले पाहिजे.</string>
-    <string name="no_application_available_ro_view_pdf">पीडीएफ पाहण्यासाठी कोणताही अनुप्रयोग उपलब्ध नाही</string>
-    <string name="file_size_exceeds_limits_of_30_mb">फाइल आकार ३० एमबी मर्यादा ओलांडला</string>
     <string name="more">अधिक</string>
 
-    <string name="street_name_locality_land_mark">Street Name,Locality,Land mark </string>
-    <string name="reln_borr">Relation with borrower</string>
-    <string name="offc_address">Office Address</string>
-    <string name="err_country">Select Country Name</string>
-    <string name="err_state">Select State</string>
-    <string name="err_city">Enter city</string>
-    <string name="post_approval">Post Approval</string>
 </resources>

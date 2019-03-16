@@ -112,23 +112,23 @@ public class SignIn extends AppCompatActivity {
                 }
             });
 
-            textView3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        Intent intent = new Intent(context, ForgotPassword.class);
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        String className = this.getClass().getSimpleName();
-                        String name = new Object() {
-                        }.getClass().getEnclosingMethod().getName();
-                        String errorMsg = e.getMessage();
-                        String errorMsgDetails = e.getStackTrace().toString();
-                        String errorLine = String.valueOf(e.getStackTrace()[0]);
-                        Globle.ErrorLog(SignIn.this,className, name, errorMsg, errorMsgDetails, errorLine);
-                    }
-                }
-            });
+//            textView3.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    try {
+//                        Intent intent = new Intent(context, ForgotPassword.class);
+//                        startActivity(intent);
+//                    } catch (Exception e) {
+//                        String className = this.getClass().getSimpleName();
+//                        String name = new Object() {
+//                        }.getClass().getEnclosingMethod().getName();
+//                        String errorMsg = e.getMessage();
+//                        String errorMsgDetails = e.getStackTrace().toString();
+//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                        Globle.ErrorLog(SignIn.this,className, name, errorMsg, errorMsgDetails, errorLine);
+//                    }
+//                }
+//            });
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {

@@ -20,7 +20,6 @@ import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 //import com.eduvanzapplication.newUI.newViews.NewTruecallerSignIn;
 import com.eduvanzapplication.newUI.newViews.GetMobileNo;
-import com.eduvanzapplication.newUI.newViews.SingInWithTruecaller;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.nio.charset.StandardCharsets;
