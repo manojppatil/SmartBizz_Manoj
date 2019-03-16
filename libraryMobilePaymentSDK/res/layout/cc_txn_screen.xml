@@ -25,7 +25,7 @@
 
     -->
 
-    <com.eduvanzins.Font.EdtLight
+    <com.eduvanzapplication.Font.EdtLight
         android:id="@+id/et_card_hname"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         android:digits="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y, ,z"/>
         />
 
-    <com.eduvanzins.Font.EdtLight
+    <com.eduvanzapplication.Font.EdtLight
         android:id="@+id/et_card_no"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
         </Spinner>
 
         <!--
-        <com.eduvanzins.Font.EdtLight
+        <com.eduvanzapplication.Font.EdtLight
             android:id="@+id/et_expYear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             android:inputType="number"
             android:maxLength="4" />
 
-        <com.eduvanzins.Font.EdtLight
+        <com.eduvanzapplication.Font.EdtLight
             android:id="@+id/et_expMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
         -->
     </LinearLayout>
 
-    <com.eduvanzins.Font.EdtLight
+    <com.eduvanzapplication.Font.EdtLight
         android:id="@+id/et_cvv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

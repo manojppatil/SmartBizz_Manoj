@@ -24,7 +24,7 @@
                 android:orientation="vertical"
                 android:visibility="visible">
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -32,7 +32,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtFnameCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -40,9 +40,9 @@
                         android:inputType="textCapSentences"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -50,7 +50,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtMnameCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -58,9 +58,9 @@
                         android:inputType="textCapSentences"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -68,7 +68,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtLnameCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                         android:inputType="textCapSentences"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -88,8 +88,8 @@
                         android:orientation="vertical"
                         android:padding="2dp">
 
-                        <TextView
-                            android:id="@+id/lblBirthdayCoBr"
+                        <com.eduvanzapplication.Font.TxtLight
+                            android:id="@+id/lblBirthdayBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingTop="8dp"
@@ -99,8 +99,8 @@
                             android:textSize="16sp"
                             android:visibility="invisible" />
 
-                        <TextView
-                            android:id="@+id/txtBirthdateCoBr"
+                        <com.eduvanzapplication.Font.TxtLight
+                            android:id="@+id/txtBirthdateBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="1dp"
@@ -157,7 +157,7 @@
                         android:gravity="left"
                         android:orientation="horizontal">
 
-                        <RadioButton
+                        <com.eduvanzapplication.Font.RbLight
                             android:id="@+id/rbMaleCoBr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                             android:textColor="@color/black"
                             android:theme="@style/EditTextStyle" />
 
-                        <RadioButton
+                        <com.eduvanzapplication.Font.RbLight
                             android:id="@+id/rbFemaleCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -178,14 +178,14 @@
                     </RadioGroup>
                 </LinearLayout>
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtEmailIdCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -194,16 +194,16 @@
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtMobileNoCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                         android:maxLength="10"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -220,7 +220,7 @@
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.eduvanzapplication.Font.TxtLight
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -242,7 +242,7 @@
                         android:theme="@style/ThemeOverlay.AppCompat.Light" />
                 </LinearLayout>
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:id="@+id/edtPanLayoutCoBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -250,7 +250,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtPanCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -260,9 +260,9 @@
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:id="@+id/edtAadhaarLayoutCoBr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtAadhaarCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -280,7 +280,7 @@
                         android:maxLength="12"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -288,7 +288,7 @@
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.eduvanzapplication.Font.InpLayoutLight
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -320,7 +320,7 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <com.eduvanzins.Font.InpLayoutLight
+                    <com.eduvanzapplication.Font.InpLayoutLight
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -328,7 +328,7 @@
                         android:theme="@style/EditTextStyle"
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:id="@+id/edtCompanyCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -336,22 +336,22 @@
                             android:inputType="textCapSentences"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
-                    </com.eduvanzins.Font.InpLayoutLight>
+                    </com.eduvanzapplication.Font.InpLayoutLight>
 
-                    <com.eduvanzins.Font.InpLayoutLight
+                    <com.eduvanzapplication.Font.InpLayoutLight
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:theme="@style/EditTextStyle"
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:id="@+id/edtAnnualSalCoBr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/annual_income"
                             android:inputType="numberDecimal"
                             android:textColor="@color/black" />
-                    </com.eduvanzins.Font.InpLayoutLight>
+                    </com.eduvanzapplication.Font.InpLayoutLight>
                 </LinearLayout>
 
             </LinearLayout>
@@ -365,7 +365,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="5dp">
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -373,7 +373,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtCurrentAddressCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -381,9 +381,9 @@
                         android:inputType="textPostalAddress"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -391,7 +391,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtCurrentLandmarkCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -399,9 +399,9 @@
                         android:inputType="textPostalAddress"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
-                <com.eduvanzins.Font.InpLayoutLight
+                <com.eduvanzapplication.Font.InpLayoutLight
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -409,7 +409,7 @@
                     android:theme="@style/EditTextStyle"
                     app:hintTextAppearance="@style/CustomTextAppearance">
 
-                    <com.eduvanzins.Font.EdtLight
+                    <com.eduvanzapplication.Font.EdtLight
                         android:id="@+id/edtCurrentPincodeCoBr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -418,7 +418,7 @@
                         android:maxLength="6"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-                </com.eduvanzins.Font.InpLayoutLight>
+                </com.eduvanzapplication.Font.InpLayoutLight>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -426,7 +426,7 @@
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.eduvanzapplication.Font.TxtLight
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -454,7 +454,7 @@
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.eduvanzapplication.Font.TxtLight
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -482,7 +482,7 @@
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.eduvanzapplication.Font.TxtLight
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

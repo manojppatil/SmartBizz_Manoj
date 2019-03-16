@@ -58,14 +58,6 @@ public class SignUp extends AppCompatActivity {
             buttonSignUp = (Button) findViewById(R.id.button_signup_signup);
             mainApplication.applyTypeface(buttonSignUp, context);
 
-            buttonSignUp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(SignUp.this, EligibilityCheck.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {

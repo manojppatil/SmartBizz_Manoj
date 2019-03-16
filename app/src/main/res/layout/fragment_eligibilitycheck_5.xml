@@ -64,7 +64,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/background_edittext"
@@ -140,7 +140,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/background_edittext"
@@ -215,7 +215,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/background_edittext"
@@ -341,7 +341,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:id="@+id/edtLoanAmt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

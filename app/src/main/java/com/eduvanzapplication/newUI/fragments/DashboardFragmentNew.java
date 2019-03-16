@@ -26,13 +26,9 @@ import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.adapter.LeadsAdapter;
-import com.eduvanzapplication.newUI.newViews.SignUp;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
-import com.eduvanzapplication.newUI.newViews.EligibilityCheck;
-import com.eduvanzapplication.newUI.newViews.LoanApplication;
-import com.eduvanzapplication.newUI.newViews.MyProfileNew;
 import com.eduvanzapplication.newUI.newViews.Notification;
 import com.eduvanzapplication.newUI.pojo.ViewPagerDashboardPOJO;
 import com.eduvanzapplication.newUI.VolleyCallNew;
@@ -112,6 +108,7 @@ public class DashboardFragmentNew extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             MainApplication.student_id = student_id;
             MainApplication.auth_token = auth_token;
             MainApplication.lead_id = lead_id;
@@ -155,27 +152,13 @@ public class DashboardFragmentNew extends Fragment {
 
             buttonApplyNow = (Button) view.findViewById(R.id.btnApplyNow);
             mainApplication.applyTypeface(buttonApplyNow, context);
-            buttonApplyNow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainApplication.isBorrower = true;
-                    Intent intent = new Intent(context, EligibilityCheck.class);
-                    startActivity(intent);
-                }
-            });
+
 
             linearLayoutMyProfile = (LinearLayout) view.findViewById(R.id.linearLayout_dashboard_myprofile);
             linearLayoutMyProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    if (sharedPref.getLoginDone(context)) {
-                        Intent intent = new Intent(context, MyProfileNew.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(context, SignUp.class);
-                        startActivity(intent);
-                    }
                 }
             });
 
@@ -234,11 +217,11 @@ public class DashboardFragmentNew extends Fragment {
                 }
             });
 
-            if(!MainApplication.lead_id.contains("null") && MainApplication.lead_id.length() > 0) {
-                Intent intent = new Intent(context, EligibilityCheck.class);
-                intent.putExtra("lead_id",MainApplication.lead_id);
-                startActivity(intent);
-            }
+//            if(!MainApplication.lead_id.contains("null") && MainApplication.lead_id.length() > 0) {
+//                Intent intent = new Intent(context, EligibilityCheck.class);
+//                intent.putExtra("lead_id",MainApplication.lead_id);
+//                startActivity(intent);
+//            }
 
             /** API CALL GET DASHBOARD BANNER**/
             try {

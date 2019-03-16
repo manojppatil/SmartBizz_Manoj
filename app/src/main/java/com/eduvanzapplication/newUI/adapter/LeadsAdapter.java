@@ -2,11 +2,8 @@ package com.eduvanzapplication.newUI.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,8 +15,6 @@ import android.widget.TextView;
 
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.newUI.newViews.EligibilityCheck;
-import com.eduvanzapplication.newUI.newViews.LoanApplication;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 
 import java.util.Collections;
@@ -63,31 +58,25 @@ public class LeadsAdapter extends RecyclerView.Adapter<LeadsAdapter.MyViewHolder
                 @Override
                 public void onClick(View v) {
 
-                    if (txtInstitute.getTag().toString().toLowerCase().equals("") || txtInstitute.getTag().toString().toLowerCase().contains("null")) {
-
-                        Intent intent = new Intent(context, EligibilityCheck.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("lead_id", card_view.getTag().toString());
-                        Log.d("LeadId","ID - "+card_view.getTag().toString());
-                        bundle.putString("application_id", txtlafid.getText().toString());
-                        bundle.putString("fillinstutute", txtlafid.getText().toString());
-                        intent.putExtras(bundle);
-                        context.startActivity(intent);
-
+//                    if (txtInstitute.getTag().toString().toLowerCase().equals("") || txtInstitute.getTag().toString().toLowerCase().contains("null")) {
+//
+//                        Intent intent = new Intent(context, EligibilityCheck.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("lead_id", card_view.getTag().toString());
+//                        Log.d("LeadId","ID - "+card_view.getTag().toString());
+//                        bundle.putString("application_id", txtlafid.getText().toString());
+//                        bundle.putString("fillinstutute", txtlafid.getText().toString());
+//                        intent.putExtras(bundle);
+//                        context.startActivity(intent);
+//
+//                    }else {
+//
 //                        Intent intent = new Intent(context, LoanApplication.class);
 //                        Bundle bundle = new Bundle();
 //                        bundle.putString("lead_id", card_view.getTag().toString());
 //                        intent.putExtras(bundle);
 //                        context.startActivity(intent);
-
-                    }else {
-
-                        Intent intent = new Intent(context, LoanApplication.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("lead_id", card_view.getTag().toString());
-                        intent.putExtras(bundle);
-                        context.startActivity(intent);
-                    }
+//                    }
 
                     MainApplication.lead_id = card_view.getTag().toString();
                     MainApplication.application_id = txtlafid.getText().toString();

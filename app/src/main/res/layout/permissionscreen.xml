@@ -303,7 +303,7 @@
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:visibility="gone"
                             android:padding="10dp"
                             android:layout_width="match_parent"

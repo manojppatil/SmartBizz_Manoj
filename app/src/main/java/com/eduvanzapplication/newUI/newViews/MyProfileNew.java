@@ -27,7 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.friendlyscore.StartActivityFS;
+//import com.eduvanzapplication.friendlyscore.StartActivityFS;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.uploaddocs.PathFile;
@@ -197,23 +197,23 @@ public class MyProfileNew extends AppCompatActivity {
     //                Intent intent = new Intent(context, ClientActivity.class);
     //                startActivity(intent);
 
-                    if(!ec.equalsIgnoreCase("1")){
-                        Intent intent = new Intent(context, EligibilityCheck.class);
-                        startActivity(intent);
-                        finish();
-                    }else if(ec.equalsIgnoreCase("1") && !mv.equalsIgnoreCase("1")){
-                        Intent intent = new Intent(context, GetMobileNo.class);
-                        startActivity(intent);
-                        finish();
-                    }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && !ev.equalsIgnoreCase("1")){
-                        Intent intent = new Intent(context, EligibilityCheck.class);
-                        startActivity(intent);
-                        finish();
-                    }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && ev.equalsIgnoreCase("1") && !ss.equalsIgnoreCase("1")){
-                        Intent intent = new Intent(context, StartActivityFS.class);
-                        startActivity(intent);//        applicationId "com.eduvanzapplication"
-
-                    }
+//                    if(!ec.equalsIgnoreCase("1")){
+//                        Intent intent = new Intent(context, EligibilityCheck.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }else if(ec.equalsIgnoreCase("1") && !mv.equalsIgnoreCase("1")){
+//                        Intent intent = new Intent(context, GetMobileNo.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && !ev.equalsIgnoreCase("1")){
+//                        Intent intent = new Intent(context, EligibilityCheck.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }else if(ec.equalsIgnoreCase("1") && mv.equalsIgnoreCase("1") && ev.equalsIgnoreCase("1") && !ss.equalsIgnoreCase("1")){
+//                        Intent intent = new Intent(context, StartActivityFS.class);
+//                        startActivity(intent);//        applicationId "com.eduvanzapplication"
+//
+//                    }
 
                 }
             });

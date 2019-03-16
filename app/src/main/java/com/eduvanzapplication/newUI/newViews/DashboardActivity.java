@@ -168,13 +168,13 @@ public class DashboardActivity extends AppCompatActivity
                 }
             });
 
-            buttonSignup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
-                    startActivity(intent);
-                }
-            });
+//            buttonSignup.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
+//                    startActivity(intent);
+//                }
+//            });
 
             frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
             Menu m = navigationView.getMenu();
@@ -246,107 +246,6 @@ public class DashboardActivity extends AppCompatActivity
         }
 
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        super.onCreateOptionsMenu(menu);
-//        getMenuInflater().inflate(R.menu.menu_notes, menu);
-//
-//        MenuItem myActionMenuItem = menu.findItem( R.id.action_notes);
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        try {
-//            int id = item.getItemId();
-//            if (id == R.id.action_notes) {
-//
-//                AlertDialog.Builder builderSingle = new AlertDialog.Builder(DashboardActivity.this);
-//                builderSingle.setIcon(R.drawable.eduvanz_logo_new);
-//                builderSingle.setTitle("Select Language:-");
-//
-//                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(DashboardActivity.this, android.R.layout.select_dialog_singlechoice);
-//                arrayAdapter.add("English");
-//                arrayAdapter.add("Marathi");
-//                arrayAdapter.add("Hindi");
-//
-//                builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//
-//                builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                        Resources res = getApplicationContext().getResources();
-//// Change locale settings in the app.
-//                        DisplayMetrics dm = res.getDisplayMetrics();
-//                        Configuration conf = res.getConfiguration();
-//                        if(which == 0)
-//                        {
-//                            conf.setLocale(new Locale("En".toLowerCase())); // API 17+ only.
-//                        }
-//                        if(which == 1)
-//                        {
-//                            conf.setLocale(new Locale("Mr".toLowerCase())); // API 17+ only.
-//                        }
-//                        if(which == 2) {
-//                            conf.setLocale(new Locale("Hi".toLowerCase())); // API 17+ only.
-//                        }
-//// Use conf.locale = new Locale(...) if targeting lower versions
-//                        res.updateConfiguration(conf, dm);
-//
-//                        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                            editor.putString("AppLanguage", conf.getLocales().toLanguageTags().toUpperCase());
-//                            editor.commit();
-//                        }
-//                        dialog.dismiss();
-//
-////                        String strName = arrayAdapter.getItem(which);
-////                        AlertDialog.Builder builderInner = new AlertDialog.Builder(DashboardActivity.this);
-////                        builderInner.setMessage(strName);
-////                        builderInner.setTitle("Your Selected Item is");
-////                        builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-////                            @Override
-////                            public void onClick(DialogInterface dialog,int which) {
-////
-////                                Resources res = context.getResources();
-////// Change locale settings in the app.
-////                                DisplayMetrics dm = res.getDisplayMetrics();
-////                                android.content.res.Configuration conf = res.getConfiguration();
-//////        conf.setLocale(new Locale("HI".toLowerCase())); // API 17+ only.
-////                                conf.setLocale(new Locale("EN".toLowerCase())); // API 17+ only.
-////// Use conf.locale = new Locale(...) if targeting lower versions
-////                                res.updateConfiguration(conf, dm);
-////                                dialog.dismiss();
-////                            }
-////                        });
-////                        builderInner.show();
-//                        Intent i = new Intent(DashboardActivity.this, SplashScreen.class);
-//                        startActivity(i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION));
-//                        System.exit(0);
-//
-////                        if (true) {
-////                            System.exit(0);
-////                        } else {
-////                            Toast.makeText(DashboardActivity.this, "Activity restarted", Toast.LENGTH_SHORT).show();
-////                        }
-//                    }
-//                });
-//                builderSingle.show();
-//            }
-//
-//        } catch (Exception e) {
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     protected void onResume() {
@@ -508,8 +407,8 @@ public class DashboardActivity extends AppCompatActivity
                 startActivity(intent);
             }
         } else if (id == R.id.nav_eligibility) {
-            Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
-            startActivity(intent);
+//            Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
+//            startActivity(intent);
         } else if (id == R.id.nav_howitworks) {
             Intent intent = new Intent(context, HowItWorks.class);
             startActivity(intent);
@@ -586,8 +485,8 @@ public class DashboardActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_loanApplication) {
-            Intent intent = new Intent(context, LoanApplication.class);
-            startActivity(intent);
+//            Intent intent = new Intent(context, LoanApplication.class);
+//            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

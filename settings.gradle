@@ -1,2 +1,4 @@
-include ':app', ':linkedin-sdk', ':digio-android-sdk-0.1.0', ':FriendlyScoreAndroidSDK-release', ':FriendlyScoreAndroidSDK-UI-release'
-include ':libraryMobilePaymentSDK'
+include ':app', ':linkedin-sdk', ':digio-android-sdk-0.1.0', ':libraryMobilePaymentSDK' ,
+        ':linkedin-sdk', ':fs-contacts-sdk-release-1.1', ':fs-calendar-sdk-release-1.1', ':friendlyscore-libs',
+        ':fs-ui-sdk-release-2.53', ':fs-location-sdk-release-1.28', ':fs-calls-sms-release-1.001', ':fs-camera-sdk-release-1.2',
+        ':fs-core-sdk-release-2.24'

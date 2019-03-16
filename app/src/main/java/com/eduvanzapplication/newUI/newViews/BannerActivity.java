@@ -92,44 +92,44 @@ public class BannerActivity extends AppCompatActivity {
             buttonContinue= (Button) findViewById(R.id.button_bannerdetail_continue);
             mainApplication.applyTypeface(buttonContinue, context);
 
-            buttonCheckEligiblity.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, EligibilityCheck.class);
-                    startActivity(intent);
-                }
-            });
+//            buttonCheckEligiblity.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, EligibilityCheck.class);
+//                    startActivity(intent);
+//                }
+//            });
+//
+//            buttonApplyNow.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, LoanApplication.class);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//            });
 
-            buttonApplyNow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, LoanApplication.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
-            buttonContinue.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, LoanApplication.class);
-                    if(borrower.equalsIgnoreCase("1") && coBorrower.equalsIgnoreCase("0")){
-                        Bundle bundle = new Bundle();
-                        bundle.putString("toCoBorrower", "1");
-                        intent.putExtras(bundle);
-                    }else if(borrower.equalsIgnoreCase("1") && coBorrower.equalsIgnoreCase("1") &&
-                            coBorrowerDocument.equalsIgnoreCase("0") && borrowerDocument.equalsIgnoreCase("0")){
-                        Bundle bundle = new Bundle();
-                        bundle.putString("toDocUpload", "1");
-                        intent.putExtras(bundle);
-                    }else if(coBorrowerDocument.equalsIgnoreCase("1") && borrowerDocument.equalsIgnoreCase("1")){
-                        Bundle bundle = new Bundle();
-                        bundle.putString("toSignSubmit", "1");
-                        intent.putExtras(bundle);
-                    }
-                    startActivity(intent);
-                }
-            });
+//            buttonContinue.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, LoanApplication.class);
+//                    if(borrower.equalsIgnoreCase("1") && coBorrower.equalsIgnoreCase("0")){
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("toCoBorrower", "1");
+//                        intent.putExtras(bundle);
+//                    }else if(borrower.equalsIgnoreCase("1") && coBorrower.equalsIgnoreCase("1") &&
+//                            coBorrowerDocument.equalsIgnoreCase("0") && borrowerDocument.equalsIgnoreCase("0")){
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("toDocUpload", "1");
+//                        intent.putExtras(bundle);
+//                    }else if(coBorrowerDocument.equalsIgnoreCase("1") && borrowerDocument.equalsIgnoreCase("1")){
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("toSignSubmit", "1");
+//                        intent.putExtras(bundle);
+//                    }
+//                    startActivity(intent);
+//                }
+//            });
 
             if (sharedPref.getLoginDone(context)) {
                 buttonApplyNow.setVisibility(View.VISIBLE);

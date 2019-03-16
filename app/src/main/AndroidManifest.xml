@@ -68,12 +68,12 @@
         <activity
             android:name="com.eduvanzapplication.ImageSlider"
             android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name="com.eduvanzapplication.friendlyscore.ClientActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.eduvanzapplication.friendlyscore.StartActivityFS"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name="com.eduvanzapplication.friendlyscore.ClientActivity"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.eduvanzapplication.friendlyscore.StartActivityFS"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name="com.eduvanzapplication.faqexpandablelistview.FAQ"
             android:screenOrientation="portrait" />

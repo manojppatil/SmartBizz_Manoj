@@ -138,7 +138,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:id="@+id/edtFirstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:id="@+id/edtMiddleName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -242,7 +242,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:id="@+id/edtLastName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -297,7 +297,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:id="@+id/edtEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -544,7 +544,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <com.eduvanzins.Font.EdtLight
+                        <com.eduvanzapplication.Font.EdtLight
                             android:id="@+id/edtCoMobileNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.eduvanzins.Font.EdtLight
+                <com.eduvanzapplication.Font.EdtLight
                     android:id="@+id/editText_recievedOtp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
