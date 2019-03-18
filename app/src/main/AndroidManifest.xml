@@ -144,16 +144,6 @@
             </intent-filter>
         </activity>
 
-        <!--<activity-->
-            <!--android:name="com.eduvanzapplication.newUI.newViews.NewTruecallerSignIn"-->
-            <!--android:screenOrientation="sensorPortrait">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-
         <activity
             android:name="com.eduvanzapplication.newUI.newViews.Language"
             android:screenOrientation="sensorPortrait">
@@ -182,12 +172,10 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.eduvanzapplication.newUI.newViews.EligibilityCheck"
+            android:name="com.eduvanzapplication.newUI.newViews.GetEmailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme"/>
-        <activity
-            android:name="com.eduvanzapplication.newUI.newViews.LoanApplication"
-            android:screenOrientation="sensorPortrait" />
+
         <activity
             android:name="com.eduvanzapplication.newUI.newViews.MyProfileNew"
             android:screenOrientation="sensorPortrait" />

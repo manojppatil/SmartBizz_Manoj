@@ -243,7 +243,7 @@ public class VolleyCallLogin extends Application {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            ((GetMobileNo) mActivity).getOTP(jsonDataO);
+//            ((GetMobileNo) mActivity).getOTP(jsonDataO);
         } else if (screen.equalsIgnoreCase("getOtpValidation")) {
             try {
                 jsonDataO = new JSONObject(s);
