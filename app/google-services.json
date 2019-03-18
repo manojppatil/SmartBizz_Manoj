@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "577641006287-pjtjo76e1keer6nup3a8pvphn1i01n6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eduvanz",
+            "certificate_hash": "bbc8a426c10f67db192b9a0e737955c37bf8ffbb"
+          }
+        },
+        {
           "client_id": "577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com",
           "client_type": 3
         }
