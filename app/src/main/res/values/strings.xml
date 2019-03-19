@@ -517,4 +517,6 @@ Flat No,Building name,Society Name
     <string name="enter_received_otp">Enter Received OTP</string>
     <string name="now_enter">Now Enter</string>
     <string name="your_regtd_emalid">Your Registered Email ID</string>
+    <string name="close">Close</string>
+    <string name="adhar_card">Aadhar Card</string>
 </resources>
