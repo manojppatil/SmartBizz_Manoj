@@ -98,9 +98,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     implementation 'com.intuit.sdp:sdp-android:1.0.4'//Multi Screen Common Font Size
 //    implementation 'com.github.lzyzsd:circleprogress:1.1.0@aar'//Circular progress
-
     implementation 'com.crowdfire.cfalertdialog:cfalertdialog:1.1.0'
     implementation 'moe.feng:MaterialStepperView:0.2.4.2'
+
 
     // Twitter Android SDK (only required for Twitter Login)
     compile('com.twitter.sdk.android:twitter:3.1.1@aar') {
