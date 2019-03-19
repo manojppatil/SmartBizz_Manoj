@@ -100,6 +100,7 @@ dependencies {
 //    implementation 'com.github.lzyzsd:circleprogress:1.1.0@aar'//Circular progress
 
     implementation 'com.crowdfire.cfalertdialog:cfalertdialog:1.1.0'
+    implementation 'moe.feng:MaterialStepperView:0.2.4.2'
 
     // Twitter Android SDK (only required for Twitter Login)
     compile('com.twitter.sdk.android:twitter:3.1.1@aar') {
@@ -116,12 +117,9 @@ dependencies {
 
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
     implementation project(':friendlyscore-libs')
-    /*
-                          Events dispatcher
-                        */
+    /*Events dispatcher*/
     api 'org.greenrobot:eventbus:3.0.0'
-    /*
-                                     FS packages
+    /*FS packages
 
                          */
     implementation project(':fs-contacts-sdk-release-1.1')
@@ -129,16 +127,13 @@ dependencies {
     implementation project(':fs-calls-sms-release-1.001')
     implementation project(':fs-ui-sdk-release-2.53')
     implementation project(':fs-camera-sdk-release-1.2')
-    /*
-                          Google packages used in SDK
-                        */
+    /*Google packages used in SDK*/
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
     implementation 'com.google.android.gms:play-services-identity:16.0.0'
     implementation project(':fs-location-sdk-release-1.28')
     implementation project(':fs-core-sdk-release-2.24')
-
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
