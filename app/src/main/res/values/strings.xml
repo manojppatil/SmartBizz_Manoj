@@ -519,4 +519,6 @@ Flat No,Building name,Society Name
     <string name="your_regtd_emalid">Your Registered Email ID</string>
     <string name="close">Close</string>
     <string name="adhar_card">Aadhar Card</string>
+    <string name="take_picture_aadhar">Take the picture of your Aadhar card</string>
+    <string name="scan_aadhar">Scan QR code of your Aadhar card</string>
 </resources>

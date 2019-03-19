@@ -7,6 +7,8 @@ import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
 
+import com.eduvanzapplication.Util.FontsOverride;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -15,6 +17,12 @@ public class MainActivity extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FontsOverride.setDefaultFont(this, "DEFAULT", "fonts/sourcesanspro_light.ttf");
+        FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/sourcesanspro_light.ttf");
+        FontsOverride.setDefaultFont(this, "SERIF", "fonts/sourcesanspro_light.ttf");
+        FontsOverride.setDefaultFont(this, "SANS", "fonts/sourcesanspro_light.ttf");
+        FontsOverride.setDefaultFont(this, "SANS_SERIF", "fonts/sourcesanspro_light.ttf");
+
 //        generateHashkey();
     }
 

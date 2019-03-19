@@ -261,16 +261,53 @@ public class DashboardActivity extends AppCompatActivity
     private void showOCRDialog() {
 
         View view = getLayoutInflater().inflate(R.layout.layout_ocr_options,null);
+        LinearLayout linPan = view.findViewById(R.id.linPan);
+        LinearLayout linAadhar = view.findViewById(R.id.linAadhar);
+        LinearLayout linClose =view.findViewById(R.id.linClose);
+        LinearLayout linFooter1 = view.findViewById(R.id.linFooter1);
+        LinearLayout linTakePicture = view.findViewById(R.id.linTakePicture);
+        LinearLayout linQR = view.findViewById(R.id.linQR);
+
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setFooterView(view);
-//                .addButton("UPGRADE", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.END, (dialog, which) -> {
-//                    Toast.makeText(DashboardActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
-//                    dialog.dismiss();
-//                });
 
-    // Show the alert
-        builder.show();
+        CFAlertDialog cfAlertDialog = builder.show();
+        cfAlertDialog.setCancelable(false);
+        cfAlertDialog.setCanceledOnTouchOutside(false);
+        linFooter1.setVisibility(View.VISIBLE);
+        linTakePicture.setVisibility(View.GONE);
+        linQR.setVisibility(View.GONE);
+
+
+        linClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cfAlertDialog.dismiss();
+            }
+        });
+
+        linPan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linTakePicture.setVisibility(View.VISIBLE);
+                linQR.setVisibility(View.GONE);
+                linFooter1.setVisibility(View.GONE);
+
+
+
+            }
+        });
+
+        linAadhar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linTakePicture.setVisibility(View.VISIBLE);
+                linQR.setVisibility(View.VISIBLE);
+                linFooter1.setVisibility(View.GONE);
+            }
+        });
+
 
     }
 
