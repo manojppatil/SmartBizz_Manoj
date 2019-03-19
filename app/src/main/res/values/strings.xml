@@ -494,6 +494,8 @@ Co-Applicant\'s single picture required to be uploaded
     <!--
    <string name="profile_photo">Profile Photo <font fgcolor="#EE415E">*</font></string>
    -->
+
+
     <string name="street_name_locality_land_mark">
 Street Name,Locality,Land mark
 <font fgcolor="#EE415E">*</font>
