@@ -1,0 +1,1162 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/_15sdp"
+    android:paddingRight="@dimen/_15sdp"
+    android:paddingTop="@dimen/_10sdp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtFirstNameBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="First Name"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/textcolordark"
+                    android:textColorHint="@color/textcolor"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtMiddleNameBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Middle Name"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/textcolordark"
+                    android:textColorHint="@color/textcolor"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtLastNameBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Last Name"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/textcolordark"
+                    android:textColorHint="@color/textcolor"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_2sdp">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/lblDobBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="@dimen/_8sdp"
+                        android:text="DOB"
+                        android:textColor="#808080"
+                        android:textSize="12sp"
+                        android:visibility="invisible" />
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtDobBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="1dp"
+                        android:text="DOB"
+                        android:textColor="#808080"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPrimary"
+                        android:paddingBottom="4dp" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnDobBorrower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@drawable/ic_calendar_alt"
+                    android:backgroundTint="@color/blue1"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_5sdp">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:text="Gender : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgGenderBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbMaleBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Male"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbFemaleBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Female"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbOtherBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Other"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_5sdp">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:text="Marital Status : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgMaritalStatusBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbMarriedBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Married"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbSingleBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Single"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtMobileNoBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Mobile Number"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtEmailBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890@. "
+                    android:hint="Email Id"
+                    android:inputType="text|textEmailAddress"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtAdhaarBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Adhaar Number."
+                    android:inputType="number"
+                    android:maxLength="12"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtPanBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="PAN Number."
+                    android:inputType="text|textCapCharacters"
+                    android:maxLength="10"
+                    android:textAllCaps="true"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Current Residency type : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spCurrentResidencyTypeBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="left"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtMonthlyRentBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Monthly Rent"
+                    android:inputType="number"
+                    android:textColor="@color/textcolordark"
+                    android:textColorHint="@color/textcolor"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtCurrentAddressBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Current Address"
+                    android:inputType="textPostalAddress"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Current Country : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spCurrentCountryBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Current State : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spCurrentStateBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Current City : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spCurrentCityBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtCurrentPincodeBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Current Pin Code no."
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_5sdp">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:text="Is your Permanent Address same as Current Address :"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgSameAddressBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbSameAddressYesBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Yes"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbSameAddressNoBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:text="No"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linPermanentAddressBorrower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.eduvanzins.Font.InpLayoutLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:theme="@style/EditTextStyle"
+                    app:hintTextAppearance="@style/CustomTextAppearance">
+
+                    <com.eduvanzins.Font.EdtLight
+                        android:id="@+id/edtPermanentAddressBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                        android:hint="Permanent Address"
+                        android:inputType="textPostalAddress"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="16sp" />
+                </com.eduvanzins.Font.InpLayoutLight>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="vertical">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="Permanent Country : "
+                        android:textColor="@color/textcolordark"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spPermanentCountryBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:dropDownSelector="@color/colorPrimary"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="vertical">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="Permanent State : "
+                        android:textColor="@color/textcolordark"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spPermanentStateBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:dropDownSelector="@color/colorPrimary"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="vertical">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="Permanent City : "
+                        android:textColor="@color/textcolordark"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spPermanentCityBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:dropDownSelector="@color/colorPrimary"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                </LinearLayout>
+
+                <com.eduvanzins.Font.InpLayoutLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:theme="@style/EditTextStyle"
+                    app:hintTextAppearance="@style/CustomTextAppearance">
+
+                    <com.eduvanzins.Font.EdtLight
+                        android:id="@+id/edtPermanentPincodeBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                        android:hint="Permanent Pin Code no."
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="16sp" />
+                </com.eduvanzins.Font.InpLayoutLight>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Duration of stay at current address : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spCurrentResidenceDurationBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Last Completed Degree : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spLastDegreeCompletedBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtPassingYearBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Year Last Degree Completed"
+                    android:inputType="number"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_5sdp">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:text="Any Gaps in Education ? "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rdEduGapsBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbEduGapsYesBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:text="yes"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbEduGapsNoBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:text="no"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_5sdp">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:text="Marks Scored In : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgIscgpaBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbIscgpaNoBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Percentage"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbIscgpaYesBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:checked="false"
+                        android:text="CGPA"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_5sdp">
+
+                <com.eduvanzins.Font.InpLayoutLight
+                    android:id="@+id/inpDegreeCgpaBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:theme="@style/EditTextStyle"
+                    android:visibility="gone"
+                    app:hintTextAppearance="@style/CustomTextAppearance">
+
+                    <com.eduvanzins.Font.EdtLight
+                        android:id="@+id/edtDegreeCgpaBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                        android:hint="Last Degree CGPA"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/textcolordark"
+                        android:textColorHint="@color/textcolor"
+                        android:textSize="16sp" />
+                </com.eduvanzins.Font.InpLayoutLight>
+
+                <com.eduvanzins.Font.InpLayoutLight
+                    android:id="@+id/inpDegreePercentageBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:theme="@style/EditTextStyle"
+                    android:visibility="gone"
+                    app:hintTextAppearance="@style/CustomTextAppearance">
+
+                    <com.eduvanzins.Font.EdtLight
+                        android:id="@+id/edtDegreePercentageBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                        android:hint="Last Degree Percentage"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/textcolordark"
+                        android:textColorHint="@color/textcolor"
+                        android:textSize="16sp" />
+                </com.eduvanzins.Font.InpLayoutLight>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_5sdp">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:text="Profession : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgProfessionBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbStudentBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Student"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbEmployeedBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:checked="false"
+                        android:text="Employeed"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbSelfEmployeedBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:checked="false"
+                        android:text="Self Employeed"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linIsEmpoyeedBorrower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <com.eduvanzins.Font.InpLayoutLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:theme="@style/EditTextStyle"
+                    app:hintTextAppearance="@style/CustomTextAppearance">
+
+                    <com.eduvanzins.Font.EdtLight
+                        android:id="@+id/edtNameOfCompanyBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                        android:hint="Name of Organization"
+                        android:inputType="textCapWords"
+                        android:textColor="@color/textcolordark"
+                        android:textColorHint="@color/textcolor"
+                        android:textSize="16sp" />
+                </com.eduvanzins.Font.InpLayoutLight>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/_5sdp">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:gravity="left"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:text="Employer Type : "
+                        android:textColor="@color/textcolordark"
+                        android:textSize="16sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rgEmptypeBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="left"
+                        android:orientation="horizontal">
+
+                        <com.eduvanzins.Font.RbLight
+                            android:id="@+id/rbEmpTypeGovBorrower"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="Government"
+                            android:textColor="@color/textcolordark"
+                            android:theme="@style/EditTextStyle" />
+
+                        <com.eduvanzins.Font.RbLight
+                            android:id="@+id/rbEmpTypePrivateBorrower"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:checked="false"
+                            android:text="Private"
+                            android:textColor="@color/textcolordark"
+                            android:theme="@style/EditTextStyle" />
+                    </RadioGroup>
+                </LinearLayout>
+
+
+                <com.eduvanzins.Font.InpLayoutLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:theme="@style/EditTextStyle"
+                    app:hintTextAppearance="@style/CustomTextAppearance">
+
+                    <com.eduvanzins.Font.EdtLight
+                        android:id="@+id/edtAnnualIncomeBorrower"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                        android:hint="Annual Salary"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/textcolordark"
+                        android:textColorHint="@color/textcolor"
+                        android:textSize="16sp" />
+                </com.eduvanzins.Font.InpLayoutLight>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1.5"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="Duration of Work : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spJobdurationBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@color/colorPrimary"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light" />
+            </LinearLayout>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtAdvancePaymentBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Advance payment you would like to give"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/textcolordark" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1.5"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="Has Any Previous Emi : "
+                    android:textColor="@color/textcolordark"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgHasAnyPreviousEmiBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbEmiYesBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Yes"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+
+                    <com.eduvanzins.Font.RbLight
+                        android:id="@+id/rbEmiNoBorrower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:checked="false"
+                        android:text="No"
+                        android:textColor="@color/textcolordark"
+                        android:theme="@style/EditTextStyle" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <com.eduvanzins.Font.InpLayoutLight
+                android:id="@+id/inpPreviousAmtBorrower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:theme="@style/EditTextStyle"
+                android:visibility="gone"
+                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                <com.eduvanzins.Font.EdtLight
+                    android:id="@+id/edtPreviousEmiAmountBorrower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+                    android:hint="Amount of previous EMI"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/textcolordark"
+                    android:textColorHint="@color/textcolor"
+                    android:textSize="16sp" />
+            </com.eduvanzins.Font.InpLayoutLight>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
