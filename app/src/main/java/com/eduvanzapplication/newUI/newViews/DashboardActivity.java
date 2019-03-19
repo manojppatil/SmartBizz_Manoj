@@ -36,7 +36,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
 import com.eduvanzapplication.R;
@@ -252,6 +254,24 @@ public class DashboardActivity extends AppCompatActivity
             Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
+        showOCRDialog();
+
+    }
+
+    private void showOCRDialog() {
+
+        View view = getLayoutInflater().inflate(R.layout.layout_ocr_options,null);
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setFooterView(view);
+//                .addButton("UPGRADE", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.END, (dialog, which) -> {
+//                    Toast.makeText(DashboardActivity.this, "Upgrade tapped", Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
+//                });
+
+    // Show the alert
+        builder.show();
+
     }
 
     @Override
@@ -259,6 +279,8 @@ public class DashboardActivity extends AppCompatActivity
         super.onResume();
 
     }
+
+
     private void Otherpermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             boolean permission = checkIfAlreadyhavePermissionLocation();

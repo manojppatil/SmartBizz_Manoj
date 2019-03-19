@@ -92,6 +92,14 @@ public class GetEmailActivity extends AppCompatActivity {
                 setGoogleLogin();
             }
         });
+
+        linSubmitEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GetEmailActivity.this, DashboardActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
     }
 
     private void setGoogleLogin() {
