@@ -1,0 +1,547 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.eduvanzins.newUI.newViews.EligibilityActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white1"
+            android:titleTextAppearance="@color/white1"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/toolbar_dropshadow"
+        android:elevation="@dimen/_2sdp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
+        android:layout_marginBottom="@dimen/_40sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/toolbar_dropshadow"
+                android:elevation="@dimen/_2sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_15sdp"
+                android:orientation="vertical">
+
+                <com.eduvanzins.Font.TxtLight
+                    android:id="@+id/loandtls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Course Details"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:scaleType="center"
+                                android:tint="@color/blue1"
+                                app:srcCompat="@drawable/ic_map_marker_alt" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <com.eduvanzins.Font.TxtLight
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:text="Institute Location "
+                                android:textColor="@color/textcolordark"
+                                android:textSize="12sp" />
+
+                            <android.support.v7.widget.AppCompatSpinner
+                                android:id="@+id/spInstituteLocation"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="left"
+                                android:spinnerMode="dropdown" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:scaleType="center"
+                                android:tint="@color/blue1"
+                                app:srcCompat="@drawable/ic_graduation_cap" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <com.eduvanzins.Font.TxtLight
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:text="Course Name"
+                                android:textColor="@color/textcolordark"
+                                android:textSize="12sp" />
+
+                            <android.support.v7.widget.AppCompatSpinner
+                                android:id="@+id/spCourseName"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="left"
+                                android:spinnerMode="dropdown" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <com.eduvanzins.Font.TxtLight
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/appbar"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Applicant's Details"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:scaleType="center"
+                                android:tint="@color/blue1"
+                                app:srcCompat="@drawable/ic_rupee_sign" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <com.eduvanzins.Font.InpLayoutLight
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <com.eduvanzins.Font.EdtLight
+                                    android:id="@+id/edtCourseFee"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Course Fee"
+                                    android:inputType="number"
+                                    android:textColor="@color/textcolordark"
+                                    android:textSize="16sp" />
+                            </com.eduvanzins.Font.InpLayoutLight>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:scaleType="centerInside"
+                                android:tint="@color/blue1"
+                                app:srcCompat="@drawable/loanamount" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <com.eduvanzins.Font.InpLayoutLight
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <com.eduvanzins.Font.EdtLight
+                                    android:id="@+id/edtLoanAmt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Loan Amount"
+                                    android:inputType="number"
+                                    android:textColor="@color/textcolordark"
+                                    android:textSize="16sp" />
+                            </com.eduvanzins.Font.InpLayoutLight>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:scaleType="center"
+                                android:tint="@color/blue1"
+                                app:srcCompat="@drawable/ic_user" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <com.eduvanzins.Font.InpLayoutLight
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <com.eduvanzins.Font.EdtLight
+                                    android:id="@+id/edtFirstName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="First Name"
+                                    android:inputType="textCapSentences"
+                                    android:textColor="@color/textcolordark"
+                                    android:textSize="16sp" />
+                            </com.eduvanzins.Font.InpLayoutLight>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:scaleType="center"
+                                android:tint="@color/blue1"
+                                app:srcCompat="@drawable/ic_user" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <com.eduvanzins.Font.InpLayoutLight
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <com.eduvanzins.Font.EdtLight
+                                    android:id="@+id/edtLastName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Last Name"
+                                    android:inputType="textCapSentences"
+                                    android:textColor="@color/textcolordark"
+                                    android:textSize="16sp" />
+                            </com.eduvanzins.Font.InpLayoutLight>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:scaleType="center"
+                                android:tint="@color/blue1"
+                                app:srcCompat="@drawable/ic_mobile_android" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <com.eduvanzins.Font.InpLayoutLight
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <com.eduvanzins.Font.EdtLight
+                                    android:id="@+id/edtMobileNo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Mobile Number"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:textColor="@color/textcolor"
+                                    android:textSize="16sp" />
+                            </com.eduvanzins.Font.InpLayoutLight>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="5"
+                                android:scaleType="center"
+                                android:tint="@color/blue1"
+                                app:srcCompat="@drawable/ic_envelope_open" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_20sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <com.eduvanzins.Font.InpLayoutLight
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <com.eduvanzins.Font.EdtLight
+                                    android:id="@+id/edtEmail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Email Id"
+                                    android:inputType="text|textEmailAddress"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/textcolordark"
+                                    android:textSize="16sp" />
+                            </com.eduvanzins.Font.InpLayoutLight>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.eduvanzins.Font.BtnLight
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red"
+        android:paddingLeft="@dimen/_20sdp"
+        android:paddingRight="@dimen/_20sdp"
+        android:text="Submit"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_applylona_borrower"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        android:visibility="gone" />institute location
+
+</RelativeLayout>

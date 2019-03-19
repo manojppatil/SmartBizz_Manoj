@@ -1,0 +1,920 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eduvanzins.newUI.fragments.ProfileDetailFragment">
+
+    <RelativeLayout
+        android:id="@+id/Rel1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/card_view"
+        android:orientation="horizontal"
+        android:padding="@dimen/_5sdp">
+
+        <LinearLayout
+            android:id="@+id/linStageDash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/linStage"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/_2sdp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:id="@+id/txtStage1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stage1"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgStageIcon1"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center"
+                            android:clickable="false"
+                            android:scaleType="center"
+                            android:src="@drawable/circle24"
+                            android:tint="@color/blue1" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:background="@color/black1" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:id="@+id/txtStage2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stage2"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgStageIcon2"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center"
+                            android:clickable="false"
+                            android:scaleType="center"
+                            android:src="@drawable/circle24" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:background="@color/black1" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:id="@+id/txtStage3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stage3"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgStageIcon3"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center"
+                            android:clickable="false"
+                            android:scaleType="center"
+                            android:src="@drawable/circle24" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:background="@color/black1" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:id="@+id/txtStage4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stage4"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgStageIcon4"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center"
+                            android:clickable="false"
+                            android:scaleType="center"
+                            android:src="@drawable/circle24" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:background="@color/black1" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:id="@+id/txtStage5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stage5"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgStageIcon5"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center"
+                            android:clickable="false"
+                            android:scaleType="center"
+                            android:src="@drawable/circle24"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:background="@color/black1" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:id="@+id/txtStage6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stage6"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgStageIcon6"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center"
+                            android:clickable="false"
+                            android:scaleType="center"
+                            android:src="@drawable/circle24"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linStageDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/_2sdp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtStage1Desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Instant Sanction"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="14sp" />
+
+
+                    <ImageView
+                        android:id="@+id/imgStage1"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:clickable="false"
+                        android:scaleType="center"
+                        android:backgroundTint="@color/green"
+                        android:background="@drawable/ic_check_circle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtStage2Desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="LAG Filling"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/imgStage2"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:clickable="false"
+                        android:scaleType="center"
+                        android:backgroundTint="@color/red"
+                        android:background="@drawable/ic_cross_circle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtStage3Desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Documents Upload"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/imgStage3"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:clickable="false"
+                        android:scaleType="center"
+                        android:backgroundTint="@color/red"
+                        android:background="@drawable/ic_cross_circle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtStage4Desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Agreement Signing"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/imgStage4"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:clickable="false"
+                        android:scaleType="center"
+                        android:backgroundTint="@color/green"
+                        android:background="@drawable/ic_check_circle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtStage5Desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Loan Disbursed"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/imgStage5"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:clickable="false"
+                        android:scaleType="center"
+                        android:backgroundTint="@color/red"
+                        android:background="@drawable/ic_cross_circle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtStage6Desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tenure Running"
+                        android:textColor="@color/lightGrey"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/imgStage6"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:clickable="false"
+                        android:scaleType="center"
+                        android:backgroundTint="@color/red"
+                        android:background="@drawable/ic_cross_circle" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linBtn"
+        android:layout_gravity="center"
+        android:background="@color/blue1"
+        card_view:cardCornerRadius="@dimen/_2sdp"
+        card_view:cardElevation="@dimen/_3sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue1"
+            android:orientation="horizontal"
+            android:padding="@dimen/_2sdp">
+
+            <LinearLayout
+                android:id="@+id/linuserDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/linlafUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:id="@+id/txtFName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="@color/white1"
+                        android:textSize="11sp" />
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtlafid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saurabh Pandey"
+                        android:textColor="@color/white1"
+                        android:textSize="14sp" />
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="Registration Date"
+                        android:textColor="@color/white1"
+                        android:textSize="11sp" />
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtRegDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="28 July 2018"
+                        android:textColor="@color/white1"
+                        android:textSize="14sp" />
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="Expected Approval Date"
+                        android:textColor="@color/white1"
+                        android:textSize="11sp" />
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtApprovalDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30 July 2018"
+                        android:textColor="@color/white1"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:background="@color/white1" />
+
+                <LinearLayout
+                    android:id="@+id/linlafContact"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <com.eduvanzins.Font.TxtBold
+                            android:id="@+id/txtMo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mobile No."
+                            android:textColor="@color/white1"
+                            android:textSize="11sp" />
+
+                            <ImageView
+                                android:id="@+id/ImgVerified"
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_13sdp"
+                                android:layout_marginLeft="@dimen/_20sdp"
+                                android:clickable="false"
+                                android:layout_gravity="center"
+                                android:background="@drawable/verified" />
+
+                    </LinearLayout>
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+917787838985"
+                        android:textColor="@color/white1"
+                        android:textSize="14sp" />
+
+                    <com.eduvanzins.Font.TxtBold
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="E-mail ID"
+                        android:textColor="@color/white1"
+                        android:textSize="11sp" />
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtEmail1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="saurabh.pandey"
+                        android:gravity="bottom"
+                        android:layout_gravity="bottom"
+                        android:textColor="@color/white1"
+                        android:textSize="14sp" />
+
+                    <com.eduvanzins.Font.TxtLight
+                        android:id="@+id/txtEmai2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:layout_gravity="top"
+                        android:text="@eduvanz.com"
+                        android:textColor="@color/white1"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linDash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linuserDetail"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:background="@color/white1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linDash"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linCouse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:id="@+id/linCourseName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="4"
+                        android:orientation="vertical">
+
+                        <com.eduvanzins.Font.TxtBold
+                            android:id="@+id/txtCourseNameDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:text="Course Name"
+                            android:textColor="@color/white1"
+                            android:textSize="11sp" />
+
+                        <com.eduvanzins.Font.TxtLight
+                            android:id="@+id/txtCourseName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:gravity="center_vertical"
+                            android:text="ABCD Edge"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linCouseFee"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <com.eduvanzins.Font.TxtBold
+                            android:id="@+id/txtCouseFeeDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:text="Course Fee"
+                            android:textColor="@color/white1"
+                            android:textSize="11sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.eduvanzins.Font.TxtLight
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_2sdp"
+                                android:text="₹"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="14sp" />
+
+                            <com.eduvanzins.Font.TxtLight
+                                android:id="@+id/txtCouseFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="51,000"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linLoanAmt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <com.eduvanzins.Font.TxtBold
+                            android:id="@+id/txtLoanAmtDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:text="Loan Amount"
+                            android:textColor="@color/white1"
+                            android:textSize="11sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.eduvanzins.Font.TxtLight
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_2sdp"
+                                android:text="₹"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="14sp" />
+
+                            <com.eduvanzins.Font.TxtLight
+                                android:id="@+id/txtLoanAmt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="51,000"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:background="@color/white1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:id="@+id/linApprovalStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="4"
+                        android:orientation="vertical">
+
+                        <com.eduvanzins.Font.TxtBold
+                            android:id="@+id/txtApprovalProbDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:text="Approval Probability"
+                            android:textColor="@color/white1"
+                            android:textSize="11sp" />
+
+                        <com.eduvanzins.Font.TxtLight
+                            android:id="@+id/txtApprovalProb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:gravity="center_vertical"
+                            android:text="High"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linAccountStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <com.eduvanzins.Font.TxtBold
+                            android:id="@+id/txtAccountStatusDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Account Status"
+                            android:textColor="@color/white1"
+                            android:textSize="11sp" />
+
+                        <com.eduvanzins.Font.TxtLight
+                            android:id="@+id/txtAccountStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Active"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linApplicationAge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <com.eduvanzins.Font.TxtBold
+                            android:id="@+id/txtApplicationAgeDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Application Age"
+                            android:textColor="@color/white1"
+                            android:textSize="11sp" />
+
+                        <com.eduvanzins.Font.TxtLight
+                            android:id="@+id/txtApplicationAge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="6 Days"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/linBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <com.eduvanzins.Font.BtnLight
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:drawableRight="@drawable/icon_rightarrow"
+            android:paddingLeft="@dimen/_30sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:text="Continue"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
