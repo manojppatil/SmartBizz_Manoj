@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.fragments.AgreementSigningFragment;
+import com.eduvanzapplication.newUI.fragments.DetailedInfoFragment;
 import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
 import com.eduvanzapplication.newUI.fragments.UploadDocumentFragment;
 
@@ -54,8 +55,9 @@ public class LoanTabActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new KycDetailFragment(), "KYC Details");
-        adapter.addFrag(new UploadDocumentFragment(), "Detailed Ino");
-        adapter.addFrag(new AgreementSigningFragment(), "Doc Upload");
+        adapter.addFrag(new DetailedInfoFragment(), "Detailed Ino");
+        adapter.addFrag(new UploadDocumentFragment(), "Doc Upload");
+        adapter.addFrag(new AgreementSigningFragment(), "Agreement SignIn");
         viewPager.setAdapter(adapter);
     }
 

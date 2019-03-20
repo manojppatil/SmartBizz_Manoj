@@ -32,4 +32,9 @@
 
     <color name="blue1">#0099cc</color>
     <color name="red">#ee415e</color>
+
+    <color name="material_blue_500">#2196F3</color>
+
+    <color name="material_deep_purple_500">#673AB7</color>
+
 </resources>

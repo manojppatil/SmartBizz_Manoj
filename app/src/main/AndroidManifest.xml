@@ -35,6 +35,7 @@
         android:smallScreens="true" />
 
     <application
+        android:name="com.eduvanzapplication.MainActivity"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@drawable/eduvanz_logo_new"
@@ -43,8 +44,7 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon">
-        <meta-data android:name="com.truecaller.android.sdk.PartnerKey" android:value="@string/partnerKey"/>
+        tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon,android:name">
 
         <activity
             android:name="com.gun0912.tedpicker.ImagePickerActivity"
@@ -84,15 +84,6 @@
 
         <activity android:name="com.eduvanzapplication.UsageStatistic" />
 
-        <!--<receiver-->
-            <!--android:name="com.eduvanzapplication.AlarmReceiver"-->
-            <!--android:exported="true">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
-                <!--<action android:name="com.myapp.mycustomaction" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-
         <service
             android:name="com.eduvanzapplication.MyService"
             android:exported="false" />
@@ -102,9 +93,7 @@
         <service
             android:name="com.eduvanzapplication.newUI.services.MyServiceReadSms"
             android:exported="false" />
-        <!--<service-->
-            <!--android:name="com.eduvanzapplication.newUI.services.MyServiceReadSmsbck"-->
-            <!--android:exported="false" />-->
+
         <service
             android:name="com.eduvanzapplication.newUI.services.MyServiceAppStats"
             android:exported="false" />

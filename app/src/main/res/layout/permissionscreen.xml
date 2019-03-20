@@ -17,21 +17,6 @@
             android:textColor="@color/permissioncolor"
             android:textSize="22sp" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/below"-->
-            <!--android:layout_below="@id/below1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:padding="1dp"-->
-            <!--android:gravity="left"-->
-            <!--android:text="For the app to function properly, we might need the following permission"-->
-            <!--android:textColor="@color/permissioncolor"-->
-            <!--android:textSize="13sp" />-->
 
         <ScrollView
             android:id="@+id/scrollView_tnc"

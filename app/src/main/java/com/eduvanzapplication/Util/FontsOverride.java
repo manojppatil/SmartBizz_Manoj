@@ -23,6 +23,9 @@ public class FontsOverride {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }

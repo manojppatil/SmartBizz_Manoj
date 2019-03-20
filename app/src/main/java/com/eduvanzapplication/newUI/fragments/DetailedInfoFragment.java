@@ -12,7 +12,7 @@ import com.eduvanzapplication.R;
 
 import moe.feng.common.stepperview.VerticalStepperItemView;
 
-public class KycDetailFragment extends Fragment {
+public class DetailedInfoFragment extends Fragment {
 
 	private VerticalStepperItemView mSteppers[] = new VerticalStepperItemView[3];
 	private Button mNextBtn0, mNextBtn1, mPrevBtn1, mNextBtn2, mPrevBtn2;
@@ -22,7 +22,7 @@ public class KycDetailFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_kycdetail_stepper, parent, false);
+		return inflater.inflate(R.layout.fragment_vertical_stepper, parent, false);
 	}
 
 	@Override
