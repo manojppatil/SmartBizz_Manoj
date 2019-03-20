@@ -16,10 +16,6 @@ import com.eduvanzapplication.R;
 public class AgreementSigningFragment extends Fragment {
 
     static View view;
-    RadioGroup rgSignIn;
-    RadioButton rbEsign,rbManual;
-    LinearLayout linManual;
-
 
     public AgreementSigningFragment() {
         // Required empty public constructor
@@ -36,23 +32,6 @@ public class AgreementSigningFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_agreementsigning, container, false);
 
-        rbEsign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-            }
-        });
-
-        rbManual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (rbManual.isChecked()) {
-                    linManual.setVisibility(View.VISIBLE);
-                } else if (!rbManual.isChecked()) {
-                    linManual.setVisibility(View.GONE);
-                }
-            }
-        });
 
         return view;
 

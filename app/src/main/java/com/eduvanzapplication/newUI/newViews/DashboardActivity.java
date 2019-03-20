@@ -160,16 +160,6 @@ public class DashboardActivity extends AppCompatActivity
                 firstTimeScrape = 0;
             }
 
-//            customDrawerButton = findViewById(R.id.btnOpenDrawer);
-//            customDrawerButton.setDrawerLayout( mDrawer );
-//            customDrawerButton.getDrawerLayout().addDrawerListener( customDrawerButton );
-//            customDrawerButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    customDrawerButton.changeState();
-//                }
-//            });
-
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -204,22 +194,6 @@ public class DashboardActivity extends AppCompatActivity
 
             linearLayoutSignup = (LinearLayout) header.findViewById(R.id.linearLayout_signupdetail_dashboard);
             linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
-
-            buttonSignIn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(DashboardActivity.this, SignIn.class);
-                    startActivity(intent);
-                }
-            });
-
-//            buttonSignup.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
-//                    startActivity(intent);
-//                }
-//            });
 
             frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
             Menu m = navigationView.getMenu();
@@ -596,6 +570,9 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_myprofile) {
+
+            Intent intent = new Intent(DashboardActivity.this, LoanTabActivity.class);
+            startActivity(intent);
 //            if (sharedPref.getLoginDone(context)) {
 //                Intent intent = new Intent(context, MyProfileNew.class);
 //                startActivity(intent);

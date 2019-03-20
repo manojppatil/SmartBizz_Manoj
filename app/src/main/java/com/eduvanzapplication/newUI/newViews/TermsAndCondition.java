@@ -38,13 +38,11 @@ public class TermsAndCondition extends AppCompatActivity {
             scrollView = findViewById(R.id.scrollView_tnc);
 
             String mystring = " " +getResources().getString(R.string.terms_of_service) + " ";
-//        String mystring=new String(" terms of service");
             SpannableString content = new SpannableString(mystring);
             content.setSpan(new UnderlineSpan(), 0, mystring.length(), 0);
             below3.setText(content);
 
             String mystring1 = " " +getResources().getString(R.string.privacy_policy);
-//        String mystring1=new String(" privacy policy.");
             SpannableString content1 = new SpannableString(mystring1);
             content1.setSpan(new UnderlineSpan(), 0, mystring1.length(), 0);
             below5.setText(content1);
@@ -61,34 +59,8 @@ public class TermsAndCondition extends AppCompatActivity {
 
                     Intent intent = new Intent(TermsAndCondition.this,
                             GetMobileNo.class);
-
-//                    Intent intent = new Intent(TermsAndCondition.this,
-//                            SingInWithTruecaller.class);
-//                    Intent intent = new Intent(TermsAndCondition.this,
-//                            NewTruecallerSignIn.class);
                     startActivity(intent);
 
-                }
-            });
-
-            below3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent intent = new Intent(TermsAndCondition.this,
-                            WebViewTermsNCondition.class);
-                    startActivity(intent);
-
-                }
-            });
-
-            below5.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent intent = new Intent(TermsAndCondition.this,
-                            WebViewPrivacyPolicy.class);
-                    startActivity(intent);
                 }
             });
 

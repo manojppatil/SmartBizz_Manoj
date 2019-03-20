@@ -8,6 +8,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.eduvanzapplication.Util.FontsOverride;
+import com.eduvanzapplication.Util.TypefaceUtil;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,24 +18,13 @@ public class MainActivity extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        FontsOverride.setDefaultFont(this, "DEFAULT", "fonts/sourcesanspro_light.ttf");
-        FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/sourcesanspro_light.ttf");
-        FontsOverride.setDefaultFont(this, "SERIF", "fonts/sourcesanspro_light.ttf");
-        FontsOverride.setDefaultFont(this, "SANS", "fonts/sourcesanspro_light.ttf");
-        FontsOverride.setDefaultFont(this, "SANS_SERIF", "fonts/sourcesanspro_light.ttf");
+        FontsOverride.setDefaultFont(getApplicationContext(), "MONOSPACE", "fonts/sourcesanspro_italic.ttf");//italic
+        FontsOverride.setDefaultFont(getApplicationContext(), "NORMAL", "fonts/sourcesanspro_regular.ttf");//Regular
+        FontsOverride.setDefaultFont(getApplicationContext(), "SANS", "fonts/sourcesanspro_light.ttf");//Light
+        FontsOverride.setDefaultFont(getApplicationContext(), "SERIF", "fonts/sourcesanspro_semibold.ttf");//Semibold
 
 //        generateHashkey();
     }
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        generateHashkey();
-//        Log.e("--------CALL---------", "");
-//        getSupportFragmentManager().beginTransaction().add(R.id.framelayout_pqform,new PqFormFragment1()).commit();
-//    }
 
     public void generateHashkey(){
         try {

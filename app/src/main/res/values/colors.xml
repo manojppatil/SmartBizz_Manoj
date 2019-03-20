@@ -29,4 +29,12 @@
 <color name="white1">#f9fbfb</color>
 <color name="textcolor">#818181</color>
 <color name="textcolordark">#666666</color>
+
+    <color name="blue1">#0099cc</color>
+    <color name="red">#ee415e</color>
+
+    <color name="material_blue_500">#2196F3</color>
+
+    <color name="material_deep_purple_500">#673AB7</color>
+
 </resources>

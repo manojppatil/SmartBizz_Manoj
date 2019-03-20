@@ -13,32 +13,52 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="0dp"
             android:titleTextAppearance="@color/blue1"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/appbar"
-            android:orientation="vertical">
-
-            <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@drawable/toolbar_dropshadow"
-            android:elevation="@dimen/_2sdp" />
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-            app:tabTextColor="@color/lightGrey"
-            app:tabSelectedTextColor="@color/blue1"
-            app:tabIndicatorColor="@color/blue1"
-            app:tabMode="scrollable"/>
-        </LinearLayout>
+            android:layout_below="@+id/appbar"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:background="@drawable/tab_drawable"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                app:tabIndicatorColor="@color/blue1"
+                app:tabIndicatorHeight="@dimen/_5sdp"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/blue1"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                app:tabTextColor="@color/lightGrey" />
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/tabs"
+                android:background="@drawable/ic_chevron_left"
+                android:padding="@dimen/_7sdp" />
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@+id/tabs"
+                android:background="@drawable/ic_chevron_right"
+                android:padding="@dimen/_7sdp" />
+
+        </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
 
