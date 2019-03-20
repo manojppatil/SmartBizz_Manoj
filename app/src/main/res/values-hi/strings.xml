@@ -133,6 +133,8 @@
     <string name="enter_institute_location">इन्स्टिट्यूट स्थान प्रविष्ट करा</string>
     <string name="more">अधिक</string>
     <string name="adhar_card">Aadhar Card</string>
+    <string name="take_picture_aadhar">Take the picture of your Aadhar card</string>
+    <string name="scan_aadhar">Scan QR code of your Aadhar card</string>
 
     <!-- Vertical Stepper View Sample Item -->
     <string name="content_step_0">This is the first step. Click OK button to next step.\n\nTest Message.</string>

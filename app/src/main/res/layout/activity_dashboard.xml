@@ -103,4 +103,16 @@
         app:itemTextColor="@color/colorPrimary"
         app:menu="@menu/activity_dashboard_drawer" />
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false"
+        android:layout_gravity="center" />
+
+
 </android.support.v4.widget.DrawerLayout>
