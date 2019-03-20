@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingLeft="15dp"
-    android:paddingTop="20dp"
-    android:paddingRight="15dp">
-
+    android:paddingLeft="@dimen/_5sdp"
+    android:paddingTop="@dimen/_10sdp"
+    android:paddingRight="@dimen/_5sdp">
     <!-- TODO: Update blank fragment layout -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,546 +15,642 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             android:orientation="vertical">
 
-            <LinearLayout
+            <moe.feng.common.stepperview.VerticalStepperItemView
+                android:id="@+id/stepper_0CoBr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/light_blue_50"
-                android:orientation="vertical"
-                android:visibility="visible">
+                android:layout_marginTop="@dimen/_10sdp"
+                app:step_index="1"
+                app:step_state="selected"
+                app:step_summary="Summarized if needed"
+                app:step_summary_done="Summarized if needed. Done"
+                app:step_title="Personal Details">
 
-                <android.support.design.widget.TextInputLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtFnameCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/first_name"
-                        android:inputType="textCapSentences"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtMnameCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/middle_name"
-                        android:inputType="textCapSentences"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtLnameCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/last_name"
-                        android:inputType="textCapSentences"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="72dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="2dp">
+                        android:visibility="visible">
 
-                        <TextView
-                            android:id="@+id/lblBirthdayCoBr"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="4dp"
-                            android:text="@string/birthdate"
-                            android:textColor="#808080"
-                            android:textSize="16sp"
-                            android:visibility="invisible" />
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
 
-                        <TextView
-                            android:id="@+id/txtBirthdateCoBr"
+                            <EditText
+                                android:id="@+id/edtFnameCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/first_name"
+                                android:inputType="textCapSentences"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="1dp"
-                            android:paddingBottom="4dp"
-                            android:text="@string/birthdate"
-                            android:textColor="#808080"
-                            android:textSize="16sp" />
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
 
-                        <View
+                            <EditText
+                                android:id="@+id/edtMnameCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/middle_name"
+                                android:inputType="textCapSentences"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/colorPrimary"
-                            android:paddingBottom="4dp" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                android:id="@+id/edtLnameCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/last_name"
+                                android:inputType="textCapSentences"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="72dp"
+                                android:orientation="vertical"
+                                android:padding="2dp">
+
+                                <TextView
+                                    android:id="@+id/lblBirthdayCoBr"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingTop="8dp"
+                                    android:paddingBottom="4dp"
+                                    android:text="@string/birthdate"
+                                    android:textColor="#808080"
+                                    android:textSize="16sp"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:id="@+id/txtBirthdateCoBr"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="1dp"
+                                    android:paddingBottom="4dp"
+                                    android:text="@string/birthdate"
+                                    android:textColor="#808080"
+                                    android:textSize="16sp" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/colorPrimary"
+                                    android:paddingBottom="4dp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txtBirthdayCalenderCoBr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:paddingTop="5dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="4dp"
+                                android:text="@string/calendar"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.5"
+                                android:gravity="left"
+                                android:paddingTop="2dp"
+                                android:text="@string/gender"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+
+                            <RadioGroup
+                                android:id="@+id/rgGenderCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbMaleCoBr"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:text="@string/male"
+                                    android:textColor="@color/black"
+                                    android:theme="@style/EditTextStyle" />
+
+                                <RadioButton
+                                    android:id="@+id/rbFemaleCoBr"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:padding="5dp"
+                                    android:text="@string/female"
+                                    android:textColor="@color/black"
+                                    android:theme="@style/EditTextStyle" />
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.5"
+                                android:gravity="left"
+                                android:paddingTop="2dp"
+                                android:text="@string/marital_status"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+
+                            <RadioGroup
+                                android:id="@+id/rgMaritalStatusCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbMarriedCoBr"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:text="@string/married"
+                                    android:textColor="@color/black"
+                                    android:theme="@style/EditTextStyle" />
+
+                                <RadioButton
+                                    android:id="@+id/rbSingleCoBr"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:padding="5dp"
+                                    android:text="@string/single"
+                                    android:textColor="@color/black"
+                                    android:theme="@style/EditTextStyle" />
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                android:id="@+id/edtEmailIdCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/email_id"
+                                android:inputType="textEmailAddress"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                android:id="@+id/edtMobileNoCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="mobile number (10 digits)"
+                                android:inputType="phone"
+                                android:maxLength="10"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.5"
+                                android:paddingLeft="5dp"
+                                android:text="Document Availability"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+
+                            <Spinner
+                                android:id="@+id/spDocumentCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                        </LinearLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/edtPanLayoutCoBr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                android:id="@+id/edtPanCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/pan_number"
+                                android:inputType="text|textCapCharacters"
+                                android:maxLength="10"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/edtAadhaarLayoutCoBr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                android:id="@+id/edtAadhaarCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/adhaar_number"
+                                android:inputType="number"
+                                android:maxLength="12"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.5"
+                                android:paddingLeft="5dp"
+                                android:text="Profession"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+
+                            <Spinner
+                                android:id="@+id/spProfessionCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linEmployedCoBr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="8dp"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <EditText
+                                    android:id="@+id/edtCompanyCoBr"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/name_of_company"
+                                    android:inputType="textCapSentences"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp" />
+                            </android.support.design.widget.TextInputLayout>
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <EditText
+                                    android:id="@+id/edtAnnualSalCoBr"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/annual_income"
+                                    android:inputType="numberDecimal"
+                                    android:textColor="@color/black" />
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/txtBirthdayCalenderCoBr"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:paddingTop="5dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="4dp"
-                        android:text="@string/calendar"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:gravity="left"
-                        android:paddingTop="2dp"
-                        android:text="@string/gender"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <RadioGroup
-                        android:id="@+id/rgGenderCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_weight="1"
-                        android:gravity="left"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/rbMaleCoBr"
+                        <Button
+                            android:id="@+id/button_next_0CoBr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/male"
-                            android:textColor="@color/black"
-                            android:theme="@style/EditTextStyle" />
+                            android:backgroundTint="@color/material_blue_500"
+                            android:text="@android:string/ok"
+                            android:textColor="@android:color/white" />
 
-                        <RadioButton
-                            android:id="@+id/rbFemaleCoBr"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:padding="5dp"
-                            android:text="@string/female"
-                            android:textColor="@color/black"
-                            android:theme="@style/EditTextStyle" />
-                    </RadioGroup>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:gravity="left"
-                        android:paddingTop="2dp"
-                        android:text="@string/marital_status"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <RadioGroup
-                        android:id="@+id/rgMaritalStatusCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rbMarriedCoBr"
+                        <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/married"
-                            android:textColor="@color/black"
-                            android:theme="@style/EditTextStyle" />
+                            android:layout_marginStart="@dimen/_6sdp"
+                            android:text="@android:string/cancel" />
 
-                        <RadioButton
-                            android:id="@+id/rbSingleCoBr"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:padding="5dp"
-                            android:text="@string/single"
-                            android:textColor="@color/black"
-                            android:theme="@style/EditTextStyle" />
-                    </RadioGroup>
+                    </LinearLayout>
+
                 </LinearLayout>
 
+            </moe.feng.common.stepperview.VerticalStepperItemView>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtEmailIdCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/email_id"
-                        android:inputType="textEmailAddress"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtMobileNoCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="mobile number (10 digits)"
-                        android:inputType="phone"
-                        android:maxLength="10"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="Document Availability"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <Spinner
-                        android:id="@+id/spDocumentCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
-                </LinearLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/edtPanLayoutCoBr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtPanCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/pan_number"
-                        android:inputType="text|textCapCharacters"
-                        android:maxLength="10"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/edtAadhaarLayoutCoBr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtAadhaarCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/adhaar_number"
-                        android:inputType="number"
-                        android:maxLength="12"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="Profession"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <Spinner
-                        android:id="@+id/spProfessionCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/linEmployedCoBr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/light_blue_50"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="8dp"
-                        android:theme="@style/EditTextStyle"
-                        app:hintTextAppearance="@style/CustomTextAppearance">
-
-                        <EditText
-                            android:id="@+id/edtCompanyCoBr"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/name_of_company"
-                            android:inputType="textCapSentences"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/EditTextStyle"
-                        app:hintTextAppearance="@style/CustomTextAppearance">
-
-                        <EditText
-                            android:id="@+id/edtAnnualSalCoBr"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/annual_income"
-                            android:inputType="numberDecimal"
-                            android:textColor="@color/black" />
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <moe.feng.common.stepperview.VerticalStepperItemView
+                android:id="@+id/stepper_1CoBr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray_background"
-                android:orientation="vertical"
-                android:paddingLeft="5dp">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtCurrentAddressCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Address"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtCurrentLandmarkCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Landmark"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:theme="@style/EditTextStyle"
-                    app:hintTextAppearance="@style/CustomTextAppearance">
-
-                    <EditText
-                        android:id="@+id/edtCurrentPincodeCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Pincode"
-                        android:inputType="number"
-                        android:maxLength="6"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="@dimen/_6sdp"
+                app:step_index="2"
+                app:step_is_last="true"
+                app:step_summary="Last step"
+                app:step_summary_done="Last step. Done"
+                app:step_title="Identity Details">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="@string/current_country"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <Spinner
-                        android:id="@+id/spCurrentCountryCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="@string/current_state"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <Spinner
-                        android:id="@+id/spCurrentStateCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="5dp"
-                        android:text="@string/current_city1"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
-
-                    <Spinner
-                        android:id="@+id/spCurrentCityCoBr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:dropDownSelector="@color/colorPrimary"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                        android:background="@color/gray_background"
+                        android:orientation="vertical"
+                        android:paddingLeft="5dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                android:id="@+id/edtCurrentAddressCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Address"
+                                android:inputType="textPostalAddress"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                android:id="@+id/edtCurrentLandmarkCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Landmark"
+                                android:inputType="textPostalAddress"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                android:id="@+id/edtCurrentPincodeCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Pincode"
+                                android:inputType="number"
+                                android:maxLength="6"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.5"
+                                android:paddingLeft="5dp"
+                                android:text="@string/current_country"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+
+                            <Spinner
+                                android:id="@+id/spCurrentCountryCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.5"
+                                android:paddingLeft="5dp"
+                                android:text="@string/current_state"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+
+                            <Spinner
+                                android:id="@+id/spCurrentStateCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.5"
+                                android:paddingLeft="5dp"
+                                android:text="@string/current_city1"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+
+                            <Spinner
+                                android:id="@+id/spCurrentCityCoBr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:dropDownSelector="@color/colorPrimary"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/button_next_1CoBr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/material_blue_500"
+                            android:text="@android:string/ok"
+                            android:textColor="@android:color/white" />
+
+                        <Button
+                            android:id="@+id/button_prev_1CoBr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_6sdp"
+                            android:text="@android:string/cancel" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
-            </LinearLayout>
+            </moe.feng.common.stepperview.VerticalStepperItemView>
+
+            <Button
+                android:id="@+id/btn_change_point_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:text="Change point activated color" />
+
+            <Button
+                android:id="@+id/btn_change_done_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="Change point done icon" />
 
         </LinearLayout>
 

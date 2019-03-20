@@ -12,16 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:animateLayoutChanges="true">
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
 
                 <moe.feng.common.stepperview.VerticalStepperItemView
                     android:id="@+id/stepper_0"
@@ -29,10 +25,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:step_index="1"
-                    app:step_title="Personal Details"
+                    app:step_state="selected"
                     app:step_summary="Summarized if needed"
                     app:step_summary_done="Summarized if needed. Done"
-                    app:step_state="selected">
+                    app:step_title="Personal Details">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -59,8 +55,7 @@
                                     android:layout_height="wrap_content"
                                     android:hint="@string/first_name"
                                     android:inputType="textCapSentences"
-                                    android:theme="@style/EditTextStyle"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <android.support.design.widget.TextInputLayout
@@ -76,9 +71,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/middle_name"
-                                    android:theme="@style/EditTextStyle"
                                     android:inputType="textCapSentences"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <android.support.design.widget.TextInputLayout
@@ -95,9 +89,7 @@
                                     android:layout_height="wrap_content"
                                     android:hint="@string/last_name"
                                     android:inputType="textCapSentences"
-                                    android:textColor="@color/black"
-                                    android:theme="@style/EditTextStyle"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <RelativeLayout
@@ -166,39 +158,74 @@
                                     android:layout_weight="1.5"
                                     android:gravity="left"
                                     android:paddingTop="@dimen/_1sdp"
-                                    android:theme="@style/TextViewTitleStyle"
                                     android:text="@string/gender"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    android:theme="@style/TextViewTitleStyle" />
 
-                                <RadioGroup
-                                    android:id="@+id/rgGenderBr"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_4sdp"
-                                    android:layout_weight="1"
-                                    android:gravity="left"
+                                <LinearLayout
+                                    android:id="@+id/linMale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/tab_drawable"
                                     android:orientation="horizontal">
 
-                                    <RadioButton
-                                        android:id="@+id/rbMaleBr"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/_4sdp"
-                                        android:text="@string/male"
-                                        android:textColor="@color/black"
-                                        android:theme="@style/RadioStyle" />
+                                    <ImageView
+                                        android:id="@+id/ivIndicator"
+                                        android:layout_width="@dimen/_15sdp"
+                                        android:layout_height="@dimen/_15sdp"
+                                        android:backgroundTint="@color/black"
+                                        app:srcCompat="@drawable/ic_angle_right"/>
 
-                                    <RadioButton
-                                        android:id="@+id/rbFemaleBr"
-                                        android:layout_width="match_parent"
+                                    <View
+                                        android:layout_width="@dimen/_1sdp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"
+                                        android:layout_marginStart="@dimen/_2sdp"
+                                        android:layout_marginEnd="@dimen/_2sdp"/>
+
+                                    <TextView
+                                        android:id="@+id/txtEmailSubmit"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/_4sdp"
-                                        android:padding="@dimen/_4sdp"
-                                        android:text="@string/female"
+                                        android:layout_weight="1"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:layout_marginEnd="@dimen/_10sdp"
+                                        android:text="Male"
                                         android:textColor="@color/black"
-                                        android:theme="@style/RadioStyle" />
-                                </RadioGroup>
+                                        android:textSize="15sp"/>
+
+                                </LinearLayout>
+
+
+                                <!--<RadioGroup-->
+                                    <!--android:id="@+id/rgGenderBr"-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="@dimen/_4sdp"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:gravity="left"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<RadioButton-->
+                                        <!--android:id="@+id/rbMaleBr"-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:padding="@dimen/_4sdp"-->
+                                        <!--android:text="@string/male"-->
+                                        <!--android:drawableLeft="@drawable/icon_aboutus"-->
+                                        <!--android:theme="@style/RadioStyle" />-->
+
+                                    <!--<RadioButton-->
+                                        <!--android:id="@+id/rbFemaleBr"-->
+                                        <!--android:layout_width="match_parent"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginLeft="@dimen/_4sdp"-->
+                                        <!--android:padding="@dimen/_4sdp"-->
+                                        <!--android:text="@string/female"-->
+                                        <!--android:drawableLeft="@drawable/icon_aboutus"-->
+                                        <!--android:theme="@style/RadioStyle" />-->
+                                <!--</RadioGroup>-->
                             </LinearLayout>
 
                             <LinearLayout
@@ -216,8 +243,7 @@
                                     android:gravity="left"
                                     android:paddingTop="@dimen/_1sdp"
                                     android:text="@string/marital_status"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:textColor="@color/colorPrimary" />
 
                                 <RadioGroup
                                     android:id="@+id/rgMaritalStatusBr"
@@ -260,9 +286,7 @@
                                     android:layout_height="wrap_content"
                                     android:hint="EmailId"
                                     android:inputType="textEmailAddress"
-                                    android:textColor="@color/black"
-                                    android:theme="@style/EditTextStyle"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <android.support.design.widget.TextInputLayout
@@ -278,10 +302,8 @@
                                     android:layout_height="wrap_content"
                                     android:hint="Enter Phone(10 digits)"
                                     android:inputType="phone"
-                                    android:theme="@style/EditTextStyle"
                                     android:maxLength="10"
-                                    android:textColor="@color/black"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <LinearLayout
@@ -296,10 +318,9 @@
                                     android:layout_gravity="center"
                                     android:layout_weight="1.5"
                                     android:paddingLeft="@dimen/_4sdp"
-                                    android:theme="@style/TextViewTitleStyle"
                                     android:text="Document Availability"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/TextViewTitleStyle" />
 
                                 <Spinner
                                     android:id="@+id/spDocumentBr"
@@ -317,9 +338,9 @@
                                 android:id="@+id/edtPanLayoutBr"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:visibility="gone"
                                 android:layout_marginTop="@dimen/_4sdp"
                                 android:theme="@style/EditTextStyle"
+                                android:visibility="gone"
                                 app:hintTextAppearance="@style/CustomTextAppearance">
 
                                 <EditText
@@ -330,18 +351,17 @@
                                     android:inputType="text|textCapCharacters"
                                     android:maxLength="10"
                                     android:textAllCaps="true"
-                                    android:theme="@style/EditTextStyle"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <android.support.design.widget.TextInputLayout
                                 android:id="@+id/edtAadhaarLayoutBr"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:visibility="gone"
                                 android:layout_marginTop="@dimen/_4sdp"
                                 android:layout_marginBottom="@dimen/_6sdp"
                                 android:theme="@style/EditTextStyle"
+                                android:visibility="gone"
                                 app:hintTextAppearance="@style/CustomTextAppearance">
 
                                 <EditText
@@ -350,9 +370,8 @@
                                     android:layout_height="wrap_content"
                                     android:hint="@string/adhaar_number"
                                     android:inputType="number"
-                                    android:theme="@style/EditTextStyle"
                                     android:maxLength="12"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <LinearLayout
@@ -378,22 +397,22 @@
                                         android:layout_height="wrap_content"
                                         android:hint="@string/name_of_company"
                                         android:inputType="textCapSentences"
-                                        android:theme="@style/EditTextStyle"
-                                        android:textSize="16sp" />
+                                        android:theme="@style/EditTextStyle" />
                                 </android.support.design.widget.TextInputLayout>
 
                                 <android.support.design.widget.TextInputLayout
-                                    app:hintTextAppearance="@style/CustomTextAppearance"
-                                    android:theme="@style/EditTextStyle"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:theme="@style/EditTextStyle"
+                                    app:hintTextAppearance="@style/CustomTextAppearance">
+
                                     <EditText
                                         android:id="@+id/edtAnnualSalBr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:hint="@string/annual_income"
                                         android:inputType="numberDecimal"
-                                        android:hint="@string/annual_income"                                    android:theme="@style/EditTextStyle"
-                                        />
+                                        android:theme="@style/EditTextStyle" />
                                 </android.support.design.widget.TextInputLayout>
                             </LinearLayout>
 
@@ -410,14 +429,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/material_blue_500"
-                                android:textColor="@android:color/white"
-                                android:text="@android:string/ok"/>
+                                android:text="@android:string/ok"
+                                android:textColor="@android:color/white" />
 
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_6sdp"
-                                android:text="@android:string/cancel"/>
+                                android:text="@android:string/cancel" />
 
                         </LinearLayout>
 
@@ -466,8 +485,7 @@
                                         android:layout_height="wrap_content"
                                         android:hint="Address"
                                         android:inputType="textPostalAddress"
-                                        android:theme="@style/EditTextStyle"
-                                        android:textSize="16sp" />
+                                        android:theme="@style/EditTextStyle" />
                                 </android.support.design.widget.TextInputLayout>
 
                                 <android.support.design.widget.TextInputLayout
@@ -484,8 +502,7 @@
                                         android:layout_height="wrap_content"
                                         android:hint="Landmark"
                                         android:inputType="textPostalAddress"
-                                        android:theme="@style/EditTextStyle"
-                                        android:textSize="16sp" />
+                                        android:theme="@style/EditTextStyle" />
                                 </android.support.design.widget.TextInputLayout>
 
                                 <android.support.design.widget.TextInputLayout
@@ -503,19 +520,18 @@
                                         android:hint="Pincode"
                                         android:inputType="number"
                                         android:maxLength="6"
-                                        android:theme="@style/EditTextStyle"
-                                        android:textSize="16sp" />
+                                        android:theme="@style/EditTextStyle" />
                                 </android.support.design.widget.TextInputLayout>
+
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_weight="1.5"
                                     android:paddingLeft="@dimen/_4sdp"
-                                    android:theme="@style/TextViewTitleStyle"
                                     android:text="@string/current_country"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/TextViewTitleStyle" />
 
                                 <Spinner
                                     android:id="@+id/spCurrentCountryBr"
@@ -541,10 +557,9 @@
                                     android:layout_gravity="center"
                                     android:layout_weight="1.5"
                                     android:paddingLeft="@dimen/_4sdp"
-                                    android:theme="@style/TextViewTitleStyle"
                                     android:text="@string/current_state"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/TextViewTitleStyle" />
 
                                 <Spinner
                                     android:id="@+id/spCurrentStateBr"
@@ -572,9 +587,8 @@
                                     android:layout_weight="1.5"
                                     android:paddingLeft="@dimen/_4sdp"
                                     android:text="@string/current_city1"
-                                    android:theme="@style/TextViewTitleStyle"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/TextViewTitleStyle" />
 
                                 <Spinner
                                     android:id="@+id/spCurrentCityBr"
@@ -601,15 +615,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/material_blue_500"
-                                android:textColor="@android:color/white"
-                                android:text="@android:string/ok"/>
+                                android:text="@android:string/ok"
+                                android:textColor="@android:color/white" />
 
                             <Button
                                 android:id="@+id/button_prev_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_6sdp"
-                                android:text="@android:string/cancel"/>
+                                android:text="@android:string/cancel" />
 
                             <Button
                                 android:id="@+id/button_test_error"
@@ -617,8 +631,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_6sdp"
                                 android:backgroundTint="@color/material_red_500"
-                                android:textColor="@android:color/white"
-                                android:text="Set Step 1 Error Text"/>
+                                android:text="Set Step 1 Error Text"
+                                android:textColor="@android:color/white" />
 
                         </LinearLayout>
 
@@ -632,10 +646,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp"
                     app:step_index="3"
-                    app:step_title="Course Details"
+                    app:step_is_last="true"
                     app:step_summary="Last step"
                     app:step_summary_done="Last step. Done"
-                    app:step_is_last="true">
+                    app:step_title="Course Details">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -643,9 +657,9 @@
                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -661,9 +675,8 @@
                                     android:layout_weight="1.5"
                                     android:paddingLeft="@dimen/_4sdp"
                                     android:text="Institute List"
-                                    android:theme="@style/TextViewTitleStyle"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/TextViewTitleStyle" />
 
                                 <Spinner
                                     android:id="@+id/spInstituteBr"
@@ -690,9 +703,8 @@
                                     android:layout_weight="1.5"
                                     android:paddingLeft="@dimen/_4sdp"
                                     android:text="Institute Location"
-                                    android:theme="@style/TextViewTitleStyle"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/TextViewTitleStyle" />
 
                                 <Spinner
                                     android:id="@+id/spInsLocationBr"
@@ -719,9 +731,8 @@
                                     android:layout_weight="1.5"
                                     android:paddingLeft="@dimen/_4sdp"
                                     android:text="Course List"
-                                    android:theme="@style/TextViewTitleStyle"
                                     android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/TextViewTitleStyle" />
 
                                 <Spinner
                                     android:id="@+id/spCourseBr"
@@ -749,8 +760,7 @@
                                     android:layout_height="wrap_content"
                                     android:enabled="false"
                                     android:hint="Course Fee"
-                                    android:theme="@style/EditTextStyle"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <android.support.design.widget.TextInputLayout
@@ -768,8 +778,7 @@
                                     android:hint="@string/enter_loan_amount"
                                     android:inputType="number"
                                     android:maxLength="10"
-                                    android:theme="@style/EditTextStyle"
-                                    android:textSize="16sp" />
+                                    android:theme="@style/EditTextStyle" />
                             </android.support.design.widget.TextInputLayout>
 
                             <LinearLayout
@@ -785,8 +794,7 @@
                                     android:layout_weight="1.5"
                                     android:paddingLeft="@dimen/_4sdp"
                                     android:text="Profession of Applicant"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="16sp" />
+                                    android:textColor="@color/colorPrimary" />
 
                                 <Spinner
                                     android:id="@+id/spProfessionBr"
@@ -813,15 +821,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/material_blue_500"
-                                android:textColor="@android:color/white"
-                                android:text="@android:string/ok"/>
+                                android:text="@android:string/ok"
+                                android:textColor="@android:color/white" />
 
                             <Button
                                 android:id="@+id/button_prev_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_6sdp"
-                                android:text="@android:string/cancel"/>
+                                android:text="@android:string/cancel" />
 
                         </LinearLayout>
 
@@ -834,18 +842,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="24dp"
-                    android:text="Change point activated color"/>
+                    android:text="Change point activated color" />
 
                 <Button
                     android:id="@+id/btn_change_done_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:text="Change point done icon"/>
+                    android:text="Change point done icon" />
 
             </LinearLayout>
-
-        </LinearLayout>
 
     </ScrollView>
 </LinearLayout>

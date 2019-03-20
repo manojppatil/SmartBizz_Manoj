@@ -22,9 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/appbar"
             android:layout_marginLeft="@dimen/_4sdp"
-            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_4sdp"
-            android:layout_marginBottom="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/tab_drawable"
             android:orientation="horizontal">
 
@@ -35,8 +35,8 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                app:tabIndicatorColor="@color/blue1"
-                app:tabIndicatorHeight="@dimen/_5sdp"
+                app:tabIndicatorColor="@color/red"
+                app:tabIndicatorHeight="@dimen/_3sdp"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/blue1"
                 app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"

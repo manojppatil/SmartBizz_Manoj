@@ -214,7 +214,6 @@
         </LinearLayout>
 
 
-
     </LinearLayout>
 
 
@@ -256,8 +255,6 @@
             app:srcCompat="@drawable/ic_angle_right"/>
 
     </LinearLayout>
-
-
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/fb_login_button"
