@@ -22,14 +22,14 @@
             android:layout_height="wrap_content"
             android:text="@string/now_enter"
             android:textSize="15sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black_new"/>
         <TextView
             android:id="@+id/txtMsg2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/your_regtd_emalid"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black_new"/>
 
 
         <TextView
@@ -40,7 +40,7 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black_new"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                 android:padding="@dimen/_4sdp"
                 android:text=""
                 android:inputType="textEmailAddress"
-                android:textColor="@color/black" />
+                android:textColor="@color/black_new" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,7 +95,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="@string/or"
-                android:textColor="@color/black"
+                android:textColor="@color/black_new"
                 android:textSize="15sp"/>
             <View
                 android:layout_width="@dimen/_30sdp"

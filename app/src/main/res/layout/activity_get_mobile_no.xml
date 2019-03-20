@@ -19,15 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lets"
-            android:textSize="@dimen/_15sdp"
-            android:textColor="@color/black"/>
+            android:textSize="15sp"
+            android:textColor="@color/black_new"/>
         <TextView
             android:id="@+id/txtMsg2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/start_with_ur"
-            android:textSize="@dimen/_15sdp"
-            android:textColor="@color/black"/>
+            android:textSize="20sp"
+            android:textColor="@color/black_new"/>
 
 
         <TextView
@@ -37,8 +37,8 @@
             android:text="@string/mobile_number"
             android:textAllCaps="true"
             android:textStyle="bold"
-            android:textSize="@dimen/_15sdp"
-            android:textColor="@color/black"/>
+            android:textSize="15sp"
+            android:textColor="@color/black_new"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,8 +67,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+91"
-                android:textSize="@dimen/_15sdp"
-                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textColor="@color/black_new"
                 android:textStyle="bold"/>
 
             <EditText
@@ -79,9 +79,10 @@
                 android:background="@android:color/transparent"
                 android:padding="@dimen/_4sdp"
                 android:text=""
+                android:textSize="15sp"
                 android:inputType="phone"
                 android:maxLength="10"
-                android:textColor="@color/black" />
+                android:textColor="@color/black_new" />
 
         </LinearLayout>
 
@@ -106,7 +107,8 @@
                 android:padding="@dimen/_3sdp"
                 android:gravity="center_horizontal"
                 android:text=""
-                android:textColor="@color/black" />
+                android:textColor="@color/black_new"
+                android:textSize="15sp"/>
 
             <View
                 android:layout_width="@dimen/_1sdp"

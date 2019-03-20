@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Select Any"
-        android:textColor="@color/black"
+        android:textColor="@color/textcolordark"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Document To Scan"
-        android:textColor="@color/black"
-        android:textSize="27sp" />
+        android:textColor="@color/textcolordark"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,8 +62,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/pan_card"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textColor="@color/black_new"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -103,8 +103,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/adhar_card"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textColor="@color/black_new"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -125,7 +125,7 @@
             android:layout_marginBottom="@dimen/_16sdp"
             android:gravity="center_horizontal"
             android:text="OR"
-            android:textColor="@color/black"
+            android:textColor="@color/black_new"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CLOSE THIS DIALOG"
-                android:textColor="@color/red"
+                android:textColor="@color/new_red"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/msg1"
                 android:text="TO CONTINUE MANUALLY"
-                android:textColor="@color/black"
+                android:textColor="@color/black_new"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -212,7 +212,7 @@
             android:layout_height="wrap_content"
             android:text="@string/take_picture_aadhar"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:textSize="@dimen/_15sdp"/>
+            android:textSize="15sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -227,7 +227,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="center_horizontal"
             android:text="OR"
-            android:textColor="@color/black"
+            android:textColor="@color/black_new"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -248,7 +248,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/scan_aadhar"
                 android:layout_marginEnd="@dimen/_20sdp"
-                android:textSize="@dimen/_15sdp"/>
+                android:textSize="15sp"/>
         </LinearLayout>
 
     </LinearLayout>

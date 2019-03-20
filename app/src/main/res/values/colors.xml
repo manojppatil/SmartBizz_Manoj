@@ -1,34 +1,28 @@
 <resources>
-<color name="new_red">#EE415E</color>
-<color name="colorSecondary">#0099cc</color>
- <!-- <color name="colorPrimary">#3F51B5</color> -->
- <!-- <color name="colorPrimaryDark">#303F9F</color> -->
- <!-- <color name="colorPrimary">#43BB99</color> -->
- <!-- <color name="colorPrimaryDark">#006b4d</color>  -->
-<color name="colorPrimary">#2BD3DD</color>
-<color name="colorPrimaryDark">#2BD3DD</color>
- <!-- <color name="colorSecondary">#4196A0</color> -->
- <!-- <color name="colorPrimary">#0099CC</color> -->
- <!-- <color name="colorPrimaryDark">#2BD3DD</color> -->
- <!-- <color name="colorSecondary">#4196A0</color> -->
-<color name="colorAccent">#2BD3DD</color>
-<color name="lightGrey">#D3D3D3</color>
-<color name="grey">#8e8e8e</color>
-<color name="white">#FFFFFF</color>
-<color name="black">#000000</color>
-<color name="blue">#435692</color>
-<color name="lightblue">#d2e4ec</color>
-<color name="blacktrasnparent">#50000000</color>
-<color name="bgcolor">#ECF7FD</color>
-<color name="background_user_profile">#F1F5F8</color>
-<color name="permissioncolor">#4196a0</color>
-<color name="colorGreen">#1ac31a</color>
-<color name="colorYellow">#ffc015</color>
-<color name="colorRed">#ee415e</color>
-    <color name="card">#f9fbfb</color>
-<color name="white1">#f9fbfb</color>
-<color name="textcolor">#818181</color>
-<color name="textcolordark">#666666</color>
+    <color name="new_red">#EE415E</color>
+    <color name="colorSecondary">#0099cc</color>
+    <color name="black_new">#666666</color>
+    <color name="grey">#8e8e8e</color>
+    <color name="textcolor">#818181</color>
+    <color name="textcolordark">#666666</color>
+
+    <color name="colorPrimary">#2BD3DD</color>
+    <color name="colorPrimaryDark">#2BD3DD</color>
+    <color name="colorAccent">#2BD3DD</color>
+    <color name="lightGrey">#D3D3D3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="blue">#435692</color>
+    <color name="lightblue">#d2e4ec</color>
+    <color name="blacktrasnparent">#50000000</color>
+    <color name="bgcolor">#ECF7FD</color>
+    <color name="background_user_profile">#F1F5F8</color>
+    <color name="permissioncolor">#4196a0</color>
+    <color name="colorGreen">#1ac31a</color>
+    <color name="colorYellow">#ffc015</color>
+    <color name="colorRed">#ee415e</color>
+        <color name="card">#f9fbfb</color>
+    <color name="white1">#f9fbfb</color>
 
     <color name="blue1">#0099cc</color>
     <color name="red">#ee415e</color>
@@ -36,5 +30,11 @@
     <color name="material_blue_500">#2196F3</color>
 
     <color name="material_deep_purple_500">#673AB7</color>
+
+
+
+
+
+
 
 </resources>
