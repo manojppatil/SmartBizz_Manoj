@@ -8,7 +8,6 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.eduvanzapplication.Util.FontsOverride;
-import com.eduvanzapplication.Util.TypefaceUtil;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

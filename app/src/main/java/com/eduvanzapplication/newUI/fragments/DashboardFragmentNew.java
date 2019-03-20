@@ -56,28 +56,21 @@ public class DashboardFragmentNew extends Fragment {
     static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
     ArrayList<ViewPagerDashboardPOJO> viewPagerDashboardPOJOArrayList;
-    static Button buttonCheckeligiblity, buttonApplyNow, buttonContinueLoanApplication, buttonContinueProfile;
-    static LinearLayout linearLayoutMyProfile, linearLayoutCallUs, linearLayoutFaq, linearLayoutContactus,
-            linearLayoutHowItWorks, linearLayoutDeal, linearLayoutEligiblityChekck,
-            linearLayoutApplyNow, linearLayoutContinueApplication, linearLayoutMailUs, linearLayoutContinueProfile, linearLayoutAboutUs;
+    static LinearLayout   linearLayoutEligiblityChekck,
+            linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
-    static TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView8,
-            textView9, textView10, textView11, textView12, textView13, textView14, textView15, textViewCongrats;
     SharedPref sharedPref;
 
-    static LinearLayout notification_linearLayout;
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
             kyc = null, profileDashboardStats = null;
     List<MLeads> mLeadsArrayList = new ArrayList<>();
 
-    public static RecyclerView recyclerLeads;
     LeadsAdapter leadsAdapter;
 
     View view;
 
     public DashboardFragmentNew() {
-        // Required empty public constructor
     }
 
     @Override
@@ -120,15 +113,6 @@ public class DashboardFragmentNew extends Fragment {
                 e.printStackTrace();
             }
 
-            textView5 = (TextView) view.findViewById(R.id.textViewdash_5);
-            mainApplication.applyTypeface(textView5, context);
-            textView6 = (TextView) view.findViewById(R.id.textViewdash_6);
-            mainApplication.applyTypeface(textView6, context);
-            textView7 = (TextView) view.findViewById(R.id.textViewdash_7);
-            mainApplication.applyTypeface(textView7, context);
-            textView8 = (TextView) view.findViewById(R.id.textViewdash_8);
-
-            recyclerLeads = (RecyclerView) view.findViewById(R.id.recyclerLeads);
 
             viewPagerDashboard = (ViewPager) view.findViewById(R.id.viewPager_dashboard);
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
@@ -140,61 +124,6 @@ public class DashboardFragmentNew extends Fragment {
 
             viewPagerDashboard.setAdapter(viewPagerAdapterDashboard);
             circlePageIndicatorDashboard.setViewPager(viewPagerDashboard);
-
-            linearLayoutMyProfile = (LinearLayout) view.findViewById(R.id.linearLayout_dashboard_myprofile);
-            linearLayoutMyProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
-            linearLayoutCallUs = (LinearLayout) view.findViewById(R.id.linearLayout_dashboard_callus);
-            linearLayoutCallUs.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:022-49733674"));
-                    startActivity(intent);
-                }
-            });
-
-            linearLayoutMailUs = (LinearLayout) view.findViewById(R.id.linearLayout_mailUs);
-            linearLayoutMailUs.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    //               /* Create the Intent */
-                    //                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    //
-                    //                /* Fill it with Data */
-                    //                emailIntent.setType("plain/text");
-                    //                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"support@eduvanz.com"});
-                    ////                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
-                    ////                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text");
-                    //
-                    //                /* Send it off to the Activity-Chooser */
-                    //                context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                    shareToGMail(new String[]{"support@eduvanz.com"}, "", "");
-                }
-            });
-
-            notification_linearLayout = (LinearLayout) view.findViewById(R.id.notification_linearLayout);
-            notification_linearLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, Notification.class);
-                    startActivity(intent);
-                }
-            });
-
-
-
-//            if(!MainApplication.lead_id.contains("null") && MainApplication.lead_id.length() > 0) {
-//                Intent intent = new Intent(context, EligibilityCheck.class);
-//                intent.putExtra("lead_id",MainApplication.lead_id);
-//                startActivity(intent);
-//            }
 
             /** API CALL GET DASHBOARD BANNER**/
             try {
@@ -523,8 +452,6 @@ public class DashboardFragmentNew extends Fragment {
 
                 leadsAdapter = new LeadsAdapter(mLeadsArrayList,context);
                 LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-                recyclerLeads.setLayoutManager(horizontalLayoutManager);
-                recyclerLeads.setAdapter(leadsAdapter);
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();

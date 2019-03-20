@@ -363,4 +363,10 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="err_state">Select State</string>
     <string name="err_city">Enter city</string>
     <string name="post_approval">Post Approval</string>
+    <string name="complete_your_appliction_nw">Complete Your Application Now</string>
+    <string name="to_get_quick_nd_easy_loan"><![CDATA[To Get a Quick & Easy Loan]]></string>
+    <string name="click">Click</string>
+    <string name="Proceed">\"Proceed\"</string>
+    <string name="to_complete">to complete the process</string>
+    <string name="fs_msg"><![CDATA[Check your \'Friendly Score\' to ensure a Quick & Smooth Loan Process]]></string>
 </resources>
