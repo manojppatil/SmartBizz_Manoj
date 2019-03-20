@@ -31,7 +31,6 @@
     <string name="title_profile">प्रोफाइल</string>
     <string name="title_loan_application">कर्ज अर्ज</string>
     <string name="title_how_it_works">हे कसे कार्य करते</string>
-    <string name="title_dashboard">डॅशबोर्ड</string>
     <string name="title_contact_us">आमच्याशी संपर्क साधा</string>
     <string name="title_fair_practics_code">उचित व्यवहार कोड</string>
     <string name="title_log_out">लोग आउट</string>
@@ -108,7 +107,6 @@
     <string name="and">आणि</string>
     <string name="terms_of_service">सेवा अटी</string>
     <string name="privacy_policy">गोपनीयता धोरण.</string>
-    <string name="strgetmobilenonote">सुरू करण्यासाठी आपल्या मोबाइल नंबरची पडताळणी करा!.</string>
 
     <string name="permissionsms">बँक व्यवहारांविषयी माहिती गोळा करणे, पक्षाचे व्यवहार करणारे व्यवहार, व्यवहाराचे वर्णन आणि वेगवान कर्ज प्रक्रियेसाठी रक्कम.</string>
 
@@ -119,8 +117,6 @@
     <string name="permissioncamera">कॅमेरा - लोन ऍप्लिकेशनसाठी आवश्यक चित्रे घेण्याची परवानगी देण्यासाठी. स्टोरेज - आपल्या कर्जाच्या अनुप्रयोगासाठी दस्तऐवज आणि चित्रे अपलोड करण्याची परवानगी देण्यासाठी.</string>
     <string name="permissionlocation">स्थान - आपल्या डिव्हाइसच्या स्थानाबद्दल माहिती गोळा आणि तिचा आढावा घेण्यासाठी. अनुप्रयोग वापर - आपल्या कर्जाच्या अर्ज प्रक्रियेत उपयुक्त ठरणार्या आपल्या क्रेडिट स्कोअरची निर्मिती करण्यासाठी आपल्या स्वारस्य आणि आवडींबद्दल माहिती मिळविण्यासाठी.</string>
 
-
-    <string name="please_provide_mobile_number">कृपया मोबाइल नंबर प्रदान करा</string>
 
     <string name="please_check_your_network_connection">कृपया तुमचा नेटवर्क कनेक्शन तपासा</string>
     <string name="please_choose_a_file_first">कृपया प्रथम फाइल निवडा</string>
@@ -138,4 +134,10 @@
     <string name="more">अधिक</string>
     <string name="adhar_card">Aadhar Card</string>
 
+    <!-- Vertical Stepper View Sample Item -->
+    <string name="content_step_0">This is the first step. Click OK button to next step.\n\nTest Message.</string>
+    <string name="content_step_1">This is the second step. Click OK button to next step or Cancel button to previous step.\n\nThe summary text of each step is optional. If you haven\'t set, summary view won\'t be displayed.</string>
+    <string name="content_step_2">This is the last step. You can finish steps now.</string>
+
+    <string name="toggle_animation_button">Toggle Animation</string>
 </resources>

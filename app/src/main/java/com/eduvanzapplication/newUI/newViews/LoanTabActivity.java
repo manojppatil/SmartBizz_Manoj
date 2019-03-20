@@ -1,7 +1,5 @@
 package com.eduvanzapplication.newUI.newViews;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,9 +11,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.fragments.AgreementSigningFragment;
-import com.eduvanzapplication.newUI.fragments.ApplicationFormFragment;
-import com.eduvanzapplication.newUI.fragments.LoanDetailsFragment;
-import com.eduvanzapplication.newUI.fragments.ProfileDetailFragment;
+import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
 import com.eduvanzapplication.newUI.fragments.UploadDocumentFragment;
 
 import java.util.ArrayList;
@@ -32,17 +28,17 @@ public class LoanTabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Instant Sanction");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.getNavigationIcon().setTint(getResources().getColor(R.color.textcolordark));
-        }
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setTitle("Instant Sanction");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            toolbar.getNavigationIcon().setTint(getResources().getColor(R.color.textcolordark));
+//        }
+//        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -57,11 +53,9 @@ public class LoanTabActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new ProfileDetailFragment(), "Profile Details");
-        adapter.addFrag(new ApplicationFormFragment(), "Application Form");
-        adapter.addFrag(new UploadDocumentFragment(), "Document Upload");
-        adapter.addFrag(new AgreementSigningFragment(), "Agreement & Payment");
-        adapter.addFrag(new LoanDetailsFragment(), "Loan Details");
+        adapter.addFrag(new KycDetailFragment(), "KYC Details");
+        adapter.addFrag(new UploadDocumentFragment(), "Detailed Ino");
+        adapter.addFrag(new AgreementSigningFragment(), "Doc Upload");
         viewPager.setAdapter(adapter);
     }
 

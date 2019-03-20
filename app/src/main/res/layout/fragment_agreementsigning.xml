@@ -33,7 +33,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:orientation="vertical">
 
-                        <com.eduvanzins.Font.TxtLight
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
@@ -52,7 +52,7 @@
                                 android:layout_gravity="center"
                                 android:orientation="vertical">
 
-                                <com.eduvanzins.Font.TxtLight
+                                <TextView
                                     android:id="@+id/textView_signsubmit_1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -65,7 +65,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_10sdp"
-                                    android:background="@drawable/background_docupload"
                                     android:orientation="horizontal">
 
                                     <LinearLayout
@@ -74,7 +73,7 @@
                                         android:layout_margin="@dimen/_5sdp"
                                         android:orientation="horizontal">
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
@@ -82,7 +81,7 @@
                                             android:textColor="@color/textcolor"
                                             android:textSize="14sp" />
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:id="@+id/txtSignedStatus"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -109,7 +108,7 @@
                                         android:gravity="center"
                                         android:orientation="horizontal">
 
-                                        <com.eduvanzins.Font.RbLight
+                                        <RadioButton
                                             android:id="@+id/rbEsign"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -118,7 +117,7 @@
                                             android:textSize="14sp"
                                             android:theme="@style/EditTextStyle" />
 
-                                        <com.eduvanzins.Font.RbLight
+                                        <RadioButton
                                             android:id="@+id/rbManual"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -140,7 +139,7 @@
                                     android:orientation="horizontal"
                                     android:visibility="gone">
 
-                                    <com.eduvanzins.Font.BtnLight
+                                    <Button
                                         android:id="@+id/btnEsign"
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
@@ -153,7 +152,7 @@
                                         android:textColor="@color/white"
                                         android:textSize="14sp" />
 
-                                    <com.eduvanzins.Font.BtnLight
+                                    <Button
                                         android:id="@+id/btnManualsign"
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
@@ -181,7 +180,7 @@
                             android:orientation="horizontal"
                             android:visibility="gone">
 
-                            <com.eduvanzins.Font.BtnLight
+                            <Button
                                 android:id="@+id/button_signnsubmit_downloadApplication"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
@@ -194,7 +193,7 @@
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
 
-                            <com.eduvanzins.Font.BtnLight
+                            <Button
                                 android:id="@+id/button_signnsubmit_uploadApplication"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
@@ -208,7 +207,7 @@
                                 android:textSize="14sp" />
                         </LinearLayout>
 
-                        <com.eduvanzins.Font.BtnLight
+                        <Button
                             android:id="@+id/btnDownloadSignedForm"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_30sdp"
@@ -232,7 +231,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:orientation="vertical">
 
-                        <com.eduvanzins.Font.TxtLight
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
@@ -247,7 +246,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@drawable/background_docupload"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -267,7 +265,7 @@
                                         android:layout_marginTop="@dimen/_10sdp"
                                         android:orientation="horizontal">
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
@@ -275,14 +273,14 @@
                                             android:textColor="@color/textcolor"
                                             android:textSize="14sp" />
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Rs."
                                             android:textColor="@color/textcolor"
                                             android:textSize="14sp" />
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:id="@+id/txtProcessingFee"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -301,7 +299,7 @@
                                         android:layout_marginTop="@dimen/_10sdp"
                                         android:orientation="horizontal">
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
@@ -309,14 +307,14 @@
                                             android:textColor="@color/textcolor"
                                             android:textSize="14sp" />
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Rs."
                                             android:textColor="@color/textcolor"
                                             android:textSize="14sp" />
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:id="@+id/txtFirstInstallment"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -347,7 +345,7 @@
                                     android:layout_marginTop="@dimen/_12sdp"
                                     android:orientation="horizontal">
 
-                                    <com.eduvanzins.Font.TxtLight
+                                    <TextView
                                         android:id="@+id/textView_signsubmit_9"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -362,14 +360,14 @@
                                         android:layout_weight="1"
                                         android:orientation="horizontal">
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:id="@+id/textView_signsubmit_10"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="@string/Rs"
                                             android:textSize="16sp" />
 
-                                        <com.eduvanzins.Font.TxtLight
+                                        <TextView
                                             android:id="@+id/textView_signsubmit_11"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -386,7 +384,7 @@
                                     android:layout_marginTop="@dimen/_12sdp"
                                     android:orientation="horizontal">
 
-                                    <com.eduvanzins.Font.TxtLight
+                                    <TextView
                                         android:id="@+id/textView_signsubmit_12"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -395,7 +393,7 @@
                                         android:text="Transaction Id :  "
                                         android:textSize="16sp" />
 
-                                    <com.eduvanzins.Font.TxtLight
+                                    <TextView
                                         android:id="@+id/textView_signsubmit_13"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -410,7 +408,7 @@
                                     android:layout_marginTop="@dimen/_12sdp"
                                     android:orientation="horizontal">
 
-                                    <com.eduvanzins.Font.TxtLight
+                                    <TextView
                                         android:id="@+id/textView_signsubmit_14"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -419,7 +417,7 @@
                                         android:text="Payment Date :  "
                                         android:textSize="16sp" />
 
-                                    <com.eduvanzins.Font.TxtLight
+                                    <TextView
                                         android:id="@+id/textView_signsubmit_15"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -439,7 +437,7 @@
                             android:orientation="horizontal"
                             android:visibility="visible">
 
-                            <com.eduvanzins.Font.TxtLight
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -449,7 +447,7 @@
                                 android:textSize="12sp" />
                         </LinearLayout>
 
-                        <com.eduvanzins.Font.BtnLight
+                        <Button
                             android:id="@+id/btnPayment"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_30sdp"
@@ -471,7 +469,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:orientation="vertical">
 
-                        <com.eduvanzins.Font.TxtLight
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
@@ -490,7 +488,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:background="@drawable/background_docupload"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -499,7 +496,7 @@
                                     android:layout_margin="@dimen/_5sdp"
                                     android:orientation="horizontal">
 
-                                    <com.eduvanzins.Font.TxtLight
+                                    <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -507,7 +504,7 @@
                                         android:textColor="@color/textcolor"
                                         android:textSize="14sp" />
 
-                                    <com.eduvanzins.Font.TxtLight
+                                    <TextView
                                         android:id="@+id/txtNachStatus"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -530,7 +527,7 @@
                                 android:orientation="horizontal"
                                 android:visibility="visible">
 
-                                <com.eduvanzins.Font.TxtLight
+                                <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -538,7 +535,7 @@
                                     android:textColor="@color/textcolor"
                                     android:textSize="14sp" />
 
-                                <com.eduvanzins.Font.BtnLight
+                                <Button
                                     android:id="@+id/btnENach"
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
@@ -583,14 +580,14 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-        <com.eduvanzins.Font.BtnLight
+        <Button
             android:id="@+id/btnContinue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_weight="1"
             android:background="@color/red"
-            android:drawableRight="@drawable/icon_rightarrow"
+            android:drawableRight="@drawable/icon_back"
             android:paddingLeft="@dimen/_30sdp"
             android:paddingRight="@dimen/_10sdp"
             android:text="Submit"

@@ -6,9 +6,9 @@
                 android:startColor="@android:color/transparent"
                 android:endColor="@android:color/transparent"/>
 
-            <corners android:radius="10dp" />
-            <stroke android:width="2px"
-                android:color="@color/colorPrimary" />
+            <corners android:radius="30dp" />
+            <stroke android:width="5px"
+                android:color="#454a62" />
         </shape>
 
     </item>
