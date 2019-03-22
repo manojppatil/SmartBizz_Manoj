@@ -369,4 +369,5 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="Proceed">\"Proceed\"</string>
     <string name="to_complete">to complete the process</string>
     <string name="fs_msg"><![CDATA[Check your \'Friendly Score\' to ensure a Quick & Smooth Loan Process]]></string>
+    <string name="unmarried">Unmarried</string>
 </resources>
