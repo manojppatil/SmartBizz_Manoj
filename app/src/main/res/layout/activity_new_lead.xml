@@ -25,12 +25,15 @@
         android:layout_below="@id/txtStepTracker"
         android:layout_marginStart="@dimen/_15sdp"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_350sdp"
-        android:layout_below="@id/layout_tracker"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_400sdp"
+            android:layout_below="@id/layout_tracker"
+            android:padding="@dimen/_8sdp"
+            android:elevation="@dimen/_10sdp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
     <ImageView
@@ -41,7 +44,7 @@
         android:layout_margin="@dimen/_30sdp"
         android:background="@drawable/border_circular_red_filled"
         app:srcCompat="@drawable/ic_angle_right"
-        android:elevation="@dimen/_10sdp"/>
+        android:elevation="@dimen/_8sdp"/>
 
 
 </RelativeLayout>

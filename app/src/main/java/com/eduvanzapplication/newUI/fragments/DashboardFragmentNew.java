@@ -27,6 +27,7 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.adapter.LeadsAdapter;
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
+import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
@@ -60,6 +61,7 @@ public class DashboardFragmentNew extends Fragment {
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
     SharedPref sharedPref;
+    LinearLayout linProceedBtn;
 
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
@@ -69,6 +71,7 @@ public class DashboardFragmentNew extends Fragment {
     LeadsAdapter leadsAdapter;
 
     View view;
+
 
     public DashboardFragmentNew() {
     }
@@ -115,6 +118,7 @@ public class DashboardFragmentNew extends Fragment {
 
 
             viewPagerDashboard = (ViewPager) view.findViewById(R.id.viewPager_dashboard);
+            linProceedBtn = view.findViewById(R.id.linProceedBtn);
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
             circlePageIndicatorDashboard.setRadius(4 * density);
@@ -225,6 +229,13 @@ public class DashboardFragmentNew extends Fragment {
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
+
+        linProceedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), NewLeadActivity.class));
+            }
+        });
 
         return view;
     }//-----------------------------------END OF ON CREATE----------------------------------------//
