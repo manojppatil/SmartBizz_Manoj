@@ -57,6 +57,7 @@
                     android:orientation="vertical">
 
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
@@ -71,6 +72,7 @@
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/middle_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
@@ -85,6 +87,7 @@
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/last_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
@@ -114,6 +117,7 @@
                         android:weightSum="3">
 
                         <LinearLayout
+                            android:id="@+id/linMaleBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/_4sdp"
@@ -145,11 +149,12 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linFemaleBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/_4sdp"
                             android:layout_weight="1"
-                            android:background="@drawable/border_circular"
+                            android:background="@drawable/border_circular_blue_filled"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
                             android:padding="@dimen/_4sdp">
@@ -176,6 +181,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linOtherBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/_4sdp"
@@ -208,56 +214,111 @@
 
                     </LinearLayout>
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:text="@string/select_your_gender"
-                        android:textAllCaps="true"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="15sp" />
+                        android:orientation="horizontal">
 
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_4sdp"
-                        android:background="@drawable/border_circular"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_6sdp">
-
-                        <ImageView
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            app:srcCompat="@drawable/ic_calendar_alt" />
-
-                        <View
-                            android:layout_width="@dimen/_1sdp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_4sdp"
-                            android:layout_marginEnd="@dimen/_4sdp"
-                            android:background="@color/textcolordark" />
-
-                        <TextView
-                            android:id="@+id/txtDOB"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="15 May 1993"
-                            android:textColor="@color/textcolordark"
-                            android:textSize="15sp" />
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:text="Select your birth date"
+                                android:textAllCaps="true"
+                                android:textColor="@color/textcolordark"
+                                android:textSize="12sp" />
+
+
+                            <LinearLayout
+                                android:id="@+id/linDobBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_4sdp"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_6sdp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    app:srcCompat="@drawable/ic_birthday_cake" />
+
+                                <View
+                                    android:layout_width="@dimen/_1sdp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:background="@color/textcolordark" />
+
+                                <TextView
+                                    android:id="@+id/txtDOB"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="@dimen/_80sdp"
+                                    android:maxLines="1"
+                                    android:text=""
+                                    android:textColor="@color/textcolordark"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:text="Marital Status"
+                                android:textAllCaps="true"
+                                android:textColor="@color/textcolordark"
+                                android:textSize="12sp" />
+
+
+                            <LinearLayout
+                                android:id="@+id/linMaritalStatusBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_4sdp"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_6sdp">
+
+                                <Switch
+                                    android:id="@+id/switchMarital"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:layout_marginStart="@dimen/_1sdp"
+                                    style="@style/SCBSwitch"/>
+
+                                <TextView
+                                    android:id="@+id/txtMaritalStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:text="Unmarried"
+                                    android:textColor="@color/textcolordark"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
-
                 </LinearLayout>
-
-
             </RelativeLayout>
-
         </ScrollView>
-
-
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

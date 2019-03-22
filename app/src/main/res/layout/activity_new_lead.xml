@@ -37,12 +37,13 @@
 
 
     <ImageView
+        android:id="@+id/ivNextBtn"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/_30sdp"
-        android:background="@drawable/border_circular_red_filled"
+        android:background="@drawable/border_circular_grey_filled"
         app:srcCompat="@drawable/ic_angle_right"
         android:elevation="@dimen/_8sdp"/>
 
