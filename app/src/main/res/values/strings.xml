@@ -86,7 +86,7 @@
     <string name="pan_card">PAN Card</string>
     <string name="continu">Continue</string>
     <string name="my_profile">My Profile</string>
-    <string name="call_us">Call Us</string>
+    <string name="call_us"> Call Us</string>
     <string name="mail_us">Mail Us</string>
     <string name="notification">Notification</string>
     <string name="email_id">Email Id</string>
@@ -369,4 +369,9 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="Proceed">\"Proceed\"</string>
     <string name="to_complete">to complete the process</string>
     <string name="fs_msg"><![CDATA[Check your \'Friendly Score\' to ensure a Quick & Smooth Loan Process]]></string>
+    <string name="start_new_msg">Apply Now for an Instant Loan</string>
+    <string name="emi_cal_msg">Calculate the approx EMI amount, you need to pay</string>
+    <string name="call_us_s">\t Call Us</string>
+    <string name="whatsapp_us">\t WhatsApp Us</string>
+    <string name="emailus">\t Email Us</string>
 </resources>
