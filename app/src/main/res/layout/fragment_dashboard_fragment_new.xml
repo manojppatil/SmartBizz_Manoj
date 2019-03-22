@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/footer_bg"/>
+        app:srcCompat="@drawable/ic_footer_bg"/>
 
     <RelativeLayout
         android:id="@+id/layout3"
@@ -89,6 +89,7 @@
 
 
         <LinearLayout
+            android:id="@+id/linProceedBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/border_circular_red_filled"
@@ -130,7 +131,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_below="@id/layout3">
+        android:layout_above="@id/linContact">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -140,17 +141,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="@dimen/_6sdp">
+                android:layout_margin="@dimen/_6sdp"
+                android:paddingEnd="@dimen/_15sdp">
 
                 <RelativeLayout
                     android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_100sdp">
+                    android:layout_height="wrap_content">
                     <LinearLayout
                         android:id="@+id/layout4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="@drawable/border"
+                        android:background="@drawable/border_white_filled"
                         android:padding="@dimen/_8sdp">
                         <TextView
                             android:layout_width="wrap_content"
@@ -173,9 +175,9 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/_40sdp"
                             android:text="@string/fs_msg"
-                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:textSize="10sp"/>
 
                     </LinearLayout>
@@ -194,24 +196,24 @@
 
                 <RelativeLayout
                     android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp">
                     <LinearLayout
                         android:id="@+id/layout5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="@drawable/border"
+                        android:background="@drawable/border_white_filled"
                         android:padding="@dimen/_8sdp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Friendly"
+                            android:text="Start New"
                             android:textSize="15sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Score"
+                            android:text="Application"
                             android:textStyle="bold"
                             android:textSize="15sp"/>
 
@@ -224,46 +226,46 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/fs_msg"
-                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:text="@string/start_new_msg"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:textSize="10sp"/>
 
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_26sdp"
+                        android:layout_height="@dimen/_26sdp"
                         android:layout_below="@id/layout5"
                         android:layout_marginTop="-18dp"
+                        android:padding="@dimen/_3sdp"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        app:srcCompat="@drawable/ic_angle_right"
+                        app:srcCompat="@drawable/ic_plus"
                         android:background="@drawable/border_circular_red_filled" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_100sdp"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:background="#ffffffff">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_6sdp">
                     <LinearLayout
                         android:id="@+id/layout6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="@drawable/border"
+                        android:background="@drawable/border_white_filled"
                         android:padding="@dimen/_8sdp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Friendly"
+                            android:text="EMI"
                             android:textSize="15sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Score"
+                            android:text="Calculator"
                             android:textStyle="bold"
                             android:textSize="15sp"/>
 
@@ -276,21 +278,22 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/fs_msg"
-                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:text="@string/emi_cal_msg"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:textSize="10sp"/>
 
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_26sdp"
+                        android:layout_height="@dimen/_26sdp"
                         android:layout_below="@id/layout6"
                         android:layout_marginTop="-18dp"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        app:srcCompat="@drawable/ic_angle_right"
+                        app:srcCompat="@drawable/ic_percent"
+                        android:padding="@dimen/_5sdp"
                         android:background="@drawable/border_circular_red_filled" />
 
                 </RelativeLayout>
@@ -300,6 +303,62 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linContact"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:padding="@dimen/_6sdp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:elevation="@dimen/_10sdp"
+
+        android:background="@drawable/border_circular_grey_filled"
+        android:backgroundTint="@color/colorSecondary"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/call_us_s"
+            android:textSize="13sp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:textColor="@color/black"
+            android:drawableStart="@drawable/ic_phone"/>
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:layout_marginEnd="@dimen/_8sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/whatsapp_us"
+            android:textSize="13sp"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:drawableStart="@drawable/ic_whatsapp_brands"/>
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:layout_marginEnd="@dimen/_8sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/emailus"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:drawableStart="@drawable/ic_comment"/>
+
+    </LinearLayout>
 
 
 
