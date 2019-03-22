@@ -22,9 +22,6 @@ public class KycDetailFragment extends Fragment {
 	private VerticalStepperItemView mSteppers[] = new VerticalStepperItemView[3];
 	private Button mNextBtn0, mNextBtn1, mPrevBtn1, mNextBtn2, mPrevBtn2;
 
-    private VerticalStepperItemView mSteppersCoBr[] = new VerticalStepperItemView[2];
-    private Button mNextBtn0CoBr, mNextBtn1CoBr, mPrevBtn1CoBr;
-
     private int mActivatedColorRes = R.color.material_blue_500;
 	private int mDoneIconRes = R.drawable.ic_done_white_16dp;
 
@@ -32,10 +29,10 @@ public class KycDetailFragment extends Fragment {
 
 	public static Context context;
 	public static Fragment mFragment;
-    public static RelativeLayout relborrower, relCoborrower;
-    public static LinearLayout linBorrowerForm, linCoCorrowerForm;
-	public static TextView txtBorrowerArrowKey, txtCoBorrowerArrowKey;
-	public static int borrowerVisiblity = 0, coborrowerVisiblity = 1;
+    public static RelativeLayout relborrower;
+    public static LinearLayout linBorrowerForm;
+	public static TextView txtBorrowerArrowKey;
+	public static int borrowerVisiblity = 0;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -43,13 +40,10 @@ public class KycDetailFragment extends Fragment {
 		view = inflater.inflate(R.layout.fragment_kycdetail_stepper, parent, false);
 
         linBorrowerForm = (LinearLayout) view.findViewById(R.id.linBorrowerForm);
-        linCoCorrowerForm = (LinearLayout) view.findViewById(R.id.linCoCorrowerForm);
 
         relborrower = (RelativeLayout) view.findViewById(R.id.relborrower);
-        relCoborrower = (RelativeLayout) view.findViewById(R.id.relCoborrower);
 
         txtBorrowerArrowKey = (TextView) view.findViewById(R.id.txtBorrowerArrowKey);
-        txtCoBorrowerArrowKey = (TextView) view.findViewById(R.id.txtCoBorrowerArrowKey);
 
 		context = getContext();
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -63,15 +57,7 @@ public class KycDetailFragment extends Fragment {
 			borrowerVisiblity = 0;
 			txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
 		}
-		if (coborrowerVisiblity == 0) {
-			linCoCorrowerForm.setVisibility(View.VISIBLE);
-			coborrowerVisiblity = 1;
-			txtCoBorrowerArrowKey.setText(getResources().getString(R.string.up));
-		} else if (coborrowerVisiblity == 1) {
-			linCoCorrowerForm.setVisibility(View.GONE);
-			coborrowerVisiblity = 0;
-			txtCoBorrowerArrowKey.setText(getResources().getString(R.string.down));
-		}
+
 
 		relborrower.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -89,23 +75,6 @@ public class KycDetailFragment extends Fragment {
 			}
 		});
 
-		relCoborrower.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (coborrowerVisiblity == 0) {
-					linCoCorrowerForm.setVisibility(View.VISIBLE);
-					coborrowerVisiblity = 1;
-					txtCoBorrowerArrowKey.setText(getResources().getString(R.string.up));
-//					setCoborrower();
-
-				} else if (coborrowerVisiblity == 1) {
-					linCoCorrowerForm.setVisibility(View.GONE);
-					coborrowerVisiblity = 0;
-					txtCoBorrowerArrowKey.setText(getResources().getString(R.string.down));
-				}
-
-			}
-		});
         return view;
     }
 
@@ -190,59 +159,6 @@ public class KycDetailFragment extends Fragment {
 			}
 		});
 
-        mSteppersCoBr[0] = view.findViewById(R.id.stepper_0CoBr);
-        mSteppersCoBr[1] = view.findViewById(R.id.stepper_1CoBr);
-
-        VerticalStepperItemView.bindSteppers(mSteppers);
-
-        mNextBtn0CoBr = view.findViewById(R.id.button_next_0CoBr);
-        mNextBtn0CoBr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSteppersCoBr[0].nextStep();
-            }
-        });
-
-        mSteppersCoBr[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSteppersCoBr[0].nextStep();
-            }
-        });
-
-        mSteppersCoBr[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSteppersCoBr[0].nextStep();
-            }
-        });
-
-        view.findViewById(R.id.button_test_error).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mSteppersCoBr[0].getErrorText() != null) {
-                    mSteppersCoBr[0].setErrorText(null);
-                } else {
-                    mSteppersCoBr[0].setErrorText("Test error!");
-                }
-            }
-        });
-
-        mPrevBtn1CoBr = view.findViewById(R.id.button_prev_1CoBr);
-        mPrevBtn1CoBr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSteppersCoBr[1].prevStep();
-            }
-        });
-
-        mNextBtn1CoBr = view.findViewById(R.id.button_next_1CoBr);
-        mNextBtn1CoBr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSteppersCoBr[1].nextStep();
-            }
-        });
 
 		view.findViewById(R.id.btn_change_point_color).setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -54,8 +53,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/first_name"
-                                android:inputType="textCapSentences"
-                                android:theme="@style/EditTextStyle" />
+                                android:inputType="textCapSentences" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
@@ -71,8 +69,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/middle_name"
-                                android:inputType="textCapSentences"
-                                android:theme="@style/EditTextStyle" />
+                                android:inputType="textCapSentences" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
@@ -94,58 +91,6 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="72dp"
-                                android:orientation="vertical"
-                                android:padding="@dimen/_1sdp">
-
-                                <TextView
-                                    android:id="@+id/lblBirthdayBr"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingTop="@dimen/_6sdp"
-                                    android:paddingBottom="@dimen/_3sdp"
-                                    android:text="@string/birthdate"
-                                    android:textColor="#808080"
-                                    android:textSize="16sp"
-                                    android:visibility="invisible" />
-
-                                <TextView
-                                    android:id="@+id/txtBirthdateBr"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingLeft="1dp"
-                                    android:paddingBottom="@dimen/_3sdp"
-                                    android:text="@string/birthdate"
-                                    android:textColor="#808080"
-                                    android:textSize="16sp" />
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/colorPrimary"
-                                    android:paddingBottom="@dimen/_3sdp" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:id="@+id/txtBirthdayCalenderBr"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:paddingTop="@dimen/_4sdp"
-                                android:paddingRight="@dimen/_8sdp"
-                                android:paddingBottom="@dimen/_3sdp"
-                                android:text="@string/calendar"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="16sp" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:paddingLeft="@dimen/_4sdp">
@@ -155,6 +100,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginRight="@dimen/_5sdp"
                                 android:background="@drawable/border_circular_red_empty"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal"
@@ -178,8 +125,9 @@
                                     android:id="@+id/txtMale"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Male"
                                     android:maxLines="1"
+                                    android:text="Male"
+                                    android:padding="@dimen/_2sdp"
                                     android:theme="@style/TextViewRadioStyle" />
 
                             </LinearLayout>
@@ -188,10 +136,11 @@
                                 android:id="@+id/linFemale"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginRight="@dimen/_5sdp"
                                 android:background="@drawable/border_circular_red_empty"
                                 android:gravity="center_horizontal"
-                                android:layout_centerHorizontal="true"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
 
@@ -213,8 +162,9 @@
                                     android:id="@+id/txtFemale"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Female"
                                     android:maxLines="1"
+                                    android:text="Female"
+                                    android:padding="@dimen/_2sdp"
                                     android:theme="@style/TextViewRadioStyle" />
 
                             </LinearLayout>
@@ -223,10 +173,11 @@
                                 android:id="@+id/linOther"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginRight="@dimen/_5sdp"
                                 android:background="@drawable/border_circular_red_empty"
                                 android:gravity="center_horizontal"
-                                android:layout_alignParentRight="true"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
 
@@ -248,8 +199,9 @@
                                     android:id="@+id/txtOther"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Other"
                                     android:maxLines="1"
+                                    android:text="Other"
+                                    android:padding="@dimen/_2sdp"
                                     android:theme="@style/TextViewRadioStyle" />
 
                             </LinearLayout>
@@ -259,7 +211,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:paddingLeft="@dimen/_4sdp">
 
                             <LinearLayout
@@ -277,7 +229,7 @@
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_17sdp"
                                     android:tint="@color/textcolordark"
-                                    app:srcCompat="@drawable/ic_male" />
+                                    app:srcCompat="@drawable/ic_birthday_cake" />
 
                                 <View
                                     android:layout_width="@dimen/_1sdp"
@@ -290,8 +242,9 @@
                                     android:id="@+id/txtDob"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="01 Apr 1999"
                                     android:maxLines="1"
+                                    android:text="01 Apr 1999"
+                                    android:padding="@dimen/_2sdp"
                                     android:theme="@style/TextViewRadioStyle" />
 
                             </LinearLayout>
@@ -300,24 +253,35 @@
                                 android:id="@+id/linMarried"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_alignParentRight="true"
                                 android:background="@drawable/border_circular_red_empty"
                                 android:gravity="center_horizontal"
-                                android:layout_alignParentRight="true"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
 
                                 <Switch
-                                    android:id="@+id/switchMarried"
-                                    android:layout_width="@dimen/_100sdp"
+                                    android:id="@+id/switchMaritalStatus"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="false"
-                                    android:text="@string/unmarried"
-                                    android:textColor="@color/textcolordark"
-                                    android:textOff="@string/unmarried"
-                                    android:textOn="@string/married"
-                                    android:textSize="16sp" />
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:theme="@style/SCBSwitch"
+                                    android:checked="false" />
 
+                                <View
+                                    android:layout_width="@dimen/_1sdp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:background="@color/textcolordark" />
+
+                                <TextView
+                                    android:id="@+id/txtMaritalStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:text="@string/unmarried"
+                                    android:padding="@dimen/_2sdp"
+                                    android:theme="@style/TextViewRadioStyle" />
                             </LinearLayout>
 
 
@@ -334,7 +298,7 @@
                                 android:id="@+id/edtEmailIdBr"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="EmailId"
+                                android:hint="e-Mail ID"
                                 android:inputType="textEmailAddress"
                                 android:theme="@style/EditTextStyle" />
                         </android.support.design.widget.TextInputLayout>
@@ -350,7 +314,7 @@
                                 android:id="@+id/edtMobileNoBr"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Enter Phone(10 digits)"
+                                android:hint="Mobile Number"
                                 android:inputType="phone"
                                 android:maxLength="10"
                                 android:theme="@style/EditTextStyle" />
@@ -513,7 +477,6 @@
                         android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="vertical"
                         android:paddingLeft="@dimen/_4sdp">
-
 
                         <LinearLayout
                             android:layout_width="match_parent"

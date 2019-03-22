@@ -15,20 +15,6 @@
 			android:layout_height="match_parent"
 			android:orientation="vertical">
 
-			<Button
-				android:id="@+id/btnAddCoborrower"
-				android:layout_width="match_parent"
-				android:layout_height="30dp"
-				android:layout_marginLeft="@dimen/_30sdp"
-				android:layout_marginRight="@dimen/_30sdp"
-				android:layout_marginTop="20dp"
-				android:textAllCaps="false"
-				android:background="@color/colorPrimary"
-				android:text="Add Co-Borrower"
-				android:textColor="@color/white"
-				android:textSize="16sp"
-				android:visibility="gone" />
-
 			<RelativeLayout
 				android:id="@+id/relborrower"
 				android:layout_width="match_parent"
@@ -63,45 +49,6 @@
 				android:visibility="visible">
 
 				<include layout="@layout/fragment_kycdetail_borrower_stepper" />
-
-			</LinearLayout>
-
-			<RelativeLayout
-				android:id="@+id/relCoborrower"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/_10sdp"
-				android:layout_marginBottom="@dimen/_10sdp"
-				android:visibility="gone"
-				android:padding="10dp">
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentStart="true"
-					android:text="Co-Borrower"
-					android:textColor="@color/colorSecondary"
-					android:textSize="20sp"
-					android:textStyle="bold" />
-
-				<TextView
-					android:id="@+id/txtCoBorrowerArrowKey"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentEnd="true"
-					android:text="@string/up"
-					android:textColor="@color/colorRed"
-					android:textSize="20sp" />
-			</RelativeLayout>
-
-			<LinearLayout
-				android:id="@+id/linCoCorrowerForm"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical"
-				android:visibility="visible">
-
-				<include layout="@layout/fragment_kycdetails_coborrower_stepper" />
 
 			</LinearLayout>
 
