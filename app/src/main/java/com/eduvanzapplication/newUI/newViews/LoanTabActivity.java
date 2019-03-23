@@ -10,9 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.newUI.fragments.AgreementSigningFragment;
+import com.eduvanzapplication.newUI.fragments.AmortizationFragment;
 import com.eduvanzapplication.newUI.fragments.DetailedInfoFragment;
 import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
+import com.eduvanzapplication.newUI.fragments.PostApprovalDocFragment;
 import com.eduvanzapplication.newUI.fragments.UploadDocumentFragment;
 
 import java.util.ArrayList;
@@ -55,9 +56,10 @@ public class LoanTabActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new KycDetailFragment(), "KYC Details");
-        adapter.addFrag(new DetailedInfoFragment(), "Detailed Ino");
-        adapter.addFrag(new UploadDocumentFragment(), "Doc Upload");
-        adapter.addFrag(new AgreementSigningFragment(), "Agreement SignIn");
+        adapter.addFrag(new DetailedInfoFragment(), "Detailed Info");
+        adapter.addFrag(new UploadDocumentFragment(), "Documents Upload");
+        adapter.addFrag(new PostApprovalDocFragment(), "Post approval Documentation");
+        adapter.addFrag(new AmortizationFragment(), "Amortization");
         viewPager.setAdapter(adapter);
     }
 

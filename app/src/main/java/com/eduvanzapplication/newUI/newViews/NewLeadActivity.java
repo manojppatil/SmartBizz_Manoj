@@ -9,13 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.newUI.fragments.AgreementSigningFragment;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
-import com.eduvanzapplication.newUI.fragments.DetailedInfoFragment;
 import com.eduvanzapplication.newUI.fragments.DocumentAvailabilityFragment;
-import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
 import com.eduvanzapplication.newUI.fragments.PersonalDetailsFragment;
-import com.eduvanzapplication.newUI.fragments.UploadDocumentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
