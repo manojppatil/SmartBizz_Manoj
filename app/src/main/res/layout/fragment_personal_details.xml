@@ -285,7 +285,7 @@
 
                             <LinearLayout
                                 android:id="@+id/linMaritalStatusBtn"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/_4sdp"
                                 android:background="@drawable/border_circular"
@@ -297,7 +297,7 @@
                                     android:id="@+id/switchMarital"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_2sdp"
                                     android:layout_marginStart="@dimen/_1sdp"
                                     style="@style/SCBSwitch"/>
 
@@ -306,7 +306,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
-                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_2sdp"
                                     android:text="Unmarried"
                                     android:textColor="@color/textcolordark"
                                     android:textSize="15sp" />

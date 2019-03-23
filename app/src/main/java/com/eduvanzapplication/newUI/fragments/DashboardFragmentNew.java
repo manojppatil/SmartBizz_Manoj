@@ -61,7 +61,7 @@ public class DashboardFragmentNew extends Fragment {
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
     SharedPref sharedPref;
-    LinearLayout linProceedBtn;
+    LinearLayout linProceedBtn, layout2;
 
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
@@ -119,6 +119,7 @@ public class DashboardFragmentNew extends Fragment {
 
             viewPagerDashboard = (ViewPager) view.findViewById(R.id.viewPager_dashboard);
             linProceedBtn = view.findViewById(R.id.linProceedBtn);
+            layout2 = view.findViewById(R.id.layout2);
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
             circlePageIndicatorDashboard.setRadius(4 * density);
@@ -237,6 +238,12 @@ public class DashboardFragmentNew extends Fragment {
             }
         });
 
+        layout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), NewLeadActivity.class));
+            }
+        });
         return view;
     }//-----------------------------------END OF ON CREATE----------------------------------------//
 

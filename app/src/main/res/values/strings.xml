@@ -353,7 +353,7 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <!--<string name="profile_photo">Profile Photo <font fgcolor="#EE415E">*</font></string>-->
 
     <string name="street_name_locality_land_mark">Street Name,Locality,Land mark </string>
-    <string name="flat_no_building_name_society_name">Flat No,Building name,Society Name</string>
+    <string name="flat_no_building_name_society_name">FLAT NO,Building name,Society Name</string>
     <string name="kyc_details">KYC Details</string>
     <string name="detailed_info">Detailed Info</string>
     <string name="reln_borr">Relation with borrower</string>
@@ -384,4 +384,6 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="last_name_cap">LAST NAME</string>
     <string name="select_your_gender">Select your gender</string>
     <string name="documents_availability">Documents Availability</string>
+    <string name="current_address">Current Address</string>
+    <string name="employement_details">Employment Details</string>
 </resources>
