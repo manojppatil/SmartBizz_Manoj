@@ -124,8 +124,6 @@ public class DashboardActivity extends AppCompatActivity
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final String IMAGE_EXTENSION = "jpg";
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

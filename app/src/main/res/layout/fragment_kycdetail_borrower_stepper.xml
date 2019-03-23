@@ -89,28 +89,36 @@
                                 android:theme="@style/EditTextStyle" />
                         </android.support.design.widget.TextInputLayout>
 
-                        <RelativeLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
-                            android:paddingLeft="@dimen/_4sdp">
+                            android:text="@string/select_your_gender"
+                            android:textAllCaps="true"
+                            android:textColor="@color/textcolordark"
+                            android:theme="@style/TextViewTitleStyle"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="3.2">
 
                             <LinearLayout
                                 android:id="@+id/linMale"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_5sdp"
-                                android:background="@drawable/border_circular_red_empty"
-                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
 
                                 <ImageView
-                                    android:id="@+id/ivMale"
                                     android:layout_width="@dimen/_15sdp"
-                                    android:layout_height="@dimen/_17sdp"
+                                    android:layout_height="@dimen/_15sdp"
                                     android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_male" />
 
@@ -127,27 +135,24 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="Male"
-                                    android:padding="@dimen/_2sdp"
-                                    android:theme="@style/TextViewRadioStyle" />
-
+                                    android:theme="@style/TextViewRadioStyle"
+                                    android:textColor="@color/textcolordark" />
                             </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/linFemale"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_5sdp"
-                                android:background="@drawable/border_circular_red_empty"
-                                android:gravity="center_horizontal"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_weight="1.2"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
 
                                 <ImageView
-                                    android:id="@+id/ivFemale"
                                     android:layout_width="@dimen/_15sdp"
-                                    android:layout_height="@dimen/_17sdp"
+                                    android:layout_height="@dimen/_15sdp"
                                     android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_female" />
 
@@ -164,27 +169,24 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="Female"
-                                    android:padding="@dimen/_2sdp"
-                                    android:theme="@style/TextViewRadioStyle" />
-
+                                    android:theme="@style/TextViewRadioStyle"
+                                    android:textColor="@color/textcolordark" />
                             </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/linOther"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_5sdp"
-                                android:background="@drawable/border_circular_red_empty"
-                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
 
                                 <ImageView
-                                    android:id="@+id/ivOther"
                                     android:layout_width="@dimen/_15sdp"
-                                    android:layout_height="@dimen/_17sdp"
+                                    android:layout_height="@dimen/_15sdp"
                                     android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_transgender" />
 
@@ -201,33 +203,33 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="Other"
-                                    android:padding="@dimen/_2sdp"
-                                    android:theme="@style/TextViewRadioStyle" />
-
+                                    android:theme="@style/TextViewRadioStyle"
+                                    android:textColor="@color/textcolordark" />
                             </LinearLayout>
 
-                        </RelativeLayout>
+                        </LinearLayout>
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:paddingLeft="@dimen/_4sdp">
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
 
                             <LinearLayout
                                 android:id="@+id/linDob"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:background="@drawable/border_circular_red_empty"
-                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/_4sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
 
                                 <ImageView
-                                    android:id="@+id/ivDob"
                                     android:layout_width="@dimen/_15sdp"
-                                    android:layout_height="@dimen/_17sdp"
+                                    android:layout_height="@dimen/_15sdp"
                                     android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_birthday_cake" />
 
@@ -244,18 +246,19 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="01 Apr 1999"
-                                    android:padding="@dimen/_2sdp"
-                                    android:theme="@style/TextViewRadioStyle" />
-
+                                    android:theme="@style/TextViewRadioStyle"
+                                    android:textColor="@color/textcolordark" />
                             </LinearLayout>
 
+
                             <LinearLayout
-                                android:id="@+id/linMarried"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/linMaritalStatus"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:background="@drawable/border_circular_red_empty"
-                                android:gravity="center_horizontal"
+                                android:layout_margin="@dimen/_4sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
 
@@ -263,7 +266,6 @@
                                     android:id="@+id/switchMaritalStatus"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:theme="@style/SCBSwitch"
                                     android:checked="false" />
 
@@ -279,13 +281,12 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
-                                    android:text="@string/unmarried"
-                                    android:padding="@dimen/_2sdp"
-                                    android:theme="@style/TextViewRadioStyle" />
+                                    android:text="Married"
+                                    android:theme="@style/TextViewRadioStyle"
+                                    android:textColor="@color/textcolordark" />
                             </LinearLayout>
 
-
-                        </RelativeLayout>
+                        </LinearLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
