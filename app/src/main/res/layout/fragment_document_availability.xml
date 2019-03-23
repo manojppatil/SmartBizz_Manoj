@@ -60,6 +60,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/linAadharBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
@@ -77,7 +78,7 @@
                             <View
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
-                                android:background="@color/colorSecondary"
+                                android:background="@color/black_new"
                                 android:layout_marginStart="@dimen/_4sdp"
                                 android:layout_marginEnd="@dimen/_4sdp"/>
 
@@ -89,6 +90,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linPanBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
@@ -106,7 +108,7 @@
                             <View
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
-                                android:background="@color/colorSecondary"
+                                android:background="@color/black_new"
                                 android:layout_marginStart="@dimen/_4sdp"
                                 android:layout_marginEnd="@dimen/_4sdp"/>
 
@@ -125,6 +127,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/linBothBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
@@ -142,7 +145,7 @@
                             <View
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
-                                android:background="@color/colorSecondary"
+                                android:background="@color/black_new"
                                 android:layout_marginStart="@dimen/_4sdp"
                                 android:layout_marginEnd="@dimen/_4sdp"/>
 
@@ -154,6 +157,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linNoneBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
@@ -171,7 +175,7 @@
                             <View
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
-                                android:background="@color/colorSecondary"
+                                android:background="@color/black_new"
                                 android:layout_marginStart="@dimen/_4sdp"
                                 android:layout_marginEnd="@dimen/_4sdp"/>
 
@@ -185,6 +189,7 @@
                     </LinearLayout>
 
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilAadhar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
@@ -196,10 +201,13 @@
                             android:layout_height="wrap_content"
                             android:hint="Aadhar Number"
                             android:textAllCaps="true"
+                            android:inputType="number"
+                            android:maxLines="1"
                             android:theme="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tilPan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
@@ -211,6 +219,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Pan Number"
                             android:textAllCaps="true"
+                            android:maxLines="1"
                             android:theme="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 

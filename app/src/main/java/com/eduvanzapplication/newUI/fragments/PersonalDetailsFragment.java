@@ -26,7 +26,6 @@ import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import java.util.Calendar;
 
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
-
 public class PersonalDetailsFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
@@ -38,10 +37,10 @@ public class PersonalDetailsFragment extends Fragment {
     private Switch switchMarital;
     private TextView txtMaritalStatus;
 
-    private OnFragmentInteractionListener mListener;
+    private static OnFragmentInteractionListener mListener;
     private TextView txtDOB;
 
-    private String firstName="", lastName="", middleName="", gender="2", maritalStatus="0";
+
     public PersonalDetailsFragment() {
         // Required empty public constructor
     }
@@ -88,7 +87,7 @@ public class PersonalDetailsFragment extends Fragment {
         linMaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gender = "1";
+                NewLeadActivity.gender = "1";
                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
@@ -98,7 +97,7 @@ public class PersonalDetailsFragment extends Fragment {
         linFemaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gender = "2";
+               NewLeadActivity.gender = "2";
                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
@@ -108,7 +107,7 @@ public class PersonalDetailsFragment extends Fragment {
         linOtherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gender = "2";
+                NewLeadActivity.gender = "2";
                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
@@ -125,7 +124,10 @@ public class PersonalDetailsFragment extends Fragment {
                     datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
+                            calendar.set(Calendar.MONTH, month);
+                            NewLeadActivity.dob = String.valueOf(dayOfMonth)+"-"+ (month+1) + "-"+year;
+                            txtDOB.setText(NewLeadActivity.dob);
+                            checkAllFields();
                         }
                     });
                     datePickerDialog.show();
@@ -136,11 +138,12 @@ public class PersonalDetailsFragment extends Fragment {
         switchMarital.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                maritalStatus = isChecked ? "1" : "0";
+                NewLeadActivity.maritalStatus = isChecked ? "1" : "0";
                 if (isChecked)
                     txtMaritalStatus.setText("Married");
                 else
                     txtMaritalStatus.setText("Unmarried");
+                checkAllFields();
             }
         });
 
@@ -152,7 +155,7 @@ public class PersonalDetailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                firstName = tilFirstName.getEditText().getText().toString();
+                NewLeadActivity.firstName = tilFirstName.getEditText().getText().toString();
                 checkAllFields();
             }
 
@@ -169,7 +172,7 @@ public class PersonalDetailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                middleName = tilMiddleName.getEditText().getText().toString();
+                NewLeadActivity.middleName = tilMiddleName.getEditText().getText().toString();
                 checkAllFields();
             }
 
@@ -187,7 +190,7 @@ public class PersonalDetailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                lastName = tilLastName.getEditText().getText().toString();
+                NewLeadActivity.lastName = tilLastName.getEditText().getText().toString();
                 checkAllFields();
             }
 
@@ -198,46 +201,22 @@ public class PersonalDetailsFragment extends Fragment {
         });
 
 
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if (state == ViewPager.SCROLL_STATE_IDLE){
-
-                    if (viewPager.getCurrentItem() == 1){
-                        firstName = tilFirstName.getEditText().getText().toString();
-                        validate();
-//                        viewPager.setCurrentItem(0);
-                    }
-                }
-            }
-        });
     }
 
     private void checkAllFields() {
-        if (!firstName.equals("") && !lastName.equals("") && !middleName.equals("")
-        || txtDOB.getText().toString().equals("")){
-            mListener.onOffButtons(true, false);
-        }else
+        if (NewLeadActivity.firstName.equals("") || NewLeadActivity.lastName.equals("") || NewLeadActivity.middleName.equals("") || NewLeadActivity.dob.equals("")){
             mListener.onOffButtons(false, false);
+        }else
+            mListener.onOffButtons(true, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void validate() {
-        if (firstName.equals("") )
+    public static void validate() {
+        if (NewLeadActivity.firstName.equals("") || NewLeadActivity.middleName.equals("") || NewLeadActivity.lastName.equals("") || NewLeadActivity.dob.equals(""))
             mListener.onFragmentInteraction(false, 0);
         else
             mListener.onFragmentInteraction(true, 1);
-        }
+     }
 
 
     @Override
@@ -255,6 +234,13 @@ public class PersonalDetailsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+//        checkAllFields();
     }
 
     public interface OnFragmentInteractionListener {

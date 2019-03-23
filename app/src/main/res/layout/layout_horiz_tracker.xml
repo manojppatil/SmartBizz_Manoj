@@ -10,8 +10,8 @@
 
     <View
         android:id="@+id/dot1"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:background="@drawable/border_circular_red_filled"
         android:visibility="visible"/>
     <View
