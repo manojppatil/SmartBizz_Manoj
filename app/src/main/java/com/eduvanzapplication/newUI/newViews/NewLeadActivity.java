@@ -7,6 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
@@ -18,9 +22,10 @@ import java.util.List;
 
 public class NewLeadActivity extends AppCompatActivity implements PersonalDetailsFragment.OnFragmentInteractionListener,
                                                             CurrentAddressFragment.OnFragmentInteractionListener,
-                                                            DocumentAvailabilityFragment.OnFragmentInteractionListener{
+                                                            DocumentAvailabilityFragment.OnFragmentInteractionListener {
 
-    ViewPager viewPager;
+    public static ViewPager viewPager;
+    private ImageView ivNextBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,34 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     private void setViews() {
 
         viewPager = findViewById(R.id.viewpager);
+        ivNextBtn = findViewById(R.id.ivNextBtn);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == ViewPager.SCROLL_STATE_IDLE){
+                    if (viewPager.getCurrentItem() == 1){
+
+                    }
+                }
+            }
+        });
+
+        ivNextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+            }
+        });
 
     }
 
@@ -43,6 +76,21 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         adapter.addFrag(new DocumentAvailabilityFragment(), "Document Availability");
         adapter.addFrag(new CurrentAddressFragment(), "Current Address");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onFragmentInteraction(boolean valid, int next) {
+        viewPager.setCurrentItem(next);
+        Toast.makeText(NewLeadActivity.this, ""+next, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onOffButtons(boolean next, boolean prev) {
+        if (next)
+            ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+        else
+            ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
+
     }
 
     @Override
