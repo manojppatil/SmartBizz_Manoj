@@ -8,6 +8,9 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -58,12 +61,21 @@ public class DashboardFragmentNew extends Fragment {
     static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
     ArrayList<ViewPagerDashboardPOJO> viewPagerDashboardPOJOArrayList;
+
+
+
+
     static LinearLayout   linearLayoutEligiblityChekck,
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
     SharedPref sharedPref;
     LinearLayout linProceedBtn, layout2, linStartNew;
     ImageView ivStartNewBtn;
+    TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
+
+
+
+
 
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
@@ -124,6 +136,10 @@ public class DashboardFragmentNew extends Fragment {
             layout2 = view.findViewById(R.id.layout2);
             linStartNew = view.findViewById(R.id.linStartNew);
             ivStartNewBtn = view.findViewById(R.id.ivStartNewBtn);
+            txtCallUs = view.findViewById(R.id.txtCallUs);
+            txtWhatsAppUs = view.findViewById(R.id.txtWhatsAppUs);
+            txtEmailUs = view.findViewById(R.id.txtEmailUs);
+
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
             circlePageIndicatorDashboard.setRadius(4 * density);
@@ -235,10 +251,6 @@ public class DashboardFragmentNew extends Fragment {
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
-        linProceedBtn.setOnClickListener(newApplicationClkListnr);
-        layout2.setOnClickListener(newApplicationClkListnr);
-        linStartNew.setOnClickListener(newApplicationClkListnr);
-        ivStartNewBtn.setOnClickListener(newApplicationClkListnr);
         return view;
     }//-----------------------------------END OF ON CREATE----------------------------------------//
 
@@ -248,6 +260,76 @@ public class DashboardFragmentNew extends Fragment {
             startActivity(new Intent(getActivity(), NewLeadActivity.class));
         }
     };
+
+    View.OnClickListener callUsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:02249733624"));
+            startActivity(intent);
+        }
+    };
+
+    View.OnClickListener whatsAppUsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String msg = "Hello Eduvanz, Please let me know more about your loan offering.";
+            Intent sendIntent = new Intent("android.intent.action.MAIN");
+            sendIntent.setAction(Intent.ACTION_VIEW);
+            sendIntent.setPackage("com.whatsapp");
+            String url = "https://api.whatsapp.com/send?phone=918070363636&text="+msg;
+            sendIntent.setData(Uri.parse(url));
+            if(sendIntent.resolveActivity(getContext().getPackageManager()) != null){
+                startActivity(sendIntent);
+            }else{
+                Snackbar.make(txtWhatsAppUs, "Please Install WhatsApp Messenger in your Devices", Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    View.OnClickListener emailUsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                try {
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@eduvanz.com"});
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                    emailIntent.setType("text/plain");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+                    final PackageManager pm = context.getPackageManager();
+                    final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
+                    ResolveInfo best = null;
+                    for (final ResolveInfo info : matches)
+                        if (info.activityInfo.packageName.endsWith(".gm") || info.activityInfo.name.toLowerCase().contains("gmail"))
+                            best = info;
+                    if (best != null)
+                        emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+                    context.startActivity(emailIntent);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+            }
+    };
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        linProceedBtn.setOnClickListener(newApplicationClkListnr);
+        layout2.setOnClickListener(newApplicationClkListnr);
+        linStartNew.setOnClickListener(newApplicationClkListnr);
+        ivStartNewBtn.setOnClickListener(newApplicationClkListnr);
+        txtCallUs.setOnClickListener(callUsListener);
+        txtWhatsAppUs.setOnClickListener(whatsAppUsListener);
+        txtEmailUs.setOnClickListener(emailUsListener);
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();

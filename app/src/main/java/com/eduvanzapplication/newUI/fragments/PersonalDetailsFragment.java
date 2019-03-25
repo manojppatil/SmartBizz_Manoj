@@ -1,5 +1,6 @@
 package com.eduvanzapplication.newUI.fragments;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
@@ -11,9 +12,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -36,6 +40,7 @@ public class PersonalDetailsFragment extends Fragment {
     private LinearLayout linMaleBtn, linFemaleBtn, linOtherBtn, linDobBtn;
     private Switch switchMarital;
     private TextView txtMaritalStatus;
+    private LinearLayout linStudentBtn,linSalariedBtn, linSelfEmployedBtn;
 
     private static OnFragmentInteractionListener mListener;
     private TextView txtDOB;
@@ -61,6 +66,62 @@ public class PersonalDetailsFragment extends Fragment {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(false);
+
+        View professionView = getLayoutInflater().inflate(R.layout.layout_profession,null);
+        linStudentBtn = professionView.findViewById(R.id.linStudentBtn);
+        linSalariedBtn = professionView.findViewById(R.id.linSalariedBtn);
+        linSelfEmployedBtn = professionView.findViewById(R.id.linSelfEmployedBtn);
+        builder.setView(professionView);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+//        Window window = dialog.getWindow();
+//        WindowManager.LayoutParams wlp = window.getAttributes();
+//        wlp.gravity = Gravity.BOTTOM;
+//        window.setAttributes(wlp);
+
+        linStudentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession = "1";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession = "2";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                dialog.dismiss();
+            }
+        });
+
+        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession  ="3";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                dialog.dismiss();
+            }
+        });
+
     }
 
     @Override
@@ -181,7 +242,6 @@ public class PersonalDetailsFragment extends Fragment {
 
             }
         });
-
         tilLastName.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

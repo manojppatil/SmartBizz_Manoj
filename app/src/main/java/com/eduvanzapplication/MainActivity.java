@@ -14,15 +14,35 @@ import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends Application {
 
+    //6FoiXr+hADbzGL05ywYcs3BIXaFmmTad9kydjVsUDe64c6NiaIGTK7xgjWuthdiD1oep9okGUlzmVkdcpXRhuw== password
+    public static String TAG = "EDUVANZ LOG";
+//    public static String mainUrl = "http://139.59.32.234/eduvanzApi/"; //PRODUCTION
+//    public static String mainUrl = " http://139.59.61.225/eduvanzApi/"; //TESTING
+//    public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
+
+    public static String mainUrl = "http://192.168.1.26/eduvanzapi/"; //Dharam
+//    public static String mainUrl = "http://192.168.0.115/eduvanzapi/"; //Sachin
+//    public static String mainUrl = "http://192.168.1.78/eduvanzapi/"; //Sachin
+//    public static String mainUrl = "http://192.168.0.108/eduvanzapi/"; //Samir
+//    public static String mainUrl = "http://192.168.0.101/eduvanzapi/index.php/"; //Vijay
+
+//    public static String mainUrl = "https://api.eduvanz.com/"; ///////////////////L I V E//////////////
+
+
     @Override
     public void onCreate() {
         super.onCreate();
+        setFont();
+//        generateHashkey();
+    }
+
+    private void setFont() {
+
         FontsOverride.setDefaultFont(getApplicationContext(), "MONOSPACE", "fonts/sourcesanspro_italic.ttf");//italic
         FontsOverride.setDefaultFont(getApplicationContext(), "NORMAL", "fonts/sourcesanspro_regular.ttf");//Regular
         FontsOverride.setDefaultFont(getApplicationContext(), "SANS", "fonts/sourcesanspro_light.ttf");//Light
         FontsOverride.setDefaultFont(getApplicationContext(), "SERIF", "fonts/sourcesanspro_semibold.ttf");//Semibold
 
-//        generateHashkey();
     }
 
     public void generateHashkey(){

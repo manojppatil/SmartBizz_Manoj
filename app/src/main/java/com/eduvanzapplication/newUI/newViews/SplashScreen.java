@@ -34,6 +34,7 @@ import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.database.DBAdapter;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 
 import io.fabric.sdk.android.Fabric;
@@ -108,24 +109,19 @@ public class SplashScreen extends AppCompatActivity {
                 int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
                 decorView.setSystemUiVisibility(uiOptions);
             }
-
             imageViewCustomer = (ImageView) view1.findViewById(R.id.splash_image);
-//            imageViewCustomer.setAlpha(80);
             textViewCustomer = (TextView) view1.findViewById(R.id.splash_text);
             relativeLayoutCustomer = (RelativeLayout) view1.findViewById(R.id.rel_lay);
 
             Resources res = context.getResources();
-// Change locale settings in the app.
             DisplayMetrics dm = res.getDisplayMetrics();
             android.content.res.Configuration conf = res.getConfiguration();
-//        conf.setLocale(new Locale("HI".toLowerCase())); // API 17+ only.
             conf.setLocale(new Locale(AppLanguage.toLowerCase())); // API 17+ only.
-// Use conf.locale = new Locale(...) if targeting lower versions
 
             res.updateConfiguration(conf, dm);
 
-//            apiCall();
-            StartAnimationsCustomer();
+            apiCall();
+//            StartAnimationsCustomer();
 
             //printHashKey(getApplicationContext());
 
@@ -159,9 +155,7 @@ public class SplashScreen extends AppCompatActivity {
                 StartAnimationsCustomer();
 
             } else {
-                StartAnimationsCustomer();//coment this
-
-                VolleyCallNew volleyCall = new VolleyCallNew();
+                VolleyCall volleyCall = new VolleyCall();
                 volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "checkVersion", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
