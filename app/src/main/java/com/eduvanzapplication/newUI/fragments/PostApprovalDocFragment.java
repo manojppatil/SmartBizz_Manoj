@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -22,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -53,6 +56,9 @@ public class PostApprovalDocFragment extends Fragment {
     String userId;
     String downloadUrl = "", downloadSignedUrl = "";
     long downloadReference;
+
+    private LinearLayout linManualBtn, lineSignBtn, linOTPBtn,linPayBtn,linData;
+    private ImageButton btnExpandCollapse;
 
     TextView txtProcessingFee;
 
@@ -123,18 +129,28 @@ public class PostApprovalDocFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view = inflater.inflate(layout.fragment_postapprovaldoc, container, false);
+
+        linManualBtn = view.findViewById(R.id.linManualBtn);
+        lineSignBtn = view.findViewById(R.id.lineSignBtn);
+        linOTPBtn = view.findViewById(R.id.linOTPBtn);
+        linPayBtn = view.findViewById(R.id.linPayBtn);
+        linData = view.findViewById(R.id.linData);
+        btnExpandCollapse = view.findViewById(R.id.btnExpandCollapse);
+
         txtProcessingFee = view.findViewById(id.txtProcessingFee);
 
         context = getContext();
         mFragment = new DashboardFragmentNew();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
 //        SpannableString string = new SpannableString("\u25CF Processing Fee");
 //        string.setSpan(new BulletSpan(40, 20), 10, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -143,9 +159,57 @@ public class PostApprovalDocFragment extends Fragment {
 //        string1.setSpan(new BulletSpan(40, red, 20), 10, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 //        txtProcessingFee.setText(string);
-        manualSignInDialog();
         return view;
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        linManualBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                NewLeadActivity.gender = "1";
+                linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                manualSignInDialog();
+            }
+        });
+
+        lineSignBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                NewLeadActivity.gender = "2";
+                linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+            }
+        });
+
+        linOTPBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                NewLeadActivity.gender = "2";
+                linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+            }
+        });
+
+        btnExpandCollapse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(linData.getVisibility() == 0) {
+                    linData.setVisibility(View.VISIBLE);
+                }
+                else {
+                    linData.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override

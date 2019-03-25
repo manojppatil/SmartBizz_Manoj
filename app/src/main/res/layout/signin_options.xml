@@ -15,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
+        android:textStyle="bold"
         android:text="Follow the below instructions" />
 
     <TextView
@@ -67,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5sdp"
             android:text="Step 1 >"
+            android:textStyle="bold"
             android:textColor="@color/darkblue" />
 
         <TextView
@@ -93,12 +95,12 @@
             <TextView
                 android:id="@+id/txtEmailSubmit"
                 style="@style/TextViewTitleStyle"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1"
                 android:text="Download"
+                android:textAlignment="center"
                 android:textColor="@color/white" />
 
             <View
@@ -132,10 +134,11 @@
         <TextView
             android:id="@+id/txt5"
             style="@style/TextViewTitleSmallStyle"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_60sdp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5sdp"
             android:text="Step 2 >"
+            android:textStyle="bold"
             android:textColor="@color/darkblue" />
 
         <TextView
@@ -166,6 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5sdp"
             android:text="Step 3 >"
+            android:textStyle="bold"
             android:textColor="@color/darkblue" />
 
         <TextView
@@ -191,12 +195,12 @@
 
             <TextView
                 style="@style/TextViewTitleStyle"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1"
                 android:text="Upload"
+                android:textAlignment="center"
                 android:textColor="@color/white" />
 
             <View

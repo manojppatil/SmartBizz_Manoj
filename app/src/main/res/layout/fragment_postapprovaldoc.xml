@@ -33,7 +33,7 @@
                         android:layout_margin="@dimen/_10sdp"
                         android:background="@drawable/border"
                         android:elevation="@dimen/_8sdp"
-                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_5sdp"
                         app:cardElevation="@dimen/_8sdp">
 
                         <RelativeLayout
@@ -45,8 +45,8 @@
                                 android:id="@+id/linExpandCollapse"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/_5sdp"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
 
                                 <TextView
                                     android:id="@+id/txtPersonalDetails"
@@ -54,9 +54,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_10sdp"
+                                    android:gravity="center_horizontal"
                                     android:text="loan ID"
-                                    android:textAllCaps="true"
-                                    android:gravity="center_horizontal"/>
+                                    android:textAllCaps="true" />
 
                                 <TextView
                                     android:id="@+id/txtLeadID"
@@ -64,26 +64,27 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_10sdp"
-                                    android:text="SA78D09P"
-                                    android:gravity="center_horizontal"/>
+                                    android:gravity="center_horizontal"
+                                    android:text="SA78D09P" />
 
                                 <ImageButton
                                     android:id="@+id/btnExpandCollapse"
-                                    android:layout_below="@id/txtLeadID"
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
+                                    android:layout_below="@id/txtLeadID"
                                     android:layout_marginLeft="@dimen/_10sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
-                                    android:backgroundTint="@color/darkblue"
                                     android:background="@drawable/ic_chevron_down"
+                                    android:backgroundTint="@color/darkblue"
                                     android:gravity="center_horizontal" />
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_below="@+id/linExpandCollapse"
-                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:id="@+id/linData"
+                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_below="@+id/linExpandCollapse"
                                 android:orientation="vertical">
 
                                 <TableLayout
@@ -95,16 +96,16 @@
                                         android:id="@+id/tableRow1"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="@dimen/_2sdp"
-                                        android:background="@drawable/tablecell">
+                                        android:background="@drawable/tablecell"
+                                        android:padding="@dimen/_2sdp">
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center_vertical"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
-                                            android:orientation="vertical">
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -126,10 +127,10 @@
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center_vertical"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
-                                            android:orientation="vertical">
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -151,9 +152,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
                                             android:gravity="center_vertical"
-                                            android:orientation="vertical">
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -177,16 +178,16 @@
                                     <TableRow
                                         android:id="@+id/tableRow2"
                                         android:layout_width="match_parent"
-                                        android:padding="@dimen/_2sdp"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/_2sdp">
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center_vertical"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
-                                            android:orientation="vertical">
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -208,10 +209,10 @@
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center_vertical"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
-                                            android:orientation="vertical">
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -233,9 +234,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
                                             android:gravity="center_vertical"
-                                            android:orientation="vertical">
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -259,16 +260,16 @@
                                         android:id="@+id/tableRow3"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:padding="@dimen/_2sdp"
-                                        android:background="@drawable/tablecell">
+                                        android:background="@drawable/tablecell"
+                                        android:padding="@dimen/_2sdp">
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center_vertical"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
-                                            android:orientation="vertical">
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -282,17 +283,17 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:text="Advance"/>
+                                                android:text="Advance" />
 
                                         </LinearLayout>
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center_vertical"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
-                                            android:orientation="vertical">
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -306,7 +307,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                android:text=" 3,3345"/>
+                                                android:text=" 3,3345" />
 
                                         </LinearLayout>
 
@@ -314,9 +315,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
                                             android:gravity="center_vertical"
-                                            android:orientation="vertical">
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -339,16 +340,16 @@
                                     <TableRow
                                         android:id="@+id/tableRow4"
                                         android:layout_width="match_parent"
-                                        android:padding="@dimen/_2sdp"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/_2sdp">
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center_vertical"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
-                                            android:orientation="vertical">
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -370,10 +371,10 @@
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center_vertical"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
-                                            android:orientation="vertical">
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -395,9 +396,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:padding="@dimen/_6sdp"
                                             android:gravity="center_vertical"
-                                            android:orientation="vertical">
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
                                             <TextView
                                                 style="@style/TextViewMiniCapsStyle"
@@ -448,7 +449,7 @@
                             android:weightSum="3.2">
 
                             <LinearLayout
-                                android:id="@+id/linMale"
+                                android:id="@+id/linManualBtn"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="@dimen/_2sdp"
@@ -456,7 +457,7 @@
                                 android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/_3sdp">
+                                android:padding="@dimen/_5sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_15sdp"
@@ -473,17 +474,17 @@
 
                                 <TextView
                                     android:id="@+id/txtMale"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="Manual"
-                                    android:textColor="@color/textcolordark"
-                                    android:theme="@style/TextViewRadioStyle" />
+                                    android:textAlignment="center"
+                                    style="@style/TextViewRadioStyle" />
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linFemale"
+                                android:id="@+id/lineSignBtn"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/_2sdp"
@@ -491,7 +492,7 @@
                                 android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/_3sdp">
+                                android:padding="@dimen/_5sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_15sdp"
@@ -508,17 +509,17 @@
 
                                 <TextView
                                     android:id="@+id/txtFemale"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="e-Sign"
                                     android:textColor="@color/textcolordark"
-                                    android:theme="@style/TextViewRadioStyle" />
-
+                                    android:textAlignment="center"
+                                    style="@style/TextViewRadioStyle" />
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linOther"
+                                android:id="@+id/linOTPBtn"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="@dimen/_2sdp"
@@ -526,7 +527,7 @@
                                 android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/_3sdp">
+                                android:padding="@dimen/_5sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_15sdp"
@@ -543,13 +544,13 @@
 
                                 <TextView
                                     android:id="@+id/txtOther"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="via OTP"
                                     android:textColor="@color/textcolordark"
-                                    android:theme="@style/TextViewRadioStyle" />
-                            </LinearLayout>
+                                    android:textAlignment="center"
+                                    style="@style/TextViewRadioStyle" />                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -603,25 +604,37 @@
                                         <TextView
                                             android:id="@+id/txtTotalAmtTitle"
                                             style="@style/TextViewSmallCapsWhiteStyle"
-                                            android:layout_width="wrap_content"
+                                            android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:drawableTint="@color/white1"
                                             android:maxLines="1"
                                             android:text="Total Amount"
+                                            android:textAlignment="center"
                                             android:textAllCaps="true" />
 
-                                        <TextView
-                                            android:id="@+id/txtTotalAmt"
-                                            style="@style/TextViewTitleWhiteStyle"
-                                            android:layout_width="wrap_content"
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_marginLeft="@dimen/_5sdp"
-                                            android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                            android:drawableTint="@color/white1"
-                                            android:maxLines="1"
-                                            android:text=" 8,835"
-                                            android:textAllCaps="true" />
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/ic_rupee_sign"
+                                                android:backgroundTint="@color/white1" />
+
+                                            <TextView
+                                                android:id="@+id/txtTotalAmt"
+                                                style="@style/TextViewTitleWhiteStyle"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:maxLines="1"
+                                                android:text=" 8,835"
+                                                android:textAlignment="center"
+                                                android:textAllCaps="true" />
+                                        </LinearLayout>
+
                                     </LinearLayout>
 
 
@@ -630,7 +643,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linProceedBtn"
+                                android:id="@+id/linPayBtn"
                                 android:layout_width="@dimen/_80sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_alignParentRight="true"
@@ -646,7 +659,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="PAY NOW" />
+                                    android:text="PAY NOW"
+                                    android:textAlignment="center" />
 
                                 <View
                                     android:layout_width="@dimen/_1sdp"
