@@ -46,6 +46,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon,android:name">
+
         <activity android:name=".newUI.newViews.NewLeadActivity"></activity>
         <activity
             android:name="com.gun0912.tedpicker.ImagePickerActivity"
@@ -56,7 +57,8 @@
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".ImageSlider"
-            android:screenOrientation="sensorPortrait" /> <!-- <activity -->
+            android:screenOrientation="sensorPortrait" />
+        <!-- <activity -->
         <!-- android:name="com.eduvanzapplication.friendlyscore.ClientActivity" -->
         <!-- android:screenOrientation="portrait" /> -->
         <!-- <activity -->
@@ -137,7 +139,6 @@
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".newUI.newViews.DashboardActivity"
-            android:label="@string/title_activity_dashboard"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme" />
         <activity

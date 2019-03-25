@@ -24,6 +24,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.CardView
@@ -38,34 +39,48 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/border"
-                            android:padding="@dimen/_5sdp">
-
-                            <TextView
-                                android:id="@+id/txtPersonalDetails"
-                                style="@style/TextViewSmallCapsStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:text="loan ID"
-                                android:textAllCaps="true" />
-
-                            <TextView
-                                android:id="@+id/txtLeadID"
-                                style="@style/TextViewTitleStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/txtPersonalDetails"
-                                android:layout_alignParentStart="true"
-                                android:text="SA78D09P" />
-
-                            <ImageView
-                                android:id="@+id/bu"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                            android:background="@drawable/border">
 
                             <LinearLayout
-                                android:layout_below="@+id/txtLeadID"
+                                android:id="@+id/linExpandCollapse"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/_5sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtPersonalDetails"
+                                    style="@style/TextViewSmallCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:text="loan ID"
+                                    android:textAllCaps="true"
+                                    android:gravity="center_horizontal"/>
+
+                                <TextView
+                                    android:id="@+id/txtLeadID"
+                                    style="@style/TextViewTitleStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:text="SA78D09P"
+                                    android:gravity="center_horizontal"/>
+
+                                <ImageButton
+                                    android:id="@+id/btnExpandCollapse"
+                                    android:layout_below="@id/txtLeadID"
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:backgroundTint="@color/darkblue"
+                                    android:background="@drawable/ic_chevron_down"
+                                    android:gravity="center_horizontal" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_below="@+id/linExpandCollapse"
                                 xmlns:android="http://schemas.android.com/apk/res/android"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -74,13 +89,14 @@
                                 <TableLayout
                                     android:id="@+id/tabla_cuerpo"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@drawable/tablecell">
+                                    android:layout_height="match_parent">
 
                                     <TableRow
                                         android:id="@+id/tableRow1"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/_2sdp"
+                                        android:background="@drawable/tablecell">
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
@@ -102,7 +118,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -126,7 +142,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -151,7 +167,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -161,8 +177,8 @@
                                     <TableRow
                                         android:id="@+id/tableRow2"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/tablecell">
+                                        android:padding="@dimen/_2sdp"
+                                        android:layout_height="wrap_content">
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
@@ -184,7 +200,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text="12 Months" />
 
                                         </LinearLayout>
@@ -208,7 +224,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -233,7 +249,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -243,6 +259,7 @@
                                         android:id="@+id/tableRow3"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:padding="@dimen/_2sdp"
                                         android:background="@drawable/tablecell">
 
                                         <LinearLayout
@@ -288,7 +305,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345"/>
 
                                         </LinearLayout>
@@ -313,7 +330,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -322,8 +339,8 @@
                                     <TableRow
                                         android:id="@+id/tableRow4"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/tablecell">
+                                        android:padding="@dimen/_2sdp"
+                                        android:layout_height="wrap_content">
 
                                         <LinearLayout
                                             android:layout_width="wrap_content"
@@ -345,7 +362,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -369,7 +386,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -394,7 +411,7 @@
                                                 style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_rupee_sign"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                 android:text=" 3,3345" />
 
                                         </LinearLayout>
@@ -600,7 +617,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
                                             android:layout_marginLeft="@dimen/_5sdp"
-                                            android:drawableLeft="@drawable/ic_rupee_sign"
+                                            android:drawableLeft="@drawable/ic_rupee_sign_small"
                                             android:drawableTint="@color/white1"
                                             android:maxLines="1"
                                             android:text=" 8,835"
@@ -862,13 +879,15 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextViewTitleStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="e-Nach"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp" />
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:text="e-NACH"
+                            android:textColor="@color/darkblue" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

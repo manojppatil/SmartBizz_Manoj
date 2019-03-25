@@ -235,10 +235,9 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/ivStartNewBtn"
                         android:layout_width="@dimen/_26sdp"
                         android:layout_height="@dimen/_26sdp"
-                        android:layout_below="@id/linStartNew"
+                        android:layout_below="@id/layout5"
                         android:layout_marginTop="-18dp"
                         android:padding="@dimen/_3sdp"
                         android:layout_alignParentEnd="true"
@@ -315,11 +314,12 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:elevation="@dimen/_10sdp"
+
         android:background="@drawable/border_circular_grey_filled"
-        android:backgroundTint="@color/colorSecondary">
+        android:backgroundTint="@color/colorSecondary"
+        >
 
         <TextView
-            android:id="@+id/txtCallUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/call_us_s"
@@ -335,7 +335,6 @@
             android:layout_marginEnd="@dimen/_8sdp"/>
 
         <TextView
-            android:id="@+id/txtWhatsAppUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/whatsapp_us"
@@ -352,7 +351,6 @@
             android:layout_marginEnd="@dimen/_8sdp"/>
 
         <TextView
-            android:id="@+id/txtEmailUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/emailus"
