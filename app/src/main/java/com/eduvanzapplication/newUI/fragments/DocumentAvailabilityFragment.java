@@ -264,6 +264,31 @@ public class DocumentAvailabilityFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        if (NewLeadActivity.documents.equals("1")){
+            linAadharBtn.performClick();
+            tilAadhar.getEditText().setText(NewLeadActivity.aadharNumber);
+        }
+        else if (NewLeadActivity.documents.equals("2")){
+            linPanBtn.performClick();
+            tilPan.getEditText().setText(NewLeadActivity.panNUmber);
+        }
+        else if (NewLeadActivity.documents.equals("3")){
+            linBothBtn.performClick();
+            tilAadhar.getEditText().setText(NewLeadActivity.aadharNumber);
+            tilPan.getEditText().setText(NewLeadActivity.panNUmber);
+        }
+        else {
+            linNoneBtn.performClick();
+        }
+
+
+
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mDocListener = null;

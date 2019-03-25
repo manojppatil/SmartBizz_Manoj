@@ -239,8 +239,22 @@ public class PersonalDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        tilFirstName.getEditText().setText(NewLeadActivity.firstName);
+        tilMiddleName.getEditText().setText(NewLeadActivity.middleName);
+        tilLastName.getEditText().setText(NewLeadActivity.lastName);
 
-//        checkAllFields();
+        if (NewLeadActivity.gender.equals("1"))
+            linMaleBtn.performClick();
+        else if (NewLeadActivity.gender.equals("3"))
+            linOtherBtn.performClick();
+        else
+            linFemaleBtn.performClick();
+
+        txtDOB.setText(NewLeadActivity.dob);
+        if (NewLeadActivity.maritalStatus.equals("0"))
+            txtMaritalStatus.setText("Unmarried");
+        else  //1
+            txtMaritalStatus.setText("Married");
     }
 
     public interface OnFragmentInteractionListener {

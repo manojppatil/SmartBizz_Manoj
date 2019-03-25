@@ -217,8 +217,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         viewPager.setCurrentItem(next);
     }
 
-
-
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();

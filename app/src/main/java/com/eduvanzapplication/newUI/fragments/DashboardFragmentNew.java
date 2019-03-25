@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +62,8 @@ public class DashboardFragmentNew extends Fragment {
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
     SharedPref sharedPref;
-    LinearLayout linProceedBtn, layout2;
+    LinearLayout linProceedBtn, layout2, linStartNew;
+    ImageView ivStartNewBtn;
 
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
@@ -120,6 +122,8 @@ public class DashboardFragmentNew extends Fragment {
             viewPagerDashboard = (ViewPager) view.findViewById(R.id.viewPager_dashboard);
             linProceedBtn = view.findViewById(R.id.linProceedBtn);
             layout2 = view.findViewById(R.id.layout2);
+            linStartNew = view.findViewById(R.id.linStartNew);
+            ivStartNewBtn = view.findViewById(R.id.ivStartNewBtn);
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
             circlePageIndicatorDashboard.setRadius(4 * density);
@@ -231,22 +235,19 @@ public class DashboardFragmentNew extends Fragment {
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
-        linProceedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), NewLeadActivity.class));
-            }
-        });
-
-        layout2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), NewLeadActivity.class));
-            }
-        });
+        linProceedBtn.setOnClickListener(newApplicationClkListnr);
+        layout2.setOnClickListener(newApplicationClkListnr);
+        linStartNew.setOnClickListener(newApplicationClkListnr);
+        ivStartNewBtn.setOnClickListener(newApplicationClkListnr);
         return view;
     }//-----------------------------------END OF ON CREATE----------------------------------------//
 
+    View.OnClickListener newApplicationClkListnr = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(getActivity(), NewLeadActivity.class));
+        }
+    };
     @Override
     public void onResume() {
         super.onResume();

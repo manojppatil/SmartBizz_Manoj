@@ -208,6 +208,15 @@ public class CurrentAddressFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        tilFlat.getEditText().setText(NewLeadActivity.flatBuildingSoc);
+        tilStreet.getEditText().setText(NewLeadActivity.streetLocalityLandMark);
+        tilPincode.getEditText().setText(NewLeadActivity.pinCode);
+
+    }
+
     public interface OnCurrentAddrFragmentInteractionListener {
         void onCurrentAddrFragmentInteraction(boolean valid, int next);
         void onOffButtonsCurrentAddress(boolean next, boolean prev);
