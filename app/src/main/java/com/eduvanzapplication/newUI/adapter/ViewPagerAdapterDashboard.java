@@ -2,7 +2,6 @@ package com.eduvanzapplication.newUI.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -14,8 +13,7 @@ import android.widget.ImageView;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
-import com.eduvanzapplication.newUI.pojo.ViewPagerDashboardPOJO;
-import com.squareup.picasso.Callback;
+import com.eduvanzapplication.newUI.pojo.DashboardBannerModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,10 +25,10 @@ import java.util.ArrayList;
 public class ViewPagerAdapterDashboard extends PagerAdapter {
     Context mContext;
     LayoutInflater mInfaler;
-    ArrayList<ViewPagerDashboardPOJO> mData;
+    ArrayList<DashboardBannerModel> mData;
     ImageView mImage;
 
-    public ViewPagerAdapterDashboard(Context context, ArrayList<ViewPagerDashboardPOJO> data) {
+    public ViewPagerAdapterDashboard(Context context, ArrayList<DashboardBannerModel> data) {
             this.mContext = context;
             this.mData=data;
             mInfaler = LayoutInflater.from(context);

@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.eduvanzapplication.ImageSlider;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.database.DBAdapter;
@@ -144,7 +145,7 @@ public class SplashScreen extends AppCompatActivity {
     public void apiCall() {
 
         try {
-            String url = MainApplication.mainUrl + "version/checkVersion";
+            String url = MainActivity.mainUrl + "version/checkVersion";
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             String currentAppVersion = packageInfo.versionName;
 

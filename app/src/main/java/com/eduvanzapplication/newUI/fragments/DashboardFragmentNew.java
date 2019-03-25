@@ -14,29 +14,26 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.LeadsAdapter;
-import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
-import com.eduvanzapplication.newUI.newViews.BannerActivity;
-import com.eduvanzapplication.newUI.newViews.Notification;
-import com.eduvanzapplication.newUI.pojo.ViewPagerDashboardPOJO;
+import com.eduvanzapplication.newUI.pojo.DashboardBannerModel;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -60,7 +57,6 @@ public class DashboardFragmentNew extends Fragment {
     static TextView textViewDealTitle;
     static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
-    ArrayList<ViewPagerDashboardPOJO> viewPagerDashboardPOJOArrayList;
 
 
 
@@ -72,6 +68,8 @@ public class DashboardFragmentNew extends Fragment {
     LinearLayout linProceedBtn, layout2, linStartNew;
     ImageView ivStartNewBtn;
     TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
+
+    ArrayList<DashboardBannerModel> bannerModelArrayList = new ArrayList<>();
 
 
 
@@ -144,8 +142,8 @@ public class DashboardFragmentNew extends Fragment {
             final float density = getResources().getDisplayMetrics().density;
             circlePageIndicatorDashboard.setRadius(4 * density);
 
-            viewPagerDashboardPOJOArrayList = new ArrayList<>();
-            viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, viewPagerDashboardPOJOArrayList);
+            bannerModelArrayList = new ArrayList<>();
+            viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, bannerModelArrayList);
 
             viewPagerDashboard.setAdapter(viewPagerAdapterDashboard);
             circlePageIndicatorDashboard.setViewPager(viewPagerDashboard);
@@ -159,7 +157,7 @@ public class DashboardFragmentNew extends Fragment {
                     Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getBanner
+                    VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getBanner
                     volleyCall.sendRequest(context, url, null, mFragment, "dashboardBanner", params,MainApplication.auth_token);
                 }
             } catch (Exception e) {
@@ -203,7 +201,7 @@ public class DashboardFragmentNew extends Fragment {
                 if (!Globle.isNetworkAvailable(context)) {
                     Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
                 } else {
-                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                    VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
                     volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardDetails", params, MainApplication.auth_token);
                 }
             } catch (Exception e) {
@@ -336,7 +334,7 @@ public class DashboardFragmentNew extends Fragment {
 
         /** API CALL POST LOGIN DASHBOARD STATUS **/
         try {
-            String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
+            String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
             Map<String, String> params = new HashMap<String, String>();
             params.put("studentId", userId);
             if (!Globle.isNetworkAvailable(context)) {
@@ -370,16 +368,16 @@ public class DashboardFragmentNew extends Fragment {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("banner");
 
-                viewPagerDashboardPOJOArrayList = new ArrayList<>();
+                bannerModelArrayList = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                    ViewPagerDashboardPOJO viewPagerDashboardPOJO = new ViewPagerDashboardPOJO();
-                    viewPagerDashboardPOJO.id = jsonObject1.getString("id");
-                    viewPagerDashboardPOJO.title = jsonObject1.getString("title");
-                    viewPagerDashboardPOJO.image = jsonObject1.getString("image");
-                    viewPagerDashboardPOJOArrayList.add(viewPagerDashboardPOJO);
+                    DashboardBannerModel dashboardBannerModel = new DashboardBannerModel();
+                    dashboardBannerModel.id = jsonObject1.getString("id");
+                    dashboardBannerModel.title = jsonObject1.getString("title");
+                    dashboardBannerModel.image = jsonObject1.getString("image");
+                    bannerModelArrayList.add(dashboardBannerModel);
                 }
-                viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, viewPagerDashboardPOJOArrayList);
+                viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, bannerModelArrayList);
                 viewPagerDashboard.setAdapter(viewPagerAdapterDashboard);
 
             } else {

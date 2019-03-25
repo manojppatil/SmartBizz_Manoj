@@ -233,6 +233,26 @@ public class VolleyCall  {
             }
             ((GetMobileNo) mActivity).verifyOTPResponse(jsonDataO);
         }
+        else if (screen.equalsIgnoreCase("bannerDetail")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((BannerActivity) mActivity).setBannerDetail(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }//DateFormat.format("dd/MM/yyyy hh:mm a", Calendar.getInstance(Locale.ENGLISH).setTimeInMillis(1531722597904)).toString()
+        }
+        else if (screen.equalsIgnoreCase("dashboardBanner")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((DashboardFragmentNew) mfragment).setDashboardImages(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
@@ -288,16 +308,7 @@ public class VolleyCall  {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("dashboardBanner")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((DashboardFragmentNew) mfragment).setDashboardImages(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("getDeal")) {
+        }  else if (screen.equalsIgnoreCase("getDeal")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((DashboardFragmentNew) mfragment).getDeal(jsonDataO);
@@ -306,16 +317,8 @@ public class VolleyCall  {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("bannerDetail")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((BannerActivity) mActivity).setBannerDetail(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }//DateFormat.format("dd/MM/yyyy hh:mm a", Calendar.getInstance(Locale.ENGLISH).setTimeInMillis(1531722597904)).toString()
-        } else if (screen.equalsIgnoreCase("dealDetail")) {
+        }
+        else if (screen.equalsIgnoreCase("dealDetail")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((BannerActivity) mActivity).setDealDetail(jsonDataO);
