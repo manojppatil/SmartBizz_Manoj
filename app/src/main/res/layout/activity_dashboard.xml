@@ -37,7 +37,8 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewPager_dashboard"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_110sdp" />
+                    android:layout_height="@dimen/_110sdp"
+                    android:elevation="@dimen/_5sdp"/>
 
                 <com.viewpagerindicator.CirclePageIndicator
                     android:id="@+id/viewPageIndicator"
@@ -47,7 +48,7 @@
                     android:paddingBottom="10dp"
                     app:fillColor="@color/colorSecondary"
                     app:pageColor="@color/colorPrimary" />
-                <!--</LinearLayout>-->
+
             </LinearLayout>
 
             <View
