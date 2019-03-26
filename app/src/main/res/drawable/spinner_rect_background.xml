@@ -10,9 +10,9 @@
         </shape>
 
     </item>
-    <item android:right="@dimen/_2sdp">
+    <item android:right="@dimen/_4sdp">
         <bitmap android:gravity="right|center_vertical"
-            android:src="@drawable/crossbox">
+            android:src="@drawable/dropdown_arrow">
         </bitmap>
     </item>
 </layer-list>

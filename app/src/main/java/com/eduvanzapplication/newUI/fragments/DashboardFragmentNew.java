@@ -8,31 +8,32 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.LeadsAdapter;
-import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
-import com.eduvanzapplication.newUI.newViews.BannerActivity;
-import com.eduvanzapplication.newUI.newViews.Notification;
-import com.eduvanzapplication.newUI.pojo.ViewPagerDashboardPOJO;
+import com.eduvanzapplication.newUI.pojo.DashboardBannerModel;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -56,12 +57,23 @@ public class DashboardFragmentNew extends Fragment {
     static TextView textViewDealTitle;
     static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
-    ArrayList<ViewPagerDashboardPOJO> viewPagerDashboardPOJOArrayList;
+
+
+
+
     static LinearLayout   linearLayoutEligiblityChekck,
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
     SharedPref sharedPref;
-    LinearLayout linProceedBtn, layout2;
+    LinearLayout linProceedBtn, layout2, linStartNew;
+    ImageView ivStartNewBtn;
+    TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
+
+    ArrayList<DashboardBannerModel> bannerModelArrayList = new ArrayList<>();
+
+
+
+
 
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
@@ -120,12 +132,18 @@ public class DashboardFragmentNew extends Fragment {
             viewPagerDashboard = (ViewPager) view.findViewById(R.id.viewPager_dashboard);
             linProceedBtn = view.findViewById(R.id.linProceedBtn);
             layout2 = view.findViewById(R.id.layout2);
+            linStartNew = view.findViewById(R.id.linStartNew);
+            ivStartNewBtn = view.findViewById(R.id.ivStartNewBtn);
+            txtCallUs = view.findViewById(R.id.txtCallUs);
+            txtWhatsAppUs = view.findViewById(R.id.txtWhatsAppUs);
+            txtEmailUs = view.findViewById(R.id.txtEmailUs);
+
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
             circlePageIndicatorDashboard.setRadius(4 * density);
 
-            viewPagerDashboardPOJOArrayList = new ArrayList<>();
-            viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, viewPagerDashboardPOJOArrayList);
+            bannerModelArrayList = new ArrayList<>();
+            viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, bannerModelArrayList);
 
             viewPagerDashboard.setAdapter(viewPagerAdapterDashboard);
             circlePageIndicatorDashboard.setViewPager(viewPagerDashboard);
@@ -139,7 +157,7 @@ public class DashboardFragmentNew extends Fragment {
                     Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getBanner
+                    VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getBanner
                     volleyCall.sendRequest(context, url, null, mFragment, "dashboardBanner", params,MainApplication.auth_token);
                 }
             } catch (Exception e) {
@@ -183,7 +201,7 @@ public class DashboardFragmentNew extends Fragment {
                 if (!Globle.isNetworkAvailable(context)) {
                     Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
                 } else {
-                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                    VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
                     volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardDetails", params, MainApplication.auth_token);
                 }
             } catch (Exception e) {
@@ -231,21 +249,84 @@ public class DashboardFragmentNew extends Fragment {
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
-        linProceedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), NewLeadActivity.class));
-            }
-        });
-
-        layout2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), NewLeadActivity.class));
-            }
-        });
         return view;
     }//-----------------------------------END OF ON CREATE----------------------------------------//
+
+    View.OnClickListener newApplicationClkListnr = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(getActivity(), NewLeadActivity.class));
+        }
+    };
+
+    View.OnClickListener callUsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:02249733624"));
+            startActivity(intent);
+        }
+    };
+
+    View.OnClickListener whatsAppUsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String msg = "Hello Eduvanz, Please let me know more about your loan offering.";
+            Intent sendIntent = new Intent("android.intent.action.MAIN");
+            sendIntent.setAction(Intent.ACTION_VIEW);
+            sendIntent.setPackage("com.whatsapp");
+            String url = "https://api.whatsapp.com/send?phone=918070363636&text="+msg;
+            sendIntent.setData(Uri.parse(url));
+            if(sendIntent.resolveActivity(getContext().getPackageManager()) != null){
+                startActivity(sendIntent);
+            }else{
+                Snackbar.make(txtWhatsAppUs, "Please Install WhatsApp Messenger in your Devices", Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    View.OnClickListener emailUsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                try {
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@eduvanz.com"});
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                    emailIntent.setType("text/plain");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+                    final PackageManager pm = context.getPackageManager();
+                    final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent, 0);
+                    ResolveInfo best = null;
+                    for (final ResolveInfo info : matches)
+                        if (info.activityInfo.packageName.endsWith(".gm") || info.activityInfo.name.toLowerCase().contains("gmail"))
+                            best = info;
+                    if (best != null)
+                        emailIntent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+                    context.startActivity(emailIntent);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+            }
+    };
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        linProceedBtn.setOnClickListener(newApplicationClkListnr);
+        layout2.setOnClickListener(newApplicationClkListnr);
+        linStartNew.setOnClickListener(newApplicationClkListnr);
+        ivStartNewBtn.setOnClickListener(newApplicationClkListnr);
+        txtCallUs.setOnClickListener(callUsListener);
+        txtWhatsAppUs.setOnClickListener(whatsAppUsListener);
+        txtEmailUs.setOnClickListener(emailUsListener);
+
+    }
 
     @Override
     public void onResume() {
@@ -253,7 +334,7 @@ public class DashboardFragmentNew extends Fragment {
 
         /** API CALL POST LOGIN DASHBOARD STATUS **/
         try {
-            String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
+            String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
             Map<String, String> params = new HashMap<String, String>();
             params.put("studentId", userId);
             if (!Globle.isNetworkAvailable(context)) {
@@ -287,16 +368,16 @@ public class DashboardFragmentNew extends Fragment {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("banner");
 
-                viewPagerDashboardPOJOArrayList = new ArrayList<>();
+                bannerModelArrayList = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                    ViewPagerDashboardPOJO viewPagerDashboardPOJO = new ViewPagerDashboardPOJO();
-                    viewPagerDashboardPOJO.id = jsonObject1.getString("id");
-                    viewPagerDashboardPOJO.title = jsonObject1.getString("title");
-                    viewPagerDashboardPOJO.image = jsonObject1.getString("image");
-                    viewPagerDashboardPOJOArrayList.add(viewPagerDashboardPOJO);
+                    DashboardBannerModel dashboardBannerModel = new DashboardBannerModel();
+                    dashboardBannerModel.id = jsonObject1.getString("id");
+                    dashboardBannerModel.title = jsonObject1.getString("title");
+                    dashboardBannerModel.image = jsonObject1.getString("image");
+                    bannerModelArrayList.add(dashboardBannerModel);
                 }
-                viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, viewPagerDashboardPOJOArrayList);
+                viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(context, bannerModelArrayList);
                 viewPagerDashboard.setAdapter(viewPagerAdapterDashboard);
 
             } else {

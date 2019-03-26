@@ -31,6 +31,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
     View dot1,dot2, dot3, dot4, dot5, track1, track2, track3, track4, track5;
 
+    public static String profession = "1";
     public static String firstName="", lastName="", middleName="", gender="2", maritalStatus="0", dob="";
     public static String documents = "1", aadharNumber="", panNUmber="";
     public static String flatBuildingSoc="", streetLocalityLandMark="", pinCode="", country="", state="", city="";
@@ -216,8 +217,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     public void onEmploymentFragmentInteraction(boolean valid, int next) {
         viewPager.setCurrentItem(next);
     }
-
-
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

@@ -107,6 +107,8 @@
                 android:padding="@dimen/_3sdp"
                 android:gravity="center_horizontal"
                 android:text=""
+                android:maxLines="1"
+                android:letterSpacing="6"
                 android:textColor="@color/black_new"
                 android:textSize="15sp"/>
 

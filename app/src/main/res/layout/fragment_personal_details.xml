@@ -303,20 +303,16 @@
 
                                 <TextView
                                     android:id="@+id/txtMaritalStatus"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
-                                    android:layout_marginEnd="@dimen/_2sdp"
+                                    android:layout_marginEnd="@dimen/_1sdp"
                                     android:text="Unmarried"
                                     android:textColor="@color/textcolordark"
-                                    android:textSize="15sp" />
+                                    android:textSize="13sp" />
                             </LinearLayout>
-
                         </LinearLayout>
-
-
                     </LinearLayout>
-
                 </LinearLayout>
             </RelativeLayout>
         </ScrollView>

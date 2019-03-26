@@ -2,12 +2,14 @@ package com.eduvanzapplication.newUI.newViews;
 
 import android.Manifest;
 import android.app.AppOpsManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -24,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -38,6 +41,7 @@ import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.webviews.VolleyCallLogin;
 
 import org.json.JSONObject;
@@ -51,6 +55,7 @@ public class  GetMobileNo extends AppCompatActivity {
     ImageView ivRetry, ivIndicator;
     TextView txtGetOtp, txtMsg1, txtMsg2;
     LinearLayout linGetOtp, layoutOtp;
+    ProgressDialog progressDialog ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +65,7 @@ public class  GetMobileNo extends AppCompatActivity {
     }
 
     private void setViews() {
+        progressDialog = new ProgressDialog(GetMobileNo.this);
         edtMobile = findViewById(R.id.edtMobile);
         edtOtp = findViewById(R.id.edtOtp);
         ivRetry  =findViewById(R.id.ivRetry);
@@ -84,6 +90,7 @@ public class  GetMobileNo extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() < 10){
                     linGetOtp.setOnClickListener(null);
+                    linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
                 }
                 else {
                     linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
@@ -92,6 +99,7 @@ public class  GetMobileNo extends AppCompatActivity {
                         public void onClick(View v) {
                             if (txtGetOtp.getText().toString().equalsIgnoreCase(getString(R.string.get_otp))){
                                 // api call - get otp
+                                getOtp();
                                 layoutOtp.setVisibility(View.VISIBLE);
                                 txtGetOtp.setText(getString(R.string.submit));
                                 ivIndicator.setImageDrawable(getResources().getDrawable(R.drawable.ic_angle_right));
@@ -99,7 +107,7 @@ public class  GetMobileNo extends AppCompatActivity {
                                 txtMsg2.setText(getString(R.string.enter_received_otp));
                             }else if (txtGetOtp.getText().toString().equalsIgnoreCase(getString(R.string.submit))){
                                 //api call - verify otp
-
+                                    verifyOTP();
                                 edtOtp.addTextChangedListener(new TextWatcher() {
                                     @Override
                                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -118,10 +126,10 @@ public class  GetMobileNo extends AppCompatActivity {
 
                                     }
                                 });
-                                if (!edtOtp.getText().toString().equals("")){
-                                    startActivity(new Intent(GetMobileNo.this, GetEmailActivity.class)
-                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                                }
+//                                if (!edtOtp.getText().toString().equals("")){
+//                                    startActivity(new Intent(GetMobileNo.this, GetEmailActivity.class)
+//                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//                                }
                             }
                         }
                     });
@@ -144,6 +152,131 @@ public class  GetMobileNo extends AppCompatActivity {
 
     }
 
+    public void getOtp(){
+        try {
+            String url = MainApplication.mainUrl + "authorization/generateOtpCode";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("mobileno", edtMobile.getText().toString());
+            if (!Globle.isNetworkAvailable(GetMobileNo.this)) {
+                Snackbar.make(linGetOtp, getString(R.string.please_check_your_network_connection),Snackbar.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();
+                volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "getOtp", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(GetMobileNo.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void getOTPResponse(JSONObject jsonData) {
+        try {
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("otp_done", "0");
+//                editor.putString("firstName", edtName.getText().toString().trim());
+//                editor.putString("emailId", edtEmailId.getText().toString().trim());
+                editor.putString("mobile_no", edtMobile.getText().toString().trim());
+                editor.putInt("userpolicyAgreement", 1);
+                editor.apply();
+                editor.commit();
+
+                layoutOtp.setVisibility(View.VISIBLE);
+                txtGetOtp.setText(getString(R.string.submit));
+                ivIndicator.setImageDrawable(getResources().getDrawable(R.drawable.ic_angle_right));
+                txtMsg1.setText(getString(R.string.to_verify));
+                txtMsg2.setText(getString(R.string.enter_received_otp));
+
+            }else {
+                Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(GetMobileNo.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void verifyOTP(){
+        try {
+            progressDialog.setMessage("Loading");
+            if (!isFinishing())
+                progressDialog.show();
+            String url = MainApplication.mainUrl + "authorization/verifyOtpCode";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("mobileno", edtMobile.getText().toString());
+            params.put("otpcode", edtOtp.getText().toString());
+            if (!Globle.isNetworkAvailable(GetMobileNo.this)) {
+                Snackbar.make(linGetOtp, getString(R.string.please_check_your_network_connection),Snackbar.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();
+                volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "verifyOTP", params, MainApplication.auth_token);
+            }
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(GetMobileNo.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void verifyOTPResponse(JSONObject jsonData){
+        try {
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                progressDialog.dismiss();
+                int otpsendcount = jsonData.getInt("otpSentCount");
+                if(otpsendcount == 3){
+                    Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
+                    linGetOtp.setVisibility(View.GONE);
+                }
+                else{
+                    startActivity(new Intent(GetMobileNo.this, GetEmailActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+            } else {
+                progressDialog.dismiss();
+                Log.e(MainApplication.TAG, "getOTPValidation: ");
+                Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(GetMobileNo.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+
+
+    }
+}
     //    TextView textViewToolbar;
 //    MainApplication mainApplication;
 //    static Context mContext;
@@ -373,47 +506,6 @@ public class  GetMobileNo extends AppCompatActivity {
 //
 //    }
 //
-//    public void getOTP(JSONObject jsonData) {
-//        try {
-//            String status = jsonData.optString("status");
-//            String message = jsonData.optString("message");
-//
-//            if (status.equalsIgnoreCase("1")) {
-//
-//                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putString("otp_done", "0");
-//                editor.putString("firstName", edtName.getText().toString().trim());
-//                editor.putString("emailId", edtEmailId.getText().toString().trim());
-//                editor.putString("mobile_no", edtMobileNo.getText().toString().trim());
-//                editor.putInt("userpolicyAgreement", 1);
-//                editor.apply();
-//                editor.commit();
-//
-//                Intent intent = new Intent(GetMobileNo.this, OtpValidation.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("mobile_no", edtMobileNo.getText().toString());
-//                bundle.putString("emailId", edtEmailId.getText().toString());
-//                bundle.putString("firstName", edtName.getText().toString());
-//                intent.putExtras(bundle);
-//                startActivity(intent);
-//                finish();
-//            }else {
-//                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            button.setEnabled(true);
-//
-//        } catch (Exception e) {
-//            String className = this.getClass().getSimpleName();
-//            String name = new Object() {
-//            }.getClass().getEnclosingMethod().getName();
-//            String errorMsg = e.getMessage();
-//            String errorMsgDetails = e.getStackTrace().toString();
-//            String errorLine = String.valueOf(e.getStackTrace()[0]);
-//            Globle.ErrorLog(GetMobileNo.this,className, name, errorMsg, errorMsgDetails, errorLine);
-//        }
-//    }
 //
 //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -514,4 +606,4 @@ public class  GetMobileNo extends AppCompatActivity {
 ////        Toast.makeText(this, "SignIn Failed", Toast.LENGTH_LONG).show();
 ////
 ////    }
-}
+

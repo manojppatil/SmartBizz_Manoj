@@ -180,7 +180,7 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="file_not_found">File Not Found</string>
     <string name="url_error">URL error!</string>
     <string name="cannot_read_write_file">Cannot Read/Write File!</string>
-    <string name="new_version_is_available_please_update">New version is available , please update</string>
+    <string name="new_version_is_available_please_update">New version is available. Please update the app.</string>
     <string name="are_you_sure_you_waqnt_to_exit">Are you sure, You want to exit ?</string>
     <string name="external_storage_permission_is_necessary">External storage permission is necessary</string>
     <string name="permission_necessary">Permission necessary</string>
@@ -386,4 +386,5 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="documents_availability">Documents Availability</string>
     <string name="current_address">Current Address</string>
     <string name="employement_details">Employment Details</string>
+    <string name="select_your_profession">Select Your Profession</string>
 </resources>

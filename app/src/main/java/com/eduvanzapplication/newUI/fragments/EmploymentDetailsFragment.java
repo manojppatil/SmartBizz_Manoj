@@ -124,6 +124,13 @@ public class EmploymentDetailsFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        tilCompanyName.getEditText().setText(NewLeadActivity.companyName);
+        tilAnnualIncome.getEditText().setText(NewLeadActivity.annualIncome);
+    }
+
     public interface OnEmploymentFragmentInteractionListener {
         // TODO: Update argument type and name
         void onEmploymentFragmentInteraction(boolean valid, int next);

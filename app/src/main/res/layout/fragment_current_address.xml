@@ -160,6 +160,7 @@
                                 android:layout_height="@dimen/_26sdp"
                                 android:background="@drawable/spinner_rect_background"
                                 android:dropDownWidth="400px"
+                                android:layout_marginEnd="@dimen/_1sdp"
                                 android:layout_marginTop="@dimen/_4sdp"/>
 
                         </LinearLayout>
@@ -200,6 +201,7 @@
                                 android:layout_height="@dimen/_26sdp"
                                 android:background="@drawable/spinner_rect_background"
                                 android:dropDownWidth="400px"
+                                android:layout_marginStart="@dimen/_2sdp"
                                 android:layout_marginTop="@dimen/_4sdp"/>
 
                         </LinearLayout>

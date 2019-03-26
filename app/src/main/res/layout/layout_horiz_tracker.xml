@@ -16,7 +16,7 @@
         android:visibility="visible"/>
     <View
         android:id="@+id/track1"
-        android:layout_width="@dimen/_30sdp"
+        android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_2sdp"
         android:background="@color/new_red"
         android:visibility="visible"/>
@@ -24,60 +24,60 @@
 
     <View
         android:id="@+id/dot2"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:background="@drawable/border_circular_red_filled"
         android:visibility="gone"/>
     <View
         android:id="@+id/track2"
-        android:layout_width="@dimen/_30sdp"
+        android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_2sdp"
         android:background="@color/new_red"
         android:visibility="gone"/>
 
     <View
         android:id="@+id/dot3"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:background="@drawable/border_circular_red_filled"
         android:visibility="gone"/>
     <View
         android:id="@+id/track3"
-        android:layout_width="@dimen/_30sdp"
+        android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_2sdp"
         android:background="@color/new_red"
         android:visibility="gone"/>
 
     <View
         android:id="@+id/dot4"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:background="@drawable/border_circular_red_filled"
         android:visibility="gone"/>
 
     <View
         android:id="@+id/track4"
-        android:layout_width="@dimen/_30sdp"
+        android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_2sdp"
         android:background="@color/new_red"
         android:visibility="gone"/>
 
     <View
         android:id="@+id/dot5"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:background="@drawable/border_circular_red_filled"
         android:visibility="gone"/>
     <View
         android:id="@+id/track5"
-        android:layout_width="@dimen/_30sdp"
+        android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_2sdp"
         android:background="@color/new_red"
         android:visibility="gone"/>
     <View
         android:id="@+id/dot6"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:background="@drawable/border_circular_red_filled"
         android:visibility="gone"/>
 

@@ -5,17 +5,56 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <LinearLayout
+        android:id="@+id/linBanner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:srcCompat="@drawable/ic_footer_bg"/>
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_5sdp"
+            android:elevation="@dimen/_6sdp">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:elevation="@dimen/_4sdp"/>
+
+        </android.support.v7.widget.CardView>
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/viewPageIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:paddingTop="8dp"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            android:paddingBottom="10dp"
+            android:layout_gravity="start"
+            app:fillColor="@color/new_red"
+            app:pageColor="@color/colorPrimary" />
+
+    </LinearLayout>
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--app:srcCompat="@drawable/ic_footer_bg"/>-->
 
     <RelativeLayout
         android:id="@+id/layout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@id/linBanner"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp">
@@ -200,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp">
                     <LinearLayout
-                        android:id="@+id/layout5"
+                        android:id="@+id/linStartNew"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -235,9 +274,10 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/ivStartNewBtn"
                         android:layout_width="@dimen/_26sdp"
                         android:layout_height="@dimen/_26sdp"
-                        android:layout_below="@id/layout5"
+                        android:layout_below="@id/linStartNew"
                         android:layout_marginTop="-18dp"
                         android:padding="@dimen/_3sdp"
                         android:layout_alignParentEnd="true"
@@ -313,12 +353,14 @@
         android:padding="@dimen/_6sdp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:elevation="@dimen/_5sdp"
+        android:elevation="@dimen/_2sdp"
 
         android:background="@drawable/border_circular_grey_filled"
-        android:backgroundTint="@color/colorSecondary">
+        android:backgroundTint="@color/colorSecondary"
+        >
 
         <TextView
+            android:id="@+id/txtCallUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/call_us_s"
@@ -334,6 +376,7 @@
             android:layout_marginEnd="@dimen/_8sdp"/>
 
         <TextView
+            android:id="@+id/txtWhatsAppUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/whatsapp_us"
@@ -350,6 +393,7 @@
             android:layout_marginEnd="@dimen/_8sdp"/>
 
         <TextView
+            android:id="@+id/txtEmailUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/emailus"
