@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
@@ -70,7 +71,7 @@ public class Notification extends AppCompatActivity {
             mListOfNotification = (ListView) findViewById(R.id.notification_listview);
             /**API CALL**/
             try {
-                String url = MainApplication.mainUrl + "dashboard/getDashBoardNotifications";
+                String url = MainActivity.mainUrl + "dashboard/getDashBoardNotifications";
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("studentId",userID);
     //            params.put("studentId","548");

@@ -262,7 +262,7 @@ public class DashboardActivity extends AppCompatActivity
             Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
-        showOCRDialog();
+//        showOCRDialog();
 
     }
 

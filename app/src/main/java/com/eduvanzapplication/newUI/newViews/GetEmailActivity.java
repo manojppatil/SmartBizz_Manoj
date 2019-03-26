@@ -1,6 +1,7 @@
 package com.eduvanzapplication.newUI.newViews;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +29,7 @@ import java.util.Arrays;
 public class GetEmailActivity extends AppCompatActivity {
 
     private static final String TAG = GetEmailActivity.class.getSimpleName();
-    EditText edtEmail;
+    EditText edtEmail,edtFirstName;
    LinearLayout linFacebook, linLinkedIn, linGoogle, linSubmitEmail;
 
    String userEmail = "";
@@ -56,6 +57,11 @@ public class GetEmailActivity extends AppCompatActivity {
                 Profile profile = Profile.getCurrentProfile();
                 profile.getFirstName();
                 Log.d("FBSUCESS","RESULT - "+profile.getFirstName() +""+profile.getId());
+                edtFirstName.setText(profile.getFirstName());
+                if (profile.getId().contains("@")){
+                    edtEmail.setText(profile.getId());
+                }else
+                    Snackbar.make(linSubmitEmail, "Unable to get Email ID, Please enter manually",Snackbar.LENGTH_SHORT).show();
             }
 
             @Override
@@ -73,6 +79,7 @@ public class GetEmailActivity extends AppCompatActivity {
 
     private void setViews() {
         edtEmail = findViewById(R.id.edtEmail);
+        edtFirstName=  findViewById(R.id.edtFirstName);
         linFacebook = findViewById(R.id.linFacebook);
         linLinkedIn = findViewById(R.id.linLinkedIn);
         linGoogle = findViewById(R.id.linGoogle);
@@ -135,6 +142,8 @@ public class GetEmailActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             userEmail =  account.getEmail();
+            edtEmail.setText(userEmail);
+            edtFirstName.setText(account.getDisplayName());
             Log.d(TAG,"Google Mail - "+userEmail);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.

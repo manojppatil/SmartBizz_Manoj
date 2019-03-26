@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
@@ -142,7 +143,7 @@ public class BannerActivity extends AppCompatActivity {
             /** API CALL**/
             if(fromDeal.equalsIgnoreCase("1")){
                 try {
-                    String url = MainApplication.mainUrl + "mobileadverstisement/getSpecificDealDetails";
+                    String url = MainActivity.mainUrl + "mobileadverstisement/getSpecificDealDetails";
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("id", id);
                     VolleyCallNew volleyCall = new VolleyCallNew();
@@ -158,7 +159,7 @@ public class BannerActivity extends AppCompatActivity {
                 }
             }else {
                 try {
-                    String url = MainApplication.mainUrl + "mobileadverstisement/getSpecificBannerDetails";
+                    String url = MainActivity.mainUrl + "mobileadverstisement/getSpecificBannerDetails";
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("id", id);
                     VolleyCallNew volleyCall = new VolleyCallNew();
@@ -176,7 +177,7 @@ public class BannerActivity extends AppCompatActivity {
 
             /** API CALL POST LOGIN DASHBOARD STATUS **/
             try {
-                String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
+                String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("studentId", userId);
                 VolleyCallNew volleyCall = new VolleyCallNew();

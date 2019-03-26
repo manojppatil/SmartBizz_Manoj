@@ -387,4 +387,5 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="current_address">Current Address</string>
     <string name="employement_details">Employment Details</string>
     <string name="select_your_profession">Select Your Profession</string>
+    <string name="course_details">Course Details</string>
 </resources>

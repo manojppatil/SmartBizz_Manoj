@@ -455,7 +455,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         StringBuffer sb;
         long total = 0;
 //        String urlup = "http://139.59.32.234/sms/Api/send_message";
-        String urlup = MainApplication.mainUrl + "mobilescrap/send_message";
+        String urlup = MainActivity.mainUrl + "mobilescrap/send_message";
         int serverResponseCode = 0;
 
 //        Log.e(TAG, "uploadFile: 999999999999999999999999999999" );

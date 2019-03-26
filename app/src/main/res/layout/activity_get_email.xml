@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:padding="@dimen/_30sdp">
 
@@ -31,11 +31,57 @@
             android:textSize="20sp"
             android:textColor="@color/black_new"/>
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30sdp"
+            android:text="@string/first_name"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/black_new"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/_4sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:background="@drawable/border">
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                app:srcCompat="@drawable/ic_user"
+                android:padding="@dimen/_3sdp"/>
+
+            <View
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_6sdp"/>
+
+
+            <EditText
+                android:id="@+id/edtFirstName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/_4sdp"
+                android:text=""
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black_new" />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/email_id"
             android:textAllCaps="true"
             android:textStyle="bold"
@@ -114,7 +160,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:background="@drawable/border_circular_red_filled"
-            android:backgroundTint="@color/blue">
+            android:backgroundTint="#dd435692">
             <ImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
@@ -150,7 +196,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:background="@drawable/border_circular_red_filled"
-            android:backgroundTint="@color/blue_900">
+            android:backgroundTint="#DD0D47A1">
             <ImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
@@ -186,7 +232,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:background="@drawable/border_circular_red_filled"
-            android:backgroundTint="@color/red">
+            android:backgroundTint="#DDee415e">
             <ImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"

@@ -1,5 +1,6 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,8 +11,10 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.badoualy.stepperindicator.StepperIndicator;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DocumentAvailabilityFragment;
@@ -28,8 +31,8 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
     public static ViewPager viewPager;
     private ImageView ivNextBtn, ivPrevBtn;
-
-    View dot1,dot2, dot3, dot4, dot5, track1, track2, track3, track4, track5;
+    private TextView txtStepTracker;
+    private StepperIndicator stepperIndicator;
 
     public static String profession = "1";
     public static String firstName="", lastName="", middleName="", gender="2", maritalStatus="0", dob="";
@@ -52,14 +55,24 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         viewPager = findViewById(R.id.viewpager);
         ivNextBtn = findViewById(R.id.ivNextBtn);
         ivPrevBtn = findViewById(R.id.ivPrevBtn);
-        dot1 = findViewById(R.id.dot1);
-        dot2 = findViewById(R.id.dot2);
-        dot3 = findViewById(R.id.dot3);
-        dot4 = findViewById(R.id.dot4);
-        track1 = findViewById(R.id.track1);
-        track2 = findViewById(R.id.track2);
-        track3 = findViewById(R.id.track3);
-        track4 = findViewById(R.id.track4);
+        txtStepTracker = findViewById(R.id.txtStepTracker);
+        stepperIndicator = findViewById(R.id.stepperIndicator);
+
+        ivNextBtn.setOnClickListener(nextClickListener);
+        ivPrevBtn.setOnClickListener(prevClickListener);
+
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new PersonalDetailsFragment(), getResources().getString(R.string.personal_details));
+        adapter.addFrag(new DocumentAvailabilityFragment(), "Document Availability");
+        adapter.addFrag(new CurrentAddressFragment(), "Current Address");
+        adapter.addFrag(new EmploymentDetailsFragment(), "Employment Details");
+        viewPager.setAdapter(adapter);
+        stepperIndicator.setViewPager(viewPager);
+
+
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -72,48 +85,16 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                     ivPrevBtn.setVisibility(View.GONE);
                 else
                     ivPrevBtn.setVisibility(View.VISIBLE);
+                txtStepTracker.setText("Step ".concat(String.valueOf(position+1)).concat(" of ").concat(String.valueOf(adapter.getCount())));
 
                 switch (position){
                     case 0:
-                        dot1.setVisibility(View.VISIBLE);
-                        track1.setVisibility(View.VISIBLE);
-                        dot2.setVisibility(View.GONE);
-                        track2.setVisibility(View.GONE);
-                        dot3.setVisibility(View.GONE);
-                        track3.setVisibility(View.GONE);
-                        dot4.setVisibility(View.GONE);
-                        track4.setVisibility(View.GONE);
                         break;
                     case 1:
-                        dot1.setVisibility(View.VISIBLE);
-                        track1.setVisibility(View.VISIBLE);
-                        dot2.setVisibility(View.VISIBLE);
-                        track2.setVisibility(View.VISIBLE);
-                        dot3.setVisibility(View.GONE);
-                        track3.setVisibility(View.GONE);
-                        dot4.setVisibility(View.GONE);
-                        track4.setVisibility(View.GONE);
                         break;
                     case 2:
-                        dot1.setVisibility(View.VISIBLE);
-                        track1.setVisibility(View.VISIBLE);
-                        dot2.setVisibility(View.VISIBLE);
-                        track2.setVisibility(View.VISIBLE);
-                        dot3.setVisibility(View.VISIBLE);
-                        track3.setVisibility(View.VISIBLE);
-                        dot4.setVisibility(View.GONE);
-                        track4.setVisibility(View.GONE);
                         break;
                     case 3:
-                        dot1.setVisibility(View.VISIBLE);
-                        track1.setVisibility(View.VISIBLE);
-                        dot2.setVisibility(View.VISIBLE);
-                        track2.setVisibility(View.VISIBLE);
-                        dot3.setVisibility(View.VISIBLE);
-                        track3.setVisibility(View.VISIBLE);
-                        dot4.setVisibility(View.VISIBLE);
-                        track4.setVisibility(View.VISIBLE);
-
                         break;
                 }
             }
@@ -134,23 +115,16 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             }
         });
 
-        ivNextBtn.setOnClickListener(nextClickListener);
-        ivPrevBtn.setOnClickListener(prevClickListener);
 
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new PersonalDetailsFragment(), getResources().getString(R.string.personal_details));
-        adapter.addFrag(new DocumentAvailabilityFragment(), "Document Availability");
-        adapter.addFrag(new CurrentAddressFragment(), "Current Address");
-        adapter.addFrag(new EmploymentDetailsFragment(), "Employment Details");
-        viewPager.setAdapter(adapter);
     }
 
     View.OnClickListener nextClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount()-1)){
+                startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
             viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
         }
     };
