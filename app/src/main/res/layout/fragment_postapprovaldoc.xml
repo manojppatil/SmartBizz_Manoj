@@ -462,13 +462,14 @@
                                 <ImageView
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
                                     android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_id_card" />
 
                                 <View
                                     android:layout_width="@dimen/_1sdp"
                                     android:layout_height="match_parent"
-                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_marginEnd="@dimen/_4sdp"
                                     android:background="@color/textcolordark" />
 
@@ -503,19 +504,19 @@
                                 <View
                                     android:layout_width="@dimen/_1sdp"
                                     android:layout_height="match_parent"
-                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_marginEnd="@dimen/_4sdp"
                                     android:background="@color/textcolordark" />
 
                                 <TextView
                                     android:id="@+id/txtFemale"
+                                    style="@style/TextViewRadioStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
-                                    android:text="e-Sign"
-                                    android:textColor="@color/textcolordark"
+                                    android:text="e-Signing"
                                     android:textAlignment="center"
-                                    style="@style/TextViewRadioStyle" />
+                                    android:textColor="@color/textcolordark" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -538,7 +539,7 @@
                                 <View
                                     android:layout_width="@dimen/_1sdp"
                                     android:layout_height="match_parent"
-                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_marginEnd="@dimen/_4sdp"
                                     android:background="@color/textcolordark" />
 
@@ -742,16 +743,28 @@
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
 
-                                            <TextView
-                                                android:id="@+id/txtDueBy"
-                                                style="@style/TextViewSmallCapsStyle"
+                                            <LinearLayout
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_circle"
-                                                android:drawableTint="@color/red"
-                                                android:maxLines="1"
-                                                android:text=" Due By"
-                                                android:textAllCaps="true" />
+                                                android:layout_gravity="center_horizontal"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/_15sdp"
+                                                    android:layout_height="@dimen/_15sdp"
+                                                    android:tint="@color/colorYellow"
+                                                    app:srcCompat="@drawable/ic_exclamation_triangle" />
+
+                                                <TextView
+                                                    android:id="@+id/txtEMIDueBy"
+                                                    style="@style/TextViewSmallCapsStyle"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:maxLines="1"
+                                                    android:text=" Due By"
+                                                    android:textAllCaps="true" />
+                                            </LinearLayout>
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
@@ -842,16 +855,29 @@
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
 
-                                            <TextView
-                                                android:id="@+id/txtEMIDueBy"
-                                                style="@style/TextViewSmallCapsStyle"
+                                            <LinearLayout
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:drawableLeft="@drawable/ic_circle"
-                                                android:drawableTint="@color/red"
-                                                android:maxLines="1"
-                                                android:text=" Due By"
-                                                android:textAllCaps="true" />
+                                                android:layout_gravity="center_horizontal"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/_15sdp"
+                                                    android:layout_height="@dimen/_15sdp"
+                                                    android:tint="@color/colorYellow"
+                                                    app:srcCompat="@drawable/ic_exclamation_triangle" />
+
+                                                <TextView
+                                                    android:id="@+id/txtDueBy"
+                                                    style="@style/TextViewSmallCapsStyle"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:maxLines="1"
+                                                    android:text=" Due By"
+                                                    android:textAllCaps="true" />
+
+                                            </LinearLayout>
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
