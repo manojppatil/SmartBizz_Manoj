@@ -150,7 +150,7 @@ public class DashboardFragmentNew extends Fragment {
 
             /** API CALL GET DASHBOARD BANNER**/
             try {
-                String url = MainApplication.mainUrl + "mobileadverstisement/getBanner";//http://159.89.204.41/eduvanzApi/mobileadverstisement/getBanner
+                String url = MainActivity.mainUrl + "mobileadverstisement/getBanner";//http://159.89.204.41/eduvanzApi/mobileadverstisement/getBanner
                 Map<String, String> params = new HashMap<String, String>();
                 if(!Globle.isNetworkAvailable(context))
                 {
@@ -172,7 +172,7 @@ public class DashboardFragmentNew extends Fragment {
 
             /** API CALL GET DEAL**/
             try {
-                String url = MainApplication.mainUrl + "mobileadverstisement/getDeal";
+                String url = MainActivity.mainUrl + "mobileadverstisement/getDeal";
                 Map<String, String> params = new HashMap<String, String>();
                 if(!Globle.isNetworkAvailable(context))
                 {
@@ -194,7 +194,7 @@ public class DashboardFragmentNew extends Fragment {
 
             /** API CALL POST LOGIN DASHBOARD Details **/
             try {
-                String url = MainApplication.mainUrl + "dashboard/getDashboardDetails";
+                String url = MainActivity.mainUrl + "dashboard/getDashboardDetails";
                 Map<String, String> params = new HashMap<String, String>();
 //                params.put("studentId","" );
                 params.put("studentId", student_id);

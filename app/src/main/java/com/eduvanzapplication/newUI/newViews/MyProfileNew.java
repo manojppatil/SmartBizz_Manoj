@@ -26,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 //import com.eduvanzapplication.friendlyscore.StartActivityFS;
 import com.eduvanzapplication.newUI.MainApplication;
@@ -76,7 +77,7 @@ public class MyProfileNew extends AppCompatActivity {
     public int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     public String userChoosenTask;
     String uploadFilePath = "";
-    String urlup = MainApplication.mainUrl + "dashboard/changeImage";
+    String urlup = MainActivity.mainUrl + "dashboard/changeImage";
     public static ProgressBar progressBar;
     public static  String ec="", mv="", ev="", ss="";
 
@@ -227,7 +228,7 @@ public class MyProfileNew extends AppCompatActivity {
 
             /**API CALL**/
             try {
-                String url = MainApplication.mainUrl + "dashboard/getProfileDashbBoardStatus";
+                String url = MainActivity.mainUrl + "dashboard/getProfileDashbBoardStatus";
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("studentId", userID);
                 if(!Globle.isNetworkAvailable(MyProfileNew.this))

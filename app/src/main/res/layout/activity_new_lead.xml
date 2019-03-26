@@ -13,24 +13,27 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:textColor="@color/textcolordark"
-        android:textSize="@dimen/_15sdp"
+        android:textSize="15sp"
         android:text="Step 1 of 4"/>
 
-    <include
-        android:id="@+id/layout_tracker"
-        layout="@layout/layout_horiz_tracker"
+
+    <com.badoualy.stepperindicator.StepperIndicator
+        android:id="@+id/stepperIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
         android:layout_below="@id/txtStepTracker"
-        android:layout_marginStart="@dimen/_15sdp"/>
-
+        app:stpi_circleRadius="@dimen/_5sdp"
+        app:stpi_circleStrokeWidth="@dimen/_2sdp"
+        app:stpi_circleColor="@color/new_red"
+        app:stpi_lineDoneColor="@color/blue1"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_400sdp"
-            android:layout_below="@id/layout_tracker"
+            android:layout_below="@id/stepperIndicator"
             android:padding="@dimen/_8sdp"
             android:elevation="@dimen/_10sdp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />

@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
@@ -81,7 +82,7 @@ public class SignIn extends AppCompatActivity {
                     /** API CALL **/
                     try {
                         progressBar.setVisibility(View.VISIBLE);
-                        String url = MainApplication.mainUrl + "authorization/email_login";//http://159.89.204.41/eduvanzApi/authorization/email_login
+                        String url = MainActivity.mainUrl + "authorization/email_login";//http://159.89.204.41/eduvanzApi/authorization/email_login
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("username",editTextEmailId.getText().toString());
     //                    params.put("password", editTextPassword.getText().toString());

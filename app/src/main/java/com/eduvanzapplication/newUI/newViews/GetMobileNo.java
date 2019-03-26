@@ -38,6 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanzapplication.BuildConfig;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
@@ -54,8 +55,9 @@ public class  GetMobileNo extends AppCompatActivity {
     EditText edtMobile, edtOtp;
     ImageView ivRetry, ivIndicator;
     TextView txtGetOtp, txtMsg1, txtMsg2;
-    LinearLayout linGetOtp, layoutOtp;
+    LinearLayout linGetOtp, layoutOtp, linEmailLayout;
     ProgressDialog progressDialog ;
+    private boolean mobileNoDone = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,13 +73,15 @@ public class  GetMobileNo extends AppCompatActivity {
         ivRetry  =findViewById(R.id.ivRetry);
         ivIndicator = findViewById(R.id.ivIndicator);
         txtGetOtp = findViewById(R.id.txtGetOtp);
-        txtGetOtp.setText(getString(R.string.get_otp));
+        txtGetOtp.setText(getString(R.string.submit));
         txtMsg1 = findViewById(R.id.txtMsg1);
         txtMsg2 = findViewById(R.id.txtMsg2);
         linGetOtp = findViewById(R.id.linGetOtp);
         linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
         layoutOtp = findViewById(R.id.layoutOtp);
         layoutOtp.setVisibility(View.GONE);
+        linEmailLayout = findViewById(R.id.linEmailLayout);
+        linEmailLayout.setVisibility(View.GONE);
 
 
         edtMobile.addTextChangedListener(new TextWatcher() {
@@ -88,6 +92,12 @@ public class  GetMobileNo extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (s.length() == 10){
+                    // api call - get otp
+                    getOtp();
+                }
+
                 if (s.length() < 10){
                     linGetOtp.setOnClickListener(null);
                     linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
@@ -97,17 +107,15 @@ public class  GetMobileNo extends AppCompatActivity {
                     linGetOtp.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (txtGetOtp.getText().toString().equalsIgnoreCase(getString(R.string.get_otp))){
-                                // api call - get otp
-                                getOtp();
-                                layoutOtp.setVisibility(View.VISIBLE);
-                                txtGetOtp.setText(getString(R.string.submit));
-                                ivIndicator.setImageDrawable(getResources().getDrawable(R.drawable.ic_angle_right));
-                                txtMsg1.setText(getString(R.string.to_verify));
-                                txtMsg2.setText(getString(R.string.enter_received_otp));
-                            }else if (txtGetOtp.getText().toString().equalsIgnoreCase(getString(R.string.submit))){
+                            if (!mobileNoDone){
+
+                            }else if (mobileNoDone){
                                 //api call - verify otp
-                                    verifyOTP();
+                                if (layoutOtp.getVisibility() == View.VISIBLE)
+                                        verifyOTP();
+                                else if (linEmailLayout.getVisibility() == View.VISIBLE){
+                                        generateOtpCode();  //signUp
+                                }
                                 edtOtp.addTextChangedListener(new TextWatcher() {
                                     @Override
                                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -154,9 +162,11 @@ public class  GetMobileNo extends AppCompatActivity {
 
     public void getOtp(){
         try {
-            String url = MainApplication.mainUrl + "authorization/generateOtpCode";
+            if (!isFinishing())
+                progressDialog.show();
+            String url = MainActivity.mainUrl + "authorization/getLoginOtp";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("mobileno", edtMobile.getText().toString());
+            params.put("mobile", edtMobile.getText().toString());
             if (!Globle.isNetworkAvailable(GetMobileNo.this)) {
                 Snackbar.make(linGetOtp, getString(R.string.please_check_your_network_connection),Snackbar.LENGTH_SHORT).show();
             } else {
@@ -164,6 +174,7 @@ public class  GetMobileNo extends AppCompatActivity {
                 volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "getOtp", params, MainApplication.auth_token);
             }
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -178,7 +189,8 @@ public class  GetMobileNo extends AppCompatActivity {
         try {
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
-
+            progressDialog.dismiss();
+            mobileNoDone = true;
             if (status.equalsIgnoreCase("1")) {
 
                 SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
@@ -192,13 +204,20 @@ public class  GetMobileNo extends AppCompatActivity {
                 editor.commit();
 
                 layoutOtp.setVisibility(View.VISIBLE);
+                linEmailLayout.setVisibility(View.GONE);
                 txtGetOtp.setText(getString(R.string.submit));
                 ivIndicator.setImageDrawable(getResources().getDrawable(R.drawable.ic_angle_right));
                 txtMsg1.setText(getString(R.string.to_verify));
                 txtMsg2.setText(getString(R.string.enter_received_otp));
 
             }else {
-                Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
+
+                layoutOtp.setVisibility(View.GONE);
+                linEmailLayout.setVisibility(View.VISIBLE);
+
+//                Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(GetMobileNo.this, GetEmailActivity.class)
+//                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
 
 
@@ -218,10 +237,10 @@ public class  GetMobileNo extends AppCompatActivity {
             progressDialog.setMessage("Loading");
             if (!isFinishing())
                 progressDialog.show();
-            String url = MainApplication.mainUrl + "authorization/verifyOtpCode";
+            String url = MainActivity.mainUrl + "authorization/otpLogin";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("mobileno", edtMobile.getText().toString());
-            params.put("otpcode", edtOtp.getText().toString());
+            params.put("mobile", edtMobile.getText().toString());
+            params.put("otp", edtOtp.getText().toString());
             if (!Globle.isNetworkAvailable(GetMobileNo.this)) {
                 Snackbar.make(linGetOtp, getString(R.string.please_check_your_network_connection),Snackbar.LENGTH_SHORT).show();
             } else {
@@ -247,15 +266,8 @@ public class  GetMobileNo extends AppCompatActivity {
 
             if (status.equalsIgnoreCase("1")) {
                 progressDialog.dismiss();
-                int otpsendcount = jsonData.getInt("otpSentCount");
-                if(otpsendcount == 3){
-                    Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
-                    linGetOtp.setVisibility(View.GONE);
-                }
-                else{
-                    startActivity(new Intent(GetMobileNo.this, GetEmailActivity.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                }
+                    startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             } else {
                 progressDialog.dismiss();
                 Log.e(MainApplication.TAG, "getOTPValidation: ");
@@ -274,6 +286,10 @@ public class  GetMobileNo extends AppCompatActivity {
         }
 
 
+
+    }
+
+    public void generateOtpCode(){
 
     }
 }

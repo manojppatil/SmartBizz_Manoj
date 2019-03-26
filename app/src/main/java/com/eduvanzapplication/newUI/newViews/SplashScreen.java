@@ -379,7 +379,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }
 
-            String url = MainApplication.mainUrl + "applog/apiErrorLog";
+            String url = MainActivity.mainUrl + "applog/apiErrorLog";
 
             for (int i = 0; i < errorLogIDArraylist.size(); i++) {
                 Map<String, String> params = new HashMap<String, String>();

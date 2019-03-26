@@ -2,6 +2,7 @@ package com.eduvanzapplication.newUI.adapter;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +23,10 @@ public class TenureOfferedAdapter extends RecyclerView.Adapter<TenureOfferedAdap
     private static Single1ClickListener sClickListener;
     private static int sSelected = -1;
 
-    List<Mforoferedloan> horizontalList = Collections.emptyList();
-    Context context;
+    private List<Mforoferedloan> horizontalList = Collections.emptyList();
+    private Context context;
 
-    public TenureOfferedAdapter(List<Mforoferedloan> mforrequestedloanArrayList, FragmentActivity activity) {
+    public TenureOfferedAdapter(List<Mforoferedloan> mforrequestedloanArrayList, AppCompatActivity activity) {
         this.horizontalList = mforrequestedloanArrayList;
         this.context = activity;
     }
@@ -38,10 +39,10 @@ public class TenureOfferedAdapter extends RecyclerView.Adapter<TenureOfferedAdap
         public DataObjectHolder(View itemView) {
             super(itemView);
             this.txtTenure = (TextView) itemView.findViewById(R.id.txtTenure);
-            this.txtRoi = (TextView) itemView.findViewById(R.id.txtRoi);
+//            this.txtRoi = (TextView) itemView.findViewById(R.id.txtRoi);
             this.txtLoanAmount = (TextView) itemView.findViewById(R.id.txtLoanAmount);
             this.txtEMIAmount = (TextView) itemView.findViewById(R.id.txtEMIAmount);
-            this.mRadioButton = (RadioButton) itemView.findViewById(R.id.rbOffered);
+//            this.mRadioButton = (RadioButton) itemView.findViewById(R.id.rbOffered);
             itemView.setOnClickListener(this);
         }
 
@@ -72,12 +73,15 @@ public class TenureOfferedAdapter extends RecyclerView.Adapter<TenureOfferedAdap
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.txtTenure.setText(horizontalList.get(position).tenure+" Months");
-        holder.txtRoi.setText(horizontalList.get(position).emi_amount);
+//        holder.txtRoi.setText(horizontalList.get(position).emi_amount);
         holder.txtLoanAmount.setText(horizontalList.get(position).loan_amount);
         holder.txtEMIAmount.setText(horizontalList.get(position).emi_amount);
 //        holder.mRadioButton.setText(horizontalList.get(position).applicationid);
 
-        holder.mRadioButton.setChecked(sSelected == position);
+//        holder.mRadioButton.setChecked(sSelected == position);
+        if (position == 2){
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.blue1));
+        }
 
     }
 

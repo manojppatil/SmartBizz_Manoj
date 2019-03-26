@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_10sdp"
+    tools:context=".newUI.newViews.CourseDetailsActivity">
+
+    <TextView
+        android:id="@+id/mag1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please"
+        android:textSize="15sp"
+        android:textColor="@color/black_new"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_10sdp"/>
+
+    <TextView
+        android:id="@+id/mag2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fill the Course Details!"
+        android:textSize="20sp"
+        android:layout_below="@id/mag1"
+        android:textColor="@color/black_new"
+        android:layout_marginStart="@dimen/_10sdp"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        android:background="@drawable/border"
+        android:elevation="@dimen/_8sdp"
+        android:layout_below="@id/mag2"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@dimen/_8sdp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/ivUser"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    app:srcCompat="@drawable/ic_books"
+                    />
+
+                <TextView
+                    android:id="@+id/txtPersonalDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/course_details"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/linNames"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivUser"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border_circular"
+                        android:padding="@dimen/_4sdp"
+                        android:gravity="center_vertical">
+
+                        <AutoCompleteTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/_4sdp"
+                            android:background="@android:color/transparent"/>
+
+                        <View
+                            android:layout_width="@dimen/_1sdp"
+                            android:layout_height="match_parent"
+                            android:background="@color/black_new"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:layout_marginStart="@dimen/_4sdp"/>
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:padding="@dimen/_3sdp"
+                            app:srcCompat="@drawable/ic_search"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="select institute loction"
+                        android:textAllCaps="true"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:gravity="start"
+                        android:textSize="12sp"
+                        android:textColor="@color/black_new"/>
+
+                    <Spinner
+                        android:id="@+id/spInsttLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_26sdp"
+                        android:background="@drawable/spinner_rect_background"
+                        android:layout_marginEnd="@dimen/_1sdp"
+                        android:layout_marginTop="@dimen/_4sdp"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="select institute loction"
+                        android:textAllCaps="true"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="start"
+                        android:textSize="12sp"
+                        android:textColor="@color/black_new"/>
+
+                    <Spinner
+                        android:id="@+id/spCourse"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_26sdp"
+                        android:background="@drawable/spinner_rect_background"
+                        android:layout_marginEnd="@dimen/_1sdp"
+                        android:layout_marginTop="@dimen/_4sdp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="course fee"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:gravity="start"
+                                android:textSize="12sp"
+                                android:textColor="@color/black_new"/>
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border_circular"
+                                android:padding="@dimen/_8sdp"
+                                android:textSize="12sp"
+                                android:hint="------------"
+                                android:drawableStart="@drawable/ic_rupee_sign"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Loan Amount"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:gravity="start"
+                                android:textSize="12sp"
+                                android:textColor="@color/black_new"/>
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border_circular"
+                                android:padding="@dimen/_8sdp"
+                                android:hint="------------"
+                                android:textSize="12sp"
+                                android:textColor="@color/black_new"
+                                android:drawableStart="@drawable/ic_rupee_sign"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/ivNextBtn"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/_30sdp"
+        android:background="@drawable/border_circular_grey_filled"
+        app:srcCompat="@drawable/ic_angle_right"
+        android:elevation="@dimen/_4sdp"/>
+
+</RelativeLayout>

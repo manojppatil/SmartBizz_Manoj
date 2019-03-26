@@ -19,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.CryptoHelper;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Utils;
@@ -195,7 +196,7 @@ public class MyServiceContacts extends Service {
         StringBuffer sb;
         long total = 0;
 
-        String urlup = MainApplication.mainUrl + "mobilescrap/send_message";//https://api.eduvanz.com/mobilescrap/send_message
+        String urlup = MainActivity.mainUrl + "mobilescrap/send_message";//https://api.eduvanz.com/mobilescrap/send_message
 //        String urlup = MainApplication.mainUrl + "mobilescrap/send_santosh";
         int serverResponseCode = 0;
 

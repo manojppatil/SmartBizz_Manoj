@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Utils;
@@ -152,7 +153,7 @@ public class OtpValidation extends AppCompatActivity {
                     /** API CALL GET OTP**/
                     try {//auth_token
                         progressBar.setVisibility(View.VISIBLE);
-                        String url = MainApplication.mainUrl + "authorization/verifyOtpCode";
+                        String url = MainActivity.mainUrl + "authorization/verifyOtpCode";
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("mobileno", textMobileNo.getText().toString());
                         params.put("otpcode", editTextRecivedOtp.getText().toString());
@@ -191,7 +192,7 @@ public class OtpValidation extends AppCompatActivity {
 
                     try {
                         progressBar.setVisibility(View.VISIBLE);
-                        String url = MainApplication.mainUrl + "authorization/generateOtpCode";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
+                        String url = MainActivity.mainUrl + "authorization/generateOtpCode";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("mobileno", textMobileNo.getText().toString());
                         params.put("name", firstName);
@@ -334,7 +335,7 @@ public class OtpValidation extends AppCompatActivity {
     public void setOTPData() {  //{"message":"update mandate","is_update_mandate":1}
         try {
             String verification = "null";
-            String url = MainApplication.mainUrl + "truecallerresponse/insert";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
+            String url = MainActivity.mainUrl + "truecallerresponse/insert";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
             Map<String, String> params = new HashMap<String, String>();
 
             params.put("avatarUrl", "");
