@@ -20,14 +20,17 @@
             android:layout_height="wrap_content"
             android:text="@string/lets"
             android:textSize="15sp"
-            android:textColor="@color/black_new"/>
+            android:textColor="@color/black_new"
+            style="@style/TextViewTitleStyle" />
+
         <TextView
             android:id="@+id/txtMsg2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/start_with_ur"
             android:textSize="20sp"
-            android:textColor="@color/black_new"/>
+            android:textColor="@color/black_new"
+            style="@style/TextViewTitleStyle"/>
 
 
         <TextView
@@ -38,7 +41,8 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:textColor="@color/black_new"/>
+            android:textColor="@color/black_new"
+            style="@style/TextViewTitleStyle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,8 +57,7 @@
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
                 app:srcCompat="@drawable/ic_mobile_android"
-                android:padding="@dimen/_3sdp"
-                />
+                android:padding="@dimen/_3sdp" />
 
             <View
                 android:layout_width="@dimen/_1sdp"
@@ -67,9 +70,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+91"
-                android:textSize="15sp"
                 android:textColor="@color/black_new"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                style="@style/TextViewTitle14Style" />
 
             <EditText
                 android:id="@+id/edtMobile"
@@ -131,14 +134,13 @@
     </LinearLayout>
 
 
-
     <LinearLayout
         android:id="@+id/linGetOtp"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
         android:background="@drawable/border_circular_red_filled"
         android:orientation="horizontal"
-        android:padding="@dimen/_10sdp"
+        android:padding="@dimen/_5sdp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
@@ -147,24 +149,26 @@
 
         <TextView
             android:id="@+id/txtGetOtp"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/get_otp"
+            android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="@dimen/_15sdp"/>
+            style="@style/TextViewTitleStyle" />
 
         <View
             android:layout_width="@dimen/_1sdp"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_6sdp"/>
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:background="@color/white" />
 
         <ImageView
-            android:id="@+id/ivIndicator"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
             app:srcCompat="@drawable/ic_key"/>
 
     </LinearLayout>

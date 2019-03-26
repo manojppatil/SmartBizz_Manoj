@@ -357,8 +357,7 @@ public class DashboardFragmentNew extends Fragment {
 
     public void setDashboardImages(JSONObject jsonData) {
         try {
-            //{"result":{"banner":[{"id":"1","title":"FINANCING YOUR FUTURE","image":"http:\/\/eduvanz.com\/admin\/uploads\/mobileadvertisement\/1\/image_1513427852.png"}]},"status":1,"message":"success"}
-            Log.e(MainApplication.TAG, "setDashboardImages: " + jsonData);
+            //{"result":{"banner":[{"id":"1","title":"FINANCING YOUR FUTURE","image":"https:\/\/eduvanz.com\/admin\/uploads\/mobileadvertisement\/1\/image_1545100643.png"}]},"status":1,"message":"success"}            Log.e(MainApplication.TAG, "setDashboardImages: " + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 

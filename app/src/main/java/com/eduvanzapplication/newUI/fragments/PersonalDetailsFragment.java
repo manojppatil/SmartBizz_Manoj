@@ -28,7 +28,7 @@ import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 
 import java.util.Calendar;
 
-import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
+
 public class PersonalDetailsFragment extends Fragment {
 
     // TODO: Rename and change types of parameters

@@ -68,7 +68,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="FLAT NUMBER, BUILDING, SOCIETY NAME"
-                            android:theme="@style/EditTextStyle" />
+                            style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -83,7 +83,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="STREET NAME, LOCALITY, LANDMARK"
-                            android:theme="@style/EditTextStyle" />
+                            style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
 
@@ -108,7 +108,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="PIN CODE"
                                 android:inputType="number"
-                                android:theme="@style/EditTextStyle" />
+                                style="@style/EditTextStyle" />
                         </android.support.design.widget.TextInputLayout>
 
                         <LinearLayout
@@ -116,13 +116,13 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_horizontal"
                                 android:text="COUNTRY"
-                                android:textSize="12sp"
-                                android:textColor="@color/black_new"/>
+                                style="@style/TextViewSmallCapsStyle"/>
 
                             <Spinner
                                 android:id="@+id/spCountry"
@@ -151,8 +151,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="STATE"
                                 android:gravity="center_horizontal"
-                                android:textSize="12sp"
-                                android:textColor="@color/black_new"/>
+                                style="@style/TextViewSmallCapsStyle"/>
 
                             <Spinner
                                 android:id="@+id/spState"
@@ -191,9 +190,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="CITY"
-                                android:textSize="12sp"
                                 android:gravity="center_horizontal"
-                                android:textColor="@color/black_new"/>
+                                style="@style/TextViewSmallCapsStyle"/>
 
                             <Spinner
                                 android:id="@+id/spCity"

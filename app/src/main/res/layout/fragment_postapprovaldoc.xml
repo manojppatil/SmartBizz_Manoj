@@ -81,7 +81,6 @@
 
                             <LinearLayout
                                 android:id="@+id/linData"
-                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_below="@+id/linExpandCollapse"
@@ -479,7 +478,6 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="Manual"
-                                    android:textAlignment="center"
                                     style="@style/TextViewRadioStyle" />
 
                             </LinearLayout>
@@ -499,6 +497,7 @@
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
                                     android:tint="@color/textcolordark"
+                                    android:layout_marginLeft="@dimen/_5sdp"
                                     app:srcCompat="@drawable/ic_id_card" />
 
                                 <View
@@ -515,7 +514,6 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="e-Signing"
-                                    android:textAlignment="center"
                                     android:textColor="@color/textcolordark" />
                             </LinearLayout>
 
@@ -534,6 +532,7 @@
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
                                     android:tint="@color/textcolordark"
+                                    android:layout_marginLeft="@dimen/_5sdp"
                                     app:srcCompat="@drawable/ic_id_card" />
 
                                 <View
@@ -550,7 +549,6 @@
                                     android:maxLines="1"
                                     android:text="via OTP"
                                     android:textColor="@color/textcolordark"
-                                    android:textAlignment="center"
                                     style="@style/TextViewRadioStyle" />                            </LinearLayout>
 
                         </LinearLayout>
@@ -657,12 +655,11 @@
 
                                 <TextView
                                     style="@style/TextViewSmallCapsWhiteStyle"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="PAY NOW"
-                                    android:textAlignment="center" />
-
+                                    android:gravity="center"/>
                                 <View
                                     android:layout_width="@dimen/_1sdp"
                                     android:layout_height="match_parent"
@@ -704,7 +701,7 @@
                                             style="@style/TextViewSmallCapsStyle"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:drawableLeft="@drawable/ic_circle"
+                                            android:drawableLeft="@drawable/ic_radio_icon"
                                             android:drawableTint="@color/red"
                                             android:maxLines="1"
                                             android:text=" Processing Fee"
@@ -771,6 +768,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_horizontal"
                                                 android:layout_marginLeft="@dimen/_10sdp"
+                                                android:padding="@dimen/_1sdp"
                                                 android:orientation="horizontal">
 
                                                 <TextView
@@ -816,8 +814,8 @@
                                             style="@style/TextViewSmallCapsStyle"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:drawableLeft="@drawable/ic_circle"
-                                            android:drawableTint="@color/red"
+                                            android:drawableLeft="@drawable/ic_radio_icon"
+                                            android:drawableTint="@color/blue1"
                                             android:maxLines="1"
                                             android:text=" EMI Fee"
                                             android:textAllCaps="true" />
@@ -892,6 +890,7 @@
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
                                                     android:text="01 Mar 2020"
+                                                    android:padding="@dimen/_1sdp"
                                                     android:textAllCaps="true"
                                                     android:textColor="@color/red" />
                                             </LinearLayout>

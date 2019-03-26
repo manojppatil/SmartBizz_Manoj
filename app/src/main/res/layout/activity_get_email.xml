@@ -22,14 +22,16 @@
             android:layout_height="wrap_content"
             android:text="@string/now_enter"
             android:textSize="15sp"
-            android:textColor="@color/black_new"/>
+            android:textColor="@color/black_new"
+            style="@style/TextViewTitleStyle"/>
         <TextView
             android:id="@+id/txtMsg2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/your_regtd_emalid"
             android:textSize="20sp"
-            android:textColor="@color/black_new"/>
+            android:textColor="@color/black_new"
+            style="@style/TextViewTitleStyle" />
 
 
         <TextView
@@ -40,7 +42,8 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:textColor="@color/black_new"/>
+            android:textColor="@color/black_new"
+            style="@style/TextViewTitleStyle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,7 +77,8 @@
                 android:padding="@dimen/_4sdp"
                 android:text=""
                 android:inputType="textEmailAddress"
-                android:textColor="@color/black_new" />
+                android:textColor="@color/black_new"
+                style="@style/TextViewTitle14Style" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,7 +100,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:text="@string/or"
                 android:textColor="@color/black_new"
-                android:textSize="15sp"/>
+                style="@style/TextViewTitleStyle" />
             <View
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_1sdp"
@@ -131,8 +135,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Connect Using Facebook"
-                android:textSize="13sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                style="@style/TextViewTitle14Style"/>
 
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -167,8 +171,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Connect Using LinkedIn"
-                android:textSize="13sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                style="@style/TextViewTitle14Style" />
 
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -187,6 +191,7 @@
             android:gravity="center_vertical"
             android:background="@drawable/border_circular_red_filled"
             android:backgroundTint="@color/red">
+
             <ImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
@@ -203,8 +208,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Connect Using Google"
-                android:textSize="13sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                style="@style/TextViewTitle14Style" />
 
             <ImageView
                 android:layout_width="@dimen/_25sdp"
@@ -219,40 +224,40 @@
 
     <LinearLayout
         android:id="@+id/linSubmitEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
         android:background="@drawable/border_circular_red_filled"
         android:orientation="horizontal"
-        android:padding="@dimen/_10sdp"
+        android:padding="@dimen/_5sdp"
+        android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:gravity="center_vertical"
         android:layout_marginBottom="@dimen/_50sdp"
         android:layout_marginEnd="@dimen/_30sdp">
 
         <TextView
             android:id="@+id/txtEmailSubmit"
-            android:layout_width="0dp"
+            style="@style/TextViewTitleStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="@string/submit"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:text="Submit"
+            android:gravity="center"
+            android:textColor="@color/white" />
 
         <View
             android:layout_width="@dimen/_1sdp"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_6sdp"/>
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:background="@color/white" />
 
         <ImageView
-            android:id="@+id/ivIndicator"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            app:srcCompat="@drawable/ic_angle_right"/>
+            app:srcCompat="@drawable/ic_angle_right" />
 
     </LinearLayout>
 

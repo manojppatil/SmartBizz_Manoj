@@ -58,7 +58,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="COMPANY NAME"
-                            android:theme="@style/EditTextStyle" />
+                            style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -72,11 +72,10 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="ANNUAL INCOME"
+                            android:hint=" ANNUAL INCOME"
                             android:inputType="numberDecimal"
                             android:drawableStart="@drawable/ic_rupee_sign"
-
-                            android:theme="@style/EditTextStyle" />
+                            style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>

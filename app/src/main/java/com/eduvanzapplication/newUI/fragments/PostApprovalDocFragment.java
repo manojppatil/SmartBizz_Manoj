@@ -57,7 +57,7 @@ public class PostApprovalDocFragment extends Fragment {
     String downloadUrl = "", downloadSignedUrl = "";
     long downloadReference;
 
-    private LinearLayout linManualBtn, lineSignBtn, linOTPBtn,linPayBtn,linData;
+    private LinearLayout linManualBtn, lineSignBtn, linOTPBtn, linPayBtn, linData;
     private ImageButton btnExpandCollapse;
 
     TextView txtProcessingFee;
@@ -116,7 +116,7 @@ public class PostApprovalDocFragment extends Fragment {
                     String errorMsg = e.getMessage();
                     String errorMsgDetails = e.getStackTrace().toString();
                     String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                 }
             }
         }
@@ -202,12 +202,14 @@ public class PostApprovalDocFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(linData.getVisibility() == 0) {
-                    linData.setVisibility(View.VISIBLE);
-                }
-                else {
+                if (linData.getVisibility() == 0) {
                     linData.setVisibility(View.GONE);
+                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_down));
+                } else {
+                    linData.setVisibility(View.VISIBLE);
+                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_up));
                 }
+
             }
         });
     }
@@ -224,11 +226,10 @@ public class PostApprovalDocFragment extends Fragment {
     }
 
 
-
     private void manualSignInDialog() {
 
-        View view = getLayoutInflater().inflate(layout.signin_options,null);
-        LinearLayout linClose =view.findViewById(R.id.linClose);
+        View view = getLayoutInflater().inflate(layout.signin_options, null);
+        LinearLayout linClose = view.findViewById(R.id.linClose);
         LinearLayout linDownload = view.findViewById(R.id.linDownload);
         LinearLayout linUpload = view.findViewById(R.id.linUpload);
 
@@ -339,7 +340,7 @@ public class PostApprovalDocFragment extends Fragment {
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }

@@ -68,7 +68,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/first_name_cap"
-                            android:theme="@style/EditTextStyle" />
+                            style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -83,7 +83,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/middle_name_cap"
-                            android:theme="@style/EditTextStyle" />
+                            style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -98,7 +98,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/last_name_cap"
-                            android:theme="@style/EditTextStyle" />
+                            style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
                     <TextView
@@ -108,7 +108,7 @@
                         android:text="@string/select_your_gender"
                         android:textAllCaps="true"
                         android:textColor="@color/textcolordark"
-                        android:textSize="15sp" />
+                        style="@style/TextViewTitleSmallStyle"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -120,16 +120,17 @@
                             android:id="@+id/linMaleBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_4sdp"
+                            android:layout_margin="@dimen/_2sdp"
                             android:layout_weight="1"
                             android:background="@drawable/border_circular"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:padding="@dimen/_4sdp">
+                            android:padding="@dimen/_5sdp">
 
                             <ImageView
-                                android:layout_width="@dimen/_20sdp"
-                                android:layout_height="@dimen/_20sdp"
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_male" />
 
                             <View
@@ -141,27 +142,29 @@
 
                             <TextView
                                 android:id="@+id/txtMale"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLines="1"
                                 android:text="Male"
-                                android:textColor="@color/textcolordark" />
+                                style="@style/TextViewRadioStyle" />
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/linFemaleBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_4sdp"
+                            android:layout_margin="@dimen/_2sdp"
                             android:layout_weight="1"
                             android:background="@drawable/border_circular_blue_filled"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:padding="@dimen/_4sdp">
+                            android:padding="@dimen/_5sdp">
 
                             <ImageView
-                                android:layout_width="@dimen/_20sdp"
-                                android:layout_height="@dimen/_20sdp"
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_female" />
 
                             <View
@@ -173,27 +176,28 @@
 
                             <TextView
                                 android:id="@+id/txtFemale"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLines="1"
                                 android:text="Female"
-                                android:textColor="@color/textcolordark" />
+                                style="@style/TextViewRadioStyle" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/linOtherBtn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_4sdp"
+                            android:layout_margin="@dimen/_2sdp"
                             android:layout_weight="1"
                             android:background="@drawable/border_circular"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:padding="@dimen/_4sdp">
+                            android:padding="@dimen/_5sdp">
 
                             <ImageView
-                                android:layout_width="@dimen/_20sdp"
-                                android:layout_height="@dimen/_20sdp"
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_transgender" />
 
                             <View
@@ -205,11 +209,11 @@
 
                             <TextView
                                 android:id="@+id/txtOther"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLines="1"
                                 android:text="Other"
-                                android:textColor="@color/textcolordark" />
+                                style="@style/TextViewRadioStyle" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -224,29 +228,30 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_4sdp"
                             android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_8sdp"
                                 android:text="Select your birth date"
                                 android:textAllCaps="true"
-                                android:textColor="@color/textcolordark"
-                                android:textSize="12sp" />
+                                style="@style/TextViewTitleSmallStyle"/>
 
 
                             <LinearLayout
                                 android:id="@+id/linDobBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_4sdp"
+                                android:layout_margin="@dimen/_3sdp"
                                 android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/_6sdp">
+                                android:padding="@dimen/_3sdp">
 
                                 <ImageView
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_width="@dimen/_18sdp"
+                                    android:layout_height="@dimen/_18sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
                                     app:srcCompat="@drawable/ic_birthday_cake" />
 
                                 <View
@@ -258,13 +263,12 @@
 
                                 <TextView
                                     android:id="@+id/txtDOB"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:minWidth="@dimen/_80sdp"
                                     android:maxLines="1"
-                                    android:text=""
-                                    android:textColor="@color/textcolordark"
-                                    android:textSize="15sp" />
+                                    android:text="03 Mar 1999"
+                                    style="@style/TextViewRadioStyle" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -279,26 +283,25 @@
                                 android:layout_marginTop="@dimen/_8sdp"
                                 android:text="Marital Status"
                                 android:textAllCaps="true"
-                                android:textColor="@color/textcolordark"
-                                android:textSize="12sp" />
+                                style="@style/TextViewTitleSmallStyle"/>
 
 
                             <LinearLayout
                                 android:id="@+id/linMaritalStatusBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_4sdp"
+                                android:layout_margin="@dimen/_3sdp"
                                 android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/_6sdp">
+                                android:padding="@dimen/_3sdp">
 
                                 <Switch
                                     android:id="@+id/switchMarital"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/_2sdp"
-                                    android:layout_marginStart="@dimen/_1sdp"
+                                    android:layout_marginStart="@dimen/_5sdp"
                                     style="@style/SCBSwitch"/>
 
                                 <TextView
@@ -309,7 +312,7 @@
                                     android:layout_marginEnd="@dimen/_1sdp"
                                     android:text="Unmarried"
                                     android:textColor="@color/textcolordark"
-                                    android:textSize="13sp" />
+                                    style="@style/TextViewRadioStyle" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
