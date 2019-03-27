@@ -115,7 +115,7 @@ public class DashboardFragmentNew extends Fragment {
             }
 
 //            MainApplication.student_id = student_id;
-            MainApplication.auth_token = auth_token;
+            MainActivity.auth_token = auth_token;
             MainApplication.lead_id = lead_id;
 
             try {
@@ -158,7 +158,7 @@ public class DashboardFragmentNew extends Fragment {
 
                 } else {
                     VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getBanner
-                    volleyCall.sendRequest(context, url, null, mFragment, "dashboardBanner", params,MainApplication.auth_token);
+                    volleyCall.sendRequest(context, url, null, mFragment, "dashboardBanner", params,MainActivity.auth_token);
                 }
             } catch (Exception e) {
                 String className = this.getClass().getSimpleName();
@@ -180,7 +180,7 @@ public class DashboardFragmentNew extends Fragment {
 
                 } else {
                     VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getDeal
-                    volleyCall.sendRequest(context, url, null, mFragment, "getDeal", params,MainApplication.auth_token);
+                    volleyCall.sendRequest(context, url, null, mFragment, "getDeal", params,MainActivity.auth_token);
                 }
             } catch (Exception e) {
                 String className = this.getClass().getSimpleName();
@@ -202,7 +202,7 @@ public class DashboardFragmentNew extends Fragment {
                     Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
                 } else {
                     VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
-                    volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardDetails", params, MainApplication.auth_token);
+                    volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardDetails", params, MainActivity.auth_token);
                 }
             } catch (Exception e) {
                 String className = this.getClass().getSimpleName();
@@ -342,7 +342,7 @@ public class DashboardFragmentNew extends Fragment {
 
             } else {
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardStatus", params,MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardStatus", params,MainActivity.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();

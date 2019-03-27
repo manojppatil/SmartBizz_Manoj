@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
@@ -104,7 +105,7 @@ public class VolleyCallNew extends Application {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
 //                headers.put("Authorization", "6041c6c1d7c580619c796c25716bf9ed");
-                headers.put("Authorization","Bearer " + MainApplication.auth_token);
+                headers.put("Authorization","Bearer " + MainActivity.auth_token);
 //                headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }

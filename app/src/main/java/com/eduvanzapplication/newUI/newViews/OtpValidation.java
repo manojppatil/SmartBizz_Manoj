@@ -408,7 +408,7 @@ public class OtpValidation extends AppCompatActivity {
 
             } else {
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(OtpValidation.this, url, mActivity, null, "updateOTPData", params, MainApplication.auth_token);
+                volleyCall.sendRequest(OtpValidation.this, url, mActivity, null, "updateOTPData", params, MainActivity.auth_token);
             }
 
         } catch (Exception e) {

@@ -98,7 +98,7 @@ public class SignIn extends AppCompatActivity {
                             // "password" -> "3ft/XFOHN1Kg6Jgba9U6aA=="
                             // "username" -> "vijay.shukla@eduvanz.in"
                             VolleyCallNew volleyCall = new VolleyCallNew();
-                            volleyCall.sendRequest(context, url, mActivity, null, "emailSignIn", params, MainApplication.auth_token);
+                            volleyCall.sendRequest(context, url, mActivity, null, "emailSignIn", params, MainActivity.auth_token);
                         }
                     } catch (Exception e) {
                         String className = this.getClass().getSimpleName();

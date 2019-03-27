@@ -147,7 +147,7 @@ public class BannerActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("id", id);
                     VolleyCallNew volleyCall = new VolleyCallNew();
-                    volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "dealDetail", params, MainApplication.auth_token);
+                    volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "dealDetail", params, MainActivity.auth_token);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
                     String name = new Object() {
@@ -163,7 +163,7 @@ public class BannerActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("id", id);
                     VolleyCallNew volleyCall = new VolleyCallNew();
-                    volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "bannerDetail", params, MainApplication.auth_token);
+                    volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "bannerDetail", params, MainActivity.auth_token);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
                     String name = new Object() {
@@ -181,7 +181,7 @@ public class BannerActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("studentId", userId);
                 VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, mActivity, null, "dashbBoardStatusBannerPage", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "dashbBoardStatusBannerPage", params, MainActivity.auth_token);
 
             } catch (Exception e) {
                 String className = this.getClass().getSimpleName();
