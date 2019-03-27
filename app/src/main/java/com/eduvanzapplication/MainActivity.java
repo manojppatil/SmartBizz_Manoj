@@ -28,6 +28,7 @@ public class MainActivity extends Application {
 
 //    public static String mainUrl = "https://api.eduvanz.com/"; ///////////////////L I V E//////////////
 
+    public static String auth_token ="",lead_id ="", application_id = "",applicant_id ="" ;
 
     @Override
     public void onCreate() {

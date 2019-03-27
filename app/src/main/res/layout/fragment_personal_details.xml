@@ -246,7 +246,7 @@
                                 android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/_3sdp">
+                                android:padding="@dimen/_4sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_18sdp"

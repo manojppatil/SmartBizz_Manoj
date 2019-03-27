@@ -82,7 +82,7 @@ public class Notification extends AppCompatActivity {
 
                 } else {
                     VolleyCallNew volleyCall = new VolleyCallNew();
-                    volleyCall.sendRequest(context, url, mActivity, null, "Notifications", params, MainApplication.auth_token);
+                    volleyCall.sendRequest(context, url, mActivity, null, "Notifications", params, MainActivity.auth_token);
                 }
             } catch (Exception e) {
                 String className = this.getClass().getSimpleName();

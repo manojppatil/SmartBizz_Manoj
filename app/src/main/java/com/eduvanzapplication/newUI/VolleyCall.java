@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
@@ -102,7 +103,7 @@ public class VolleyCall  {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
 //                headers.put("Authorization", "6041c6c1d7c580619c796c25716bf9ed");
-                headers.put("Authorization","Bearer " + MainApplication.auth_token);
+                headers.put("Authorization","Bearer " + MainActivity.auth_token);
 //                headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -225,13 +226,13 @@ public class VolleyCall  {
             }
             ((GetMobileNo) mActivity).getOTPResponse(jsonDataO);
         }
-        else if (screen.equalsIgnoreCase("verifyOTP")) {
+        else if (screen.equalsIgnoreCase("otpLogin")) {
             try {
                 jsonDataO = new JSONObject(s);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            ((GetMobileNo) mActivity).verifyOTPResponse(jsonDataO);
+            ((GetMobileNo) mActivity).otpLoginResponse(jsonDataO);
         }
         else if (screen.equalsIgnoreCase("bannerDetail")) {
             try {
@@ -247,6 +248,26 @@ public class VolleyCall  {
             try {
                 jsonDataO = new JSONObject(s);
                 ((DashboardFragmentNew) mfragment).setDashboardImages(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("generateOtpCode")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((GetMobileNo) mActivity).generateOtpCodeResponse(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("verifyOtpCode")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((GetMobileNo) mActivity).verifyOtpCodeResponse(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

@@ -1,49 +1,28 @@
 package com.eduvanzapplication.newUI.newViews;
 
-import android.Manifest;
-import android.app.AppOpsManager;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.PersistableBundle;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.webviews.VolleyCallLogin;
 
 import org.json.JSONObject;
 
@@ -52,12 +31,12 @@ import java.util.Map;
 
 public class  GetMobileNo extends AppCompatActivity {
 
-    EditText edtMobile, edtOtp;
+    EditText edtMobile, edtOtp, edtFirstName, edtEmail;
     ImageView ivRetry, ivIndicator;
     TextView txtGetOtp, txtMsg1, txtMsg2;
     LinearLayout linGetOtp, layoutOtp, linEmailLayout;
     ProgressDialog progressDialog ;
-    private boolean mobileNoDone = false;
+    private boolean mobileNoDone = false, signUpCalled = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +49,8 @@ public class  GetMobileNo extends AppCompatActivity {
         progressDialog = new ProgressDialog(GetMobileNo.this);
         edtMobile = findViewById(R.id.edtMobile);
         edtOtp = findViewById(R.id.edtOtp);
+        edtFirstName = findViewById(R.id.edtFirstName);
+        edtEmail = findViewById(R.id.edtEmail);
         ivRetry  =findViewById(R.id.ivRetry);
         ivIndicator = findViewById(R.id.ivIndicator);
         txtGetOtp = findViewById(R.id.txtGetOtp);
@@ -111,11 +92,24 @@ public class  GetMobileNo extends AppCompatActivity {
 
                             }else if (mobileNoDone){
                                 //api call - verify otp
-                                if (layoutOtp.getVisibility() == View.VISIBLE)
-                                        verifyOTP();
-                                else if (linEmailLayout.getVisibility() == View.VISIBLE){
-                                        generateOtpCode();  //signUp
+                                if (layoutOtp.getVisibility() == View.VISIBLE && !signUpCalled)
+                                        otpLogin();
+                                else{
+                                    if (edtFirstName.getText().toString().equals("")){
+                                        edtFirstName.setError("Please provide your first name");
+                                    }else if (edtMobile.getText().toString().equals("")){
+                                        edtMobile.setError("Please provide mobile number");
+                                    }else if (edtEmail.getText().toString().equals("")){
+                                        edtEmail.setError("Please provide email");
+                                    }else{
+                                        if (!signUpCalled){
+                                            generateOtpCode();  //signUp
+                                        }
+                                        else
+                                            verifyOtpCode();
+                                    }
                                 }
+
                                 edtOtp.addTextChangedListener(new TextWatcher() {
                                     @Override
                                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -160,6 +154,35 @@ public class  GetMobileNo extends AppCompatActivity {
 
     }
 
+    private void verifyOtpCode() {
+        try {
+            if (!isFinishing())
+                progressDialog.show();
+            String url = MainActivity.mainUrl + "authorization/verifyOtpCode";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("mobileno", edtMobile.getText().toString());
+            params.put("name", edtFirstName.getText().toString());
+            params.put("email", edtEmail.getText().toString());
+            params.put("otpcode", edtOtp.getText().toString());
+            if (!Globle.isNetworkAvailable(GetMobileNo.this)) {
+                Snackbar.make(linGetOtp, getString(R.string.please_check_your_network_connection),Snackbar.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();
+                volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "verifyOtpCode", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(GetMobileNo.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+    }
+
     public void getOtp(){
         try {
             if (!isFinishing())
@@ -171,7 +194,7 @@ public class  GetMobileNo extends AppCompatActivity {
                 Snackbar.make(linGetOtp, getString(R.string.please_check_your_network_connection),Snackbar.LENGTH_SHORT).show();
             } else {
                 VolleyCall volleyCall = new VolleyCall();
-                volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "getOtp", params, MainApplication.auth_token);
+                volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "getOtp", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             progressDialog.dismiss();
@@ -193,15 +216,9 @@ public class  GetMobileNo extends AppCompatActivity {
             mobileNoDone = true;
             if (status.equalsIgnoreCase("1")) {
 
-                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("otp_done", "0");
-//                editor.putString("firstName", edtName.getText().toString().trim());
-//                editor.putString("emailId", edtEmailId.getText().toString().trim());
-                editor.putString("mobile_no", edtMobile.getText().toString().trim());
-                editor.putInt("userpolicyAgreement", 1);
-                editor.apply();
-                editor.commit();
+                saveUserPrefernce("otp_done","1");
+                saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
+                saveUserPrefernce("userpolicyAgreement", "1");
 
                 layoutOtp.setVisibility(View.VISIBLE);
                 linEmailLayout.setVisibility(View.GONE);
@@ -232,7 +249,7 @@ public class  GetMobileNo extends AppCompatActivity {
         }
     }
 
-    public void verifyOTP(){
+    public void otpLogin(){
         try {
             progressDialog.setMessage("Loading");
             if (!isFinishing())
@@ -245,7 +262,7 @@ public class  GetMobileNo extends AppCompatActivity {
                 Snackbar.make(linGetOtp, getString(R.string.please_check_your_network_connection),Snackbar.LENGTH_SHORT).show();
             } else {
                 VolleyCall volleyCall = new VolleyCall();
-                volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "verifyOTP", params, MainApplication.auth_token);
+                volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "otpLogin", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             progressDialog.dismiss();
@@ -259,13 +276,20 @@ public class  GetMobileNo extends AppCompatActivity {
         }
     }
 
-    public void verifyOTPResponse(JSONObject jsonData){
+    public void otpLoginResponse(JSONObject jsonData){
         try {
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
                 progressDialog.dismiss();
+                MainActivity.auth_token  = jsonData.getJSONObject("auth_token").getString("auth_token");
+                saveUserPrefernce("name",jsonData.getJSONObject("result").getString("first_name"));
+                saveUserPrefernce("otp_done","1");
+                saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
+                saveUserPrefernce("user_img",jsonData.getJSONObject("result").getString("img_profile"));
+                saveUserPrefernce("userpolicyAgreement", "1");
+
                     startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             } else {
@@ -284,14 +308,112 @@ public class  GetMobileNo extends AppCompatActivity {
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(GetMobileNo.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
-
-
-
     }
 
     public void generateOtpCode(){
+        try {
+            progressDialog.setMessage("Loading");
+            if (!isFinishing())
+                progressDialog.show();
+            String url = MainActivity.mainUrl + "authorization/generateOtpCode";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("mobileno", edtMobile.getText().toString());
+            params.put("name", edtFirstName.getText().toString());
+            params.put("email", edtEmail.getText().toString());
+            if (!Globle.isNetworkAvailable(GetMobileNo.this)) {
+                Snackbar.make(linGetOtp, getString(R.string.please_check_your_network_connection),Snackbar.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();
+                volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "generateOtpCode", params, MainActivity.auth_token);
+                signUpCalled = true;
+            }
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(GetMobileNo.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
 
     }
+
+    public void generateOtpCodeResponse(JSONObject jsonData) {
+        try {
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                progressDialog.dismiss();
+                layoutOtp.setVisibility(View.VISIBLE);
+                linEmailLayout.setVisibility(View.GONE);
+//                startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
+//                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            } else {
+                progressDialog.dismiss();
+                Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(GetMobileNo.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+    }
+
+    public void verifyOtpCodeResponse(JSONObject jsonData) {
+        try {
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                progressDialog.dismiss();
+
+                MainActivity.auth_token  = jsonData.getJSONObject("auth_token").getString("auth_token");
+                saveUserPrefernce("name",jsonData.getJSONObject("result").getString("first_name"));
+                saveUserPrefernce("otp_done","1");
+                saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
+                saveUserPrefernce("user_img",jsonData.getJSONObject("result").getString("img"));
+                saveUserPrefernce("userpolicyAgreement", "1");
+
+                startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            } else {
+                progressDialog.dismiss();
+                Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(GetMobileNo.this,className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+
+
+   private void saveUserPrefernce(String key, String value){
+       SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+       SharedPreferences.Editor editor = sharedPreferences.edit();
+       editor.putString(key, value);
+       editor.apply();
+       editor.commit();
+
+   }
 }
     //    TextView textViewToolbar;
 //    MainApplication mainApplication;

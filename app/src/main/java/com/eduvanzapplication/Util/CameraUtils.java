@@ -15,6 +15,7 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import com.eduvanzapplication.BuildConfig;
+import com.eduvanzapplication.newUI.fragments.PersonalDetailsFragment;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 
 import java.io.File;
@@ -96,13 +97,13 @@ public class CameraUtils {
         File mediaStorageDir = new File(
                 Environment
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                DashboardActivity.GALLERY_DIRECTORY_NAME);
+                PersonalDetailsFragment.GALLERY_DIRECTORY_NAME);
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.e(DashboardActivity.GALLERY_DIRECTORY_NAME, "Oops! Failed create "
-                        + DashboardActivity.GALLERY_DIRECTORY_NAME + " directory");
+                Log.e(PersonalDetailsFragment.GALLERY_DIRECTORY_NAME, "Oops! Failed create "
+                        + PersonalDetailsFragment.GALLERY_DIRECTORY_NAME + " directory");
                 return null;
             }
         }
@@ -112,9 +113,9 @@ public class CameraUtils {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(new Date());
         File mediaFile;
-        if (type == DashboardActivity.MEDIA_TYPE_IMAGE) {
+        if (type == PersonalDetailsFragment.MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + "." + DashboardActivity.IMAGE_EXTENSION);
+                    + "IMG_" + timeStamp + "." + PersonalDetailsFragment.IMAGE_EXTENSION);
         }  else {
             return null;
         }
