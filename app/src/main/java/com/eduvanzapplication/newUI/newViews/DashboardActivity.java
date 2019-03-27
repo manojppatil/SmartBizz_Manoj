@@ -55,6 +55,7 @@ import com.android.volley.toolbox.Volley;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
@@ -105,7 +106,7 @@ public class DashboardActivity extends AppCompatActivity
     SharedPref sharedPref;
     LinearLayout linearLayoutSignup, linearLayoutUserDetail;
 
-    static String userMobileNo = "", userId = "", appInstallationTimeStamp = "";
+    static String userMobileNo = "", student_id = "", appInstallationTimeStamp = "";
     AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
 
@@ -134,11 +135,11 @@ public class DashboardActivity extends AppCompatActivity
 
             try {
                 sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                userFirst = sharedPreferences.getString("first_name", "");
-                userLast = sharedPreferences.getString("last_name", "");
-                userEmail = sharedPreferences.getString("user_email", "");
+                userFirst = sharedPreferences.getString("name", "");
+                userEmail = sharedPreferences.getString("email", "");
                 userMobileNo = sharedPreferences.getString("mobile_no", "");
-                userId = sharedPreferences.getString("logged_id", "");
+                MainActivity.auth_token = sharedPreferences.getString("auth_token", "");
+                student_id = sharedPreferences.getString("student_id", "");
                 userPic = sharedPreferences.getString("user_image", "");
                 firstTimeScrape = sharedPreferences.getInt("firstTimeScrape", 0);
                 appInstallationTimeStamp = sharedPreferences.getString("appInstallationTimeStamp", "null");
@@ -146,7 +147,6 @@ public class DashboardActivity extends AppCompatActivity
                 e.printStackTrace();
                 firstTimeScrape = 0;
             }
-
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

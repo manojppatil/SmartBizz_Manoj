@@ -287,6 +287,7 @@ public class  GetMobileNo extends AppCompatActivity {
                 saveUserPrefernce("name",jsonData.getJSONObject("result").getString("first_name"));
                 saveUserPrefernce("otp_done","1");
                 saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
+                saveUserPrefernce("student_id",jsonData.optString("student_id"));
                 saveUserPrefernce("user_img",jsonData.getJSONObject("result").getString("img_profile"));
                 saveUserPrefernce("userpolicyAgreement", "1");
 
@@ -382,6 +383,7 @@ public class  GetMobileNo extends AppCompatActivity {
                 saveUserPrefernce("name",jsonData.getJSONObject("result").getString("first_name"));
                 saveUserPrefernce("otp_done","1");
                 saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
+                saveUserPrefernce("student_id",jsonData.optString("student_id"));
                 saveUserPrefernce("user_img",jsonData.getJSONObject("result").getString("img"));
                 saveUserPrefernce("userpolicyAgreement", "1");
 

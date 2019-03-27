@@ -13,11 +13,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
+import com.eduvanzapplication.newUI.adapter.CardStackAdapter;
 import com.eduvanzapplication.newUI.adapter.LeadsAdapter;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
@@ -36,6 +40,13 @@ import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
 import com.eduvanzapplication.newUI.pojo.DashboardBannerModel;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.viewpagerindicator.CirclePageIndicator;
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
+import com.yuyakaido.android.cardstackview.CardStackListener;
+import com.yuyakaido.android.cardstackview.CardStackView;
+import com.yuyakaido.android.cardstackview.Direction;
+import com.yuyakaido.android.cardstackview.RewindAnimationSetting;
+import com.yuyakaido.android.cardstackview.StackFrom;
+import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +59,7 @@ import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 
-public class DashboardFragmentNew extends Fragment {
+public class DashboardFragmentNew extends Fragment implements CardStackListener {
 
     public static Context context;
     public static Fragment mFragment;
@@ -57,6 +68,7 @@ public class DashboardFragmentNew extends Fragment {
     static TextView textViewDealTitle;
     static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
+    ImageView ivPrevBtn,ivNextBtn;
 
 
 
@@ -68,8 +80,15 @@ public class DashboardFragmentNew extends Fragment {
     LinearLayout linProceedBtn, layout2, linStartNew;
     ImageView ivStartNewBtn;
     TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
-
     ArrayList<DashboardBannerModel> bannerModelArrayList = new ArrayList<>();
+
+    private CardStackView cardStackView; //by lazy { findViewById<CardStackView>(R.id.card_stack_view) }
+    private CardStackLayoutManager manager; //by lazy { CardStackLayoutManager(this, this) }
+    private CardStackAdapter adapter; //by lazy { CardStackAdapter(createSpots()) }
+
+    List<MLeads> mLeadsArrayList = new ArrayList<>();
+    LeadsAdapter leadsAdapter;
+
 
 
 
@@ -78,9 +97,7 @@ public class DashboardFragmentNew extends Fragment {
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
             kyc = null, profileDashboardStats = null;
-    List<MLeads> mLeadsArrayList = new ArrayList<>();
 
-    LeadsAdapter leadsAdapter;
 
     View view;
 
@@ -117,6 +134,7 @@ public class DashboardFragmentNew extends Fragment {
 //            MainApplication.student_id = student_id;
             MainActivity.auth_token = auth_token;
             MainApplication.lead_id = lead_id;
+            MainActivity.lead_id = lead_id;
 
             try {
                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
@@ -137,6 +155,24 @@ public class DashboardFragmentNew extends Fragment {
             txtCallUs = view.findViewById(R.id.txtCallUs);
             txtWhatsAppUs = view.findViewById(R.id.txtWhatsAppUs);
             txtEmailUs = view.findViewById(R.id.txtEmailUs);
+            ivNextBtn = view.findViewById(R.id.ivNextBtn);
+            ivPrevBtn = view.findViewById(R.id.ivPrevBtn);
+
+            cardStackView = view.findViewById(R.id.card_stack_view);
+            manager = new CardStackLayoutManager(getActivity(),this);
+            MLeads mLeads = new MLeads();
+//            for (int i=0; i<10; i++){
+//                mLeads = new MLeads();
+//                mLeads.application_id = "AAA"+i;
+//                mLeads.first_name = "EDUvanz " +i;
+//                mLeads.middle_name = "Shar "+i;
+//                mLeads.last_name = "Name "+i;
+//                mLeads.created_date_time = "Created "+i;
+//                mLeads.profession = "Profession "+i;
+//                mLeads.fk_applicant_type_id = "Applicant type "+i;
+//                mLeadsArrayList.add(mLeads);
+//
+//            }
 
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
@@ -252,6 +288,70 @@ public class DashboardFragmentNew extends Fragment {
         return view;
     }//-----------------------------------END OF ON CREATE----------------------------------------//
 
+    private void setupCardStackView() {
+        manager.setStackFrom(StackFrom.Right);
+        manager.setVisibleCount(3);
+        manager.setDirections(Direction.HORIZONTAL);
+        manager.setTranslationInterval(8.0f);
+        manager.setScaleInterval(0.95f);
+//        manager.can
+        manager.setSwipeThreshold(0.3f);
+        manager.setMaxDegree(20.0f);
+        manager.setDirections(Direction.HORIZONTAL);
+        manager.setCanScrollHorizontal(true);
+        manager.setCanScrollVertical(false);
+        cardStackView.setLayoutManager(manager);
+        cardStackView.setAdapter(adapter);
+        if(  cardStackView.getItemAnimator() instanceof DefaultItemAnimator){
+            ((DefaultItemAnimator)cardStackView.getItemAnimator()).setSupportsChangeAnimations(false);
+        }
+
+    }
+    private void setupButton() {
+//        View skip = findViewById(R.id.skip_button);
+//        skip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SwipeAnimationSetting setting = new SwipeAnimationSetting.Builder()
+//                        .setDirection(Direction.Left)
+//                        .setDuration(200)
+//                        .setInterpolator(new AccelerateInterpolator())
+//                        .build();
+//                manager.setSwipeAnimationSetting(setting);
+//                cardStackView.swipe();
+//
+//            }
+//        });
+
+        ivPrevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RewindAnimationSetting setting =new  RewindAnimationSetting.Builder()
+                        .setDirection(Direction.Bottom)
+                        .setDuration(200)
+                        .setInterpolator(new DecelerateInterpolator())
+                        .build();
+                manager.setRewindAnimationSetting(setting);
+                cardStackView.rewind(adapter.getSpots());
+            }
+        });
+
+
+        ivNextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwipeAnimationSetting setting = new SwipeAnimationSetting.Builder()
+                        .setDirection(Direction.Right)
+                        .setDuration(200)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+                manager.setSwipeAnimationSetting(setting);
+                cardStackView.swipe();
+            }
+        });
+    }
+
+
     View.OnClickListener newApplicationClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -332,6 +432,8 @@ public class DashboardFragmentNew extends Fragment {
     public void onResume() {
         super.onResume();
 
+        getDashboardDetails();
+
         /** API CALL POST LOGIN DASHBOARD STATUS **/
         try {
             String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
@@ -353,6 +455,29 @@ public class DashboardFragmentNew extends Fragment {
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
+    }
+
+    private void getDashboardDetails() {   //get leads
+        try {
+            String url = MainActivity.mainUrl + "dashboard/getDashboardDetails";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("studentId", student_id);//3303
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardDetails", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
     }
 
     public void setDashboardImages(JSONObject jsonData) {
@@ -546,10 +671,12 @@ public class DashboardFragmentNew extends Fragment {
                     mLeadsArrayList.add(mLeads);
 
                 }
-                //146  150 184 217
+                adapter = new CardStackAdapter(mLeadsArrayList, getContext(), getActivity());
+                setupCardStackView();
+                setupButton();
 
-                leadsAdapter = new LeadsAdapter(mLeadsArrayList,context);
-                LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+//                leadsAdapter = new LeadsAdapter(mLeadsArrayList,context);
+//                LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -557,11 +684,11 @@ public class DashboardFragmentNew extends Fragment {
                 editor.apply();
                 editor.commit();
 
-                if (borrower.equalsIgnoreCase("1")) {
-                    linearLayoutContinueApplication.setVisibility(View.VISIBLE);
-                    linearLayoutApplyNow.setVisibility(View.GONE);
-                    linearLayoutEligiblityChekck.setVisibility(View.GONE);
-                }
+//                if (borrower.equalsIgnoreCase("1")) {
+//                    linearLayoutContinueApplication.setVisibility(View.VISIBLE);
+//                    linearLayoutApplyNow.setVisibility(View.GONE);
+//                    linearLayoutEligiblityChekck.setVisibility(View.GONE);
+//                }
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -612,5 +739,59 @@ public class DashboardFragmentNew extends Fragment {
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
+    }
+
+    @Override
+    public void onCardDragging(Direction direction, float ratio) {
+
+    }
+
+    @Override
+    public void onCardSwiped(Direction direction) {
+
+    }
+
+    @Override
+    public void onCardRewound() {
+
+    }
+
+    @Override
+    public void onCardCanceled() {
+
+    }
+
+    @Override
+    public void onCardAppeared(View view, int position) {
+
+    }
+
+    @Override
+    public void onCardDisappeared(View view, int position) {
+        if (position == (cardStackView.getAdapter().getItemCount()-1)){
+//            manager.removeAndRecycleAllViews(cardStackView);
+//            cardStackView.setAdapter(adapter);
+//            cardStackView.scrollToPosition(0);
+//            manager.scrollToPosition(0);
+
+//            MLeads mLeads = new MLeads();
+//            for (int i=0; i<10; i++){
+//                mLeads = new MLeads();
+//                mLeads.application_id = "AAA"+i;
+//                mLeads.first_name = "EDUvanz " +i;
+//                mLeads.middle_name = "Shar "+i;
+//                mLeads.last_name = "Name "+i;
+//                mLeads.created_date_time = "Created "+i;
+//                mLeads.profession = "Profession "+i;
+//                mLeads.fk_applicant_type_id = "Applicant type "+i;
+//                mLeadsArrayList.add(mLeads);
+//
+//            }
+            adapter = new CardStackAdapter(mLeadsArrayList, getContext(), getActivity());
+            cardStackView.setAdapter(adapter);
+            setupCardStackView();
+            setupButton();
+
+        }
     }
 }

@@ -4,20 +4,257 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/_5sdp"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_3sdp"
         android:layout_marginBottom="@dimen/_5sdp"
-        card_view:cardElevation="@dimen/_3sdp">
+        card_view:cardElevation="@dimen/_5sdp"
+        android:elevation="@dimen/_5sdp">
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:id="@+id/txtLeadfName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="Sohail"
+                android:textColor="@color/textcolordark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtLeadlName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtLeadfName"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:text="Ansari"
+                android:textColor="@color/textcolordark"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="-16dp"
+                android:layout_toEndOf="@id/txtLeadfName"
+                android:background="@drawable/border_circular_blue_filled"
+                android:ellipsize="marquee"
+                android:paddingStart="@dimen/_4sdp"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="@dimen/_4sdp"
+                android:singleLine="true"
+                android:text="Completer your application to start to start to start"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLeadlName"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="APPLICATION ID"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="AAAAAAAAAAAAAAAA"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_exclamation_circle_yellow"
+                        android:padding="@dimen/_2sdp"
+                        android:text="\t Pending"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_calendar_check"
+                        android:ellipsize="marquee"
+                        android:padding="@dimen/_2sdp"
+                        android:singleLine="true"
+                        android:text="\t 15 May 2019"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_user_check"
+                        android:ellipsize="marquee"
+                        android:padding="@dimen/_2sdp"
+                        android:singleLine="true"
+                        android:text="\tApproved"
+                        android:textAllCaps="true"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/layout1"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@color/black_new" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:text="Amity University"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:text="BBA - Banking &amp; Financing"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="\tMumbai"
+                        android:drawableStart="@drawable/ic_map_marker_alt"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_new" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="COURSE FEE"
+                        android:textSize="13sp"
+                        android:textColor="@color/custom_txt_darkgray"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:text="\t 94956956"
+                        android:drawableStart="@drawable/ic_rupee_sign"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="@dimen/_15sdp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LOAN AMOUNT"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:textSize="13sp"
+                        android:textColor="@color/custom_txt_darkgray"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:text="\t 10000051"
+                        android:drawableStart="@drawable/ic_rupee_sign"
+                        android:textColor="@color/textcolordark"
+                        android:textSize="@dimen/_15sdp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_3sdp"
@@ -101,9 +338,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:maxLines="2"
+                        android:text="dfgf"
                         android:gravity="center_vertical"
                         android:textColor="@color/textcolordark"
-                        android:textSize="12sp" />
+                        android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
