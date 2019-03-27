@@ -77,7 +77,6 @@
                 android:padding="@dimen/_4sdp"
                 android:text=""
                 android:inputType="textEmailAddress"
-                android:textColor="@color/black_new"
                 style="@style/TextViewTitle14Style" />
         </LinearLayout>
 

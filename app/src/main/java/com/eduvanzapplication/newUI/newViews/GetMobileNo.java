@@ -283,14 +283,16 @@ public class  GetMobileNo extends AppCompatActivity {
 
             if (status.equalsIgnoreCase("1")) {
                 progressDialog.dismiss();
-                MainActivity.auth_token  = jsonData.getJSONObject("auth_token").getString("auth_token");
                 saveUserPrefernce("name",jsonData.getJSONObject("result").getString("first_name"));
                 saveUserPrefernce("otp_done","1");
                 saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
                 saveUserPrefernce("user_img",jsonData.getJSONObject("result").getString("img_profile"));
+                saveUserPrefernce("email",jsonData.getJSONObject("result").getString("email"));
+                saveUserPrefernce("auth_token", jsonData.getJSONObject("auth_token").getString("auth_token"));
+                saveUserPrefernce("student_id", jsonData.optString("student_id"));
                 saveUserPrefernce("userpolicyAgreement", "1");
 
-                    startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
+                startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             } else {
                 progressDialog.dismiss();
@@ -378,11 +380,14 @@ public class  GetMobileNo extends AppCompatActivity {
             if (status.equalsIgnoreCase("1")) {
                 progressDialog.dismiss();
 
-                MainActivity.auth_token  = jsonData.getJSONObject("auth_token").getString("auth_token");
+//                MainActivity.auth_token  = jsonData.getJSONObject("auth_token").getString("auth_token");
                 saveUserPrefernce("name",jsonData.getJSONObject("result").getString("first_name"));
                 saveUserPrefernce("otp_done","1");
                 saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
                 saveUserPrefernce("user_img",jsonData.getJSONObject("result").getString("img"));
+                saveUserPrefernce("email",jsonData.getJSONObject("result").getString("email"));
+                saveUserPrefernce("auth_token", jsonData.getJSONObject("auth_token").getString("auth_token"));
+                saveUserPrefernce("student_id", jsonData.optString("student_id"));
                 saveUserPrefernce("userpolicyAgreement", "1");
 
                 startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)

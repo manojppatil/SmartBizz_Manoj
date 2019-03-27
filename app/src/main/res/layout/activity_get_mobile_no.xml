@@ -41,9 +41,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/first_name"
                 android:textAllCaps="true"
-                android:textColor="@color/black_new"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textColor="@color/darkblue"
+                style="@style/TextViewTitleStyle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,7 +67,6 @@
                     android:layout_marginEnd="@dimen/_6sdp"
                     android:background="@color/black" />
 
-
                 <EditText
                     android:id="@+id/edtFirstName"
                     android:layout_width="0dp"
@@ -78,8 +76,8 @@
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_4sdp"
                     android:text=""
-                    android:textColor="@color/black_new"
-                    android:textSize="15sp" />
+                    style="@style/TextViewTitle14Style" />
+
             </LinearLayout>
 
 
@@ -89,9 +87,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/mobile_number"
                 android:textAllCaps="true"
-                android:textColor="@color/black_new"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textColor="@color/darkblue"
+                style="@style/TextViewTitleStyle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,8 +118,8 @@
                     android:layout_height="wrap_content"
                     android:text="+91"
                     android:textColor="@color/black_new"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    style="@style/TextViewTitle14Style" />
 
                 <EditText
                     android:id="@+id/edtMobile"
@@ -134,8 +131,7 @@
                     android:maxLength="10"
                     android:padding="@dimen/_4sdp"
                     android:text=""
-                    android:textColor="@color/black_new"
-                    android:textSize="15sp" />
+                    style="@style/TextViewTitle14Style" />
 
             </LinearLayout>
         </LinearLayout>
@@ -151,9 +147,8 @@
                 android:text="@string/email_id"
                 android:textAllCaps="true"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:textColor="@color/black_new"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textColor="@color/darkblue"
+                style="@style/TextViewTitleStyle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,7 +189,7 @@
                         android:inputType="textEmailAddress"
                         android:padding="@dimen/_4sdp"
                         android:text=""
-                        android:textColor="@color/black_new" />
+                        style="@style/TextViewTitle14Style" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -207,7 +202,7 @@
                     <View
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_1sdp"
-                        android:background="@color/black" />
+                        android:background="@color/darkblue" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -215,13 +210,13 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:text="@string/or"
-                        android:textColor="@color/black_new"
-                        android:textSize="15sp" />
+                        android:textColor="@color/darkblue"
+                        style="@style/TextViewTitleStyle" />
 
                     <View
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_1sdp"
-                        android:background="@color/black" />
+                        android:background="@color/darkblue" />
 
 
                 </LinearLayout>
@@ -255,7 +250,7 @@
                         android:layout_weight="1"
                         android:text="Connect Using Facebook"
                         android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        style="@style/TextViewTitle14Style"/>
 
                     <ImageView
                         android:layout_width="@dimen/_25sdp"
@@ -293,7 +288,7 @@
                         android:layout_weight="1"
                         android:text="Connect Using LinkedIn"
                         android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        style="@style/TextViewTitle14Style"/>
 
                     <ImageView
                         android:layout_width="@dimen/_25sdp"
@@ -331,7 +326,7 @@
                         android:layout_weight="1"
                         android:text="Connect Using Google"
                         android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        style="@style/TextViewTitle14Style"/>
 
                     <ImageView
                         android:layout_width="@dimen/_25sdp"
@@ -353,7 +348,7 @@
             android:background="@drawable/border_circular"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/_6sdp"
+            android:padding="@dimen/_5sdp"
             android:visibility="visible">
 
             <EditText
@@ -367,8 +362,8 @@
                 android:padding="@dimen/_3sdp"
                 android:text=""
                 android:hint="Enter OTP"
-                android:textColor="@color/black_new"
-                android:textSize="15sp" />
+                style="@style/TextViewTitle14Style" />
+
 
             <View
                 android:layout_width="@dimen/_1sdp"
@@ -391,7 +386,7 @@
 
     <LinearLayout
         android:id="@+id/linGetOtp"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -400,29 +395,31 @@
         android:background="@drawable/border_circular_red_filled"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/_10sdp">
+        android:padding="@dimen/_5sdp">
 
         <TextView
             android:id="@+id/txtGetOtp"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/submit"
-            android:textAllCaps="true"
+            android:text="Submit"
+            android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="@dimen/_15sdp" />
+            style="@style/TextViewTitleStyle"/>
 
         <View
             android:layout_width="@dimen/_1sdp"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
             android:background="@color/white" />
 
         <ImageView
             android:id="@+id/ivIndicator"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
             app:srcCompat="@drawable/ic_key" />
 
     </LinearLayout>

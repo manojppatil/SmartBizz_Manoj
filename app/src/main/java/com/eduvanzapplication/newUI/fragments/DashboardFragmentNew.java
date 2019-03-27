@@ -30,6 +30,7 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.LeadsAdapter;
+import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
@@ -59,8 +60,6 @@ public class DashboardFragmentNew extends Fragment {
     CirclePageIndicator circlePageIndicatorDashboard;
 
 
-
-
     static LinearLayout   linearLayoutEligiblityChekck,
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
@@ -70,10 +69,6 @@ public class DashboardFragmentNew extends Fragment {
     TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
 
     ArrayList<DashboardBannerModel> bannerModelArrayList = new ArrayList<>();
-
-
-
-
 
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
@@ -255,7 +250,7 @@ public class DashboardFragmentNew extends Fragment {
     View.OnClickListener newApplicationClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(getActivity(), NewLeadActivity.class));
+            startActivity(new Intent(getActivity(), CourseDetailsActivity.class));
         }
     };
 
@@ -318,6 +313,7 @@ public class DashboardFragmentNew extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         linProceedBtn.setOnClickListener(newApplicationClkListnr);
         layout2.setOnClickListener(newApplicationClkListnr);
         linStartNew.setOnClickListener(newApplicationClkListnr);

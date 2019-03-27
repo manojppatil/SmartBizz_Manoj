@@ -95,7 +95,7 @@
                             android:text="tenure"
                             android:textAllCaps="true"
                             android:textColor="@color/darkblue"
-                            style="@style/TextViewTitleStyle" />
+                            style="@style/TextViewTitle14Style" />
 
                         <View
                             android:layout_width="@dimen/_1sdp"
@@ -108,7 +108,7 @@
                             android:padding="@dimen/_2sdp"
                             android:text="TOTAL EMIs"
                             android:textColor="@color/darkblue"
-                            style="@style/TextViewTitleStyle" />
+                            style="@style/TextViewTitle14Style" />
                         <View
                             android:layout_width="@dimen/_1sdp"
                             android:layout_height="match_parent"
@@ -122,7 +122,7 @@
                             android:text="LOAN AMOUNT"
                             android:textAllCaps="true"
                             android:textColor="@color/darkblue"
-                            style="@style/TextViewTitleStyle" />
+                            style="@style/TextViewTitle14Style" />
                         <View
                             android:layout_width="@dimen/_1sdp"
                             android:layout_height="match_parent"
@@ -136,7 +136,8 @@
                             android:text="EMI AMOUNT"
                             android:textAllCaps="true"
                             android:textColor="@color/darkblue"
-                            style="@style/TextViewTitleStyle" />
+                            style="@style/TextViewTitle14Style" />
+
                         <View
                             android:layout_width="@dimen/_1sdp"
                             android:layout_height="match_parent"

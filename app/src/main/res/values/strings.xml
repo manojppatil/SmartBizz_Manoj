@@ -378,7 +378,7 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="as_per_aadhar">* As per Aadhaar Card</string>
+    <string name="as_per_aadhar"> * Address ss per your Aadhaar Card</string>
     <string name="first_name_cap">FIRST NAME</string>
     <string name="middle_name_cap">MIDDLE NAME</string>
     <string name="last_name_cap">LAST NAME</string>

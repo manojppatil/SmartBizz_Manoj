@@ -19,11 +19,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
-import com.eduvanzapplication.newUI.VolleyCallNew;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanzapplication.pqformfragments.pojo.NameOfCoursePOJO;
 import com.eduvanzapplication.pqformfragments.pojo.NameOfInsitituePOJO;
@@ -38,7 +39,7 @@ import java.util.Map;
 public class CourseDetailsActivity extends AppCompatActivity {
 
     private ImageView ivNextBtn;
-    private AutoCompleteTextView acInstituteName;
+    public AutoCompleteTextView acInstituteName;
     private Spinner spInsttLocation,spCourse;
     private TextView txtCourseFee;
     private EditText edtLoanAmt;
@@ -66,6 +67,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         setViews();
         context = getApplicationContext();
         mActivity = this;
+
         
         spCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -143,11 +145,11 @@ public class CourseDetailsActivity extends AppCompatActivity {
         try {
             String url = MainApplication.mainUrl + "pqform/apiPrefillInstitutes";  //http://159.89.204.41/eduvanzApi/pqform/apiPrefillInstitutes
             Map<String, String> params = new HashMap<String, String>();
-            VolleyCallNew volleyCall = new VolleyCallNew();
+            VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {
-                volleyCall.sendRequest(context, url, mActivity, null, "instituteName", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "instituteName", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -172,6 +174,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
                 nameOfInsitituePOJOArrayList = new ArrayList<>();
                 nameofinstitute_arrayList = new ArrayList<>();
+
                 for (int i = 0; i < jsonArray.length(); i++) {
                     NameOfInsitituePOJO nameOfInsitituePOJO = new NameOfInsitituePOJO();
                     JSONObject mJsonti = jsonArray.getJSONObject(i);
@@ -209,18 +212,28 @@ public class CourseDetailsActivity extends AppCompatActivity {
             //Getting the instance of AutoCompleteTextView
             acInstituteName.setThreshold(3);//will start working from first character
             acInstituteName.setAdapter(arrayAdapter_NameOfInsititue);//setting the adapter data into the AutoCompleteTextView
-            acInstituteName.setTextColor(Color.RED);
+//            acInstituteName.setTextColor(Color.RED);
 
-            //            spInstitute.setAdapter(arrayAdapter_NameOfInsititue);
-//            arrayAdapter_NameOfInsititue.notifyDataSetChanged();
-//
-//            if (!MainApplication.mainapp_instituteID.equals("")) {
-//                for (int i = 0; i < nameOfInsitituePOJOArrayList.size(); i++) {
-//                    if (MainApplication.mainapp_instituteID.equalsIgnoreCase(nameOfInsitituePOJOArrayList.get(i).instituteID)) {
-//                        spInstitute.setSelection(i);
-//                    }
-//                }
-//            }
+            acInstituteName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                    String countryName = (String) arg0.getItemAtPosition(arg2);
+//                    MainApplication.mainapp_instituteID = instituteID = nameOfInsitituePOJOArrayList.get().instituteID;
+//                    mSelectedCountry.setText(countryName);
+                    int count = nameOfInsitituePOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase((String) arg0.getItemAtPosition(arg2))) {
+                            MainApplication.mainapp_instituteID = instituteID = nameOfInsitituePOJOArrayList.get(i).instituteID;
+                            Log.e("I_________D", "onItemClick: " + instituteID);
+                        }
+                    }
+                    locationApiCall();
+
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+                }
+            });
+
+
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
@@ -240,12 +253,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
             params.put("institute_id", instituteID);
             params.put("location_id", locationID);
 
-            VolleyCallNew volleyCall = new VolleyCallNew();
+            VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
             } else {
-                volleyCall.sendRequest(context, url, mActivity, null, "courseName", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "courseName", params, MainActivity.auth_token);
             }
 
         } catch (Exception e) {
@@ -265,12 +278,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
             Map<String, String> params = new HashMap<String, String>();
             params.put("institute_id", MainApplication.mainapp_instituteID);
 //            params.put("course_id", MainApplication.mainapp_courseID);
-            VolleyCallNew volleyCall = new VolleyCallNew();
+            VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
             } else {
-                volleyCall.sendRequest(context, url, mActivity, null, "locationName", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "locationName", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -291,12 +304,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
             params.put("institute_id", MainApplication.mainapp_instituteID);
             params.put("course_id", MainApplication.mainapp_courseID);
             params.put("location_id", MainApplication.mainapp_locationID);
-            VolleyCallNew volleyCall = new VolleyCallNew();
+            VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
             } else {
-                volleyCall.sendRequest(context, url, mActivity, null, "courseFee", params, MainApplication.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "courseFee", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -473,8 +486,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
             params.put("location", locationID);
             params.put("loanAmount", edtLoanAmt.getText().toString().trim());
 
-            VolleyCallNew volleyCall = new VolleyCallNew();
-            volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "saveInstitute", params, MainApplication.auth_token);
+            VolleyCall volleyCall = new VolleyCall();
+            volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "saveInstitute", params, MainActivity.auth_token);
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {

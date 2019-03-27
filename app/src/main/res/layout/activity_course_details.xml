@@ -85,8 +85,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/_2sdp"
+                            android:maxLines="1"
                             android:background="@android:color/transparent"
-                            style="@style/TextViewTitleStyle"/>
+                            style="@style/TextViewTitle14Style"/>
 
                         <View
                             android:layout_width="@dimen/_1sdp"
@@ -122,14 +123,14 @@
                         android:layout_marginEnd="@dimen/_1sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:paddingLeft="@dimen/_2sdp"
-                        android:paddingRight="@dimen/_2sdp"
-                        style="@style/SpinnerTheme"/>
+                        style="@style/TextViewTitle14Style"
+                        android:paddingRight="@dimen/_2sdp"/>
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="select institute loction"
+                        android:text="select course name"
                         android:textAllCaps="true"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:gravity="start"
@@ -144,6 +145,7 @@
                         android:layout_marginEnd="@dimen/_1sdp"
                         android:paddingLeft="@dimen/_2sdp"
                         android:paddingRight="@dimen/_2sdp"
+                        style="@style/TextViewTitle14Style"
                         android:layout_marginTop="@dimen/_4sdp"/>
 
                     <LinearLayout
@@ -169,13 +171,15 @@
                                 android:textColor="@color/darkblue"
                                 style="@style/TextViewSmallCapsStyle" />
 
-                            <EditText
+                            <TextView
+                                android:id="@+id/txtCourseFee"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/border_circular"
-                                android:backgroundTint="@color/darkblue"
                                 android:padding="@dimen/_8sdp"
-                                android:textSize="12sp"
+                                android:inputType="number"
+                                style="@style/TextViewTitle14Style"
+                                android:maxLines="1"
                                 android:hint="------------"
                                 android:drawableStart="@drawable/ic_rupee_sign"/>
 
@@ -189,7 +193,6 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/txtCourseFee"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Loan Amount"
@@ -206,9 +209,12 @@
                                 android:background="@drawable/border_circular"
                                 android:backgroundTint="@color/darkblue"
                                 android:padding="@dimen/_8sdp"
+                                android:maxLines="1"
+                                android:inputType="number"
+                                style="@style/EditTextStyle"
+                                android:maxLength="8"
                                 android:hint="------------"
-                                android:textSize="12sp"
-                                android:textColor="@color/black_new"
+                                android:textSize="14sp"
                                 android:drawableStart="@drawable/ic_rupee_sign"/>
 
                         </LinearLayout>

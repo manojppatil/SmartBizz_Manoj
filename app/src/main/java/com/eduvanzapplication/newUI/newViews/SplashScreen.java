@@ -61,7 +61,7 @@ public class SplashScreen extends AppCompatActivity {
     public String checkOTPDone = "", checkForImageSlider = "";
     SharedPref sharedPref = new SharedPref();
     static Context context;
-    int policyAgreementStatus;
+    String policyAgreementStatus;
     AppCompatActivity mActivity;
     static Context mContext;
     private String isMandateToUpdate;
@@ -96,7 +96,7 @@ public class SplashScreen extends AppCompatActivity {
 
             SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
             checkOTPDone = sharedPreferences.getString("otp_done", "0");
-            policyAgreementStatus = sharedPreferences.getInt("userpolicyAgreement", 0);
+            policyAgreementStatus = sharedPreferences.getString("userpolicyAgreement", "0");
             checkForImageSlider = sharedPreferences.getString("checkForImageSlider", "0");
 
             AppLanguage = sharedPreferences.getString("AppLanguage", "");
@@ -256,7 +256,7 @@ public class SplashScreen extends AppCompatActivity {
                                 startActivity(intent);
                                 SplashScreen.this.finish();
                             } else {
-                                if (policyAgreementStatus == 0) {
+                                if (policyAgreementStatus.equals("0")) {
 //                                    Intent intent = new Intent(SplashScreen.this, TermsAndCondition.class);
                                     Intent intent = new Intent(SplashScreen.this, DashboardActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
