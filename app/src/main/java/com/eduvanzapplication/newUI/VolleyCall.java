@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
+import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.GetMobileNo;
 import com.eduvanzapplication.newUI.newViews.MyProfileNew;
@@ -253,6 +254,43 @@ public class VolleyCall  {
                 e.printStackTrace();
             }
         }
+        else if (screen.equalsIgnoreCase("instituteName")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((CourseDetailsActivity) mActivity).instituteName(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("courseName")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((CourseDetailsActivity) mActivity).courseName(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("courseFee")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((CourseDetailsActivity) mActivity).courseFee(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (screen.equalsIgnoreCase("locationName")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((CourseDetailsActivity) mActivity).locationName(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
@@ -413,42 +451,6 @@ public class VolleyCall  {
             try {
                 jsonDataO = new JSONObject(s);
                 //LoanApplicationFragment_2 mfragment).getAllProfessiondetailedinfoCoBr(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else if (screen.equalsIgnoreCase("instituteName")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                //EligibilityCheckFragment_5 mfragment).instituteName(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("courseName")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                //EligibilityCheckFragment_5 mfragment).courseName(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else if (screen.equalsIgnoreCase("courseFee")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                //EligibilityCheckFragment_5 mfragment).courseFee(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("locationName")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                //EligibilityCheckFragment_5 mfragment).locationName(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
