@@ -53,7 +53,6 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             final MLeads mLeads = list.get(i);
 
             viewHolder.InsttName.setText("Institute "+i);
-//            viewHolder.city.setText(spot.getCity());
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
