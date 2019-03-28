@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
@@ -31,19 +32,18 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:text="Sohail"
-                android:textColor="@color/textcolordark"
-                android:textSize="18sp" />
+                android:textColor="@color/darkblue"
+                style="@style/TextViewTitleStyle"/>
 
             <TextView
                 android:id="@+id/txtLeadlName"
+                style="@style/TextViewTitle14BoldStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtLeadfName"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:text="Ansari"
-                android:textColor="@color/textcolordark"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textColor="@color/darkblue" />
 
             <TextView
                 android:id="@+id/txtMessage"
@@ -61,8 +61,9 @@
                 android:paddingEnd="18dp"
                 android:paddingBottom="@dimen/_4sdp"
                 android:singleLine="true"
-                android:text="Completer your application to start to start to start"
-                android:textColor="@color/white" />
+                android:text="Complete your application to start to start to start"
+                android:textColor="@color/white"
+                style="@style/TextViewTitle14Style"/>
 
             <LinearLayout
                 android:id="@+id/layout1"
@@ -71,7 +72,6 @@
                 android:layout_below="@+id/txtLeadlName"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:orientation="horizontal">
-
 
                 <LinearLayout
                     android:layout_width="@dimen/_90sdp"
@@ -87,9 +87,8 @@
                         android:ellipsize="marquee"
                         android:singleLine="true"
                         android:text="APPLICATION ID"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/darkblue"
+                        style="@style/TextViewTitle14BoldStyle"/>
 
                     <TextView
                         android:id="@+id/txtApplicationId"
@@ -97,10 +96,9 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
                         android:singleLine="true"
-                        android:text="AAAAAAAAAAAAAAAA"
+                        android:text="13783DFV23"
                         android:textAllCaps="true"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="13sp" />
+                        style="@style/TextViewTitle14Style"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -117,8 +115,7 @@
                         android:drawableStart="@drawable/ic_exclamation_circle_yellow"
                         android:padding="@dimen/_2sdp"
                         android:text="\t Pending"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="13sp" />
+                        style="@style/TextViewTitleSmallStyle"/>
 
                     <TextView
                         android:id="@+id/txtDate"
@@ -130,8 +127,7 @@
                         android:singleLine="true"
                         android:text="\t 15 May 2019"
                         android:textAllCaps="true"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="13sp" />
+                        style="@style/TextViewTitleSmallStyle"/>
 
                     <TextView
                         android:id="@+id/txtStatus2"
@@ -143,8 +139,7 @@
                         android:singleLine="true"
                         android:text="\tApproved"
                         android:textAllCaps="true"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="13sp" />
+                        style="@style/TextViewTitleSmallStyle"/>
 
                 </LinearLayout>
 
@@ -157,7 +152,6 @@
                 android:layout_below="@id/layout1"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:background="@color/black_new" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -182,7 +176,7 @@
                         android:singleLine="true"
                         android:ellipsize="marquee"
                         android:text="Amity University"
-                        android:textSize="18sp" />
+                        style="@style/TextViewTitleStyle"/>
 
                     <TextView
                         android:id="@+id/txtCourseNmae"
@@ -192,17 +186,30 @@
                         android:text="BBA - Banking &amp; Financing"
                         android:singleLine="true"
                         android:ellipsize="marquee"
-                        android:textSize="13sp" />
+                        style="@style/TextViewTitle14BoldStyle"/>
 
-                    <TextView
-                        android:id="@+id/txtCity"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:layout_marginTop="@dimen/_4sdp"
-                        android:text="\tMumbai"
-                        android:drawableStart="@drawable/ic_map_marker_alt"
-                        android:textSize="12sp" />
+                        android:padding="@dimen/_1sdp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/ic_map_marker_alt"/>
+
+                        <TextView
+                            android:id="@+id/txtCity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:text="Mumbai"
+                            android:layout_gravity="center_vertical"
+                            style="@style/TextViewTitle14BoldStyle"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -214,7 +221,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:orientation="vertical">
 
@@ -222,8 +229,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="COURSE FEE"
-                        android:textSize="13sp"
-                        android:textColor="@color/custom_txt_darkgray"/>
+                        android:layout_gravity="left"
+                        android:textColor="@color/darkblue"
+                        style="@style/TextViewTitle12BoldStyle"/>
 
                     <TextView
                         android:id="@+id/txtCourseFee"
@@ -231,29 +239,30 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:ellipsize="marquee"
-                        android:text="\t 94956956"
+                        android:layout_gravity="left"
+                        android:text="\t 345000"
                         android:drawableStart="@drawable/ic_rupee_sign"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="@dimen/_15sdp"/>
+                        style="@style/TextViewTitle14Style"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LOAN AMOUNT"
+                        android:layout_gravity="left"
                         android:layout_marginTop="@dimen/_4sdp"
-                        android:textSize="13sp"
-                        android:textColor="@color/custom_txt_darkgray"/>
+                        android:textColor="@color/darkblue"
+                        style="@style/TextViewTitle12BoldStyle"/>
 
                     <TextView
                         android:id="@+id/txtLoanAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
+                        android:layout_gravity="left"
                         android:ellipsize="marquee"
-                        android:text="\t 10000051"
+                        android:text="\t 1000000"
                         android:drawableStart="@drawable/ic_rupee_sign"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="@dimen/_15sdp"/>
+                        style="@style/TextViewTitle14Style"/>
 
                 </LinearLayout>
 
@@ -261,311 +270,6 @@
 
         </RelativeLayout>
 
-
-
-        <RelativeLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_3sdp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/_5sdp">
-
-            <LinearLayout
-                android:id="@+id/linlafUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginBottom="@dimen/_2sdp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/txtFName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minWidth="@dimen/_30sdp"
-                        android:singleLine="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" "
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/txtLName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/txtlafid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textcolordark"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linInstitue"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:layout_toLeftOf="@+id/linlafstatus0"
-                android:layout_toRightOf="@+id/linlafUser"
-                android:gravity="left"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_2sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="11sp" />
-
-                <TextView
-                    android:id="@+id/txtInstitute"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_2sdp"
-                    android:gravity="center_vertical"
-                    android:maxLines="2"
-                    android:text="dfgf"
-                    android:textColor="@color/textcolordark"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linlafstatus0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_2sdp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/txtLafStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_22sdp"
-                    android:maxWidth="@dimen/_50sdp"
-                    android:gravity="left"
-                    android:lines="2"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="11sp" />
-
-                <ImageView
-                    android:id="@+id/imgLafStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_18sdp"
-                    android:layout_marginLeft="@dimen/_3sdp"
-                    android:gravity="center"
-                    android:scaleType="fitCenter"
-                    android:tint="@color/colorSecondary"
-                    app:srcCompat="@drawable/ic_check_circle" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linlafUser"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="@dimen/_2sdp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_1sdp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtLafDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="11sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/idaddress"
-                            android:layout_width="@dimen/_9sdp"
-                            android:layout_height="@dimen/_10sdp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/ic_map_marker_alt"
-                            android:backgroundTint="@color/textcolordark"
-                            android:scaleType="center" />
-
-                        <TextView
-                            android:id="@+id/txtAddress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxWidth="@dimen/_50sdp"
-                            android:layout_marginLeft="@dimen/_2sdp"
-                            android:textColor="@color/textcolordark"
-                            android:textSize="11sp" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linlafUser"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="@dimen/_2sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="@dimen/_2sdp"
-                android:layout_toRightOf="@+id/linlafUser"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:id="@+id/linLoanAmt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_1sdp"
-                    android:layout_weight="0.28"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtLoanAmtDesc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="@dimen/_50sdp"
-                        android:layout_marginLeft="@dimen/_2sdp"
-                        android:text="Loan Amount"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="11sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_2sdp"
-                            android:text="₹"
-                            android:textColor="@color/textcolordark"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/txtLoanAmt"
-                            android:layout_width="wrap_content"
-                            android:minWidth="@dimen/_50sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_2sdp"
-                            android:textColor="@color/textcolordark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linCourseName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_1sdp"
-                    android:layout_weight="0.28"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtCourseNameDesc"
-                        android:layout_width="wrap_content"
-                        android:minWidth="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_2sdp"
-                        android:text="Course Fee"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="11sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_2sdp"
-                            android:text="₹"
-                            android:textColor="@color/textcolordark"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/txtCourseAmt"
-                            android:layout_width="wrap_content"
-                            android:minWidth="@dimen/_50sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_2sdp"
-                            android:textColor="@color/textcolordark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linCounsellorName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_1sdp"
-                    android:layout_weight="0.46"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_2sdp"
-                        android:text="Course Name"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        android:id="@+id/txtCouseName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxWidth="@dimen/_100sdp"
-                        android:maxLines="2"
-                        android:layout_marginLeft="@dimen/_2sdp"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

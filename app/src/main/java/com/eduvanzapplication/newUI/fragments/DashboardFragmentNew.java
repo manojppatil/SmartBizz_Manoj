@@ -35,12 +35,10 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.CardStackAdapter;
-import com.eduvanzapplication.newUI.adapter.LeadsAdapter;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
 import com.eduvanzapplication.newUI.pojo.DashboardBannerModel;
-import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
@@ -75,8 +73,6 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     public static LinearLayout linLeadsLayout;
     public static ProgressDialog progressDialog;
 
-
-
     static LinearLayout   linearLayoutEligiblityChekck,
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
@@ -91,12 +87,6 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     public static CardStackAdapter adapter;
 
     public static List<MLeads> mLeadsArrayList = new ArrayList<>();
-
-
-
-
-
-
 
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
@@ -168,7 +158,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
             progressDialog = new ProgressDialog(getActivity());
 
             cardStackView = view.findViewById(R.id.card_stack_view);
-            manager = new CardStackLayoutManager(getActivity(),this);
+            manager = new CardStackLayoutManager(context,this);
             adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
             cardStackView.setAdapter(adapter);
             MLeads mLeads = new MLeads();
@@ -300,21 +290,24 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     }//-----------------------------------END OF ON CREATE----------------------------------------//
 
     private void setupCardStackView() {
-        manager.setStackFrom(StackFrom.Right);
-        manager.setVisibleCount(3);
-        manager.setDirections(Direction.HORIZONTAL);
-        manager.setTranslationInterval(8.0f);
-        manager.setScaleInterval(0.95f);
-//        manager.can
-        manager.setSwipeThreshold(0.3f);
-        manager.setMaxDegree(20.0f);
-        manager.setDirections(Direction.HORIZONTAL);
-        manager.setCanScrollHorizontal(true);
-        manager.setCanScrollVertical(false);
-        cardStackView.setLayoutManager(manager);
-        cardStackView.setAdapter(adapter);
-        if(  cardStackView.getItemAnimator() instanceof DefaultItemAnimator){
-            ((DefaultItemAnimator)cardStackView.getItemAnimator()).setSupportsChangeAnimations(false);
+        try {
+            manager.setStackFrom(StackFrom.Right);
+            manager.setVisibleCount(3);
+            manager.setDirections(Direction.HORIZONTAL);
+            manager.setTranslationInterval(8.0f);
+            manager.setScaleInterval(0.95f);
+            manager.setSwipeThreshold(0.3f);
+            manager.setMaxDegree(20.0f);
+            manager.setDirections(Direction.HORIZONTAL);
+            manager.setCanScrollHorizontal(true);
+            manager.setCanScrollVertical(false);
+            cardStackView.setLayoutManager(manager);
+            cardStackView.setAdapter(adapter);
+            if(  cardStackView.getItemAnimator() instanceof DefaultItemAnimator){
+                ((DefaultItemAnimator)cardStackView.getItemAnimator()).setSupportsChangeAnimations(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -699,8 +692,8 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
                 }
 //                cardStackView = view.findViewById(R.id.card_stack_view);
-                adapter = new CardStackAdapter(mLeadsArrayList, getContext(), getActivity());
-                manager = new CardStackLayoutManager(getActivity(),this);
+                adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
+                manager = new CardStackLayoutManager(context,this);
                 setupCardStackView();
                 setupButton();
 

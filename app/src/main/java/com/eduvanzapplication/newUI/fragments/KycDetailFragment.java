@@ -48,32 +48,32 @@ public class KycDetailFragment extends Fragment {
 		context = getContext();
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-		if (borrowerVisiblity == 0) {
-			linBorrowerForm.setVisibility(View.VISIBLE);
-			borrowerVisiblity = 1;
-			txtBorrowerArrowKey.setText(getResources().getString(R.string.up));
-		} else if (borrowerVisiblity == 1) {
-			linBorrowerForm.setVisibility(View.GONE);
-			borrowerVisiblity = 0;
-			txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
-		}
-
-
-		relborrower.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (borrowerVisiblity == 0) {
-					linBorrowerForm.setVisibility(View.VISIBLE);
-					borrowerVisiblity = 1;
-					txtBorrowerArrowKey.setText(getResources().getString(R.string.up));
-				} else if (borrowerVisiblity == 1) {
-					linBorrowerForm.setVisibility(View.GONE);
-					borrowerVisiblity = 0;
-					txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
-				}
-
-			}
-		});
+//		if (borrowerVisiblity == 0) {
+//			linBorrowerForm.setVisibility(View.VISIBLE);
+//			borrowerVisiblity = 1;
+//			txtBorrowerArrowKey.setText(getResources().getString(R.string.up));
+//		} else if (borrowerVisiblity == 1) {
+//			linBorrowerForm.setVisibility(View.GONE);
+//			borrowerVisiblity = 0;
+//			txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
+//		}
+//
+//
+//		relborrower.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				if (borrowerVisiblity == 0) {
+//					linBorrowerForm.setVisibility(View.VISIBLE);
+//					borrowerVisiblity = 1;
+//					txtBorrowerArrowKey.setText(getResources().getString(R.string.up));
+//				} else if (borrowerVisiblity == 1) {
+//					linBorrowerForm.setVisibility(View.GONE);
+//					borrowerVisiblity = 0;
+//					txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
+//				}
+//
+//			}
+//		});
 
         return view;
     }
