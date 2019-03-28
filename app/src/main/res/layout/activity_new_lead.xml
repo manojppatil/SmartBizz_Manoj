@@ -64,4 +64,12 @@
         android:elevation="@dimen/_4sdp"/>
 
 
+    <ImageView
+        android:id="@+id/ivOCRBtn"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/ic_ocr_button"
+        android:layout_marginBottom="-15dp"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

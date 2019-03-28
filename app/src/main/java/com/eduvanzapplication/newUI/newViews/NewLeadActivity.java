@@ -33,6 +33,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     private ImageView ivNextBtn, ivPrevBtn;
     private TextView txtStepTracker;
     private StepperIndicator stepperIndicator;
+    public static ImageView ivOCRBtn;
 
     public static String profession = "1";
     public static String firstName="", lastName="", middleName="", gender="2", maritalStatus="0", dob="";
@@ -57,9 +58,12 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         ivPrevBtn = findViewById(R.id.ivPrevBtn);
         txtStepTracker = findViewById(R.id.txtStepTracker);
         stepperIndicator = findViewById(R.id.stepperIndicator);
+        ivOCRBtn = findViewById(R.id.ivOCRBtn);
+        ivOCRBtn.setVisibility(View.VISIBLE);
 
         ivNextBtn.setOnClickListener(nextClickListener);
         ivPrevBtn.setOnClickListener(prevClickListener);
+
 
     }
 
@@ -81,10 +85,15 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0)
+                if (position == 0){
                     ivPrevBtn.setVisibility(View.GONE);
-                else
+                    ivOCRBtn.setVisibility(View.VISIBLE);
+                }
+                else{
                     ivPrevBtn.setVisibility(View.VISIBLE);
+                    ivOCRBtn.setVisibility(View.GONE);
+
+                }
                 txtStepTracker.setText("Step ".concat(String.valueOf(position+1)).concat(" of ").concat(String.valueOf(adapter.getCount())));
 
                 switch (position){

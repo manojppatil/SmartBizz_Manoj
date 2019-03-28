@@ -323,7 +323,13 @@ public class PersonalDetailsFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        showOCRDialog();
+
+        NewLeadActivity.ivOCRBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOCRDialog();
+            }
+        });
     }
 
     @Override
