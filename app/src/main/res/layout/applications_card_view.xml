@@ -46,6 +46,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txtMessage"
                 android:layout_width="@dimen/_200sdp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -91,6 +92,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtApplicationId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
@@ -109,6 +111,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txtStatus1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_exclamation_circle_yellow"
@@ -118,6 +121,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/txtDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_calendar_check"
@@ -130,6 +134,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/txtStatus2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_user_check"
@@ -169,6 +174,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txtUniversity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_4sdp"
@@ -179,6 +185,7 @@
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/txtCourseNmae"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_4sdp"
@@ -188,6 +195,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/txtCity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_4sdp"
@@ -218,6 +226,7 @@
                         android:textColor="@color/custom_txt_darkgray"/>
 
                     <TextView
+                        android:id="@+id/txtCourseFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -236,6 +245,7 @@
                         android:textColor="@color/custom_txt_darkgray"/>
 
                     <TextView
+                        android:id="@+id/txtLoanAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -315,33 +325,33 @@
 
             <LinearLayout
                 android:id="@+id/linInstitue"
-                android:layout_width="match_parent"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_12sdp"
-                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginLeft="18dp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:layout_toRightOf="@+id/linlafUser"
+                android:layout_marginRight="@dimen/_5sdp"
                 android:layout_toLeftOf="@+id/linlafstatus0"
+                android:layout_toRightOf="@+id/linlafUser"
                 android:gravity="left"
                 android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_2sdp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="11sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="11sp" />
 
-                    <TextView
-                        android:id="@+id/txtInstitute"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_2sdp"
-                        android:maxLines="2"
-                        android:text="dfgf"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/textcolordark"
-                        android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/txtInstitute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:text="dfgf"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout

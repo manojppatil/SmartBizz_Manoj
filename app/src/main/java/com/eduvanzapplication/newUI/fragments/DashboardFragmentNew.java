@@ -63,12 +63,12 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
     public static Context context;
     public static Fragment mFragment;
-    static ViewPager viewPagerDashboard;
+    static  ViewPager viewPagerDashboard;
     static ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     static TextView textViewDealTitle;
     static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
-    ImageView ivPrevBtn,ivNextBtn;
+    public static ImageView ivPrevBtn,ivNextBtn;
 
 
 
@@ -82,12 +82,12 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
     ArrayList<DashboardBannerModel> bannerModelArrayList = new ArrayList<>();
 
-    private CardStackView cardStackView; //by lazy { findViewById<CardStackView>(R.id.card_stack_view) }
-    private CardStackLayoutManager manager; //by lazy { CardStackLayoutManager(this, this) }
-    private CardStackAdapter adapter; //by lazy { CardStackAdapter(createSpots()) }
+    public static CardStackView cardStackView;
+    public static CardStackLayoutManager manager;
+    public static CardStackAdapter adapter;
 
-    List<MLeads> mLeadsArrayList = new ArrayList<>();
-    LeadsAdapter leadsAdapter;
+    public static List<MLeads> mLeadsArrayList = new ArrayList<>();
+
 
 
 
@@ -99,7 +99,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
             kyc = null, profileDashboardStats = null;
 
 
-    View view;
+    public static View view;
 
 
     public DashboardFragmentNew() {
@@ -160,6 +160,8 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
             cardStackView = view.findViewById(R.id.card_stack_view);
             manager = new CardStackLayoutManager(getActivity(),this);
+            adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
+            cardStackView.setAdapter(adapter);
             MLeads mLeads = new MLeads();
 //            for (int i=0; i<10; i++){
 //                mLeads = new MLeads();
@@ -206,27 +208,27 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
                 Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
             }
 
-            /** API CALL GET DEAL**/
-            try {
-                String url = MainActivity.mainUrl + "mobileadverstisement/getDeal";
-                Map<String, String> params = new HashMap<String, String>();
-                if(!Globle.isNetworkAvailable(context))
-                {
-                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-
-                } else {
-                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getDeal
-                    volleyCall.sendRequest(context, url, null, mFragment, "getDeal", params,MainActivity.auth_token);
-                }
-            } catch (Exception e) {
-                String className = this.getClass().getSimpleName();
-                String name = new Object() {
-                }.getClass().getEnclosingMethod().getName();
-                String errorMsg = e.getMessage();
-                String errorMsgDetails = e.getStackTrace().toString();
-                String errorLine = String.valueOf(e.getStackTrace()[0]);
-                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
-            }
+//            /** API CALL GET DEAL**/
+//            try {
+//                String url = MainActivity.mainUrl + "mobileadverstisement/getDeal";
+//                Map<String, String> params = new HashMap<String, String>();
+//                if(!Globle.isNetworkAvailable(context))
+//                {
+//                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//
+//                } else {
+//                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getDeal
+//                    volleyCall.sendRequest(context, url, null, mFragment, "getDeal", params,MainActivity.auth_token);
+//                }
+//            } catch (Exception e) {
+//                String className = this.getClass().getSimpleName();
+//                String name = new Object() {
+//                }.getClass().getEnclosingMethod().getName();
+//                String errorMsg = e.getMessage();
+//                String errorMsgDetails = e.getStackTrace().toString();
+//                String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+//            }
 
             /** API CALL POST LOGIN DASHBOARD Details **/
             try {
@@ -291,6 +293,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     private void setupCardStackView() {
         manager.setStackFrom(StackFrom.Right);
         manager.setVisibleCount(3);
+        manager.setTranslationInterval(400);
         manager.setDirections(Direction.HORIZONTAL);
         manager.setTranslationInterval(8.0f);
         manager.setScaleInterval(0.95f);
@@ -434,29 +437,29 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     public void onResume() {
         super.onResume();
 
-        getDashboardDetails();
+//        getDashboardDetails();
 
-        /** API CALL POST LOGIN DASHBOARD STATUS **/
-        try {
-            String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId", userId);
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-
-            } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
-                volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardStatus", params,MainActivity.auth_token);
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
+//        /** API CALL POST LOGIN DASHBOARD STATUS **/
+//        try {
+//            String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
+//            Map<String, String> params = new HashMap<String, String>();
+//            params.put("studentId", userId);
+//            if (!Globle.isNetworkAvailable(context)) {
+//                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//
+//            } else {
+//                VolleyCallNew volleyCall = new VolleyCallNew();
+//                volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardStatus", params,MainActivity.auth_token);
+//            }
+//        } catch (Exception e) {
+//            String className = this.getClass().getSimpleName();
+//            String name = new Object() {
+//            }.getClass().getEnclosingMethod().getName();
+//            String errorMsg = e.getMessage();
+//            String errorMsgDetails = e.getStackTrace().toString();
+//            String errorLine = String.valueOf(e.getStackTrace()[0]);
+//            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//        }
     }
 
     private void getDashboardDetails() {   //get leads
@@ -580,7 +583,6 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     }
 
     public void setstudentDashbBoardDetails(JSONObject jsonDataO) {
-        Log.e(TAG, "setProfileDashbBoardStatus: " + jsonDataO);
         try {//
             if (jsonDataO.getInt("status") == 1) {
 
@@ -661,7 +663,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 //                        mLeads.institute_name = jsonleadStatus.getString("institute_name");
 //                        mLeads.student_id = jsonleadStatus.getString("student_id");
 
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         String className = this.getClass().getSimpleName();
                         String name = new Object() {
                         }.getClass().getEnclosingMethod().getName();
@@ -673,14 +675,14 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
                     mLeadsArrayList.add(mLeads);
 
                 }
-//                cardStackView = view.findViewById(R.id.card_stack_view);
-                adapter = new CardStackAdapter(mLeadsArrayList, getContext(), getActivity());
-                manager = new CardStackLayoutManager(getActivity(),this);
+                cardStackView = view.findViewById(R.id.card_stack_view);
+                manager = new CardStackLayoutManager(context,this);
+                adapter = new CardStackAdapter(mLeadsArrayList,context, getActivity());
+                cardStackView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 setupCardStackView();
                 setupButton();
 
-//                leadsAdapter = new LeadsAdapter(mLeadsArrayList,context);
-//                LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -772,6 +774,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
     @Override
     public void onCardDisappeared(View view, int position) {
+
         if (position == (cardStackView.getAdapter().getItemCount()-1)){
 //            manager.removeAndRecycleAllViews(cardStackView);
 //            cardStackView.setAdapter(adapter);
@@ -791,10 +794,16 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 //                mLeadsArrayList.add(mLeads);
 //
 //            }
-            adapter = new CardStackAdapter(mLeadsArrayList, getContext(), getActivity());
-            cardStackView.setAdapter(adapter);
-            setupCardStackView();
-            setupButton();
+            try{
+                adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
+                cardStackView.setAdapter(adapter);
+                setupCardStackView();
+                setupButton();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
 
         }
     }
