@@ -84,7 +84,7 @@
 										android:layout_width="match_parent"
 										android:layout_height="wrap_content"
 										android:layout_marginTop="@dimen/_8sdp"
-										android:text="Is Your Current Address Same As Aadhaar Address ?"
+										android:text="Is Your Permanent Address Same As Aadhaar Address ?"
 										android:textColor="@color/darkblue"
 										style="@style/TextViewSmall10Style" />
 
@@ -322,6 +322,12 @@
 
 												</LinearLayout>
 
+												<LinearLayout
+													android:id="@+id/linIfAddressNotSame"
+													android:layout_width="match_parent"
+													android:layout_height="wrap_content"
+													android:orientation="vertical"
+													android:visibility="visible">
 												<android.support.design.widget.TextInputLayout
 													android:id="@+id/tilFlat"
 													android:layout_width="match_parent"
@@ -352,6 +358,142 @@
 														style="@style/EditTextStyle" />
 												</android.support.design.widget.TextInputLayout>
 
+												<LinearLayout
+													android:layout_width="match_parent"
+													android:layout_height="wrap_content"
+													android:layout_marginTop="@dimen/_6sdp"
+													android:orientation="horizontal">
+
+													<android.support.design.widget.TextInputLayout
+														android:id="@+id/tilPincode"
+														android:layout_width="0dp"
+														android:layout_height="wrap_content"
+														android:layout_weight="0.5"
+														android:layout_marginTop="@dimen/_6sdp"
+														android:theme="@style/EditTextStyle"
+														app:hintTextAppearance="@style/CustomTextAppearance">
+
+														<EditText
+															android:layout_width="match_parent"
+															android:layout_height="wrap_content"
+															android:hint="PinCode"
+															android:inputType="number"
+															style="@style/EditTextStyle" />
+													</android.support.design.widget.TextInputLayout>
+
+													<LinearLayout
+														android:layout_width="0dp"
+														android:layout_height="wrap_content"
+														android:layout_weight="0.5"
+														android:orientation="vertical">
+
+														<TextView
+															android:layout_width="match_parent"
+															android:layout_height="wrap_content"
+															android:gravity="center_horizontal"
+															android:text="COUNTRY"
+															style="@style/TextViewSmallCapsStyle"/>
+
+														<Spinner
+															android:id="@+id/spCountry"
+															android:layout_width="match_parent"
+															android:layout_height="@dimen/_26sdp"
+															android:background="@drawable/spinner_rect_background"
+															android:dropDownWidth="400px"
+															android:layout_marginTop="@dimen/_4sdp" />
+
+													</LinearLayout>
+
+												</LinearLayout>
+
+												<LinearLayout
+													android:layout_width="match_parent"
+													android:layout_height="wrap_content"
+													android:layout_marginTop="@dimen/_6sdp"
+													android:orientation="horizontal">
+
+													<LinearLayout
+														android:layout_width="0dp"
+														android:layout_height="wrap_content"
+														android:layout_weight="0.5"
+														android:orientation="vertical">
+														<TextView
+															android:layout_width="match_parent"
+															android:layout_height="wrap_content"
+															android:text="STATE"
+															android:gravity="center_horizontal"
+															style="@style/TextViewSmallCapsStyle"/>
+
+														<Spinner
+															android:id="@+id/spState"
+															android:layout_width="match_parent"
+															android:layout_height="@dimen/_26sdp"
+															android:background="@drawable/spinner_rect_background"
+															android:dropDownWidth="400px"
+															android:layout_marginEnd="@dimen/_1sdp"
+															android:layout_marginTop="@dimen/_4sdp"/>
+
+													</LinearLayout>
+
+													<!--<android.support.design.widget.TextInputLayout-->
+													<!--android:id="@+id/tilState"-->
+													<!--android:layout_width="0dp"-->
+													<!--android:layout_height="wrap_content"-->
+													<!--android:layout_weight="0.5"-->
+													<!--android:layout_marginTop="@dimen/_6sdp"-->
+													<!--android:layout_marginEnd="@dimen/_2sdp"-->
+													<!--android:theme="@style/EditTextStyle"-->
+													<!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+													<!--<EditText-->
+													<!--android:layout_width="match_parent"-->
+													<!--android:layout_height="wrap_content"-->
+													<!--android:hint="STATE"-->
+													<!--android:theme="@style/EditTextStyle" />-->
+													<!--</android.support.design.widget.TextInputLayout>-->
+
+													<LinearLayout
+														android:layout_width="0dp"
+														android:layout_height="wrap_content"
+														android:layout_weight="0.5"
+														android:orientation="vertical">
+														<TextView
+															android:layout_width="match_parent"
+															android:layout_height="wrap_content"
+															android:text="CITY"
+															android:gravity="center_horizontal"
+															style="@style/TextViewSmallCapsStyle"/>
+
+														<Spinner
+															android:id="@+id/spCity"
+															android:layout_width="match_parent"
+															android:layout_height="@dimen/_26sdp"
+															android:background="@drawable/spinner_rect_background"
+															android:dropDownWidth="400px"
+															android:layout_marginStart="@dimen/_2sdp"
+															android:layout_marginTop="@dimen/_4sdp"/>
+
+													</LinearLayout>
+
+													<!--<android.support.design.widget.TextInputLayout-->
+													<!--android:id="@+id/tilCity"-->
+													<!--android:layout_width="0dp"-->
+													<!--android:layout_height="wrap_content"-->
+													<!--android:layout_weight="0.5"-->
+													<!--android:layout_marginTop="@dimen/_6sdp"-->
+													<!--android:layout_marginStart="@dimen/_2sdp"-->
+													<!--android:theme="@style/EditTextStyle"-->
+													<!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+													<!--<EditText-->
+													<!--android:layout_width="match_parent"-->
+													<!--android:layout_height="wrap_content"-->
+													<!--android:hint="CITY"-->
+													<!--android:theme="@style/EditTextStyle" />-->
+													<!--</android.support.design.widget.TextInputLayout>-->
+
+												</LinearLayout>
+												</LinearLayout>
 											</LinearLayout>
 
 										</RelativeLayout>

@@ -540,7 +540,6 @@
 												style="@style/EditTextStyle" />
 										</android.support.design.widget.TextInputLayout>
 
-
 										<LinearLayout
 											android:layout_width="match_parent"
 											android:layout_height="wrap_content"
@@ -676,7 +675,6 @@
 											<!--</android.support.design.widget.TextInputLayout>-->
 
 										</LinearLayout>
-
 
 									</LinearLayout>
 
