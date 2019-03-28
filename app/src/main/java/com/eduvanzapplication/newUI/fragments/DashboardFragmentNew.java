@@ -1,5 +1,6 @@
 package com.eduvanzapplication.newUI.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +71,9 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
     public static ImageView ivPrevBtn,ivNextBtn;
-
+    public static RelativeLayout relStartNewLayout;
+    public static LinearLayout linLeadsLayout;
+    public static ProgressDialog progressDialog;
 
 
 
@@ -157,6 +161,11 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
             txtEmailUs = view.findViewById(R.id.txtEmailUs);
             ivNextBtn = view.findViewById(R.id.ivNextBtn);
             ivPrevBtn = view.findViewById(R.id.ivPrevBtn);
+            relStartNewLayout = view.findViewById(R.id.relStartNewLayout);
+            linLeadsLayout = view.findViewById(R.id.linLeadsLayout);
+            relStartNewLayout.setVisibility(View.VISIBLE);
+            linLeadsLayout.setVisibility(View.GONE);
+            progressDialog = new ProgressDialog(getActivity());
 
             cardStackView = view.findViewById(R.id.card_stack_view);
             manager = new CardStackLayoutManager(getActivity(),this);
@@ -428,7 +437,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
         txtWhatsAppUs.setOnClickListener(whatsAppUsListener);
         txtEmailUs.setOnClickListener(emailUsListener);
 
-        getDashboardDetails();
+//        getDashboardDetails();
 
     }
 
@@ -436,7 +445,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     public void onResume() {
         super.onResume();
 
-//        getDashboardDetails();
+        getDashboardDetails();
 
 //        /** API CALL POST LOGIN DASHBOARD STATUS **/
 //        try {
@@ -463,6 +472,11 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
     private void getDashboardDetails() {   //get leads
         try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setTitle("Retrieving your data");
+            progressDialog.setCancelable(false);
+            if (!getActivity().isFinishing())
+                progressDialog.show();
             String url = MainActivity.mainUrl + "dashboard/getDashboardDetails";
             Map<String, String> params = new HashMap<String, String>();
             params.put("studentId", student_id);//3303
@@ -583,6 +597,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
     public void setstudentDashbBoardDetails(JSONObject jsonDataO) {
         try {//
+            progressDialog.dismiss();
             if (jsonDataO.getInt("status") == 1) {
 
                 JSONObject mObject = jsonDataO.optJSONObject("result");
@@ -590,6 +605,14 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
                 JSONArray jsonArray1 = mObject.getJSONArray("leadsData");
                 mLeadsArrayList = new ArrayList<>();
+                if (jsonArray1.length() == 0){
+                    linLeadsLayout.setVisibility(View.GONE);
+                    relStartNewLayout.setVisibility(View.VISIBLE);
+                }
+                else {
+                    relStartNewLayout.setVisibility(View.GONE);
+                    linLeadsLayout.setVisibility(View.VISIBLE);
+                }
                 for (int i = 0; i < jsonArray1.length(); i++) {
                     MLeads mLeads = new MLeads();
                     JSONObject jsonleadStatus = jsonArray1.getJSONObject(i);

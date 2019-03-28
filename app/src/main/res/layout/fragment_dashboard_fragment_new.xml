@@ -53,6 +53,7 @@
         <!--app:srcCompat="@drawable/ic_footer_bg"/>-->
 
     <RelativeLayout
+        android:id="@+id/relStartNewLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linBanner"
@@ -175,6 +176,7 @@
         android:id="@+id/linLeadsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         android:orientation="horizontal"
         android:layout_marginBottom="@dimen/_3sdp"
         android:layout_marginStart="@dimen/_6sdp"
