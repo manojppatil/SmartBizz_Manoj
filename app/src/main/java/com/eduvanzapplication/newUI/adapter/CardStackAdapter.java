@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,8 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     public List<MLeads> getSpots() {
         return list;
     }
-    public Context context;
-    public FragmentActivity activity;
+     Context context;
+    FragmentActivity activity;
 
     public void setSpots(List<MLeads> list) {
         this.list = list;
@@ -67,13 +68,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             viewHolder.txtStatus1.setText("\tStatus");
             viewHolder.txtStatus2.setText("\tStatus 2");
 
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    context.startActivity(new Intent(activity, LoanTabActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-//                    Toast.makeText(v.getContext(), mLeads.first_name, Toast.LENGTH_SHORT).show();
-                }
-            });
+            viewHolder.itemView.setTag(mLeads.lead_id);
     }
 
     @Override
@@ -100,6 +95,22 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             txtCity = itemView.findViewById(R.id.txtCity);
             txtCourseFee= itemView.findViewById(R.id.txtCourseFee);
             txtLoanAmount = itemView.findViewById(R.id.txtLoanAmount);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(CardStackAdapter.class.getSimpleName(),"LEADID -"+itemView.getTag().toString());
+
+                    try {
+                        context.startActivity(new Intent(context, LoanTabActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .putExtra("lead_id", itemView.getTag().toString()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
 
         }
     }

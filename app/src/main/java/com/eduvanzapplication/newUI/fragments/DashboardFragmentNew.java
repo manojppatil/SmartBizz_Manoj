@@ -293,7 +293,6 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     private void setupCardStackView() {
         manager.setStackFrom(StackFrom.Right);
         manager.setVisibleCount(3);
-        manager.setTranslationInterval(400);
         manager.setDirections(Direction.HORIZONTAL);
         manager.setTranslationInterval(8.0f);
         manager.setScaleInterval(0.95f);
