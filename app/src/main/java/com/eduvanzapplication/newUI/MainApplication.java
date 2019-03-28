@@ -81,7 +81,7 @@ public class MainApplication {
 //        /**API CALL**/
 //        try {
 //
-//            String url = MainApplication.mainUrl + "algo/setBorrowerLoanDetails";
+//            String url = MainActivity.mainUrl + "algo/setBorrowerLoanDetails";
 //            Map<String, String> params = new HashMap<String, String>();
 //            params.put("logged_id", userID);
 //            params.put("student_address_type", borrowerValue1);
@@ -125,7 +125,7 @@ public class MainApplication {
 
 //    public static void apiCallCoBorrower(Context context, AppCompatActivity mActivity, String userID) {
 //        try {
-//            String url = MainApplication.mainUrl + "algo/setCoBorrowerLoanDetails";
+//            String url = MainActivity.mainUrl + "algo/setCoBorrowerLoanDetails";
 //            Map<String, String> params = new HashMap<String, String>();
 //            params.put("logged_id", userID);
 //            params.put("coborrower_address_type", coborrowerValue1);

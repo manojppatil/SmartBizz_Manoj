@@ -252,7 +252,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
 //            /** API CALL POST LOGIN DASHBOARD STATUS **/
 //            try {
-//                String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
+//                String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
 //                Map<String, String> params = new HashMap<String, String>();
 //                params.put("studentId", userId);
 //                if(!Globle.isNetworkAvailable(context))

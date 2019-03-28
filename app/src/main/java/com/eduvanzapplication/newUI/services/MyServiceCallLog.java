@@ -222,7 +222,7 @@ public class MyServiceCallLog extends Service {
         StringBuffer sb;
         long total = 0;
         String urlup = MainActivity.mainUrl + "mobilescrap/send_message";//https://api.eduvanz.com/mobilescrap/send_message
-//        String urlup = MainApplication.mainUrl + "mobilescrap/send_santosh";
+//        String urlup = MainActivity.mainUrl + "mobilescrap/send_santosh";
         int serverResponseCode = 0;
 
         HttpURLConnection connection;

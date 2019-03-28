@@ -625,8 +625,8 @@ public class  GetMobileNo extends AppCompatActivity {
 //        /** API CALL GET OTP**/
 //
 //            try {
-////                String url = MainApplication.mainUrl + "pqform/thirdPartyGenerateOtpCode";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
-//                String url = MainApplication.mainUrl + "authorization/generateOtpCode";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
+////                String url = MainActivity.mainUrl + "pqform/thirdPartyGenerateOtpCode";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
+//                String url = MainActivity.mainUrl + "authorization/generateOtpCode";//http://192.168.0.110/eduvanzapi/pqform/thirdPartyGenerateOtpCode
 //                Map<String, String> params = new HashMap<String, String>();
 //                params.put("mobileno", edtMobileNo.getText().toString());
 //                params.put("name", edtName.getText().toString());

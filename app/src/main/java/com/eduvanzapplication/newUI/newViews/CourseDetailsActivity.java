@@ -143,7 +143,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public void instituteApiCall() {
         /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillInstitutes";  //http://159.89.204.41/eduvanzApi/pqform/apiPrefillInstitutes
+            String url = MainActivity.mainUrl + "pqform/apiPrefillInstitutes";  //http://159.89.204.41/eduvanzApi/pqform/apiPrefillInstitutes
             Map<String, String> params = new HashMap<String, String>();
             VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
@@ -248,7 +248,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void courseApiCall() {
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillCourses";
+            String url = MainActivity.mainUrl + "pqform/apiPrefillCourses";
             Map<String, String> params = new HashMap<String, String>();
             params.put("institute_id", instituteID);
             params.put("location_id", locationID);
@@ -274,7 +274,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void locationApiCall() {
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillLocations";
+            String url = MainActivity.mainUrl + "pqform/apiPrefillLocations";
             Map<String, String> params = new HashMap<String, String>();
             params.put("institute_id", MainApplication.mainapp_instituteID);
 //            params.put("course_id", MainApplication.mainapp_courseID);
@@ -299,7 +299,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public void courseFeeApiCall() {
         /**API CALL**/
         try {
-            String url = MainApplication.mainUrl + "pqform/apiPrefillSliderAmount";
+            String url = MainActivity.mainUrl + "pqform/apiPrefillSliderAmount";
             Map<String, String> params = new HashMap<String, String>();
             params.put("institute_id", MainApplication.mainapp_instituteID);
             params.put("course_id", MainApplication.mainapp_courseID);
@@ -476,7 +476,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         /** API CALL GET OTP**/
         try {//auth_token
             progressBar.setVisibility(View.VISIBLE);
-            String url = MainApplication.mainUrl + "dashboard/saveInstitute";
+            String url = MainActivity.mainUrl + "dashboard/saveInstitute";
             Map<String, String> params = new HashMap<String, String>();
 
             params.put("lead_id", MainApplication.lead_id);

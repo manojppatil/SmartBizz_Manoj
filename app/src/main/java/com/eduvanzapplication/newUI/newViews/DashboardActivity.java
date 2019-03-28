@@ -216,7 +216,7 @@ public class DashboardActivity extends AppCompatActivity
 
 //            /** API CALL GET Dates**/
 //            try {
-//                String url = MainApplication.mainUrl + "mobilescrap/getRecentScrappingDetails";
+//                String url = MainActivity.mainUrl + "mobilescrap/getRecentScrappingDetails";
 //                Map<String, String> params = new HashMap<String, String>();
 //                params.put("mobileNo", userMobileNo);
 //                if (!Globle.isNetworkAvailable(DashboardActivity.this)) {
