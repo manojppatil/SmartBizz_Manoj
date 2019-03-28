@@ -312,6 +312,16 @@ public class VolleyCall  {
                 e.printStackTrace();
             }
         }
+        else if (screen.equalsIgnoreCase("studentDashbBoardDetails")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((DashboardFragmentNew) mfragment).setstudentDashbBoardDetails(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
@@ -692,16 +702,7 @@ public class VolleyCall  {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("studentDashbBoardDetails")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((DashboardFragmentNew) mfragment).setstudentDashbBoardDetails(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("studentDashbBoardStatus")) {
+        }  else if (screen.equalsIgnoreCase("studentDashbBoardStatus")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((DashboardFragmentNew) mfragment).setProfileDashbBoardStatus(jsonDataO);

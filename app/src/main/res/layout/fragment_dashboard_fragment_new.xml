@@ -23,10 +23,10 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager_dashboard"
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/_110sdp"
                 android:layout_marginLeft="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_12sdp"
                 android:padding="@dimen/_5sdp"
-                android:layout_height="@dimen/_110sdp"
                 android:elevation="@dimen/_4sdp"/>
 
         </android.support.v7.widget.CardView>
@@ -56,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linBanner"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
@@ -171,11 +172,59 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/linLeadsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_6sdp"
+        android:gravity="center_vertical"
+        android:layout_above="@+id/linLayout1"
+        android:layout_below="@id/linBanner"
+        android:background="#FFFFFFFF">
+
+        <ImageView
+            android:id="@+id/ivPrevBtn"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            app:srcCompat="@drawable/ic_chevron_left"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:clipToPadding="false"
+            android:clipChildren="false">
+            <com.yuyakaido.android.cardstackview.CardStackView
+                android:id="@+id/card_stack_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_4sdp">
+            </com.yuyakaido.android.cardstackview.CardStackView>
+
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/ivNextBtn"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="-4dp"
+            app:srcCompat="@drawable/ic_chevron_right"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/linContact"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginBottom="3dp"
         android:orientation="horizontal">
 
         <HorizontalScrollView
@@ -377,6 +426,7 @@
             android:layout_height="wrap_content"
             android:text="@string/call_us_s"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             style="@style/TextViewTitle14Style"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/_8sdp"
@@ -394,6 +444,7 @@
             android:layout_height="wrap_content"
             android:text="@string/whatsapp_us"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             style="@style/TextViewTitle14Style"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/_4sdp"
@@ -411,6 +462,7 @@
             android:layout_height="wrap_content"
             android:text="@string/emailus"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/_4sdp"
             style="@style/TextViewTitle14Style"
