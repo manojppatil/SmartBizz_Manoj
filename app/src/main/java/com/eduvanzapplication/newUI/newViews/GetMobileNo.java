@@ -284,6 +284,7 @@ public class  GetMobileNo extends AppCompatActivity {
             if (status.equalsIgnoreCase("1")) {
                 progressDialog.dismiss();
                 MainActivity.auth_token  = jsonData.getJSONObject("auth_token").getString("auth_token");
+                saveUserPrefernce("auth_token",jsonData.getJSONObject("auth_token").getString("auth_token"));
                 saveUserPrefernce("name",jsonData.getJSONObject("result").getString("first_name"));
                 saveUserPrefernce("otp_done","1");
                 saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
@@ -380,6 +381,7 @@ public class  GetMobileNo extends AppCompatActivity {
                 progressDialog.dismiss();
 
                 MainActivity.auth_token  = jsonData.getJSONObject("auth_token").getString("auth_token");
+                saveUserPrefernce("auth_token",jsonData.getJSONObject("auth_token").getString("auth_token"));
                 saveUserPrefernce("name",jsonData.getJSONObject("result").getString("first_name"));
                 saveUserPrefernce("otp_done","1");
                 saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());

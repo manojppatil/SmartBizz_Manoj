@@ -426,6 +426,8 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
         txtWhatsAppUs.setOnClickListener(whatsAppUsListener);
         txtEmailUs.setOnClickListener(emailUsListener);
 
+        getDashboardDetails();
+
     }
 
     @Override
@@ -671,7 +673,9 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
                     mLeadsArrayList.add(mLeads);
 
                 }
+//                cardStackView = view.findViewById(R.id.card_stack_view);
                 adapter = new CardStackAdapter(mLeadsArrayList, getContext(), getActivity());
+                manager = new CardStackLayoutManager(getActivity(),this);
                 setupCardStackView();
                 setupButton();
 
