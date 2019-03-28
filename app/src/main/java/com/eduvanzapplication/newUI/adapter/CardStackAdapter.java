@@ -1,6 +1,7 @@
 package com.eduvanzapplication.newUI.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanzapplication.R;
+import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 
 import java.util.ArrayList;
@@ -24,12 +26,12 @@ import java.util.List;
 
 public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.ViewHolder>{
     List<MLeads> list = new ArrayList();
-    Context context;
-    FragmentActivity activity;
 
     public List<MLeads> getSpots() {
         return list;
     }
+    public Context context;
+    public FragmentActivity activity;
 
     public void setSpots(List<MLeads> list) {
         this.list = list;
@@ -52,20 +54,27 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
             final MLeads mLeads = list.get(i);
 
-            viewHolder.InsttName.setText("Institute "+i);
+            viewHolder.txtLeadfName.setText(mLeads.first_name);
+            viewHolder.txtLeadlName.setText(mLeads.last_name);
+            viewHolder.txtApplicationId.setText(mLeads.application_id);
+            viewHolder.txtCity.setText(mLeads.location_name);
+            viewHolder.txtCourseFee.setText(mLeads.course_cost);
+            viewHolder.txtCourseNmae.setText(mLeads.course_name);
+            viewHolder.txtDate.setText(mLeads.created_date_time);
+            viewHolder.txtLoanAmount.setText(mLeads.requested_loan_amount);
+            viewHolder.txtUniversity.setText(mLeads.institute_name);
+            viewHolder.txtMessage.setText("\tPending....");
+            viewHolder.txtStatus1.setText("\tStatus");
+            viewHolder.txtStatus2.setText("\tStatus 2");
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), mLeads.first_name, Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(activity, LoanTabActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//                    Toast.makeText(v.getContext(), mLeads.first_name, Toast.LENGTH_SHORT).show();
                 }
             });
     }
-
-
-
-
-
 
     @Override
     public int getItemCount() {
@@ -74,18 +83,23 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView InsttName;
-//        TextView city;
-//        ImageView image;
+        TextView  txtLeadfName,txtLeadlName,txtMessage, txtApplicationId, txtStatus1, txtDate, txtStatus2
+                , txtUniversity, txtCourseNmae,txtCity,txtCourseFee,txtLoanAmount ;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            InsttName = itemView.findViewById(R.id.txtInstitute);
-//            city = itemView.findViewById(R.id.item_city);
-////            image  =itemView.findViewById(R.id.item_image);
-//            container = itemView.findViewById(R.id.containerr);
-
+            txtLeadfName = itemView.findViewById(R.id.txtLeadfName);
+            txtLeadlName = itemView.findViewById(R.id.txtLeadlName);
+            txtMessage= itemView.findViewById(R.id.txtMessage);
+            txtApplicationId = itemView.findViewById(R.id.txtApplicationId);
+            txtStatus1 = itemView.findViewById(R.id.txtStatus1);
+            txtDate = itemView.findViewById(R.id.txtDate);
+            txtStatus2 = itemView.findViewById(R.id.txtStatus2);
+            txtUniversity = itemView.findViewById(R.id.txtUniversity);
+            txtCourseNmae = itemView.findViewById(R.id.txtCourseNmae);
+            txtCity = itemView.findViewById(R.id.txtCity);
+            txtCourseFee= itemView.findViewById(R.id.txtCourseFee);
+            txtLoanAmount = itemView.findViewById(R.id.txtLoanAmount);
 
         }
     }
