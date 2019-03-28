@@ -168,7 +168,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
             progressDialog = new ProgressDialog(getActivity());
 
             cardStackView = view.findViewById(R.id.card_stack_view);
-            manager = new CardStackLayoutManager(getActivity(),this);
+            manager = new CardStackLayoutManager(context,this);
             adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
             cardStackView.setAdapter(adapter);
             MLeads mLeads = new MLeads();
@@ -699,8 +699,8 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
                 }
 //                cardStackView = view.findViewById(R.id.card_stack_view);
-                adapter = new CardStackAdapter(mLeadsArrayList, getContext(), getActivity());
-                manager = new CardStackLayoutManager(getActivity(),this);
+                adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
+                manager = new CardStackLayoutManager(context,this);
                 setupCardStackView();
                 setupButton();
 
