@@ -20,7 +20,7 @@ import moe.feng.common.stepperview.VerticalStepperItemView;
 public class KycDetailFragment extends Fragment {
 
 	private VerticalStepperItemView mSteppers[] = new VerticalStepperItemView[3];
-	private Button mNextBtn0, mNextBtn1, mPrevBtn1, mNextBtn2, mPrevBtn2;
+	private Button btnNextKycDetail0, btnNextKycDetail1, btnPreviousKycDetail1, btnNextKycDetail2, btnPreviousKycDetail2;
 
     private int mActivatedColorRes = R.color.material_blue_500;
 	private int mDoneIconRes = R.drawable.ic_done_white_16dp;
@@ -81,14 +81,14 @@ public class KycDetailFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 
-	    mSteppers[0] = view.findViewById(R.id.stepper_0);
-		mSteppers[1] = view.findViewById(R.id.stepper_1);
-		mSteppers[2] = view.findViewById(R.id.stepper_2);
+	    mSteppers[0] = view.findViewById(R.id.stepperKyc0);
+		mSteppers[1] = view.findViewById(R.id.stepperKyc1);
+		mSteppers[2] = view.findViewById(R.id.stepperKyc2);
 
 		VerticalStepperItemView.bindSteppers(mSteppers);
 
-		mNextBtn0 = view.findViewById(R.id.button_next_0);
-		mNextBtn0.setOnClickListener(new View.OnClickListener() {
+		btnNextKycDetail0 = view.findViewById(R.id.btnNextKycDetail0);
+		btnNextKycDetail0.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				mSteppers[0].nextStep();
@@ -127,32 +127,32 @@ public class KycDetailFragment extends Fragment {
 			}
 		});
 
-		mPrevBtn1 = view.findViewById(R.id.button_prev_1);
-		mPrevBtn1.setOnClickListener(new View.OnClickListener() {
+		btnPreviousKycDetail1 = view.findViewById(R.id.btnPreviousKycDetail1);
+		btnPreviousKycDetail1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				mSteppers[1].prevStep();
 			}
 		});
 
-		mNextBtn1 = view.findViewById(R.id.button_next_1);
-		mNextBtn1.setOnClickListener(new View.OnClickListener() {
+		btnNextKycDetail1 = view.findViewById(R.id.btnNextKycDetail1);
+		btnNextKycDetail1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				mSteppers[1].nextStep();
 			}
 		});
 
-		mPrevBtn2 = view.findViewById(R.id.button_prev_2);
-		mPrevBtn2.setOnClickListener(new View.OnClickListener() {
+		btnPreviousKycDetail2 = view.findViewById(R.id.btnPreviousKycDetail2);
+		btnPreviousKycDetail2.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				mSteppers[2].prevStep();
 			}
 		});
 
-		mNextBtn2 = view.findViewById(R.id.button_next_2);
-		mNextBtn2.setOnClickListener(new View.OnClickListener() {
+		btnNextKycDetail2 = view.findViewById(R.id.btnNextKycDetail2);
+		btnNextKycDetail2.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Snackbar.make(view, "Finish!", Snackbar.LENGTH_LONG).show();

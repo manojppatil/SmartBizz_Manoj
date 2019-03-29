@@ -59,7 +59,7 @@
 						android:orientation="vertical">
 
 						<moe.feng.common.stepperview.VerticalStepperItemView
-							android:id="@+id/stepper_0"
+							android:id="@+id/stepperKyc0"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="@dimen/_10sdp"
@@ -373,7 +373,7 @@
 									android:orientation="horizontal">
 
 									<Button
-										android:id="@+id/button_next_0"
+										android:id="@+id/btnNextKycDetail0"
 										android:layout_width="wrap_content"
 										android:layout_height="wrap_content"
 										android:backgroundTint="@color/material_blue_500"
@@ -393,7 +393,7 @@
 						</moe.feng.common.stepperview.VerticalStepperItemView>
 
 						<moe.feng.common.stepperview.VerticalStepperItemView
-							android:id="@+id/stepper_1"
+							android:id="@+id/stepperKyc1"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="@dimen/_6sdp"
@@ -653,7 +653,7 @@
 									android:orientation="horizontal">
 
 									<Button
-										android:id="@+id/button_next_1"
+										android:id="@+id/btnNextKycDetail1"
 										android:layout_width="wrap_content"
 										android:layout_height="wrap_content"
 										android:backgroundTint="@color/material_blue_500"
@@ -661,7 +661,7 @@
 										android:textColor="@android:color/white" />
 
 									<Button
-										android:id="@+id/button_prev_1"
+										android:id="@+id/btnPreviousKycDetail1"
 										android:layout_width="wrap_content"
 										android:layout_height="wrap_content"
 										android:layout_marginStart="@dimen/_6sdp"
@@ -683,7 +683,7 @@
 						</moe.feng.common.stepperview.VerticalStepperItemView>
 
 						<moe.feng.common.stepperview.VerticalStepperItemView
-							android:id="@+id/stepper_2"
+							android:id="@+id/stepperKyc2"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="@dimen/_6sdp"
@@ -900,7 +900,7 @@
 									android:orientation="horizontal">
 
 									<Button
-										android:id="@+id/button_next_2"
+										android:id="@+id/btnNextKycDetail2"
 										android:layout_width="wrap_content"
 										android:layout_height="wrap_content"
 										android:backgroundTint="@color/material_blue_500"
@@ -908,7 +908,7 @@
 										android:textColor="@android:color/white" />
 
 									<Button
-										android:id="@+id/button_prev_2"
+										android:id="@+id/btnPreviousKycDetail2"
 										android:layout_width="wrap_content"
 										android:layout_height="wrap_content"
 										android:layout_marginStart="@dimen/_6sdp"
