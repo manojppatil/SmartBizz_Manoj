@@ -609,16 +609,7 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getRecentScrapping")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((DashboardActivity) mActivity).getScrappingdates(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("studentDashbBoardDetails")) {
+        }  else if (screen.equalsIgnoreCase("studentDashbBoardDetails")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((DashboardFragmentNew) mfragment).setstudentDashbBoardDetails(jsonDataO);
