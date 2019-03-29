@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -32,7 +33,7 @@ public class DetailedInfoFragment extends Fragment {
 	public static Context context;
 	public static Fragment mFragment;
     public static RelativeLayout relborrower;
-    public static LinearLayout linBorrowerForm;
+    public static LinearLayout linBorrowerForm,linIfAddressNotSame;
 	public static TextView txtBorrowerArrowKey;
 	public static int borrowerVisiblity = 0;
 
@@ -42,6 +43,7 @@ public class DetailedInfoFragment extends Fragment {
 		view = inflater.inflate(R.layout.fragment_detailedinfo_stepper, parent, false);
 
         linBorrowerForm = view.findViewById(R.id.linBorrowerForm);
+		linIfAddressNotSame = view.findViewById(R.id.linIfAddressNotSame);
 
         relborrower = view.findViewById(R.id.relborrower);
 
@@ -79,6 +81,17 @@ public class DetailedInfoFragment extends Fragment {
 //			}
 //		});
 
+		switchIsPermanentAddressSame.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked)
+				{
+					linIfAddressNotSame.setVisibility(View.VISIBLE);
+				}
+				else {
+					linIfAddressNotSame.setVisibility(View.GONE);
+				}
+			}
+		});
         return view;
     }
 

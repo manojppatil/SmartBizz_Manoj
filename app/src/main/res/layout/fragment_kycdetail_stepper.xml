@@ -93,6 +93,7 @@
 											android:layout_width="match_parent"
 											android:layout_height="wrap_content"
 											android:hint="@string/first_name"
+											android:imeOptions="actionNext"
 											android:inputType="textCapSentences"
 											style="@style/EditTextStyle" />
 									</android.support.design.widget.TextInputLayout>
@@ -110,6 +111,7 @@
 											android:layout_width="match_parent"
 											android:layout_height="wrap_content"
 											android:hint="@string/middle_name"
+											android:imeOptions="actionNext"
 											android:inputType="textCapSentences"
 											style="@style/EditTextStyle" />
 									</android.support.design.widget.TextInputLayout>
@@ -127,6 +129,7 @@
 											android:layout_width="match_parent"
 											android:layout_height="wrap_content"
 											android:hint="@string/last_name"
+											android:imeOptions="actionNext"
 											android:inputType="textCapSentences"
 											android:theme="@style/EditTextStyle" />
 									</android.support.design.widget.TextInputLayout>
@@ -288,6 +291,7 @@
 												android:layout_width="wrap_content"
 												android:layout_height="wrap_content"
 												android:maxLines="1"
+												android:imeOptions="actionNext"
 												android:text="01 Apr 1999"
 												android:theme="@style/TextViewRadioStyle"
 												android:textColor="@color/textcolordark" />
@@ -309,6 +313,7 @@
 												android:layout_width="wrap_content"
 												android:layout_height="wrap_content"
 												android:theme="@style/SCBSwitch"
+												android:imeOptions="actionNext"
 												android:layout_marginLeft="@dimen/_5sdp"
 												android:checked="true" />
 
@@ -343,6 +348,7 @@
 											android:layout_width="match_parent"
 											android:layout_height="wrap_content"
 											android:hint="e-Mail ID"
+											android:imeOptions="actionNext"
 											android:inputType="textEmailAddress"
 											style="@style/EditTextStyle" />
 									</android.support.design.widget.TextInputLayout>
@@ -359,6 +365,7 @@
 											android:layout_width="match_parent"
 											android:layout_height="wrap_content"
 											android:hint="Mobile Number"
+											android:imeOptions="actionNext"
 											android:inputType="phone"
 											android:maxLength="10"
 											style="@style/EditTextStyle" />
@@ -397,7 +404,6 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="@dimen/_6sdp"
-							app:step_state="selected"
 							app:step_index="2"
 							app:step_title="Identity Details">
 
@@ -450,6 +456,7 @@
 												android:layout_height="wrap_content"
 												android:maxLines="1"
 												android:text="616183839494"
+												android:imeOptions="actionNext"
 												android:inputType="number"
 												style="@style/EditTextStyle" />
 										</LinearLayout>
@@ -486,6 +493,7 @@
 												android:layout_height="wrap_content"
 												android:maxLines="1"
 												android:text="CDFUS9320F"
+												android:imeOptions="actionNext"
 												android:inputType="number"
 												style="@style/EditTextStyle" />
 										</LinearLayout>
@@ -521,6 +529,8 @@
 											<EditText
 												android:layout_width="match_parent"
 												android:layout_height="wrap_content"
+												android:imeOptions="actionNext"
+												android:maxLines="2"
 												android:hint="Flat No, Building, Society Name"
 												style="@style/EditTextStyle" />
 										</android.support.design.widget.TextInputLayout>
@@ -536,6 +546,8 @@
 											<EditText
 												android:layout_width="match_parent"
 												android:layout_height="wrap_content"
+												android:maxLines="2"
+												android:imeOptions="actionNext"
 												android:hint="Street Name, Locality, Landmark"
 												style="@style/EditTextStyle" />
 										</android.support.design.widget.TextInputLayout>
@@ -559,6 +571,7 @@
 													android:layout_width="match_parent"
 													android:layout_height="wrap_content"
 													android:hint="PinCode"
+													android:imeOptions="actionNext"
 													android:inputType="number"
 													style="@style/EditTextStyle" />
 											</android.support.design.widget.TextInputLayout>
@@ -580,6 +593,7 @@
 													android:id="@+id/spCountry"
 													android:layout_width="match_parent"
 													android:layout_height="@dimen/_26sdp"
+													android:imeOptions="actionNext"
 													android:background="@drawable/spinner_rect_background"
 													android:dropDownWidth="400px"
 													android:layout_marginTop="@dimen/_4sdp" />
@@ -610,6 +624,7 @@
 													android:id="@+id/spState"
 													android:layout_width="match_parent"
 													android:layout_height="@dimen/_26sdp"
+													android:imeOptions="actionNext"
 													android:background="@drawable/spinner_rect_background"
 													android:dropDownWidth="400px"
 													android:layout_marginEnd="@dimen/_1sdp"
@@ -633,6 +648,7 @@
 													android:id="@+id/spCity"
 													android:layout_width="match_parent"
 													android:layout_height="@dimen/_26sdp"
+													android:imeOptions="actionNext"
 													android:background="@drawable/spinner_rect_background"
 													android:dropDownWidth="400px"
 													android:layout_marginStart="@dimen/_2sdp"
@@ -688,7 +704,6 @@
 							android:layout_height="wrap_content"
 							android:layout_marginTop="@dimen/_6sdp"
 							app:step_index="3"
-							app:step_state="selected"
 							app:step_is_last="true"
 							app:step_summary="Last step"
 							app:step_summary_done="Last step. Done"
@@ -728,6 +743,7 @@
 												android:layout_weight="1"
 												android:padding="@dimen/_2sdp"
 												android:maxLines="1"
+												android:imeOptions="actionNext"
 												android:background="@android:color/transparent"
 												style="@style/TextViewTitle14Style" />
 
@@ -766,6 +782,7 @@
 											android:layout_marginTop="@dimen/_4sdp"
 											android:paddingLeft="@dimen/_2sdp"
 											android:paddingRight="@dimen/_2sdp"
+											android:imeOptions="actionNext"
 											style="@style/TextViewTitle14Style"/>
 
 
@@ -788,6 +805,7 @@
 											android:paddingLeft="@dimen/_2sdp"
 											android:paddingRight="@dimen/_2sdp"
 											android:layout_marginTop="@dimen/_4sdp"
+											android:imeOptions="actionNext"
 											style="@style/TextViewTitle14Style"/>
 
 										<LinearLayout
@@ -820,6 +838,7 @@
 													android:background="@drawable/border_circular"
 													android:padding="@dimen/_8sdp"
 													android:inputType="number"
+													android:imeOptions="actionNext"
 													style="@style/TextViewTitle14Style"                                        android:maxLines="1"
 													android:hint="------------"
 													android:drawableStart="@drawable/ic_rupee_sign"/>
@@ -853,6 +872,7 @@
 													android:maxLines="1"
 													android:inputType="number"
 													style="@style/EditTextStyle"
+													android:imeOptions="actionNext"
 													android:maxLength="8"
 													android:hint="------------"
 													android:textSize="14sp"
@@ -885,6 +905,7 @@
 											android:layout_height="wrap_content"
 											android:layout_marginRight="20dp"
 											android:layout_weight="1"
+											android:imeOptions="actionNext"
 											android:dropDownSelector="@color/colorPrimary"
 											android:focusable="true"
 											android:gravity="center"

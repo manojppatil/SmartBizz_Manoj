@@ -64,6 +64,7 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             app:step_index="1"
                             app:step_state="selected"
+                            android:clickable="false"
                             app:step_summary="Summarized if needed"
                             app:step_summary_done="Summarized if needed. Done"
                             app:step_title="Residential Details">
@@ -120,7 +121,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_vertical"
-                                                android:checked="true"
+                                                android:checked="false"
                                                 android:theme="@style/SCBSwitch" />
 
                                             <TextView
@@ -200,6 +201,7 @@
                                                             android:layout_height="wrap_content"
                                                             android:layout_gravity="center_vertical"
                                                             android:checked="true"
+                                                            android:imeOptions="actionNext"
                                                             android:theme="@style/SCBSwitch" />
 
                                                         <TextView
@@ -245,6 +247,7 @@
                                                             android:layout_height="wrap_content"
                                                             android:background="@color/white1"
                                                             android:maxLines="1"
+                                                            android:imeOptions="actionNext"
                                                             android:text="45909" />
 
                                                     </LinearLayout>
@@ -277,6 +280,7 @@
                                                             android:layout_height="@dimen/_26sdp"
                                                             android:layout_marginTop="@dimen/_4sdp"
                                                             android:layout_marginEnd="@dimen/_1sdp"
+                                                            android:imeOptions="actionNext"
                                                             android:background="@drawable/spinner_rect_background"
                                                             android:dropDownWidth="400px" />
 
@@ -310,6 +314,7 @@
                                                             android:layout_height="@dimen/_26sdp"
                                                             android:layout_marginTop="@dimen/_4sdp"
                                                             android:layout_marginEnd="@dimen/_1sdp"
+                                                            android:imeOptions="actionNext"
                                                             android:background="@drawable/spinner_rect_background"
                                                             android:dropDownWidth="400px" />
 
@@ -322,7 +327,7 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:orientation="vertical"
-                                                    android:visibility="visible">
+                                                    android:visibility="gone">
 
                                                     <android.support.design.widget.TextInputLayout
                                                         android:id="@+id/tilFlat"
@@ -336,6 +341,7 @@
                                                             style="@style/EditTextStyle"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
+                                                            android:imeOptions="actionNext"
                                                             android:hint="Flat No, Building, Society Name" />
                                                     </android.support.design.widget.TextInputLayout>
 
@@ -351,6 +357,7 @@
                                                             style="@style/EditTextStyle"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
+                                                            android:imeOptions="actionNext"
                                                             android:hint="Street Name, Locality, Landmark" />
                                                     </android.support.design.widget.TextInputLayout>
 
@@ -374,6 +381,7 @@
                                                                 android:layout_width="match_parent"
                                                                 android:layout_height="wrap_content"
                                                                 android:hint="PinCode"
+                                                                android:imeOptions="actionNext"
                                                                 android:inputType="number" />
                                                         </android.support.design.widget.TextInputLayout>
 
@@ -395,6 +403,7 @@
                                                                 android:layout_width="match_parent"
                                                                 android:layout_height="@dimen/_26sdp"
                                                                 android:layout_marginTop="@dimen/_4sdp"
+                                                                android:imeOptions="actionNext"
                                                                 android:background="@drawable/spinner_rect_background"
                                                                 android:dropDownWidth="400px" />
 
@@ -427,6 +436,7 @@
                                                                 android:layout_height="@dimen/_26sdp"
                                                                 android:layout_marginTop="@dimen/_4sdp"
                                                                 android:layout_marginEnd="@dimen/_1sdp"
+                                                                android:imeOptions="actionNext"
                                                                 android:background="@drawable/spinner_rect_background"
                                                                 android:dropDownWidth="400px" />
 
@@ -451,6 +461,7 @@
                                                                 android:layout_height="@dimen/_26sdp"
                                                                 android:layout_marginStart="@dimen/_2sdp"
                                                                 android:layout_marginTop="@dimen/_4sdp"
+                                                                android:imeOptions="actionNext"
                                                                 android:background="@drawable/spinner_rect_background"
                                                                 android:dropDownWidth="400px" />
 
@@ -498,7 +509,6 @@
                             android:layout_marginTop="@dimen/_6sdp"
                             app:step_index="2"
                             app:step_is_last="true"
-                            app:step_state="selected"
                             app:step_summary="Last step"
                             app:step_summary_done="Last step. Done"
                             app:step_title="Professional Details">
@@ -539,6 +549,7 @@
                                             android:layout_height="@dimen/_26sdp"
                                             android:layout_marginTop="@dimen/_4sdp"
                                             android:layout_marginEnd="@dimen/_1sdp"
+                                            android:imeOptions="actionNext"
                                             android:background="@drawable/spinner_rect_background"
                                             android:paddingLeft="@dimen/_2sdp"
                                             android:paddingRight="@dimen/_2sdp" />
@@ -561,7 +572,7 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:orientation="vertical"
-                                                    android:padding="@dimen/_5sdp">
+                                                    android:padding="@dimen/_4sdp">
 
                                                     <android.support.design.widget.TextInputLayout
                                                         android:layout_width="match_parent"
@@ -577,6 +588,7 @@
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
                                                             android:hint="Company Name"
+                                                            android:imeOptions="actionNext"
                                                             android:inputType="textCapSentences" />
                                                     </android.support.design.widget.TextInputLayout>
 
@@ -597,6 +609,7 @@
                                                         android:layout_height="@dimen/_26sdp"
                                                         android:layout_marginTop="@dimen/_4sdp"
                                                         android:layout_marginEnd="@dimen/_1sdp"
+                                                        android:imeOptions="actionNext"
                                                         android:background="@drawable/spinner_rect_background"
                                                         android:paddingLeft="@dimen/_2sdp"
                                                         android:paddingRight="@dimen/_2sdp" />
@@ -621,6 +634,7 @@
                                                                 android:layout_width="match_parent"
                                                                 android:layout_height="wrap_content"
                                                                 android:hint="Annual Income"
+                                                                android:imeOptions="actionNext"
                                                                 android:inputType="number" />
                                                         </android.support.design.widget.TextInputLayout>
 
@@ -642,6 +656,7 @@
                                                                 android:layout_width="match_parent"
                                                                 android:layout_height="@dimen/_26sdp"
                                                                 android:layout_marginTop="@dimen/_4sdp"
+                                                                android:imeOptions="actionNext"
                                                                 android:background="@drawable/spinner_rect_background"
                                                                 android:dropDownWidth="400px" />
 
@@ -667,6 +682,7 @@
                                                                 style="@style/EditTextStyle"
                                                                 android:layout_width="match_parent"
                                                                 android:layout_height="wrap_content"
+                                                                android:imeOptions="actionNext"
                                                                 android:hint="Flat No, Building, Society Name" />
                                                         </android.support.design.widget.TextInputLayout>
 
@@ -682,6 +698,7 @@
                                                                 style="@style/EditTextStyle"
                                                                 android:layout_width="match_parent"
                                                                 android:layout_height="wrap_content"
+                                                                android:imeOptions="actionNext"
                                                                 android:hint="Street Name, Locality, Landmark" />
                                                         </android.support.design.widget.TextInputLayout>
 
@@ -705,6 +722,7 @@
                                                                     android:layout_width="match_parent"
                                                                     android:layout_height="wrap_content"
                                                                     android:hint="PinCode"
+                                                                    android:imeOptions="actionNext"
                                                                     android:inputType="number" />
                                                             </android.support.design.widget.TextInputLayout>
 
@@ -726,6 +744,7 @@
                                                                     android:layout_width="match_parent"
                                                                     android:layout_height="@dimen/_26sdp"
                                                                     android:layout_marginTop="@dimen/_4sdp"
+                                                                    android:imeOptions="actionNext"
                                                                     android:background="@drawable/spinner_rect_background"
                                                                     android:dropDownWidth="400px" />
 
@@ -758,6 +777,7 @@
                                                                     android:layout_height="@dimen/_26sdp"
                                                                     android:layout_marginTop="@dimen/_4sdp"
                                                                     android:layout_marginEnd="@dimen/_1sdp"
+                                                                    android:imeOptions="actionNext"
                                                                     android:background="@drawable/spinner_rect_background"
                                                                     android:dropDownWidth="400px" />
 
@@ -782,6 +802,7 @@
                                                                     android:layout_height="@dimen/_26sdp"
                                                                     android:layout_marginStart="@dimen/_2sdp"
                                                                     android:layout_marginTop="@dimen/_4sdp"
+                                                                    android:imeOptions="actionNext"
                                                                     android:background="@drawable/spinner_rect_background"
                                                                     android:dropDownWidth="400px" />
 
