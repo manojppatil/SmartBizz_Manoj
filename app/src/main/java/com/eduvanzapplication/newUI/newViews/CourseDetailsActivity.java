@@ -38,16 +38,16 @@ import java.util.Map;
 
 public class CourseDetailsActivity extends AppCompatActivity {
 
-    private ImageView ivNextBtn;
-    public AutoCompleteTextView acInstituteName;
-    private Spinner spInsttLocation,spCourse;
-    private TextView txtCourseFee;
-    private EditText edtLoanAmt;
-    ProgressBar progressBar;
-    Context context;
-    AppCompatActivity mActivity;
-    SharedPreferences sharedPreferences;
-    String instituteID = "", courseID = "", locationID = "", lead_id = "", application_id = "";
+    public static ImageView ivNextBtn;
+    public static AutoCompleteTextView acInstituteName;
+    public static Spinner spInsttLocation,spCourse;
+    public static TextView txtCourseFee;
+    public static EditText edtLoanAmt;
+    public static ProgressBar progressBar;
+    public static Context context;
+    public static AppCompatActivity mActivity;
+     SharedPreferences sharedPreferences;
+    public static String instituteID = "", courseID = "", locationID = "", lead_id = "", application_id = "";
 
     public ArrayAdapter arrayAdapter_NameOfInsititue;
     public ArrayList<String> nameofinstitute_arrayList;

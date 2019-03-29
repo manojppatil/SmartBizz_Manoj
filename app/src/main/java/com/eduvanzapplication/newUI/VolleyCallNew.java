@@ -488,16 +488,7 @@ public class VolleyCallNew extends Application {
                 e.printStackTrace();
             }
         }
-        else if (screen.equalsIgnoreCase("addborrower")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                //EligibilityCheckFragment_4 mfragment).setaddborrower(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else if (screen.equalsIgnoreCase("addcoborrower")) {
+        else if (screen.equalsIgnoreCase("addcoborrower")) {
             try {
                 jsonDataO = new JSONObject(s);
                 //EligibilityCheckFragment_4 mfragment).setaddcoborrower(jsonDataO);

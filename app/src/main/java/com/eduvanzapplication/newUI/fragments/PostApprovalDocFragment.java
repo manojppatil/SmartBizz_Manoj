@@ -95,8 +95,8 @@ public class PostApprovalDocFragment extends Fragment {
 //                    for (int i = 0; i < countriesObj.length(); i++) {
 //                        Gson gson = new Gson();
 //                        String countryInfo = countriesObj.getJSONObject(i).toString();
-//                        Country country = gson.fromJson(countryInfo, Country.class);
-//                        countryData.append(country.getCode() + ": " + country.getName() + "\n");
+//                        Country countryId = gson.fromJson(countryInfo, Country.class);
+//                        countryData.append(countryId.getCode() + ": " + countryId.getName() + "\n");
 //                    }
 //
 //                    TextView showCountries = (TextView) findViewById(R.id.countryData);

@@ -204,7 +204,7 @@ public class PersonalDetailsFragment extends Fragment {
         linOtherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLeadActivity.gender = "2";
+                NewLeadActivity.gender = "3";
                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
@@ -235,7 +235,7 @@ public class PersonalDetailsFragment extends Fragment {
         switchMarital.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                NewLeadActivity.maritalStatus = isChecked ? "1" : "0";
+                NewLeadActivity.maritalStatus = isChecked ? "1" : "2";
                 if (isChecked)
                     txtMaritalStatus.setText("Married");
                 else
