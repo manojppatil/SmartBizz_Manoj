@@ -57,6 +57,7 @@ dependencies {
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':cardstackview')
+//    implementation project(':library')
 
     //Dotted View For View pager
 

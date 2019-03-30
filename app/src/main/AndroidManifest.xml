@@ -45,10 +45,12 @@
         android:roundIcon="@drawable/eduvanz_logo_new"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        tools:node="replace"
         tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon,android:name">
-        <activity android:name=".newUI.newViews.TenureSelectionActivity"></activity>
+        <activity android:name=".newUI.newViews.TenureSelectionActivity"/>
         <activity android:name=".newUI.newViews.CourseDetailsActivity" />
-        <activity android:name=".newUI.newViews.NewLeadActivity" />
+        <activity android:name=".newUI.newViews.NewLeadActivity"
+            android:theme="@style/AppTheme1"/>
         <activity
             android:name="com.gun0912.tedpicker.ImagePickerActivity"
             android:screenOrientation="portrait"

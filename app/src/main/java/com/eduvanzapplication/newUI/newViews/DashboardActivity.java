@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -52,6 +53,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
@@ -99,12 +101,11 @@ public class DashboardActivity extends AppCompatActivity
     public static DrawerLayout drawer;
     Context context;
 //    com.eduvanzapplication.newUI.newViews.CustomDrawerButton customDrawerButton;
-    TextView textViewName, textViewEmail;
-    Button buttonSignup, buttonSignIn;
+    TextView textViewName, textViewEmail, textView_mobileNo;
     MainApplication mainApplication;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
-    LinearLayout linearLayoutSignup, linearLayoutUserDetail;
+    LinearLayout  linearLayoutUserDetail;
 
     static String userMobileNo = "", student_id = "", appInstallationTimeStamp = "";
     AppCompatActivity mActivity;
@@ -140,7 +141,7 @@ public class DashboardActivity extends AppCompatActivity
                 userMobileNo = sharedPreferences.getString("mobile_no", "");
                 MainActivity.auth_token = sharedPreferences.getString("auth_token", "");
                 student_id = sharedPreferences.getString("student_id", "");
-                userPic = sharedPreferences.getString("user_image", "");
+                userPic = sharedPreferences.getString("user_img", "");
                 firstTimeScrape = sharedPreferences.getInt("firstTimeScrape", 0);
                 appInstallationTimeStamp = sharedPreferences.getString("appInstallationTimeStamp", "null");
             } catch (Exception e) {
@@ -163,23 +164,28 @@ public class DashboardActivity extends AppCompatActivity
             hideMenuOptions();
 
             textViewName = (TextView) header.findViewById(R.id.textView_name);
-            mainApplication.applyTypeface(textViewName, context);
-            textViewName.setText(userFirst + " " + userLast);
+            textViewName.setText(userFirst.concat(" ").concat(userLast));
             textViewEmail = (TextView) header.findViewById(R.id.textView_emailID);
-            mainApplication.applyTypeface(textViewEmail, context);
             textViewEmail.setText(userEmail);
-
+            textView_mobileNo = header.findViewById(R.id.textView_mobileNo);
+            textView_mobileNo.setText(userMobileNo);
             imageViewProfilePic = (ImageView) header.findViewById(R.id.imageView_userpic);
+
+//            try {
+//                Glide.with(getApplicationContext())
+//                        .load(userPic)
+//                        .placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder))
+//                        .into(imageViewProfilePic);
+//            } catch (Resources.NotFoundException e) {
+//                e.printStackTrace();
+//            }
+
+
             if (!userPic.equalsIgnoreCase("")) {
                 Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
             }
 
-            buttonSignup = (Button) header.findViewById(R.id.button_dashboard_signup);
-            mainApplication.applyTypeface(buttonSignup, context);
-            buttonSignIn = (Button) header.findViewById(R.id.button_dashboard_signin);
-            mainApplication.applyTypeface(buttonSignIn, context);
 
-            linearLayoutSignup = (LinearLayout) header.findViewById(R.id.linearLayout_signupdetail_dashboard);
             linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
 
             frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
@@ -202,7 +208,6 @@ public class DashboardActivity extends AppCompatActivity
 
             if (sharedPref.getLoginDone(context)) {
                 linearLayoutUserDetail.setVisibility(View.VISIBLE);
-                linearLayoutSignup.setVisibility(View.GONE);
                 Menu nav_Menu = navigationView.getMenu();
                 nav_Menu.findItem(R.id.nav_loanApplication).setVisible(true);
                 nav_Menu.findItem(R.id.nav_eligibility).setVisible(false);
@@ -222,8 +227,10 @@ public class DashboardActivity extends AppCompatActivity
 //                if (!Globle.isNetworkAvailable(DashboardActivity.this)) {
 //
 //                } else {
-//                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobilescrap/getRecentScrappingDetails
-//                    volleyCall.sendRequest(context, url, mActivity, null, "getRecentScrapping", params);
+//                if (!userMobileNo.equals("8007168421") || !userMobileNo.equals("9834224796")){
+    //                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobilescrap/getRecentScrappingDetails
+    //                    volleyCall.sendRequest(context, url, mActivity, null, "getRecentScrapping", params);
+//                }
 //                }
 //            } catch (Exception e) {
 //                String className = this.getClass().getSimpleName();
@@ -260,7 +267,6 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
 
