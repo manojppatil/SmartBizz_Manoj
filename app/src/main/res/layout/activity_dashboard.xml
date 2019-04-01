@@ -42,7 +42,9 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_dashboard"
-        app:itemTextColor="@color/colorPrimary"
+        android:background="@color/darkblue"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
         app:menu="@menu/activity_dashboard_drawer" />
 
     <ProgressBar

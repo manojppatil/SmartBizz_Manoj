@@ -12,7 +12,7 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "27.0.3"
+    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.eduvanzapplication"
         minSdkVersion 19
@@ -57,7 +57,6 @@ dependencies {
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':cardstackview')
-//    implementation project(':library')
 
     //Dotted View For View pager
 
@@ -94,7 +93,7 @@ dependencies {
     implementation 'com.twitter.sdk.android:twitter:3.1.1'
     implementation 'com.xw.repo:bubbleseekbar:3.8'
     implementation 'com.makeramen:roundedimageview:2.3.0'
-    implementation 'com.google.firebase:firebase-messaging:17.4.0'
+    implementation 'com.google.firebase:firebase-messaging:17.5.0'
 //    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 //    implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
@@ -158,6 +157,8 @@ dependencies {
     implementation 'com.idfy:rftcapturesdk:0.1.0'
     implementation 'com.google.android.gms:play-services-vision:17.0.2'
     implementation 'com.github.badoualy:stepper-indicator:1.0.7'
+    implementation 'com.brucetoo.pickview:library:1.2.3'
+
 
 
 }

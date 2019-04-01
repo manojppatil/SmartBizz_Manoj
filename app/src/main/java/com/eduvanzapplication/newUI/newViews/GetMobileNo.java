@@ -23,26 +23,51 @@ import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.VolleyCall;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class  GetMobileNo extends AppCompatActivity {
 
+    private final String TAG = GetMobileNo.class.getSimpleName();
     EditText edtMobile, edtOtp, edtFirstName, edtEmail;
     ImageView ivRetry, ivIndicator;
     TextView txtGetOtp, txtMsg1, txtMsg2;
-    LinearLayout linGetOtp, layoutOtp, linEmailLayout;
+    String userEmail = "";
+    LinearLayout linGetOtp, layoutOtp, linEmailLayout, linFacebook, linLinkedIn, linGoogle;
+    LoginButton fbLoginButton;
     ProgressDialog progressDialog ;
     private boolean mobileNoDone = false, signUpCalled = false;
+    CallbackManager callbackManagerFb = CallbackManager.Factory.create();
+    private static final String EMAIL = "email";
+
+    final private int RC_SIGN_IN = 112;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_get_mobile_no);
         setViews();
+        setFacebookLogin();
+
     }
 
     private void setViews() {
@@ -63,6 +88,11 @@ public class  GetMobileNo extends AppCompatActivity {
         layoutOtp.setVisibility(View.GONE);
         linEmailLayout = findViewById(R.id.linEmailLayout);
         linEmailLayout.setVisibility(View.GONE);
+        linFacebook = findViewById(R.id.linFacebook);
+        linLinkedIn = findViewById(R.id.linLinkedIn);
+        linGoogle = findViewById(R.id.linGoogle);
+        fbLoginButton = findViewById(R.id.fb_login_button);
+
 
 
         edtMobile.addTextChangedListener(new TextWatcher() {
@@ -152,7 +182,92 @@ public class  GetMobileNo extends AppCompatActivity {
             }
         });
 
+        linFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbLoginButton.performClick();
+            }
+        });
+
+        linGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setGoogleLogin();
+            }
+        });
+
+
     }
+
+    private void setFacebookLogin() {
+        fbLoginButton.setReadPermissions(Arrays.asList(EMAIL));
+        fbLoginButton.registerCallback(callbackManagerFb, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Profile profile = Profile.getCurrentProfile();
+                Log.d("FBSUCESS","RESULT - "+profile.getFirstName() +""+profile.getId());
+                edtFirstName.setText(profile.getFirstName());
+                if (profile.getId().contains("@")){
+                    edtEmail.setText(profile.getId());
+                }else
+                    Snackbar.make(linGetOtp, "Unable to get Email ID, Please enter it manually",Snackbar.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d("FBONERROR","ERROR - "+ error.toString());
+            }
+        });
+
+    }
+
+    private void setGoogleLogin() {
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        callbackManagerFb.onActivityResult(requestCode, resultCode, data); //facebook
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            userEmail =  account.getEmail();
+            edtEmail.setText(userEmail);
+            edtFirstName.setText(account.getDisplayName());
+            Log.d(TAG,"Google Mail - "+userEmail);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+        }
+    }
+
 
     private void verifyOtpCode() {
         try {
