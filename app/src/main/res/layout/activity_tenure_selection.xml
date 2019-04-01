@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_6sdp"
-            android:text="Select your comfort as per your comfort"
+            android:text="Select your tenure as per your comfort"
             android:textColor="@color/darkblue"
             style="@style/TextViewTitleStyle" />
 

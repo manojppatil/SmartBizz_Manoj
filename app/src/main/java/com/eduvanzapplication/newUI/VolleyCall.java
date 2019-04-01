@@ -31,6 +31,7 @@ import com.eduvanzapplication.newUI.newViews.Notification;
 import com.eduvanzapplication.newUI.newViews.OtpValidation;
 import com.eduvanzapplication.newUI.newViews.SignIn;
 import com.eduvanzapplication.newUI.newViews.SplashScreen;
+import com.eduvanzapplication.newUI.newViews.TenureSelectionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -355,7 +356,16 @@ public class VolleyCall  {
                 e.printStackTrace();
             }
         }
-
+        else if (screen.equalsIgnoreCase("getTenureList")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((TenureSelectionActivity)mActivity).getTenureList(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
@@ -449,16 +459,7 @@ public class VolleyCall  {
         }else if (screen.equalsIgnoreCase("saveInstitute")) {
             try {
                 jsonDataO = new JSONObject(s);
-                //EligibilityCheckFragment_5 mfragment).setsaveInstitute(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else if (screen.equalsIgnoreCase("getTenureList")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                //EligibilityCheckFragment_6 mfragment).getTenureList(jsonDataO);
+                ((CourseDetailsActivity)mActivity).setsaveInstitute(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

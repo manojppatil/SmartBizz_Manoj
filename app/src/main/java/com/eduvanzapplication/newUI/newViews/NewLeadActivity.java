@@ -55,6 +55,8 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     public static String documents = "1", aadharNumber="", panNUmber="";
     public static String flatBuildingSoc="", streetLocalityLandMark="", pinCode="", countryId ="", stateId="", cityId="";
     public static String companyName="", annualIncome="";
+    public static String instituteName="", instituteLocation="", courseName="", courseFee="", loanAmount="";
+    public static String leadId = "", applicantId="";
 
 
     @Override
@@ -149,7 +151,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount()-1)){
                 if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")){
                     startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                            .addFlags( Intent.FLAG_ACTIVITY_NEW_TASK));
                 }else
                     Snackbar.make(ivNextBtn, "Please fill all the fields",Snackbar.LENGTH_SHORT).show();
 
@@ -319,6 +321,9 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
             MainActivity.lead_id = jsonData.optString("lead_id");
             MainActivity.applicant_id = jsonData.optString("applicant_id");
+            NewLeadActivity.leadId= jsonData.optString("lead_id");
+            NewLeadActivity.applicantId = jsonData.optString("applicant_id");
+
 
             if (jsonData.getInt("status") == 1) {
                 startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
