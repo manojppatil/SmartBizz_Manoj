@@ -28,6 +28,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
@@ -86,6 +87,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -167,19 +169,10 @@ public class DashboardActivity extends AppCompatActivity
             textViewName.setText(userFirst.concat(" ").concat(userLast));
             textViewEmail = (TextView) header.findViewById(R.id.textView_emailID);
             textViewEmail.setText(userEmail);
+            textViewEmail.setSelected(true);
             textView_mobileNo = header.findViewById(R.id.textView_mobileNo);
             textView_mobileNo.setText(userMobileNo);
             imageViewProfilePic = (ImageView) header.findViewById(R.id.imageView_userpic);
-
-//            try {
-//                Glide.with(getApplicationContext())
-//                        .load(userPic)
-//                        .placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder))
-//                        .into(imageViewProfilePic);
-//            } catch (Resources.NotFoundException e) {
-//                e.printStackTrace();
-//            }
-
 
             if (!userPic.equalsIgnoreCase("")) {
                 Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);

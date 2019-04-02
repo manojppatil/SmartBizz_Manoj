@@ -21,7 +21,7 @@
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         app:civ_border_width="1dp"
-        app:civ_border_color="@color/blue1"
+        app:civ_border_color="@color/darkblue"
         android:src="@drawable/profilepic_placeholder" />
 
     <LinearLayout
@@ -64,6 +64,7 @@
         <TextView
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
             android:id="@+id/textView_emailID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

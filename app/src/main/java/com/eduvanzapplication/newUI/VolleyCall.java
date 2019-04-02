@@ -278,7 +278,7 @@ public class VolleyCall  {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("instituteName")) {
+        } else if (screen.equalsIgnoreCase("instituteId")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((CourseDetailsActivity) mActivity).instituteName(jsonDataO);
@@ -287,7 +287,7 @@ public class VolleyCall  {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("courseName")) {
+        } else if (screen.equalsIgnoreCase("courseId")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((CourseDetailsActivity) mActivity).courseName(jsonDataO);
@@ -521,19 +521,19 @@ public class VolleyCall  {
                 e.printStackTrace();
             }
         }
-//        else if (screen.equalsIgnoreCase("instituteName")) {
+//        else if (screen.equalsIgnoreCase("instituteId")) {
 //            try {
 //                jsonDataO = new JSONObject(s);
-//                //EligibilityCheckFragment_5 mfragment).instituteName(jsonDataO);
+//                //EligibilityCheckFragment_5 mfragment).instituteId(jsonDataO);
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
-//        } else if (screen.equalsIgnoreCase("courseName")) {
+//        } else if (screen.equalsIgnoreCase("courseId")) {
 //            try {
 //                jsonDataO = new JSONObject(s);
-//                //EligibilityCheckFragment_5 mfragment).courseName(jsonDataO);
+//                //EligibilityCheckFragment_5 mfragment).courseId(jsonDataO);
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            } catch (Exception e) {
@@ -561,7 +561,7 @@ public class VolleyCall  {
         else if (screen.equalsIgnoreCase("instituteNamekyc")) {
             try {
                 jsonDataO = new JSONObject(s);
-                //LoanApplicationFragment_1 mfragment).instituteName(jsonDataO);
+                //LoanApplicationFragment_1 mfragment).instituteId(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -570,7 +570,7 @@ public class VolleyCall  {
         } else if (screen.equalsIgnoreCase("courseNamekyc")) {
             try {
                 jsonDataO = new JSONObject(s);
-                //LoanApplicationFragment_1 mfragment).courseName(jsonDataO);
+                //LoanApplicationFragment_1 mfragment).courseId(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

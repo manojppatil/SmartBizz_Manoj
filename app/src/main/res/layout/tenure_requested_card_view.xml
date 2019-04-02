@@ -20,11 +20,14 @@
             android:id="@+id/rbrequested"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            android:checked="false"/>
+            android:checked="false"
+            android:clickable="false"
+            android:background="@color/darkblue"
+            style="@style/TextViewRadioStyle"/>
         <View
             android:layout_width="@dimen/_1sdp"
             android:layout_height="match_parent"
-            android:background="@color/darkblue"/>
+            android:background="@color/grey"/>
         <TextView
             android:id="@+id/txtTenure"
             android:layout_width="@dimen/_70sdp"

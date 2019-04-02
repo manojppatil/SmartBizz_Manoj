@@ -298,19 +298,19 @@ public class VolleyCallLogin extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("instituteName")) {
+        } else if (screen.equalsIgnoreCase("instituteId")) {
             try {
                 jsonDataO = new JSONObject(s);
-                //((EligibilityCheckFragment_5) mfragment).instituteName(jsonDataO);
+                //((EligibilityCheckFragment_5) mfragment).instituteId(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("courseName")) {
+        } else if (screen.equalsIgnoreCase("courseId")) {
             try {
                 jsonDataO = new JSONObject(s);
-                //((EligibilityCheckFragment_5) mfragment).courseName(jsonDataO);
+                //((EligibilityCheckFragment_5) mfragment).courseId(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

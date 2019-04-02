@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:text="Sohail"
+                android:text=""
                 android:textColor="@color/darkblue"
                 style="@style/TextViewTitleStyle"/>
 
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtLeadfName"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:text="Ansari"
+                android:text=""
                 android:textColor="@color/darkblue" />
 
             <TextView
@@ -56,6 +56,8 @@
                 android:layout_toEndOf="@id/txtLeadfName"
                 android:background="@drawable/border_circular_blue_filled"
                 android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
                 android:paddingStart="@dimen/_4sdp"
                 android:paddingTop="@dimen/_4sdp"
                 android:paddingEnd="18dp"

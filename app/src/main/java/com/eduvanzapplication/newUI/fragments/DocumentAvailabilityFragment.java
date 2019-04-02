@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.eduvanzapplication.R;
+import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 
 import static android.view.View.GONE;
@@ -186,8 +187,9 @@ public class DocumentAvailabilityFragment extends Fragment {
 
         switch (NewLeadActivity.documents){
             case "1":
-                if (NewLeadActivity.aadharNumber.equals(""))
+                if(!Globle.validateAadharNumber(NewLeadActivity.aadharNumber)){
                     mDocListener.onOffButtonsDocuments(false, true);
+                }
                 else
                     mDocListener.onOffButtonsDocuments(true, true);
                 break;
@@ -216,7 +218,7 @@ public class DocumentAvailabilityFragment extends Fragment {
     public static void validate() {
         switch (NewLeadActivity.documents){
             case "1":
-                if (NewLeadActivity.aadharNumber.equals(""))
+                if (!Globle.validateAadharNumber(NewLeadActivity.aadharNumber))
                     mDocListener.onDocumentFragmentInteraction(false, 1);
                 else
                     mDocListener.onDocumentFragmentInteraction(true, 2);

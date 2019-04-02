@@ -55,7 +55,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     public static String documents = "1", aadharNumber="", panNUmber="";
     public static String flatBuildingSoc="", streetLocalityLandMark="", pinCode="", countryId ="", stateId="", cityId="";
     public static String companyName="", annualIncome="";
-    public static String instituteName="", instituteLocation="", courseName="", courseFee="", loanAmount="";
+    public static String instituteId ="", instituteLocationId ="", courseId ="", courseFee="", loanAmount="";
     public static String leadId = "", applicantId="";
 
 

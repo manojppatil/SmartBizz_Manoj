@@ -256,15 +256,15 @@ public class SplashScreen extends AppCompatActivity {
                                 startActivity(intent);
                                 SplashScreen.this.finish();
                             } else {
-                                if (policyAgreementStatus.equals("0")) {
+                                if (policyAgreementStatus.equals("1")) {
 //                                    Intent intent = new Intent(SplashScreen.this, TermsAndCondition.class);
                                     Intent intent = new Intent(SplashScreen.this, DashboardActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
                                 } else {
-//                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);// This is commented for testing
-                                    Intent intent = new Intent(SplashScreen.this, DashboardActivity.class);
+                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);// This is commented for testing
+//                                    Intent intent = new Intent(SplashScreen.this, DashboardActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
