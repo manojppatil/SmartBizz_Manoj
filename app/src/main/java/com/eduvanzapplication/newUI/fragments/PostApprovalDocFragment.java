@@ -57,7 +57,7 @@ public class PostApprovalDocFragment extends Fragment {
     String downloadUrl = "", downloadSignedUrl = "";
     long downloadReference;
 
-    private LinearLayout linManualBtn, lineSignBtn, linOTPBtn, linPayBtn, linData;
+    private LinearLayout linManualBtn, lineSignBtn, linOTPBtn, linPayBtn, linData,linExpandCollapse;
     private ImageButton btnExpandCollapse;
 
     TextView txtProcessingFee;
@@ -138,6 +138,7 @@ public class PostApprovalDocFragment extends Fragment {
 
         view = inflater.inflate(layout.fragment_postapprovaldoc, container, false);
 
+        linExpandCollapse = view.findViewById(R.id.linExpandCollapse);
         linManualBtn = view.findViewById(R.id.linManualBtn);
         lineSignBtn = view.findViewById(R.id.lineSignBtn);
         linOTPBtn = view.findViewById(R.id.linOTPBtn);
@@ -198,7 +199,7 @@ public class PostApprovalDocFragment extends Fragment {
             }
         });
 
-        btnExpandCollapse.setOnClickListener(new View.OnClickListener() {
+        linExpandCollapse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
