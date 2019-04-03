@@ -1,9 +1,11 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +23,6 @@ import android.widget.Toast;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanzapplication.pqformfragments.pojo.NameOfCoursePOJO;
@@ -38,16 +37,15 @@ import java.util.Map;
 
 public class CourseDetailsActivity extends AppCompatActivity {
 
-    private ImageView ivNextBtn;
-    public AutoCompleteTextView acInstituteName;
-    private Spinner spInsttLocation,spCourse;
-    private TextView txtCourseFee;
-    private EditText edtLoanAmt;
-    ProgressBar progressBar;
-    Context context;
-    AppCompatActivity mActivity;
-    SharedPreferences sharedPreferences;
-    String instituteID = "", courseID = "", locationID = "", lead_id = "", application_id = "";
+    public static ImageView ivNextBtn;
+    public static AutoCompleteTextView acInstituteName;
+    public static Spinner spInsttLocation,spCourse;
+    public static TextView txtCourseFee;
+    public static EditText edtLoanAmt;
+    public static Context context;
+    public static AppCompatActivity mActivity;
+     SharedPreferences sharedPreferences;
+    public static String instituteID = "", courseID = "", locationID = "", lead_id = "", application_id = "";
 
     public ArrayAdapter arrayAdapter_NameOfInsititue;
     public ArrayList<String> nameofinstitute_arrayList;
@@ -59,6 +57,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public ArrayAdapter arrayAdapter_locations;
     public ArrayList<String> locations_arrayList;
     public ArrayList<LocationsPOJO> locationPOJOArrayList;
+    public static ProgressDialog progressDialog ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +77,11 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 Log.e("TAG", "count: " + count);
                 for (int i = 0; i < count; i++) {
                     if (nameOfCoursePOJOArrayList.get(i).courseName.equalsIgnoreCase(text)) {
-                        MainApplication.mainapp_courseID = courseID = nameOfCoursePOJOArrayList.get(i).courseID;
-                        Log.e("I_________D", "onItemClick: " + courseID);
+                        NewLeadActivity.courseId = nameOfCoursePOJOArrayList.get(i).courseID;
+                        courseFeeApiCall();
+                        break;
                     }
                 }
-//                    locationApiCall();
-                courseFeeApiCall();
             }
 
             @Override
@@ -99,8 +97,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 int count = locationPOJOArrayList.size();
                 for (int i = 0; i < count; i++) {
                     if (locationPOJOArrayList.get(i).locationName.equalsIgnoreCase(text)) {
-                        MainApplication.mainapp_locationID = locationID = locationPOJOArrayList.get(i).locationID;
-                        Log.e("I_________D", "onItemClick: " + locationID);
+                        NewLeadActivity.instituteLocationId = locationPOJOArrayList.get(i).locationID;
+                        break;
                     }
                 }
 //                    courseFeeApiCall();
@@ -122,8 +120,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         ivNextBtn = findViewById(R.id.ivNextBtn);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        progressBar = (ProgressBar) findViewById(R.id.progressInstitute);
+        progressDialog = new ProgressDialog(CourseDetailsActivity.this);
 
         txtCourseFee =  findViewById(R.id.txtCourseFee);
         edtLoanAmt = findViewById(R.id.edtLoanAmt);
@@ -135,7 +132,19 @@ public class CourseDetailsActivity extends AppCompatActivity {
         ivNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CourseDetailsActivity.this, TenureSelectionActivity.class));
+                if (acInstituteName.getText().toString().equals("")){
+                    Snackbar.make(ivNextBtn, "Please enter institute name",Snackbar.LENGTH_SHORT).show();
+                }else if (spInsttLocation.getSelectedItemPosition() == 0){
+                    Snackbar.make(ivNextBtn, "Please select institute location",Snackbar.LENGTH_SHORT).show();
+                }else if (spCourse.getSelectedItemPosition() == 0){
+                    Snackbar.make(ivNextBtn, "Please select course name",Snackbar.LENGTH_SHORT).show();
+                }else if (edtLoanAmt.getText().toString().equals("")){
+                    Snackbar.make(ivNextBtn, "Please enter loan amount",Snackbar.LENGTH_SHORT).show();
+                }else {
+                    NewLeadActivity.courseFee = txtCourseFee.getText().toString();
+                    NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
+                    saveInstituteData();
+                }
             }
         });
     }
@@ -143,15 +152,19 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public void instituteApiCall() {
         /**API CALL**/
         try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             String url = MainActivity.mainUrl + "pqform/apiPrefillInstitutes";  //http://159.89.204.41/eduvanzApi/pqform/apiPrefillInstitutes
             Map<String, String> params = new HashMap<String, String>();
             VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {
-                volleyCall.sendRequest(context, url, mActivity, null, "instituteName", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "instituteId", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -164,6 +177,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void instituteName(JSONObject jsonData) {
         try {
+            progressDialog.dismiss();
             Log.e("SERVER CALL", "PrefillInstitutesFragment1" + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
@@ -190,6 +204,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 //                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -217,17 +232,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
             acInstituteName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                     String countryName = (String) arg0.getItemAtPosition(arg2);
-//                    MainApplication.mainapp_instituteID = instituteID = nameOfInsitituePOJOArrayList.get().instituteID;
-//                    mSelectedCountry.setText(countryName);
                     int count = nameOfInsitituePOJOArrayList.size();
                     for (int i = 0; i < count; i++) {
                         if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase((String) arg0.getItemAtPosition(arg2))) {
-                            MainApplication.mainapp_instituteID = instituteID = nameOfInsitituePOJOArrayList.get(i).instituteID;
-                            Log.e("I_________D", "onItemClick: " + instituteID);
+                            NewLeadActivity.instituteId  = nameOfInsitituePOJOArrayList.get(i).instituteID;
+                            locationApiCall();
+                            break;
                         }
                     }
-                    locationApiCall();
-
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
                 }
@@ -248,20 +260,24 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void courseApiCall() {
         try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             String url = MainActivity.mainUrl + "pqform/apiPrefillCourses";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("institute_id", instituteID);
-            params.put("location_id", locationID);
+            params.put("institute_id", NewLeadActivity.instituteId);
+            params.put("location_id", NewLeadActivity.instituteLocationId);
 
             VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
             } else {
-                volleyCall.sendRequest(context, url, mActivity, null, "courseName", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "courseId", params, MainActivity.auth_token);
             }
 
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -274,10 +290,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void locationApiCall() {
         try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             String url = MainActivity.mainUrl + "pqform/apiPrefillLocations";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("institute_id", MainApplication.mainapp_instituteID);
-//            params.put("course_id", MainApplication.mainapp_courseID);
+            params.put("institute_id", NewLeadActivity.instituteId);
             VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
@@ -286,6 +304,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 volleyCall.sendRequest(context, url, mActivity, null, "locationName", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -299,11 +318,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public void courseFeeApiCall() {
         /**API CALL**/
         try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             String url = MainActivity.mainUrl + "pqform/apiPrefillSliderAmount";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("institute_id", MainApplication.mainapp_instituteID);
-            params.put("course_id", MainApplication.mainapp_courseID);
-            params.put("location_id", MainApplication.mainapp_locationID);
+            params.put("institute_id", NewLeadActivity.instituteId);
+            params.put("course_id", NewLeadActivity.courseId);
+            params.put("location_id", NewLeadActivity.instituteLocationId);
             VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
@@ -312,6 +334,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 volleyCall.sendRequest(context, url, mActivity, null, "courseFee", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -324,6 +347,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void courseName(JSONObject jsonData) {
         try {
+            progressDialog.dismiss();
             Log.e("SERVER CALL", "PrefillCourseFragment1" + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
@@ -349,6 +373,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 //                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -361,16 +386,18 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void courseFee(JSONObject jsonData) {
         try {
+            progressDialog.dismiss();
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
                 txtCourseFee.setText(jsonData.getString("result"));
-                MainApplication.mainapp_coursefee = jsonData.getString("result");
+                NewLeadActivity.courseFee = jsonData.getString("result");
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -389,9 +416,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
             spCourse.setAdapter(arrayAdapter_NameOfCourse);
             arrayAdapter_NameOfCourse.notifyDataSetChanged();
 
-            if (!MainApplication.mainapp_courseID.equals("")) {
+            if (!NewLeadActivity.courseId.equals("")) {
                 for (int i = 0; i < nameOfCoursePOJOArrayList.size(); i++) {
-                    if (MainApplication.mainapp_courseID.equalsIgnoreCase(nameOfCoursePOJOArrayList.get(i).courseID)) {
+                    if (NewLeadActivity.courseId.equalsIgnoreCase(nameOfCoursePOJOArrayList.get(i).courseID)) {
                         spCourse.setSelection(i);
                     }
                 }
@@ -409,6 +436,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void locationName(JSONObject jsonData) {
         try {
+            progressDialog.dismiss();
             Log.e("SERVER CALL", "PrefillInstitutesFragment1" + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
@@ -435,6 +463,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             }
 
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -452,9 +481,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
             spInsttLocation.setAdapter(arrayAdapter_locations);
             arrayAdapter_locations.notifyDataSetChanged();
 
-            if (!MainApplication.mainapp_locationID.equals("")) {
+            if (!NewLeadActivity.instituteLocationId.equals("")) {
                 for (int i = 0; i < locationPOJOArrayList.size(); i++) {
-                    if (MainApplication.mainapp_locationID.equalsIgnoreCase(locationPOJOArrayList.get(i).locationID)) {
+                    if (NewLeadActivity.instituteLocationId.equalsIgnoreCase(locationPOJOArrayList.get(i).locationID)) {
                         spInsttLocation.setSelection(i);
                     }
                 }
@@ -475,15 +504,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
     private void saveInstituteData() {
         /** API CALL GET OTP**/
         try {//auth_token
-            progressBar.setVisibility(View.VISIBLE);
             String url = MainActivity.mainUrl + "dashboard/saveInstitute";
             Map<String, String> params = new HashMap<String, String>();
 
-            params.put("lead_id", MainApplication.lead_id);
-            params.put("applicant_id", MainApplication.applicant_id);
-            params.put("institute", instituteID);
-            params.put("course_name", courseID);
-            params.put("location", locationID);
+            params.put("lead_id", NewLeadActivity.leadId);
+            params.put("applicant_id", NewLeadActivity.applicantId);
+            params.put("institute", NewLeadActivity.instituteId);
+            params.put("course_name", NewLeadActivity.courseId);
+            params.put("location", NewLeadActivity.instituteLocationId);
             params.put("loanAmount", edtLoanAmt.getText().toString().trim());
 
             VolleyCall volleyCall = new VolleyCall();
@@ -501,13 +529,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void setsaveInstitute(JSONObject jsonData) {
         try {
-
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
             if (jsonData.getInt("status") == 1) {
 
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(CourseDetailsActivity.this, TenureSelectionActivity.class));
+
 //                EligibilityCheckFragment_6 eligibilityCheckFragment_6 = new EligibilityCheckFragment_6();
 //                transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_6).commit();
 
@@ -515,11 +544,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
 
-            try {
-                progressBar.setVisibility(View.GONE);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
@@ -554,5 +578,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             Globle.ErrorLog(mActivity, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
+
 
 }

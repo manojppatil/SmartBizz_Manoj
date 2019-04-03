@@ -809,10 +809,13 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 //
 //            }
             try{
-                adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
-                cardStackView.setAdapter(adapter);
-                setupCardStackView();
-                setupButton();
+//                adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
+//                cardStackView.setAdapter(adapter);
+
+                cardStackView.smoothScrollToPosition(0);
+
+//                setupCardStackView();
+//                setupButton();
 
             }catch (Exception e){
                 e.printStackTrace();

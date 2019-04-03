@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.eduvanzapplication.R;
@@ -19,6 +21,10 @@ public class UploadDocumentFragment extends Fragment {
 
     public static LinearLayout linAllDocBlock,linKYCblock, linKYCblockBottom, linFinancBlockBottom, linEducationBlockBottom, linOtherBottom ,
             linFinancBlock,linEducationBlock,linOther, linKYCDocuments, linFinanceDocuments, linEducationDocuments, linOtherDocuments, linBottomBlocks;
+
+    public static Animation  scaleInlinKYCDocuments, scaleInlinFinanceDocuments,
+           scaleInlinEducationDocuments, scaleInlinOtherDocuments;
+
 
     public UploadDocumentFragment() {
         // Required empty public constructor
@@ -56,6 +62,10 @@ public class UploadDocumentFragment extends Fragment {
         linOtherDocuments.setVisibility(GONE);
         linBottomBlocks.setVisibility(GONE);
 
+        scaleInlinKYCDocuments = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
+        scaleInlinFinanceDocuments = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
+        scaleInlinEducationDocuments = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
+        scaleInlinOtherDocuments = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
 
         return view;
     }
@@ -75,37 +85,197 @@ public class UploadDocumentFragment extends Fragment {
 
         linOther.setOnClickListener(otherBlockClkListnr);
         linOtherBottom.setOnClickListener(otherBlockClkListnr);
+
+        scaleInlinKYCDocuments.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                linKYCDocuments.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linBottomBlocks.setVisibility(VISIBLE);
+                linKYCblockBottom.setVisibility(GONE);
+                linFinancBlockBottom.setVisibility(VISIBLE);
+                linEducationBlockBottom.setVisibility(VISIBLE);
+                linOtherBottom.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        scaleInlinFinanceDocuments.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                linFinanceDocuments.setVisibility(VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linBottomBlocks.setVisibility(VISIBLE);
+                linKYCblockBottom.setVisibility(VISIBLE);
+                linFinancBlockBottom.setVisibility(GONE);
+                linEducationBlockBottom.setVisibility(VISIBLE);
+                linOtherBottom.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        scaleInlinEducationDocuments.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                linEducationDocuments.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linBottomBlocks.setVisibility(VISIBLE);
+                linKYCblockBottom.setVisibility(VISIBLE);
+                linFinancBlockBottom.setVisibility(VISIBLE);
+                linEducationBlockBottom.setVisibility(GONE);
+                linOtherBottom.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        scaleInlinOtherDocuments.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                linOtherDocuments.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linBottomBlocks.setVisibility(VISIBLE);
+                linKYCblockBottom.setVisibility(VISIBLE);
+                linFinancBlockBottom.setVisibility(VISIBLE);
+                linEducationBlockBottom.setVisibility(VISIBLE);
+                linOtherBottom.setVisibility(GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     View.OnClickListener kycBlockClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            linAllDocBlock.setVisibility(GONE);
-            linKYCDocuments.setVisibility(VISIBLE);
-            linFinanceDocuments.setVisibility(GONE);
-            linEducationDocuments.setVisibility(GONE);
-            linOtherDocuments.setVisibility(GONE);
-            linBottomBlocks.setVisibility(VISIBLE);
-            linKYCblockBottom.setVisibility(GONE);
-            linFinancBlockBottom.setVisibility(VISIBLE);
-            linEducationBlockBottom.setVisibility(VISIBLE);
-            linOtherBottom.setVisibility(VISIBLE);
+//            linAllDocBlock.setVisibility(GONE);
+//            linKYCDocuments.setVisibility(VISIBLE);
+//            linFinanceDocuments.setVisibility(GONE);
+//            linEducationDocuments.setVisibility(GONE);
+//            linOtherDocuments.setVisibility(GONE);
+//            linBottomBlocks.setVisibility(VISIBLE);
+//            linKYCblockBottom.setVisibility(GONE);
+//            linFinancBlockBottom.setVisibility(VISIBLE);
+//            linEducationBlockBottom.setVisibility(VISIBLE);
+//            linOtherBottom.setVisibility(VISIBLE);
+            Animation scaleOutlinAllDocBlock = AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
+            if (linAllDocBlock.getVisibility() == VISIBLE){
+                linAllDocBlock.startAnimation(scaleOutlinAllDocBlock);
+            }else{
+                linAllDocBlock.setVisibility(GONE);
+                linKYCDocuments.setVisibility(VISIBLE);
+                linFinanceDocuments.setVisibility(GONE);
+                linEducationDocuments.setVisibility(GONE);
+                linOtherDocuments.setVisibility(GONE);
+                linBottomBlocks.setVisibility(VISIBLE);
+                linKYCblockBottom.setVisibility(GONE);
+                linFinancBlockBottom.setVisibility(VISIBLE);
+                linEducationBlockBottom.setVisibility(VISIBLE);
+                linOtherBottom.setVisibility(VISIBLE);
+
+            }
+            scaleOutlinAllDocBlock.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    linKYCDocuments.startAnimation(scaleInlinKYCDocuments);
+                    linAllDocBlock.setVisibility(GONE);
+                    linFinanceDocuments.setVisibility(GONE);
+                    linEducationDocuments.setVisibility(GONE);
+                    linOtherDocuments.setVisibility(GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
         }
     };
+
+
 
     View.OnClickListener financeBlockClkListenr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            linAllDocBlock.setVisibility(GONE);
-            linKYCDocuments.setVisibility(GONE);
-            linFinanceDocuments.setVisibility(VISIBLE);
-            linEducationDocuments.setVisibility(GONE);
-            linOtherDocuments.setVisibility(GONE);
-            linBottomBlocks.setVisibility(VISIBLE);
-            linKYCblockBottom.setVisibility(VISIBLE);
-            linFinancBlockBottom.setVisibility(GONE);
-            linEducationBlockBottom.setVisibility(VISIBLE);
-            linOtherBottom.setVisibility(VISIBLE);
+//            linAllDocBlock.setVisibility(GONE);
+//            linKYCDocuments.setVisibility(GONE);
+//            linFinanceDocuments.setVisibility(VISIBLE);
+//            linEducationDocuments.setVisibility(GONE);
+//            linOtherDocuments.setVisibility(GONE);
+//            linBottomBlocks.setVisibility(VISIBLE);
+//            linKYCblockBottom.setVisibility(VISIBLE);
+//            linFinancBlockBottom.setVisibility(GONE);
+//            linEducationBlockBottom.setVisibility(VISIBLE);
+//            linOtherBottom.setVisibility(VISIBLE);
+            Animation scaleOutlinAllDocBlock = AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
+            if (linAllDocBlock.getVisibility() == VISIBLE){
+                linAllDocBlock.startAnimation(scaleOutlinAllDocBlock);
+            }else{
+                linAllDocBlock.setVisibility(GONE);
+                linKYCDocuments.setVisibility(GONE);
+                linFinanceDocuments.setVisibility(VISIBLE);
+                linEducationDocuments.setVisibility(GONE);
+                linOtherDocuments.setVisibility(GONE);
+                linBottomBlocks.setVisibility(VISIBLE);
+                linKYCblockBottom.setVisibility(VISIBLE);
+                linFinancBlockBottom.setVisibility(GONE);
+                linEducationBlockBottom.setVisibility(VISIBLE);
+                linOtherBottom.setVisibility(VISIBLE);
+            }
+            scaleOutlinAllDocBlock.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    linFinanceDocuments.startAnimation(scaleInlinFinanceDocuments);
+                    linAllDocBlock.setVisibility(GONE);
+                    linKYCDocuments.setVisibility(GONE);
+                    linEducationDocuments.setVisibility(GONE);
+                    linOtherDocuments.setVisibility(GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
 
         }
     };
@@ -113,32 +283,105 @@ public class UploadDocumentFragment extends Fragment {
     View.OnClickListener educationBlockClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            linAllDocBlock.setVisibility(GONE);
-            linKYCDocuments.setVisibility(GONE);
-            linFinanceDocuments.setVisibility(GONE);
-            linEducationDocuments.setVisibility(VISIBLE);
-            linOtherDocuments.setVisibility(GONE);
-            linBottomBlocks.setVisibility(VISIBLE);
-            linKYCblockBottom.setVisibility(VISIBLE);
-            linFinancBlockBottom.setVisibility(VISIBLE);
-            linEducationBlockBottom.setVisibility(GONE);
-            linOtherBottom.setVisibility(VISIBLE);
+//            linAllDocBlock.setVisibility(GONE);
+//            linKYCDocuments.setVisibility(GONE);
+//            linFinanceDocuments.setVisibility(GONE);
+//            linEducationDocuments.setVisibility(VISIBLE);
+//            linOtherDocuments.setVisibility(GONE);
+//            linBottomBlocks.setVisibility(VISIBLE);
+//            linKYCblockBottom.setVisibility(VISIBLE);
+//            linFinancBlockBottom.setVisibility(VISIBLE);
+//            linEducationBlockBottom.setVisibility(GONE);
+//            linOtherBottom.setVisibility(VISIBLE);
+            Animation scaleOutlinAllDocBlock = AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
+            if (linAllDocBlock.getVisibility() == VISIBLE){
+                linAllDocBlock.startAnimation(scaleOutlinAllDocBlock);
+            }else{
+                linAllDocBlock.setVisibility(GONE);
+                linKYCDocuments.setVisibility(GONE);
+                linFinanceDocuments.setVisibility(GONE);
+                linEducationDocuments.setVisibility(VISIBLE);
+                linOtherDocuments.setVisibility(GONE);
+                linBottomBlocks.setVisibility(VISIBLE);
+                linKYCblockBottom.setVisibility(VISIBLE);
+                linFinancBlockBottom.setVisibility(VISIBLE);
+                linEducationBlockBottom.setVisibility(GONE);
+                linOtherBottom.setVisibility(VISIBLE);
+            }
+            scaleOutlinAllDocBlock.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    linEducationDocuments.startAnimation(scaleInlinEducationDocuments);
+                    linAllDocBlock.setVisibility(GONE);
+                    linKYCDocuments.setVisibility(GONE);
+                    linFinanceDocuments.setVisibility(GONE);
+                    linOtherDocuments.setVisibility(GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
         }
     };
 
     View.OnClickListener otherBlockClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            linAllDocBlock.setVisibility(GONE);
-            linKYCDocuments.setVisibility(GONE);
-            linFinanceDocuments.setVisibility(GONE);
-            linEducationDocuments.setVisibility(GONE);
-            linOtherDocuments.setVisibility(VISIBLE);
-            linBottomBlocks.setVisibility(VISIBLE);
-            linKYCblockBottom.setVisibility(VISIBLE);
-            linFinancBlockBottom.setVisibility(VISIBLE);
-            linEducationBlockBottom.setVisibility(VISIBLE);
-            linOtherBottom.setVisibility(GONE);
+//            linAllDocBlock.setVisibility(GONE);
+//            linKYCDocuments.setVisibility(GONE);
+//            linFinanceDocuments.setVisibility(GONE);
+//            linEducationDocuments.setVisibility(GONE);
+//            linOtherDocuments.setVisibility(VISIBLE);
+//            linBottomBlocks.setVisibility(VISIBLE);
+//            linKYCblockBottom.setVisibility(VISIBLE);
+//            linFinancBlockBottom.setVisibility(VISIBLE);
+//            linEducationBlockBottom.setVisibility(VISIBLE);
+//            linOtherBottom.setVisibility(GONE);
+
+            Animation scaleOutlinAllDocBlock = AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
+            if (linAllDocBlock.getVisibility() == VISIBLE){
+                linAllDocBlock.startAnimation(scaleOutlinAllDocBlock);
+            }else{
+                linAllDocBlock.setVisibility(GONE);
+                linKYCDocuments.setVisibility(GONE);
+                linFinanceDocuments.setVisibility(GONE);
+                linEducationDocuments.setVisibility(GONE);
+                linOtherDocuments.setVisibility(VISIBLE);
+                linBottomBlocks.setVisibility(VISIBLE);
+                linKYCblockBottom.setVisibility(VISIBLE);
+                linFinancBlockBottom.setVisibility(VISIBLE);
+                linEducationBlockBottom.setVisibility(VISIBLE);
+                linOtherBottom.setVisibility(GONE);
+            }
+            scaleOutlinAllDocBlock.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    linOtherDocuments.startAnimation(scaleInlinOtherDocuments);
+                    linAllDocBlock.setVisibility(GONE);
+                    linKYCDocuments.setVisibility(GONE);
+                    linFinanceDocuments.setVisibility(GONE);
+                    linEducationDocuments.setVisibility(GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
 
         }
     };

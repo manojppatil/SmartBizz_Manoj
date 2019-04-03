@@ -36,7 +36,6 @@ public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequested
         public DataObjectHolder(View itemView) {
             super(itemView);
             this.txtTenure = (TextView) itemView.findViewById(R.id.txtTenure);
-            this.txtRoi = (TextView) itemView.findViewById(R.id.txtRoi);
             this.txtLoanAmount = (TextView) itemView.findViewById(R.id.txtLoanAmount);
             this.txtEMIAmount = (TextView) itemView.findViewById(R.id.txtEMIAmount);
             this.mRadioButton = (RadioButton) itemView.findViewById(R.id.rbrequested);
@@ -70,13 +69,19 @@ public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequested
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.txtTenure.setText(horizontalList.get(position).tenure +" Months");
-        holder.txtRoi.setText(horizontalList.get(position).emi_amount);
+        holder.txtTenure.setText(horizontalList.get(position).tenure+" Months");
+//        holder.txtRoi.setText(horizontalList.get(position).emi_amount);
         holder.txtLoanAmount.setText(horizontalList.get(position).loan_amount);
         holder.txtEMIAmount.setText(horizontalList.get(position).emi_amount);
 //        holder.mRadioButton.setText(horizontalList.get(position).applicationid);
 
-        holder.mRadioButton.setChecked(sSelected == position);
+        if (sSelected == position){
+            holder.mRadioButton.setChecked(true);
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.blue1));
+        }else {
+            holder.mRadioButton.setChecked(false);
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.white));
+        }
 
     }
 

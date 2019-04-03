@@ -1,13 +1,17 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,14 +19,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.badoualy.stepperindicator.StepperIndicator;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
+import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.newUI.MainApplication;
+import com.eduvanzapplication.newUI.VolleyCall;
+import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DocumentAvailabilityFragment;
 import com.eduvanzapplication.newUI.fragments.EmploymentDetailsFragment;
 import com.eduvanzapplication.newUI.fragments.PersonalDetailsFragment;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class NewLeadActivity extends AppCompatActivity implements PersonalDetailsFragment.OnFragmentInteractionListener,
                                                             CurrentAddressFragment.OnCurrentAddrFragmentInteractionListener,
@@ -38,8 +53,10 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     public static String profession = "1";
     public static String firstName="", lastName="", middleName="", gender="2", maritalStatus="0", dob="";
     public static String documents = "1", aadharNumber="", panNUmber="";
-    public static String flatBuildingSoc="", streetLocalityLandMark="", pinCode="", country="", state="", city="";
+    public static String flatBuildingSoc="", streetLocalityLandMark="", pinCode="", countryId ="", stateId="", cityId="";
     public static String companyName="", annualIncome="";
+    public static String instituteId ="", instituteLocationId ="", courseId ="", courseFee="", loanAmount="";
+    public static String leadId = "", applicantId="";
 
 
     @Override
@@ -104,6 +121,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                     case 2:
                         break;
                     case 3:
+
                         break;
                 }
             }
@@ -131,8 +149,13 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         @Override
         public void onClick(View v) {
             if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount()-1)){
-                startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")){
+                    startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
+                            .addFlags( Intent.FLAG_ACTIVITY_NEW_TASK));
+                }else
+                    Snackbar.make(ivNextBtn, "Please fill all the fields",Snackbar.LENGTH_SHORT).show();
+
+                saveBorrowerData();
             }
             viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
         }
@@ -201,6 +224,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         viewPager.setCurrentItem(next);
     }
 
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -229,5 +253,93 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             return mFragmentTitleList.get(position);
         }
     }
+
+
+    private void saveBorrowerData() {
+
+        try {//auth_token
+            SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            String student_id="";
+            student_id = sharedPreferences.getString("student_id", "");
+            String auth_token = sharedPreferences.getString("auth_token", "");
+            String mobileNo =  sharedPreferences.getString("mobile_no", "");
+
+            String url = MainActivity.mainUrl + "dashboard/addborrower";
+            Map<String, String> params = new HashMap<String, String>();
+
+            params.put("student_id", student_id);
+            params.put("sourceId", "2");
+            params.put("first_name", NewLeadActivity.firstName);
+            params.put("middle_name", NewLeadActivity.middleName);
+            params.put("last_name", NewLeadActivity.lastName);
+            params.put("pincode", NewLeadActivity.pinCode);
+            params.put("dob", NewLeadActivity.dob);
+            params.put("current_address", NewLeadActivity.flatBuildingSoc);
+            params.put("current_address_city", NewLeadActivity.cityId);
+            params.put("current_address_state", NewLeadActivity.stateId);
+            params.put("pan_number", NewLeadActivity.panNUmber);
+            params.put("aadhar_number", NewLeadActivity.aadharNumber);
+            params.put("mobile_number", mobileNo);
+            params.put("loan_amount", "");
+            params.put("current_landmark", NewLeadActivity.streetLocalityLandMark);
+            params.put("current_address_country", NewLeadActivity.countryId);
+            params.put("gender_id", NewLeadActivity.gender);
+            params.put("has_aadhar_pan", NewLeadActivity.documents);
+            params.put("profession", NewLeadActivity.profession);
+            params.put("employer_name", NewLeadActivity.companyName);
+            params.put("annual_income", NewLeadActivity.annualIncome);
+//            if(MainApplication.lead_id == null) {
+//                params.put("lead_id", "");
+//            }
+//            else {
+//                params.put("lead_id", MainApplication.lead_id);
+//            }
+//            if(MainApplication.application_id == null) {
+//
+//                params.put("application_id", "");
+//            }else{
+//                params.put("application_id", MainApplication.application_id);
+//
+//            }
+            VolleyCall volleyCall = new VolleyCall();
+            volleyCall.sendRequest(getApplicationContext(), url, NewLeadActivity.this, null, "addborrower", params, auth_token);
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(NewLeadActivity.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void addBorrowerResponse(JSONObject jsonData) {
+        try {
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            MainActivity.lead_id = jsonData.optString("lead_id");
+            MainActivity.applicant_id = jsonData.optString("applicant_id");
+            NewLeadActivity.leadId= jsonData.optString("lead_id");
+            NewLeadActivity.applicantId = jsonData.optString("applicant_id");
+
+
+            if (jsonData.getInt("status") == 1) {
+                startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            }
+
+        }catch (Exception e){
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(NewLeadActivity.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
 
 }

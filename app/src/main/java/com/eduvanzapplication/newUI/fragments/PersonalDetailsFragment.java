@@ -1,9 +1,9 @@
 package com.eduvanzapplication.newUI.fragments;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,6 +39,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
@@ -204,7 +205,7 @@ public class PersonalDetailsFragment extends Fragment {
         linOtherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLeadActivity.gender = "2";
+                NewLeadActivity.gender = "3";
                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
@@ -214,28 +215,54 @@ public class PersonalDetailsFragment extends Fragment {
         linDobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.YEAR,calendar.get(Calendar.YEAR)-18);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity());
-                    datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            calendar.set(Calendar.MONTH, month);
-                            NewLeadActivity.dob = String.valueOf(dayOfMonth)+"-"+ (month+1) + "-"+year;
+
+                DatePickerPopWin datePickerPopWin = new DatePickerPopWin.Builder(getActivity(), new DatePickerPopWin.OnDatePickedListener() {
+                    @Override
+                    public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
+//                        Toast.makeText(getContext(), dateDesc, Toast.LENGTH_SHORT).show();
+                        NewLeadActivity.dob = day+"-"+ month + "-"+year;
                             txtDOB.setText(NewLeadActivity.dob);
                             checkAllFields();
-                        }
-                    });
-                    datePickerDialog.show();
-                }
+                    }
+                }).textConfirm("CONFIRM") //text of confirm button
+                        .textCancel("CANCEL") //text of cancel button
+                        .btnTextSize(16) // button text size
+                        .viewTextSize(35) // pick view text size
+                        .colorCancel(Color.parseColor("#999999")) //color of cancel button
+                        .colorConfirm(Color.parseColor("#009900"))//color of confirm button
+                        .minYear(1900) //min year in loop
+                        .maxYear(calendar.get(Calendar.YEAR)-18) // max year in loop
+                        .showDayMonthYear(false) // shows like dd mm yyyy (default is false)
+                        .dateChose("2013-11-11") // date chose when init popwindow
+                        .build();
+//                datePickerPopWin.showPopWin(getActivity());
+                datePickerPopWin.showAsDropDown(linDobBtn);
+
+
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.set(Calendar.YEAR,calendar.get(Calendar.YEAR)-18);
+//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity());
+//                    datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+//                        @Override
+//                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                            calendar.set(Calendar.MONTH, month);
+//                            NewLeadActivity.dob = String.valueOf(dayOfMonth)+"-"+ (month+1) + "-"+year;
+//                            txtDOB.setText(NewLeadActivity.dob);
+//                            checkAllFields();
+//                        }
+//                    });
+//                    datePickerDialog.show();
+//                }
             }
         });
 
         switchMarital.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                NewLeadActivity.maritalStatus = isChecked ? "1" : "0";
+                NewLeadActivity.maritalStatus = isChecked ? "1" : "2";
                 if (isChecked)
                     txtMaritalStatus.setText("Married");
                 else

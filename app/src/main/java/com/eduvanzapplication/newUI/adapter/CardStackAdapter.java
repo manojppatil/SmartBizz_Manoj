@@ -61,10 +61,11 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             viewHolder.txtCity.setText(mLeads.location_name);
             viewHolder.txtCourseFee.setText(mLeads.course_cost);
             viewHolder.txtCourseNmae.setText(mLeads.course_name);
-            viewHolder.txtDate.setText(mLeads.created_date_time);
+            viewHolder.txtDate.setText(new String("\t").concat(mLeads.created_date_time));
             viewHolder.txtLoanAmount.setText(mLeads.requested_loan_amount);
             viewHolder.txtUniversity.setText(mLeads.institute_name);
-            viewHolder.txtMessage.setText("\tPending....");
+            viewHolder.txtMessage.setText("\tPending. Complete your process in order to get your loan instantly ");
+            viewHolder.txtMessage.setSelected(true);
             viewHolder.txtStatus1.setText("\tStatus");
             viewHolder.txtStatus2.setText("\tStatus 2");
 
