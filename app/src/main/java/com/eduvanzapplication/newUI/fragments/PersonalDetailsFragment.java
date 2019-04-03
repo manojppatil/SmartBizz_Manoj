@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,14 +14,10 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -43,7 +38,6 @@ import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
-import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.google.gson.JsonObject;
 import com.idfy.rft.RFTSdk;
@@ -60,7 +54,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
-import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
 public class PersonalDetailsFragment extends Fragment {
 
     private static ProgressBar progressbar;
@@ -217,7 +210,6 @@ public class PersonalDetailsFragment extends Fragment {
             public void onClick(View v) {
 
                 Calendar calendar = Calendar.getInstance();
-
                 DatePickerPopWin datePickerPopWin = new DatePickerPopWin.Builder(getActivity(), new DatePickerPopWin.OnDatePickedListener() {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
