@@ -1,9 +1,12 @@
 package com.eduvanzapplication.newUI.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +14,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.eduvanzapplication.R;
@@ -23,10 +30,20 @@ public class KycDetailFragment extends Fragment {
     static View view;
     public static Context context;
     public static TextView txtPersonalToggle, txtIdentityToggle, txtCourseToggle;
-    public static RelativeLayout linPersonalBlock, relIdentityBlock, relCourseBlock;
+    public static LinearLayout linPersonalBlock,relIdentityBlock, relCourseBlock;
     public static Animation expandAnimationPersonal, collapseanimationPersonal;
     public static Animation expandAnimationIdentity, collapseAnimationIdentity;
     public static Animation expanAnimationCourse, collapseAnimationCourse;
+    public static FloatingActionButton fabEdit;
+    public static boolean isEdit = false;
+
+    public static TextInputLayout tilFirstName, tilMiddleName, tilLastName, tilEmail, tilMobile, tilFlat, tilStreet, tilPincode;
+    public static LinearLayout linMale,linFemale,linOther, linDob, linMaritalStatus;
+    public static EditText edtAadhaar, edtPAN, edtLoanAmt;
+    public static Spinner spCountry, spState, spCity, spInsttLocation, spCourse;
+    public static AutoCompleteTextView acInstituteName;
+    public static TextView txtCourseFee;
+
 
     @Nullable
     @Override
@@ -47,6 +64,31 @@ public class KycDetailFragment extends Fragment {
         relIdentityBlock = view.findViewById(R.id.relIdentityBlock);
         txtCourseToggle = view.findViewById(R.id.txtCourseToggle);
         relCourseBlock = view.findViewById(R.id.relCourseBlock);
+        fabEdit = view.findViewById(R.id.fabEdit);
+        tilFirstName = view.findViewById(R.id.tilFirstName);
+        tilMiddleName = view.findViewById(R.id.tilMiddleName);
+        tilLastName = view.findViewById(R.id.tilLastName);
+
+        tilEmail = view.findViewById(R.id.tilEmail);
+        tilMobile = view.findViewById(R.id.tilMobile);
+        tilFlat = view.findViewById(R.id.tilFlat);
+        tilStreet = view.findViewById(R.id.tilStreet);
+        tilPincode = view.findViewById(R.id.tilPincode);
+        linMale = view.findViewById(R.id.linMale);
+        linFemale = view.findViewById(R.id.linFemale);
+        linOther = view.findViewById(R.id.linOther);
+        linDob = view.findViewById(R.id.linDob);
+        linMaritalStatus = view.findViewById(R.id.linMaritalStatus);
+        edtAadhaar = view.findViewById(R.id.edtAadhaar);
+        edtPAN = view.findViewById(R.id.edtPAN);
+        edtLoanAmt = view.findViewById(R.id.edtLoanAmt);
+        spCountry = view.findViewById(R.id.spCountry);
+        spState = view.findViewById(R.id.spState);
+        spCity = view.findViewById(R.id.spCity);
+        spInsttLocation = view.findViewById(R.id.spInsttLocation);
+        spCourse = view.findViewById(R.id.spCourse);
+        acInstituteName = view.findViewById(R.id.acInstituteName);
+        txtCourseFee = view.findViewById(R.id.txtCourseFee);
 
         return view;
 
@@ -55,9 +97,27 @@ public class KycDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        linPersonalBlock.startAnimation(collapseanimationPersonal);
-        relIdentityBlock.startAnimation(collapseanimationPersonal);
+        linPersonalBlock.startAnimation(expandAnimationPersonal);
+        relIdentityBlock.startAnimation(collapseAnimationIdentity);
+        relCourseBlock.startAnimation(collapseAnimationCourse);
+        setViewsEnabled(false);
 
+        fabEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isEdit){
+                    isEdit = true;
+                    setViewsEnabled(true);
+                    fabEdit.setImageResource(R.drawable.ic_save_white_16dp);
+                    fabEdit.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                }
+                else {
+                }
+            }
+        });
+
+        txtIdentityToggle.setCompoundDrawablesRelativeWithIntrinsicBounds(context.getResources().getDrawable(R.drawable.ic_id_card),null, context.getResources().getDrawable(R.drawable.ic_exclamation_circle_yellow),null);
+        txtIdentityToggle.getCompoundDrawablesRelative()[0].setTint(Color.RED);
         txtPersonalToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,6 +250,33 @@ public class KycDetailFragment extends Fragment {
 
             }
         });
+    }
+
+    public void setViewsEnabled(boolean f){
+        tilFirstName.setEnabled(f);
+        tilMiddleName.setEnabled(f);
+        tilLastName.setEnabled(f);
+        linMale.setEnabled(f);
+        linFemale.setEnabled(f);
+        linOther.setEnabled(f);
+        linDob.setEnabled(f);
+        linMaritalStatus.setEnabled(f);
+        tilEmail.setEnabled(f);
+        tilMobile.setEnabled(f);
+        edtAadhaar.setEnabled(f);
+        edtPAN.setEnabled(f);
+        tilFlat.setEnabled(f);
+        tilStreet.setEnabled(f);
+        tilPincode.setEnabled(f);
+        spCountry.setEnabled(f);
+        spState.setEnabled(f);
+        spCity.setEnabled(f);
+        acInstituteName.setEnabled(f);
+        spInsttLocation.setEnabled(f);
+        spCourse.setEnabled(f);
+        txtCourseFee.setEnabled(f);
+        edtLoanAmt.setEnabled(f);
+
     }
 
 
