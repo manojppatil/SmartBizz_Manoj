@@ -31,13 +31,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.newUI.MainApplication;
+import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.airbnb.lottie.model.layer.Layer.LayerType.Text;
 import static com.eduvanzapplication.R.*;
@@ -47,17 +52,17 @@ import static com.eduvanzapplication.R.color.red;
 public class PostApprovalDocFragment extends Fragment {
 
     static View view;
-    public static Context context;
-    public static Fragment mFragment;
-    public int SELECT_DOC = 2;
-    public static ProgressBar progressBar;
+    private Context context;
+    private Fragment mFragment;
+    private int SELECT_DOC = 2;
+    private static ProgressBar progressBar;
     SharedPreferences sharedPreferences;
     DownloadManager downloadManager;
     String userId;
     String downloadUrl = "", downloadSignedUrl = "";
     long downloadReference;
 
-    private LinearLayout linManualBtn, lineSignBtn, linOTPBtn, linPayBtn, linData,linExpandCollapse;
+    private LinearLayout linManualBtn, lineSignBtn, linOTPBtn, linPayBtn, linData,linDownloadAgreement,linExpandCollapse;
     private ImageButton btnExpandCollapse;
 
     TextView txtProcessingFee;
@@ -144,6 +149,7 @@ public class PostApprovalDocFragment extends Fragment {
         linOTPBtn = view.findViewById(R.id.linOTPBtn);
         linPayBtn = view.findViewById(R.id.linPayBtn);
         linData = view.findViewById(R.id.linData);
+        linDownloadAgreement = view.findViewById(R.id.linDownloadAgreement);
         btnExpandCollapse = view.findViewById(R.id.btnExpandCollapse);
 
         txtProcessingFee = view.findViewById(id.txtProcessingFee);
@@ -186,6 +192,27 @@ public class PostApprovalDocFragment extends Fragment {
                 linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                try {
+                    String ipaddress = Utils.getIPAddress(true);
+                    String url = MainActivity.mainUrl + "laf/getDigioDocumentIdForStudent";
+                    Map<String, String> params = new HashMap<String, String>();
+                    if (!Globle.isNetworkAvailable(context)) {
+                        Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        VolleyCallNew volleyCall = new VolleyCallNew();
+//                        params.put("logged_id", userID);
+                        params.put("created_by_ip", ipaddress);
+                        if (!Globle.isNetworkAvailable(context)) {
+                            Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            volleyCall.sendRequest(context, url, null, mFragment, "getDigioDocumentIdForStudent", params, MainActivity.auth_token);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 

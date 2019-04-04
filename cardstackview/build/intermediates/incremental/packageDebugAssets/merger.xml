@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/sheetal/eduvanz_3_0/cardstackview/src/main/assets"/><source path="/home/sheetal/eduvanz_3_0/cardstackview/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/sheetal/eduvanz_3_0/cardstackview/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/assets"/><source path="/home/vijay/Documents/Vijay/EduvanzNew/cardstackview/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/debug/assets"/></dataSet></merger>

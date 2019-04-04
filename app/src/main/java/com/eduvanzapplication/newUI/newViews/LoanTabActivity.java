@@ -1,5 +1,7 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,7 +11,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
+import com.eduvanzapplication.newUI.MainApplication;
+import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.fragments.AmortizationFragment;
 import com.eduvanzapplication.newUI.fragments.DetailedInfoFragment;
 import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
@@ -24,6 +29,10 @@ public class LoanTabActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    public static String LeadID = "", firstName = "", student_id ="";
+    SharedPreferences sharedPreferences;
+    Context context;
+    AppCompatActivity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,26 @@ public class LoanTabActivity extends AppCompatActivity {
 //        }
 //        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
 //        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+
+        context = getApplicationContext();
+        mActivity = this;
+
+        try {
+            Bundle extras = getIntent().getExtras();
+            MainActivity.lead_id = LeadID = extras.getString("lead_id", "0");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        DashboardActivity.student_id;
+
+        try {
+            sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            firstName = sharedPreferences.getString("firstName", "");
+            MainActivity.auth_token = sharedPreferences.getString("auth_token", "");
+            student_id = sharedPreferences.getString("student_id", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);

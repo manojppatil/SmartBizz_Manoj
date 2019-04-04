@@ -1,37 +1,37 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
+ADDED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
 	package
-		ADDED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:11-56
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
+		ADDED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:11-56
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-		ADDED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+		ADDED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
+		ADDED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
 	android:versionCode
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-		ADDED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml:3:1-58
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+		ADDED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml:3:1-58
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
 uses-sdk
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-		ADDED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+		ADDED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-		ADDED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
-		INJECTED from /home/sheetal/eduvanz_3_0/cardstackview/src/main/AndroidManifest.xml
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+		ADDED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml
+		INJECTED from /home/vijay/Documents/Vijay/EduvanzNew/cardstackview/src/main/AndroidManifest.xml

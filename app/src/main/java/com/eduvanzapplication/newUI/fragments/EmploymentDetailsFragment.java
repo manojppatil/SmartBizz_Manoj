@@ -96,6 +96,7 @@ public class EmploymentDetailsFragment extends Fragment {
     }
 
     public static  void validate(){
+
 //        if (NewLeadActivity.companyName.equals("") || NewLeadActivity.annualIncome.equals(""))
 //            mListener.onEmploymentFragmentInteraction(false,);
 //

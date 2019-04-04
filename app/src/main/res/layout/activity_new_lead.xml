@@ -19,16 +19,15 @@
 
     <com.badoualy.stepperindicator.StepperIndicator
         android:id="@+id/stepperIndicator"
-        android:layout_width="@dimen/_150sdp"
+        android:layout_width="@dimen/_90sdp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/_90sdp"
         android:layout_below="@id/txtStepTracker"
-        app:stpi_circleRadius="@dimen/_5sdp"
+        app:stpi_circleRadius="@dimen/_4sdp"
         app:stpi_circleStrokeWidth="@dimen/_2sdp"
         app:stpi_circleColor="@color/new_red"
-        app:stpi_lineDoneColor="@color/blue1"
-        />
+        app:stpi_lineDoneColor="@color/blue1" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"

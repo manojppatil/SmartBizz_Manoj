@@ -552,6 +552,37 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/linDownloadAgreement"
+                            android:layout_width="wrap_content"
+                            android:minWidth="@dimen/_120sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/border_circular_red_filled"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                style="@style/TextViewSmallCapsWhiteStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Download Application"
+                                android:gravity="center"/>
+                            <View
+                                android:layout_width="@dimen/_1sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:background="@color/white" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                app:srcCompat="@drawable/ic_angle_down" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

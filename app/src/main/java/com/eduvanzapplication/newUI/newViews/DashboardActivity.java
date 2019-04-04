@@ -62,12 +62,7 @@ import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
-import com.eduvanzapplication.newUI.services.LocationService;
-import com.eduvanzapplication.newUI.services.MyServiceAppStats;
-import com.eduvanzapplication.newUI.services.MyServiceCallLog;
-import com.eduvanzapplication.newUI.services.MyServiceContacts;
-import com.eduvanzapplication.newUI.services.MyServiceReadSms;
-//import com.eduvanzapplication.newUI.services.MyServiceReadSmsbck;
+
 import com.eduvanzapplication.newUI.webviews.WebViewAboutUs;
 import com.eduvanzapplication.newUI.webviews.WebViewBlog;
 import com.eduvanzapplication.newUI.webviews.WebViewDisclaimer;
@@ -80,15 +75,6 @@ import com.google.gson.JsonObject;
 import com.idfy.rft.RFTSdk;
 import com.idfy.rft.RftSdkCallbackInterface;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 
@@ -104,7 +90,6 @@ public class DashboardActivity extends AppCompatActivity
     MainApplication mainApplication;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
-    LinearLayout linearLayoutSignup, linearLayoutUserDetail;
 
     static String userMobileNo = "", student_id = "", appInstallationTimeStamp = "";
     AppCompatActivity mActivity;
@@ -174,13 +159,6 @@ public class DashboardActivity extends AppCompatActivity
                 Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
             }
 
-            buttonSignup = (Button) header.findViewById(R.id.button_dashboard_signup);
-            mainApplication.applyTypeface(buttonSignup, context);
-            buttonSignIn = (Button) header.findViewById(R.id.button_dashboard_signin);
-            mainApplication.applyTypeface(buttonSignIn, context);
-
-            linearLayoutSignup = (LinearLayout) header.findViewById(R.id.linearLayout_signupdetail_dashboard);
-            linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
 
             frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
             Menu m = navigationView.getMenu();
@@ -201,8 +179,6 @@ public class DashboardActivity extends AppCompatActivity
             }
 
             if (sharedPref.getLoginDone(context)) {
-                linearLayoutUserDetail.setVisibility(View.VISIBLE);
-                linearLayoutSignup.setVisibility(View.GONE);
                 Menu nav_Menu = navigationView.getMenu();
                 nav_Menu.findItem(R.id.nav_loanApplication).setVisible(true);
                 nav_Menu.findItem(R.id.nav_eligibility).setVisible(false);
@@ -212,34 +188,7 @@ public class DashboardActivity extends AppCompatActivity
             }
 
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_dashboard, new DashboardFragmentNew()).commit();
-            // services for upload scapping data
 
-//            /** API CALL GET Dates**/
-//            try {
-//                String url = MainActivity.mainUrl + "mobilescrap/getRecentScrappingDetails";
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("mobileNo", userMobileNo);
-//                if (!Globle.isNetworkAvailable(DashboardActivity.this)) {
-//
-//                } else {
-//                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobilescrap/getRecentScrappingDetails
-//                    volleyCall.sendRequest(context, url, mActivity, null, "getRecentScrapping", params);
-//                }
-//            } catch (Exception e) {
-//                String className = this.getClass().getSimpleName();
-//                String name = new Object() {
-//                }.getClass().getEnclosingMethod().getName();
-//                String errorMsg = e.getMessage();
-//                String errorMsgDetails = e.getStackTrace().toString();
-//                String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
-//            }
-
-//        permissionCallLogs();     //101
-//        permissionReadSMS();      //102
-//        permissionAppStats();    //103
-//        permissionContacts();    //104
-//        Otherpermission();
 
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -261,133 +210,6 @@ public class DashboardActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-    }
-
-
-    private void Otherpermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            boolean permission = checkIfAlreadyhavePermissionLocation();
-
-            if (!permission) {
-                requestPermissions(
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
-                        }, 105);
-            } else {
-                /** SERVICE CALL **/
-                setScheduleIntent(LocationService.class);
-            }
-        } else {
-            /** SERVICE CALL **/
-            setScheduleIntent(LocationService.class);
-        }
-    }
-
-    private boolean checkIfAlreadyhavePermissionLocation() {
-        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void permissionContacts() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            boolean permission = checkIfAlreadyhavePermissionContact();
-
-            if (!permission) {
-                Log.i("TAG", "Permission to record denied");
-                requestPermissions(
-                        new String[]{Manifest.permission.READ_CONTACTS,
-                        }, 104);
-            } else {
-                /** SERVICE CALL **/
-                setScheduleIntent(MyServiceContacts.class);
-            }
-        } else {
-            /** SERVICE CALL **/
-            setScheduleIntent(MyServiceContacts.class);
-        }
-    }
-
-    private boolean checkIfAlreadyhavePermissionContact() {
-        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void permissionAppStats() {
-        if (!isAccessGranted()) {
-            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-        } else {
-            setScheduleIntent(MyServiceAppStats.class);
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private boolean isAccessGranted() {
-        try {
-            PackageManager packageManager = getPackageManager();
-            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(getPackageName(), 0);
-            AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
-            int mode = 0;
-            if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.KITKAT) {
-                mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
-                        applicationInfo.uid, applicationInfo.packageName);
-            }
-            return (mode == AppOpsManager.MODE_ALLOWED);
-
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
-
-    private void permissionReadSMS() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            boolean permission = checkIfAlreadyhavePermissionSMS();
-            if (!permission) {
-                Log.i("TAG", "Permission to record denied");
-                requestPermissions(
-                        new String[]{Manifest.permission.READ_SMS,
-                        }, 102);
-            } else {
-                /** SERVICE CALL **/
-                setScheduleIntent(MyServiceReadSms.class);
-            }
-        } else {
-            /** SERVICE CALL **/
-            setScheduleIntent(MyServiceReadSms.class);
-        }
-    }
-
-    private boolean checkIfAlreadyhavePermissionSMS() {
-        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_SMS);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void permissionCallLogs() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            boolean permission = checkIfAlreadyhavePermission();
-            if (!permission) {
-                requestPermissions(
-                        new String[]{Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_PHONE_STATE,
-                        }, 101);
-            } else {
-                /** SERVICE CALL **/
-                setScheduleIntent(MyServiceCallLog.class);
-            }
-        } else {
-            /** SERVICE CALL **/
-            setScheduleIntent(MyServiceCallLog.class);
-        }
-    }
-
-    private void setScheduleIntent(Class myServiceCallLogClass) {
-        // start location service
-
-        startService(new Intent(context, myServiceCallLogClass));
-    }
-
-    private boolean checkIfAlreadyhavePermission() {
-        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG);
-        return result == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -541,320 +363,5 @@ public class DashboardActivity extends AppCompatActivity
             nav_Menu.findItem(R.id.nav_logout).setVisible(true);
         }
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 101:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //granted
-                    Intent intent = new Intent(this, MyServiceCallLog.class);
-                    startService(intent);
-                } else {
-                    // Permission denied.
-                    // Notify the user via a SnackBar that they have rejected a core permission for the
-                    // app, which makes the Activity useless. In a real app, core permissions would
-                    // typically be best requested during a welcome-screen flow.
-                    // Additionally, it is important to remember that a permission might have been
-                    // rejected without asking the user for permission (device policy or "Never ask
-                    // again" prompts). Therefore, a user interface affordance is typically implemented
-                    // when permissions are denied. Otherwise, your app could appear unresponsive to
-                    // touches or interactions which have required permissions.
-                    //                    Toast.makeText(this, R.string.permission_denied_explanation, Toast.LENGTH_LONG).show();
-                    //                    finish();
-                    Snackbar.make(
-                            findViewById(R.id.drawer_layout),
-                            R.string.permission_denied_explanation,
-                            Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.settings, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    // Build intent that displays the App settings screen.
-                                    Intent intent = new Intent();
-                                    intent.setAction(
-                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package",
-                                            BuildConfig.APPLICATION_ID, null);
-                                    intent.setData(uri);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                }
-                            })
-                            .show();
-                }
-                break;
-            case 102:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //granted
-                    Intent intent = new Intent(this, MyServiceReadSms.class);
-                    startService(intent);
-                } else {
-                    // Permission denied.
-                    // Notify the user via a SnackBar that they have rejected a core permission for the
-                    // app, which makes the Activity useless. In a real app, core permissions would
-                    // typically be best requested during a welcome-screen flow.
-                    // Additionally, it is important to remember that a permission might have been
-                    // rejected without asking the user for permission (device policy or "Never ask
-                    // again" prompts). Therefore, a user interface affordance is typically implemented
-                    // when permissions are denied. Otherwise, your app could appear unresponsive to
-                    // touches or interactions which have required permissions.
-                    //                    Toast.makeText(this, R.string.permission_denied_explanation, Toast.LENGTH_LONG).show();
-                    //                    finish();
-                    Snackbar.make(
-                            findViewById(R.id.drawer_layout),
-                            R.string.permission_denied_explanation,
-                            Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.settings, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    // Build intent that displays the App settings screen.
-                                    Intent intent = new Intent();
-                                    intent.setAction(
-                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package",
-                                            BuildConfig.APPLICATION_ID, null);
-                                    intent.setData(uri);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                }
-                            })
-                            .show();
-                }
-                break;
-            case 103:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //granted
-                } else {
-                    // Permission denied.
-                    // Notify the user via a SnackBar that they have rejected a core permission for the
-                    // app, which makes the Activity useless. In a real app, core permissions would
-                    // typically be best requested during a welcome-screen flow.
-                    // Additionally, it is important to remember that a permission might have been
-                    // rejected without asking the user for permission (device policy or "Never ask
-                    // again" prompts). Therefore, a user interface affordance is typically implemented
-                    // when permissions are denied. Otherwise, your app could appear unresponsive to
-                    // touches or interactions which have required permissions.
-                    //                    Toast.makeText(this, R.string.permission_denied_explanation, Toast.LENGTH_LONG).show();
-                    //                    finish();
-                    Snackbar.make(
-                            findViewById(R.id.drawer_layout),
-                            R.string.permission_denied_explanation,
-                            Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.settings, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    // Build intent that displays the App settings screen.
-                                    Intent intent = new Intent();
-                                    intent.setAction(
-                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package",
-                                            BuildConfig.APPLICATION_ID, null);
-                                    intent.setData(uri);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                }
-                            })
-                            .show();
-                }
-                break;
-            case 104:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //granted
-                    Intent intent = new Intent(this, MyServiceContacts.class);
-                    startService(intent);
-                } else {
-                    // Permission denied.
-                    // Notify the user via a SnackBar that they have rejected a core permission for the
-                    // app, which makes the Activity useless. In a real app, core permissions would
-                    // typically be best requested during a welcome-screen flow.
-                    // Additionally, it is important to remember that a permission might have been
-                    // rejected without asking the user for permission (device policy or "Never ask
-                    // again" prompts). Therefore, a user interface affordance is typically implemented
-                    // when permissions are denied. Otherwise, your app could appear unresponsive to
-                    // touches or interactions which have required permissions.
-                    //                    Toast.makeText(this, R.string.permission_denied_explanation, Toast.LENGTH_LONG).show();
-                    //                    finish();
-                    Snackbar.make(
-                            findViewById(R.id.drawer_layout),
-                            R.string.permission_denied_explanation,
-                            Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.settings, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    // Build intent that displays the App settings screen.
-                                    Intent intent = new Intent();
-                                    intent.setAction(
-                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package",
-                                            BuildConfig.APPLICATION_ID, null);
-                                    intent.setData(uri);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                }
-                            })
-                            .show();
-                }
-            case 105:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //granted
-                    Intent intent = new Intent(this, LocationService.class);
-                    startService(intent);
-                } else {
-                    // Permission denied.
-                    // Notify the user via a SnackBar that they have rejected a core permission for the
-                    // app, which makes the Activity useless. In a real app, core permissions would
-                    // typically be best requested during a welcome-screen flow.
-                    // Additionally, it is important to remember that a permission might have been
-                    // rejected without asking the user for permission (device policy or "Never ask
-                    // again" prompts). Therefore, a user interface affordance is typically implemented
-                    // when permissions are denied. Otherwise, your app could appear unresponsive to
-                    // touches or interactions which have required permissions.
-                    //                    Toast.makeText(this, R.string.permission_denied_explanation, Toast.LENGTH_LONG).show();
-                    //                    finish();
-                    Snackbar.make(
-                            findViewById(R.id.drawer_layout),
-                            R.string.permission_denied_explanation,
-                            Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.settings, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    // Build intent that displays the App settings screen.
-                                    Intent intent = new Intent();
-                                    intent.setAction(
-                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package",
-                                            BuildConfig.APPLICATION_ID, null);
-                                    intent.setData(uri);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                }
-                            })
-                            .show();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-
-    /** RESPONSE OF API CALL SCRAPING DATES */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void getScrappingdates(JSONObject jsonDataO) {
-        Log.e(TAG, "*****************GET SCRAPING DATES************** \n" + jsonDataO);
-        try {
-            String smsTimeStamp = null, callTimeStamp = null, contactTimeStamp = null,
-                    appTimeStamp = null, appInstallationDateTimes = null, locationTimeStamp = null;
-            JSONObject mobject = jsonDataO.optJSONObject("result");
-            try {
-                smsTimeStamp = mobject.getString("smsTimeStamp");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                callTimeStamp = mobject.getString("callTimeStamp");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                contactTimeStamp = mobject.getString("contactTimeStamp");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                appTimeStamp = mobject.getString("appTimeStamp");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                appInstallationTimeStamp = appInstallationDateTimes = mobject.getString("appInstallationDateTime");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                locationTimeStamp = mobject.getString("locationTimeStamp");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            Log.e(TAG, "getScrappingdates:appInstallationDateTime:::................. " + appInstallationDateTimes);
-            try {
-                SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("smsTimeStamp", smsTimeStamp);
-                editor.putString("callTimeStamp", callTimeStamp);
-                editor.putString("contactTimeStamp", contactTimeStamp);
-                editor.putString("appTimeStamp", appTimeStamp);
-                editor.putString("locationTimeStamp", locationTimeStamp);
-                editor.putString("appInstallationTimeStamp", appInstallationDateTimes);
-                editor.apply();
-                editor.commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-//            if(firstTimeScrape == 0){
-            permissionCallLogs();     //101
-            permissionReadSMS();      //102
-            permissionAppStats();    //103
-            permissionContacts();    //104
-            Otherpermission();       //105
-
-            locationScrape();
-
-            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("userpolicyAgreement", 1);
-            editor.putInt("firstTimeScrape", 1);
-            editor.apply();
-            editor.commit();
-//            }
-
-
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-    private void locationScrape() {
-        try {
-//                Log.e(TAG, "getScrappingdates:appInstallationTimeStampappInstallationTimeStamp:..................................:: " + appInstallationTimeStamp);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date lLocationDate = simpleDateFormat.parse(appInstallationTimeStamp);
-                long installationTime = lLocationDate.getTime() + (5 * 12 * 60 * 60 * 1000);
-
-                if (installationTime < System.currentTimeMillis()) {
-                    Intent myService = new Intent(DashboardActivity.this, LocationService.class);
-                    stopService(myService);
-                } else {
-                    startService(new Intent(context, LocationService.class));
-                }
-
-        } catch (Exception e) {
-            try {
-                startService(new Intent(context, LocationService.class));
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
-
-
-
 
 }

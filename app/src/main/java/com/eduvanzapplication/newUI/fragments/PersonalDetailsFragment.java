@@ -2,6 +2,7 @@ package com.eduvanzapplication.newUI.fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -41,8 +42,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
+import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.newUI.MainApplication;
+import com.eduvanzapplication.newUI.SharedPref;
+import com.eduvanzapplication.newUI.VolleyCall;
+import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.google.gson.JsonObject;
@@ -60,7 +67,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
+import static com.eduvanzapplication.newUI.newViews.LoanTabActivity.student_id;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class PersonalDetailsFragment extends Fragment {
 
     private static ProgressBar progressbar;
@@ -79,10 +89,14 @@ public class PersonalDetailsFragment extends Fragment {
     private TextView txtMaritalStatus;
     private LinearLayout linStudentBtn,linSalariedBtn, linSelfEmployedBtn;
 
+    LinearLayout linPan,linAadhar ,linClose ,linFooter1 ,linTakePicture ,linQR ,linStudentType ,linOCR;
+    public static Context context;
+    public static Fragment mFragment;
+
     private static OnFragmentInteractionListener mListener;
     private TextView txtDOB;
 
-
+    private CFAlertDialog cfAlertDialog;
     public PersonalDetailsFragment() {
         // Required empty public constructor
     }
@@ -104,60 +118,55 @@ public class PersonalDetailsFragment extends Fragment {
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setCancelable(false);
-
-        View professionView = getLayoutInflater().inflate(R.layout.layout_profession,null);
-        linStudentBtn = professionView.findViewById(R.id.linStudentBtn);
-        linSalariedBtn = professionView.findViewById(R.id.linSalariedBtn);
-        linSelfEmployedBtn = professionView.findViewById(R.id.linSelfEmployedBtn);
-        builder.setView(professionView);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-//        Window window = dialog.getWindow();
-//        WindowManager.LayoutParams wlp = window.getAttributes();
-//        wlp.gravity = Gravity.BOTTOM;
-//        window.setAttributes(wlp);
-
-        linStudentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession = "1";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                dialog.dismiss();
-            }
-        });
-
-        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession = "2";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                dialog.dismiss();
-            }
-        });
-
-        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession  ="3";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                dialog.dismiss();
-            }
-        });
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setCancelable(false);
+//
+//        View professionView = getLayoutInflater().inflate(R.layout.layout_profession,null);
+//        linStudentBtn = professionView.findViewById(R.id.linStudentBtn);
+//        linSalariedBtn = professionView.findViewById(R.id.linSalariedBtn);
+//        linSelfEmployedBtn = professionView.findViewById(R.id.linSelfEmployedBtn);
+//        builder.setView(professionView);
+//
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//
+//        linStudentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession = "1";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession = "2";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession  ="3";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                dialog.dismiss();
+//            }
+//        });
 
     }
 
@@ -176,12 +185,139 @@ public class PersonalDetailsFragment extends Fragment {
         txtDOB = view.findViewById(R.id.txtDOB);
         txtMaritalStatus = view.findViewById(R.id.txtMaritalStatus);
         switchMarital = view.findViewById(R.id.switchMarital);
+
+        context = getContext();
+        mFragment = new DashboardFragmentNew();
+
+//        View professionView = getLayoutInflater().inflate(R.layout.layout_ocr_options,null);
+//
+//        linStudentBtn = professionView.findViewById(R.id.linStudentBtn);
+//        linSalariedBtn = professionView.findViewById(R.id.linSalariedBtn);
+//        linSelfEmployedBtn = professionView.findViewById(R.id.linSelfEmployedBtn);
+//
+//        LinearLayout linPan = professionView.findViewById(R.id.linPan);
+//        LinearLayout linAadhar = professionView.findViewById(R.id.linAadhar);
+//        LinearLayout linClose =professionView.findViewById(R.id.linClose);
+//        LinearLayout linFooter1 = professionView.findViewById(R.id.linFooter1);
+//        LinearLayout linTakePicture = professionView.findViewById(R.id.linTakePicture);
+//        LinearLayout linQR = professionView.findViewById(R.id.linQR);
+//        LinearLayout linStudentType = professionView.findViewById(R.id.linStudentType);
+//        LinearLayout linOCR = professionView.findViewById(R.id.linOCR);
+//
+//        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(getContext())
+//                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+//                .setFooterView(professionView);
+//
+//        cfAlertDialog = builder.show();
+//        cfAlertDialog.setCancelable(false);
+//        cfAlertDialog.setCanceledOnTouchOutside(false);
+//        linFooter1.setVisibility(View.VISIBLE);
+//        linTakePicture.setVisibility(View.GONE);
+//        linQR.setVisibility(View.GONE);
+//
+//        linStudentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession = "1";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                linOCR.setVisibility(View.VISIBLE);
+//                linStudentType.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession = "2";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linOCR.setVisibility(View.VISIBLE);
+//                linStudentType.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession  ="3";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linOCR.setVisibility(View.VISIBLE);
+//                linStudentType.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        linClose.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                cfAlertDialog.dismiss();
+//            }
+//        });
+//
+//        linPan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                linTakePicture.setVisibility(View.VISIBLE);
+//                linQR.setVisibility(View.GONE);
+//                linFooter1.setVisibility(View.GONE);
+//
+//            }
+//        });
+//
+//        linAadhar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                linTakePicture.setVisibility(View.VISIBLE);
+//                linQR.setVisibility(View.VISIBLE);
+//                linFooter1.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        linTakePicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (linQR.getVisibility() != View.VISIBLE){  //pan is selected
+//                    if (CameraUtils.checkPermissions(getContext())) {
+//                        doctype = "ind_pan";
+//                        rftsdk.CaptureDocImage(getActivity(), "ind_pan", rftSdkCallbackInterface);
+//                    } else {
+////                        requestCameraPermission(MEDIA_TYPE_IMAGE);
+//                    }
+//
+//                }else{
+//                    if (CameraUtils.checkPermissions(getContext())) {
+//                        Toast.makeText(getActivity(), "Capture front-side image of Aadhaar", Toast.LENGTH_LONG).show();
+//
+//                        doctype = "ind_aadhaar";
+////                    doctype = "aadhaar_ocr";
+//                        rftsdk.CaptureDocImage(getActivity(), "ind_aadhaar", rftSdkCallbackInterface);
+//                    } else {
+////                        requestCameraPermission(MEDIA_TYPE_IMAGE);
+//                    }
+//
+//                }
+//            }
+//        });
+
+        showOCRDialog();
+
         return  view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         linMaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -389,24 +525,70 @@ public class PersonalDetailsFragment extends Fragment {
     private void showOCRDialog() {
 
         View view = getLayoutInflater().inflate(R.layout.layout_ocr_options,null);
-        LinearLayout linPan = view.findViewById(R.id.linPan);
-        LinearLayout linAadhar = view.findViewById(R.id.linAadhar);
-        LinearLayout linClose =view.findViewById(R.id.linClose);
-        LinearLayout linFooter1 = view.findViewById(R.id.linFooter1);
-        LinearLayout linTakePicture = view.findViewById(R.id.linTakePicture);
-        LinearLayout linQR = view.findViewById(R.id.linQR);
 
-        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(getActivity())
+        linStudentBtn = view.findViewById(R.id.linStudentBtn);
+        linSalariedBtn = view.findViewById(R.id.linSalariedBtn);
+        linSelfEmployedBtn = view.findViewById(R.id.linSelfEmployedBtn);
+
+         linPan = view.findViewById(R.id.linPan);
+         linAadhar = view.findViewById(R.id.linAadhar);
+         linClose =view.findViewById(R.id.linClose);
+         linFooter1 = view.findViewById(R.id.linFooter1);
+         linTakePicture = view.findViewById(R.id.linTakePicture);
+         linQR = view.findViewById(R.id.linQR);
+         linStudentType = view.findViewById(R.id.linStudentType);
+         linOCR = view.findViewById(R.id.linOCR);
+
+
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setFooterView(view);
 
-        CFAlertDialog cfAlertDialog = builder.show();
-        cfAlertDialog.setCancelable(false);
-        cfAlertDialog.setCanceledOnTouchOutside(false);
         linFooter1.setVisibility(View.VISIBLE);
         linTakePicture.setVisibility(View.GONE);
         linQR.setVisibility(View.GONE);
 
+        linStudentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession = "1";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                linOCR.setVisibility(View.VISIBLE);
+                linStudentType.setVisibility(View.GONE);
+            }
+        });
+
+        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession = "2";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linOCR.setVisibility(View.VISIBLE);
+                linStudentType.setVisibility(View.GONE);
+            }
+        });
+
+        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession  ="3";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linOCR.setVisibility(View.VISIBLE);
+                linStudentType.setVisibility(View.GONE);
+            }
+        });
 
         linClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -421,9 +603,6 @@ public class PersonalDetailsFragment extends Fragment {
                 linTakePicture.setVisibility(View.VISIBLE);
                 linQR.setVisibility(View.GONE);
                 linFooter1.setVisibility(View.GONE);
-
-
-
 
             }
         });
@@ -460,6 +639,19 @@ public class PersonalDetailsFragment extends Fragment {
                     }
 
                 }
+            }
+        });
+
+        builder.setCancelable(true);
+
+        cfAlertDialog = builder.show();
+        cfAlertDialog.setCancelable(true);
+        cfAlertDialog.setCanceledOnTouchOutside(false);
+
+        cfAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+//                onDialogDismiss();
             }
         });
 
@@ -1072,7 +1264,6 @@ public class PersonalDetailsFragment extends Fragment {
         }
     }
 
-
     private void getPANData(String Requestid) {
 
         RequestQueue queue12 = Volley.newRequestQueue(getContext());
@@ -1091,6 +1282,25 @@ public class PersonalDetailsFragment extends Fragment {
                         try {
                             if (new JSONArray(response.toString()).getJSONObject(0).getString("status").toLowerCase().equals("completed")) {
                                 success = true;
+                                getActivity().runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        final Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    saveOCRData(new JSONArray(response.toString()).getJSONObject(0).getString("status"),Requestid,response.toString());
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }, 0);
+
+                                    }
+                                });
+
                             } else if (new JSONArray(response.toString()).getJSONObject(0).getString("status").toLowerCase().equals("in_progress")) {
                                 success = false;
 
@@ -1213,6 +1423,32 @@ public class PersonalDetailsFragment extends Fragment {
         queue12.add(getRequest);
     }
 
+    private void saveOCRData(String strStatus, String strRequestId, String strResponse) {
+        /** API CALL **/
+        try {//auth_token
+//            progressBar.setVisibility(View.VISIBLE);
+            String url = MainActivity.mainUrl + "dashboard/addcoborrower";
+            Map<String, String> params = new HashMap<String, String>();
+
+            params.put("request_id", strRequestId);
+            params.put("student_id", student_id);
+            params.put("response", strResponse);
+            params.put("status", strStatus);
+
+            VolleyCall volleyCall = new VolleyCall();
+            volleyCall.sendRequest(context, url, null, mFragment, "addOCR", params, MainActivity.auth_token);
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+
     private void getAadhaarData(String Requestid) {
         RequestQueue queue12 = Volley.newRequestQueue(getContext());//https://api.idfy.com/v2/tasks?request_id=d740cbd1-6af1-45f6-a609-8c2170dc3418
         StringRequest getRequest = new StringRequest(Request.Method.GET, "https://api.idfy.com/v2/tasks?request_id=" + Requestid,
@@ -1230,6 +1466,26 @@ public class PersonalDetailsFragment extends Fragment {
                         try {
                             if (new JSONArray(response.toString()).getJSONObject(0).getString("status").toLowerCase().equals("completed")) {
                                 success = true;
+
+                                getActivity().runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        final Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    saveOCRData(new JSONArray(response.toString()).getJSONObject(0).getString("status"),Requestid,response.toString());
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }, 0);
+
+                                    }
+                                });
+
                             } else if (new JSONArray(response.toString()).getJSONObject(0).getString("status").toLowerCase().equals("in_progress")) {
                                 success = false;
 
@@ -1371,7 +1627,6 @@ public class PersonalDetailsFragment extends Fragment {
         };
         queue12.add(getRequest);
     }
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
