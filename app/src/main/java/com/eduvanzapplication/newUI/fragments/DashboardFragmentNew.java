@@ -155,7 +155,7 @@ public class DashboardFragmentNew extends Fragment  {
             rvLeads.setLayoutManager(linearLayoutManager);
             adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
             rvLeads.setAdapter(adapter);
-
+            rvLeads.setNestedScrollingEnabled(false);
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
             circlePageIndicatorDashboard.setRadius(4 * density);
@@ -643,23 +643,6 @@ public class DashboardFragmentNew extends Fragment  {
                             mLeads.student_id = jsonleadStatus.getString("student_id");
 
 
-//                        mLeads.requested_loan_amount = jsonleadStatus.getString("requested_loan_amount");
-//                        mLeads.lead_id = jsonleadStatus.getString("lead_id");
-//                        mLeads.application_id = jsonleadStatus.getString("application_id");
-//                        mLeads.first_name = jsonleadStatus.getString("first_name");
-//                        mLeads.middle_name = jsonleadStatus.getString("middle_name");
-//                        mLeads.last_name = jsonleadStatus.getString("last_name");
-//                        mLeads.created_date_time = jsonleadStatus.getString("created_date_time");
-//                        mLeads.profession = jsonleadStatus.getString("profession");
-//                        mLeads.fk_applicant_type_id = jsonleadStatus.getString("fk_applicant_type_id");
-//                        mLeads.has_coborrower = jsonleadStatus.getString("has_coborrower");
-//                        mLeads.course_name = jsonleadStatus.getString("course_name");
-//                        mLeads.course_cost = jsonleadStatus.getString("course_cost");
-//                        mLeads.status_name = jsonleadStatus.getString("status_name");
-//                        mLeads.location_name = jsonleadStatus.getString("location_name");
-//                        mLeads.institute_name = jsonleadStatus.getString("institute_name");
-//                        mLeads.student_id = jsonleadStatus.getString("student_id");
-
                     } catch (JSONException e) {
                         String className = this.getClass().getSimpleName();
                         String name = new Object() {
@@ -672,12 +655,8 @@ public class DashboardFragmentNew extends Fragment  {
                     mLeadsArrayList.add(mLeads);
 
                 }
-//                rvLeads = view.findViewById(R.id.card_stack_view);
                 adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
                 rvLeads.setAdapter(adapter);
-//                setupCardStackView();
-//                setupButton();
-
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();

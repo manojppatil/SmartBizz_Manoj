@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/vijay/Documents/Vijay/EduvanzNew/linkedin-sdk/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/home/vijay/Documents/Vijay/EduvanzNew/linkedin-sdk/src/debug/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/sheetal/eduvanz_3_0/linkedin-sdk/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/home/sheetal/eduvanz_3_0/linkedin-sdk/src/debug/shaders"/></dataSet></merger>
