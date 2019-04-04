@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
-import static com.eduvanzapplication.newUI.newViews.LoanTabActivity.LeadID;
+import static com.eduvanzapplication.newUI.newViews.LoanTabActivity.lead_id;
 
 
 public class AmortizationFragment extends Fragment {
@@ -59,7 +59,7 @@ public class AmortizationFragment extends Fragment {
         try {
             String url = MainActivity.mainUrl + "dashboard/ammortisation";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("lead_id", LeadID);
+            params.put("lead_id", lead_id);
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {
