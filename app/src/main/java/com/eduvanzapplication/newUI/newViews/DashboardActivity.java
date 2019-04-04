@@ -90,6 +90,7 @@ public class DashboardActivity extends AppCompatActivity
     MainApplication mainApplication;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
+    LinearLayout linearLayoutSignup, linearLayoutUserDetail;
 
     static String userMobileNo = "", student_id = "", appInstallationTimeStamp = "";
     AppCompatActivity mActivity;
@@ -159,6 +160,8 @@ public class DashboardActivity extends AppCompatActivity
                 Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
             }
 
+
+            linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
 
             frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
             Menu m = navigationView.getMenu();

@@ -173,46 +173,39 @@
         android:visibility="visible"
         android:orientation="horizontal"
         android:layout_marginBottom="@dimen/_3sdp"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:layout_marginEnd="@dimen/_6sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:gravity="center_vertical"
         android:layout_above="@+id/linLayout1"
         android:layout_below="@id/linBanner"
         android:background="#77FFFFFF">
 
-        <ImageView
-            android:id="@+id/ivPrevBtn"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            app:srcCompat="@drawable/ic_chevron_left"/>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_weight="1"
-            android:paddingEnd="@dimen/_12sdp"
             android:paddingBottom="@dimen/_4sdp"
-            android:paddingStart="@dimen/_4sdp"
             android:paddingTop="@dimen/_4sdp"
             android:clipToPadding="false"
             android:clipChildren="false">
 
-            <com.yuyakaido.android.cardstackview.CardStackView
-                android:id="@+id/card_stack_view"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvLeads"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/_2sdp">
-            </com.yuyakaido.android.cardstackview.CardStackView>
+                android:orientation="horizontal">
+
+            </android.support.v7.widget.RecyclerView>
+            <!--<com.yuyakaido.android.cardstackview.CardStackView-->
+                <!--android:id="@+id/card_stack_view"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="@dimen/_2sdp">-->
+            <!--</com.yuyakaido.android.cardstackview.CardStackView>-->
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ivNextBtn"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="-4dp"
-            app:srcCompat="@drawable/ic_chevron_right"/>
 
     </LinearLayout>
 

@@ -1,968 +1,1136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-
-	<ScrollView
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_marginBottom="@dimen/_10sdp">
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical">
-
-			<RelativeLayout
-				android:id="@+id/relborrower"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:padding="10dp">
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentStart="true"
-					android:text="Borrower"
-					android:textColor="@color/colorSecondary"
-					android:textSize="20sp"
-					android:textStyle="bold" />
-
-				<TextView
-					android:id="@+id/txtBorrowerArrowKey"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentEnd="true"
-					android:text="@string/up"
-					android:textColor="@color/colorRed"
-					android:textSize="20sp" />
-
-			</RelativeLayout>
-
-			<LinearLayout
-				android:id="@+id/linBorrowerForm"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical"
-				android:visibility="visible">
-
-				<ScrollView
-					android:layout_width="match_parent"
-					android:layout_height="match_parent">
-
-					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:animateLayoutChanges="true"
-						android:orientation="vertical">
-
-						<moe.feng.common.stepperview.VerticalStepperItemView
-							android:id="@+id/stepperKyc0"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_10sdp"
-							app:step_index="1"
-							app:step_state="selected"
-							app:step_summary="Summarized if needed"
-							app:step_summary_done="Summarized if needed. Done"
-							app:step_title="Personal Details">
-
-							<LinearLayout
-								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:orientation="vertical">
-
-								<LinearLayout
-									android:layout_width="match_parent"
-									android:layout_height="wrap_content"
-									android:layout_marginTop="@dimen/_7sdp"
-									android:orientation="vertical">
-
-									<android.support.design.widget.TextInputLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_marginTop="@dimen/_4sdp"
-										android:layout_marginBottom="@dimen/_6sdp"
-										android:theme="@style/EditTextStyle"
-										app:hintTextAppearance="@style/CustomTextAppearance">
-
-										<EditText
-											android:id="@+id/edtFnameBr"
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:hint="@string/first_name"
-											android:imeOptions="actionNext"
-											android:inputType="textCapSentences"
-											style="@style/EditTextStyle" />
-									</android.support.design.widget.TextInputLayout>
-
-									<android.support.design.widget.TextInputLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_marginTop="@dimen/_4sdp"
-										android:layout_marginBottom="@dimen/_6sdp"
-										android:theme="@style/EditTextStyle"
-										app:hintTextAppearance="@style/CustomTextAppearance">
-
-										<EditText
-											android:id="@+id/edtMnameBr"
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:hint="@string/middle_name"
-											android:imeOptions="actionNext"
-											android:inputType="textCapSentences"
-											style="@style/EditTextStyle" />
-									</android.support.design.widget.TextInputLayout>
-
-									<android.support.design.widget.TextInputLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_marginTop="@dimen/_4sdp"
-										android:layout_marginBottom="@dimen/_6sdp"
-										android:theme="@style/EditTextStyle"
-										app:hintTextAppearance="@style/CustomTextAppearance">
-
-										<EditText
-											android:id="@+id/edtLnameBr"
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:hint="@string/last_name"
-											android:imeOptions="actionNext"
-											android:inputType="textCapSentences"
-											android:theme="@style/EditTextStyle" />
-									</android.support.design.widget.TextInputLayout>
-
-									<TextView
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_marginTop="@dimen/_8sdp"
-										android:text="@string/select_your_gender"
-										android:textAllCaps="true"
-										android:textColor="@color/textcolordark"
-										android:theme="@style/TextViewTitleStyle"
-										android:textSize="12sp" />
-
-									<LinearLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:orientation="horizontal"
-										android:weightSum="3.1">
-
-										<LinearLayout
-											android:id="@+id/linMale"
-											android:layout_width="0dp"
-											android:layout_height="@dimen/_25sdp"
-											android:layout_margin="@dimen/_2sdp"
-											android:layout_weight="1"
-											android:background="@drawable/border_circular"
-											android:gravity="center_vertical"
-											android:orientation="horizontal"
-											android:padding="@dimen/_3sdp">
-
-											<ImageView
-												android:layout_width="@dimen/_15sdp"
-												android:layout_height="@dimen/_15sdp"
-												android:tint="@color/textcolordark"
-												app:srcCompat="@drawable/ic_male" />
-
-											<View
-												android:layout_width="@dimen/_1sdp"
-												android:layout_height="match_parent"
-												android:layout_marginStart="@dimen/_4sdp"
-												android:layout_marginEnd="@dimen/_4sdp"
-												android:background="@color/textcolordark" />
-
-											<TextView
-												android:id="@+id/txtMale"
-												android:layout_width="wrap_content"
-												android:layout_height="wrap_content"
-												android:maxLines="1"
-												android:text="Male"
-												android:theme="@style/TextViewRadioStyle"
-												android:textColor="@color/textcolordark" />
-										</LinearLayout>
-
-										<LinearLayout
-											android:id="@+id/linFemale"
-											android:layout_width="0dp"
-											android:layout_height="@dimen/_25sdp"
-											android:layout_margin="@dimen/_2sdp"
-											android:layout_weight="1.1"
-											android:background="@drawable/border_circular"
-											android:gravity="center_vertical"
-											android:orientation="horizontal"
-											android:padding="@dimen/_3sdp">
-
-											<ImageView
-												android:layout_width="@dimen/_15sdp"
-												android:layout_height="@dimen/_15sdp"
-												android:tint="@color/textcolordark"
-												app:srcCompat="@drawable/ic_female" />
-
-											<View
-												android:layout_width="@dimen/_1sdp"
-												android:layout_height="match_parent"
-												android:layout_marginStart="@dimen/_4sdp"
-												android:layout_marginEnd="@dimen/_4sdp"
-												android:background="@color/textcolordark" />
-
-											<TextView
-												android:id="@+id/txtFemale"
-												android:layout_width="wrap_content"
-												android:layout_height="wrap_content"
-												android:maxLines="1"
-												android:text="Female"
-												android:theme="@style/TextViewRadioStyle"
-												android:textColor="@color/textcolordark" />
-										</LinearLayout>
-
-										<LinearLayout
-											android:id="@+id/linOther"
-											android:layout_width="0dp"
-											android:layout_height="@dimen/_25sdp"
-											android:layout_margin="@dimen/_2sdp"
-											android:layout_weight="1"
-											android:background="@drawable/border_circular"
-											android:gravity="center_vertical"
-											android:orientation="horizontal"
-											android:padding="@dimen/_3sdp">
-
-											<ImageView
-												android:layout_width="@dimen/_15sdp"
-												android:layout_height="@dimen/_15sdp"
-												android:tint="@color/textcolordark"
-												app:srcCompat="@drawable/ic_transgender" />
-
-											<View
-												android:layout_width="@dimen/_1sdp"
-												android:layout_height="match_parent"
-												android:layout_marginStart="@dimen/_4sdp"
-												android:layout_marginEnd="@dimen/_4sdp"
-												android:background="@color/textcolordark" />
-
-											<TextView
-												android:id="@+id/txtOther"
-												android:layout_width="wrap_content"
-												android:layout_height="wrap_content"
-												android:maxLines="1"
-												android:text="Other"
-												android:theme="@style/TextViewRadioStyle"
-												android:textColor="@color/textcolordark" />
-										</LinearLayout>
-
-									</LinearLayout>
-
-									<LinearLayout
-										android:layout_width="match_parent"
-										android:layout_height="match_parent"
-										android:layout_marginTop="@dimen/_8sdp"
-										android:orientation="horizontal"
-										android:weightSum="2">
-
-										<LinearLayout
-											android:id="@+id/linDob"
-											android:layout_width="0dp"
-											android:layout_height="@dimen/_25sdp"
-											android:layout_margin="@dimen/_2sdp"
-											android:layout_weight="1"
-											android:background="@drawable/border_circular"
-											android:gravity="center_vertical"
-											android:orientation="horizontal"
-											android:padding="@dimen/_3sdp">
-
-											<ImageView
-												android:layout_width="@dimen/_15sdp"
-												android:layout_height="@dimen/_15sdp"
-												android:tint="@color/textcolordark"
-												android:layout_marginLeft="@dimen/_5sdp"
-												app:srcCompat="@drawable/ic_birthday_cake" />
-
-											<View
-												android:layout_width="@dimen/_1sdp"
-												android:layout_height="match_parent"
-												android:layout_marginStart="@dimen/_4sdp"
-												android:layout_marginEnd="@dimen/_4sdp"
-												android:background="@color/textcolordark" />
-
-											<TextView
-												android:id="@+id/txtDob"
-												android:layout_width="wrap_content"
-												android:layout_height="wrap_content"
-												android:maxLines="1"
-												android:imeOptions="actionNext"
-												android:text="01 Apr 1999"
-												android:theme="@style/TextViewRadioStyle"
-												android:textColor="@color/textcolordark" />
-										</LinearLayout>
-
-										<LinearLayout
-											android:id="@+id/linMaritalStatus"
-											android:layout_width="0dp"
-											android:layout_height="@dimen/_25sdp"
-											android:layout_margin="@dimen/_2sdp"
-											android:layout_weight="1"
-											android:background="@drawable/border_circular"
-											android:gravity="center_vertical"
-											android:orientation="horizontal"
-											android:padding="@dimen/_3sdp">
-
-											<Switch
-												android:id="@+id/switchMaritalStatus"
-												android:layout_width="wrap_content"
-												android:layout_height="wrap_content"
-												android:theme="@style/SCBSwitch"
-												android:imeOptions="actionNext"
-												android:layout_marginLeft="@dimen/_5sdp"
-												android:checked="true" />
-
-											<View
-												android:layout_width="@dimen/_1sdp"
-												android:layout_height="match_parent"
-												android:layout_marginStart="@dimen/_4sdp"
-												android:layout_marginEnd="@dimen/_4sdp"
-												android:background="@color/textcolordark" />
-
-											<TextView
-												android:id="@+id/txtMaritalStatus"
-												android:layout_width="wrap_content"
-												android:layout_height="wrap_content"
-												android:maxLines="1"
-												android:text="Married"
-												android:theme="@style/TextViewRadioStyle"
-												android:textColor="@color/textcolordark" />
-										</LinearLayout>
-
-									</LinearLayout>
-
-									<android.support.design.widget.TextInputLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_marginTop="@dimen/_4sdp"
-										android:theme="@style/EditTextStyle"
-										app:hintTextAppearance="@style/CustomTextAppearance">
-
-										<EditText
-											android:id="@+id/edtEmailIdBr"
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:hint="e-Mail ID"
-											android:imeOptions="actionNext"
-											android:inputType="textEmailAddress"
-											style="@style/EditTextStyle" />
-									</android.support.design.widget.TextInputLayout>
-
-									<android.support.design.widget.TextInputLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_marginTop="@dimen/_4sdp"
-										android:theme="@style/EditTextStyle"
-										app:hintTextAppearance="@style/CustomTextAppearance">
-
-										<EditText
-											android:id="@+id/edtMobileNoBr"
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:hint="Mobile Number"
-											android:imeOptions="actionNext"
-											android:inputType="phone"
-											android:maxLength="10"
-											style="@style/EditTextStyle" />
-									</android.support.design.widget.TextInputLayout>
-
-								</LinearLayout>
-
-								<LinearLayout
-									android:layout_width="wrap_content"
-									android:layout_height="wrap_content"
-									android:layout_marginTop="@dimen/_10sdp"
-									android:orientation="horizontal">
-
-									<Button
-										android:id="@+id/btnNextKycDetail0"
-										android:layout_width="wrap_content"
-										android:layout_height="wrap_content"
-										android:backgroundTint="@color/material_blue_500"
-										android:text="@android:string/ok"
-										android:textColor="@android:color/white" />
-
-									<Button
-										android:layout_width="wrap_content"
-										android:layout_height="wrap_content"
-										android:layout_marginStart="@dimen/_6sdp"
-										android:text="@android:string/cancel" />
-
-								</LinearLayout>
-
-							</LinearLayout>
-
-						</moe.feng.common.stepperview.VerticalStepperItemView>
-
-						<moe.feng.common.stepperview.VerticalStepperItemView
-							android:id="@+id/stepperKyc1"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_6sdp"
-							app:step_index="2"
-							app:step_title="Identity Details">
-
-							<LinearLayout
-								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:orientation="vertical">
-
-								<LinearLayout
-									android:layout_width="match_parent"
-									android:layout_height="wrap_content"
-									android:layout_marginTop="@dimen/_8sdp"
-									android:orientation="vertical"
-									android:paddingLeft="@dimen/_4sdp">
-
-									<LinearLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_marginTop="@dimen/_4sdp"
-										android:orientation="vertical">
-
-										<LinearLayout
-											android:id="@+id/linAadhaar"
-											android:layout_width="match_parent"
-											android:layout_height="@dimen/_25sdp"
-											android:layout_margin="@dimen/_2sdp"
-											android:layout_weight="1"
-											android:background="@drawable/border_circular"
-											android:gravity="center_vertical"
-											android:orientation="horizontal"
-											android:padding="@dimen/_3sdp">
-
-											<ImageView
-												android:layout_width="@dimen/_15sdp"
-												android:layout_height="@dimen/_15sdp"
-												android:tint="@color/textcolordark"
-												android:layout_marginLeft="@dimen/_7sdp"
-												app:srcCompat="@drawable/ic_id_card" />
-
-											<View
-												android:layout_width="@dimen/_1sdp"
-												android:layout_height="match_parent"
-												android:layout_marginStart="@dimen/_6sdp"
-												android:layout_marginEnd="@dimen/_6sdp"
-												android:background="@color/textcolordark" />
-
-											<EditText
-												android:id="@+id/edtAadhaar"
-												android:layout_width="match_parent"
-												android:layout_height="wrap_content"
-												android:maxLines="1"
-												android:text="616183839494"
-												android:imeOptions="actionNext"
-												android:inputType="number"
-												style="@style/EditTextStyle" />
-										</LinearLayout>
-
-										<LinearLayout
-											android:id="@+id/linPAN"
-											android:layout_width="match_parent"
-											android:layout_height="@dimen/_25sdp"
-											android:layout_margin="@dimen/_2sdp"
-											android:layout_weight="1"
-											android:layout_marginTop="@dimen/_10sdp"
-											android:background="@drawable/border_circular"
-											android:gravity="center_vertical"
-											android:orientation="horizontal"
-											android:padding="@dimen/_3sdp">
-
-											<ImageView
-												android:layout_width="@dimen/_15sdp"
-												android:layout_height="@dimen/_15sdp"
-												android:tint="@color/textcolordark"
-												android:layout_marginLeft="@dimen/_7sdp"
-												app:srcCompat="@drawable/ic_id_card" />
-
-											<View
-												android:layout_width="@dimen/_1sdp"
-												android:layout_height="match_parent"
-												android:layout_marginStart="@dimen/_6sdp"
-												android:layout_marginEnd="@dimen/_6sdp"
-												android:background="@color/textcolordark" />
-
-											<EditText
-												android:id="@+id/edtPAN"
-												android:layout_width="match_parent"
-												android:layout_height="wrap_content"
-												android:maxLines="1"
-												android:text="CDFUS9320F"
-												android:imeOptions="actionNext"
-												android:inputType="number"
-												style="@style/EditTextStyle" />
-										</LinearLayout>
-
-
-
-									</LinearLayout>
-
-									<TextView
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_below="@id/txtcurrentAddress"
-										android:text="@string/as_per_aadhar"
-										android:layout_marginTop="@dimen/_10sdp"
-										android:textColor="@color/new_red"
-										style="@style/TextViewSmallCapsStyle"/>
-
-									<LinearLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_below="@id/ivUser"
-										android:layout_marginTop="@dimen/_5sdp"
-										android:orientation="vertical">
-
-										<android.support.design.widget.TextInputLayout
-											android:id="@+id/tilFlat"
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:layout_marginTop="@dimen/_6sdp"
-											android:theme="@style/EditTextStyle"
-											app:hintTextAppearance="@style/CustomTextAppearance">
-
-											<EditText
-												android:layout_width="match_parent"
-												android:layout_height="wrap_content"
-												android:imeOptions="actionNext"
-												android:maxLines="2"
-												android:hint="Flat No, Building, Society Name"
-												style="@style/EditTextStyle" />
-										</android.support.design.widget.TextInputLayout>
-
-										<android.support.design.widget.TextInputLayout
-											android:id="@+id/tilStreet"
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:layout_marginTop="@dimen/_6sdp"
-											android:theme="@style/EditTextStyle"
-											app:hintTextAppearance="@style/CustomTextAppearance">
-
-											<EditText
-												android:layout_width="match_parent"
-												android:layout_height="wrap_content"
-												android:maxLines="2"
-												android:imeOptions="actionNext"
-												android:hint="Street Name, Locality, Landmark"
-												style="@style/EditTextStyle" />
-										</android.support.design.widget.TextInputLayout>
-
-										<LinearLayout
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:layout_marginTop="@dimen/_6sdp"
-											android:orientation="horizontal">
-
-											<android.support.design.widget.TextInputLayout
-												android:id="@+id/tilPincode"
-												android:layout_width="0dp"
-												android:layout_height="wrap_content"
-												android:layout_weight="0.5"
-												android:layout_marginTop="@dimen/_6sdp"
-												android:theme="@style/EditTextStyle"
-												app:hintTextAppearance="@style/CustomTextAppearance">
-
-												<EditText
-													android:layout_width="match_parent"
-													android:layout_height="wrap_content"
-													android:hint="PinCode"
-													android:imeOptions="actionNext"
-													android:inputType="number"
-													style="@style/EditTextStyle" />
-											</android.support.design.widget.TextInputLayout>
-
-											<LinearLayout
-												android:layout_width="0dp"
-												android:layout_height="wrap_content"
-												android:layout_weight="0.5"
-												android:orientation="vertical">
-
-												<TextView
-													android:layout_width="match_parent"
-													android:layout_height="wrap_content"
-													android:gravity="center_horizontal"
-													android:text="COUNTRY"
-													style="@style/TextViewSmallCapsStyle"/>
-
-												<Spinner
-													android:id="@+id/spCountry"
-													android:layout_width="match_parent"
-													android:layout_height="@dimen/_26sdp"
-													android:imeOptions="actionNext"
-													android:background="@drawable/spinner_rect_background"
-													android:dropDownWidth="400px"
-													android:layout_marginTop="@dimen/_4sdp" />
-
-											</LinearLayout>
-
-										</LinearLayout>
-
-										<LinearLayout
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:layout_marginTop="@dimen/_6sdp"
-											android:orientation="horizontal">
-
-											<LinearLayout
-												android:layout_width="0dp"
-												android:layout_height="wrap_content"
-												android:layout_weight="0.5"
-												android:orientation="vertical">
-												<TextView
-													android:layout_width="match_parent"
-													android:layout_height="wrap_content"
-													android:text="STATE"
-													android:gravity="center_horizontal"
-													style="@style/TextViewSmallCapsStyle"/>
-
-												<Spinner
-													android:id="@+id/spState"
-													android:layout_width="match_parent"
-													android:layout_height="@dimen/_26sdp"
-													android:imeOptions="actionNext"
-													android:background="@drawable/spinner_rect_background"
-													android:dropDownWidth="400px"
-													android:layout_marginEnd="@dimen/_1sdp"
-													android:layout_marginTop="@dimen/_4sdp"/>
-
-											</LinearLayout>
-
-											<LinearLayout
-												android:layout_width="0dp"
-												android:layout_height="wrap_content"
-												android:layout_weight="0.5"
-												android:orientation="vertical">
-												<TextView
-													android:layout_width="match_parent"
-													android:layout_height="wrap_content"
-													android:text="CITY"
-													android:gravity="center_horizontal"
-													style="@style/TextViewSmallCapsStyle"/>
-
-												<Spinner
-													android:id="@+id/spCity"
-													android:layout_width="match_parent"
-													android:layout_height="@dimen/_26sdp"
-													android:imeOptions="actionNext"
-													android:background="@drawable/spinner_rect_background"
-													android:dropDownWidth="400px"
-													android:layout_marginStart="@dimen/_2sdp"
-													android:layout_marginTop="@dimen/_4sdp"/>
-
-											</LinearLayout>
-
-										</LinearLayout>
-
-									</LinearLayout>
-
-								</LinearLayout>
-
-								<LinearLayout
-									android:layout_width="wrap_content"
-									android:layout_height="wrap_content"
-									android:layout_marginTop="@dimen/_10sdp"
-									android:orientation="horizontal">
-
-									<Button
-										android:id="@+id/btnNextKycDetail1"
-										android:layout_width="wrap_content"
-										android:layout_height="wrap_content"
-										android:backgroundTint="@color/material_blue_500"
-										android:text="@android:string/ok"
-										android:textColor="@android:color/white" />
-
-									<Button
-										android:id="@+id/btnPreviousKycDetail1"
-										android:layout_width="wrap_content"
-										android:layout_height="wrap_content"
-										android:layout_marginStart="@dimen/_6sdp"
-										android:text="@android:string/cancel" />
-
-									<Button
-										android:id="@+id/button_test_error"
-										android:layout_width="wrap_content"
-										android:layout_height="wrap_content"
-										android:layout_marginStart="@dimen/_6sdp"
-										android:backgroundTint="@color/material_red_500"
-										android:text="Set Step 1 Error Text"
-										android:textColor="@android:color/white" />
-
-								</LinearLayout>
-
-							</LinearLayout>
-
-						</moe.feng.common.stepperview.VerticalStepperItemView>
-
-						<moe.feng.common.stepperview.VerticalStepperItemView
-							android:id="@+id/stepperKyc2"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_6sdp"
-							app:step_index="3"
-							app:step_is_last="true"
-							app:step_summary="Last step"
-							app:step_summary_done="Last step. Done"
-							app:step_title="Course Details">
-
-							<LinearLayout
-								android:layout_width="match_parent"
-								android:layout_height="wrap_content"
-								android:orientation="vertical">
-
-								<LinearLayout
-									android:layout_width="match_parent"
-									android:layout_height="wrap_content"
-									android:layout_marginTop="@dimen/_5sdp"
-									android:orientation="vertical">
-
-									<LinearLayout
-										android:id="@+id/linNames"
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_below="@id/ivUser"
-										android:layout_marginTop="@dimen/_10sdp"
-										android:orientation="vertical">
-
-										<LinearLayout
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:orientation="horizontal"
-											android:background="@drawable/border_circular"
-											android:padding="@dimen/_4sdp"
-											android:gravity="center_vertical">
-
-											<AutoCompleteTextView
-												android:id="@+id/acInstituteName"
-												android:layout_width="0dp"
-												android:layout_height="wrap_content"
-												android:layout_weight="1"
-												android:padding="@dimen/_2sdp"
-												android:maxLines="1"
-												android:imeOptions="actionNext"
-												android:background="@android:color/transparent"
-												style="@style/TextViewTitle14Style" />
-
-											<View
-												android:layout_width="@dimen/_1sdp"
-												android:layout_height="match_parent"
-												android:background="@color/black_new"
-												android:layout_marginEnd="@dimen/_4sdp"
-												android:layout_marginStart="@dimen/_4sdp"/>
-
-											<ImageView
-												android:layout_width="@dimen/_20sdp"
-												android:layout_height="@dimen/_20sdp"
-												android:padding="@dimen/_3sdp"
-												android:tint="@color/darkblue"
-												app:srcCompat="@drawable/ic_search"/>
-
-										</LinearLayout>
-
-										<TextView
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:text="select institute loction"
-											android:textAllCaps="true"
-											android:layout_marginTop="@dimen/_15sdp"
-											android:gravity="start"
-											android:textColor="@color/darkblue"
-											style="@style/TextViewSmallCapsStyle" />
-
-										<Spinner
-											android:id="@+id/spInsttLocation"
-											android:layout_width="match_parent"
-											android:layout_height="@dimen/_26sdp"
-											android:background="@drawable/spinner_rect_background"
-											android:layout_marginEnd="@dimen/_1sdp"
-											android:layout_marginTop="@dimen/_4sdp"
-											android:paddingLeft="@dimen/_2sdp"
-											android:paddingRight="@dimen/_2sdp"
-											android:imeOptions="actionNext"
-											style="@style/TextViewTitle14Style"/>
-
-
-										<TextView
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:text="select course name"
-											android:textAllCaps="true"
-											android:layout_marginTop="@dimen/_8sdp"
-											android:gravity="start"
-											android:textColor="@color/darkblue"
-											style="@style/TextViewSmallCapsStyle" />
-
-										<Spinner
-											android:id="@+id/spCourse"
-											android:layout_width="match_parent"
-											android:layout_height="@dimen/_26sdp"
-											android:background="@drawable/spinner_rect_background"
-											android:layout_marginEnd="@dimen/_1sdp"
-											android:paddingLeft="@dimen/_2sdp"
-											android:paddingRight="@dimen/_2sdp"
-											android:layout_marginTop="@dimen/_4sdp"
-											android:imeOptions="actionNext"
-											style="@style/TextViewTitle14Style"/>
-
-										<LinearLayout
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:orientation="horizontal"
-											android:layout_marginTop="@dimen/_10sdp">
-
-											<LinearLayout
-												android:layout_width="0dp"
-												android:layout_height="wrap_content"
-												android:layout_weight="0.5"
-												android:layout_marginRight="@dimen/_2sdp"
-												android:orientation="vertical">
-
-												<TextView
-													android:layout_width="match_parent"
-													android:layout_height="wrap_content"
-													android:text="course fee"
-													android:textAllCaps="true"
-													android:layout_marginTop="@dimen/_8sdp"
-													android:gravity="start"
-													android:textColor="@color/darkblue"
-													style="@style/TextViewSmallCapsStyle" />
-
-												<TextView
-													android:id="@+id/txtCourseFee"
-													android:layout_width="match_parent"
-													android:layout_height="wrap_content"
-													android:background="@drawable/border_circular"
-													android:padding="@dimen/_8sdp"
-													android:inputType="number"
-													android:imeOptions="actionNext"
-													style="@style/TextViewTitle14Style"                                        android:maxLines="1"
-													android:hint="------------"
-													android:drawableStart="@drawable/ic_rupee_sign"/>
-
-											</LinearLayout>
-
-											<LinearLayout
-												android:layout_width="0dp"
-												android:layout_height="wrap_content"
-												android:layout_weight="0.5"
-												android:layout_marginEnd="@dimen/_2sdp"
-												android:orientation="vertical">
-
-												<TextView
-													android:layout_width="match_parent"
-													android:layout_height="wrap_content"
-													android:text="Loan Amount"
-													android:textAllCaps="true"
-													android:layout_marginTop="@dimen/_8sdp"
-													android:gravity="start"
-													android:textColor="@color/darkblue"
-													style="@style/TextViewSmallCapsStyle" />
-
-												<EditText
-													android:id="@+id/edtLoanAmt"
-													android:layout_width="match_parent"
-													android:layout_height="wrap_content"
-													android:background="@drawable/border_circular"
-													android:backgroundTint="@color/darkblue"
-													android:padding="@dimen/_8sdp"
-													android:maxLines="1"
-													android:inputType="number"
-													style="@style/EditTextStyle"
-													android:imeOptions="actionNext"
-													android:maxLength="8"
-													android:hint="------------"
-													android:textSize="14sp"
-													android:drawableStart="@drawable/ic_rupee_sign"/>
-
-											</LinearLayout>
-
-										</LinearLayout>
-
-									</LinearLayout>
-
-									<LinearLayout
-										android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										android:layout_marginTop="@dimen/_4sdp"
-										android:orientation="vertical">
-
-										<TextView
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:layout_gravity="center"
-											android:layout_weight="1.5"
-											android:paddingLeft="@dimen/_4sdp"
-											android:text="Profession of Applicant"
-											android:textColor="@color/colorPrimary" />
-
-										<Spinner
-											android:id="@+id/spProfessionBr"
-											android:layout_width="match_parent"
-											android:layout_height="wrap_content"
-											android:layout_marginRight="20dp"
-											android:layout_weight="1"
-											android:imeOptions="actionNext"
-											android:dropDownSelector="@color/colorPrimary"
-											android:focusable="true"
-											android:gravity="center"
-											android:theme="@style/ThemeOverlay.AppCompat.Light" />
-									</LinearLayout>
-								</LinearLayout>
-
-
-								<LinearLayout
-									android:layout_width="wrap_content"
-									android:layout_height="wrap_content"
-									android:layout_marginTop="@dimen/_10sdp"
-									android:orientation="horizontal">
-
-									<Button
-										android:id="@+id/btnNextKycDetail2"
-										android:layout_width="wrap_content"
-										android:layout_height="wrap_content"
-										android:backgroundTint="@color/material_blue_500"
-										android:text="@android:string/ok"
-										android:textColor="@android:color/white" />
-
-									<Button
-										android:id="@+id/btnPreviousKycDetail2"
-										android:layout_width="wrap_content"
-										android:layout_height="wrap_content"
-										android:layout_marginStart="@dimen/_6sdp"
-										android:text="@android:string/cancel" />
-
-								</LinearLayout>
-
-							</LinearLayout>
-
-						</moe.feng.common.stepperview.VerticalStepperItemView>
-
-						<Button
-							android:id="@+id/btn_change_point_color"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_margin="24dp"
-							android:text="Change point activated color" />
-
-						<Button
-							android:id="@+id/btn_change_done_icon"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginStart="24dp"
-							android:text="Change point done icon" />
-
-					</LinearLayout>
-
-				</ScrollView>
-
-			</LinearLayout>
-
-		</LinearLayout>
-	</ScrollView>
-
-
-</android.support.v4.widget.NestedScrollView>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_20sdp"
+                android:text="Borrower details"
+                android:textAllCaps="true"
+                android:textColor="@color/darkblue"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <!--personal-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_8sdp">
+
+                <TextView
+                    android:id="@+id/txtPersonalToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_user_check"
+                    android:drawableEnd="@drawable/ic_check_circle_green"
+                    android:text="   Personal Details"
+                    android:textColor="@color/darkblue" />
+
+                <LinearLayout
+                    android:id="@+id/linPersonalBlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/txtPersonalToggle"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_4sdp"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp">
+
+                    <View
+                        android:id="@+id/line1"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:background="@drawable/dashed_vertical_line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toEndOf="@id/line1"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/tilFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/first_name">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/tilMiddleName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/middle_name">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/tilLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/last_name">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:background="@drawable/border_circular"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_4sdp"
+                            android:weightSum="3.1">
+
+                            <LinearLayout
+                                android:id="@+id/linMale"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_3sdp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:tint="@color/textcolordark"
+                                    app:srcCompat="@drawable/ic_male" />
+
+                                <View
+                                    android:layout_width="@dimen/_1sdp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:background="@color/textcolordark" />
+
+                                <TextView
+                                    android:id="@+id/txtMale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:text="Male"
+                                    android:textColor="@color/textcolordark"
+                                    android:theme="@style/TextViewRadioStyle" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linFemale"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_weight="1.1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_3sdp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:tint="@color/textcolordark"
+                                    app:srcCompat="@drawable/ic_female" />
+
+                                <View
+                                    android:layout_width="@dimen/_1sdp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:background="@color/textcolordark" />
+
+                                <TextView
+                                    android:id="@+id/txtFemale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:text="Female"
+                                    android:textColor="@color/textcolordark"
+                                    android:theme="@style/TextViewRadioStyle" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linOther"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_3sdp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:tint="@color/textcolordark"
+                                    app:srcCompat="@drawable/ic_transgender" />
+
+                                <View
+                                    android:layout_width="@dimen/_1sdp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:background="@color/textcolordark" />
+
+                                <TextView
+                                    android:id="@+id/txtOther"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:text="Other"
+                                    android:textColor="@color/textcolordark"
+                                    android:theme="@style/TextViewRadioStyle" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:id="@+id/linDob"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_3sdp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:tint="@color/textcolordark"
+                                    app:srcCompat="@drawable/ic_birthday_cake" />
+
+                                <View
+                                    android:layout_width="@dimen/_1sdp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:background="@color/textcolordark" />
+
+                                <TextView
+                                    android:id="@+id/txtDob"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:maxLines="1"
+                                    android:text="01 Apr 1999"
+                                    android:textColor="@color/textcolordark"
+                                    android:theme="@style/TextViewRadioStyle" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linMaritalStatus"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_margin="@dimen/_2sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/border_circular"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_3sdp">
+
+                                <Switch
+                                    android:id="@+id/switchMaritalStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:checked="true"
+                                    android:imeOptions="actionNext"
+                                    android:theme="@style/SCBSwitch" />
+
+                                <View
+                                    android:layout_width="@dimen/_1sdp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:background="@color/textcolordark" />
+
+                                <TextView
+                                    android:id="@+id/txtMaritalStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:text="Married"
+                                    android:textColor="@color/textcolordark"
+                                    android:theme="@style/TextViewRadioStyle" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/tilEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="e-Mail ID"
+                                android:imeOptions="actionNext"
+                                android:inputType="textEmailAddress" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/tilMobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Mobile Number"
+                                android:imeOptions="actionNext"
+                                android:inputType="phone"
+                                android:maxLength="10" />
+                        </android.support.design.widget.TextInputLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!--Identity-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_8sdp">
+
+                <TextView
+                    android:id="@+id/txtIdentityToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_user_check"
+                    android:drawableEnd="@drawable/ic_check_circle_green"
+                    android:text="   Identity Details"
+                    android:textColor="@color/darkblue" />
+
+                <LinearLayout
+                    android:id="@+id/relIdentityBlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_4sdp"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp">
+
+                    <View
+                        android:id="@+id/line2"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:background="@drawable/dashed_vertical_line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/line2"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:id="@+id/linAadhaar"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_circular"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_3sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginLeft="@dimen/_7sdp"
+                                android:tint="@color/textcolordark"
+                                app:srcCompat="@drawable/ic_id_card" />
+
+                            <View
+                                android:layout_width="@dimen/_1sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_marginEnd="@dimen/_6sdp"
+                                android:background="@color/textcolordark" />
+
+                            <EditText
+                                android:id="@+id/edtAadhaar"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:hint="Aadhar number"
+                                android:maxLines="1"
+                                android:padding="@dimen/_3sdp"
+                                android:text="" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linPAN"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_circular"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_3sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginLeft="@dimen/_7sdp"
+                                android:tint="@color/textcolordark"
+                                app:srcCompat="@drawable/ic_id_card" />
+
+                            <View
+                                android:layout_width="@dimen/_1sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_marginEnd="@dimen/_6sdp"
+                                android:background="@color/textcolordark" />
+
+                            <EditText
+                                android:id="@+id/edtPAN"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:hint="PAN Number"
+                                android:maxLines="1"
+                                android:padding="@dimen/_3sdp"
+                                android:text="" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:text="* Address (As Per your aadhar card)"
+                            android:textAllCaps="true"
+                            android:textColor="@color/new_red"
+                            android:textSize="12sp" />
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/tilFlat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="FLAT NUMBER, BUILDING, SOCIETY NAME" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/tilStreet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:theme="@style/EditTextStyle"
+                            app:hintTextAppearance="@style/CustomTextAppearance">
+
+                            <EditText
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="STREET NAME, LOCALITY, LANDMARK" />
+                        </android.support.design.widget.TextInputLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:orientation="horizontal">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:id="@+id/tilPincode"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:layout_weight="0.5"
+                                android:theme="@style/EditTextStyle"
+                                app:hintTextAppearance="@style/CustomTextAppearance">
+
+                                <EditText
+                                    style="@style/EditTextStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="PIN CODE"
+                                    android:inputType="number" />
+                            </android.support.design.widget.TextInputLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/TextViewSmallCapsStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="COUNTRY" />
+
+                                <Spinner
+                                    android:id="@+id/spCountry"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_26sdp"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:background="@drawable/spinner_rect_background"
+                                    android:dropDownWidth="400px" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/TextViewSmallCapsStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="STATE" />
+
+                                <Spinner
+                                    android:id="@+id/spState"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_26sdp"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_1sdp"
+                                    android:background="@drawable/spinner_rect_background"
+                                    android:dropDownWidth="400px" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/TextViewSmallCapsStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="CITY" />
+
+                                <Spinner
+                                    android:id="@+id/spCity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_26sdp"
+                                    android:layout_marginStart="@dimen/_2sdp"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:background="@drawable/spinner_rect_background"
+                                    android:dropDownWidth="400px" />
+
+                            </LinearLayout>
+
+                            <!--<android.support.design.widget.TextInputLayout-->
+                            <!--android:id="@+id/tilCity"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="0.5"-->
+                            <!--android:layout_marginTop="@dimen/_6sdp"-->
+                            <!--android:layout_marginStart="@dimen/_2sdp"-->
+                            <!--android:theme="@style/EditTextStyle"-->
+                            <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+                            <!--<EditText-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:hint="CITY"-->
+                            <!--android:theme="@style/EditTextStyle" />-->
+                            <!--</android.support.design.widget.TextInputLayout>-->
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Course-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_8sdp">
+
+                <TextView
+                    android:id="@+id/txtCourseToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_user_check"
+                    android:drawableEnd="@drawable/ic_check_circle_green"
+                    android:text="   Course Details"
+                    android:textColor="@color/darkblue" />
+
+                <LinearLayout
+                    android:id="@+id/relCourseBlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_4sdp"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp">
+
+                    <View
+                        android:id="@+id/line3"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:background="@drawable/dashed_vertical_line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:text="Complete Your"
+                            android:textColor="@color/textcolordark"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Course Details"
+                            android:textColor="@color/textcolordark"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:background="@drawable/border_circular"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_4sdp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/acInstituteName"
+                                style="@style/TextViewTitle14Style"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:hint="Search Your Institute Here"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:padding="@dimen/_2sdp" />
+
+                            <View
+                                android:layout_width="@dimen/_1sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:background="@color/black_new" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:padding="@dimen/_3sdp"
+                                android:tint="@color/darkblue"
+                                app:srcCompat="@drawable/ic_search" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/TextViewSmallCapsStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:gravity="start"
+                            android:text="select institute loction"
+                            android:textAllCaps="true"
+                            android:textColor="@color/darkblue" />
+
+                        <Spinner
+                            android:id="@+id/spInsttLocation"
+                            style="@style/TextViewTitle14Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_26sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:layout_marginEnd="@dimen/_1sdp"
+                            android:background="@drawable/spinner_rect_background"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/_2sdp"
+                            android:paddingRight="@dimen/_2sdp" />
+
+
+                        <TextView
+                            style="@style/TextViewSmallCapsStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:gravity="start"
+                            android:text="select course name"
+                            android:textAllCaps="true"
+                            android:textColor="@color/darkblue" />
+
+                        <Spinner
+                            android:id="@+id/spCourse"
+                            style="@style/TextViewTitle14Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_26sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:layout_marginEnd="@dimen/_1sdp"
+                            android:background="@drawable/spinner_rect_background"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/_2sdp"
+                            android:paddingRight="@dimen/_2sdp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/_2sdp"
+                                android:layout_weight="0.5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/TextViewSmallCapsStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_8sdp"
+                                    android:gravity="start"
+                                    android:text="course fee"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/darkblue" />
+
+                                <TextView
+                                    android:id="@+id/txtCourseFee"
+                                    style="@style/TextViewTitle14Style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/border_circular"
+                                    android:drawableStart="@drawable/ic_rupee_sign"
+                                    android:hint="------------"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLines="1"
+                                    android:padding="@dimen/_8sdp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:layout_weight="0.5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/TextViewSmallCapsStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_8sdp"
+                                    android:gravity="start"
+                                    android:text="Loan Amount"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/darkblue" />
+
+                                <EditText
+                                    android:id="@+id/edtLoanAmt"
+                                    style="@style/EditTextStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/border_circular"
+                                    android:backgroundTint="@color/darkblue"
+                                    android:drawableStart="@drawable/ic_rupee_sign"
+                                    android:hint="------------"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLength="8"
+                                    android:maxLines="1"
+                                    android:padding="@dimen/_8sdp"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabEdit"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="@dimen/_4sdp"
+        android:layout_margin="@dimen/_30sdp"
+        app:srcCompat="@drawable/ic_edit"/>
+</RelativeLayout>
+
+
+    <!--<android.support.v4.widget.NestedScrollView        xmlns:android="http://schemas.android.com/apk/res/android"        xmlns:app="http://schemas.android.com/apk/res-auto"        android:layout_width="match_parent"        android:visibility="gone"        android:layout_height="match_parent">-->
+
+    <!--<ScrollView        android:layout_width="match_parent"        android:layout_height="match_parent"        android:layout_marginBottom="@dimen/_10sdp">-->
+
+    <!--<LinearLayout            android:layout_width="match_parent"            android:layout_height="match_parent"            android:orientation="vertical">-->
+
+    <!--<RelativeLayout-->                <!--android:id="@+id/relborrower"-->                <!--android:layout_width="match_parent"-->                <!--android:layout_height="wrap_content"-->                <!--android:padding="10dp">-->
+
+    <!--<TextView-->                    <!--android:layout_width="wrap_content"-->                    <!--android:layout_height="wrap_content"-->                    <!--android:layout_alignParentStart="true"-->                    <!--android:text="Borrower"-->                    <!--android:textColor="@color/colorSecondary"-->                    <!--android:textSize="20sp"-->                    <!--android:textStyle="bold" />-->
+
+    <!--<TextView-->                    <!--android:id="@+id/txtBorrowerArrowKey"-->                    <!--android:layout_width="wrap_content"-->                    <!--android:layout_height="wrap_content"-->                    <!--android:layout_alignParentEnd="true"-->                    <!--android:text="@string/up"-->                    <!--android:textColor="@color/colorRed"-->                    <!--android:textSize="20sp" />-->
+
+    <!--</RelativeLayout>-->
+
+    <!--<LinearLayout-->                <!--android:id="@+id/linBorrowerForm"-->                <!--android:layout_width="match_parent"-->                <!--android:layout_height="wrap_content"-->                <!--android:orientation="vertical"-->                <!--android:visibility="visible">-->
+
+    <!--<ScrollView-->                    <!--android:layout_width="match_parent"-->                    <!--android:layout_height="match_parent">-->
+
+    <!--<LinearLayout-->                        <!--android:layout_width="match_parent"-->                        <!--android:layout_height="match_parent"-->                        <!--android:animateLayoutChanges="true"-->                        <!--android:orientation="vertical">-->
+
+    <!--<moe.feng.common.stepperview.VerticalStepperItemView-->                            <!--android:id="@+id/stepperKyc0"-->                            <!--android:layout_width="match_parent"-->                            <!--android:layout_height="wrap_content"-->                            <!--android:layout_marginTop="@dimen/_10sdp"-->                            <!--app:step_index="1"-->                            <!--app:step_state="selected"-->                            <!--app:step_summary="Summarized if needed"-->                            <!--app:step_summary_done="Summarized if needed. Done"-->                            <!--app:step_title="Personal Details">-->
+
+    <!--<LinearLayout-->                                <!--android:layout_width="match_parent"-->                                <!--android:layout_height="wrap_content"-->                                <!--android:orientation="vertical">-->
+
+    <!--<LinearLayout-->                                    <!--android:layout_width="match_parent"-->                                    <!--android:layout_height="wrap_content"-->                                    <!--android:layout_marginTop="@dimen/_7sdp"-->                                    <!--android:orientation="vertical">-->
+
+    <!--<android.support.design.widget.TextInputLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginTop="@dimen/_4sdp"-->                                        <!--android:layout_marginBottom="@dimen/_6sdp"-->                                        <!--android:theme="@style/EditTextStyle"-->                                        <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+    <!--<EditText-->                                            <!--android:id="@+id/edtFnameBr"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:hint="@string/first_name"-->                                            <!--android:imeOptions="actionNext"-->                                            <!--android:inputType="textCapSentences"-->                                            <!--style="@style/EditTextStyle" />-->                                    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginTop="@dimen/_4sdp"-->                                        <!--android:layout_marginBottom="@dimen/_6sdp"-->                                        <!--android:theme="@style/EditTextStyle"-->                                        <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+    <!--<EditText-->                                            <!--android:id="@+id/edtMnameBr"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:hint="@string/middle_name"-->                                            <!--android:imeOptions="actionNext"-->                                            <!--android:inputType="textCapSentences"-->                                            <!--style="@style/EditTextStyle" />-->                                    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginTop="@dimen/_4sdp"-->                                        <!--android:layout_marginBottom="@dimen/_6sdp"-->                                        <!--android:theme="@style/EditTextStyle"-->                                        <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+    <!--<EditText-->                                            <!--android:id="@+id/edtLnameBr"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:hint="@string/last_name"-->                                            <!--android:imeOptions="actionNext"-->                                            <!--android:inputType="textCapSentences"-->                                            <!--android:theme="@style/EditTextStyle" />-->                                    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<TextView-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginTop="@dimen/_8sdp"-->                                        <!--android:text="@string/select_your_gender"-->                                        <!--android:textAllCaps="true"-->                                        <!--android:textColor="@color/textcolordark"-->                                        <!--android:theme="@style/TextViewTitleStyle"-->                                        <!--android:textSize="12sp" />-->
+
+    <!--<LinearLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:orientation="horizontal"-->                                        <!--android:weightSum="3.1">-->
+
+    <!--<LinearLayout-->                                            <!--android:id="@+id/linMale"-->                                            <!--android:layout_width="0dp"-->                                            <!--android:layout_height="@dimen/_25sdp"-->                                            <!--android:layout_margin="@dimen/_2sdp"-->                                            <!--android:layout_weight="1"-->                                            <!--android:background="@drawable/border_circular"-->                                            <!--android:gravity="center_vertical"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:padding="@dimen/_3sdp">-->
+
+    <!--<ImageView-->                                                <!--android:layout_width="@dimen/_15sdp"-->                                                <!--android:layout_height="@dimen/_15sdp"-->                                                <!--android:tint="@color/textcolordark"-->                                                <!--app:srcCompat="@drawable/ic_male" />-->
+
+    <!--<View-->                                                <!--android:layout_width="@dimen/_1sdp"-->                                                <!--android:layout_height="match_parent"-->                                                <!--android:layout_marginStart="@dimen/_4sdp"-->                                                <!--android:layout_marginEnd="@dimen/_4sdp"-->                                                <!--android:background="@color/textcolordark" />-->
+
+    <!--<TextView-->                                                <!--android:id="@+id/txtMale"-->                                                <!--android:layout_width="wrap_content"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:maxLines="1"-->                                                <!--android:text="Male"-->                                                <!--android:theme="@style/TextViewRadioStyle"-->                                                <!--android:textColor="@color/textcolordark" />-->                                        <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                            <!--android:id="@+id/linFemale"-->                                            <!--android:layout_width="0dp"-->                                            <!--android:layout_height="@dimen/_25sdp"-->                                            <!--android:layout_margin="@dimen/_2sdp"-->                                            <!--android:layout_weight="1.1"-->                                            <!--android:background="@drawable/border_circular"-->                                            <!--android:gravity="center_vertical"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:padding="@dimen/_3sdp">-->
+
+    <!--<ImageView-->                                                <!--android:layout_width="@dimen/_15sdp"-->                                                <!--android:layout_height="@dimen/_15sdp"-->                                                <!--android:tint="@color/textcolordark"-->                                                <!--app:srcCompat="@drawable/ic_female" />-->
+
+    <!--<View-->                                                <!--android:layout_width="@dimen/_1sdp"-->                                                <!--android:layout_height="match_parent"-->                                                <!--android:layout_marginStart="@dimen/_4sdp"-->                                                <!--android:layout_marginEnd="@dimen/_4sdp"-->                                                <!--android:background="@color/textcolordark" />-->
+
+    <!--<TextView-->                                                <!--android:id="@+id/txtFemale"-->                                                <!--android:layout_width="wrap_content"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:maxLines="1"-->                                                <!--android:text="Female"-->                                                <!--android:theme="@style/TextViewRadioStyle"-->                                                <!--android:textColor="@color/textcolordark" />-->                                        <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                            <!--android:id="@+id/linOther"-->                                            <!--android:layout_width="0dp"-->                                            <!--android:layout_height="@dimen/_25sdp"-->                                            <!--android:layout_margin="@dimen/_2sdp"-->                                            <!--android:layout_weight="1"-->                                            <!--android:background="@drawable/border_circular"-->                                            <!--android:gravity="center_vertical"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:padding="@dimen/_3sdp">-->
+
+    <!--<ImageView-->                                                <!--android:layout_width="@dimen/_15sdp"-->                                                <!--android:layout_height="@dimen/_15sdp"-->                                                <!--android:tint="@color/textcolordark"-->                                                <!--app:srcCompat="@drawable/ic_transgender" />-->
+
+    <!--<View-->                                                <!--android:layout_width="@dimen/_1sdp"-->                                                <!--android:layout_height="match_parent"-->                                                <!--android:layout_marginStart="@dimen/_4sdp"-->                                                <!--android:layout_marginEnd="@dimen/_4sdp"-->                                                <!--android:background="@color/textcolordark" />-->
+
+    <!--<TextView-->                                                <!--android:id="@+id/txtOther"-->                                                <!--android:layout_width="wrap_content"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:maxLines="1"-->                                                <!--android:text="Other"-->                                                <!--android:theme="@style/TextViewRadioStyle"-->                                                <!--android:textColor="@color/textcolordark" />-->                                        <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="match_parent"-->                                        <!--android:layout_marginTop="@dimen/_8sdp"-->                                        <!--android:orientation="horizontal"-->                                        <!--android:weightSum="2">-->
+
+    <!--<LinearLayout-->                                            <!--android:id="@+id/linDob"-->                                            <!--android:layout_width="0dp"-->                                            <!--android:layout_height="@dimen/_25sdp"-->                                            <!--android:layout_margin="@dimen/_2sdp"-->                                            <!--android:layout_weight="1"-->                                            <!--android:background="@drawable/border_circular"-->                                            <!--android:gravity="center_vertical"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:padding="@dimen/_3sdp">-->
+
+    <!--<ImageView-->                                                <!--android:layout_width="@dimen/_15sdp"-->                                                <!--android:layout_height="@dimen/_15sdp"-->                                                <!--android:tint="@color/textcolordark"-->                                                <!--android:layout_marginLeft="@dimen/_5sdp"-->                                                <!--app:srcCompat="@drawable/ic_birthday_cake" />-->
+
+    <!--<View-->                                                <!--android:layout_width="@dimen/_1sdp"-->                                                <!--android:layout_height="match_parent"-->                                                <!--android:layout_marginStart="@dimen/_4sdp"-->                                                <!--android:layout_marginEnd="@dimen/_4sdp"-->                                                <!--android:background="@color/textcolordark" />-->
+
+    <!--<TextView-->                                                <!--android:id="@+id/txtDob"-->                                                <!--android:layout_width="wrap_content"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:maxLines="1"-->                                                <!--android:imeOptions="actionNext"-->                                                <!--android:text="01 Apr 1999"-->                                                <!--android:theme="@style/TextViewRadioStyle"-->                                                <!--android:textColor="@color/textcolordark" />-->                                        <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                            <!--android:id="@+id/linMaritalStatus"-->                                            <!--android:layout_width="0dp"-->                                            <!--android:layout_height="@dimen/_25sdp"-->                                            <!--android:layout_margin="@dimen/_2sdp"-->                                            <!--android:layout_weight="1"-->                                            <!--android:background="@drawable/border_circular"-->                                            <!--android:gravity="center_vertical"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:padding="@dimen/_3sdp">-->
+
+    <!--<Switch-->                                                <!--android:id="@+id/switchMaritalStatus"-->                                                <!--android:layout_width="wrap_content"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:theme="@style/SCBSwitch"-->                                                <!--android:imeOptions="actionNext"-->                                                <!--android:layout_marginLeft="@dimen/_5sdp"-->                                                <!--android:checked="true" />-->
+
+    <!--<View-->                                                <!--android:layout_width="@dimen/_1sdp"-->                                                <!--android:layout_height="match_parent"-->                                                <!--android:layout_marginStart="@dimen/_4sdp"-->                                                <!--android:layout_marginEnd="@dimen/_4sdp"-->                                                <!--android:background="@color/textcolordark" />-->
+
+    <!--<TextView-->                                                <!--android:id="@+id/txtMaritalStatus"-->                                                <!--android:layout_width="wrap_content"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:maxLines="1"-->                                                <!--android:text="Married"-->                                                <!--android:theme="@style/TextViewRadioStyle"-->                                                <!--android:textColor="@color/textcolordark" />-->                                        <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginTop="@dimen/_4sdp"-->                                        <!--android:theme="@style/EditTextStyle"-->                                        <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+    <!--<EditText-->                                            <!--android:id="@+id/edtEmailIdBr"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:hint="e-Mail ID"-->                                            <!--android:imeOptions="actionNext"-->                                            <!--android:inputType="textEmailAddress"-->                                            <!--style="@style/EditTextStyle" />-->                                    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginTop="@dimen/_4sdp"-->                                        <!--android:theme="@style/EditTextStyle"-->                                        <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+    <!--<EditText-->                                            <!--android:id="@+id/edtMobileNoBr"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:hint="Mobile Number"-->                                            <!--android:imeOptions="actionNext"-->                                            <!--android:inputType="phone"-->                                            <!--android:maxLength="10"-->                                            <!--style="@style/EditTextStyle" />-->                                    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                    <!--android:layout_width="wrap_content"-->                                    <!--android:layout_height="wrap_content"-->                                    <!--android:layout_marginTop="@dimen/_10sdp"-->                                    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->                                        <!--android:id="@+id/btnNextKycDetail0"-->                                        <!--android:layout_width="wrap_content"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:backgroundTint="@color/material_blue_500"-->                                        <!--android:text="@android:string/ok"-->                                        <!--android:textColor="@android:color/white" />-->
+
+    <!--<Button-->                                        <!--android:layout_width="wrap_content"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginStart="@dimen/_6sdp"-->                                        <!--android:text="@android:string/cancel" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</moe.feng.common.stepperview.VerticalStepperItemView>-->
+
+    <!--<moe.feng.common.stepperview.VerticalStepperItemView-->                            <!--android:id="@+id/stepperKyc1"-->                            <!--android:layout_width="match_parent"-->                            <!--android:layout_height="wrap_content"-->                            <!--android:layout_marginTop="@dimen/_6sdp"-->                            <!--app:step_index="2"-->                            <!--app:step_title="Identity Details">-->
+
+    <!--<LinearLayout-->                                <!--android:layout_width="match_parent"-->                                <!--android:layout_height="wrap_content"-->                                <!--android:orientation="vertical">-->
+
+    <!--<LinearLayout-->                                    <!--android:layout_width="match_parent"-->                                    <!--android:layout_height="wrap_content"-->                                    <!--android:layout_marginTop="@dimen/_8sdp"-->                                    <!--android:orientation="vertical"-->                                    <!--android:paddingLeft="@dimen/_4sdp">-->
+
+    <!--<LinearLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginTop="@dimen/_4sdp"-->                                        <!--android:orientation="vertical">-->
+
+    <!--<LinearLayout-->                                            <!--android:id="@+id/linAadhaar"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="@dimen/_25sdp"-->                                            <!--android:layout_margin="@dimen/_2sdp"-->                                            <!--android:layout_weight="1"-->                                            <!--android:background="@drawable/border_circular"-->                                            <!--android:gravity="center_vertical"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:padding="@dimen/_3sdp">-->
+
+    <!--<ImageView-->                                                <!--android:layout_width="@dimen/_15sdp"-->                                                <!--android:layout_height="@dimen/_15sdp"-->                                                <!--android:tint="@color/textcolordark"-->                                                <!--android:layout_marginLeft="@dimen/_7sdp"-->                                                <!--app:srcCompat="@drawable/ic_id_card" />-->
+
+    <!--<View-->                                                <!--android:layout_width="@dimen/_1sdp"-->                                                <!--android:layout_height="match_parent"-->                                                <!--android:layout_marginStart="@dimen/_6sdp"-->                                                <!--android:layout_marginEnd="@dimen/_6sdp"-->                                                <!--android:background="@color/textcolordark" />-->
+
+    <!--<EditText-->                                                <!--android:id="@+id/edtAadhaar"-->                                                <!--android:layout_width="match_parent"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:maxLines="1"-->                                                <!--android:text="616183839494"-->                                                <!--android:imeOptions="actionNext"-->                                                <!--android:inputType="number"-->                                                <!--style="@style/EditTextStyle" />-->                                        <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                            <!--android:id="@+id/linPAN"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="@dimen/_25sdp"-->                                            <!--android:layout_margin="@dimen/_2sdp"-->                                            <!--android:layout_weight="1"-->                                            <!--android:layout_marginTop="@dimen/_10sdp"-->                                            <!--android:background="@drawable/border_circular"-->                                            <!--android:gravity="center_vertical"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:padding="@dimen/_3sdp">-->
+
+    <!--<ImageView-->                                                <!--android:layout_width="@dimen/_15sdp"-->                                                <!--android:layout_height="@dimen/_15sdp"-->                                                <!--android:tint="@color/textcolordark"-->                                                <!--android:layout_marginLeft="@dimen/_7sdp"-->                                                <!--app:srcCompat="@drawable/ic_id_card" />-->
+
+    <!--<View-->                                                <!--android:layout_width="@dimen/_1sdp"-->                                                <!--android:layout_height="match_parent"-->                                                <!--android:layout_marginStart="@dimen/_6sdp"-->                                                <!--android:layout_marginEnd="@dimen/_6sdp"-->                                                <!--android:background="@color/textcolordark" />-->
+
+    <!--<EditText-->                                                <!--android:id="@+id/edtPAN"-->                                                <!--android:layout_width="match_parent"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:maxLines="1"-->                                                <!--android:text="CDFUS9320F"-->                                                <!--android:imeOptions="actionNext"-->                                                <!--android:inputType="number"-->                                                <!--style="@style/EditTextStyle" />-->                                        <!--</LinearLayout>-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_below="@id/txtcurrentAddress"-->                                        <!--android:text="@string/as_per_aadhar"-->                                        <!--android:layout_marginTop="@dimen/_10sdp"-->                                        <!--android:textColor="@color/new_red"-->                                        <!--style="@style/TextViewSmallCapsStyle"/>-->
+
+    <!--<LinearLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_below="@id/ivUser"-->                                        <!--android:layout_marginTop="@dimen/_5sdp"-->                                        <!--android:orientation="vertical">-->
+
+    <!--<android.support.design.widget.TextInputLayout-->                                            <!--android:id="@+id/tilFlat"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:layout_marginTop="@dimen/_6sdp"-->                                            <!--android:theme="@style/EditTextStyle"-->                                            <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+    <!--<EditText-->                                                <!--android:layout_width="match_parent"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:imeOptions="actionNext"-->                                                <!--android:maxLines="2"-->                                                <!--android:hint="Flat No, Building, Society Name"-->                                                <!--style="@style/EditTextStyle" />-->                                        <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->                                            <!--android:id="@+id/tilStreet"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:layout_marginTop="@dimen/_6sdp"-->                                            <!--android:theme="@style/EditTextStyle"-->                                            <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+    <!--<EditText-->                                                <!--android:layout_width="match_parent"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:maxLines="2"-->                                                <!--android:imeOptions="actionNext"-->                                                <!--android:hint="Street Name, Locality, Landmark"-->                                                <!--style="@style/EditTextStyle" />-->                                        <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<LinearLayout-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:layout_marginTop="@dimen/_6sdp"-->                                            <!--android:orientation="horizontal">-->
+
+    <!--<android.support.design.widget.TextInputLayout-->                                                <!--android:id="@+id/tilPincode"-->                                                <!--android:layout_width="0dp"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:layout_weight="0.5"-->                                                <!--android:layout_marginTop="@dimen/_6sdp"-->                                                <!--android:theme="@style/EditTextStyle"-->                                                <!--app:hintTextAppearance="@style/CustomTextAppearance">-->
+
+    <!--<EditText-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="wrap_content"-->                                                    <!--android:hint="PinCode"-->                                                    <!--android:imeOptions="actionNext"-->                                                    <!--android:inputType="number"-->                                                    <!--style="@style/EditTextStyle" />-->                                            <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<LinearLayout-->                                                <!--android:layout_width="0dp"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:layout_weight="0.5"-->                                                <!--android:orientation="vertical">-->
+
+    <!--<TextView-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="wrap_content"-->                                                    <!--android:gravity="center_horizontal"-->                                                    <!--android:text="COUNTRY"-->                                                    <!--style="@style/TextViewSmallCapsStyle"/>-->
+
+    <!--<Spinner-->                                                    <!--android:id="@+id/spCountry"-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="@dimen/_26sdp"-->                                                    <!--android:imeOptions="actionNext"-->                                                    <!--android:background="@drawable/spinner_rect_background"-->                                                    <!--android:dropDownWidth="400px"-->                                                    <!--android:layout_marginTop="@dimen/_4sdp" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:layout_marginTop="@dimen/_6sdp"-->                                            <!--android:orientation="horizontal">-->
+
+    <!--<LinearLayout-->                                                <!--android:layout_width="0dp"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:layout_weight="0.5"-->                                                <!--android:orientation="vertical">-->                                                <!--<TextView-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="wrap_content"-->                                                    <!--android:text="STATE"-->                                                    <!--android:gravity="center_horizontal"-->                                                    <!--style="@style/TextViewSmallCapsStyle"/>-->
+
+    <!--<Spinner-->                                                    <!--android:id="@+id/spState"-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="@dimen/_26sdp"-->                                                    <!--android:imeOptions="actionNext"-->                                                    <!--android:background="@drawable/spinner_rect_background"-->                                                    <!--android:dropDownWidth="400px"-->                                                    <!--android:layout_marginEnd="@dimen/_1sdp"-->                                                    <!--android:layout_marginTop="@dimen/_4sdp"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                                <!--android:layout_width="0dp"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:layout_weight="0.5"-->                                                <!--android:orientation="vertical">-->                                                <!--<TextView-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="wrap_content"-->                                                    <!--android:text="CITY"-->                                                    <!--android:gravity="center_horizontal"-->                                                    <!--style="@style/TextViewSmallCapsStyle"/>-->
+
+    <!--<Spinner-->                                                    <!--android:id="@+id/spCity"-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="@dimen/_26sdp"-->                                                    <!--android:imeOptions="actionNext"-->                                                    <!--android:background="@drawable/spinner_rect_background"-->                                                    <!--android:dropDownWidth="400px"-->                                                    <!--android:layout_marginStart="@dimen/_2sdp"-->                                                    <!--android:layout_marginTop="@dimen/_4sdp"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                    <!--android:layout_width="wrap_content"-->                                    <!--android:layout_height="wrap_content"-->                                    <!--android:layout_marginTop="@dimen/_10sdp"-->                                    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->                                        <!--android:id="@+id/btnNextKycDetail1"-->                                        <!--android:layout_width="wrap_content"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:backgroundTint="@color/material_blue_500"-->                                        <!--android:text="@android:string/ok"-->                                        <!--android:textColor="@android:color/white" />-->
+
+    <!--<Button-->                                        <!--android:id="@+id/btnPreviousKycDetail1"-->                                        <!--android:layout_width="wrap_content"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginStart="@dimen/_6sdp"-->                                        <!--android:text="@android:string/cancel" />-->
+
+    <!--<Button-->                                        <!--android:id="@+id/button_test_error"-->                                        <!--android:layout_width="wrap_content"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginStart="@dimen/_6sdp"-->                                        <!--android:backgroundTint="@color/material_red_500"-->                                        <!--android:text="Set Step 1 Error Text"-->                                        <!--android:textColor="@android:color/white" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</moe.feng.common.stepperview.VerticalStepperItemView>-->
+
+    <!--<moe.feng.common.stepperview.VerticalStepperItemView-->                            <!--android:id="@+id/stepperKyc2"-->                            <!--android:layout_width="match_parent"-->                            <!--android:layout_height="wrap_content"-->                            <!--android:layout_marginTop="@dimen/_6sdp"-->                            <!--app:step_index="3"-->                            <!--app:step_is_last="true"-->                            <!--app:step_summary="Last step"-->                            <!--app:step_summary_done="Last step. Done"-->                            <!--app:step_title="Course Details">-->
+
+    <!--<LinearLayout-->                                <!--android:layout_width="match_parent"-->                                <!--android:layout_height="wrap_content"-->                                <!--android:orientation="vertical">-->
+
+    <!--<LinearLayout-->                                    <!--android:layout_width="match_parent"-->                                    <!--android:layout_height="wrap_content"-->                                    <!--android:layout_marginTop="@dimen/_5sdp"-->                                    <!--android:orientation="vertical">-->
+
+    <!--<LinearLayout-->                                        <!--android:id="@+id/linNames"-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_below="@id/ivUser"-->                                        <!--android:layout_marginTop="@dimen/_10sdp"-->                                        <!--android:orientation="vertical">-->
+
+    <!--<LinearLayout-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:background="@drawable/border_circular"-->                                            <!--android:padding="@dimen/_4sdp"-->                                            <!--android:gravity="center_vertical">-->
+
+    <!--<AutoCompleteTextView-->                                                <!--android:id="@+id/acInstituteName"-->                                                <!--android:layout_width="0dp"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:layout_weight="1"-->                                                <!--android:padding="@dimen/_2sdp"-->                                                <!--android:maxLines="1"-->                                                <!--android:imeOptions="actionNext"-->                                                <!--android:background="@android:color/transparent"-->                                                <!--style="@style/TextViewTitle14Style" />-->
+
+    <!--<View-->                                                <!--android:layout_width="@dimen/_1sdp"-->                                                <!--android:layout_height="match_parent"-->                                                <!--android:background="@color/black_new"-->                                                <!--android:layout_marginEnd="@dimen/_4sdp"-->                                                <!--android:layout_marginStart="@dimen/_4sdp"/>-->
+
+    <!--<ImageView-->                                                <!--android:layout_width="@dimen/_20sdp"-->                                                <!--android:layout_height="@dimen/_20sdp"-->                                                <!--android:padding="@dimen/_3sdp"-->                                                <!--android:tint="@color/darkblue"-->                                                <!--app:srcCompat="@drawable/ic_search"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:text="select institute loction"-->                                            <!--android:textAllCaps="true"-->                                            <!--android:layout_marginTop="@dimen/_15sdp"-->                                            <!--android:gravity="start"-->                                            <!--android:textColor="@color/darkblue"-->                                            <!--style="@style/TextViewSmallCapsStyle" />-->
+
+    <!--<Spinner-->                                            <!--android:id="@+id/spInsttLocation"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="@dimen/_26sdp"-->                                            <!--android:background="@drawable/spinner_rect_background"-->                                            <!--android:layout_marginEnd="@dimen/_1sdp"-->                                            <!--android:layout_marginTop="@dimen/_4sdp"-->                                            <!--android:paddingLeft="@dimen/_2sdp"-->                                            <!--android:paddingRight="@dimen/_2sdp"-->                                            <!--android:imeOptions="actionNext"-->                                            <!--style="@style/TextViewTitle14Style"/>-->
+
+
+    <!--<TextView-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:text="select course name"-->                                            <!--android:textAllCaps="true"-->                                            <!--android:layout_marginTop="@dimen/_8sdp"-->                                            <!--android:gravity="start"-->                                            <!--android:textColor="@color/darkblue"-->                                            <!--style="@style/TextViewSmallCapsStyle" />-->
+
+    <!--<Spinner-->                                            <!--android:id="@+id/spCourse"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="@dimen/_26sdp"-->                                            <!--android:background="@drawable/spinner_rect_background"-->                                            <!--android:layout_marginEnd="@dimen/_1sdp"-->                                            <!--android:paddingLeft="@dimen/_2sdp"-->                                            <!--android:paddingRight="@dimen/_2sdp"-->                                            <!--android:layout_marginTop="@dimen/_4sdp"-->                                            <!--android:imeOptions="actionNext"-->                                            <!--style="@style/TextViewTitle14Style"/>-->
+
+    <!--<LinearLayout-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:orientation="horizontal"-->                                            <!--android:layout_marginTop="@dimen/_10sdp">-->
+
+    <!--<LinearLayout-->                                                <!--android:layout_width="0dp"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:layout_weight="0.5"-->                                                <!--android:layout_marginRight="@dimen/_2sdp"-->                                                <!--android:orientation="vertical">-->
+
+    <!--<TextView-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="wrap_content"-->                                                    <!--android:text="course fee"-->                                                    <!--android:textAllCaps="true"-->                                                    <!--android:layout_marginTop="@dimen/_8sdp"-->                                                    <!--android:gravity="start"-->                                                    <!--android:textColor="@color/darkblue"-->                                                    <!--style="@style/TextViewSmallCapsStyle" />-->
+
+    <!--<TextView-->                                                    <!--android:id="@+id/txtCourseFee"-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="wrap_content"-->                                                    <!--android:background="@drawable/border_circular"-->                                                    <!--android:padding="@dimen/_8sdp"-->                                                    <!--android:inputType="number"-->                                                    <!--android:imeOptions="actionNext"-->                                                    <!--style="@style/TextViewTitle14Style"                                        android:maxLines="1"-->                                                    <!--android:hint="&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"-->                                                    <!--android:drawableStart="@drawable/ic_rupee_sign"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                                <!--android:layout_width="0dp"-->                                                <!--android:layout_height="wrap_content"-->                                                <!--android:layout_weight="0.5"-->                                                <!--android:layout_marginEnd="@dimen/_2sdp"-->                                                <!--android:orientation="vertical">-->
+
+    <!--<TextView-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="wrap_content"-->                                                    <!--android:text="Loan Amount"-->                                                    <!--android:textAllCaps="true"-->                                                    <!--android:layout_marginTop="@dimen/_8sdp"-->                                                    <!--android:gravity="start"-->                                                    <!--android:textColor="@color/darkblue"-->                                                    <!--style="@style/TextViewSmallCapsStyle" />-->
+
+    <!--<EditText-->                                                    <!--android:id="@+id/edtLoanAmt"-->                                                    <!--android:layout_width="match_parent"-->                                                    <!--android:layout_height="wrap_content"-->                                                    <!--android:background="@drawable/border_circular"-->                                                    <!--android:backgroundTint="@color/darkblue"-->                                                    <!--android:padding="@dimen/_8sdp"-->                                                    <!--android:maxLines="1"-->                                                    <!--android:inputType="number"-->                                                    <!--style="@style/EditTextStyle"-->                                                    <!--android:imeOptions="actionNext"-->                                                    <!--android:maxLength="8"-->                                                    <!--android:hint="&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"-->                                                    <!--android:textSize="14sp"-->                                                    <!--android:drawableStart="@drawable/ic_rupee_sign"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->                                        <!--android:layout_width="match_parent"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginTop="@dimen/_4sdp"-->                                        <!--android:orientation="vertical">-->
+
+    <!--<TextView-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:layout_gravity="center"-->                                            <!--android:layout_weight="1.5"-->                                            <!--android:paddingLeft="@dimen/_4sdp"-->                                            <!--android:text="Profession of Applicant"-->                                            <!--android:textColor="@color/colorPrimary" />-->
+
+    <!--<Spinner-->                                            <!--android:id="@+id/spProfessionBr"-->                                            <!--android:layout_width="match_parent"-->                                            <!--android:layout_height="wrap_content"-->                                            <!--android:layout_marginRight="20dp"-->                                            <!--android:layout_weight="1"-->                                            <!--android:imeOptions="actionNext"-->                                            <!--android:dropDownSelector="@color/colorPrimary"-->                                            <!--android:focusable="true"-->                                            <!--android:gravity="center"-->                                            <!--android:theme="@style/ThemeOverlay.AppCompat.Light" />-->                                    <!--</LinearLayout>-->                                <!--</LinearLayout>-->
+
+
+    <!--<LinearLayout-->                                    <!--android:layout_width="wrap_content"-->                                    <!--android:layout_height="wrap_content"-->                                    <!--android:layout_marginTop="@dimen/_10sdp"-->                                    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->                                        <!--android:id="@+id/btnNextKycDetail2"-->                                        <!--android:layout_width="wrap_content"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:backgroundTint="@color/material_blue_500"-->                                        <!--android:text="@android:string/ok"-->                                        <!--android:textColor="@android:color/white" />-->
+
+    <!--<Button-->                                        <!--android:id="@+id/btnPreviousKycDetail2"-->                                        <!--android:layout_width="wrap_content"-->                                        <!--android:layout_height="wrap_content"-->                                        <!--android:layout_marginStart="@dimen/_6sdp"-->                                        <!--android:text="@android:string/cancel" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</moe.feng.common.stepperview.VerticalStepperItemView>-->
+
+    <!--<Button-->                            <!--android:id="@+id/btn_change_point_color"-->                            <!--android:layout_width="wrap_content"-->                            <!--android:layout_height="wrap_content"-->                            <!--android:layout_margin="24dp"-->                            <!--android:text="Change point activated color" />-->
+
+    <!--<Button-->                            <!--android:id="@+id/btn_change_done_icon"-->                            <!--android:layout_width="wrap_content"-->                            <!--android:layout_height="wrap_content"-->                            <!--android:layout_marginStart="24dp"-->                            <!--android:text="Change point done icon" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</ScrollView>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->    <!--</ScrollView>-->
+
+
+    <!--</android.support.v4.widget.NestedScrollView>-->

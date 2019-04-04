@@ -14,14 +14,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,12 +39,6 @@ import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
 import com.eduvanzapplication.newUI.pojo.DashboardBannerModel;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
-import com.yuyakaido.android.cardstackview.CardStackListener;
-import com.yuyakaido.android.cardstackview.CardStackView;
-import com.yuyakaido.android.cardstackview.Direction;
-import com.yuyakaido.android.cardstackview.RewindAnimationSetting;
-import com.yuyakaido.android.cardstackview.StackFrom;
-import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,7 +51,7 @@ import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 
-public class DashboardFragmentNew extends Fragment implements CardStackListener {
+public class DashboardFragmentNew extends Fragment  {
 
     public static Context context;
     public static Fragment mFragment;
@@ -82,7 +74,7 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
     ArrayList<DashboardBannerModel> bannerModelArrayList = new ArrayList<>();
 
-    public static CardStackView cardStackView;
+    public static RecyclerView rvLeads;
     public static CardStackLayoutManager manager;
     public static CardStackAdapter adapter;
 
@@ -157,23 +149,12 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
             linLeadsLayout.setVisibility(View.GONE);
             progressDialog = new ProgressDialog(getActivity());
 
-            cardStackView = view.findViewById(R.id.card_stack_view);
-            manager = new CardStackLayoutManager(context,this);
+            rvLeads = view.findViewById(R.id.rvLeads);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            rvLeads.setLayoutManager(linearLayoutManager);
             adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
-            cardStackView.setAdapter(adapter);
-            MLeads mLeads = new MLeads();
-//            for (int i=0; i<10; i++){
-//                mLeads = new MLeads();
-//                mLeads.application_id = "AAA"+i;
-//                mLeads.first_name = "EDUvanz " +i;
-//                mLeads.middle_name = "Shar "+i;
-//                mLeads.last_name = "Name "+i;
-//                mLeads.created_date_time = "Created "+i;
-//                mLeads.profession = "Profession "+i;
-//                mLeads.fk_applicant_type_id = "Applicant type "+i;
-//                mLeadsArrayList.add(mLeads);
-//
-//            }
+            rvLeads.setAdapter(adapter);
 
             circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
@@ -290,25 +271,25 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
     }//-----------------------------------END OF ON CREATE----------------------------------------//
 
     private void setupCardStackView() {
-        try {
-            manager.setStackFrom(StackFrom.Right);
-            manager.setVisibleCount(3);
-            manager.setDirections(Direction.HORIZONTAL);
-            manager.setTranslationInterval(8.0f);
-            manager.setScaleInterval(0.95f);
-            manager.setSwipeThreshold(0.3f);
-            manager.setMaxDegree(20.0f);
-            manager.setDirections(Direction.HORIZONTAL);
-            manager.setCanScrollHorizontal(true);
-            manager.setCanScrollVertical(false);
-            cardStackView.setLayoutManager(manager);
-            cardStackView.setAdapter(adapter);
-            if(  cardStackView.getItemAnimator() instanceof DefaultItemAnimator){
-                ((DefaultItemAnimator)cardStackView.getItemAnimator()).setSupportsChangeAnimations(false);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            manager.setStackFrom(StackFrom.Right);
+//            manager.setVisibleCount(3);
+//            manager.setDirections(Direction.HORIZONTAL);
+//            manager.setTranslationInterval(8.0f);
+//            manager.setScaleInterval(0.95f);
+//            manager.setSwipeThreshold(0.3f);
+//            manager.setMaxDegree(20.0f);
+//            manager.setDirections(Direction.HORIZONTAL);
+//            manager.setCanScrollHorizontal(true);
+//            manager.setCanScrollVertical(false);
+//            rvLeads.setLayoutManager(manager);
+//            rvLeads.setAdapter(adapter);
+//            if(  rvLeads.getItemAnimator() instanceof DefaultItemAnimator){
+//                ((DefaultItemAnimator)rvLeads.getItemAnimator()).setSupportsChangeAnimations(false);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
     private void setupButton() {
@@ -322,37 +303,37 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 //                        .setInterpolator(new AccelerateInterpolator())
 //                        .build();
 //                manager.setSwipeAnimationSetting(setting);
-//                cardStackView.swipe();
+//                rvLeads.swipe();
 //
 //            }
 //        });
 
-        ivPrevBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RewindAnimationSetting setting =new  RewindAnimationSetting.Builder()
-                        .setDirection(Direction.Bottom)
-                        .setDuration(200)
-                        .setInterpolator(new DecelerateInterpolator())
-                        .build();
-                manager.setRewindAnimationSetting(setting);
-                cardStackView.rewind(adapter.getSpots());
-            }
-        });
-
-
-        ivNextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SwipeAnimationSetting setting = new SwipeAnimationSetting.Builder()
-                        .setDirection(Direction.Right)
-                        .setDuration(200)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .build();
-                manager.setSwipeAnimationSetting(setting);
-                cardStackView.swipe();
-            }
-        });
+//        ivPrevBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                RewindAnimationSetting setting =new  RewindAnimationSetting.Builder()
+//                        .setDirection(Direction.Bottom)
+//                        .setDuration(200)
+//                        .setInterpolator(new DecelerateInterpolator())
+//                        .build();
+//                manager.setRewindAnimationSetting(setting);
+//                rvLeads.rewind(adapter.getSpots());
+//            }
+//        });
+//
+//
+//        ivNextBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SwipeAnimationSetting setting = new SwipeAnimationSetting.Builder()
+//                        .setDirection(Direction.Right)
+//                        .setDuration(200)
+//                        .setInterpolator(new AccelerateInterpolator())
+//                        .build();
+//                manager.setSwipeAnimationSetting(setting);
+//                rvLeads.swipe();
+//            }
+//        });
     }
 
 
@@ -691,11 +672,11 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
                     mLeadsArrayList.add(mLeads);
 
                 }
-//                cardStackView = view.findViewById(R.id.card_stack_view);
+//                rvLeads = view.findViewById(R.id.card_stack_view);
                 adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
-                manager = new CardStackLayoutManager(context,this);
-                setupCardStackView();
-                setupButton();
+                rvLeads.setAdapter(adapter);
+//                setupCardStackView();
+//                setupButton();
 
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
@@ -761,67 +742,4 @@ public class DashboardFragmentNew extends Fragment implements CardStackListener 
 
     }
 
-    @Override
-    public void onCardDragging(Direction direction, float ratio) {
-
-    }
-
-    @Override
-    public void onCardSwiped(Direction direction) {
-
-    }
-
-    @Override
-    public void onCardRewound() {
-
-    }
-
-    @Override
-    public void onCardCanceled() {
-
-    }
-
-    @Override
-    public void onCardAppeared(View view, int position) {
-
-    }
-
-    @Override
-    public void onCardDisappeared(View view, int position) {
-
-        if (position == (cardStackView.getAdapter().getItemCount()-1)){
-//            manager.removeAndRecycleAllViews(cardStackView);
-//            cardStackView.setAdapter(adapter);
-//            cardStackView.scrollToPosition(0);
-//            manager.scrollToPosition(0);
-
-//            MLeads mLeads = new MLeads();
-//            for (int i=0; i<10; i++){
-//                mLeads = new MLeads();
-//                mLeads.application_id = "AAA"+i;
-//                mLeads.first_name = "EDUvanz " +i;
-//                mLeads.middle_name = "Shar "+i;
-//                mLeads.last_name = "Name "+i;
-//                mLeads.created_date_time = "Created "+i;
-//                mLeads.profession = "Profession "+i;
-//                mLeads.fk_applicant_type_id = "Applicant type "+i;
-//                mLeadsArrayList.add(mLeads);
-//
-//            }
-            try{
-//                adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
-//                cardStackView.setAdapter(adapter);
-
-                cardStackView.smoothScrollToPosition(0);
-
-//                setupCardStackView();
-//                setupButton();
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-
-        }
-    }
 }
