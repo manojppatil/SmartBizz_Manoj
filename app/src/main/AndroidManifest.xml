@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
@@ -43,8 +44,13 @@
         tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon,android:name">
         <activity android:name=".newUI.newViews.TenureSelectionActivity"/>
         <activity android:name=".newUI.newViews.CourseDetailsActivity" />
+
         <activity android:name=".newUI.newViews.NewLeadActivity"
-            android:theme="@style/AppTheme1"/>
+            android:theme="@style/AppTheme1"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity android:name="com.idfy.rft.CameraView"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name="com.gun0912.tedpicker.ImagePickerActivity"
             android:screenOrientation="portrait"

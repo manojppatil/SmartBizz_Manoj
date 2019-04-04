@@ -1,8 +1,10 @@
 package com.eduvanzapplication.newUI.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -67,7 +69,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
-import static com.eduvanzapplication.newUI.newViews.LoanTabActivity.student_id;
+import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.student_id;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -76,7 +78,7 @@ public class PersonalDetailsFragment extends Fragment {
     private static ProgressBar progressbar;
     private static final String idfy_account_id = "99cde5a9e632/744939bd-4fe2-42e8-94d2-971a79928ee4";
     private static final String idfy_token = "2075c38b-31c3-4fc8-a642-ba7c02697c42";
-    RFTSdk rftsdk;
+    public static RFTSdk rftsdk;
     Bitmap bitmapFront = null, bitmapBack = null;
     String doctype = "";
     public static final String GALLERY_DIRECTORY_NAME = "Hello Camera";
@@ -92,6 +94,7 @@ public class PersonalDetailsFragment extends Fragment {
     LinearLayout linPan,linAadhar ,linClose ,linFooter1 ,linTakePicture ,linQR ,linStudentType ,linOCR;
     public static Context context;
     public static Fragment mFragment;
+    SharedPreferences sharedPreferences;
 
     private static OnFragmentInteractionListener mListener;
     private TextView txtDOB;
@@ -187,7 +190,27 @@ public class PersonalDetailsFragment extends Fragment {
         switchMarital = view.findViewById(R.id.switchMarital);
 
         context = getContext();
-        mFragment = new DashboardFragmentNew();
+        mFragment = new PersonalDetailsFragment();
+        // Checking availability of the camera
+        rftsdk = RFTSdk.init((NewLeadActivity) context, idfy_account_id, idfy_token);
+
+        try {
+            sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+//            MainActivity.Aaadhaarno = sharedPreferences.getString("Aaadhaarno", "");
+//            MainActivity.Aname = sharedPreferences.getString("Aname", "");
+//            MainActivity.Adob = sharedPreferences.getString("Adob", "");
+//            MainActivity.Ayob = sharedPreferences.getString("Ayob", "");
+//            MainActivity.Agender = sharedPreferences.getString("Agender", "");
+//            MainActivity.Aaddress = sharedPreferences.getString("Aaddress", "");
+//            MainActivity.Astreet_address = sharedPreferences.getString("Astreet_address", "");
+//            MainActivity.Adistrict = sharedPreferences.getString("Adistrict", "");
+//            MainActivity.Apincode = sharedPreferences.getString("Apincode", "");
+//            MainActivity.Astate = sharedPreferences.getString("Astate", "");
+//            MainActivity.Aisscanned = sharedPreferences.getString("Aisscanned", "");
+//
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //        View professionView = getLayoutInflater().inflate(R.layout.layout_ocr_options,null);
 //
@@ -317,6 +340,7 @@ public class PersonalDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         linMaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -620,20 +644,20 @@ public class PersonalDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (linQR.getVisibility() != View.VISIBLE){  //pan is selected
-                    if (CameraUtils.checkPermissions(getContext())) {
+                    if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
                         doctype = "ind_pan";
-                        rftsdk.CaptureDocImage(getActivity(), "ind_pan", rftSdkCallbackInterface);
+                        rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_pan", rftSdkCallbackInterface);
                     } else {
 //                        requestCameraPermission(MEDIA_TYPE_IMAGE);
                     }
-
+//Unable to find explicit activity class {com.eduvanzapplication/com.idfy.rft.CameraView}; have you declared this activity in your AndroidManifest.xml?
                 }else{
-                    if (CameraUtils.checkPermissions(getContext())) {
+                    if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
                         Toast.makeText(getActivity(), "Capture front-side image of Aadhaar", Toast.LENGTH_LONG).show();
 
                         doctype = "ind_aadhaar";
 //                    doctype = "aadhaar_ocr";
-                        rftsdk.CaptureDocImage(getActivity(), "ind_aadhaar", rftSdkCallbackInterface);
+                        rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_aadhaar", rftSdkCallbackInterface);
                     } else {
 //                        requestCameraPermission(MEDIA_TYPE_IMAGE);
                     }
@@ -1336,58 +1360,75 @@ public class PersonalDetailsFragment extends Fragment {
                             e.printStackTrace();
                         }
                         if (success) {
-                            String panno = "";
                             try {
-                                panno = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pan_number");
+                                NewLeadActivity.Ppanno = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pan_number");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String pantype = "";
+
                             try {
-                                pantype = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pan_type");
+                                NewLeadActivity.Ppantype = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pan_type");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String name = "";
+
                             try {
-                                name = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("name_on_card");
+                                NewLeadActivity.Pname = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("name_on_card");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String dob = "";
+
                             try {
-                                dob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_on_card");
+                                NewLeadActivity.Pdob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_on_card");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String doi = "";
+
                             try {
-                                doi = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_of_issue");
+                                NewLeadActivity.Pdoi = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_of_issue");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String age = "";
+
                             try {
-                                age = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("age");
+                                NewLeadActivity.Page = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("age");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String fathersname = "";
+
                             try {
-                                fathersname = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("fathers_name");
+                                NewLeadActivity.Pfathersname = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("fathers_name");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String isminor = "";
+
                             try {
-                                isminor = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("minor");
+                                NewLeadActivity.Pisminor = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("minor");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            String isscanned = "";
+
                             try {
-                                isscanned = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("is_scanned");
+                                NewLeadActivity.Pisscanned = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("is_scanned");
                             } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("Ppanno", NewLeadActivity.Ppanno);
+                                editor.putString("Ppantype", NewLeadActivity.Ppantype);
+                                editor.putString("Pname", NewLeadActivity.Pname);
+                                editor.putString("Pdob", NewLeadActivity.Pdob);
+                                editor.putString("Pdoi", NewLeadActivity.Pdoi);
+                                editor.putString("Page", NewLeadActivity.Page);
+                                editor.putString("Pfathersname", NewLeadActivity.Pfathersname);
+                                editor.putString("Pisminor", NewLeadActivity.Pisminor);
+                                editor.putString("Pisscanned", NewLeadActivity.Pisscanned);
+                                editor.apply();
+                                editor.commit();
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -1427,14 +1468,14 @@ public class PersonalDetailsFragment extends Fragment {
         /** API CALL **/
         try {//auth_token
 //            progressBar.setVisibility(View.VISIBLE);
-            String url = MainActivity.mainUrl + "dashboard/addcoborrower";
+            String url = MainActivity.mainUrl + "dashboard/saveocr";
             Map<String, String> params = new HashMap<String, String>();
 
             params.put("request_id", strRequestId);
             params.put("student_id", student_id);
             params.put("response", strResponse);
             params.put("status", strStatus);
-
+           // http://159.89.204.41/eduvanzApi/saveocr
             VolleyCall volleyCall = new VolleyCall();
             volleyCall.sendRequest(context, url, null, mFragment, "addOCR", params, MainActivity.auth_token);
         } catch (Exception e) {
@@ -1521,78 +1562,93 @@ public class PersonalDetailsFragment extends Fragment {
                             e.printStackTrace();
                         }
                         if (success) {
-                            String aadhaarno = "";
+
                             try {
-                                aadhaarno = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("aadhaar_number");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            String name = "";
-                            try {
-                                name = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("name_on_card");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            String dob = "";
-                            try {
-                                dob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_of_birth");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            String yob = "";
-                            try {
-                                yob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("year_of_birth");
+                                NewLeadActivity.Aaadhaarno = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("aadhaar_number");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            String gender = "";
                             try {
-                                gender = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("gender");
+                                NewLeadActivity.Aname = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("name_on_card");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            String address = "";
                             try {
-                                address = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("address");
+                                NewLeadActivity.dob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_of_birth");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            String street_address = "";
                             try {
-                                street_address = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("street_address");
+                                NewLeadActivity.Adob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("year_of_birth");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            String district = "";
                             try {
-                                district = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("gender");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            String pincode = "";
-                            try {
-                                pincode = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pincode");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            String state = "";
-                            try {
-                                state = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("district");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            String isscanned = "";
-                            try {
-                                isscanned = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("state");
+                                NewLeadActivity.Ayob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("gender");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            Log.v(TAG, response);
+                            try {
+                                NewLeadActivity.Agender = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("address");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                NewLeadActivity.Aaddress = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("street_address");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                NewLeadActivity.Astreet_address = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("gender");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                NewLeadActivity.Adistrict = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pincode");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                NewLeadActivity.Apincode = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("district");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                NewLeadActivity.Astate = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("state");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+//                            Log.v(TAG, response);
+
+                            try {
+                                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("Aaadhaarno", NewLeadActivity.Aaadhaarno);
+                                editor.putString("Aname", NewLeadActivity.Aname);
+                                editor.putString("Adob", NewLeadActivity.Adob);
+                                editor.putString("Ayob", NewLeadActivity.Ayob);
+                                editor.putString("Agender", NewLeadActivity.Agender);
+                                editor.putString("Aaddress", NewLeadActivity.Aaddress);
+                                editor.putString("Astreet_address", NewLeadActivity.Astreet_address);
+                                editor.putString("Adistrict", NewLeadActivity.Adistrict);
+                                editor.putString("Apincode", NewLeadActivity.Apincode);
+                                editor.putString("Astate", NewLeadActivity.Astate);
+                                editor.putString("Aisscanned", NewLeadActivity.Aisscanned);
+                                editor.apply();
+                                editor.commit();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
 //                            Toast.makeText(context, "Upload succes " + aadhaarno + "\n" + name + "\n" + dob + "\n" + yob + "\n" + gender, Toast.LENGTH_LONG).show();
                         }

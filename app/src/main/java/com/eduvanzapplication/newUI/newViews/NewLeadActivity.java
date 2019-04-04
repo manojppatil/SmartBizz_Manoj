@@ -1,5 +1,6 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.badoualy.stepperindicator.StepperIndicator;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
+import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.VolleyCall;
@@ -29,6 +31,7 @@ import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DocumentAvailabilityFragment;
 import com.eduvanzapplication.newUI.fragments.EmploymentDetailsFragment;
 import com.eduvanzapplication.newUI.fragments.PersonalDetailsFragment;
+import com.idfy.rft.RFTSdk;
 
 import org.json.JSONObject;
 
@@ -57,7 +60,16 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     public static String companyName="", annualIncome="";
     public static String instituteId ="", instituteLocationId ="", courseId ="", courseFee="", loanAmount="";
     public static String leadId = "", applicantId="";
+    public static String lead_id="",student_id ="";
 
+    public static String Aaadhaarno = "", Aname = "", Adob = "", Ayob = "", Agender = "", Aaddress = "",
+            Astreet_address = "",Adistrict = "",Apincode = "",Astate = "",Aisscanned = "";
+
+    public static String Ppanno = "", Ppantype = "", Pname = "",Pdob = "", Pdoi = "",Page = "", Pfathersname = "", Pisminor = "", Pisscanned = "";
+
+    Context context;
+    AppCompatActivity mActivity;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +78,47 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
         setViews();
         setupViewPager(viewPager);
+        if (!CameraUtils.isDeviceSupportCamera(getApplicationContext())) {
+            Toast.makeText(getApplicationContext(),
+                    "Sorry! Your device doesn't support camera",
+                    Toast.LENGTH_LONG).show();
+            // will close the app if the device doesn't have camera
+            finish();
+        }
+
+        try {
+            sharedPreferences = this.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            firstName = sharedPreferences.getString("firstName", "");
+            MainActivity.auth_token = sharedPreferences.getString("auth_token", "");
+            student_id = sharedPreferences.getString("student_id", "");
+
+            Aaadhaarno = sharedPreferences.getString("Aaadhaarno", "");
+            Aname = sharedPreferences.getString("Aname", "");
+            Adob = sharedPreferences.getString("Adob", "");
+            Ayob = sharedPreferences.getString("Ayob", "");
+            Agender = sharedPreferences.getString("Agender", "");
+            Aaddress = sharedPreferences.getString("Aaddress", "");
+            Astreet_address = sharedPreferences.getString("Astreet_address", "");
+            Adistrict = sharedPreferences.getString("Adistrict", "");
+            Apincode = sharedPreferences.getString("Apincode", "");
+            Astate = sharedPreferences.getString("Astate", "");
+            Aisscanned = sharedPreferences.getString("Aisscanned", "");
+
+            Ppanno = sharedPreferences.getString("Ppanno", "");
+            Ppantype = sharedPreferences.getString("Ppantype", "");
+            Pname = sharedPreferences.getString("Pname", "");
+            Pdob = sharedPreferences.getString("Pdob", "");
+            Pdoi = sharedPreferences.getString("Pdoi", "");
+            Page = sharedPreferences.getString("Page", "");
+            Pfathersname = sharedPreferences.getString("Pfathersname", "");
+            Pisminor = sharedPreferences.getString("Pisminor", "");
+            Pisscanned = sharedPreferences.getString("Pisscanned", "");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void setViews() {
