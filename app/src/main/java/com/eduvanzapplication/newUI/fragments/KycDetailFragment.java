@@ -142,7 +142,7 @@ public class KycDetailFragment extends Fragment {
         relIdentityBlock.startAnimation(collapseAnimationIdentity);
         relCourseBlock.startAnimation(collapseAnimationCourse);
         setViewsEnabled(false);
-        countryApiResponse(new JSONObject());  //temporary code
+//        countryApiResponse(new JSONObject());  //temporary code
 
         fabEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -394,6 +394,32 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {           }
         });
+
+        edtAadhaar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LoanTabActivity.aadhar = s.toString(); chekAllFields();
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+        edtPAN.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LoanTabActivity.pan = s.toString(); chekAllFields();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     public void chekAllFields(){
@@ -402,6 +428,12 @@ public class KycDetailFragment extends Fragment {
             indicateValidationText(txtPersonalToggle, getResources().getDrawable(R.drawable.ic_user_check), false);
         }else {
             indicateValidationText(txtPersonalToggle, getResources().getDrawable(R.drawable.ic_user_check), true);
+        }
+        if (LoanTabActivity.aadhar.equals("") || LoanTabActivity.pan.equals("")){
+            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card),false);
+        }
+        else {
+            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card),true);
         }
 
     }
@@ -434,23 +466,55 @@ public class KycDetailFragment extends Fragment {
 
     private void countryApiCall(){
             //api is pending
+        try {
+            progressDialog.setMessage("Loading");
+            progressDialog.show();
+            progressDialog.setCancelable(false);
+            String url = MainActivity.mainUrl + "dashboard/getcountrylist";
+            Map<String, String> params = new HashMap<String, String>();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();
+                volleyCall.sendRequest(context, url, null, KycDetailFragment.this, "getCountriesKyc", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+
     }
     public void countryApiResponse(JSONObject jsonObject){
+        progressDialog.dismiss();
         countryModelList.clear();
         countrList.clear();
+        try {
+            String message = jsonObject.getString("message");
+            if (jsonObject.getInt("status") == 1){
+                JSONArray jsonArray = jsonObject.getJSONArray("countries");
+                for (int i=0;i<jsonArray.length(); i++){
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                    countryModelList.add(new CountryModel(jsonObject1.getString("country_id"), jsonObject1.getString("country_name")));
+                    countrList.add(jsonObject1.getString("country_name"));
+                }
+                ArrayAdapter countryAdapter = new ArrayAdapter(getContext(),  android.R.layout.simple_list_item_1, countrList );
+                spCountry.setAdapter(countryAdapter);
 
-        countryModelList.add(new CountryModel("0","Select"));
-        countryModelList.add(new CountryModel("1","India"));
-        countryModelList.add(new CountryModel("2","Germany"));
-        countryModelList.add(new CountryModel("3","Behrain"));
+            }else{
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
-        countrList.add("Select");
-        countrList.add("India");
-        countrList.add("Germany");
-        countrList.add("Behrain");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        ArrayAdapter countryAdapter = new ArrayAdapter(getContext(),  android.R.layout.simple_list_item_1, countrList );
-        spCountry.setAdapter(countryAdapter);
 
     }
 
@@ -590,8 +654,7 @@ public class KycDetailFragment extends Fragment {
             progressDialog.show();
             String url = MainActivity.mainUrl + "dashboard/getKycDetails";
             Map<String, String> params = new HashMap<String, String>();
-//            params.put("lead_id",LoanTabActivity.lead_id);
-            params.put("lead_id","293");
+            params.put("lead_id",LoanTabActivity.lead_id);
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {
@@ -605,7 +668,17 @@ public class KycDetailFragment extends Fragment {
         String message = jsonData.optString("message");
         try {
             if (jsonData.getInt("status") == 1 ){
+                if (jsonData.has("borrowerDetails") && jsonData.getJSONObject("borrowerDetails") != null){
+                    JSONObject jsonborrowerDetails = jsonData.getJSONObject("borrowerDetails");
+                    if (jsonborrowerDetails.getString("first_name") != null)
+                        LoanTabActivity.firstName = jsonborrowerDetails.getString("first_name");
 
+
+                    if (jsonborrowerDetails.getString("current_address_country") != null)
+                        LoanTabActivity.countryId = jsonborrowerDetails.getString("current_address_country");
+
+
+                }
             }
             else{
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

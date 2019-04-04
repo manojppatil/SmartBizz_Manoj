@@ -378,6 +378,17 @@ public class VolleyCall  {
                 e.printStackTrace();
             }
         }
+        else if (screen.equalsIgnoreCase("getCountriesKyc")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((KycDetailFragment) mfragment).countryApiResponse(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         else if (screen.equalsIgnoreCase("getStatesKyc")) {
             try {
                 jsonDataO = new JSONObject(s);
