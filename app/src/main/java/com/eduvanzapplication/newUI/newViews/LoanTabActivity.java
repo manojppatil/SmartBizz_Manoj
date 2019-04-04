@@ -29,7 +29,10 @@ public class LoanTabActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    public static String lead_id="";
+    public static String lead_id="",student_id ="";
+    Context context;
+    AppCompatActivity mActivity;
+    SharedPreferences sharedPreferences;
     //kyc values
     public static String firstName="", lastName="", middleName="", gender="2", dob="", maritalStatus="1", email="", mobile="",
                             aadhar="", pan="", flatBuildingSociety="", streetLocalityLandmark="", pincode="", countryId="", stateId="",cityId="",
@@ -59,7 +62,7 @@ public class LoanTabActivity extends AppCompatActivity {
 
         try {
             Bundle extras = getIntent().getExtras();
-            MainActivity.lead_id = LeadID = extras.getString("lead_id", "0");
+            MainActivity.lead_id = lead_id = extras.getString("lead_id", "0");
         } catch (Exception e) {
             e.printStackTrace();
         }
