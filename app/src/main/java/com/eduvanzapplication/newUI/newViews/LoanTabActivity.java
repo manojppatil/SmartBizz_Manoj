@@ -24,6 +24,13 @@ public class LoanTabActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    public static String lead_id="";
+    //kyc values
+    public static String firstName="", lastName="", middleName="", gender="2", dob="", maritalStatus="1", email="", mobile="",
+                            aadhar="", pan="", flatBuildingSociety="", streetLocalityLandmark="", pincode="", countryId="", stateId="",cityId="",
+                            instituteId="", courseId="", instituteLocationId="", courseFee="", loanAmount="";
+
+    //detailed values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

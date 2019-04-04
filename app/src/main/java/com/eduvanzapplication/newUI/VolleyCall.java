@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
+import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
 import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
 import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
@@ -366,6 +367,38 @@ public class VolleyCall  {
                 e.printStackTrace();
             }
         }
+        else if (screen.equalsIgnoreCase("studentKycDetails")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                (( KycDetailFragment) mfragment).setStudentKycDetails(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("getStatesKyc")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((KycDetailFragment)mfragment).getStatesResponse(jsonDataO);
+                //EligibilityCheckFragment_3 mfragment).getStates(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("getCityKyc")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((KycDetailFragment)mfragment).getCityResponse(jsonDataO);
+                //EligibilityCheckFragment_3 mfragment).getStates(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
@@ -614,15 +647,6 @@ else if (screen.equalsIgnoreCase("addcoborrower")) {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if (screen.equalsIgnoreCase("studentKycDetails")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                //LoanApplicationFragment_1 mfragment).setStudentKycDetails(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }else if (screen.equalsIgnoreCase("getDetailedInformation")) {
             try {
                 jsonDataO = new JSONObject(s);
@@ -739,16 +763,6 @@ else if (screen.equalsIgnoreCase("addcoborrower")) {
             try {
                 jsonDataO = new JSONObject(s);
                 //EligibilityCheckFragment_3 mfragment).getfetchpincode(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (screen.equalsIgnoreCase("getStates")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                //EligibilityCheckFragment_3 mfragment).getStates(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

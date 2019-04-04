@@ -62,12 +62,6 @@ import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
-import com.eduvanzapplication.newUI.services.LocationService;
-import com.eduvanzapplication.newUI.services.MyServiceAppStats;
-import com.eduvanzapplication.newUI.services.MyServiceCallLog;
-import com.eduvanzapplication.newUI.services.MyServiceContacts;
-import com.eduvanzapplication.newUI.services.MyServiceReadSms;
-//import com.eduvanzapplication.newUI.services.MyServiceReadSmsbck;
 import com.eduvanzapplication.newUI.webviews.WebViewAboutUs;
 import com.eduvanzapplication.newUI.webviews.WebViewBlog;
 import com.eduvanzapplication.newUI.webviews.WebViewDisclaimer;
@@ -174,12 +168,7 @@ public class DashboardActivity extends AppCompatActivity
                 Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
             }
 
-            buttonSignup = (Button) header.findViewById(R.id.button_dashboard_signup);
-            mainApplication.applyTypeface(buttonSignup, context);
-            buttonSignIn = (Button) header.findViewById(R.id.button_dashboard_signin);
-            mainApplication.applyTypeface(buttonSignIn, context);
 
-            linearLayoutSignup = (LinearLayout) header.findViewById(R.id.linearLayout_signupdetail_dashboard);
             linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
 
             frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
@@ -274,11 +263,9 @@ public class DashboardActivity extends AppCompatActivity
                         }, 105);
             } else {
                 /** SERVICE CALL **/
-                setScheduleIntent(LocationService.class);
             }
         } else {
             /** SERVICE CALL **/
-            setScheduleIntent(LocationService.class);
         }
     }
 
@@ -298,11 +285,9 @@ public class DashboardActivity extends AppCompatActivity
                         }, 104);
             } else {
                 /** SERVICE CALL **/
-                setScheduleIntent(MyServiceContacts.class);
             }
         } else {
             /** SERVICE CALL **/
-            setScheduleIntent(MyServiceContacts.class);
         }
     }
 
@@ -316,7 +301,6 @@ public class DashboardActivity extends AppCompatActivity
         if (!isAccessGranted()) {
             startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
         } else {
-            setScheduleIntent(MyServiceAppStats.class);
         }
     }
 
@@ -349,11 +333,9 @@ public class DashboardActivity extends AppCompatActivity
                         }, 102);
             } else {
                 /** SERVICE CALL **/
-                setScheduleIntent(MyServiceReadSms.class);
             }
         } else {
             /** SERVICE CALL **/
-            setScheduleIntent(MyServiceReadSms.class);
         }
     }
 
@@ -371,11 +353,9 @@ public class DashboardActivity extends AppCompatActivity
                         }, 101);
             } else {
                 /** SERVICE CALL **/
-                setScheduleIntent(MyServiceCallLog.class);
             }
         } else {
             /** SERVICE CALL **/
-            setScheduleIntent(MyServiceCallLog.class);
         }
     }
 
@@ -548,8 +528,6 @@ public class DashboardActivity extends AppCompatActivity
             case 101:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //granted
-                    Intent intent = new Intent(this, MyServiceCallLog.class);
-                    startService(intent);
                 } else {
                     // Permission denied.
                     // Notify the user via a SnackBar that they have rejected a core permission for the
@@ -586,8 +564,6 @@ public class DashboardActivity extends AppCompatActivity
             case 102:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //granted
-                    Intent intent = new Intent(this, MyServiceReadSms.class);
-                    startService(intent);
                 } else {
                     // Permission denied.
                     // Notify the user via a SnackBar that they have rejected a core permission for the
@@ -660,8 +636,6 @@ public class DashboardActivity extends AppCompatActivity
             case 104:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //granted
-                    Intent intent = new Intent(this, MyServiceContacts.class);
-                    startService(intent);
                 } else {
                     // Permission denied.
                     // Notify the user via a SnackBar that they have rejected a core permission for the
@@ -697,8 +671,6 @@ public class DashboardActivity extends AppCompatActivity
             case 105:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //granted
-                    Intent intent = new Intent(this, LocationService.class);
-                    startService(intent);
                 } else {
                     // Permission denied.
                     // Notify the user via a SnackBar that they have rejected a core permission for the
@@ -830,19 +802,8 @@ public class DashboardActivity extends AppCompatActivity
                 Date lLocationDate = simpleDateFormat.parse(appInstallationTimeStamp);
                 long installationTime = lLocationDate.getTime() + (5 * 12 * 60 * 60 * 1000);
 
-                if (installationTime < System.currentTimeMillis()) {
-                    Intent myService = new Intent(DashboardActivity.this, LocationService.class);
-                    stopService(myService);
-                } else {
-                    startService(new Intent(context, LocationService.class));
-                }
 
         } catch (Exception e) {
-            try {
-                startService(new Intent(context, LocationService.class));
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -852,9 +813,4 @@ public class DashboardActivity extends AppCompatActivity
             Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
-
-
-
-
-
 }
