@@ -3,6 +3,8 @@ package com.eduvanzapplication.newUI.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.pojo.MLeads;
+import com.eduvanzapplication.newUI.adapter.AmortAdapter;
 import com.eduvanzapplication.newUI.pojo.MLoanEmis;
 
 import org.json.JSONArray;
@@ -37,6 +39,9 @@ public class AmortizationFragment extends Fragment {
     private Fragment mFragment;
     public static List<MLoanEmis> mLoanEmisArrayList = new ArrayList<>();
 
+    public static RecyclerView rvAmort;
+    public static AmortAdapter adapter;
+
     public AmortizationFragment() {
         // Required empty public constructor
     }
@@ -55,6 +60,15 @@ public class AmortizationFragment extends Fragment {
         context = getContext();
         mFragment = new AmortizationFragment();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        rvAmort = view.findViewById(R.id.rvAmort);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvAmort.setLayoutManager(linearLayoutManager);
+        adapter = new AmortAdapter(mLoanEmisArrayList, context, getActivity());
+        rvAmort.setAdapter(adapter);
+        rvAmort.setNestedScrollingEnabled(false);
+
 
         try {
             String url = MainActivity.mainUrl + "dashboard/ammortisation";
@@ -87,7 +101,11 @@ public class AmortizationFragment extends Fragment {
             if (jsonDataO.getInt("status") == 1) {
 
                 String message = jsonDataO.getString("message");
-
+//                txtEmiNo
+//                        txtEmiAmount
+//                txtDueBy
+//                        txtPaymentDate
+//                txtPaymentStatus
                 JSONArray jsonArray1 = jsonDataO.getJSONArray("loanEmiDetails");
 
                 for (int i = 0; i < jsonArray1.length(); i++) {
@@ -136,7 +154,9 @@ public class AmortizationFragment extends Fragment {
                             mLoanEmis.status = jsonEmiDetails.getString("status");
 
                         if (!jsonEmiDetails.getString("comments").toString().equals("null"))
-                            mLoanEmis.comments = jsonEmiDetails.getString("comments");
+                            mLoanEmis.statusMessage = jsonEmiDetails.getString("comments");
+                        if (!jsonEmiDetails.getString("statusMessage").toString().equals("null"))
+                            mLoanEmis.statusMessage = jsonEmiDetails.getString("statusMessage");
 
 
                     } catch (JSONException e) {
@@ -152,10 +172,8 @@ public class AmortizationFragment extends Fragment {
 
                 }
 
-//                adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
-//                manager = new CardStackLayoutManager(context,this);
-//                setupCardStackView();
-//                setupButton();
+                adapter = new AmortAdapter(mLoanEmisArrayList, context, getActivity());
+                rvAmort.setAdapter(adapter);
 
             } else {
                 String message = jsonDataO.getString("message");

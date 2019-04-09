@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -41,7 +42,7 @@ public class CurrentAddressFragment extends Fragment {
     public static Context context;
     public static Activity activity;
     public static OnCurrentAddrFragmentInteractionListener mListener;
-    public static TextInputLayout tilFlat, tilStreet,tilPincode ;
+    public static EditText edtAddress, edtLandmark,edtPincode ;
     public static Spinner spCountry, spState, spCity;
 
     public static ArrayList<CountryModel> countryModelList = new ArrayList<>();
@@ -83,9 +84,9 @@ public class CurrentAddressFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_current_address, container, false);
         context = getContext();
         activity = getActivity();
-        tilFlat = view.findViewById(R.id.tilFlat);
-        tilStreet = view.findViewById(R.id.tilStreet);
-        tilPincode = view.findViewById(R.id.tilPincode);
+        edtAddress = view.findViewById(R.id.edtAddress);
+        edtLandmark = view.findViewById(R.id.edtLandmark);
+        edtPincode = view.findViewById(R.id.edtPincode);
         spCountry = view.findViewById(R.id.spCountry);
         spState = view.findViewById(R.id.spState);
         spCity = view.findViewById(R.id.spCity);
@@ -97,7 +98,8 @@ public class CurrentAddressFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         progressDialog = new ProgressDialog(activity);
         countryApiResponse(new JSONObject());
-        tilFlat.getEditText().addTextChangedListener(new TextWatcher() {
+
+        edtAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -115,7 +117,7 @@ public class CurrentAddressFragment extends Fragment {
             }
         });
 
-        tilStreet.getEditText().addTextChangedListener(new TextWatcher() {
+        edtLandmark.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -133,7 +135,7 @@ public class CurrentAddressFragment extends Fragment {
             }
         });
 
-        tilPincode.getEditText().addTextChangedListener(new TextWatcher() {
+        edtPincode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -152,6 +154,8 @@ public class CurrentAddressFragment extends Fragment {
         });
 
         countryApiCall();
+
+
         spCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -179,6 +183,24 @@ public class CurrentAddressFragment extends Fragment {
                     if (spState.getSelectedItem().toString().equals(stateModelList.get(i).getName())){
                         NewLeadActivity.stateId = stateModelList.get(i).getId();
                         cityApiCall(NewLeadActivity.countryId, NewLeadActivity.stateId);
+                        break;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                for (int i=0; i<cityList.size(); i++){
+                    if (spCity.getSelectedItem().toString().equals(cityModelList.get(i).getName())){
+                        NewLeadActivity.cityId = cityModelList.get(i).getId();
                         break;
                     }
                 }
@@ -230,9 +252,9 @@ public class CurrentAddressFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        tilFlat.getEditText().setText(NewLeadActivity.flatBuildingSoc);
-        tilStreet.getEditText().setText(NewLeadActivity.streetLocalityLandMark);
-        tilPincode.getEditText().setText(NewLeadActivity.pinCode);
+        edtAddress.setText(NewLeadActivity.flatBuildingSoc);
+        edtLandmark.setText(NewLeadActivity.streetLocalityLandMark);
+        edtPincode.setText(NewLeadActivity.pinCode);
 
     }
 
@@ -254,6 +276,11 @@ public class CurrentAddressFragment extends Fragment {
 
         ArrayAdapter countryAdapter = new ArrayAdapter(getContext(),  android.R.layout.simple_list_item_1, countrList );
         spCountry.setAdapter(countryAdapter);
+        countryAdapter.notifyDataSetChanged();
+
+        if(NewLeadActivity.Astate.length() > 1){
+                spState.setSelection(1);
+        }
 
     }
 
@@ -304,6 +331,14 @@ public class CurrentAddressFragment extends Fragment {
                 stateAdapter = new ArrayAdapter(context, R.layout.custom_layout_spinner, stateList);
                 spState.setAdapter(stateAdapter);
                 stateAdapter.notifyDataSetChanged();
+
+                int count = stateModelList.size();
+                for (int i = 0; i < count; i++) {
+                    if (stateModelList.get(i).getName().equalsIgnoreCase(NewLeadActivity.Astate)) {
+                        spState.setSelection(i);
+                    }
+                }
+
 
             } else {
 
@@ -368,6 +403,13 @@ public class CurrentAddressFragment extends Fragment {
                 cityAdapter = new ArrayAdapter(context, R.layout.custom_layout_spinner, cityList);
                 spCity.setAdapter(cityAdapter);
                 cityAdapter.notifyDataSetChanged();
+
+                int count = cityModelList.size();
+                for (int i = 0; i < count; i++) {
+                    if (cityModelList.get(i).getName().equalsIgnoreCase(NewLeadActivity.Adistrict)) {
+                        spCity.setSelection(i);
+                    }
+                }
 
             } else {
 

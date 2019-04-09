@@ -196,18 +196,7 @@ public class PersonalDetailsFragment extends Fragment {
 
         try {
             sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//            MainActivity.Aaadhaarno = sharedPreferences.getString("Aaadhaarno", "");
-//            MainActivity.Aname = sharedPreferences.getString("Aname", "");
-//            MainActivity.Adob = sharedPreferences.getString("Adob", "");
-//            MainActivity.Ayob = sharedPreferences.getString("Ayob", "");
-//            MainActivity.Agender = sharedPreferences.getString("Agender", "");
-//            MainActivity.Aaddress = sharedPreferences.getString("Aaddress", "");
-//            MainActivity.Astreet_address = sharedPreferences.getString("Astreet_address", "");
-//            MainActivity.Adistrict = sharedPreferences.getString("Adistrict", "");
-//            MainActivity.Apincode = sharedPreferences.getString("Apincode", "");
-//            MainActivity.Astate = sharedPreferences.getString("Astate", "");
-//            MainActivity.Aisscanned = sharedPreferences.getString("Aisscanned", "");
-//
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -332,7 +321,13 @@ public class PersonalDetailsFragment extends Fragment {
 //            }
 //        });
 
-        showOCRDialog();
+        if(NewLeadActivity.Aaadhaarno.equals("") && NewLeadActivity.Ppanno.equals(""))
+        {
+
+        }
+        else {
+            showOCRDialog();
+        }
 
         return  view;
     }
@@ -340,7 +335,6 @@ public class PersonalDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         linMaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -562,7 +556,6 @@ public class PersonalDetailsFragment extends Fragment {
          linQR = view.findViewById(R.id.linQR);
          linStudentType = view.findViewById(R.id.linStudentType);
          linOCR = view.findViewById(R.id.linOCR);
-
 
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
@@ -1588,42 +1581,41 @@ public class PersonalDetailsFragment extends Fragment {
                             }
 
                             try {
-                                NewLeadActivity.Ayob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("gender");
+                                NewLeadActivity.Agender = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("gender");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                             try {
-                                NewLeadActivity.Agender = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("address");
+                                NewLeadActivity.Aaddress = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("address");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                             try {
-                                NewLeadActivity.Aaddress = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("street_address");
+                                NewLeadActivity.Astreet_address = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("street_address");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                             try {
-                                NewLeadActivity.Astreet_address = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("gender");
+                                NewLeadActivity.Apincode = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pincode");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                             try {
-                                NewLeadActivity.Adistrict = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pincode");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Apincode = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("district");
+                                NewLeadActivity.Adistrict = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("district");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             try {
                                 NewLeadActivity.Astate = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("state");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                NewLeadActivity.Aisscanned = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("Aisscanned");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

@@ -473,11 +473,11 @@
 
                                 <TextView
                                     android:id="@+id/txtMale"
+                                    style="@style/TextViewRadioStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
-                                    android:text="Manual"
-                                    style="@style/TextViewRadioStyle" />
+                                    android:text="Manual" />
 
                             </LinearLayout>
 
@@ -495,8 +495,8 @@
                                 <ImageView
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
-                                    android:tint="@color/textcolordark"
                                     android:layout_marginLeft="@dimen/_5sdp"
+                                    android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_id_card" />
 
                                 <View
@@ -530,8 +530,8 @@
                                 <ImageView
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
-                                    android:tint="@color/textcolordark"
                                     android:layout_marginLeft="@dimen/_5sdp"
+                                    android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_id_card" />
 
                                 <View
@@ -543,24 +543,25 @@
 
                                 <TextView
                                     android:id="@+id/txtOther"
+                                    style="@style/TextViewRadioStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:text="via OTP"
-                                    android:textColor="@color/textcolordark"
-                                    style="@style/TextViewRadioStyle" />                            </LinearLayout>
+                                    android:textColor="@color/textcolordark" />
+                            </LinearLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/linDownloadAgreement"
                             android:layout_width="wrap_content"
-                            android:minWidth="@dimen/_120sdp"
                             android:layout_height="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:background="@drawable/border_circular_red_filled"
                             android:gravity="center_vertical"
+                            android:minWidth="@dimen/_120sdp"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:padding="@dimen/_5sdp">
 
                             <TextView
@@ -568,8 +569,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Download Application"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:text="Download Application" />
+
                             <View
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
@@ -674,7 +676,7 @@
                             <LinearLayout
                                 android:id="@+id/linPayBtn"
                                 android:layout_width="@dimen/_80sdp"
-                                android:layout_height="@dimen/_30sdp"
+                                android:layout_height="@dimen/_25sdp"
                                 android:layout_alignParentRight="true"
                                 android:layout_alignParentBottom="true"
                                 android:layout_marginEnd="@dimen/_15sdp"
@@ -688,8 +690,9 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="PAY NOW"
-                                    android:gravity="center"/>
+                                    android:gravity="center"
+                                    android:text="PAY NOW" />
+
                                 <View
                                     android:layout_width="@dimen/_1sdp"
                                     android:layout_height="match_parent"
@@ -798,8 +801,8 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_horizontal"
                                                 android:layout_marginLeft="@dimen/_10sdp"
-                                                android:padding="@dimen/_1sdp"
-                                                android:orientation="horizontal">
+                                                android:orientation="horizontal"
+                                                android:padding="@dimen/_1sdp">
 
                                                 <TextView
                                                     android:id="@+id/txtDueByDate"
@@ -919,8 +922,8 @@
                                                     style="@style/TextViewSmallCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:text="01 Mar 2020"
                                                     android:padding="@dimen/_1sdp"
+                                                    android:text="01 Mar 2020"
                                                     android:textAllCaps="true"
                                                     android:textColor="@color/red" />
                                             </LinearLayout>

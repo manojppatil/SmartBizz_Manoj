@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.eduvanzapplication.R;
@@ -26,7 +27,7 @@ public class DocumentAvailabilityFragment extends Fragment {
 
     private static OnDocumentFragmentInteractionListener mDocListener;
     private LinearLayout linAadharBtn, linPanBtn, linBothBtn, linNoneBtn;
-    private TextInputLayout tilAadhar,tilPan;
+    private EditText edtAadhaar,edtPAN;
 
 
     public DocumentAvailabilityFragment() {
@@ -52,13 +53,13 @@ public class DocumentAvailabilityFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_document_availability, container, false);
-        linAadharBtn = view.findViewById(R.id.linAadharBtn);
-        linPanBtn = view.findViewById(R.id.linPanBtn);
-        linBothBtn =view.findViewById(R.id.linBothBtn);
-        linNoneBtn = view.findViewById(R.id.linNoneBtn);
+//        linAadharBtn = view.findViewById(R.id.linAadharBtn);
+//        linPanBtn = view.findViewById(R.id.linPanBtn);
+//        linBothBtn =view.findViewById(R.id.linBothBtn);
+//        linNoneBtn = view.findViewById(R.id.linNoneBtn);
 
-        tilAadhar = view.findViewById(R.id.tilAadhar);
-        tilPan = view.findViewById(R.id.tilPan);
+        edtAadhaar = view.findViewById(R.id.edtAadhaar);
+        edtPAN = view.findViewById(R.id.edtPAN);
 
         return  view;
     }
@@ -66,64 +67,65 @@ public class DocumentAvailabilityFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tilAadhar.setVisibility(GONE);
-        tilPan.setVisibility(GONE);
-        linAadharBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.documents  ="1";
-                tilAadhar.setVisibility(View.VISIBLE);
-                tilPan.setVisibility(GONE);
-                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-            }
-        });
+//        tilAadhar.setVisibility(GONE);
+//        tilPan.setVisibility(GONE);
 
-        linPanBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.documents  ="2";
-                tilAadhar.setVisibility(View.GONE);
-                tilPan.setVisibility(View.VISIBLE);
-                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-            }
-        });
+//        linAadharBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.documents  ="1";
+//                tilAadhar.setVisibility(View.VISIBLE);
+//                tilPan.setVisibility(GONE);
+//                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//            }
+//        });
+//
+//        linPanBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.documents  ="2";
+//                tilAadhar.setVisibility(View.GONE);
+//                tilPan.setVisibility(View.VISIBLE);
+//                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//            }
+//        });
+//
+//        linBothBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.documents  ="3";
+//                tilAadhar.setVisibility(View.VISIBLE);
+//                tilPan.setVisibility(View.VISIBLE);
+//                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//
+//            }
+//        });
+//
+//        linNoneBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.documents  ="4";
+//                tilAadhar.setVisibility(View.GONE);
+//                tilPan.setVisibility(View.GONE);
+//                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//
+//            }
+//        });
+//        linAadharBtn.performClick();
 
-        linBothBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.documents  ="3";
-                tilAadhar.setVisibility(View.VISIBLE);
-                tilPan.setVisibility(View.VISIBLE);
-                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-
-            }
-        });
-
-        linNoneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.documents  ="4";
-                tilAadhar.setVisibility(View.GONE);
-                tilPan.setVisibility(View.GONE);
-                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-
-            }
-        });
-        linAadharBtn.performClick();
-
-        tilAadhar.getEditText().addTextChangedListener(new TextWatcher() {
+        edtAadhaar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -131,7 +133,7 @@ public class DocumentAvailabilityFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                NewLeadActivity.aadharNumber = tilAadhar.getEditText().getText().toString();
+                NewLeadActivity.aadharNumber = edtAadhaar.getText().toString();
                 checkAllFields();
             }
 
@@ -141,7 +143,7 @@ public class DocumentAvailabilityFragment extends Fragment {
             }
         });
 
-        tilPan.getEditText().addTextChangedListener(new TextWatcher() {
+        edtPAN.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -149,7 +151,7 @@ public class DocumentAvailabilityFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                NewLeadActivity.panNUmber = tilPan.getEditText().getText().toString();
+                NewLeadActivity.panNUmber = edtPAN.getText().toString();
                 checkAllFields();
             }
 
@@ -179,7 +181,6 @@ public class DocumentAvailabilityFragment extends Fragment {
                 }
             });
         }
-
 
     }
 
@@ -269,24 +270,25 @@ public class DocumentAvailabilityFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if (NewLeadActivity.documents.equals("1")){
-            linAadharBtn.performClick();
-            tilAadhar.getEditText().setText(NewLeadActivity.aadharNumber);
-        }
-        else if (NewLeadActivity.documents.equals("2")){
-            linPanBtn.performClick();
-            tilPan.getEditText().setText(NewLeadActivity.panNUmber);
-        }
-        else if (NewLeadActivity.documents.equals("3")){
-            linBothBtn.performClick();
-            tilAadhar.getEditText().setText(NewLeadActivity.aadharNumber);
-            tilPan.getEditText().setText(NewLeadActivity.panNUmber);
-        }
-        else {
-            linNoneBtn.performClick();
-        }
+        edtAadhaar.setText(NewLeadActivity.Aaadhaarno);
+        edtPAN.setText(NewLeadActivity.Ppanno);
 
-
+//        if (NewLeadActivity.documents.equals("1")){
+//            linAadharBtn.performClick();
+//            tilAadhar.getEditText().setText(NewLeadActivity.aadharNumber);
+//        }
+//        else if (NewLeadActivity.documents.equals("2")){
+//            linPanBtn.performClick();
+//            tilPan.getEditText().setText(NewLeadActivity.panNUmber);
+//        }
+//        else if (NewLeadActivity.documents.equals("3")){
+//            linBothBtn.performClick();
+//            tilAadhar.getEditText().setText(NewLeadActivity.aadharNumber);
+//            tilPan.getEditText().setText(NewLeadActivity.panNUmber);
+//        }
+//        else {
+//            linNoneBtn.performClick();
+//        }
 
     }
 

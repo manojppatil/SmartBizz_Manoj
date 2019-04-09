@@ -10,12 +10,12 @@
         android:id="@+id/mag1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center"
         android:text="Borrower Documents"
         android:textAllCaps="true"
-        android:textSize="15sp"
-        android:gravity="center"
         android:textColor="@color/textcolordark"
-        android:layout_marginTop="@dimen/_8sdp"/>
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,21 +30,22 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Upload all the"
             android:textColor="@color/textcolordark"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Required Documents"
             android:textColor="@color/textcolordark"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/linAllDocBlock"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,29 +56,31 @@
                     android:id="@+id/linKYCblock"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_100sdp"
-                    android:layout_weight="0.5"
                     android:layout_margin="@dimen/_10sdp"
-                    android:padding="@dimen/_8sdp"
-                    android:orientation="vertical"
+                    android:layout_weight="0.5"
                     android:background="@drawable/border"
-                    android:backgroundTint="@color/yellow_600">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="KYC"
-                        android:drawableEnd="@drawable/ic_exclamation_triangle_yellow"
-                        android:textStyle="italic|bold"
-                        android:textSize="15sp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Documents"
-                        android:textSize="12sp"/>
+                    android:backgroundTint="@color/yellow_600"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd"/>
+                        android:drawableEnd="@drawable/ic_exclamation_triangle_yellow"
+                        android:text="KYC"
+                        android:textSize="15sp"
+                        android:textStyle="italic|bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Documents"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd" />
 
                 </LinearLayout>
 
@@ -85,29 +88,31 @@
                     android:id="@+id/linFinancBlock"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_100sdp"
-                    android:layout_weight="0.5"
                     android:layout_margin="@dimen/_10sdp"
-                    android:padding="@dimen/_8sdp"
-                    android:orientation="vertical"
+                    android:layout_weight="0.5"
                     android:background="@drawable/border"
-                    android:backgroundTint="#43A047">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Financial"
-                        android:drawableEnd="@drawable/ic_check_circle_green"
-                        android:textStyle="italic|bold"
-                        android:textSize="15sp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Documents"
-                        android:textSize="12sp"/>
+                    android:backgroundTint="#43A047"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd"/>
+                        android:drawableEnd="@drawable/ic_check_circle_green"
+                        android:text="Financial"
+                        android:textSize="15sp"
+                        android:textStyle="italic|bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Documents"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd" />
 
                 </LinearLayout>
 
@@ -117,33 +122,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:id="@+id/linEducationBlock"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_100sdp"
-                    android:layout_weight="0.5"
                     android:layout_margin="@dimen/_10sdp"
-                    android:padding="@dimen/_8sdp"
-                    android:orientation="vertical"
+                    android:layout_weight="0.5"
                     android:background="@drawable/border"
-                    android:backgroundTint="#1E88E5">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Educational"
-                        android:drawableEnd="@drawable/ic_exclamation_triangle_yellow"
-                        android:textStyle="italic|bold"
-                        android:textSize="15sp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Documents"
-                        android:textSize="12sp"/>
+                    android:backgroundTint="#1E88E5"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd"/>
+                        android:drawableEnd="@drawable/ic_exclamation_triangle_yellow"
+                        android:text="Educational"
+                        android:textSize="15sp"
+                        android:textStyle="italic|bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Documents"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd" />
 
                 </LinearLayout>
 
@@ -151,30 +159,31 @@
                     android:id="@+id/linOther"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_100sdp"
-                    android:layout_weight="0.5"
                     android:layout_margin="@dimen/_10sdp"
-                    android:padding="@dimen/_8sdp"
-                    android:orientation="vertical"
+                    android:layout_weight="0.5"
                     android:background="@drawable/border"
-                    android:backgroundTint="@color/blue1">
+                    android:backgroundTint="@color/blue1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp">
 
                     <ImageView
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
-                        app:srcCompat="@drawable/ic_plus_circle_solid"
-                        android:layout_gravity="end"/>
+                        android:layout_gravity="end"
+                        app:srcCompat="@drawable/ic_plus_circle_solid" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Upload"
-                        android:textStyle="italic|bold"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textStyle="italic|bold" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Additional Documents"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -185,139 +194,272 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/_8sdp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/_8sdp">
 
             <!--kyc documents-->
             <LinearLayout
                 android:id="@+id/linKYCDocuments"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_300sdp"
-                android:visibility="gone"
+                android:background="@drawable/border"
+                android:backgroundTint="#FDD835"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
-                android:background="@drawable/border"
-                android:backgroundTint="#FDD835">
+                android:visibility="visible">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_exclamation_triangle"
                     android:text="KYC Documents"
                     android:textColor="@color/textcolordark"
-                    android:drawableEnd="@drawable/ic_exclamation_triangle"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
 
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
+                            android:id="@+id/linPhoto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
+                                android:id="@+id/txtPhoto1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Photo"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/linPan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="PAN Card"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/linAadhaar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Aadhar Card"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/linPassport"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Passport"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
+
                         <LinearLayout
+                            android:id="@+id/linVoterId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Voter Id"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linDrivingLicense"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Driving License"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linTelephoneBill"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Telephone Bill"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linElectricityBill"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Electricity Bill"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linRentAgreement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Rent Agreement"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linAddressProof"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Address Proof"
+                                android:textSize="15sp" />
                         </LinearLayout>
 
                     </LinearLayout>
                 </ScrollView>
-
 
 
             </LinearLayout>
@@ -327,131 +469,287 @@
                 android:id="@+id/linFinanceDocuments"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_300sdp"
-                android:visibility="gone"
+                android:background="@drawable/border"
+                android:backgroundTint="#43A047"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
-                android:background="@drawable/border"
-                android:backgroundTint="#43A047">
+                android:visibility="gone">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_exclamation_triangle"
                     android:text="Financial Documents"
                     android:textColor="@color/textcolordark"
-                    android:drawableEnd="@drawable/ic_exclamation_triangle"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
 
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
+                            android:id="@+id/linSalarySlipSix"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Salary Slip - 6 Months"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/linSalarySlipThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Salary Slip - 3 Months"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/linBankStatementThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Bank Statement - 3 Months"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/linBankStatementSix"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Bank Statement - 6 Months"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/linKVP"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="KVP"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linLICPolicy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="LIC Policy"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linForm16"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Form 16"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linForm61"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Form 61"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linPensionLetter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Pension Letter"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="ITR"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="PNL"
+                                android:textSize="15sp" />
                         </LinearLayout>
 
                     </LinearLayout>
                 </ScrollView>
-
 
 
             </LinearLayout>
@@ -461,131 +759,141 @@
                 android:id="@+id/linEducationDocuments"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_300sdp"
-                android:visibility="gone"
+                android:background="@drawable/border"
+                android:backgroundTint="#1E88E5"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
-                android:background="@drawable/border"
-                android:backgroundTint="#1E88E5">
+                android:visibility="gone">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ducational Documents"
-                    android:textColor="@color/textcolordark"
                     android:drawableEnd="@drawable/ic_exclamation_triangle"
-                    android:textSize="15sp"/>
+                    android:text="Educational Documents"
+                    android:textColor="@color/textcolordark"
+                    android:textSize="15sp" />
 
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="10th Mark sheet"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="12th Mark sheet"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="Last completed degree Mark sheet"
+                                android:textSize="15sp" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Last completed Degree certificate"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
-                                android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/dashed_border"
-                            android:orientation="horizontal">
+                                app:srcCompat="@drawable/ic_image" />
 
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/dashed_border"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
                                 android:text="Upload ypour PAN Card"
-                                android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:textSize="15sp" />
                         </LinearLayout>
 
                     </LinearLayout>
                 </ScrollView>
-
 
 
             </LinearLayout>
@@ -595,131 +903,77 @@
                 android:id="@+id/linOtherDocuments"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_300sdp"
-                android:visibility="visible"
+                android:background="@drawable/border"
+                android:backgroundTint="@color/blue1"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
-                android:background="@drawable/border"
-                android:backgroundTint="@color/blue1">
+                android:visibility="visible">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_exclamation_triangle"
                     android:text="Other Documents"
                     android:textColor="@color/textcolordark"
-                    android:drawableEnd="@drawable/ic_exclamation_triangle"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
 
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
+                                app:srcCompat="@drawable/ic_image" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Others"
+                                android:textSize="15sp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
                             android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
-                                android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/dashed_border"
-                            android:orientation="horizontal">
+                                app:srcCompat="@drawable/ic_image" />
 
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
                                 android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
+                                android:text="Upload ypour PAN Card"
+                                android:textSize="15sp" />
                         </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/dashed_border"
-                            android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
-                                android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/dashed_border"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Upload ypour PAN Card"
-                                android:layout_marginEnd="@dimen/_20sdp"
-                                android:textSize="15sp"/>
-                        </LinearLayout>
 
                     </LinearLayout>
                 </ScrollView>
-
 
 
             </LinearLayout>
@@ -737,24 +991,38 @@
                     android:id="@+id/linKYCblockBottom"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="8sp"
-                    android:padding="@dimen/_6sdp"
-                    android:orientation="vertical"
+                    android:layout_weight="1"
                     android:background="@drawable/border"
-                    android:backgroundTint="#FDD835">
+                    android:backgroundTint="#FDD835"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_1sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="@dimen/_10sdp"
+                            app:srcCompat="@drawable/ic_check_circle_green" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="KYC"
-                        android:textStyle="bold|italic"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textStyle="bold|italic" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Documents"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -762,24 +1030,38 @@
                     android:id="@+id/linFinancBlockBottom"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="8sp"
-                    android:padding="@dimen/_6sdp"
-                    android:orientation="vertical"
+                    android:layout_weight="1"
                     android:background="@drawable/border"
-                    android:backgroundTint="#43A047">
+                    android:backgroundTint="#43A047"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_1sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            app:srcCompat="@drawable/ic_check_circle_green" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Finacial"
-                        android:textStyle="italic|bold"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textStyle="italic|bold" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Documents"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -787,24 +1069,38 @@
                     android:id="@+id/linEducationBlockBottom"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="8sp"
-                    android:padding="@dimen/_6sdp"
-                    android:orientation="vertical"
+                    android:layout_weight="1"
                     android:background="@drawable/border"
-                    android:backgroundTint="#1E88E5">
+                    android:backgroundTint="#1E88E5"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_1sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            app:srcCompat="@drawable/ic_check_circle_green" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Educational"
-                        android:textStyle="bold|italic"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textStyle="bold|italic" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Documents"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -812,32 +1108,45 @@
                     android:id="@+id/linOtherBottom"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:visibility="gone"
                     android:layout_margin="8sp"
-                    android:padding="@dimen/_6sdp"
-                    android:orientation="vertical"
+                    android:layout_weight="1"
                     android:background="@drawable/border"
-                    android:backgroundTint="@color/blue1">
+                    android:backgroundTint="@color/blue1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_1sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            app:srcCompat="@drawable/ic_check_circle_green" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Other"
-                        android:textStyle="bold|italic"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:textStyle="bold|italic" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Documents"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
 
 
     </LinearLayout>

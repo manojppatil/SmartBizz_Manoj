@@ -57,7 +57,6 @@
                     android:orientation="vertical">
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/tilFlat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
@@ -65,6 +64,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:id="@+id/edtAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="FLAT NUMBER, BUILDING, SOCIETY NAME"
@@ -72,7 +72,6 @@
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/tilStreet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
@@ -80,6 +79,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:id="@+id/edtLandmark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="STREET NAME, LOCALITY, LANDMARK"
@@ -94,7 +94,6 @@
                         android:orientation="horizontal">
 
                         <android.support.design.widget.TextInputLayout
-                            android:id="@+id/tilPincode"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
@@ -104,6 +103,7 @@
                             app:hintTextAppearance="@style/CustomTextAppearance">
 
                             <EditText
+                                android:id="@+id/edtPincode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="PIN CODE"

@@ -632,6 +632,7 @@ public class KycDetailFragment extends Fragment {
                 spCity.setAdapter(cityAdapter);
                 cityAdapter.notifyDataSetChanged();
 
+
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }

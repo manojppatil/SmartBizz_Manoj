@@ -36,8 +36,11 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.newUI.MainApplication;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
+
+import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,6 +48,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.airbnb.lottie.model.layer.Layer.LayerType.Text;
+import static com.eduvanzapplication.MainActivity.TAG;
 import static com.eduvanzapplication.R.*;
 import static com.eduvanzapplication.R.color.red;
 
@@ -155,17 +159,9 @@ public class PostApprovalDocFragment extends Fragment {
         txtProcessingFee = view.findViewById(id.txtProcessingFee);
 
         context = getContext();
-        mFragment = new DashboardFragmentNew();
+        mFragment = new PostApprovalDocFragment();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
-//        SpannableString string = new SpannableString("\u25CF Processing Fee");
-//        string.setSpan(new BulletSpan(40, 20), 10, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-//        SpannableString string1 = new SpannableString("Text with\nBullet point");
-//        string1.setSpan(new BulletSpan(40, red, 20), 10, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-//        txtProcessingFee.setText(string);
         return view;
 
     }
@@ -240,7 +236,133 @@ public class PostApprovalDocFragment extends Fragment {
 
             }
         });
+
+        try {
+            String url = MainActivity.mainUrl + "laf/getLoanDetails";
+            Map<String, String> params = new HashMap<String, String>();
+//                params.put("studentId","" );
+            params.put("lead_id", MainActivity.lead_id);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+//                volleyCall.sendRequest(context, url, null, mFragment, "getLoanDetails", params,"");
+                volleyCall.sendRequest(context, url, null, mFragment, "getLoanDetails", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
     }
+
+    public void setLoanDetails(JSONObject jsonDataO) {
+        Log.e(TAG, "setLoanDetails: " + jsonDataO);
+        try {//
+//            progressDialog.dismiss();
+//            if (jsonDataO.getInt("status") == 1) {
+//
+//                JSONObject mObject = jsonDataO.optJSONObject("result");
+//                String message = jsonDataO.getString("message");
+//
+//                JSONArray jsonArray1 = mObject.getJSONArray("leadsData");
+//                mLeadsArrayList = new ArrayList<>();
+//                if (jsonArray1.length() == 0){
+//                    linLeadsLayout.setVisibility(View.GONE);
+//                    relStartNewLayout.setVisibility(View.VISIBLE);
+//                }
+//                else {
+//                    relStartNewLayout.setVisibility(View.GONE);
+//                    linLeadsLayout.setVisibility(View.VISIBLE);
+//                }
+//                for (int i = 0; i < jsonArray1.length(); i++) {
+//                    MLeads mLeads = new MLeads();
+//                    JSONObject jsonleadStatus = jsonArray1.getJSONObject(i);
+//
+//                    try {
+//
+//                        if (!jsonleadStatus.getString("requested_loan_amount").toString().equals("null"))
+//                            mLeads.requested_loan_amount  = jsonleadStatus.getString("requested_loan_amount");
+//
+//                        if (!jsonleadStatus.getString("lead_id").toString().equals("null"))
+//                            mLeads.lead_id = jsonleadStatus.getString("lead_id");
+//
+//                        if (!jsonleadStatus.getString("application_id").toString().equals("null"))
+//                            mLeads.application_id = jsonleadStatus.getString("application_id");
+//
+//                        if (!jsonleadStatus.getString("first_name").toString().equals("null"))
+//                            mLeads.first_name = jsonleadStatus.getString("first_name");
+//
+//                        if (!jsonleadStatus.getString("middle_name").toString().equals("null"))
+//                            mLeads.middle_name = jsonleadStatus.getString("middle_name");
+//
+//                        if (!jsonleadStatus.getString("last_name").toString().equals("null"))
+//                            mLeads.last_name = jsonleadStatus.getString("last_name");
+//
+//                        if (!jsonleadStatus.getString("created_date_time").toString().equals("null"))
+//                            mLeads.created_date_time = jsonleadStatus.getString("created_date_time");
+//
+//                        if (!jsonleadStatus.getString("profession").toString().equals("null"))
+//                            mLeads.profession = jsonleadStatus.getString("profession");
+//
+//                        if (!jsonleadStatus.getString("fk_applicant_type_id").toString().equals("null"))
+//                            mLeads.fk_applicant_type_id = jsonleadStatus.getString("fk_applicant_type_id");
+//
+//                        if (!jsonleadStatus.getString("has_coborrower").toString().equals("null"))
+//                            mLeads.has_coborrower = jsonleadStatus.getString("has_coborrower");
+//
+//                        if (!jsonleadStatus.getString("course_name").toString().equals("null"))
+//                            mLeads.course_name = jsonleadStatus.getString("course_name");
+//
+//                        if (!jsonleadStatus.getString("course_cost").toString().equals("null"))
+//                            mLeads.course_cost = jsonleadStatus.getString("course_cost");
+//
+//                        if (!jsonleadStatus.getString("status_name").toString().equals("null"))
+//                            mLeads.status_name = jsonleadStatus.getString("status_name");
+//
+//                        if (!jsonleadStatus.getString("location_name").toString().equals("null"))
+//                            mLeads.location_name = jsonleadStatus.getString("location_name");
+//
+//                        if (!jsonleadStatus.getString("institute_name").toString().equals("null"))
+//                            mLeads.institute_name = jsonleadStatus.getString("institute_name");
+//
+//                        if (!jsonleadStatus.getString("student_id").toString().equals("null"))
+//                            mLeads.student_id = jsonleadStatus.getString("student_id");
+//
+//
+//                    } catch (JSONException e) {
+//                        String className = this.getClass().getSimpleName();
+//                        String name = new Object() {
+//                        }.getClass().getEnclosingMethod().getName();
+//                        String errorMsg = e.getMessage();
+//                        String errorMsgDetails = e.getStackTrace().toString();
+//                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//                    }
+//                    mLeadsArrayList.add(mLeads);
+//
+//                }
+//                adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
+//                rvLeads.setAdapter(adapter);
+
+//            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+    }
+
 
     @Override
     public void onStart() {

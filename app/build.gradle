@@ -57,6 +57,7 @@ dependencies {
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':cardstackview')
+    implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
 
     //Dotted View For View pager
 

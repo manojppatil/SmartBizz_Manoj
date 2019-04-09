@@ -22,6 +22,7 @@ import com.eduvanzapplication.newUI.fragments.AmortizationFragment;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
+import com.eduvanzapplication.newUI.fragments.PostApprovalDocFragment;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
 import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
 import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
@@ -321,6 +322,15 @@ public class VolleyCall  {
             try {
                 jsonDataO = new JSONObject(s);
                 ((DashboardFragmentNew) mfragment).setstudentDashbBoardDetails(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("getLoanDetails")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((PostApprovalDocFragment) mfragment).setLoanDetails(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

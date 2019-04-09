@@ -147,7 +147,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/_2sdp"
                             android:layout_weight="1"
-                            android:background="@drawable/border_circular_blue_filled"
+                            android:background="@drawable/border_circular"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
                             android:padding="@dimen/_5sdp">

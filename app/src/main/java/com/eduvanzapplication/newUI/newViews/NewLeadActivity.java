@@ -43,9 +43,9 @@ import java.util.Map;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class NewLeadActivity extends AppCompatActivity implements PersonalDetailsFragment.OnFragmentInteractionListener,
-                                                            CurrentAddressFragment.OnCurrentAddrFragmentInteractionListener,
-                                                            DocumentAvailabilityFragment.OnDocumentFragmentInteractionListener,
-                                                            EmploymentDetailsFragment.OnEmploymentFragmentInteractionListener {
+        CurrentAddressFragment.OnCurrentAddrFragmentInteractionListener,
+        DocumentAvailabilityFragment.OnDocumentFragmentInteractionListener,
+        EmploymentDetailsFragment.OnEmploymentFragmentInteractionListener {
 
     public static ViewPager viewPager;
     private ImageView ivNextBtn, ivPrevBtn;
@@ -54,18 +54,18 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     public static ImageView ivOCRBtn;
 
     public static String profession = "1";
-    public static String firstName="", lastName="", middleName="", gender="2", maritalStatus="0", dob="";
-    public static String documents = "1", aadharNumber="", panNUmber="";
-    public static String flatBuildingSoc="", streetLocalityLandMark="", pinCode="", countryId ="", stateId="", cityId="";
-    public static String companyName="", annualIncome="";
-    public static String instituteId ="", instituteLocationId ="", courseId ="", courseFee="", loanAmount="";
-    public static String leadId = "", applicantId="";
-    public static String lead_id="",student_id ="";
+    public static String firstName = "", lastName = "", middleName = "", gender = "2", maritalStatus = "0", dob = "";
+    public static String documents = "1", aadharNumber = "", panNUmber = "";
+    public static String flatBuildingSoc = "", streetLocalityLandMark = "", pinCode = "", countryId = "", stateId = "", cityId = "";
+    public static String companyName = "", annualIncome = "";
+    public static String instituteId = "", instituteLocationId = "", courseId = "", courseFee = "", loanAmount = "";
+    public static String leadId = "", applicantId = "";
+    public static String lead_id = "", student_id = "";
 
     public static String Aaadhaarno = "", Aname = "", Adob = "", Ayob = "", Agender = "", Aaddress = "",
-            Astreet_address = "",Adistrict = "",Apincode = "",Astate = "",Aisscanned = "";
+            Astreet_address = "", Adistrict = "", Apincode = "", Astate = "", Aisscanned = "";
 
-    public static String Ppanno = "", Ppantype = "", Pname = "",Pdob = "", Pdoi = "",Page = "", Pfathersname = "", Pisminor = "", Pisscanned = "";
+    public static String Ppanno = "", Ppantype = "", Pname = "", Pdob = "", Pdoi = "", Page = "", Pfathersname = "", Pisminor = "", Pisscanned = "";
 
     Context context;
     AppCompatActivity mActivity;
@@ -114,10 +114,64 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             Pisminor = sharedPreferences.getString("Pisminor", "");
             Pisscanned = sharedPreferences.getString("Pisscanned", "");
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if (Aaadhaarno.length() > 3) {
+            firstName = Aname;
+            if(Agender.toLowerCase().equals("male"))
+            {
+                gender = "1";
+            }
+            if(Agender.toLowerCase().equals("female"))
+            {
+                gender = "2";
+            }
+
+            if(Adob.length() > Pdob.length()) {
+                dob = Adob;
+            }
+            else {
+                dob = Pdob;
+            }
+            if (Ppanno.length() > 3) {
+                documents = "3";
+            } else {
+                documents = "1";
+            }
+            aadharNumber = Aaadhaarno;
+            panNUmber = Ppanno;
+            flatBuildingSoc = Aaddress;
+            streetLocalityLandMark = Astreet_address;
+            pinCode = Apincode;
+
+
+        } else if (panNUmber.length() > 3) {
+            firstName = Pname;
+//            gender = Agender;
+            if(Adob.length() > Pdob.length()) {
+                dob = Adob;
+            }
+            else {
+                dob = Pdob;
+            }
+            if (aadharNumber.length() > 3) {
+                documents = "3";
+            } else {
+                documents = "2";
+            }
+            aadharNumber = Aaadhaarno;
+            panNUmber = Ppanno;
+//            flatBuildingSoc = Aaddress;
+//            streetLocalityLandMark = Astreet_address;
+//            pinCode = Apincode;
+//            countryId = "1";
+//            stateId = "";
+//            cityId = "";
+
+        }
+
 
     }
 
@@ -134,7 +188,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         ivNextBtn.setOnClickListener(nextClickListener);
         ivPrevBtn.setOnClickListener(prevClickListener);
 
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -146,7 +199,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         viewPager.setAdapter(adapter);
         stepperIndicator.setViewPager(viewPager);
 
-
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -155,18 +207,17 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0){
+                if (position == 0) {
                     ivPrevBtn.setVisibility(View.GONE);
                     ivOCRBtn.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     ivPrevBtn.setVisibility(View.VISIBLE);
                     ivOCRBtn.setVisibility(View.GONE);
 
                 }
-                txtStepTracker.setText("Step ".concat(String.valueOf(position+1)).concat(" of ").concat(String.valueOf(adapter.getCount())));
+                txtStepTracker.setText("Step ".concat(String.valueOf(position + 1)).concat(" of ").concat(String.valueOf(adapter.getCount())));
 
-                switch (position){
+                switch (position) {
                     case 0:
                         break;
                     case 1:
@@ -181,14 +232,14 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                if (state == ViewPager.SCROLL_STATE_IDLE){
-                    if (viewPager.getCurrentItem() == 1){
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    if (viewPager.getCurrentItem() == 1) {
                         PersonalDetailsFragment.validate();
                     }
-                    if (viewPager.getCurrentItem() == 2){
+                    if (viewPager.getCurrentItem() == 2) {
                         DocumentAvailabilityFragment.validate();
                     }
-                    if (viewPager.getCurrentItem() == 3){
+                    if (viewPager.getCurrentItem() == 3) {
                         CurrentAddressFragment.validate();
                     }
                 }
@@ -201,23 +252,23 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     View.OnClickListener nextClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount()-1)){
-                if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")){
+            if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount() - 1)) {
+                if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")) {
                     startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
-                            .addFlags( Intent.FLAG_ACTIVITY_NEW_TASK));
-                }else
-                    Snackbar.make(ivNextBtn, "Please fill all the fields",Snackbar.LENGTH_SHORT).show();
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else
+                    Snackbar.make(ivNextBtn, "Please fill all the fields", Snackbar.LENGTH_SHORT).show();
 
                 saveBorrowerData();
             }
-            viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+            viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
         }
     };
     View.OnClickListener prevClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (viewPager.getCurrentItem() != 0)
-                viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+                viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
     };
 
@@ -230,10 +281,12 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     public void onOffButtonsDocuments(boolean next, boolean prev) {
         enableDisableButtons(next, prev);
     }
+
     @Override
     public void onOffButtonsCurrentAddress(boolean next, boolean prev) {
         enableDisableButtons(next, prev);
     }
+
     @Override
     public void onOffButtonEmployent(boolean next, boolean prev) {
         enableDisableButtons(next, prev);
@@ -241,18 +294,17 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
 
     private void enableDisableButtons(boolean next, boolean prev) {
-        if (next){
+        if (next) {
             ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
             ivNextBtn.setOnClickListener(nextClickListener);
-        }
-        else{
+        } else {
             ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
             ivNextBtn.setOnClickListener(null);
         }
-        if (prev){
+        if (prev) {
             ivPrevBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
             ivPrevBtn.setOnClickListener(prevClickListener);
-        }else
+        } else
             ivPrevBtn.setOnClickListener(prevClickListener);
     }
 
@@ -312,10 +364,10 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
         try {//auth_token
             SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-            String student_id="";
+            String student_id = "";
             student_id = sharedPreferences.getString("student_id", "");
             String auth_token = sharedPreferences.getString("auth_token", "");
-            String mobileNo =  sharedPreferences.getString("mobile_no", "");
+            String mobileNo = sharedPreferences.getString("mobile_no", "");
 
             String url = MainActivity.mainUrl + "dashboard/addborrower";
             Map<String, String> params = new HashMap<String, String>();
@@ -374,16 +426,16 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
             MainActivity.lead_id = jsonData.optString("lead_id");
             MainActivity.applicant_id = jsonData.optString("applicant_id");
-            NewLeadActivity.leadId= jsonData.optString("lead_id");
+            NewLeadActivity.leadId = jsonData.optString("lead_id");
             NewLeadActivity.applicantId = jsonData.optString("applicant_id");
 
 
             if (jsonData.getInt("status") == 1) {
                 startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();

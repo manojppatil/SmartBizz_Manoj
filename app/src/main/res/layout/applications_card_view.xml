@@ -9,7 +9,7 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="match_parent"
         app:cardCornerRadius="@dimen/_5sdp"
         android:layout_marginLeft="@dimen/_3sdp"
@@ -28,9 +28,10 @@
                 android:id="@+id/txtLeadfName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="@dimen/_50sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:text=""
+                android:ellipsize="marquee"
                 android:textColor="@color/darkblue"
                 style="@style/TextViewTitleStyle"/>
 
@@ -38,10 +39,12 @@
                 android:id="@+id/txtLeadlName"
                 style="@style/TextViewTitle14BoldStyle"
                 android:layout_width="wrap_content"
+                android:maxWidth="@dimen/_50sdp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtLeadfName"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:text=""
+                android:ellipsize="marquee"
                 android:textColor="@color/darkblue" />
 
             <TextView
@@ -75,7 +78,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="@dimen/_90sdp"
+                    android:layout_width="@dimen/_110sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_15sdp"
