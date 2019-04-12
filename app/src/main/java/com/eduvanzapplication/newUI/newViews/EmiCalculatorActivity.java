@@ -92,7 +92,7 @@ public class EmiCalculatorActivity extends AppCompatActivity {
                     txtCalculatedEmi.setText(String.valueOf(emi));
                     float ta = calTa(emi, months);
                     float ti = calTi(ta, principal);
-                    txtCalculatedEmi.setText(String.valueOf(ti));
+//                    txtCalculatedEmi.setText(String.valueOf(ti));
                 }
             }
         });

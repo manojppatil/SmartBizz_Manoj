@@ -66,7 +66,8 @@ dependencies {
     implementation project(':linkedin-sdk')
     implementation 'com.paytm:pgplussdk:1.1.2'
     implementation project(':digio-android-sdk-0.1.0')
-
+    implementation project(':FriendlyScoreAndroidSDK-release')
+    implementation project(':FriendlyScoreAndroidSDK-UI-release')
     implementation files('libs/commons-codec-1.10-rep.jar')
     implementation(name: "imgtopdf", ext: "aar")
 
@@ -116,24 +117,14 @@ dependencies {
     }*/
 
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
-    implementation project(':friendlyscore-libs')
     /*Events dispatcher*/
     api 'org.greenrobot:eventbus:3.0.0'
-    /*FS packages
 
-                         */
-    implementation project(':fs-contacts-sdk-release-1.1')
-    implementation project(':fs-calendar-sdk-release-1.1')
-    implementation project(':fs-calls-sms-release-1.001')
-    implementation project(':fs-ui-sdk-release-2.53')
-    implementation project(':fs-camera-sdk-release-1.2')
     /*Google packages used in SDK*/
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-identity:16.0.0'
-    implementation project(':fs-location-sdk-release-1.28')
-    implementation project(':fs-core-sdk-release-2.24')
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

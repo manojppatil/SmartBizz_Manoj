@@ -100,7 +100,7 @@
 //    Paypal
 //     */
 //
-////
+//    //
 ////    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
 ////
 ////    private static String FSCORE_PROD_CONFIG_CLIENT_ID = "251611";
@@ -269,7 +269,7 @@
 //        else if (requestCode == TwitterAuthConfig.DEFAULT_AUTH_REQUEST_CODE) {
 //            twitterLoginbutton.onActivityResult(requestCode, resultCode, data);
 //        } else {
-//             //Linkedin Response
+//            //Linkedin Response
 //            LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
 //        }
 //    }
