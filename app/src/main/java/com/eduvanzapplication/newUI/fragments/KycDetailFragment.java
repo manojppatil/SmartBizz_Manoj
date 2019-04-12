@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -61,10 +62,10 @@ public class KycDetailFragment extends Fragment {
     public static Animation expandAnimationPersonal, collapseanimationPersonal;
     public static Animation expandAnimationIdentity, collapseAnimationIdentity;
     public static Animation expanAnimationCourse, collapseAnimationCourse;
-    public static FloatingActionButton fabEdit;
+    public static ImageButton fabEdit;
     public static boolean isEdit = false;
 
-    public static TextInputLayout tilFirstName, tilMiddleName, tilLastName, tilEmail, tilMobile, tilFlat, tilStreet, tilPincode;
+    public static EditText edtFnameBr, edtMnameBr, edtLnameBr, edtEmailIdBr, edtMobileNoBr, edtAddressbr, edtLandmarkbr, edtPincodeBr;
     public static LinearLayout linMale,linFemale,linOther, linDob, linMaritalStatus;
     public static EditText edtAadhaar, edtPAN, edtLoanAmt;
     public static Spinner spCountry, spState, spCity, spInsttLocation, spCourse;
@@ -106,15 +107,15 @@ public class KycDetailFragment extends Fragment {
         txtCourseToggle = view.findViewById(R.id.txtCourseToggle);
         relCourseBlock = view.findViewById(R.id.relCourseBlock);
         fabEdit = view.findViewById(R.id.fabEdit);
-        tilFirstName = view.findViewById(R.id.tilFirstName);
-        tilMiddleName = view.findViewById(R.id.tilMiddleName);
-        tilLastName = view.findViewById(R.id.tilLastName);
+        edtFnameBr = view.findViewById(R.id.edtFnameBr);
+        edtMnameBr = view.findViewById(R.id.edtMnameBr);
+        edtLnameBr = view.findViewById(R.id.edtLnameBr);
 
-        tilEmail = view.findViewById(R.id.tilEmail);
-        tilMobile = view.findViewById(R.id.tilMobile);
-        tilFlat = view.findViewById(R.id.tilFlat);
-        tilStreet = view.findViewById(R.id.tilStreet);
-        tilPincode = view.findViewById(R.id.tilPincode);
+        edtEmailIdBr = view.findViewById(R.id.edtEmailIdBr);
+        edtMobileNoBr = view.findViewById(R.id.edtMobileNoBr);
+        edtAddressbr = view.findViewById(R.id.edtAddressbr);
+        edtLandmarkbr = view.findViewById(R.id.edtLandmarkbr);
+        edtPincodeBr = view.findViewById(R.id.edtPincodeBr);
         linMale = view.findViewById(R.id.linMale);
         linFemale = view.findViewById(R.id.linFemale);
         linOther = view.findViewById(R.id.linOther);
@@ -322,21 +323,21 @@ public class KycDetailFragment extends Fragment {
     }
 
     public void setViewsEnabled(boolean f){
-        tilFirstName.setEnabled(f);
-        tilMiddleName.setEnabled(f);
-        tilLastName.setEnabled(f);
+        edtFnameBr.setEnabled(f);
+        edtMnameBr.setEnabled(f);
+        edtLnameBr.setEnabled(f);
         linMale.setEnabled(f);
         linFemale.setEnabled(f);
         linOther.setEnabled(f);
         linDob.setEnabled(f);
         linMaritalStatus.setEnabled(f);
-        tilEmail.setEnabled(f);
-        tilMobile.setEnabled(f);
+        edtEmailIdBr.setEnabled(f);
+        edtMobileNoBr.setEnabled(f);
         edtAadhaar.setEnabled(f);
         edtPAN.setEnabled(f);
-        tilFlat.setEnabled(f);
-        tilStreet.setEnabled(f);
-        tilPincode.setEnabled(f);
+        edtAddressbr.setEnabled(f);
+        edtLandmarkbr.setEnabled(f);
+        edtPincodeBr.setEnabled(f);
         spCountry.setEnabled(f);
         spState.setEnabled(f);
         spCity.setEnabled(f);
@@ -350,7 +351,7 @@ public class KycDetailFragment extends Fragment {
 
     public void applyFieldsChangeListener(){
 
-        tilFirstName.getEditText().addTextChangedListener(new TextWatcher() {
+        edtFnameBr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
@@ -359,7 +360,7 @@ public class KycDetailFragment extends Fragment {
             public void afterTextChanged(Editable s) { }
         });
 
-        tilMiddleName.getEditText().addTextChangedListener(new TextWatcher() {
+        edtMnameBr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
@@ -368,7 +369,7 @@ public class KycDetailFragment extends Fragment {
             public void afterTextChanged(Editable s) { }
         });
 
-        tilLastName.getEditText().addTextChangedListener(new TextWatcher() {
+        edtLnameBr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
@@ -377,7 +378,7 @@ public class KycDetailFragment extends Fragment {
             public void afterTextChanged(Editable s) {          }
         });
 
-        tilEmail.getEditText().addTextChangedListener(new TextWatcher() {
+        edtEmailIdBr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
@@ -386,7 +387,7 @@ public class KycDetailFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
         });
 
-        tilMobile.getEditText().addTextChangedListener(new TextWatcher() {
+        edtMobileNoBr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override

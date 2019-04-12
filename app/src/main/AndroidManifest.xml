@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -42,8 +41,13 @@
         android:theme="@style/AppTheme"
         tools:node="replace"
         tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon,android:name">
-        <activity android:name=".newUI.newViews.TenureSelectionActivity"/>
-        <activity android:name=".newUI.newViews.CourseDetailsActivity" />
+
+        <activity android:name=".newUI.newViews.TenureSelectionActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".newUI.newViews.CourseDetailsActivity" android:screenOrientation="sensorPortrait"/>
+
+        <activity android:name=".newUI.newViews.EmiCalculatorActivity"
+            android:theme="@style/AppTheme1"
+            android:screenOrientation="sensorPortrait" />
 
         <activity android:name=".newUI.newViews.NewLeadActivity"
             android:theme="@style/AppTheme1"
@@ -155,22 +159,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".newUI.receiver.AppStatsForFileUpload"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="com.myapp.mycustomaction" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".newUI.receiver.LocationUploadForFileUpload"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="com.myapp.mycustomaction" />
             </intent-filter>
         </receiver>
 

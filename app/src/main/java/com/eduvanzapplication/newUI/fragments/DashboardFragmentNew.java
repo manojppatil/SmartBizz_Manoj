@@ -33,6 +33,7 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.CardStackAdapter;
+import com.eduvanzapplication.newUI.newViews.EmiCalculatorActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
@@ -58,19 +59,19 @@ public class DashboardFragmentNew extends Fragment  {
     static  ViewPager viewPagerDashboard;
     static ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     static TextView textViewDealTitle;
-    static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="" ,auth_token ="", lead_id="";
+    static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="",email ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
     public static ImageView ivPrevBtn,ivNextBtn;
     public static RelativeLayout relStartNewLayout;
     public static LinearLayout linLeadsLayout;
     public static ProgressDialog progressDialog;
 
-    static LinearLayout   linearLayoutEligiblityChekck,
+    static LinearLayout linearLayoutEligiblityChekck,
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
     SharedPref sharedPref;
-    LinearLayout linProceedBtn, layout2, linStartNew;
-    ImageView ivStartNewBtn;
+    LinearLayout linProceedBtn, layout2, linStartNew,linEMICalculator;
+    ImageView ivStartNewBtn, ivEMICalculatorBtn;
     TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
     ArrayList<DashboardBannerModel> bannerModelArrayList = new ArrayList<>();
 
@@ -83,7 +84,6 @@ public class DashboardFragmentNew extends Fragment  {
     static String borrower = null, coBorrower = null, coBorrowerDocument = null,
             eligibility = null, borrowerDocument = null, signDocument = null,
             kyc = null, profileDashboardStats = null;
-
 
     public static View view;
 
@@ -109,6 +109,7 @@ public class DashboardFragmentNew extends Fragment  {
                 userName = sharedPreferences.getString("first_name", "User");
                 userId = sharedPreferences.getString("logged_id", "");
                 mobile_no = sharedPreferences.getString("mobile_no", "");
+                email = sharedPreferences.getString("email", "");
                 student_id = sharedPreferences.getString("student_id", "");
                 auth_token = sharedPreferences.getString("auth_token", "");
                 lead_id = sharedPreferences.getString("lead_id", "");
@@ -138,6 +139,8 @@ public class DashboardFragmentNew extends Fragment  {
             layout2 = view.findViewById(R.id.layout2);
             linStartNew = view.findViewById(R.id.linStartNew);
             ivStartNewBtn = view.findViewById(R.id.ivStartNewBtn);
+            linEMICalculator = view.findViewById(R.id.linEMICalculator);
+            ivEMICalculatorBtn = view.findViewById(R.id.ivEMICalculatorBtn);
             txtCallUs = view.findViewById(R.id.txtCallUs);
             txtWhatsAppUs = view.findViewById(R.id.txtWhatsAppUs);
             txtEmailUs = view.findViewById(R.id.txtEmailUs);
@@ -344,6 +347,13 @@ public class DashboardFragmentNew extends Fragment  {
         }
     };
 
+    View.OnClickListener emiClkListnr = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(getActivity(), EmiCalculatorActivity.class));
+        }
+    };
+
     View.OnClickListener callUsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -410,6 +420,9 @@ public class DashboardFragmentNew extends Fragment  {
         txtCallUs.setOnClickListener(callUsListener);
         txtWhatsAppUs.setOnClickListener(whatsAppUsListener);
         txtEmailUs.setOnClickListener(emailUsListener);
+        linEMICalculator.setOnClickListener(emiClkListnr);
+        ivEMICalculatorBtn.setOnClickListener(emiClkListnr);
+
 
 //        getDashboardDetails();
 

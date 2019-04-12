@@ -276,7 +276,6 @@
                                 android:textAllCaps="true"
                                 style="@style/TextViewTitleSmallStyle"/>
 
-
                             <LinearLayout
                                 android:id="@+id/linMaritalStatusBtn"
                                 android:layout_width="match_parent"

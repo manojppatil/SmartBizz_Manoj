@@ -40,6 +40,33 @@ public class LoanTabActivity extends AppCompatActivity {
 
     //detailed values
 
+    //Post Doc values
+    public static String Postlead_id = "" ,Postapplication_loan_id= "" ,
+    Postprincipal_amount= "" ,
+            Postdown_payment= "" ,
+    Postrate_of_interest= "" ,
+            Postemi_type= "" ,
+    Postemi_amount= "" ,
+            Postrequested_loan_amount= "" ,
+    Postrequested_tenure= "" ,
+            Postrequested_roi= "" ,
+    Postrequested_emi= "" ,
+            Postoffered_amount= "" ,
+    Postapplicant_id= "" ,
+            Postfk_lead_id= "" ,
+    Postfirst_name= "" ,
+            Postlast_name= "" ,
+    Postmobile_number= "" ,
+            Postemail_id= "" ,
+    Postkyc_address= "" ,
+            Postcourse_cost= "" ,
+    Postpaid_on= "" ,
+            Posttransaction_amount= "" ,
+    Postkyc_status= "" ,
+            Postdisbursal_status= "" ,
+    Postloan_agrement_upload_status= "";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

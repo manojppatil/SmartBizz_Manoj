@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -19,14 +21,16 @@ import com.eduvanzapplication.R;
 
 import moe.feng.common.stepperview.VerticalStepperItemView;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class DetailedInfoFragment extends Fragment {
 
-	private VerticalStepperItemView mSteppersDetailed[] = new VerticalStepperItemView[2];
 	private Button btnNextDetailedInfo0, btnNextDetailedInfo1, btnPreviousDetailedInfo1;
-
+	public static TextView txtResidentialToggle, txtProfessionalToggle;
+	public static LinearLayout linResidentialBlock, linProfessionalBlock;
+	public static Animation collapseanimationResidential, expandAnimationResidential,collapseanimationProfessional, expandAnimationProfessional;
 	private Switch switchIsPermanentAddressSame;
-    private int mActivatedColorRes = R.color.material_blue_500;
-	private int mDoneIconRes = R.drawable.ic_done_white_16dp;
 
     static View view;
 
@@ -41,45 +45,109 @@ public class DetailedInfoFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.fragment_detailedinfo_stepper, parent, false);
+		context = getContext();
+		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        linBorrowerForm = view.findViewById(R.id.linBorrowerForm);
 		linIfAddressNotSame = view.findViewById(R.id.linIfAddressNotSame);
 
-        relborrower = view.findViewById(R.id.relborrower);
+		txtResidentialToggle = view.findViewById(R.id.txtResidentialToggle);
+		linResidentialBlock = view.findViewById(R.id.linResidentialBlock);
+		txtProfessionalToggle = view.findViewById(R.id.txtProfessionalToggle);
+		linProfessionalBlock = view.findViewById(R.id.linProfessionalBlock);
 
-        txtBorrowerArrowKey = view.findViewById(R.id.txtBorrowerArrowKey);
+		expandAnimationResidential = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+		collapseanimationResidential = AnimationUtils.loadAnimation(context,R.anim.scale_collapse);
+
+		expandAnimationProfessional = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+		collapseanimationProfessional = AnimationUtils.loadAnimation(context,R.anim.scale_collapse);
 
 		switchIsPermanentAddressSame =  view.findViewById(R.id.switchIsPermanentAddressSame);
 
-		context = getContext();
-		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-//
-//		if (borrowerVisiblity == 0) {
-//			linBorrowerForm.setVisibility(View.VISIBLE);
-//			borrowerVisiblity = 1;
-//			txtBorrowerArrowKey.setText(getResources().getString(R.string.up));
-//		} else if (borrowerVisiblity == 1) {
-//			linBorrowerForm.setVisibility(View.GONE);
-//			borrowerVisiblity = 0;
-//			txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
-//		}
-//
+        return view;
+    }
 
-//		relborrower.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				if (borrowerVisiblity == 0) {
-//					linBorrowerForm.setVisibility(View.VISIBLE);
-//					borrowerVisiblity = 1;
-//					txtBorrowerArrowKey.setText(getResources().getString(R.string.up));
-//				} else if (borrowerVisiblity == 1) {
-//					linBorrowerForm.setVisibility(View.GONE);
-//					borrowerVisiblity = 0;
-//					txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
-//				}
-//
-//			}
-//		});
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+
+
+		txtResidentialToggle.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (linResidentialBlock.getVisibility() == VISIBLE){
+					linResidentialBlock.startAnimation(collapseanimationResidential);
+				}else{
+					linResidentialBlock.startAnimation(expandAnimationResidential);
+				}
+			}
+		});
+
+		txtProfessionalToggle.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (linProfessionalBlock.getVisibility() == VISIBLE){
+					linProfessionalBlock.startAnimation(collapseanimationProfessional);
+				}else {
+					linProfessionalBlock.startAnimation(expandAnimationProfessional);
+				}
+			}
+		});
+
+		collapseanimationResidential.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) { }
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				linResidentialBlock.setVisibility(GONE);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) { }
+		});
+
+		expandAnimationResidential.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				linResidentialBlock.setVisibility(VISIBLE);
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				linProfessionalBlock.startAnimation(collapseanimationProfessional);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) { }
+		});
+
+
+		collapseanimationProfessional.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) { }
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				linProfessionalBlock.setVisibility(GONE);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) { }
+		});
+
+		expandAnimationProfessional.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				linProfessionalBlock.setVisibility(VISIBLE);
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				linProfessionalBlock.startAnimation(collapseanimationResidential);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {}
+		});
 
 		switchIsPermanentAddressSame.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -92,93 +160,9 @@ public class DetailedInfoFragment extends Fragment {
 				}
 			}
 		});
-        return view;
-    }
 
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+//		applyFieldsChangeListener();
 
-		mSteppersDetailed[0] = view.findViewById(R.id.stepperDetailed0);
-		mSteppersDetailed[1] = view.findViewById(R.id.stepperDetailed1);
-
-		VerticalStepperItemView.bindSteppers(mSteppersDetailed);
-
-		btnNextDetailedInfo0 = view.findViewById(R.id.btnNextDetailedInfo0);
-		btnNextDetailedInfo0.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				mSteppersDetailed[0].nextStep();
-			}
-		});
-
-		mSteppersDetailed[0].setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				mSteppersDetailed[0].nextStep();
-			}
-		});
-
-		mSteppersDetailed[1].setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				mSteppersDetailed[0].nextStep();
-			}
-		});
-
-//		view.findViewById(R.id.button_test_error).setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				if (mSteppersDetailed[0].getErrorText() != null) {
-//					mSteppersDetailed[0].setErrorText(null);
-//				} else {
-//					mSteppersDetailed[0].setErrorText("Test error!");
-//				}
-//			}
-//		});
-
-		btnPreviousDetailedInfo1 = view.findViewById(R.id.btnPreviousDetailedInfo1);
-		btnPreviousDetailedInfo1.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				mSteppersDetailed[1].prevStep();
-			}
-		});
-
-		btnNextDetailedInfo1 = view.findViewById(R.id.btnNextDetailedInfo1);
-		btnNextDetailedInfo1.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-
-				Snackbar.make(view, "Finish!", Snackbar.LENGTH_LONG).show();
-			}
-		});
-
-		view.findViewById(R.id.btn_change_point_color).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (mActivatedColorRes == R.color.material_blue_500) {
-					mActivatedColorRes = R.color.material_deep_purple_500;
-				} else {
-					mActivatedColorRes = R.color.material_blue_500;
-				}
-				for (VerticalStepperItemView stepper : mSteppersDetailed) {
-					stepper.setActivatedColorResource(mActivatedColorRes);
-				}
-			}
-		});
-		view.findViewById(R.id.btn_change_done_icon).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (mDoneIconRes == R.drawable.ic_done_white_16dp) {
-					mDoneIconRes = R.drawable.ic_save_white_16dp;
-				} else {
-					mDoneIconRes = R.drawable.ic_done_white_16dp;
-				}
-				for (VerticalStepperItemView stepper : mSteppersDetailed) {
-					stepper.setDoneIconResource(mDoneIconRes);
-				}
-			}
-		});
 	}
 
 

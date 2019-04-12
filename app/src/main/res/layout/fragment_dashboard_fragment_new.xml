@@ -215,7 +215,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/linContact"
         android:layout_marginTop="@dimen/_4sdp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="-18dp"
         android:orientation="horizontal">
 
         <HorizontalScrollView
@@ -345,7 +345,7 @@
                     android:layout_marginStart="@dimen/_6sdp">
 
                     <LinearLayout
-                        android:id="@+id/layout6"
+                        android:id="@+id/linEMICalculator"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/border_white_filled"
@@ -382,9 +382,10 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/ivEMICalculatorBtn"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp"
-                        android:layout_below="@id/layout6"
+                        android:layout_below="@id/linEMICalculator"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="-18dp"
                         android:layout_marginEnd="@dimen/_15sdp"

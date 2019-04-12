@@ -327,10 +327,21 @@ public class VolleyCall  {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if (screen.equalsIgnoreCase("getLoanDetails")) {
+        }
+        else if (screen.equalsIgnoreCase("getLoanDetails")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((PostApprovalDocFragment) mfragment).setLoanDetails(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("genrateAgreement")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((PostApprovalDocFragment) mfragment).setgenrateAgreement(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -953,16 +964,18 @@ else if (screen.equalsIgnoreCase("addcoborrower")) {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getDigioDocumentIdForStudent")) {
+        }
+        else if (screen.equalsIgnoreCase("getDigioDocumentIdForStudent")) {
             try {
                 jsonDataO = new JSONObject(s);
-                //LoanApplicationFragment_4 mfragment).getDigioDocumentIdForStudent(jsonDataO);
+                ((PostApprovalDocFragment) mfragment).setDigioDocumentIdForStudent(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("onSuccessfulRegisterStudentESignCase")) {
+        }
+        else if (screen.equalsIgnoreCase("onSuccessfulRegisterStudentESignCase")) {
             try {
                 jsonDataO = new JSONObject(s);
                 //LoanApplicationFragment_4 mfragment).onSuccessfulRegisterStudentESignCase(jsonDataO);

@@ -101,11 +101,6 @@ public class AmortizationFragment extends Fragment {
             if (jsonDataO.getInt("status") == 1) {
 
                 String message = jsonDataO.getString("message");
-//                txtEmiNo
-//                        txtEmiAmount
-//                txtDueBy
-//                        txtPaymentDate
-//                txtPaymentStatus
                 JSONArray jsonArray1 = jsonDataO.getJSONArray("loanEmiDetails");
 
                 for (int i = 0; i < jsonArray1.length(); i++) {
