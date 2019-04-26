@@ -58,6 +58,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="COMPANY NAME"
+                            android:imeOptions="actionNext"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
@@ -74,6 +75,7 @@
                             android:layout_height="wrap_content"
                             android:hint=" ANNUAL INCOME"
                             android:inputType="numberDecimal"
+                            android:imeOptions="actionDone"
                             android:drawableStart="@drawable/ic_rupee_sign"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>

@@ -86,7 +86,6 @@ public class DashboardActivity extends AppCompatActivity
     Context context;
 //    com.eduvanzapplication.newUI.newViews.CustomDrawerButton customDrawerButton;
     TextView textViewName, textViewEmail;
-    Button buttonSignup, buttonSignIn;
     MainApplication mainApplication;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
@@ -139,7 +138,7 @@ public class DashboardActivity extends AppCompatActivity
             drawer.setDrawerListener(toggle);
             toggle.syncState();
             //**To change the hamburger color on dashboard **/
-            toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorPrimary));
+            toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
 
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);

@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.friendlyscore.StartActivityFS;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
@@ -39,7 +40,6 @@ import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
 import com.eduvanzapplication.newUI.pojo.DashboardBannerModel;
 import com.viewpagerindicator.CirclePageIndicator;
-import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,13 +70,12 @@ public class DashboardFragmentNew extends Fragment  {
             linearLayoutApplyNow, linearLayoutContinueApplication;
     MainApplication mainApplication;
     SharedPref sharedPref;
-    LinearLayout linProceedBtn, layout2, linStartNew,linEMICalculator;
+    LinearLayout linProceedBtn, layout2,linFriendlyScore, linStartNew,linEMICalculator;
     ImageView ivStartNewBtn, ivEMICalculatorBtn;
     TextView txtCallUs, txtEmailUs, txtWhatsAppUs;
     ArrayList<DashboardBannerModel> bannerModelArrayList = new ArrayList<>();
 
     public static RecyclerView rvLeads;
-    public static CardStackLayoutManager manager;
     public static CardStackAdapter adapter;
 
     public static List<MLeads> mLeadsArrayList = new ArrayList<>();
@@ -137,6 +136,7 @@ public class DashboardFragmentNew extends Fragment  {
             viewPagerDashboard = (ViewPager) view.findViewById(R.id.viewPager_dashboard);
             linProceedBtn = view.findViewById(R.id.linProceedBtn);
             layout2 = view.findViewById(R.id.layout2);
+            linFriendlyScore = view.findViewById(R.id.linFriendlyScore);
             linStartNew = view.findViewById(R.id.linStartNew);
             ivStartNewBtn = view.findViewById(R.id.ivStartNewBtn);
             linEMICalculator = view.findViewById(R.id.linEMICalculator);
@@ -340,6 +340,13 @@ public class DashboardFragmentNew extends Fragment  {
     }
 
 
+    View.OnClickListener FriendlyScoreClkListnr = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(getActivity(), StartActivityFS.class));
+        }
+    };
+
     View.OnClickListener newApplicationClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -415,6 +422,7 @@ public class DashboardFragmentNew extends Fragment  {
         super.onViewCreated(view, savedInstanceState);
         linProceedBtn.setOnClickListener(newApplicationClkListnr);
         layout2.setOnClickListener(newApplicationClkListnr);
+        linFriendlyScore.setOnClickListener(FriendlyScoreClkListnr);
         linStartNew.setOnClickListener(newApplicationClkListnr);
         ivStartNewBtn.setOnClickListener(newApplicationClkListnr);
         txtCallUs.setOnClickListener(callUsListener);
@@ -584,7 +592,7 @@ public class DashboardFragmentNew extends Fragment  {
 
     public void setstudentDashbBoardDetails(JSONObject jsonDataO) {
         Log.e(TAG, "setProfileDashbBoardStatus: " + jsonDataO);
-        try {//
+        try {
             progressDialog.dismiss();
             if (jsonDataO.getInt("status") == 1) {
 
@@ -733,5 +741,6 @@ public class DashboardFragmentNew extends Fragment  {
         }
 
     }
+
 
 }

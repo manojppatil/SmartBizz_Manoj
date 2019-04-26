@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
@@ -28,6 +30,7 @@ public class LoanTabActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
+    private LinearLayout linDashBoard;
     private ViewPager viewPager;
     public static String lead_id="",student_id ="";
     Context context;
@@ -104,11 +107,19 @@ public class LoanTabActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        linDashBoard = findViewById(R.id.linDashBoard);
+        tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        linDashBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void onBackPressed() {

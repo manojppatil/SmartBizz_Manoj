@@ -67,6 +67,7 @@
                             android:id="@+id/edtAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
                             android:hint="FLAT NUMBER, BUILDING, SOCIETY NAME"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
@@ -82,6 +83,7 @@
                             android:id="@+id/edtLandmark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
                             android:hint="STREET NAME, LOCALITY, LANDMARK"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
@@ -107,6 +109,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="PIN CODE"
+                                android:imeOptions="actionDone"
                                 android:inputType="number"
                                 style="@style/EditTextStyle" />
                         </android.support.design.widget.TextInputLayout>

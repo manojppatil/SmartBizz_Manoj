@@ -41,10 +41,11 @@
                 <TextView
                     android:id="@+id/txtResidentialToggle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_25sdp"
                     android:drawableStart="@drawable/ic_user_check"
                     android:drawableEnd="@drawable/ic_check_circle_green"
                     android:text="   Residential Details"
+                    android:gravity="center_vertical"
                     android:textColor="@color/darkblue" />
 
                 <LinearLayout
@@ -165,6 +166,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentLeft="true"
                                             android:layout_alignParentTop="true"
+                                            android:layout_marginLeft="@dimen/_2sdp"
                                             android:text="Current Resident Type"
                                             android:textColor="@color/darkblue" />
 
@@ -211,25 +213,31 @@
 
                                         </LinearLayout>
 
+                                        <LinearLayout
+                                            android:id="@+id/linMonthlyRent"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_alignParentTop="true"
+                                            android:visibility="gone"
+                                            android:layout_marginLeft="@dimen/_5sdp"
+                                            android:layout_toRightOf="@+id/linResidentType"
+                                            android:orientation="vertical">
+
+
                                         <TextView
                                             android:id="@+id/txtRent"
                                             style="@style/TextViewSmall10Style"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_alignParentTop="true"
-                                            android:layout_marginLeft="@dimen/_5sdp"
-                                            android:layout_toRightOf="@+id/linResidentType"
+                                            android:layout_marginLeft="@dimen/_2sdp"
                                             android:text="Monthly Rent"
                                             android:textColor="@color/darkblue" />
 
                                         <LinearLayout
-                                            android:id="@+id/linMonthlyRent"
                                             android:layout_width="match_parent"
                                             android:layout_height="@dimen/_25sdp"
                                             android:layout_below="@+id/txtRent"
                                             android:layout_margin="@dimen/_2sdp"
-                                            android:layout_marginLeft="@dimen/_5sdp"
-                                            android:layout_toRightOf="@+id/linResidentType"
                                             android:background="@drawable/border_circular"
                                             android:gravity="center"
                                             android:orientation="horizontal"
@@ -245,6 +253,7 @@
                                                 android:maxLines="1"
                                                 android:text="45909" />
 
+                                        </LinearLayout>
                                         </LinearLayout>
 
                                     </RelativeLayout>
@@ -266,6 +275,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="@dimen/_8sdp"
+                                                android:layout_marginLeft="@dimen/_2sdp"
                                                 android:text="Owned By"
                                                 android:textColor="@color/darkblue" />
 
@@ -276,7 +286,6 @@
                                                 android:layout_marginTop="@dimen/_4sdp"
                                                 android:layout_marginEnd="@dimen/_1sdp"
                                                 android:background="@drawable/spinner_rect_background"
-                                                android:dropDownWidth="400px"
                                                 android:imeOptions="actionNext" />
 
                                         </LinearLayout>
@@ -300,6 +309,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="@dimen/_8sdp"
+                                                android:layout_marginLeft="@dimen/_2sdp"
                                                 android:text="Duration of Stay at your Current Address"
                                                 android:textColor="@color/darkblue" />
 
@@ -310,7 +320,6 @@
                                                 android:layout_marginTop="@dimen/_4sdp"
                                                 android:layout_marginEnd="@dimen/_1sdp"
                                                 android:background="@drawable/spinner_rect_background"
-                                                android:dropDownWidth="400px"
                                                 android:imeOptions="actionNext" />
 
                                         </LinearLayout>
@@ -322,10 +331,9 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:visibility="gone">
+                                        android:visibility="visible">
 
                                         <android.support.design.widget.TextInputLayout
-                                            android:id="@+id/tilFlat"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="@dimen/_6sdp"
@@ -333,15 +341,16 @@
                                             app:hintTextAppearance="@style/CustomTextAppearance">
 
                                             <EditText
+                                                android:id="@+id/edtPermanentAddress"
                                                 style="@style/EditTextStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:hint="Flat No, Building, Society Name"
+                                                android:maxLines="1"
                                                 android:imeOptions="actionNext" />
                                         </android.support.design.widget.TextInputLayout>
 
                                         <android.support.design.widget.TextInputLayout
-                                            android:id="@+id/tilStreet"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="@dimen/_6sdp"
@@ -349,9 +358,11 @@
                                             app:hintTextAppearance="@style/CustomTextAppearance">
 
                                             <EditText
+                                                android:id="@+id/edtPermanentLandmark"
                                                 style="@style/EditTextStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
+                                                android:maxLines="1"
                                                 android:hint="Street Name, Locality, Landmark"
                                                 android:imeOptions="actionNext" />
                                         </android.support.design.widget.TextInputLayout>
@@ -363,7 +374,6 @@
                                             android:orientation="horizontal">
 
                                             <android.support.design.widget.TextInputLayout
-                                                android:id="@+id/tilPincode"
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="@dimen/_6sdp"
@@ -372,10 +382,13 @@
                                                 app:hintTextAppearance="@style/CustomTextAppearance">
 
                                                 <EditText
+                                                    android:id="@+id/edtPermanentPincode"
                                                     style="@style/EditTextStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:hint="PinCode"
+                                                    android:maxLength="6"
+                                                    android:maxLines="1"
                                                     android:imeOptions="actionNext"
                                                     android:inputType="number" />
                                             </android.support.design.widget.TextInputLayout>
@@ -383,6 +396,7 @@
                                             <LinearLayout
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
+                                                android:layout_marginTop="@dimen/_6sdp"
                                                 android:layout_weight="0.5"
                                                 android:orientation="vertical">
 
@@ -394,7 +408,7 @@
                                                     android:text="COUNTRY" />
 
                                                 <Spinner
-                                                    android:id="@+id/spCountry"
+                                                    android:id="@+id/spPermanentCountry"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="@dimen/_26sdp"
                                                     android:layout_marginTop="@dimen/_4sdp"
@@ -426,7 +440,7 @@
                                                     android:text="STATE" />
 
                                                 <Spinner
-                                                    android:id="@+id/spState"
+                                                    android:id="@+id/spPermanentState"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="@dimen/_26sdp"
                                                     android:layout_marginTop="@dimen/_4sdp"
@@ -451,7 +465,7 @@
                                                     android:text="CITY" />
 
                                                 <Spinner
-                                                    android:id="@+id/spCity"
+                                                    android:id="@+id/spPermanentCity"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="@dimen/_26sdp"
                                                     android:layout_marginStart="@dimen/_2sdp"
@@ -480,15 +494,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
-                android:visibility="visible">
+                android:visibility="visible"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp">
 
                 <TextView
                     android:id="@+id/txtProfessionalToggle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_25sdp"
                     android:drawableStart="@drawable/ic_user_check"
                     android:drawableEnd="@drawable/ic_check_circle_green"
                     android:text="   Professional Details"
+                    android:gravity="center_vertical"
                     android:textColor="@color/darkblue" />
 
                 <LinearLayout
@@ -500,7 +517,8 @@
                     android:paddingStart="@dimen/_4sdp"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_8sdp"
-                    android:paddingBottom="@dimen/_8sdp">
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:visibility="visible">
 
                     <View
                         android:id="@+id/line2"
@@ -513,24 +531,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@id/line2"
-                        android:orientation="vertical"
-                        android:visibility="visible">
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:id="@+id/linNames"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/ivUser"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:orientation="vertical">
 
                             <TextView
                                 style="@style/TextViewSmallCapsStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
                                 android:gravity="start"
                                 android:text="Profession"
+                                android:layout_marginLeft="@dimen/_2sdp"
                                 android:textAllCaps="true"
                                 android:textColor="@color/darkblue" />
 
@@ -539,7 +556,6 @@
                                 style="@style/TextViewTitle14Style"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_26sdp"
-                                android:layout_marginTop="@dimen/_4sdp"
                                 android:layout_marginEnd="@dimen/_1sdp"
                                 android:background="@drawable/spinner_rect_background"
                                 android:imeOptions="actionNext"
@@ -580,6 +596,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:hint="Company Name"
+                                                android:maxLines="1"
                                                 android:imeOptions="actionNext"
                                                 android:inputType="textCapSentences" />
                                         </android.support.design.widget.TextInputLayout>
@@ -590,12 +607,13 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="@dimen/_8sdp"
                                             android:gravity="start"
+                                            android:layout_marginLeft="@dimen/_2sdp"
                                             android:text="Employer Type"
                                             android:textAllCaps="true"
                                             android:textColor="@color/darkblue" />
 
                                         <Spinner
-                                            android:id="@+id/spemployerType"
+                                            android:id="@+id/spEmployerType"
                                             style="@style/TextViewTitle14Style"
                                             android:layout_width="match_parent"
                                             android:layout_height="@dimen/_26sdp"
@@ -626,6 +644,7 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:hint="Annual Income"
+                                                    android:maxLines="1"
                                                     android:imeOptions="actionNext"
                                                     android:inputType="number" />
                                             </android.support.design.widget.TextInputLayout>
@@ -634,6 +653,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.5"
+                                                android:layout_marginTop="@dimen/_6sdp"
                                                 android:orientation="vertical">
 
                                                 <TextView
@@ -641,6 +661,7 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:gravity="center_horizontal"
+                                                    android:textColor="@color/darkblue"
                                                     android:text="Current Employment Duration" />
 
                                                 <Spinner
@@ -674,6 +695,7 @@
                                                     style="@style/EditTextStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
+                                                    android:maxLines="1"
                                                     android:hint="Flat No, Building, Society Name"
                                                     android:imeOptions="actionNext" />
                                             </android.support.design.widget.TextInputLayout>
@@ -690,6 +712,7 @@
                                                     style="@style/EditTextStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
+                                                    android:maxLines="1"
                                                     android:hint="Street Name, Locality, Landmark"
                                                     android:imeOptions="actionNext" />
                                             </android.support.design.widget.TextInputLayout>
@@ -714,6 +737,8 @@
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
                                                         android:hint="PinCode"
+                                                        android:maxLength="6"
+                                                        android:maxLines="1"
                                                         android:imeOptions="actionNext"
                                                         android:inputType="number" />
                                                 </android.support.design.widget.TextInputLayout>
@@ -722,6 +747,7 @@
                                                     android:layout_width="0dp"
                                                     android:layout_height="wrap_content"
                                                     android:layout_weight="0.5"
+                                                    android:layout_marginTop="@dimen/_6sdp"
                                                     android:orientation="vertical">
 
                                                     <TextView
@@ -821,7 +847,7 @@
 
 
     <ImageButton
-        android:id="@+id/fabEditDetailedInfo"
+        android:id="@+id/btnEditDetailedInfo"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_alignParentEnd="true"
@@ -834,7 +860,7 @@
         app:srcCompat="@drawable/ic_pencil_alt"/>
 
     <ImageButton
-        android:id="@+id/fabNext"
+        android:id="@+id/btnNext"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_alignParentEnd="true"

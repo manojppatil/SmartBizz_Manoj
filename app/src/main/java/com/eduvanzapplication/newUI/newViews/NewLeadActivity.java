@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -74,8 +75,14 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_lead);
 
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+        if (height<1800){
+            setContentView(R.layout.activity_new_lead_small);
+        }
+        else {
+            setContentView(R.layout.activity_new_lead);
+        }
         setViews();
         setupViewPager(viewPager);
         if (!CameraUtils.isDeviceSupportCamera(getApplicationContext())) {
@@ -264,6 +271,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
         }
     };
+
     View.OnClickListener prevClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

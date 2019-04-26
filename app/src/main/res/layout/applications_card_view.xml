@@ -10,7 +10,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_5sdp"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginTop="@dimen/_5sdp"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:maxWidth="@dimen/_50sdp"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:ellipsize="marquee"
                 android:textColor="@color/darkblue"
                 style="@style/TextViewTitleStyle"/>
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="-16dp"
                 android:layout_toEndOf="@id/txtLeadfName"
                 android:background="@drawable/border_circular_blue_filled"
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtLeadlName"
-                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -92,6 +92,7 @@
                         android:singleLine="true"
                         android:text="APPLICATION ID"
                         android:textColor="@color/darkblue"
+                        android:textSize="12sp"
                         style="@style/TextViewTitle14BoldStyle"/>
 
                     <TextView
@@ -160,6 +161,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
                 android:layout_below="@id/line1"
                 android:orientation="horizontal">
 
@@ -176,7 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_4sdp"
-                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:singleLine="true"
                         android:ellipsize="marquee"
                         android:text="Amity University"
@@ -190,6 +192,7 @@
                         android:text="BBA - Banking &amp; Financing"
                         android:singleLine="true"
                         android:ellipsize="marquee"
+                        android:textSize="12sp"
                         style="@style/TextViewTitle14BoldStyle"/>
 
                     <LinearLayout
@@ -199,8 +202,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_15sdp"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
                             android:layout_gravity="center_vertical"
                             app:srcCompat="@drawable/ic_map_marker_alt"/>
 
@@ -211,6 +214,7 @@
                             android:layout_marginStart="@dimen/_4sdp"
                             android:text="Mumbai"
                             android:layout_gravity="center_vertical"
+                            android:textSize="12sp"
                             style="@style/TextViewTitle14BoldStyle"/>
 
                     </LinearLayout>
@@ -225,8 +229,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_6sdp"
-                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginRight="@dimen/_6sdp"
+                    android:layout_marginLeft="@dimen/_6sdp"
                     android:orientation="vertical">
 
                     <TextView
@@ -235,7 +239,7 @@
                         android:text="COURSE FEE"
                         android:layout_gravity="left"
                         android:textColor="@color/darkblue"
-                        style="@style/TextViewTitle12BoldStyle"/>
+                        style="@style/TextViewTitle10BoldStyle"/>
 
                     <TextView
                         android:id="@+id/txtCourseFee"
@@ -246,16 +250,16 @@
                         android:layout_gravity="left"
                         android:text="\t 345000"
                         android:drawableStart="@drawable/ic_rupee_sign"
-                        style="@style/TextViewTitle14Style"/>
+                        style="@style/TextViewTitleSmallStyle"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LOAN AMOUNT"
                         android:layout_gravity="left"
-                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         android:textColor="@color/darkblue"
-                        style="@style/TextViewTitle12BoldStyle"/>
+                        style="@style/TextViewTitle10BoldStyle"/>
 
                     <TextView
                         android:id="@+id/txtLoanAmount"
@@ -266,7 +270,7 @@
                         android:ellipsize="marquee"
                         android:text="\t 1000000"
                         android:drawableStart="@drawable/ic_rupee_sign"
-                        style="@style/TextViewTitle14Style"/>
+                        style="@style/TextViewTitleSmallStyle"/>
 
                 </LinearLayout>
 

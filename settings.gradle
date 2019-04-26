@@ -1,2 +1,2 @@
 include ':app', ':linkedin-sdk', ':digio-android-sdk-0.1.0', ':libraryMobilePaymentSDK' ,
-        ':FriendlyScoreAndroidSDK-release', ':FriendlyScoreAndroidSDK-UI-release' , ':cardstackview', ':library'
+        ':FriendlyScoreAndroidSDK-release', ':FriendlyScoreAndroidSDK-UI-release', ':library'

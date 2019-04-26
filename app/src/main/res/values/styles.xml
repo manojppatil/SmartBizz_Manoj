@@ -98,6 +98,14 @@
 
     </style>
 
+    <style name="TextViewTitle10BoldStyle" parent="Theme.AppCompat.Light">
+        <item name="android:textStyle">bold</item>
+        <item name="colorControlHighlight">@color/textcolordark</item>
+        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
+        <item name="android:textSize">10sp</item>
+
+    </style>
+
     <style name="TextViewSmallCapsStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/black_new</item>
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
@@ -112,6 +120,14 @@
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
         <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">10sp</item>
+
+    </style>
+
+    <style name="TextViewSmall9Style" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/black_new</item>
+        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
+        <item name="android:textColor">@color/black_new</item>
+        <item name="android:textSize">9sp</item>
 
     </style>
 

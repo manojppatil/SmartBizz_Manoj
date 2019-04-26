@@ -20,8 +20,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/mag1"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_below="@+id/mag1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:orientation="vertical">
 
         <TextView
@@ -29,16 +30,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Upload all the"
-            android:textColor="@color/textcolordark"
-            android:textSize="15sp" />
+            style="@style/TextViewTitle14Style"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Required Documents"
-            android:textColor="@color/textcolordark"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            style="@style/TextViewTitleStyle"/>
 
         <LinearLayout
             android:id="@+id/linAllDocBlock"
@@ -248,6 +248,20 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Photo"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/btnPhoto1"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -271,6 +285,20 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="PAN Card"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/panCardBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPan2"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -294,6 +322,20 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Aadhar Card"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/aadharBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -317,6 +359,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Passport"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/passportBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
 
@@ -341,6 +396,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Voter Id"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/voterIdBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -364,6 +432,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Driving License"
                                 android:textSize="15sp" />
+                            <Button
+                                android:id="@+id/drivingLicenseBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -387,6 +468,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Telephone Bill"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/telephoneBillBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -410,6 +504,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Electricity Bill"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/electricityBillBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -433,6 +540,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Rent Agreement"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/rentAgreementBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -456,6 +576,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Address Proof"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/addressProffBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -514,6 +647,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Salary Slip - 6 Months"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/salSlipSixBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -537,6 +683,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Salary Slip - 3 Months"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/salSlipThreeBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -560,6 +719,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Bank Statement - 3 Months"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/bankStmnt3"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -583,6 +755,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Bank Statement - 6 Months"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/bankstatmntSixBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -606,6 +791,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="KVP"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/kvpBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
 
@@ -630,6 +828,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="LIC Policy"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/licBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
 
@@ -654,6 +865,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Form 16"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/form16Btn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
 
@@ -678,6 +902,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Form 61"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/form61btn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
 
@@ -702,9 +939,22 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Pension Letter"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/pensionBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
-                        <LinearLayout
+                        <LinearLayout android:id="@+id/linITR"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
@@ -724,9 +974,23 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="ITR"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/itrBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linPNL"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
@@ -746,6 +1010,19 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="PNL"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/pnlBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -784,6 +1061,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/lintenth_mark_sheet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
@@ -803,9 +1081,23 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="10th Mark sheet"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/tenthMarkSheetBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lintwelvethMarkSheet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
@@ -825,9 +1117,22 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="12th Mark sheet"
                                 android:textSize="15sp" />
+                            <Button
+                                android:id="@+id/twelvethMarkSheetBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linlastCompletedMarkSheet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
@@ -847,8 +1152,23 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Last completed degree Mark sheet"
                                 android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/lastCompletedMarksheetBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
+
                         <LinearLayout
+                            android:id="@+id/linlastcompletedDegreeCertificate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
@@ -868,30 +1188,20 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Last completed Degree certificate"
                                 android:textSize="15sp" />
-                        </LinearLayout>
 
-                        <LinearLayout
+                            <Button
+                                android:id="@+id/lastDegreeCertificateBtn"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:background="@drawable/dashed_border"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/_20sdp"
-                                android:text="Upload ypour PAN Card"
-                                android:textSize="15sp" />
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
-
                     </LinearLayout>
                 </ScrollView>
 
@@ -928,6 +1238,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/others"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_16sdp"
@@ -947,30 +1258,20 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Others"
                                 android:textSize="15sp" />
-                        </LinearLayout>
 
-                        <LinearLayout
+                            <Button
+                                android:id="@+id/othersBtn"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:background="@drawable/dashed_border"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/_20sdp"
-                                android:text="Upload ypour PAN Card"
-                                android:textSize="15sp" />
+                                android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
-
 
                     </LinearLayout>
                 </ScrollView>
@@ -1150,6 +1451,17 @@
 
 
     </LinearLayout>
+
+    <ProgressBar
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar_docupload"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false"
+        android:layout_gravity="center" />
 
 </RelativeLayout>
 

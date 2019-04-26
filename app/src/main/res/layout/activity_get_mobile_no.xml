@@ -76,6 +76,7 @@
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_4sdp"
                     android:text=""
+                    android:imeOptions="actionNext"
                     style="@style/TextViewTitle14Style" />
 
             </LinearLayout>
@@ -131,6 +132,7 @@
                     android:maxLength="10"
                     android:padding="@dimen/_4sdp"
                     android:text=""
+                    android:imeOptions="actionNext"
                     style="@style/TextViewTitle14Style" />
 
             </LinearLayout>
@@ -189,6 +191,7 @@
                         android:inputType="textEmailAddress"
                         android:padding="@dimen/_4sdp"
                         android:text=""
+                        android:imeOptions="actionNext"
                         style="@style/TextViewTitle14Style" />
                 </LinearLayout>
 
@@ -362,8 +365,8 @@
                 android:padding="@dimen/_3sdp"
                 android:text=""
                 android:hint="Enter OTP"
+                android:imeOptions="actionDone"
                 style="@style/TextViewTitle14Style" />
-
 
             <View
                 android:layout_width="@dimen/_1sdp"

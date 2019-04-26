@@ -153,7 +153,6 @@ public class AmortizationFragment extends Fragment {
                         if (!jsonEmiDetails.getString("statusMessage").toString().equals("null"))
                             mLoanEmis.statusMessage = jsonEmiDetails.getString("statusMessage");
 
-
                     } catch (JSONException e) {
                         String className = this.getClass().getSimpleName();
                         String name = new Object() {

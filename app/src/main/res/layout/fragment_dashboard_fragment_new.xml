@@ -18,12 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/_5sdp"
-            android:elevation="@dimen/_6sdp">
+            android:elevation="@dimen/_5sdp">
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager_dashboard"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:padding="@dimen/_5sdp"
@@ -163,7 +163,6 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
 
     <LinearLayout
@@ -172,7 +171,7 @@
         android:layout_height="match_parent"
         android:visibility="visible"
         android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_1sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:gravity="center_vertical"
@@ -180,12 +179,11 @@
         android:layout_below="@id/linBanner"
         android:background="#77FFFFFF">
 
-
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingBottom="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_2sdp"
             android:paddingTop="@dimen/_4sdp"
             android:clipToPadding="false"
             android:clipChildren="false">
@@ -197,12 +195,6 @@
                 android:orientation="horizontal">
 
             </android.support.v7.widget.RecyclerView>
-            <!--<com.yuyakaido.android.cardstackview.CardStackView-->
-                <!--android:id="@+id/card_stack_view"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginBottom="@dimen/_2sdp">-->
-            <!--</com.yuyakaido.android.cardstackview.CardStackView>-->
 
         </RelativeLayout>
 
@@ -214,8 +206,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/linContact"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:layout_marginBottom="-18dp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="-10dp"
         android:orientation="horizontal">
 
         <HorizontalScrollView
@@ -226,16 +218,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_margin="@dimen/_3sdp"
                 android:orientation="horizontal"
-                android:paddingEnd="@dimen/_5sdp">
+                android:layout_gravity="center_horizontal"
+                android:paddingEnd="@dimen/_3sdp">
 
                 <RelativeLayout
-                    android:layout_width="@dimen/_99sdp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:id="@+id/layout4"
+                        android:id="@+id/linFriendlyScore"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/border_white_filled"
@@ -243,38 +236,40 @@
                         android:padding="@dimen/_5sdp">
 
                         <TextView
-                            style="@style/TextViewTitleStyle"
+                            style="@style/TextViewTitle14Style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
                             android:text="Friendly" />
 
                         <TextView
-                            style="@style/TextViewTitleStyle"
+                            style="@style/TextViewTitle14Style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Score"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <View
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_1sdp"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_3sdp"
                             android:background="@color/black" />
 
                         <TextView
-                            style="@style/TextViewSmall10Style"
+                            style="@style/TextViewSmall9Style"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_40sdp"
+                            android:layout_height="@dimen/_38sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:text="@string/fs_msg" />
 
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_below="@id/layout4"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_below="@id/linFriendlyScore"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="-18dp"
                         android:layout_marginEnd="@dimen/_15sdp"
@@ -284,9 +279,9 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="@dimen/_99sdp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_6sdp">
+                    android:layout_marginStart="@dimen/_7sdp">
 
                     <LinearLayout
                         android:id="@+id/linStartNew"
@@ -297,15 +292,17 @@
                         android:padding="@dimen/_5sdp">
 
                         <TextView
-                            style="@style/TextViewTitleStyle"
+                            style="@style/TextViewTitle14Style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
                             android:text="Start New" />
 
                         <TextView
-                            style="@style/TextViewTitleStyle"
+                            style="@style/TextViewTitle14Style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
                             android:text="Application"
                             android:textStyle="bold" />
 
@@ -313,13 +310,13 @@
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_1sdp"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_3sdp"
                             android:background="@color/black" />
 
                         <TextView
-                            style="@style/TextViewSmall10Style"
+                            style="@style/TextViewSmall9Style"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_40sdp"
+                            android:layout_height="@dimen/_38sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:text="@string/start_new_msg" />
 
@@ -327,8 +324,8 @@
 
                     <ImageView
                         android:id="@+id/ivStartNewBtn"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_below="@id/linStartNew"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="-18dp"
@@ -340,9 +337,9 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="@dimen/_99sdp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_6sdp">
+                    android:layout_marginStart="@dimen/_7sdp">
 
                     <LinearLayout
                         android:id="@+id/linEMICalculator"
@@ -353,15 +350,17 @@
                         android:padding="@dimen/_5sdp">
 
                         <TextView
-                            style="@style/TextViewTitleStyle"
+                            style="@style/TextViewTitle14Style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
                             android:text="EMI" />
 
                         <TextView
-                            style="@style/TextViewTitleStyle"
+                            style="@style/TextViewTitle14Style"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="13sp"
                             android:text="Calculator"
                             android:textStyle="bold" />
 
@@ -369,13 +368,13 @@
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_1sdp"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_3sdp"
                             android:background="@color/black" />
 
                         <TextView
-                            style="@style/TextViewSmall10Style"
+                            style="@style/TextViewSmall9Style"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_40sdp"
+                            android:layout_height="@dimen/_38sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:text="@string/emi_cal_msg" />
 
@@ -383,8 +382,8 @@
 
                     <ImageView
                         android:id="@+id/ivEMICalculatorBtn"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_below="@id/linEMICalculator"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="-18dp"
@@ -405,7 +404,7 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_7sdp"
+        android:layout_margin="@dimen/_5sdp"
         android:padding="@dimen/_6sdp"
         android:orientation="horizontal"
         android:gravity="center_vertical"

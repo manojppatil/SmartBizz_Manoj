@@ -50,6 +50,8 @@ public class MainApplication {
 
     public static int currrentFrag = 0;
 
+    public static String Brapplicant_idkyc = "";
+
 
     public static double latitude;
     public static double longitde;

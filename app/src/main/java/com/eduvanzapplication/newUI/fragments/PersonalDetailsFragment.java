@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -188,6 +189,13 @@ public class PersonalDetailsFragment extends Fragment {
         txtDOB = view.findViewById(R.id.txtDOB);
         txtMaritalStatus = view.findViewById(R.id.txtMaritalStatus);
         switchMarital = view.findViewById(R.id.switchMarital);
+
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+//        if(height<1080){
+//            view = inflater.inflate(R.layout.demo1, container, false);
+//        }else {
+//            view = inflater.inflate(R.layout.fragment_dashboard_fragment_new, container, false);
+//        }
 
         context = getContext();
         mFragment = new PersonalDetailsFragment();

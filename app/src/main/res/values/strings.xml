@@ -36,6 +36,19 @@
     <string name="label_firebase_ui">FirebaseUI Auth</string>
     <string name="desc_firebase_ui">Use the FirebaseUI-Android library to authenticate with Firebase.</string>
 
+    <string name="google_play_services_invalid">Google Play Service Version on your device is invalid</string>
+    <string name="google_play_services_invalid_title">Invalid Google Play Services</string>
+    <string name="no_google_play_services">Your device does not have Google Pay Services. Install From &google_play_services_link;</string>
+    <string name="no_google_play_services_title">Google Play Services Missing</string>
+    <string name="google_play_services_update">Update Google Play Services on your devices. Update from &google_play_services_link;</string>
+    <string name="google_play_services_title_update">Google Play Services is not updated on your device.</string>
+
+    <string name="google_play_services_updating">Google Play Services is being updated on your device. Check from &google_play_services_link;</string>
+    <string name="google_play_services_updating_title">Google Play Services is being updated.</string>
+    <string name="google_play_services_disabled">Google Play Services is disabled on your device. To use the App, Enable it.</string>
+    <string name="google_play_services_disabled_title">Google Play Services Disabled</string>
+    <string name="default_web_client_id1" translatable="false">577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com</string>
+
     <!--<string name="hint_user_id">User ID</string>-->
     <!--<string name="get_custom_token">Get Token</string>-->
     <!--<string name="sign_in">Sign In</string>-->
@@ -86,7 +99,8 @@
     <string name="title_activity_main2">Connect &amp; Score</string>
     <string name="title_activity_start">New Scoring</string>
 
-
+    <!--KYC documents-->
+    <string name="upload">Upload</string>
     <string name="ok">I understand</string>
     <!--
    B7:6F:26:F5:D7:75:F6:FA:42:A6:3C:A4:D7:B8:65:32:2D:7F:9B:A6
@@ -260,6 +274,8 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="eduvanz">Eduvanz</string>
     <string name="enter_institute_location">Enter Institute Location</string>
     <string name="more">More</string>
+    <string name="preview">Preview</string>
+    <string name="download">Download</string>
     <!--New Truecaller Strings-->
     <!--
    <string name="profile_photo">Profile Photo <font fgcolor="#EE415E">*</font></string>
@@ -328,6 +344,31 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="applicant_pan_card">Applicant\'s PAN Card</string>
     <string name="co_applicant_pan_card">Co-Applicant\'s PAN Card</string>
 
+    <string name="upload_passport">Upload Passport</string>
+    <string name="applicant_passport">Applicant\'s Passport</string>
+    <string name="co_applicant_passport">Co-Applicant\'s Passport</string>
+
+    <string name="upload_voterID">Upload Voter Id</string>
+    <string name="applicant_voterID">Applicant\'s Voter Id</string>
+    <string name="co_applicant_voterID">Co-Applicant\'s Voter Id</string>
+
+
+    <string name="upload_driving_license">Upload Driving License</string>
+    <string name="applicant_driving_license">Applicant\'s Driving License</string>
+    <string name="co_applicant_driving_license">Co-Applicant\'s Driving License</string>
+
+    <string name="upload_telephone_bill">Upload Telephone Bill</string>
+    <string name="applicant_telephone_bill">Applicant\'s Telephone Bill</string>
+    <string name="co_applicant_telephone_bill">Co-Applicant\'s Telephone Bill</string>
+
+    <string name="upload_electricity_bill">Upload Electricity Bill</string>
+    <string name="applicant_electricity_bill">Applicant\'s Electricity Bill</string>
+    <string name="co_applicant_electricity_bill">Co-Applicant\'s Electricity Bill</string>
+
+    <string name="upload_rent_agreement">Upload Rent Agreement</string>
+    <string name="applicant_rent_agreement">Applicant\'s Rent Agreement</string>
+    <string name="co_applicant_rent_agreement">Co-Applicant\'s Rent Agreement</string>
+
     <string name="upload_address_proof">Upload Address Proof</string>
     <string name="applicant_address_proof">Applicant\'s Address proof</string>
     <string name="co_applicant_address_proof">Co-Applicant\'s Address proof</string>
@@ -336,9 +377,45 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="salary_slip_of_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">Salary slip of Applicant (Latest 3 months , if not available salary certificate stating the same details would be accepted)</string>
     <string name="salary_slip_of_co_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">Salary slip of Co-Applicant (Latest 3 months , if not available salary certificate stating the same details would be accepted)</string>
 
+    <string name="upload_income_proof_6">Upload Income Proof</string>
+    <string name="salary_slip_of_applicant_latest_6_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">Salary slip of Applicant (Latest 6 months , if not available salary certificate stating the same details would be accepted)</string>
+    <string name="salary_slip_of_co_applicant_latest_6_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">Salary slip of Co-Applicant (Latest 6 months , if not available salary certificate stating the same details would be accepted)</string>
+
     <string name="upload_bank_statement">Upload Bank Statement</string>
     <string name="current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page">Current 3 Months Bank Statement of Applicant reflecting Salary along with the front page</string>
     <string name="current_3_months_bank_statement_of_co_applicant_reflecting_salary_along_with_the_front_page">Current 3 Months Bank Statement of Co-Applicant reflecting Salary along with the front page</string>
+
+    <string name="upload_bank_statement_6">Upload Bank Statement</string>
+    <string name="current_6_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page">Current 6 Months Bank Statement of Applicant reflecting Salary along with the front page</string>
+    <string name="current_6_months_bank_statement_of_co_applicant_reflecting_salary_along_with_the_front_page">Current 6 Months Bank Statement of Co-Applicant reflecting Salary along with the front page</string>
+
+    <string name="upload_KVP">Upload KVP</string>
+    <string name="current_KVP">Applicant\'s KVP</string>
+    <string name="current_co_applicant">Co-Applicant\'s KVP</string>
+
+    <string name="upload_lic_policy">Upload LIC Policy</string>
+    <string name="current_applicant_lic_policy">Applicant\'s LIC Policy</string>
+    <string name="current_co_applicant_lic_policy">Co-Applicant\'s LIC Policy</string>
+
+    <string name="upload_form_16">Upload Form 16</string>
+    <string name="current_applicant_form_16">Applicant\'s Form 16</string>
+    <string name="current_co_applicant_form_16">Co-Applicant\'s Form 16</string>
+
+    <string name="upload_form_61">Upload Form 61</string>
+    <string name="current_applicant_form_61">Applicant\'s Form 61</string>
+    <string name="current_co_applicant_form_61">Co-Applicant\'s Form 61</string>
+
+    <string name="upload_pension_letter">Upload Pension Letter</string>
+    <string name="current_applicant_pension_letter">Applicant\'s Pension Letter</string>
+    <string name="current_co_applicant_pension_letter">Co-Applicant\'s Pension Letter</string>
+
+    <string name="upload_itr">Upload ITR</string>
+    <string name="current_itr">Applicant\'s ITR</string>
+    <string name="current_co_applicant_itr">Co-Applicant\'s ITR</string>
+
+    <string name="upload_pnl">Upload PNL</string>
+    <string name="current_applicant_pnl">Applicant\'s PNL</string>
+    <string name="current_co_applicant_pnl">Co-Applicant\'s PNL</string>
 
     <string name="upload_latest_marksheet">Upload Latest Marksheet</string>
     <string name="latest_marksheet_of_the_applicant">Latest Marksheet of the Applicant</string>
@@ -350,7 +427,6 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="recent_utility_bill_if_the_house_is_owned_or_rent_agreement_if_the_house_is_rented_rent_agreement_should_be_noterised">Recent Utility Bill if the house is owned or Rent Agreement if the house is rented. Rent agreement should be noterised.</string>
     <string name="no_application_available_ro_view_pdf">No Application Available to View PDF</string>
     <string name="file_size_exceeds_limits_of_30_mb">File size exceeds limit of 30 MB</string>
-
     <string name="sign_the_application">Sign the Application</string>
     <string name="signing_status">Signing Status :</string>
     <string name="pending">Pending</string>
@@ -415,6 +491,8 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="upload_profile_picture">Upload Profile Picture</string>
     <string name="applicant_single_picture_required_to_be_uploaded">Applicant\'s single picture required to be uploaded</string>
     <string name="co_applicant_single_picture_required_to_be_uploaded">Co-Applicant\'s single picture required to be uploaded</string>
+
+
     <string name="new_user">New User</string>
     <string name="existing_user">Existing User</string>
     <string name="enter_loan_amount">Enter loan amount</string>

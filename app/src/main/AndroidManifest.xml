@@ -42,6 +42,9 @@
         tools:node="replace"
         tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon,android:name">
 
+        <!--Needed for Pie Device-->
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
         <activity android:name=".newUI.newViews.TenureSelectionActivity" android:screenOrientation="sensorPortrait"/>
         <activity android:name=".newUI.newViews.CourseDetailsActivity" android:screenOrientation="sensorPortrait"/>
 
@@ -50,7 +53,7 @@
             android:screenOrientation="sensorPortrait" />
 
         <activity android:name=".newUI.newViews.NewLeadActivity"
-            android:theme="@style/AppTheme1"
+            android:theme="@style/AppTheme"
             android:screenOrientation="sensorPortrait" />
 
         <activity android:name="com.idfy.rft.CameraView"
@@ -65,12 +68,12 @@
         <activity
             android:name=".ImageSlider"
             android:screenOrientation="sensorPortrait" />
-        <!-- <activity -->
-        <!-- android:name="com.eduvanzapplication.friendlyscore.ClientActivity" -->
-        <!-- android:screenOrientation="portrait" /> -->
-        <!-- <activity -->
-        <!-- android:name="com.eduvanzapplication.friendlyscore.StartActivityFS" -->
-        <!-- android:screenOrientation="portrait" /> -->
+         <activity
+         android:name="com.eduvanzapplication.friendlyscore.ClientActivity"
+         android:screenOrientation="portrait" />
+         <activity
+         android:name="com.eduvanzapplication.friendlyscore.StartActivityFS"
+         android:screenOrientation="portrait" />
         <activity
             android:name=".faqexpandablelistview.FAQ"
             android:screenOrientation="portrait" />
