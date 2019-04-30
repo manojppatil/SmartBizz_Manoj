@@ -5,6 +5,7 @@ import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -17,7 +18,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +76,8 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.eduvanzapplication.MainActivity.TAG;
 import static com.eduvanzapplication.R.*;
+import static com.eduvanzapplication.newUI.MainApplication.staticdownloadurl;
+import static com.eduvanzapplication.newUI.fragments.DashboardFragmentNew.userName;
 
 public class PostApprovalDocFragment extends Fragment {
 
@@ -88,7 +91,7 @@ public class PostApprovalDocFragment extends Fragment {
     private static String userId, uploadFilePath = "";
     StringBuffer sb;
 
-    public static List<MNach> mNachArrayList = new ArrayList<>();
+    public static List<MNach> mNachArrayList;
     public static RecyclerView rvNach;
     public static NachAdapter adapter;
 
@@ -102,13 +105,15 @@ public class PostApprovalDocFragment extends Fragment {
     String downloadUrl = "", downloadSignedUrl = "";
     long downloadReference;
 
-    private LinearLayout linExpandCollapse, linManualBtn, lineSignBtn, linOTPBtn, linData, linAggSignInBtn, linDownloadAgreement, linPayBtn, linPayStatus;
-    private ImageButton btnExpandCollapse;
-    private ImageView ivLeadDisbursed, ivAggSigned;
+    public static LinearLayout linManualBtn, lineSignBtn, linOTPBtn, linData, linAggSignInBtn,
+            linDownloadAgreement, linDownloadNach, linDisbursed, linAgreementSigned, linPayBtn, linPayStatus;
+    public static RelativeLayout relExpandCollapse;
+    public static ImageButton btnExpandCollapse;
+    public static ImageView ivLeadDisbursed, ivAggSigned;
 
-    private TextView txtProcessingFee, txtLeadDisbursedStatus, txtAggSignedStatus;
+    public static TextView txtProcessingFee, txtLeadDisbursedStatus, txtAggSignedStatus;
 
-    private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+    public BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -176,6 +181,35 @@ public class PostApprovalDocFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mNachArrayList = new ArrayList<>();
+        lead_id = "";
+        application_loan_id = "";
+        principal_amount = "";
+        down_payment = "";
+        rate_of_interest = "";
+        emi_type = "";
+        emi_amount = "";
+        requested_loan_amount = "";
+        requested_tenure = "";
+        requested_roi = "";
+        requested_emi = "";
+        offered_amount = "";
+        applicant_id = "";
+        fk_lead_id = "";
+        first_name = "";
+        last_name = "";
+        mobile_number = "";
+        email_id = "";
+        kyc_address = "";
+        course_cost = "";
+        paid_on = "";
+        transaction_amount = "";
+        kyc_status = "";
+        disbursal_status = "";
+        loan_agrement_upload_status = "";
+        downloadUrl = "";
+        downloadSignedUrl = "";
+
     }
 
     @Override
@@ -188,17 +222,22 @@ public class PostApprovalDocFragment extends Fragment {
         mFragment = new PostApprovalDocFragment();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        linExpandCollapse = view.findViewById(R.id.linExpandCollapse);
+        progressBar = view.findViewById(R.id.progressBar_signsubmit);
+        relExpandCollapse = view.findViewById(R.id.relExpandCollapse);
         linManualBtn = view.findViewById(R.id.linManualBtn);
         lineSignBtn = view.findViewById(R.id.lineSignBtn);
         linOTPBtn = view.findViewById(R.id.linOTPBtn);
         linPayBtn = view.findViewById(R.id.linPayBtn);
+        linPayStatus = view.findViewById(R.id.linPayStatus);
         linData = view.findViewById(R.id.linData);
         linAggSignInBtn = view.findViewById(R.id.linAggSignInBtn);
         linDownloadAgreement = view.findViewById(R.id.linDownloadAgreement);
+        linDownloadNach = view.findViewById(R.id.linDownloadNach);
         btnExpandCollapse = view.findViewById(R.id.btnExpandCollapse);
         ivLeadDisbursed = view.findViewById(R.id.ivLeadDisbursed);
         ivAggSigned = view.findViewById(R.id.ivAggSigned);
+        linDisbursed = view.findViewById(R.id.linDisbursed);
+        linAgreementSigned = view.findViewById(R.id.linAgreementSigned);
 
         txtProcessingFee = view.findViewById(id.txtProcessingFee);
         txtLeadDisbursedStatus = view.findViewById(id.txtLeadDisbursedStatus);
@@ -223,6 +262,9 @@ public class PostApprovalDocFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+        context.registerReceiver(downloadReceiver, filter);
+
         linManualBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,7 +283,6 @@ public class PostApprovalDocFragment extends Fragment {
                 linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-
 
                 try {
                     String ipaddress = Utils.getIPAddress(true);
@@ -277,7 +318,6 @@ public class PostApprovalDocFragment extends Fragment {
             }
         });
 
-
 //        linExpandCollapse.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -293,7 +333,7 @@ public class PostApprovalDocFragment extends Fragment {
 //            }
 //        });
 
-        linExpandCollapse.setOnClickListener(new View.OnClickListener() {
+        btnExpandCollapse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (linData.getVisibility() == VISIBLE) {
@@ -304,7 +344,7 @@ public class PostApprovalDocFragment extends Fragment {
             }
         });
 
-        btnExpandCollapse.setOnClickListener(new View.OnClickListener() {
+        relExpandCollapse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (linData.getVisibility() == VISIBLE) {
@@ -343,6 +383,36 @@ public class PostApprovalDocFragment extends Fragment {
 
             @Override
             public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        linDownloadAgreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                if (!linDownloadAgreement.getTag().toString().equalsIgnoreCase("")) {
+                    downloadSignedUrl = linDownloadAgreement.getTag().toString();
+                    downLoad(downloadSignedUrl, 2, "SignedAgreement");
+                } else {
+                    Toast.makeText(context, R.string.something_went_wrong_please_try_again_later, Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
+        linDownloadNach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                if (!linDownloadNach.getTag().toString().equalsIgnoreCase("")) {
+                    downloadSignedUrl = linDownloadNach.getTag().toString();
+                    downLoad(downloadSignedUrl, 2, "Nach");
+                } else {
+                    Toast.makeText(context, R.string.something_went_wrong_please_try_again_later, Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
@@ -482,35 +552,60 @@ public class PostApprovalDocFragment extends Fragment {
                         LoanTabActivity.Postkyc_status = kyc_status = jsonloanDataDetails.getString("kyc_status");
                     if (!jsonloanDataDetails.getString("disbursal_status").toString().equals("null"))
                         LoanTabActivity.Postdisbursal_status = disbursal_status = jsonloanDataDetails.getString("disbursal_status");
-
                     if (!jsonloanDataDetails.getString("loan_agrement_upload_status").toString().equals("null"))
                         LoanTabActivity.Postloan_agrement_upload_status = loan_agrement_upload_status = jsonloanDataDetails.getString("loan_agrement_upload_status");
                 }
-                if (disbursal_status.equals("0") || disbursal_status.equals("1")) //Disbursed
-                {
-                    txtAggSignedStatus.setText("Disbursal Pending");
-                    ivLeadDisbursed.setBackground(getResources().getDrawable(drawable.ic_exclamation_triangle));
+
+                //href="http://159.89.204.41/eduhtmlbeta/agreement/downloadSignedAgreement/415"
+                //href="http://159.89.204.41/eduvanzbeta/download/downloadENach/415">Download NACH</a
+
+                if (paid_on.length() > 5) {
+                    linPayBtn.setVisibility(GONE);
+                    linPayStatus.setVisibility(VISIBLE);
                 } else {
-                    txtAggSignedStatus.setText("Loan Disbursed");
-                    txtAggSignedStatus.setBackgroundResource(R.color.colorGreen);
-                    ivLeadDisbursed.setBackground(getResources().getDrawable(drawable.ic_check_circle_white));
+                    linPayBtn.setVisibility(VISIBLE);
+                    linPayStatus.setVisibility(GONE);
                 }
 
-                if (loan_agrement_upload_status.equals("1"))
+                if (disbursal_status.equals("0") || disbursal_status.equals("1")) //Disbursed
+                {
+                    txtLeadDisbursedStatus.setText("Disbursal Pending");
+                    ivLeadDisbursed.setBackground(context.getResources().getDrawable(drawable.ic_exclamation_triangle));
+                    linDisbursed.setBackground(context.getResources().getDrawable(drawable.border_circular_yellow_filled));
+                } else {
+                    txtLeadDisbursedStatus.setText("Loan Disbursed");
+                    linDisbursed.setBackgroundResource(R.color.colorGreen);
+                    ivLeadDisbursed.setBackground(context.getResources().getDrawable(drawable.ic_check_circle_white));
+                    linDisbursed.setBackground(context.getResources().getDrawable(drawable.border_circular_green_filled));
+                    if (MainActivity.mainUrl.toString().contains("eduvanzApi")) {
+                        linDownloadNach.setTag(MainActivity.mainUrl.toString().replace("eduvanzApi/", "").concat("eduvanzbeta/download/downloadENach/").concat(MainActivity.lead_id));
+                    } else {
+
+                    }
+                }
+
+                if (loan_agrement_upload_status.equals("1")) {
                     linAggSignInBtn.setVisibility(GONE);
-                linDownloadAgreement.setVisibility(VISIBLE);
-//                    txtLeadDisbursedStatus
-                txtAggSignedStatus.setText("Agreement Signed");
-                txtAggSignedStatus.setBackgroundResource(R.color.colorGreen);
-                ivAggSigned.setBackground(getResources().getDrawable(drawable.ic_check_circle_white));
+                    linDownloadAgreement.setTag(VISIBLE);
+                    linDownloadAgreement.setVisibility(VISIBLE);
+                    txtAggSignedStatus.setText("Agreement Signed");
+                    ivAggSigned.setBackground(context.getResources().getDrawable(drawable.ic_check_circle_white));
+                    linAgreementSigned.setBackground(context.getResources().getDrawable(drawable.border_circular_green_filled));
+                    if (MainActivity.mainUrl.toString().contains("eduvanzApi")) {
+                        linDownloadAgreement.setTag(MainActivity.mainUrl.toString().replace("eduvanzApi/", "").concat("eduhtmlbeta/agreement/downloadSignedAgreement/").concat(MainActivity.lead_id));
+                    } else {
 
-            } else {
-                linAggSignInBtn.setVisibility(VISIBLE);
-                linDownloadAgreement.setVisibility(GONE);
-                txtAggSignedStatus.setText("Agreement Signed Pending");
-                ivAggSigned.setBackground(getResources().getDrawable(drawable.ic_exclamation_triangle));
+                    }
+
+                } else {
+                    linAggSignInBtn.setVisibility(VISIBLE);
+                    linDownloadAgreement.setVisibility(GONE);
+                    txtAggSignedStatus.setText("Agreement Signed Pending");
+                    ivAggSigned.setBackground(context.getResources().getDrawable(drawable.ic_exclamation_triangle));
+                    linAgreementSigned.setBackground(context.getResources().getDrawable(drawable.border_circular_yellow_filled));
+
+                }
             }
-
             if (!jsonDataO.get("nachData").equals(null)) {
                 JSONArray jsonArray1 = jsonDataO.getJSONArray("nachData");
 
@@ -532,7 +627,29 @@ public class PostApprovalDocFragment extends Fragment {
                             mNach.end_date = jsonEmiDetails.getString("end_date");
 
                         if (!jsonEmiDetails.getString("frequency").toString().equals("null"))
-                            mNach.frequency = jsonEmiDetails.getString("frequency");
+
+                            switch (jsonEmiDetails.getString("frequency").toString()) {
+                                case "1":
+                                    mNach.frequency = "Monthly";
+                                    break;
+
+                                case "2":
+                                    mNach.frequency = "Quarterly";
+                                    break;
+
+                                case "3":
+                                    mNach.frequency = "Half-Yearly";
+                                    break;
+
+                                case "4":
+                                    mNach.frequency = "Yearly";
+                                    break;
+
+                                case "5":
+                                    mNach.frequency = "As and when presented";
+                                    break;
+                            }
+//                            mNach.frequency = jsonEmiDetails.getString("frequency");
 
                         if (!jsonEmiDetails.getString("debit_type").toString().equals("null"))
                             mNach.debit_type = jsonEmiDetails.getString("debit_type");
@@ -551,16 +668,15 @@ public class PostApprovalDocFragment extends Fragment {
                     }
                     mNachArrayList.add(mNach);
                 }
-
                 adapter = new NachAdapter(mNachArrayList, context, getActivity());
                 rvNach.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
 
-            if (!jsonDataO.get("applicantonlineData").equals(null)) {
-                JSONObject jsonloanDataDetails = jsonDataO.getJSONObject("applicantonlineData");
-//                MainApplication.lead_idkyc = lead_id = jsonloanDataDetails.getString("lead_id");
-            }
+//            if (!jsonDataO.get("applicantonlineData").equals(null)) {
+//                JSONObject jsonloanDataDetails = jsonDataO.getJSONObject("applicantonlineData");
+////                MainApplication.lead_idkyc = lead_id = jsonloanDataDetails.getString("lead_id");
+//            }
 
             try {
                 String url = MainActivity.mainUrl + "laf/genrateAgreement";
@@ -671,7 +787,7 @@ public class PostApprovalDocFragment extends Fragment {
                     request.setVisibleInDownloadsUi(true);
                     request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/Eduvanz/" + "/" + "LAF" + ".pdf");
                     progressBar.setVisibility(VISIBLE);
-                    downLoad(downloadUrl, 1);
+                    downLoad(downloadUrl, 1, "LAF");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -947,13 +1063,13 @@ public class PostApprovalDocFragment extends Fragment {
 
     }
 
-    public void downLoad(String uri, int status) {
+    public void downLoad(String uri, int status, String fileName) {
         try {
             String fname = "";
             if (status == 1) {
-//                fname = "LAF" + userFirst + userLast + System.currentTimeMillis() + ".pdf";
+                fname = "LAF" + userName + System.currentTimeMillis() + ".pdf";
             } else if (status == 2) {
-//                fname = "SIGNED APPLICATION" + userFirst + userLast + System.currentTimeMillis() + ".pdf";
+                fname = fileName + userName + System.currentTimeMillis() + ".pdf";
             }
             downloadManager = (DownloadManager) context.getSystemService(context.DOWNLOAD_SERVICE);
             Uri Download_Uri = Uri.parse(uri);

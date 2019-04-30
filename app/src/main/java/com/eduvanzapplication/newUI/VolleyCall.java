@@ -29,6 +29,7 @@ import com.eduvanzapplication.newUI.newViews.BannerActivity;
 import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
 import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
+import com.eduvanzapplication.newUI.newViews.EditProfile;
 import com.eduvanzapplication.newUI.newViews.GetMobileNo;
 import com.eduvanzapplication.newUI.newViews.MyProfileNew;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
@@ -37,6 +38,7 @@ import com.eduvanzapplication.newUI.newViews.OtpValidation;
 import com.eduvanzapplication.newUI.newViews.SignIn;
 import com.eduvanzapplication.newUI.newViews.SplashScreen;
 import com.eduvanzapplication.newUI.newViews.TenureSelectionActivity;
+import com.google.gson.JsonIOException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -851,7 +853,28 @@ public class VolleyCall {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("emailSignIn")) {
+        }
+        else if (screen.equalsIgnoreCase("editProfileDetails")){
+            try{
+                jsonDataO = new JSONObject(s);
+                ((EditProfile)mActivity).saveResponse(jsonDataO);
+            }catch (JsonIOException e){
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("setProfileDetails")){
+            try{
+                jsonDataO = new JSONObject(s);
+                ((EditProfile)mActivity).setProfileDetails(jsonDataO);
+            }catch (JsonIOException e){
+                e.printStackTrace();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("emailSignIn")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((SignIn) mActivity).emailSignin(jsonDataO);

@@ -36,6 +36,7 @@
                         app:cardElevation="@dimen/_8sdp">
 
                         <RelativeLayout
+                            android:id="@+id/relExpandCollapse"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/border">
@@ -83,7 +84,7 @@
                                     android:gravity="center_horizontal" />
 
                             <LinearLayout
-                                android:id="@+id/linStatus1"
+                                android:id="@+id/linDisbursed"
                                 android:layout_width="@dimen/_150sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -112,13 +113,14 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/linAgreementSigned"
                                 android:layout_width="@dimen/_150sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginEnd="-10dp"
                                 android:gravity="center"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_below="@+id/linStatus1"
+                                android:layout_below="@+id/linDisbursed"
                                 android:background="@drawable/border_circular_yellow_filled">
 
                                 <ImageView
@@ -798,7 +800,7 @@
 
                             <LinearLayout
                                 android:id="@+id/linPayStatus"
-                                android:visibility="visible"
+                                android:visibility="gone"
                                 android:layout_width="@dimen/_80sdp"
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_alignParentRight="true"

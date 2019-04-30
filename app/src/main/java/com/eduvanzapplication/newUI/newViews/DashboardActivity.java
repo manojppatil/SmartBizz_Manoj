@@ -89,7 +89,7 @@ public class DashboardActivity extends AppCompatActivity
     MainApplication mainApplication;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
-    LinearLayout linearLayoutSignup, linearLayoutUserDetail;
+    LinearLayout linearLayoutSignup, linearLayoutUserDetail,editProfile;
 
     static String userMobileNo = "", student_id = "", appInstallationTimeStamp = "";
     AppCompatActivity mActivity;
@@ -144,7 +144,13 @@ public class DashboardActivity extends AppCompatActivity
             navigationView.setNavigationItemSelectedListener(this);
 
             View header = navigationView.getHeaderView(0);
-
+            editProfile=(LinearLayout)header.findViewById(R.id.linearLayout_userdetail_dashboard);
+            editProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),EditProfile.class));
+                }
+            });
             hideMenuOptions();
 
             textViewName = (TextView) header.findViewById(R.id.textView_name);
