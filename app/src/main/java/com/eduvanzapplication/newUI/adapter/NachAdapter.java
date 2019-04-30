@@ -8,29 +8,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.newUI.pojo.MLoanEmis;
+import com.eduvanzapplication.newUI.pojo.MNach;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NachAdapter extends RecyclerView.Adapter<NachAdapter.ViewHolder>{
-    List<MLoanEmis> list = new ArrayList();
+    List<MNach> list = new ArrayList();
 
-    public List<MLoanEmis> getSpots() {
+    public List<MNach> getSpots() {
         return list;
     }
      Context context;
     FragmentActivity activity;
 
-    public void setSpots(List<MLoanEmis> list) {
+    public void setSpots(List<MNach> list) {
         this.list = list;
     }
 
-    public NachAdapter(List<MLoanEmis> list, Context context, FragmentActivity activity ){
+    public NachAdapter(List<MNach> list, Context context, FragmentActivity activity ){
         this.list = list;
         this.context = context;
         this.activity = activity;
@@ -45,20 +44,16 @@ public class NachAdapter extends RecyclerView.Adapter<NachAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-            final MLoanEmis mLoanEmis = list.get(i);
+            final MNach mNach = list.get(i);
 
-            viewHolder.txtEmiNo.setText("0"+mLoanEmis.emi_no);
-            viewHolder.txtEmiAmount.setText(mLoanEmis.emi_amount);
-            viewHolder.txtDueBy.setText(mLoanEmis.proposed_payment_date);
-            viewHolder.txtPaymentDate.setText(mLoanEmis.actual_payment_date);
-            viewHolder.txtPaymentStatus.setText(" "+ mLoanEmis.statusMessage);
-            if(mLoanEmis.status.equals("0")) {
-                viewHolder.txtBtnText.setText(" " + "Pre Pay");
-            }
-            else {
-                viewHolder.txtBtnText.setText(" " + "EMI History");
-            }
-            viewHolder.linPayBtn.setTag(mLoanEmis.loan_emi_id);
+//            viewHolder.txtNachId.setText("0"+mNach.emi_no);
+            viewHolder.txtUmrnNum.setText(mNach.umrn_num);
+            viewHolder.txtEndDate.setText(mNach.end_date);
+            viewHolder.txtStatus.setText(mNach.status);
+            viewHolder.txtPersonName.setText(" "+ mNach.person_name);
+            viewHolder.txtAmount.setText(" "+ mNach.amount);
+            viewHolder.txtFrequency.setText(" "+ mNach.frequency);
+
     }
 
     @Override
@@ -68,34 +63,18 @@ public class NachAdapter extends RecyclerView.Adapter<NachAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtEmiNo,txtEmiAmount,txtDueBy, txtPaymentDate, txtPaymentStatus,txtBtnText;
-        LinearLayout linPayBtn;
+        TextView txtNachId,txtUmrnNum,txtEndDate, txtStatus, txtPersonName,txtAmount,txtFrequency;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtEmiNo = itemView.findViewById(R.id.txtEmiNo);
-            txtEmiAmount = itemView.findViewById(R.id.txtEmiAmount);
-            txtDueBy= itemView.findViewById(R.id.txtDueBy);
-            txtPaymentDate = itemView.findViewById(R.id.txtPaymentDate);
-            txtPaymentStatus = itemView.findViewById(R.id.txtPaymentStatus);
-            txtBtnText = itemView.findViewById(R.id.txtBtnText);
-            linPayBtn = itemView.findViewById(R.id.linPayBtn);
 
-            linPayBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(NachAdapter.class.getSimpleName(),"LEADID -"+itemView.getTag().toString());
-
-//                    try {
-//                        context.startActivity(new Intent(context, LoanTabActivity.class)
-//                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                                .putExtra("lead_id", itemView.getTag().toString()));
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-
-                }
-            });
+            txtNachId = itemView.findViewById(R.id.txtNachId);
+            txtUmrnNum = itemView.findViewById(R.id.txtUmrnNum);
+            txtEndDate= itemView.findViewById(R.id.txtEndDate);
+            txtStatus = itemView.findViewById(R.id.txtStatus);
+            txtPersonName = itemView.findViewById(R.id.txtPersonName);
+            txtAmount = itemView.findViewById(R.id.txtAmount);
+            txtFrequency = itemView.findViewById(R.id.txtFrequency);
 
         }
     }

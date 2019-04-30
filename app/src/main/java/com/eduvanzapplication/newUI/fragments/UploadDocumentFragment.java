@@ -32,6 +32,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.eduvanzapplication.MainActivity;
@@ -39,6 +40,7 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Util.JavaGetFileSize;
 import com.eduvanzapplication.newUI.MainApplication;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.uploaddocs.PathFile;
 import com.squareup.picasso.Picasso;
@@ -77,18 +79,22 @@ public class UploadDocumentFragment extends Fragment {
             linFinancBlock,linEducationBlock,linOther, linKYCDocuments, linFinanceDocuments, linEducationDocuments, linOtherDocuments, linBottomBlocks;
 
     public static Animation  scaleInlinKYCDocuments, scaleInlinFinanceDocuments,
-           scaleInlinEducationDocuments, scaleInlinOtherDocuments;
+            scaleInlinEducationDocuments, scaleInlinOtherDocuments;
     ProgressDialog dialog;
 
     //code by yash
     /*KYC documents*/
     static LinearLayout profileImage,aadharCard,panCard,passport,voterId,drivingLicense,telephoneBill,electricityBill,rentAgreement,addressProof;
+    static RelativeLayout profileBckgrnd,aadharBckgrnd,panBckgrnd,passportBckgrnd,voterIdBckgrnd,drivingLicenseBckgrnd,telephoneBillBckgrnd,electricityBillBckgrnd,rentAgreementBckgrnd,addressProofBckgrnd;
     /*Financial Documents*/
     static LinearLayout salSlipSix,salSlipThree,bankStmntThree,bankStmntSix,kvp,licPolicy,form16,form61,pensionLetter,itr,pnl;
+    static RelativeLayout salSixBckgrnd,salThreeBckgrnd,bankThreeBckgrnd,bankSixBckgrnd,kvpBckgrnd,licPolicyBckgrnd,form16Bckgrnd,form61Bckgrnd,pensionBckgrnd,itrBckgrnd,pnlBckgrnd;
     /*Educational Documents*/
     static LinearLayout tenthMarksheet,twelvethMarksheet,degreeMarkSheet,degreeCertificate;
+    static RelativeLayout tenthBckgrnd,twelthBckgrnd,degreeMarksheetBckgrnd,degreeCertificateBckgrnd;
     /*others documents*/
     static LinearLayout others;
+    static RelativeLayout othersBckgrnd;
 
     int tap;
 
@@ -130,6 +136,38 @@ public class UploadDocumentFragment extends Fragment {
         linOtherBottom = view.findViewById(R.id.linOtherBottom);
         linBottomBlocks = view.findViewById(R.id.linBottomBlocks);
 
+        //personal details
+        profileBckgrnd = view.findViewById(R.id.profileBack);
+        panBckgrnd = view.findViewById(R.id.panBackground);
+        aadharBckgrnd = view.findViewById(R.id.aadharBackground);
+        passportBckgrnd = view.findViewById(R.id.passportBackground);
+        voterIdBckgrnd = view.findViewById(R.id.voterIdBackground);
+        drivingLicenseBckgrnd = view.findViewById(R.id.drivingLicenseBackground);
+        telephoneBillBckgrnd = view.findViewById(R.id.telephoneBillBackground);
+        electricityBillBckgrnd = view.findViewById(R.id.electricityBillBackground);
+        rentAgreementBckgrnd = view.findViewById(R.id.rentAgreementBackground);
+        addressProofBckgrnd = view.findViewById(R.id.addressProofBackground);
+        //financial details
+        salSixBckgrnd = view.findViewById(R.id.salSixBackground);
+        salThreeBckgrnd = view.findViewById(R.id.salThreeBackground);
+        bankSixBckgrnd = view.findViewById(R.id.bankSixBackground);
+        bankThreeBckgrnd = view.findViewById(R.id.bankThreeBackground);
+        kvpBckgrnd = view.findViewById(R.id.kvpBackground);
+        licPolicyBckgrnd = view.findViewById(R.id.licPolicyBackground);
+        form16Bckgrnd = view.findViewById(R.id.form16Background);
+        form61Bckgrnd = view.findViewById(R.id.from61Background);
+        pensionBckgrnd = view.findViewById(R.id.pensionBackground);
+        itrBckgrnd = view.findViewById(R.id.itrBackground);
+        pnlBckgrnd = view.findViewById(R.id.pnlBackground);
+        //educational
+        tenthBckgrnd = view.findViewById(R.id.tenthMarksheetBackground);
+        twelthBckgrnd = view.findViewById(R.id.twelvethMarksheetBackground);
+        degreeMarksheetBckgrnd = view.findViewById(R.id.lastMarksheetBackground);
+        degreeCertificateBckgrnd = view.findViewById(R.id.lastCertificateBackground);
+        //others
+        othersBckgrnd = view.findViewById(R.id.othersBackground);
+
+
         linKYCDocuments = view.findViewById(R.id.linKYCDocuments);
         linFinanceDocuments  =view.findViewById(R.id.linFinanceDocuments);
         linEducationDocuments = view.findViewById(R.id.linEducationDocuments);
@@ -161,6 +199,7 @@ public class UploadDocumentFragment extends Fragment {
                         @Override
                         public void run() {
                             if (tap==1){
+                                profileBckgrnd.setVisibility(GONE);
                                 applicantType = "1";
                                 documentTypeNo = "1";
                                 imageToPdf(documentTypeNo,getString(R.string.upload_profile_picture),getString(R.string.applicant_single_picture_required_to_be_uploaded), MainApplication.Brapplicant_idkyc,"1");
@@ -277,49 +316,49 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                         if (tap==1){
-                             applicantType = "1";
-                             documentTypeNo = "3";
-                             imageToPdf(documentTypeNo,getString(R.string.upload_adhaar_card),getString(R.string.applicant_adhaar_card_front_and_backside), MainApplication.Brapplicant_idkyc,"1");
-                             tap=0;
-                         }else if (tap==2){
+                            if (tap==1){
+                                applicantType = "1";
+                                documentTypeNo = "3";
+                                imageToPdf(documentTypeNo,getString(R.string.upload_adhaar_card),getString(R.string.applicant_adhaar_card_front_and_backside), MainApplication.Brapplicant_idkyc,"1");
+                                tap=0;
+                            }else if (tap==2){
 
-                             if (aadharCard.getTag()!=null){
-                                 String strFileName = aadharCard.getTag().toString().substring(aadharCard.getTag().toString().lastIndexOf("/")+1);
+                                if (aadharCard.getTag()!=null){
+                                    String strFileName = aadharCard.getTag().toString().substring(aadharCard.getTag().toString().lastIndexOf("/")+1);
 
-                                 File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
+                                    File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
-                                 String FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    String FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                 if (FileExtn.equals("pdf")) {
-                                     openPdf(String.valueOf(aadharCard.getTag()));
+                                    if (FileExtn.equals("pdf")) {
+                                        openPdf(String.valueOf(aadharCard.getTag()));
 
-                                 }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                     if (filepath.exists()){
-                                         Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                     }
-                                     else {
-                                         try {
-                                             downLoadClick(String.valueOf(aadharCard.getTag()));
-                                         }catch (Exception e){
-                                             e.printStackTrace();
-                                         }
-                                     }
-                                 }else {
-                                     try {
-                                         openImage(String.valueOf(aadharCard.getTag()));
-                                     }catch (Exception e){
-                                         e.printStackTrace();
-                                     }
-                                 }
-                             }else {
-                                 Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
-                             }
+                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
+                                        if (filepath.exists()){
+                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            try {
+                                                downLoadClick(String.valueOf(aadharCard.getTag()));
+                                            }catch (Exception e){
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }else {
+                                        try {
+                                            openImage(String.valueOf(aadharCard.getTag()));
+                                        }catch (Exception e){
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }else {
+                                    Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
+                                }
 
 
-                             tap=0;
-                         }
-                         tap = 0;
+                                tap=0;
+                            }
+                            tap = 0;
                         }
                     },700);
 
@@ -819,9 +858,9 @@ public class UploadDocumentFragment extends Fragment {
                 }
             });
 
-/*end sal slip six months*/
+            /*end sal slip six months*/
 
-/*==========================================sal slip three months=============================*/
+            /*==========================================sal slip three months=============================*/
             salSlipThree = view.findViewById(R.id.linSalarySlipThree);
             salSlipThree.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -879,11 +918,11 @@ public class UploadDocumentFragment extends Fragment {
                         }
                     },700);
 
-                    }
+                }
             });
 
-/*================================end of sal slip three=============================*/
-/*===========================================bank statement three months=========================*/
+            /*================================end of sal slip three=============================*/
+            /*===========================================bank statement three months=========================*/
 
             bankStmntThree = view.findViewById(R.id.linBankStatementThree);
             bankStmntThree.setOnClickListener(new View.OnClickListener() {
@@ -940,7 +979,7 @@ public class UploadDocumentFragment extends Fragment {
                         }
                     },700);
 
-                     }
+                }
             });
 
             /*end if bank statement three*/
@@ -1004,7 +1043,7 @@ public class UploadDocumentFragment extends Fragment {
                         }
                     },700);
 
-                    }
+                }
             });
 
             /*end of bank statement 6*/
@@ -1378,9 +1417,9 @@ public class UploadDocumentFragment extends Fragment {
                 }
             });
 
-/*end of itr*/
+            /*end of itr*/
 
-/*====================================================PNL===================================*/
+            /*====================================================PNL===================================*/
             pnl = view.findViewById(R.id.linPNL);
             pnl.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1440,8 +1479,8 @@ public class UploadDocumentFragment extends Fragment {
                 }
             });
 
-           /* end of pnl & financial documents*/
-           /*==========================================Educational Documents================================*/
+            /* end of pnl & financial documents*/
+            /*==========================================Educational Documents================================*/
 
             tenthMarksheet = view.findViewById(R.id.lintenth_mark_sheet);
             tenthMarksheet.setOnClickListener(new View.OnClickListener() {
@@ -1498,11 +1537,11 @@ public class UploadDocumentFragment extends Fragment {
                         }
                     },700);
 
-                    }
+                }
             });
 
-/*========================end of tenth marksheet==========================*/
-/*========================================twelveth marksheet======================================*/
+            /*========================end of tenth marksheet==========================*/
+            /*========================================twelveth marksheet======================================*/
 
             twelvethMarksheet = view.findViewById(R.id.lintwelvethMarkSheet);
             twelvethMarksheet.setOnClickListener(new View.OnClickListener() {
@@ -1559,7 +1598,7 @@ public class UploadDocumentFragment extends Fragment {
                         }
                     },700);
 
-                    }
+                }
             });
 
             /*end of twelve marksheet*/
@@ -1621,7 +1660,7 @@ public class UploadDocumentFragment extends Fragment {
                         }
                     },700);
 
-                    }
+                }
             });
 
             /*end of degree marksheet*/
@@ -1682,7 +1721,7 @@ public class UploadDocumentFragment extends Fragment {
                         }
                     },700);
 
-                   }
+                }
             });
             /*============================================end of educational documents=================================================================*/
             /*===============================================Others====================================================*/
@@ -1743,7 +1782,7 @@ public class UploadDocumentFragment extends Fragment {
 
                 }
             });
-/*===========================================end of others document==========================================*/
+            /*===========================================end of others document==========================================*/
             getUploadDocumentsApiCall();
         }catch (Exception e){
             String className = this.getClass().getSimpleName();
@@ -1768,10 +1807,10 @@ public class UploadDocumentFragment extends Fragment {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
             } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();//http://159.89.204.41/eduvanzApi/document/getapplicantDocumentDetails
+                VolleyCall volleyCall = new VolleyCall();//http://159.89.204.41/eduvanzApi/document/getapplicantDocumentDetails
                 params.put("lead_id", MainActivity.lead_id);//"studentId" -> "2953"
 //                params.put("fk_applicant_id", MainApplication.Brapplicant_iddtl);//"studentId" -> "2953"
-                params.put("fk_applicant_id", MainActivity.applicant_id);//"studentId" -> "2953"
+                params.put("fk_applicant_id", MainApplication.Brapplicant_idkyc);//"studentId" -> "2953"
                 params.put("applicant_type", "1");//"studentId" -> "2953"
                 volleyCall.sendRequest(context, url, null, mFragment, "getDocumentsBorrower", params, MainActivity.auth_token);
             }
@@ -2152,7 +2191,7 @@ public class UploadDocumentFragment extends Fragment {
                                 DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
 
                                 request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-                               request.setAllowedOverRoaming(false);
+                                request.setAllowedOverRoaming(false);
                                 request.setTitle("Your Document is Downloading");
                                 request.setDescription("Android Data download using DownloadManager.");
 
@@ -2181,7 +2220,7 @@ public class UploadDocumentFragment extends Fragment {
         }
 
     }
-//solve this
+    //solve this
     private void openImage(String mPath) {
 
         try {
@@ -2554,7 +2593,7 @@ public class UploadDocumentFragment extends Fragment {
                     Log.e("TAG", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
                 }
                 Log.e("TAG", "uploadFile: " + sb.toString());
-              try {
+                try {
                     JSONObject mJson = new JSONObject(sb.toString());
                     final String mData = mJson.getString("status");
                     final String mData1 = mJson.getString("message");
@@ -2592,7 +2631,7 @@ public class UploadDocumentFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                               progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
                                 Log.e("TAG", " 2285: " + new Date().toLocaleString());//1538546658896.jpg/
                                 Toast.makeText(context, mData1+" "+mData, Toast.LENGTH_SHORT).show();
 
@@ -2604,7 +2643,7 @@ public class UploadDocumentFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                 if (serverResponseCode == 200) {
+                if (serverResponseCode == 200) {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -2613,7 +2652,7 @@ public class UploadDocumentFragment extends Fragment {
                     });
                 }
 
-                 fileInputStream.close();
+                fileInputStream.close();
                 dataOutputStream.flush();
                 dataOutputStream.close();
 
@@ -2636,7 +2675,7 @@ public class UploadDocumentFragment extends Fragment {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.GONE);
-                       Log.e("TAG", " 2335: " + new Date().toLocaleString());//1538546658896.jpg/
+                        Log.e("TAG", " 2335: " + new Date().toLocaleString());//1538546658896.jpg/
                     }
                 });
             } catch (Exception e) {
@@ -2725,17 +2764,19 @@ public class UploadDocumentFragment extends Fragment {
                             if (bPhoto) {
 
                                 profileImage.setTag(baseUrl + image);
+                                profileBckgrnd.setVisibility(View.VISIBLE);
                                 /*imgPhotoUploadTick.setVisibility(View.VISIBLE);
                                 txtPhoto1.setVisibility(View.GONE);*/
 //                              imgPhoto1.setBackgroundResource(R.drawable.pdf_image);
                                 /*Picasso.with(context).load(baseUrl + image).into(imgPhoto1);
-                                */bPhoto = false;
+                                 */bPhoto = false;
                             }
                             break;
 
                         case "3":
                             if (bAadhaar) {
                                 aadharCard.setTag(baseUrl + image);
+                                aadharBckgrnd.setVisibility(VISIBLE);
                                /* imgAadhaarUploadTick3.setVisibility(View.VISIBLE);
                                 txtAadhaar3.setVisibility(View.GONE);
 */
@@ -2746,9 +2787,9 @@ public class UploadDocumentFragment extends Fragment {
                                 if (FileExtn.equals("pdf")) {
                                     /*btnAadhar.setText(R.string.preview);*/
                                     /*imgAadhaar3.setBackgroundResource(R.drawable.pdf_image);
-                               */ } else {
+                                     */ } else {
                                     /*btnAadhar.setText(R.string.download);*/
-                                      }
+                                }
                                 bAadhaar = false;
                             }
                             break;
@@ -2756,6 +2797,7 @@ public class UploadDocumentFragment extends Fragment {
                         case "2":
                             if (bPan) {
                                 panCard.setTag(baseUrl + image);
+                                panBckgrnd.setVisibility(View.VISIBLE);
                                 /*imgPanUploadTick2.setVisibility(View.VISIBLE);
                                 txtPan2.setVisibility(View.GONE);*/
                                 strFileName = panCard.getTag().toString().substring(panCard.getTag().toString().lastIndexOf("/") + 1);
@@ -2778,6 +2820,7 @@ public class UploadDocumentFragment extends Fragment {
                         case "4":
                             if (bPassport) {
                                 passport.setTag(baseUrl + image);
+                                passportBckgrnd.setVisibility(VISIBLE);
                                 /*imgAddressUploadTick38.setVisibility(View.VISIBLE);
                                 txtAddress38.setVisibility(View.GONE);*/
                                 strFileName = passport.getTag().toString().substring(passport.getTag().toString().lastIndexOf("/") + 1);
@@ -2801,6 +2844,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bVoterId) {
                                 voterId.setTag(baseUrl + image);
+                                voterIdBckgrnd.setVisibility(VISIBLE);
                                 /*imgSalarySlipUploadTick18.setVisibility(View.VISIBLE);
                                 txtSalarySlip18.setVisibility(View.GONE);*/
                                 strFileName = voterId.getTag().toString().substring(voterId.getTag().toString().lastIndexOf("/") + 1);
@@ -2808,7 +2852,7 @@ public class UploadDocumentFragment extends Fragment {
                                 FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
                                 if (FileExtn.equals("pdf")) {
-                                   /* btnVoterId.setText(R.string.preview);*/
+                                    /* btnVoterId.setText(R.string.preview);*/
                                     /*imgSalarySlip18.setBackgroundResource(R.drawable.pdf_image);*/
                                 } else {
                                     /*btnVoterId.setText(R.string.download);*/
@@ -2823,6 +2867,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bDrivingLicense) {
                                 drivingLicense.setTag(baseUrl + image);
+                                drivingLicenseBckgrnd.setVisibility(VISIBLE);
                                /* imgBankStmtUploadTick19.setVisibility(View.VISIBLE);
                                 txtBankStmt19.setVisibility(View.GONE);*/
                                 strFileName = drivingLicense.getTag().toString().substring(drivingLicense.getTag().toString().lastIndexOf("/") + 1);
@@ -2847,6 +2892,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bTelephoneBill) {
                                 telephoneBill.setTag(baseUrl + image);
+                                telephoneBillBckgrnd.setVisibility(VISIBLE);
                                 /*imgDegreeMarkSheetUploadTick23.setVisibility(View.VISIBLE);
                                 txtDegreeMarkSheet23.setVisibility(View.GONE);*/
                                 strFileName = telephoneBill.getTag().toString().substring(telephoneBill.getTag().toString().lastIndexOf("/") + 1);
@@ -2870,6 +2916,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bElectricityBill) {
                                 electricityBill.setTag(baseUrl + image);
+                                electricityBillBckgrnd.setVisibility(VISIBLE);
                                /* imgDegreeMarkSheetUploadTick23.setVisibility(View.VISIBLE);
                                 txtDegreeMarkSheet23.setVisibility(View.GONE);*/
                                 strFileName = electricityBill.getTag().toString().substring(electricityBill.getTag().toString().lastIndexOf("/") + 1);
@@ -2893,6 +2940,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bDegreeCerti) {
                                 degreeCertificate.setTag(baseUrl + image);
+                                degreeCertificateBckgrnd.setVisibility(VISIBLE);
                                 /*imgDegreeCertiUploadTick24.setVisibility(View.VISIBLE);
                                 txtDegreeCerti24.setVisibility(View.GONE);*/
                                 strFileName = degreeCertificate.getTag().toString().substring(degreeCertificate.getTag().toString().lastIndexOf("/") + 1);
@@ -2916,6 +2964,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bOtherDoc) {
                                 others.setTag(baseUrl + image);
+                                othersBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = others.getTag().toString().substring(others.getTag().toString().lastIndexOf("/") + 1);
@@ -2938,6 +2987,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bRentAgreemnet) {
                                 rentAgreement.setTag(baseUrl + image);
+                                rentAgreementBckgrnd.setVisibility(VISIBLE);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = rentAgreement.getTag().toString().substring(rentAgreement.getTag().toString().lastIndexOf("/") + 1);
@@ -2960,6 +3010,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bAddress) {
                                 addressProof.setTag(baseUrl + image);
+                                addressProofBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = addressProof.getTag().toString().substring(addressProof.getTag().toString().lastIndexOf("/") + 1);
@@ -2970,7 +3021,7 @@ public class UploadDocumentFragment extends Fragment {
                                     /*btnAddressProof.setText(R.string.preview);*/
                                     //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
                                 } else {
-                                   /* btnAddressProof.setText(R.string.download);*/
+                                    /* btnAddressProof.setText(R.string.download);*/
                                     //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
                                 }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
@@ -2982,6 +3033,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bSalSlip6) {
                                 salSlipSix.setTag(baseUrl + image);
+                                salSixBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = salSlipSix.getTag().toString().substring(salSlipSix.getTag().toString().lastIndexOf("/") + 1);
@@ -3004,6 +3056,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bSalSlip3) {
                                 salSlipThree.setTag(baseUrl + image);
+                                salThreeBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = salSlipThree.getTag().toString().substring(salSlipThree.getTag().toString().lastIndexOf("/") + 1);
@@ -3026,6 +3079,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bBankStmt3) {
                                 bankStmntThree.setTag(baseUrl + image);
+                                bankThreeBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = bankStmntThree.getTag().toString().substring(bankStmntThree.getTag().toString().lastIndexOf("/") + 1);
@@ -3048,6 +3102,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bBankStmt6) {
                                 bankStmntSix.setTag(baseUrl + image);
+                                bankSixBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = bankStmntSix.getTag().toString().substring(bankStmntSix.getTag().toString().lastIndexOf("/") + 1);
@@ -3070,6 +3125,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bKVP) {
                                 kvp.setTag(baseUrl + image);
+                                kvpBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = kvp.getTag().toString().substring(kvp.getTag().toString().lastIndexOf("/") + 1);
@@ -3092,6 +3148,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bLic) {
                                 licPolicy.setTag(baseUrl + image);
+                                licPolicyBckgrnd.setVisibility(VISIBLE);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = licPolicy.getTag().toString().substring(licPolicy.getTag().toString().lastIndexOf("/") + 1);
@@ -3114,6 +3171,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bForm16) {
                                 form16.setTag(baseUrl + image);
+                                form16Bckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = form16.getTag().toString().substring(form16.getTag().toString().lastIndexOf("/") + 1);
@@ -3121,7 +3179,7 @@ public class UploadDocumentFragment extends Fragment {
                                 FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
                                 if (FileExtn.equals("pdf")) {
-                                   /* btnForm16.setText(R.string.preview);*/
+                                    /* btnForm16.setText(R.string.preview);*/
                                     //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
                                 } else {
                                     /*btnForm16.setText(R.string.download);*/
@@ -3136,6 +3194,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bForm61) {
                                 form61.setTag(baseUrl + image);
+                                form61Bckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = form61.getTag().toString().substring(form61.getTag().toString().lastIndexOf("/") + 1);
@@ -3158,6 +3217,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bPension) {
                                 pensionLetter.setTag(baseUrl + image);
+                                pensionBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = pensionLetter.getTag().toString().substring(pensionLetter.getTag().toString().lastIndexOf("/") + 1);
@@ -3180,6 +3240,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bITR) {
                                 itr.setTag(baseUrl + image);
+                                itrBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = itr.getTag().toString().substring(itr.getTag().toString().lastIndexOf("/") + 1);
@@ -3202,6 +3263,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bPNL) {
                                 pnl.setTag(baseUrl + image);
+                                pnlBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = pnl.getTag().toString().substring(pnl.getTag().toString().lastIndexOf("/") + 1);
@@ -3224,6 +3286,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bDregreeMarkSheet) {
                                 degreeMarkSheet.setTag(baseUrl + image);
+                                degreeMarksheetBckgrnd.setVisibility(VISIBLE);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = degreeMarkSheet.getTag().toString().substring(degreeMarkSheet.getTag().toString().lastIndexOf("/") + 1);
@@ -3246,6 +3309,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (btenthmark) {
                                 tenthMarksheet.setTag(baseUrl + image);
+                                tenthBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = tenthMarksheet.getTag().toString().substring(tenthMarksheet.getTag().toString().lastIndexOf("/") + 1);
@@ -3253,7 +3317,7 @@ public class UploadDocumentFragment extends Fragment {
                                 FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
                                 if (FileExtn.equals("pdf")) {
-                                   /* btntenthMarksheet.setText(R.string.preview);*/
+                                    /* btntenthMarksheet.setText(R.string.preview);*/
                                     // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
                                 } else {
                                     /*btntenthMarksheet.setText(R.string.download);*/
@@ -3268,6 +3332,7 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (btwelvethmark) {
                                 twelvethMarksheet.setTag(baseUrl + image);
+                                twelthBckgrnd.setVisibility(VISIBLE);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                 strFileName = twelvethMarksheet.getTag().toString().substring(twelvethMarksheet.getTag().toString().lastIndexOf("/") + 1);

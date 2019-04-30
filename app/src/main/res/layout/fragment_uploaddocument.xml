@@ -235,6 +235,38 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
+                            <RelativeLayout
+                                android:id="@+id/profileBack"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent" >
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:id="@+id/profileTxt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="Photo"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
@@ -267,11 +299,42 @@
                         <LinearLayout
                             android:id="@+id/linPan"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/panBackground"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="pan card"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -304,11 +367,42 @@
                         <LinearLayout
                             android:id="@+id/linAadhaar"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/aadharBackground"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="aadhar card"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -341,11 +435,42 @@
                         <LinearLayout
                             android:id="@+id/linPassport"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/passportBackground"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="passport"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -378,11 +503,42 @@
                         <LinearLayout
                             android:id="@+id/linVoterId"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/voterIdBackground"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="voter id"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -414,11 +570,42 @@
                         <LinearLayout
                             android:id="@+id/linDrivingLicense"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/drivingLicenseBackground"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="Driving license"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -450,11 +637,42 @@
                         <LinearLayout
                             android:id="@+id/linTelephoneBill"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/telephoneBillBackground"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="Telephone bill"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -486,11 +704,42 @@
                         <LinearLayout
                             android:id="@+id/linElectricityBill"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/electricityBillBackground"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="electricity bill"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -522,11 +771,42 @@
                         <LinearLayout
                             android:id="@+id/linRentAgreement"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/rentAgreementBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="rent agreement"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -558,11 +838,42 @@
                         <LinearLayout
                             android:id="@+id/linAddressProof"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/addressProofBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text="address Proof"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -629,11 +940,42 @@
                         <LinearLayout
                             android:id="@+id/linSalarySlipSix"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/salSixBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" Salary Slip - 6 Months"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -665,11 +1007,42 @@
                         <LinearLayout
                             android:id="@+id/linSalarySlipThree"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/salThreeBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" Salary Slip - 3 Months"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -701,11 +1074,43 @@
                         <LinearLayout
                             android:id="@+id/linBankStatementThree"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/bankThreeBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" Bank Statement - 3 Months"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -737,11 +1142,43 @@
                         <LinearLayout
                             android:id="@+id/linBankStatementSix"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/bankSixBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" bank statement - 6 Months"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -773,11 +1210,43 @@
                         <LinearLayout
                             android:id="@+id/linKVP"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/kvpBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" KVP"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -810,11 +1279,43 @@
                         <LinearLayout
                             android:id="@+id/linLICPolicy"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/licPolicyBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" LIC policy"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -847,11 +1348,43 @@
                         <LinearLayout
                             android:id="@+id/linForm16"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/form16Background"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" form 16"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -884,11 +1417,43 @@
                         <LinearLayout
                             android:id="@+id/linForm61"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/from61Background"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" form 61"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -921,11 +1486,43 @@
                         <LinearLayout
                             android:id="@+id/linPensionLetter"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/pensionBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" Pension Letter"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -956,11 +1553,43 @@
 
                         <LinearLayout android:id="@+id/linITR"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/itrBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" ITR"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -992,11 +1621,43 @@
                         <LinearLayout
                             android:id="@+id/linPNL"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/pnlBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" PNL"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -1063,11 +1724,43 @@
                         <LinearLayout
                             android:id="@+id/lintenth_mark_sheet"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/tenthMarksheetBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" 10th mark sheet"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -1099,11 +1792,43 @@
                         <LinearLayout
                             android:id="@+id/lintwelvethMarkSheet"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/twelvethMarksheetBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" 12th mark sheet"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -1134,11 +1859,43 @@
                         <LinearLayout
                             android:id="@+id/linlastCompletedMarkSheet"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/lastMarksheetBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" Last completed degree mark sheet"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -1170,11 +1927,43 @@
                         <LinearLayout
                             android:id="@+id/linlastcompletedDegreeCertificate"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/lastCertificateBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" Last completed degree certificate"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -1191,7 +1980,7 @@
 
                             <Button
                                 android:id="@+id/lastDegreeCertificateBtn"
-                            android:layout_width="match_parent"
+                                android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
@@ -1240,11 +2029,43 @@
                         <LinearLayout
                             android:id="@+id/others"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_marginTop="@dimen/_16sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:visibility="gone"
+                                android:id="@+id/othersBackground"
+                                android:layout_width="fill_parent"
+                                android:layout_height="100dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:text=" others"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
 
                             <ImageView
                                 android:layout_width="@dimen/_30sdp"
@@ -1261,7 +2082,7 @@
 
                             <Button
                                 android:id="@+id/othersBtn"
-                            android:layout_width="match_parent"
+                                android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"

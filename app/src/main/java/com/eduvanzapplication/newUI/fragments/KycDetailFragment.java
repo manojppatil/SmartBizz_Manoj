@@ -2,6 +2,8 @@ package com.eduvanzapplication.newUI.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -67,11 +69,11 @@ public class KycDetailFragment extends Fragment {
     public static Context context;
     public static Fragment mFragment;
     public static ProgressDialog progressDialog;
-    public TextView txtPersonalToggle, txtIdentityToggle, txtCourseToggle;
-    public LinearLayout linPersonalBlock, relIdentityBlock, relCourseBlock;
-    public Animation expandAnimationPersonal, collapseanimationPersonal;
-    public Animation expandAnimationIdentity, collapseAnimationIdentity;
-    public Animation expanAnimationCourse, collapseAnimationCourse;
+    public static TextView txtPersonalToggle, txtIdentityToggle, txtCourseToggle;
+    public static LinearLayout linPersonalBlock, relIdentityBlock, relCourseBlock;
+    public static Animation expandAnimationPersonal, collapseanimationPersonal;
+    public static Animation expandAnimationIdentity, collapseAnimationIdentity;
+    public static Animation expanAnimationCourse, collapseAnimationCourse;
     public static Fragment fragment;
 
     public ArrayAdapter arrayAdapter_NameOfInsititue;
@@ -85,32 +87,33 @@ public class KycDetailFragment extends Fragment {
     public ArrayList<String> locations_arrayList;
     public ArrayList<LocationsPOJO> locationPOJOArrayList;
 
-    public static ImageButton fabEditKycDetail, fabEdit;
+    public static ImageButton fabEditKycDetail,fabEdit;
     public static boolean isEdit = false;
     private Switch switchMarital;
     private TextView txtMaritalStatus;
     public static EditText edtFnameBr, edtMnameBr, edtLnameBr, edtEmailIdBr, edtMobileNoBr, edtAddressbr, edtLandmarkbr, edtPincodeBr;
-    public static LinearLayout linMale, linFemale, linOther, linDob, linMaritalStatus;
+    public static LinearLayout linMale,linFemale,linOther, linDob, linMaritalStatus;
     public static EditText edtAadhaar, edtPAN, edtLoanAmt;
     public static Spinner spCountry, spState, spCity, spInsttLocation, spCourse;
     public static AutoCompleteTextView acInstituteName;
-    public static TextView txtCourseFee, txtDOB;
+    public static TextView txtCourseFee,txtDOB;
 
     public static String firstname;
 
     public static ArrayList<CountryModel> countryModelList = new ArrayList<>();
-    public static ArrayList<String> countrList = new ArrayList<>();
+    public static ArrayList<String> countrList  = new ArrayList<>();
     public static ArrayAdapter countryAdapter;
 
-    public static ArrayList<String> stateList = new ArrayList<>();
+    public static ArrayList<String> stateList  = new ArrayList<>();
     public static ArrayList<StateModel> stateModelList = new ArrayList<>();
     public static ArrayAdapter stateAdapter;
 
     public static ArrayList<CityModel> cityModelList = new ArrayList<>();
-    public static ArrayList<String> cityList = new ArrayList<>();
+    public static ArrayList<String> cityList  = new ArrayList<>();
     public static ArrayAdapter cityAdapter;
 
-   public AnimationUtils animationUtils;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -119,21 +122,12 @@ public class KycDetailFragment extends Fragment {
         mFragment = new KycDetailFragment();
 
         progressDialog = new ProgressDialog(getActivity());
-
-        expandAnimationPersonal = animationUtils.loadAnimation(context, R.anim.scale_expand);
-        expandAnimationIdentity= animationUtils.loadAnimation(context, R.anim.scale_expand);
-        expanAnimationCourse = animationUtils.loadAnimation(context, R.anim.scale_expand);
-        collapseanimationPersonal = animationUtils.loadAnimation(context,R.anim.scale_collapse);
-        collapseAnimationIdentity = animationUtils.loadAnimation(context,R.anim.scale_collapse);
-        collapseAnimationCourse = animationUtils.loadAnimation(context,R.anim.scale_collapse);
-
-//        expandAnimationPersonal = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_expand);
-//        expandAnimationIdentity = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_expand);
-//        expanAnimationCourse = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_expand);
-//        collapseanimationPersonal = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_collapse);
-//        collapseAnimationIdentity = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_collapse);
-//        collapseAnimationCourse = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_collapse);
-
+        expandAnimationPersonal = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+        expandAnimationIdentity= AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+        expanAnimationCourse = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+        collapseanimationPersonal = AnimationUtils.loadAnimation(context,R.anim.scale_collapse);
+        collapseAnimationIdentity = AnimationUtils.loadAnimation(context,R.anim.scale_collapse);
+        collapseAnimationCourse = AnimationUtils.loadAnimation(context,R.anim.scale_collapse);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         txtPersonalToggle = view.findViewById(R.id.txtPersonalToggle);
@@ -179,7 +173,6 @@ public class KycDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         linPersonalBlock.startAnimation(expandAnimationPersonal);
         relIdentityBlock.startAnimation(collapseAnimationIdentity);
         relCourseBlock.startAnimation(collapseAnimationCourse);
@@ -190,16 +183,17 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (isEdit) {
+                if (isEdit){
                     if (!LoanTabActivity.firstName.equals("") && !LoanTabActivity.middleName.equals("") && !LoanTabActivity.lastName.equals("")
                             && !LoanTabActivity.flatBuildingSociety.equals("") && !LoanTabActivity.dob.equals("") && !LoanTabActivity.maritalStatus.equals("")
                             && !LoanTabActivity.email.equals("") && !LoanTabActivity.mobile.equals("") && !LoanTabActivity.streetLocalityLandmark.equals("")
                             && !LoanTabActivity.countryId.equals("") && !LoanTabActivity.stateId.equals("") && !LoanTabActivity.cityId.equals("")
-                            && !LoanTabActivity.gender.equals("")) {
-
+                            && !LoanTabActivity.gender.equals("")){
 
                     }
                 }
+                Toast.makeText(context, "Working fine", Toast.LENGTH_SHORT).show();
+                saveEditedKycData();
 
             }
         });
@@ -207,13 +201,14 @@ public class KycDetailFragment extends Fragment {
         fabEditKycDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isEdit) {
+                if (!isEdit){
                     isEdit = true;
                     setViewsEnabled(true);
                     fabEditKycDetail.setImageResource(R.drawable.ic_save_white_16dp);
                     fabEditKycDetail.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                     chekAllFields();
-                } else {
+                }
+                else {
 
                 }
             }
@@ -222,9 +217,9 @@ public class KycDetailFragment extends Fragment {
         txtPersonalToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (linPersonalBlock.getVisibility() == VISIBLE) {
+                if (linPersonalBlock.getVisibility() == VISIBLE){
                     linPersonalBlock.startAnimation(collapseanimationPersonal);
-                } else {
+                }else{
                     linPersonalBlock.startAnimation(expandAnimationPersonal);
                 }
             }
@@ -233,9 +228,9 @@ public class KycDetailFragment extends Fragment {
         txtIdentityToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (relIdentityBlock.getVisibility() == VISIBLE) {
+                if (relIdentityBlock.getVisibility() == VISIBLE){
                     relIdentityBlock.startAnimation(collapseAnimationIdentity);
-                } else {
+                }else {
                     relIdentityBlock.startAnimation(expandAnimationIdentity);
                 }
             }
@@ -244,9 +239,9 @@ public class KycDetailFragment extends Fragment {
         txtCourseToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (relCourseBlock.getVisibility() == VISIBLE) {
+                if (relCourseBlock.getVisibility() == VISIBLE){
                     relCourseBlock.startAnimation(collapseAnimationCourse);
-                } else {
+                }else {
                     relCourseBlock.startAnimation(expanAnimationCourse);
                 }
             }
@@ -255,8 +250,7 @@ public class KycDetailFragment extends Fragment {
         /*================================personal details==========================================*/
         collapseanimationPersonal.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-            }
+            public void onAnimationStart(Animation animation) { }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -264,8 +258,7 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
+            public void onAnimationRepeat(Animation animation) { }
         });
 
         expandAnimationPersonal.setAnimationListener(new Animation.AnimationListener() {
@@ -281,14 +274,12 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
+            public void onAnimationRepeat(Animation animation) { }
         });
         /*=============================================identity details===================================*/
         collapseAnimationIdentity.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-            }
+            public void onAnimationStart(Animation animation) { }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -296,8 +287,7 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
+            public void onAnimationRepeat(Animation animation) { }
         });
 
         expandAnimationIdentity.setAnimationListener(new Animation.AnimationListener() {
@@ -313,14 +303,12 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
+            public void onAnimationRepeat(Animation animation) { }
         });
         /*===========================================course details=================================*/
         collapseAnimationCourse.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-            }
+            public void onAnimationStart(Animation animation) { }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -328,8 +316,7 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
+            public void onAnimationRepeat(Animation animation) { }
         });
 
         expanAnimationCourse.setAnimationListener(new Animation.AnimationListener() {
@@ -345,8 +332,7 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
+            public void onAnimationRepeat(Animation animation) {}
         });
         /*=====================================end====================================================*/
         applyFieldsChangeListener();
@@ -356,31 +342,28 @@ public class KycDetailFragment extends Fragment {
         spCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0; i < countrList.size(); i++) {
-                    if (spCountry.getSelectedItem().toString().equals(countryModelList.get(i).getName())) {
+                for (int i=0; i<countrList.size(); i++){
+                    if (spCountry.getSelectedItem().toString().equals(countryModelList.get(i).getName())){
                         LoanTabActivity.countryId = countryModelList.get(i).getId();
                         stateApiCall(LoanTabActivity.countryId);
                         break;
                     }
                 }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0; i < stateList.size(); i++) {
-                    if (spState.getSelectedItem().toString().equals(stateModelList.get(i).getName())) {
+                for (int i=0; i<stateList.size(); i++){
+                    if (spState.getSelectedItem().toString().equals(stateModelList.get(i).getName())){
                         LoanTabActivity.stateId = stateModelList.get(i).getId();
                         cityApiCall(LoanTabActivity.countryId, LoanTabActivity.stateId);
                         break;
                     }
                 }
-
             }
 
             @Override
@@ -423,7 +406,6 @@ public class KycDetailFragment extends Fragment {
                         break;
                     }
                 }
-//                    courseFeeApiCall();
                 courseApiCall();
             }
 
@@ -432,6 +414,50 @@ public class KycDetailFragment extends Fragment {
 
             }
         });
+
+    }
+
+    private void saveEditedKycData() {
+
+        try {//auth token
+
+            String url = MainActivity.mainUrl + "dashboard/editKycDetails";
+            Map<String, String> params = new HashMap<String, String>();
+
+            params.put("lead_id", LoanTabActivity.lead_id);
+            params.put("fk_institutes_id", LoanTabActivity.instituteId);
+            params.put("fk_insitutes_location_id", LoanTabActivity.instituteLocationId);
+            params.put("fk_course_id", LoanTabActivity.courseId);
+            params.put("requested_loan_amount", LoanTabActivity.loanAmount);
+            params.put("applicant_id", LoanTabActivity.applicant_id);
+            params.put("profession", LoanTabActivity.applicant_id);
+            params.put("first_name", LoanTabActivity.firstName);
+            params.put("middle_name", LoanTabActivity.middleName);
+            params.put("last_name", LoanTabActivity.lastName);
+            params.put("dob", LoanTabActivity.dob);
+            params.put("gender_id", LoanTabActivity.gender);
+            params.put("mobile_number", LoanTabActivity.mobile);
+            params.put("email_id", LoanTabActivity.email);
+            params.put("pan_number", LoanTabActivity.pan);
+            params.put("aadhar_number", LoanTabActivity.aadhar);
+            params.put("current_address", LoanTabActivity.flatBuildingSociety);
+            params.put("current_landmark", LoanTabActivity.streetLocalityLandmark);
+            params.put("current_address_pin", LoanTabActivity.pincode);
+            params.put("current_address_country", LoanTabActivity.countryId);
+            params.put("current_address_state", LoanTabActivity.stateId);
+            params.put("current_address_city", LoanTabActivity.cityId);
+
+            if (!Globle.isNetworkAvailable(context)){
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            }else {
+                VolleyCallNew volleyCallNew = new VolleyCallNew();
+
+                volleyCallNew.sendRequest(context,url,null,mFragment,"editKycDetails",params,MainActivity.auth_token);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -481,7 +507,7 @@ public class KycDetailFragment extends Fragment {
         }
     }
 
-    public void setViewsEnabled(boolean f) {
+    public void setViewsEnabled(boolean f){
         edtFnameBr.setEnabled(f);
         edtMnameBr.setEnabled(f);
         edtLnameBr.setEnabled(f);
@@ -509,7 +535,7 @@ public class KycDetailFragment extends Fragment {
 
     }
 
-    public void applyFieldsChangeListener() {
+    public void applyFieldsChangeListener(){
 
 
         linDob.setOnClickListener(new View.OnClickListener() {
@@ -522,7 +548,7 @@ public class KycDetailFragment extends Fragment {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
 //                        Toast.makeText(getContext(), dateDesc, Toast.LENGTH_SHORT).show();
-                        LoanTabActivity.dob = day + "-" + month + "-" + year;
+                        LoanTabActivity.dob = day+"-"+ month + "-"+year;
                         txtDOB.setText(LoanTabActivity.dob);
                         chekAllFields();
                     }
@@ -533,7 +559,7 @@ public class KycDetailFragment extends Fragment {
                         .colorCancel(Color.parseColor("#999999")) //color of cancel button
                         .colorConfirm(Color.parseColor("#009900"))//color of confirm button
                         .minYear(1900) //min year in loop
-                        .maxYear(calendar.get(Calendar.YEAR) - 18) // max year in loop
+                        .maxYear(calendar.get(Calendar.YEAR)-18) // max year in loop
                         .showDayMonthYear(false) // shows like dd mm yyyy (default is false)
                         .dateChose("2013-11-11") // date chose when init popwindow
                         .build();
@@ -544,15 +570,13 @@ public class KycDetailFragment extends Fragment {
         edtFnameBr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //               edtFnameBr.setText(firstname);
-            }
 
+            }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                LoanTabActivity.firstName = edtFnameBr.getText().toString();
                 chekAllFields();
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -561,93 +585,126 @@ public class KycDetailFragment extends Fragment {
 
         edtMnameBr.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.middleName = s.toString();
+                LoanTabActivity.middleName = edtMnameBr.getText().toString();
                 chekAllFields();
             }
-
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) { }
         });
 
         edtLnameBr.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.lastName = s.toString();
+                LoanTabActivity.lastName = edtLnameBr.getText().toString();
                 chekAllFields();
             }
-
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {          }
         });
 
         edtEmailIdBr.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.email = s.toString();
+                LoanTabActivity.email = edtEmailIdBr.getText().toString();
                 chekAllFields();
             }
-
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
         edtMobileNoBr.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.mobile = s.toString();
+                LoanTabActivity.mobile = edtMobileNoBr.getText().toString();
                 chekAllFields();
             }
-
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {           }
         });
 
         edtAadhaar.addTextChangedListener(new TextWatcher() {
             @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LoanTabActivity.aadhar = edtAadhaar.getText().toString(); chekAllFields();
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+        edtAddressbr.addTextChangedListener(new TextWatcher() {
+            @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.aadhar = s.toString();
+                LoanTabActivity.flatBuildingSociety = edtAddressbr.getText().toString();
                 chekAllFields();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+
             }
         });
+
+
 
         edtPAN.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LoanTabActivity.pan = edtPAN.getText().toString();
+                chekAllFields();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edtLandmarkbr.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.pan = s.toString();
+                LoanTabActivity.streetLocalityLandmark = edtLandmarkbr.getText().toString();
+                chekAllFields();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edtPincodeBr.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LoanTabActivity.pincode = edtPincodeBr.getText().toString();
                 chekAllFields();
             }
 
@@ -701,39 +758,41 @@ public class KycDetailFragment extends Fragment {
 
     }
 
-    public void chekAllFields() {
-        if (LoanTabActivity.firstName.equals("") || LoanTabActivity.middleName.equals("") || LoanTabActivity.lastName.equals("")
-                || LoanTabActivity.email.equals("") || LoanTabActivity.mobile.equals("") || LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("")
-                || LoanTabActivity.maritalStatus.equals("")) {
+    public void chekAllFields(){
+        if (LoanTabActivity.firstName.equals("") || LoanTabActivity.middleName.equals("")  || LoanTabActivity.lastName.equals("")
+                || LoanTabActivity.email.equals("") || LoanTabActivity.mobile.equals("")|| LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("")
+                || LoanTabActivity.maritalStatus.equals("")){
             indicateValidationText(txtPersonalToggle, getResources().getDrawable(R.drawable.ic_user_check), false);
-        } else {
+        }else {
             indicateValidationText(txtPersonalToggle, getResources().getDrawable(R.drawable.ic_user_check), true);
         }
-        if (LoanTabActivity.aadhar.equals("") || LoanTabActivity.pan.equals("")) {
-            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), false);
-        } else {
-            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), true);
+        if (LoanTabActivity.aadhar.equals("") || LoanTabActivity.pan.equals("")){
+            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card),false);
+        }
+        else {
+            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card),true);
         }
         if (LoanTabActivity.flatBuildingSociety.equals("")
                 || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.equals("") || LoanTabActivity.countryId.equals("")
-                || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), false);
-        } else {
-            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), true);
+                || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")){
+            indicateValidationText(txtIdentityToggle,getResources().getDrawable(R.drawable.ic_address_card),false);
+        }else {
+            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card),true);
         }
 
     }
 
-    public void indicateValidationText(TextView indicator, Drawable start, boolean valid) {
-        if (valid) {
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, getResources().getDrawable(R.drawable.ic_check_circle_green), null);
+    public void indicateValidationText(TextView indicator, Drawable start, boolean valid){
+        if (valid){
+            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start,null,getResources().getDrawable(R.drawable.ic_check_circle_green),null);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 indicator.getCompoundDrawablesRelative()[0].setTint(getResources().getColor(R.color.colorGreen));
                 indicator.getCompoundDrawablesRelative()[2].setTint(getResources().getColor(R.color.colorGreen));
             }
             indicator.setTextColor(getResources().getColor(R.color.colorGreen));
-        } else {
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, getResources().getDrawable(R.drawable.ic_exclamation_circle), null);
+        }
+        else{
+            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start,null,getResources().getDrawable(R.drawable.ic_exclamation_circle),null);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 indicator.getCompoundDrawablesRelative()[0].setTint(getResources().getColor(R.color.blue1));
                 indicator.getCompoundDrawablesRelative()[2].setTint(getResources().getColor(R.color.new_red));
@@ -750,7 +809,7 @@ public class KycDetailFragment extends Fragment {
 
     }
 
-    private void countryApiCall() {
+    private void countryApiCall(){
         //api is pending
         try {
             progressDialog.setMessage("Loading");
@@ -778,22 +837,22 @@ public class KycDetailFragment extends Fragment {
 
     }
 
-    public void countryApiResponse(JSONObject jsonObject) {
+    public void countryApiResponse(JSONObject jsonObject){
         progressDialog.dismiss();
         countryModelList.clear();
         countrList.clear();
 
-        countryModelList.add(new CountryModel("0", "Select"));
-        countryModelList.add(new CountryModel("1", "India"));
-        countryModelList.add(new CountryModel("2", "Germany"));
-        countryModelList.add(new CountryModel("3", "Behrain"));
+        countryModelList.add(new CountryModel("0","Select"));
+        countryModelList.add(new CountryModel("1","India"));
+        countryModelList.add(new CountryModel("2","Germany"));
+        countryModelList.add(new CountryModel("3","Behrain"));
 
         countrList.add("Select");
         countrList.add("India");
         countrList.add("Germany");
         countrList.add("Behrain");
 
-        ArrayAdapter countryAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, countrList);
+        ArrayAdapter countryAdapter = new ArrayAdapter(getContext(),  android.R.layout.simple_list_item_1, countrList );
         spCountry.setAdapter(countryAdapter);
         countryAdapter.notifyDataSetChanged();
 
@@ -827,7 +886,7 @@ public class KycDetailFragment extends Fragment {
         }
     }
 
-    public void getStatesResponse(JSONObject jsonData) {
+    public void getStatesResponse(JSONObject jsonData){
         progressDialog.dismiss();
         stateList.clear();
         stateModelList.clear();
@@ -852,7 +911,7 @@ public class KycDetailFragment extends Fragment {
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -904,7 +963,7 @@ public class KycDetailFragment extends Fragment {
                 JSONObject jsonObject = jsonData.getJSONObject("result");
                 JSONArray jsonArray3 = jsonObject.getJSONArray("cities");
                 CityModel cityModel = new CityModel();
-                for (int i = 0; i < jsonArray3.length(); i++) {
+                for (int i=0; i<jsonArray3.length();i++){
                     JSONObject mJsonti = jsonArray3.getJSONObject(i);
                     cityModel = new CityModel(mJsonti.getString("city_id"), mJsonti.getString("city_name"));
                     cityModelList.add(cityModel);
@@ -919,7 +978,7 @@ public class KycDetailFragment extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
 
-        } catch (Exception e) {
+        }catch (Exception e){
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -931,13 +990,13 @@ public class KycDetailFragment extends Fragment {
     }
 
 
-    public void kycApiCall() {
+    public void kycApiCall(){
         progressDialog.setMessage("Loading");
         progressDialog.setCancelable(false);
         progressDialog.show();
         String url = MainActivity.mainUrl + "dashboard/getKycDetails";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("lead_id", LoanTabActivity.lead_id);
+            params.put("lead_id",LoanTabActivity.lead_id);
         if (!Globle.isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
         } else {
@@ -950,117 +1009,123 @@ public class KycDetailFragment extends Fragment {
         progressDialog.dismiss();
         String message = jsonData.optString("message");
         try {
-            if (jsonData.getInt("status") == 1) {
-                if (jsonData.has("borrowerDetails") && jsonData.getJSONObject("borrowerDetails") != null) {
+            if (jsonData.getInt("status") == 1 ){
+                if (jsonData.has("borrowerDetails") && jsonData.getJSONObject("borrowerDetails") != null){
                     JSONObject jsonborrowerDetails = jsonData.getJSONObject("borrowerDetails");
-                    if (jsonborrowerDetails.getString("first_name") != null) {
+                    if (jsonborrowerDetails.getString("first_name") != null){
                         LoanTabActivity.firstName = jsonborrowerDetails.getString("first_name");
                         edtFnameBr.setText(LoanTabActivity.firstName);
                     }
-                    if (jsonborrowerDetails.getString("middle_name") != null) {
+                    if (jsonborrowerDetails.getString("applicant_id")!=null){
+                        LoanTabActivity.applicant_id = jsonborrowerDetails.getString("applicant_id");
+                    }
+                    if (jsonborrowerDetails.getString("applicant_id")!=null){
+                        MainApplication.Brapplicant_idkyc = jsonborrowerDetails.getString("applicant_id");
+                    }
+                    if (jsonborrowerDetails.getString("middle_name")!=null){
                         LoanTabActivity.middleName = jsonborrowerDetails.getString("middle_name");
                         edtMnameBr.setText(LoanTabActivity.middleName);
                     }
 
-                    if (jsonborrowerDetails.getString("last_name") != null) {
+                    if (jsonborrowerDetails.getString("last_name")!=null){
                         LoanTabActivity.lastName = jsonborrowerDetails.getString("last_name");
                         edtLnameBr.setText(LoanTabActivity.lastName);
                     }
 
-                    if (jsonborrowerDetails.getString("email_id") != null) {
+                    if (jsonborrowerDetails.getString("email_id") != null){
                         LoanTabActivity.email = jsonborrowerDetails.getString("email_id");
                         edtEmailIdBr.setText(LoanTabActivity.email);
                     }
 
-                    if (jsonborrowerDetails.getString("mobile_number") != null) {
+                    if (jsonborrowerDetails.getString("mobile_number")!=null){
                         LoanTabActivity.mobile = jsonborrowerDetails.getString("mobile_number");
                         edtMobileNoBr.setText(LoanTabActivity.mobile);
                     }
 
-                    if (jsonborrowerDetails.getString("dob") != null) {
+                    if (jsonborrowerDetails.getString("dob")!=null){
                         LoanTabActivity.dob = jsonborrowerDetails.getString("dob");
                         txtDOB.setText(LoanTabActivity.dob);
                     }
 
-                    if (jsonborrowerDetails.getString("gender_id") != null) {
+                    if (jsonborrowerDetails.getString("gender_id") != null){
                         LoanTabActivity.gender = jsonborrowerDetails.getString("gender_id");
 
-                        if (LoanTabActivity.gender.equals("1")) {
+                        if (LoanTabActivity.gender.equals("1")){
                             linMale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                             linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
                             linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                        } else if (LoanTabActivity.gender.equals("2")) {
+                        }else if (LoanTabActivity.gender.equals("2")){
                             linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
                             linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                             linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                        } else if (LoanTabActivity.gender.equals("3")) {
+                        }else if (LoanTabActivity.gender.equals("3")){
                             linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
                             linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
                             linOther.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                         }
                     }
 
-                    if (jsonborrowerDetails.getString("marital_status") != null) {
+                    if (jsonborrowerDetails.getString("marital_status") != null){
                         LoanTabActivity.maritalStatus = jsonborrowerDetails.getString("marital_status");
-                        if (LoanTabActivity.maritalStatus.equals("1")) {
+                        if (LoanTabActivity.maritalStatus.equals("1")){
                             txtMaritalStatus.setText("Married");
                             switchMarital.setChecked(true);
-                        } else if (LoanTabActivity.maritalStatus.equals("2")) {
+                        }else if (LoanTabActivity.maritalStatus.equals("2")){
                             txtMaritalStatus.setText("Unmarried");
                             switchMarital.setChecked(false);
                         }
                     }
 
-                    if (jsonborrowerDetails.getString("aadhar_number") != null) {
+                    if (jsonborrowerDetails.getString("aadhar_number")!=null){
                         LoanTabActivity.aadhar = jsonborrowerDetails.getString("aadhar_number");
                         edtAadhaar.setText(LoanTabActivity.aadhar);
                     }
 
-                    if (jsonborrowerDetails.getString("pan_number") != null) {
+                    if (jsonborrowerDetails.getString("pan_number")!=null){
                         LoanTabActivity.pan = jsonborrowerDetails.getString("pan_number");
                         edtPAN.setText(LoanTabActivity.pan);
                     }
 
-                    if (jsonborrowerDetails.getString("current_address") != null) {
+                    if (jsonborrowerDetails.getString("current_address")!=null){
                         LoanTabActivity.flatBuildingSociety = jsonborrowerDetails.getString("current_address");
                         edtAddressbr.setText(LoanTabActivity.flatBuildingSociety);
                     }
-                    if (jsonborrowerDetails.getString("current_landmark") != null) {
+                    if (jsonborrowerDetails.getString("current_landmark")!=null){
                         LoanTabActivity.streetLocalityLandmark = jsonborrowerDetails.getString("current_landmark");
                         edtLandmarkbr.setText(LoanTabActivity.streetLocalityLandmark);
                     }
-                    if (jsonborrowerDetails.getString("current_address_pin") != null) {
+                    if (jsonborrowerDetails.getString("current_address_pin")!=null){
                         LoanTabActivity.pincode = jsonborrowerDetails.getString("current_address_pin");
                         edtPincodeBr.setText(LoanTabActivity.pincode);
                     }
-                    if (jsonborrowerDetails.getString("current_address_country") != null) {
+                    if (jsonborrowerDetails.getString("current_address_country") != null){
                         LoanTabActivity.countryId = jsonborrowerDetails.getString("current_address_country");
                         spCountry.setSelection(Integer.parseInt(LoanTabActivity.countryId));
                     }
 
-                    if (jsonborrowerDetails.getString("current_address_state") != null) {
+                    if (jsonborrowerDetails.getString("current_address_state")!=null){
                         LoanTabActivity.stateId = jsonborrowerDetails.getString("current_address_state");
                         int count = stateModelList.size();
-
-                        for (int i = 0; i < count; i++) {
-                            if (stateModelList.get(i).getId().equalsIgnoreCase(LoanTabActivity.stateId)) {
+                        Log.e("state model list","Count: "+count);
+                        for (int i=0;i<count;i++){
+                            if (stateModelList.get(i).getId().equalsIgnoreCase(LoanTabActivity.stateId)){
                                 spState.setSelection(i);
-                                Log.d("another one", String.valueOf(i));
                             }
                         }
                     }
-                    if (jsonborrowerDetails.getString("current_address_city") != null) {
+                    if (jsonborrowerDetails.getString("current_address_city") != null){
                         LoanTabActivity.cityId = jsonborrowerDetails.getString("current_address_city");
                         int count = cityModelList.size();
 
-                        for (int i = 0; i < count; i++) {
-                            if (cityModelList.get(i).getId().equalsIgnoreCase(LoanTabActivity.cityId)) {
+                        for (int i=0; i<count; i++){
+                            if (cityModelList.get(i).getId().equalsIgnoreCase(LoanTabActivity.cityId)){
                                 spCity.setSelection(i);
                             }
                         }
                     }
                 }
-            } else {
+            }
+            else{
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -1090,7 +1155,7 @@ public class KycDetailFragment extends Fragment {
                     int count = nameOfInsitituePOJOArrayList.size();
                     for (int i = 0; i < count; i++) {
                         if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase((String) arg0.getItemAtPosition(arg2))) {
-                            LoanTabActivity.instituteId = nameOfInsitituePOJOArrayList.get(i).instituteID;
+                            LoanTabActivity.instituteId  = nameOfInsitituePOJOArrayList.get(i).instituteID;
                             locationApiCall();
                             break;
                         }

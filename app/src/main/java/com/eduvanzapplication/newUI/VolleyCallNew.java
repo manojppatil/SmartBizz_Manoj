@@ -768,7 +768,8 @@ public class VolleyCallNew extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if (screen.equalsIgnoreCase("dtlgetOffStates")) {
+        }
+        else if (screen.equalsIgnoreCase("dtlgetOffStates")) {
             try {
                 jsonDataO = new JSONObject(s);
                 //LoanApplicationFragment_2 mfragment).dtlgetOffStates(jsonDataO);

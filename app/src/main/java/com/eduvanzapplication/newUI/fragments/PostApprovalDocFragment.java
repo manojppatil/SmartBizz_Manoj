@@ -17,13 +17,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -40,6 +46,8 @@ import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.VolleyCallNew;
+import com.eduvanzapplication.newUI.adapter.AmortAdapter;
+import com.eduvanzapplication.newUI.adapter.NachAdapter;
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.pojo.MNach;
 import com.eduvanzapplication.uploaddocs.PathFile;
@@ -63,6 +71,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static com.eduvanzapplication.MainActivity.TAG;
 import static com.eduvanzapplication.R.*;
 
@@ -77,7 +87,12 @@ public class PostApprovalDocFragment extends Fragment {
     DownloadManager downloadManager;
     private static String userId, uploadFilePath = "";
     StringBuffer sb;
+
     public static List<MNach> mNachArrayList = new ArrayList<>();
+    public static RecyclerView rvNach;
+    public static NachAdapter adapter;
+
+    public static Animation collapseanimationlinExpand, expandAnimationlinExpand;
 
     public String lead_id = "", application_loan_id = "", principal_amount = "", down_payment = "", rate_of_interest = "",
             emi_type = "", emi_amount = "", requested_loan_amount = "", requested_tenure = "", requested_roi = "", requested_emi = "",
@@ -87,10 +102,11 @@ public class PostApprovalDocFragment extends Fragment {
     String downloadUrl = "", downloadSignedUrl = "";
     long downloadReference;
 
-    private LinearLayout linManualBtn, lineSignBtn, linOTPBtn, linPayBtn, linData, linDownloadAgreement, linExpandCollapse;
+    private LinearLayout linExpandCollapse, linManualBtn, lineSignBtn, linOTPBtn, linData, linAggSignInBtn, linDownloadAgreement, linPayBtn, linPayStatus;
     private ImageButton btnExpandCollapse;
+    private ImageView ivLeadDisbursed, ivAggSigned;
 
-    TextView txtProcessingFee;
+    private TextView txtProcessingFee, txtLeadDisbursedStatus, txtAggSignedStatus;
 
     private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
 
@@ -168,20 +184,36 @@ public class PostApprovalDocFragment extends Fragment {
 
         view = inflater.inflate(layout.fragment_postapprovaldoc, container, false);
 
+        context = getContext();
+        mFragment = new PostApprovalDocFragment();
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         linExpandCollapse = view.findViewById(R.id.linExpandCollapse);
         linManualBtn = view.findViewById(R.id.linManualBtn);
         lineSignBtn = view.findViewById(R.id.lineSignBtn);
         linOTPBtn = view.findViewById(R.id.linOTPBtn);
         linPayBtn = view.findViewById(R.id.linPayBtn);
         linData = view.findViewById(R.id.linData);
+        linAggSignInBtn = view.findViewById(R.id.linAggSignInBtn);
         linDownloadAgreement = view.findViewById(R.id.linDownloadAgreement);
         btnExpandCollapse = view.findViewById(R.id.btnExpandCollapse);
+        ivLeadDisbursed = view.findViewById(R.id.ivLeadDisbursed);
+        ivAggSigned = view.findViewById(R.id.ivAggSigned);
 
         txtProcessingFee = view.findViewById(id.txtProcessingFee);
+        txtLeadDisbursedStatus = view.findViewById(id.txtLeadDisbursedStatus);
+        txtAggSignedStatus = view.findViewById(id.txtAggSignedStatus);
 
-        context = getContext();
-        mFragment = new PostApprovalDocFragment();
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        expandAnimationlinExpand = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+        collapseanimationlinExpand = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
+
+        rvNach = view.findViewById(id.rvNach);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvNach.setLayoutManager(linearLayoutManager);
+        adapter = new NachAdapter(mNachArrayList, context, getActivity());
+        rvNach.setAdapter(adapter);
+        rvNach.setNestedScrollingEnabled(false);
 
         return view;
 
@@ -245,18 +277,72 @@ public class PostApprovalDocFragment extends Fragment {
             }
         });
 
+
+//        linExpandCollapse.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (linData.getVisibility() == 0) {
+//                    linData.setVisibility(View.GONE);
+//                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_down));
+//                } else {
+//                    linData.setVisibility(View.VISIBLE);
+//                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_up));
+//                }
+//
+//            }
+//        });
+
         linExpandCollapse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (linData.getVisibility() == 0) {
-                    linData.setVisibility(View.GONE);
-                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_down));
+                if (linData.getVisibility() == VISIBLE) {
+                    linData.startAnimation(collapseanimationlinExpand);
                 } else {
-                    linData.setVisibility(View.VISIBLE);
-                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_up));
+                    linData.startAnimation(expandAnimationlinExpand);
                 }
+            }
+        });
 
+        btnExpandCollapse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (linData.getVisibility() == VISIBLE) {
+                    linData.startAnimation(collapseanimationlinExpand);
+                } else {
+                    linData.startAnimation(expandAnimationlinExpand);
+                }
+            }
+        });
+
+        collapseanimationlinExpand.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linData.setVisibility(GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        expandAnimationlinExpand.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                linData.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
             }
         });
 
@@ -318,7 +404,7 @@ public class PostApprovalDocFragment extends Fragment {
                     String errorMsg = e.getMessage();
                     String errorMsgDetails = e.getStackTrace().toString();
                     String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                 }
 
             } else {
@@ -331,7 +417,7 @@ public class PostApprovalDocFragment extends Fragment {
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -347,103 +433,153 @@ public class PostApprovalDocFragment extends Fragment {
                 if (!jsonDataO.get("loanData").equals(null)) {
 
                     JSONObject jsonloanDataDetails = jsonDataO.getJSONObject("loanData");
-                    LoanTabActivity.Postlead_id = lead_id = jsonloanDataDetails.getString("lead_id");
-                    LoanTabActivity.Postapplication_loan_id = application_loan_id = jsonloanDataDetails.getString("application_loan_id");
-                    LoanTabActivity.Postprincipal_amount = principal_amount = jsonloanDataDetails.getString("principal_amount");
-                    LoanTabActivity.Postdown_payment = down_payment = jsonloanDataDetails.getString("down_payment");
-                    LoanTabActivity.Postrate_of_interest = rate_of_interest = jsonloanDataDetails.getString("rate_of_interest");
-                    LoanTabActivity.Postemi_type = emi_type = jsonloanDataDetails.getString("emi_type");
-                    LoanTabActivity.Postemi_amount = emi_amount = jsonloanDataDetails.getString("emi_amount");
-                    LoanTabActivity.Postrequested_loan_amount = requested_loan_amount = jsonloanDataDetails.getString("requested_loan_amount");
-                    LoanTabActivity.Postrequested_tenure = requested_tenure = jsonloanDataDetails.getString("requested_tenure");
-                    LoanTabActivity.Postrequested_roi = requested_roi = jsonloanDataDetails.getString("requested_roi");
-                    LoanTabActivity.Postrequested_emi = requested_emi = jsonloanDataDetails.getString("requested_emi");
-                    LoanTabActivity.Postoffered_amount = offered_amount = jsonloanDataDetails.getString("offered_amount");
-                    LoanTabActivity.Postapplicant_id = applicant_id = jsonloanDataDetails.getString("applicant_id");
-                    LoanTabActivity.Postfk_lead_id = fk_lead_id = jsonloanDataDetails.getString("fk_lead_id");
-                    LoanTabActivity.Postfirst_name = first_name = jsonloanDataDetails.getString("first_name");
-                    LoanTabActivity.Postlast_name = last_name = jsonloanDataDetails.getString("last_name");
-                    LoanTabActivity.Postmobile_number = mobile_number = jsonloanDataDetails.getString("mobile_number");
-                    LoanTabActivity.Postemail_id = email_id = jsonloanDataDetails.getString("email_id");
-                    LoanTabActivity.Postkyc_address = kyc_address = jsonloanDataDetails.getString("kyc_address");
-                    LoanTabActivity.Postcourse_cost = course_cost = jsonloanDataDetails.getString("course_cost");
-                    LoanTabActivity.Postpaid_on = paid_on = jsonloanDataDetails.getString("paid_on");
-                    LoanTabActivity.Posttransaction_amount = transaction_amount = jsonloanDataDetails.getString("transaction_amount");
-                    LoanTabActivity.Postkyc_status = kyc_status = jsonloanDataDetails.getString("kyc_status");
-                    LoanTabActivity.Postdisbursal_status = disbursal_status = jsonloanDataDetails.getString("disbursal_status");
-                    LoanTabActivity.Postloan_agrement_upload_status = loan_agrement_upload_status = jsonloanDataDetails.getString("loan_agrement_upload_status");
 
+                    if (!jsonloanDataDetails.getString("lead_id").toString().equals("null"))
+                        LoanTabActivity.Postlead_id = lead_id = jsonloanDataDetails.getString("lead_id");
+                    if (!jsonloanDataDetails.getString("application_loan_id").toString().equals("null"))
+                        LoanTabActivity.Postapplication_loan_id = application_loan_id = jsonloanDataDetails.getString("application_loan_id");
+                    if (!jsonloanDataDetails.getString("principal_amount").toString().equals("null"))
+                        LoanTabActivity.Postprincipal_amount = principal_amount = jsonloanDataDetails.getString("principal_amount");
+                    if (!jsonloanDataDetails.getString("down_payment").toString().equals("null"))
+                        LoanTabActivity.Postdown_payment = down_payment = jsonloanDataDetails.getString("down_payment");
+                    if (!jsonloanDataDetails.getString("rate_of_interest").toString().equals("null"))
+                        LoanTabActivity.Postrate_of_interest = rate_of_interest = jsonloanDataDetails.getString("rate_of_interest");
+                    if (!jsonloanDataDetails.getString("emi_type").toString().equals("null"))
+                        LoanTabActivity.Postemi_type = emi_type = jsonloanDataDetails.getString("emi_type");
+                    if (!jsonloanDataDetails.getString("emi_amount").toString().equals("null"))
+                        LoanTabActivity.Postemi_amount = emi_amount = jsonloanDataDetails.getString("emi_amount");
+                    if (!jsonloanDataDetails.getString("requested_loan_amount").toString().equals("null"))
+                        LoanTabActivity.Postrequested_loan_amount = requested_loan_amount = jsonloanDataDetails.getString("requested_loan_amount");
+                    if (!jsonloanDataDetails.getString("requested_tenure").toString().equals("null"))
+                        LoanTabActivity.Postrequested_tenure = requested_tenure = jsonloanDataDetails.getString("requested_tenure");
+                    if (!jsonloanDataDetails.getString("requested_roi").toString().equals("null"))
+                        LoanTabActivity.Postrequested_roi = requested_roi = jsonloanDataDetails.getString("requested_roi");
+                    if (!jsonloanDataDetails.getString("requested_emi").toString().equals("null"))
+                        LoanTabActivity.Postrequested_emi = requested_emi = jsonloanDataDetails.getString("requested_emi");
+                    if (!jsonloanDataDetails.getString("offered_amount").toString().equals("null"))
+                        LoanTabActivity.Postoffered_amount = offered_amount = jsonloanDataDetails.getString("offered_amount");
+                    if (!jsonloanDataDetails.getString("applicant_id").toString().equals("null"))
+                        LoanTabActivity.Postapplicant_id = applicant_id = jsonloanDataDetails.getString("applicant_id");
+                    if (!jsonloanDataDetails.getString("fk_lead_id").toString().equals("null"))
+                        LoanTabActivity.Postfk_lead_id = fk_lead_id = jsonloanDataDetails.getString("fk_lead_id");
+                    if (!jsonloanDataDetails.getString("first_name").toString().equals("null"))
+                        LoanTabActivity.Postfirst_name = first_name = jsonloanDataDetails.getString("first_name");
+                    if (!jsonloanDataDetails.getString("last_name").toString().equals("null"))
+                        LoanTabActivity.Postlast_name = last_name = jsonloanDataDetails.getString("last_name");
+                    if (!jsonloanDataDetails.getString("mobile_number").toString().equals("null"))
+                        LoanTabActivity.Postmobile_number = mobile_number = jsonloanDataDetails.getString("mobile_number");
+                    if (!jsonloanDataDetails.getString("email_id").toString().equals("null"))
+                        LoanTabActivity.Postemail_id = email_id = jsonloanDataDetails.getString("email_id");
+                    if (!jsonloanDataDetails.getString("kyc_address").toString().equals("null"))
+                        LoanTabActivity.Postkyc_address = kyc_address = jsonloanDataDetails.getString("kyc_address");
+                    if (!jsonloanDataDetails.getString("course_cost").toString().equals("null"))
+                        LoanTabActivity.Postcourse_cost = course_cost = jsonloanDataDetails.getString("course_cost");
+                    if (!jsonloanDataDetails.getString("paid_on").toString().equals("null"))
+                        LoanTabActivity.Postpaid_on = paid_on = jsonloanDataDetails.getString("paid_on");
+                    if (!jsonloanDataDetails.getString("transaction_amount").toString().equals("null"))
+                        LoanTabActivity.Posttransaction_amount = transaction_amount = jsonloanDataDetails.getString("transaction_amount");
+                    if (!jsonloanDataDetails.getString("kyc_status").toString().equals("null"))
+                        LoanTabActivity.Postkyc_status = kyc_status = jsonloanDataDetails.getString("kyc_status");
+                    if (!jsonloanDataDetails.getString("disbursal_status").toString().equals("null"))
+                        LoanTabActivity.Postdisbursal_status = disbursal_status = jsonloanDataDetails.getString("disbursal_status");
+
+                    if (!jsonloanDataDetails.getString("loan_agrement_upload_status").toString().equals("null"))
+                        LoanTabActivity.Postloan_agrement_upload_status = loan_agrement_upload_status = jsonloanDataDetails.getString("loan_agrement_upload_status");
+                }
+                if (disbursal_status.equals("0") || disbursal_status.equals("1")) //Disbursed
+                {
+                    txtAggSignedStatus.setText("Disbursal Pending");
+                    ivLeadDisbursed.setBackground(getResources().getDrawable(drawable.ic_exclamation_triangle));
+                } else {
+                    txtAggSignedStatus.setText("Loan Disbursed");
+                    txtAggSignedStatus.setBackgroundResource(R.color.colorGreen);
+                    ivLeadDisbursed.setBackground(getResources().getDrawable(drawable.ic_check_circle_white));
                 }
 
-//                if (!jsonDataO.get("nachData").equals(null)) {
-//                    JSONArray jsonArray1 = jsonDataO.getJSONArray("nachData");
-//
-//                    for (int i = 0; i < jsonArray1.length(); i++) {
-//                        MNach mNach = new MNach();
-//                        JSONObject jsonEmiDetails = jsonArray1.getJSONObject(i);
-//
-//                        try {
-//                            if (!jsonEmiDetails.getString("person_name").toString().equals("null"))
-//                                mNach.person_name = jsonEmiDetails.getString("person_name");
-//
-//                            if (!jsonEmiDetails.getString("amount").toString().equals("null"))
-//                                mNach.amount = jsonEmiDetails.getString("amount");
-//
-//                            if (!jsonEmiDetails.getString("umrn_num").toString().equals("null"))
-//                                mNach.umrn_num = jsonEmiDetails.getString("umrn_num");
-//
-//                            if (!jsonEmiDetails.getString("end_date").toString().equals("null"))
-//                                mNach.end_date = jsonEmiDetails.getString("end_date");
-//
-//                            if (!jsonEmiDetails.getString("frequency").toString().equals("null"))
-//                                mNach.frequency = jsonEmiDetails.getString("frequency");
-//
-//                            if (!jsonEmiDetails.getString("debit_type").toString().equals("null"))
-//                                mNach.debit_type = jsonEmiDetails.getString("debit_type");
-//
-//                            if (!jsonEmiDetails.getString("status").toString().equals("null"))
-//                                mNach.status = jsonEmiDetails.getString("status");
-//
-//                        } catch (JSONException e) {
-//                            String className = this.getClass().getSimpleName();
-//                            String name = new Object() {
-//                            }.getClass().getEnclosingMethod().getName();
-//                            String errorMsg = e.getMessage();
-//                            String errorMsgDetails = e.getStackTrace().toString();
-//                            String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-//                        }
-//                        mNachArrayList.add(mNach);
-//                    }
-//
-////                    adapter = new AmortAdapter(mNachArrayList, context, getActivity());
-////                    rvAmort.setAdapter(adapter);
-//                }
+                if (loan_agrement_upload_status.equals("1"))
+                    linAggSignInBtn.setVisibility(GONE);
+                linDownloadAgreement.setVisibility(VISIBLE);
+//                    txtLeadDisbursedStatus
+                txtAggSignedStatus.setText("Agreement Signed");
+                txtAggSignedStatus.setBackgroundResource(R.color.colorGreen);
+                ivAggSigned.setBackground(getResources().getDrawable(drawable.ic_check_circle_white));
 
-//                if (!jsonDataO.get("applicantonlineData").equals(null)) {
-//                    JSONObject jsonloanDataDetails = jsonDataO.getJSONObject("applicantonlineData");
-////                MainApplication.lead_idkyc = lead_id = jsonloanDataDetails.getString("lead_id");
-//                }
+            } else {
+                linAggSignInBtn.setVisibility(VISIBLE);
+                linDownloadAgreement.setVisibility(GONE);
+                txtAggSignedStatus.setText("Agreement Signed Pending");
+                ivAggSigned.setBackground(getResources().getDrawable(drawable.ic_exclamation_triangle));
+            }
 
-                try {
-                    String url = MainActivity.mainUrl + "laf/genrateAgreement";
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("lead_id", MainActivity.lead_id);
-                    if (!Globle.isNetworkAvailable(context)) {
-                        Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-                    } else {
-                        VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
-                        volleyCall.sendRequest(context, url, null, mFragment, "genrateAgreement", params, MainActivity.auth_token);
+            if (!jsonDataO.get("nachData").equals(null)) {
+                JSONArray jsonArray1 = jsonDataO.getJSONArray("nachData");
+
+                for (int i = 0; i < jsonArray1.length(); i++) {
+                    MNach mNach = new MNach();
+                    JSONObject jsonEmiDetails = jsonArray1.getJSONObject(i);
+
+                    try {
+                        if (!jsonEmiDetails.getString("person_name").toString().equals("null"))
+                            mNach.person_name = jsonEmiDetails.getString("person_name");
+
+                        if (!jsonEmiDetails.getString("amount").toString().equals("null"))
+                            mNach.amount = jsonEmiDetails.getString("amount");
+
+                        if (!jsonEmiDetails.getString("umrn_num").toString().equals("null"))
+                            mNach.umrn_num = jsonEmiDetails.getString("umrn_num");
+
+                        if (!jsonEmiDetails.getString("end_date").toString().equals("null"))
+                            mNach.end_date = jsonEmiDetails.getString("end_date");
+
+                        if (!jsonEmiDetails.getString("frequency").toString().equals("null"))
+                            mNach.frequency = jsonEmiDetails.getString("frequency");
+
+                        if (!jsonEmiDetails.getString("debit_type").toString().equals("null"))
+                            mNach.debit_type = jsonEmiDetails.getString("debit_type");
+
+                        if (!jsonEmiDetails.getString("status").toString().equals("null"))
+                            mNach.status = jsonEmiDetails.getString("status");
+
+                    } catch (JSONException e) {
+                        String className = this.getClass().getSimpleName();
+                        String name = new Object() {
+                        }.getClass().getEnclosingMethod().getName();
+                        String errorMsg = e.getMessage();
+                        String errorMsgDetails = e.getStackTrace().toString();
+                        String errorLine = String.valueOf(e.getStackTrace()[0]);
+                        Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
-                } catch (Exception e) {
-                    String className = this.getClass().getSimpleName();
-                    String name = new Object() {
-                    }.getClass().getEnclosingMethod().getName();
-                    String errorMsg = e.getMessage();
-                    String errorMsgDetails = e.getStackTrace().toString();
-                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                    mNachArrayList.add(mNach);
                 }
+
+                adapter = new NachAdapter(mNachArrayList, context, getActivity());
+                rvNach.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+
+            if (!jsonDataO.get("applicantonlineData").equals(null)) {
+                JSONObject jsonloanDataDetails = jsonDataO.getJSONObject("applicantonlineData");
+//                MainApplication.lead_idkyc = lead_id = jsonloanDataDetails.getString("lead_id");
+            }
+
+            try {
+                String url = MainActivity.mainUrl + "laf/genrateAgreement";
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("lead_id", MainActivity.lead_id);
+                if (!Globle.isNetworkAvailable(context)) {
+                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+                } else {
+                    VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                    volleyCall.sendRequest(context, url, null, mFragment, "genrateAgreement", params, MainActivity.auth_token);
+                }
+            } catch (Exception e) {
+                String className = this.getClass().getSimpleName();
+                String name = new Object() {
+                }.getClass().getEnclosingMethod().getName();
+                String errorMsg = e.getMessage();
+                String errorMsgDetails = e.getStackTrace().toString();
+                String errorLine = String.valueOf(e.getStackTrace()[0]);
+                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -534,7 +670,7 @@ public class PostApprovalDocFragment extends Fragment {
                     //                request.setDescription("Downloading " + "Sample" + ".png");
                     request.setVisibleInDownloadsUi(true);
                     request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/Eduvanz/" + "/" + "LAF" + ".pdf");
-                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(VISIBLE);
                     downLoad(downloadUrl, 1);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -597,7 +733,7 @@ public class PostApprovalDocFragment extends Fragment {
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }

@@ -39,7 +39,7 @@ public class LoanTabActivity extends AppCompatActivity {
     //kyc values
     public static String firstName="", lastName="", middleName="", gender="2", dob="", maritalStatus="1", email="", mobile="",
                             aadhar="", pan="", flatBuildingSociety="", streetLocalityLandmark="", pincode="", countryId="", stateId="",cityId="",
-                            instituteId="", courseId="", instituteLocationId="", courseFee="", loanAmount="";
+                            instituteId="", courseId="", instituteLocationId="", courseFee="", loanAmount="",applicant_id="";
 
     //detailed values
 
