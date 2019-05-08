@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,7 +30,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -39,15 +39,14 @@ import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCityPersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCountryPersonalPOJO;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentStatePersonalPOJO;
+
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.VolleyCallNew;
-import com.eduvanzapplication.newUI.model.CityModel;
-import com.eduvanzapplication.newUI.model.CountryModel;
-import com.eduvanzapplication.newUI.model.StateModel;
-import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
+
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
-import com.eduvanzapplication.newUI.newViews.TenureSelectionActivity;
 import com.eduvanzapplication.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanzapplication.pqformfragments.pojo.NameOfCoursePOJO;
 import com.eduvanzapplication.pqformfragments.pojo.NameOfInsitituePOJO;
@@ -63,9 +62,11 @@ import java.util.Map;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.eduvanzapplication.newUI.MainApplication.TAG;
 
 public class KycDetailFragment extends Fragment {
     static View view;
+    public static ViewPager viewPager;
     public static Context context;
     public static Fragment mFragment;
     public static ProgressDialog progressDialog;
@@ -76,43 +77,47 @@ public class KycDetailFragment extends Fragment {
     public static Animation expanAnimationCourse, collapseAnimationCourse;
     public static Fragment fragment;
 
-    public ArrayAdapter arrayAdapter_NameOfInsititue;
-    public ArrayList<String> nameofinstitute_arrayList;
-    public ArrayList<NameOfInsitituePOJO> nameOfInsitituePOJOArrayList;
+    public static ArrayAdapter arrayAdapter_NameOfInsititue;
+    public static ArrayList<String> nameofinstitute_arrayList;
+    public static ArrayList<NameOfInsitituePOJO> nameOfInsitituePOJOArrayList;
 
-    public ArrayAdapter arrayAdapter_NameOfCourse;
-    public ArrayList<String> nameofcourse_arrayList;
-    public ArrayList<NameOfCoursePOJO> nameOfCoursePOJOArrayList;
-    public ArrayAdapter arrayAdapter_locations;
-    public ArrayList<String> locations_arrayList;
-    public ArrayList<LocationsPOJO> locationPOJOArrayList;
+    public static ArrayAdapter arrayAdapter_NameOfCourse;
+    public static ArrayList<String> nameofcourse_arrayList;
+    public static ArrayList<NameOfCoursePOJO> nameOfCoursePOJOArrayList;
+    public static ArrayAdapter arrayAdapter_locations;
+    public static ArrayList<String> locations_arrayList;
+    public static ArrayList<LocationsPOJO> locationPOJOArrayList;
 
-    public static ImageButton fabEditKycDetail,fabEdit;
-    public static boolean isEdit = false;
+    public static ImageButton fabEditKycDetail, btnNextKycDetail;
     private Switch switchMarital;
     private TextView txtMaritalStatus;
     public static EditText edtFnameBr, edtMnameBr, edtLnameBr, edtEmailIdBr, edtMobileNoBr, edtAddressbr, edtLandmarkbr, edtPincodeBr;
-    public static LinearLayout linMale,linFemale,linOther, linDob, linMaritalStatus;
+    public static LinearLayout linMale, linFemale, linOther, linDob, linMaritalStatus;
     public static EditText edtAadhaar, edtPAN, edtLoanAmt;
     public static Spinner spCountry, spState, spCity, spInsttLocation, spCourse;
     public static AutoCompleteTextView acInstituteName;
-    public static TextView txtCourseFee,txtDOB;
+    public static TextView txtCourseFee, txtDOB;
 
     public static String firstname;
+    private static OnFragmentInteracting mListener;
 
-    public static ArrayList<CountryModel> countryModelList = new ArrayList<>();
-    public static ArrayList<String> countrList  = new ArrayList<>();
-    public static ArrayAdapter countryAdapter;
+    public static String currentcityID = "", currentstateID = "", currentcountryID = "", instituteID = "", courseID = "", locationID = "";
 
-    public static ArrayList<String> stateList  = new ArrayList<>();
-    public static ArrayList<StateModel> stateModelList = new ArrayList<>();
-    public static ArrayAdapter stateAdapter;
+    //city
+    public static ArrayAdapter arrayAdapter_currentCity;
+    public static ArrayList<String> currentcity_arrayList;
+    public static ArrayList<BorrowerCurrentCityPersonalPOJO> borrowerCurrentCityPersonalPOJOArrayList;
 
-    public static ArrayList<CityModel> cityModelList = new ArrayList<>();
-    public static ArrayList<String> cityList  = new ArrayList<>();
-    public static ArrayAdapter cityAdapter;
+    //state
+    public static ArrayAdapter arrayAdapter_currentState;
+    public static ArrayList<String> currentstate_arrayList;
+    public static ArrayList<BorrowerCurrentStatePersonalPOJO> borrowerCurrentStatePersonalPOJOArrayList;
 
-
+    //country
+    public static ArrayAdapter arrayAdapter_currentCountry;
+    public static ArrayList<String> currentCountry_arrayList;
+    public static ArrayList<BorrowerCurrentCountryPersonalPOJO> borrowerCurrentCountryPersonalPOJOArrayList;
+    public static String documents = "0";
 
     @Nullable
     @Override
@@ -123,11 +128,11 @@ public class KycDetailFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getActivity());
         expandAnimationPersonal = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
-        expandAnimationIdentity= AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+        expandAnimationIdentity = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
         expanAnimationCourse = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
-        collapseanimationPersonal = AnimationUtils.loadAnimation(context,R.anim.scale_collapse);
-        collapseAnimationIdentity = AnimationUtils.loadAnimation(context,R.anim.scale_collapse);
-        collapseAnimationCourse = AnimationUtils.loadAnimation(context,R.anim.scale_collapse);
+        collapseanimationPersonal = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
+        collapseAnimationIdentity = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
+        collapseAnimationCourse = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         txtPersonalToggle = view.findViewById(R.id.txtPersonalToggle);
@@ -137,12 +142,13 @@ public class KycDetailFragment extends Fragment {
         txtCourseToggle = view.findViewById(R.id.txtCourseToggle);
         relCourseBlock = view.findViewById(R.id.relCourseBlock);
         fabEditKycDetail = view.findViewById(R.id.fabEditKycDetail);
-        fabEdit = view.findViewById(R.id.fabEdit);
+        btnNextKycDetail = view.findViewById(R.id.btnNextKycDetail);
         edtFnameBr = view.findViewById(R.id.edtFnameBr);
         edtMnameBr = view.findViewById(R.id.edtMnameBr);
         edtLnameBr = view.findViewById(R.id.edtLnameBr);
         switchMarital = view.findViewById(R.id.switchMaritalStatus);
         txtMaritalStatus = view.findViewById(R.id.txtMaritalStatus);
+        viewPager = view.findViewById(R.id.viewpager1);
 
         edtEmailIdBr = view.findViewById(R.id.edtEmailIdBr);
         edtMobileNoBr = view.findViewById(R.id.edtMobileNoBr);
@@ -177,49 +183,67 @@ public class KycDetailFragment extends Fragment {
         relIdentityBlock.startAnimation(collapseAnimationIdentity);
         relCourseBlock.startAnimation(collapseAnimationCourse);
         setViewsEnabled(false);
-//        countryApiResponse(new JSONObject());  //temporary code
 
-        fabEdit.setOnClickListener(new View.OnClickListener() {
+        btnNextKycDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (isEdit){
-                    if (!LoanTabActivity.firstName.equals("") && !LoanTabActivity.middleName.equals("") && !LoanTabActivity.lastName.equals("")
-                            && !LoanTabActivity.flatBuildingSociety.equals("") && !LoanTabActivity.dob.equals("") && !LoanTabActivity.maritalStatus.equals("")
-                            && !LoanTabActivity.email.equals("") && !LoanTabActivity.mobile.equals("") && !LoanTabActivity.streetLocalityLandmark.equals("")
-                            && !LoanTabActivity.countryId.equals("") && !LoanTabActivity.stateId.equals("") && !LoanTabActivity.cityId.equals("")
-                            && !LoanTabActivity.gender.equals("")){
-
+                if (LoanTabActivity.isKycEdit) {
+                    if (LoanTabActivity.firstName.equals("") || LoanTabActivity.middleName.equals("") || LoanTabActivity.lastName.equals("") || LoanTabActivity.email.equals("") || LoanTabActivity.mobile.equals("") || LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("") || LoanTabActivity.maritalStatus.equals("")
+                            || LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.equals("") || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")
+                            || LoanTabActivity.institute_name.equals("") || LoanTabActivity.instituteLocationId.equals("") || LoanTabActivity.courseId.equals("") || LoanTabActivity.courseFee.equals("") || LoanTabActivity.requested_loan_amount.equals("")) {
+                        mListener.onFragmentInteraction(false, 0);
+                        //                    chekAllFields();
+                    } else {
+                        mListener.onFragmentInteraction(true, 1);
                     }
+                    saveEditedKycData();
+
+                }else{
+                    mListener.onFragmentInteraction(true, 1);
+
                 }
-                Toast.makeText(context, "Working fine", Toast.LENGTH_SHORT).show();
-                saveEditedKycData();
 
             }
         });
+
+//        fabEditKycDetail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!LoanTabActivity.isKycEdit){
+//                    LoanTabActivity.isKycEdit = true;
+//                    setViewsEnabled(true);
+//                    fabEditKycDetail.setImageResource(R.drawable.ic_save_white_16dp);
+//                    fabEditKycDetail.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+//                    chekAllFields();
+//                }
+//                else {
+//
+//                }
+//            }
+//        });
 
         fabEditKycDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isEdit){
-                    isEdit = true;
-                    setViewsEnabled(true);
-                    fabEditKycDetail.setImageResource(R.drawable.ic_save_white_16dp);
-                    fabEditKycDetail.setBackgroundColor(getResources().getColor(R.color.colorGreen));
-                    chekAllFields();
-                }
-                else {
 
-                }
+//				if (lead_status.equals("1") && current_stage.equals("1")) {
+                setViewsEnabled(true);
+                LoanTabActivity.isKycEdit = true;
+                fabEditKycDetail.setVisibility(View.GONE);
+//				} else {
+//
+//				}
             }
         });
+
 //Personal details
         txtPersonalToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (linPersonalBlock.getVisibility() == VISIBLE){
+                if (linPersonalBlock.getVisibility() == VISIBLE) {
                     linPersonalBlock.startAnimation(collapseanimationPersonal);
-                }else{
+                } else {
                     linPersonalBlock.startAnimation(expandAnimationPersonal);
                 }
             }
@@ -228,9 +252,9 @@ public class KycDetailFragment extends Fragment {
         txtIdentityToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (relIdentityBlock.getVisibility() == VISIBLE){
+                if (relIdentityBlock.getVisibility() == VISIBLE) {
                     relIdentityBlock.startAnimation(collapseAnimationIdentity);
-                }else {
+                } else {
                     relIdentityBlock.startAnimation(expandAnimationIdentity);
                 }
             }
@@ -239,9 +263,9 @@ public class KycDetailFragment extends Fragment {
         txtCourseToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (relCourseBlock.getVisibility() == VISIBLE){
+                if (relCourseBlock.getVisibility() == VISIBLE) {
                     relCourseBlock.startAnimation(collapseAnimationCourse);
-                }else {
+                } else {
                     relCourseBlock.startAnimation(expanAnimationCourse);
                 }
             }
@@ -250,7 +274,8 @@ public class KycDetailFragment extends Fragment {
         /*================================personal details==========================================*/
         collapseanimationPersonal.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) { }
+            public void onAnimationStart(Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -258,7 +283,8 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) { }
+            public void onAnimationRepeat(Animation animation) {
+            }
         });
 
         expandAnimationPersonal.setAnimationListener(new Animation.AnimationListener() {
@@ -274,12 +300,14 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) { }
+            public void onAnimationRepeat(Animation animation) {
+            }
         });
         /*=============================================identity details===================================*/
         collapseAnimationIdentity.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) { }
+            public void onAnimationStart(Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -287,7 +315,8 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) { }
+            public void onAnimationRepeat(Animation animation) {
+            }
         });
 
         expandAnimationIdentity.setAnimationListener(new Animation.AnimationListener() {
@@ -303,12 +332,14 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) { }
+            public void onAnimationRepeat(Animation animation) {
+            }
         });
         /*===========================================course details=================================*/
         collapseAnimationCourse.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) { }
+            public void onAnimationStart(Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -316,7 +347,8 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) { }
+            public void onAnimationRepeat(Animation animation) {
+            }
         });
 
         expanAnimationCourse.setAnimationListener(new Animation.AnimationListener() {
@@ -332,38 +364,32 @@ public class KycDetailFragment extends Fragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {}
+            public void onAnimationRepeat(Animation animation) {
+            }
         });
         /*=====================================end====================================================*/
         applyFieldsChangeListener();
+        instituteApiCall();
+        countryApiCall();
 
         kycApiCall();
-        countryApiCall();
-        spCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (int i=0; i<countrList.size(); i++){
-                    if (spCountry.getSelectedItem().toString().equals(countryModelList.get(i).getName())){
-                        LoanTabActivity.countryId = countryModelList.get(i).getId();
-                        stateApiCall(LoanTabActivity.countryId);
-                        break;
-                    }
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        });
 
-        spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (int i=0; i<stateList.size(); i++){
-                    if (spState.getSelectedItem().toString().equals(stateModelList.get(i).getName())){
-                        LoanTabActivity.stateId = stateModelList.get(i).getId();
-                        cityApiCall(LoanTabActivity.countryId, LoanTabActivity.stateId);
-                        break;
+                try {
+                    String text = spCity.getSelectedItem().toString();
+                    int count = borrowerCurrentCityPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
+                            LoanTabActivity.cityId = currentcityID = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
+                            Log.e(TAG, "spCurrentCityBr: +++++++++++++++++++*********************" + currentcityID);
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
             }
 
             @Override
@@ -372,6 +398,56 @@ public class KycDetailFragment extends Fragment {
             }
         });
 
+        spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    String text = spState.getSelectedItem().toString();
+                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
+                            LoanTabActivity.stateId = currentstateID = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
+                        }
+                    }
+                } catch (Exception e) {
+
+                }
+                cityApiCall();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    String text = spCountry.getSelectedItem().toString();
+                    int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryName.equalsIgnoreCase(text)) {
+                            LoanTabActivity.countryId = currentcountryID = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
+                        }
+                    }
+                    stateApiCall();
+//                        if (currentcityID.equals("")) {
+//                            spCurrentCityBr.setSelection(0);
+//                        } else {
+//                            spCurrentCityBr.setSelection(Integer.parseInt(currentcityID));
+//                        }
+                } catch (Exception e) {
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         spCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -428,7 +504,7 @@ public class KycDetailFragment extends Fragment {
             params.put("fk_institutes_id", LoanTabActivity.instituteId);
             params.put("fk_insitutes_location_id", LoanTabActivity.instituteLocationId);
             params.put("fk_course_id", LoanTabActivity.courseId);
-            params.put("requested_loan_amount", LoanTabActivity.loanAmount);
+            params.put("requested_loan_amount", LoanTabActivity.requested_loan_amount);
             params.put("applicant_id", LoanTabActivity.applicant_id);
             params.put("profession", LoanTabActivity.applicant_id);
             params.put("first_name", LoanTabActivity.firstName);
@@ -443,71 +519,74 @@ public class KycDetailFragment extends Fragment {
             params.put("current_address", LoanTabActivity.flatBuildingSociety);
             params.put("current_landmark", LoanTabActivity.streetLocalityLandmark);
             params.put("current_address_pin", LoanTabActivity.pincode);
+            params.put("marital_status", LoanTabActivity.maritalStatus);
             params.put("current_address_country", LoanTabActivity.countryId);
             params.put("current_address_state", LoanTabActivity.stateId);
             params.put("current_address_city", LoanTabActivity.cityId);
+            params.put("has_aadhar_pan", documents);
 
-            if (!Globle.isNetworkAvailable(context)){
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-            }else {
-                VolleyCallNew volleyCallNew = new VolleyCallNew();
-
-                volleyCallNew.sendRequest(context,url,null,mFragment,"editKycDetails",params,MainActivity.auth_token);
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    public void courseFeeApiCall() {
-        /**API CALL**/
-        try {
-            progressDialog.setMessage("Loading");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-            String url = MainActivity.mainUrl + "pqform/apiPrefillSliderAmount";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("institute_id", LoanTabActivity.instituteId);
-            params.put("course_id", LoanTabActivity.courseId);
-            params.put("location_id", LoanTabActivity.instituteLocationId);
-            VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-
             } else {
-                volleyCall.sendRequest(context, url, null, fragment, "courseFee", params, MainActivity.auth_token);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+                VolleyCall volleyCall = new VolleyCall();
 
-    public void courseApiCall() {
-        try {
-            progressDialog.setMessage("Loading");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-            String url = MainActivity.mainUrl + "pqform/apiPrefillCourses";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("institute_id", LoanTabActivity.instituteId);
-            params.put("location_id", LoanTabActivity.instituteLocationId);
-
-            VolleyCall volleyCall = new VolleyCall();
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-
-            } else {
-                volleyCall.sendRequest(context, url, null, fragment, "courseId", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "editKycDetails", params, MainActivity.auth_token);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
-    public void setViewsEnabled(boolean f){
+    public void editKycDetailsResponse(JSONObject jsonData) {
+        try {
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (jsonData.getInt("status") == 1) {
+
+//                LoanApplicationFragment_2 loanApplicationFragment_2 = new LoanApplicationFragment_2();
+//                transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_2).commit();
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    private void setSpinnerError(Spinner spinner, String error) {
+        try {
+            View selectedView = spinner.getSelectedView();
+            if (selectedView != null && selectedView instanceof TextView) {
+                spinner.requestFocus();
+                TextView selectedTextView = (TextView) selectedView;
+                selectedTextView.setError(getString(R.string.error)); // any name of the error will do
+                selectedTextView.setTextColor(Color.RED); //text color in which you want your error message to be displayed
+                selectedTextView.setText(error); // actual error message
+                spinner.performClick();
+                // to open the spinner list if error is found.
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void setViewsEnabled(boolean f) {
         edtFnameBr.setEnabled(f);
         edtMnameBr.setEnabled(f);
         edtLnameBr.setEnabled(f);
@@ -517,8 +596,8 @@ public class KycDetailFragment extends Fragment {
         switchMarital.setEnabled(f);
         linDob.setEnabled(f);
         linMaritalStatus.setEnabled(f);
-        edtEmailIdBr.setEnabled(f);
-        edtMobileNoBr.setEnabled(f);
+//        edtEmailIdBr.setEnabled(f);
+//        edtMobileNoBr.setEnabled(f);
         edtAadhaar.setEnabled(f);
         edtPAN.setEnabled(f);
         edtAddressbr.setEnabled(f);
@@ -535,7 +614,7 @@ public class KycDetailFragment extends Fragment {
 
     }
 
-    public void applyFieldsChangeListener(){
+    public void applyFieldsChangeListener() {
 
 
         linDob.setOnClickListener(new View.OnClickListener() {
@@ -548,7 +627,7 @@ public class KycDetailFragment extends Fragment {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
 //                        Toast.makeText(getContext(), dateDesc, Toast.LENGTH_SHORT).show();
-                        LoanTabActivity.dob = day+"-"+ month + "-"+year;
+                        LoanTabActivity.dob = day + "-" + month + "-" + year;
                         txtDOB.setText(LoanTabActivity.dob);
                         chekAllFields();
                     }
@@ -559,7 +638,7 @@ public class KycDetailFragment extends Fragment {
                         .colorCancel(Color.parseColor("#999999")) //color of cancel button
                         .colorConfirm(Color.parseColor("#009900"))//color of confirm button
                         .minYear(1900) //min year in loop
-                        .maxYear(calendar.get(Calendar.YEAR)-18) // max year in loop
+                        .maxYear(calendar.get(Calendar.YEAR) - 18) // max year in loop
                         .showDayMonthYear(false) // shows like dd mm yyyy (default is false)
                         .dateChose("2013-11-11") // date chose when init popwindow
                         .build();
@@ -572,11 +651,13 @@ public class KycDetailFragment extends Fragment {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 LoanTabActivity.firstName = edtFnameBr.getText().toString();
                 chekAllFields();
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -585,62 +666,128 @@ public class KycDetailFragment extends Fragment {
 
         edtMnameBr.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 LoanTabActivity.middleName = edtMnameBr.getText().toString();
                 chekAllFields();
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         edtLnameBr.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 LoanTabActivity.lastName = edtLnameBr.getText().toString();
                 chekAllFields();
             }
+
             @Override
-            public void afterTextChanged(Editable s) {          }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         edtEmailIdBr.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 LoanTabActivity.email = edtEmailIdBr.getText().toString();
                 chekAllFields();
             }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         edtMobileNoBr.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 LoanTabActivity.mobile = edtMobileNoBr.getText().toString();
                 chekAllFields();
             }
+
             @Override
-            public void afterTextChanged(Editable s) {           }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         edtAadhaar.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.aadhar = edtAadhaar.getText().toString(); chekAllFields();
+                if (!Globle.validateAadharNumber(edtAadhaar.getText().toString())) {
+//False
+                    LoanTabActivity.aadhar = "";
+                } else {
+//True
+                    LoanTabActivity.aadhar = edtAadhaar.getText().toString();
+                }
+                if (LoanTabActivity.aadhar.length() > 3 && LoanTabActivity.pan.length() > 3) {
+                    documents = "3";
+                } else {
+                    documents = "1";
+                }
+                chekAllFields();
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
+
+        edtPAN.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LoanTabActivity.pan = edtPAN.getText().toString();
+
+                if (!Globle.validateAadharNumber(edtPAN.getText().toString())) {
+//False
+                    LoanTabActivity.pan = "";
+                } else {
+//True
+                    LoanTabActivity.pan = edtPAN.getText().toString();
+                }
+
+                if (LoanTabActivity.aadhar.length() > 3 && LoanTabActivity.pan.length() > 3) {
+                    documents = "3";
+                } else {
+                    documents = "2";
+                }
+//                checkingAdharPanField();
+                chekAllFields();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         edtAddressbr.addTextChangedListener(new TextWatcher() {
             @Override
@@ -660,23 +807,6 @@ public class KycDetailFragment extends Fragment {
             }
         });
 
-
-
-        edtPAN.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.pan = edtPAN.getText().toString();
-                chekAllFields();
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         edtLandmarkbr.addTextChangedListener(new TextWatcher() {
             @Override
@@ -705,6 +835,23 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 LoanTabActivity.pincode = edtPincodeBr.getText().toString();
+                chekAllFields();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edtLoanAmt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                LoanTabActivity.requested_loan_amount = edtLoanAmt.getText().toString();
                 chekAllFields();
             }
 
@@ -748,51 +895,95 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 LoanTabActivity.maritalStatus = isChecked ? "1" : "2";
-                if (isChecked)
-                    txtMaritalStatus.setText("Married");
-                else
-                    txtMaritalStatus.setText("Unmarried");
+                if (isChecked) txtMaritalStatus.setText("Married");
+                else txtMaritalStatus.setText("Unmarried");
                 chekAllFields();
             }
         });
 
     }
 
-    public void chekAllFields(){
-        if (LoanTabActivity.firstName.equals("") || LoanTabActivity.middleName.equals("")  || LoanTabActivity.lastName.equals("")
-                || LoanTabActivity.email.equals("") || LoanTabActivity.mobile.equals("")|| LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("")
-                || LoanTabActivity.maritalStatus.equals("")){
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteracting) {
+            mListener = (OnFragmentInteracting) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteracting");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+//    private void checkingAdharPanField() {
+//
+//        switch (documents) {
+//            case "1":
+//                if (!Globle.validateAadharNumber(LoanTabActivity.aadhar)) {
+//                } else {
+//                }
+//                break;
+//
+//            case "2":
+//                if (LoanTabActivity.pan.equals(Globle.panPattern))
+//                else mDocListener.onOffButtonsDocuments(true, true);
+//                break;
+//
+//            case "3":
+//                if (!Globle.validateAadharNumber(LoanTabActivity.aadhar) && !LoanTabActivity.pan.equals(Globle.panPattern)) {
+//                    mDocListener.onOffButtonsDocuments(false, true);
+//                } else mDocListener.onOffButtonsDocuments(true, true);
+//                break;
+//        }
+//
+//    }
+
+    public void chekAllFields() {
+        if (LoanTabActivity.firstName.equals("") || LoanTabActivity.middleName.equals("") || LoanTabActivity.lastName.equals("") || LoanTabActivity.email.equals("") || LoanTabActivity.mobile.equals("") || LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("") || LoanTabActivity.maritalStatus.equals("")) {
             indicateValidationText(txtPersonalToggle, getResources().getDrawable(R.drawable.ic_user_check), false);
-        }else {
+        } else {
             indicateValidationText(txtPersonalToggle, getResources().getDrawable(R.drawable.ic_user_check), true);
         }
-        if (LoanTabActivity.aadhar.equals("") || LoanTabActivity.pan.equals("")){
-            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card),false);
+        if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.equals("") || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("") || LoanTabActivity.aadhar.equals("") && LoanTabActivity.pan.equals("")) {
+            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), false);
+        } else {
+            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), true);
         }
-        else {
-            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card),true);
+
+        if (LoanTabActivity.institute_name.equals("") || LoanTabActivity.instituteLocationId.equals("") || LoanTabActivity.courseId.equals("") || LoanTabActivity.courseFee.equals("") || LoanTabActivity.requested_loan_amount.equals("")) {
+            indicateValidationText(txtCourseToggle, getResources().getDrawable(R.drawable.ic_graduation_cap), false);
+        } else {
+            indicateValidationText(txtCourseToggle, getResources().getDrawable(R.drawable.ic_graduation_cap), true);
         }
-        if (LoanTabActivity.flatBuildingSociety.equals("")
-                || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.equals("") || LoanTabActivity.countryId.equals("")
-                || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")){
-            indicateValidationText(txtIdentityToggle,getResources().getDrawable(R.drawable.ic_address_card),false);
-        }else {
-            indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card),true);
-        }
+
 
     }
 
-    public void indicateValidationText(TextView indicator, Drawable start, boolean valid){
-        if (valid){
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start,null,getResources().getDrawable(R.drawable.ic_check_circle_green),null);
+    public static void validate() {
+        if (LoanTabActivity.firstName.equals("") || LoanTabActivity.middleName.equals("") || LoanTabActivity.lastName.equals("") || LoanTabActivity.email.equals("") || LoanTabActivity.mobile.equals("") || LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("") || LoanTabActivity.maritalStatus.equals("")
+                || LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.equals("") || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")
+                || LoanTabActivity.institute_name.equals("") || LoanTabActivity.instituteLocationId.equals("") || LoanTabActivity.courseId.equals("") || LoanTabActivity.courseFee.equals("") || LoanTabActivity.requested_loan_amount.equals("")) {
+            mListener.onFragmentInteraction(false, 0);
+        } else {
+            mListener.onFragmentInteraction(true, 1);
+        }
+    }
+
+    public void indicateValidationText(TextView indicator, Drawable start, boolean valid) {
+        if (valid) {
+            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, getResources().getDrawable(R.drawable.ic_check_circle_green), null);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 indicator.getCompoundDrawablesRelative()[0].setTint(getResources().getColor(R.color.colorGreen));
                 indicator.getCompoundDrawablesRelative()[2].setTint(getResources().getColor(R.color.colorGreen));
             }
             indicator.setTextColor(getResources().getColor(R.color.colorGreen));
-        }
-        else{
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start,null,getResources().getDrawable(R.drawable.ic_exclamation_circle),null);
+        } else {
+            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, getResources().getDrawable(R.drawable.ic_exclamation_circle), null);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 indicator.getCompoundDrawablesRelative()[0].setTint(getResources().getColor(R.color.blue1));
                 indicator.getCompoundDrawablesRelative()[2].setTint(getResources().getColor(R.color.new_red));
@@ -805,11 +996,11 @@ public class KycDetailFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        isEdit = false;
+//        LoanTabActivity.isKycEdit = false;
 
     }
 
-    private void countryApiCall(){
+    private void countryApiCall() {
         //api is pending
         try {
             progressDialog.setMessage("Loading");
@@ -837,108 +1028,143 @@ public class KycDetailFragment extends Fragment {
 
     }
 
-    public void countryApiResponse(JSONObject jsonObject){
+    public void countryApiResponse(JSONObject jsonObject) {
         progressDialog.dismiss();
-        countryModelList.clear();
-        countrList.clear();
+        try {
+            String message = jsonObject.getString("message");
+            if (jsonObject.getInt("status") == 1) {
+                JSONArray jsonArray = jsonObject.getJSONObject("result").getJSONArray("countries");
 
-        countryModelList.add(new CountryModel("0","Select"));
-        countryModelList.add(new CountryModel("1","India"));
-        countryModelList.add(new CountryModel("2","Germany"));
-        countryModelList.add(new CountryModel("3","Behrain"));
+                currentCountry_arrayList = new ArrayList<>();
+                borrowerCurrentCountryPersonalPOJOArrayList = new ArrayList<>();
 
-        countrList.add("Select");
-        countrList.add("India");
-        countrList.add("Germany");
-        countrList.add("Behrain");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-        ArrayAdapter countryAdapter = new ArrayAdapter(getContext(),  android.R.layout.simple_list_item_1, countrList );
-        spCountry.setAdapter(countryAdapter);
-        countryAdapter.notifyDataSetChanged();
+                    BorrowerCurrentCountryPersonalPOJO borrowerCurrentCountryPersonalPOJO = new BorrowerCurrentCountryPersonalPOJO();
+                    borrowerCurrentCountryPersonalPOJO.countryName = jsonObject1.getString("country_name");
+                    currentCountry_arrayList.add(jsonObject1.getString("country_name"));
+                    borrowerCurrentCountryPersonalPOJO.countryID = jsonObject1.getString("country_id");
+                    borrowerCurrentCountryPersonalPOJOArrayList.add(borrowerCurrentCountryPersonalPOJO);
+
+                }
+
+                arrayAdapter_currentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayList);
+                spCountry.setAdapter(arrayAdapter_currentCountry);
+                arrayAdapter_currentCountry.notifyDataSetChanged();
 
 
+            } else {
+//				Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void stateApiCall(String countryId) {
+    private void stateApiCall() {
         /**API CALL**/
         try {
-            progressDialog.setMessage("Loading");
-            progressDialog.show();
-            progressDialog.setCancelable(false);
             String url = MainActivity.mainUrl + "algo/getStates";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", countryId);
+            params.put("countryId", currentcountryID);
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentStates(currentcountryID);
+
             } else {
                 VolleyCall volleyCall = new VolleyCall();
-                volleyCall.sendRequest(context, url, null, KycDetailFragment.this, "getStatesKyc", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "getStatesKyc", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
-            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
-    public void getStatesResponse(JSONObject jsonData){
-        progressDialog.dismiss();
-        stateList.clear();
-        stateModelList.clear();
+    public void getCurrentStates(JSONObject jsonData) {
         try {
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-                JSONObject jsonObject = jsonData.getJSONObject("result");
-                JSONArray jsonArray3 = jsonObject.getJSONArray("states");
-                StateModel stateModel = new StateModel();
-                for (int i = 0; i < jsonArray3.length(); i++) {
-                    JSONObject mJsonti = jsonArray3.getJSONObject(i);
-                    stateModel = new StateModel(mJsonti.getString("state_id"), mJsonti.getString("state_name"));
-                    stateModelList.add(stateModel);
-                    stateList.add(mJsonti.getString("state_name"));
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    currentstate_arrayList = new ArrayList<>();
+                    currentstate_arrayList.add("Select Any");
+                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
+                    spState.setAdapter(arrayAdapter_currentState);
+                    arrayAdapter_currentState.notifyDataSetChanged();
+                    spState.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
                 }
-                stateAdapter = new ArrayAdapter(context, R.layout.custom_layout_spinner, stateList);
-                spState.setAdapter(stateAdapter);
-                stateAdapter.notifyDataSetChanged();
 
             } else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray3 = jsonObject.getJSONArray("states");
+                    currentstate_arrayList = new ArrayList<>();
+                    borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray3.length(); i++) {
+                        BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
+                        JSONObject mJsonti = jsonArray3.getJSONObject(i);
+                        borrowerCurrentStatePersonalPOJO.stateName = mJsonti.getString("state_name");
+                        currentstate_arrayList.add(mJsonti.getString("state_name"));
+                        borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
+                        borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
+                    }
+                    arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
+                    spState.setAdapter(arrayAdapter_currentState);
+                    arrayAdapter_currentState.notifyDataSetChanged();
+
+                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                            spState.setSelection(i);
+                        }
+                    }
+
+                } else {
+                }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
-
     }
 
-    private void cityApiCall(String countryId, String stateId) {
+    private void cityApiCall() {
         /**API CALL**/
         try {
-            progressDialog.show();
-            progressDialog.setCancelable(false);
-            progressDialog.setMessage("Loading");
             String url = MainActivity.mainUrl + "algo/getCities"; //http://159.89.204.41/eduvanzApi/algo/getCities
             Map<String, String> params = new HashMap<String, String>();
-            params.put("countryId", countryId);//1
-            params.put("stateId", stateId);//2
+            params.put("countryId", currentcountryID);//1
+            params.put("stateId", currentstateID);//2
             if (!Globle.isNetworkAvailable(context)) {
-                progressDialog.dismiss();
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                getCurrentCities(currentstateID,currentcountryID);
             } else {
                 VolleyCall volleyCall = new VolleyCall();
-                volleyCall.sendRequest(context, url, null, KycDetailFragment.this, "getCityKyc", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "getCityKyc", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -947,56 +1173,82 @@ public class KycDetailFragment extends Fragment {
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
-    public void getCityResponse(JSONObject jsonData) {
-        progressDialog.dismiss();
-        cityList.clear();
-        cityModelList.clear();
+    public void getCurrentCities(JSONObject jsonData) {
         try {
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-                JSONObject jsonObject = jsonData.getJSONObject("result");
-                JSONArray jsonArray3 = jsonObject.getJSONArray("cities");
-                CityModel cityModel = new CityModel();
-                for (int i=0; i<jsonArray3.length();i++){
-                    JSONObject mJsonti = jsonArray3.getJSONObject(i);
-                    cityModel = new CityModel(mJsonti.getString("city_id"), mJsonti.getString("city_name"));
-                    cityModelList.add(cityModel);
-                    cityList.add(mJsonti.getString("city_name"));
+            if (jsonData.toString().equals("{}")) {
+                try {
+                    currentcity_arrayList = new ArrayList<>();
+                    currentcity_arrayList.add("Select Any");
+                    arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
+                    spCity.setAdapter(arrayAdapter_currentCity);
+                    arrayAdapter_currentCity.notifyDataSetChanged();
+                    spCity.setSelection(0);
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
                 }
-                cityAdapter = new ArrayAdapter(context, R.layout.custom_layout_spinner, cityList);
-                spCity.setAdapter(cityAdapter);
-                cityAdapter.notifyDataSetChanged();
-
 
             } else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
+                Log.e("SERVER CALL", "getCurrentCities+++" + jsonData);
 
-        }catch (Exception e){
+                String status = jsonData.optString("status");
+                String message = jsonData.optString("message");
+
+                if (status.equalsIgnoreCase("1")) {
+                    JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                    JSONArray jsonArray2 = jsonObject.getJSONArray("cities");
+                    currentcity_arrayList = new ArrayList<>();
+                    borrowerCurrentCityPersonalPOJOArrayList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray2.length(); i++) {
+                        BorrowerCurrentCityPersonalPOJO borrowerCurrentCityPersonalPOJO = new BorrowerCurrentCityPersonalPOJO();
+                        JSONObject mJsonti = jsonArray2.getJSONObject(i);
+                        borrowerCurrentCityPersonalPOJO.cityName = mJsonti.getString("city_name");
+                        currentcity_arrayList.add(mJsonti.getString("city_name"));
+                        borrowerCurrentCityPersonalPOJO.cityID = mJsonti.getString("city_id");
+                        borrowerCurrentCityPersonalPOJOArrayList.add(borrowerCurrentCityPersonalPOJO);
+                    }
+                    arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
+                    spCity.setAdapter(arrayAdapter_currentCity);
+                    arrayAdapter_currentCity.notifyDataSetChanged();
+
+                    int count = borrowerCurrentCityPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                            spCity.setSelection(i);
+                        }
+                    }
+
+                } else {
+                }
+            }
+        } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
-
-    public void kycApiCall(){
+    public void kycApiCall() {
         progressDialog.setMessage("Loading");
         progressDialog.setCancelable(false);
         progressDialog.show();
         String url = MainActivity.mainUrl + "dashboard/getKycDetails";
         Map<String, String> params = new HashMap<String, String>();
-            params.put("lead_id",LoanTabActivity.lead_id);
+        params.put("lead_id", LoanTabActivity.lead_id);
         if (!Globle.isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
         } else {
@@ -1009,123 +1261,309 @@ public class KycDetailFragment extends Fragment {
         progressDialog.dismiss();
         String message = jsonData.optString("message");
         try {
-            if (jsonData.getInt("status") == 1 ){
-                if (jsonData.has("borrowerDetails") && jsonData.getJSONObject("borrowerDetails") != null){
-                    JSONObject jsonborrowerDetails = jsonData.getJSONObject("borrowerDetails");
-                    if (jsonborrowerDetails.getString("first_name") != null){
-                        LoanTabActivity.firstName = jsonborrowerDetails.getString("first_name");
-                        edtFnameBr.setText(LoanTabActivity.firstName);
+            if (jsonData.getInt("status") == 1) {
+
+                if (!jsonData.get("kycDetails").equals(null)) {
+                    JSONObject jsonkycDetails = jsonData.getJSONObject("kycDetails");
+
+//                    MainApplication.lead_idkyc = lead_id = jsonkycDetails.getString("lead_id");
+                    LoanTabActivity.application_id = jsonkycDetails.getString("application_id");
+                    LoanTabActivity.institute_name = jsonkycDetails.getString("institute_name");
+                    LoanTabActivity.location_name = jsonkycDetails.getString("location_name");
+                    LoanTabActivity.course_name = jsonkycDetails.getString("course_name");
+                    LoanTabActivity.course_cost = jsonkycDetails.getString("course_cost");
+                    LoanTabActivity.fk_institutes_id = jsonkycDetails.getString("fk_institutes_id");
+                    LoanTabActivity.fk_insitutes_location_id = jsonkycDetails.getString("fk_insitutes_location_id");
+                    LoanTabActivity.fk_course_id = jsonkycDetails.getString("fk_course_id");
+
+                    if (!LoanTabActivity.course_cost.equals("null")) {
+                        txtCourseFee.setText(LoanTabActivity.course_cost);
                     }
-                    if (jsonborrowerDetails.getString("applicant_id")!=null){
+//                    if (!LoanTabActivity.requested_loan_amount.equals("null")) {
+//                        edtLoanAmt.setText(LoanTabActivity.requested_loan_amount);
+//                    }
+                    if (!LoanTabActivity.institute_name.equals("null") && !LoanTabActivity.institute_name.equals("")) {
+                        acInstituteName.setText(LoanTabActivity.institute_name);
+//                        int count = nameOfInsitituePOJOArrayList.size();
+//                        try {
+//                            for (int i = 0; i < count; i++) {
+//                                if (nameOfInsitituePOJOArrayList.get(i).instituteID.equalsIgnoreCase(instituteID)) {
+//                                    acInstituteName.setText(i);
+//                                    acInstituteName.setSelection(i);
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+                    }
+                    if (!LoanTabActivity.fk_institutes_id.equals("null") && !LoanTabActivity.fk_institutes_id.equals("")) {
+                        LoanTabActivity.instituteId = instituteID = LoanTabActivity.fk_institutes_id;
+                        locationApiCall();
+//                        int count = nameOfInsitituePOJOArrayList.size();
+//                        try {
+//                            for (int i = 0; i < count; i++) {
+//                                if (nameOfInsitituePOJOArrayList.get(i).instituteID.equalsIgnoreCase(instituteID)) {
+//                                    acInstituteName.setSelection(i);
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+                    }
+
+                    if (!LoanTabActivity.fk_insitutes_location_id.equals("null") && !LoanTabActivity.fk_insitutes_location_id.equals("")) {
+
+                        LoanTabActivity.instituteLocationId = locationID = LoanTabActivity.fk_insitutes_location_id;
+
+                        try {
+                            if (!LoanTabActivity.fk_insitutes_location_id.equals("") && !LoanTabActivity.fk_insitutes_location_id.equals("null")) {
+                                try {
+
+                                    int count = locationPOJOArrayList.size();
+                                    for (int i = 0; i < count; i++) {
+                                        if (locationPOJOArrayList.get(i).locationID.equalsIgnoreCase(locationID)) {
+                                            spInsttLocation.setSelection(i);
+                                        }
+                                    }
+
+                                } catch (Exception e) {
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if (!LoanTabActivity.fk_course_id.equals("null") && !LoanTabActivity.fk_course_id.equals("")) {
+                        LoanTabActivity.courseId = courseID = LoanTabActivity.fk_course_id;
+                        spCourse.setSelection(Integer.parseInt(courseID));
+
+                        try {
+                            if (!LoanTabActivity.fk_course_id.equals("") && !LoanTabActivity.fk_course_id.equals("null")) {
+                                try {
+
+                                    int count = nameOfCoursePOJOArrayList.size();
+                                    for (int i = 0; i < count; i++) {
+                                        if (nameOfCoursePOJOArrayList.get(i).courseID.equalsIgnoreCase(courseID)) {
+                                            spCourse.setSelection(i);
+                                        }
+                                    }
+
+                                } catch (Exception e) {
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+
+//                if (!jsonData.get("leadStatus").equals(null)) {
+//                    JSONObject jsonleadStatus = jsonData.getJSONObject("leadStatus");
+//                    LoanTabActivity.lead_status = jsonleadStatus.getString("lead_status");
+//                    LoanTabActivity.lead_sub_status = jsonleadStatus.getString("lead_sub_status");
+//                    LoanTabActivity.current_stage = jsonleadStatus.getString("current_stage");
+//                    LoanTabActivity.current_status = jsonleadStatus.getString("current_status");
+//                }
+//
+//                if(LoanTabActivity.lead_status.equals("1") && LoanTabActivity.current_stage.equals("1"))
+//                {
+//                }
+//                else{
+//                    fabEditKycDetail.setVisibility(View.GONE);
+//                }
+
+                if (jsonData.has("borrowerDetails") && jsonData.getJSONObject("borrowerDetails") != null) {
+                    JSONObject jsonborrowerDetails = jsonData.getJSONObject("borrowerDetails");
+
+                    LoanTabActivity.has_aadhar_pan = documents = jsonborrowerDetails.getString("has_aadhar_pan");
+
+                    if (jsonborrowerDetails.getString("first_name") != null) {
+                        LoanTabActivity.firstName = jsonborrowerDetails.getString("first_name");
+                        if (!LoanTabActivity.firstName.equals("") && !LoanTabActivity.firstName.equals("null")) {
+                            edtFnameBr.setText(LoanTabActivity.firstName);
+                        }
+                    }
+                    if (jsonborrowerDetails.getString("applicant_id") != null) {
                         LoanTabActivity.applicant_id = jsonborrowerDetails.getString("applicant_id");
                     }
-                    if (jsonborrowerDetails.getString("applicant_id")!=null){
-                        MainApplication.Brapplicant_idkyc = jsonborrowerDetails.getString("applicant_id");
-                    }
-                    if (jsonborrowerDetails.getString("middle_name")!=null){
+
+                    if (jsonborrowerDetails.getString("middle_name") != null) {
                         LoanTabActivity.middleName = jsonborrowerDetails.getString("middle_name");
-                        edtMnameBr.setText(LoanTabActivity.middleName);
+                        if (!LoanTabActivity.middleName.equals("") && !LoanTabActivity.middleName.equals("null")) {
+                            edtMnameBr.setText(LoanTabActivity.middleName);
+                        }
                     }
 
-                    if (jsonborrowerDetails.getString("last_name")!=null){
+                    if (jsonborrowerDetails.getString("last_name") != null) {
                         LoanTabActivity.lastName = jsonborrowerDetails.getString("last_name");
-                        edtLnameBr.setText(LoanTabActivity.lastName);
+                        if (!LoanTabActivity.lastName.equals("") && !LoanTabActivity.lastName.equals("null")) {
+                            edtLnameBr.setText(LoanTabActivity.lastName);
+                        }
                     }
 
-                    if (jsonborrowerDetails.getString("email_id") != null){
+                    if (jsonborrowerDetails.getString("email_id") != null) {
                         LoanTabActivity.email = jsonborrowerDetails.getString("email_id");
-                        edtEmailIdBr.setText(LoanTabActivity.email);
+                        if (!LoanTabActivity.email.equals("") && !LoanTabActivity.email.equals("null")) {
+                            edtEmailIdBr.setText(LoanTabActivity.email);
+                        }
                     }
 
-                    if (jsonborrowerDetails.getString("mobile_number")!=null){
+                    if (jsonborrowerDetails.getString("mobile_number") != null) {
                         LoanTabActivity.mobile = jsonborrowerDetails.getString("mobile_number");
-                        edtMobileNoBr.setText(LoanTabActivity.mobile);
+                        if (!LoanTabActivity.mobile.equals("") && !LoanTabActivity.mobile.equals("null")) {
+                            edtMobileNoBr.setText(LoanTabActivity.mobile);
+                        }
                     }
 
-                    if (jsonborrowerDetails.getString("dob")!=null){
+                    if (jsonborrowerDetails.getString("dob") != null) {
                         LoanTabActivity.dob = jsonborrowerDetails.getString("dob");
-                        txtDOB.setText(LoanTabActivity.dob);
+                        if (!LoanTabActivity.dob.equals("") && !LoanTabActivity.dob.equals("null")) {
+                            txtDOB.setText(LoanTabActivity.dob);
+                        }
                     }
 
-                    if (jsonborrowerDetails.getString("gender_id") != null){
+                    if (jsonborrowerDetails.getString("gender_id") != null) {
                         LoanTabActivity.gender = jsonborrowerDetails.getString("gender_id");
-
-                        if (LoanTabActivity.gender.equals("1")){
-                            linMale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                            linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                            linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                        }else if (LoanTabActivity.gender.equals("2")){
-                            linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                            linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                            linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                        }else if (LoanTabActivity.gender.equals("3")){
-                            linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                            linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                            linOther.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                        if (!LoanTabActivity.gender.equals("") && !LoanTabActivity.gender.equals("null")) {
+                            if (LoanTabActivity.gender.equals("1")) {
+                                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                            } else if (LoanTabActivity.gender.equals("2")) {
+                                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                            } else if (LoanTabActivity.gender.equals("3")) {
+                                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                            }
                         }
                     }
 
-                    if (jsonborrowerDetails.getString("marital_status") != null){
+                    if (jsonborrowerDetails.getString("marital_status") != null) {
                         LoanTabActivity.maritalStatus = jsonborrowerDetails.getString("marital_status");
-                        if (LoanTabActivity.maritalStatus.equals("1")){
-                            txtMaritalStatus.setText("Married");
-                            switchMarital.setChecked(true);
-                        }else if (LoanTabActivity.maritalStatus.equals("2")){
-                            txtMaritalStatus.setText("Unmarried");
-                            switchMarital.setChecked(false);
+                        if (!LoanTabActivity.maritalStatus.equals("") && !LoanTabActivity.maritalStatus.equals("null")) {
+                            if (LoanTabActivity.maritalStatus.equals("1")) {
+                                txtMaritalStatus.setText("Married");
+                                switchMarital.setChecked(true);
+                            } else if (LoanTabActivity.maritalStatus.equals("2")) {
+                                txtMaritalStatus.setText("Unmarried");
+                                switchMarital.setChecked(false);
+                            }
                         }
                     }
 
-                    if (jsonborrowerDetails.getString("aadhar_number")!=null){
+                    if (jsonborrowerDetails.getString("aadhar_number") != null) {
                         LoanTabActivity.aadhar = jsonborrowerDetails.getString("aadhar_number");
-                        edtAadhaar.setText(LoanTabActivity.aadhar);
-                    }
-
-                    if (jsonborrowerDetails.getString("pan_number")!=null){
-                        LoanTabActivity.pan = jsonborrowerDetails.getString("pan_number");
-                        edtPAN.setText(LoanTabActivity.pan);
-                    }
-
-                    if (jsonborrowerDetails.getString("current_address")!=null){
-                        LoanTabActivity.flatBuildingSociety = jsonborrowerDetails.getString("current_address");
-                        edtAddressbr.setText(LoanTabActivity.flatBuildingSociety);
-                    }
-                    if (jsonborrowerDetails.getString("current_landmark")!=null){
-                        LoanTabActivity.streetLocalityLandmark = jsonborrowerDetails.getString("current_landmark");
-                        edtLandmarkbr.setText(LoanTabActivity.streetLocalityLandmark);
-                    }
-                    if (jsonborrowerDetails.getString("current_address_pin")!=null){
-                        LoanTabActivity.pincode = jsonborrowerDetails.getString("current_address_pin");
-                        edtPincodeBr.setText(LoanTabActivity.pincode);
-                    }
-                    if (jsonborrowerDetails.getString("current_address_country") != null){
-                        LoanTabActivity.countryId = jsonborrowerDetails.getString("current_address_country");
-                        spCountry.setSelection(Integer.parseInt(LoanTabActivity.countryId));
-                    }
-
-                    if (jsonborrowerDetails.getString("current_address_state")!=null){
-                        LoanTabActivity.stateId = jsonborrowerDetails.getString("current_address_state");
-                        int count = stateModelList.size();
-                        Log.e("state model list","Count: "+count);
-                        for (int i=0;i<count;i++){
-                            if (stateModelList.get(i).getId().equalsIgnoreCase(LoanTabActivity.stateId)){
-                                spState.setSelection(i);
-                            }
+                        if (!LoanTabActivity.aadhar.equals("") && !LoanTabActivity.aadhar.equals("null")) {
+                            edtAadhaar.setText(LoanTabActivity.aadhar);
                         }
                     }
-                    if (jsonborrowerDetails.getString("current_address_city") != null){
-                        LoanTabActivity.cityId = jsonborrowerDetails.getString("current_address_city");
-                        int count = cityModelList.size();
 
-                        for (int i=0; i<count; i++){
-                            if (cityModelList.get(i).getId().equalsIgnoreCase(LoanTabActivity.cityId)){
-                                spCity.setSelection(i);
+                    if (jsonborrowerDetails.getString("pan_number") != null) {
+                        LoanTabActivity.pan = jsonborrowerDetails.getString("pan_number");
+                        if (!LoanTabActivity.pan.equals("") && !LoanTabActivity.pan.equals("null")) {
+                            edtPAN.setText(LoanTabActivity.pan);
+                        }
+                    }
+
+                    if (jsonborrowerDetails.getString("current_address") != null) {
+                        LoanTabActivity.flatBuildingSociety = jsonborrowerDetails.getString("current_address");
+                        if (!LoanTabActivity.flatBuildingSociety.equals("") && !LoanTabActivity.flatBuildingSociety.equals("null")) {
+                            edtAddressbr.setText(LoanTabActivity.flatBuildingSociety);
+                        }
+                    }
+                    if (jsonborrowerDetails.getString("current_landmark") != null) {
+                        LoanTabActivity.streetLocalityLandmark = jsonborrowerDetails.getString("current_landmark");
+                        if (!LoanTabActivity.streetLocalityLandmark.equals("") && !LoanTabActivity.streetLocalityLandmark.equals("null")) {
+                            edtLandmarkbr.setText(LoanTabActivity.streetLocalityLandmark);
+                        }
+                    }
+                    if (jsonborrowerDetails.getString("current_address_pin") != null) {
+                        LoanTabActivity.pincode = jsonborrowerDetails.getString("current_address_pin");
+                        if (!LoanTabActivity.pincode.equals("") && !LoanTabActivity.pincode.equals("null")) {
+                            edtPincodeBr.setText(LoanTabActivity.pincode);
+                        }
+                    }
+                    if (jsonborrowerDetails.getString("requested_loan_amount") != null) {
+                        LoanTabActivity.requested_loan_amount = jsonborrowerDetails.getString("requested_loan_amount");
+                        if (!LoanTabActivity.requested_loan_amount.equals("") && !LoanTabActivity.requested_loan_amount.equals("null")) {
+                            edtLoanAmt.setText(LoanTabActivity.requested_loan_amount);
+                        }
+                    }
+                    if (jsonborrowerDetails.getString("current_address_country") != null) {
+                        LoanTabActivity.countryId = jsonborrowerDetails.getString("current_address_country");
+
+                        try {
+                            if (!LoanTabActivity.countryId.equals("") && !LoanTabActivity.countryId.equals("null")) {
+                                try {
+                                    currentcountryID = LoanTabActivity.countryId;
+
+                                    int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
+                                    for (int i = 0; i < count; i++) {
+                                        if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase(currentcountryID)) {
+                                            spCountry.setSelection(i);
+                                        }
+                                    }
+
+                                } catch (Exception e) {
+
+                                }
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if (jsonborrowerDetails.getString("current_address_state") != null) {
+                        LoanTabActivity.stateId = jsonborrowerDetails.getString("current_address_state");
+
+                        try {
+                            if (!LoanTabActivity.stateId.equals("") && !LoanTabActivity.stateId.equals("null")) {
+                                currentstateID = LoanTabActivity.stateId;
+                                try {
+                                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+                                    for (int i = 0; i < count; i++) {
+                                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                            spState.setSelection(i);
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (jsonborrowerDetails.getString("current_address_city") != null) {
+                        LoanTabActivity.cityId = jsonborrowerDetails.getString("current_address_city");
+
+                        try {
+                            if (!LoanTabActivity.cityId.equals("") && !LoanTabActivity.cityId.equals("null")) {
+                                currentcityID = LoanTabActivity.cityId;
+                                try {
+                                    int count = borrowerCurrentCityPersonalPOJOArrayList.size();
+                                    for (int i = 0; i < count; i++) {
+                                        if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                            spCity.setSelection(i);
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
                 }
-            }
-            else{
+            } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -1134,56 +1572,29 @@ public class KycDetailFragment extends Fragment {
 
     }
 
-
-    public void setInstituteAdaptor() {
-
+    public void instituteApiCall() {
+        /**API CALL**/
         try {
-
-//            ArrayAdapter<String> adapter = new ArrayAdapter<String>
-//                    (this, android.R.layout.select_dialog_item, nameofinstitute_arrayList);
-
-            arrayAdapter_NameOfInsititue = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofinstitute_arrayList);
-
-            //Getting the instance of AutoCompleteTextView
-            acInstituteName.setThreshold(3);//will start working from first character
-            acInstituteName.setAdapter(arrayAdapter_NameOfInsititue);//setting the adapter data into the AutoCompleteTextView
-//            acInstituteName.setTextColor(Color.RED);
-
-            acInstituteName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                    String countryName = (String) arg0.getItemAtPosition(arg2);
-                    int count = nameOfInsitituePOJOArrayList.size();
-                    for (int i = 0; i < count; i++) {
-                        if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase((String) arg0.getItemAtPosition(arg2))) {
-                            LoanTabActivity.instituteId  = nameOfInsitituePOJOArrayList.get(i).instituteID;
-                            locationApiCall();
-                            break;
-                        }
-                    }
-
-                }
-            });
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void locationApiCall() {
-        try {
-            String url = MainActivity.mainUrl + "pqform/apiPrefillLocations";
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            String url = MainActivity.mainUrl + "pqform/apiPrefillInstitutes";  //http://159.89.204.41/eduvanzApi/pqform/apiPrefillInstitutes
             Map<String, String> params = new HashMap<String, String>();
-            params.put("institute_id", LoanTabActivity.instituteId);
             VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-
             } else {
-                volleyCall.sendRequest(context, url, null, fragment, "locationName", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "instituteIdkyc", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -1216,7 +1627,145 @@ public class KycDetailFragment extends Fragment {
 //                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void setInstituteAdaptor() {
+
+        try {
+
+            arrayAdapter_NameOfInsititue = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofinstitute_arrayList);
+
+            //Getting the instance of AutoCompleteTextView
+            acInstituteName.setThreshold(3);//will start working from first character
+            acInstituteName.setAdapter(arrayAdapter_NameOfInsititue);//setting the adapter data into the AutoCompleteTextView
+//            acInstituteName.setTextColor(Color.RED);
+
+            acInstituteName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                    String countryName = (String) arg0.getItemAtPosition(arg2);
+                    int count = nameOfInsitituePOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase((String) arg0.getItemAtPosition(arg2))) {
+                            LoanTabActivity.instituteId = nameOfInsitituePOJOArrayList.get(i).instituteID;
+                            locationApiCall();
+                            break;
+                        }
+                    }
+                    try {
+                        ((LoanTabActivity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+//                        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void courseApiCall() {
+        try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            String url = MainActivity.mainUrl + "pqform/apiPrefillCourses";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("institute_id", LoanTabActivity.instituteId);
+            params.put("location_id", LoanTabActivity.instituteLocationId);
+
+            VolleyCall volleyCall = new VolleyCall();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+            } else {
+                volleyCall.sendRequest(context, url, null, mFragment, "courseIdkyc", params, MainActivity.auth_token);
+            }
+
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void locationApiCall() {
+        try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            String url = MainActivity.mainUrl + "pqform/apiPrefillLocations";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("institute_id", LoanTabActivity.instituteId);
+            VolleyCall volleyCall = new VolleyCall();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+            } else {
+                volleyCall.sendRequest(context, url, null, mFragment, "locationNamekyc", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void courseFeeApiCall() {
+        /**API CALL**/
+        try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            String url = MainActivity.mainUrl + "pqform/apiPrefillSliderAmount";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("institute_id", LoanTabActivity.instituteId);
+            params.put("course_id", LoanTabActivity.courseId);
+            params.put("location_id", LoanTabActivity.instituteLocationId);
+            VolleyCall volleyCall = new VolleyCall();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+            } else {
+                volleyCall.sendRequest(context, url, null, mFragment, "courseFeekyc", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -1248,7 +1797,14 @@ public class KycDetailFragment extends Fragment {
 //                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -1265,10 +1821,16 @@ public class KycDetailFragment extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
-
 
     public void setCourseAdaptor() {
 
@@ -1285,7 +1847,13 @@ public class KycDetailFragment extends Fragment {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -1318,7 +1886,14 @@ public class KycDetailFragment extends Fragment {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            progressDialog.dismiss();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -1337,221 +1912,19 @@ public class KycDetailFragment extends Fragment {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
-
 
     }
 
-    private void saveInstituteData() {
-        /** API CALL GET OTP**/
-        try {//auth_token
-            String url = MainActivity.mainUrl + "dashboard/saveInstitute";
-            Map<String, String> params = new HashMap<String, String>();
-
-            params.put("lead_id", LoanTabActivity.lead_id);
-            params.put("applicant_id", MainActivity.applicant_id);
-            params.put("institute", LoanTabActivity.instituteId);
-            params.put("course_name", LoanTabActivity.courseId);
-            params.put("location", LoanTabActivity.instituteLocationId);
-            params.put("loanAmount", edtLoanAmt.getText().toString().trim());
-
-            VolleyCall volleyCall = new VolleyCall();
-            volleyCall.sendRequest(getActivity(), url, null, fragment, "saveInstitute", params, MainActivity.auth_token);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public interface OnFragmentInteracting {
+        void onFragmentInteraction(boolean valid, int next);
     }
-
-    public void setsaveInstitute(JSONObject jsonData) {
-        try {
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (jsonData.getInt("status") == 1) {
-
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-
-//                EligibilityCheckFragment_6 eligibilityCheckFragment_6 = new EligibilityCheckFragment_6();
-//                transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_6).commit();
-
-            } else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    //	private VerticalStepperItemView mSteppers[] = new VerticalStepperItemView[3];
-//	private Button btnNextKycDetail0, btnNextKycDetail1, btnPreviousKycDetail1, btnNextKycDetail2, btnPreviousKycDetail2;
-//
-//    private int mActivatedColorRes = R.color.material_blue_500;
-//	private int mDoneIconRes = R.drawable.ic_done_white_16dp;
-//
-//    static View view;
-//
-//	public static Context context;
-//	public static Fragment mFragment;
-//    public static RelativeLayout relborrower;
-//    public static LinearLayout linBorrowerForm;
-//	public static TextView txtBorrowerArrowKey;
-//	public static int borrowerVisiblity = 0;
-//
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-//
-//		view = inflater.inflate(R.layout.fragment_kycdetail_stepper, parent, false);
-//
-//        linBorrowerForm = (LinearLayout) view.findViewById(R.id.linBorrowerForm);
-//
-//        relborrower = (RelativeLayout) view.findViewById(R.id.relborrower);
-//
-//        txtBorrowerArrowKey = (TextView) view.findViewById(R.id.txtBorrowerArrowKey);
-//
-//		context = getContext();
-//		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-//
-////		if (borrowerVisiblity == 0) {
-////			linBorrowerForm.setVisibility(View.VISIBLE);
-////			borrowerVisiblity = 1;
-////			txtBorrowerArrowKey.setText(getResources().getString(R.string.up));
-////		} else if (borrowerVisiblity == 1) {
-////			linBorrowerForm.setVisibility(View.GONE);
-////			borrowerVisiblity = 0;
-////			txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
-////		}
-////
-////
-////		relborrower.setOnClickListener(new View.OnClickListener() {
-////			@Override
-////			public void onClick(View v) {
-////				if (borrowerVisiblity == 0) {
-////					linBorrowerForm.setVisibility(View.VISIBLE);
-////					borrowerVisiblity = 1;
-////					txtBorrowerArrowKey.setText(getResources().getString(R.string.up));
-////				} else if (borrowerVisiblity == 1) {
-////					linBorrowerForm.setVisibility(View.GONE);
-////					borrowerVisiblity = 0;
-////					txtBorrowerArrowKey.setText(getResources().getString(R.string.down));
-////				}
-////
-////			}
-////		});
-//
-//        return view;
-//    }
-//
-//	@Override
-//	public void onViewCreated(View view, Bundle savedInstanceState) {
-//
-//	    mSteppers[0] = view.findViewById(R.id.stepperKyc0);
-//		mSteppers[1] = view.findViewById(R.id.stepperKyc1);
-//		mSteppers[2] = view.findViewById(R.id.stepperKyc2);
-//
-//		VerticalStepperItemView.bindSteppers(mSteppers);
-//
-//		btnNextKycDetail0 = view.findViewById(R.id.btnNextKycDetail0);
-//		btnNextKycDetail0.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				mSteppers[0].nextStep();
-//			}
-//		});
-//
-//		mSteppers[0].setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				mSteppers[0].nextStep();
-//			}
-//		});
-//
-//		mSteppers[1].setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				mSteppers[0].nextStep();
-//			}
-//		});
-//
-//		mSteppers[2].setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				mSteppers[1].nextStep();
-//			}
-//		});
-//
-//		view.findViewById(R.id.button_test_error).setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				if (mSteppers[0].getErrorText() != null) {
-//					mSteppers[0].setErrorText(null);
-//				} else {
-//					mSteppers[0].setErrorText("Test error!");
-//				}
-//			}
-//		});
-//
-//		btnPreviousKycDetail1 = view.findViewById(R.id.btnPreviousKycDetail1);
-//		btnPreviousKycDetail1.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				mSteppers[1].prevStep();
-//			}
-//		});
-//
-//		btnNextKycDetail1 = view.findViewById(R.id.btnNextKycDetail1);
-//		btnNextKycDetail1.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				mSteppers[1].nextStep();
-//			}
-//		});
-//
-//		btnPreviousKycDetail2 = view.findViewById(R.id.btnPreviousKycDetail2);
-//		btnPreviousKycDetail2.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				mSteppers[2].prevStep();
-//			}
-//		});
-//
-//		btnNextKycDetail2 = view.findViewById(R.id.btnNextKycDetail2);
-//		btnNextKycDetail2.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				Snackbar.make(view, "Finish!", Snackbar.LENGTH_LONG).show();
-//			}
-//		});
-//
-//
-//		view.findViewById(R.id.btn_change_point_color).setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				if (mActivatedColorRes == R.color.material_blue_500) {
-//					mActivatedColorRes = R.color.material_deep_purple_500;
-//				} else {
-//					mActivatedColorRes = R.color.material_blue_500;
-//				}
-//				for (VerticalStepperItemView stepper : mSteppers) {
-//					stepper.setActivatedColorResource(mActivatedColorRes);
-//				}
-//			}
-//		});
-//		view.findViewById(R.id.btn_change_done_icon).setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				if (mDoneIconRes == R.drawable.ic_done_white_16dp) {
-//					mDoneIconRes = R.drawable.ic_save_white_16dp;
-//				} else {
-//					mDoneIconRes = R.drawable.ic_done_white_16dp;
-//				}
-//				for (VerticalStepperItemView stepper : mSteppers) {
-//					stepper.setDoneIconResource(mDoneIconRes);
-//				}
-//			}
-//		});
-//	}
-
 
 }

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/linear_one"
     android:orientation="vertical"
     android:padding="@dimen/_10sdp">
 
@@ -140,6 +141,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/newLinOcr"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -245,86 +252,11 @@
             </LinearLayout>
 
         </LinearLayout>
+    </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linFooter1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_16sdp"
-            android:gravity="center_horizontal"
-            android:text="OR"
-            android:textSize="18sp"
-            android:textColor="@color/textcolordark"
-            style="@style/TextViewTitle16BoldStyle"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/msg1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CLOSE THIS DIALOG"
-                android:textColor="@color/new_red"
-                style="@style/TextViewTitle15BoldStyle"/>
-
-            <TextView
-                android:id="@+id/msg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/msg1"
-                android:text="TO CONTINUE MANUALLY"
-                android:textColor="@color/black_new"
-                style="@style/TextViewTitle15BoldStyle"/>
-
-
-            <LinearLayout
-                android:id="@+id/linClose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/border_circular_red_filled"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="@dimen/_6sdp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_weight="1"
-                    android:text="@string/close"
-                    android:textColor="@color/white"
-                    style="@style/TextViewTitle15BoldStyle"/>
-
-                <View
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:layout_marginEnd="@dimen/_6sdp"
-                    android:background="@color/white" />
-
-                <ImageView
-                    android:id="@+id/ivIndicator"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="@dimen/_14sdp"
-                    app:srcCompat="@drawable/ic_clear" />
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linTakePicture"
@@ -387,4 +319,83 @@
     </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/linFooter1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:gravity="center_horizontal"
+            android:text="OR"
+            android:textSize="18sp"
+            android:textColor="@color/textcolordark"
+            style="@style/TextViewTitle16BoldStyle"/>
+
+
+    </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/msg1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLOSE THIS DIALOG"
+                android:textColor="@color/new_red"
+                style="@style/TextViewTitle15BoldStyle"/>
+
+            <TextView
+                android:id="@+id/msg2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/msg1"
+                android:text="TO CONTINUE MANUALLY"
+                android:textColor="@color/black_new"
+                style="@style/TextViewTitle15BoldStyle"/>
+
+
+            <LinearLayout
+                android:id="@+id/linClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/border_circular_red_filled"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_6sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/close"
+                    android:textColor="@color/white"
+                    style="@style/TextViewTitle15BoldStyle"/>
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:background="@color/white" />
+
+                <ImageView
+                    android:id="@+id/ivIndicator"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    app:srcCompat="@drawable/ic_clear" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>

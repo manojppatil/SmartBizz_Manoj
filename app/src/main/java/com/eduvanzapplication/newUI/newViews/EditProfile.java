@@ -1,9 +1,25 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -16,23 +32,43 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.VolleyCallNew;
-import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
-import com.google.gson.JsonObject;
+import com.eduvanzapplication.uploaddocs.PathFile;
+import com.eduvanzapplication.uploaddocs.Utility;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfile extends AppCompatActivity {
+    private static final int PICK_IMAGE = 1;
     private CircleImageView profileImage;
     private EditText firstName,middleName,lastName,email;
     private TextView mobile_number;
     private LinearLayout submit_button;
+    public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
+    public String userChoosenTask;
+    String uploadFilePath = "";
     ProgressBar progressBar;
+    StringBuffer sb;
     static String first_name,last_name,img_profile,email_id;
     public static AppCompatActivity mActivity;
     Context context;
@@ -42,8 +78,16 @@ public class EditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        context = getApplicationContext();
+        context = EditProfile.this;
         mActivity = this;
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Profile");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
+        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
 
         profileImage = findViewById(R.id.profileImage);
@@ -55,17 +99,6 @@ public class EditProfile extends AppCompatActivity {
         submit_button = findViewById(R.id.linSubmit);
         progressBar = (ProgressBar) findViewById(R.id.progressBar_editProfile);
 
-        try {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-            first_name = sharedPreferences.getString("first_name", "");
-            email_id = sharedPreferences.getString("email", "");
-            last_name = sharedPreferences.getString("last_name", "");
-            img_profile = sharedPreferences.getString("profile_image", "");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,8 +106,376 @@ public class EditProfile extends AppCompatActivity {
                 finish();
             }
         });
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("image/*");
+//
+//                Intent pickIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                pickIntent.setType("images/*");
+//
+//                Intent chooserIntent = Intent.createChooser(intent,"Select Images");
+//                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,new Intent[]{pickIntent});
+//
+//                startActivityForResult(chooserIntent,PICK_IMAGE);
+                selectImage();
 
+            }
+        });
         setProfileApiCall();
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
+
+    private void selectImage() {
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                boolean result = Utility.checkPermission(context);
+
+                if (items[item].equals("Take Photo")) {
+                    userChoosenTask = "Take Photo";
+                    if (result)
+                        cameraIntent();
+
+                } else if (items[item].equals("Choose from Library")) {
+                    userChoosenTask = "Choose from Library";
+                    if (result)
+                        galleryIntent();
+
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void galleryIntent() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+    }
+
+    private void cameraIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        if (requestCode == PICK_IMAGE){
+//            Uri selectedImage = data.getData();
+//            String[] filePath = {MediaStore.Images.Media.DATA};
+//
+//            Cursor cursor = getContentResolver().query(selectedImage,filePath,null,null,null);
+//            cursor.moveToFirst();
+//
+//            int columnIndex = cursor.getColumnIndex(filePath[0]);
+//            String picturePath = cursor.getString(columnIndex);
+//            cursor.close();
+//
+//            uploadFile(picturePath);
+////            editingProfilePicture(picturePath);
+//        }
+//    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        }
+    }
+
+    private void onCaptureImageResult(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        uploadFilePath = destination.toString();
+        Log.e("TAG", "onCaptureImageResult: " + uploadFilePath);
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (uploadFilePath != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //creating new thread to handle Http Operations
+                    Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                    uploadFile(uploadFilePath);
+                }
+            }).start();
+        } else {
+            Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+        }
+//        if(imageViewProfilePicSelect == imageViewKycProfilePhoto){
+//            imageViewProfilePicSelect.setImageBitmap(thumbnail);
+//            buttonKycProfilePhoto.setVisibility(View.VISIBLE);
+//        }else if(imageViewProfilePicSelect == imageViewKycProfilePhoto_co){
+//            imageViewProfilePicSelect.setImageBitmap(thumbnail);
+//            buttonKycProfilePhoto_co.setVisibility(View.VISIBLE);
+//        }
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+
+        Bitmap bm = null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(context.getContentResolver(), data.getData());
+                Uri selectedFileUri = data.getData();
+                uploadFilePath = PathFile.getPath(context, selectedFileUri);
+                Log.e("TAG", "onSelectFromGalleryResult: " + uploadFilePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (uploadFilePath != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //creating new thread to handle Http Operations
+                    Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                    uploadFile(uploadFilePath);
+                }
+            }).start();
+        } else {
+            Toast.makeText(context, "Please choose a File First", Toast.LENGTH_SHORT).show();
+        }
+//            profileImage.setImageBitmap(bm);
+    }
+
+
+    public int uploadFile(final String selectedFilePath) {
+        String urlup = MainActivity.mainUrl + "authorization/updateProfilePicture";
+        Map<String,String> params = new HashMap <>();
+        params.put("studentId",DashboardActivity.student_id);
+
+        int serverResponseCode = 0;
+        HttpURLConnection connection;
+        DataOutputStream dataOutputStream;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        File selectedFile = new File(selectedFilePath);
+
+
+        String[] parts = selectedFilePath.split("/");
+        final String fileName = parts[parts.length - 1];
+        String[] fileExtn = fileName.split(".");
+
+
+        if (!selectedFile.isFile()) {
+            //dialog.dismiss();
+            try {
+                progressBar.setVisibility(View.GONE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            EditProfile.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("TAG", "run: " + "Source File Doesn't Exist: " + selectedFilePath);
+                }
+            });
+            return 0;
+        } else {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(selectedFile);
+                URL url = new URL(urlup);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setUseCaches(false);
+                connection.setChunkedStreamingMode(1024);
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Connection", "Keep-Alive");
+                connection.setRequestProperty("ENCTYPE", "multipart/form-data");
+                connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                connection.setRequestProperty("Authorization", "Bearer " + MainActivity.auth_token);
+                connection.setRequestProperty("document", selectedFilePath);
+                Log.e("TAG", "Server property" + connection.getRequestMethod() + ":property " + connection.getRequestProperties());
+                dataOutputStream = new DataOutputStream(connection.getOutputStream());
+
+                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"myfile\";filename=\""
+                        + selectedFilePath + "\"" + lineEnd);
+                dataOutputStream.writeBytes(lineEnd);
+
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                buffer = new byte[bufferSize];
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                while (bytesRead > 0) {
+                    dataOutputStream.write(buffer, 0, bufferSize);
+                    Log.e("TAG", " here: \n\n" + buffer + "\n" + bufferSize);
+                    bytesAvailable = fileInputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                }
+                dataOutputStream.writeBytes(lineEnd);
+
+                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"studentId\";studentId=" + DashboardActivity.student_id + "" + lineEnd);
+                dataOutputStream.writeBytes(lineEnd);
+                dataOutputStream.writeBytes(DashboardActivity.student_id);
+                dataOutputStream.writeBytes(lineEnd);
+
+                dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                serverResponseCode = connection.getResponseCode();
+                Log.e("TAG", " here:server response serverResponseCode\n\n" + serverResponseCode);
+                String serverResponseMessage = connection.getResponseMessage();
+                Log.e("TAG", " here: server message serverResponseMessage \n\n" + serverResponseMessage.toString() + "\n" + bufferSize);
+                BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+                String output = "";
+                sb = new StringBuffer();
+
+                while ((output = br.readLine()) != null) {
+                    sb.append(output);
+                    Log.e("TAG", "uploadFile: " + br);
+                    Log.e("TAG", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
+                }
+                Log.e("TAG", "uploadFile: " + sb.toString());
+                try {
+                    JSONObject mJson = new JSONObject(sb.toString());
+                    final String mData = mJson.getString("status");
+                    final String mData1 = mJson.getString("message");
+                    final String document_path = mJson.getString("document_path");
+
+                    Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
+                    if (mData.equalsIgnoreCase("1")) {
+                        EditProfile.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+//sp
+                                try {
+                                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+                                    email.setText(sharedPreferences.getString("email_id", ""));
+                                    firstName.setText(sharedPreferences.getString("first_name", ""));
+                                    lastName.setText(sharedPreferences.getString("last_name",""));
+                                    Picasso.with(context)
+                                            .load(sharedPreferences.getString("image_profile", ""))
+                                            .into(profileImage);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                progressBar.setVisibility(View.GONE);
+                                Log.e("TAG", "uploadFile: code 1 " + mData);
+                                Toast.makeText(context, mData1, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                    } else {
+                        EditProfile.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.GONE);
+                                Log.e("TAG", " 2285: " + new Date().toLocaleString());//1538546658896.jpg/
+                                Toast.makeText(context, mData1+" "+mData, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (serverResponseCode == 200) {
+                    EditProfile.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("TAG", " 2303: " + new Date().toLocaleString());//1538546658896.jpg/
+                        }
+                    });
+                }
+
+                fileInputStream.close();
+                dataOutputStream.flush();
+                dataOutputStream.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                EditProfile.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("TAG", " 2318: " + new Date().toLocaleString());//1538546658896.jpg/
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                EditProfile.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        Log.e("TAG", " 2335: " + new Date().toLocaleString());//1538546658896.jpg/
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Log.e("TAG", " 2342: " + new Date().toLocaleString());//1538546658896.jpg/
+
+            return serverResponseCode;
+        }
 
     }
 
@@ -154,9 +555,27 @@ public class EditProfile extends AppCompatActivity {
                         mobile_number.setText(jsonObj.getString("mobile_no"));
                     }
                     if (jsonObj.getString("img_profile")!=null){
+                        Picasso.with(context)
+                                .load(jsonObj.getString("img_profile").toString())
+                                .into(profileImage);
+                    }
 
+                try {
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("first_name",jsonObj.getString("first_name"));
+                    editor.putString("last_name",jsonObj.getString("last_name"));
+                    editor.putString("image_profile",jsonObj.getString("img_profile"));
+                    editor.putString("email_id",jsonObj.getString("email"));
+                    editor.apply();
+                    editor.commit();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                     }
             }
+//            {"document_path":"student\/3354\/user_profile_1556790017.jpg","status":0,"message":"Profile Picture Updated Successfully"}
+//            http:\/\/159.89.204.41\/eduvanzbeta\/uploads\/student\/3354\/user_profile_1556789668.jpg;
         }catch (Exception e){
             e.printStackTrace();
         }

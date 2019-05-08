@@ -26,20 +26,27 @@ import com.eduvanzapplication.newUI.fragments.UploadDocumentFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoanTabActivity extends AppCompatActivity {
+public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
+DetailedInfoFragment.onDetailedInfoFragmentInteractionListener{
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private LinearLayout linDashBoard;
-    private ViewPager viewPager;
+    public static ViewPager viewPager;
     public static String lead_id="",student_id ="";
     Context context;
     AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
+    public static boolean isKycEdit = false;
+    public static boolean isDetailedInfoEdit = false;
+
     //kyc values
     public static String firstName="", lastName="", middleName="", gender="2", dob="", maritalStatus="1", email="", mobile="",
                             aadhar="", pan="", flatBuildingSociety="", streetLocalityLandmark="", pincode="", countryId="", stateId="",cityId="",
-                            instituteId="", courseId="", instituteLocationId="", courseFee="", loanAmount="",applicant_id="";
+                            instituteId="", courseId="", instituteLocationId="", courseFee="",applicant_id="",
+                            application_id="", requested_loan_amount="", institute_name="", location_name="",
+                            course_name="", course_cost="", fk_institutes_id="", fk_insitutes_location_id="", fk_course_id="",lead_status ="",
+                            lead_sub_status ="", current_status ="", current_stage ="", has_aadhar_pan ="";
 
     //detailed values
 
@@ -75,18 +82,6 @@ public class LoanTabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
 
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("Instant Sanction");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            toolbar.getNavigationIcon().setTint(getResources().getColor(R.color.textcolordark));
-//        }
-//        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-//        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
-
         context = getApplicationContext();
         mActivity = this;
 
@@ -107,7 +102,7 @@ public class LoanTabActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        viewPager = findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager1);
         setupViewPager(viewPager);
 
         linDashBoard = findViewById(R.id.linDashBoard);
@@ -134,6 +129,43 @@ public class LoanTabActivity extends AppCompatActivity {
         adapter.addFrag(new PostApprovalDocFragment(), "Post approval Documentation");
         adapter.addFrag(new AmortizationFragment(), "Amortization");
         viewPager.setAdapter(adapter);
+
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == ViewPager.SCROLL_STATE_IDLE){
+                    if (viewPager.getCurrentItem() == 1){
+                        if(isKycEdit == true)
+                        KycDetailFragment.validate();
+                    }
+                    if (viewPager.getCurrentItem() == 2){
+                        if(isDetailedInfoEdit == true)
+                            DetailedInfoFragment.validate();
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onDetailedInfoFragment(boolean valid, int next) {
+        viewPager.setCurrentItem(next);
+    }
+
+    @Override
+    public void onFragmentInteraction(boolean valid, int next) {
+        viewPager.setCurrentItem(next);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

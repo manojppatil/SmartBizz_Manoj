@@ -8,7 +8,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -54,6 +56,26 @@ public class EmiCalculatorActivity extends AppCompatActivity {
         context = getApplicationContext();
         mActivity = this;
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("EMI Calculator");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
+        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 
     private void setViews() {

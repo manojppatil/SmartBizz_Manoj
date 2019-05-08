@@ -3,16 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.eduvanzapplication">
 
+    <uses-permission android:name = "android.permission.READ_SMS" />
+    <uses-permission android:name = "android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
@@ -51,11 +57,12 @@
         <activity android:name=".newUI.newViews.CourseDetailsActivity" android:screenOrientation="sensorPortrait"/>
 
         <activity android:name=".newUI.newViews.EmiCalculatorActivity"
-            android:theme="@style/AppTheme1"
+            android:theme="@style/AppTheme"
             android:screenOrientation="sensorPortrait" />
 
         <activity android:name=".newUI.newViews.NewLeadActivity"
             android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="sensorPortrait" />
 
         <activity android:name=".newUI.newViews.EditProfile"
@@ -253,6 +260,14 @@
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
+    <receiver android:name=".DataSyncReceiver"
+        android:enabled="true"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION" />
+        </intent-filter>
+    </receiver>
     </application>
 
 </manifest>

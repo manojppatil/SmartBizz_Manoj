@@ -6,35 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".newUI.newViews.EditProfile"
     android:background="@color/darkblue">
-    <ProgressBar
-        android:visibility="gone"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar_editProfile"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:indeterminate="false"
-        android:layout_gravity="center" />
+        android:layout_alignParentTop="true">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/ic_back_arrow" />
+    </android.support.design.widget.AppBarLayout>
+
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_400sdp"
-        android:background="@drawable/topbg">
+        android:layout_below="@+id/appbar"
+        android:background="@drawable/profile_bg">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
         android:layout_width="@dimen/_90sdp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_80sdp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:layout_height="@dimen/_90sdp"
-        android:src="@drawable/success_image"
-        />
+        android:src="@drawable/success_image" />
 
         <LinearLayout
             android:id="@+id/edtProfileLayout"
             android:layout_below="@+id/profileImage"
             android:layout_width="@dimen/_190sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -121,15 +128,6 @@
     </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/edtProfileMobileNumber"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_below="@+id/relativeLayout"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14sdp"
-        android:layout_centerHorizontal="true"/>
 
     <LinearLayout
         android:id="@+id/linSubmit"
@@ -171,5 +169,26 @@
             app:srcCompat="@drawable/ic_angle_right" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/edtProfileMobileNumber"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/relativeLayout"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:layout_centerHorizontal="true"/>
+
+    <ProgressBar
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar_editProfile"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false"
+        android:layout_gravity="center" />
 
 </RelativeLayout>

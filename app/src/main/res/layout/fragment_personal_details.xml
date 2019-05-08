@@ -53,17 +53,23 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
                         android:theme="@style/EditTextStyle"
-                        app:hintTextAppearance="@style/CustomTextAppearance">
+                        app:hintTextAppearance="@style/CustomTextAppearance"
+                        >
 
                         <EditText
+                            android:singleLine="true"
+                            android:inputType="text"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/first_name_cap"
+                            android:ems="10"
                             android:imeOptions="actionNext"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
+                        android:imeOptions="actionNext"
                         android:id="@+id/middle_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -72,6 +78,9 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                           android:singleLine="true"
+                            android:inputType="text"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/middle_name_cap"
@@ -88,6 +97,10 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:singleLine="true"
+                            android:id="@+id/LastName"
+                            android:inputType="text"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/last_name_cap"

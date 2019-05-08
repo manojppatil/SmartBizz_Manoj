@@ -646,7 +646,7 @@ public class MyProfileNew extends AppCompatActivity {
                     sb.append(output);
                     Log.e("TAG", "uploadFile: " + br);
                     Log.e("TAG", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
-                }
+}
                 Log.e("TAG", "uploadFile: " + sb.toString());
 //                [{"code":1,"file_name":"284f0b39af461ad8ae3ee17ac20ee5f4.pdf","message":"Document uploaded successfully"}]
 

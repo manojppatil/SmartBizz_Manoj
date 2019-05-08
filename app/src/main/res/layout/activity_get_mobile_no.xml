@@ -68,6 +68,7 @@
                     android:background="@color/black" />
 
                 <EditText
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:id="@+id/edtFirstName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -355,6 +356,8 @@
             android:visibility="visible">
 
             <EditText
+                android:inputType="number"
+                android:maxLength="6"
                 android:id="@+id/edtOtp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

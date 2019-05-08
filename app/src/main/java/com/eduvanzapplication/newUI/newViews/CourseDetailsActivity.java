@@ -8,9 +8,14 @@ import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -71,9 +76,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
         spCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 Log.e("I_________D", "onItemClick: ");
+
                 String text = spCourse.getSelectedItem().toString();
                 int count = nameOfCoursePOJOArrayList.size();
+
                 Log.e("TAG", "count: " + count);
                 for (int i = 0; i < count; i++) {
                     if (nameOfCoursePOJOArrayList.get(i).courseName.equalsIgnoreCase(text)) {
@@ -114,10 +122,27 @@ public class CourseDetailsActivity extends AppCompatActivity {
         instituteApiCall();
 
     }
+    View.OnClickListener nextClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            saveInstituteData();
+        }
+    };
+    private void enableDisableButtons(boolean next) {
+        if (next) {
+            ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
+            ivNextBtn.setOnClickListener(nextClickListener);
+            ivNextBtn.setEnabled(true);
+        } else {
+            ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+            ivNextBtn.setOnClickListener(null);
+            ivNextBtn.setEnabled(false);
 
-
+        }
+    }
     private void setViews() {
         ivNextBtn = findViewById(R.id.ivNextBtn);
+        ivNextBtn.setEnabled(false);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         progressDialog = new ProgressDialog(CourseDetailsActivity.this);
@@ -145,6 +170,34 @@ public class CourseDetailsActivity extends AppCompatActivity {
                     NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
                     saveInstituteData();
                 }
+            }
+        });
+
+        edtLoanAmt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
+                if (Integer.parseInt(txtCourseFee.getText().toString()) >= Integer.parseInt(edtLoanAmt.getText().toString())){
+                    NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
+//                    ivNextBtn.setEnabled(true);
+                    enableDisableButtons(true);
+                }
+                else{
+                    enableDisableButtons(false);
+
+                    edtLoanAmt.setError("Loan Amount not more than Course fees ");
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -218,20 +271,15 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public void setInstituteAdaptor() {
 
         try {
-
-//            ArrayAdapter<String> adapter = new ArrayAdapter<String>
-//                    (this, android.R.layout.select_dialog_item, nameofinstitute_arrayList);
-
             arrayAdapter_NameOfInsititue = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofinstitute_arrayList);
 
             //Getting the instance of AutoCompleteTextView
             acInstituteName.setThreshold(3);//will start working from first character
             acInstituteName.setAdapter(arrayAdapter_NameOfInsititue);//setting the adapter data into the AutoCompleteTextView
-//            acInstituteName.setTextColor(Color.RED);
+//          acInstituteName.setTextColor(Color.RED);
 
             acInstituteName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                    String countryName = (String) arg0.getItemAtPosition(arg2);
                     int count = nameOfInsitituePOJOArrayList.size();
                     for (int i = 0; i < count; i++) {
                         if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase((String) arg0.getItemAtPosition(arg2))) {
@@ -240,7 +288,27 @@ public class CourseDetailsActivity extends AppCompatActivity {
                             break;
                         }
                     }
-                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    InputMethodManager imm = (InputMethodManager) acInstituteName.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(acInstituteName.getWindowToken(), 0);
+
+//                    CourseDetailsActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+                //this is code for close institute text keyboard close
+
+                   /* acInstituteName.setOnEditorActionListener(new AutoCompleteTextView.OnEditorActionListener() {
+
+                        @Override
+                        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                                return true;
+                            }
+                            return false;
+                        }
+                    });*/
+
+
 
                 }
             });
@@ -256,7 +324,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             Globle.ErrorLog(mActivity, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
-
 
     public void courseApiCall() {
         try {
@@ -394,7 +461,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 txtCourseFee.setText(jsonData.getString("result"));
                 NewLeadActivity.courseFee = jsonData.getString("result");
             } else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             progressDialog.dismiss();
@@ -407,7 +474,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             Globle.ErrorLog(mActivity,className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
-
 
     public void setCourseAdaptor() {
 
@@ -534,7 +600,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
             if (jsonData.getInt("status") == 1) {
 
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(CourseDetailsActivity.this, TenureSelectionActivity.class));
 
 //                EligibilityCheckFragment_6 eligibilityCheckFragment_6 = new EligibilityCheckFragment_6();

@@ -2,9 +2,11 @@ package com.eduvanzapplication.newUI.newViews;
 
 import android.Manifest;
 import android.app.AppOpsManager;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -55,6 +57,7 @@ import com.android.volley.toolbox.Volley;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
+import com.eduvanzapplication.DataSyncReceiver;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
@@ -71,10 +74,15 @@ import com.eduvanzapplication.newUI.webviews.WebViewFairPracticsCode;
 import com.eduvanzapplication.newUI.webviews.WebViewInterestRatePolicy;
 import com.eduvanzapplication.newUI.webviews.WebViewPrivacyPolicy;
 import com.eduvanzapplication.newUI.webviews.WebViewTermsNCondition;
+import com.google.android.gms.maps.model.Circle;
 import com.google.gson.JsonObject;
 import com.idfy.rft.RFTSdk;
 import com.idfy.rft.RftSdkCallbackInterface;
 import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
+import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
 
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 
@@ -90,7 +98,7 @@ public class DashboardActivity extends AppCompatActivity
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
     LinearLayout linearLayoutSignup, linearLayoutUserDetail,editProfile;
-
+   public DataSyncReceiver dataSyncReceiver;
     static String userMobileNo = "", student_id = "", appInstallationTimeStamp = "";
     AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
@@ -144,6 +152,7 @@ public class DashboardActivity extends AppCompatActivity
             navigationView.setNavigationItemSelectedListener(this);
 
             View header = navigationView.getHeaderView(0);
+
             editProfile=(LinearLayout)header.findViewById(R.id.linearLayout_userdetail_dashboard);
             editProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -165,6 +174,17 @@ public class DashboardActivity extends AppCompatActivity
                 Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
             }
 
+            try {
+                sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+                textViewEmail.setText(sharedPreferences.getString("email_id", ""));
+                textViewName.setText(sharedPreferences.getString("first_name", ""));
+                Picasso.with(context)
+                        .load(sharedPreferences.getString("image_profile", ""))
+                        .into(imageViewProfilePic);
+            } catch (Exception e) {
+                e.printStackTrace();
+                firstTimeScrape = 0;
+            }
 
             linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
 
@@ -196,6 +216,15 @@ public class DashboardActivity extends AppCompatActivity
             }
 
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_dashboard, new DashboardFragmentNew()).commit();
+
+//
+//            dataSyncReceiver = new DataSyncReceiver();
+//
+//            IntentFilter filter = new IntentFilter(String.valueOf("DataSynced"));
+//            context.registerReceiver(dataSyncReceiver, filter);
+
+            ExtraHelperFunctions.putRefUserId(context,student_id);
+            Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
 
 
         } catch (Exception e) {

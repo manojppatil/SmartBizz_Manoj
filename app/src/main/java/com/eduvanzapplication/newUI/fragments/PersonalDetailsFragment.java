@@ -20,13 +20,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -69,7 +73,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.Context.*;
+import static android.support.v4.content.ContextCompat.getSystemService;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
+import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.lastName;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.student_id;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -87,12 +94,13 @@ public class PersonalDetailsFragment extends Fragment {
     public static final String IMAGE_EXTENSION = "jpg";
 
     private TextInputLayout tilFirstName,tilMiddleName, tilLastName;
+    private EditText edtLastName;
     private LinearLayout linMaleBtn, linFemaleBtn, linOtherBtn, linDobBtn;
     private Switch switchMarital;
     private TextView txtMaritalStatus;
     private LinearLayout linStudentBtn,linSalariedBtn, linSelfEmployedBtn;
 
-    LinearLayout linPan,linAadhar ,linClose ,linFooter1 ,linTakePicture ,linQR ,linStudentType ,linOCR;
+    LinearLayout linPan,linAadhar ,linClose ,linFooter1 ,linTakePicture ,linQR ,linStudentType ,linOCR,newLinOcr;
     public static Context context;
     public static Fragment mFragment;
     SharedPreferences sharedPreferences;
@@ -117,6 +125,7 @@ public class PersonalDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -177,11 +186,13 @@ public class PersonalDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_personal_details, container, false);
         tilFirstName = view.findViewById(R.id.first_name);
         tilMiddleName =view.findViewById(R.id.middle_name);
         tilLastName =view.findViewById(R.id.last_name);
+        edtLastName = view.findViewById( R.id.LastName );
         linMaleBtn = view.findViewById(R.id.linMaleBtn);
         linFemaleBtn = view.findViewById(R.id.linFemaleBtn);
         linOtherBtn = view.findViewById(R.id.linOtherBtn);
@@ -190,6 +201,10 @@ public class PersonalDetailsFragment extends Fragment {
         txtMaritalStatus = view.findViewById(R.id.txtMaritalStatus);
         switchMarital = view.findViewById(R.id.switchMarital);
 
+
+
+
+
         int height = Resources.getSystem().getDisplayMetrics().heightPixels;
 //        if(height<1080){
 //            view = inflater.inflate(R.layout.demo1, container, false);
@@ -197,13 +212,17 @@ public class PersonalDetailsFragment extends Fragment {
 //            view = inflater.inflate(R.layout.fragment_dashboard_fragment_new, container, false);
 //        }
 
+
+//closed keyboard after enter LastName
+
+
         context = getContext();
         mFragment = new PersonalDetailsFragment();
         // Checking availability of the camera
         rftsdk = RFTSdk.init((NewLeadActivity) context, idfy_account_id, idfy_token);
 
         try {
-            sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -329,6 +348,10 @@ public class PersonalDetailsFragment extends Fragment {
 //            }
 //        });
 
+
+
+        showOCRDialog();
+
         if(NewLeadActivity.Aaadhaarno.equals("") && NewLeadActivity.Ppanno.equals(""))
         {
 
@@ -340,9 +363,25 @@ public class PersonalDetailsFragment extends Fragment {
         return  view;
     }
 
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        edtLastName.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         linMaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -353,6 +392,7 @@ public class PersonalDetailsFragment extends Fragment {
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
             }
         });
+
 
         linFemaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -485,6 +525,9 @@ public class PersonalDetailsFragment extends Fragment {
             }
         });
 
+
+
+
     }
 
     private void checkAllFields() {
@@ -564,12 +607,15 @@ public class PersonalDetailsFragment extends Fragment {
          linQR = view.findViewById(R.id.linQR);
          linStudentType = view.findViewById(R.id.linStudentType);
          linOCR = view.findViewById(R.id.linOCR);
+         newLinOcr = view.findViewById(R.id.newLinOcr);
+
 
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setFooterView(view);
 
         linFooter1.setVisibility(View.VISIBLE);
+        newLinOcr.setVisibility(View.GONE);
         linTakePicture.setVisibility(View.GONE);
         linQR.setVisibility(View.GONE);
 
@@ -588,6 +634,7 @@ public class PersonalDetailsFragment extends Fragment {
 
                 linOCR.setVisibility(View.VISIBLE);
                 linStudentType.setVisibility(View.GONE);
+                newLinOcr.setVisibility(View.VISIBLE);
             }
         });
 
@@ -600,6 +647,7 @@ public class PersonalDetailsFragment extends Fragment {
                 linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOCR.setVisibility(View.VISIBLE);
                 linStudentType.setVisibility(View.GONE);
+                newLinOcr.setVisibility(View.VISIBLE);
             }
         });
 
@@ -612,6 +660,7 @@ public class PersonalDetailsFragment extends Fragment {
                 linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linOCR.setVisibility(View.VISIBLE);
                 linStudentType.setVisibility(View.GONE);
+                newLinOcr.setVisibility(View.VISIBLE);
             }
         });
 
@@ -627,7 +676,7 @@ public class PersonalDetailsFragment extends Fragment {
             public void onClick(View v) {
                 linTakePicture.setVisibility(View.VISIBLE);
                 linQR.setVisibility(View.GONE);
-                linFooter1.setVisibility(View.GONE);
+                linFooter1.setVisibility(View.VISIBLE);
 
             }
         });
@@ -637,7 +686,7 @@ public class PersonalDetailsFragment extends Fragment {
             public void onClick(View v) {
                 linTakePicture.setVisibility(View.VISIBLE);
                 linQR.setVisibility(View.VISIBLE);
-                linFooter1.setVisibility(View.GONE);
+                linFooter1.setVisibility(View.VISIBLE);
             }
         });
 
@@ -667,10 +716,10 @@ public class PersonalDetailsFragment extends Fragment {
             }
         });
 
-        builder.setCancelable(true);
+        builder.setCancelable(false);
 
         cfAlertDialog = builder.show();
-        cfAlertDialog.setCancelable(true);
+        cfAlertDialog.setCancelable(false);
         cfAlertDialog.setCanceledOnTouchOutside(false);
 
         cfAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -1416,7 +1465,7 @@ public class PersonalDetailsFragment extends Fragment {
                             }
 
                             try {
-                                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("Ppanno", NewLeadActivity.Ppanno);
                                 editor.putString("Ppantype", NewLeadActivity.Ppantype);
@@ -1631,7 +1680,7 @@ public class PersonalDetailsFragment extends Fragment {
 //                            Log.v(TAG, response);
 
                             try {
-                                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("Aaadhaarno", NewLeadActivity.Aaadhaarno);
                                 editor.putString("Aname", NewLeadActivity.Aname);

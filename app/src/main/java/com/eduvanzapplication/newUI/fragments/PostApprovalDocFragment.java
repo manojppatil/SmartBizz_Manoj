@@ -499,7 +499,11 @@ public class PostApprovalDocFragment extends Fragment {
 
                 String message = jsonDataO.getString("message");
 
-//                JSONArray jsonArray1 = jsonDataO.getJSONObject("loanData");
+//                {"loanData":{"lead_id":"415"},"applicantonlineData":[],
+//                    "coApplicant":false,"nachData":[{"person_name":"AKSHAY DHAWAN","amount":"3334",
+//                        "umrn_num":"HDFC0000000006288294","end_date":"1970-01-01","frequency":"5",
+//                        "debit_type":"2","status":"Registered"}],"status":1,"message":"success"}
+
                 if (!jsonDataO.get("loanData").equals(null)) {
 
                     JSONObject jsonloanDataDetails = jsonDataO.getJSONObject("loanData");

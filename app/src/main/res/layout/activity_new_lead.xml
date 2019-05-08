@@ -71,9 +71,9 @@
     <ImageView
         android:id="@+id/ivOCRBtn"
         android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/ocr_new" />
+        android:background="@drawable/ocr_icon" />
     </LinearLayout>
 
 </RelativeLayout>

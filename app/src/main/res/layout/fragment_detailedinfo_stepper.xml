@@ -62,7 +62,7 @@
                     <LinearLayout
                         android:layout_width="@dimen/_10sdp"
                         android:layout_height="match_parent"
-                        android:minHeight="@dimen/_25sdp"
+                        android:minHeight="@dimen/_20sdp"
                         android:layout_alignParentTop="true"
                         android:orientation="vertical">
 
@@ -509,7 +509,7 @@
                 <TextView
                     android:id="@+id/txtProfessionalToggle"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:drawableStart="@drawable/ic_business_time"
                     android:drawableEnd="@drawable/ic_check_circle_green"
                     android:gravity="center_vertical"

@@ -68,8 +68,8 @@ dependencies {
     implementation project(':FriendlyScoreAndroidSDK-release')
     implementation project(':FriendlyScoreAndroidSDK-UI-release')
     implementation files('libs/commons-codec-1.10-rep.jar')
-    implementation(name: "imgtopdf", ext: "aar")
-
+    implementation(name: "imgtopdf", ext: "aar")//Image To PDF SDK
+    implementation (name: "Algo360SDK-eduvanz", ext:"aar")//Algo 360 SDK
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -95,8 +95,9 @@ dependencies {
     implementation 'com.xw.repo:bubbleseekbar:3.8'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.google.firebase:firebase-messaging:17.5.0'
-//    implementation 'com.google.android.gms:play-services-auth:16.0.1'
-//    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-base:16.1.0'//For Algo 360
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     implementation 'com.intuit.sdp:sdp-android:1.0.4'//Multi Screen Common Font Size
     implementation 'com.github.lzyzsd:circleprogress:1.1.0@aar'//Circular progress

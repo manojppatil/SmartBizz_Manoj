@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="@dimen/_50sdp"
-                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:ellipsize="marquee"
                 android:textColor="@color/darkblue"
@@ -42,7 +42,7 @@
                 android:maxWidth="@dimen/_50sdp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtLeadfName"
-                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:text=""
                 android:ellipsize="marquee"
                 android:textColor="@color/darkblue" />
@@ -80,7 +80,7 @@
                 <LinearLayout
                     android:layout_width="@dimen/_110sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:orientation="vertical">
@@ -109,7 +109,7 @@
                 <LinearLayout
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_6sdp"
                     android:orientation="vertical">
 
@@ -168,8 +168,8 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -177,18 +177,18 @@
                         android:id="@+id/txtUniversity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:singleLine="true"
                         android:ellipsize="marquee"
                         android:text="Amity University"
+                        android:textSize="13sp"
                         style="@style/TextViewTitle14Style"/>
 
                     <TextView
                         android:id="@+id/txtCourseNmae"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:text="BBA - Banking &amp; Financing"
                         android:singleLine="true"
                         android:ellipsize="marquee"
@@ -198,6 +198,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:padding="@dimen/_1sdp"
                         android:orientation="horizontal">
 
@@ -227,10 +229,9 @@
                     android:background="@color/black_new" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_55sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/_6sdp"
-                    android:layout_marginLeft="@dimen/_6sdp"
+                    android:layout_margin="@dimen/_5sdp"
                     android:orientation="vertical">
 
                     <TextView
@@ -248,7 +249,7 @@
                         android:singleLine="true"
                         android:ellipsize="marquee"
                         android:layout_gravity="left"
-                        android:text="\t 345000"
+                        android:text="\t345000"
                         android:drawableStart="@drawable/ic_rupee_sign"
                         style="@style/TextViewTitleSmallStyle"/>
 
@@ -268,7 +269,7 @@
                         android:singleLine="true"
                         android:layout_gravity="left"
                         android:ellipsize="marquee"
-                        android:text="\t 1000000"
+                        android:text="\t1000000"
                         android:drawableStart="@drawable/ic_rupee_sign"
                         style="@style/TextViewTitleSmallStyle"/>
 

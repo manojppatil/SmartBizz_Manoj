@@ -95,6 +95,8 @@
                             android:background="@color/textcolordark" />
 
                         <EditText
+                            android:digits="0123456789"
+                            android:maxLength="12"
                             android:id="@+id/edtAadhaar"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
@@ -102,7 +104,7 @@
                             android:background="@android:color/transparent"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:hint="Aadhar number"
+                            android:hint="Aadhar Number"
                             android:maxLines="1"
                             android:padding="@dimen/_3sdp"
                             android:text="" />
@@ -141,14 +143,16 @@
                             android:background="@color/textcolordark" />
 
                         <EditText
+                            android:textAllCaps="true"
                             android:id="@+id/edtPAN"
                             style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:imeOptions="actionDone"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:hint="PAN Number"
+                            android:maxLength="10"
                             android:maxLines="1"
                             android:padding="@dimen/_3sdp"
                             android:text="" />

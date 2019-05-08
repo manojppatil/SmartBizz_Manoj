@@ -11,13 +11,17 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanzapplication.MainActivity;
@@ -80,6 +84,8 @@ public class CurrentAddressFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_current_address, container, false);
         context = getContext();
@@ -91,6 +97,8 @@ public class CurrentAddressFragment extends Fragment {
         spState = view.findViewById(R.id.spState);
         spCity = view.findViewById(R.id.spCity);
         return view;
+
+
     }
 
     @Override
@@ -98,6 +106,19 @@ public class CurrentAddressFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         progressDialog = new ProgressDialog(activity);
         countryApiResponse(new JSONObject());
+
+        edtPincode.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         edtAddress.addTextChangedListener(new TextWatcher() {
             @Override
@@ -143,8 +164,15 @@ public class CurrentAddressFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().length()==6){
                 NewLeadActivity.pinCode = s.toString();
                 checkAllFields();
+                }else{
+
+                    edtPincode.setError("Please Enter valid PINCODE Number!");
+                }
+
+
             }
 
             @Override

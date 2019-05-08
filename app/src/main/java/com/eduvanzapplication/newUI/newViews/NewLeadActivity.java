@@ -25,9 +25,7 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.VolleyCallNew;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DocumentAvailabilityFragment;
 import com.eduvanzapplication.newUI.fragments.EmploymentDetailsFragment;
@@ -77,7 +75,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         super.onCreate(savedInstanceState);
 
         int height = Resources.getSystem().getDisplayMetrics().heightPixels;
-        if (height<1800){
+        if (height < 1800) {
             setContentView(R.layout.activity_new_lead_small);
         }
         else {
@@ -92,6 +90,34 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             // will close the app if the device doesn't have camera
             finish();
         }
+
+        profession = "1";
+        firstName = "";
+        lastName = "";
+        middleName = "";
+        gender = "2";
+        maritalStatus = "0";
+        dob = "";
+        documents = "0";
+        aadharNumber = "";
+        panNUmber = "";
+        flatBuildingSoc = "";
+        streetLocalityLandMark = "";
+        pinCode = "";
+        countryId = "";
+        stateId = "";
+        cityId = "";
+        companyName = "";
+        annualIncome = "";
+        instituteId = "";
+        instituteLocationId = "";
+        courseId = "";
+        courseFee = "";
+        loanAmount = "";
+        leadId = "";
+        applicantId = "";
+        lead_id = "";
+        student_id = "";
 
         try {
             sharedPreferences = this.getSharedPreferences("UserData", Context.MODE_PRIVATE);
@@ -136,7 +162,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                 gender = "2";
             }
 
-            if(Adob.length() > Pdob.length()) {
+            if (Adob.length() > Pdob.length()) {
                 dob = Adob;
             }
             else {
@@ -157,7 +183,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         } else if (panNUmber.length() > 3) {
             firstName = Pname;
 //            gender = Agender;
-            if(Adob.length() > Pdob.length()) {
+            if (Adob.length() > Pdob.length()) {
                 dob = Adob;
             }
             else {
@@ -288,6 +314,11 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     @Override
     public void onOffButtonsDocuments(boolean next, boolean prev) {
         enableDisableButtons(next, prev);
+    }
+
+    @Override
+    public boolean onOffButtonsDocuments(boolean b) {
+        return false;
     }
 
     @Override

@@ -55,6 +55,8 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:inputType="text"
+                            android:singleLine="true"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="COMPANY NAME"
@@ -71,6 +73,7 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:singleLine="true"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint=" ANNUAL INCOME"

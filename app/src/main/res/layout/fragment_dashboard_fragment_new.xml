@@ -422,7 +422,7 @@
             style="@style/TextViewTitle14Style"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:drawableStart="@drawable/ic_phone"/>
+            android:drawableStart="@drawable/ic_phone_rotated"/>
 
         <View
             android:layout_width="@dimen/_1sdp"

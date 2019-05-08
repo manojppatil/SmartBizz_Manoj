@@ -31,15 +31,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp">
 
-                        <com.warkiz.widget.IndicatorSeekBar
+                        <SeekBar
+                            android:id="@+id/seek_bar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:isb_indicator_top_content_layout="@layout/seekbar_content_view_rect"
-                            app:isb_max="60"
-                            app:isb_progress="43"
-                            app:isb_show_indicator="rectangle"
-                            app:isb_show_tick_marks_type="divider"
-                            app:isb_ticks_count="6" />
+                            android:progress="35"
+                            android:progressDrawable="@drawable/seekbar_drawable_progress"
+                            android:thumb="@drawable/seekbar_drawable_thumb" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -52,7 +50,7 @@
                         android:background="#77FFFFFF"
                         android:gravity="center_vertical"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -98,7 +96,7 @@
                                                 <LinearLayout
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
+                                                    android:layout_weight="0.8"
                                                     android:gravity="center_vertical"
                                                     android:orientation="vertical"
                                                     android:padding="@dimen/_6sdp">
@@ -113,15 +111,39 @@
 
                                                     <TextView
                                                         android:id="@+id/txtEmiNo"
-                                                        style="@style/TextViewTitle12BoldStyle"
+                                                        style="@style/TextViewTitle14BoldStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
                                                         android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:text="01"
-                                                        android:textColor="@color/darkblue" />
+                                                        android:textColor="@color/darkblue"
+                                                        android:text="01" />
 
                                                 </LinearLayout>
 
+                                                <LinearLayout
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1.2"
+                                                    android:gravity="center_vertical"
+                                                    android:orientation="vertical"
+                                                    android:padding="@dimen/_6sdp">
+
+                                                    <TextView
+                                                        style="@style/TextViewMiniCapsStyle"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="Amount"
+                                                        android:textAllCaps="true" />
+
+                                                    <TextView
+                                                        android:id="@+id/txtEmiAmount"
+                                                        style="@style/TextViewTitleSmallStyle"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:drawableLeft="@drawable/ic_rupee_sign_small"
+                                                        android:text=" 3,3345" />
+
+                                                </LinearLayout>
 
                                                 <LinearLayout
                                                     android:layout_width="wrap_content"
@@ -144,6 +166,7 @@
                                                         style="@style/TextViewTitleSmallStyle"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
+                                                        android:textColor="@color/red"
                                                         android:text="05 Apr 2019" />
 
                                                 </LinearLayout>
@@ -169,6 +192,7 @@
                                                         style="@style/TextViewTitleSmallStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
+                                                        android:textColor="@color/colorPrimary"
                                                         android:text="05 Apr 2019" />
 
                                                 </LinearLayout>
@@ -178,8 +202,18 @@
                                                     android:layout_height="wrap_content"
                                                     android:layout_weight="1"
                                                     android:gravity="center_vertical"
-                                                    android:orientation="vertical"
+                                                    android:layout_gravity="center_vertical"
+                                                    android:orientation="horizontal"
                                                     android:padding="@dimen/_6sdp">
+
+                                                    <ImageView
+                                                        android:layout_width="@dimen/_14sdp"
+                                                        android:layout_height="@dimen/_14sdp"
+                                                        android:layout_gravity="center_vertical"
+                                                        android:gravity="center"
+                                                        android:textAlignment="center"
+                                                        android:tint="@color/colorGreen"
+                                                        app:srcCompat="@drawable/ic_check_circle"/>
 
                                                     <TextView
                                                         android:id="@+id/txtPaymentStatus"
@@ -187,15 +221,12 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="center_vertical"
-                                                        android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:drawableLeft="@drawable/ic_check_circle"
-                                                        android:drawableTint="@color/colorGreen"
                                                         android:gravity="center"
-                                                        android:text=" Paid"
                                                         android:textAlignment="center"
-                                                        android:textAllCaps="true"
-                                                        android:textColor="@color/colorGreen" />
-
+                                                        android:layout_marginLeft="@dimen/_2sdp"
+                                                        android:textColor="@color/colorGreen"
+                                                        android:text=" Paid"
+                                                        android:textAllCaps="true" />
 
                                                 </LinearLayout>
 
@@ -248,8 +279,9 @@
 
                         </RelativeLayout>
 
-
                     </LinearLayout>
+
+                    //Lin1-10
 
                     <LinearLayout
                         android:id="@+id/linAmortBtn1"
@@ -272,7 +304,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -314,7 +347,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -356,7 +390,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -398,7 +433,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -440,7 +476,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -475,6 +512,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+
                         android:id="@+id/linAmortBtn2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -495,7 +533,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -537,7 +576,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -579,7 +619,9 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -621,7 +663,9 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -663,7 +707,9 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -697,6 +743,7 @@
 
                     </LinearLayout>
 
+                    //Lin11-20
                     <LinearLayout
                         android:id="@+id/linAmortBtn3"
                         android:layout_width="match_parent"
@@ -718,7 +765,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -760,7 +808,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -784,7 +833,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:text="03"
+                                    android:text="02"
                                     android:textColor="@color/darkblue" />
 
                             </LinearLayout>
@@ -802,7 +851,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -844,7 +894,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -886,7 +937,8 @@
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp">
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -910,7 +962,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:text="15"
+                                    android:text="05"
                                     android:textColor="@color/darkblue" />
 
                             </LinearLayout>
@@ -919,6 +971,2522 @@
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card16"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo16"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card17"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo17"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card18"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo18"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card19"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo19"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card20"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo20"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+
+                    //Lin11-30
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card21"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo21"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card22"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo22"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card23"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo23"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card24"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo24"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card25"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo25"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card26"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo26"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card27"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo27"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card28"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo28"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card29"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo29"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card30"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo30"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    //Lin31-40
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card31"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo31"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card32"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo32"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card33"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo33"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card34"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo34"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card35"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo35"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn8"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card36"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo36"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card37"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo37"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card38"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo38"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card39"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo39"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card40"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo40"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    //Lin41-50
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card41"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo41"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card42"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo42"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card43"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo43"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card44"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo44"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card45"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo45"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card46"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo46"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card47"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo47"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card48"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo48"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card49"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo49"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card50"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo50"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    //Lin51-60
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn11"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card51"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo51"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card52"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo52"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card53"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo53"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card54"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo54"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card55"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo55"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn12"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card56"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo56"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card57"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo57"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card58"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo58"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card59"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo59"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card60"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo60"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    //Lin61-70
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card61"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo61"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card62"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo62"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card63"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo63"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card64"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo64"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card65"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo65"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linAmortBtn14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="#77FFFFFF"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="5">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card66"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo66"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="01"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card67"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo67"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="02"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card68"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo68"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="03"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card69"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo69"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="04"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card70"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:elevation="@dimen/_3sdp"
+                            android:padding="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_5sdp"
+                            app:cardElevation="@dimen/_3sdp"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+                                <TextView
+                                    style="@style/TextViewMiniCapsStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="EMI"
+                                    android:textAllCaps="true" />
+
+                                <TextView
+                                    android:id="@+id/txtEmiNo70"
+                                    style="@style/TextViewTitle12BoldStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_2sdp"
+                                    android:text="05"
+                                    android:textColor="@color/darkblue" />
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
 
 
                     <LinearLayout
@@ -934,6 +3502,7 @@
                         android:visibility="visible">
 
                         <RelativeLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -957,23 +3526,24 @@
 
                 </LinearLayout>
 
-                <ProgressBar
-                    android:id="@+id/progressBar_signsubmit"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:indeterminate="false"
-                    android:visibility="gone" />
+
 
             </RelativeLayout>
         </ScrollView>
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar_signsubmit"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        android:visibility="gone" />
 
 </RelativeLayout>
 
