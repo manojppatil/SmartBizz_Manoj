@@ -217,14 +217,14 @@ public class DashboardActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_dashboard, new DashboardFragmentNew()).commit();
 
-//
+
 //            dataSyncReceiver = new DataSyncReceiver();
 //
 //            IntentFilter filter = new IntentFilter(String.valueOf("DataSynced"));
 //            context.registerReceiver(dataSyncReceiver, filter);
 
             ExtraHelperFunctions.putRefUserId(context,student_id);
-            Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+            Algo360_SDK_Init.startAlgo360(DashboardActivity.this, Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
 
 
         } catch (Exception e) {
@@ -236,12 +236,8 @@ public class DashboardActivity extends AppCompatActivity
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
-
-//        showOCRDialog();
-
+//      showOCRDialog();
     }
-
-
 
     @Override
     protected void onResume() {

@@ -181,7 +181,6 @@ public class PostApprovalDocFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mNachArrayList = new ArrayList<>();
         lead_id = "";
         application_loan_id = "";
         principal_amount = "";
@@ -250,9 +249,9 @@ public class PostApprovalDocFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvNach.setLayoutManager(linearLayoutManager);
-        adapter = new NachAdapter(mNachArrayList, context, getActivity());
-        rvNach.setAdapter(adapter);
-        rvNach.setNestedScrollingEnabled(false);
+//        adapter = new NachAdapter(mNachArrayList, context, getActivity());
+//        rvNach.setAdapter(adapter);
+//        rvNach.setNestedScrollingEnabled(false);
 
         return view;
 
@@ -611,6 +610,7 @@ public class PostApprovalDocFragment extends Fragment {
                 }
             }
             if (!jsonDataO.get("nachData").equals(null)) {
+                mNachArrayList = new ArrayList<>();
                 JSONArray jsonArray1 = jsonDataO.getJSONArray("nachData");
 
                 for (int i = 0; i < jsonArray1.length(); i++) {

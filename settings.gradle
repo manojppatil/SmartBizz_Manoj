@@ -1,2 +1,2 @@
-include ':app', ':linkedin-sdk', ':digio-android-sdk-0.1.0', ':libraryMobilePaymentSDK' ,
+include ':app', ':linkedin-sdk', ':digio-android-sdk-0.1.0', ':libraryMobilePaymentSDK' ,'Algo360SDK',
         ':FriendlyScoreAndroidSDK-release', ':FriendlyScoreAndroidSDK-UI-release', ':library'
