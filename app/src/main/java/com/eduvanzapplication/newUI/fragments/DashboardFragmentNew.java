@@ -36,6 +36,7 @@ import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.CardStackAdapter;
 import com.eduvanzapplication.newUI.newViews.EmiCalculatorActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
+import com.eduvanzapplication.newUI.newViews.TenureSelectionActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
 import com.eduvanzapplication.newUI.adapter.ViewPagerAdapterDashboard;
 import com.eduvanzapplication.newUI.pojo.DashboardBannerModel;
@@ -65,6 +66,7 @@ public class DashboardFragmentNew extends Fragment  {
     public static RelativeLayout relStartNewLayout;
     public static LinearLayout linLeadsLayout;
     public static ProgressDialog progressDialog;
+    public static Boolean isLeadReload = false;
 
     static LinearLayout linearLayoutEligiblityChekck,
             linearLayoutApplyNow, linearLayoutContinueApplication;
@@ -85,7 +87,6 @@ public class DashboardFragmentNew extends Fragment  {
             kyc = null, profileDashboardStats = null;
 
     public static View view;
-
 
     public DashboardFragmentNew() {
     }
@@ -148,8 +149,8 @@ public class DashboardFragmentNew extends Fragment  {
             ivPrevBtn = view.findViewById(R.id.ivPrevBtn);
             relStartNewLayout = view.findViewById(R.id.relStartNewLayout);
             linLeadsLayout = view.findViewById(R.id.linLeadsLayout);
-            relStartNewLayout.setVisibility(View.VISIBLE);
-            linLeadsLayout.setVisibility(View.GONE);
+//            relStartNewLayout.setVisibility(View.VISIBLE);
+//            linLeadsLayout.setVisibility(View.GONE);
             progressDialog = new ProgressDialog(getActivity());
 
             rvLeads = view.findViewById(R.id.rvLeads);
@@ -191,27 +192,6 @@ public class DashboardFragmentNew extends Fragment  {
                 Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
             }
 
-//            /** API CALL GET DEAL**/
-//            try {
-//                String url = MainActivity.mainUrl + "mobileadverstisement/getDeal";
-//                Map<String, String> params = new HashMap<String, String>();
-//                if(!Globle.isNetworkAvailable(context))
-//                {
-//                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//
-//                } else {
-//                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/mobileadverstisement/getDeal
-//                    volleyCall.sendRequest(context, url, null, mFragment, "getDeal", params,MainActivity.auth_token);
-//                }
-//            } catch (Exception e) {
-//                String className = this.getClass().getSimpleName();
-//                String name = new Object() {
-//                }.getClass().getEnclosingMethod().getName();
-//                String errorMsg = e.getMessage();
-//                String errorMsgDetails = e.getStackTrace().toString();
-//                String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
-//            }
 
             /** API CALL POST LOGIN DASHBOARD Details **/
             try {
@@ -235,31 +215,6 @@ public class DashboardFragmentNew extends Fragment  {
                 Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
             }
 
-//            /** API CALL POST LOGIN DASHBOARD STATUS **/
-//            try {
-//                String url = MainApplication.mainUrl + "dashboard/getStudentDashbBoardStatus";
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("studentId", userId);
-//                if(!Globle.isNetworkAvailable(context))
-//                {
-//                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//                } else {
-//                    VolleyCallNew volleyCall = new VolleyCallNew();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
-//                    volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardStatus", params);
-//                }
-//            } catch (Exception e) {
-//                String className = this.getClass().getSimpleName();
-//                String name = new Object() {
-//                }.getClass().getEnclosingMethod().getName();
-//                String errorMsg = e.getMessage();
-//                String errorMsgDetails = e.getStackTrace().toString();
-//                String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
-//            }
-
-//            Intent intent = new Intent(context, LoanApplication.class);
-//            startActivity(intent);
-
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
@@ -273,76 +228,12 @@ public class DashboardFragmentNew extends Fragment  {
         return view;
     }//-----------------------------------END OF ON CREATE----------------------------------------//
 
-    private void setupCardStackView() {
-//        try {
-//            manager.setStackFrom(StackFrom.Right);
-//            manager.setVisibleCount(3);
-//            manager.setDirections(Direction.HORIZONTAL);
-//            manager.setTranslationInterval(8.0f);
-//            manager.setScaleInterval(0.95f);
-//            manager.setSwipeThreshold(0.3f);
-//            manager.setMaxDegree(20.0f);
-//            manager.setDirections(Direction.HORIZONTAL);
-//            manager.setCanScrollHorizontal(true);
-//            manager.setCanScrollVertical(false);
-//            rvLeads.setLayoutManager(manager);
-//            rvLeads.setAdapter(adapter);
-//            if(  rvLeads.getItemAnimator() instanceof DefaultItemAnimator){
-//                ((DefaultItemAnimator)rvLeads.getItemAnimator()).setSupportsChangeAnimations(false);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-    }
-    private void setupButton() {
-//        View skip = findViewById(R.id.skip_button);
-//        skip.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SwipeAnimationSetting setting = new SwipeAnimationSetting.Builder()
-//                        .setDirection(Direction.Left)
-//                        .setDuration(200)
-//                        .setInterpolator(new AccelerateInterpolator())
-//                        .build();
-//                manager.setSwipeAnimationSetting(setting);
-//                rvLeads.swipe();
-//
-//            }
-//        });
-
-//        ivPrevBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                RewindAnimationSetting setting =new  RewindAnimationSetting.Builder()
-//                        .setDirection(Direction.Bottom)
-//                        .setDuration(200)
-//                        .setInterpolator(new DecelerateInterpolator())
-//                        .build();
-//                manager.setRewindAnimationSetting(setting);
-//                rvLeads.rewind(adapter.getSpots());
-//            }
-//        });
-//
-//
-//        ivNextBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SwipeAnimationSetting setting = new SwipeAnimationSetting.Builder()
-//                        .setDirection(Direction.Right)
-//                        .setDuration(200)
-//                        .setInterpolator(new AccelerateInterpolator())
-//                        .build();
-//                manager.setSwipeAnimationSetting(setting);
-//                rvLeads.swipe();
-//            }
-//        });
-    }
 
 
     View.OnClickListener FriendlyScoreClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+//            startActivity(new Intent(getActivity(), TenureSelectionActivity.class));
             startActivity(new Intent(getActivity(), StartActivityFS.class));
         }
     };
@@ -431,8 +322,7 @@ public class DashboardFragmentNew extends Fragment  {
         linEMICalculator.setOnClickListener(emiClkListnr);
         ivEMICalculatorBtn.setOnClickListener(emiClkListnr);
 
-
-//        getDashboardDetails();
+        getDashboardDetails();
 
     }
 
@@ -440,29 +330,10 @@ public class DashboardFragmentNew extends Fragment  {
     public void onResume() {
         super.onResume();
 
-        getDashboardDetails();
+        if(isLeadReload) {
+            getDashboardDetails();
+        }
 
-//        /** API CALL POST LOGIN DASHBOARD STATUS **/
-//        try {
-//            String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
-//            Map<String, String> params = new HashMap<String, String>();
-//            params.put("studentId", userId);
-//            if (!Globle.isNetworkAvailable(context)) {
-//                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-//
-//            } else {
-//                VolleyCallNew volleyCall = new VolleyCallNew();
-//                volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardStatus", params,MainActivity.auth_token);
-//            }
-//        } catch (Exception e) {
-//            String className = this.getClass().getSimpleName();
-//            String name = new Object() {
-//            }.getClass().getEnclosingMethod().getName();
-//            String errorMsg = e.getMessage();
-//            String errorMsgDetails = e.getStackTrace().toString();
-//            String errorLine = String.valueOf(e.getStackTrace()[0]);
-//            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-//        }
     }
 
     private void getDashboardDetails() {   //get leads
@@ -663,7 +534,6 @@ public class DashboardFragmentNew extends Fragment  {
                         if (!jsonleadStatus.getString("student_id").toString().equals("null"))
                             mLeads.student_id = jsonleadStatus.getString("student_id");
 
-
                     } catch (JSONException e) {
                         String className = this.getClass().getSimpleName();
                         String name = new Object() {
@@ -674,7 +544,6 @@ public class DashboardFragmentNew extends Fragment  {
                         Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                     }
                     mLeadsArrayList.add(mLeads);
-
                 }
                 adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
                 rvLeads.setAdapter(adapter);
@@ -690,6 +559,11 @@ public class DashboardFragmentNew extends Fragment  {
 //                    linearLayoutApplyNow.setVisibility(View.GONE);
 //                    linearLayoutEligiblityChekck.setVisibility(View.GONE);
 //                }
+
+            }
+            else {
+                relStartNewLayout.setVisibility(View.VISIBLE);
+                linLeadsLayout.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();

@@ -14,7 +14,6 @@ import com.eduvanzapplication.newUI.pojo.Mforrequestedloan;
 import java.util.Collections;
 import java.util.List;
 
-
 public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequestedAdapter.DataObjectHolder> {
 
     private static SingleClickListener sClickListener;
@@ -30,15 +29,16 @@ public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequested
 
     static class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView txtTenure, txtRoi, txtLoanAmount, txtEMIAmount;
+        TextView txtTenure, txtEMIAmount, txtRoi, txtLoanAmount;
         RadioButton mRadioButton;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            this.txtTenure = (TextView) itemView.findViewById(R.id.txtTenure);
-            this.txtLoanAmount = (TextView) itemView.findViewById(R.id.txtLoanAmount);
-            this.txtEMIAmount = (TextView) itemView.findViewById(R.id.txtEMIAmount);
-            this.mRadioButton = (RadioButton) itemView.findViewById(R.id.rbrequested);
+            this.txtTenure = itemView.findViewById(R.id.txtTenure);
+            this.txtEMIAmount = itemView.findViewById(R.id.txtEMIAmount);
+            this.txtRoi = itemView.findViewById(R.id.txtRoi);
+            this.txtLoanAmount = itemView.findViewById(R.id.txtLoanAmount);
+            this.mRadioButton = itemView.findViewById(R.id.rbrequested);
             itemView.setOnClickListener(this);
         }
 
@@ -46,7 +46,7 @@ public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequested
         public void onClick(View view) {
             sSelected = getAdapterPosition();
             sClickListener.onItemClickListener(getAdapterPosition(), view, mRadioButton.getId());
-//            mRadioButton.setChecked(true);
+//          mRadioButton.setChecked(true);
         }
     }
 

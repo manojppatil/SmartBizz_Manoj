@@ -66,7 +66,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             viewHolder.txtUniversity.setText(mLeads.institute_name);
             viewHolder.txtMessage.setText("\tPending. Complete your process in order to get your loan instantly ");
             viewHolder.txtMessage.setSelected(true);
-            viewHolder.txtStatus1.setText("\tStatus");
+            viewHolder.txtStatus1.setText("\t"+ mLeads.status_name);
             viewHolder.txtStatus2.setText("\tStatus 2");
 
             viewHolder.itemView.setTag(mLeads.lead_id);

@@ -18,7 +18,6 @@ import android.widget.ImageView;
 
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
-//import com.eduvanzapplication.newUI.newViews.NewTruecallerSignIn;
 import com.eduvanzapplication.newUI.newViews.GetMobileNo;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -55,21 +54,21 @@ public class ImageSlider extends AppCompatActivity {
         editor.putString("checkForImageSlider",checkForImageSlider);
         editor.commit();
 
-        String[] data={"Learn from the mistakes of others... you can't live long enough to make them all yourselves!!",
-                "A person should not be too honest. Straight trees are cut first and Honest people are screwed first."
-                ,"here is some self-interest behind every friendship. There is no friendship without self-interests. This is a bitter truth"};
+        String[] data={"Easy and Hassle free education loans to help you grow",
+                "Fill in your details with relevant documents and get instant approvals for your education loan"
+                ,"Get all the information about your loan on your finger tips \n Think Education, Think Eduvanz !!"};
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 
         int[] mResources = {
-                R.drawable.walkthrough_demoimage1,
-                R.drawable.walkthrough_demoimage2,
-                R.drawable.walkthrough_demoimage3
+                R.drawable.ic_im_welcome,
+                R.drawable.ic_im_documents,
+                R.drawable.ic_im_stay_updated
         };
 
-        mPager= (ViewPager) findViewById(R.id.Viewpager);
-        indicator= (CirclePageIndicator) findViewById(R.id.indicator);
-        mbtn= (Button) findViewById(R.id.nextbtn);
+        mPager=  findViewById(R.id.Viewpager);
+        indicator= findViewById(R.id.indicator);
+        mbtn= findViewById(R.id.nextbtn);
         mbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,8 +86,6 @@ public class ImageSlider extends AppCompatActivity {
 
                 }else {
                     Intent intent = new Intent(ImageSlider.this, GetMobileNo.class);
-//                    Intent intent = new Intent(ImageSlider.this,SingInWithTruecaller.class);
-//                    Intent intent = new Intent(ImageSlider.this,NewTruecallerSignIn.class);
                     startActivity(intent);
                     finish();
                 }

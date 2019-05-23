@@ -2,18 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_myprofile"
-            android:icon="@drawable/icon_myprofile"
-            android:title="@string/title_profile" />
+
         <item
             android:id="@+id/nav_eligibility"
             android:icon="@drawable/icon_eligibility"
             android:title="Apply Now" />
-        <item
-            android:id="@+id/nav_loanApplication"
-            android:icon="@drawable/icon_eligibility"
-            android:title="@string/title_loan_application" />
+
         <item
             android:id="@+id/nav_howitworks"
             android:icon="@drawable/icon_howitworks"
@@ -37,10 +31,12 @@
             android:id="@+id/nav_more"
             android:icon="@drawable/icon_more"
             android:title="@string/more" />
-        <item
-            android:id="@+id/nav_blog"
-            android:icon="@drawable/icon_privacypolicy"
-            android:title="@string/title_blog" />
+
+        <!--<item-->
+            <!--android:id="@+id/nav_blog"-->
+            <!--android:icon="@drawable/icon_privacypolicy"-->
+            <!--android:title="@string/title_blog" />-->
+
         <item
             android:id="@+id/nav_disclaimer"
             android:icon="@drawable/icon_disclaimer"

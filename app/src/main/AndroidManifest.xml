@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.eduvanzapplication">
 
-    <uses-permission android:name = "android.permission.READ_SMS" />
-    <uses-permission android:name = "android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -25,8 +25,6 @@
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <supports-screens
         android:anyDensity="true"
@@ -160,12 +158,6 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".newUI.newViews.MyProfileNew"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".newUI.newViews.SignIn"
-            android:screenOrientation="sensorPortrait" />
-        <activity
             android:name=".newUI.newViews.ContactUs"
             android:screenOrientation="sensorPortrait" />
         <activity
@@ -177,8 +169,6 @@
         <activity
             android:name=".newUI.newViews.BannerActivity"
             android:screenOrientation="sensorPortrait" />
-        <!-- <activity android:name=".newUI.newViews.Notification" -->
-        <!-- android:screenOrientation="sensorPortrait"/> -->
         <receiver android:name=".Util.PowerConnectionReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
@@ -186,9 +176,9 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".newUI.newViews.Notification"
-            android:screenOrientation="sensorPortrait" />
+        <!--<activity-->
+            <!--android:name=".newUI.newViews.Notification"-->
+            <!--android:screenOrientation="sensorPortrait" />-->
         <activity
             android:name=".newUI.webviews.WebViewFairPracticsCode"
             android:screenOrientation="sensorPortrait" />
@@ -261,6 +251,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
+        <!--Think Analytics-->
     <receiver android:name=".DataSyncReceiver"
         android:enabled="true"
         android:exported="false">
@@ -268,6 +259,117 @@
             <action android:name="in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION" />
         </intent-filter>
     </receiver>
+
+        <service
+            android:name="in.thinkanalytics.algo360SDK.Algo360_SDK_Init"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="in.thinkanalytics.algo360SDK.Service.MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="in.thinkanalytics.algo360SDK.Service.MyJobService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="in.thinkanalytics.algo360SDK.Service.LocationUpdatesIntentService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name="in.thinkanalytics.algo360SDK.Receivers.SmsReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="in.thinkanalytics.algo360SDK.Receivers.InternetReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="in.thinkanalytics.algo360SDK.Receivers.GpsReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="in.thinkanalytics.algo360SDK.Receivers.BootReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="in.thinkanalytics.algo360SDK.Receivers.AlarmBroadcast"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
+        <receiver
+            android:name="in.thinkanalytics.algo360SDK.Receivers.LocationReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.location.sample.backgroundlocationupdates.action.PROCESS_UPDATES" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="in.thinkanalytics.algo360SDK.Receivers.BatteryStatsReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+
+        <!--Paytm-->
+        <activity
+            android:name="com.paytm.pgsdk.PaytmPGActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <service
+            android:name="com.paytm.pgsdk.IntentServicePostNotification"
+            android:exported="false" />
+        <service
+            android:name="com.paytm.pgsdk.IntentServicePreNotification"
+            android:exported="false" />
+        <service
+            android:name="com.paytm.pgsdk.easypay.utils.EasypayLoaderService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="com.paytm.pgsdk.easypay.utils.AnalyticsService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <!--FriendlyScore-->
+
+        <activity android:name="com.FriendlyScoreUI.FormActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+
+        </activity>
+        <activity
+            android:name="com.twitter.sdk.android.core.identity.OAuthActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false" />
     </application>
 
 </manifest>

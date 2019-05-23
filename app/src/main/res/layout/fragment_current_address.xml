@@ -65,7 +65,7 @@
 
                         <EditText
                             android:singleLine="true"
-                            android:inputType="text"
+                            android:inputType="textPostalAddress"
                             android:id="@+id/edtAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
 
                         <EditText
                             android:singleLine="true"
-                            android:inputType="text"
+                            android:inputType="textPostalAddress"
                             android:id="@+id/edtLandmark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

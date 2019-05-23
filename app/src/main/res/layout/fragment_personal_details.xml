@@ -53,12 +53,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_6sdp"
                         android:theme="@style/EditTextStyle"
-                        app:hintTextAppearance="@style/CustomTextAppearance"
-                        >
+                        app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:id="@+id/edtFirstName"
                             android:singleLine="true"
-                            android:inputType="text"
+                            android:inputType="textCapSentences"
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -78,8 +78,9 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                           android:singleLine="true"
-                            android:inputType="text"
+                            android:id="@+id/edtMiddleName"
+                            android:singleLine="true"
+                            android:inputType="textCapSentences"
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -98,8 +99,8 @@
 
                         <EditText
                             android:singleLine="true"
-                            android:id="@+id/LastName"
-                            android:inputType="text"
+                            android:id="@+id/edtLastName"
+                            android:inputType="textCapSentences"
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -135,7 +136,7 @@
                             android:padding="@dimen/_5sdp">
 
                             <ImageView
-                                android:layout_width="@dimen/_17sdp"
+                                android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_18sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_male" />
@@ -169,7 +170,7 @@
                             android:padding="@dimen/_5sdp">
 
                             <ImageView
-                                android:layout_width="@dimen/_17sdp"
+                                android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_18sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_female" />
@@ -202,7 +203,7 @@
                             android:padding="@dimen/_5sdp">
 
                             <ImageView
-                                android:layout_width="@dimen/_17sdp"
+                                android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_18sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_transgender" />

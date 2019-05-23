@@ -61,7 +61,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfile extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
     private CircleImageView profileImage;
-    private EditText firstName,middleName,lastName,email;
+    private EditText firstName, middleName, lastName, email;
     private TextView mobile_number;
     private LinearLayout submit_button;
     public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
@@ -69,9 +69,10 @@ public class EditProfile extends AppCompatActivity {
     String uploadFilePath = "";
     ProgressBar progressBar;
     StringBuffer sb;
-    static String first_name,last_name,img_profile,email_id;
+    static String first_name, last_name, img_profile, email_id;
     public static AppCompatActivity mActivity;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,7 +130,7 @@ public class EditProfile extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home)
+        if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
@@ -291,8 +292,8 @@ public class EditProfile extends AppCompatActivity {
 
     public int uploadFile(final String selectedFilePath) {
         String urlup = MainActivity.mainUrl + "authorization/updateProfilePicture";
-        Map<String,String> params = new HashMap <>();
-        params.put("studentId",DashboardActivity.student_id);
+        Map<String, String> params = new HashMap<>();
+        params.put("studentId", DashboardActivity.student_id);
 
         int serverResponseCode = 0;
         HttpURLConnection connection;
@@ -391,24 +392,61 @@ public class EditProfile extends AppCompatActivity {
                     final String mData = mJson.getString("status");
                     final String mData1 = mJson.getString("message");
                     final String document_path = mJson.getString("document_path");
+                    final String baseUrl = new JSONObject(mJson.getJSONObject("result").toString()).getString("baseUrl").toString();
 
                     Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
                     if (mData.equalsIgnoreCase("1")) {
                         EditProfile.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-//sp
+
+//                                {"document_path":"student\/3423\/user_profile_1557394413.jpg","result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,"message":"Profile Picture Updated Successfully"}
+
                                 try {
-                                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
-                                    email.setText(sharedPreferences.getString("email_id", ""));
+                                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("user_img", baseUrl + document_path);
+                                    editor.putString("email", mJson.getString("email"));
+                                    editor.apply();
+                                    editor.commit();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                                    email.setText(sharedPreferences.getString("email", ""));
                                     firstName.setText(sharedPreferences.getString("first_name", ""));
-                                    lastName.setText(sharedPreferences.getString("last_name",""));
+                                    lastName.setText(sharedPreferences.getString("last_name", ""));
                                     Picasso.with(context)
-                                            .load(sharedPreferences.getString("image_profile", ""))
+                                            .load(sharedPreferences.getString("user_img", ""))
                                             .into(profileImage);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+
+//                                try {
+//                                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+//                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                                    editor.putString("image_profile", baseUrl + document_path);
+//                                    editor.putString("email_id", mJson.getString("email"));
+//                                    editor.apply();
+//                                    editor.commit();
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                                try {
+//                                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+//                                    email.setText(sharedPreferences.getString("email_id", ""));
+//                                    firstName.setText(sharedPreferences.getString("first_name", ""));
+//                                    lastName.setText(sharedPreferences.getString("last_name", ""));
+//                                    Picasso.with(context)
+//                                            .load(sharedPreferences.getString("image_profile", ""))
+//                                            .into(profileImage);
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
 
                                 progressBar.setVisibility(View.GONE);
                                 Log.e("TAG", "uploadFile: code 1 " + mData);
@@ -423,7 +461,7 @@ public class EditProfile extends AppCompatActivity {
                             public void run() {
                                 progressBar.setVisibility(View.GONE);
                                 Log.e("TAG", " 2285: " + new Date().toLocaleString());//1538546658896.jpg/
-                                Toast.makeText(context, mData1+" "+mData, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, mData1 + " " + mData, Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -480,24 +518,24 @@ public class EditProfile extends AppCompatActivity {
     }
 
     public void saveEditProfileData() {
-        try{
+        try {
             progressBar.setVisibility(View.VISIBLE);
             String url = MainActivity.mainUrl + "authorization/updateProfile";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("studentId",DashboardActivity.student_id);
-            params.put("email",email.getText().toString());
-            params.put("fname",firstName.getText().toString());
-            params.put("mname",middleName.getText().toString());
-            params.put("lname",lastName.getText().toString());
+            params.put("studentId", DashboardActivity.student_id);
+            params.put("email", email.getText().toString());
+            params.put("fname", firstName.getText().toString());
+            params.put("mname", middleName.getText().toString());
+            params.put("lname", lastName.getText().toString());
 
-            if (!Globle.isNetworkAvailable(context)){
+            if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 VolleyCall volleyCall = new VolleyCall();
 
-                volleyCall.sendRequest(context,url,mActivity,null,"editProfileDetails",params,MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "editProfileDetails", params, MainActivity.auth_token);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -515,7 +553,7 @@ public class EditProfile extends AppCompatActivity {
 
 //            if (jsonData.getInt("status") == 1) {
 
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 //            } else {
 //                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 //            }
@@ -525,10 +563,10 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
-    public void setProfileApiCall(){
+    public void setProfileApiCall() {
         String url = MainActivity.mainUrl + "authorization/profile";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("studentId",DashboardActivity.student_id);
+        params.put("studentId", DashboardActivity.student_id);
         if (!Globle.isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
         } else {
@@ -537,46 +575,60 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
-    public void setProfileDetails(JSONObject jsonObject){
+    public void setProfileDetails(JSONObject jsonObject) {
         String message = jsonObject.optString("message");
         try {
-            if (jsonObject.getInt("status")==1){
-                    JSONObject jsonObj =jsonObject.getJSONObject("result");
-                    if (jsonObj.getString("first_name")!=null){
-                        firstName.setText(jsonObj.getString("first_name"));
-                    }
-                    if (jsonObj.getString("last_name")!=null){
-                        lastName.setText(jsonObj.getString("last_name"));
-                    }
-                    if (jsonObj.getString("email")!=null){
-                        email.setText(jsonObj.getString("email"));
-                    }
-                    if (jsonObj.getString("mobile_no")!=null){
-                        mobile_number.setText(jsonObj.getString("mobile_no"));
-                    }
-                    if (jsonObj.getString("img_profile")!=null){
-                        Picasso.with(context)
-                                .load(jsonObj.getString("img_profile").toString())
-                                .into(profileImage);
-                    }
+            if (jsonObject.getInt("status") == 1) {
+                JSONObject jsonObj = jsonObject.getJSONObject("result");
+                if (jsonObj.getString("first_name") != null) {
+                    firstName.setText(jsonObj.getString("first_name"));
+                }
+                if (jsonObj.getString("last_name") != null) {
+                    lastName.setText(jsonObj.getString("last_name"));
+                }
+                if (jsonObj.getString("email") != null) {
+                    email.setText(jsonObj.getString("email"));
+                }
+                if (jsonObj.getString("mobile_no") != null) {
+                    mobile_number.setText(jsonObj.getString("mobile_no"));
+                }
+                if (jsonObj.getString("img_profile") != null) {
+                    Picasso.with(context)
+                            .load(jsonObj.getString("img_profile").toString())
+                            .into(profileImage);
+                }
 
                 try {
-                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("first_name",jsonObj.getString("first_name"));
-                    editor.putString("last_name",jsonObj.getString("last_name"));
-                    editor.putString("image_profile",jsonObj.getString("img_profile"));
-                    editor.putString("email_id",jsonObj.getString("email"));
+                    editor.putString("first_name", jsonObj.getString("first_name"));
+                    editor.putString("last_name", jsonObj.getString("last_name"));
+                    editor.putString("user_img", jsonObj.getString("img_profile"));
+                    editor.putString("email", jsonObj.getString("email"));
                     editor.apply();
                     editor.commit();
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    }
+                }
+
+//                try {
+//                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("first_name", jsonObj.getString("first_name"));
+//                    editor.putString("last_name", jsonObj.getString("last_name"));
+//                    editor.putString("image_profile", jsonObj.getString("img_profile"));
+//                    editor.putString("email_id", jsonObj.getString("email"));
+//                    editor.apply();
+//                    editor.commit();
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
 //            {"document_path":"student\/3354\/user_profile_1556790017.jpg","status":0,"message":"Profile Picture Updated Successfully"}
 //            http:\/\/159.89.204.41\/eduvanzbeta\/uploads\/student\/3354\/user_profile_1556789668.jpg;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -28,31 +28,32 @@
                 android:id="@+id/txtLeadfName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="@dimen/_50sdp"
+                android:maxWidth="@dimen/_60sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:ellipsize="marquee"
                 android:textColor="@color/darkblue"
-                style="@style/TextViewTitleStyle"/>
+                style="@style/TextViewTitleStyle"
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/txtLeadlName"
                 style="@style/TextViewTitle14BoldStyle"
                 android:layout_width="wrap_content"
-                android:maxWidth="@dimen/_50sdp"
+                android:maxWidth="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtLeadfName"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:text=""
                 android:ellipsize="marquee"
-                android:textColor="@color/darkblue" />
+                android:textColor="@color/darkblue"
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/txtMessage"
-                android:layout_width="@dimen/_200sdp"
+                android:layout_width="@dimen/_160sdp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="-16dp"
                 android:layout_toEndOf="@id/txtLeadfName"
@@ -65,7 +66,7 @@
                 android:paddingEnd="18dp"
                 android:paddingBottom="@dimen/_4sdp"
                 android:singleLine="true"
-                android:text="Complete your application to start to start to start"
+                android:text="Complete your application to get approval fast"
                 android:textColor="@color/white"
                 style="@style/TextViewTitle14Style"/>
 
@@ -101,7 +102,6 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
                         android:singleLine="true"
-                        android:text="13783DFV23"
                         android:textAllCaps="true"
                         style="@style/TextViewTitle14Style"/>
                 </LinearLayout>
@@ -117,9 +117,10 @@
                         android:id="@+id/txtStatus1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
                         android:drawableStart="@drawable/ic_exclamation_circle_yellow"
                         android:padding="@dimen/_2sdp"
-                        android:text="\t Pending"
+                        android:text="\t"
                         style="@style/TextViewTitleSmallStyle"/>
 
                     <TextView
@@ -130,7 +131,7 @@
                         android:ellipsize="marquee"
                         android:padding="@dimen/_2sdp"
                         android:singleLine="true"
-                        android:text="\t 15 May 2019"
+                        android:text="\t"
                         android:textAllCaps="true"
                         style="@style/TextViewTitleSmallStyle"/>
 
@@ -139,10 +140,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_user_check"
-                        android:ellipsize="marquee"
+                        android:maxLines="1"
                         android:padding="@dimen/_2sdp"
                         android:singleLine="true"
-                        android:text="\tApproved"
+                        android:text="\t"
                         android:textAllCaps="true"
                         style="@style/TextViewTitleSmallStyle"/>
 
@@ -180,7 +181,6 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:singleLine="true"
                         android:ellipsize="marquee"
-                        android:text="Amity University"
                         android:textSize="13sp"
                         style="@style/TextViewTitle14Style"/>
 
@@ -189,7 +189,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:text="BBA - Banking &amp; Financing"
                         android:singleLine="true"
                         android:ellipsize="marquee"
                         android:textSize="12sp"
@@ -214,7 +213,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/_4sdp"
-                            android:text="Mumbai"
                             android:layout_gravity="center_vertical"
                             android:textSize="12sp"
                             style="@style/TextViewTitle14BoldStyle"/>
@@ -249,7 +247,7 @@
                         android:singleLine="true"
                         android:ellipsize="marquee"
                         android:layout_gravity="left"
-                        android:text="\t345000"
+                        android:text="\t - "
                         android:drawableStart="@drawable/ic_rupee_sign"
                         style="@style/TextViewTitleSmallStyle"/>
 
@@ -269,7 +267,7 @@
                         android:singleLine="true"
                         android:layout_gravity="left"
                         android:ellipsize="marquee"
-                        android:text="\t1000000"
+                        android:text="\t - "
                         android:drawableStart="@drawable/ic_rupee_sign"
                         style="@style/TextViewTitleSmallStyle"/>
 

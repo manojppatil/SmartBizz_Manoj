@@ -80,7 +80,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd" />
+                        android:text=" Help us know you better" />
 
                 </LinearLayout>
 
@@ -112,7 +112,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd" />
+                        android:text="Upload your income documents for easy loan approval" />
 
                 </LinearLayout>
 
@@ -151,7 +151,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="sdsjsndsds d oosn donsn dosn do osndonso ndooc ddd ddddddd dddd" />
+                        android:text="Let us understand your education background" />
 
                 </LinearLayout>
 
@@ -182,7 +182,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Additional Documents"
+                        android:text="Any other documents, if required by our team"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -229,8 +229,8 @@
                         <LinearLayout
                             android:id="@+id/linPhoto"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
@@ -255,7 +255,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="Photo"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -284,7 +284,7 @@
                             <Button
                                 android:id="@+id/btnPhoto1"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -297,87 +297,20 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/linPan"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
-                            android:background="@drawable/dashed_border"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <RelativeLayout
-                                android:id="@+id/panBackground"
-                                android:visibility="gone"
-                                android:layout_width="fill_parent"
-                                android:layout_height="100dp">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_alignParentRight="true"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/background" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
-                                    android:text="pan card"
-                                    android:layout_alignParentLeft="true"
-                                    android:textAllCaps="true"
-                                    android:textColor="@color/amber_50"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
-                                    android:textStyle="bold" />
-
-                            </RelativeLayout>
-
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_20sdp"
-                                app:srcCompat="@drawable/ic_image" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/_20sdp"
-                                android:text="PAN Card"
-                                android:textSize="15sp" />
-
-                            <Button
-                                android:id="@+id/panCardBtn"
-                                android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_below="@+id/txtPan2"
-                                android:layout_margin="5dp"
-                                android:background="@color/colorSecondary"
-                                android:text="@string/upload"
-                                android:textColor="@color/white"
-                                android:textSize="12sp"
-                                android:visibility="gone" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
                             android:id="@+id/linAadhaar"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:id="@+id/aadharBackground"
                                 android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -392,7 +325,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="aadhar card"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -420,7 +353,7 @@
                             <Button
                                 android:id="@+id/aadharBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -433,19 +366,19 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/linPassport"
+                            android:id="@+id/linPan"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <RelativeLayout
-                                android:id="@+id/passportBackground"
+                                android:id="@+id/panBackground"
                                 android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -460,7 +393,77 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:text="pan card"
+                                    android:layout_alignParentLeft="true"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/amber_50"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_margin="@dimen/_20sdp"
+                                app:srcCompat="@drawable/ic_image" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:text="PAN Card"
+                                android:textSize="15sp" />
+
+                            <Button
+                                android:id="@+id/panCardBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_below="@+id/txtPan2"
+                                android:layout_margin="5dp"
+                                android:background="@color/colorSecondary"
+                                android:text="@string/upload"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/linPassport"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:background="@drawable/dashed_border"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <RelativeLayout
+                                android:id="@+id/passportBackground"
+                                android:visibility="gone"
+                                android:layout_width="fill_parent"
+                                android:layout_height="@dimen/_70sdp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentRight="true"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/background" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="passport"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -488,7 +491,7 @@
                             <Button
                                 android:id="@+id/passportBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -499,21 +502,21 @@
                                 android:visibility="gone" />
                         </LinearLayout>
 
-
                         <LinearLayout
                             android:id="@+id/linVoterId"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:id="@+id/voterIdBackground"
                                 android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -528,7 +531,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="voter id"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -556,7 +559,7 @@
                             <Button
                                 android:id="@+id/voterIdBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -570,17 +573,18 @@
                         <LinearLayout
                             android:id="@+id/linDrivingLicense"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:id="@+id/drivingLicenseBackground"
                                 android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -595,7 +599,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="Driving license"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -622,7 +626,7 @@
                             <Button
                                 android:id="@+id/drivingLicenseBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -637,17 +641,18 @@
                         <LinearLayout
                             android:id="@+id/linTelephoneBill"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:id="@+id/telephoneBillBackground"
                                 android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -662,7 +667,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="Telephone bill"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -690,7 +695,7 @@
                             <Button
                                 android:id="@+id/telephoneBillBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -704,17 +709,18 @@
                         <LinearLayout
                             android:id="@+id/linElectricityBill"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:id="@+id/electricityBillBackground"
                                 android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -729,7 +735,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="electricity bill"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -757,7 +763,7 @@
                             <Button
                                 android:id="@+id/electricityBillBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -771,17 +777,18 @@
                         <LinearLayout
                             android:id="@+id/linRentAgreement"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:visibility="gone"
                                 android:id="@+id/rentAgreementBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -796,7 +803,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="rent agreement"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -824,7 +831,7 @@
                             <Button
                                 android:id="@+id/rentAgreementBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -838,17 +845,18 @@
                         <LinearLayout
                             android:id="@+id/linAddressProof"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:visibility="gone"
                                 android:id="@+id/addressProofBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -863,7 +871,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text="address Proof"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -891,7 +899,7 @@
                             <Button
                                 android:id="@+id/addressProffBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -902,9 +910,47 @@
                                 android:visibility="gone" />
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/linSeemoreKycBtn"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:background="@drawable/border_circular_red_filled"
+                            android:layout_gravity="right"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:id="@+id/txtGetOtp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="See More"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                style="@style/TextViewTitleStyle"/>
+
+                            <View
+                                android:layout_width="@dimen/_1sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_marginBottom="@dimen/_2sdp"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:background="@color/white" />
+
+                            <ImageView
+                                android:id="@+id/ivIndicator"
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                app:srcCompat="@drawable/ic_plus" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
                 </ScrollView>
-
 
             </LinearLayout>
 
@@ -940,17 +986,17 @@
                         <LinearLayout
                             android:id="@+id/linSalarySlipSix"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/salSixBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -963,16 +1009,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" Salary Slip - 6 Months"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -993,9 +1039,9 @@
                             <Button
                                 android:id="@+id/salSlipSixBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1007,17 +1053,18 @@
                         <LinearLayout
                             android:id="@+id/linSalarySlipThree"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/salThreeBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1030,16 +1077,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" Salary Slip - 3 Months"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1060,9 +1107,9 @@
                             <Button
                                 android:id="@+id/salSlipThreeBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1074,18 +1121,19 @@
                         <LinearLayout
                             android:id="@+id/linBankStatementThree"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/bankThreeBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1098,16 +1146,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" Bank Statement - 3 Months"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1128,9 +1176,9 @@
                             <Button
                                 android:id="@+id/bankStmnt3"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1142,18 +1190,19 @@
                         <LinearLayout
                             android:id="@+id/linBankStatementSix"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/bankSixBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1166,16 +1215,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" bank statement - 6 Months"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1196,9 +1245,9 @@
                             <Button
                                 android:id="@+id/bankstatmntSixBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1210,18 +1259,19 @@
                         <LinearLayout
                             android:id="@+id/linKVP"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/kvpBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1234,16 +1284,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" KVP"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1264,9 +1314,9 @@
                             <Button
                                 android:id="@+id/kvpBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1275,22 +1325,22 @@
                                 android:visibility="gone" />
                         </LinearLayout>
 
-
                         <LinearLayout
                             android:id="@+id/linLICPolicy"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/licPolicyBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1303,16 +1353,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" LIC policy"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1333,9 +1383,9 @@
                             <Button
                                 android:id="@+id/licBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1344,22 +1394,22 @@
                                 android:visibility="gone" />
                         </LinearLayout>
 
-
                         <LinearLayout
                             android:id="@+id/linForm16"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/form16Background"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1372,16 +1422,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" form 16"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1402,9 +1452,9 @@
                             <Button
                                 android:id="@+id/form16Btn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1413,22 +1463,22 @@
                                 android:visibility="gone" />
                         </LinearLayout>
 
-
                         <LinearLayout
                             android:id="@+id/linForm61"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/from61Background"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1441,16 +1491,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" form 61"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1471,9 +1521,9 @@
                             <Button
                                 android:id="@+id/form61btn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1482,22 +1532,22 @@
                                 android:visibility="gone" />
                         </LinearLayout>
 
-
                         <LinearLayout
                             android:id="@+id/linPensionLetter"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/pensionBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1510,16 +1560,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" Pension Letter"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1540,9 +1590,9 @@
                             <Button
                                 android:id="@+id/pensionBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1551,20 +1601,22 @@
                                 android:visibility="gone" />
                         </LinearLayout>
 
-                        <LinearLayout android:id="@+id/linITR"
+                        <LinearLayout
+                            android:id="@+id/linITR"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/itrBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1577,16 +1629,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" ITR"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1607,9 +1659,9 @@
                             <Button
                                 android:id="@+id/itrBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1621,18 +1673,19 @@
                         <LinearLayout
                             android:id="@+id/linPNL"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/pnlBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1645,16 +1698,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="@dimen/_29sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" PNL"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1675,15 +1728,53 @@
                             <Button
                                 android:id="@+id/pnlBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_alignParentBottom="true"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
                                 android:textColor="@color/white"
                                 android:textSize="12sp"
                                 android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linSeemoreFinancialBtn"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_30sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:background="@drawable/border_circular_red_filled"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:id="@+id/txtSeeMoreFinancial"
+                                style="@style/TextViewTitleStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="See More"
+                                android:textColor="@color/white" />
+
+                            <View
+                                android:layout_width="@dimen/_1sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_2sdp"
+                                android:background="@color/white" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                app:srcCompat="@drawable/ic_plus" />
+
                         </LinearLayout>
 
                     </LinearLayout>
@@ -1701,7 +1792,7 @@
                 android:backgroundTint="#1E88E5"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -1724,18 +1815,19 @@
                         <LinearLayout
                             android:id="@+id/lintenth_mark_sheet"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
                                 android:visibility="gone"
                                 android:id="@+id/tenthMarksheetBackground"
-                                android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1750,7 +1842,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text=" 10th mark sheet"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -1778,7 +1870,7 @@
                             <Button
                                 android:id="@+id/tenthMarkSheetBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -1787,23 +1879,25 @@
                                 android:textColor="@color/white"
                                 android:textSize="12sp"
                                 android:visibility="gone" />
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/lintwelvethMarkSheet"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
                                 android:visibility="gone"
                                 android:id="@+id/twelvethMarksheetBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1818,7 +1912,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text=" 12th mark sheet"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -1845,7 +1939,7 @@
                             <Button
                                 android:id="@+id/twelvethMarkSheetBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -1859,18 +1953,19 @@
                         <LinearLayout
                             android:id="@+id/linlastCompletedMarkSheet"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
 
                             <RelativeLayout
                                 android:visibility="gone"
                                 android:id="@+id/lastMarksheetBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1885,7 +1980,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text=" Last completed degree mark sheet"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -1913,7 +2008,7 @@
                             <Button
                                 android:id="@+id/lastCompletedMarksheetBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -1927,18 +2022,19 @@
                         <LinearLayout
                             android:id="@+id/linlastcompletedDegreeCertificate"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
 
 
                             <RelativeLayout
                                 android:visibility="gone"
                                 android:id="@+id/lastCertificateBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1953,7 +2049,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text=" Last completed degree certificate"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -1981,7 +2077,7 @@
                             <Button
                                 android:id="@+id/lastDegreeCertificateBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -1991,6 +2087,45 @@
                                 android:textSize="12sp"
                                 android:visibility="gone" />
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linSeemoreEducationalBtn"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:background="@drawable/border_circular_red_filled"
+                            android:layout_gravity="right"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:id="@+id/txtSeeMoreEducational"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="See More"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                style="@style/TextViewTitleStyle"/>
+
+                            <View
+                                android:layout_width="@dimen/_1sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_marginBottom="@dimen/_2sdp"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:background="@color/white" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                app:srcCompat="@drawable/ic_plus" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
                 </ScrollView>
 
@@ -2029,8 +2164,8 @@
                         <LinearLayout
                             android:id="@+id/others"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_height="@dimen/_70sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@drawable/dashed_border"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
@@ -2040,7 +2175,7 @@
                                 android:visibility="gone"
                                 android:id="@+id/othersBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="100dp">
+                                android:layout_height="@dimen/_70sdp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -2055,7 +2190,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="@dimen/_15sdp"
                                     android:text=" others"
                                     android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
@@ -2083,7 +2218,7 @@
                             <Button
                                 android:id="@+id/othersBtn"
                                 android:layout_width="match_parent"
-                                android:layout_height="20dp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
                                 android:layout_margin="5dp"
@@ -2284,5 +2419,5 @@
         android:indeterminate="false"
         android:layout_gravity="center" />
 
-</RelativeLayout>
 
+</RelativeLayout>

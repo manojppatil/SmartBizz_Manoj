@@ -9,6 +9,7 @@
     tools:context="com.eduvanzapplication.newUI.fragments.AmortizationFragment">
 
     <LinearLayout
+        android:id="@+id/linAmortFrag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_40sdp">
@@ -17,34 +18,216 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/linHasAmort"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/_100sdp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_150sdp">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:weightSum="4">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_border_tv"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/TextViewTitle10BoldStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:layout_weight="1"
+                                android:text="EMI Amount"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/txtNextEmiAmount"
+                                style="@style/TextViewTitle14Style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableStart="@drawable/ic_rupee_sign"
+                                android:padding="@dimen/_3sdp"
+                                android:text=" 0"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_border_tv"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/TextViewTitle10BoldStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:layout_weight="1"
+                                android:text="Next EMI Due" />
+
+                            <TextView
+                                android:id="@+id/txtNextEmiDue"
+                                style="@style/TextViewTitle14Style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/_3sdp"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_border_tv"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/TextViewTitle10BoldStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:layout_weight="1"
+                                android:text="EMI End Date"/>
+
+                            <TextView
+                                android:id="@+id/txtNextEmiEndDate"
+                                style="@style/TextViewTitle14Style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/_3sdp"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_border_tv"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/TextViewTitle10BoldStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:layout_weight="1"
+                                android:text="Outstanding Amt" />
+
+                            <TextView
+                                android:id="@+id/txtOutstandingAmt"
+                                style="@style/TextViewTitle14Style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_rupee_sign"
+                                android:layout_weight="1"
+                                android:padding="@dimen/_3sdp"
+                                android:text=" 0"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp">
 
                         <SeekBar
                             android:id="@+id/seek_bar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:progress="35"
+                            android:progress="0"
                             android:progressDrawable="@drawable/seekbar_drawable_progress"
                             android:thumb="@drawable/seekbar_drawable_thumb" />
                     </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextViewTitle12BoldStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Paid : "
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/txtPaidDue"
+                                style="@style/TextViewTitle12BoldStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_rupee_sign"
+                                android:maxLines="1"
+                                android:padding="@dimen/_5sdp"
+                                android:text=" 0"
+                                android:textStyle="normal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextViewTitle12BoldStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Remaining : "
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/txtOutstandingDue"
+                                style="@style/TextViewTitle12BoldStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_rupee_sign"
+                                android:maxLines="1"
+                                android:padding="@dimen/_5sdp"
+                                android:text=" 0"
+                                android:textStyle="normal" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:id="@+id/linAmortTile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_marginBottom="@dimen/_3sdp"
                         android:background="#77FFFFFF"
@@ -115,8 +298,8 @@
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
                                                         android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:textColor="@color/darkblue"
-                                                        android:text="01" />
+                                                        android:text="01"
+                                                        android:textColor="@color/darkblue" />
 
                                                 </LinearLayout>
 
@@ -166,8 +349,8 @@
                                                         style="@style/TextViewTitleSmallStyle"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:textColor="@color/red"
-                                                        android:text="05 Apr 2019" />
+                                                        android:text="05 Apr 2019"
+                                                        android:textColor="@color/red" />
 
                                                 </LinearLayout>
 
@@ -192,17 +375,17 @@
                                                         style="@style/TextViewTitleSmallStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:textColor="@color/colorPrimary"
-                                                        android:text="05 Apr 2019" />
+                                                        android:text="05 Apr 2019"
+                                                        android:textColor="@color/colorPrimary" />
 
                                                 </LinearLayout>
 
                                                 <LinearLayout
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
+                                                    android:layout_gravity="center_vertical"
                                                     android:layout_weight="1"
                                                     android:gravity="center_vertical"
-                                                    android:layout_gravity="center_vertical"
                                                     android:orientation="horizontal"
                                                     android:padding="@dimen/_6sdp">
 
@@ -213,7 +396,7 @@
                                                         android:gravity="center"
                                                         android:textAlignment="center"
                                                         android:tint="@color/colorGreen"
-                                                        app:srcCompat="@drawable/ic_check_circle"/>
+                                                        app:srcCompat="@drawable/ic_check_circle" />
 
                                                     <TextView
                                                         android:id="@+id/txtPaymentStatus"
@@ -221,12 +404,12 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_gravity="center_vertical"
-                                                        android:gravity="center"
-                                                        android:textAlignment="center"
                                                         android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:textColor="@color/colorGreen"
+                                                        android:gravity="center"
                                                         android:text=" Paid"
-                                                        android:textAllCaps="true" />
+                                                        android:textAlignment="center"
+                                                        android:textAllCaps="true"
+                                                        android:textColor="@color/colorGreen" />
 
                                                 </LinearLayout>
 
@@ -281,17 +464,17 @@
 
                     </LinearLayout>
 
-                    //Lin1-10
+                    <!--//Lin1-10-->
 
                     <LinearLayout
                         android:id="@+id/linAmortBtn1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:weightSum="5">
 
                         <android.support.v7.widget.CardView
@@ -303,9 +486,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -346,9 +529,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -389,9 +572,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -432,9 +615,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -475,9 +658,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -532,9 +715,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -575,9 +758,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -618,9 +801,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
 
                             <LinearLayout
@@ -662,9 +845,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
 
                             <LinearLayout
@@ -706,9 +889,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
 
                             <LinearLayout
@@ -743,7 +926,8 @@
 
                     </LinearLayout>
 
-                    //Lin11-20
+                    <!--//Lin11-20-->
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn3"
                         android:layout_width="match_parent"
@@ -764,9 +948,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -807,9 +991,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -850,9 +1034,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -893,9 +1077,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -936,9 +1120,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -992,9 +1176,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1036,9 +1220,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1079,9 +1263,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1122,9 +1306,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1165,9 +1349,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1202,7 +1386,8 @@
                     </LinearLayout>
 
 
-                    //Lin11-30
+                    <!--//Lin11-30-->
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn5"
                         android:layout_width="match_parent"
@@ -1223,9 +1408,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1266,9 +1451,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1309,9 +1494,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1352,9 +1537,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1395,9 +1580,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1451,9 +1636,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1494,9 +1679,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1537,9 +1722,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1580,9 +1765,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1623,9 +1808,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1659,7 +1844,8 @@
 
                     </LinearLayout>
 
-                    //Lin31-40
+                    <!--//Lin31-40-->
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn7"
                         android:layout_width="match_parent"
@@ -1680,9 +1866,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1723,9 +1909,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1766,9 +1952,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1809,9 +1995,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1852,9 +2038,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1908,9 +2094,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1951,9 +2137,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1994,9 +2180,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2037,9 +2223,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2080,9 +2266,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2116,7 +2302,8 @@
 
                     </LinearLayout>
 
-                    //Lin41-50
+                    <!--//Lin41-50-->
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn9"
                         android:layout_width="match_parent"
@@ -2137,9 +2324,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2180,9 +2367,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2223,9 +2410,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2266,9 +2453,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2309,9 +2496,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2365,9 +2552,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2408,9 +2595,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2451,9 +2638,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2494,9 +2681,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2537,9 +2724,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2573,7 +2760,8 @@
 
                     </LinearLayout>
 
-                    //Lin51-60
+                    <!--//Lin51-60-->
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn11"
                         android:layout_width="match_parent"
@@ -2594,9 +2782,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2637,9 +2825,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2680,9 +2868,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2723,9 +2911,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2766,9 +2954,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2822,9 +3010,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2865,9 +3053,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2908,9 +3096,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2951,9 +3139,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2994,9 +3182,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3030,7 +3218,8 @@
 
                     </LinearLayout>
 
-                    //Lin61-70
+                    <!--//Lin61-70-->
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn13"
                         android:layout_width="match_parent"
@@ -3051,9 +3240,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3094,9 +3283,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3137,9 +3326,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3180,9 +3369,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3223,9 +3412,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3279,9 +3468,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3322,9 +3511,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3365,9 +3554,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3408,9 +3597,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3451,9 +3640,9 @@
                             android:background="@drawable/border"
                             android:elevation="@dimen/_3sdp"
                             android:padding="@dimen/_1sdp"
+                            android:visibility="invisible"
                             app:cardCornerRadius="@dimen/_5sdp"
-                            app:cardElevation="@dimen/_3sdp"
-                            android:visibility="invisible">
+                            app:cardElevation="@dimen/_3sdp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3488,7 +3677,6 @@
                     </LinearLayout>
 
 
-
                     <LinearLayout
                         android:id="@+id/linAmortList"
                         android:layout_width="match_parent"
@@ -3502,14 +3690,14 @@
                         android:visibility="visible">
 
                         <RelativeLayout
-                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:clipChildren="false"
                             android:clipToPadding="false"
                             android:paddingTop="@dimen/_4sdp"
-                            android:paddingBottom="@dimen/_4sdp">
+                            android:paddingBottom="@dimen/_4sdp"
+                            android:visibility="gone">
 
                             <android.support.v7.widget.RecyclerView
                                 android:id="@+id/rvAmort"
@@ -3523,12 +3711,31 @@
 
 
                     </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linNoAmort"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtAmortNotCreated"
+                        style="@style/TextViewTitle16BoldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Details will be Available Post Loan Approval"
+                        android:textAlignment="center"
+                        android:textColor="@color/textcolor" />
 
                 </LinearLayout>
 
+            </LinearLayout>
 
-
-            </RelativeLayout>
         </ScrollView>
 
     </LinearLayout>

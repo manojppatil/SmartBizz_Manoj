@@ -3,6 +3,7 @@ package com.eduvanzapplication.newUI.newViews;
 import android.Manifest;
 import android.app.AppOpsManager;
 import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,27 +42,13 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
 import com.eduvanzapplication.DataSyncReceiver;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
@@ -74,37 +62,30 @@ import com.eduvanzapplication.newUI.webviews.WebViewFairPracticsCode;
 import com.eduvanzapplication.newUI.webviews.WebViewInterestRatePolicy;
 import com.eduvanzapplication.newUI.webviews.WebViewPrivacyPolicy;
 import com.eduvanzapplication.newUI.webviews.WebViewTermsNCondition;
-import com.google.android.gms.maps.model.Circle;
-import com.google.gson.JsonObject;
-import com.idfy.rft.RFTSdk;
-import com.idfy.rft.RftSdkCallbackInterface;
 import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
 import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
-
-import static com.eduvanzapplication.newUI.MainApplication.TAG;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static NavigationView navigationView;
     public static DrawerLayout drawer;
-    Context context;
+    public static Context context;
 //    com.eduvanzapplication.newUI.newViews.CustomDrawerButton customDrawerButton;
-    TextView textViewName, textViewEmail;
-    MainApplication mainApplication;
+    TextView textViewName,textView_mobileNo, textViewEmail;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
     LinearLayout linearLayoutSignup, linearLayoutUserDetail,editProfile;
    public DataSyncReceiver dataSyncReceiver;
-    static String userMobileNo = "", student_id = "", appInstallationTimeStamp = "";
+    static String  student_id = "", appInstallationTimeStamp = "";
     AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
+    public int GET_MY_PERMISSION = 1, permission;
 
-    String userFirst = "", userLast = "", userEmail = "", userPic = "";
-    ImageView imageViewProfilePic;
+    String userFirst = "", userLast = "", userEmail = "", userPic = "",userMobileNo ="";
+    ImageView ivUserPic;
 
     static int firstTimeScrape = 0;
 
@@ -119,10 +100,7 @@ public class DashboardActivity extends AppCompatActivity
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("");
-//            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-//            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
             context = getApplicationContext();
-            mainApplication = new MainApplication();
             sharedPref = new SharedPref();
             mActivity = this;
 
@@ -133,14 +111,14 @@ public class DashboardActivity extends AppCompatActivity
                 userMobileNo = sharedPreferences.getString("mobile_no", "");
                 MainActivity.auth_token = sharedPreferences.getString("auth_token", "");
                 student_id = sharedPreferences.getString("student_id", "");
-                userPic = sharedPreferences.getString("user_image", "");
+                userPic = sharedPreferences.getString("user_img", "");
                 firstTimeScrape = sharedPreferences.getInt("firstTimeScrape", 0);
                 appInstallationTimeStamp = sharedPreferences.getString("appInstallationTimeStamp", "null");
             } catch (Exception e) {
                 e.printStackTrace();
                 firstTimeScrape = 0;
             }
-            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer = findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.setDrawerListener(toggle);
@@ -148,12 +126,12 @@ public class DashboardActivity extends AppCompatActivity
             //**To change the hamburger color on dashboard **/
             toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
 
-            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView = findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
             View header = navigationView.getHeaderView(0);
 
-            editProfile=(LinearLayout)header.findViewById(R.id.linearLayout_userdetail_dashboard);
+            editProfile= header.findViewById(R.id.linearLayout_userdetail_dashboard);
             editProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -162,33 +140,32 @@ public class DashboardActivity extends AppCompatActivity
             });
             hideMenuOptions();
 
-            textViewName = (TextView) header.findViewById(R.id.textView_name);
-            mainApplication.applyTypeface(textViewName, context);
-            textViewName.setText(userFirst + " " + userLast);
-            textViewEmail = (TextView) header.findViewById(R.id.textView_emailID);
-            mainApplication.applyTypeface(textViewEmail, context);
+            textViewName =  header.findViewById(R.id.textView_name);
+            textViewName.setText(userFirst);
+            textView_mobileNo = header.findViewById(R.id.textView_mobileNo);
+            textView_mobileNo.setText(userMobileNo);
+            textViewEmail = header.findViewById(R.id.textView_emailID);
             textViewEmail.setText(userEmail);
 
-            imageViewProfilePic = (ImageView) header.findViewById(R.id.imageView_userpic);
+            ivUserPic = header.findViewById(R.id.ivUserPic);
             if (!userPic.equalsIgnoreCase("")) {
-                Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(imageViewProfilePic);
+                Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(ivUserPic);
             }
 
-            try {
-                sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
-                textViewEmail.setText(sharedPreferences.getString("email_id", ""));
-                textViewName.setText(sharedPreferences.getString("first_name", ""));
-                Picasso.with(context)
-                        .load(sharedPreferences.getString("image_profile", ""))
-                        .into(imageViewProfilePic);
-            } catch (Exception e) {
-                e.printStackTrace();
-                firstTimeScrape = 0;
-            }
+//            try {
+//                sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
+//                textViewEmail.setText(sharedPreferences.getString("email_id", ""));
+//                textViewName.setText(sharedPreferences.getString("first_name", ""));
+//                Picasso.with(context)
+//                        .load(sharedPreferences.getString("image_profile", ""))
+//                        .into(ivUserPic);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                firstTimeScrape = 0;
+//            }
+            linearLayoutUserDetail = header.findViewById(R.id.linearLayout_userdetail_dashboard);
 
-            linearLayoutUserDetail = (LinearLayout) header.findViewById(R.id.linearLayout_userdetail_dashboard);
-
-            frameLayoutDashboard = (FrameLayout) findViewById(R.id.framelayout_dashboard);
+            frameLayoutDashboard = findViewById(R.id.framelayout_dashboard);
             Menu m = navigationView.getMenu();
             for (int i = 0; i < m.size(); i++) {
                 MenuItem mi = m.getItem(i);
@@ -208,7 +185,6 @@ public class DashboardActivity extends AppCompatActivity
 
             if (sharedPref.getLoginDone(context)) {
                 Menu nav_Menu = navigationView.getMenu();
-                nav_Menu.findItem(R.id.nav_loanApplication).setVisible(true);
                 nav_Menu.findItem(R.id.nav_eligibility).setVisible(false);
             }else {
                 Menu nav_Menu = navigationView.getMenu();
@@ -217,15 +193,35 @@ public class DashboardActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction().add(R.id.framelayout_dashboard, new DashboardFragmentNew()).commit();
 
+            dataSyncReceiver = new DataSyncReceiver();
+            IntentFilter filter = new IntentFilter("in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION");
+            context.registerReceiver(dataSyncReceiver, filter);
 
-//            dataSyncReceiver = new DataSyncReceiver();
-//
-//            IntentFilter filter = new IntentFilter(String.valueOf("DataSynced"));
-//            context.registerReceiver(dataSyncReceiver, filter);
+            if (Build.VERSION.SDK_INT >= 23) {
+                permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.READ_SMS);
 
-            ExtraHelperFunctions.putRefUserId(context,student_id);
-            Algo360_SDK_Init.startAlgo360(DashboardActivity.this, Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+                if (permission != PackageManager.PERMISSION_GRANTED)
+                {//Direct Permission without disclaimer dialog
+                    ActivityCompat.requestPermissions(DashboardActivity.this,
+                            new String[]{Manifest.permission.READ_CONTACTS,
+                                    Manifest.permission.READ_SMS,
+                                    Manifest.permission.RECEIVE_SMS,
+                                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                                    Manifest.permission.READ_PHONE_STATE,
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                    Manifest.permission.READ_CONTACTS,
+                                    Manifest.permission.CAMERA,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    Manifest.permission.ACCESS_FINE_LOCATION},
+                            GET_MY_PERMISSION);
 
+                } else {
+                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
+//                    Log.d("SDK","Initialized: "+student_id);
+                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+                }
+            }
 
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -236,11 +232,34 @@ public class DashboardActivity extends AppCompatActivity
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
         }
-//      showOCRDialog();
+    }
+
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String action = intent.getAction();
+
+            Boolean dataSynced = intent.getBooleanExtra("DataSynced",false);
+
+            Log.e("Receiver", "Data synced: " + dataSynced);
+            Log.e("Receiver", "Data Action: " + action);
+        }
+    };
+
+    @Override
+    protected void onPause() {
+
+        unregisterReceiver(broadcastReceiver);
+
+        super.onPause();
     }
 
     @Override
     protected void onResume() {
+
+        IntentFilter intentFilter = new IntentFilter("in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION");
+        registerReceiver(broadcastReceiver,intentFilter);
         super.onResume();
 
     }
@@ -261,20 +280,9 @@ public class DashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_myprofile) {
-
-            Intent intent = new Intent(DashboardActivity.this, LoanTabActivity.class);
+            if (id == R.id.nav_eligibility) {
+            Intent intent = new Intent(DashboardActivity.this, NewLeadActivity.class);
             startActivity(intent);
-//            if (sharedPref.getLoginDone(context)) {
-//                Intent intent = new Intent(context, MyProfileNew.class);
-//                startActivity(intent);
-//            } else {
-//                Intent intent = new Intent(context, SignUp.class);
-//                startActivity(intent);
-//            }
-        } else if (id == R.id.nav_eligibility) {
-//            Intent intent = new Intent(DashboardActivity.this, EligibilityCheck.class);
-//            startActivity(intent);
         } else if (id == R.id.nav_howitworks) {
             Intent intent = new Intent(context, HowItWorks.class);
             startActivity(intent);
@@ -294,10 +302,12 @@ public class DashboardActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_more) {
             showMenuOptions();
-        } else if (id == R.id.nav_blog) {
-            Intent intent = new Intent(DashboardActivity.this, WebViewBlog.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_disclaimer) {
+        }
+//        else if (id == R.id.nav_blog) {
+//            Intent intent = new Intent(DashboardActivity.this, WebViewBlog.class);
+//            startActivity(intent);
+//        }
+        else if (id == R.id.nav_disclaimer) {
             Intent intent = new Intent(DashboardActivity.this, WebViewDisclaimer.class);
             startActivity(intent);
         } else if (id == R.id.nav_termsandconditions) {
@@ -324,7 +334,6 @@ public class DashboardActivity extends AppCompatActivity
 
                             SharedPref sharedPref = new SharedPref();
                             sharedPref.clearSharedPreference(DashboardActivity.this);
-
 //            /** STORING THE COLOR and BOOLEAN VALUE FOR FIRST TIME DEFAULT COLOR STORE INTO SHARED PREFERENCE **/
 //            SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
 //            SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -334,8 +343,6 @@ public class DashboardActivity extends AppCompatActivity
 //            editor.apply();
 //            editor.commit();
                             Intent intent = new Intent(DashboardActivity.this, GetMobileNo.class);
-//                            Intent intent = new Intent(DashboardActivity.this, SingInWithTruecaller.class);
-//                            Intent intent = new Intent(DashboardActivity.this, NewTruecallerSignIn.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             finish();
@@ -349,10 +356,6 @@ public class DashboardActivity extends AppCompatActivity
             AlertDialog alert = builder.create();
             alert.show();
 
-
-        } else if (id == R.id.nav_loanApplication) {
-//            Intent intent = new Intent(context, LoanApplication.class);
-//            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -373,20 +376,19 @@ public class DashboardActivity extends AppCompatActivity
 
     private void hideMenuOptions() {
         Menu nav_Menu = navigationView.getMenu();
-        nav_Menu.findItem(R.id.nav_blog).setVisible(false);
+//        nav_Menu.findItem(R.id.nav_blog).setVisible(false);
         nav_Menu.findItem(R.id.nav_disclaimer).setVisible(false);
         nav_Menu.findItem(R.id.nav_termsandconditions).setVisible(false);
         nav_Menu.findItem(R.id.nav_privacypolicy).setVisible(false);
         nav_Menu.findItem(R.id.nav_interestratepolicy).setVisible(false);
         nav_Menu.findItem(R.id.nav_fairpracticscode).setVisible(false);
         nav_Menu.findItem(R.id.nav_logout).setVisible(false);
-        nav_Menu.findItem(R.id.nav_loanApplication).setVisible(false);
     }
 
     private void showMenuOptions() {
         Menu nav_Menu = navigationView.getMenu();
         nav_Menu.findItem(R.id.nav_more).setVisible(false);
-        nav_Menu.findItem(R.id.nav_blog).setVisible(true);
+//        nav_Menu.findItem(R.id.nav_blog).setVisible(true);
         nav_Menu.findItem(R.id.nav_disclaimer).setVisible(true);
         nav_Menu.findItem(R.id.nav_termsandconditions).setVisible(true);
         nav_Menu.findItem(R.id.nav_privacypolicy).setVisible(true);
@@ -397,4 +399,61 @@ public class DashboardActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+
+            case 1:
+                if (grantResults.length <= 0) {
+                }
+                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[8] == PackageManager.PERMISSION_GRANTED && grantResults[9] == PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
+                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+                } else {
+                    //not granted
+//                    Log.e(MainApplication.TAG, "not granted: Dashboard " + grantResults[0]);
+                    {
+                        // Permission denied.
+                        // Notify the user via a SnackBar that they have rejected a core permission for the
+                        // app, which makes the Activity useless. In a real app, core permissions would
+                        // typically be best requested during a welcome-screen flow.
+                        // Additionally, it is important to remember that a permission might have been
+                        // rejected without asking the user for permission (device policy or "Never ask
+                        // again" prompts). Therefore, a user interface affordance is typically implemented
+                        // when permissions are denied. Otherwise, your app could appear unresponsive to
+                        // touches or interactions which have required permissions.
+                        //                    Toast.makeText(this, R.string.permission_denied_explanation, Toast.LENGTH_LONG).show();
+                        //                    finish();
+
+                        Snackbar.make(
+                                findViewById(R.id.framelayout_dashboard),
+                                R.string.permission_denied_explanation,
+                                Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.settings, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        // Build intent that displays the App settings screen.
+                                        Intent intent = new Intent();
+                                        intent.setAction(
+                                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                        Uri uri = Uri.fromParts("package",
+                                                BuildConfig.APPLICATION_ID, null);
+                                        intent.setData(uri);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
+                    }
+                }
+                break;
+        }
+
+    }
 }

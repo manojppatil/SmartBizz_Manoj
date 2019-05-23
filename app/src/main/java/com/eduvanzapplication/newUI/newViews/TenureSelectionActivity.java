@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.TenureOfferedAdapter;
 import com.eduvanzapplication.newUI.adapter.TenureRequestedAdapter;
@@ -35,7 +36,8 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
     TenureRequestedAdapter requestedAdapter;
     LinearLayout linProceedTenure;
     ProgressDialog progressDialog;
-    public static String leadid, requestedtenure, requestedroi, requestedemi, offeredamount, requestedloanamount, studentid, SLA, RLA;
+    public static String leadid ="", requestedtenure ="", requestedroi ="", requestedemi ="", offeredamount="",
+            requestedloanamount ="", studentid = "", SLA = "", RLA = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,23 +45,6 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
         setContentView(R.layout.activity_tenure_selection);
         setViews();
         getTenureListApiCall();
-//        setOfferedRecycler();
-    }
-
-    private void setOfferedRecycler() {
-//        Mforrequestedloan mforrequestedloan = new Mforrequestedloan();
-//        for (int i=0; i<10; i++){
-//            mforrequestedloan = new Mforrequestedloan();
-//            mforrequestedloan.emi_amount = "565588888888.3358";
-//            mforrequestedloan.loan_amount = "888888888";
-//            mforrequestedloan.tenure ="24";
-//            horizontalList.add(mforrequestedloan);
-//        }
-//
-//        rvRequested.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-//         requestedAdapter = new TenureRequestedAdapter(horizontalList, TenureSelectionActivity.this);
-//        rvRequested.setAdapter(requestedAdapter);
-//        rvRequested.setHasFixedSize(true);
     }
 
     private void setViews() {
@@ -70,10 +55,83 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
         linProceedTenure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TenureSelectionActivity.this, DashboardActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                saveTenureApiCall();
             }
         });
+    }
+
+    private void saveTenureApiCall() {
+        /**API CALL**/
+        try {
+            String url = MainActivity.mainUrl + "dashboard/saveTenure";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("lead_id", leadid);
+            if(requestedtenure == null){
+                requestedtenure ="";
+            }if(requestedroi == null){
+                requestedroi ="";
+            }if(requestedemi == null){
+                requestedemi ="";
+            }if(offeredamount == null){
+                offeredamount ="";
+            }if(requestedloanamount == null){
+                requestedloanamount ="";
+            }
+            params.put("requested_tenure", requestedtenure);
+            params.put("requested_roi", requestedroi);
+            params.put("requested_emi", requestedemi);
+            params.put("offered_amount", offeredamount);
+            params.put("student_id", DashboardActivity.student_id);
+            params.put("SLA", offeredamount);
+            params.put("RLA", requestedloanamount);
+
+            if (!Globle.isNetworkAvailable(getApplicationContext())) {
+                Toast.makeText(getApplicationContext(), R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                progressDialog.setMessage("Submitting Data...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                VolleyCall volleyCall = new VolleyCall();
+                volleyCall.sendRequest(getApplicationContext(), url, TenureSelectionActivity.this, null, "saveTenure", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(TenureSelectionActivity.this, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void saveTenure(JSONObject jsonData) {
+        try {
+            progressDialog.dismiss();
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+                startActivity(new Intent(TenureSelectionActivity.this, DashboardActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                TenureSelectionActivity.this.finish();
+
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getApplicationContext(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
     }
 
     private void getTenureListApiCall() {
@@ -84,13 +142,12 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             progressDialog.show();
             String url = MainActivity.mainUrl + "dashboard/getTenureList";
             Map<String, String> params = new HashMap<String, String>();
+//            params.put("lead_id", "564");
             params.put("lead_id", NewLeadActivity.leadId);
             if (!Globle.isNetworkAvailable(getApplicationContext())) {
                 Toast.makeText(TenureSelectionActivity.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
             } else {
-
-
                 VolleyCall volleyCall = new VolleyCall();
                 volleyCall.sendRequest(getApplicationContext(), url, TenureSelectionActivity.this, null, "getTenureList", params, MainActivity.auth_token);
             }
@@ -117,7 +174,6 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             requestedloanamount = jsonData.optString("requested_loan_amount");
             String has_coborrower = jsonData.optString("has_coborrower");
             leadid = jsonData.optString("lead_id");
-
 
             if (status.equalsIgnoreCase("1")) {
 
@@ -152,8 +208,6 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
                 } else {
 
                 }
-
-
 
             } else {
             }

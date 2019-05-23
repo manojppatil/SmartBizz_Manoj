@@ -27,54 +27,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
-DetailedInfoFragment.onDetailedInfoFragmentInteractionListener{
+        DetailedInfoFragment.onDetailedInfoFragmentInteractionListener {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private LinearLayout linDashBoard;
     public static ViewPager viewPager;
-    public static String lead_id="",student_id ="";
+    public static String lead_id = "", student_id = "";
     Context context;
     AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
-    public static boolean isKycEdit = false;
-    public static boolean isDetailedInfoEdit = false;
+    public static boolean isKycEdit;
+    public static boolean isDetailedInfoEdit;
 
     //kyc values
-    public static String firstName="", lastName="", middleName="", gender="2", dob="", maritalStatus="1", email="", mobile="",
-                            aadhar="", pan="", flatBuildingSociety="", streetLocalityLandmark="", pincode="", countryId="", stateId="",cityId="",
-                            instituteId="", courseId="", instituteLocationId="", courseFee="",applicant_id="",
-                            application_id="", requested_loan_amount="", institute_name="", location_name="",
-                            course_name="", course_cost="", fk_institutes_id="", fk_insitutes_location_id="", fk_course_id="",lead_status ="",
-                            lead_sub_status ="", current_status ="", current_stage ="", has_aadhar_pan ="";
-
-    //detailed values
-
-    //Post Doc values
-    public static String Postlead_id = "" ,Postapplication_loan_id= "" ,
-    Postprincipal_amount= "" ,
-            Postdown_payment= "" ,
-    Postrate_of_interest= "" ,
-            Postemi_type= "" ,
-    Postemi_amount= "" ,
-            Postrequested_loan_amount= "" ,
-    Postrequested_tenure= "" ,
-            Postrequested_roi= "" ,
-    Postrequested_emi= "" ,
-            Postoffered_amount= "" ,
-    Postapplicant_id= "" ,
-            Postfk_lead_id= "" ,
-    Postfirst_name= "" ,
-            Postlast_name= "" ,
-    Postmobile_number= "" ,
-            Postemail_id= "" ,
-    Postkyc_address= "" ,
-            Postcourse_cost= "" ,
-    Postpaid_on= "" ,
-            Posttransaction_amount= "" ,
-    Postkyc_status= "" ,
-            Postdisbursal_status= "" ,
-    Postloan_agrement_upload_status= "";
+    public static String firstName = "", lastName = "", middleName = "", gender = "", dob = "", maritalStatus = "2", email = "", mobile = "",
+            aadhar = "", pan = "", flatBuildingSociety = "", streetLocalityLandmark = "", pincode = "", countryId = "", stateId = "", cityId = "",
+            instituteId = "", courseId = "", instituteLocationId = "", courseFee = "", applicant_id = "",
+            application_id = "", requested_loan_amount = "", institute_name = "", location_name = "",
+            course_name = "", course_cost = "", fk_institutes_id = "", fk_insitutes_location_id = "", fk_course_id = "", lead_status = "",
+            lead_sub_status = "", current_status = "", current_stage = "", has_aadhar_pan = "";
 
 
     @Override
@@ -91,8 +63,8 @@ DetailedInfoFragment.onDetailedInfoFragmentInteractionListener{
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        DashboardActivity.student_id;
-
+        isKycEdit = false;
+        isDetailedInfoEdit = false;
         try {
             sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
             firstName = sharedPreferences.getString("firstName", "");
@@ -118,7 +90,7 @@ DetailedInfoFragment.onDetailedInfoFragmentInteractionListener{
     }
 
     public void onBackPressed() {
-            finish();
+        finish();
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -129,7 +101,6 @@ DetailedInfoFragment.onDetailedInfoFragmentInteractionListener{
         adapter.addFrag(new PostApprovalDocFragment(), "Post approval Documentation");
         adapter.addFrag(new AmortizationFragment(), "Amortization");
         viewPager.setAdapter(adapter);
-
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -144,13 +115,13 @@ DetailedInfoFragment.onDetailedInfoFragmentInteractionListener{
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                if (state == ViewPager.SCROLL_STATE_IDLE){
-                    if (viewPager.getCurrentItem() == 1){
-                        if(isKycEdit == true)
-                        KycDetailFragment.validate();
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    if (viewPager.getCurrentItem() == 1) {
+                        if (isKycEdit == true)
+                            KycDetailFragment.validate();
                     }
-                    if (viewPager.getCurrentItem() == 2){
-                        if(isDetailedInfoEdit == true)
+                    if (viewPager.getCurrentItem() == 2) {
+                        if (isDetailedInfoEdit == true)
                             DetailedInfoFragment.validate();
                     }
                 }

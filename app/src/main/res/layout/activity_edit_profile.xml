@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".newUI.newViews.EditProfile"
-    android:background="@color/darkblue">
+    tools:context=".newUI.newViews.EditProfile">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -21,13 +20,16 @@
         app:navigationIcon="@drawable/ic_back_arrow" />
     </android.support.design.widget.AppBarLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_profile_bg"
+        android:layout_below="@+id/appbar">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_400sdp"
-        android:layout_below="@+id/appbar"
-        android:background="@drawable/profile_bg">
+        android:layout_height="@dimen/_400sdp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
@@ -128,7 +130,6 @@
     </RelativeLayout>
 
 
-
     <LinearLayout
         android:id="@+id/linSubmit"
         android:layout_alignParentBottom="true"
@@ -179,6 +180,8 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
 
     <ProgressBar
         android:visibility="gone"

@@ -95,7 +95,6 @@
                             android:background="@color/textcolordark" />
 
                         <EditText
-                            android:digits="0123456789"
                             android:maxLength="12"
                             android:id="@+id/edtAadhaar"
                             style="@style/EditTextStyle"
@@ -150,8 +149,8 @@
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:imeOptions="actionDone"
-                            android:inputType="text"
                             android:hint="PAN Number"
+                            android:inputType="text|textCapCharacters"
                             android:maxLength="10"
                             android:maxLines="1"
                             android:padding="@dimen/_3sdp"

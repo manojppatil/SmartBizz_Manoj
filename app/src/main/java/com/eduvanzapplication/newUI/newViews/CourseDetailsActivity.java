@@ -64,6 +64,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public ArrayList<LocationsPOJO> locationPOJOArrayList;
     public static ProgressDialog progressDialog ;
 
+    //Integer Values
+    public static  int loanAmountvalueInInt,courseFeeValueinint;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +75,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
         context = getApplicationContext();
         mActivity = this;
 
-        
         spCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -181,18 +183,24 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
-                if (Integer.parseInt(txtCourseFee.getText().toString()) >= Integer.parseInt(edtLoanAmt.getText().toString())){
-                    NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
-//                    ivNextBtn.setEnabled(true);
-                    enableDisableButtons(true);
-                }
-                else{
-                    enableDisableButtons(false);
 
+                if(s.length()>0) {
+                    loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
+                    courseFeeValueinint = Integer.parseInt(txtCourseFee.getText().toString());
+
+                    if (courseFeeValueinint >= loanAmountvalueInInt) {
+                        NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
+//                    ivNextBtn.setEnabled(true);
+                        enableDisableButtons(true);
+                    } else {
+                        enableDisableButtons(false);
+                        edtLoanAmt.setError("Loan Amount not more than Course fees ");
+                    }
+                }
+                else {
+                    enableDisableButtons(false);
                     edtLoanAmt.setError("Loan Amount not more than Course fees ");
                 }
-
             }
 
             @Override
@@ -205,9 +213,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public void instituteApiCall() {
         /**API CALL**/
         try {
-            progressDialog.setMessage("Loading");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
+//            progressDialog.setMessage("Loading");
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
             String url = MainActivity.mainUrl + "pqform/apiPrefillInstitutes";  //http://159.89.204.41/eduvanzApi/pqform/apiPrefillInstitutes
             Map<String, String> params = new HashMap<String, String>();
             VolleyCall volleyCall = new VolleyCall();
@@ -217,7 +225,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                 volleyCall.sendRequest(context, url, mActivity, null, "instituteId", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -230,7 +238,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void instituteName(JSONObject jsonData) {
         try {
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
             Log.e("SERVER CALL", "PrefillInstitutesFragment1" + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");

@@ -51,18 +51,24 @@ public class EmiCalculatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emi_calculator);
-        setViews();
-        context = getApplicationContext();
-        mActivity = this;
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("EMI Calculator");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+        try {
+            setContentView(R.layout.activity_emi_calculator);
+            setViews();
+            context = getApplicationContext();
+            mActivity = this;
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle("EMI Calculator");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
+            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -89,65 +95,123 @@ public class EmiCalculatorActivity extends AppCompatActivity {
         edtTenure = findViewById(R.id.edtTenure);
         txtCalculatedEmi = findViewById(R.id.txtCalculatedEmi);
 
+
         linCalculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (edtLoanAmt.getText().toString().equals("")) {
-                    Snackbar.make(linCalculateBtn, "Please enter loan amount", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(linCalculateBtn, "please enter loan amount", Snackbar.LENGTH_SHORT).show();
                 } else if (edtRateOfInterest.toString().equals("")) {
                     Snackbar.make(linCalculateBtn, "Please enter rate of interest", Snackbar.LENGTH_SHORT).show();
                 } else if (edtTenure.toString().equals("")) {
                     Snackbar.make(linCalculateBtn, "Please enter tenure", Snackbar.LENGTH_SHORT).show();
-                } else {
+                    }
+                    else {
 
-                    //use method
-                    float principal = calprinc(Float.parseFloat(edtLoanAmt.getText().toString()));
+                    //Getting value of principal ,rate,tenure(Months)
+                    int principal = calprinc(Integer.parseInt(edtLoanAmt.getText().toString()));
                     float rate = calintrest(Float.parseFloat(edtRateOfInterest.getText().toString()));
-                    float months = calMonth(Float.parseFloat(edtTenure.getText().toString()));
+                    int months = calMonth(Integer.parseInt(edtTenure.getText().toString()));
+                        if (principal > 1000000) {
+                            Snackbar.make(linCalculateBtn, "Loan amount not exceed than 10,00,000", Snackbar.LENGTH_SHORT).show();
+                            txtCalculatedEmi.setText("");
+                        } else if (rate >36) {
+                            Snackbar.make(linCalculateBtn, "Rate of intrest not exceed than 36%", Snackbar.LENGTH_SHORT).show();
+                            txtCalculatedEmi.setText("");
+                        } else if (months > 96) {
+                            Snackbar.make(linCalculateBtn, "Tenure not exceed than 96", Snackbar.LENGTH_SHORT).show();
+                            txtCalculatedEmi.setText("");
+                        }
+                    //calculate (months*rate)+1200
+                     float  calmonthsintorate=  calmonthsintorate(months,rate);
 
-                    float dvdnt = caldvdnt(rate, months);
-                    float fd = calFinalDvdnt(principal, rate, dvdnt);
-                    float divider = calDivider(dvdnt);
+                  //calculate numerator result
+                    float calnr=calnr(principal,calmonthsintorate);
 
-                    float emi = calEmi(fd, divider);
+                    //calculate denominator result
+                    int caldr=caldr(months);
+                    //calculate  EMI output
+                    float EMIcalculate=calEMI(calnr,caldr);
 
-                    txtCalculatedEmi.setText(String.valueOf(emi));
-                    float ta = calTa(emi, months);
+                   int EMIoutput= (int)Math.ceil(EMIcalculate);
+
+                    //store value in textbox EMI result
+                    txtCalculatedEmi.setText(String.valueOf(EMIoutput));
+
+                  /* // float dvdnt = caldvdnt(rate, months);
+                    float fd = calFinalDvdnt(principal, dvdnt);
+                    int divider = calDivider(months);
+
+                    int emi = calEmi(fd, divider);*/
+
+                //    txtCalculatedEmi.setText(String.valueOf(emi));
+                    /*float ta = calTa(emi, months);
                     float ti = calTi(ta, principal);
-//                    txtCalculatedEmi.setText(String.valueOf(ti));
-                }
-            }
+                  txtCalculatedEmi.setText(String.valueOf(ti));*/
+
+                    } }
         });
     }
 
-    public float calprinc(float p) {
-        return (float) p;
+    //method principal ,rate,months
+
+    public int calprinc(int p) {
+        return (int) p;
     }
 
     public float calintrest(float i) {
-        return (float) i / 12 / 100;
+        return (float) i ;
     }
 
-    public float calMonth(float y) {
-        return (float) y * 12;
-    }
-
-    public float calFinalDvdnt(float principal, float rate, float dvdnt) {
-        return (float) (principal * rate * dvdnt);
-
-    }
-
-    public float calDivider(float dvdnt) {
-        return (float) (dvdnt - 1);
+    public int calMonth(int y) {
+        return (int) y ;
     }
 
 
-    public float caldvdnt(float rate, float months) {
-        return (float) (Math.pow(1 + rate, months));
+    //method for calculate EMI output
+    public float calmonthsintorate(int months,float rate){
+        float calmonthsintorate=(int) (months*rate);
+        calmonthsintorate= calmonthsintorate+1200;
+        return calmonthsintorate;
+    }
+    public  float calnr(int principal,float calmonthsintorate){
+        float calnr=(int)(principal*calmonthsintorate);
+        return  calnr;
+
+    }
+    public  int caldr(int months){
+        int caldr=months*1200;
+        return  caldr;
+
+    }
+    public  float calEMI(float calnr,int caldr){
+        float EMIcalculate=  (calnr/caldr);
+        return  EMIcalculate;
+
     }
 
-    public float calEmi(float fd, float divider) {
-        return (float) (fd / divider);
+
+
+   /* public float calFinalDvdnt(float principal,  float dvdnt) {
+        return (float) (principal* dvdnt);
+
+    }
+
+    public  int calDivider(int months) {
+        return (int) (months*1200);
+    }
+
+
+
+
+    public float caldvdnt(float rate, int months) {
+
+       *//* return (float) (Math.pow(1 + rate, months));*//*
+        return (Float) (1200+(months*rate));
+    }
+
+    public int calEmi(float fd, int divider) {
+        return (int) (fd / divider);
 
     }
 
@@ -158,6 +222,6 @@ public class EmiCalculatorActivity extends AppCompatActivity {
     public float calTi(float ta, float principal) {
         return (float) (ta - principal);
 
-    }
+    }*/
 
 }

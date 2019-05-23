@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Rs">\u20B9</string>
     <string name="app_name">MobilePaymentSDK</string>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

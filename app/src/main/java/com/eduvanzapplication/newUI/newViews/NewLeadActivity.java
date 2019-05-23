@@ -1,6 +1,5 @@
 package com.eduvanzapplication.newUI.newViews;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +12,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +27,6 @@ import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DocumentAvailabilityFragment;
 import com.eduvanzapplication.newUI.fragments.EmploymentDetailsFragment;
 import com.eduvanzapplication.newUI.fragments.PersonalDetailsFragment;
-import com.idfy.rft.RFTSdk;
 
 import org.json.JSONObject;
 
@@ -39,12 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
-public class NewLeadActivity extends AppCompatActivity implements PersonalDetailsFragment.OnFragmentInteractionListener,
-        CurrentAddressFragment.OnCurrentAddrFragmentInteractionListener,
-        DocumentAvailabilityFragment.OnDocumentFragmentInteractionListener,
-        EmploymentDetailsFragment.OnEmploymentFragmentInteractionListener {
+public class NewLeadActivity extends AppCompatActivity implements PersonalDetailsFragment.OnFragmentInteractionListener, CurrentAddressFragment.OnCurrentAddrFragmentInteractionListener, DocumentAvailabilityFragment.OnDocumentFragmentInteractionListener, EmploymentDetailsFragment.OnEmploymentFragmentInteractionListener {
 
     public static ViewPager viewPager;
     private ImageView ivNextBtn, ivPrevBtn;
@@ -52,8 +43,10 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     private StepperIndicator stepperIndicator;
     public static ImageView ivOCRBtn;
 
-    public static String profession = "1";
-    public static String firstName = "", lastName = "", middleName = "", gender = "2", maritalStatus = "0", dob = "";
+    public static Boolean scrolledRight = true;
+    public static int lastPage = 0;
+    public static String profession = "";
+    public static String firstName = "", lastName = "", middleName = "", gender = "", maritalStatus = "2", dob = "";
     public static String documents = "1", aadharNumber = "", panNUmber = "";
     public static String flatBuildingSoc = "", streetLocalityLandMark = "", pinCode = "", countryId = "", stateId = "", cityId = "";
     public static String companyName = "", annualIncome = "";
@@ -61,8 +54,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     public static String leadId = "", applicantId = "";
     public static String lead_id = "", student_id = "";
 
-    public static String Aaadhaarno = "", Aname = "", Adob = "", Ayob = "", Agender = "", Aaddress = "",
-            Astreet_address = "", Adistrict = "", Apincode = "", Astate = "", Aisscanned = "";
+    public static String Aaadhaarno = "", Aname = "", Adob = "", Ayob = "", Agender = "", Aaddress = "", Astreet_address = "", Adistrict = "", Apincode = "", Astate = "", Aisscanned = "";
 
     public static String Ppanno = "", Ppantype = "", Pname = "", Pdob = "", Pdoi = "", Page = "", Pfathersname = "", Pisminor = "", Pisscanned = "";
 
@@ -77,28 +69,19 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         int height = Resources.getSystem().getDisplayMetrics().heightPixels;
         if (height < 1800) {
             setContentView(R.layout.activity_new_lead_small);
-        }
-        else {
+        } else {
             setContentView(R.layout.activity_new_lead);
         }
         setViews();
-        setupViewPager(viewPager);
-        if (!CameraUtils.isDeviceSupportCamera(getApplicationContext())) {
-            Toast.makeText(getApplicationContext(),
-                    "Sorry! Your device doesn't support camera",
-                    Toast.LENGTH_LONG).show();
-            // will close the app if the device doesn't have camera
-            finish();
-        }
 
-        profession = "1";
+        profession = "";
         firstName = "";
         lastName = "";
         middleName = "";
-        gender = "2";
-        maritalStatus = "0";
+        gender = "";
+        maritalStatus = "2";
         dob = "";
-        documents = "0";
+        documents = "1";
         aadharNumber = "";
         panNUmber = "";
         flatBuildingSoc = "";
@@ -118,6 +101,165 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         applicantId = "";
         lead_id = "";
         student_id = "";
+        setOcrSharedPref();
+
+        setupViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                if (position == 0) {
+                    ivPrevBtn.setVisibility(View.GONE);
+                    ivOCRBtn.setVisibility(View.VISIBLE);
+                } else {
+                    ivPrevBtn.setVisibility(View.VISIBLE);
+                    ivOCRBtn.setVisibility(View.GONE);
+                }
+                txtStepTracker.setText("Step ".concat(String.valueOf(position + 1)).concat(" of ").concat("4"));
+
+                if (lastPage > position) {
+                    scrolledRight = false;
+                } else if (lastPage < position) {
+                    scrolledRight = true;
+                }else {
+
+                }
+//                switch (position) {
+//                    case 0:
+//                        lastPage = position;
+//                        break;
+//                    case 1:
+//                        PersonalDetailsFragment.validate();
+//                        lastPage = position;
+//                        break;
+//                    case 2:
+//                        DocumentAvailabilityFragment.validate();
+//                        lastPage = position;
+//                        break;
+//                    case 3:
+//                        CurrentAddressFragment.validate();
+//                        lastPage = position;
+//                        break;
+//                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    switch (viewPager.getCurrentItem()) {
+                        case 0:
+                            if (scrolledRight) {
+                                lastPage = viewPager.getCurrentItem();
+                            }else {
+                                lastPage = viewPager.getCurrentItem();
+                            }
+                            break;
+                        case 1:
+                            if (scrolledRight) {
+                                PersonalDetailsFragment.checkAllFields();
+                                if(ivNextBtn.isEnabled()) {
+                                    PersonalDetailsFragment.validate();
+                                    lastPage = viewPager.getCurrentItem();
+                                }else {
+                                    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+                                    lastPage = viewPager.getCurrentItem()-1;
+                                }
+                            } else {
+                                PersonalDetailsFragment.validate();
+                                lastPage = viewPager.getCurrentItem();
+                            }
+                            break;
+
+                        case 2:
+                            if (scrolledRight) {
+                                DocumentAvailabilityFragment.checkAllFields();
+                                if(ivNextBtn.isEnabled()) {
+                                    DocumentAvailabilityFragment.validate();
+                                    lastPage = viewPager.getCurrentItem();
+                                }else {
+                                    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+                                    lastPage = viewPager.getCurrentItem()-1;
+                                }
+                            } else {
+                                DocumentAvailabilityFragment.validate();
+                                lastPage = viewPager.getCurrentItem();
+                            }
+                            break;
+
+                        case 3:
+                            if (scrolledRight) {
+                                CurrentAddressFragment.checkAllFields();
+                                if(ivNextBtn.isEnabled()) {
+                                    CurrentAddressFragment.validate();
+                                    lastPage = viewPager.getCurrentItem();
+                                }else {
+                                    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+                                    lastPage = viewPager.getCurrentItem()-1;
+                                }
+                            } else {
+                                CurrentAddressFragment.validate();
+                                lastPage = viewPager.getCurrentItem();
+                            }
+                            break;
+                    }
+                }
+//                if (state == ViewPager.SCROLL_STATE_IDLE) {
+//                    if (viewPager.getCurrentItem() == 1) {
+//                        PersonalDetailsFragment.validate();
+//                    }
+//                    if (viewPager.getCurrentItem() == 2) {
+//                        DocumentAvailabilityFragment.validate();
+//                    }
+//                    if (viewPager.getCurrentItem() == 3) {
+//                        CurrentAddressFragment.validate();
+//                    }
+//                }
+            }
+        });
+        if (!CameraUtils.isDeviceSupportCamera(getApplicationContext())) {
+            Toast.makeText(getApplicationContext(), "Sorry! Your device doesn't support camera", Toast.LENGTH_LONG).show();
+            // will close the app if the device doesn't have camera
+            finish();
+        }
+    }
+
+    private void setOcrSharedPref() {
+
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Aaadhaarno", "");
+            editor.putString("Aname", "");
+            editor.putString("Adob", "");
+            editor.putString("Ayob", "");
+            editor.putString("Agender", "");
+            editor.putString("Aaddress", "");
+            editor.putString("Astreet_address", "");
+            editor.putString("Adistrict", "");
+            editor.putString("Apincode", "");
+            editor.putString("Astate", "");
+            editor.putString("Aisscanned", "");
+            editor.putString("Ppanno", "");
+            editor.putString("Ppantype", "");
+            editor.putString("Pname", "");
+            editor.putString("Pdob", "");
+            editor.putString("Pdoi", "");
+            editor.putString("Page", "");
+            editor.putString("Pfathersname", "");
+            editor.putString("Pisminor", "");
+            editor.putString("Pisscanned", "");
+            editor.apply();
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             sharedPreferences = this.getSharedPreferences("UserData", Context.MODE_PRIVATE);
@@ -151,65 +293,59 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             e.printStackTrace();
         }
 
-        if (Aaadhaarno.length() > 3) {
-            firstName = Aname;
-            if(Agender.toLowerCase().equals("male"))
-            {
-                gender = "1";
+    }
+
+    public static void setOcrData() {
+
+        if (NewLeadActivity.Aaadhaarno.length() > 3) {
+            NewLeadActivity.firstName = NewLeadActivity.Aname;
+            if (NewLeadActivity.Agender.toLowerCase().equals("male")) {
+                NewLeadActivity.gender = "1";
             }
-            if(Agender.toLowerCase().equals("female"))
-            {
-                gender = "2";
+            if (NewLeadActivity.Agender.toLowerCase().equals("female")) {
+                NewLeadActivity.gender = "2";
             }
 
-            if (Adob.length() > Pdob.length()) {
-                dob = Adob;
-            }
-            else {
-                dob = Pdob;
-            }
-            if (Ppanno.length() > 3) {
-                documents = "3";
+            if (NewLeadActivity.Adob.length() > NewLeadActivity.Pdob.length()) {
+                NewLeadActivity.dob = NewLeadActivity.Adob;
             } else {
-                documents = "1";
+                NewLeadActivity.dob = NewLeadActivity.Pdob;
             }
-            aadharNumber = Aaadhaarno;
-            panNUmber = Ppanno;
-            flatBuildingSoc = Aaddress;
-            streetLocalityLandMark = Astreet_address;
-            pinCode = Apincode;
-
-
-        } else if (panNUmber.length() > 3) {
-            firstName = Pname;
-//            gender = Agender;
-            if (Adob.length() > Pdob.length()) {
-                dob = Adob;
-            }
-            else {
-                dob = Pdob;
-            }
-            if (aadharNumber.length() > 3) {
-                documents = "3";
+            if (NewLeadActivity.Ppanno.length() > 3) {
+                NewLeadActivity.documents = "3";
             } else {
-                documents = "2";
+                NewLeadActivity.documents = "1";
             }
-            aadharNumber = Aaadhaarno;
-            panNUmber = Ppanno;
-//            flatBuildingSoc = Aaddress;
-//            streetLocalityLandMark = Astreet_address;
-//            pinCode = Apincode;
-//            countryId = "1";
-//            stateId = "";
-//            cityId = "";
 
+            NewLeadActivity.aadharNumber = NewLeadActivity.Aaadhaarno;
+            NewLeadActivity.panNUmber = NewLeadActivity.Ppanno;
+            NewLeadActivity.flatBuildingSoc = NewLeadActivity.Aaddress;
+            NewLeadActivity.streetLocalityLandMark = NewLeadActivity.Astreet_address;
+            NewLeadActivity.pinCode = NewLeadActivity.Apincode;
+
+
+        } else if (NewLeadActivity.panNUmber.length() > 3) {
+            NewLeadActivity.firstName = NewLeadActivity.Pname;
+            if (NewLeadActivity.Adob.length() > NewLeadActivity.Pdob.length()) {
+                NewLeadActivity.dob = NewLeadActivity.Adob;
+            } else {
+                NewLeadActivity.dob = NewLeadActivity.Pdob;
+            }
+            if (NewLeadActivity.aadharNumber.length() > 3) {
+                NewLeadActivity.documents = "3";
+            } else {
+                NewLeadActivity.documents = "2";
+            }
+            NewLeadActivity.aadharNumber = NewLeadActivity.Aaadhaarno;
+            NewLeadActivity.panNUmber = NewLeadActivity.Ppanno;
         }
 
-
+        DocumentAvailabilityFragment.setDcoAvailabilityData();
+        CurrentAddressFragment.setCurrentAddressData();
+        EmploymentDetailsFragment.setEmploymentData();
     }
 
     private void setViews() {
-
         viewPager = findViewById(R.id.viewpager);
         ivNextBtn = findViewById(R.id.ivNextBtn);
         ivPrevBtn = findViewById(R.id.ivPrevBtn);
@@ -222,7 +358,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         ivPrevBtn.setOnClickListener(prevClickListener);
 
     }
-
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new PersonalDetailsFragment(), getResources().getString(R.string.personal_details));
@@ -232,53 +367,49 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         viewPager.setAdapter(adapter);
         stepperIndicator.setViewPager(viewPager);
 
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0) {
-                    ivPrevBtn.setVisibility(View.GONE);
-                    ivOCRBtn.setVisibility(View.VISIBLE);
-                } else {
-                    ivPrevBtn.setVisibility(View.VISIBLE);
-                    ivOCRBtn.setVisibility(View.GONE);
-
-                }
-                txtStepTracker.setText("Step ".concat(String.valueOf(position + 1)).concat(" of ").concat(String.valueOf(adapter.getCount())));
-
-                switch (position) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    if (viewPager.getCurrentItem() == 1) {
-                        PersonalDetailsFragment.validate();
-                    }
-                    if (viewPager.getCurrentItem() == 2) {
-                        DocumentAvailabilityFragment.validate();
-                    }
-                    if (viewPager.getCurrentItem() == 3) {
-                        CurrentAddressFragment.validate();
-                    }
-                }
-            }
-        });
-
+//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                if (position == 0) {
+//                    ivPrevBtn.setVisibility(View.GONE);
+//                    ivOCRBtn.setVisibility(View.VISIBLE);
+//                } else {
+//                    ivPrevBtn.setVisibility(View.VISIBLE);
+//                    ivOCRBtn.setVisibility(View.GONE);
+//                }
+//                txtStepTracker.setText("Step ".concat(String.valueOf(position + 1)).concat(" of ").concat(String.valueOf(adapter.getCount())));
+//
+//                switch (position) {
+//                    case 0:
+//                        break;
+//                    case 1:
+//                        break;
+//                    case 2:
+//                        break;
+//                    case 3:
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//                if (state == ViewPager.SCROLL_STATE_IDLE) {
+//                    if (viewPager.getCurrentItem() == 1) {
+//                        PersonalDetailsFragment.validate();
+//                    }
+//                    if (viewPager.getCurrentItem() == 2) {
+//                        DocumentAvailabilityFragment.validate();
+//                    }
+//                    if (viewPager.getCurrentItem() == 3) {
+//                        CurrentAddressFragment.validate();
+//                    }
+//                }
+//            }
+//        });
 
     }
 
@@ -286,13 +417,14 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         @Override
         public void onClick(View v) {
             if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount() - 1)) {
+                onOffButtonEmployent(false,true);
                 if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")) {
-                    startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                } else
+//                    startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
+//                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    saveBorrowerData();
+                } else {
                     Snackbar.make(ivNextBtn, "Please fill all the fields", Snackbar.LENGTH_SHORT).show();
-
-                saveBorrowerData();
+                }
             }
             viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
         }
@@ -336,17 +468,17 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         if (next) {
             ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
             ivNextBtn.setOnClickListener(nextClickListener);
+            ivNextBtn.setEnabled(true);
         } else {
             ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
             ivNextBtn.setOnClickListener(null);
+            ivNextBtn.setEnabled(false);
         }
         if (prev) {
             ivPrevBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
             ivPrevBtn.setOnClickListener(prevClickListener);
-        } else
-            ivPrevBtn.setOnClickListener(prevClickListener);
+        } else ivPrevBtn.setOnClickListener(prevClickListener);
     }
-
 
     @Override
     public void onFragmentInteraction(boolean valid, int next) {
@@ -428,10 +560,13 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             params.put("current_landmark", NewLeadActivity.streetLocalityLandMark);
             params.put("current_address_country", NewLeadActivity.countryId);
             params.put("gender_id", NewLeadActivity.gender);
-            params.put("has_aadhar_pan", NewLeadActivity.documents);
+            params.put("marital_status", NewLeadActivity.maritalStatus);
+//            params.put("has_aadhar_pan", NewLeadActivity.documents);
             params.put("profession", NewLeadActivity.profession);
             params.put("employer_name", NewLeadActivity.companyName);
             params.put("annual_income", NewLeadActivity.annualIncome);
+            params.put("has_aadhar_pan", documents);
+
 //            if(MainApplication.lead_id == null) {
 //                params.put("lead_id", "");
 //            }
@@ -470,8 +605,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
 
             if (jsonData.getInt("status") == 1) {
-                startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
 
         } catch (Exception e) {

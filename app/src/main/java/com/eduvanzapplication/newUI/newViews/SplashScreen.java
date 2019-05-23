@@ -36,7 +36,7 @@ import com.eduvanzapplication.database.DBAdapter;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.VolleyCallNew;
+import com.eduvanzapplication.newUI.VolleyCall;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -251,23 +251,14 @@ public class SplashScreen extends AppCompatActivity {
 
                         if (checkForImageSlider.equalsIgnoreCase("1")) {
                             if (sharedPref.getLoginDone(SplashScreen.this)) {
-                                Intent intent = new Intent(SplashScreen.this, DashboardActivity.class);
+                                Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 startActivity(intent);
                                 SplashScreen.this.finish();
                             } else {
-                                if (policyAgreementStatus.equals("1")) {
-//                                    Intent intent = new Intent(SplashScreen.this, TermsAndCondition.class);
-                                    Intent intent = new Intent(SplashScreen.this, DashboardActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                    startActivity(intent);
-                                    SplashScreen.this.finish();
-                                } else {
                                     Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);// This is commented for testing
-//                                    Intent intent = new Intent(SplashScreen.this, DashboardActivity.class);
                                     startActivity(intent);
                                     finish();
-                                }
                             }
                         } else {
                             Intent intent = new Intent(SplashScreen.this, ImageSlider.class);
@@ -398,7 +389,7 @@ public class SplashScreen extends AppCompatActivity {
                 params.put("deviceName", deviceNameArraylist.get(i));
                 params.put("lineNumber", lineNumberArraylist.get(i));
 
-                VolleyCallNew volleyCall = new VolleyCallNew();
+                VolleyCall volleyCall = new VolleyCall();
                 volleyCall.sendRequest1(getApplicationContext(), url, mActivity, null, "getUploadErrorLog", params, errorLogIDArraylist.get(i));
             }
         } catch (Exception e) {

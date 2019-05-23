@@ -55,7 +55,6 @@ public class ViewPagerAdapterDashboard extends PagerAdapter {
             Log.e(MainApplication.TAG, "instantiateItem: "+mData.size() );
 
 //            Picasso.with(mContext).load(mData.get(position).image).into(myImage);
-
 //
 //            try {
 //                Picasso.with(mContext).load(mData.get(position).image).placeholder(mContext.getResources().getDrawable(R.drawable.bannersplaceholder)).fit().into(myImage, new Callback() {
@@ -74,18 +73,18 @@ public class ViewPagerAdapterDashboard extends PagerAdapter {
             //http://eduvanz.com/admin/uploads/mobileadvertisement/1/image_1513427852.png
             Picasso.with(mContext).load(mData.get(position).image).placeholder(mContext.getResources().getDrawable(R.drawable.bannersplaceholder)).into(myImage);
 
-            myImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, BannerActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("bannerImage", mData.get(position).image);
-                    bundle.putString("bannerID", mData.get(position).id);
-                    bundle.putString("bannerTitle", mData.get(position).title);
-                    intent.putExtras(bundle);
-                    mContext.startActivity(intent);
-                }
-            });
+//            myImage.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(mContext, BannerActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("bannerImage", mData.get(position).image);
+//                    bundle.putString("bannerID", mData.get(position).id);
+//                    bundle.putString("bannerTitle", mData.get(position).title);
+//                    intent.putExtras(bundle);
+//                    mContext.startActivity(intent);
+//                }
+//            });
 
             return myImageLayout;
         }

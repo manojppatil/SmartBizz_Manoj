@@ -21,7 +21,7 @@ import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
-import com.eduvanzapplication.newUI.VolleyCallNew;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -146,7 +146,7 @@ public class BannerActivity extends AppCompatActivity {
                     String url = MainActivity.mainUrl + "mobileadverstisement/getSpecificDealDetails";
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("id", id);
-                    VolleyCallNew volleyCall = new VolleyCallNew();
+                    VolleyCall volleyCall = new VolleyCall();
                     volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "dealDetail", params, MainActivity.auth_token);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
@@ -162,7 +162,7 @@ public class BannerActivity extends AppCompatActivity {
                     String url = MainActivity.mainUrl + "mobileadverstisement/getSpecificBannerDetails";
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("id", id);
-                    VolleyCallNew volleyCall = new VolleyCallNew();
+                    VolleyCall volleyCall = new VolleyCall();
                     volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "bannerDetail", params, MainActivity.auth_token);
                 } catch (Exception e) {
                     String className = this.getClass().getSimpleName();
@@ -180,7 +180,7 @@ public class BannerActivity extends AppCompatActivity {
                 String url = MainActivity.mainUrl + "dashboard/getStudentDashbBoardStatus";
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("studentId", userId);
-                VolleyCallNew volleyCall = new VolleyCallNew();
+                VolleyCall volleyCall = new VolleyCall();
                 volleyCall.sendRequest(context, url, mActivity, null, "dashbBoardStatusBannerPage", params, MainActivity.auth_token);
 
             } catch (Exception e) {

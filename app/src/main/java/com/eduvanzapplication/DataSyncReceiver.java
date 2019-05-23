@@ -3,6 +3,7 @@ package com.eduvanzapplication;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 
 /**
@@ -20,6 +21,10 @@ public class DataSyncReceiver extends BroadcastReceiver {
         String action = intent.getAction();
 
         Boolean dataSynced = intent.getBooleanExtra("DataSynced",false);
+        String algo360_datasync = String.valueOf(intent.getBooleanExtra("DataSynced",false));
+        Log.e("Receiver", "Data synced: " + dataSynced);
+        Log.e("Receiver", "Data Action: " + action);
+
 
 
     }

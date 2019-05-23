@@ -3,8 +3,6 @@
     <string name="app_name">Eduvanz</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="calendar">&#xf073;</string>
-    <string name="Rs">\u20B9</string>
     <string name="down"></string>
     <string name="up"></string>
     <string name="circle"></string>
@@ -14,27 +12,6 @@
 
     <!--/** FRIENDLY SCORE STRINGS XML CONTENT **/-->
     /** FRIENDLY SCORE STRINGS XML CONTENT **/
-
-    <string name="label_google_sign_in">Firebase + Google Sign In</string>
-    <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
-
-    <string name="label_facebook_login"></string>
-    <string name="desc_facebook_login">Use a Facebook Login credential to authenticate with Firebase.</string>
-
-    <string name="label_twitter_login">Firebase + Twitter Login</string>
-    <string name="desc_twitter_login">Use a Twitter Login credential to authenticate with Firebase.</string>
-
-    <string name="label_emailpassword">Email/Password Authentication</string>
-    <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
-
-    <string name="label_anonymous_auth">Anonymous Authentication</string>
-    <string name="desc_anonymous_auth">Sign in anonymously and then later upgrade to a full Firebase Auth user.</string>
-
-    <string name="label_custom_auth">Custom Authentication</string>
-    <string name="desc_custom_auth">Use a custom token signed by your own server to authenticate with Firebase.</string>
-
-    <string name="label_firebase_ui">FirebaseUI Auth</string>
-    <string name="desc_firebase_ui">Use the FirebaseUI-Android library to authenticate with Firebase.</string>
 
     <string name="google_play_services_invalid">Google Play Service Version on your device is invalid</string>
     <string name="google_play_services_invalid_title">Invalid Google Play Services</string>
@@ -66,38 +43,11 @@
     <!--<string name="auth_failed">Authentication failed</string>-->
 
 
-    <string name="firebase_status_fmt">Firebase User: %s</string>
-    <string name="firebase_user_management">Firebase User Management</string>
-
-    <string name="google_status_fmt">Google User: %s</string>
-    <string name="google_title_text">Google Sign In</string>
-
-    <string name="facebook_status_fmt">Facebook User: %s</string>
-    <string name="facebook_title_text">Facebook Login</string>
-
-    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
-    <string name="emailpassword_title_text">Email and Password</string>
-
-    <string name="twitter_status_fmt">Twitter User: %s</string>
-    <string name="twitter_title_text">Twitter Login</string>
-
-    <string name="firebaseui_status_fmt">Firebase User: %s</string>
-    <string name="firebaseui_title_text">FirebaseUI Auth</string>
-
-    <string name="id_fmt">User ID: %s</string>
-    <string name="email_fmt">Email: %s</string>
     <string name="facebook_app_id">2033654490205621</string>
     <string name="fb_login_protocol_scheme">fb2033654490205621</string>
 
     <string name="twitter_consumer_key">Cn3lPUubSrtsJWw1se1OmrDIp</string>
     <string name="twitter_consumer_secret">sA5B4ol5mXoYMEyWivBT2rHIsJwTIjLtdqgjzqpgHeuIsMc2b5</string>
-
-    <string name="desc_linkedin_login">Use Linkedin Login</string>
-    <string name="desc_paypal_login">Login with Paypal</string>
-    <string name="title_activity_test_google_login">TestGoogleLoginActivity</string>
-    <string name="title_activity_test_facebook_login">TestFacebookActivity</string>
-    <string name="title_activity_main2">Connect &amp; Score</string>
-    <string name="title_activity_start">New Scoring</string>
 
     <!--KYC documents-->
     <string name="upload">Upload</string>
@@ -105,7 +55,6 @@
     <!--
    B7:6F:26:F5:D7:75:F6:FA:42:A6:3C:A4:D7:B8:65:32:2D:7F:9B:A6
    -->
-    <string name="partnerKey">CCesL1c389d78081845e8b661a1d47689fe1a</string>
     <!--play store-->
     <!--<string name="partnerKey">nlfFk49b1e27ef26c461a8348788b3b24925a</string>-->
     <!--//Local-->
@@ -139,7 +88,6 @@
     <!--
    <string name="partnerKey">ma4U8974ef9549cc74aa29fc2a7f4d5b14b60</string>    &lt;!&ndash;eduvanz 1&ndash;&gt;
    -->
-    <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="title_blog">Blog</string>
     <string name="title_interest_rate_policy">Interest Rate Policy</string>
     <string name="title_privacy_policy">Privacy Policy</string>
@@ -147,11 +95,6 @@
     <string name="title_faq">FAQs</string>
     <string name="title_disclaimer">Disclaimer</string>
     <string name="title_about_us">About Us</string>
-    <string name="title_sign_up">Sign Up</string>
-    <string name="title_sign_in">Sign In</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_profile">Profile</string>
-    <string name="title_loan_application">Loan Application</string>
     <string name="title_how_it_works">How it Works</string>
     <string name="title_contact_us">Contact Us</string>
     <string name="title_fair_practics_code">Fair Practices Code</string>
@@ -170,10 +113,6 @@
    -->
     <string name="pan_card">PAN Card</string>
     <string name="continu">Continue</string>
-    <string name="my_profile">My Profile</string>
-    <string name="call_us"> Call Us</string>
-    <string name="mail_us">Mail Us</string>
-    <string name="notification">Notification</string>
     <string name="email_id">Email Id</string>
     <string name="submit">Submit</string>
 
@@ -190,38 +129,14 @@
     <string name="makwana_road_marol_andheri_east">Makwana Road, Marol, Andheri East,</string>
     <string name="mumbai_400059">Mumbai 400059.</string>
     <string name="financing_your_future">Financing Your Future!</string>
-    <string name="get_otp">GET OTP</string>
-    <string name="eligiblity_chek">Eligiblity Check</string>
-    <string name="mobile_verification">Mobile Verification</string>
-    <string name="email_verification">Email Verification</string>
 
-    <string name="social_score">Social Score</string>
-    <string name="profile_completion">Profile Completion</string>
-    <string name="complete_now1">Complete Now</string>
-    <string name="application_status">Application Status</string>
-    <string name="processing">Processing</string>
-    <string name="loan_details">Loan Details :</string>
-    <string name="institute">Institute</string>
-    <string name="course">Course</string>
-    <string name="fees">Fees</string>
-    <string name="loan_amount1">Loan Amount :</string>
     <string name="personal_details">Personal Details </string>
-    <string name="mobile">Mobile</string>
-    <string name="email1">Email</string>
-    <string name="address">Address</string>
     <string name="please_verify_your_mobile_number_to_begin">Please verify your mobile number to begin!</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="edit1">Edit</string>
     <string name="resend_otp">Resend OTP</string>
     <string name="skip">SKIP</string>
 
-    <string name="your_name">Your Name</string>
-    <string name="email_id1">Email Id</string>
-    <string name="enter_your_email_id">Enter your email id</string>
-    <string name="password">Password</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="enter_your_password">Enter your password</string>
-    <string name="sign_in">Sign In</string>
     <string name="sms_data">SMS Data</string>
     <string name="permissions_required">PERMISSIONS REQUIRED</string>
     <string name="contacts_and_call_info">Contacts and Call Info</string>
@@ -232,6 +147,11 @@
     <string name="and"> and </string>
     <string name="terms_of_service"> terms of service</string>
     <string name="privacy_policy"> privacy policy.</string>
+
+    <string name="tenurestring"><b> \t Great Job !!! \n</b>\n
+Your application is successfully registerded with us. \n \n
+To complete the process we need some additional details. Request you to select the best suited loan plan and proceed further to complete the application
+</string>
 
     <string name="permissionsms">To collect and monitor information about bank transactions, names of transacting parties, description of the transactions
     and amount for faster loan processing.</string>
@@ -256,10 +176,6 @@ To collect and monitor information about location of your device.\n
 <b>App Usage -</b>
 To gain information about your interest and likings to generate your credit score that may be useful in the processing of your loan application.
 </string>
-    <string name="paymentoptions">
-<b>Paytm Payment-</b>
-with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
-</string>
     <string name="please_check_your_network_connection">Please check your network connection</string>
     <string name="please_choose_a_file_first">Please choose a File First</string>
     <string name="file_not_found">File Not Found</string>
@@ -274,9 +190,6 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="eduvanz">Eduvanz</string>
     <string name="enter_institute_location">Enter Institute Location</string>
     <string name="more">More</string>
-    <string name="preview">Preview</string>
-    <string name="download">Download</string>
-    <!--New Truecaller Strings-->
     <!--
    <string name="profile_photo">Profile Photo <font fgcolor="#EE415E">*</font></string>
    -->
@@ -292,130 +205,71 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="scan_aadhar">Scan QR code of your Aadhar card</string>
 
     <!-- Vertical Stepper View Sample Item -->
-    <string name="content_step_0">This is the first step. Click OK button to next step.\n\nTest Message.</string>
-    <string name="content_step_1">This is the second step. Click OK button to next step or Cancel button to previous step.\n\nThe summary text of each step is optional. If you haven\'t set, summary view won\'t be displayed.</string>
-    <string name="content_step_2">This is the last step. You can finish steps now.</string>
 
-    <string name="personal">Personal</string>
-    <string name="documents">Documents</string>
-    <string name="employment">Employment</string>
-    <string name="institute_name">Select Your Institute</string>
-    <string name="course_name">Select Your Course</string>
-    <string name="institute_location">Select Institute Location</string>
-    <string name="next">Next</string>
-    <string name="course_fee">Course Fee</string>
-    <string name="loan_amount">Loan Amount</string>
-    <string name="previous">Previous</string>
-    <string name="your_profession">Your Profession</string>
-    <string name="document_you_have">Document you have</string>
     <string name="first_name">First Name</string>
     <string name="middle_name">Middle Name</string>
     <string name="last_name">Last Name</string>
 
-    <string name="laf_documents">Doc Uploads</string>
-    <string name="monthly_rent">Monthly Rent</string>
-    <string name="permanent_address">Permanent Address</string>
-    <string name="adhaar_number">Adhaar Number.</string>
-    <string name="pan_number">PAN Number.</string>
-    <string name="marital_status">Marital status :</string>
-    <string name="married">Married</string>
-    <string name="single">Single</string>
-    <string name="current_residency_type">Residency type :</string>
-    <string name="current_country">Current Country :</string>
-    <string name="current_state">Current State :</string>
-    <string name="current_city1">Current City :</string>
-    <string name="permanent_country">Permanent Country :</string>
-    <string name="permanent_state">Permanent State :</string>
-    <string name="permanent_city">Permanent City :</string>
-    <string name="duration_of_stay_at_current_address">Duration of stay at current address :</string>
-    <string name="birthdate">Birthdate</string>
-    <string name="gender">Gender :</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="name_of_company">Name of Company</string>
-    <string name="annual_income">Annual Income</string>
-    <string name="duration_of_job_business">Duration of Work</string>
-
     <string name="upload_adhaar_card">Upload Adhaar Card</string>
     <string name="applicant_adhaar_card_front_and_backside">Applicant\'s Adhaar Card - front and backside</string>
-    <string name="co_applicant_adhaar_card_front_and_backside">Co-Applicant\'s Adhaar Card - front and backside</string>
 
     <string name="upload_pan_card">Upload PAN Card</string>
     <string name="applicant_pan_card">Applicant\'s PAN Card</string>
-    <string name="co_applicant_pan_card">Co-Applicant\'s PAN Card</string>
 
     <string name="upload_passport">Upload Passport</string>
     <string name="applicant_passport">Applicant\'s Passport</string>
-    <string name="co_applicant_passport">Co-Applicant\'s Passport</string>
 
     <string name="upload_voterID">Upload Voter Id</string>
     <string name="applicant_voterID">Applicant\'s Voter Id</string>
-    <string name="co_applicant_voterID">Co-Applicant\'s Voter Id</string>
 
 
     <string name="upload_driving_license">Upload Driving License</string>
     <string name="applicant_driving_license">Applicant\'s Driving License</string>
-    <string name="co_applicant_driving_license">Co-Applicant\'s Driving License</string>
 
     <string name="upload_telephone_bill">Upload Telephone Bill</string>
     <string name="applicant_telephone_bill">Applicant\'s Telephone Bill</string>
-    <string name="co_applicant_telephone_bill">Co-Applicant\'s Telephone Bill</string>
 
     <string name="upload_electricity_bill">Upload Electricity Bill</string>
     <string name="applicant_electricity_bill">Applicant\'s Electricity Bill</string>
-    <string name="co_applicant_electricity_bill">Co-Applicant\'s Electricity Bill</string>
 
     <string name="upload_rent_agreement">Upload Rent Agreement</string>
     <string name="applicant_rent_agreement">Applicant\'s Rent Agreement</string>
-    <string name="co_applicant_rent_agreement">Co-Applicant\'s Rent Agreement</string>
 
     <string name="upload_address_proof">Upload Address Proof</string>
     <string name="applicant_address_proof">Applicant\'s Address proof</string>
-    <string name="co_applicant_address_proof">Co-Applicant\'s Address proof</string>
 
     <string name="upload_income_proof">Upload Income Proof</string>
     <string name="salary_slip_of_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">Salary slip of Applicant (Latest 3 months , if not available salary certificate stating the same details would be accepted)</string>
-    <string name="salary_slip_of_co_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">Salary slip of Co-Applicant (Latest 3 months , if not available salary certificate stating the same details would be accepted)</string>
 
     <string name="upload_income_proof_6">Upload Income Proof</string>
     <string name="salary_slip_of_applicant_latest_6_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">Salary slip of Applicant (Latest 6 months , if not available salary certificate stating the same details would be accepted)</string>
-    <string name="salary_slip_of_co_applicant_latest_6_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted">Salary slip of Co-Applicant (Latest 6 months , if not available salary certificate stating the same details would be accepted)</string>
 
     <string name="upload_bank_statement">Upload Bank Statement</string>
     <string name="current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page">Current 3 Months Bank Statement of Applicant reflecting Salary along with the front page</string>
-    <string name="current_3_months_bank_statement_of_co_applicant_reflecting_salary_along_with_the_front_page">Current 3 Months Bank Statement of Co-Applicant reflecting Salary along with the front page</string>
 
     <string name="upload_bank_statement_6">Upload Bank Statement</string>
     <string name="current_6_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page">Current 6 Months Bank Statement of Applicant reflecting Salary along with the front page</string>
-    <string name="current_6_months_bank_statement_of_co_applicant_reflecting_salary_along_with_the_front_page">Current 6 Months Bank Statement of Co-Applicant reflecting Salary along with the front page</string>
 
     <string name="upload_KVP">Upload KVP</string>
     <string name="current_KVP">Applicant\'s KVP</string>
-    <string name="current_co_applicant">Co-Applicant\'s KVP</string>
 
     <string name="upload_lic_policy">Upload LIC Policy</string>
     <string name="current_applicant_lic_policy">Applicant\'s LIC Policy</string>
-    <string name="current_co_applicant_lic_policy">Co-Applicant\'s LIC Policy</string>
 
     <string name="upload_form_16">Upload Form 16</string>
     <string name="current_applicant_form_16">Applicant\'s Form 16</string>
-    <string name="current_co_applicant_form_16">Co-Applicant\'s Form 16</string>
 
     <string name="upload_form_61">Upload Form 61</string>
     <string name="current_applicant_form_61">Applicant\'s Form 61</string>
-    <string name="current_co_applicant_form_61">Co-Applicant\'s Form 61</string>
 
     <string name="upload_pension_letter">Upload Pension Letter</string>
     <string name="current_applicant_pension_letter">Applicant\'s Pension Letter</string>
-    <string name="current_co_applicant_pension_letter">Co-Applicant\'s Pension Letter</string>
 
     <string name="upload_itr">Upload ITR</string>
     <string name="current_itr">Applicant\'s ITR</string>
-    <string name="current_co_applicant_itr">Co-Applicant\'s ITR</string>
 
     <string name="upload_pnl">Upload PNL</string>
     <string name="current_applicant_pnl">Applicant\'s PNL</string>
-    <string name="current_co_applicant_pnl">Co-Applicant\'s PNL</string>
 
     <string name="upload_latest_marksheet">Upload Latest Marksheet</string>
     <string name="latest_marksheet_of_the_applicant">Latest Marksheet of the Applicant</string>
@@ -423,102 +277,31 @@ with options like Paytm Wallet, Debit Card, BHIM UPI, Net banking.
     <string name="upload_latest_certificate">Upload Latest Certificate</string>
     <string name="latest_certificate_of_the_applicant">Latest Certificate of the Applicant</string>
 
-    <string name="upload_other_document">Upload Other Document</string>
-    <string name="recent_utility_bill_if_the_house_is_owned_or_rent_agreement_if_the_house_is_rented_rent_agreement_should_be_noterised">Recent Utility Bill if the house is owned or Rent Agreement if the house is rented. Rent agreement should be noterised.</string>
     <string name="no_application_available_ro_view_pdf">No Application Available to View PDF</string>
     <string name="file_size_exceeds_limits_of_30_mb">File size exceeds limit of 30 MB</string>
-    <string name="sign_the_application">Sign the Application</string>
-    <string name="signing_status">Signing Status :</string>
-    <string name="pending">Pending</string>
-    <string name="choose_a_signing_method">Choose a Signing Method</string>
-    <string name="manual">Manual</string>
-    <string name="esign">eSign</string>
-    <string name="download_application">Download Application</string>
-    <string name="upload_application">upload Application</string>
-    <string name="download_signed_application">Download Signed Application</string>
-    <string name="step_2">Step 2</string>
-    <string name="processing_fee_payment">Processing Fee Payment</string>
-    <string name="payment_status">Payment Status :</string>
-    <string name="paytm">Paytm</string>
-    <string name="atom">Atom</string>
-    <string name="amount">Amount :</string>
-    <string name="transaction_id">Transaction Id :</string>
-    <string name="payment_date">Payment Date :</string>
-    <string name="pay_now">Pay Now</string>
-    <string name="paid">Paid</string>
 
     <string name="error">error</string>
-    <string name="please_provide_mobile_number">Please Provide Mobile Number</string>
-    <string name="please_select_profession">Please select profession</string>
-    <string name="please_select_document_type">Please select document type</string>
-    <string name="please_provide_your_loan_amount">Please provide your loan amount</string>
-    <string name="you_need_to_select_gender">You need to select Gender</string>
-    <string name="first_name_is_required">First Name is Required</string>
-    <string name="last_name_is_required">Last Name is Required</string>
-    <string name="birthdate_is_required">Birthdate is Required</string>
-    <string name="adhaar_number_is_required">Aadhaar Number is Required</string>
-    <string name="pan_number_is_required">PAN number is required</string>
-    <string name="current_address_is_required">Current Address is Required</string>
-    <string name="current_pin_code_is_required">Current Pin code is Required</string>
-    <string name="name_of_the_company_is_required">Name of the company is Required</string>
-    <string name="annual_income_is_required">Annual Income is Required</string>
-    <string name="please_select_current_country">Please select current country</string>
-    <string name="please_select_current_state">Please select current state</string>
-    <string name="please_select_current_city">Please select current city</string>
-    <string name="please_select_duration_of_stay_at_current_address">Please select duration of stay at current address</string>
-    <string name="please_select_last_degree_completed">Please select last degree completed</string>
-    <string name="please_select_duration_of_job_business">Please select duration of job/business</string>
-    <string name="emailid_is_required">Email Id is Required</string>
-    <string name="please_select_relationship_with_borrower">Please select relationship with borrower</string>
-    <string name="please_fill_up_all_the_details_to_continue">Please fill up all the details to continue</string>
-    <string name="please_select_institue_name">Please select institute name</string>
-    <string name="please_select_course_name">Please select course name</string>
-    <string name="please_select_institue_location">Please select institute location</string>
 
     <string name="file_size_exceeds_limit_of_30_mb">File size exceeds limit of 30 MB</string>
     <string name="file_is_not_in_supported_format">file is not in supported format</string>
-    <string name="payment_not_successful">Payment not successful</string>
-    <string name="signed_successfully">signed successfully</string>
     <string name="downloading_of_file_just_finished">Downloading of File just finished</string>
-    <string name="please_sign_the_documents_first">Please Sign the documents first</string>
     <string name="something_went_wrong_please_try_again_later">Something went wrong, please try again later.</string>
-    <string name="payment_transaction_response">Payment Transaction response</string>
-    <string name="payment_tansaction_failed">Payment Transaction Failed</string>
-    <string name="back_pressed_transaction_cancelled">Back pressed. Transaction cancelled</string>
-    <string name="authentication_failed">Authentication Failed</string>
 
 
     <string name="upload_profile_picture">Upload Profile Picture</string>
     <string name="applicant_single_picture_required_to_be_uploaded">Applicant\'s single picture required to be uploaded</string>
-    <string name="co_applicant_single_picture_required_to_be_uploaded">Co-Applicant\'s single picture required to be uploaded</string>
 
 
     <string name="new_user">New User</string>
-    <string name="existing_user">Existing User</string>
-    <string name="enter_loan_amount">Enter loan amount</string>
-
-    <!--New Truecaller Strings-->
 
     <!--<string name="profile_photo">Profile Photo <font fgcolor="#EE415E">*</font></string>-->
 
-    <string name="street_name_locality_land_mark">Street Name,Locality,Land mark </string>
-    <string name="flat_no_building_name_society_name">FLAT NO,Building name,Society Name</string>
-    <string name="kyc_details">KYC Details</string>
-    <string name="detailed_info">Detailed Info</string>
-    <string name="reln_borr">Relation with borrower</string>
-    <string name="offc_address">Office Address</string>
-
-    <string name="err_country">Select Country Name</string>
-    <string name="err_state">Select State</string>
-    <string name="err_city">Enter city</string>
-    <string name="post_approval">Post Approval</string>
     <string name="complete_your_appliction_nw">Complete Your Application Now</string>
     <string name="to_get_quick_nd_easy_loan"><![CDATA[To Get a Quick & Easy Loan]]></string>
     <string name="click">Click</string>
     <string name="Proceed">\"Proceed\"</string>
     <string name="to_complete">to complete the process</string>
     <string name="fs_msg"><![CDATA[Check your \'Friendly Score\' to ensure a Quick & Smooth Loan Process]]></string>
-    <string name="unmarried">Unmarried</string>
     <string name="start_new_msg">Apply Now for an Instant Loan</string>
     <string name="emi_cal_msg">Calculate the approx EMI amount, you need to pay</string>
     <string name="call_us_s">\t Call Us</string>

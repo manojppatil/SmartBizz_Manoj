@@ -14,8 +14,7 @@ public final class R {
         public static int spinner_item = 0x7f0f0001;
     }
     public static final class string {
-        public static int Rs = 0x7f150001;
-        public static int app_name = 0x7f150002;
+        public static int app_name = 0x7f150001;
     }
     public static final class style {
         public static int AppBaseTheme = 0x7f160001;

@@ -2,10 +2,13 @@ package com.eduvanzapplication.newUI.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -17,33 +20,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CheckBox;
+
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
-import android.widget.Space;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.Util.Paytm;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.adapter.AmortAdapter;
-import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.pojo.MLoanEmis;
+import com.paytm.pgsdk.PaytmOrder;
+import com.paytm.pgsdk.PaytmPGService;
+import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
+
 import android.app.AlertDialog;
 
-import com.squareup.picasso.Picasso;
-import com.warkiz.widget.IndicatorSeekBar;
-import com.warkiz.widget.OnSeekChangeListener;
-import com.warkiz.widget.SeekParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,15 +50,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.view.View.VISIBLE;
+import static com.eduvanzapplication.Util.Globle.payment_partner;
+import static com.eduvanzapplication.Util.Globle.payment_platform;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
-import static com.eduvanzapplication.newUI.newViews.LoanTabActivity.lead_id;
 
-
+//9773494235 Test
 public class AmortizationFragment extends Fragment implements View.OnClickListener {
 
-    static View view, thumbView1;
+    static View view;
     public static Context context;
     public static Fragment mFragment;
+    public static ProgressBar progressBarAmort;
+
     public static List<MLoanEmis> mLoanEmisArrayList;
     public static TextView thumbView;
     public static TextView txtEmiNo1, txtEmiNo2, txtEmiNo3, txtEmiNo4, txtEmiNo5, txtEmiNo6, txtEmiNo7,
@@ -75,7 +75,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
             txtEmiNo56, txtEmiNo57, txtEmiNo58, txtEmiNo59, txtEmiNo60, txtEmiNo61, txtEmiNo62, txtEmiNo63,
             txtEmiNo64, txtEmiNo65, txtEmiNo66, txtEmiNo67, txtEmiNo68, txtEmiNo69, txtEmiNo70;
     public static LinearLayout linAmortBtn1, linAmortBtn2, linAmortBtn3, linAmortBtn4, linAmortBtn5, linAmortBtn6,
-            linAmortBtn7, linAmortBtn8, linAmortBtn9, linAmortBtn10, linAmortBtn11, linAmortBtn12, linAmortBtn13, linAmortBtn14,linAmortTile;
+            linAmortBtn7, linAmortBtn8, linAmortBtn9, linAmortBtn10, linAmortBtn11, linAmortBtn12, linAmortBtn13, linAmortBtn14, linAmortTile;
     public static CardView card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
             card11, card12, card13, card14, card15, card16, card17, card18, card19, card20,
             card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
@@ -84,14 +84,15 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
             card51, card52, card53, card54, card55, card56, card57, card58, card59, card60,
             card61, card62, card63, card64, card65, card66, card67, card68, card69, card70;
 
-    public static TextView txtEmiNo,txtEmiAmount,txtDueBy, txtPaymentDate, txtPaymentStatus,txtBtnText;
-    public static LinearLayout linPayBtn;
+    public static TextView txtEmiNo, txtEmiAmount, txtDueBy, txtPaymentDate, txtPaymentStatus, txtBtnText, txtPaidDue, txtOutstandingDue,
+            txtNextEmiAmount, txtNextEmiDue, txtNextEmiEndDate, txtOutstandingAmt;
+    public static LinearLayout linPayBtn, linAmortFrag, linHasAmort, linNoAmort;
 
+    public static TextView txtAmortNotCreated;
     public static RecyclerView rvAmort;
-    public static AmortAdapter adapter;
     public static SeekBar seek_bar;
-    public static CardView emi_card_1;
-    public static String emi_num, str_emi_due, str_emi_pay_date;
+    public static String emi_num, str_emi_due, str_emi_pay_date, emi_amount1 = "",
+            next_emi_date1 = "", emi_end_date1 = "", outstanding_amount1 = "";
 
     public AmortizationFragment() {
         // Required empty public constructor
@@ -114,7 +115,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         return new BitmapDrawable(getResources(), bitmap);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -127,25 +127,26 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         seek_bar = view.findViewById(R.id.seek_bar);
         rvAmort = view.findViewById(R.id.rvAmort);
 
-//        emi_card_1 = view.findViewById(R.id.card1);
-//        emi_number =view.findViewById(R.id.txtEmiNo);
-//        emi_due_date = view.findViewById(R.id.txtDueBy);
-//        emi_Payment_date = view.findViewById(R.id.txtPaymentDate);
-//        emi_card_1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, emi_num+" "+str_emi_pay_date+" "+str_emi_due, Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        progressBarAmort = view.findViewById(R.id.progressBar_signsubmit);
+
+        txtAmortNotCreated = view.findViewById(R.id.txtAmortNotCreated);
 
         txtEmiNo = view.findViewById(R.id.txtEmiNo);
         txtEmiAmount = view.findViewById(R.id.txtEmiAmount);
-        txtDueBy= view.findViewById(R.id.txtDueBy);
+        txtDueBy = view.findViewById(R.id.txtDueBy);
         txtPaymentDate = view.findViewById(R.id.txtPaymentDate);
         txtPaymentStatus = view.findViewById(R.id.txtPaymentStatus);
         txtBtnText = view.findViewById(R.id.txtBtnText);
         linPayBtn = view.findViewById(R.id.linPayBtn);
         linAmortTile = view.findViewById(R.id.linAmortTile);
+
+        txtPaidDue = view.findViewById(R.id.txtPaidDue);
+        txtOutstandingDue = view.findViewById(R.id.txtOutstandingDue);
+
+        txtNextEmiAmount = view.findViewById(R.id.txtNextEmiAmount);
+        txtNextEmiDue = view.findViewById(R.id.txtNextEmiDue);
+        txtNextEmiEndDate = view.findViewById(R.id.txtNextEmiEndDate);
+        txtOutstandingAmt = view.findViewById(R.id.txtOutstandingAmt);
 
         //textview
         txtEmiNo1 = view.findViewById(R.id.txtEmiNo1);
@@ -293,6 +294,11 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         card70 = view.findViewById(R.id.card70);
 
         //linear layout
+        linHasAmort = view.findViewById(R.id.linHasAmort);
+        linNoAmort = view.findViewById(R.id.linNoAmort);
+
+        linAmortFrag = view.findViewById(R.id.linAmortFrag);
+
         linAmortBtn1 = view.findViewById(R.id.linAmortBtn1);
         linAmortBtn2 = view.findViewById(R.id.linAmortBtn2);
         linAmortBtn3 = view.findViewById(R.id.linAmortBtn3);
@@ -380,36 +386,34 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         card69.setOnClickListener(this);
         card70.setOnClickListener(this);
 
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvAmort.setLayoutManager(linearLayoutManager);
-        adapter = new AmortAdapter(mLoanEmisArrayList, context, getActivity());
-        rvAmort.setAdapter(adapter);
-        rvAmort.setNestedScrollingEnabled(false);
 
         seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
+        getAmortDetails();
+        return view;
 
+    }
+
+    public void getAmortDetails() {
         try {
             String url = MainActivity.mainUrl + "dashboard/ammortisation";
             Map<String, String> params = new HashMap<String, String>();
-            params.put("lead_id", lead_id);
+            params.put("lead_id", MainActivity.lead_id);
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {
@@ -425,9 +429,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
-
-        return view;
-
     }
 
     public void setAmortDetails(JSONObject jsonDataO) {
@@ -436,7 +437,38 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 //            progressDialog.dismiss();
             mLoanEmisArrayList = new ArrayList<>();
             if (jsonDataO.getInt("status") == 1) {
+                try {
+                    linHasAmort.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    linNoAmort.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    progressBarAmort.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 String message = jsonDataO.getString("message");
+
+                if (!jsonDataO.get("loanData").equals(null)) {
+
+                    JSONObject jsonloanDataDetails = jsonDataO.getJSONObject("loanData");
+
+                    if (jsonloanDataDetails.has("application_loan_id")) {
+                        if (!jsonloanDataDetails.getString("emi_amount").toString().equals("null"))
+                            emi_amount1 = jsonloanDataDetails.getString("emi_amount");
+                        if (!jsonloanDataDetails.getString("next_emi_date").toString().equals("null"))
+                            next_emi_date1 = jsonloanDataDetails.getString("next_emi_date");
+                        if (!jsonloanDataDetails.getString("emi_end_date").toString().equals("null"))
+                            emi_end_date1 = jsonloanDataDetails.getString("emi_end_date");
+                        if (!jsonloanDataDetails.getString("outstanding_amount").toString().equals("null"))
+                            outstanding_amount1 = jsonloanDataDetails.getString("outstanding_amount");
+                    }
+                }
                 JSONArray jsonArray1 = jsonDataO.getJSONArray("loanEmiDetails");
 
                 for (int i = 0; i < jsonArray1.length(); i++) {
@@ -478,118 +510,856 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                     }
                     mLoanEmisArrayList.add(mLoanEmis);
                 }
+
                 int amortlistsize = mLoanEmisArrayList.size();
+                float OutstandingDue = 0, TotalDue = 0, PaidDue = 0;
+                int NextEmiPos = 0;
+                for (int k = 0; k < amortlistsize; k++) {
+
+                    if (mLoanEmisArrayList.get(k).status.toString().equals("0")) {
+                        OutstandingDue = OutstandingDue + Float.parseFloat(mLoanEmisArrayList.get(k).emi_amount);
+                        if (NextEmiPos == 0) {
+                            NextEmiPos = k;
+                        }
+                    } else {
+                        PaidDue = PaidDue + Float.parseFloat(mLoanEmisArrayList.get(k).emi_amount);
+                    }
+                    TotalDue = TotalDue + Float.parseFloat(mLoanEmisArrayList.get(k).emi_amount);
+                }
+
+                seek_bar.setProgress((int) (PaidDue / TotalDue * 100));
+
+                txtPaidDue.setText(" " + String.valueOf(PaidDue));
+//                txtOutstandingDue.setText(" " + String.valueOf(OutstandingDue));
+                txtOutstandingDue.setText(" " + outstanding_amount1);
+
+                txtNextEmiAmount.setText(" "+emi_amount1);
+                if(next_emi_date1.length() > 5) {
+
+                     String[] split = next_emi_date1.split(" ");
+                     String day = split[0].toString();
+                     String month = split[1].toString().substring(0,3);
+                     String year = split[2];
+                    txtNextEmiDue.setText(day+" "+month+" "+year);
+
+                }else{
+                    txtNextEmiDue.setText(next_emi_date1);
+                }
+
+                if(emi_end_date1.length() > 5) {
+
+                    String[] split = emi_end_date1.split(" ");
+                    String day = split[0].toString();
+                    String month = split[1].toString().substring(0,3);
+                    String year = split[2];
+                    txtNextEmiEndDate.setText(day+" "+month+" "+year);
+
+                }else{
+                    txtNextEmiEndDate.setText(emi_end_date1);
+                }
+
+                txtOutstandingAmt.setText(" " + outstanding_amount1);
 
                 for (int j = 0; j < amortlistsize; j++) {
                     switch (j) {
 
-                        case 0: linAmortBtn1.setVisibility(View.VISIBLE);txtEmiNo1.setVisibility(View.VISIBLE);card1.setVisibility(View.VISIBLE);txtEmiNo1.setText("0" + mLoanEmisArrayList.get(j).emi_no);card1.setTag(j);break;
-                        case 1: linAmortBtn1.setVisibility(View.VISIBLE);txtEmiNo2.setVisibility(View.VISIBLE);card2.setVisibility(View.VISIBLE);txtEmiNo2.setText("0" + mLoanEmisArrayList.get(j).emi_no);card2.setTag(j);break;
-                        case 2: linAmortBtn1.setVisibility(View.VISIBLE);txtEmiNo3.setVisibility(View.VISIBLE);card3.setVisibility(View.VISIBLE);txtEmiNo3.setText("0" + mLoanEmisArrayList.get(j).emi_no);card3.setTag(j);break;
-                        case 3: linAmortBtn1.setVisibility(View.VISIBLE);txtEmiNo4.setVisibility(View.VISIBLE);card4.setVisibility(View.VISIBLE);txtEmiNo4.setText("0" + mLoanEmisArrayList.get(j).emi_no);card4.setTag(j);break;
-                        case 4: linAmortBtn1.setVisibility(View.VISIBLE);txtEmiNo5.setVisibility(View.VISIBLE);card5.setVisibility(View.VISIBLE);txtEmiNo5.setText("0" + mLoanEmisArrayList.get(j).emi_no);card5.setTag(j);break;
+                        case 0:
+                            linAmortBtn1.setVisibility(View.VISIBLE);
+                            txtEmiNo1.setVisibility(View.VISIBLE);
+                            card1.setVisibility(View.VISIBLE);
+                            txtEmiNo1.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card1.setTag(j);
+                            break;
+                        case 1:
+                            linAmortBtn1.setVisibility(View.VISIBLE);
+                            txtEmiNo2.setVisibility(View.VISIBLE);
+                            card2.setVisibility(View.VISIBLE);
+                            txtEmiNo2.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card2.setTag(j);
+                            break;
+                        case 2:
+                            linAmortBtn1.setVisibility(View.VISIBLE);
+                            txtEmiNo3.setVisibility(View.VISIBLE);
+                            card3.setVisibility(View.VISIBLE);
+                            txtEmiNo3.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card3.setTag(j);
+                            break;
+                        case 3:
+                            linAmortBtn1.setVisibility(View.VISIBLE);
+                            txtEmiNo4.setVisibility(View.VISIBLE);
+                            card4.setVisibility(View.VISIBLE);
+                            txtEmiNo4.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card4.setTag(j);
+                            break;
+                        case 4:
+                            linAmortBtn1.setVisibility(View.VISIBLE);
+                            txtEmiNo5.setVisibility(View.VISIBLE);
+                            card5.setVisibility(View.VISIBLE);
+                            txtEmiNo5.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card5.setTag(j);
+                            break;
 
-                        case 5: linAmortBtn2.setVisibility(View.VISIBLE);txtEmiNo6.setVisibility(View.VISIBLE);card6.setVisibility(View.VISIBLE);txtEmiNo6.setText("0" + mLoanEmisArrayList.get(j).emi_no);card6.setTag(j);break;
-                        case 6: linAmortBtn2.setVisibility(View.VISIBLE);txtEmiNo7.setVisibility(View.VISIBLE);card7.setVisibility(View.VISIBLE);txtEmiNo7.setText("0" + mLoanEmisArrayList.get(j).emi_no);card7.setTag(j);break;
-                        case 7: linAmortBtn2.setVisibility(View.VISIBLE);txtEmiNo8.setVisibility(View.VISIBLE);card8.setVisibility(View.VISIBLE);txtEmiNo8.setText("0" + mLoanEmisArrayList.get(j).emi_no);card8.setTag(j);break;
-                        case 8: linAmortBtn2.setVisibility(View.VISIBLE);txtEmiNo9.setVisibility(View.VISIBLE);card9.setVisibility(View.VISIBLE);txtEmiNo9.setText("0" + mLoanEmisArrayList.get(j).emi_no);card9.setTag(j);break;
-                        case 9: linAmortBtn2.setVisibility(View.VISIBLE);txtEmiNo10.setVisibility(View.VISIBLE);card10.setVisibility(View.VISIBLE);txtEmiNo10.setText("0" + mLoanEmisArrayList.get(j).emi_no);card10.setTag(j);break;
+                        case 5:
+                            linAmortBtn2.setVisibility(View.VISIBLE);
+                            txtEmiNo6.setVisibility(View.VISIBLE);
+                            card6.setVisibility(View.VISIBLE);
+                            txtEmiNo6.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card6.setTag(j);
+                            break;
+                        case 6:
+                            linAmortBtn2.setVisibility(View.VISIBLE);
+                            txtEmiNo7.setVisibility(View.VISIBLE);
+                            card7.setVisibility(View.VISIBLE);
+                            txtEmiNo7.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card7.setTag(j);
+                            break;
+                        case 7:
+                            linAmortBtn2.setVisibility(View.VISIBLE);
+                            txtEmiNo8.setVisibility(View.VISIBLE);
+                            card8.setVisibility(View.VISIBLE);
+                            txtEmiNo8.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card8.setTag(j);
+                            break;
+                        case 8:
+                            linAmortBtn2.setVisibility(View.VISIBLE);
+                            txtEmiNo9.setVisibility(View.VISIBLE);
+                            card9.setVisibility(View.VISIBLE);
+                            txtEmiNo9.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card9.setTag(j);
+                            break;
+                        case 9:
+                            linAmortBtn2.setVisibility(View.VISIBLE);
+                            txtEmiNo10.setVisibility(View.VISIBLE);
+                            card10.setVisibility(View.VISIBLE);
+                            txtEmiNo10.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card10.setTag(j);
+                            break;
 
-                        case 10: linAmortBtn3.setVisibility(View.VISIBLE);txtEmiNo11.setVisibility(View.VISIBLE);card11.setVisibility(View.VISIBLE);txtEmiNo11.setText("0" + mLoanEmisArrayList.get(j).emi_no);card11.setTag(j);break;
-                        case 11: linAmortBtn3.setVisibility(View.VISIBLE);txtEmiNo12.setVisibility(View.VISIBLE);card12.setVisibility(View.VISIBLE);txtEmiNo12.setText("0" + mLoanEmisArrayList.get(j).emi_no);card12.setTag(j);break;
-                        case 12: linAmortBtn3.setVisibility(View.VISIBLE);txtEmiNo13.setVisibility(View.VISIBLE);card13.setVisibility(View.VISIBLE);txtEmiNo13.setText("0" + mLoanEmisArrayList.get(j).emi_no);card13.setTag(j);break;
-                        case 13: linAmortBtn3.setVisibility(View.VISIBLE);txtEmiNo14.setVisibility(View.VISIBLE);card14.setVisibility(View.VISIBLE);txtEmiNo14.setText("0" + mLoanEmisArrayList.get(j).emi_no);card14.setTag(j);break;
-                        case 14: linAmortBtn1.setVisibility(View.VISIBLE);txtEmiNo15.setVisibility(View.VISIBLE);card15.setVisibility(View.VISIBLE);txtEmiNo15.setText("0" + mLoanEmisArrayList.get(j).emi_no);card15.setTag(j);break;
+                        case 10:
+                            linAmortBtn3.setVisibility(View.VISIBLE);
+                            txtEmiNo11.setVisibility(View.VISIBLE);
+                            card11.setVisibility(View.VISIBLE);
+                            txtEmiNo11.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card11.setTag(j);
+                            break;
+                        case 11:
+                            linAmortBtn3.setVisibility(View.VISIBLE);
+                            txtEmiNo12.setVisibility(View.VISIBLE);
+                            card12.setVisibility(View.VISIBLE);
+                            txtEmiNo12.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card12.setTag(j);
+                            break;
+                        case 12:
+                            linAmortBtn3.setVisibility(View.VISIBLE);
+                            txtEmiNo13.setVisibility(View.VISIBLE);
+                            card13.setVisibility(View.VISIBLE);
+                            txtEmiNo13.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card13.setTag(j);
+                            break;
+                        case 13:
+                            linAmortBtn3.setVisibility(View.VISIBLE);
+                            txtEmiNo14.setVisibility(View.VISIBLE);
+                            card14.setVisibility(View.VISIBLE);
+                            txtEmiNo14.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card14.setTag(j);
+                            break;
+                        case 14:
+                            linAmortBtn1.setVisibility(View.VISIBLE);
+                            txtEmiNo15.setVisibility(View.VISIBLE);
+                            card15.setVisibility(View.VISIBLE);
+                            txtEmiNo15.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card15.setTag(j);
+                            break;
 
-                        case 15: linAmortBtn4.setVisibility(View.VISIBLE);txtEmiNo16.setVisibility(View.VISIBLE);card16.setVisibility(View.VISIBLE);txtEmiNo16.setText("0" + mLoanEmisArrayList.get(j).emi_no);card16.setTag(j);break;
-                        case 16: linAmortBtn4.setVisibility(View.VISIBLE);txtEmiNo17.setVisibility(View.VISIBLE);card17.setVisibility(View.VISIBLE);txtEmiNo17.setText("0" + mLoanEmisArrayList.get(j).emi_no);card17.setTag(j);break;
-                        case 17: linAmortBtn4.setVisibility(View.VISIBLE);txtEmiNo18.setVisibility(View.VISIBLE);card18.setVisibility(View.VISIBLE);txtEmiNo18.setText("0" + mLoanEmisArrayList.get(j).emi_no);card18.setTag(j);break;
-                        case 18: linAmortBtn4.setVisibility(View.VISIBLE);txtEmiNo19.setVisibility(View.VISIBLE);card19.setVisibility(View.VISIBLE);txtEmiNo19.setText("0" + mLoanEmisArrayList.get(j).emi_no);card19.setTag(j);break;
-                        case 19: linAmortBtn4.setVisibility(View.VISIBLE);txtEmiNo20.setVisibility(View.VISIBLE);card20.setVisibility(View.VISIBLE);txtEmiNo20.setText("0" + mLoanEmisArrayList.get(j).emi_no);card20.setTag(j);break;
+                        case 15:
+                            linAmortBtn4.setVisibility(View.VISIBLE);
+                            txtEmiNo16.setVisibility(View.VISIBLE);
+                            card16.setVisibility(View.VISIBLE);
+                            txtEmiNo16.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card16.setTag(j);
+                            break;
+                        case 16:
+                            linAmortBtn4.setVisibility(View.VISIBLE);
+                            txtEmiNo17.setVisibility(View.VISIBLE);
+                            card17.setVisibility(View.VISIBLE);
+                            txtEmiNo17.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card17.setTag(j);
+                            break;
+                        case 17:
+                            linAmortBtn4.setVisibility(View.VISIBLE);
+                            txtEmiNo18.setVisibility(View.VISIBLE);
+                            card18.setVisibility(View.VISIBLE);
+                            txtEmiNo18.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card18.setTag(j);
+                            break;
+                        case 18:
+                            linAmortBtn4.setVisibility(View.VISIBLE);
+                            txtEmiNo19.setVisibility(View.VISIBLE);
+                            card19.setVisibility(View.VISIBLE);
+                            txtEmiNo19.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card19.setTag(j);
+                            break;
+                        case 19:
+                            linAmortBtn4.setVisibility(View.VISIBLE);
+                            txtEmiNo20.setVisibility(View.VISIBLE);
+                            card20.setVisibility(View.VISIBLE);
+                            txtEmiNo20.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card20.setTag(j);
+                            break;
 
-                case 20: linAmortBtn5.setVisibility(View.VISIBLE);txtEmiNo21.setVisibility(View.VISIBLE);card21.setVisibility(View.VISIBLE);txtEmiNo21.setText("0" + mLoanEmisArrayList.get(j).emi_no);card21.setTag(j);break;
-                case 21: linAmortBtn5.setVisibility(View.VISIBLE);txtEmiNo22.setVisibility(View.VISIBLE);card22.setVisibility(View.VISIBLE);txtEmiNo22.setText("0" + mLoanEmisArrayList.get(j).emi_no);card22.setTag(j);break;
-                case 22: linAmortBtn5.setVisibility(View.VISIBLE);txtEmiNo23.setVisibility(View.VISIBLE);card23.setVisibility(View.VISIBLE);txtEmiNo23.setText("0" + mLoanEmisArrayList.get(j).emi_no);card23.setTag(j);break;
-                case 23: linAmortBtn5.setVisibility(View.VISIBLE);txtEmiNo24.setVisibility(View.VISIBLE);card24.setVisibility(View.VISIBLE);txtEmiNo24.setText("0" + mLoanEmisArrayList.get(j).emi_no);card24.setTag(j);break;
-                case 24: linAmortBtn5.setVisibility(View.VISIBLE);txtEmiNo25.setVisibility(View.VISIBLE);card25.setVisibility(View.VISIBLE);txtEmiNo25.setText("0" + mLoanEmisArrayList.get(j).emi_no);card25.setTag(j);break;
+                        case 20:
+                            linAmortBtn5.setVisibility(View.VISIBLE);
+                            txtEmiNo21.setVisibility(View.VISIBLE);
+                            card21.setVisibility(View.VISIBLE);
+                            txtEmiNo21.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card21.setTag(j);
+                            break;
+                        case 21:
+                            linAmortBtn5.setVisibility(View.VISIBLE);
+                            txtEmiNo22.setVisibility(View.VISIBLE);
+                            card22.setVisibility(View.VISIBLE);
+                            txtEmiNo22.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card22.setTag(j);
+                            break;
+                        case 22:
+                            linAmortBtn5.setVisibility(View.VISIBLE);
+                            txtEmiNo23.setVisibility(View.VISIBLE);
+                            card23.setVisibility(View.VISIBLE);
+                            txtEmiNo23.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card23.setTag(j);
+                            break;
+                        case 23:
+                            linAmortBtn5.setVisibility(View.VISIBLE);
+                            txtEmiNo24.setVisibility(View.VISIBLE);
+                            card24.setVisibility(View.VISIBLE);
+                            txtEmiNo24.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card24.setTag(j);
+                            break;
+                        case 24:
+                            linAmortBtn5.setVisibility(View.VISIBLE);
+                            txtEmiNo25.setVisibility(View.VISIBLE);
+                            card25.setVisibility(View.VISIBLE);
+                            txtEmiNo25.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card25.setTag(j);
+                            break;
 
-                case 25: linAmortBtn6.setVisibility(View.VISIBLE);txtEmiNo26.setVisibility(View.VISIBLE);card26.setVisibility(View.VISIBLE);txtEmiNo26.setText("0" + mLoanEmisArrayList.get(j).emi_no);card26.setTag(j);break;
-                case 26: linAmortBtn6.setVisibility(View.VISIBLE);txtEmiNo27.setVisibility(View.VISIBLE);card27.setVisibility(View.VISIBLE);txtEmiNo27.setText("0" + mLoanEmisArrayList.get(j).emi_no);card27.setTag(j);break;
-                case 27: linAmortBtn6.setVisibility(View.VISIBLE);txtEmiNo28.setVisibility(View.VISIBLE);card28.setVisibility(View.VISIBLE);txtEmiNo28.setText("0" + mLoanEmisArrayList.get(j).emi_no);card28.setTag(j);break;
-                case 28: linAmortBtn6.setVisibility(View.VISIBLE);txtEmiNo29.setVisibility(View.VISIBLE);card29.setVisibility(View.VISIBLE);txtEmiNo29.setText("0" + mLoanEmisArrayList.get(j).emi_no);card29.setTag(j);break;
-                case 29: linAmortBtn6.setVisibility(View.VISIBLE);txtEmiNo30.setVisibility(View.VISIBLE);card30.setVisibility(View.VISIBLE);txtEmiNo30.setText("0" + mLoanEmisArrayList.get(j).emi_no);card30.setTag(j);break;
+                        case 25:
+                            linAmortBtn6.setVisibility(View.VISIBLE);
+                            txtEmiNo26.setVisibility(View.VISIBLE);
+                            card26.setVisibility(View.VISIBLE);
+                            txtEmiNo26.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card26.setTag(j);
+                            break;
+                        case 26:
+                            linAmortBtn6.setVisibility(View.VISIBLE);
+                            txtEmiNo27.setVisibility(View.VISIBLE);
+                            card27.setVisibility(View.VISIBLE);
+                            txtEmiNo27.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card27.setTag(j);
+                            break;
+                        case 27:
+                            linAmortBtn6.setVisibility(View.VISIBLE);
+                            txtEmiNo28.setVisibility(View.VISIBLE);
+                            card28.setVisibility(View.VISIBLE);
+                            txtEmiNo28.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card28.setTag(j);
+                            break;
+                        case 28:
+                            linAmortBtn6.setVisibility(View.VISIBLE);
+                            txtEmiNo29.setVisibility(View.VISIBLE);
+                            card29.setVisibility(View.VISIBLE);
+                            txtEmiNo29.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card29.setTag(j);
+                            break;
+                        case 29:
+                            linAmortBtn6.setVisibility(View.VISIBLE);
+                            txtEmiNo30.setVisibility(View.VISIBLE);
+                            card30.setVisibility(View.VISIBLE);
+                            txtEmiNo30.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card30.setTag(j);
+                            break;
 
-                case 30: linAmortBtn7.setVisibility(View.VISIBLE);txtEmiNo31.setVisibility(View.VISIBLE);card31.setVisibility(View.VISIBLE);txtEmiNo31.setText("0" + mLoanEmisArrayList.get(j).emi_no);card31.setTag(j);break;
-                case 31: linAmortBtn7.setVisibility(View.VISIBLE);txtEmiNo32.setVisibility(View.VISIBLE);card32.setVisibility(View.VISIBLE);txtEmiNo32.setText("0" + mLoanEmisArrayList.get(j).emi_no);card32.setTag(j);break;
-                case 32: linAmortBtn7.setVisibility(View.VISIBLE);txtEmiNo33.setVisibility(View.VISIBLE);card33.setVisibility(View.VISIBLE);txtEmiNo33.setText("0" + mLoanEmisArrayList.get(j).emi_no);card33.setTag(j);break;
-                case 33: linAmortBtn7.setVisibility(View.VISIBLE);txtEmiNo34.setVisibility(View.VISIBLE);card34.setVisibility(View.VISIBLE);txtEmiNo34.setText("0" + mLoanEmisArrayList.get(j).emi_no);card34.setTag(j);break;
-                case 34: linAmortBtn7.setVisibility(View.VISIBLE);txtEmiNo35.setVisibility(View.VISIBLE);card35.setVisibility(View.VISIBLE);txtEmiNo35.setText("0" + mLoanEmisArrayList.get(j).emi_no);card35.setTag(j);break;
+                        case 30:
+                            linAmortBtn7.setVisibility(View.VISIBLE);
+                            txtEmiNo31.setVisibility(View.VISIBLE);
+                            card31.setVisibility(View.VISIBLE);
+                            txtEmiNo31.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card31.setTag(j);
+                            break;
+                        case 31:
+                            linAmortBtn7.setVisibility(View.VISIBLE);
+                            txtEmiNo32.setVisibility(View.VISIBLE);
+                            card32.setVisibility(View.VISIBLE);
+                            txtEmiNo32.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card32.setTag(j);
+                            break;
+                        case 32:
+                            linAmortBtn7.setVisibility(View.VISIBLE);
+                            txtEmiNo33.setVisibility(View.VISIBLE);
+                            card33.setVisibility(View.VISIBLE);
+                            txtEmiNo33.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card33.setTag(j);
+                            break;
+                        case 33:
+                            linAmortBtn7.setVisibility(View.VISIBLE);
+                            txtEmiNo34.setVisibility(View.VISIBLE);
+                            card34.setVisibility(View.VISIBLE);
+                            txtEmiNo34.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card34.setTag(j);
+                            break;
+                        case 34:
+                            linAmortBtn7.setVisibility(View.VISIBLE);
+                            txtEmiNo35.setVisibility(View.VISIBLE);
+                            card35.setVisibility(View.VISIBLE);
+                            txtEmiNo35.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card35.setTag(j);
+                            break;
 
-                case 35: linAmortBtn8.setVisibility(View.VISIBLE);txtEmiNo36.setVisibility(View.VISIBLE);card36.setVisibility(View.VISIBLE);txtEmiNo36.setText("0" + mLoanEmisArrayList.get(j).emi_no);card36.setTag(j);break;
-                case 36: linAmortBtn8.setVisibility(View.VISIBLE);txtEmiNo37.setVisibility(View.VISIBLE);card37.setVisibility(View.VISIBLE);txtEmiNo37.setText("0" + mLoanEmisArrayList.get(j).emi_no);card37.setTag(j);break;
-                case 37: linAmortBtn8.setVisibility(View.VISIBLE);txtEmiNo38.setVisibility(View.VISIBLE);card38.setVisibility(View.VISIBLE);txtEmiNo38.setText("0" + mLoanEmisArrayList.get(j).emi_no);card38.setTag(j);break;
-                case 38: linAmortBtn8.setVisibility(View.VISIBLE);txtEmiNo39.setVisibility(View.VISIBLE);card39.setVisibility(View.VISIBLE);txtEmiNo39.setText("0" + mLoanEmisArrayList.get(j).emi_no);card39.setTag(j);break;
-                case 39: linAmortBtn8.setVisibility(View.VISIBLE);txtEmiNo40.setVisibility(View.VISIBLE);card40.setVisibility(View.VISIBLE);txtEmiNo40.setText("0" + mLoanEmisArrayList.get(j).emi_no);card40.setTag(j);break;
+                        case 35:
+                            linAmortBtn8.setVisibility(View.VISIBLE);
+                            txtEmiNo36.setVisibility(View.VISIBLE);
+                            card36.setVisibility(View.VISIBLE);
+                            txtEmiNo36.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card36.setTag(j);
+                            break;
+                        case 36:
+                            linAmortBtn8.setVisibility(View.VISIBLE);
+                            txtEmiNo37.setVisibility(View.VISIBLE);
+                            card37.setVisibility(View.VISIBLE);
+                            txtEmiNo37.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card37.setTag(j);
+                            break;
+                        case 37:
+                            linAmortBtn8.setVisibility(View.VISIBLE);
+                            txtEmiNo38.setVisibility(View.VISIBLE);
+                            card38.setVisibility(View.VISIBLE);
+                            txtEmiNo38.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card38.setTag(j);
+                            break;
+                        case 38:
+                            linAmortBtn8.setVisibility(View.VISIBLE);
+                            txtEmiNo39.setVisibility(View.VISIBLE);
+                            card39.setVisibility(View.VISIBLE);
+                            txtEmiNo39.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card39.setTag(j);
+                            break;
+                        case 39:
+                            linAmortBtn8.setVisibility(View.VISIBLE);
+                            txtEmiNo40.setVisibility(View.VISIBLE);
+                            card40.setVisibility(View.VISIBLE);
+                            txtEmiNo40.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card40.setTag(j);
+                            break;
 
-                case 40: linAmortBtn9.setVisibility(View.VISIBLE);txtEmiNo41.setVisibility(View.VISIBLE);card41.setVisibility(View.VISIBLE);txtEmiNo41.setText("0" + mLoanEmisArrayList.get(j).emi_no);card41.setTag(j);break;
-                case 41: linAmortBtn9.setVisibility(View.VISIBLE);txtEmiNo42.setVisibility(View.VISIBLE);card42.setVisibility(View.VISIBLE);txtEmiNo42.setText("0" + mLoanEmisArrayList.get(j).emi_no);card42.setTag(j);break;
-                case 42: linAmortBtn9.setVisibility(View.VISIBLE);txtEmiNo43.setVisibility(View.VISIBLE);card43.setVisibility(View.VISIBLE);txtEmiNo43.setText("0" + mLoanEmisArrayList.get(j).emi_no);card43.setTag(j);break;
-                case 43: linAmortBtn9.setVisibility(View.VISIBLE);txtEmiNo44.setVisibility(View.VISIBLE);card44.setVisibility(View.VISIBLE);txtEmiNo44.setText("0" + mLoanEmisArrayList.get(j).emi_no);card44.setTag(j);break;
-                case 44: linAmortBtn9.setVisibility(View.VISIBLE);txtEmiNo45.setVisibility(View.VISIBLE);card45.setVisibility(View.VISIBLE);txtEmiNo45.setText("0" + mLoanEmisArrayList.get(j).emi_no);card45.setTag(j);break;
+                        case 40:
+                            linAmortBtn9.setVisibility(View.VISIBLE);
+                            txtEmiNo41.setVisibility(View.VISIBLE);
+                            card41.setVisibility(View.VISIBLE);
+                            txtEmiNo41.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card41.setTag(j);
+                            break;
+                        case 41:
+                            linAmortBtn9.setVisibility(View.VISIBLE);
+                            txtEmiNo42.setVisibility(View.VISIBLE);
+                            card42.setVisibility(View.VISIBLE);
+                            txtEmiNo42.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card42.setTag(j);
+                            break;
+                        case 42:
+                            linAmortBtn9.setVisibility(View.VISIBLE);
+                            txtEmiNo43.setVisibility(View.VISIBLE);
+                            card43.setVisibility(View.VISIBLE);
+                            txtEmiNo43.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card43.setTag(j);
+                            break;
+                        case 43:
+                            linAmortBtn9.setVisibility(View.VISIBLE);
+                            txtEmiNo44.setVisibility(View.VISIBLE);
+                            card44.setVisibility(View.VISIBLE);
+                            txtEmiNo44.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card44.setTag(j);
+                            break;
+                        case 44:
+                            linAmortBtn9.setVisibility(View.VISIBLE);
+                            txtEmiNo45.setVisibility(View.VISIBLE);
+                            card45.setVisibility(View.VISIBLE);
+                            txtEmiNo45.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card45.setTag(j);
+                            break;
 
-                case 45: linAmortBtn10.setVisibility(View.VISIBLE);txtEmiNo46.setVisibility(View.VISIBLE);card46.setVisibility(View.VISIBLE);txtEmiNo46.setText("0" + mLoanEmisArrayList.get(j).emi_no);card46.setTag(j);break;
-                case 46: linAmortBtn10.setVisibility(View.VISIBLE);txtEmiNo47.setVisibility(View.VISIBLE);card47.setVisibility(View.VISIBLE);txtEmiNo47.setText("0" + mLoanEmisArrayList.get(j).emi_no);card47.setTag(j);break;
-                case 47: linAmortBtn10.setVisibility(View.VISIBLE);txtEmiNo48.setVisibility(View.VISIBLE);card48.setVisibility(View.VISIBLE);txtEmiNo48.setText("0" + mLoanEmisArrayList.get(j).emi_no);card48.setTag(j);break;
-                case 48: linAmortBtn10.setVisibility(View.VISIBLE);txtEmiNo49.setVisibility(View.VISIBLE);card49.setVisibility(View.VISIBLE);txtEmiNo49.setText("0" + mLoanEmisArrayList.get(j).emi_no);card49.setTag(j);break;
-                case 49: linAmortBtn10.setVisibility(View.VISIBLE);txtEmiNo50.setVisibility(View.VISIBLE);card50.setVisibility(View.VISIBLE);txtEmiNo50.setText("0" + mLoanEmisArrayList.get(j).emi_no);card50.setTag(j);break;
+                        case 45:
+                            linAmortBtn10.setVisibility(View.VISIBLE);
+                            txtEmiNo46.setVisibility(View.VISIBLE);
+                            card46.setVisibility(View.VISIBLE);
+                            txtEmiNo46.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card46.setTag(j);
+                            break;
+                        case 46:
+                            linAmortBtn10.setVisibility(View.VISIBLE);
+                            txtEmiNo47.setVisibility(View.VISIBLE);
+                            card47.setVisibility(View.VISIBLE);
+                            txtEmiNo47.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card47.setTag(j);
+                            break;
+                        case 47:
+                            linAmortBtn10.setVisibility(View.VISIBLE);
+                            txtEmiNo48.setVisibility(View.VISIBLE);
+                            card48.setVisibility(View.VISIBLE);
+                            txtEmiNo48.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card48.setTag(j);
+                            break;
+                        case 48:
+                            linAmortBtn10.setVisibility(View.VISIBLE);
+                            txtEmiNo49.setVisibility(View.VISIBLE);
+                            card49.setVisibility(View.VISIBLE);
+                            txtEmiNo49.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card49.setTag(j);
+                            break;
+                        case 49:
+                            linAmortBtn10.setVisibility(View.VISIBLE);
+                            txtEmiNo50.setVisibility(View.VISIBLE);
+                            card50.setVisibility(View.VISIBLE);
+                            txtEmiNo50.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card50.setTag(j);
+                            break;
 
-                case 50: linAmortBtn11.setVisibility(View.VISIBLE);txtEmiNo51.setVisibility(View.VISIBLE);card51.setVisibility(View.VISIBLE);txtEmiNo51.setText("0" + mLoanEmisArrayList.get(j).emi_no);card51.setTag(j);break;
-                case 51: linAmortBtn11.setVisibility(View.VISIBLE);txtEmiNo52.setVisibility(View.VISIBLE);card52.setVisibility(View.VISIBLE);txtEmiNo52.setText("0" + mLoanEmisArrayList.get(j).emi_no);card52.setTag(j);break;
-                case 52: linAmortBtn11.setVisibility(View.VISIBLE);txtEmiNo53.setVisibility(View.VISIBLE);card53.setVisibility(View.VISIBLE);txtEmiNo53.setText("0" + mLoanEmisArrayList.get(j).emi_no);card53.setTag(j);break;
-                case 53: linAmortBtn11.setVisibility(View.VISIBLE);txtEmiNo54.setVisibility(View.VISIBLE);card54.setVisibility(View.VISIBLE);txtEmiNo54.setText("0" + mLoanEmisArrayList.get(j).emi_no);card54.setTag(j);break;
-                case 54: linAmortBtn11.setVisibility(View.VISIBLE);txtEmiNo55.setVisibility(View.VISIBLE);card55.setVisibility(View.VISIBLE);txtEmiNo55.setText("0" + mLoanEmisArrayList.get(j).emi_no);card55.setTag(j);break;
+                        case 50:
+                            linAmortBtn11.setVisibility(View.VISIBLE);
+                            txtEmiNo51.setVisibility(View.VISIBLE);
+                            card51.setVisibility(View.VISIBLE);
+                            txtEmiNo51.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card51.setTag(j);
+                            break;
+                        case 51:
+                            linAmortBtn11.setVisibility(View.VISIBLE);
+                            txtEmiNo52.setVisibility(View.VISIBLE);
+                            card52.setVisibility(View.VISIBLE);
+                            txtEmiNo52.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card52.setTag(j);
+                            break;
+                        case 52:
+                            linAmortBtn11.setVisibility(View.VISIBLE);
+                            txtEmiNo53.setVisibility(View.VISIBLE);
+                            card53.setVisibility(View.VISIBLE);
+                            txtEmiNo53.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card53.setTag(j);
+                            break;
+                        case 53:
+                            linAmortBtn11.setVisibility(View.VISIBLE);
+                            txtEmiNo54.setVisibility(View.VISIBLE);
+                            card54.setVisibility(View.VISIBLE);
+                            txtEmiNo54.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card54.setTag(j);
+                            break;
+                        case 54:
+                            linAmortBtn11.setVisibility(View.VISIBLE);
+                            txtEmiNo55.setVisibility(View.VISIBLE);
+                            card55.setVisibility(View.VISIBLE);
+                            txtEmiNo55.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card55.setTag(j);
+                            break;
 
-                case 55: linAmortBtn12.setVisibility(View.VISIBLE);txtEmiNo56.setVisibility(View.VISIBLE);card56.setVisibility(View.VISIBLE);txtEmiNo56.setText("0" + mLoanEmisArrayList.get(j).emi_no);card56.setTag(j);break;
-                case 56: linAmortBtn12.setVisibility(View.VISIBLE);txtEmiNo57.setVisibility(View.VISIBLE);card57.setVisibility(View.VISIBLE);txtEmiNo57.setText("0" + mLoanEmisArrayList.get(j).emi_no);card57.setTag(j);break;
-                case 57: linAmortBtn12.setVisibility(View.VISIBLE);txtEmiNo58.setVisibility(View.VISIBLE);card58.setVisibility(View.VISIBLE);txtEmiNo58.setText("0" + mLoanEmisArrayList.get(j).emi_no);card58.setTag(j);break;
-                case 58: linAmortBtn12.setVisibility(View.VISIBLE);txtEmiNo59.setVisibility(View.VISIBLE);card59.setVisibility(View.VISIBLE);txtEmiNo59.setText("0" + mLoanEmisArrayList.get(j).emi_no);card59.setTag(j);break;
-                case 59: linAmortBtn12.setVisibility(View.VISIBLE);txtEmiNo60.setVisibility(View.VISIBLE);card60.setVisibility(View.VISIBLE);txtEmiNo60.setText("0" + mLoanEmisArrayList.get(j).emi_no);card60.setTag(j);break;
+                        case 55:
+                            linAmortBtn12.setVisibility(View.VISIBLE);
+                            txtEmiNo56.setVisibility(View.VISIBLE);
+                            card56.setVisibility(View.VISIBLE);
+                            txtEmiNo56.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card56.setTag(j);
+                            break;
+                        case 56:
+                            linAmortBtn12.setVisibility(View.VISIBLE);
+                            txtEmiNo57.setVisibility(View.VISIBLE);
+                            card57.setVisibility(View.VISIBLE);
+                            txtEmiNo57.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card57.setTag(j);
+                            break;
+                        case 57:
+                            linAmortBtn12.setVisibility(View.VISIBLE);
+                            txtEmiNo58.setVisibility(View.VISIBLE);
+                            card58.setVisibility(View.VISIBLE);
+                            txtEmiNo58.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card58.setTag(j);
+                            break;
+                        case 58:
+                            linAmortBtn12.setVisibility(View.VISIBLE);
+                            txtEmiNo59.setVisibility(View.VISIBLE);
+                            card59.setVisibility(View.VISIBLE);
+                            txtEmiNo59.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card59.setTag(j);
+                            break;
+                        case 59:
+                            linAmortBtn12.setVisibility(View.VISIBLE);
+                            txtEmiNo60.setVisibility(View.VISIBLE);
+                            card60.setVisibility(View.VISIBLE);
+                            txtEmiNo60.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card60.setTag(j);
+                            break;
 
-                case 60: linAmortBtn13.setVisibility(View.VISIBLE);txtEmiNo61.setVisibility(View.VISIBLE);card61.setVisibility(View.VISIBLE);txtEmiNo61.setText("0" + mLoanEmisArrayList.get(j).emi_no);card61.setTag(j);break;
-                case 61: linAmortBtn13.setVisibility(View.VISIBLE);txtEmiNo62.setVisibility(View.VISIBLE);card62.setVisibility(View.VISIBLE);txtEmiNo62.setText("0" + mLoanEmisArrayList.get(j).emi_no);card62.setTag(j);break;
-                case 62: linAmortBtn13.setVisibility(View.VISIBLE);txtEmiNo63.setVisibility(View.VISIBLE);card63.setVisibility(View.VISIBLE);txtEmiNo63.setText("0" + mLoanEmisArrayList.get(j).emi_no);card63.setTag(j);break;
-                case 63: linAmortBtn13.setVisibility(View.VISIBLE);txtEmiNo64.setVisibility(View.VISIBLE);card64.setVisibility(View.VISIBLE);txtEmiNo64.setText("0" + mLoanEmisArrayList.get(j).emi_no);card64.setTag(j);break;
-                case 64: linAmortBtn13.setVisibility(View.VISIBLE);txtEmiNo65.setVisibility(View.VISIBLE);card65.setVisibility(View.VISIBLE);txtEmiNo65.setText("0" + mLoanEmisArrayList.get(j).emi_no);card65.setTag(j);break;
+                        case 60:
+                            linAmortBtn13.setVisibility(View.VISIBLE);
+                            txtEmiNo61.setVisibility(View.VISIBLE);
+                            card61.setVisibility(View.VISIBLE);
+                            txtEmiNo61.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card61.setTag(j);
+                            break;
+                        case 61:
+                            linAmortBtn13.setVisibility(View.VISIBLE);
+                            txtEmiNo62.setVisibility(View.VISIBLE);
+                            card62.setVisibility(View.VISIBLE);
+                            txtEmiNo62.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card62.setTag(j);
+                            break;
+                        case 62:
+                            linAmortBtn13.setVisibility(View.VISIBLE);
+                            txtEmiNo63.setVisibility(View.VISIBLE);
+                            card63.setVisibility(View.VISIBLE);
+                            txtEmiNo63.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card63.setTag(j);
+                            break;
+                        case 63:
+                            linAmortBtn13.setVisibility(View.VISIBLE);
+                            txtEmiNo64.setVisibility(View.VISIBLE);
+                            card64.setVisibility(View.VISIBLE);
+                            txtEmiNo64.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card64.setTag(j);
+                            break;
+                        case 64:
+                            linAmortBtn13.setVisibility(View.VISIBLE);
+                            txtEmiNo65.setVisibility(View.VISIBLE);
+                            card65.setVisibility(View.VISIBLE);
+                            txtEmiNo65.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card65.setTag(j);
+                            break;
 
-                case 65: linAmortBtn14.setVisibility(View.VISIBLE);txtEmiNo66.setVisibility(View.VISIBLE);card66.setVisibility(View.VISIBLE);txtEmiNo66.setText("0" + mLoanEmisArrayList.get(j).emi_no);card66.setTag(j);break;
-                case 66: linAmortBtn14.setVisibility(View.VISIBLE);txtEmiNo67.setVisibility(View.VISIBLE);card67.setVisibility(View.VISIBLE);txtEmiNo67.setText("0" + mLoanEmisArrayList.get(j).emi_no);card67.setTag(j);break;
-                case 67: linAmortBtn14.setVisibility(View.VISIBLE);txtEmiNo68.setVisibility(View.VISIBLE);card68.setVisibility(View.VISIBLE);txtEmiNo68.setText("0" + mLoanEmisArrayList.get(j).emi_no);card68.setTag(j);break;
-                case 68: linAmortBtn14.setVisibility(View.VISIBLE);txtEmiNo69.setVisibility(View.VISIBLE);card69.setVisibility(View.VISIBLE);txtEmiNo69.setText("0" + mLoanEmisArrayList.get(j).emi_no);card69.setTag(j);break;
-                case 69: linAmortBtn14.setVisibility(View.VISIBLE);txtEmiNo70.setVisibility(View.VISIBLE);card70.setVisibility(View.VISIBLE);txtEmiNo70.setText("0" + mLoanEmisArrayList.get(j).emi_no);card70.setTag(j);break;
+                        case 65:
+                            linAmortBtn14.setVisibility(View.VISIBLE);
+                            txtEmiNo66.setVisibility(View.VISIBLE);
+                            card66.setVisibility(View.VISIBLE);
+                            txtEmiNo66.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card66.setTag(j);
+                            break;
+                        case 66:
+                            linAmortBtn14.setVisibility(View.VISIBLE);
+                            txtEmiNo67.setVisibility(View.VISIBLE);
+                            card67.setVisibility(View.VISIBLE);
+                            txtEmiNo67.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card67.setTag(j);
+                            break;
+                        case 67:
+                            linAmortBtn14.setVisibility(View.VISIBLE);
+                            txtEmiNo68.setVisibility(View.VISIBLE);
+                            card68.setVisibility(View.VISIBLE);
+                            txtEmiNo68.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card68.setTag(j);
+                            break;
+                        case 68:
+                            linAmortBtn14.setVisibility(View.VISIBLE);
+                            txtEmiNo69.setVisibility(View.VISIBLE);
+                            card69.setVisibility(View.VISIBLE);
+                            txtEmiNo69.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card69.setTag(j);
+                            break;
+                        case 69:
+                            linAmortBtn14.setVisibility(View.VISIBLE);
+                            txtEmiNo70.setVisibility(View.VISIBLE);
+                            card70.setVisibility(View.VISIBLE);
+                            txtEmiNo70.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            card70.setTag(j);
+                            break;
+                    }
+                }
+
+                for (int k = 0; k < amortlistsize; k++) {
+                    if (mLoanEmisArrayList.get(k).status.equals("0")) {
+//                        selectedAmort(k);
+                        if (linAmortTile.getVisibility() != View.VISIBLE) {
+                            linAmortTile.setVisibility(View.VISIBLE);
+                        }
+
+                        txtEmiNo.setText("0" + mLoanEmisArrayList.get(k).emi_no);
+                        txtEmiAmount.setText(mLoanEmisArrayList.get(k).emi_amount);
+                        txtDueBy.setText(mLoanEmisArrayList.get(k).proposed_payment_date);
+                        txtPaymentDate.setText(mLoanEmisArrayList.get(k).actual_payment_date);
+                        txtPaymentStatus.setText(" " + mLoanEmisArrayList.get(k).statusMessage);
+                        if (mLoanEmisArrayList.get(k).status.equals("0")) {
+                            txtBtnText.setText(" " + "Pre Pay");
+                        } else {
+                            txtBtnText.setText(" " + "EMI History");
+                        }
+                        linPayBtn.setTag(mLoanEmisArrayList.get(k).loan_emi_id);
+                        break;
+                    }
+                }
+
+            } else {
+                try {
+                    linHasAmort.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    linNoAmort.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                String message = jsonDataO.getString("message");
+                txtAmortNotCreated.setText(message);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                progressBarAmort.setVisibility(View.GONE);
+            } catch (Exception e1) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void makePayment(String emi_id, String Amount) {
+        try {
+            try {
+                Globle.getInstance().paytm = new Paytm(
+                        "Eduvan80947867008828",
+                        "WAP",
+                        Amount,
+                        "APPPROD",
+                        "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp",
+//                                "https://securegw.paytm.in/theia/paytmCallback",
+                        "Retail109"
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String url = "https://eduvanz.com/Paytm/generateChecksum.php/";
+            Map<String, String> params = new HashMap<String, String>();
+            VolleyCall volleyCall = new VolleyCall();
+            params.put("MID", Globle.getInstance().paytm.getmId());
+            params.put("ORDER_ID", Globle.getInstance().paytm.getOrderId());
+            params.put("CUST_ID", Globle.getInstance().paytm.getCustId());
+            params.put("CHANNEL_ID", Globle.getInstance().paytm.getChannelId());
+            params.put("TXN_AMOUNT", Globle.getInstance().paytm.getTxnAmount());
+            params.put("WEBSITE", Globle.getInstance().paytm.getWebsite());
+            params.put("CALLBACK_URL", Globle.getInstance().paytm.getCallBackUrl());
+            params.put("INDUSTRY_TYPE_ID", Globle.getInstance().paytm.getIndustryTypeId());
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+
+            } else {
+                volleyCall.sendRequest(context, url, null, mFragment, "initializePaytmPaymentAmort", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initializePaytmPaymentAmort(JSONObject jsonData) {
+
+        try {
+            //getting paytm service
+            PaytmPGService Service = PaytmPGService.getProductionService();
+            String checksumHash = jsonData.optString("CHECKSUMHASH");
+
+            //creating a hashmap and adding all the values required
+            Map<String, String> paramMap = new HashMap<String, String>();
+
+            paramMap.put("MID", Globle.getInstance().paytm.getmId());
+            paramMap.put("ORDER_ID", Globle.getInstance().paytm.getOrderId());
+            paramMap.put("CUST_ID", Globle.getInstance().paytm.getCustId());
+//            paramMap.put( "MOBILE_NO" , "7777777777");
+//            paramMap.put( "EMAIL" , "shuklavijay249@gmail.com");
+            paramMap.put("CHANNEL_ID", Globle.getInstance().paytm.getChannelId());
+            paramMap.put("TXN_AMOUNT", Globle.getInstance().paytm.getTxnAmount());
+            paramMap.put("WEBSITE", Globle.getInstance().paytm.getWebsite());
+//        paramMap.put("CALLBACK_URL",Globle.getInstance().paytm.getCallBackUrl().concat("?").concat("ORDER_ID=").concat(Globle.getInstance().paytm.getOrderId()));
+            paramMap.put("CALLBACK_URL", Globle.getInstance().paytm.getCallBackUrl());
+            paramMap.put("CHECKSUMHASH", checksumHash);
+            paramMap.put("INDUSTRY_TYPE_ID", Globle.getInstance().paytm.getIndustryTypeId());
+
+            PaytmOrder order = new PaytmOrder((HashMap<String, String>) paramMap);
+
+            //intializing the paytm service
+            Service.initialize(order, null);
+
+            //finally starting the payment transaction
+            Service.startPaymentTransaction(context, true, true, new PaytmPaymentTransactionCallback() {
+                @Override
+                public void someUIErrorOccurred(String inErrorMessage) {
+                    // Some UI Error Occurred in Payment Gateway Activity.
+                    // // This may be due to initialization of views in
+                    // Payment Gateway Activity or may be due to //
+                    // initialization of webview. // Error Message details
+                    // the error occurred.
+                    Toast.makeText(context, "Payment Transaction response " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
+                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+                    s.append("inErrorMessage-");
+                    s.append(inErrorMessage);
+                    Globle.appendLog(String.valueOf(s));
+
+                }
+
+                @Override
+                public void onTransactionResponse(Bundle inResponse) {
+                    Log.d("LOG", "Payment Transaction is successful " + inResponse);
+                    Toast.makeText(context, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+                    s.append("inResponse-");
+                    s.append(inResponse);
+                    Globle.appendLog(String.valueOf(s));
+                    //"Bundle[{STATUS=TXN_SUCCESS,
+                    // CHECKSUMHASH=ENXZLPAIk3AlC/rdD7EfpMnG8Okxe0819nIQvFBjJL+aGnTrGIQfHHtGLFoiI+sWxVEFmOer+UCZiNaRNaRyOGbE4NMF66qRldhhHLJFaUs=,
+                    // BANKNAME=Union Bank of India, ORDERID=ORDER100008205, TXNAMOUNT=10.00,
+                    // TXNDATE=2018-07-10 14:23:01.0, MID=Eduvan80947867008828, TXNID=20180710111212800110168845030370887,
+                    // RESPCODE=01, PAYMENTMODE=DC, BANKTXNID=201819106425560, CURRENCY=INR, GATEWAYNAME=SBIFSS,
+                    // RESPMSG=Txn Success}]"
+                    if (inResponse.get("STATUS").equals("TXN_SUCCESS"))
+                    //                    if(inResponse.get("STATUS").equals("TXN_FAILURE"))
+                    {
+                        if (inResponse != null) {
+                            String message = String.valueOf(inResponse.get("RESPMSG"));
+                            String CHECKSUMHASH = String.valueOf(inResponse.get("CHECKSUMHASH"));
+                            String BANKNAME = String.valueOf(inResponse.get("BANKNAME"));
+                            String ORDERID = String.valueOf(inResponse.get("ORDERID"));
+                            String TXNAMOUNT = String.valueOf(inResponse.get("TXNAMOUNT"));
+                            String TXNDATE = String.valueOf(inResponse.get("TXNDATE"));
+                            String MID = String.valueOf(inResponse.get("MID"));
+                            String TXNID = String.valueOf(inResponse.get("TXNID"));
+                            String RESPCODE = String.valueOf(inResponse.get("RESPCODE"));
+                            String BANKTXNID = String.valueOf(inResponse.get("BANKTXNID"));
+                            String PAYMENTMODE = String.valueOf(inResponse.get("PAYMENTMODE"));
+
+                            if (message.equalsIgnoreCase("TXN_SUCCESS")) {
+                                Log.e(MainActivity.TAG, "onActivityResult: " + "Transaction Successful!");
+                                /** API CALL **/
+                                try {
+
+                                    //payment_platform = 2 (1-web, 2-app)
+                                    //payment_partner = 1 (1-paytm, 2-atom)
+
+                                    String url = MainActivity.mainUrl + "epayment/studentEmiReceive";
+                                    Map<String, String> params = new HashMap<String, String>();
+                                    VolleyCall volleyCall = new VolleyCall();
+                                    params.put("loan_emi_id", linPayBtn.getTag().toString());
+                                    params.put("TXNAMOUNT", TXNAMOUNT);
+                                    params.put("TXNID", TXNID); // merchant ID
+//                                  params.put("bankTxnId", BANKTXNID); // Bank ID
+                                    params.put("STATUS", "TXN_SUCCESS");
+                                    params.put("paymentOption", "1");
+                                    params.put("payment_partner", payment_partner);
+                                    params.put("payment_platform", payment_platform);
+                                    if (!Globle.isNetworkAvailable(context)) {
+                                        Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        volleyCall.sendRequest(context, url, null, mFragment, "kycPaymentCaptureWizard", params, MainActivity.auth_token);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                Log.e(MainActivity.TAG, "onActivityResult: " + "Transaction Successful!");
+                                /** API CALL **/
+                                try {
+//                                        String ipaddress = Utils.getIPAddress(true);
+                                    String url = MainActivity.mainUrl + "epayment/studentEmiReceive";
+                                    Map<String, String> params = new HashMap<String, String>();
+                                    VolleyCall volleyCall = new VolleyCall();
+                                    params.put("loan_emi_id", linPayBtn.getTag().toString());
+                                    params.put("TXNAMOUNT", TXNAMOUNT);
+                                    params.put("TXNID", TXNID); // merchant ID
+//                                  params.put("bankTxnId", BANKTXNID); // Bank ID
+                                    params.put("STATUS", "TXN_SUCCESS");
+                                    params.put("paymentOption", "1");
+                                    params.put("payment_partner", payment_partner);
+                                    params.put("payment_platform", payment_platform);
+                                    if (!Globle.isNetworkAvailable(context)) {
+                                        Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        volleyCall.sendRequest(context, url, null, mFragment, "kycPaymentCaptureWizard", params, MainActivity.auth_token);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            try {
+                                progressBarAmort.setVisibility(VISIBLE);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            getAmortDetails();
+                        } else {
+                            Toast.makeText(context, "Payment not successful ", Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 }
 
+                @Override
+                public void networkNotAvailable() { // If network is not
+                    // available, then this
+                    // method gets called.
+                }
 
-                selectedAmort(amortlistsize-1);
-//                adapter = new AmortAdapter(mLoanEmisArrayList, context, getActivity());
-//                rvAmort.setAdapter(adapter);
+                @Override
+                public void clientAuthenticationFailed(String inErrorMessage) {
+                    // This method gets called if client authentication
+                    // failed. // Failure may be due to following reasons //
+                    // 1. Server error or downtime. // 2. Server unable to
+                    // generate checksum or checksum response is not in
+                    // proper format. // 3. Server failed to authenticate
+                    // that client. That is value of payt_STATUS is 2. //
+                    // Error Message describes the reason for failure.
+                    Toast.makeText(context, "Back pressed. Transaction cancelled", Toast.LENGTH_LONG).show();
+                    //                    Globle.appendLog(inErrorMessage);
+                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+                    s.append("inErrorMessage-");
+                    s.append(inErrorMessage);
+                    Globle.appendLog(String.valueOf(s));
 
-            } else {
-                String message = jsonDataO.getString("message");
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-            }
+                }
+
+                @Override
+                public void onErrorLoadingWebPage(int iniErrorCode,
+                                                  String inErrorMessage, String inFailingUrl) {
+                    Toast.makeText(context, "Back pressed. Transaction cancelled", Toast.LENGTH_LONG).show();
+
+                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+                    s.append("inErrorMessage-");
+                    s.append(inErrorMessage);
+                    s.append(" inFailingUrl-");
+                    s.append(inFailingUrl);
+                    Globle.appendLog(String.valueOf(s));
+
+                }
+
+                // had to be added: NOTE
+                @Override
+                public void onBackPressedCancelTransaction() {
+                    Toast.makeText(context, "Back pressed. Transaction cancelled", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {
+                    Log.d("LOG", "Payment Transaction Failed " + inErrorMessage);
+                    Toast.makeText(context, "Payment Transaction Failed ", Toast.LENGTH_LONG).show();
+                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+                    s.append("inErrorMessage-");
+                    s.append(inErrorMessage);
+                    Globle.appendLog(String.valueOf(s));
+
+                }
+
+            });
+
         } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+            e.printStackTrace();
         }
 
+
     }
+
 
     @Override
     public void onClick(View v) {
@@ -598,7 +1368,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
             switch (v.getId()) {
 
                 case R.id.linPayBtn:
-                    if(txtBtnText.getText().toString().contains("EMI History")){
+                    if (txtBtnText.getText().toString().contains("EMI History")) {
 
                         try {
                             String url = MainActivity.mainUrl + "dashboard/getEmiTransactionDetails";
@@ -611,96 +1381,226 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                                 volleyCall.sendRequest(context, url, null, mFragment, "getEmiTransactionDetails", params, MainActivity.auth_token);
                             }
                         } catch (Exception e) {
-                           e.printStackTrace();
-                        }
-                    }else {
-                        try {
-                            String url = MainActivity.mainUrl + "dashboard/ammortisation";
-                            Map<String, String> params = new HashMap<String, String>();
-                            params.put("lead_id", lead_id);
-                            if (!Globle.isNetworkAvailable(context)) {
-                                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-                            } else {
-                                VolleyCall volleyCall = new VolleyCall();
-                                volleyCall.sendRequest(context, url, null, mFragment, "getAmortDetails", params, MainActivity.auth_token);
-                            }
-                        } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    } else {
+
+                        makePayment(linPayBtn.getTag().toString(), txtEmiAmount.getText().toString());
+
                     }
-//                    selectedAmort((Integer) card1.getTag());
                     break;
 
-                case R.id.card1: selectedAmort((Integer) card1.getTag());break;
-                case R.id.card2: selectedAmort((Integer) card2.getTag());break;
-                case R.id.card3: selectedAmort((Integer) card3.getTag());break;
-                case R.id.card4: selectedAmort((Integer) card4.getTag());break;
-                case R.id.card5: selectedAmort((Integer) card5.getTag());break;
-                case R.id.card6: selectedAmort((Integer) card6.getTag());break;
-                case R.id.card7: selectedAmort((Integer) card7.getTag());break;
-                case R.id.card8: selectedAmort((Integer) card8.getTag());break;
-                case R.id.card9: selectedAmort((Integer) card9.getTag());break;
-                case R.id.card10: selectedAmort((Integer) card10.getTag());break;
-                case R.id.card11: selectedAmort((Integer) card11.getTag());break;
-                case R.id.card12: selectedAmort((Integer) card12.getTag());break;
-                case R.id.card13: selectedAmort((Integer) card13.getTag());break;
-                case R.id.card14: selectedAmort((Integer) card14.getTag());break;
-                case R.id.card15: selectedAmort((Integer) card15.getTag());break;
-                case R.id.card16: selectedAmort((Integer) card16.getTag());break;
-                case R.id.card17: selectedAmort((Integer) card17.getTag());break;
-                case R.id.card18: selectedAmort((Integer) card18.getTag());break;
-                case R.id.card19: selectedAmort((Integer) card19.getTag());break;
-                case R.id.card20: selectedAmort((Integer) card20.getTag());break;
-                case R.id.card21: selectedAmort((Integer) card21.getTag());break;
-                case R.id.card22: selectedAmort((Integer) card22.getTag());break;
-                case R.id.card23: selectedAmort((Integer) card23.getTag());break;
-                case R.id.card24: selectedAmort((Integer) card24.getTag());break;
-                case R.id.card25: selectedAmort((Integer) card25.getTag());break;
-                case R.id.card26: selectedAmort((Integer) card26.getTag());break;
-                case R.id.card27: selectedAmort((Integer) card27.getTag());break;
-                case R.id.card28: selectedAmort((Integer) card28.getTag());break;
-                case R.id.card29: selectedAmort((Integer) card29.getTag());break;
-                case R.id.card30: selectedAmort((Integer) card30.getTag());break;
-                case R.id.card31: selectedAmort((Integer) card31.getTag());break;
-                case R.id.card32: selectedAmort((Integer) card32.getTag());break;
-                case R.id.card33: selectedAmort((Integer) card33.getTag());break;
-                case R.id.card34: selectedAmort((Integer) card34.getTag());break;
-                case R.id.card35: selectedAmort((Integer) card35.getTag());break;
-                case R.id.card36: selectedAmort((Integer) card36.getTag());break;
-                case R.id.card37: selectedAmort((Integer) card37.getTag());break;
-                case R.id.card38: selectedAmort((Integer) card38.getTag());break;
-                case R.id.card39: selectedAmort((Integer) card39.getTag());break;
-                case R.id.card40: selectedAmort((Integer) card40.getTag());break;
-                case R.id.card41: selectedAmort((Integer) card41.getTag());break;
-                case R.id.card42: selectedAmort((Integer) card42.getTag());break;
-                case R.id.card43: selectedAmort((Integer) card43.getTag());break;
-                case R.id.card44: selectedAmort((Integer) card44.getTag());break;
-                case R.id.card45: selectedAmort((Integer) card45.getTag());break;
-                case R.id.card46: selectedAmort((Integer) card46.getTag());break;
-                case R.id.card47: selectedAmort((Integer) card47.getTag());break;
-                case R.id.card48: selectedAmort((Integer) card48.getTag());break;
-                case R.id.card49: selectedAmort((Integer) card49.getTag());break;
-                case R.id.card50: selectedAmort((Integer) card50.getTag());break;
-                case R.id.card51: selectedAmort((Integer) card51.getTag());break;
-                case R.id.card52: selectedAmort((Integer) card52.getTag());break;
-                case R.id.card53: selectedAmort((Integer) card53.getTag());break;
-                case R.id.card54: selectedAmort((Integer) card54.getTag());break;
-                case R.id.card55: selectedAmort((Integer) card55.getTag());break;
-                case R.id.card56: selectedAmort((Integer) card56.getTag());break;
-                case R.id.card57: selectedAmort((Integer) card57.getTag());break;
-                case R.id.card58: selectedAmort((Integer) card58.getTag());break;
-                case R.id.card59: selectedAmort((Integer) card59.getTag());break;
-                case R.id.card60: selectedAmort((Integer) card60.getTag());break;
-                case R.id.card61: selectedAmort((Integer) card61.getTag());break;
-                case R.id.card62: selectedAmort((Integer) card62.getTag());break;
-                case R.id.card63: selectedAmort((Integer) card63.getTag());break;
-                case R.id.card64: selectedAmort((Integer) card64.getTag());break;
-                case R.id.card65: selectedAmort((Integer) card65.getTag());break;
-                case R.id.card66: selectedAmort((Integer) card66.getTag());break;
-                case R.id.card67: selectedAmort((Integer) card67.getTag());break;
-                case R.id.card68: selectedAmort((Integer) card68.getTag());break;
-                case R.id.card69: selectedAmort((Integer) card69.getTag());break;
-                case R.id.card70: selectedAmort((Integer) card70.getTag());break;
+                case R.id.card1:
+                    selectedAmort((Integer) card1.getTag(),card1);
+
+                    break;
+                case R.id.card2:
+                    selectedAmort((Integer) card2.getTag(), card2);
+                    break;
+                case R.id.card3:
+                    selectedAmort((Integer) card3.getTag(), card3);
+                    break;
+                case R.id.card4:
+                    selectedAmort((Integer) card4.getTag(), card4);
+                    break;
+                case R.id.card5:
+                    selectedAmort((Integer) card5.getTag(), card5);
+                    break;
+                case R.id.card6:
+                    selectedAmort((Integer) card6.getTag(), card6);
+                    break;
+                case R.id.card7:
+                    selectedAmort((Integer) card7.getTag(), card7);
+                    break;
+                case R.id.card8:
+                    selectedAmort((Integer) card8.getTag(), card8);
+                    break;
+                case R.id.card9:
+                    selectedAmort((Integer) card9.getTag(), card9);
+                    break;
+                case R.id.card10:
+                    selectedAmort((Integer) card10.getTag(), card10);
+                    break;
+                case R.id.card11:
+                    selectedAmort((Integer) card11.getTag(), card11);
+                    break;
+                case R.id.card12:
+                    selectedAmort((Integer) card12.getTag(), card12);
+                    break;
+                case R.id.card13:
+                    selectedAmort((Integer) card13.getTag(), card13);
+                    break;
+                case R.id.card14:
+                    selectedAmort((Integer) card14.getTag(), card14);
+                    break;
+                case R.id.card15:
+                    selectedAmort((Integer) card15.getTag(), card15);
+                    break;
+                case R.id.card16:
+                    selectedAmort((Integer) card16.getTag(), card16);
+                    break;
+                case R.id.card17:
+                    selectedAmort((Integer) card17.getTag(), card17);
+                    break;
+                case R.id.card18:
+                    selectedAmort((Integer) card18.getTag(), card18);
+                    break;
+                case R.id.card19:
+                    selectedAmort((Integer) card19.getTag(), card19);
+                    break;
+                case R.id.card20:
+                    selectedAmort((Integer) card20.getTag(), card20);
+                    break;
+                case R.id.card21:
+                    selectedAmort((Integer) card21.getTag(), card21);
+                    break;
+                case R.id.card22:
+                    selectedAmort((Integer) card22.getTag(), card22);
+                    break;
+                case R.id.card23:
+                    selectedAmort((Integer) card23.getTag(), card23);
+                    break;
+                case R.id.card24:
+                    selectedAmort((Integer) card24.getTag(), card24);
+                    break;
+                case R.id.card25:
+                    selectedAmort((Integer) card25.getTag(), card25);
+                    break;
+                case R.id.card26:
+                    selectedAmort((Integer) card26.getTag(), card26);
+                    break;
+                case R.id.card27:
+                    selectedAmort((Integer) card27.getTag(), card27);
+                    break;
+                case R.id.card28:
+                    selectedAmort((Integer) card28.getTag(), card28);
+                    break;
+                case R.id.card29:
+                    selectedAmort((Integer) card29.getTag(), card29);
+                    break;
+                case R.id.card30:
+                    selectedAmort((Integer) card30.getTag(), card30);
+                    break;
+                case R.id.card31:
+                    selectedAmort((Integer) card31.getTag(), card31);
+                    break;
+                case R.id.card32:
+                    selectedAmort((Integer) card32.getTag(), card32);
+                    break;
+                case R.id.card33:
+                    selectedAmort((Integer) card33.getTag(), card33);
+                    break;
+                case R.id.card34:
+                    selectedAmort((Integer) card34.getTag(), card34);
+                    break;
+                case R.id.card35:
+                    selectedAmort((Integer) card35.getTag(), card35);
+                    break;
+                case R.id.card36:
+                    selectedAmort((Integer) card36.getTag(), card36);
+                    break;
+                case R.id.card37:
+                    selectedAmort((Integer) card37.getTag(), card37);
+                    break;
+                case R.id.card38:
+                    selectedAmort((Integer) card38.getTag(), card38);
+                    break;
+                case R.id.card39:
+                    selectedAmort((Integer) card39.getTag(), card39);
+                    break;
+                case R.id.card40:
+                    selectedAmort((Integer) card40.getTag(), card40);
+                    break;
+                case R.id.card41:
+                    selectedAmort((Integer) card41.getTag(), card41);
+                    break;
+                case R.id.card42:
+                    selectedAmort((Integer) card42.getTag(), card42);
+                    break;
+                case R.id.card43:
+                    selectedAmort((Integer) card43.getTag(), card43);
+                    break;
+                case R.id.card44:
+                    selectedAmort((Integer) card44.getTag(), card44);
+                    break;
+                case R.id.card45:
+                    selectedAmort((Integer) card45.getTag(), card45);
+                    break;
+                case R.id.card46:
+                    selectedAmort((Integer) card46.getTag(), card46);
+                    break;
+                case R.id.card47:
+                    selectedAmort((Integer) card47.getTag(), card47);
+                    break;
+                case R.id.card48:
+                    selectedAmort((Integer) card48.getTag(), card48);
+                    break;
+                case R.id.card49:
+                    selectedAmort((Integer) card49.getTag(), card49);
+                    break;
+                case R.id.card50:
+                    selectedAmort((Integer) card50.getTag(), card50);
+                    break;
+                case R.id.card51:
+                    selectedAmort((Integer) card51.getTag(), card51);
+                    break;
+                case R.id.card52:
+                    selectedAmort((Integer) card52.getTag(), card52);
+                    break;
+                case R.id.card53:
+                    selectedAmort((Integer) card53.getTag(), card53);
+                    break;
+                case R.id.card54:
+                    selectedAmort((Integer) card54.getTag(), card54);
+                    break;
+                case R.id.card55:
+                    selectedAmort((Integer) card55.getTag(), card55);
+                    break;
+                case R.id.card56:
+                    selectedAmort((Integer) card56.getTag(), card56);
+                    break;
+                case R.id.card57:
+                    selectedAmort((Integer) card57.getTag(), card57);
+                    break;
+                case R.id.card58:
+                    selectedAmort((Integer) card58.getTag(), card58);
+                    break;
+                case R.id.card59:
+                    selectedAmort((Integer) card59.getTag(), card59);
+                    break;
+                case R.id.card60:
+                    selectedAmort((Integer) card60.getTag(), card60);
+                    break;
+                case R.id.card61:
+                    selectedAmort((Integer) card61.getTag(), card61);
+                    break;
+                case R.id.card62:
+                    selectedAmort((Integer) card62.getTag(), card62);
+                    break;
+                case R.id.card63:
+                    selectedAmort((Integer) card63.getTag(), card63);
+                    break;
+                case R.id.card64:
+                    selectedAmort((Integer) card64.getTag(), card64);
+                    break;
+                case R.id.card65:
+                    selectedAmort((Integer) card65.getTag(), card65);
+                    break;
+                case R.id.card66:
+                    selectedAmort((Integer) card66.getTag(), card66);
+                    break;
+                case R.id.card67:
+                    selectedAmort((Integer) card67.getTag(), card67);
+                    break;
+                case R.id.card68:
+                    selectedAmort((Integer) card68.getTag(), card68);
+                    break;
+                case R.id.card69:
+                    selectedAmort((Integer) card69.getTag(), card69);
+                    break;
+                case R.id.card70:
+                    selectedAmort((Integer) card70.getTag(), card70);
+                    break;
 
             }
         } catch (Exception e) {
@@ -709,31 +1609,43 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 
     }
 
-    public void emiHistoryDialog(JSONObject mPath) {
+    public void emiHistoryDialog(JSONObject jsonObject) {
 
         try {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            if (jsonObject.getInt("status") == 1) {
+
+                jsonObject.getString("status");
+                jsonObject.getString("message");
+                JSONObject jsonObject1 = jsonObject.getJSONObject("emiCompleteInstrumentDetails");
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
 //            builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
 //                @Override
 //                public void onClick(DialogInterface dialog, int which) {
 //                }
 //            });
-            final AlertDialog dialog = builder.create();
-            LayoutInflater inflater = dialog.getLayoutInflater();
-            View dialogLayout = inflater.inflate(R.layout.emihistorydialog, null);
-            dialog.setView(dialogLayout);
-            ImageButton closeButton = dialogLayout.findViewById(R.id.btnClose);
-            TextView txtPaymentMode =  dialogLayout.findViewById(R.id.txtPaymentMode);
-            TextView txtTransactionStatus =  dialogLayout.findViewById(R.id.txtTransactionStatus);
-            TextView txtPaymentAmount =  dialogLayout.findViewById(R.id.txtPaymentAmount);
-            TextView txtPaymentDate =  dialogLayout.findViewById(R.id.txtPaymentDate);
+                final AlertDialog dialog = builder.create();
+                LayoutInflater inflater = dialog.getLayoutInflater();
+                View dialogLayout = inflater.inflate(R.layout.emihistorydialog, null);
+                dialog.setView(dialogLayout);
+                ImageButton closeButton = dialogLayout.findViewById(R.id.btnClose);
+                TextView txtPaymentMode = dialogLayout.findViewById(R.id.txtPaymentMode);
+                TextView txtTransactionStatus = dialogLayout.findViewById(R.id.txtTransactionStatus);
+                TextView txtPaymentAmount = dialogLayout.findViewById(R.id.txtPaymentAmount);
+                TextView txtPaymentDate = dialogLayout.findViewById(R.id.txtPaymentDate);
 
-            closeButton.setOnClickListener((View.OnClickListener) mFragment);
+                txtPaymentMode.setText(jsonObject1.getString("instrument_type").toString());
+                txtTransactionStatus.setText(jsonObject1.getString("transaction_type_value").toString());
+                txtPaymentAmount.setText(jsonObject1.getString("transaction_amount").toString());
+                txtPaymentDate.setText(jsonObject1.getString("epayment_transaction_date").toString());
 
-            closeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                closeButton.setOnClickListener((View.OnClickListener) mFragment);
+
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 //                    try {
 //
 //                        InputMethodManager imm = (InputMethodManager) (context.getSystemService(Context.INPUT_METHOD_SERVICE));
@@ -743,21 +1655,20 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 //                    } catch (Exception e) {
 //                        e.printStackTrace();
 //                    }
-                    dialog.dismiss();
-                }
+                        dialog.dismiss();
+                    }
+                });
 
-            });
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.show();
 
-            dialog.show();
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface d) {
 
-            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface d) {
-
-                }
-            });
+                    }
+                });
 
 //            final AlertDialog emihistorydialog = new AlertDialog.Builder(context).create();
 //            LayoutInflater factory = LayoutInflater.from(context);
@@ -788,6 +1699,10 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 //                }
 //
 //            });
+            } else {
+
+                Toast.makeText(context, jsonObject.getString("message").toString(), Toast.LENGTH_LONG).show();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -795,23 +1710,104 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
     }
 
 
-    private void selectedAmort(int pos) {
+    private void selectedAmort(int pos, CardView CheckedCard) {
 
-        if(linAmortTile.getVisibility()!= View.VISIBLE)
-        {
+        if (linAmortTile.getVisibility() != View.VISIBLE) {
             linAmortTile.setVisibility(View.VISIBLE);
         }
-        txtEmiNo.setText("0"+mLoanEmisArrayList.get(pos).emi_no);
+
+        txtEmiNo.setText("0" + mLoanEmisArrayList.get(pos).emi_no);
         txtEmiAmount.setText(mLoanEmisArrayList.get(pos).emi_amount);
         txtDueBy.setText(mLoanEmisArrayList.get(pos).proposed_payment_date);
         txtPaymentDate.setText(mLoanEmisArrayList.get(pos).actual_payment_date);
-        txtPaymentStatus.setText(" "+ mLoanEmisArrayList.get(pos).statusMessage);
-        if(mLoanEmisArrayList.get(pos).status.equals("0")) {
+        txtPaymentStatus.setText(" " + mLoanEmisArrayList.get(pos).statusMessage);
+        if (mLoanEmisArrayList.get(pos).status.equals("0")) {
             txtBtnText.setText(" " + "Pre Pay");
-        }
-        else {
+        } else {
             txtBtnText.setText(" " + "EMI History");
         }
         linPayBtn.setTag(mLoanEmisArrayList.get(pos).loan_emi_id);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            try {
+                card1.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card2.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card3.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card4.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card5.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card6.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card7.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card8.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card9.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card10.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card11.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card12.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card13.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card14.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card15.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card16.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card17.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card18.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card19.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card20.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card21.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card22.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card23.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card24.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card25.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card26.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card27.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card28.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card29.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card30.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card31.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card32.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card33.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card34.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card35.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card36.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card37.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card38.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card39.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card40.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card41.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card42.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card43.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card44.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card45.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card46.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card47.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card48.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card49.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card50.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card51.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card52.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card53.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card54.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card55.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card56.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card57.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card58.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card59.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card60.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card61.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card62.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card63.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card64.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card65.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card66.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card67.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card68.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card69.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card70.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+            } catch (Resources.NotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            CheckedCard.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.lightGrey)));
+        }
+
     }
 }

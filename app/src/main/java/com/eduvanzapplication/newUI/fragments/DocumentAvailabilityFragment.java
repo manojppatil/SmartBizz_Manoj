@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -24,17 +25,14 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 
-import static android.view.View.GONE;
-import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.documents;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
 
 public class DocumentAvailabilityFragment extends Fragment {
 
     private static OnDocumentFragmentInteractionListener mDocListener;
     private LinearLayout linAadharBtn, linPanBtn, linBothBtn, linNoneBtn;
-    private EditText edtAadhaar,edtPAN;
-    int keyDel ;
-
+    public static EditText edtAadhaar, edtPAN;
+    int keyDel;
 
 
     public DocumentAvailabilityFragment() {
@@ -59,17 +57,13 @@ public class DocumentAvailabilityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_document_availability, container, false);
-//        linAadharBtn = view.findViewById(R.id.linAadharBtn);
-//        linPanBtn = view.findViewById(R.id.linPanBtn);
-//        linBothBtn =view.findViewById(R.id.linBothBtn);
-//        linNoneBtn = view.findViewById(R.id.linNoneBtn);
+        View view = inflater.inflate(R.layout.fragment_document_availability, container, false);
 
         edtAadhaar = view.findViewById(R.id.edtAadhaar);
 
         edtPAN = view.findViewById(R.id.edtPAN);
 
-        return  view;
+        return view;
     }
 
     @Override
@@ -152,53 +146,50 @@ public class DocumentAvailabilityFragment extends Fragment {
         edtAadhaar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
             }
-
-
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                NewLeadActivity.aadharNumber = edtAadhaar.getText().toString();
-                if(edtAadhaar.getText().toString().length() > 3 && edtPAN.getText().toString().length() > 3)
-                {
-                    documents = "3";
-                }
-                else {
-
-                    documents = "1";
-                }
-
-
-                checkAllFields();
-
-                //this is code for aadhar text format
-/*
-                NewLeadActivity.aadharNumber = edtAadhaar.getText().toString();
-
-                edtAadhaar.setOnKeyListener(new View.OnKeyListener() {
-
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                        if (keyCode == KeyEvent.KEYCODE_DEL)
-                            keyDel = 1;
-                        return false;
+                if (!Globle.validateAadharNumber(edtAadhaar.getText().toString())) {
+//False
+                    if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
+                        NewLeadActivity.aadharNumber = "";
+                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
+                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "3";
+                    } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
+                        NewLeadActivity.aadharNumber = "";
+                        edtAadhaar.setError(null);
+                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "2";
+                    } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
+                        NewLeadActivity.aadharNumber = "";
+                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
+//                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "1";
+                    } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
+                        NewLeadActivity.panNUmber = "";
+                        edtAadhaar.setError("Please Enter Aadhaar or PAN Number!");
+                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "0";
                     }
-                });
 
-                if (keyDel == 0) {
-                    int len = edtAadhaar.getText().length();
-                    if(len == 4 || len==10) {
-                        edtAadhaar.setText(edtAadhaar.getText() + "  ");
-                        edtAadhaar.setSelection(edtAadhaar.getText().length());
-                    }
                 } else {
-                    keyDel = 0;
-                }*/
-
-
+//True
+                    if (edtPAN.getText().toString().length() > 0) {
+                        NewLeadActivity.aadharNumber = edtAadhaar.getText().toString();
+                        edtAadhaar.setError(null);
+//                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "3";
+                    } else {
+                        NewLeadActivity.aadharNumber = edtAadhaar.getText().toString();
+                        edtAadhaar.setError(null);
+//                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "1";
+                    }
+                }
+                checkAllFields();
             }
 
             @Override
@@ -206,25 +197,65 @@ public class DocumentAvailabilityFragment extends Fragment {
 
             }
         });
-
 
         edtPAN.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
+            //            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////                edtPAN.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+//                if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
+//                    NewLeadActivity.panNUmber = edtPAN.getText().toString().toUpperCase();
+//                    NewLeadActivity.documents = "3";
+//                }
+//                else {
+//                    NewLeadActivity.panNUmber = edtPAN.getText().toString().toUpperCase();
+//                    NewLeadActivity.documents = "2";
+//                }
+//                checkAllFields();
+//            }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                NewLeadActivity.panNUmber = edtPAN.getText().toString();
 
-                if(edtAadhaar.getText().toString().length() > 3 && edtPAN.getText().toString().length() > 3)
-                {
-                    documents = "3";
+                if (!edtPAN.getText().toString().toUpperCase().matches(Globle.panPattern)) {
+                    if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
+                        NewLeadActivity.panNUmber = "";
+//                        edtAadhaar.setError(null);
+                        edtPAN.setError("please Enter Valid PAN number!");
+                        NewLeadActivity.documents = "3";
+                    } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
+                        NewLeadActivity.panNUmber = "";
+                        edtAadhaar.setError(null);
+                        edtPAN.setError("please Enter Valid PAN number!");
+                        NewLeadActivity.documents = "2";
+                    } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
+                        NewLeadActivity.panNUmber = "";
+//                        edtAadhaar.setError(null);
+                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "1";
+                    } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
+                        NewLeadActivity.panNUmber = "";
+                        edtAadhaar.setError(null);
+                        edtPAN.setError("Please Enter Aadhaar or PAN Number!");
+                        NewLeadActivity.documents = "0";
+                    }
+                } else {
+                    //Pan True
+                    if (edtAadhaar.getText().toString().length() > 0) {
+                        NewLeadActivity.panNUmber = edtPAN.getText().toString().toUpperCase().trim();
+//                        edtAadhaar.setError(null);
+                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "3";
+                    } else {
+                        NewLeadActivity.panNUmber = edtPAN.getText().toString().toUpperCase().trim();
+//                        edtAadhaar.setError(null);
+                        edtPAN.setError(null);
+                        NewLeadActivity.documents = "2";
+                    }
                 }
-                else {
-                    documents = "2";
-                }
+
                 checkAllFields();
             }
 
@@ -234,7 +265,7 @@ public class DocumentAvailabilityFragment extends Fragment {
             }
         });
 
-        if (viewPager.getCurrentItem() == 1){
+        if (viewPager.getCurrentItem() == 1) {
             viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -248,7 +279,7 @@ public class DocumentAvailabilityFragment extends Fragment {
 
                 @Override
                 public void onPageScrollStateChanged(int state) {
-                    if (state == ViewPager.SCROLL_STATE_IDLE){
+                    if (state == ViewPager.SCROLL_STATE_IDLE) {
 
                     }
                 }
@@ -259,48 +290,89 @@ public class DocumentAvailabilityFragment extends Fragment {
 
 //    private  void checkNextButtonstate()'
 
-    private void checkAllFields() {
-
-        switch (NewLeadActivity.documents){
-            case "1":
-                if(!Globle.validateAadharNumber(NewLeadActivity.aadharNumber)){
-                    mDocListener.onOffButtonsDocuments(false, true);
-                    //create method here
-                    edtAadhaar.setError( "Please enter valid Aadhar" );
-                    edtPAN.setError( null );
-
-                }
-                else
-                    mDocListener.onOffButtonsDocuments(true, true);
-                break;
-
-            case "2":
-                if (!NewLeadActivity.panNUmber.matches(Globle.panPattern)) {
-                    mDocListener.onOffButtonsDocuments(false, true);
-                    edtPAN.setError( "Plase enter valid Pan" );
-                    edtAadhaar.setError( null );
-                }
-                else
-                    mDocListener.onOffButtonsDocuments(true, true);
-                break;
-
-            case "3":
-                if (!Globle.validateAadharNumber(NewLeadActivity.aadharNumber) && !NewLeadActivity.panNUmber.matches(Globle.panPattern))
-                    mDocListener.onOffButtonsDocuments(false, true);
-                else
-                    mDocListener.onOffButtonsDocuments(true, true);
-                edtAadhaar.setError( null );
-                break;
-
-//            case "4":
-//                mDocListener.onOffButtonsDocuments(true, true);
+//    private void checkAllFields() {
+//
+//        switch (NewLeadActivity.documents) {
+//            case "1":
+//                if (!Globle.validateAadharNumber(NewLeadActivity.aadharNumber)) {
+//                    mDocListener.onOffButtonsDocuments(false, true);
+//                    //create method here
+//                    edtAadhaar.setError("Please enter valid Aadhar");
+//                    edtPAN.setError(null);
+//                } else {
+//                    edtAadhaar.setError(null);
+//                    mDocListener.onOffButtonsDocuments(true, true);
+//                }
 //                break;
+//
+//            case "2":
+//                if (!NewLeadActivity.panNUmber.matches(Globle.panPattern)) {
+//                    mDocListener.onOffButtonsDocuments(false, true);
+//                    edtPAN.setError("Plase enter valid Pan");
+//                    edtAadhaar.setError(null);
+//                } else{
+//                    edtPAN.setError(null);
+//                mDocListener.onOffButtonsDocuments(true, true);
+//                }
+//                break;
+//
+//            case "3":
+//                if (!(Globle.validateAadharNumber(NewLeadActivity.aadharNumber) && NewLeadActivity.panNUmber.matches(Globle.panPattern)))
+//                {
+//                    mDocListener.onOffButtonsDocuments(false, true);
+//                }
+//                else{
+//                    edtAadhaar.setError(null);
+//                edtPAN.setError(null);
+//                mDocListener.onOffButtonsDocuments(true, true);}
+//
+//                break;
+//
+//        }
+//
+//    }
+
+    public static void checkAllFields() {
+
+        if (NewLeadActivity.documents.equals("1")) {
+            if (NewLeadActivity.aadharNumber.equals("") ||
+                    !NewLeadActivity.panNUmber.equals("")) {
+                mDocListener.onOffButtonsDocuments(false, true);
+            } else {
+                mDocListener.onOffButtonsDocuments(true, true);
+            }
+        } else if (NewLeadActivity.documents.equals("2")) {
+            if (!NewLeadActivity.aadharNumber.equals("") || NewLeadActivity.panNUmber.equals("")) {
+                mDocListener.onOffButtonsDocuments(false, true);
+            } else {
+                mDocListener.onOffButtonsDocuments(true, true);
+            }
+        } else if (NewLeadActivity.documents.equals("3")) {
+            if (NewLeadActivity.aadharNumber.equals("") || NewLeadActivity.panNUmber.equals("")) {
+                mDocListener.onOffButtonsDocuments(false, true);
+            } else {
+                mDocListener.onOffButtonsDocuments(true, true);
+            }
+        }
+        else if (NewLeadActivity.documents.equals("0") || NewLeadActivity.documents.equals("")) {
+            if ((NewLeadActivity.aadharNumber.equals("") && NewLeadActivity.panNUmber.equals(""))) {
+                mDocListener.onOffButtonsDocuments(false, true);
+            } else {
+                mDocListener.onOffButtonsDocuments(false, true);
+            }
+        }
+        else {
+            if ((NewLeadActivity.aadharNumber.equals("") && NewLeadActivity.panNUmber.equals(""))) {
+                mDocListener.onOffButtonsDocuments(false, true);
+            } else {
+                mDocListener.onOffButtonsDocuments(true, true);
+            }
         }
 
     }
 
     public static void validate() {
-        switch (NewLeadActivity.documents){
+        switch (NewLeadActivity.documents) {
             case "1":
                 if (!Globle.validateAadharNumber(NewLeadActivity.aadharNumber))
                     mDocListener.onDocumentFragmentInteraction(false, 1);
@@ -316,15 +388,11 @@ public class DocumentAvailabilityFragment extends Fragment {
                 break;
 
             case "3":
-                if (!Globle.validateAadharNumber(NewLeadActivity.aadharNumber) && !NewLeadActivity.panNUmber.matches(Globle.panPattern))
+                if (!(Globle.validateAadharNumber(NewLeadActivity.aadharNumber) && NewLeadActivity.panNUmber.matches(Globle.panPattern)))
                     mDocListener.onDocumentFragmentInteraction(false, 1);
                 else
                     mDocListener.onDocumentFragmentInteraction(true, 2);
                 break;
-
-//            case "4":
-//                mDocListener.onDocumentFragmentInteraction(true, 2);
-//                break;
         }
 
     }
@@ -332,7 +400,7 @@ public class DocumentAvailabilityFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mDocListener != null) {
-            mDocListener.onDocumentFragmentInteraction(true,2);
+            mDocListener.onDocumentFragmentInteraction(true, 2);
         }
     }
 
@@ -352,27 +420,17 @@ public class DocumentAvailabilityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        edtAadhaar.setText(NewLeadActivity.aadharNumber);
+        edtPAN.setText(NewLeadActivity.panNUmber);
+    }
 
-        edtAadhaar.setText(NewLeadActivity.Aaadhaarno);
-        edtPAN.setText(NewLeadActivity.Ppanno);
-
-//        if (NewLeadActivity.documents.equals("1")){
-//            linAadharBtn.performClick();
-//            tilAadhar.getEditText().setText(NewLeadActivity.aadharNumber);
-//        }
-//        else if (NewLeadActivity.documents.equals("2")){
-//            linPanBtn.performClick();
-//            tilPan.getEditText().setText(NewLeadActivity.panNUmber);
-//        }
-//        else if (NewLeadActivity.documents.equals("3")){
-//            linBothBtn.performClick();
-//            tilAadhar.getEditText().setText(NewLeadActivity.aadharNumber);
-//            tilPan.getEditText().setText(NewLeadActivity.panNUmber);
-//        }
-//        else {
-//            linNoneBtn.performClick();
-//        }
-
+    public static void setDcoAvailabilityData() {
+        try {
+            edtAadhaar.setText(NewLeadActivity.aadharNumber);
+            edtPAN.setText(NewLeadActivity.panNUmber);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -384,6 +442,7 @@ public class DocumentAvailabilityFragment extends Fragment {
     public interface OnDocumentFragmentInteractionListener {
         // TODO: Update argument type and name
         void onDocumentFragmentInteraction(boolean valid, int next);
+
         void onOffButtonsDocuments(boolean next, boolean prev);
 
         boolean onOffButtonsDocuments(boolean b);

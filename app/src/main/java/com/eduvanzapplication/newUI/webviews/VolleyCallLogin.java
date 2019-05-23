@@ -19,12 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
-import com.eduvanzapplication.newUI.newViews.DashboardActivity;
-import com.eduvanzapplication.newUI.newViews.GetMobileNo;
-import com.eduvanzapplication.newUI.newViews.MyProfileNew;
-import com.eduvanzapplication.newUI.newViews.Notification;
 import com.eduvanzapplication.newUI.newViews.OtpValidation;
-import com.eduvanzapplication.newUI.newViews.SignIn;
 import com.eduvanzapplication.newUI.newViews.SplashScreen;
 
 import org.json.JSONArray;
@@ -36,7 +31,6 @@ import java.util.Map;
 
 import static com.eduvanzapplication.database.DBAdapter.ExecuteSql;
 
-//import com.eduvanzapplication.newUI.newViews.NewTruecallerSignIn;
 
 /**
  * Created by vijay on 23/1/17.
@@ -206,17 +200,6 @@ public class VolleyCallLogin extends Application {
             }
         }
 
-//        else if (screen.equalsIgnoreCase("updateTrueData")) {
-//            try {
-//                jsonDataO = new JSONObject(s);
-//                ((NewTruecallerSignIn) mActivity).UpdateTrueData();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-
         else if (screen.equalsIgnoreCase("updateOTPData")) {
             try {
                 jsonDataO = new JSONObject(s);
@@ -227,16 +210,6 @@ public class VolleyCallLogin extends Application {
                 e.printStackTrace();
             }
         }
-//        else if (screen.equalsIgnoreCase("updateTrueData")) {
-//            try {
-//                jsonDataO = new JSONObject(s);
-//                ((SingInWithTruecaller) mActivity).UpdateTrueData(jsonDataO);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
         else if (screen.equalsIgnoreCase("getOtp")) {
             try {
                 jsonDataO = new JSONObject(s);
@@ -401,16 +374,7 @@ public class VolleyCallLogin extends Application {
 //                e.printStackTrace();
 //            }
 //        }
- else if (screen.equalsIgnoreCase("myProfile")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((MyProfileNew) mActivity).myProfile(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("getDocumentsBorrower")) {
+else if (screen.equalsIgnoreCase("getDocumentsBorrower")) {
             try {
                 jsonDataO = new JSONObject(s);
                 //((LoanApplicationFragment_3) mfragment).getBorrowerDocuments(jsonDataO);
@@ -428,16 +392,18 @@ public class VolleyCallLogin extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("Notifications")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((Notification) mActivity).getNotificationContent(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (screen.equalsIgnoreCase("studentDashbBoardStatus")) {
+        }
+//        else if (screen.equalsIgnoreCase("Notifications")) {
+//            try {
+//                jsonDataO = new JSONObject(s);
+//                ((Notification) mActivity).getNotificationContent(jsonDataO);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+        else if (screen.equalsIgnoreCase("studentDashbBoardStatus")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((DashboardFragmentNew) mfragment).setProfileDashbBoardStatus(jsonDataO);
@@ -495,15 +461,6 @@ public class VolleyCallLogin extends Application {
             try {
                 jsonDataO = new JSONObject(s);
                 //((LoanApplicationFragment_1) mfragment).getCurrentCities(jsonDataO);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }  else if (screen.equalsIgnoreCase("emailSignIn")) {
-            try {
-                jsonDataO = new JSONObject(s);
-                ((SignIn) mActivity).emailSignin(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

@@ -53,11 +53,8 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.VolleyCallNew;
-import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.google.gson.JsonObject;
 import com.idfy.rft.RFTSdk;
@@ -76,14 +73,12 @@ import java.util.Map;
 import static android.content.Context.*;
 import static android.support.v4.content.ContextCompat.getSystemService;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
-import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.lastName;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.student_id;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class PersonalDetailsFragment extends Fragment {
 
-    private static ProgressBar progressbar;
+    //    private static ProgressBar progressbar;
     private static final String idfy_account_id = "99cde5a9e632/744939bd-4fe2-42e8-94d2-971a79928ee4";
     private static final String idfy_token = "2075c38b-31c3-4fc8-a642-ba7c02697c42";
     public static RFTSdk rftsdk;
@@ -93,22 +88,23 @@ public class PersonalDetailsFragment extends Fragment {
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final String IMAGE_EXTENSION = "jpg";
 
-    private TextInputLayout tilFirstName,tilMiddleName, tilLastName;
-    private EditText edtLastName;
+    private EditText edtFirstName, edtMiddleName, edtLastName;
     private LinearLayout linMaleBtn, linFemaleBtn, linOtherBtn, linDobBtn;
     private Switch switchMarital;
     private TextView txtMaritalStatus;
-    private LinearLayout linStudentBtn,linSalariedBtn, linSelfEmployedBtn;
+    private LinearLayout linStudentBtn, linSalariedBtn, linSelfEmployedBtn;
 
-    LinearLayout linPan,linAadhar ,linClose ,linFooter1 ,linTakePicture ,linQR ,linStudentType ,linOCR,newLinOcr;
+    LinearLayout linPan, linAadhar, linClose, linFooter1, linTakePicture, linQR, linStudentType, linOCR, newLinOcr;
     public static Context context;
     public static Fragment mFragment;
     SharedPreferences sharedPreferences;
+    ProgressBar progressBar;
 
     private static OnFragmentInteractionListener mListener;
     private TextView txtDOB;
 
     private CFAlertDialog cfAlertDialog;
+
     public PersonalDetailsFragment() {
         // Required empty public constructor
     }
@@ -117,7 +113,6 @@ public class PersonalDetailsFragment extends Fragment {
         PersonalDetailsFragment fragment = new PersonalDetailsFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -128,71 +123,18 @@ public class PersonalDetailsFragment extends Fragment {
 
         if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setCancelable(false);
-//
-//        View professionView = getLayoutInflater().inflate(R.layout.layout_profession,null);
-//        linStudentBtn = professionView.findViewById(R.id.linStudentBtn);
-//        linSalariedBtn = professionView.findViewById(R.id.linSalariedBtn);
-//        linSelfEmployedBtn = professionView.findViewById(R.id.linSelfEmployedBtn);
-//        builder.setView(professionView);
-//
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//
-//        linStudentBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession = "1";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                try {
-//                    Thread.sleep(2000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession = "2";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession  ="3";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                dialog.dismiss();
-//            }
-//        });
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_personal_details, container, false);
-        tilFirstName = view.findViewById(R.id.first_name);
-        tilMiddleName =view.findViewById(R.id.middle_name);
-        tilLastName =view.findViewById(R.id.last_name);
-        edtLastName = view.findViewById( R.id.LastName );
+        edtFirstName = view.findViewById(R.id.edtFirstName);
+        edtMiddleName = view.findViewById(R.id.edtMiddleName);
+        edtLastName = view.findViewById(R.id.edtLastName);
         linMaleBtn = view.findViewById(R.id.linMaleBtn);
         linFemaleBtn = view.findViewById(R.id.linFemaleBtn);
         linOtherBtn = view.findViewById(R.id.linOtherBtn);
@@ -200,22 +142,6 @@ public class PersonalDetailsFragment extends Fragment {
         txtDOB = view.findViewById(R.id.txtDOB);
         txtMaritalStatus = view.findViewById(R.id.txtMaritalStatus);
         switchMarital = view.findViewById(R.id.switchMarital);
-
-
-
-
-
-        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
-//        if(height<1080){
-//            view = inflater.inflate(R.layout.demo1, container, false);
-//        }else {
-//            view = inflater.inflate(R.layout.fragment_dashboard_fragment_new, container, false);
-//        }
-
-
-//closed keyboard after enter LastName
-
-
         context = getContext();
         mFragment = new PersonalDetailsFragment();
         // Checking availability of the camera
@@ -228,142 +154,63 @@ public class PersonalDetailsFragment extends Fragment {
             e.printStackTrace();
         }
 
-//        View professionView = getLayoutInflater().inflate(R.layout.layout_ocr_options,null);
-//
-//        linStudentBtn = professionView.findViewById(R.id.linStudentBtn);
-//        linSalariedBtn = professionView.findViewById(R.id.linSalariedBtn);
-//        linSelfEmployedBtn = professionView.findViewById(R.id.linSelfEmployedBtn);
-//
-//        LinearLayout linPan = professionView.findViewById(R.id.linPan);
-//        LinearLayout linAadhar = professionView.findViewById(R.id.linAadhar);
-//        LinearLayout linClose =professionView.findViewById(R.id.linClose);
-//        LinearLayout linFooter1 = professionView.findViewById(R.id.linFooter1);
-//        LinearLayout linTakePicture = professionView.findViewById(R.id.linTakePicture);
-//        LinearLayout linQR = professionView.findViewById(R.id.linQR);
-//        LinearLayout linStudentType = professionView.findViewById(R.id.linStudentType);
-//        LinearLayout linOCR = professionView.findViewById(R.id.linOCR);
-//
-//        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(getContext())
-//                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-//                .setFooterView(professionView);
-//
-//        cfAlertDialog = builder.show();
-//        cfAlertDialog.setCancelable(false);
-//        cfAlertDialog.setCanceledOnTouchOutside(false);
-//        linFooter1.setVisibility(View.VISIBLE);
-//        linTakePicture.setVisibility(View.GONE);
-//        linQR.setVisibility(View.GONE);
-//
-//        linStudentBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession = "1";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                linOCR.setVisibility(View.VISIBLE);
-//                linStudentType.setVisibility(View.GONE);
-//            }
-//        });
-//
-//        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession = "2";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linOCR.setVisibility(View.VISIBLE);
-//                linStudentType.setVisibility(View.GONE);
-//            }
-//        });
-//
-//        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession  ="3";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linOCR.setVisibility(View.VISIBLE);
-//                linStudentType.setVisibility(View.GONE);
-//            }
-//        });
-//
-//        linClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                cfAlertDialog.dismiss();
-//            }
-//        });
-//
-//        linPan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                linTakePicture.setVisibility(View.VISIBLE);
-//                linQR.setVisibility(View.GONE);
-//                linFooter1.setVisibility(View.GONE);
-//
-//            }
-//        });
-//
-//        linAadhar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                linTakePicture.setVisibility(View.VISIBLE);
-//                linQR.setVisibility(View.VISIBLE);
-//                linFooter1.setVisibility(View.GONE);
-//            }
-//        });
-//
-//        linTakePicture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (linQR.getVisibility() != View.VISIBLE){  //pan is selected
-//                    if (CameraUtils.checkPermissions(getContext())) {
-//                        doctype = "ind_pan";
-//                        rftsdk.CaptureDocImage(getActivity(), "ind_pan", rftSdkCallbackInterface);
-//                    } else {
-////                        requestCameraPermission(MEDIA_TYPE_IMAGE);
-//                    }
-//
-//                }else{
-//                    if (CameraUtils.checkPermissions(getContext())) {
-//                        Toast.makeText(getActivity(), "Capture front-side image of Aadhaar", Toast.LENGTH_LONG).show();
-//
-//                        doctype = "ind_aadhaar";
-////                    doctype = "aadhaar_ocr";
-//                        rftsdk.CaptureDocImage(getActivity(), "ind_aadhaar", rftSdkCallbackInterface);
-//                    } else {
-////                        requestCameraPermission(MEDIA_TYPE_IMAGE);
-//                    }
-//
-//                }
-//            }
-//        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(false);
 
+        View professionView = getLayoutInflater().inflate(R.layout.layout_profession, null);
+        linStudentBtn = professionView.findViewById(R.id.linStudentBtn);
+        linSalariedBtn = professionView.findViewById(R.id.linSalariedBtn);
+        linSelfEmployedBtn = professionView.findViewById(R.id.linSelfEmployedBtn);
+        builder.setView(professionView);
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
-        showOCRDialog();
+        linStudentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession = "1";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+            }
+        });
 
-        if(NewLeadActivity.Aaadhaarno.equals("") && NewLeadActivity.Ppanno.equals(""))
-        {
+        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession = "2";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                dialog.dismiss();
+            }
+        });
 
-        }
-        else {
-            showOCRDialog();
-        }
+        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewLeadActivity.profession = "3";
+                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                dialog.dismiss();
+            }
+        });
 
-        return  view;
+//        if (NewLeadActivity.Aaadhaarno.equals("") && NewLeadActivity.Ppanno.equals("")) {
+//            showOCRDialog();
+//        } else {
+//        }
+        switchMarital.setChecked(false);
+        return view;
     }
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -376,6 +223,7 @@ public class PersonalDetailsFragment extends Fragment {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    v.setCursorVisible(false);
                     return true;
                 }
                 return false;
@@ -390,6 +238,7 @@ public class PersonalDetailsFragment extends Fragment {
                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                checkAllFields();
             }
         });
 
@@ -397,10 +246,11 @@ public class PersonalDetailsFragment extends Fragment {
         linFemaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               NewLeadActivity.gender = "2";
+                NewLeadActivity.gender = "2";
                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                checkAllFields();
             }
         });
 
@@ -411,6 +261,7 @@ public class PersonalDetailsFragment extends Fragment {
                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                checkAllFields();
             }
         });
 
@@ -424,9 +275,9 @@ public class PersonalDetailsFragment extends Fragment {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
 //                        Toast.makeText(getContext(), dateDesc, Toast.LENGTH_SHORT).show();
-                        NewLeadActivity.dob = day+"-"+ month + "-"+year;
-                            txtDOB.setText(NewLeadActivity.dob);
-                            checkAllFields();
+                        NewLeadActivity.dob = day + "-" + month + "-" + year;
+                        txtDOB.setText(NewLeadActivity.dob);
+                        checkAllFields();
                     }
                 }).textConfirm("CONFIRM") //text of confirm button
                         .textCancel("CANCEL") //text of cancel button
@@ -435,9 +286,9 @@ public class PersonalDetailsFragment extends Fragment {
                         .colorCancel(Color.parseColor("#999999")) //color of cancel button
                         .colorConfirm(Color.parseColor("#009900"))//color of confirm button
                         .minYear(1900) //min year in loop
-                        .maxYear(calendar.get(Calendar.YEAR)-18) // max year in loop
+                        .maxYear(calendar.get(Calendar.YEAR) - 18) // max year in loop
                         .showDayMonthYear(false) // shows like dd mm yyyy (default is false)
-                        .dateChose("2013-11-11") // date chose when init popwindow
+                        .dateChose("2000-01-01") // date chose when init popwindow
                         .build();
 //                datePickerPopWin.showPopWin(getActivity());
                 datePickerPopWin.showAsDropDown(linDobBtn);
@@ -465,15 +316,68 @@ public class PersonalDetailsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 NewLeadActivity.maritalStatus = isChecked ? "1" : "2";
-                if (isChecked)
+                if (isChecked) {
                     txtMaritalStatus.setText("Married");
-                else
+                } else {
                     txtMaritalStatus.setText("Unmarried");
+                }
                 checkAllFields();
             }
         });
 
-        tilFirstName.getEditText().addTextChangedListener(new TextWatcher() {
+//        tilFirstName.getEditText().addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                NewLeadActivity.firstName = tilFirstName.getEditText().getText().toString();
+//                checkAllFields();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+//        tilMiddleName.getEditText().addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                NewLeadActivity.middleName = tilMiddleName.getEditText().getText().toString();
+//                checkAllFields();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+//        tilLastName.getEditText().addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                NewLeadActivity.lastName = tilLastName.getEditText().getText().toString();
+//                checkAllFields();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+
+        edtFirstName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -481,7 +385,14 @@ public class PersonalDetailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                NewLeadActivity.firstName = tilFirstName.getEditText().getText().toString();
+
+                if (edtFirstName.getText().toString().equals("")) {
+                    NewLeadActivity.firstName = "";
+                    edtFirstName.setError("Please enter first name");
+                } else {
+                    NewLeadActivity.firstName = edtFirstName.getText().toString();
+                    edtFirstName.setError(null);
+                }
                 checkAllFields();
             }
 
@@ -490,7 +401,7 @@ public class PersonalDetailsFragment extends Fragment {
 
             }
         });
-        tilMiddleName.getEditText().addTextChangedListener(new TextWatcher() {
+        edtMiddleName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -498,7 +409,30 @@ public class PersonalDetailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                NewLeadActivity.middleName = tilMiddleName.getEditText().getText().toString();
+                NewLeadActivity.middleName = edtMiddleName.getText().toString();
+//                checkAllFields();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        edtLastName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (edtLastName.getText().toString().equals("")) {
+                    NewLeadActivity.lastName = "";
+                    edtLastName.setError("Please enter last name");
+                } else {
+                    NewLeadActivity.lastName = edtLastName.getText().toString();
+                    edtLastName.setError(null);
+                }
                 checkAllFields();
             }
 
@@ -507,44 +441,26 @@ public class PersonalDetailsFragment extends Fragment {
 
             }
         });
-        tilLastName.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                NewLeadActivity.lastName = tilLastName.getEditText().getText().toString();
-                checkAllFields();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
-
 
     }
 
-    private void checkAllFields() {
-        if (NewLeadActivity.firstName.equals("") || NewLeadActivity.lastName.equals("") || NewLeadActivity.middleName.equals("") || NewLeadActivity.dob.equals("")){
+    public static void checkAllFields() {
+        if (NewLeadActivity.firstName.equals("") || NewLeadActivity.lastName.equals("") || NewLeadActivity.dob.equals("") ||
+                NewLeadActivity.gender.equals("") || NewLeadActivity.maritalStatus.equals("")) {
             mListener.onOffButtons(false, false);
-        }else
+        } else {
             mListener.onOffButtons(true, false);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public static void validate() {
-        if (NewLeadActivity.firstName.equals("") || NewLeadActivity.middleName.equals("") || NewLeadActivity.lastName.equals("") || NewLeadActivity.dob.equals(""))
+        if (NewLeadActivity.firstName.equals("") || NewLeadActivity.lastName.equals("") || NewLeadActivity.dob.equals("") ||
+                NewLeadActivity.gender.equals("") || NewLeadActivity.maritalStatus.equals(""))
             mListener.onFragmentInteraction(false, 0);
         else
             mListener.onFragmentInteraction(true, 1);
-     }
-
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -573,96 +489,41 @@ public class PersonalDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        tilFirstName.getEditText().setText(NewLeadActivity.firstName);
-        tilMiddleName.getEditText().setText(NewLeadActivity.middleName);
-        tilLastName.getEditText().setText(NewLeadActivity.lastName);
+        edtFirstName.setText(NewLeadActivity.firstName);
+        edtMiddleName.setText(NewLeadActivity.middleName);
+        edtLastName.setText(NewLeadActivity.lastName);
 
-        if (NewLeadActivity.gender.equals("1"))
+        if (NewLeadActivity.gender.equals("1")) {
             linMaleBtn.performClick();
-        else if (NewLeadActivity.gender.equals("3"))
-            linOtherBtn.performClick();
-        else
+        } else if (NewLeadActivity.gender.equals("2")) {
             linFemaleBtn.performClick();
+        } else if (NewLeadActivity.gender.equals("3")) {
+            linOtherBtn.performClick();
+        }
 
         txtDOB.setText(NewLeadActivity.dob);
-        if (NewLeadActivity.maritalStatus.equals("0"))
-            txtMaritalStatus.setText("Unmarried");
-        else  //1
+        if (NewLeadActivity.maritalStatus.equals("0") || NewLeadActivity.maritalStatus.equals("1")) {
             txtMaritalStatus.setText("Married");
+        } else  //2
+        {
+            txtMaritalStatus.setText("Unmarried");
+        }
+        checkAllFields();
+
     }
 
     private void showOCRDialog() {
 
-        View view = getLayoutInflater().inflate(R.layout.layout_ocr_options,null);
+        View view = getLayoutInflater().inflate(R.layout.layout_ocr_options, null);
 
-        linStudentBtn = view.findViewById(R.id.linStudentBtn);
-        linSalariedBtn = view.findViewById(R.id.linSalariedBtn);
-        linSelfEmployedBtn = view.findViewById(R.id.linSelfEmployedBtn);
-
-         linPan = view.findViewById(R.id.linPan);
-         linAadhar = view.findViewById(R.id.linAadhar);
-         linClose =view.findViewById(R.id.linClose);
-         linFooter1 = view.findViewById(R.id.linFooter1);
-         linTakePicture = view.findViewById(R.id.linTakePicture);
-         linQR = view.findViewById(R.id.linQR);
-         linStudentType = view.findViewById(R.id.linStudentType);
-         linOCR = view.findViewById(R.id.linOCR);
-         newLinOcr = view.findViewById(R.id.newLinOcr);
-
+        linPan = view.findViewById(R.id.linPan);
+        linAadhar = view.findViewById(R.id.linAadhar);
+        linClose = view.findViewById(R.id.linClose);
+        progressBar = view.findViewById(R.id.progressBar);
 
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
                 .setFooterView(view);
-
-        linFooter1.setVisibility(View.VISIBLE);
-        newLinOcr.setVisibility(View.GONE);
-        linTakePicture.setVisibility(View.GONE);
-        linQR.setVisibility(View.GONE);
-
-        linStudentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession = "1";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                linOCR.setVisibility(View.VISIBLE);
-                linStudentType.setVisibility(View.GONE);
-                newLinOcr.setVisibility(View.VISIBLE);
-            }
-        });
-
-        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession = "2";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linOCR.setVisibility(View.VISIBLE);
-                linStudentType.setVisibility(View.GONE);
-                newLinOcr.setVisibility(View.VISIBLE);
-            }
-        });
-
-        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession  ="3";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linOCR.setVisibility(View.VISIBLE);
-                linStudentType.setVisibility(View.GONE);
-                newLinOcr.setVisibility(View.VISIBLE);
-            }
-        });
 
         linClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -674,9 +535,13 @@ public class PersonalDetailsFragment extends Fragment {
         linPan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                linTakePicture.setVisibility(View.VISIBLE);
-                linQR.setVisibility(View.GONE);
-                linFooter1.setVisibility(View.VISIBLE);
+                if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
+                    doctype = "ind_pan";
+                    rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_pan", rftSdkCallbackInterface);
+                } else {
+//                        requestCameraPermission(MEDIA_TYPE_IMAGE);
+                }
+//Unable to find explicit activity class {com.eduvanzapplication/com.idfy.rft.CameraView}; have you declared this activity in your AndroidManifest.xml?
 
             }
         });
@@ -684,34 +549,15 @@ public class PersonalDetailsFragment extends Fragment {
         linAadhar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                linTakePicture.setVisibility(View.VISIBLE);
-                linQR.setVisibility(View.VISIBLE);
-                linFooter1.setVisibility(View.VISIBLE);
-            }
-        });
+                if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
+//                        progressBar.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(), "Capture front-side image of Aadhaar", Toast.LENGTH_LONG).show();
 
-        linTakePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (linQR.getVisibility() != View.VISIBLE){  //pan is selected
-                    if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
-                        doctype = "ind_pan";
-                        rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_pan", rftSdkCallbackInterface);
-                    } else {
-//                        requestCameraPermission(MEDIA_TYPE_IMAGE);
-                    }
-//Unable to find explicit activity class {com.eduvanzapplication/com.idfy.rft.CameraView}; have you declared this activity in your AndroidManifest.xml?
-                }else{
-                    if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
-                        Toast.makeText(getActivity(), "Capture front-side image of Aadhaar", Toast.LENGTH_LONG).show();
-
-                        doctype = "ind_aadhaar";
+                    doctype = "ind_aadhaar";
 //                    doctype = "aadhaar_ocr";
-                        rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_aadhaar", rftSdkCallbackInterface);
-                    } else {
+                    rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_aadhaar", rftSdkCallbackInterface);
+                } else {
 //                        requestCameraPermission(MEDIA_TYPE_IMAGE);
-                    }
-
                 }
             }
         });
@@ -731,11 +577,153 @@ public class PersonalDetailsFragment extends Fragment {
 
     }
 
+//    private void showOCRDialog() {
+//
+//        View view = getLayoutInflater().inflate(R.layout.layout_ocr_options, null);
+//
+//        linStudentBtn = view.findViewById(R.id.linStudentBtn);
+//        linSalariedBtn = view.findViewById(R.id.linSalariedBtn);
+//        linSelfEmployedBtn = view.findViewById(R.id.linSelfEmployedBtn);
+//
+//        linPan = view.findViewById(R.id.linPan);
+//        linAadhar = view.findViewById(R.id.linAadhar);
+//        linClose = view.findViewById(R.id.linClose);
+//        linFooter1 = view.findViewById(R.id.linFooter1);
+//        linTakePicture = view.findViewById(R.id.linTakePicture);
+//        linQR = view.findViewById(R.id.linQR);
+//        linStudentType = view.findViewById(R.id.linStudentType);
+//        linOCR = view.findViewById(R.id.linOCR);
+//        newLinOcr = view.findViewById(R.id.newLinOcr);
+//        progressBar = view.findViewById(R.id.progressBar);
+//
+//        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(context)
+//                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+//                .setFooterView(view);
+//
+//        linFooter1.setVisibility(View.VISIBLE);
+//        newLinOcr.setVisibility(View.GONE);
+//        linTakePicture.setVisibility(View.GONE);
+//        linQR.setVisibility(View.GONE);
+//
+//        linStudentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession = "1";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                linOCR.setVisibility(View.VISIBLE);
+//                linStudentType.setVisibility(View.GONE);
+//                newLinOcr.setVisibility(View.VISIBLE);
+//            }
+//        });
+//
+//        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession = "2";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linOCR.setVisibility(View.VISIBLE);
+//                linStudentType.setVisibility(View.GONE);
+//                newLinOcr.setVisibility(View.VISIBLE);
+//            }
+//        });
+//
+//        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NewLeadActivity.profession = "3";
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                linOCR.setVisibility(View.VISIBLE);
+//                linStudentType.setVisibility(View.GONE);
+//                newLinOcr.setVisibility(View.VISIBLE);
+//            }
+//        });
+//
+//        linClose.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                cfAlertDialog.dismiss();
+//            }
+//        });
+//
+//        linPan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                linTakePicture.setVisibility(View.VISIBLE);
+//                linQR.setVisibility(View.GONE);
+//                linFooter1.setVisibility(View.VISIBLE);
+//
+//            }
+//        });
+//
+//        linAadhar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                linTakePicture.setVisibility(View.VISIBLE);
+//                linQR.setVisibility(View.VISIBLE);
+//                linFooter1.setVisibility(View.VISIBLE);
+//            }
+//        });
+//
+//        linTakePicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (linQR.getVisibility() != View.VISIBLE) {  //pan is selected
+//                    if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
+//                        doctype = "ind_pan";
+//                        rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_pan", rftSdkCallbackInterface);
+//                    } else {
+////                        requestCameraPermission(MEDIA_TYPE_IMAGE);
+//                    }
+////Unable to find explicit activity class {com.eduvanzapplication/com.idfy.rft.CameraView}; have you declared this activity in your AndroidManifest.xml?
+//                } else {
+//                    if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
+////                        progressBar.setVisibility(View.VISIBLE);
+//                        Toast.makeText(getActivity(), "Capture front-side image of Aadhaar", Toast.LENGTH_LONG).show();
+//
+//                        doctype = "ind_aadhaar";
+////                    doctype = "aadhaar_ocr";
+//                        rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_aadhaar", rftSdkCallbackInterface);
+//                    } else {
+////                        requestCameraPermission(MEDIA_TYPE_IMAGE);
+//                    }
+//
+//                }
+//            }
+//        });
+//
+//        builder.setCancelable(false);
+//
+//        cfAlertDialog = builder.show();
+//        cfAlertDialog.setCancelable(false);
+//        cfAlertDialog.setCanceledOnTouchOutside(false);
+//
+//        cfAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+////                onDialogDismiss();
+//            }
+//        });
+//
+//    }
+
+
     private RftSdkCallbackInterface rftSdkCallbackInterface = new RftSdkCallbackInterface() {
         @Override
         public void onImageCaptureSuccess(final Bitmap image) {
             try {
-                progressbar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -904,7 +892,7 @@ public class PersonalDetailsFragment extends Fragment {
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d(TAG, "Error: " + error.getMessage()); //com.android.volley.ClientError
                     try {
-                        progressbar.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1180,7 +1168,7 @@ public class PersonalDetailsFragment extends Fragment {
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d(TAG, "Error: " + error.getMessage()); //com.android.volley.ClientError
                     try {
-                        progressbar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1348,7 +1336,7 @@ public class PersonalDetailsFragment extends Fragment {
                         // response
                         Log.d("Response", response);
                         try {
-                            progressbar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1365,7 +1353,7 @@ public class PersonalDetailsFragment extends Fragment {
                                             @Override
                                             public void run() {
                                                 try {
-                                                    saveOCRData(new JSONArray(response.toString()).getJSONObject(0).getString("status"),Requestid,response.toString());
+                                                    saveOCRData(new JSONArray(response.toString()).getJSONObject(0).getString("status"), Requestid, response.toString());
                                                 } catch (Exception e) {
                                                     e.printStackTrace();
                                                 }
@@ -1379,7 +1367,7 @@ public class PersonalDetailsFragment extends Fragment {
                                 success = false;
 
                                 try {
-                                    progressbar.setVisibility(View.VISIBLE);
+                                    progressBar.setVisibility(View.VISIBLE);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -1481,8 +1469,8 @@ public class PersonalDetailsFragment extends Fragment {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
-
+                            NewLeadActivity.setOcrData();
+                            onResume();
                         }
 //                        else {
 //                            Toast.makeText(context, "Upload Failed, Response-> " + response.toString(), Toast.LENGTH_LONG).show();
@@ -1495,7 +1483,7 @@ public class PersonalDetailsFragment extends Fragment {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
                         try {
-                            progressbar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1525,7 +1513,7 @@ public class PersonalDetailsFragment extends Fragment {
             params.put("student_id", student_id);
             params.put("response", strResponse);
             params.put("status", strStatus);
-           // http://159.89.204.41/eduvanzApi/saveocr
+            // http://159.89.204.41/eduvanzApi/saveocr
             VolleyCall volleyCall = new VolleyCall();
             volleyCall.sendRequest(context, url, null, mFragment, "addOCR", params, MainActivity.auth_token);
         } catch (Exception e) {
@@ -1539,7 +1527,6 @@ public class PersonalDetailsFragment extends Fragment {
         }
     }
 
-
     private void getAadhaarData(String Requestid) {
         RequestQueue queue12 = Volley.newRequestQueue(getContext());//https://api.idfy.com/v2/tasks?request_id=d740cbd1-6af1-45f6-a609-8c2170dc3418
         StringRequest getRequest = new StringRequest(Request.Method.GET, "https://api.idfy.com/v2/tasks?request_id=" + Requestid,
@@ -1549,7 +1536,7 @@ public class PersonalDetailsFragment extends Fragment {
                         // response
                         Log.d("Response", response);
                         try {
-                            progressbar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1567,7 +1554,7 @@ public class PersonalDetailsFragment extends Fragment {
                                             @Override
                                             public void run() {
                                                 try {
-                                                    saveOCRData(new JSONArray(response.toString()).getJSONObject(0).getString("status"),Requestid,response.toString());
+                                                    saveOCRData(new JSONArray(response.toString()).getJSONObject(0).getString("status"), Requestid, response.toString());
                                                 } catch (Exception e) {
                                                     e.printStackTrace();
                                                 }
@@ -1581,7 +1568,7 @@ public class PersonalDetailsFragment extends Fragment {
                                 success = false;
 
                                 try {
-                                    progressbar.setVisibility(View.VISIBLE);
+                                    progressBar.setVisibility(View.VISIBLE);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -1626,13 +1613,13 @@ public class PersonalDetailsFragment extends Fragment {
                             }
 
                             try {
-                                NewLeadActivity.dob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_of_birth");
+                                NewLeadActivity.Adob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_of_birth");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                             try {
-                                NewLeadActivity.Adob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("year_of_birth");
+                                NewLeadActivity.Ayob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("year_of_birth");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -1698,8 +1685,8 @@ public class PersonalDetailsFragment extends Fragment {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
-//                            Toast.makeText(context, "Upload succes " + aadhaarno + "\n" + name + "\n" + dob + "\n" + yob + "\n" + gender, Toast.LENGTH_LONG).show();
+                            NewLeadActivity.setOcrData();
+                            onResume();
                         }
 //                        else {
 //                            Toast.makeText(context, "Upload Failed, Response-> " + response.toString(), Toast.LENGTH_LONG).show();
@@ -1712,7 +1699,7 @@ public class PersonalDetailsFragment extends Fragment {
                         // TODO Auto-generated method stub
                         Log.d("ERROR", "error => " + error.toString());
                         try {
-                            progressbar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1736,6 +1723,7 @@ public class PersonalDetailsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(boolean valid, int next);
+
         void onOffButtons(boolean next, boolean prev);
     }
 

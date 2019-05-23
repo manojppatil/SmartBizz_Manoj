@@ -35,6 +35,7 @@
             <ImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
+                                android:tint="@color/darkblue"
                 app:srcCompat="@drawable/ic_graduation_cap" />
 
             <View
@@ -46,11 +47,11 @@
 
             <TextView
                 android:id="@+id/txtStudent"
+                                style="@style/TextViewTitle14Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="Student"
-                android:textSize="15sp"
                 android:textColor="@color/textcolordark" />
         </LinearLayout>
 
@@ -59,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_4sdp"
+                            android:layout_marginTop="@dimen/_7sdp"
             android:background="@drawable/border_circular"
             android:backgroundTint="@color/blue1"
             android:gravity="center_vertical"
@@ -68,6 +70,7 @@
             <ImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
+                                android:tint="@color/darkblue"
                 app:srcCompat="@drawable/ic_briefcase" />
 
             <View
@@ -79,11 +82,11 @@
 
             <TextView
                 android:id="@+id/txtSalaried"
+                                style="@style/TextViewTitle14Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="Salaried"
-                android:textSize="15sp"
                 android:textColor="@color/textcolordark" />
         </LinearLayout>
 
@@ -92,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_4sdp"
+                            android:layout_marginTop="@dimen/_7sdp"
             android:background="@drawable/border_circular"
             android:backgroundTint="@color/blue1"
             android:gravity="center_vertical"
@@ -101,6 +105,7 @@
             <ImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
+                                android:tint="@color/darkblue"
                 app:srcCompat="@drawable/ic_male" />
 
             <View
@@ -112,11 +117,11 @@
 
             <TextView
                 android:id="@+id/txtSelfEmployed"
+                                style="@style/TextViewTitle14Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="Self Employed"
-                android:textSize="15sp"
                 android:textColor="@color/textcolordark" />
         </LinearLayout>
 

@@ -1,11 +1,19 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,10 +28,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
+import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -59,9 +69,9 @@ public class  GetMobileNo extends AppCompatActivity {
     CallbackManager callbackManagerFb = CallbackManager.Factory.create();
     private static final String EMAIL = "email";
     final int OTPlength=6;
-
+    public int GET_MY_PERMISSION = 1, permission;
     final private int RC_SIGN_IN = 112;
-
+    SharedPref sharedPref;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +79,30 @@ public class  GetMobileNo extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_get_mobile_no);
         setViews();
+        sharedPref = new SharedPref();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.READ_SMS);
+
+            if (permission != PackageManager.PERMISSION_GRANTED)
+            {//Direct Permission without disclaimer dialog
+                ActivityCompat.requestPermissions(GetMobileNo.this,
+                        new String[]{Manifest.permission.READ_CONTACTS,
+                                Manifest.permission.READ_SMS,
+                                Manifest.permission.RECEIVE_SMS,
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_PHONE_STATE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_CONTACTS,
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION},
+                        GET_MY_PERMISSION);
+
+            } else {
+            }
+        }
+
         setFacebookLogin();
 
     }
@@ -125,8 +159,6 @@ public class  GetMobileNo extends AppCompatActivity {
             }
         }); //closed Keyboard
 
-
-
         edtMobile.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,68 +168,67 @@ public class  GetMobileNo extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (s.length() == 10){
-                    // api call - get otp
-                    getOtp();
+                if (Build.VERSION.SDK_INT >= 23)
+                {
+                    permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                            Manifest.permission.READ_SMS);
+
+                    if (permission != PackageManager.PERMISSION_GRANTED)
+//                        {//Permission with disclaimer dialog
+////                            makeRequest();
+//
+//                            AlertDialog.Builder builder;
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                                builder = new AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert);
+//                            } else {
+//                                builder = new AlertDialog.Builder(mContext);
+//                            }
+//                            builder.setTitle("Disclaimer")
+//                                    .setMessage("Dear Student, \n" +
+//                                            "This app will access your mobile details like contacts and SMS to calculate your eligibility and give faster loans. Incase if you are comfortable with the same press ok else cancel")
+//                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int which) {
+//
+//                                            ActivityCompat.requestPermissions(GetMobileNo.this,
+//                                                    new String[]{Manifest.permission.READ_CONTACTS,
+//                                                            Manifest.permission.READ_SMS,
+//                                                            Manifest.permission.READ_EXTERNAL_STORAGE,
+//                                                            Manifest.permission.READ_PHONE_STATE,
+//                                                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                                            Manifest.permission.ACCESS_FINE_LOCATION},
+//                                                    GET_MY_PERMISSION);
+//
+//                                        }
+//                                    })
+//                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            finish();
+//                                        }
+//                                    })
+//                                    .setIcon(android.R.drawable.ic_dialog_alert)
+//                                    .show();
+//
+//                        }
+                    {//Direct Permission without disclaimer dialog
+                        ActivityCompat.requestPermissions(GetMobileNo.this,
+                                new String[]{Manifest.permission.READ_CONTACTS,
+                                        Manifest.permission.READ_SMS,
+                                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                                        Manifest.permission.READ_PHONE_STATE,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                        Manifest.permission.READ_CONTACTS,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                                        Manifest.permission.ACCESS_FINE_LOCATION},
+                                GET_MY_PERMISSION);
+
+                    }else {
+                        getOTPAPICall(s);
+                    }
                 }
-
-                if (s.length() < 10){
-                    linGetOtp.setOnClickListener(null);
-                    linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
-                }
-                else {
-                    linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
-                    linGetOtp.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (!mobileNoDone){
-
-                            }else if (mobileNoDone){
-                                //api call - verify otp
-                                if (layoutOtp.getVisibility() == View.VISIBLE && !signUpCalled)
-                                        otpLogin();
-                                else{
-                                    if (edtFirstName.getText().toString().equals("")){
-                                        edtFirstName.setError("Please provide your first name");
-                                    }else if (edtMobile.getText().toString().equals("")){
-                                        edtMobile.setError("Please provide mobile number");
-                                    }else if (edtEmail.getText().toString().equals("")){
-                                        edtEmail.setError("Please provide email");
-                                    }else{
-                                        if (!signUpCalled){
-                                            generateOtpCode();  //signUp
-                                        }
-                                        else
-                                            verifyOtpCode();
-                                    }
-                                }
-
-                                edtOtp.addTextChangedListener(new TextWatcher() {
-                                    @Override
-                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                                        if (s.length() == 0){
-                                            linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
-                                        }
-                                        else
-                                            linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
-                                    }
-                                    @Override
-                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                                    }
-                                    @Override
-                                    public void afterTextChanged(Editable s) {
-
-                                    }
-                                });
-//                                if (!edtOtp.getText().toString().equals("")){
-//                                    startActivity(new Intent(GetMobileNo.this, GetEmailActivity.class)
-//                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-//                                }
-                            }
-                        }
-                    });
-
+                else
+                {
+                    getOTPAPICall(s);
                 }
             }
 
@@ -229,7 +260,72 @@ public class  GetMobileNo extends AppCompatActivity {
             }
         });
 
+    }
 
+    private void getOTPAPICall(CharSequence s){
+        if (s.length() == 10){
+            // api call - get otp
+            getOtp();
+        }
+
+        if (s.length() < 10){
+            linGetOtp.setOnClickListener(null);
+            linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+        }
+        else {
+            linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
+            linGetOtp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!mobileNoDone){
+
+                    }else if (mobileNoDone){
+                        //api call - verify otp
+                        if (layoutOtp.getVisibility() == View.VISIBLE && !signUpCalled)
+                            otpLogin();
+                        else{
+                            if (edtFirstName.getText().toString().equals("")){
+                                edtFirstName.setError("Please provide your first name");
+                            }else if (edtMobile.getText().toString().equals("")){
+                                edtMobile.setError("Please provide mobile number");
+                            }else if (edtEmail.getText().toString().equals("")){
+                                edtEmail.setError("Please provide email");
+                            }else{
+                                if (!signUpCalled){
+                                    generateOtpCode();  //signUp
+                                }
+                                else
+                                    verifyOtpCode();
+                            }
+                        }
+
+                        edtOtp.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                if (s.length() == 0){
+                                    linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                                }
+                                else
+                                    linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
+                            }
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                            }
+                            @Override
+                            public void afterTextChanged(Editable s) {
+
+                            }
+                        });
+//                                if (!edtOtp.getText().toString().equals("")){
+//                                    startActivity(new Intent(GetMobileNo.this, GetEmailActivity.class)
+//                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//                                }
+                    }
+                }
+            });
+
+        }
     }
 
     private void setFacebookLogin() {
@@ -287,6 +383,7 @@ public class  GetMobileNo extends AppCompatActivity {
         }
 
     }
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -300,7 +397,6 @@ public class  GetMobileNo extends AppCompatActivity {
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
         }
     }
-
 
     private void verifyOtpCode() {
         try {
@@ -364,7 +460,7 @@ public class  GetMobileNo extends AppCompatActivity {
             mobileNoDone = true;
             if (status.equalsIgnoreCase("1")) {
 
-                saveUserPrefernce("otp_done","1");
+                saveUserPrefernce("otp_done","0");
                 saveUserPrefernce("mobile_no",edtMobile.getText().toString().trim());
                 saveUserPrefernce("userpolicyAgreement", "1");
 
@@ -374,11 +470,13 @@ public class  GetMobileNo extends AppCompatActivity {
                 ivIndicator.setImageDrawable(getResources().getDrawable(R.drawable.ic_angle_right));
                 txtMsg1.setText(getString(R.string.to_verify));
                 txtMsg2.setText(getString(R.string.enter_received_otp));
+                sharedPref.setLoginDone(getApplicationContext(),false);
 
             }else {
-
+                saveUserPrefernce("otp_done","0");
                 layoutOtp.setVisibility(View.GONE);
                 linEmailLayout.setVisibility(View.VISIBLE);
+                sharedPref.setLoginDone(getApplicationContext(),false);
 
 //                Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
 //                startActivity(new Intent(GetMobileNo.this, GetEmailActivity.class)
@@ -440,11 +538,14 @@ public class  GetMobileNo extends AppCompatActivity {
                 saveUserPrefernce("auth_token", jsonData.getJSONObject("auth_token").getString("auth_token"));
                 saveUserPrefernce("student_id", jsonData.optString("student_id"));
                 saveUserPrefernce("userpolicyAgreement", "1");
+                sharedPref.setLoginDone(getApplicationContext(),true);
 
                 startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             } else {
                 progressDialog.dismiss();
+                saveUserPrefernce("otp_done","0");
+                sharedPref.setLoginDone(getApplicationContext(),false);
                 Log.e(MainApplication.TAG, "getOTPValidation: ");
                 Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
             }
@@ -504,6 +605,7 @@ public class  GetMobileNo extends AppCompatActivity {
 //                startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
 //                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             } else {
+                signUpCalled = false;
                 progressDialog.dismiss();
                 Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
             }
@@ -539,11 +641,19 @@ public class  GetMobileNo extends AppCompatActivity {
                 saveUserPrefernce("auth_token", jsonData.getJSONObject("auth_token").getString("auth_token"));
                 saveUserPrefernce("student_id", jsonData.optString("student_id"));
                 saveUserPrefernce("userpolicyAgreement", "1");
+                sharedPref.setLoginDone(getApplicationContext(),true);
 
+                // {"student_id":3445,"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/","auth_token":{"userName":"0101010101",
+                // "auth_token":"7b07da9be235490ec0eec52c5b049445"},"result":{"first_name":"vijay",
+                // "password":"aHXD\/F3tJ32mkUtVe3ai\/GKu2QTBhgoEJHy2NHxAKM8HeEOphgD34oFtSh6N+NjZ0zGA1+cRGKkqo+zZJNsw6Q==",
+                // "email":"abcde@gmail.com","mobile":"0101010101","img":"student\/defaultprofilepic\/default_profile_pic_2.jpg",
+                // "created_by_ip":3756390272,"created_datetime":"2019-05-20 19:37:25"},"status":1,"message":"OTP Successfully Verified"}
                 startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             } else {
                 progressDialog.dismiss();
+                saveUserPrefernce("otp_done","0");
+                sharedPref.setLoginDone(getApplicationContext(),false);
                 Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();
             }
 
@@ -559,8 +669,6 @@ public class  GetMobileNo extends AppCompatActivity {
         }
     }
 
-
-
    private void saveUserPrefernce(String key, String value){
        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
        SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -569,8 +677,71 @@ public class  GetMobileNo extends AppCompatActivity {
        editor.commit();
 
    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+
+            case 1:
+                if (grantResults.length <= 0) {
+                }
+                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED&&
+                        grantResults[8] == PackageManager.PERMISSION_GRANTED) {
+                    //granted
+//                    apiCall();
+                } else {
+                    //not granted
+//                    Log.e(MainApplication.TAG, "not granted: Dashboard " + grantResults[0]);
+                    {
+                        // Permission denied.
+                        // Notify the user via a SnackBar that they have rejected a core permission for the
+                        // app, which makes the Activity useless. In a real app, core permissions would
+                        // typically be best requested during a welcome-screen flow.
+                        // Additionally, it is important to remember that a permission might have been
+                        // rejected without asking the user for permission (device policy or "Never ask
+                        // again" prompts). Therefore, a user interface affordance is typically implemented
+                        // when permissions are denied. Otherwise, your app could appear unresponsive to
+                        // touches or interactions which have required permissions.
+                        //                    Toast.makeText(this, R.string.permission_denied_explanation, Toast.LENGTH_LONG).show();
+                        //                    finish();
+
+                        try {
+//                            button.setEnabled(true);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Snackbar.make(
+                                findViewById(R.id.rootViews),
+                                R.string.permission_denied_explanation,
+                                Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.settings, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        // Build intent that displays the App settings screen.
+                                        Intent intent = new Intent();
+                                        intent.setAction(
+                                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                        Uri uri = Uri.fromParts("package",
+                                                BuildConfig.APPLICATION_ID, null);
+                                        intent.setData(uri);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
+                    }
+                }
+                break;
+        }
+
+    }
 }
-    //    TextView textViewToolbar;
+
+//    TextView textViewToolbar;
 //    MainApplication mainApplication;
 //    static Context mContext;
 //    Button button;

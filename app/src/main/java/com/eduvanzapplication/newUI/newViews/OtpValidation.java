@@ -28,8 +28,7 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.newUI.VolleyCallNew;
-import com.eduvanzapplication.newUI.webviews.VolleyCallLogin;
+import com.eduvanzapplication.newUI.VolleyCall;
 
 import org.json.JSONObject;
 
@@ -160,8 +159,8 @@ public class OtpValidation extends AppCompatActivity {
                         params.put("email", emailId);
                         params.put("name", firstName);
 //                        params.put("studentId", userID);
-                        VolleyCallLogin volleyCall = new VolleyCallLogin();
-                        volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "setOtpValidation", params);
+                        VolleyCall volleyCall = new VolleyCall();
+                        volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "setOtpValidation", params,MainActivity.auth_token);
                     } catch (Exception e) {
                         String className = this.getClass().getSimpleName();
                         String name = new Object() {
@@ -202,8 +201,8 @@ public class OtpValidation extends AppCompatActivity {
                             Toast.makeText(OtpValidation.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
                         } else {
-                            VolleyCallLogin volleyCall = new VolleyCallLogin();
-                            volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "getOtpValidation", params);
+                            VolleyCall volleyCall = new VolleyCall();
+                            volleyCall.sendRequest(getApplicationContext(), url, mActivity, null, "getOtpValidation", params,MainActivity.auth_token);
                         }
                     } catch (Exception e) {
                         String className = this.getClass().getSimpleName();
@@ -407,7 +406,7 @@ public class OtpValidation extends AppCompatActivity {
                 Toast.makeText(OtpValidation.this, getText(R.string.please_check_your_network_connection), Toast.LENGTH_SHORT).show();
 
             } else {
-                VolleyCallNew volleyCall = new VolleyCallNew();
+                VolleyCall volleyCall = new VolleyCall();
                 volleyCall.sendRequest(OtpValidation.this, url, mActivity, null, "updateOTPData", params, MainActivity.auth_token);
             }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -92,6 +93,7 @@
 
                             <EditText
                                 android:id="@+id/edtFnameBr"
+                                android:singleLine="true"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/first_name"
@@ -110,6 +112,7 @@
 
                             <EditText
                                 android:id="@+id/edtMnameBr"
+                                android:singleLine="true"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/middle_name"
@@ -128,6 +131,7 @@
 
                             <EditText
                                 android:id="@+id/edtLnameBr"
+                                android:singleLine="true"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/last_name"
@@ -512,7 +516,7 @@
                                 android:background="@android:color/transparent"
                                 android:hint="PAN Number"
                                 android:imeOptions="actionNext"
-                                android:inputType="text"
+                                android:inputType="text|textCapCharacters"
                                 android:maxLines="1"
                                 android:maxLength="10"
                                 android:padding="@dimen/_3sdp"
@@ -538,7 +542,10 @@
 
                             <EditText
                                 android:id="@+id/edtAddressbr"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
                                 style="@style/EditTextStyle"
+                                android:inputType="textPostalAddress"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="FLAT NUMBER, BUILDING, SOCIETY NAME" />
@@ -553,7 +560,10 @@
 
                             <EditText
                                 android:id="@+id/edtLandmarkbr"
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
                                 style="@style/EditTextStyle"
+                                android:inputType="textPostalAddress"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="STREET NAME, LOCALITY, LANDMARK" />
@@ -578,9 +588,11 @@
                                 <EditText
                                     android:id="@+id/edtPincodeBr"
                                     style="@style/EditTextStyle"
+                                    android:imeOptions="actionDone"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="PIN CODE"
+                                    android:maxLength="6"
                                     android:inputType="number" />
                             </android.support.design.widget.TextInputLayout>
 
@@ -783,6 +795,7 @@
                                 android:hint="Search Your Institute Here"
                                 android:imeOptions="actionNext"
                                 android:maxLines="1"
+                                android:singleLine="true"
                                 android:padding="@dimen/_2sdp" />
 
                             <View
@@ -910,7 +923,7 @@
                                     android:backgroundTint="@color/darkblue"
                                     android:drawableStart="@drawable/ic_rupee_sign"
                                     android:hint="------------"
-                                    android:imeOptions="actionNext"
+                                    android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:maxLength="8"
                                     android:maxLines="1"
