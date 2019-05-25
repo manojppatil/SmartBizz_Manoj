@@ -38,20 +38,42 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/_8sdp">
 
-                <TextView
-                    android:id="@+id/txtResidentialToggle"
+                <LinearLayout
+                    android:id="@+id/linResidentialToggle"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
-                    android:drawableStart="@drawable/ic_home_heart"
-                    android:drawableEnd="@drawable/ic_check_circle_green"
-                    android:gravity="center_vertical"
-                    android:text="   Residential Details"
-                    android:textColor="@color/darkblue" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtResidentialToggle"
+                        android:layout_width="@dimen/_170sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:drawableStart="@drawable/ic_home_heart"
+                        android:drawableEnd="@drawable/ic_check_circle_green"
+                        android:gravity="center_vertical"
+                        android:text="   Residential Details"
+                        android:textColor="@color/darkblue" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end">
+
+                        <ImageView
+                            android:id="@+id/ivResidentialToggle"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="center_vertical"
+                            android:tint="@color/darkblue"
+                            app:srcCompat="@drawable/ic_angle_down" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtResidentialToggle"
+                    android:layout_below="@id/linResidentialToggle"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/_4sdp"
@@ -62,20 +84,19 @@
                     <LinearLayout
                         android:layout_width="@dimen/_10sdp"
                         android:layout_height="match_parent"
-                        android:minHeight="@dimen/_20sdp"
                         android:layout_alignParentTop="true"
+                        android:minHeight="@dimen/_20sdp"
                         android:orientation="vertical">
 
                         <View
                             android:id="@+id/line1"
                             android:layout_width="@dimen/_10sdp"
                             android:layout_height="match_parent"
-                            android:minHeight="@dimen/_15sdp"
                             android:layout_marginEnd="@dimen/_8sdp"
-                            android:background="@drawable/dashed_vertical_line" />
+                            android:background="@drawable/dashed_vertical_line"
+                            android:minHeight="@dimen/_15sdp" />
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:id="@+id/linResidentialBlock"
@@ -119,14 +140,14 @@
                                     android:maxLines="1"
                                     android:text="Yes"
                                     android:textColor="@color/textcolordark"
-                                    android:theme="@style/TextViewRadioStyle" />
+                                    style="@style/TextViewTitleStyle" />
 
                                 <Switch
                                     android:id="@+id/switchIsPermanentAddressSame"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:checked="false"
+                                    android:checked="true"
                                     android:theme="@style/SCBSwitch" />
 
                                 <TextView
@@ -137,7 +158,7 @@
                                     android:maxLines="1"
                                     android:text="No"
                                     android:textColor="@color/textcolordark"
-                                    android:theme="@style/TextViewRadioStyle" />
+                                    style="@style/TextViewTitleStyle" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -192,14 +213,15 @@
 
                                             <TextView
                                                 android:id="@+id/txtRented"
-                                                style="@style/TextViewTitleStyle"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginLeft="@dimen/_5sdp"
                                                 android:layout_marginRight="@dimen/_5sdp"
                                                 android:layout_weight="1.1"
                                                 android:maxLines="1"
-                                                android:text="Rented" />
+                                                android:text="Rented"
+                                                android:textColor="@color/textcolordark"
+                                                style="@style/TextViewTitleStyle" />
 
                                             <Switch
                                                 android:id="@+id/switchResidenceType"
@@ -212,13 +234,15 @@
 
                                             <TextView
                                                 android:id="@+id/txtOwned"
-                                                style="@style/TextViewTitleStyle"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginLeft="@dimen/_5sdp"
                                                 android:layout_marginRight="@dimen/_5sdp"
                                                 android:maxLines="1"
-                                                android:text="Owned" />
+                                                android:text="Owned"
+                                                android:textColor="@color/textcolordark"
+
+                                                style="@style/TextViewTitleStyle" />
 
                                         </LinearLayout>
 
@@ -339,7 +363,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:visibility="gone">
+                                        android:visibility="visible">
 
                                         <android.support.design.widget.TextInputLayout
                                             android:layout_width="match_parent"
@@ -506,15 +530,37 @@
                 android:padding="@dimen/_8sdp"
                 android:visibility="visible">
 
-                <TextView
-                    android:id="@+id/txtProfessionalToggle"
+                <LinearLayout
+                    android:id="@+id/linProfessionalToggle"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp"
-                    android:drawableStart="@drawable/ic_business_time"
-                    android:drawableEnd="@drawable/ic_check_circle_green"
-                    android:gravity="center_vertical"
-                    android:text="   Professional Details"
-                    android:textColor="@color/darkblue" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtProfessionalToggle"
+                        android:layout_width="@dimen/_170sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:drawableStart="@drawable/ic_business_time"
+                        android:drawableEnd="@drawable/ic_check_circle_green"
+                        android:gravity="center_vertical"
+                        android:text="   Professional Details"
+                        android:textColor="@color/darkblue" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end">
+
+                        <ImageView
+                            android:id="@+id/ivProfessionalToggle"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="center_vertical"
+                            android:tint="@color/darkblue"
+                            app:srcCompat="@drawable/ic_angle_down" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

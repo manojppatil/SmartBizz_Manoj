@@ -10,6 +10,16 @@
 
     </style>
 
+    <style name="TextViewLightStyle" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@android:color/white</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/red</item>
+        <item name="colorControlHighlight">@color/textcolordark</item>
+        <item name="android:fontFamily">@font/sourcesanspro_light</item>
+        <item name="android:textSize">14sp</item>
+
+    </style>
+
     <style name="TextViewTitleStyle" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@android:color/white</item>
         <item name="colorControlNormal">@color/colorPrimary</item>
@@ -82,7 +92,6 @@
     </style>
 
     <style name="TextViewTitle12BoldStyle" parent="Theme.AppCompat.Light">
-        <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/textcolordark</item>
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
         <item name="android:textSize">12sp</item>
@@ -90,7 +99,6 @@
     </style>
 
     <style name="TextViewTitle10BoldStyle" parent="Theme.AppCompat.Light">
-        <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/textcolordark</item>
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
         <item name="android:textSize">10sp</item>
@@ -100,7 +108,6 @@
     <style name="TextViewSmallCapsStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/black_new</item>
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">10sp</item>
 
@@ -125,7 +132,6 @@
     <style name="TextViewMiniCapsStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/black_new</item>
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">8sp</item>
 
@@ -156,7 +162,7 @@
         <item name="colorAccent">@color/blue1</item>
 
         <!-- inactive thumb color -->
-        <item name="colorSwitchThumbNormal">#f1f1f1
+        <item name="colorSwitchThumbNormal">@color/blue1
         </item>
 
         <!-- inactive track color (30% transparency) -->

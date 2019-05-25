@@ -21,24 +21,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/mag1"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <TextView
+            style="@style/TextViewTitle14Style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:text="Upload all the"
-            style="@style/TextViewTitle14Style"/>
+            android:text="Upload all the" />
 
         <TextView
+            style="@style/TextViewTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Required Documents"
-            android:textSize="20sp"
-            style="@style/TextViewTitleStyle"/>
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/linAllDocBlock"
@@ -58,18 +58,32 @@
                     android:layout_height="@dimen/_100sdp"
                     android:layout_margin="@dimen/_10sdp"
                     android:layout_weight="0.5"
-                    android:background="@drawable/border"
-                    android:backgroundTint="@color/yellow_600"
+                    android:background="@drawable/border_yellow"
                     android:orientation="vertical"
                     android:padding="@dimen/_8sdp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_exclamation_triangle_yellow"
-                        android:text="KYC"
-                        android:textSize="15sp"
-                        android:textStyle="italic|bold" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="KYC"
+                            android:textSize="15sp"
+                            android:textStyle="italic|bold" />
+
+                        <ImageView
+                            android:id="@+id/ivKyc"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="right"
+                            app:srcCompat="@drawable/ic_exclamation_triangle_yellow" />
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:layout_width="match_parent"
@@ -90,18 +104,39 @@
                     android:layout_height="@dimen/_100sdp"
                     android:layout_margin="@dimen/_10sdp"
                     android:layout_weight="0.5"
-                    android:background="@drawable/border"
-                    android:backgroundTint="#43A047"
+                    android:background="@drawable/border_yellow"
                     android:orientation="vertical"
                     android:padding="@dimen/_8sdp">
 
-                    <TextView
+                    <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:drawableEnd="@drawable/ic_check_circle_green"-->
+                    <!--android:text="Financial"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textStyle="italic|bold" />-->
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_check_circle_green"
-                        android:text="Financial"
-                        android:textSize="15sp"
-                        android:textStyle="italic|bold" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Financial"
+                            android:textSize="15sp"
+                            android:textStyle="italic|bold" />
+
+                        <ImageView
+                            android:id="@+id/ivFinancial"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="right"
+                            app:srcCompat="@drawable/ic_exclamation_triangle_yellow" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -129,18 +164,32 @@
                     android:layout_height="@dimen/_100sdp"
                     android:layout_margin="@dimen/_10sdp"
                     android:layout_weight="0.5"
-                    android:background="@drawable/border"
-                    android:backgroundTint="#1E88E5"
+                    android:background="@drawable/border_yellow"
                     android:orientation="vertical"
                     android:padding="@dimen/_8sdp">
 
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_exclamation_triangle_yellow"
-                        android:text="Educational"
-                        android:textSize="15sp"
-                        android:textStyle="italic|bold" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Educational"
+                            android:textSize="15sp"
+                            android:textStyle="italic|bold" />
+
+                        <ImageView
+                            android:id="@+id/ivEducational"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="right"
+                            app:srcCompat="@drawable/ic_exclamation_triangle_yellow" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -175,7 +224,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Upload"
+                        android:text="Other"
                         android:textSize="15sp"
                         android:textStyle="italic|bold" />
 
@@ -202,8 +251,7 @@
                 android:id="@+id/linKYCDocuments"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_300sdp"
-                android:background="@drawable/border"
-                android:backgroundTint="#FDD835"
+                android:background="@drawable/border_yellow"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
                 android:visibility="visible">
@@ -237,9 +285,9 @@
 
                             <RelativeLayout
                                 android:id="@+id/profileBack"
-                                android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="fill_parent" >
+                                android:layout_height="fill_parent"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -253,16 +301,16 @@
                                     android:id="@+id/profileTxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="Photo"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -285,8 +333,8 @@
                                 android:id="@+id/btnPhoto1"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -308,9 +356,9 @@
 
                             <RelativeLayout
                                 android:id="@+id/aadharBackground"
-                                android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -323,16 +371,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="aadhar card"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -354,8 +402,8 @@
                                 android:id="@+id/aadharBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -376,9 +424,9 @@
 
                             <RelativeLayout
                                 android:id="@+id/panBackground"
-                                android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -391,16 +439,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="pan card"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -422,8 +470,8 @@
                                 android:id="@+id/panCardBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPan2"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -446,9 +494,9 @@
 
                             <RelativeLayout
                                 android:id="@+id/passportBackground"
-                                android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -461,16 +509,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="passport"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -492,8 +540,8 @@
                                 android:id="@+id/passportBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -514,9 +562,9 @@
 
                             <RelativeLayout
                                 android:id="@+id/voterIdBackground"
-                                android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -529,16 +577,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="voter id"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -560,8 +608,8 @@
                                 android:id="@+id/voterIdBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -582,9 +630,9 @@
 
                             <RelativeLayout
                                 android:id="@+id/drivingLicenseBackground"
-                                android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -597,16 +645,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="Driving license"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -623,12 +671,13 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="Driving License"
                                 android:textSize="15sp" />
+
                             <Button
                                 android:id="@+id/drivingLicenseBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -650,9 +699,9 @@
 
                             <RelativeLayout
                                 android:id="@+id/telephoneBillBackground"
-                                android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -665,16 +714,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="Telephone bill"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -696,8 +745,8 @@
                                 android:id="@+id/telephoneBillBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -718,9 +767,9 @@
 
                             <RelativeLayout
                                 android:id="@+id/electricityBillBackground"
-                                android:visibility="gone"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -733,16 +782,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="electricity bill"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -764,8 +813,8 @@
                                 android:id="@+id/electricityBillBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -785,10 +834,10 @@
                             android:visibility="gone">
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/rentAgreementBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -801,16 +850,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="rent agreement"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -832,8 +881,8 @@
                                 android:id="@+id/rentAgreementBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -853,10 +902,10 @@
                             android:visibility="gone">
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/addressProofBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -869,16 +918,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text="address Proof"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -900,8 +949,8 @@
                                 android:id="@+id/addressProffBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -914,31 +963,31 @@
                             android:id="@+id/linSeemoreKycBtn"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_30sdp"
+                            android:layout_gravity="right"
                             android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_30sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@drawable/border_circular_red_filled"
-                            android:layout_gravity="right"
                             android:orientation="horizontal"
                             android:padding="@dimen/_5sdp">
 
                             <TextView
                                 android:id="@+id/txtGetOtp"
+                                style="@style/TextViewTitleStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="See More"
                                 android:gravity="center"
-                                android:textColor="@color/white"
-                                style="@style/TextViewTitleStyle"/>
+                                android:text="See More"
+                                android:textColor="@color/white" />
 
                             <View
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:layout_marginBottom="@dimen/_2sdp"
                                 android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_marginTop="@dimen/_2sdp"
                                 android:layout_marginEnd="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_2sdp"
                                 android:background="@color/white" />
 
                             <ImageView
@@ -959,8 +1008,7 @@
                 android:id="@+id/linFinanceDocuments"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_300sdp"
-                android:background="@drawable/border"
-                android:backgroundTint="#43A047"
+                android:background="@drawable/border_yellow"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
                 android:visibility="gone">
@@ -1792,7 +1840,7 @@
                 android:backgroundTint="#1E88E5"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -1824,10 +1872,10 @@
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/tenthMarksheetBackground"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1840,16 +1888,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" 10th mark sheet"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1871,8 +1919,8 @@
                                 android:id="@+id/tenthMarkSheetBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1894,10 +1942,10 @@
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/twelvethMarksheetBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1910,16 +1958,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" 12th mark sheet"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -1936,12 +1984,13 @@
                                 android:layout_marginEnd="@dimen/_20sdp"
                                 android:text="12th Mark sheet"
                                 android:textSize="15sp" />
+
                             <Button
                                 android:id="@+id/twelvethMarkSheetBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -1962,10 +2011,10 @@
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/lastMarksheetBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -1978,16 +2027,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" Last completed degree mark sheet"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -2009,8 +2058,8 @@
                                 android:id="@+id/lastCompletedMarksheetBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -2029,12 +2078,11 @@
                             android:orientation="horizontal">
 
 
-
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/lastCertificateBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -2047,16 +2095,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" Last completed degree certificate"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -2078,8 +2126,8 @@
                                 android:id="@+id/lastDegreeCertificateBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -2092,31 +2140,31 @@
                             android:id="@+id/linSeemoreEducationalBtn"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_30sdp"
+                            android:layout_gravity="right"
                             android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_30sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@drawable/border_circular_red_filled"
-                            android:layout_gravity="right"
                             android:orientation="horizontal"
                             android:padding="@dimen/_5sdp">
 
                             <TextView
                                 android:id="@+id/txtSeeMoreEducational"
+                                style="@style/TextViewTitleStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="See More"
                                 android:gravity="center"
-                                android:textColor="@color/white"
-                                style="@style/TextViewTitleStyle"/>
+                                android:text="See More"
+                                android:textColor="@color/white" />
 
                             <View
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:layout_marginBottom="@dimen/_2sdp"
                                 android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_marginTop="@dimen/_2sdp"
                                 android:layout_marginEnd="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_2sdp"
                                 android:background="@color/white" />
 
                             <ImageView
@@ -2141,7 +2189,7 @@
                 android:backgroundTint="@color/blue1"
                 android:orientation="vertical"
                 android:padding="@dimen/_8sdp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -2172,10 +2220,10 @@
 
 
                             <RelativeLayout
-                                android:visibility="gone"
                                 android:id="@+id/othersBackground"
                                 android:layout_width="fill_parent"
-                                android:layout_height="@dimen/_70sdp">
+                                android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -2188,16 +2236,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
                                     android:layout_alignParentBottom="true"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:text=" others"
-                                    android:layout_alignParentLeft="true"
                                     android:textAllCaps="true"
                                     android:textColor="@color/amber_50"
                                     android:textSize="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
-                                    android:layout_marginLeft="@dimen/_29sdp"
                                     android:textStyle="bold" />
 
                             </RelativeLayout>
@@ -2219,8 +2267,8 @@
                                 android:id="@+id/othersBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
-                                android:layout_alignParentBottom="true"
                                 android:layout_below="@+id/txtPhotoTitle1"
+                                android:layout_alignParentBottom="true"
                                 android:layout_margin="5dp"
                                 android:background="@color/colorSecondary"
                                 android:text="@string/upload"
@@ -2250,8 +2298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8sp"
                     android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:backgroundTint="#FDD835"
+                    android:background="@drawable/border_yellow"
                     android:orientation="vertical"
                     android:padding="@dimen/_6sdp">
 
@@ -2289,8 +2336,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8sp"
                     android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:backgroundTint="#43A047"
+                    android:background="@drawable/border_yellow"
                     android:orientation="vertical"
                     android:padding="@dimen/_6sdp">
 
@@ -2328,8 +2374,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8sp"
                     android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:backgroundTint="#1E88E5"
+                    android:background="@drawable/border_yellow"
                     android:orientation="vertical"
                     android:padding="@dimen/_6sdp">
 
@@ -2367,8 +2412,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8sp"
                     android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:backgroundTint="@color/blue1"
+                    android:background="@drawable/border_yellow"
                     android:orientation="vertical"
                     android:padding="@dimen/_6sdp"
                     android:visibility="gone">
@@ -2409,15 +2453,15 @@
     </LinearLayout>
 
     <ProgressBar
-        android:visibility="gone"
+        android:id="@+id/progressBar_docupload"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar_docupload"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
         android:indeterminate="false"
-        android:layout_gravity="center" />
+        android:visibility="gone" />
 
 
 </RelativeLayout>

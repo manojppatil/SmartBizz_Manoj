@@ -52,6 +52,7 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
+import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 
 import com.eduvanzapplication.newUI.webviews.WebViewAboutUs;
@@ -64,8 +65,15 @@ import com.eduvanzapplication.newUI.webviews.WebViewPrivacyPolicy;
 import com.eduvanzapplication.newUI.webviews.WebViewTermsNCondition;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
 import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -78,13 +86,11 @@ public class DashboardActivity extends AppCompatActivity
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
     LinearLayout linearLayoutSignup, linearLayoutUserDetail,editProfile;
-   public DataSyncReceiver dataSyncReceiver;
-    static String  student_id = "", appInstallationTimeStamp = "";
-    AppCompatActivity mActivity;
+    public DataSyncReceiver dataSyncReceiver;
+    static String  student_id = "", appInstallationTimeStamp = "",userFirst = "", userLast = "", userEmail = "", userPic = "",userMobileNo ="";
+    public static AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
     public int GET_MY_PERMISSION = 1, permission;
-
-    String userFirst = "", userLast = "", userEmail = "", userPic = "",userMobileNo ="";
     ImageView ivUserPic;
 
     static int firstTimeScrape = 0;
@@ -210,7 +216,6 @@ public class DashboardActivity extends AppCompatActivity
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
                                     Manifest.permission.READ_PHONE_STATE,
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                    Manifest.permission.READ_CONTACTS,
                                     Manifest.permission.CAMERA,
                                     Manifest.permission.ACCESS_COARSE_LOCATION,
                                     Manifest.permission.ACCESS_FINE_LOCATION},
@@ -218,7 +223,6 @@ public class DashboardActivity extends AppCompatActivity
 
                 } else {
                     ExtraHelperFunctions.putRefUserId(context,userMobileNo);
-//                    Log.d("SDK","Initialized: "+student_id);
                     Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
                 }
             }
@@ -242,16 +246,61 @@ public class DashboardActivity extends AppCompatActivity
 
             Boolean dataSynced = intent.getBooleanExtra("DataSynced",false);
 
-            Log.e("Receiver", "Data synced: " + dataSynced);
-            Log.e("Receiver", "Data Action: " + action);
+//            Log.e("Receiver", "Data synced: " + dataSynced);
+//            Log.e("Receiver", "Data Action: " + action);
+
+//            if(dataSynced) {
+                saveAlgo360();
+//                saveAlgo360(context, student_id,userMobileNo,userEmail, String.valueOf(true));
+                sharedPreferences = context.getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("Data synced", String.valueOf(dataSynced));
+                editor.commit();
+//            }
         }
     };
+
+    public static void saveAlgo360() {
+        /** API CALL **/
+        try {//auth_token
+            String url = "http://192.168.1.63/eduvanzapi/dashboard/saveAlgo360response";
+//            String url = MainActivity.mainUrl + "dashboard/saveAlgo360response";
+            Map<String, String> params = new HashMap<String, String>();
+
+            params.put("student_id", student_id);
+            params.put("mobile_no", userMobileNo);
+            params.put("email_id", userEmail);
+            params.put("algo360_datasync", String.valueOf(true));
+            VolleyCall volleyCall = new VolleyCall();
+            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, "90ad441a12b48c6d7c5524b8b2a334c3");
+//            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public static void saveAlgo360(Context context, String studid, String mobno, String email,String datasync) {
+//        /** API CALL **/
+//        try {//auth_token
+//            String url = "192.168.1.63/eduvanzapi/dashboard/saveAlgo360response";
+////            String url = MainActivity.mainUrl + "dashboard/saveAlgo360response";
+//            Map<String, String> params = new HashMap<String, String>();
+//
+//            params.put("student_id", studid);
+//            params.put("mobile_no", mobno);
+//            params.put("email_id", email);
+//            params.put("algo360_datasync", datasync);
+//            VolleyCall volleyCall = new VolleyCall();
+//            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     protected void onPause() {
 
         unregisterReceiver(broadcastReceiver);
-
         super.onPause();
     }
 
@@ -266,7 +315,7 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -281,7 +330,8 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
             if (id == R.id.nav_eligibility) {
-            Intent intent = new Intent(DashboardActivity.this, NewLeadActivity.class);
+//            Intent intent = new Intent(DashboardActivity.this, NewLeadActivity.class);
+            Intent intent = new Intent(DashboardActivity.this, LeadOwnerType.class);
             startActivity(intent);
         } else if (id == R.id.nav_howitworks) {
             Intent intent = new Intent(context, HowItWorks.class);
@@ -411,7 +461,7 @@ public class DashboardActivity extends AppCompatActivity
                         grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[8] == PackageManager.PERMISSION_GRANTED && grantResults[9] == PackageManager.PERMISSION_GRANTED) {
+                        grantResults[8] == PackageManager.PERMISSION_GRANTED ) {
                     //granted
                     ExtraHelperFunctions.putRefUserId(context,userMobileNo);
                     Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
@@ -455,5 +505,8 @@ public class DashboardActivity extends AppCompatActivity
                 break;
         }
 
+    }
+
+    public void updateAlgo360Res(JSONObject jsonDataO) {
     }
 }

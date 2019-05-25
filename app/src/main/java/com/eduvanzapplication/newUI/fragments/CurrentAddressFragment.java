@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,13 +39,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.isCurrentAddEnabled;
+
 public class CurrentAddressFragment extends Fragment {
 
     public static Context context;
     public static Activity activity;
     public static Fragment mFragment;
     public static OnCurrentAddrFragmentInteractionListener mListener;
-    public static EditText edtAddress, edtLandmark,edtPincode ;
+    public static EditText edtAddress, edtLandmark, edtPincode;
+    public static TextView txtcurrentAddressErrMsg;
     public static Spinner spCountry, spState, spCity;
 
     //city
@@ -63,7 +65,7 @@ public class CurrentAddressFragment extends Fragment {
     public static ArrayAdapter arrayAdapter_currentCountry;
     public static ArrayList<String> currentCountry_arrayList;
     public static ArrayList<BorrowerCurrentCountryPersonalPOJO> borrowerCurrentCountryPersonalPOJOArrayList;
-    public  static ProgressDialog progressDialog;
+    public static ProgressDialog progressDialog;
 
     public CurrentAddressFragment() {
     }
@@ -89,7 +91,7 @@ public class CurrentAddressFragment extends Fragment {
 
 
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_current_address, container, false);
+        View view = inflater.inflate(R.layout.fragment_current_address, container, false);
         context = getContext();
         activity = getActivity();
         context = getContext();
@@ -100,6 +102,7 @@ public class CurrentAddressFragment extends Fragment {
         spCountry = view.findViewById(R.id.spCountry);
         spState = view.findViewById(R.id.spState);
         spCity = view.findViewById(R.id.spCity);
+        txtcurrentAddressErrMsg = view.findViewById(R.id.txtcurrentAddressErrMsg);
         return view;
 
     }
@@ -133,14 +136,16 @@ public class CurrentAddressFragment extends Fragment {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    if(s.toString().length() >0) {
-                    NewLeadActivity.flatBuildingSoc = s.toString();
-                        edtAddress .setError(null);
-                    }else {
-                        NewLeadActivity.flatBuildingSoc = "";
-                        edtLandmark.setError("Please enter Address,FlatBuilding");
+                    if (isCurrentAddEnabled) {
+                        if (edtAddress.getText().toString().equals("")) {
+                            NewLeadActivity.flatBuildingSoc = "";
+//                        edtFirstName.setError("Please enter first name");
+                        } else {
+                            NewLeadActivity.flatBuildingSoc = edtAddress.getText().toString();
+                            edtAddress.setError(null);
+                        }
+                        checkAllFields();
                     }
-                    checkAllFields();
                 }
 
                 @Override
@@ -158,14 +163,17 @@ public class CurrentAddressFragment extends Fragment {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    if(s.toString().length() >0) {
-                    NewLeadActivity.streetLocalityLandMark = s.toString();
-                        edtLandmark.setError(null);
-                    }else {
-                        NewLeadActivity.streetLocalityLandMark = "";
-                        edtLandmark.setError("Please enter LandMark");
+                    if (isCurrentAddEnabled) {
+
+                        if (edtLandmark.getText().toString().equals("")) {
+                            NewLeadActivity.streetLocalityLandMark = "";
+//                        edtFirstName.setError("Please enter first name");
+                        } else {
+                            NewLeadActivity.streetLocalityLandMark = edtLandmark.getText().toString();
+                            edtLandmark.setError(null);
+                        }
+                        checkAllFields();
                     }
-                    checkAllFields();
                 }
 
                 @Override
@@ -181,14 +189,17 @@ public class CurrentAddressFragment extends Fragment {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (s.toString().length()==6){
-                    NewLeadActivity.pinCode = s.toString();
-                    edtPincode.setError(null);
-                    }else{
-                        NewLeadActivity.pinCode = "";
-                        edtPincode.setError("Please Enter valid PINCODE Number!");
+
+                    if (isCurrentAddEnabled) {
+                        if (s.toString().length() == 6) {
+                            NewLeadActivity.pinCode = s.toString();
+                            edtPincode.setError(null);
+                        } else {
+                            NewLeadActivity.pinCode = "";
+//                        edtPincode.setError("Please Enter valid PINCODE Number!");
+                        }
+                        checkAllFields();
                     }
-                    checkAllFields();
                 }
 
                 @Override
@@ -206,8 +217,9 @@ public class CurrentAddressFragment extends Fragment {
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
                                 NewLeadActivity.cityId = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
-//                                Log.e(TAG, "spCurrentCityBr: +++++++++++++++++++*********************" + currentcityID);
-                                checkAllFields();
+                                if (isCurrentAddEnabled) {
+                                    checkAllFields();
+                                }
                                 break;
                             }
                         }
@@ -281,21 +293,55 @@ public class CurrentAddressFragment extends Fragment {
 
     public static void checkAllFields() {
         if (NewLeadActivity.flatBuildingSoc.equals("") || NewLeadActivity.streetLocalityLandMark.equals("")
-            || NewLeadActivity.pinCode.equals("") || NewLeadActivity.countryId.equals("") ||
-                NewLeadActivity.stateId.equals("") || NewLeadActivity.cityId.equals("")){
+                || NewLeadActivity.pinCode.equals("") || NewLeadActivity.countryId.equals("") ||
+                NewLeadActivity.stateId.equals("") || NewLeadActivity.cityId.equals("")) {
             mListener.onOffButtonsCurrentAddress(false, false);
-        }else {
+
+            if (edtAddress.getText().toString().equals("")) {
+                txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
+                txtcurrentAddressErrMsg.setText("");
+//                edtAddress.requestFocus();
+
+            } else if (edtPincode.getText().toString().equals("")) {
+                txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
+                txtcurrentAddressErrMsg.setText("please enter your pincode");
+//                edtPincode.requestFocus();
+
+            }else if (edtLandmark.getText().toString().equals("")) {
+                txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
+                txtcurrentAddressErrMsg.setText("please enter your street address");
+//                edtLandmark.requestFocus();
+
+            }  else if (NewLeadActivity.countryId.equals("")) {
+                txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
+                txtcurrentAddressErrMsg.setText("please select country");
+//                spCountry.requestFocus();
+
+            } else if (NewLeadActivity.stateId.equals("")) {
+                txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
+                txtcurrentAddressErrMsg.setText("please select state");
+//                spState.requestFocus();
+
+            } else if (NewLeadActivity.cityId.equals("")) {
+                txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
+                txtcurrentAddressErrMsg.setText("please select city");
+//                spCity.requestFocus();
+            }
+
+        } else {
+            txtcurrentAddressErrMsg.setText(null);
+            txtcurrentAddressErrMsg.setVisibility(View.GONE);
             mListener.onOffButtonsCurrentAddress(true, true);
         }
     }
+
     public static void validate() {
         if (NewLeadActivity.flatBuildingSoc.equals("") || NewLeadActivity.streetLocalityLandMark.equals("")
-                || NewLeadActivity.pinCode.equals("") )
+                || NewLeadActivity.pinCode.equals(""))
             mListener.onCurrentAddrFragmentInteraction(false, 2);
         else
             mListener.onCurrentAddrFragmentInteraction(true, 3);
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -320,6 +366,11 @@ public class CurrentAddressFragment extends Fragment {
         edtAddress.setText(NewLeadActivity.flatBuildingSoc);
         edtLandmark.setText(NewLeadActivity.streetLocalityLandMark);
         edtPincode.setText(NewLeadActivity.pinCode);
+
+        if (isCurrentAddEnabled) {
+            checkAllFields();
+        }
+        isCurrentAddEnabled = true;
 
     }
 
@@ -552,13 +603,6 @@ public class CurrentAddressFragment extends Fragment {
                     spCity.setAdapter(arrayAdapter_currentCity);
                     arrayAdapter_currentCity.notifyDataSetChanged();
 
-//                    int count = borrowerCurrentCityPersonalPOJOArrayList.size();
-//                    for (int i = 0; i < count; i++) {
-//                        if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-//                            spCity.setSelection(i);
-//                        }
-//                    }
-
                 } else {
                 }
             }
@@ -575,6 +619,7 @@ public class CurrentAddressFragment extends Fragment {
 
     public interface OnCurrentAddrFragmentInteractionListener {
         void onCurrentAddrFragmentInteraction(boolean valid, int next);
+
         void onOffButtonsCurrentAddress(boolean next, boolean prev);
     }
 }

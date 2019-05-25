@@ -54,6 +54,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linDoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linClose"
@@ -148,6 +149,18 @@
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/msg2"
+        style="@style/TextViewTitle15BoldStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linDoc"
+        android:fontFamily="@font/sourcesanspro_light"
+        android:textSize="18sp"
+        android:text="SCAN THE DOCUMENT OR CLOSE THIS DIALOG TO CONTINUE MANUALLY"
+        android:textColor="@color/darkblue" />
 
 
     <ProgressBar

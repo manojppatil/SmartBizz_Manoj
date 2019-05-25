@@ -64,14 +64,14 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                            android:singleLine="true"
-                            android:inputType="textPostalAddress"
                             android:id="@+id/edtAddress"
+                            style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
                             android:hint="FLAT NUMBER, BUILDING, SOCIETY NAME"
-                            style="@style/EditTextStyle" />
+                            android:imeOptions="actionNext"
+                            android:inputType="textPostalAddress"
+                            android:singleLine="true" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -82,14 +82,14 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
-                            android:singleLine="true"
-                            android:inputType="textPostalAddress"
                             android:id="@+id/edtLandmark"
+                            style="@style/EditTextStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
                             android:hint="STREET NAME, LOCALITY, LANDMARK"
-                            style="@style/EditTextStyle" />
+                            android:imeOptions="actionNext"
+                            android:inputType="textPostalAddress"
+                            android:singleLine="true" />
                     </android.support.design.widget.TextInputLayout>
 
 
@@ -102,22 +102,22 @@
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
                             android:layout_marginTop="@dimen/_6sdp"
                             android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_weight="0.5"
                             android:theme="@style/EditTextStyle"
                             app:hintTextAppearance="@style/CustomTextAppearance">
 
                             <EditText
-                                android:maxLength="6"
-                                android:singleLine="true"
                                 android:id="@+id/edtPincode"
+                                style="@style/EditTextStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="PIN CODE"
                                 android:imeOptions="actionDone"
                                 android:inputType="number"
-                                style="@style/EditTextStyle" />
+                                android:maxLength="6"
+                                android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
 
                         <LinearLayout
@@ -127,23 +127,24 @@
                             android:orientation="vertical">
 
                             <TextView
+                                style="@style/TextViewSmallCapsStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_horizontal"
-                                android:text="COUNTRY"
-                                style="@style/TextViewSmallCapsStyle"/>
+                                android:text="COUNTRY" />
 
                             <Spinner
                                 android:id="@+id/spCountry"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_26sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
                                 android:background="@drawable/spinner_rect_background"
-                                android:dropDownWidth="400px"
-                                android:layout_marginTop="@dimen/_4sdp" />
+                                android:dropDownWidth="400px" />
 
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -155,21 +156,22 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:orientation="vertical">
+
                             <TextView
+                                style="@style/TextViewSmallCapsStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="STATE"
                                 android:gravity="center_horizontal"
-                                style="@style/TextViewSmallCapsStyle"/>
+                                android:text="STATE" />
 
                             <Spinner
                                 android:id="@+id/spState"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_26sdp"
-                                android:background="@drawable/spinner_rect_background"
-                                android:dropDownWidth="400px"
+                                android:layout_marginTop="@dimen/_4sdp"
                                 android:layout_marginEnd="@dimen/_1sdp"
-                                android:layout_marginTop="@dimen/_4sdp"/>
+                                android:background="@drawable/spinner_rect_background"
+                                android:dropDownWidth="400px" />
 
                         </LinearLayout>
 
@@ -178,26 +180,38 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:orientation="vertical">
+
                             <TextView
+                                style="@style/TextViewSmallCapsStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="CITY"
                                 android:gravity="center_horizontal"
-                                style="@style/TextViewSmallCapsStyle"/>
+                                android:text="CITY" />
 
                             <Spinner
                                 android:id="@+id/spCity"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_26sdp"
-                                android:background="@drawable/spinner_rect_background"
-                                android:dropDownWidth="400px"
                                 android:layout_marginStart="@dimen/_2sdp"
-                                android:layout_marginTop="@dimen/_4sdp"/>
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:background="@drawable/spinner_rect_background"
+                                android:dropDownWidth="400px" />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/txtcurrentAddressErrMsg"
+                        style="@style/TextViewTitle14Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/red"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="15sp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

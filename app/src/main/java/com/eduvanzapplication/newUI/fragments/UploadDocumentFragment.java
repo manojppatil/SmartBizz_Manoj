@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +23,10 @@ import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,6 +99,8 @@ public class UploadDocumentFragment extends Fragment {
     static LinearLayout others;
     static RelativeLayout othersBckgrnd;
 
+    public static ImageView ivKyc,ivFinancial, ivEducational;
+
     int tap;
 
     public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
@@ -106,7 +113,7 @@ public class UploadDocumentFragment extends Fragment {
     DownloadManager downloadManager;
     static Context context;
     static ImageView imageViewProfilePicSelect;
-    ProgressBar progressBar;
+    public static ProgressBar progressBar;
     long downloadReference;
     public UploadDocumentFragment() {
         // Required empty public constructor
@@ -175,6 +182,10 @@ public class UploadDocumentFragment extends Fragment {
         linFinanceDocuments  =view.findViewById(R.id.linFinanceDocuments);
         linEducationDocuments = view.findViewById(R.id.linEducationDocuments);
         linOtherDocuments = view.findViewById(R.id.linOtherDocuments);
+
+        ivKyc = view.findViewById(R.id.ivKyc);
+        ivFinancial = view.findViewById(R.id.ivFinancial);
+        ivEducational = view.findViewById(R.id.ivEducational);
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar_docupload);
 
@@ -3061,6 +3072,7 @@ public class UploadDocumentFragment extends Fragment {
                     }
 
                 } catch (JSONException e) {
+                    progressBar.setVisibility(View.GONE);
                     e.printStackTrace();
                 }
 
@@ -3178,7 +3190,7 @@ public class UploadDocumentFragment extends Fragment {
                     String verification_status = jsonObject1.getString("verification_status");
                     String document_name = jsonObject1.getString("document_name");
 
-                    Log.e(TAG, "TYPENO: " + s);
+
                     Log.e(TAG, "image: " + image);
 
                     switch (s) {
@@ -3904,12 +3916,62 @@ public class UploadDocumentFragment extends Fragment {
                             }
                             break;
                     }
+
+                }
+
+                if(profileImage.getTag() != null || aadharCard.getTag() != null  || panCard.getTag() != null){//kyc
+                    Drawable bg;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+                        ivKyc.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
+                    }
+                    ivKyc.setImageDrawable(bg);
+                    linKYCblock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+                    linKYCDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+                    linKYCblockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+                }
+
+                if(salSlipSix.getTag() != null || salSlipThree.getTag() != null || bankStmntThree.getTag() != null|| bankStmntSix.getTag() != null|| kvp.getTag() != null|| licPolicy.getTag()!= null||
+                        form16.getTag() != null|| form61.getTag() != null|| pensionLetter.getTag() != null|| itr.getTag() != null|| pnl.getTag() != null){//Fin
+
+                    Drawable bg;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+                        ivFinancial.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
+                    }
+                    ivFinancial.setImageDrawable(bg);
+                    linFinancBlock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+                    linFinanceDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+                    linFinancBlockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+                }
+
+                if(degreeMarkSheet.getTag() != null || degreeCertificate.getTag() != null || tenthMarksheet.getTag() != null|| twelvethMarksheet.getTag() != null ){//Edu
+
+                    Drawable bg;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+                        ivEducational.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
+                    }
+                    ivEducational.setImageDrawable(bg);
+                    linEducationBlock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+                    linEducationDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+                    linEducationBlockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
                 }
 
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
+            String.valueOf(e.getStackTrace()[0]);
             e.printStackTrace();
         }
     }

@@ -123,7 +123,7 @@
     <string name="contact_number">Contact Number</string>
     <string name="_022_49733674">022-49733674</string>
     <string name="email">Email</string>
-    <string name="contact_eduvanz_com">contact@eduvanz.com</string>
+    <string name="contact_eduvanz_com">support@eduvanz.com</string>
     <string name="office">Office</string>
     <string name="_801_jai_antriksh">801, Jai Antriksh,</string>
     <string name="makwana_road_marol_andheri_east">Makwana Road, Marol, Andheri East,</string>
@@ -148,10 +148,13 @@
     <string name="terms_of_service"> terms of service</string>
     <string name="privacy_policy"> privacy policy.</string>
 
-    <string name="tenurestring"><b> \t Great Job !!! \n</b>\n
-Your application is successfully registerded with us. \n \n
+    <string name="tenurestring">
 To complete the process we need some additional details. Request you to select the best suited loan plan and proceed further to complete the application
 </string>
+    <!--<string name="tenurestring"><b> \t Great Job !!! \n</b>\n-->
+<!--Your application is successfully registerded with us. \n \n-->
+<!--To complete the process we need some additional details. Request you to select the best suited loan plan and proceed further to complete the application-->
+<!--</string>-->
 
     <string name="permissionsms">To collect and monitor information about bank transactions, names of transacting parties, description of the transactions
     and amount for faster loan processing.</string>

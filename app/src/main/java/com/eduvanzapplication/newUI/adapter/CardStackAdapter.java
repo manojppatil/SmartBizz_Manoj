@@ -79,8 +79,8 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView  txtLeadfName,txtLeadlName,txtMessage, txtApplicationId, txtStatus1, txtDate, txtStatus2
-                , txtUniversity, txtCourseNmae,txtCity,txtCourseFee,txtLoanAmount ;
+        TextView  txtLeadfName,txtLeadlName,txtMessage, txtApplicationId, txtStatus1, txtDate, txtStatus2,
+                txtUniversity, txtCourseNmae,txtCity,txtCourseFee,txtLoanAmount ;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

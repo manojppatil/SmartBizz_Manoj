@@ -257,7 +257,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/msg1"
-                android:text="TO CONTINUE MANUALLY"
+                android:text="SCAN THE DOCUMENT OR CLOSE THIS DIALOG TO CONTINUE MANUALLY"
                 android:textColor="@color/black_new" />
 
 

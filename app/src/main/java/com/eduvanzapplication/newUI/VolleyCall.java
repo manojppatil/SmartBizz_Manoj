@@ -26,6 +26,7 @@ import com.eduvanzapplication.newUI.fragments.PostApprovalDocFragment;
 import com.eduvanzapplication.newUI.fragments.UploadDocumentFragment;
 import com.eduvanzapplication.newUI.newViews.BannerActivity;
 import com.eduvanzapplication.newUI.newViews.CourseDetailsActivity;
+import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.EditProfile;
 import com.eduvanzapplication.newUI.newViews.GetMobileNo;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
@@ -267,6 +268,15 @@ public class VolleyCall {
             try {
                 jsonDataO = new JSONObject(s);
                 ((GetMobileNo) mActivity).verifyOtpCodeResponse(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("addAlgo360")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((DashboardActivity) mActivity).updateAlgo360Res(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

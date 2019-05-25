@@ -8,14 +8,20 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -31,6 +37,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -73,8 +80,10 @@ import java.util.Map;
 import static android.content.Context.*;
 import static android.support.v4.content.ContextCompat.getSystemService;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
+import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.isProfileEnabled;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.student_id;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class PersonalDetailsFragment extends Fragment {
 
@@ -88,11 +97,14 @@ public class PersonalDetailsFragment extends Fragment {
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final String IMAGE_EXTENSION = "jpg";
 
-    private EditText edtFirstName, edtMiddleName, edtLastName;
-    private LinearLayout linMaleBtn, linFemaleBtn, linOtherBtn, linDobBtn;
-    private Switch switchMarital;
-    private TextView txtMaritalStatus;
-    private LinearLayout linStudentBtn, linSalariedBtn, linSelfEmployedBtn;
+    public static EditText edtFirstName, edtMiddleName, edtLastName;
+    public static LinearLayout linMaleBtn, linFemaleBtn, linOtherBtn, linDobBtn;
+    public static Switch switchMarital;
+    public static TextView txtMaritalStatus,txtPersonalDetailsErrMsg;
+
+    public static ImageView ivMale, ivFemale, ivOther;
+    public static View viewMale, viewFemale,viewOther;
+    public static TextView txtMale ,txtFemale,txtOther;
 
     LinearLayout linPan, linAadhar, linClose, linFooter1, linTakePicture, linQR, linStudentType, linOCR, newLinOcr;
     public static Context context;
@@ -124,7 +136,6 @@ public class PersonalDetailsFragment extends Fragment {
         if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
         }
-
     }
 
     @Override
@@ -141,7 +152,19 @@ public class PersonalDetailsFragment extends Fragment {
         linDobBtn = view.findViewById(R.id.linDobBtn);
         txtDOB = view.findViewById(R.id.txtDOB);
         txtMaritalStatus = view.findViewById(R.id.txtMaritalStatus);
+        txtPersonalDetailsErrMsg = view.findViewById(R.id.txtPersonalDetailsErrMsg);
         switchMarital = view.findViewById(R.id.switchMarital);
+
+        ivMale = view.findViewById(R.id.ivMale);
+        ivFemale = view.findViewById(R.id.ivFemale);
+        ivOther = view.findViewById(R.id.ivOther);
+        viewMale = view.findViewById(R.id.viewMale);
+        viewFemale = view.findViewById(R.id.viewFemale);
+        viewOther = view.findViewById(R.id.viewOther);
+        txtMale = view.findViewById(R.id.txtMale);
+        txtFemale = view.findViewById(R.id.txtFemale);
+        txtOther = view.findViewById(R.id.txtOther);
+
         context = getContext();
         mFragment = new PersonalDetailsFragment();
         // Checking availability of the camera
@@ -149,65 +172,10 @@ public class PersonalDetailsFragment extends Fragment {
 
         try {
             sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setCancelable(false);
-
-        View professionView = getLayoutInflater().inflate(R.layout.layout_profession, null);
-        linStudentBtn = professionView.findViewById(R.id.linStudentBtn);
-        linSalariedBtn = professionView.findViewById(R.id.linSalariedBtn);
-        linSelfEmployedBtn = professionView.findViewById(R.id.linSelfEmployedBtn);
-        builder.setView(professionView);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        linStudentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession = "1";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                dialog.dismiss();
-            }
-        });
-
-        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession = "2";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                dialog.dismiss();
-            }
-        });
-
-        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewLeadActivity.profession = "3";
-                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                dialog.dismiss();
-            }
-        });
-
-//        if (NewLeadActivity.Aaadhaarno.equals("") && NewLeadActivity.Ppanno.equals("")) {
-//            showOCRDialog();
-//        } else {
-//        }
         switchMarital.setChecked(false);
         return view;
     }
@@ -234,11 +202,51 @@ public class PersonalDetailsFragment extends Fragment {
         linMaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLeadActivity.gender = "1";
-                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                checkAllFields();
+                if(isProfileEnabled) {
+                    NewLeadActivity.gender = "1";
+                    linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                    linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                    linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+
+                    txtMale.setTextColor(getResources().getColor(R.color.white));
+                    txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+                    txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+
+                    viewMale.setBackgroundColor(getResources().getColor(R.color.white));
+                    viewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                    viewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+
+                    Drawable bg;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_male, null);
+                        ivMale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_male);
+                        DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
+                    }
+                    ivMale.setImageDrawable(bg);
+
+                    Drawable bg1;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_female, null);
+                        ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_female);
+                        DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+                    }
+                    ivFemale.setImageDrawable(bg1);
+
+                    Drawable bg2;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_transgender, null);
+                        ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_transgender);
+                        DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+                    }
+                    ivOther.setImageDrawable(bg2);
+                    checkAllFields();
+                }
             }
         });
 
@@ -246,22 +254,104 @@ public class PersonalDetailsFragment extends Fragment {
         linFemaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLeadActivity.gender = "2";
-                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                checkAllFields();
+                if(isProfileEnabled) {
+                    NewLeadActivity.gender = "2";
+                    linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                    linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                    linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+
+                    txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+                    txtFemale.setTextColor(getResources().getColor(R.color.white));
+                    txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+
+                    viewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                    viewFemale.setBackgroundColor(getResources().getColor(R.color.white));
+                    viewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+
+                    Drawable bg;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_male, null);
+                        ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_male);
+                        DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+                    }
+                    ivMale.setImageDrawable(bg);
+
+                    Drawable bg1;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_female, null);
+                        ivFemale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_female);
+                        DrawableCompat.setTint(bg1, getResources().getColor(R.color.white));
+                    }
+                    ivFemale.setImageDrawable(bg1);
+
+                    Drawable bg2;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_transgender, null);
+                        ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_transgender);
+                        DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+                    }
+                    ivOther.setImageDrawable(bg2);
+
+                    checkAllFields();
+                }
             }
         });
 
         linOtherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLeadActivity.gender = "3";
-                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                checkAllFields();
+                if(isProfileEnabled) {
+                    NewLeadActivity.gender = "3";
+                    linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                    linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                    linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+
+                    txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+                    txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+                    txtOther.setTextColor(getResources().getColor(R.color.white));
+
+                    viewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                    viewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                    viewOther.setBackgroundColor(getResources().getColor(R.color.white));
+
+                    Drawable bg;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_male, null);
+                        ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_male);
+                        DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+                    }
+                    ivMale.setImageDrawable(bg);
+
+                    Drawable bg1;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_female, null);
+                        ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_female);
+                        DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+                    }
+                    ivFemale.setImageDrawable(bg1);
+
+                    Drawable bg2;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_transgender, null);
+                        ivOther.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_transgender);
+                        DrawableCompat.setTint(bg2, getResources().getColor(R.color.white));
+                    }
+                    ivOther.setImageDrawable(bg2);
+
+                    checkAllFields();
+                }
             }
         });
 
@@ -275,9 +365,11 @@ public class PersonalDetailsFragment extends Fragment {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
 //                        Toast.makeText(getContext(), dateDesc, Toast.LENGTH_SHORT).show();
-                        NewLeadActivity.dob = day + "-" + month + "-" + year;
-                        txtDOB.setText(NewLeadActivity.dob);
-                        checkAllFields();
+                        if(isProfileEnabled) {
+                            NewLeadActivity.dob = day + "-" + month + "-" + year;
+                            txtDOB.setText(NewLeadActivity.dob);
+                            checkAllFields();
+                        }
                     }
                 }).textConfirm("CONFIRM") //text of confirm button
                         .textCancel("CANCEL") //text of cancel button
@@ -292,7 +384,6 @@ public class PersonalDetailsFragment extends Fragment {
                         .build();
 //                datePickerPopWin.showPopWin(getActivity());
                 datePickerPopWin.showAsDropDown(linDobBtn);
-
 
 //                Calendar calendar = Calendar.getInstance();
 //                calendar.set(Calendar.YEAR,calendar.get(Calendar.YEAR)-18);
@@ -325,58 +416,6 @@ public class PersonalDetailsFragment extends Fragment {
             }
         });
 
-//        tilFirstName.getEditText().addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                NewLeadActivity.firstName = tilFirstName.getEditText().getText().toString();
-//                checkAllFields();
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        tilMiddleName.getEditText().addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                NewLeadActivity.middleName = tilMiddleName.getEditText().getText().toString();
-//                checkAllFields();
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        tilLastName.getEditText().addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                NewLeadActivity.lastName = tilLastName.getEditText().getText().toString();
-//                checkAllFields();
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-
         edtFirstName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -386,14 +425,16 @@ public class PersonalDetailsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (edtFirstName.getText().toString().equals("")) {
-                    NewLeadActivity.firstName = "";
-                    edtFirstName.setError("Please enter first name");
-                } else {
-                    NewLeadActivity.firstName = edtFirstName.getText().toString();
-                    edtFirstName.setError(null);
+                if(isProfileEnabled) {
+                    if (edtFirstName.getText().toString().equals("")) {
+                        NewLeadActivity.firstName = "";
+//                        edtFirstName.setError("Please enter first name");
+                    } else {
+                        NewLeadActivity.firstName = edtFirstName.getText().toString();
+                        edtFirstName.setError(null);
+                    }
+                    checkAllFields();
                 }
-                checkAllFields();
             }
 
             @Override
@@ -426,14 +467,17 @@ public class PersonalDetailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (edtLastName.getText().toString().equals("")) {
-                    NewLeadActivity.lastName = "";
-                    edtLastName.setError("Please enter last name");
-                } else {
-                    NewLeadActivity.lastName = edtLastName.getText().toString();
-                    edtLastName.setError(null);
+
+                if(isProfileEnabled) {
+                    if (edtLastName.getText().toString().equals("")) {
+                        NewLeadActivity.lastName = "";
+//                        edtLastName.setError("Please enter last name");
+                    } else {
+                        NewLeadActivity.lastName = edtLastName.getText().toString();
+                        edtLastName.setError(null);
+                    }
+                    checkAllFields();
                 }
-                checkAllFields();
             }
 
             @Override
@@ -448,7 +492,24 @@ public class PersonalDetailsFragment extends Fragment {
         if (NewLeadActivity.firstName.equals("") || NewLeadActivity.lastName.equals("") || NewLeadActivity.dob.equals("") ||
                 NewLeadActivity.gender.equals("") || NewLeadActivity.maritalStatus.equals("")) {
             mListener.onOffButtons(false, false);
+            txtPersonalDetailsErrMsg.setVisibility(View.VISIBLE);
+
+            if(edtFirstName.getText().toString().equals("")){
+                txtPersonalDetailsErrMsg.setText("Please enter first name");
+//                edtFirstName.requestFocus();
+            }else if(edtLastName.getText().toString().equals("")){
+                txtPersonalDetailsErrMsg.setText("Please enter last name");
+//                edtLastName.requestFocus();
+            }else if(NewLeadActivity.gender.equals("")){
+                txtPersonalDetailsErrMsg.setText("Please select gender");
+//                linMaleBtn.requestFocus();
+            }else if(NewLeadActivity.dob.equals("")){
+                txtPersonalDetailsErrMsg.setText("Please enter your birthdate");
+//                linDobBtn.requestFocus();
+            }
         } else {
+            txtPersonalDetailsErrMsg.setText(null);
+            txtPersonalDetailsErrMsg.setVisibility(View.GONE);
             mListener.onOffButtons(true, false);
         }
     }
@@ -489,6 +550,12 @@ public class PersonalDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+//        if (NewLeadActivity.Aaadhaarno.equals("") && NewLeadActivity.Ppanno.equals("")) {
+//            showOCRDialog();
+//        } else {
+//        }
+
         edtFirstName.setText(NewLeadActivity.firstName);
         edtMiddleName.setText(NewLeadActivity.middleName);
         edtLastName.setText(NewLeadActivity.lastName);
@@ -508,7 +575,11 @@ public class PersonalDetailsFragment extends Fragment {
         {
             txtMaritalStatus.setText("Unmarried");
         }
-        checkAllFields();
+
+        if(isProfileEnabled) {
+            checkAllFields();
+        }
+        isProfileEnabled = true;
 
     }
 
@@ -783,7 +854,7 @@ public class PersonalDetailsFragment extends Fragment {
         @Override
         public void onImageCaptureFaliure(JSONObject response) {
             JsonObject jsonObject = new JsonObject();
-            Toast.makeText(getActivity(), "Upload Failure, Response-> " + jsonObject.toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), "Upload Failure, Response-> " + jsonObject.toString(), Toast.LENGTH_LONG).show();
         }
 
     };
@@ -1015,7 +1086,7 @@ public class PersonalDetailsFragment extends Fragment {
 //            Use response as required
 //            It will contain a selflink for uploaded image
 
-            Toast.makeText(getActivity(), "Upload succes, Response-> " + jsonObject.toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), "Upload succes, Response-> " + jsonObject.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -1392,7 +1463,7 @@ public class PersonalDetailsFragment extends Fragment {
                                 });
 
                             } else {
-                                Toast.makeText(getActivity(), "OCR Response-> " + response.toString(), Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getActivity(), "OCR Response-> " + response.toString(), Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1487,7 +1558,7 @@ public class PersonalDetailsFragment extends Fragment {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(getActivity(), "Upload Failed, Response-> " + error.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getActivity(), "Upload Failed, Response-> " + error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
         ) {
@@ -1593,7 +1664,7 @@ public class PersonalDetailsFragment extends Fragment {
                                 });
 
                             } else {
-                                Toast.makeText(getContext(), "OCR Response-> " + response.toString(), Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getContext(), "OCR Response-> " + response.toString(), Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1703,7 +1774,7 @@ public class PersonalDetailsFragment extends Fragment {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(getActivity(), "Upload Failure, Response-> " + error.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getActivity(), "Upload Failure, Response-> " + error.toString(), Toast.LENGTH_LONG).show();
 
                     }
                 }

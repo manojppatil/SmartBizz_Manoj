@@ -58,7 +58,7 @@ public class EmiCalculatorActivity extends AppCompatActivity {
             context = getApplicationContext();
             mActivity = this;
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("EMI Calculator");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

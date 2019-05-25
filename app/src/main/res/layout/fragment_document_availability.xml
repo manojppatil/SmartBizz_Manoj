@@ -58,7 +58,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="I Have"
+                        android:text="Here is my"
                         android:textAllCaps="true"
                         android:textColor="@color/textcolordark"
                         android:textSize="@dimen/_12sdp"/>
@@ -157,6 +157,17 @@
                             android:text="" />
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/txtDocAvailableErrMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/red"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="15sp"
+                        style="@style/TextViewTitle14Style" />
                 </LinearLayout>
                 </LinearLayout>
 

@@ -25,13 +25,15 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 
+import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.isDocAvailabilityEnabled;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
 
 public class DocumentAvailabilityFragment extends Fragment {
 
     private static OnDocumentFragmentInteractionListener mDocListener;
-    private LinearLayout linAadharBtn, linPanBtn, linBothBtn, linNoneBtn;
+    public LinearLayout linAadharBtn, linPanBtn, linBothBtn, linNoneBtn;
     public static EditText edtAadhaar, edtPAN;
+    public static TextView txtDocAvailableErrMsg;
     int keyDel;
 
 
@@ -62,6 +64,7 @@ public class DocumentAvailabilityFragment extends Fragment {
         edtAadhaar = view.findViewById(R.id.edtAadhaar);
 
         edtPAN = view.findViewById(R.id.edtPAN);
+        txtDocAvailableErrMsg = view.findViewById(R.id.txtDocAvailableErrMsg);
 
         return view;
     }
@@ -85,63 +88,6 @@ public class DocumentAvailabilityFragment extends Fragment {
             }
         }); //close PAN
 
-//        tilAadhar.setVisibility(GONE);
-//        tilPan.setVisibility(GONE);
-
-//        linAadharBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.documents  ="1";
-//                tilAadhar.setVisibility(View.VISIBLE);
-//                tilPan.setVisibility(GONE);
-//                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//            }
-//        });
-//
-//        linPanBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.documents  ="2";
-//                tilAadhar.setVisibility(View.GONE);
-//                tilPan.setVisibility(View.VISIBLE);
-//                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//            }
-//        });
-//
-//        linBothBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.documents  ="3";
-//                tilAadhar.setVisibility(View.VISIBLE);
-//                tilPan.setVisibility(View.VISIBLE);
-//                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//
-//            }
-//        });
-//
-//        linNoneBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.documents  ="4";
-//                tilAadhar.setVisibility(View.GONE);
-//                tilPan.setVisibility(View.GONE);
-//                linAadharBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linPanBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linBothBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linNoneBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//
-//            }
-//        });
-//        linAadharBtn.performClick();
 
         edtAadhaar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -151,11 +97,13 @@ public class DocumentAvailabilityFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (!Globle.validateAadharNumber(edtAadhaar.getText().toString())) {
+                if (isDocAvailabilityEnabled){
+
+                    if (!Globle.validateAadharNumber(edtAadhaar.getText().toString())) {
 //False
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.aadharNumber = "";
-                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
+//                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
                         edtPAN.setError(null);
                         NewLeadActivity.documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
@@ -165,12 +113,11 @@ public class DocumentAvailabilityFragment extends Fragment {
                         NewLeadActivity.documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.aadharNumber = "";
-                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
-//                        edtPAN.setError(null);
+//                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
                         NewLeadActivity.documents = "1";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.panNUmber = "";
-                        edtAadhaar.setError("Please Enter Aadhaar or PAN Number!");
+//                        edtAadhaar.setError("Please Enter Aadhaar or PAN Number!");
                         edtPAN.setError(null);
                         NewLeadActivity.documents = "0";
                     }
@@ -180,16 +127,16 @@ public class DocumentAvailabilityFragment extends Fragment {
                     if (edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.aadharNumber = edtAadhaar.getText().toString();
                         edtAadhaar.setError(null);
-//                        edtPAN.setError(null);
                         NewLeadActivity.documents = "3";
                     } else {
                         NewLeadActivity.aadharNumber = edtAadhaar.getText().toString();
                         edtAadhaar.setError(null);
-//                        edtPAN.setError(null);
                         NewLeadActivity.documents = "1";
                     }
                 }
-                checkAllFields();
+
+                    checkAllFields();
+            }
             }
 
             @Override
@@ -203,32 +150,21 @@ public class DocumentAvailabilityFragment extends Fragment {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
-            //            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-////                edtPAN.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-//                if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
-//                    NewLeadActivity.panNUmber = edtPAN.getText().toString().toUpperCase();
-//                    NewLeadActivity.documents = "3";
-//                }
-//                else {
-//                    NewLeadActivity.panNUmber = edtPAN.getText().toString().toUpperCase();
-//                    NewLeadActivity.documents = "2";
-//                }
-//                checkAllFields();
-//            }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (!edtPAN.getText().toString().toUpperCase().matches(Globle.panPattern)) {
+                if (isDocAvailabilityEnabled){
+
+                    if (!edtPAN.getText().toString().toUpperCase().matches(Globle.panPattern)) {
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.panNUmber = "";
 //                        edtAadhaar.setError(null);
-                        edtPAN.setError("please Enter Valid PAN number!");
+//                        edtPAN.setError("please Enter Valid PAN number!");
                         NewLeadActivity.documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.panNUmber = "";
                         edtAadhaar.setError(null);
-                        edtPAN.setError("please Enter Valid PAN number!");
+//                        edtPAN.setError("please Enter Valid PAN number!");
                         NewLeadActivity.documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.panNUmber = "";
@@ -238,7 +174,7 @@ public class DocumentAvailabilityFragment extends Fragment {
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.panNUmber = "";
                         edtAadhaar.setError(null);
-                        edtPAN.setError("Please Enter Aadhaar or PAN Number!");
+//                        edtPAN.setError("Please Enter PAN Number!");
                         NewLeadActivity.documents = "0";
                     }
                 } else {
@@ -255,8 +191,8 @@ public class DocumentAvailabilityFragment extends Fragment {
                         NewLeadActivity.documents = "2";
                     }
                 }
-
-                checkAllFields();
+                    checkAllFields();
+                }
             }
 
             @Override
@@ -338,33 +274,65 @@ public class DocumentAvailabilityFragment extends Fragment {
             if (NewLeadActivity.aadharNumber.equals("") ||
                     !NewLeadActivity.panNUmber.equals("")) {
                 mDocListener.onOffButtonsDocuments(false, true);
+                if(NewLeadActivity.aadharNumber.equals(""))
+                {
+                    txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
+                    txtDocAvailableErrMsg.setText("please enter valid aadhaar number!");
+                    edtAadhaar.requestFocus();
+                }
             } else {
+                txtDocAvailableErrMsg.setText(null);
+                txtDocAvailableErrMsg.setVisibility(View.GONE);
                 mDocListener.onOffButtonsDocuments(true, true);
             }
         } else if (NewLeadActivity.documents.equals("2")) {
             if (!NewLeadActivity.aadharNumber.equals("") || NewLeadActivity.panNUmber.equals("")) {
                 mDocListener.onOffButtonsDocuments(false, true);
+                if(NewLeadActivity.panNUmber.equals(""))
+                {
+                    txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
+                    txtDocAvailableErrMsg.setText("please enter valid pan number!");
+                    edtPAN.requestFocus();
+                }
             } else {
+                txtDocAvailableErrMsg.setText(null);
+                txtDocAvailableErrMsg.setVisibility(View.GONE);
                 mDocListener.onOffButtonsDocuments(true, true);
             }
         } else if (NewLeadActivity.documents.equals("3")) {
             if (NewLeadActivity.aadharNumber.equals("") || NewLeadActivity.panNUmber.equals("")) {
                 mDocListener.onOffButtonsDocuments(false, true);
+                if(NewLeadActivity.aadharNumber.equals("") && NewLeadActivity.panNUmber.equals(""))
+                {
+                    txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
+                    txtDocAvailableErrMsg.setText("please enter either aadhaar or pan number!");
+                    edtAadhaar.requestFocus();
+                    edtPAN.requestFocus();
+                }
+
             } else {
+                txtDocAvailableErrMsg.setText(null);
+                txtDocAvailableErrMsg.setVisibility(View.GONE);
                 mDocListener.onOffButtonsDocuments(true, true);
             }
-        }
-        else if (NewLeadActivity.documents.equals("0") || NewLeadActivity.documents.equals("")) {
+        } else if (NewLeadActivity.documents.equals("0") || NewLeadActivity.documents.equals("")) {
             if ((NewLeadActivity.aadharNumber.equals("") && NewLeadActivity.panNUmber.equals(""))) {
                 mDocListener.onOffButtonsDocuments(false, true);
+                txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
+                txtDocAvailableErrMsg.setText("please enter either aadhaar or pan number");
             } else {
+                txtDocAvailableErrMsg.setText(null);
+                txtDocAvailableErrMsg.setVisibility(View.GONE);
                 mDocListener.onOffButtonsDocuments(false, true);
             }
-        }
-        else {
+        } else {
             if ((NewLeadActivity.aadharNumber.equals("") && NewLeadActivity.panNUmber.equals(""))) {
                 mDocListener.onOffButtonsDocuments(false, true);
+                txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
+                txtDocAvailableErrMsg.setText("please enter either aadhaar or pan number");
             } else {
+                txtDocAvailableErrMsg.setText(null);
+                txtDocAvailableErrMsg.setVisibility(View.GONE);
                 mDocListener.onOffButtonsDocuments(true, true);
             }
         }
@@ -422,6 +390,11 @@ public class DocumentAvailabilityFragment extends Fragment {
         super.onResume();
         edtAadhaar.setText(NewLeadActivity.aadharNumber);
         edtPAN.setText(NewLeadActivity.panNUmber);
+
+        if (isDocAvailabilityEnabled) {
+            checkAllFields();
+        }
+        isDocAvailabilityEnabled = true;
     }
 
     public static void setDcoAvailabilityData() {

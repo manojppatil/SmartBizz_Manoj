@@ -70,16 +70,24 @@ public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequested
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.txtTenure.setText(horizontalList.get(position).tenure+" Months");
-//        holder.txtRoi.setText(horizontalList.get(position).emi_amount);
+        holder.txtRoi.setText(horizontalList.get(position).emi_amount);
         holder.txtLoanAmount.setText(horizontalList.get(position).loan_amount);
         holder.txtEMIAmount.setText(horizontalList.get(position).emi_amount);
 //        holder.mRadioButton.setText(horizontalList.get(position).applicationid);
 
         if (sSelected == position){
             holder.mRadioButton.setChecked(true);
+            holder.txtTenure.setTextColor(context.getResources().getColor(R.color.white));
+            holder.txtRoi.setTextColor(context.getResources().getColor(R.color.white));
+            holder.txtLoanAmount.setTextColor(context.getResources().getColor(R.color.white));
+            holder.txtEMIAmount.setTextColor(context.getResources().getColor(R.color.white));
             holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.blue1));
         }else {
             holder.mRadioButton.setChecked(false);
+            holder.txtTenure.setTextColor(context.getResources().getColor(R.color.textcolordark));
+            holder.txtRoi.setTextColor(context.getResources().getColor(R.color.textcolordark));
+            holder.txtLoanAmount.setTextColor(context.getResources().getColor(R.color.textcolordark));
+            holder.txtEMIAmount.setTextColor(context.getResources().getColor(R.color.textcolordark));
             holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.white));
         }
 

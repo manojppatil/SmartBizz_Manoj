@@ -4,12 +4,16 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,6 +33,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -70,6 +75,8 @@ public class KycDetailFragment extends Fragment {
     public static Fragment mFragment;
     public static ProgressDialog progressDialog;
     public static TextView txtPersonalToggle, txtIdentityToggle, txtCourseToggle;
+    public static LinearLayout linPersonalToggle, linIdentityToggle, linCourseToggle;
+    public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle;
     public static LinearLayout linPersonalBlock, relIdentityBlock, relCourseBlock;
     public static Animation expandAnimationPersonal, collapseanimationPersonal;
     public static Animation expandAnimationIdentity, collapseAnimationIdentity;
@@ -135,9 +142,17 @@ public class KycDetailFragment extends Fragment {
         collapseAnimationCourse = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+
+        ivPersonalToggle = view.findViewById(R.id.ivPersonalToggle);
+        ivIdentityToggle = view.findViewById(R.id.ivIdentityToggle);
+        ivCourseToggle = view.findViewById(R.id.ivCourseToggle);
+
         txtPersonalToggle = view.findViewById(R.id.txtPersonalToggle);
         linPersonalBlock = view.findViewById(R.id.linPersonalBlock);
         txtIdentityToggle = view.findViewById(R.id.txtIdentityToggle);
+        linPersonalToggle = view.findViewById(R.id.linPersonalToggle);
+        linIdentityToggle = view.findViewById(R.id.linIdentityToggle);
+        linCourseToggle = view.findViewById(R.id.linCourseToggle);
         relIdentityBlock = view.findViewById(R.id.relIdentityBlock);
         txtCourseToggle = view.findViewById(R.id.txtCourseToggle);
         relCourseBlock = view.findViewById(R.id.relCourseBlock);
@@ -171,6 +186,19 @@ public class KycDetailFragment extends Fragment {
         spCourse = view.findViewById(R.id.spCourse);
         acInstituteName = view.findViewById(R.id.scInstituteName);
         txtCourseFee = view.findViewById(R.id.txtCourseFee);
+
+        LoanTabActivity.firstName = ""; LoanTabActivity.lastName = ""; LoanTabActivity.middleName = ""; LoanTabActivity.gender = "";
+        LoanTabActivity.dob = ""; LoanTabActivity.maritalStatus = "2"; LoanTabActivity.email = ""; LoanTabActivity.mobile = "";
+        LoanTabActivity.aadhar = ""; LoanTabActivity.pan = ""; LoanTabActivity.flatBuildingSociety = ""; LoanTabActivity.streetLocalityLandmark = "";
+        LoanTabActivity.pincode = ""; LoanTabActivity.countryId = ""; LoanTabActivity.stateId = ""; LoanTabActivity.cityId = "";
+        LoanTabActivity.instituteId = ""; LoanTabActivity.courseId = ""; LoanTabActivity.instituteLocationId = "";
+        LoanTabActivity.courseFee = ""; LoanTabActivity.applicant_id = "";
+        LoanTabActivity.application_id = ""; LoanTabActivity.requested_loan_amount = ""; LoanTabActivity.institute_name = "";
+        LoanTabActivity.location_name = "";
+        LoanTabActivity.course_name = ""; LoanTabActivity.course_cost = ""; LoanTabActivity.fk_institutes_id = "";
+        LoanTabActivity.fk_insitutes_location_id = ""; LoanTabActivity.fk_course_id = ""; LoanTabActivity.lead_status = "";
+        LoanTabActivity.lead_sub_status = ""; LoanTabActivity.current_status = ""; LoanTabActivity.current_stage = "";
+        LoanTabActivity.has_aadhar_pan = "";
 
         return view;
 
@@ -281,6 +309,43 @@ public class KycDetailFragment extends Fragment {
             }
         });
 
+        //Personal details
+        linPersonalToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (linPersonalBlock.getVisibility() == VISIBLE) {
+                    linPersonalBlock.startAnimation(collapseanimationPersonal);
+                } else {
+                    linPersonalBlock.startAnimation(expandAnimationPersonal);
+                    chekAllFields();
+                }
+            }
+        });
+//Identity details
+        linIdentityToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (relIdentityBlock.getVisibility() == VISIBLE) {
+                    relIdentityBlock.startAnimation(collapseAnimationIdentity);
+                } else {
+                    relIdentityBlock.startAnimation(expandAnimationIdentity);
+                    chekAllFields();
+                }
+            }
+        });
+//course details.
+        linCourseToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (relCourseBlock.getVisibility() == VISIBLE) {
+                    relCourseBlock.startAnimation(collapseAnimationCourse);
+                } else {
+                    relCourseBlock.startAnimation(expanAnimationCourse);
+                    chekAllFields();
+                }
+            }
+        });
+
         /*================================personal details==========================================*/
         collapseanimationPersonal.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -290,6 +355,15 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 linPersonalBlock.setVisibility(GONE);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    ivPersonalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivPersonalToggle.setImageDrawable(bg);
             }
 
             @Override
@@ -307,6 +381,15 @@ public class KycDetailFragment extends Fragment {
             public void onAnimationEnd(Animation animation) {
                 relIdentityBlock.startAnimation(collapseAnimationIdentity);
                 relCourseBlock.startAnimation(collapseAnimationCourse);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    ivPersonalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivPersonalToggle.setImageDrawable(bg);
             }
 
             @Override
@@ -322,6 +405,15 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 relIdentityBlock.setVisibility(GONE);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    ivIdentityToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivIdentityToggle.setImageDrawable(bg);
             }
 
             @Override
@@ -339,6 +431,15 @@ public class KycDetailFragment extends Fragment {
             public void onAnimationEnd(Animation animation) {
                 linPersonalBlock.startAnimation(collapseanimationPersonal);
                 relCourseBlock.startAnimation(collapseAnimationCourse);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    ivIdentityToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivIdentityToggle.setImageDrawable(bg);
             }
 
             @Override
@@ -354,6 +455,15 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 relCourseBlock.setVisibility(GONE);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    ivCourseToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivCourseToggle.setImageDrawable(bg);
             }
 
             @Override
@@ -371,6 +481,15 @@ public class KycDetailFragment extends Fragment {
             public void onAnimationEnd(Animation animation) {
                 linPersonalBlock.startAnimation(collapseanimationPersonal);
                 relIdentityBlock.startAnimation(collapseAnimationIdentity);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    ivCourseToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivCourseToggle.setImageDrawable(bg);
             }
 
             @Override
@@ -462,14 +581,13 @@ public class KycDetailFragment extends Fragment {
                 try {
                     String text = spCourse.getSelectedItem().toString();
                     int count = nameOfCoursePOJOArrayList.size();
-                    Log.e("TAG", "count: " + count);
                     for (int i = 0; i < count; i++) {
                         if (nameOfCoursePOJOArrayList.get(i).courseName.equalsIgnoreCase(text)) {
                             LoanTabActivity.courseId = nameOfCoursePOJOArrayList.get(i).courseID;
-                            courseFeeApiCall();
                             break;
                         }
                     }
+                    courseFeeApiCall();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -972,20 +1090,24 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s.length()>0) {
-                    loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
-                    courseFeeValueinint = Integer.parseInt(LoanTabActivity.course_cost);
+                try {
+                    if(s.length()>0) {
+                        loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
+                        courseFeeValueinint = Integer.parseInt(LoanTabActivity.course_cost);
 
-                    if (loanAmountvalueInInt > courseFeeValueinint) {
-                        edtLoanAmt.setError("Loan amount not exceed than course fees!");
-                        LoanTabActivity.requested_loan_amount = "";
+                        if (loanAmountvalueInInt > courseFeeValueinint) {
+                            edtLoanAmt.setError("Loan amount not exceed than course fees!");
+                            LoanTabActivity.requested_loan_amount = "";
 
-                    } else {
-                        LoanTabActivity.requested_loan_amount = edtLoanAmt.getText().toString();
-                        edtLoanAmt.setError(null);
+                        } else {
+                            LoanTabActivity.requested_loan_amount = edtLoanAmt.getText().toString();
+                            edtLoanAmt.setError(null);
+                        }
                     }
+                    chekAllFields();
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
-                chekAllFields();
             }
 
             @Override
@@ -998,9 +1120,9 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 LoanTabActivity.gender = "1";
-                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
             }
         });
 
@@ -1008,9 +1130,9 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 LoanTabActivity.gender = "2";
-                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
             }
         });
 
@@ -1018,9 +1140,9 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 LoanTabActivity.gender = "3";
-                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
             }
         });
 
@@ -1079,9 +1201,9 @@ public class KycDetailFragment extends Fragment {
         if (LoanTabActivity.firstName.equals("") || LoanTabActivity.lastName.equals("") || LoanTabActivity.email.equals("") ||
                 LoanTabActivity.mobile.equals("") || LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("") ||
                 LoanTabActivity.maritalStatus.equals("")) {
-            indicateValidationText(txtPersonalToggle, getResources().getDrawable(R.drawable.ic_user_check), false);
+            indicateValidationText(txtPersonalToggle, context.getResources().getDrawable(R.drawable.ic_user_check), false);
         } else {
-            indicateValidationText(txtPersonalToggle, getResources().getDrawable(R.drawable.ic_user_check), true);
+            indicateValidationText(txtPersonalToggle, context.getResources().getDrawable(R.drawable.ic_user_check), true);
         }
 
         if (LoanTabActivity.requested_loan_amount.equals("") || LoanTabActivity.course_cost.equals("") ||
@@ -1089,51 +1211,51 @@ public class KycDetailFragment extends Fragment {
                 LoanTabActivity.courseId.equals("") || LoanTabActivity.course_cost.equals("") ||
                 LoanTabActivity.requested_loan_amount.equals("")) {
 
-            indicateValidationText(txtCourseToggle, getResources().getDrawable(R.drawable.ic_graduation_cap), false);
+            indicateValidationText(txtCourseToggle, context.getResources().getDrawable(R.drawable.ic_graduation_cap), false);
         } else {
-            indicateValidationText(txtCourseToggle, getResources().getDrawable(R.drawable.ic_graduation_cap), true);
+            indicateValidationText(txtCourseToggle, context.getResources().getDrawable(R.drawable.ic_graduation_cap), true);
         }
 
         if (documents.equals("0") || documents.equals("")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
                     LoanTabActivity.pincode.length() < 6 || (LoanTabActivity.aadhar.equals("") && LoanTabActivity.pan.equals("")) ||
                     LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), false);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), true);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
             }
         }
 
         if (documents.equals("1")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
-                    LoanTabActivity.pincode.toString().length() < 6 || LoanTabActivity.aadhar.equals("") ||
+                    LoanTabActivity.pincode.length() < 6 || LoanTabActivity.aadhar.equals("") ||
                     !LoanTabActivity.pan.equals("") || LoanTabActivity.countryId.equals("") ||
                     LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), false);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), true);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
             }
         } else if (documents.equals("2")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
                     LoanTabActivity.pincode.length() < 6 || !LoanTabActivity.aadhar.equals("") ||
                     LoanTabActivity.pan.equals("") || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("")
                     || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), false);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), true);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
             }
         } else if (documents.equals("3")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.length() < 6 ||
                     LoanTabActivity.aadhar.equals("") || LoanTabActivity.pan.equals("") || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), false);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), true);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
             }
         } else {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.length() < 6 || (LoanTabActivity.aadhar.equals("") && LoanTabActivity.pan.equals("")) || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), false);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, getResources().getDrawable(R.drawable.ic_address_card), true);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
             }
         }
 
@@ -1157,19 +1279,19 @@ public class KycDetailFragment extends Fragment {
 
     public void indicateValidationText(TextView indicator, Drawable start, boolean valid) {
         if (valid) {
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, getResources().getDrawable(R.drawable.ic_check_circle_green), null);
+            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, context.getResources().getDrawable(R.drawable.ic_check_circle_green), null);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                indicator.getCompoundDrawablesRelative()[0].setTint(getResources().getColor(R.color.colorGreen));
-                indicator.getCompoundDrawablesRelative()[2].setTint(getResources().getColor(R.color.colorGreen));
+                indicator.getCompoundDrawablesRelative()[0].setTint(context.getResources().getColor(R.color.colorGreen));
+                indicator.getCompoundDrawablesRelative()[2].setTint(context.getResources().getColor(R.color.colorGreen));
             }
-            indicator.setTextColor(getResources().getColor(R.color.colorGreen));
+            indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
         } else {
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, getResources().getDrawable(R.drawable.ic_exclamation_circle), null);
+            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, context.getResources().getDrawable(R.drawable.ic_exclamation_circle), null);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                indicator.getCompoundDrawablesRelative()[0].setTint(getResources().getColor(R.color.blue1));
-                indicator.getCompoundDrawablesRelative()[2].setTint(getResources().getColor(R.color.new_red));
+                indicator.getCompoundDrawablesRelative()[0].setTint(context.getResources().getColor(R.color.blue1));
+                indicator.getCompoundDrawablesRelative()[2].setTint(context.getResources().getColor(R.color.new_red));
             }
-            indicator.setTextColor(getResources().getColor(R.color.blue1));
+            indicator.setTextColor(context.getResources().getColor(R.color.blue1));
         }
 
     }
@@ -1457,6 +1579,80 @@ public class KycDetailFragment extends Fragment {
                     LoanTabActivity.fk_insitutes_location_id = jsonkycDetails.getString("fk_insitutes_location_id");
                     LoanTabActivity.fk_course_id = jsonkycDetails.getString("fk_course_id");
 
+//                    if (!LoanTabActivity.requested_loan_amount.equals("null")) {
+//                        edtLoanAmt.setText(LoanTabActivity.requested_loan_amount);
+//                    }
+
+                    if (!LoanTabActivity.institute_name.equals("null") && !LoanTabActivity.institute_name.equals("")) {
+                        acInstituteName.setText(LoanTabActivity.institute_name);
+                    }
+                    if (!LoanTabActivity.fk_institutes_id.equals("null") && !LoanTabActivity.fk_institutes_id.equals("")) {
+                        LoanTabActivity.instituteId = instituteID = LoanTabActivity.fk_institutes_id;
+                        locationApiCall();
+                    }
+
+                    if (!LoanTabActivity.fk_insitutes_location_id.equals("null") && !LoanTabActivity.fk_insitutes_location_id.equals("")) {
+
+                        LoanTabActivity.instituteLocationId = locationID = LoanTabActivity.fk_insitutes_location_id;
+
+//                        try {
+//                            if (!LoanTabActivity.fk_insitutes_location_id.equals("") && !LoanTabActivity.fk_insitutes_location_id.equals("null")) {
+//                                try {
+//
+//                                    int count = locationPOJOArrayList.size();
+//                                    for (int i = 0; i < count; i++) {
+//                                        if (locationPOJOArrayList.get(i).locationID.equalsIgnoreCase(LoanTabActivity.instituteLocationId)) {
+//                                            spInsttLocation.setSelection(i);
+//                                            break;
+//                                        }
+//                                    }
+////                                    int count = locationPOJOArrayList.size();
+////                                    for (int i = 0; i < count; i++) {
+////                                        if (locationPOJOArrayList.get(i).locationID.equalsIgnoreCase(locationID)) {
+////                                            spInsttLocation.setSelection(i);
+////                                        }
+////                                    }
+//
+//                                } catch (Exception e) {
+//
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+                    }
+
+                    if (!LoanTabActivity.fk_course_id.equals("null") && !LoanTabActivity.fk_course_id.equals("")) {
+                        LoanTabActivity.courseId = courseID = LoanTabActivity.fk_course_id;
+
+//                        try {
+//                            if (!LoanTabActivity.fk_course_id.equals("") && !LoanTabActivity.fk_course_id.equals("null")) {
+//                                try {
+//
+//                                    int count = nameOfCoursePOJOArrayList.size();
+//                                    for (int i = 0; i < count; i++) {
+//                                        if (nameOfCoursePOJOArrayList.get(i).courseID.equalsIgnoreCase(LoanTabActivity.courseId)) {
+//                                            spCourse.setSelection(i);
+//                                            break;
+//
+//                                        }
+//                                    }
+//
+////                                    int count = nameOfCoursePOJOArrayList.size();
+////                                    for (int i = 0; i < count; i++) {
+////                                        if (nameOfCoursePOJOArrayList.get(i).courseID.equalsIgnoreCase(courseID)) {
+////                                            spCourse.setSelection(i);
+////                                        }
+////                                    }
+//
+//                                } catch (Exception e) {
+//
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+                    }
 
                     if (jsonkycDetails.getString("requested_loan_amount") != null) {
                         LoanTabActivity.requested_loan_amount = jsonkycDetails.getString("requested_loan_amount");
@@ -1482,77 +1678,6 @@ public class KycDetailFragment extends Fragment {
                             chekAllFields();
                         }
 
-                    }
-//                    if (!LoanTabActivity.requested_loan_amount.equals("null")) {
-//                        edtLoanAmt.setText(LoanTabActivity.requested_loan_amount);
-//                    }
-                    if (!LoanTabActivity.institute_name.equals("null") && !LoanTabActivity.institute_name.equals("")) {
-                        acInstituteName.setText(LoanTabActivity.institute_name);
-                    }
-                    if (!LoanTabActivity.fk_institutes_id.equals("null") && !LoanTabActivity.fk_institutes_id.equals("")) {
-                        LoanTabActivity.instituteId = instituteID = LoanTabActivity.fk_institutes_id;
-//                        locationApiCall();
-                    }
-
-                    if (!LoanTabActivity.fk_insitutes_location_id.equals("null") && !LoanTabActivity.fk_insitutes_location_id.equals("")) {
-
-                        LoanTabActivity.instituteLocationId = locationID = LoanTabActivity.fk_insitutes_location_id;
-
-                        try {
-                            if (!LoanTabActivity.fk_insitutes_location_id.equals("") && !LoanTabActivity.fk_insitutes_location_id.equals("null")) {
-                                try {
-
-                                    int count = locationPOJOArrayList.size();
-                                    for (int i = 0; i < count; i++) {
-                                        if (locationPOJOArrayList.get(i).locationID.equalsIgnoreCase(LoanTabActivity.instituteLocationId)) {
-                                            spInsttLocation.setSelection(i);
-                                        }
-                                    }
-//                                    int count = locationPOJOArrayList.size();
-//                                    for (int i = 0; i < count; i++) {
-//                                        if (locationPOJOArrayList.get(i).locationID.equalsIgnoreCase(locationID)) {
-//                                            spInsttLocation.setSelection(i);
-//                                        }
-//                                    }
-
-                                } catch (Exception e) {
-
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    if (!LoanTabActivity.fk_course_id.equals("null") && !LoanTabActivity.fk_course_id.equals("")) {
-                        LoanTabActivity.courseId = courseID = LoanTabActivity.fk_course_id;
-                        spCourse.setSelection(Integer.parseInt(courseID));
-
-                        try {
-                            if (!LoanTabActivity.fk_course_id.equals("") && !LoanTabActivity.fk_course_id.equals("null")) {
-                                try {
-
-                                    int count = nameOfCoursePOJOArrayList.size();
-                                    for (int i = 0; i < count; i++) {
-                                        if (nameOfCoursePOJOArrayList.get(i).courseID.equalsIgnoreCase(LoanTabActivity.courseId)) {
-                                            spCourse.setSelection(i);
-                                        }
-                                    }
-
-//                                    int count = nameOfCoursePOJOArrayList.size();
-//                                    for (int i = 0; i < count; i++) {
-//                                        if (nameOfCoursePOJOArrayList.get(i).courseID.equalsIgnoreCase(courseID)) {
-//                                            spCourse.setSelection(i);
-//                                        }
-//                                    }
-
-                                } catch (Exception e) {
-
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
                     }
 
                 }
@@ -1611,17 +1736,17 @@ public class KycDetailFragment extends Fragment {
                         LoanTabActivity.gender = jsonborrowerDetails.getString("gender_id");
                         if (!LoanTabActivity.gender.equals("") && !LoanTabActivity.gender.equals("null")) {
                             if (LoanTabActivity.gender.equals("1")) {
-                                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
                             } else if (LoanTabActivity.gender.equals("2")) {
-                                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
                             } else if (LoanTabActivity.gender.equals("3")) {
-                                linMale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                                linFemale.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                                linOther.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
                             }
                         }
                     }
@@ -1688,6 +1813,7 @@ public class KycDetailFragment extends Fragment {
                                     for (int i = 0; i < count; i++) {
                                         if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase(currentcountryID)) {
                                             spCountry.setSelection(i);
+                                            break;
                                         }
                                     }
 
@@ -1966,55 +2092,6 @@ public class KycDetailFragment extends Fragment {
         }
     }
 
-    public void courseName(JSONObject jsonData) {
-        try {
-//            progressDialog.dismiss();
-            Log.e("SERVER CALL", "PrefillCourseFragment1" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                JSONArray jsonArray = jsonData.getJSONArray("result");
-                nameOfCoursePOJOArrayList = new ArrayList<>();
-                nameofcourse_arrayList = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    NameOfCoursePOJO nameOfCoursePOJO = new NameOfCoursePOJO();
-                    JSONObject mJsonti = jsonArray.getJSONObject(i);
-                    nameOfCoursePOJO.courseName = mJsonti.getString("course_name");
-                    nameofcourse_arrayList.add(mJsonti.getString("course_name"));
-                    nameOfCoursePOJO.courseID = mJsonti.getString("course_id");
-                    nameOfCoursePOJOArrayList.add(nameOfCoursePOJO);
-                }
-
-                arrayAdapter_NameOfCourse = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofcourse_arrayList);
-                spCourse.setAdapter(arrayAdapter_NameOfCourse);
-                arrayAdapter_NameOfCourse.notifyDataSetChanged();
-
-                int count = nameOfCoursePOJOArrayList.size();
-                for (int i = 0; i < count; i++) {
-                    if (nameOfCoursePOJOArrayList.get(i).courseID.equalsIgnoreCase(LoanTabActivity.courseId)) {
-                        spCourse.setSelection(i);
-                    }
-                }
-
-//                setCourseAdaptor();
-
-            } else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-//            progressDialog.dismiss();
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
-        }
-    }
-
     public void courseFee(JSONObject jsonData) {
         try {
 //            progressDialog.dismiss();
@@ -2054,21 +2131,48 @@ public class KycDetailFragment extends Fragment {
         }
     }
 
-    public void setCourseAdaptor() {
 
+    public void courseName(JSONObject jsonData) {
         try {
-            arrayAdapter_NameOfCourse = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofcourse_arrayList);
-            spCourse.setAdapter(arrayAdapter_NameOfCourse);
-            arrayAdapter_NameOfCourse.notifyDataSetChanged();
+//            progressDialog.dismiss();
+            Log.e("SERVER CALL", "PrefillCourseFragment1" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
 
-            if (!LoanTabActivity.courseId.equals("")) {
-                for (int i = 0; i < nameOfCoursePOJOArrayList.size(); i++) {
-                    if (LoanTabActivity.courseId.equalsIgnoreCase(nameOfCoursePOJOArrayList.get(i).courseID)) {
-                        spCourse.setSelection(i);
-                    }
+            if (status.equalsIgnoreCase("1")) {
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                JSONArray jsonArray = jsonData.getJSONArray("result");
+                nameOfCoursePOJOArrayList = new ArrayList<>();
+                nameofcourse_arrayList = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    NameOfCoursePOJO nameOfCoursePOJO = new NameOfCoursePOJO();
+                    JSONObject mJsonti = jsonArray.getJSONObject(i);
+                    nameOfCoursePOJO.courseName = mJsonti.getString("course_name");
+                    nameofcourse_arrayList.add(mJsonti.getString("course_name"));
+                    nameOfCoursePOJO.courseID = mJsonti.getString("course_id");
+                    nameOfCoursePOJOArrayList.add(nameOfCoursePOJO);
                 }
+
+                arrayAdapter_NameOfCourse = new ArrayAdapter(context, R.layout.custom_layout_spinner, nameofcourse_arrayList);
+                spCourse.setAdapter(arrayAdapter_NameOfCourse);
+                arrayAdapter_NameOfCourse.notifyDataSetChanged();
+
+                if (!LoanTabActivity.courseId.equals("")) {
+                    int count = nameOfCoursePOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (nameOfCoursePOJOArrayList.get(i).courseID.equalsIgnoreCase(LoanTabActivity.courseId)) {
+                            spCourse.setSelection(i);
+                            break;
+                        }
+                    }
+                    courseFeeApiCall();
+                }
+
+            } else {
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
+//            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -2106,14 +2210,16 @@ public class KycDetailFragment extends Fragment {
                 spInsttLocation.setAdapter(arrayAdapter_locations);
                 arrayAdapter_locations.notifyDataSetChanged();
 
-                int count = locationPOJOArrayList.size();
-                for (int i = 0; i < count; i++) {
-                    if (locationPOJOArrayList.get(i).locationID.equalsIgnoreCase(LoanTabActivity.instituteLocationId)) {
-                        spInsttLocation.setSelection(i);
+                if (!LoanTabActivity.instituteLocationId.equals("")) {
+
+                    int count = locationPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (locationPOJOArrayList.get(i).locationID.equalsIgnoreCase(LoanTabActivity.instituteLocationId)) {
+                            spInsttLocation.setSelection(i);
+                            break;
+                        }
                     }
                 }
-
-//                setInstituteLocationAdaptor();
 
             } else {
 //                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

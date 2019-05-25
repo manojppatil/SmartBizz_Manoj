@@ -35,6 +35,7 @@ import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.CardStackAdapter;
 import com.eduvanzapplication.newUI.newViews.EmiCalculatorActivity;
+import com.eduvanzapplication.newUI.newViews.LeadOwnerType;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.newViews.TenureSelectionActivity;
 import com.eduvanzapplication.newUI.pojo.MLeads;
@@ -133,8 +134,7 @@ public class DashboardFragmentNew extends Fragment  {
                 e.printStackTrace();
             }
 
-
-            viewPagerDashboard = (ViewPager) view.findViewById(R.id.viewPager_dashboard);
+            viewPagerDashboard = view.findViewById(R.id.viewPager_dashboard);
             linProceedBtn = view.findViewById(R.id.linProceedBtn);
             layout2 = view.findViewById(R.id.layout2);
             linFriendlyScore = view.findViewById(R.id.linFriendlyScore);
@@ -241,7 +241,8 @@ public class DashboardFragmentNew extends Fragment  {
     View.OnClickListener newApplicationClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(getActivity(), NewLeadActivity.class));
+            startActivity(new Intent(getActivity(), LeadOwnerType.class));
+//            startActivity(new Intent(getActivity(), NewLeadActivity.class));
         }
     };
 
@@ -339,7 +340,6 @@ public class DashboardFragmentNew extends Fragment  {
     private void getDashboardDetails() {   //get leads
         try {
             progressDialog.setMessage("Loading");
-            progressDialog.setTitle("Retrieving your data");
             progressDialog.setCancelable(false);
             if (!getActivity().isFinishing())
                 progressDialog.show();

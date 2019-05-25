@@ -136,12 +136,14 @@
                             android:padding="@dimen/_5sdp">
 
                             <ImageView
+                                android:id="@+id/ivMale"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_18sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_male" />
 
                             <View
+                                android:id="@+id/viewMale"
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/_4sdp"
@@ -170,12 +172,14 @@
                             android:padding="@dimen/_5sdp">
 
                             <ImageView
+                                android:id="@+id/ivFemale"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_18sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_female" />
 
                             <View
+                                android:id="@+id/viewFemale"
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/_4sdp"
@@ -203,12 +207,14 @@
                             android:padding="@dimen/_5sdp">
 
                             <ImageView
+                                android:id="@+id/ivOther"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_18sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
                                 app:srcCompat="@drawable/ic_transgender" />
 
                             <View
+                                android:id="@+id/viewOther"
                                 android:layout_width="@dimen/_1sdp"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/_4sdp"
@@ -322,7 +328,19 @@
                                     style="@style/TextViewRadioStyle" />
                             </LinearLayout>
                         </LinearLayout>
+
                     </LinearLayout>
+                    <TextView
+                        android:id="@+id/txtPersonalDetailsErrMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/red"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="15sp"
+                        style="@style/TextViewTitle14Style" />
                 </LinearLayout>
             </RelativeLayout>
         </ScrollView>

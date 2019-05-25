@@ -87,8 +87,8 @@ public class EditProfile extends AppCompatActivity {
         getSupportActionBar().setTitle("Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+//        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
 
         profileImage = findViewById(R.id.profileImage);

@@ -16,7 +16,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="#e54350"
         app:navigationIcon="@drawable/ic_back_arrow" />
     </android.support.design.widget.AppBarLayout>
 
@@ -62,7 +62,7 @@
                 android:id="@+id/edtFnameProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/first_name"
+                android:hint="User Name"
                 android:imeOptions="actionNext"
                 android:inputType="textCapSentences"
                 style="@style/EditTextProfileStyle" />
@@ -75,6 +75,7 @@
             android:layout_marginBottom="@dimen/_6sdp"
             android:backgroundTint="@color/white"
             android:theme="@style/EditTextProfileStyle"
+            android:visibility="gone"
             app:hintTextAppearance="@style/CustomTextProfileAppearance">
 
             <EditText
@@ -94,6 +95,7 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginBottom="@dimen/_6sdp"
             android:theme="@style/EditTextProfileStyle"
+            android:visibility="gone"
             app:hintTextAppearance="@style/CustomTextProfileAppearance">
 
             <EditText
@@ -125,6 +127,15 @@
                     android:inputType="textCapSentences"
                     android:theme="@style/EditTextProfileStyle" />
             </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/edtProfileMobileNumber"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                style="@style/TextViewTitle14Style"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -170,16 +181,6 @@
             app:srcCompat="@drawable/ic_angle_right" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/edtProfileMobileNumber"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_below="@+id/relativeLayout"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14sdp"
-        android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 

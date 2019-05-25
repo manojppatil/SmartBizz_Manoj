@@ -58,13 +58,19 @@
             android:theme="@style/AppTheme"
             android:screenOrientation="sensorPortrait" />
 
+        <activity android:name=".newUI.newViews.LeadOwnerType"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="sensorPortrait" />
+
         <activity android:name=".newUI.newViews.NewLeadActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:screenOrientation="sensorPortrait" />
 
         <activity android:name=".newUI.newViews.EditProfile"
             android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:screenOrientation="sensorPortrait" />
 
         <activity android:name="com.idfy.rft.CameraView"
@@ -135,6 +141,7 @@
         </activity>
         <activity
             android:name=".newUI.newViews.GetMobileNo"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -144,6 +151,7 @@
         </activity>
         <activity
             android:name=".newUI.newViews.OtpValidation"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".newUI.newViews.DashboardActivity"
@@ -152,10 +160,12 @@
         <activity
             android:name=".newUI.newViews.LoanTabActivity"
             android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".newUI.newViews.GetEmailActivity"
             android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".newUI.newViews.ContactUs"

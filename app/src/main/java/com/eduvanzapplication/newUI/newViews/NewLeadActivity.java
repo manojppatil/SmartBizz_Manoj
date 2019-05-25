@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +39,12 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
     public static ViewPager viewPager;
     private ImageView ivNextBtn, ivPrevBtn;
+    private LinearLayout linSubmit;
     private TextView txtStepTracker;
     private StepperIndicator stepperIndicator;
     public static ImageView ivOCRBtn;
+
+    public static Boolean isProfileEnabled = false,isDocAvailabilityEnabled = false,isCurrentAddEnabled = false,isEmploymentDtlEnabled = false;
 
     public static Boolean scrolledRight = true;
     public static int lastPage = 0;
@@ -73,6 +76,11 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             setContentView(R.layout.activity_new_lead);
         }
         setViews();
+
+        isProfileEnabled = false;
+        isDocAvailabilityEnabled = false;
+        isCurrentAddEnabled = false;
+        isEmploymentDtlEnabled = false;
 
         profession = "";
         firstName = "";
@@ -129,6 +137,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                 }else {
 
                 }
+
 //                switch (position) {
 //                    case 0:
 //                        lastPage = position;
@@ -158,6 +167,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                             if (scrolledRight) {
                                 lastPage = viewPager.getCurrentItem();
                             }else {
+                                PersonalDetailsFragment.checkAllFields();
                                 lastPage = viewPager.getCurrentItem();
                             }
                             break;
@@ -172,7 +182,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                                     lastPage = viewPager.getCurrentItem()-1;
                                 }
                             } else {
-                                PersonalDetailsFragment.validate();
+                                PersonalDetailsFragment.checkAllFields();
                                 lastPage = viewPager.getCurrentItem();
                             }
                             break;
@@ -188,7 +198,20 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                                     lastPage = viewPager.getCurrentItem()-1;
                                 }
                             } else {
-                                DocumentAvailabilityFragment.validate();
+                                try {
+                                    linSubmit.setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                                    ivNextBtn.setOnClickListener(null);
+                                    ivNextBtn.setEnabled(false);
+                                    ivNextBtn.setVisibility(View.VISIBLE);
+                                } catch (Resources.NotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                                DocumentAvailabilityFragment.checkAllFields();
                                 lastPage = viewPager.getCurrentItem();
                             }
                             break;
@@ -197,14 +220,19 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                             if (scrolledRight) {
                                 CurrentAddressFragment.checkAllFields();
                                 if(ivNextBtn.isEnabled()) {
+                                    ivNextBtn.setVisibility(View.GONE);
+                                    linSubmit.setVisibility(View.VISIBLE);
+                                    linSubmit.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                                    linSubmit.setEnabled(false);
                                     CurrentAddressFragment.validate();
+                                    EmploymentDetailsFragment.checkAllFields();
                                     lastPage = viewPager.getCurrentItem();
                                 }else {
                                     viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
                                     lastPage = viewPager.getCurrentItem()-1;
                                 }
                             } else {
-                                CurrentAddressFragment.validate();
+                                CurrentAddressFragment.checkAllFields();
                                 lastPage = viewPager.getCurrentItem();
                             }
                             break;
@@ -324,7 +352,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             NewLeadActivity.pinCode = NewLeadActivity.Apincode;
 
 
-        } else if (NewLeadActivity.panNUmber.length() > 3) {
+        } else if (NewLeadActivity.Ppanno.length() > 3) {
             NewLeadActivity.firstName = NewLeadActivity.Pname;
             if (NewLeadActivity.Adob.length() > NewLeadActivity.Pdob.length()) {
                 NewLeadActivity.dob = NewLeadActivity.Adob;
@@ -349,6 +377,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         viewPager = findViewById(R.id.viewpager);
         ivNextBtn = findViewById(R.id.ivNextBtn);
         ivPrevBtn = findViewById(R.id.ivPrevBtn);
+        linSubmit = findViewById(R.id.linSubmit);
         txtStepTracker = findViewById(R.id.txtStepTracker);
         stepperIndicator = findViewById(R.id.stepperIndicator);
         ivOCRBtn = findViewById(R.id.ivOCRBtn);
@@ -356,6 +385,22 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
         ivNextBtn.setOnClickListener(nextClickListener);
         ivPrevBtn.setOnClickListener(prevClickListener);
+        linSubmit.setOnClickListener(nextClickListener1);
+//        linSubmit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount() - 1)) {
+//                    onOffButtonEmployent(false,true);
+//                    if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")) {
+//                        saveBorrowerData();
+//                    } else {
+//                        Snackbar.make(ivNextBtn, "Please fill all the fields", Snackbar.LENGTH_SHORT).show();
+//                    }
+//                }
+//                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+//            }
+//        });
 
     }
     private void setupViewPager(ViewPager viewPager) {
@@ -430,6 +475,23 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         }
     };
 
+    View.OnClickListener nextClickListener1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount() - 1)) {
+                onOffButtonEmployentSubmit(false,true);
+                if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")) {
+//                    startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
+//                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    saveBorrowerData();
+                } else {
+                    Snackbar.make(ivNextBtn, "Please fill all the fields", Snackbar.LENGTH_SHORT).show();
+                }
+            }
+            viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+        }
+    };
+
     View.OnClickListener prevClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -461,6 +523,24 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     @Override
     public void onOffButtonEmployent(boolean next, boolean prev) {
         enableDisableButtons(next, prev);
+    }
+
+    @Override
+    public void onOffButtonEmployentSubmit(boolean submit, boolean prev) {
+
+        if (submit) {
+            linSubmit.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
+            linSubmit.setOnClickListener(nextClickListener);
+            linSubmit.setEnabled(true);
+        } else {
+            linSubmit.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+            linSubmit.setOnClickListener(null);
+            linSubmit.setEnabled(false);
+        }
+        if (prev) {
+            ivPrevBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+            ivPrevBtn.setOnClickListener(prevClickListener);
+        } else ivPrevBtn.setOnClickListener(prevClickListener);
     }
 
 
@@ -562,7 +642,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             params.put("gender_id", NewLeadActivity.gender);
             params.put("marital_status", NewLeadActivity.maritalStatus);
 //            params.put("has_aadhar_pan", NewLeadActivity.documents);
-            params.put("profession", NewLeadActivity.profession);
+            params.put("profession", "1");
             params.put("employer_name", NewLeadActivity.companyName);
             params.put("annual_income", NewLeadActivity.annualIncome);
             params.put("has_aadhar_pan", documents);

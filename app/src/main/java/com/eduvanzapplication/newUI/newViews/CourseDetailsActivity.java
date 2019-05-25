@@ -79,12 +79,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Log.e("I_________D", "onItemClick: ");
-
                 String text = spCourse.getSelectedItem().toString();
                 int count = nameOfCoursePOJOArrayList.size();
 
-                Log.e("TAG", "count: " + count);
                 for (int i = 0; i < count; i++) {
                     if (nameOfCoursePOJOArrayList.get(i).courseName.equalsIgnoreCase(text)) {
                         NewLeadActivity.courseId = nameOfCoursePOJOArrayList.get(i).courseID;
@@ -111,7 +108,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         break;
                     }
                 }
-//                    courseFeeApiCall();
                 courseApiCall();
             }
 

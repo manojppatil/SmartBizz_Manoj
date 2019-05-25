@@ -12,38 +12,35 @@
         android:orientation="vertical"
         android:padding="@dimen/_10sdp">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
-            app:cardCornerRadius="@dimen/_5sdp">
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/_180sdp"-->
+            <!--android:layout_marginTop="@dimen/_30sdp"-->
+            <!--app:cardCornerRadius="@dimen/_3sdp">-->
 
             <RelativeLayout
+                android:id="@+id/rel1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/_180sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/tenurepass">
 
-                <ImageView
-                    android:id="@+id/ivImage"
-                    android:layout_width="@dimen/_110sdp"
-                    android:layout_height="@dimen/_110sdp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/tenure_selection" />
-
-                <TextView
-                    style="@style/TextViewTitleSmallStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewStart"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginLeft="@dimen/_2sdp"
-                    android:layout_marginRight="@dimen/_2sdp"
-                    android:layout_toStartOf="@id/ivImage"
-                    android:text="@string/tenurestring"/>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/rel2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_180sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/tenurefail"
+                android:visibility="gone">
+
+
+            </RelativeLayout>
+        <!--</android.support.v7.widget.CardView>-->
 
         <TextView
+            android:id="@+id/txtTenureTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
@@ -75,6 +72,7 @@
                         android:background="@color/black_new" />
 
                     <LinearLayout
+                        android:id="@+id/linHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -121,7 +119,7 @@
                             android:background="@color/black_new" />
 
                         <TextView
-                            android:layout_width="@dimen/_60sdp"
+                            android:layout_width="@dimen/_70sdp"
                             android:layout_height="@dimen/_25sdp"
                             android:gravity="center"
                             android:padding="@dimen/_2sdp"
