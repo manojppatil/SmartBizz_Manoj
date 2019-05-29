@@ -37,7 +37,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_height="@dimen/_90sdp"
-        android:src="@drawable/success_image" />
+        app:civ_border_color="@color/darkblue"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/ic_personal_details_user" />
 
         <LinearLayout
             android:id="@+id/edtProfileLayout"

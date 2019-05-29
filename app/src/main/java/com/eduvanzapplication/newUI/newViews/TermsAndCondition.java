@@ -64,6 +64,27 @@ public class TermsAndCondition extends AppCompatActivity {
                 }
             });
 
+            below3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(TermsAndCondition.this,
+                            WebViewTermsNCondition.class);
+                    startActivity(intent);
+
+                }
+            });
+
+            below5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(TermsAndCondition.this,
+                            WebViewPrivacyPolicy.class);
+                    startActivity(intent);
+                }
+            });
+
             scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
                 @Override
                 public void onScrollChanged() {

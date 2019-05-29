@@ -44,12 +44,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public static ImageView ivNextBtn;
     public static AutoCompleteTextView acInstituteName;
-    public static Spinner spInsttLocation,spCourse;
+    public static Spinner spInsttLocation, spCourse;
     public static TextView txtCourseFee;
     public static EditText edtLoanAmt;
     public static Context context;
     public static AppCompatActivity mActivity;
-     SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences;
     public static String instituteID = "", courseID = "", locationID = "", lead_id = "", application_id = "";
 
     public ArrayAdapter arrayAdapter_NameOfInsititue;
@@ -62,10 +62,10 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public ArrayAdapter arrayAdapter_locations;
     public ArrayList<String> locations_arrayList;
     public ArrayList<LocationsPOJO> locationPOJOArrayList;
-    public static ProgressDialog progressDialog ;
+    public static ProgressDialog progressDialog;
 
     //Integer Values
-    public static  int loanAmountvalueInInt,courseFeeValueinint;
+    public static int loanAmountvalueInInt, courseFeeValueinint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,12 +120,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
         instituteApiCall();
 
     }
+
     View.OnClickListener nextClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             saveInstituteData();
         }
     };
+
     private void enableDisableButtons(boolean next) {
         if (next) {
             ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
@@ -138,6 +140,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
         }
     }
+
     private void setViews() {
         ivNextBtn = findViewById(R.id.ivNextBtn);
         ivNextBtn.setEnabled(false);
@@ -145,25 +148,25 @@ public class CourseDetailsActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         progressDialog = new ProgressDialog(CourseDetailsActivity.this);
 
-        txtCourseFee =  findViewById(R.id.txtCourseFee);
+        txtCourseFee = findViewById(R.id.txtCourseFee);
         edtLoanAmt = findViewById(R.id.edtLoanAmt);
 
-        acInstituteName =  findViewById(R.id.acInstituteName);
-        spInsttLocation =  findViewById(R.id.spInsttLocation);
-        spCourse =  findViewById(R.id.spCourse);
+        acInstituteName = findViewById(R.id.acInstituteName);
+        spInsttLocation = findViewById(R.id.spInsttLocation);
+        spCourse = findViewById(R.id.spCourse);
 
         ivNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (acInstituteName.getText().toString().equals("")){
-                    Snackbar.make(ivNextBtn, "Please enter institute name",Snackbar.LENGTH_SHORT).show();
-                }else if (spInsttLocation.getSelectedItemPosition() == 0){
-                    Snackbar.make(ivNextBtn, "Please select institute location",Snackbar.LENGTH_SHORT).show();
-                }else if (spCourse.getSelectedItemPosition() == 0){
-                    Snackbar.make(ivNextBtn, "Please select course name",Snackbar.LENGTH_SHORT).show();
-                }else if (edtLoanAmt.getText().toString().equals("")){
-                    Snackbar.make(ivNextBtn, "Please enter loan amount",Snackbar.LENGTH_SHORT).show();
-                }else {
+                if (acInstituteName.getText().toString().equals("")) {
+                    Snackbar.make(ivNextBtn, "Please enter institute name", Snackbar.LENGTH_SHORT).show();
+                } else if (spInsttLocation.getSelectedItemPosition() == 0) {
+                    Snackbar.make(ivNextBtn, "Please select institute location", Snackbar.LENGTH_SHORT).show();
+                } else if (spCourse.getSelectedItemPosition() == 0) {
+                    Snackbar.make(ivNextBtn, "Please select course name", Snackbar.LENGTH_SHORT).show();
+                } else if (edtLoanAmt.getText().toString().equals("")) {
+                    Snackbar.make(ivNextBtn, "Please enter loan amount", Snackbar.LENGTH_SHORT).show();
+                } else {
                     NewLeadActivity.courseFee = txtCourseFee.getText().toString();
                     NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
                     saveInstituteData();
@@ -180,24 +183,29 @@ public class CourseDetailsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s.length()>0) {
+                if (s.length() > 0) {
                     loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
                     courseFeeValueinint = Integer.parseInt(txtCourseFee.getText().toString());
 
                     if (courseFeeValueinint >= loanAmountvalueInInt) {
-                        NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
-//                    ivNextBtn.setEnabled(true);
-                        enableDisableButtons(true);
+                        if (loanAmountvalueInInt >= 5000) {
+                            NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
+                            edtLoanAmt.setError(null);
+                            enableDisableButtons(true);
+                        } else {
+                            enableDisableButtons(false);
+                            edtLoanAmt.setError("The Loan Amount must be greater than or equal to 5000.");
+                        }
                     } else {
                         enableDisableButtons(false);
-                        edtLoanAmt.setError("Loan Amount not more than Course fees ");
+                        edtLoanAmt.setError("Loan Amount not exceed than course fees!");
                     }
-                }
-                else {
+                } else {
                     enableDisableButtons(false);
-                    edtLoanAmt.setError("Loan Amount not more than Course fees ");
+                    edtLoanAmt.setError("Loan Amount not exceed than course fees!");
                 }
             }
+
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -287,7 +295,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
                     int count = nameOfInsitituePOJOArrayList.size();
                     for (int i = 0; i < count; i++) {
                         if (nameOfInsitituePOJOArrayList.get(i).instituteName.equalsIgnoreCase((String) arg0.getItemAtPosition(arg2))) {
-                            NewLeadActivity.instituteId  = nameOfInsitituePOJOArrayList.get(i).instituteID;
+                            NewLeadActivity.instituteId = nameOfInsitituePOJOArrayList.get(i).instituteID;
                             locationApiCall();
                             break;
                         }
@@ -297,7 +305,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
 //                    CourseDetailsActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-                //this is code for close institute text keyboard close
+                    //this is code for close institute text keyboard close
 
                    /* acInstituteName.setOnEditorActionListener(new AutoCompleteTextView.OnEditorActionListener() {
 
@@ -311,7 +319,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
                             return false;
                         }
                     });*/
-
 
 
                 }
@@ -475,7 +482,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(mActivity,className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(mActivity, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -604,7 +611,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
             if (jsonData.getInt("status") == 1) {
 
-              //  Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(CourseDetailsActivity.this, TenureSelectionActivity.class));
 
 //                EligibilityCheckFragment_6 eligibilityCheckFragment_6 = new EligibilityCheckFragment_6();

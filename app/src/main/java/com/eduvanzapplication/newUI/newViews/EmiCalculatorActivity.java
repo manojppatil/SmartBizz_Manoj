@@ -74,7 +74,7 @@ public class EmiCalculatorActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home)
+        if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
@@ -100,56 +100,55 @@ public class EmiCalculatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edtLoanAmt.getText().toString().equals("")) {
-                        Snackbar.make(linCalculateBtn, "please enter loan amount", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(linCalculateBtn, "please enter loan amount", Snackbar.LENGTH_SHORT).show();
                 } else if (edtRateOfInterest.toString().equals("")) {
                     Snackbar.make(linCalculateBtn, "Please enter rate of interest", Snackbar.LENGTH_SHORT).show();
                 } else if (edtTenure.toString().equals("")) {
                     Snackbar.make(linCalculateBtn, "Please enter tenure", Snackbar.LENGTH_SHORT).show();
-                    }
-                    else {
+                } else {
 
                     //Getting value of principal ,rate,tenure(Months)
                     int principal = calprinc(Integer.parseInt(edtLoanAmt.getText().toString()));
                     float rate = calintrest(Float.parseFloat(edtRateOfInterest.getText().toString()));
                     int months = calMonth(Integer.parseInt(edtTenure.getText().toString()));
-                        if (principal > 1000000) {
-                            Snackbar.make(linCalculateBtn, "Loan amount not exceed than 10,00,000", Snackbar.LENGTH_SHORT).show();
-                            txtCalculatedEmi.setText("");
-                        } else if (rate >36) {
-                            Snackbar.make(linCalculateBtn, "Rate of intrest not exceed than 36%", Snackbar.LENGTH_SHORT).show();
-                            txtCalculatedEmi.setText("");
-                        } else if (months > 96) {
-                            Snackbar.make(linCalculateBtn, "Tenure not exceed than 96", Snackbar.LENGTH_SHORT).show();
-                            txtCalculatedEmi.setText("");
-                        }
-                    //calculate (months*rate)+1200
-                     float  calmonthsintorate=  calmonthsintorate(months,rate);
 
-                  //calculate numerator result
-                    float calnr=calnr(principal,calmonthsintorate);
+                    //calculate (months*rate)+1200
+                    float calmonthsintorate = calmonthsintorate(months, rate);
+
+                    //calculate numerator result
+                    float calnr = calnr(principal, calmonthsintorate);
 
                     //calculate denominator result
-                    int caldr=caldr(months);
+                    int caldr = caldr(months);
                     //calculate  EMI output
-                    float EMIcalculate=calEMI(calnr,caldr);
+                    float EMIcalculate = calEMI(calnr, caldr);
 
-                   int EMIoutput= (int)Math.ceil(EMIcalculate);
+                    int EMIoutput = (int) Math.ceil(EMIcalculate);
 
                     //store value in textbox EMI result
-                    txtCalculatedEmi.setText(String.valueOf(EMIoutput));
+                    //    txtCalculatedEmi.setText(String.valueOf(EMIoutput));
+                    if (principal > 1000000) {
+                        Snackbar.make(linCalculateBtn, "Loan amount not exceed than 10,00,000", Snackbar.LENGTH_SHORT).show();
+                        txtCalculatedEmi.setText("");
+                    } else {
+                        txtCalculatedEmi.setText(String.valueOf(EMIoutput));
+                    }
+                    if (rate > 36) {
+                        Snackbar.make(linCalculateBtn, "Rate of intrest not exceed than 36%", Snackbar.LENGTH_SHORT).show();
+                        txtCalculatedEmi.setText("");
+                    } else {
+                        txtCalculatedEmi.setText(String.valueOf(EMIoutput));
+                    }
+                    if (months > 96) {
+                        Snackbar.make(linCalculateBtn, "Tenure not exceed than 96", Snackbar.LENGTH_SHORT).show();
+                        txtCalculatedEmi.setText("");
+                    } else {
+                        txtCalculatedEmi.setText(String.valueOf(EMIoutput));
 
-                  /* // float dvdnt = caldvdnt(rate, months);
-                    float fd = calFinalDvdnt(principal, dvdnt);
-                    int divider = calDivider(months);
+                    }
 
-                    int emi = calEmi(fd, divider);*/
-
-                //    txtCalculatedEmi.setText(String.valueOf(emi));
-                    /*float ta = calTa(emi, months);
-                    float ti = calTi(ta, principal);
-                  txtCalculatedEmi.setText(String.valueOf(ti));*/
-
-                    } }
+                }
+            }
         });
     }
 
@@ -160,33 +159,36 @@ public class EmiCalculatorActivity extends AppCompatActivity {
     }
 
     public float calintrest(float i) {
-        return (float) i ;
+        return (float) i;
     }
 
     public int calMonth(int y) {
-        return (int) y ;
+        return (int) y;
     }
 
 
     //method for calculate EMI output
-    public float calmonthsintorate(int months,float rate){
-        float calmonthsintorate=(int) (months*rate);
-        calmonthsintorate= calmonthsintorate+1200;
+    public float calmonthsintorate(int months, float rate) {
+        float calmonthsintorate = (int) (months * rate);
+        calmonthsintorate = calmonthsintorate + 1200;
         return calmonthsintorate;
     }
-    public  float calnr(int principal,float calmonthsintorate){
-        float calnr=(int)(principal*calmonthsintorate);
-        return  calnr;
+
+    public float calnr(int principal, float calmonthsintorate) {
+        float calnr = (int) (principal * calmonthsintorate);
+        return calnr;
 
     }
-    public  int caldr(int months){
-        int caldr=months*1200;
-        return  caldr;
+
+    public int caldr(int months) {
+        int caldr = months * 1200;
+        return caldr;
 
     }
-    public  float calEMI(float calnr,int caldr){
-        float EMIcalculate=  (calnr/caldr);
-        return  EMIcalculate;
+
+    public float calEMI(float calnr, int caldr) {
+        float EMIcalculate = (calnr / caldr);
+        return EMIcalculate;
 
     }
 

@@ -28,7 +28,8 @@
                 android:id="@+id/ivUser"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                app:srcCompat="@drawable/ic_id_card" />
+                android:tint="@color/colorPrimary"
+                app:srcCompat="@drawable/ic_documents_availability_user" />
 
             <TextView
                 android:id="@+id/txtPersonalDetails"
@@ -37,7 +38,8 @@
                 android:layout_alignParentEnd="true"
                 android:text="@string/documents_availability"
                 android:textColor="@color/textcolordark"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="22sp"
+                style="@style/TextViewTitleStyle"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,7 +87,7 @@
                             android:layout_height="@dimen/_15sdp"
                             android:layout_marginLeft="@dimen/_7sdp"
                             android:tint="@color/textcolordark"
-                            app:srcCompat="@drawable/ic_id_card" />
+                            app:srcCompat="@drawable/ic_borrower_details_id_card" />
 
                         <View
                             android:layout_width="@dimen/_1sdp"
@@ -132,7 +134,7 @@
                             android:layout_height="@dimen/_15sdp"
                             android:layout_marginLeft="@dimen/_7sdp"
                             android:tint="@color/textcolordark"
-                            app:srcCompat="@drawable/ic_id_card" />
+                            app:srcCompat="@drawable/ic_borrower_details_id_card" />
 
                         <View
                             android:layout_width="@dimen/_1sdp"

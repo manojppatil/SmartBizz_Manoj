@@ -87,7 +87,7 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
                                 android:tint="@color/darkblue"
-                                app:srcCompat="@drawable/ic_address_card" />
+                                app:srcCompat="@drawable/ic_borrower_details_id_card" />
 
                             <View
                                 android:layout_width="@dimen/_1sdp"
@@ -129,7 +129,7 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
                                 android:tint="@color/darkblue"
-                                app:srcCompat="@drawable/ic_id_card" />
+                                app:srcCompat="@drawable/ic_borrower_details_id_card" />
 
                             <View
                                 android:layout_width="@dimen/_1sdp"

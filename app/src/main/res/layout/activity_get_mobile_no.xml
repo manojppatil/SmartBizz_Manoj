@@ -112,7 +112,7 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:padding="@dimen/_3sdp"
-                    app:srcCompat="@drawable/ic_mobile_android" />
+                    app:srcCompat="@drawable/ic_login_mobile" />
 
                 <View
                     android:layout_width="@dimen/_1sdp"
@@ -176,7 +176,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:padding="@dimen/_3sdp"
-                        app:srcCompat="@drawable/ic_envelope_open" />
+                        app:srcCompat="@drawable/ic_login_email" />
 
                     <View
                         android:layout_width="@dimen/_1sdp"
@@ -276,6 +276,7 @@
                     android:backgroundTint="#0077b5"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:padding="@dimen/_4sdp">
 
                     <ImageView
@@ -430,7 +431,7 @@
             android:id="@+id/ivIndicator"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
-            app:srcCompat="@drawable/ic_key" />
+            app:srcCompat="@drawable/ic_angle_right" />
 
     </LinearLayout>
 

@@ -17,8 +17,8 @@ android {
         applicationId "com.eduvanzapplication"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 70
-        versionName "5.1.1"
+        versionCode 83
+        versionName "5.1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -71,8 +71,8 @@ dependencies {
     implementation project(':FriendlyScoreAndroidSDK-UI-release')
     implementation files('libs/commons-codec-1.10-rep.jar')
     implementation(name: "imgtopdf", ext: "aar")//Image To PDF SDK
-//    implementation (name: "Algo360SDK-eduvanz", ext:"aar")//Algo 360 SDK
-    implementation (name: "Algo360SDK-edu-test", ext:"aar")//Algo 360 SDK
+//    implementation (name: "Algo360SDK-eduvanz-prod", ext:"aar")//Algo 360 SDK
+//    implementation (name: "Algo360SDK-edu-test", ext:"aar")//Algo 360 SDK
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'

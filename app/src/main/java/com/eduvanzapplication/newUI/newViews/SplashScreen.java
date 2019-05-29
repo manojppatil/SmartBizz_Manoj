@@ -36,7 +36,6 @@ import com.eduvanzapplication.database.DBAdapter;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.VolleyCall;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -49,7 +48,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.eduvanzapplication.database.DBAdapter.ExecuteSql;
 import static com.eduvanzapplication.database.DBAdapter.getLocalData;
 
 public class SplashScreen extends AppCompatActivity {
@@ -61,7 +59,7 @@ public class SplashScreen extends AppCompatActivity {
     public String checkOTPDone = "", checkForImageSlider = "";
     SharedPref sharedPref = new SharedPref();
     static Context context;
-    String policyAgreementStatus;
+    int policyAgreementStatus;
     AppCompatActivity mActivity;
     static Context mContext;
     private String isMandateToUpdate;
@@ -96,7 +94,7 @@ public class SplashScreen extends AppCompatActivity {
 
             SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
             checkOTPDone = sharedPreferences.getString("otp_done", "0");
-            policyAgreementStatus = sharedPreferences.getString("userpolicyAgreement", "0");
+//            policyAgreementStatus = sharedPreferences.getInt("userpolicyAgreement", 0);
             checkForImageSlider = sharedPreferences.getString("checkForImageSlider", "0");
 
             AppLanguage = sharedPreferences.getString("AppLanguage", "");
@@ -114,12 +112,12 @@ public class SplashScreen extends AppCompatActivity {
             textViewCustomer = (TextView) view1.findViewById(R.id.splash_text);
             relativeLayoutCustomer = (RelativeLayout) view1.findViewById(R.id.rel_lay);
 
-            Resources res = context.getResources();
-            DisplayMetrics dm = res.getDisplayMetrics();
-            android.content.res.Configuration conf = res.getConfiguration();
-            conf.setLocale(new Locale(AppLanguage.toLowerCase())); // API 17+ only.
-
-            res.updateConfiguration(conf, dm);
+//            Resources res = context.getResources();
+//            DisplayMetrics dm = res.getDisplayMetrics();
+//            android.content.res.Configuration conf = res.getConfiguration();
+//            conf.setLocale(new Locale(AppLanguage.toLowerCase())); // API 17+ only.
+//
+//            res.updateConfiguration(conf, dm);
 
             apiCall();
 //            StartAnimationsCustomer();
@@ -128,7 +126,9 @@ public class SplashScreen extends AppCompatActivity {
 
             if (Globle.isNetworkAvailable(SplashScreen.this)) {
                 BackgroundThread bv = new BackgroundThread();
-                bv.execute(10);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                    bv.execute(10);
+                }
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -250,15 +250,34 @@ public class SplashScreen extends AppCompatActivity {
                     } else {
 
                         if (checkForImageSlider.equalsIgnoreCase("1")) {
+//                            if (policyAgreementStatus == 0) {
+//                                Intent intent = new Intent(SplashScreen.this,
+//                                        TermsAndCondition.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                                startActivity(intent);
+//                                SplashScreen.this.finish();
+//                            } else {
+//                                if (sharedPref.getLoginDone(SplashScreen.this)) {
+//                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                                    startActivity(intent);
+//                                    SplashScreen.this.finish();
+//                                } else {
+//                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);// This is commented for testing
+//                                    startActivity(intent);
+//                                    finish();
+//                                }
+//                            }
                             if (sharedPref.getLoginDone(SplashScreen.this)) {
-                                Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);
+                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                    startActivity(intent);
+                                    SplashScreen.this.finish();
+                            }else{
+                                Intent intent = new Intent(SplashScreen.this, ImageSlider.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 startActivity(intent);
                                 SplashScreen.this.finish();
-                            } else {
-                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);// This is commented for testing
-                                    startActivity(intent);
-                                    finish();
                             }
                         } else {
                             Intent intent = new Intent(SplashScreen.this, ImageSlider.class);
@@ -268,7 +287,6 @@ public class SplashScreen extends AppCompatActivity {
                         }
 
                     }
-
 
                 } catch (InterruptedException e) {
                     // do nothing

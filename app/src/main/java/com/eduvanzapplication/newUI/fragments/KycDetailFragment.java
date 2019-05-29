@@ -124,7 +124,9 @@ public class KycDetailFragment extends Fragment {
     public static ArrayList<BorrowerCurrentCountryPersonalPOJO> borrowerCurrentCountryPersonalPOJOArrayList;
     public static String documents = "0";
     //Integer Values
-     public static  int loanAmountvalueInInt,courseFeeValueinint;
+    public static int loanAmountvalueInInt, courseFeeValueinint;
+    //txterrorMsg
+    public static TextView txtPersonalDetailsErrMsg, txtCourseDetailsErrMsg, txtIdentityDetailsErrMsg;
 
     @Nullable
     @Override
@@ -141,7 +143,6 @@ public class KycDetailFragment extends Fragment {
         collapseAnimationIdentity = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
         collapseAnimationCourse = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 
         ivPersonalToggle = view.findViewById(R.id.ivPersonalToggle);
         ivIdentityToggle = view.findViewById(R.id.ivIdentityToggle);
@@ -186,22 +187,48 @@ public class KycDetailFragment extends Fragment {
         spCourse = view.findViewById(R.id.spCourse);
         acInstituteName = view.findViewById(R.id.scInstituteName);
         txtCourseFee = view.findViewById(R.id.txtCourseFee);
+        //errorMsg Id
+        txtPersonalDetailsErrMsg = view.findViewById(R.id.txtPersonalDetailsErrMsg);
+        txtIdentityDetailsErrMsg = view.findViewById(R.id.txtIdentityDetailsErrMsg);
+        txtCourseDetailsErrMsg = view.findViewById(R.id.txtCourseDetailsErrMsg);
 
-        LoanTabActivity.firstName = ""; LoanTabActivity.lastName = ""; LoanTabActivity.middleName = ""; LoanTabActivity.gender = "";
-        LoanTabActivity.dob = ""; LoanTabActivity.maritalStatus = "2"; LoanTabActivity.email = ""; LoanTabActivity.mobile = "";
-        LoanTabActivity.aadhar = ""; LoanTabActivity.pan = ""; LoanTabActivity.flatBuildingSociety = ""; LoanTabActivity.streetLocalityLandmark = "";
-        LoanTabActivity.pincode = ""; LoanTabActivity.countryId = ""; LoanTabActivity.stateId = ""; LoanTabActivity.cityId = "";
-        LoanTabActivity.instituteId = ""; LoanTabActivity.courseId = ""; LoanTabActivity.instituteLocationId = "";
-        LoanTabActivity.courseFee = ""; LoanTabActivity.applicant_id = "";
-        LoanTabActivity.application_id = ""; LoanTabActivity.requested_loan_amount = ""; LoanTabActivity.institute_name = "";
+        LoanTabActivity.firstName = "";
+        LoanTabActivity.lastName = "";
+        LoanTabActivity.middleName = "";
+        LoanTabActivity.gender = "";
+        LoanTabActivity.dob = "";
+        LoanTabActivity.maritalStatus = "2";
+        LoanTabActivity.email = "";
+        LoanTabActivity.mobile = "";
+        LoanTabActivity.aadhar = "";
+        LoanTabActivity.pan = "";
+        LoanTabActivity.flatBuildingSociety = "";
+        LoanTabActivity.streetLocalityLandmark = "";
+        LoanTabActivity.pincode = "";
+        LoanTabActivity.countryId = "";
+        LoanTabActivity.stateId = "";
+        LoanTabActivity.cityId = "";
+        LoanTabActivity.instituteId = "";
+        LoanTabActivity.courseId = "";
+        LoanTabActivity.instituteLocationId = "";
+        LoanTabActivity.courseFee = "";
+        LoanTabActivity.applicant_id = "";
+        LoanTabActivity.application_id = "";
+        LoanTabActivity.requested_loan_amount = "";
+        LoanTabActivity.institute_name = "";
         LoanTabActivity.location_name = "";
-        LoanTabActivity.course_name = ""; LoanTabActivity.course_cost = ""; LoanTabActivity.fk_institutes_id = "";
-        LoanTabActivity.fk_insitutes_location_id = ""; LoanTabActivity.fk_course_id = ""; LoanTabActivity.lead_status = "";
-        LoanTabActivity.lead_sub_status = ""; LoanTabActivity.current_status = ""; LoanTabActivity.current_stage = "";
+        LoanTabActivity.course_name = "";
+        LoanTabActivity.course_cost = "";
+        LoanTabActivity.fk_institutes_id = "";
+        LoanTabActivity.fk_insitutes_location_id = "";
+        LoanTabActivity.fk_course_id = "";
+        LoanTabActivity.lead_status = "";
+        LoanTabActivity.lead_sub_status = "";
+        LoanTabActivity.current_status = "";
+        LoanTabActivity.current_stage = "";
         LoanTabActivity.has_aadhar_pan = "";
 
         return view;
-
     }
 
     @Override
@@ -226,7 +253,7 @@ public class KycDetailFragment extends Fragment {
                             LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("") ||
                             LoanTabActivity.institute_name.equals("") || LoanTabActivity.instituteLocationId.equals("")
                             || LoanTabActivity.courseId.equals("") || LoanTabActivity.course_cost.equals("") ||
-                            LoanTabActivity.requested_loan_amount.equals("") || (loanAmountvalueInInt>courseFeeValueinint)) {
+                            LoanTabActivity.requested_loan_amount.equals("") || (loanAmountvalueInInt > courseFeeValueinint)) {
                         mListener.onFragmentInteraction(false, 0);
                         chekAllFields();
                     } else {
@@ -950,16 +977,15 @@ public class KycDetailFragment extends Fragment {
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         LoanTabActivity.pan = "";
 //                        edtAadhaar.setError(null);
-                        edtPAN.setError("please Enter Valid PAN number!");
+                        edtPAN.setError("Please Enter Valid PAN number!");
                         documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
                         LoanTabActivity.pan = "";
                         edtAadhaar.setError(null);
-                        edtPAN.setError("please Enter Valid PAN number!");
+                        edtPAN.setError("Please Enter Valid PAN number!");
                         documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         LoanTabActivity.pan = "";
-//                        edtAadhaar.setError(null);
                         edtPAN.setError(null);
                         documents = "1";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
@@ -1057,7 +1083,7 @@ public class KycDetailFragment extends Fragment {
                     edtPincodeBr.setError(null);
                 } else {
                     LoanTabActivity.pincode = "";
-                    edtPincodeBr.setError("please enter valid pincode !");
+                    edtPincodeBr.setError("Please enter valid pincode !");
                 }
 
                 chekAllFields();
@@ -1091,20 +1117,27 @@ public class KycDetailFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 try {
-                    if(s.length()>0) {
+                    if (s.length() > 0) {
                         loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
                         courseFeeValueinint = Integer.parseInt(LoanTabActivity.course_cost);
 
                         if (loanAmountvalueInInt > courseFeeValueinint) {
-                            edtLoanAmt.setError("Loan amount not exceed than course fees!");
+//                            edtLoanAmt.setError("Loan amount not exceed than course fees!");
                             LoanTabActivity.requested_loan_amount = "";
 
                         } else {
-                            LoanTabActivity.requested_loan_amount = edtLoanAmt.getText().toString();
-                            edtLoanAmt.setError(null);
+                            if (loanAmountvalueInInt >= 5000) {
+                                LoanTabActivity.requested_loan_amount = edtLoanAmt.getText().toString();
+                                edtLoanAmt.setError(null);
+                            } else {
+                                edtLoanAmt.setError("The Loan Amount must be greater than or equal to 5000.");
+                                LoanTabActivity.requested_loan_amount = "";
+                            }
                         }
                     }
+                    if (LoanTabActivity.isKycEdit) {
                     chekAllFields();
+                    }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
@@ -1152,7 +1185,9 @@ public class KycDetailFragment extends Fragment {
                 LoanTabActivity.maritalStatus = isChecked ? "1" : "2";
                 if (isChecked) txtMaritalStatus.setText("Married");
                 else txtMaritalStatus.setText("Unmarried");
+                if (LoanTabActivity.isKycEdit) {
                 chekAllFields();
+            }
             }
         });
 
@@ -1198,64 +1233,293 @@ public class KycDetailFragment extends Fragment {
 //    }
 
     public void chekAllFields() {
+
         if (LoanTabActivity.firstName.equals("") || LoanTabActivity.lastName.equals("") || LoanTabActivity.email.equals("") ||
                 LoanTabActivity.mobile.equals("") || LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("") ||
                 LoanTabActivity.maritalStatus.equals("")) {
-            indicateValidationText(txtPersonalToggle, context.getResources().getDrawable(R.drawable.ic_user_check), false);
+            indicateValidationText(txtPersonalToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_user), false);
+
+            if (LoanTabActivity.isKycEdit) {
+                txtPersonalDetailsErrMsg.setVisibility(VISIBLE);
+
+                if (edtFnameBr.getText().toString().equals("")) {
+                    txtPersonalDetailsErrMsg.setText("Please enter first name");
+                    // edtFnameBr.requestFocus();
+
+                } else if (edtLnameBr.getText().toString().equals("")) {
+                    txtPersonalDetailsErrMsg.setText("Please enter last name");
+                    //  edtLnameBr.requestFocus();
+
+                } else if (LoanTabActivity.gender.equals("")) {
+                    txtPersonalDetailsErrMsg.setText("Please enter gender");
+                    //   linMale.requestFocus();
+
+                } else if (LoanTabActivity.dob.equals("")) {
+                    txtPersonalDetailsErrMsg.setText("Please enter DOB");
+                    // txtDOB.requestFocus();
+                } else if (LoanTabActivity.maritalStatus.equals("")) {
+                    txtPersonalDetailsErrMsg.setText("Please enter maritalStatus");
+                    //  txtMaritalStatus.requestFocus();
+                } else if (LoanTabActivity.email.equals("")) {
+                    txtPersonalDetailsErrMsg.setText("Please enter email");
+                    //edtEmailIdBr.requestFocus();
+                } else if (LoanTabActivity.mobile.equals("")) {
+                    txtPersonalDetailsErrMsg.setText("Please enter mobile number");
+                    // edtMobileNoBr.requestFocus();
+                }
+                linPersonalBlock.requestFocus();
+                txtPersonalDetailsErrMsg.requestFocus();
+            }
         } else {
-            indicateValidationText(txtPersonalToggle, context.getResources().getDrawable(R.drawable.ic_user_check), true);
+            txtPersonalDetailsErrMsg.setVisibility(GONE);
+            txtPersonalDetailsErrMsg.setText(null);
+//            linPersonalBlock.startAnimation(collapseanimationPersonal);
+            indicateValidationText(txtPersonalToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_user), true);
         }
 
-        if (LoanTabActivity.requested_loan_amount.equals("") || LoanTabActivity.course_cost.equals("") ||
-                LoanTabActivity.instituteId.equals("") || LoanTabActivity.instituteLocationId.equals("") ||
+        if (LoanTabActivity.instituteId.equals("") || LoanTabActivity.instituteLocationId.equals("") ||
                 LoanTabActivity.courseId.equals("") || LoanTabActivity.course_cost.equals("") ||
                 LoanTabActivity.requested_loan_amount.equals("")) {
+            if (LoanTabActivity.isKycEdit) {
+                txtCourseDetailsErrMsg.setVisibility(VISIBLE);
 
-            indicateValidationText(txtCourseToggle, context.getResources().getDrawable(R.drawable.ic_graduation_cap), false);
+                if (LoanTabActivity.instituteId.equals("")) {
+                    txtCourseDetailsErrMsg.setText("Please select Institue Name");
+                    // spInsttLocation.requestFocus();
+                } else if (LoanTabActivity.course_cost.equals("")) {
+                    txtCourseDetailsErrMsg.setText("Please enter course fee");
+                    //spCourse.requestFocus();
+                } else if (LoanTabActivity.requested_loan_amount.equals("")) {
+                    txtCourseDetailsErrMsg.setText("Please enter loan amount");
+                    //edtLoanAmt.requestFocus();
+                } else if (loanAmountvalueInInt > courseFeeValueinint) {
+                    txtCourseDetailsErrMsg.setText("Loan amount not exceed than course fees!");
+                    LoanTabActivity.requested_loan_amount = "";
+                    //edtLoanAmt.requestFocus();
+                }
+
+                txtCourseDetailsErrMsg.requestFocus();
+            }
+
+            indicateValidationText(txtCourseToggle, context.getResources().getDrawable(R.drawable.ic_profession_student), false);
         } else {
-            indicateValidationText(txtCourseToggle, context.getResources().getDrawable(R.drawable.ic_graduation_cap), true);
+            txtCourseDetailsErrMsg.setText(null);
+            txtCourseDetailsErrMsg.setVisibility(GONE);
+//            relCourseBlock.startAnimation(collapseAnimationCourse);
+            indicateValidationText(txtCourseToggle, context.getResources().getDrawable(R.drawable.ic_profession_student), true);
         }
 
         if (documents.equals("0") || documents.equals("")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
                     LoanTabActivity.pincode.length() < 6 || (LoanTabActivity.aadhar.equals("") && LoanTabActivity.pan.equals("")) ||
                     LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
+
+                if (LoanTabActivity.isKycEdit) {
+                    txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
+
+                    if (LoanTabActivity.flatBuildingSociety.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        // edtAddressbr.requestFocus();
+
+                    } else if (LoanTabActivity.streetLocalityLandmark.equals("")) {
+
+                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        //edtLandmarkbr.requestFocus();
+                    } else if (LoanTabActivity.pincode.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        //edtPincodeBr.requestFocus();
+                    } else if (LoanTabActivity.aadhar.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter aadhar");
+                        //edtAadhaar.requestFocus();
+                    } else if (LoanTabActivity.pan.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter pan");
+                        //edtPAN.requestFocus();
+                    } else if (LoanTabActivity.countryId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        //spCountry.requestFocus();
+                    } else if (LoanTabActivity.stateId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        //spState.requestFocus();
+                    } else if (LoanTabActivity.cityId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        //spCity.requestFocus();
+                    }
+                    txtIdentityDetailsErrMsg.requestFocus();
+
+                }
+
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
+                txtIdentityDetailsErrMsg.setText(null);
+                txtIdentityDetailsErrMsg.setVisibility(GONE);
+//                relIdentityBlock.startAnimation(collapseAnimationIdentity);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
             }
         }
-
         if (documents.equals("1")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
                     LoanTabActivity.pincode.length() < 6 || LoanTabActivity.aadhar.equals("") ||
                     !LoanTabActivity.pan.equals("") || LoanTabActivity.countryId.equals("") ||
                     LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
+
+                if (LoanTabActivity.isKycEdit) {
+                    txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
+
+                    if (LoanTabActivity.flatBuildingSociety.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        // edtAddressbr.requestFocus();
+                    } else if (LoanTabActivity.streetLocalityLandmark.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        //edtLandmarkbr.requestFocus();
+                    } else if (LoanTabActivity.pincode.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        //edtPincodeBr.requestFocus();
+                    } else if (LoanTabActivity.aadhar.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter aadhar");
+                        //edtAadhaar.requestFocus();
+                    } else if (LoanTabActivity.countryId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        //spCountry.requestFocus();
+                    } else if (LoanTabActivity.stateId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        //spState.requestFocus();
+                    } else if (LoanTabActivity.cityId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        //spCity.requestFocus();
+                    }
+                    txtIdentityDetailsErrMsg.requestFocus();
+
+                }
+
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
+                txtIdentityDetailsErrMsg.setText(null);
+                txtIdentityDetailsErrMsg.setVisibility(GONE);
+//                relIdentityBlock.startAnimation(collapseAnimationIdentity);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
             }
         } else if (documents.equals("2")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
                     LoanTabActivity.pincode.length() < 6 || !LoanTabActivity.aadhar.equals("") ||
                     LoanTabActivity.pan.equals("") || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("")
                     || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
+
+                if (LoanTabActivity.isKycEdit) {
+                    txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
+
+                    if (LoanTabActivity.flatBuildingSociety.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        // edtAddressbr.requestFocus();
+                    } else if (LoanTabActivity.streetLocalityLandmark.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        //edtLandmarkbr.requestFocus();
+                    } else if (LoanTabActivity.pincode.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        //edtPincodeBr.requestFocus();
+                    } else if (LoanTabActivity.pan.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter pan");
+                        //edtPAN.requestFocus();
+                    } else if (LoanTabActivity.countryId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        //spCountry.requestFocus();
+                    } else if (LoanTabActivity.stateId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        //spState.requestFocus();
+                    } else if (LoanTabActivity.cityId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        //spCity.requestFocus();
+                    }
+                    txtIdentityDetailsErrMsg.requestFocus();
+                }
+
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
+                txtIdentityDetailsErrMsg.setText(null);
+                txtIdentityDetailsErrMsg.setVisibility(GONE);
+//                relIdentityBlock.startAnimation(collapseAnimationIdentity);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
             }
         } else if (documents.equals("3")) {
-            if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.length() < 6 ||
-                    LoanTabActivity.aadhar.equals("") || LoanTabActivity.pan.equals("") || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
+            if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
+                    LoanTabActivity.pincode.length() < 6 || LoanTabActivity.aadhar.equals("") || LoanTabActivity.pan.equals("") ||
+                    LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
+
+                if (LoanTabActivity.isKycEdit) {
+                    txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
+
+                    if (LoanTabActivity.flatBuildingSociety.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        //edtAddressbr.requestFocus();
+                    } else if (LoanTabActivity.streetLocalityLandmark.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        // edtLandmarkbr.requestFocus();
+                    } else if (LoanTabActivity.pincode.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        // edtPincodeBr.requestFocus();
+                    } else if (LoanTabActivity.aadhar.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter aadhar");
+                        //edtAadhaar.requestFocus();
+                    } else if (LoanTabActivity.pan.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter pan");
+                        //edtPAN.requestFocus();
+                    } else if (LoanTabActivity.countryId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        //spCountry.requestFocus();
+                    } else if (LoanTabActivity.stateId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        //spState.requestFocus();
+                    } else if (LoanTabActivity.cityId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        //spCity.requestFocus();
+                    }
+                    txtIdentityDetailsErrMsg.requestFocus();
+                }
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
+                txtIdentityDetailsErrMsg.setText(null);
+                txtIdentityDetailsErrMsg.setVisibility(GONE);
+//                relIdentityBlock.startAnimation(collapseAnimationIdentity);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
             }
         } else {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.length() < 6 || (LoanTabActivity.aadhar.equals("") && LoanTabActivity.pan.equals("")) || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), false);
+
+                if (LoanTabActivity.isKycEdit) {
+                    txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
+
+                    if (LoanTabActivity.flatBuildingSociety.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("please enter Flat No,Building Name,Society Name");
+                        //edtAddressbr.requestFocus();
+
+                    } else if (LoanTabActivity.streetLocalityLandmark.equals("")) {
+
+                        txtIdentityDetailsErrMsg.setText("please enter Street Name,Locality,LandMark");
+                        //edtLandmarkbr.requestFocus();
+                    } else if (LoanTabActivity.pincode.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("please enter pincode");
+                        //edtPincodeBr.requestFocus();
+                    } else if (LoanTabActivity.aadhar.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("please enter aadhar");
+                        // edtAadhaar.requestFocus();
+                    } else if (LoanTabActivity.pan.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("please enter pan");
+                        //edtPAN.requestFocus();
+                    } else if (LoanTabActivity.countryId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("please enter Country");
+                        //spCountry.requestFocus();
+                    } else if (LoanTabActivity.stateId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("please enter State");
+                        //spState.requestFocus();
+                    } else if (LoanTabActivity.cityId.equals("")) {
+                        txtIdentityDetailsErrMsg.setText("please enter City");
+                        //spCity.requestFocus();
+                    }
+                }
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
             } else {
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_address_card), true);
+                txtIdentityDetailsErrMsg.setText(null);
+                txtIdentityDetailsErrMsg.setVisibility(GONE);
+                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
             }
         }
 
@@ -1263,12 +1527,15 @@ public class KycDetailFragment extends Fragment {
 
     public static void validate() {
         if (LoanTabActivity.firstName.equals("") || LoanTabActivity.lastName.equals("") ||
-                LoanTabActivity.email.equals("") || LoanTabActivity.mobile.equals("") || LoanTabActivity.dob.equals("") ||
-                LoanTabActivity.gender.equals("") || LoanTabActivity.maritalStatus.equals("") || LoanTabActivity.flatBuildingSociety.equals("")
-                || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.equals("") || LoanTabActivity.countryId.equals("")
-                || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("") || LoanTabActivity.institute_name.equals("") ||
-                LoanTabActivity.instituteLocationId.equals("") || LoanTabActivity.courseId.equals("") ||
-                LoanTabActivity.requested_loan_amount.equals("")) {
+                LoanTabActivity.email.equals("") || LoanTabActivity.mobile.equals("") ||
+                LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("") || (LoanTabActivity.aadhar.equals("") && LoanTabActivity.pan.equals("")) ||
+                LoanTabActivity.maritalStatus.equals("") || LoanTabActivity.flatBuildingSociety.equals("")
+                || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.equals("")
+                || LoanTabActivity.pincode.length() < 6 || LoanTabActivity.countryId.equals("") ||
+                LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("") ||
+                LoanTabActivity.institute_name.equals("") || LoanTabActivity.instituteLocationId.equals("")
+                || LoanTabActivity.courseId.equals("") || LoanTabActivity.course_cost.equals("") ||
+                LoanTabActivity.requested_loan_amount.equals("") || (loanAmountvalueInInt > courseFeeValueinint)) {
 
             mListener.onFragmentInteraction(false, 0);
         } else {
@@ -1663,19 +1930,21 @@ public class KycDetailFragment extends Fragment {
 
                     if (!LoanTabActivity.course_cost.equals("null")) {
                         txtCourseFee.setText(LoanTabActivity.course_cost);
-                        if(edtLoanAmt.getText().toString().length()>0 && txtCourseFee.getText().toString().length()>0) {
+                        if (edtLoanAmt.getText().toString().length() > 0 && txtCourseFee.getText().toString().length() > 0) {
                             loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
                             courseFeeValueinint = Integer.parseInt(LoanTabActivity.course_cost);
 
                             if (loanAmountvalueInInt > courseFeeValueinint) {
-                                edtLoanAmt.setError("Loan amount not exceed than course fees!");
+//                                edtLoanAmt.setError("Loan amount not exceed than course fees!");
                                 LoanTabActivity.requested_loan_amount = "";
 
                             } else {
                                 LoanTabActivity.requested_loan_amount = edtLoanAmt.getText().toString();
                                 edtLoanAmt.setError(null);
                             }
-                            chekAllFields();
+//                            if(LoanTabActivity.isKycEdit) {
+//                        chekAllFields();
+//                    }
                         }
 
                     }
@@ -1888,7 +2157,9 @@ public class KycDetailFragment extends Fragment {
                 fabEditKycDetail.setVisibility(View.GONE);
             }
 
-            chekAllFields();
+//            if(LoanTabActivity.isKycEdit) {
+//                        chekAllFields();
+//                    }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -2102,12 +2373,12 @@ public class KycDetailFragment extends Fragment {
                 txtCourseFee.setText(jsonData.getString("result"));
                 LoanTabActivity.course_cost = jsonData.getString("result");
 
-                if(edtLoanAmt.getText().toString().length()>0) {
+                if (edtLoanAmt.getText().toString().length() > 0) {
                     loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
                     courseFeeValueinint = Integer.parseInt(LoanTabActivity.course_cost);
 
                     if (loanAmountvalueInInt > courseFeeValueinint) {
-                        edtLoanAmt.setError("Loan amount not exceed than course fees!");
+//                        edtLoanAmt.setError("Loan amount not exceed than course fees!");
                         LoanTabActivity.requested_loan_amount = "";
 
                     } else {
@@ -2118,7 +2389,9 @@ public class KycDetailFragment extends Fragment {
             } else {
                 // Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
+            if (LoanTabActivity.isKycEdit) {
             chekAllFields();
+            }
         } catch (Exception e) {
 //            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();

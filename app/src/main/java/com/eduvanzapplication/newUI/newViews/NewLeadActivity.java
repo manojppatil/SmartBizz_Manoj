@@ -1,6 +1,7 @@
 package com.eduvanzapplication.newUI.newViews;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DocumentAvailabilityFragment;
@@ -44,7 +47,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     private StepperIndicator stepperIndicator;
     public static ImageView ivOCRBtn;
 
-    public static Boolean isProfileEnabled = false,isDocAvailabilityEnabled = false,isCurrentAddEnabled = false,isEmploymentDtlEnabled = false;
+    public static Boolean isProfileEnabled = false, isDocAvailabilityEnabled = false, isCurrentAddEnabled = false, isEmploymentDtlEnabled = false;
 
     public static Boolean scrolledRight = true;
     public static int lastPage = 0;
@@ -61,7 +64,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
     public static String Ppanno = "", Ppantype = "", Pname = "", Pdob = "", Pdoi = "", Page = "", Pfathersname = "", Pisminor = "", Pisscanned = "";
 
-    Context context;
+    public static Context context;
     AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
 
@@ -75,6 +78,8 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         } else {
             setContentView(R.layout.activity_new_lead);
         }
+        context = this;
+        mActivity = NewLeadActivity.this;
         setViews();
 
         isProfileEnabled = false;
@@ -82,33 +87,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         isCurrentAddEnabled = false;
         isEmploymentDtlEnabled = false;
 
-        profession = "";
-        firstName = "";
-        lastName = "";
-        middleName = "";
-        gender = "";
-        maritalStatus = "2";
-        dob = "";
-        documents = "1";
-        aadharNumber = "";
-        panNUmber = "";
-        flatBuildingSoc = "";
-        streetLocalityLandMark = "";
-        pinCode = "";
-        countryId = "";
-        stateId = "";
-        cityId = "";
-        companyName = "";
-        annualIncome = "";
-        instituteId = "";
-        instituteLocationId = "";
-        courseId = "";
-        courseFee = "";
-        loanAmount = "";
-        leadId = "";
-        applicantId = "";
-        lead_id = "";
-        student_id = "";
+
         setOcrSharedPref();
 
         setupViewPager(viewPager);
@@ -134,7 +113,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                     scrolledRight = false;
                 } else if (lastPage < position) {
                     scrolledRight = true;
-                }else {
+                } else {
 
                 }
 
@@ -166,7 +145,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                         case 0:
                             if (scrolledRight) {
                                 lastPage = viewPager.getCurrentItem();
-                            }else {
+                            } else {
                                 PersonalDetailsFragment.checkAllFields();
                                 lastPage = viewPager.getCurrentItem();
                             }
@@ -174,12 +153,12 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                         case 1:
                             if (scrolledRight) {
                                 PersonalDetailsFragment.checkAllFields();
-                                if(ivNextBtn.isEnabled()) {
+                                if (ivNextBtn.isEnabled()) {
                                     PersonalDetailsFragment.validate();
                                     lastPage = viewPager.getCurrentItem();
-                                }else {
+                                } else {
                                     viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-                                    lastPage = viewPager.getCurrentItem()-1;
+                                    lastPage = viewPager.getCurrentItem() - 1;
                                 }
                             } else {
                                 PersonalDetailsFragment.checkAllFields();
@@ -190,12 +169,12 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                         case 2:
                             if (scrolledRight) {
                                 DocumentAvailabilityFragment.checkAllFields();
-                                if(ivNextBtn.isEnabled()) {
+                                if (ivNextBtn.isEnabled()) {
                                     DocumentAvailabilityFragment.validate();
                                     lastPage = viewPager.getCurrentItem();
-                                }else {
+                                } else {
                                     viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-                                    lastPage = viewPager.getCurrentItem()-1;
+                                    lastPage = viewPager.getCurrentItem() - 1;
                                 }
                             } else {
                                 try {
@@ -219,7 +198,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                         case 3:
                             if (scrolledRight) {
                                 CurrentAddressFragment.checkAllFields();
-                                if(ivNextBtn.isEnabled()) {
+                                if (ivNextBtn.isEnabled()) {
                                     ivNextBtn.setVisibility(View.GONE);
                                     linSubmit.setVisibility(View.VISIBLE);
                                     linSubmit.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
@@ -227,9 +206,9 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                                     CurrentAddressFragment.validate();
                                     EmploymentDetailsFragment.checkAllFields();
                                     lastPage = viewPager.getCurrentItem();
-                                }else {
+                                } else {
                                     viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-                                    lastPage = viewPager.getCurrentItem()-1;
+                                    lastPage = viewPager.getCurrentItem() - 1;
                                 }
                             } else {
                                 CurrentAddressFragment.checkAllFields();
@@ -261,6 +240,57 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     private void setOcrSharedPref() {
 
         try {
+
+            profession = "";
+            firstName = "";
+            lastName = "";
+            middleName = "";
+            gender = "";
+            maritalStatus = "2";
+            dob = "";
+            documents = "1";
+            aadharNumber = "";
+            panNUmber = "";
+            flatBuildingSoc = "";
+            streetLocalityLandMark = "";
+            pinCode = "";
+            countryId = "";
+            stateId = "";
+            cityId = "";
+            companyName = "";
+            annualIncome = "";
+            instituteId = "";
+            instituteLocationId = "";
+            courseId = "";
+            courseFee = "";
+            loanAmount = "";
+            leadId = "";
+            applicantId = "";
+            lead_id = "";
+            student_id = "";
+
+            Aaadhaarno = "";
+            Aname = "";
+            Adob = "";
+            Ayob = "";
+            Agender = "";
+            Aaddress = "";
+            Astreet_address = "";
+            Adistrict = "";
+            Apincode = "";
+            Astate = "";
+            Aisscanned = "";
+
+            Ppanno = "";
+            Ppantype = "";
+            Pname = "";
+            Pdob = "";
+            Pdoi = "";
+            Page = "";
+            Pfathersname = "";
+            Pisminor = "";
+            Pisscanned = "";
+
             SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("Aaadhaarno", "");
@@ -325,47 +355,144 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
     public static void setOcrData() {
 
-        if (NewLeadActivity.Aaadhaarno.length() > 3) {
-            NewLeadActivity.firstName = NewLeadActivity.Aname;
-            if (NewLeadActivity.Agender.toLowerCase().equals("male")) {
-                NewLeadActivity.gender = "1";
+        if (Aaadhaarno.length() > 3) {
+
+            if (Pname.length() > 3) {
+                if (!Pname.contains(Aname.substring(0, 4))) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle(R.string.app_name);
+                    builder.setIcon(R.drawable.eduvanz_logo_new);
+                    builder.setMessage("Your name on Pan card does not match with aadhaar name.")
+                            .setCancelable(false)
+                            .setPositiveButton("Continue with Aadhaar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("Ppanno", "");
+                                    editor.putString("Ppantype", "");
+                                    editor.putString("Pname", "");
+                                    editor.putString("Pdob", "");
+                                    editor.putString("Pdoi", "");
+                                    editor.putString("Page", "");
+                                    editor.putString("Pfathersname", "");
+                                    editor.putString("Pisminor", "");
+                                    editor.putString("Pisscanned", "");
+                                    editor.apply();
+                                    editor.commit();
+
+                                    Ppanno = "";
+                                    Ppantype = "";
+                                    Pname = "";
+                                    Pdob = "";
+                                    Pdoi = "";
+                                    Page = "";
+                                    Pfathersname = "";
+                                    Pisminor = "";
+                                    Pisscanned = "";
+                                    setOcrData();
+                                    dialog.cancel();
+
+                                }
+                            })
+                            .setNegativeButton("Continue with PAN", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("Aaadhaarno", "");
+                                    editor.putString("Aname", "");
+                                    editor.putString("Adob", "");
+                                    editor.putString("Ayob", "");
+                                    editor.putString("Agender", "");
+                                    editor.putString("Aaddress", "");
+                                    editor.putString("Astreet_address", "");
+                                    editor.putString("Adistrict", "");
+                                    editor.putString("Apincode", "");
+                                    editor.putString("Astate", "");
+                                    editor.putString("Aisscanned", "");
+                                    editor.apply();
+                                    editor.commit();
+
+                                    Aaadhaarno = "";
+                                    Aname = "";
+                                    Adob = "";
+                                    Ayob = "";
+                                    Agender = "";
+                                    Aaddress = "";
+                                    Astreet_address = "";
+                                    Adistrict = "";
+                                    Apincode = "";
+                                    Astate = "";
+                                    Aisscanned = "";
+                                    setOcrData();
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
             }
-            if (NewLeadActivity.Agender.toLowerCase().equals("female")) {
-                NewLeadActivity.gender = "2";
+            firstName = Aname;
+            if (Agender.toLowerCase().equals("male")) {
+                gender = "1";
+            }
+            if (Agender.toLowerCase().equals("female")) {
+                gender = "2";
             }
 
-            if (NewLeadActivity.Adob.length() > NewLeadActivity.Pdob.length()) {
-                NewLeadActivity.dob = NewLeadActivity.Adob;
+            if (Adob.length() > Pdob.length()) {
+                dob = Adob;
             } else {
-                NewLeadActivity.dob = NewLeadActivity.Pdob;
+                dob = Pdob;
             }
-            if (NewLeadActivity.Ppanno.length() > 3) {
-                NewLeadActivity.documents = "3";
+            if (Ppanno.length() > 3) {
+                documents = "3";
             } else {
-                NewLeadActivity.documents = "1";
+                documents = "1";
             }
 
-            NewLeadActivity.aadharNumber = NewLeadActivity.Aaadhaarno;
-            NewLeadActivity.panNUmber = NewLeadActivity.Ppanno;
-            NewLeadActivity.flatBuildingSoc = NewLeadActivity.Aaddress;
-            NewLeadActivity.streetLocalityLandMark = NewLeadActivity.Astreet_address;
-            NewLeadActivity.pinCode = NewLeadActivity.Apincode;
+            aadharNumber = Aaadhaarno;
+            panNUmber = Ppanno;
+            flatBuildingSoc = Aaddress;
+            streetLocalityLandMark = Astreet_address;
+            pinCode = Apincode;
 
+        } else if (Ppanno.length() > 3) {
 
-        } else if (NewLeadActivity.Ppanno.length() > 3) {
-            NewLeadActivity.firstName = NewLeadActivity.Pname;
-            if (NewLeadActivity.Adob.length() > NewLeadActivity.Pdob.length()) {
-                NewLeadActivity.dob = NewLeadActivity.Adob;
-            } else {
-                NewLeadActivity.dob = NewLeadActivity.Pdob;
+            if (Aname.length() > 3) {
+                if (!Aname.contains(Pname.substring(0, 4))) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle(R.string.app_name);
+                    builder.setIcon(R.drawable.eduvanz_logo_new);
+                    builder.setMessage("Your name on Pan card does not match with aadhaar name.")
+                            .setCancelable(false)
+                            .setPositiveButton("Continue with Aadhaar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .setNegativeButton("Continue with PAN", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
             }
-            if (NewLeadActivity.aadharNumber.length() > 3) {
-                NewLeadActivity.documents = "3";
+            firstName = Pname;
+            if (Adob.length() > Pdob.length()) {
+                dob = Adob;
             } else {
-                NewLeadActivity.documents = "2";
+                dob = Pdob;
             }
-            NewLeadActivity.aadharNumber = NewLeadActivity.Aaadhaarno;
-            NewLeadActivity.panNUmber = NewLeadActivity.Ppanno;
+            if (aadharNumber.length() > 3) {
+                documents = "3";
+            } else {
+                documents = "2";
+            }
+            aadharNumber = Aaadhaarno;
+            panNUmber = Ppanno;
         }
 
         DocumentAvailabilityFragment.setDcoAvailabilityData();
@@ -403,6 +530,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 //        });
 
     }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new PersonalDetailsFragment(), getResources().getString(R.string.personal_details));
@@ -462,7 +590,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         @Override
         public void onClick(View v) {
             if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount() - 1)) {
-                onOffButtonEmployent(false,true);
+                onOffButtonEmployent(false, true);
                 if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")) {
 //                    startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
 //                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -479,7 +607,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         @Override
         public void onClick(View v) {
             if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount() - 1)) {
-                onOffButtonEmployentSubmit(false,true);
+                onOffButtonEmployentSubmit(false, true);
                 if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")) {
 //                    startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class)
 //                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

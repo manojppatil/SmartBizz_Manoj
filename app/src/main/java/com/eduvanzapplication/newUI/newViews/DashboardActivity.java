@@ -50,13 +50,11 @@ import com.eduvanzapplication.DataSyncReceiver;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.newUI.SharedPref;
-import com.eduvanzapplication.newUI.VolleyCall;
+import com.eduvanzapplication.newUI.VolleyCallAlgo360;
 import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 
 import com.eduvanzapplication.newUI.webviews.WebViewAboutUs;
-import com.eduvanzapplication.newUI.webviews.WebViewBlog;
 import com.eduvanzapplication.newUI.webviews.WebViewDisclaimer;
 import com.eduvanzapplication.newUI.webviews.WebViewFAQs;
 import com.eduvanzapplication.newUI.webviews.WebViewFairPracticsCode;
@@ -70,8 +68,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
-import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
+//import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
+//import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -210,20 +208,26 @@ public class DashboardActivity extends AppCompatActivity
                 if (permission != PackageManager.PERMISSION_GRANTED)
                 {//Direct Permission without disclaimer dialog
                     ActivityCompat.requestPermissions(DashboardActivity.this,
-                            new String[]{Manifest.permission.READ_CONTACTS,
-                                    Manifest.permission.READ_SMS,
-                                    Manifest.permission.RECEIVE_SMS,
+                            new String[]{
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                                    Manifest.permission.READ_PHONE_STATE,
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                    Manifest.permission.CAMERA,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                                    Manifest.permission.ACCESS_FINE_LOCATION},
+                                    Manifest.permission.CAMERA},
                             GET_MY_PERMISSION);
+//                    ActivityCompat.requestPermissions(DashboardActivity.this,
+//                            new String[]{Manifest.permission.READ_CONTACTS,
+//                                    Manifest.permission.READ_SMS,
+//                                    Manifest.permission.RECEIVE_SMS,
+//                                    Manifest.permission.READ_EXTERNAL_STORAGE,
+//                                    Manifest.permission.READ_PHONE_STATE,
+//                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                    Manifest.permission.CAMERA,
+//                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+//                                    Manifest.permission.ACCESS_FINE_LOCATION},
+//                            GET_MY_PERMISSION);
 
                 } else {
-                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
-                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+//                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
+//                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
                 }
             }
 
@@ -249,14 +253,9 @@ public class DashboardActivity extends AppCompatActivity
 //            Log.e("Receiver", "Data synced: " + dataSynced);
 //            Log.e("Receiver", "Data Action: " + action);
 
-//            if(dataSynced) {
+            if(dataSynced) {
                 saveAlgo360();
-//                saveAlgo360(context, student_id,userMobileNo,userEmail, String.valueOf(true));
-                sharedPreferences = context.getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("Data synced", String.valueOf(dataSynced));
-                editor.commit();
-//            }
+            }
         }
     };
 
@@ -271,7 +270,7 @@ public class DashboardActivity extends AppCompatActivity
             params.put("mobile_no", userMobileNo);
             params.put("email_id", userEmail);
             params.put("algo360_datasync", String.valueOf(true));
-            VolleyCall volleyCall = new VolleyCall();
+            VolleyCallAlgo360 volleyCall = new VolleyCallAlgo360();
             volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, "90ad441a12b48c6d7c5524b8b2a334c3");
 //            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
         } catch (Exception e) {
@@ -457,14 +456,15 @@ public class DashboardActivity extends AppCompatActivity
             case 1:
                 if (grantResults.length <= 0) {
                 }
-                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[8] == PackageManager.PERMISSION_GRANTED ) {
+                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
+//                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+//                        grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
+//                        grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
+//                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
+//                        grantResults[8] == PackageManager.PERMISSION_GRANTED ) {
                     //granted
-                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
-                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+//                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
+//                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
                 } else {
                     //not granted
 //                    Log.e(MainApplication.TAG, "not granted: Dashboard " + grantResults[0]);
@@ -508,5 +508,10 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     public void updateAlgo360Res(JSONObject jsonDataO) {
+
+        sharedPreferences = context.getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Data synced", "true");
+        editor.commit();
     }
 }

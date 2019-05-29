@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
@@ -26,6 +27,8 @@ public class EmploymentDetailsFragment extends Fragment {
     private static OnEmploymentFragmentInteractionListener mListener;
     public static TextInputLayout tilAnnualIncome, tilCompanyName;
     public static EditText companyedt,edtaanual;
+    public static TextView txtEmploymentDetailsErrMsg;
+
 
     public EmploymentDetailsFragment() {
         // Required empty public constructor
@@ -54,6 +57,7 @@ public class EmploymentDetailsFragment extends Fragment {
         tilCompanyName = view.findViewById(R.id.tilCompanyName);
         edtaanual=view.findViewById(R.id.edtaanual);
         companyedt=view.findViewById(R.id.companyedt);
+        txtEmploymentDetailsErrMsg = view.findViewById(R.id.txtEmploymentDetailsErrMsg);
 
         return view;
     }
@@ -70,6 +74,7 @@ public class EmploymentDetailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isEmploymentDtlEnabled) {
                 if (count > 0) {
                     NewLeadActivity.companyName = s.toString();
                     companyedt.setError(null);
@@ -78,7 +83,7 @@ public class EmploymentDetailsFragment extends Fragment {
                     companyedt.setError("Please enter Company Name");
                 }
                 checkAllFields();
-
+                }
             }
 
             @Override
@@ -96,6 +101,8 @@ public class EmploymentDetailsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (isEmploymentDtlEnabled) {
                 if (count > 0) {
 
                     NewLeadActivity.annualIncome = s.toString();
@@ -107,6 +114,7 @@ public class EmploymentDetailsFragment extends Fragment {
                     edtaanual.setError("Please enter Annual Income:");
                 }
                 checkAllFields();
+                }
 
             }
 
@@ -123,7 +131,18 @@ public class EmploymentDetailsFragment extends Fragment {
         if (NewLeadActivity.companyName.equals("") || NewLeadActivity.annualIncome.equals("")) {
             mListener.onOffButtonEmployentSubmit(false, true);
           //  mListener.onEmploymentFragmentInteraction(false,0);
+            txtEmploymentDetailsErrMsg.setVisibility(View.VISIBLE);
+            if (companyedt.getText().toString().equals("")) {
+                txtEmploymentDetailsErrMsg.setText("Please Enter Company Name");
+            } else if (edtaanual.getText().toString().equals("")) {
+                txtEmploymentDetailsErrMsg.setText("Please Enter Annual Income");
+            }
+
+
+
         } else {
+            txtEmploymentDetailsErrMsg.setVisibility(View.GONE);
+            txtEmploymentDetailsErrMsg.setText(null);
             mListener.onOffButtonEmployentSubmit(true, true);
         }
     }
@@ -180,7 +199,9 @@ public class EmploymentDetailsFragment extends Fragment {
     public interface OnEmploymentFragmentInteractionListener {
         // TODO: Update argument type and name
         void onEmploymentFragmentInteraction(boolean valid, int next);
+
         void onOffButtonEmployent(boolean next, boolean prev);
+
         void onOffButtonEmployentSubmit(boolean next, boolean prev);
     }
 }

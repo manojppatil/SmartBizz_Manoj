@@ -13,13 +13,13 @@
         android:id="@+id/card_view"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/_5sdp"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
         android:layout_marginLeft="@dimen/_3sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_3sdp"
         android:layout_marginBottom="@dimen/_5sdp"
+        android:gravity="center_horizontal"
+        app:cardCornerRadius="@dimen/_5sdp"
         card_view:cardElevation="@dimen/_5sdp">
 
         <RelativeLayout
@@ -30,30 +30,31 @@
 
             <TextView
                 android:id="@+id/txtLeadfName"
+                style="@style/TextViewTitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="@dimen/_60sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:ellipsize="marquee"
-                android:textColor="@color/darkblue"
-                style="@style/TextViewTitleStyle"
-                android:singleLine="true" />
+                android:maxWidth="@dimen/_60sdp"
+                android:singleLine="true"
+                android:textColor="@color/darkblue" />
 
             <TextView
                 android:id="@+id/txtLeadlName"
                 style="@style/TextViewTitle14BoldStyle"
                 android:layout_width="wrap_content"
-                android:maxWidth="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtLeadfName"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:ellipsize="marquee"
-                android:textColor="@color/darkblue"
-                android:singleLine="true"/>
+                android:maxWidth="@dimen/_60sdp"
+                android:singleLine="true"
+                android:textColor="@color/darkblue" />
 
             <TextView
                 android:id="@+id/txtMessage"
+                style="@style/TextViewTitle14Style"
                 android:layout_width="@dimen/_160sdp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -64,15 +65,14 @@
                 android:background="@drawable/border_circular_blue_filled"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
                 android:paddingStart="@dimen/_4sdp"
                 android:paddingTop="@dimen/_4sdp"
                 android:paddingEnd="18dp"
                 android:paddingBottom="@dimen/_4sdp"
+                android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Complete your application to get approval fast"
-                android:textColor="@color/white"
-                style="@style/TextViewTitle14Style"/>
+                android:textColor="@color/white" />
 
             <LinearLayout
                 android:id="@+id/layout1"
@@ -91,24 +91,25 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextViewTitle14BoldStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
                         android:singleLine="true"
                         android:text="APPLICATION ID"
                         android:textColor="@color/darkblue"
-                        android:textSize="12sp"
-                        style="@style/TextViewTitle14BoldStyle"/>
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/txtApplicationId"
+                        style="@style/TextViewTitle14Style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
                         android:singleLine="true"
-                        android:textAllCaps="true"
-                        style="@style/TextViewTitle14Style"/>
+                        android:textAllCaps="true" />
                 </LinearLayout>
+                <!--////ic_home_status_pending  ic_exclamation_circle_yellow-->
 
                 <LinearLayout
                     android:layout_width="@dimen/_120sdp"
@@ -117,30 +118,56 @@
                     android:layout_marginEnd="@dimen/_6sdp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtStatus1"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:drawableStart="@drawable/ic_exclamation_circle_yellow"
-                        android:padding="@dimen/_2sdp"
-                        android:text="\t"
-                        style="@style/TextViewTitleSmallStyle"/>
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txtDate"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/ic_home_status_pending_yellow" />
+
+                        <TextView
+                            android:id="@+id/txtStatus1"
+                            style="@style/TextViewTitleSmallStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:maxLines="1"
+                            android:padding="@dimen/_2sdp"
+                            android:text="\t" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_calendar_check"
-                        android:ellipsize="marquee"
-                        android:padding="@dimen/_2sdp"
-                        android:singleLine="true"
-                        android:text="\t"
-                        android:textAllCaps="true"
-                        style="@style/TextViewTitleSmallStyle"/>
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/ic_home_calendar" />
+
+                        <TextView
+                            android:id="@+id/txtDate"
+                            style="@style/TextViewTitleSmallStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:ellipsize="marquee"
+                            android:padding="@dimen/_2sdp"
+                            android:singleLine="true"
+                            android:text="\t"
+                            android:textAllCaps="true" />
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/txtStatus2"
+                        style="@style/TextViewTitleSmallStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_user_check"
@@ -149,8 +176,7 @@
                         android:singleLine="true"
                         android:text="\t"
                         android:textAllCaps="true"
-                        android:visibility="gone"
-                        style="@style/TextViewTitleSmallStyle"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -167,8 +193,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_2sdp"
                 android:layout_below="@id/line1"
+                android:layout_marginBottom="@dimen/_2sdp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -181,46 +207,46 @@
 
                     <TextView
                         android:id="@+id/txtUniversity"
+                        style="@style/TextViewTitle14Style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:singleLine="true"
                         android:ellipsize="marquee"
-                        android:textSize="13sp"
-                        style="@style/TextViewTitle14Style"/>
+                        android:singleLine="true"
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/txtCourseNmae"
+                        style="@style/TextViewTitle14BoldStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:singleLine="true"
                         android:ellipsize="marquee"
-                        android:textSize="12sp"
-                        style="@style/TextViewTitle14BoldStyle"/>
+                        android:singleLine="true"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:padding="@dimen/_1sdp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_1sdp">
 
                         <ImageView
                             android:layout_width="@dimen/_12sdp"
                             android:layout_height="@dimen/_12sdp"
                             android:layout_gravity="center_vertical"
-                            app:srcCompat="@drawable/ic_map_marker_alt"/>
+                            app:srcCompat="@drawable/ic_home_location" />
 
                         <TextView
                             android:id="@+id/txtCity"
+                            style="@style/TextViewTitle14BoldStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_4sdp"
                             android:layout_gravity="center_vertical"
-                            android:textSize="12sp"
-                            style="@style/TextViewTitle14BoldStyle"/>
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -232,49 +258,49 @@
                     android:background="@color/black_new" />
 
                 <LinearLayout
-                    android:layout_width="@dimen/_55sdp"
+                    android:layout_width="@dimen/_60sdp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextViewTitle10BoldStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="COURSE FEE"
                         android:layout_gravity="left"
-                        android:textColor="@color/darkblue"
-                        style="@style/TextViewTitle10BoldStyle"/>
+                        android:text="COURSE FEE"
+                        android:textColor="@color/darkblue" />
 
                     <TextView
                         android:id="@+id/txtCourseFee"
+                        style="@style/TextViewTitleSmallStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:ellipsize="marquee"
                         android:layout_gravity="left"
-                        android:text="\t - "
                         android:drawableStart="@drawable/ic_rupee_sign"
-                        style="@style/TextViewTitleSmallStyle"/>
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="\t - " />
 
                     <TextView
+                        style="@style/TextViewTitle10BoldStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="LOAN AMOUNT"
                         android:layout_gravity="left"
                         android:layout_marginTop="@dimen/_3sdp"
-                        android:textColor="@color/darkblue"
-                        style="@style/TextViewTitle10BoldStyle"/>
+                        android:text="LOAN AMOUNT"
+                        android:textColor="@color/darkblue" />
 
                     <TextView
                         android:id="@+id/txtLoanAmount"
+                        style="@style/TextViewTitleSmallStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
                         android:layout_gravity="left"
-                        android:ellipsize="marquee"
-                        android:text="\t - "
                         android:drawableStart="@drawable/ic_rupee_sign"
-                        style="@style/TextViewTitleSmallStyle"/>
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="\t - " />
 
                 </LinearLayout>
 

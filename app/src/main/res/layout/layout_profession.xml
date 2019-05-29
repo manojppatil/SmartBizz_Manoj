@@ -36,7 +36,7 @@
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                                 android:tint="@color/darkblue"
-                app:srcCompat="@drawable/ic_graduation_cap" />
+                app:srcCompat="@drawable/ic_profession_student" />
 
             <View
                 android:layout_width="@dimen/_1sdp"
@@ -71,7 +71,7 @@
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                                 android:tint="@color/darkblue"
-                app:srcCompat="@drawable/ic_briefcase" />
+                app:srcCompat="@drawable/ic_profession_salaried" />
 
             <View
                 android:layout_width="@dimen/_1sdp"
@@ -106,7 +106,7 @@
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                                 android:tint="@color/darkblue"
-                app:srcCompat="@drawable/ic_male" />
+                app:srcCompat="@drawable/ic_personal_details_male" />
 
             <View
                 android:layout_width="@dimen/_1sdp"

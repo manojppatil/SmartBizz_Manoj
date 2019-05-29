@@ -29,7 +29,8 @@
                     android:id="@+id/ivUser"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    app:srcCompat="@drawable/ic_home" />
+                    android:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_current_address_home" />
 
                 <TextView
                     android:id="@+id/txtcurrentAddress"
@@ -38,7 +39,8 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/current_address"
                     android:textColor="@color/textcolordark"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="22sp"
+                    style="@style/TextViewTitleStyle"/>
 
                 <TextView
                     android:layout_width="wrap_content"

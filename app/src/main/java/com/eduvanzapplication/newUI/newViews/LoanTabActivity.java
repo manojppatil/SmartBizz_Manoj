@@ -48,7 +48,6 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
             course_name = "", course_cost = "", fk_institutes_id = "", fk_insitutes_location_id = "", fk_course_id = "", lead_status = "",
             lead_sub_status = "", current_status = "", current_stage = "", has_aadhar_pan = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

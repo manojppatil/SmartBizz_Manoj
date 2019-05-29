@@ -432,7 +432,7 @@
                 android:padding="@dimen/_3sdp"
                 android:layout_gravity="center"
                 android:scaleType="center"
-                app:srcCompat="@drawable/ic_phone_rotated" />
+                app:srcCompat="@drawable/ic_home_call" />
 
             <TextView
                 android:id="@+id/txtCallUs"
@@ -468,7 +468,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:padding="@dimen/_3sdp"
-                app:srcCompat="@drawable/ic_whatsapp_brands" />
+                app:srcCompat="@drawable/ic_home_whatsapp" />
 
             <TextView
                 android:id="@+id/txtWhatsAppUs"
@@ -504,7 +504,7 @@
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:padding="@dimen/_3sdp"
-                app:srcCompat="@drawable/ic_comment" />
+                app:srcCompat="@drawable/ic_home_chat" />
 
             <TextView
                 android:id="@+id/txtEmailUs"

@@ -28,7 +28,8 @@
                     android:id="@+id/ivUser"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    app:srcCompat="@drawable/ic_user_circle" />
+                    android:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_personal_details_user" />
 
                 <TextView
                     android:id="@+id/txtPersonalDetails"
@@ -37,7 +38,8 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/personal_details"
                     android:textColor="@color/textcolordark"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="22sp"
+                    style="@style/TextViewTitleStyle"/>
 
                 <LinearLayout
                     android:id="@+id/linNames"
@@ -138,9 +140,9 @@
                             <ImageView
                                 android:id="@+id/ivMale"
                                 android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_18sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
-                                app:srcCompat="@drawable/ic_male" />
+                                app:srcCompat="@drawable/ic_personal_details_male" />
 
                             <View
                                 android:id="@+id/viewMale"
@@ -174,9 +176,9 @@
                             <ImageView
                                 android:id="@+id/ivFemale"
                                 android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_18sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
-                                app:srcCompat="@drawable/ic_female" />
+                                app:srcCompat="@drawable/ic_personal_details_female" />
 
                             <View
                                 android:id="@+id/viewFemale"
@@ -209,9 +211,9 @@
                             <ImageView
                                 android:id="@+id/ivOther"
                                 android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_18sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_marginLeft="@dimen/_5sdp"
-                                app:srcCompat="@drawable/ic_transgender" />
+                                app:srcCompat="@drawable/ic_personal_details_gender" />
 
                             <View
                                 android:id="@+id/viewOther"
@@ -263,10 +265,10 @@
                                 android:padding="@dimen/_4sdp">
 
                                 <ImageView
-                                    android:layout_width="@dimen/_18sdp"
-                                    android:layout_height="@dimen/_18sdp"
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
                                     android:layout_marginLeft="@dimen/_5sdp"
-                                    app:srcCompat="@drawable/ic_birthday_cake" />
+                                    app:srcCompat="@drawable/ic_personal_details_dob" />
 
                                 <View
                                     android:layout_width="@dimen/_1sdp"

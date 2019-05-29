@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.GetMobileNo;
+import com.eduvanzapplication.newUI.newViews.TermsAndCondition;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.nio.charset.StandardCharsets;
@@ -46,8 +47,8 @@ public class ImageSlider extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 
-        imageView1 = (ImageView) findViewById(R.id.imageview1);
-        imageView2 = (ImageView) findViewById(R.id.imageview2);
+        imageView1 = findViewById(R.id.imageview1);
+        imageView2 = findViewById(R.id.imageview2);
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -86,6 +87,7 @@ public class ImageSlider extends AppCompatActivity {
 
                 }else {
                     Intent intent = new Intent(ImageSlider.this, GetMobileNo.class);
+//                    Intent intent = new Intent(ImageSlider.this, TermsAndCondition.class);
                     startActivity(intent);
                     finish();
                 }

@@ -28,7 +28,8 @@
                     android:id="@+id/ivUser"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    app:srcCompat="@drawable/ic_user_circle" />
+                    android:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_personal_details_user" />
 
                 <TextView
                     android:id="@+id/txtPersonalDetails"
@@ -37,7 +38,8 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/employement_details"
                     android:textColor="@color/textcolordark"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="22sp"
+                    style="@style/TextViewTitleStyle"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,6 +87,18 @@
                             android:drawableStart="@drawable/ic_rupee_sign"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/txtEmploymentDetailsErrMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/red"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="15sp"
+                        style="@style/TextViewTitle14Style" />
 
                 </LinearLayout>
 

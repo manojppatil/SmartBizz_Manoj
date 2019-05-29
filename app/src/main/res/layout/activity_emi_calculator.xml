@@ -44,7 +44,7 @@
                     android:id="@+id/ivUser"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
-                    app:srcCompat="@drawable/ic_calculator" />
+                    app:srcCompat="@drawable/ic_emi_calculator" />
 
                 <TextView
                     android:id="@+id/txtPersonalDetails"
@@ -72,12 +72,15 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:singleLine="true"
+                            android:maxLength="7"
                             android:id="@+id/edtLoanAmt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Loan Amount (In Rupees)"
                             android:inputType="textNoSuggestions|number"
-                            style="@style/EditTextStyle" />
+                            style="@style/EditTextStyle"
+                            android:imeOptions="actionNext"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -88,6 +91,9 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:singleLine="true"
+                            android:maxLength="2"
+                            android:imeOptions="actionNext"
                             android:id="@+id/edtRateOfInterest"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -105,11 +111,14 @@
                         app:hintTextAppearance="@style/CustomTextAppearance">
 
                         <EditText
+                            android:maxLength="2"
+                            android:singleLine="true"
                             android:id="@+id/edtTenure"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textNoSuggestions|number"
                             android:hint="Tenure (In Months)"
+                            android:imeOptions="actionDone"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
 
@@ -161,7 +170,7 @@
                             <!--android:id="@+id/ivIndicator"-->
                             <!--android:layout_width="@dimen/_18sdp"-->
                             <!--android:layout_height="@dimen/_18sdp"-->
-                            <!--app:srcCompat="@drawable/ic_key" />-->
+                            <!--app:srcCompat="@drawable/ic_login_otp" />-->
 
                     </LinearLayout>
 

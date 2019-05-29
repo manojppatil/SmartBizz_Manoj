@@ -206,7 +206,7 @@
                     android:layout_width="@dimen/_12sdp"
                     android:layout_height="@dimen/_12sdp"
                     android:tint="@color/white"
-                    app:srcCompat="@drawable/ic_search" />
+                    app:srcCompat="@drawable/ic_course_details_search" />
 
             </LinearLayout>
 

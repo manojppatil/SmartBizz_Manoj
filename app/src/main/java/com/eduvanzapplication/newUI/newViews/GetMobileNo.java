@@ -81,25 +81,25 @@ public class GetMobileNo extends AppCompatActivity {
         setViews();
         sharedPref = new SharedPref();
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            permission = ContextCompat.checkSelfPermission(getApplicationContext(),
-                    Manifest.permission.READ_SMS);
-
-            if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
-                ActivityCompat.requestPermissions(GetMobileNo.this,
-                        new String[]{Manifest.permission.READ_CONTACTS,
-                                Manifest.permission.READ_SMS,
-                                Manifest.permission.RECEIVE_SMS,
-                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_PHONE_STATE,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.ACCESS_FINE_LOCATION},
-                        GET_MY_PERMISSION);
-
-            } else {
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= 23) {
+//            permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+//                    Manifest.permission.READ_SMS);
+//
+//            if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
+//                ActivityCompat.requestPermissions(GetMobileNo.this,
+//                        new String[]{Manifest.permission.READ_CONTACTS,
+//                                Manifest.permission.READ_SMS,
+//                                Manifest.permission.RECEIVE_SMS,
+//                                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                                Manifest.permission.READ_PHONE_STATE,
+//                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                Manifest.permission.ACCESS_COARSE_LOCATION,
+//                                Manifest.permission.ACCESS_FINE_LOCATION},
+//                        GET_MY_PERMISSION);
+//
+//            } else {
+//            }
+//        }
 
         setFacebookLogin();
 
@@ -148,7 +148,6 @@ public class GetMobileNo extends AppCompatActivity {
                     linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(edtOtp.getWindowToken(), 0);
-
                 }
 
             }
@@ -189,65 +188,66 @@ public class GetMobileNo extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (Build.VERSION.SDK_INT >= 23) {
-                    permission = ContextCompat.checkSelfPermission(getApplicationContext(),
-                            Manifest.permission.READ_SMS);
-
-                    if (permission != PackageManager.PERMISSION_GRANTED)
-//                        {//Permission with disclaimer dialog
-////                            makeRequest();
+//                if (Build.VERSION.SDK_INT >= 23) {
+//                    permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+//                            Manifest.permission.READ_SMS);
 //
-//                            AlertDialog.Builder builder;
-//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                                builder = new AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert);
-//                            } else {
-//                                builder = new AlertDialog.Builder(mContext);
-//                            }
-//                            builder.setTitle("Disclaimer")
-//                                    .setMessage("Dear Student, \n" +
-//                                            "This app will access your mobile details like contacts and SMS to calculate your eligibility and give faster loans. Incase if you are comfortable with the same press ok else cancel")
-//                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                        public void onClick(DialogInterface dialog, int which) {
+//                    if (permission != PackageManager.PERMISSION_GRANTED)
+////                        {//Permission with disclaimer dialog
+//////                            makeRequest();
+////
+////                            AlertDialog.Builder builder;
+////                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+////                                builder = new AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert);
+////                            } else {
+////                                builder = new AlertDialog.Builder(mContext);
+////                            }
+////                            builder.setTitle("Disclaimer")
+////                                    .setMessage("Dear Student, \n" +
+////                                            "This app will access your mobile details like contacts and SMS to calculate your eligibility and give faster loans. Incase if you are comfortable with the same press ok else cancel")
+////                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+////                                        public void onClick(DialogInterface dialog, int which) {
+////
+////                                            ActivityCompat.requestPermissions(GetMobileNo.this,
+////                                                    new String[]{Manifest.permission.READ_CONTACTS,
+////                                                            Manifest.permission.READ_SMS,
+////                                                            Manifest.permission.READ_EXTERNAL_STORAGE,
+////                                                            Manifest.permission.READ_PHONE_STATE,
+////                                                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+////                                                            Manifest.permission.ACCESS_FINE_LOCATION},
+////                                                    GET_MY_PERMISSION);
+////
+////                                        }
+////                                    })
+////                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+////                                        @Override
+////                                        public void onClick(DialogInterface dialog, int which) {
+////                                            finish();
+////                                        }
+////                                    })
+////                                    .setIcon(android.R.drawable.ic_dialog_alert)
+////                                    .show();
+////
+////                        }
+//                    {//Direct Permission without disclaimer dialog
+//                        ActivityCompat.requestPermissions(GetMobileNo.this,
+//                                new String[]{Manifest.permission.READ_CONTACTS,
+//                                        Manifest.permission.READ_SMS,
+//                                        Manifest.permission.READ_EXTERNAL_STORAGE,
+//                                        Manifest.permission.READ_PHONE_STATE,
+//                                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                        Manifest.permission.READ_CONTACTS,
+//                                        Manifest.permission.ACCESS_COARSE_LOCATION,
+//                                        Manifest.permission.ACCESS_FINE_LOCATION},
+//                                GET_MY_PERMISSION);
 //
-//                                            ActivityCompat.requestPermissions(GetMobileNo.this,
-//                                                    new String[]{Manifest.permission.READ_CONTACTS,
-//                                                            Manifest.permission.READ_SMS,
-//                                                            Manifest.permission.READ_EXTERNAL_STORAGE,
-//                                                            Manifest.permission.READ_PHONE_STATE,
-//                                                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                                                            Manifest.permission.ACCESS_FINE_LOCATION},
-//                                                    GET_MY_PERMISSION);
-//
-//                                        }
-//                                    })
-//                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            finish();
-//                                        }
-//                                    })
-//                                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                                    .show();
-//
-//                        }
-                    {//Direct Permission without disclaimer dialog
-                        ActivityCompat.requestPermissions(GetMobileNo.this,
-                                new String[]{Manifest.permission.READ_CONTACTS,
-                                        Manifest.permission.READ_SMS,
-                                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                                        Manifest.permission.READ_PHONE_STATE,
-                                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                        Manifest.permission.READ_CONTACTS,
-                                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                                        Manifest.permission.ACCESS_FINE_LOCATION},
-                                GET_MY_PERMISSION);
-
-                    } else {
-                        getOTPAPICall(s);
-                    }
-                } else {
-                    getOTPAPICall(s);
-                }
+//                    } else {
+//                        getOTPAPICall(s);
+//                    }
+//                } else {
+//                    getOTPAPICall(s);
+//                }
+                getOTPAPICall(s);
             }
 
             @Override
@@ -283,6 +283,8 @@ public class GetMobileNo extends AppCompatActivity {
     private void getOTPAPICall(CharSequence s) {
         if (s.length() == 10) {
             // api call - get otp
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(edtOtp.getWindowToken(), 0);
             getOtp();
         }
 
@@ -494,7 +496,7 @@ public class GetMobileNo extends AppCompatActivity {
                 linEmailLayout.setVisibility(View.VISIBLE);
                 txtGetOtp.setText("Get OTP");
                 linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
-                ivIndicator.setImageDrawable(getResources().getDrawable(R.drawable.ic_key));
+                ivIndicator.setImageDrawable(getResources().getDrawable(R.drawable.ic_login_otp));
                 sharedPref.setLoginDone(getApplicationContext(), false);
 
 //                Toast.makeText(GetMobileNo.this, message, Toast.LENGTH_SHORT).show();

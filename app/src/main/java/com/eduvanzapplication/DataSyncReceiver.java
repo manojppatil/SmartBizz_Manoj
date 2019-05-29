@@ -32,14 +32,9 @@ public class DataSyncReceiver extends BroadcastReceiver {
         String algo360_datasync = String.valueOf(intent.getBooleanExtra("DataSynced",false));
         Log.e("Receiver", "Data synced: " + dataSynced);
 
-        //            if(dataSynced) {
-        DashboardActivity.saveAlgo360();
-//                saveAlgo360(context, student_id,userMobileNo,userEmail, String.valueOf(true));
-//        sharedPreferences = context.getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("Data synced", String.valueOf(dataSynced));
-//        editor.commit();
-//            }
+                    if(dataSynced) {
+                        DashboardActivity.saveAlgo360();
+                    }
     }
 
 }

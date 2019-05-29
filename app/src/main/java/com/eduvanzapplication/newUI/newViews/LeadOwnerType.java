@@ -123,33 +123,33 @@ public class LeadOwnerType extends AppCompatActivity {
 
         Drawable bg;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_graduation_cap, null);
+            bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_student, null);
             ivStud.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
         } else {
-            bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_graduation_cap);
+            bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_student);
             DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
         }
         ivStud.setImageDrawable(bg);
 
         Drawable bg1;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_briefcase, null);
+            bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_salaried, null);
             ivSal.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
         } else {
-            bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_briefcase);
+            bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_salaried);
             DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
         }
         ivSal.setImageDrawable(bg1);
 
         Drawable bg2;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_business_time, null);
+            bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_self_employed, null);
             ivSelfEmp.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
         } else {
-            bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_business_time);
+            bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_self_employed);
             DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
         }
-        ivSelfEmp.setImageDrawable(bg);
+        ivSelfEmp.setImageDrawable(bg2);
 
         linStudentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,30 +171,30 @@ public class LeadOwnerType extends AppCompatActivity {
 
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_graduation_cap, null);
+                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_student, null);
                     ivStud.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_graduation_cap);
+                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_student);
                     DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
                 }
                 ivStud.setImageDrawable(bg);
 
                 Drawable bg1;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_briefcase, null);
+                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_salaried, null);
                     ivSal.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_briefcase);
+                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_salaried);
                     DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
                 }
                 ivSal.setImageDrawable(bg1);
 
                 Drawable bg2;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_business_time, null);
+                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_self_employed, null);
                     ivSelfEmp.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_business_time);
+                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_self_employed);
                     DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
                 }
                 ivSelfEmp.setImageDrawable(bg2);
@@ -224,30 +224,30 @@ public class LeadOwnerType extends AppCompatActivity {
 
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_briefcase, null);
+                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_salaried, null);
                     ivSal.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_briefcase);
+                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_salaried);
                     DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
                 }
                 ivSal.setImageDrawable(bg);
 
                 Drawable bg1;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_graduation_cap, null);
+                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_student, null);
                     ivStud.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_graduation_cap);
+                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_student);
                     DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
                 }
                 ivStud.setImageDrawable(bg1);
 
                 Drawable bg2;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_business_time, null);
+                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_self_employed, null);
                     ivSelfEmp.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_business_time);
+                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_self_employed);
                     DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
                 }
                 ivSelfEmp.setImageDrawable(bg2);
@@ -277,30 +277,30 @@ public class LeadOwnerType extends AppCompatActivity {
 
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_business_time, null);
+                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_self_employed, null);
                     ivSelfEmp.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_business_time);
+                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_self_employed);
                     DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
                 }
                 ivSelfEmp.setImageDrawable(bg);
 
                 Drawable bg2;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_graduation_cap, null);
+                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_student, null);
                     ivStud.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_graduation_cap);
+                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_student);
                     DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
                 }
                 ivStud.setImageDrawable(bg2);
 
                 Drawable bg1;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_briefcase, null);
+                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_profession_salaried, null);
                     ivSal.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_briefcase);
+                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_profession_salaried);
                     DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
                 }
                 ivSal.setImageDrawable(bg1);
@@ -313,6 +313,7 @@ public class LeadOwnerType extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LeadOwnerType.this, NewLeadActivity.class));
+                LeadOwnerType.this.finish();
             }
         });
     }

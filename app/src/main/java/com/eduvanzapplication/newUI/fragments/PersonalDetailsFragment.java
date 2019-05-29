@@ -218,30 +218,30 @@ public class PersonalDetailsFragment extends Fragment {
 
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_male, null);
+                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
                         ivMale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_male);
+                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
                         DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
                     }
                     ivMale.setImageDrawable(bg);
 
                     Drawable bg1;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_female, null);
+                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
                         ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_female);
+                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
                         DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
                     }
                     ivFemale.setImageDrawable(bg1);
 
                     Drawable bg2;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_transgender, null);
+                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
                         ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_transgender);
+                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
                         DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
                     }
                     ivOther.setImageDrawable(bg2);
@@ -270,30 +270,30 @@ public class PersonalDetailsFragment extends Fragment {
 
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_male, null);
+                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
                         ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_male);
+                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
                         DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
                     }
                     ivMale.setImageDrawable(bg);
 
                     Drawable bg1;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_female, null);
+                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
                         ivFemale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_female);
+                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
                         DrawableCompat.setTint(bg1, getResources().getColor(R.color.white));
                     }
                     ivFemale.setImageDrawable(bg1);
 
                     Drawable bg2;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_transgender, null);
+                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
                         ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_transgender);
+                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
                         DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
                     }
                     ivOther.setImageDrawable(bg2);
@@ -322,30 +322,30 @@ public class PersonalDetailsFragment extends Fragment {
 
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_male, null);
+                        bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
                         ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_male);
+                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
                         DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
                     }
                     ivMale.setImageDrawable(bg);
 
                     Drawable bg1;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_female, null);
+                        bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
                         ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_female);
+                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
                         DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
                     }
                     ivFemale.setImageDrawable(bg1);
 
                     Drawable bg2;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_transgender, null);
+                        bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
                         ivOther.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_transgender);
+                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
                         DrawableCompat.setTint(bg2, getResources().getColor(R.color.white));
                     }
                     ivOther.setImageDrawable(bg2);

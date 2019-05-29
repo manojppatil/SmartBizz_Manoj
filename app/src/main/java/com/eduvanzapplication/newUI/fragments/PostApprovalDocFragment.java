@@ -1103,7 +1103,7 @@ public class PostApprovalDocFragment extends Fragment {
                         }
 
                         if (emi_type.equals("0")) {
-                            txtTbEMIType.setText("Arrears");
+                            txtTbEMIType.setText("Arrear");
 
                         } else if (emi_type.equals("1")) {
                             txtTbEMIType.setText("Advance");
@@ -1229,7 +1229,7 @@ public class PostApprovalDocFragment extends Fragment {
                         if (disbursal_status.equals("0") || disbursal_status.equals("1")) //Disbursed
                         {
                             txtLeadDisbursedStatus.setText("Disbursal Pending");
-                            ivLeadDisbursed.setBackground(context.getResources().getDrawable(drawable.ic_exclamation_triangle));
+                            ivLeadDisbursed.setBackground(context.getResources().getDrawable(drawable.ic_borrower_documents_pending));
                             linDisbursed.setBackground(context.getResources().getDrawable(drawable.border_circular_yellow_filled));
                             linDownloadNach.setVisibility(GONE);
                         } else {
@@ -1256,7 +1256,7 @@ public class PostApprovalDocFragment extends Fragment {
                             linAggSignInBtn.setVisibility(VISIBLE);
                             linDownloadSignedAgreement.setVisibility(GONE);
                             txtAggSignedStatus.setText("Agreement Signed Pending");
-                            ivAggSigned.setBackground(context.getResources().getDrawable(drawable.ic_exclamation_triangle));
+                            ivAggSigned.setBackground(context.getResources().getDrawable(drawable.ic_borrower_documents_pending));
                             linAgreementSigned.setBackground(context.getResources().getDrawable(drawable.border_circular_yellow_filled));
                         }
                     } else {
