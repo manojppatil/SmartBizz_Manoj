@@ -703,7 +703,7 @@ public class PostApprovalDocFragment extends Fragment {
                     // Payment Gateway Activity or may be due to //
                     // initialization of webview. // Error Message details
                     // the error occurred.
-                    Toast.makeText(context, "Payment Transaction response " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, "Payment Transaction response " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
                     StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
                     s.append("inErrorMessage-");
                     s.append(inErrorMessage);
@@ -714,7 +714,7 @@ public class PostApprovalDocFragment extends Fragment {
                 @Override
                 public void onTransactionResponse(Bundle inResponse) {
                     Log.d("LOG", "Payment Transaction is successful " + inResponse);
-                    Toast.makeText(context, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
                     StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
                     s.append("inResponse-");
                     s.append(inResponse);

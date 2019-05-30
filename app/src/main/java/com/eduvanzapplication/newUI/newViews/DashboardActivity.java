@@ -207,23 +207,23 @@ public class DashboardActivity extends AppCompatActivity
 
                 if (permission != PackageManager.PERMISSION_GRANTED)
                 {//Direct Permission without disclaimer dialog
-                    ActivityCompat.requestPermissions(DashboardActivity.this,
-                            new String[]{
-                                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                    Manifest.permission.CAMERA},
-                            GET_MY_PERMISSION);
 //                    ActivityCompat.requestPermissions(DashboardActivity.this,
-//                            new String[]{Manifest.permission.READ_CONTACTS,
-//                                    Manifest.permission.READ_SMS,
-//                                    Manifest.permission.RECEIVE_SMS,
+//                            new String[]{
 //                                    Manifest.permission.READ_EXTERNAL_STORAGE,
-//                                    Manifest.permission.READ_PHONE_STATE,
 //                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                                    Manifest.permission.CAMERA,
-//                                    Manifest.permission.ACCESS_COARSE_LOCATION,
-//                                    Manifest.permission.ACCESS_FINE_LOCATION},
+//                                    Manifest.permission.CAMERA},
 //                            GET_MY_PERMISSION);
+                    ActivityCompat.requestPermissions(DashboardActivity.this,
+                            new String[]{Manifest.permission.READ_CONTACTS,
+                                    Manifest.permission.READ_SMS,
+                                    Manifest.permission.RECEIVE_SMS,
+                                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                                    Manifest.permission.READ_PHONE_STATE,
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                    Manifest.permission.CAMERA,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    Manifest.permission.ACCESS_FINE_LOCATION},
+                            GET_MY_PERMISSION);
 
                 } else {
 //                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
@@ -271,8 +271,8 @@ public class DashboardActivity extends AppCompatActivity
             params.put("email_id", userEmail);
             params.put("algo360_datasync", String.valueOf(true));
             VolleyCallAlgo360 volleyCall = new VolleyCallAlgo360();
-            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, "90ad441a12b48c6d7c5524b8b2a334c3");
-//            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
+//            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, "90ad441a12b48c6d7c5524b8b2a334c3");
+            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -456,12 +456,12 @@ public class DashboardActivity extends AppCompatActivity
             case 1:
                 if (grantResults.length <= 0) {
                 }
-                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
-//                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
-//                        grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
-//                        grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
-//                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
-//                        grantResults[8] == PackageManager.PERMISSION_GRANTED ) {
+//                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
+                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[8] == PackageManager.PERMISSION_GRANTED ) {
                     //granted
 //                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
 //                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);

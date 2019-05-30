@@ -81,25 +81,25 @@ public class GetMobileNo extends AppCompatActivity {
         setViews();
         sharedPref = new SharedPref();
 
-//        if (Build.VERSION.SDK_INT >= 23) {
-//            permission = ContextCompat.checkSelfPermission(getApplicationContext(),
-//                    Manifest.permission.READ_SMS);
-//
-//            if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
-//                ActivityCompat.requestPermissions(GetMobileNo.this,
-//                        new String[]{Manifest.permission.READ_CONTACTS,
-//                                Manifest.permission.READ_SMS,
-//                                Manifest.permission.RECEIVE_SMS,
-//                                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                                Manifest.permission.READ_PHONE_STATE,
-//                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                                Manifest.permission.ACCESS_FINE_LOCATION},
-//                        GET_MY_PERMISSION);
-//
-//            } else {
-//            }
-//        }
+        if (Build.VERSION.SDK_INT >= 23) {
+            permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.READ_SMS);
+
+            if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
+                ActivityCompat.requestPermissions(GetMobileNo.this,
+                        new String[]{Manifest.permission.READ_CONTACTS,
+                                Manifest.permission.READ_SMS,
+                                Manifest.permission.RECEIVE_SMS,
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_PHONE_STATE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION},
+                        GET_MY_PERMISSION);
+
+            } else {
+            }
+        }
 
         setFacebookLogin();
 

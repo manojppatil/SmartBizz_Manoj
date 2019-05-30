@@ -125,7 +125,7 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             if (status.equalsIgnoreCase("1")) {
                 startActivity(new Intent(TenureSelectionActivity.this, DashboardActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-
+                TenureSelectionActivity.this.finish();
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

@@ -67,6 +67,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 import static com.eduvanzapplication.newUI.fragments.DashboardFragmentNew.isLeadReload;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class KycDetailFragment extends Fragment {
     static View view;
@@ -94,15 +95,16 @@ public class KycDetailFragment extends Fragment {
     public static ArrayList<String> locations_arrayList;
     public static ArrayList<LocationsPOJO> locationPOJOArrayList;
 
+    public static ImageView ivMale, ivFemale, ivOther, iviewMale, iviewFemale, iviewOther;
     public static ImageButton fabEditKycDetail, btnNextKycDetail;
     public static Switch switchMarital;
     public static TextView txtMaritalStatus;
     public static EditText edtFnameBr, edtMnameBr, edtLnameBr, edtEmailIdBr, edtMobileNoBr, edtAddressbr, edtLandmarkbr, edtPincodeBr;
-    public static LinearLayout linMale, linFemale, linOther, linDob, linMaritalStatus;
+    public static LinearLayout linMaleBtn, linFemaleBtn, linOtherBtn, linDob, linMaritalStatus;
     public static EditText edtAadhaar, edtPAN, edtLoanAmt;
     public static Spinner spCountry, spState, spCity, spInsttLocation, spCourse;
     public static AutoCompleteTextView acInstituteName;
-    public static TextView txtCourseFee, txtDOB;
+    public static TextView txtCourseFee, txtDOB, txtMale, txtFemale, txtOther;
 
     public static OnFragmentInteracting mListener;
 
@@ -171,10 +173,19 @@ public class KycDetailFragment extends Fragment {
         edtAddressbr = view.findViewById(R.id.edtAddressbr);
         edtLandmarkbr = view.findViewById(R.id.edtLandmarkbr);
         edtPincodeBr = view.findViewById(R.id.edtPincodeBr);
-        linMale = view.findViewById(R.id.linMale);
-        linFemale = view.findViewById(R.id.linFemale);
-        linOther = view.findViewById(R.id.linOther);
+        linMaleBtn = view.findViewById(R.id.linMaleBtn);
+        linFemaleBtn = view.findViewById(R.id.linFemaleBtn);
+        linOtherBtn = view.findViewById(R.id.linOtherBtn);
         linDob = view.findViewById(R.id.linDob);
+        ivMale = view.findViewById(R.id.ivMale);
+        ivFemale = view.findViewById(R.id.ivFemale);
+        ivOther = view.findViewById(R.id.ivOther);
+        iviewMale = view.findViewById(R.id.iviewMale);
+        iviewFemale = view.findViewById(R.id.iviewFemale);
+        iviewOther = view.findViewById(R.id.iviewOther);
+        txtMale = view.findViewById(R.id.txtMale);
+        txtFemale = view.findViewById(R.id.txtFemale);
+        txtOther = view.findViewById(R.id.txtOther);
         txtDOB = view.findViewById(R.id.textDob);
         linMaritalStatus = view.findViewById(R.id.linMaritalStatus);
         edtAadhaar = view.findViewById(R.id.edtAadhaar);
@@ -336,7 +347,7 @@ public class KycDetailFragment extends Fragment {
             }
         });
 
-        //Personal details
+//Personal details
         linPersonalToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -753,12 +764,22 @@ public class KycDetailFragment extends Fragment {
     }
 
     public void setViewsEnabled(boolean f) {
+
         edtFnameBr.setEnabled(f);
         edtMnameBr.setEnabled(f);
         edtLnameBr.setEnabled(f);
-        linMale.setEnabled(f);
-        linFemale.setEnabled(f);
-        linOther.setEnabled(f);
+        linMaleBtn.setEnabled(f);
+        linFemaleBtn.setEnabled(f);
+        linOtherBtn.setEnabled(f);
+        ivMale.setEnabled(f);
+        ivFemale.setEnabled(f);
+        ivOther.setEnabled(f);
+        txtMale.setEnabled(f);
+        txtFemale.setEnabled(f);
+        txtOther.setEnabled(f);
+        iviewMale.setEnabled(f);
+        iviewFemale.setEnabled(f);
+        iviewOther.setEnabled(f);
         switchMarital.setEnabled(f);
         linDob.setEnabled(f);
         linMaritalStatus.setEnabled(f);
@@ -876,37 +897,37 @@ public class KycDetailFragment extends Fragment {
             }
         });
 
-        edtEmailIdBr.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+//        edtEmailIdBr.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                LoanTabActivity.email = edtEmailIdBr.getText().toString();
+//                chekAllFields();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//            }
+//        });
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.email = edtEmailIdBr.getText().toString();
-                chekAllFields();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-        edtMobileNoBr.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                LoanTabActivity.mobile = edtMobileNoBr.getText().toString();
-                chekAllFields();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
+//        edtMobileNoBr.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                LoanTabActivity.mobile = edtMobileNoBr.getText().toString();
+//                chekAllFields();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//            }
+//        });
 
         edtAadhaar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1136,7 +1157,7 @@ public class KycDetailFragment extends Fragment {
                         }
                     }
                     if (LoanTabActivity.isKycEdit) {
-                    chekAllFields();
+                        chekAllFields();
                     }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
@@ -1149,33 +1170,151 @@ public class KycDetailFragment extends Fragment {
             }
         });
 
-        linMale.setOnClickListener(new View.OnClickListener() {
+        linMaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoanTabActivity.gender = "1";
-                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
-                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+
+                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+
+                txtMale.setTextColor(getResources().getColor(R.color.white));
+                txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+                txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+
+                iviewMale.setBackgroundColor(getResources().getColor(R.color.white));
+                iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                iviewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                    ivMale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                    DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
+                }
+                ivMale.setImageDrawable(bg);
+
+                Drawable bg1;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                    ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+                }
+                ivFemale.setImageDrawable(bg1);
+
+                Drawable bg2;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                    ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+                }
+                ivOther.setImageDrawable(bg2);
             }
         });
 
-        linFemale.setOnClickListener(new View.OnClickListener() {
+        linFemaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoanTabActivity.gender = "2";
-                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
-                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+
+                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+
+                txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+                txtFemale.setTextColor(getResources().getColor(R.color.white));
+                txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+
+                iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                iviewFemale.setBackgroundColor(getResources().getColor(R.color.white));
+                iviewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                    ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                    DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+                }
+                ivMale.setImageDrawable(bg);
+
+                Drawable bg1;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                    ivFemale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.white));
+                }
+                ivFemale.setImageDrawable(bg1);
+
+                Drawable bg2;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                    ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+                }
+                ivOther.setImageDrawable(bg2);
+
             }
         });
 
-        linOther.setOnClickListener(new View.OnClickListener() {
+        linOtherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoanTabActivity.gender = "3";
-                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
-                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
-                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
+
+                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+
+                txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+                txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+                txtOther.setTextColor(getResources().getColor(R.color.white));
+
+                iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                iviewOther.setBackgroundColor(getResources().getColor(R.color.white));
+
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                    ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                    DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+                }
+                ivMale.setImageDrawable(bg);
+
+                Drawable bg1;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                    ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+                }
+                ivFemale.setImageDrawable(bg1);
+
+                Drawable bg2;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                    ivOther.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.white));
+                }
+                ivOther.setImageDrawable(bg2);
             }
         });
 
@@ -1186,8 +1325,8 @@ public class KycDetailFragment extends Fragment {
                 if (isChecked) txtMaritalStatus.setText("Married");
                 else txtMaritalStatus.setText("Unmarried");
                 if (LoanTabActivity.isKycEdit) {
-                chekAllFields();
-            }
+                    chekAllFields();
+                }
             }
         });
 
@@ -1252,7 +1391,7 @@ public class KycDetailFragment extends Fragment {
 
                 } else if (LoanTabActivity.gender.equals("")) {
                     txtPersonalDetailsErrMsg.setText("Please enter gender");
-                    //   linMale.requestFocus();
+                    //   linMaleBtn.requestFocus();
 
                 } else if (LoanTabActivity.dob.equals("")) {
                     txtPersonalDetailsErrMsg.setText("Please enter DOB");
@@ -2005,17 +2144,131 @@ public class KycDetailFragment extends Fragment {
                         LoanTabActivity.gender = jsonborrowerDetails.getString("gender_id");
                         if (!LoanTabActivity.gender.equals("") && !LoanTabActivity.gender.equals("null")) {
                             if (LoanTabActivity.gender.equals("1")) {
-                                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
-                                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+
+                                txtMale.setTextColor(getResources().getColor(R.color.white));
+                                txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+                                txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+
+                                iviewMale.setBackgroundColor(getResources().getColor(R.color.white));
+                                iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                                iviewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+
+                                Drawable bg;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                                    ivMale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                                    DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
+                                }
+                                ivMale.setImageDrawable(bg);
+
+                                Drawable bg1;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                                    ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+                                }
+                                ivFemale.setImageDrawable(bg1);
+
+                                Drawable bg2;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                                    ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+                                }
+                                ivOther.setImageDrawable(bg2);
                             } else if (LoanTabActivity.gender.equals("2")) {
-                                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
-                                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
+                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+
+                                txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+                                txtFemale.setTextColor(getResources().getColor(R.color.white));
+                                txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+
+                                iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                                iviewFemale.setBackgroundColor(getResources().getColor(R.color.white));
+                                iviewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+
+                                Drawable bg;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                                    ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                                    DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+                                }
+                                ivMale.setImageDrawable(bg);
+
+                                Drawable bg1;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                                    ivFemale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.white));
+                                }
+                                ivFemale.setImageDrawable(bg1);
+
+                                Drawable bg2;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                                    ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+                                }
+                                ivOther.setImageDrawable(bg2);
                             } else if (LoanTabActivity.gender.equals("3")) {
-                                linMale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
-                                linFemale.setBackground(context.getResources().getDrawable(R.drawable.border_circular));
-                                linOther.setBackground(context.getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+
+                                txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+                                txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+                                txtOther.setTextColor(getResources().getColor(R.color.white));
+
+                                iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                                iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                                iviewOther.setBackgroundColor(getResources().getColor(R.color.white));
+
+                                Drawable bg;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                                    ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                                    DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+                                }
+                                ivMale.setImageDrawable(bg);
+
+                                Drawable bg1;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                                    ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+                                }
+                                ivFemale.setImageDrawable(bg1);
+
+                                Drawable bg2;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                                    ivOther.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.white));
+                                }
+                                ivOther.setImageDrawable(bg2);
                             }
                         }
                     }
@@ -2390,7 +2643,7 @@ public class KycDetailFragment extends Fragment {
                 // Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
             if (LoanTabActivity.isKycEdit) {
-            chekAllFields();
+                chekAllFields();
             }
         } catch (Exception e) {
 //            progressDialog.dismiss();

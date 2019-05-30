@@ -115,11 +115,11 @@ public class LeadOwnerType extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Profession");
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
+//        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
         Drawable bg;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {

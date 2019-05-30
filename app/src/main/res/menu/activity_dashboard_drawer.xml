@@ -29,7 +29,7 @@
             android:title="@string/title_contact_us" />
         <item
             android:id="@+id/nav_more"
-            android:icon="@drawable/icon_more"
+            android:icon="@drawable/ic_nav_leagal"
             android:title="@string/more" />
 
         <!--<item-->
@@ -39,28 +39,90 @@
 
         <item
             android:id="@+id/nav_disclaimer"
-            android:icon="@drawable/icon_disclaimer"
+            android:icon="@drawable/ic_exclamation_triangle"
             android:title="@string/title_disclaimer" />
         <item
             android:id="@+id/nav_termsandconditions"
-            android:icon="@drawable/icon_t_c"
+            android:icon="@drawable/ic_nav_legal_terms_conditions"
             android:title="@string/title_terms_and_condition" />
         <item
             android:id="@+id/nav_privacypolicy"
-            android:icon="@drawable/icon_privacypolicy"
+            android:icon="@drawable/ic_nav_legal_privacy_policy"
             android:title="@string/title_privacy_policy" />
         <item
             android:id="@+id/nav_interestratepolicy"
-            android:icon="@drawable/icon_fairpractice"
+            android:icon="@drawable/ic_nav_legal_interest_rate"
             android:title="@string/title_interest_rate_policy" />
         <item
             android:id="@+id/nav_fairpracticscode"
-            android:icon="@drawable/icon_fairpractice"
+            android:icon="@drawable/ic_nav_leagal_fair_practices_code"
             android:title="@string/title_fair_practics_code" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/icon_logout"
+            android:icon="@drawable/ic_nav_logout"
             android:title="@string/title_log_out" />
     </group>
+
+    <!--<group android:checkableBehavior="single">-->
+
+        <!--<item-->
+            <!--android:id="@+id/nav_eligibility"-->
+            <!--android:icon="@drawable/icon_eligibility"-->
+            <!--android:title="Apply Now" />-->
+
+        <!--<item-->
+            <!--android:id="@+id/nav_howitworks"-->
+            <!--android:icon="@drawable/icon_howitworks"-->
+            <!--android:title="@string/title_how_it_works" />-->
+        <!--&lt;!&ndash;<item&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/nav_language"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:title="Language" />&ndash;&gt;-->
+        <!--<item-->
+            <!--android:id="@+id/nav_aboutus"-->
+            <!--android:icon="@drawable/icon_aboutus"-->
+            <!--android:title="@string/title_about_us" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_faq"-->
+            <!--android:icon="@drawable/icon_faq"-->
+            <!--android:title="@string/title_faq" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_contactus"-->
+            <!--android:icon="@drawable/icon_contactus"-->
+            <!--android:title="@string/title_contact_us" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_more"-->
+            <!--android:icon="@drawable/icon_more"-->
+            <!--android:title="@string/more" />-->
+
+        <!--&lt;!&ndash;<item&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/nav_blog"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:icon="@drawable/icon_privacypolicy"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:title="@string/title_blog" />&ndash;&gt;-->
+
+        <!--<item-->
+            <!--android:id="@+id/nav_disclaimer"-->
+            <!--android:icon="@drawable/icon_disclaimer"-->
+            <!--android:title="@string/title_disclaimer" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_termsandconditions"-->
+            <!--android:icon="@drawable/icon_t_c"-->
+            <!--android:title="@string/title_terms_and_condition" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_privacypolicy"-->
+            <!--android:icon="@drawable/icon_privacypolicy"-->
+            <!--android:title="@string/title_privacy_policy" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_interestratepolicy"-->
+            <!--android:icon="@drawable/icon_fairpractice"-->
+            <!--android:title="@string/title_interest_rate_policy" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_fairpracticscode"-->
+            <!--android:icon="@drawable/icon_fairpractice"-->
+            <!--android:title="@string/title_fair_practics_code" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_logout"-->
+            <!--android:icon="@drawable/icon_logout"-->
+            <!--android:title="@string/title_log_out" />-->
+    <!--</group>-->
 
 </menu>

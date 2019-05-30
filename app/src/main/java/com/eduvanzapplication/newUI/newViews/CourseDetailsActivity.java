@@ -183,26 +183,30 @@ public class CourseDetailsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (s.length() > 0) {
-                    loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
-                    courseFeeValueinint = Integer.parseInt(txtCourseFee.getText().toString());
+                try {
+                    if (s.length() > 0) {
+                        loanAmountvalueInInt = Integer.parseInt(edtLoanAmt.getText().toString());
+                        courseFeeValueinint = Integer.parseInt(txtCourseFee.getText().toString());
 
-                    if (courseFeeValueinint >= loanAmountvalueInInt) {
-                        if (loanAmountvalueInInt >= 5000) {
-                            NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
-                            edtLoanAmt.setError(null);
-                            enableDisableButtons(true);
+                        if (courseFeeValueinint >= loanAmountvalueInInt) {
+                            if (loanAmountvalueInInt >= 5000) {
+                                NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
+                                edtLoanAmt.setError(null);
+                                enableDisableButtons(true);
+                            } else {
+                                enableDisableButtons(false);
+                                edtLoanAmt.setError("The Loan Amount must be greater than or equal to 5000.");
+                            }
                         } else {
                             enableDisableButtons(false);
-                            edtLoanAmt.setError("The Loan Amount must be greater than or equal to 5000.");
+                            edtLoanAmt.setError("Loan Amount not exceed than course fees!");
                         }
                     } else {
                         enableDisableButtons(false);
                         edtLoanAmt.setError("Loan Amount not exceed than course fees!");
                     }
-                } else {
-                    enableDisableButtons(false);
-                    edtLoanAmt.setError("Loan Amount not exceed than course fees!");
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -613,6 +617,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
                 //  Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(CourseDetailsActivity.this, TenureSelectionActivity.class));
+                CourseDetailsActivity.this.finish();
 
 //                EligibilityCheckFragment_6 eligibilityCheckFragment_6 = new EligibilityCheckFragment_6();
 //                transaction.replace(R.id.frameLayout_eligibilityCheck, eligibilityCheckFragment_6).commit();

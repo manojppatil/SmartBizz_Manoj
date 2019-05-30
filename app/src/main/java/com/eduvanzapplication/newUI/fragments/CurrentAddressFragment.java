@@ -293,24 +293,24 @@ public class CurrentAddressFragment extends Fragment {
 
     public static void checkAllFields() {
         if (NewLeadActivity.flatBuildingSoc.equals("") || NewLeadActivity.streetLocalityLandMark.equals("")
-                || NewLeadActivity.pinCode.equals("") || NewLeadActivity.countryId.equals("") ||
+                || NewLeadActivity.pinCode.equals("")|| NewLeadActivity.pinCode.toString().length()<6 || NewLeadActivity.countryId.equals("") ||
                 NewLeadActivity.stateId.equals("") || NewLeadActivity.cityId.equals("")) {
             mListener.onOffButtonsCurrentAddress(false, false);
 
             if (edtAddress.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("");
+                txtcurrentAddressErrMsg.setText("please enter FLAT NUMBER,BUILDING,SOCIETY NAME");
 //                edtAddress.requestFocus();
+
+            }else if (edtLandmark.getText().toString().equals("")) {
+                txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
+                txtcurrentAddressErrMsg.setText("please enter your STREET NAME,LOCALITY,LANDMARK");
+//                edtLandmark.requestFocus();
 
             } else if (edtPincode.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
                 txtcurrentAddressErrMsg.setText("please enter your pincode");
 //                edtPincode.requestFocus();
-
-            }else if (edtLandmark.getText().toString().equals("")) {
-                txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("please enter your street address");
-//                edtLandmark.requestFocus();
 
             }  else if (NewLeadActivity.countryId.equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
@@ -337,10 +337,13 @@ public class CurrentAddressFragment extends Fragment {
 
     public static void validate() {
         if (NewLeadActivity.flatBuildingSoc.equals("") || NewLeadActivity.streetLocalityLandMark.equals("")
-                || NewLeadActivity.pinCode.equals(""))
+                || NewLeadActivity.pinCode.equals("")|| NewLeadActivity.pinCode.toString().length()<6 || NewLeadActivity.countryId.equals("") ||
+                NewLeadActivity.stateId.equals("") || NewLeadActivity.cityId.equals("")) {
+
             mListener.onCurrentAddrFragmentInteraction(false, 2);
-        else
+        } else{
             mListener.onCurrentAddrFragmentInteraction(true, 3);
+    }
     }
 
     @Override

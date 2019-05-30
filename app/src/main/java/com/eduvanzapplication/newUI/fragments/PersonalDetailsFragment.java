@@ -205,8 +205,8 @@ public class PersonalDetailsFragment extends Fragment {
                 if(isProfileEnabled) {
                     NewLeadActivity.gender = "1";
                     linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                    linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                    linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                    linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                    linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
 
                     txtMale.setTextColor(getResources().getColor(R.color.white));
                     txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
@@ -256,9 +256,9 @@ public class PersonalDetailsFragment extends Fragment {
             public void onClick(View v) {
                 if(isProfileEnabled) {
                     NewLeadActivity.gender = "2";
-                    linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                    linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
                     linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                    linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                    linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
 
                     txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
                     txtFemale.setTextColor(getResources().getColor(R.color.white));
@@ -308,8 +308,8 @@ public class PersonalDetailsFragment extends Fragment {
             public void onClick(View v) {
                 if(isProfileEnabled) {
                     NewLeadActivity.gender = "3";
-                    linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                    linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                    linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                    linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
                     linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
 
                     txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
@@ -681,8 +681,8 @@ public class PersonalDetailsFragment extends Fragment {
 //            public void onClick(View v) {
 //                NewLeadActivity.profession = "1";
 //                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
 //                try {
 //                    Thread.sleep(1000);
 //                } catch (InterruptedException e) {
@@ -699,9 +699,9 @@ public class PersonalDetailsFragment extends Fragment {
 //            @Override
 //            public void onClick(View v) {
 //                NewLeadActivity.profession = "2";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
 //                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
 //                linOCR.setVisibility(View.VISIBLE);
 //                linStudentType.setVisibility(View.GONE);
 //                newLinOcr.setVisibility(View.VISIBLE);
@@ -712,8 +712,8 @@ public class PersonalDetailsFragment extends Fragment {
 //            @Override
 //            public void onClick(View v) {
 //                NewLeadActivity.profession = "3";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
 //                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
 //                linOCR.setVisibility(View.VISIBLE);
 //                linStudentType.setVisibility(View.GONE);

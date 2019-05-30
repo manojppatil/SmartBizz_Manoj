@@ -62,7 +62,6 @@ public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequested
     public DataObjectHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.tenure_requested_card_view, parent, false);
-
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
         return dataObjectHolder;
     }
@@ -70,7 +69,7 @@ public class TenureRequestedAdapter extends RecyclerView.Adapter<TenureRequested
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.txtTenure.setText(horizontalList.get(position).tenure+" Months");
-        holder.txtRoi.setText(horizontalList.get(position).emi_amount);
+        holder.txtRoi.setText(horizontalList.get(position).roi);
         holder.txtLoanAmount.setText(horizontalList.get(position).loan_amount);
         holder.txtEMIAmount.setText(horizontalList.get(position).emi_amount);
 //        holder.mRadioButton.setText(horizontalList.get(position).applicationid);

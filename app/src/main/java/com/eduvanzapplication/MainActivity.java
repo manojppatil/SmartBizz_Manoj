@@ -60,9 +60,9 @@ public class MainActivity extends Application {
                 Log.e("Hash key", ""+ Base64.encodeToString(md.digest(),Base64.DEFAULT));
             }
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e("Teating", e.getMessage(), e);
+            Log.e("Testing", e.getMessage(), e);
         } catch (NoSuchAlgorithmException e) {
-            Log.e("Teating", e.getMessage(), e);
+            Log.e("Testing", e.getMessage(), e);
         }
     }
 }

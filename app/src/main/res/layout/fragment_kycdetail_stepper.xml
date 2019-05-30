@@ -185,7 +185,7 @@
                             android:weightSum="3.1">
 
                             <LinearLayout
-                                android:id="@+id/linMale"
+                                android:id="@+id/linMaleBtn"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_margin="@dimen/_2sdp"
@@ -196,12 +196,13 @@
                                 android:padding="@dimen/_3sdp">
 
                                 <ImageView
+                                    android:id="@+id/ivMale"
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
-                                    android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_personal_details_male" />
 
-                                <View
+                                <ImageView
+                                    android:id="@+id/iviewMale"
                                     android:layout_width="@dimen/_1sdp"
                                     android:layout_height="match_parent"
                                     android:layout_marginStart="@dimen/_4sdp"
@@ -219,7 +220,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linFemale"
+                                android:id="@+id/linFemaleBtn"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_margin="@dimen/_2sdp"
@@ -230,12 +231,14 @@
                                 android:padding="@dimen/_3sdp">
 
                                 <ImageView
+                                    android:id="@+id/ivFemale"
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
                                     android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_personal_details_female" />
 
-                                <View
+                                <ImageView
+                                    android:id="@+id/iviewFemale"
                                     android:layout_width="@dimen/_1sdp"
                                     android:layout_height="match_parent"
                                     android:layout_marginStart="@dimen/_4sdp"
@@ -253,7 +256,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linOther"
+                                android:id="@+id/linOtherBtn"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_margin="@dimen/_2sdp"
@@ -264,12 +267,13 @@
                                 android:padding="@dimen/_3sdp">
 
                                 <ImageView
+                                    android:id="@+id/ivOther"
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
-                                    android:tint="@color/textcolordark"
                                     app:srcCompat="@drawable/ic_personal_details_gender" />
 
-                                <View
+                                <ImageView
+                                    android:id="@+id/iviewOther"
                                     android:layout_width="@dimen/_1sdp"
                                     android:layout_height="match_parent"
                                     android:layout_marginStart="@dimen/_4sdp"
@@ -327,7 +331,6 @@
                                         android:layout_width="@dimen/_15sdp"
                                         android:layout_height="@dimen/_15sdp"
                                         android:layout_marginLeft="@dimen/_5sdp"
-                                        android:tint="@color/textcolordark"
                                         app:srcCompat="@drawable/ic_personal_details_dob" />
 
                                     <View
@@ -452,19 +455,19 @@
                                 android:inputType="phone"
                                 android:maxLength="10" />
 
-                            <TextView
-                                android:id="@+id/txtPersonalDetailsErrMsg"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_5sdp"
-                                android:textColor="@color/red"
-                                android:visibility="visible"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:layout_gravity="center_horizontal"
-                                android:textSize="15sp"
-                                style="@style/TextViewTitle14Style" />
                         </android.support.design.widget.TextInputLayout>
 
+                        <TextView
+                            android:id="@+id/txtPersonalDetailsErrMsg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:textColor="@color/red"
+                            android:visibility="visible"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="15sp"
+                            style="@style/TextViewTitle14Style" />
 
                     </LinearLayout>
 
@@ -946,6 +949,18 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:textSize="25sp"
                             style="@style/TextViewLightStyle"/>
+
+                        <TextView
+                            style="@style/TextViewTitle12BoldStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:text="select institute"
+                            android:gravity="start"
+                            android:layout_gravity="start"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textAllCaps="true"
+                            android:textColor="@color/darkblue" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

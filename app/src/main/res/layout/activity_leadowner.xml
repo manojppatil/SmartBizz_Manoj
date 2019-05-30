@@ -5,19 +5,25 @@
     android:layout_height="match_parent"
     android:id="@+id/rootViews">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_height="@dimen/_100sdp"
+        android:background="@drawable/ic_topbg"
+        app:title=""
+        app:navigationIcon="@drawable/ic_back_arrow_white" >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:navigationIcon="@drawable/ic_back_arrow" />
+            android:layout_height="wrap_content"
+            android:text="Profession"
+            android:layout_gravity="top|left"
+            android:textAllCaps="true"
+            android:id="@+id/toolbar_title"
+            android:textColor="@color/white"
+            style="@style/TextViewTitle16BoldStyle"/>
 
-    </android.support.design.widget.AppBarLayout>
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/layoutMobile"

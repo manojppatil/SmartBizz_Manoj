@@ -390,7 +390,6 @@ public class DocumentAvailabilityFragment extends Fragment {
         super.onResume();
         edtAadhaar.setText(NewLeadActivity.aadharNumber);
         edtPAN.setText(NewLeadActivity.panNUmber);
-
         if (isDocAvailabilityEnabled) {
             checkAllFields();
         }
@@ -399,11 +398,13 @@ public class DocumentAvailabilityFragment extends Fragment {
 
     public static void setDcoAvailabilityData() {
         try {
+            isDocAvailabilityEnabled = false;
             edtAadhaar.setText(NewLeadActivity.aadharNumber);
             edtPAN.setText(NewLeadActivity.panNUmber);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        isDocAvailabilityEnabled = true;
     }
 
     @Override

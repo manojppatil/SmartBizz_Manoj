@@ -75,12 +75,12 @@ public class EmploymentDetailsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (isEmploymentDtlEnabled) {
-                if (count > 0) {
+                if (s.length() > 0) {
                     NewLeadActivity.companyName = s.toString();
                     companyedt.setError(null);
                 } else {
                     NewLeadActivity.companyName = "";
-                    companyedt.setError("Please enter Company Name");
+                   // companyedt.setError("Please enter Company Name");
                 }
                 checkAllFields();
                 }
@@ -103,15 +103,13 @@ public class EmploymentDetailsFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if (isEmploymentDtlEnabled) {
-                if (count > 0) {
-
+                if (s.length() > 0) {
                     NewLeadActivity.annualIncome = s.toString();
                     edtaanual.setError(null);
 
                 } else {
-
                     NewLeadActivity.annualIncome = "";
-                    edtaanual.setError("Please enter Annual Income:");
+                 //   edtaanual.setError("Please enter Annual Income:");
                 }
                 checkAllFields();
                 }
@@ -129,16 +127,15 @@ public class EmploymentDetailsFragment extends Fragment {
 
     public static void checkAllFields() {
         if (NewLeadActivity.companyName.equals("") || NewLeadActivity.annualIncome.equals("")) {
-            mListener.onOffButtonEmployentSubmit(false, true);
           //  mListener.onEmploymentFragmentInteraction(false,0);
-            txtEmploymentDetailsErrMsg.setVisibility(View.VISIBLE);
             if (companyedt.getText().toString().equals("")) {
+            txtEmploymentDetailsErrMsg.setVisibility(View.VISIBLE);
                 txtEmploymentDetailsErrMsg.setText("Please Enter Company Name");
             } else if (edtaanual.getText().toString().equals("")) {
+                txtEmploymentDetailsErrMsg.setVisibility(View.VISIBLE);
                 txtEmploymentDetailsErrMsg.setText("Please Enter Annual Income");
             }
-
-
+            mListener.onOffButtonEmployentSubmit(false, true);
 
         } else {
             txtEmploymentDetailsErrMsg.setVisibility(View.GONE);

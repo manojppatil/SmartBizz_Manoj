@@ -420,6 +420,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:paddingTop="@dimen/_4sdp"
@@ -434,7 +435,7 @@
 
             <TextView
                 android:id="@+id/txtCallUs"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/call_us_s"
                 android:layout_weight="1"
@@ -457,6 +458,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:paddingTop="@dimen/_4sdp"
             android:paddingBottom="@dimen/_4sdp">
@@ -492,6 +494,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:paddingTop="@dimen/_4sdp"

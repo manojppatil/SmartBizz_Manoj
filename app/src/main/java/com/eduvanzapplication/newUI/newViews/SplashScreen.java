@@ -94,7 +94,7 @@ public class SplashScreen extends AppCompatActivity {
 
             SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
             checkOTPDone = sharedPreferences.getString("otp_done", "0");
-//            policyAgreementStatus = sharedPreferences.getInt("userpolicyAgreement", 0);
+            policyAgreementStatus = sharedPreferences.getInt("userpolicyAgreement", 0);
             checkForImageSlider = sharedPreferences.getString("checkForImageSlider", "0");
 
             AppLanguage = sharedPreferences.getString("AppLanguage", "");
@@ -250,35 +250,35 @@ public class SplashScreen extends AppCompatActivity {
                     } else {
 
                         if (checkForImageSlider.equalsIgnoreCase("1")) {
-//                            if (policyAgreementStatus == 0) {
-//                                Intent intent = new Intent(SplashScreen.this,
-//                                        TermsAndCondition.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                                startActivity(intent);
-//                                SplashScreen.this.finish();
-//                            } else {
-//                                if (sharedPref.getLoginDone(SplashScreen.this)) {
-//                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);
-//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                                    startActivity(intent);
-//                                    SplashScreen.this.finish();
-//                                } else {
-//                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);// This is commented for testing
-//                                    startActivity(intent);
-//                                    finish();
-//                                }
-//                            }
-                            if (sharedPref.getLoginDone(SplashScreen.this)) {
+                            if (policyAgreementStatus == 0) {
+                                Intent intent = new Intent(SplashScreen.this,
+                                        TermsAndCondition.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                startActivity(intent);
+                                SplashScreen.this.finish();
+                            } else {
+                                if (sharedPref.getLoginDone(SplashScreen.this)) {
                                     Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
-                            }else{
-                                Intent intent = new Intent(SplashScreen.this, ImageSlider.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                startActivity(intent);
-                                SplashScreen.this.finish();
+                                } else {
+                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);// This is commented for testing
+                                    startActivity(intent);
+                                    finish();
+                                }
                             }
+//                            if (sharedPref.getLoginDone(SplashScreen.this)) {
+//                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                                    startActivity(intent);
+//                                    SplashScreen.this.finish();
+//                            }else{
+//                                Intent intent = new Intent(SplashScreen.this, ImageSlider.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                                startActivity(intent);
+//                                SplashScreen.this.finish();
+//                            }
                         } else {
                             Intent intent = new Intent(SplashScreen.this, ImageSlider.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

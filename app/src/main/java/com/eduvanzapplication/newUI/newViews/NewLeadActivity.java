@@ -1,5 +1,6 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +25,6 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.fragments.CurrentAddressFragment;
 import com.eduvanzapplication.newUI.fragments.DocumentAvailabilityFragment;
@@ -46,6 +46,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     private TextView txtStepTracker;
     private StepperIndicator stepperIndicator;
     public static ImageView ivOCRBtn;
+    public static ProgressDialog progressDialog;
 
     public static Boolean isProfileEnabled = false, isDocAvailabilityEnabled = false, isCurrentAddEnabled = false, isEmploymentDtlEnabled = false;
 
@@ -86,7 +87,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         isDocAvailabilityEnabled = false;
         isCurrentAddEnabled = false;
         isEmploymentDtlEnabled = false;
-
 
         setOcrSharedPref();
 
@@ -240,7 +240,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     private void setOcrSharedPref() {
 
         try {
-
             profession = "";
             firstName = "";
             lastName = "";
@@ -509,14 +508,16 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         stepperIndicator = findViewById(R.id.stepperIndicator);
         ivOCRBtn = findViewById(R.id.ivOCRBtn);
         ivOCRBtn.setVisibility(View.VISIBLE);
+        progressDialog = new ProgressDialog(mActivity);
+
 
         ivNextBtn.setOnClickListener(nextClickListener);
         ivPrevBtn.setOnClickListener(prevClickListener);
         linSubmit.setOnClickListener(nextClickListener1);
+
 //        linSubmit.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//
 //                if (viewPager.getCurrentItem() == (viewPager.getAdapter().getCount() - 1)) {
 //                    onOffButtonEmployent(false,true);
 //                    if (!NewLeadActivity.companyName.equals("") && !NewLeadActivity.annualIncome.equals("")) {
@@ -742,6 +743,11 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
     private void saveBorrowerData() {
 
         try {//auth_token
+
+            progressDialog.setMessage("Submitting");
+            progressDialog.show();
+            progressDialog.setCancelable(false);
+
             SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
             String student_id = "";
             student_id = sharedPreferences.getString("student_id", "");
@@ -810,13 +816,15 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             MainActivity.applicant_id = jsonData.optString("applicant_id");
             NewLeadActivity.leadId = jsonData.optString("lead_id");
             NewLeadActivity.applicantId = jsonData.optString("applicant_id");
-
+            progressDialog.dismiss();
 
             if (jsonData.getInt("status") == 1) {
                 startActivity(new Intent(NewLeadActivity.this, CourseDetailsActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                NewLeadActivity.this.finish();
             }
 
         } catch (Exception e) {
+            progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();

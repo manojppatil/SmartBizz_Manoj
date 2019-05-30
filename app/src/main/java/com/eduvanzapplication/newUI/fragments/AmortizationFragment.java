@@ -73,16 +73,27 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
             txtEmiNo40, txtEmiNo41, txtEmiNo42, txtEmiNo43, txtEmiNo44, txtEmiNo45, txtEmiNo46, txtEmiNo47,
             txtEmiNo48, txtEmiNo49, txtEmiNo50, txtEmiNo51, txtEmiNo52, txtEmiNo53, txtEmiNo54, txtEmiNo55,
             txtEmiNo56, txtEmiNo57, txtEmiNo58, txtEmiNo59, txtEmiNo60, txtEmiNo61, txtEmiNo62, txtEmiNo63,
-            txtEmiNo64, txtEmiNo65, txtEmiNo66, txtEmiNo67, txtEmiNo68, txtEmiNo69, txtEmiNo70;
+            txtEmiNo64, txtEmiNo65, txtEmiNo66, txtEmiNo67, txtEmiNo68, txtEmiNo69, txtEmiNo70,
+            txtEmiNo71, txtEmiNo72, txtEmiNo73, txtEmiNo74, txtEmiNo75, txtEmiNo76, txtEmiNo77,
+            txtEmiNo78, txtEmiNo79, txtEmiNo80, txtEmiNo81, txtEmiNo82, txtEmiNo83, txtEmiNo84,
+            txtEmiNo85, txtEmiNo86, txtEmiNo87, txtEmiNo88, txtEmiNo89, txtEmiNo90, txtEmiNo91,
+            txtEmiNo92, txtEmiNo93, txtEmiNo94, txtEmiNo95, txtEmiNo96, txtEmiNo97, txtEmiNo98,
+            txtEmiNo99, txtEmiNo100;
+
     public static LinearLayout linAmortBtn1, linAmortBtn2, linAmortBtn3, linAmortBtn4, linAmortBtn5, linAmortBtn6,
-            linAmortBtn7, linAmortBtn8, linAmortBtn9, linAmortBtn10, linAmortBtn11, linAmortBtn12, linAmortBtn13, linAmortBtn14, linAmortTile;
+            linAmortBtn7, linAmortBtn8, linAmortBtn9, linAmortBtn10, linAmortBtn11, linAmortBtn12, linAmortBtn13, linAmortBtn14,
+            linAmortBtn15,linAmortBtn16,linAmortBtn17,linAmortBtn18,linAmortBtn19,linAmortBtn20,linAmortTile;
     public static CardView card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
             card11, card12, card13, card14, card15, card16, card17, card18, card19, card20,
             card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
             card31, card32, card33, card34, card35, card36, card37, card38, card39, card40,
             card41, card42, card43, card44, card45, card46, card47, card48, card49, card50,
             card51, card52, card53, card54, card55, card56, card57, card58, card59, card60,
-            card61, card62, card63, card64, card65, card66, card67, card68, card69, card70;
+            card61, card62, card63, card64, card65, card66, card67, card68, card69, card70,
+            card71, card72, card73, card74, card75, card76, card77, card78, card79, card80,
+            card81, card82, card83, card84, card85, card86, card87, card88, card89, card90,
+            card91, card92, card93, card94, card95, card96, card97, card98, card99, card100;
+
 
     public static TextView txtEmiNo, txtEmiAmount, txtDueBy, txtPaymentDate, txtPaymentStatus, txtBtnText, txtPaidDue, txtOutstandingDue,
             txtNextEmiAmount, txtNextEmiDue, txtNextEmiEndDate, txtOutstandingAmt;
@@ -220,6 +231,43 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         txtEmiNo69 = view.findViewById(R.id.txtEmiNo69);
         txtEmiNo70 = view.findViewById(R.id.txtEmiNo70);
 
+        txtEmiNo71 = view.findViewById(R.id.txtEmiNo71);
+        txtEmiNo72 = view.findViewById(R.id.txtEmiNo72);
+        txtEmiNo73 = view.findViewById(R.id.txtEmiNo73);
+        txtEmiNo74 = view.findViewById(R.id.txtEmiNo74);
+        txtEmiNo75 = view.findViewById(R.id.txtEmiNo75);
+        txtEmiNo76 = view.findViewById(R.id.txtEmiNo76);
+        txtEmiNo77 = view.findViewById(R.id.txtEmiNo77);
+        txtEmiNo78 = view.findViewById(R.id.txtEmiNo78);
+        txtEmiNo79 = view.findViewById(R.id.txtEmiNo79);
+        txtEmiNo80 = view.findViewById(R.id.txtEmiNo80);
+
+
+
+        txtEmiNo81 = view.findViewById(R.id.txtEmiNo81);
+        txtEmiNo82 = view.findViewById(R.id.txtEmiNo82);
+        txtEmiNo83 = view.findViewById(R.id.txtEmiNo83);
+        txtEmiNo84 = view.findViewById(R.id.txtEmiNo84);
+        txtEmiNo85 = view.findViewById(R.id.txtEmiNo85);
+        txtEmiNo86 = view.findViewById(R.id.txtEmiNo86);
+        txtEmiNo87 = view.findViewById(R.id.txtEmiNo87);
+        txtEmiNo88 = view.findViewById(R.id.txtEmiNo88);
+        txtEmiNo89 = view.findViewById(R.id.txtEmiNo89);
+        txtEmiNo90 = view.findViewById(R.id.txtEmiNo90);
+
+
+
+        txtEmiNo91 = view.findViewById(R.id.txtEmiNo91);
+        txtEmiNo92 = view.findViewById(R.id.txtEmiNo92);
+        txtEmiNo93 = view.findViewById(R.id.txtEmiNo93);
+        txtEmiNo94 = view.findViewById(R.id.txtEmiNo94);
+        txtEmiNo95 = view.findViewById(R.id.txtEmiNo95);
+        txtEmiNo96 = view.findViewById(R.id.txtEmiNo96);
+        txtEmiNo97 = view.findViewById(R.id.txtEmiNo97);
+        txtEmiNo98 = view.findViewById(R.id.txtEmiNo98);
+        txtEmiNo99 = view.findViewById(R.id.txtEmiNo99);
+        txtEmiNo100 = view.findViewById(R.id.txtEmiNo100);
+
         //card view
 
         card1 = view.findViewById(R.id.card1);
@@ -293,6 +341,40 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         card69 = view.findViewById(R.id.card69);
         card70 = view.findViewById(R.id.card70);
 
+        card71 = view.findViewById(R.id.card71);
+        card72 = view.findViewById(R.id.card72);
+        card73 = view.findViewById(R.id.card73);
+        card74 = view.findViewById(R.id.card74);
+        card75 = view.findViewById(R.id.card75);
+        card76 = view.findViewById(R.id.card76);
+        card77 = view.findViewById(R.id.card77);
+        card78 = view.findViewById(R.id.card78);
+        card79 = view.findViewById(R.id.card79);
+        card80 = view.findViewById(R.id.card80);
+
+        card81 = view.findViewById(R.id.card81);
+        card82 = view.findViewById(R.id.card82);
+        card83 = view.findViewById(R.id.card83);
+        card84 = view.findViewById(R.id.card84);
+        card85 = view.findViewById(R.id.card85);
+        card86 = view.findViewById(R.id.card86);
+        card87 = view.findViewById(R.id.card87);
+        card88 = view.findViewById(R.id.card88);
+        card89 = view.findViewById(R.id.card89);
+        card90 = view.findViewById(R.id.card90);
+
+
+        card91 = view.findViewById(R.id.card91);
+        card92 = view.findViewById(R.id.card92);
+        card93 = view.findViewById(R.id.card93);
+        card94 = view.findViewById(R.id.card94);
+        card95 = view.findViewById(R.id.card95);
+        card96 = view.findViewById(R.id.card96);
+        card97 = view.findViewById(R.id.card97);
+        card98 = view.findViewById(R.id.card98);
+        card99 = view.findViewById(R.id.card99);
+        card100 = view.findViewById(R.id.card100);
+
         //linear layout
         linHasAmort = view.findViewById(R.id.linHasAmort);
         linNoAmort = view.findViewById(R.id.linNoAmort);
@@ -313,6 +395,13 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         linAmortBtn12 = view.findViewById(R.id.linAmortBtn12);
         linAmortBtn13 = view.findViewById(R.id.linAmortBtn13);
         linAmortBtn14 = view.findViewById(R.id.linAmortBtn14);
+
+        linAmortBtn15 = view.findViewById(R.id.linAmortBtn15);
+        linAmortBtn16 = view.findViewById(R.id.linAmortBtn16);
+        linAmortBtn17 = view.findViewById(R.id.linAmortBtn17);
+        linAmortBtn18 = view.findViewById(R.id.linAmortBtn18);
+        linAmortBtn19 = view.findViewById(R.id.linAmortBtn19);
+        linAmortBtn20 = view.findViewById(R.id.linAmortBtn20);
 
         linPayBtn.setOnClickListener(this);
         card1.setOnClickListener(this);
@@ -385,6 +474,41 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         card68.setOnClickListener(this);
         card69.setOnClickListener(this);
         card70.setOnClickListener(this);
+
+        card71.setOnClickListener(this);
+        card72.setOnClickListener(this);
+        card73.setOnClickListener(this);
+        card74.setOnClickListener(this);
+        card75.setOnClickListener(this);
+        card76.setOnClickListener(this);
+        card77.setOnClickListener(this);
+        card78.setOnClickListener(this);
+        card79.setOnClickListener(this);
+        card80.setOnClickListener(this);
+
+
+        card81.setOnClickListener(this);
+        card82.setOnClickListener(this);
+        card83.setOnClickListener(this);
+        card84.setOnClickListener(this);
+        card85.setOnClickListener(this);
+        card86.setOnClickListener(this);
+        card87.setOnClickListener(this);
+        card88.setOnClickListener(this);
+        card89.setOnClickListener(this);
+        card90.setOnClickListener(this);
+
+
+        card91.setOnClickListener(this);
+        card92.setOnClickListener(this);
+        card93.setOnClickListener(this);
+        card94.setOnClickListener(this);
+        card95.setOnClickListener(this);
+        card96.setOnClickListener(this);
+        card97.setOnClickListener(this);
+        card98.setOnClickListener(this);
+        card99.setOnClickListener(this);
+        card100.setOnClickListener(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -639,35 +763,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn3.setVisibility(View.VISIBLE);
                             txtEmiNo11.setVisibility(View.VISIBLE);
                             card11.setVisibility(View.VISIBLE);
-                            txtEmiNo11.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo11.setText(mLoanEmisArrayList.get(j).emi_no);
                             card11.setTag(j);
                             break;
                         case 11:
                             linAmortBtn3.setVisibility(View.VISIBLE);
                             txtEmiNo12.setVisibility(View.VISIBLE);
                             card12.setVisibility(View.VISIBLE);
-                            txtEmiNo12.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo12.setText(mLoanEmisArrayList.get(j).emi_no);
                             card12.setTag(j);
                             break;
                         case 12:
                             linAmortBtn3.setVisibility(View.VISIBLE);
                             txtEmiNo13.setVisibility(View.VISIBLE);
                             card13.setVisibility(View.VISIBLE);
-                            txtEmiNo13.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo13.setText(mLoanEmisArrayList.get(j).emi_no);
                             card13.setTag(j);
                             break;
                         case 13:
                             linAmortBtn3.setVisibility(View.VISIBLE);
                             txtEmiNo14.setVisibility(View.VISIBLE);
                             card14.setVisibility(View.VISIBLE);
-                            txtEmiNo14.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo14.setText(mLoanEmisArrayList.get(j).emi_no);
                             card14.setTag(j);
                             break;
                         case 14:
                             linAmortBtn1.setVisibility(View.VISIBLE);
                             txtEmiNo15.setVisibility(View.VISIBLE);
                             card15.setVisibility(View.VISIBLE);
-                            txtEmiNo15.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo15.setText(mLoanEmisArrayList.get(j).emi_no);
                             card15.setTag(j);
                             break;
 
@@ -675,35 +799,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn4.setVisibility(View.VISIBLE);
                             txtEmiNo16.setVisibility(View.VISIBLE);
                             card16.setVisibility(View.VISIBLE);
-                            txtEmiNo16.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo16.setText(mLoanEmisArrayList.get(j).emi_no);
                             card16.setTag(j);
                             break;
                         case 16:
                             linAmortBtn4.setVisibility(View.VISIBLE);
                             txtEmiNo17.setVisibility(View.VISIBLE);
                             card17.setVisibility(View.VISIBLE);
-                            txtEmiNo17.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo17.setText(mLoanEmisArrayList.get(j).emi_no);
                             card17.setTag(j);
                             break;
                         case 17:
                             linAmortBtn4.setVisibility(View.VISIBLE);
                             txtEmiNo18.setVisibility(View.VISIBLE);
                             card18.setVisibility(View.VISIBLE);
-                            txtEmiNo18.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo18.setText(mLoanEmisArrayList.get(j).emi_no);
                             card18.setTag(j);
                             break;
                         case 18:
                             linAmortBtn4.setVisibility(View.VISIBLE);
                             txtEmiNo19.setVisibility(View.VISIBLE);
                             card19.setVisibility(View.VISIBLE);
-                            txtEmiNo19.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo19.setText(mLoanEmisArrayList.get(j).emi_no);
                             card19.setTag(j);
                             break;
                         case 19:
                             linAmortBtn4.setVisibility(View.VISIBLE);
                             txtEmiNo20.setVisibility(View.VISIBLE);
                             card20.setVisibility(View.VISIBLE);
-                            txtEmiNo20.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo20.setText(mLoanEmisArrayList.get(j).emi_no);
                             card20.setTag(j);
                             break;
 
@@ -711,35 +835,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn5.setVisibility(View.VISIBLE);
                             txtEmiNo21.setVisibility(View.VISIBLE);
                             card21.setVisibility(View.VISIBLE);
-                            txtEmiNo21.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo21.setText(mLoanEmisArrayList.get(j).emi_no);
                             card21.setTag(j);
                             break;
                         case 21:
                             linAmortBtn5.setVisibility(View.VISIBLE);
                             txtEmiNo22.setVisibility(View.VISIBLE);
                             card22.setVisibility(View.VISIBLE);
-                            txtEmiNo22.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo22.setText(mLoanEmisArrayList.get(j).emi_no);
                             card22.setTag(j);
                             break;
                         case 22:
                             linAmortBtn5.setVisibility(View.VISIBLE);
                             txtEmiNo23.setVisibility(View.VISIBLE);
                             card23.setVisibility(View.VISIBLE);
-                            txtEmiNo23.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo23.setText(mLoanEmisArrayList.get(j).emi_no);
                             card23.setTag(j);
                             break;
                         case 23:
                             linAmortBtn5.setVisibility(View.VISIBLE);
                             txtEmiNo24.setVisibility(View.VISIBLE);
                             card24.setVisibility(View.VISIBLE);
-                            txtEmiNo24.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo24.setText(mLoanEmisArrayList.get(j).emi_no);
                             card24.setTag(j);
                             break;
                         case 24:
                             linAmortBtn5.setVisibility(View.VISIBLE);
                             txtEmiNo25.setVisibility(View.VISIBLE);
                             card25.setVisibility(View.VISIBLE);
-                            txtEmiNo25.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo25.setText(mLoanEmisArrayList.get(j).emi_no);
                             card25.setTag(j);
                             break;
 
@@ -747,35 +871,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn6.setVisibility(View.VISIBLE);
                             txtEmiNo26.setVisibility(View.VISIBLE);
                             card26.setVisibility(View.VISIBLE);
-                            txtEmiNo26.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo26.setText(mLoanEmisArrayList.get(j).emi_no);
                             card26.setTag(j);
                             break;
                         case 26:
                             linAmortBtn6.setVisibility(View.VISIBLE);
                             txtEmiNo27.setVisibility(View.VISIBLE);
                             card27.setVisibility(View.VISIBLE);
-                            txtEmiNo27.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo27.setText(mLoanEmisArrayList.get(j).emi_no);
                             card27.setTag(j);
                             break;
                         case 27:
                             linAmortBtn6.setVisibility(View.VISIBLE);
                             txtEmiNo28.setVisibility(View.VISIBLE);
                             card28.setVisibility(View.VISIBLE);
-                            txtEmiNo28.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo28.setText(mLoanEmisArrayList.get(j).emi_no);
                             card28.setTag(j);
                             break;
                         case 28:
                             linAmortBtn6.setVisibility(View.VISIBLE);
                             txtEmiNo29.setVisibility(View.VISIBLE);
                             card29.setVisibility(View.VISIBLE);
-                            txtEmiNo29.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo29.setText(mLoanEmisArrayList.get(j).emi_no);
                             card29.setTag(j);
                             break;
                         case 29:
                             linAmortBtn6.setVisibility(View.VISIBLE);
                             txtEmiNo30.setVisibility(View.VISIBLE);
                             card30.setVisibility(View.VISIBLE);
-                            txtEmiNo30.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo30.setText(mLoanEmisArrayList.get(j).emi_no);
                             card30.setTag(j);
                             break;
 
@@ -783,35 +907,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn7.setVisibility(View.VISIBLE);
                             txtEmiNo31.setVisibility(View.VISIBLE);
                             card31.setVisibility(View.VISIBLE);
-                            txtEmiNo31.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo31.setText(mLoanEmisArrayList.get(j).emi_no);
                             card31.setTag(j);
                             break;
                         case 31:
                             linAmortBtn7.setVisibility(View.VISIBLE);
                             txtEmiNo32.setVisibility(View.VISIBLE);
                             card32.setVisibility(View.VISIBLE);
-                            txtEmiNo32.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo32.setText(mLoanEmisArrayList.get(j).emi_no);
                             card32.setTag(j);
                             break;
                         case 32:
                             linAmortBtn7.setVisibility(View.VISIBLE);
                             txtEmiNo33.setVisibility(View.VISIBLE);
                             card33.setVisibility(View.VISIBLE);
-                            txtEmiNo33.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo33.setText(mLoanEmisArrayList.get(j).emi_no);
                             card33.setTag(j);
                             break;
                         case 33:
                             linAmortBtn7.setVisibility(View.VISIBLE);
                             txtEmiNo34.setVisibility(View.VISIBLE);
                             card34.setVisibility(View.VISIBLE);
-                            txtEmiNo34.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo34.setText(mLoanEmisArrayList.get(j).emi_no);
                             card34.setTag(j);
                             break;
                         case 34:
                             linAmortBtn7.setVisibility(View.VISIBLE);
                             txtEmiNo35.setVisibility(View.VISIBLE);
                             card35.setVisibility(View.VISIBLE);
-                            txtEmiNo35.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo35.setText(mLoanEmisArrayList.get(j).emi_no);
                             card35.setTag(j);
                             break;
 
@@ -819,35 +943,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn8.setVisibility(View.VISIBLE);
                             txtEmiNo36.setVisibility(View.VISIBLE);
                             card36.setVisibility(View.VISIBLE);
-                            txtEmiNo36.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo36.setText(mLoanEmisArrayList.get(j).emi_no);
                             card36.setTag(j);
                             break;
                         case 36:
                             linAmortBtn8.setVisibility(View.VISIBLE);
                             txtEmiNo37.setVisibility(View.VISIBLE);
                             card37.setVisibility(View.VISIBLE);
-                            txtEmiNo37.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo37.setText(mLoanEmisArrayList.get(j).emi_no);
                             card37.setTag(j);
                             break;
                         case 37:
                             linAmortBtn8.setVisibility(View.VISIBLE);
                             txtEmiNo38.setVisibility(View.VISIBLE);
                             card38.setVisibility(View.VISIBLE);
-                            txtEmiNo38.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo38.setText(mLoanEmisArrayList.get(j).emi_no);
                             card38.setTag(j);
                             break;
                         case 38:
                             linAmortBtn8.setVisibility(View.VISIBLE);
                             txtEmiNo39.setVisibility(View.VISIBLE);
                             card39.setVisibility(View.VISIBLE);
-                            txtEmiNo39.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo39.setText(mLoanEmisArrayList.get(j).emi_no);
                             card39.setTag(j);
                             break;
                         case 39:
                             linAmortBtn8.setVisibility(View.VISIBLE);
                             txtEmiNo40.setVisibility(View.VISIBLE);
                             card40.setVisibility(View.VISIBLE);
-                            txtEmiNo40.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo40.setText(mLoanEmisArrayList.get(j).emi_no);
                             card40.setTag(j);
                             break;
 
@@ -855,35 +979,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn9.setVisibility(View.VISIBLE);
                             txtEmiNo41.setVisibility(View.VISIBLE);
                             card41.setVisibility(View.VISIBLE);
-                            txtEmiNo41.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo41.setText(mLoanEmisArrayList.get(j).emi_no);
                             card41.setTag(j);
                             break;
                         case 41:
                             linAmortBtn9.setVisibility(View.VISIBLE);
                             txtEmiNo42.setVisibility(View.VISIBLE);
                             card42.setVisibility(View.VISIBLE);
-                            txtEmiNo42.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo42.setText(mLoanEmisArrayList.get(j).emi_no);
                             card42.setTag(j);
                             break;
                         case 42:
                             linAmortBtn9.setVisibility(View.VISIBLE);
                             txtEmiNo43.setVisibility(View.VISIBLE);
                             card43.setVisibility(View.VISIBLE);
-                            txtEmiNo43.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo43.setText(mLoanEmisArrayList.get(j).emi_no);
                             card43.setTag(j);
                             break;
                         case 43:
                             linAmortBtn9.setVisibility(View.VISIBLE);
                             txtEmiNo44.setVisibility(View.VISIBLE);
                             card44.setVisibility(View.VISIBLE);
-                            txtEmiNo44.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo44.setText(mLoanEmisArrayList.get(j).emi_no);
                             card44.setTag(j);
                             break;
                         case 44:
                             linAmortBtn9.setVisibility(View.VISIBLE);
                             txtEmiNo45.setVisibility(View.VISIBLE);
                             card45.setVisibility(View.VISIBLE);
-                            txtEmiNo45.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo45.setText(mLoanEmisArrayList.get(j).emi_no);
                             card45.setTag(j);
                             break;
 
@@ -891,35 +1015,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn10.setVisibility(View.VISIBLE);
                             txtEmiNo46.setVisibility(View.VISIBLE);
                             card46.setVisibility(View.VISIBLE);
-                            txtEmiNo46.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo46.setText(mLoanEmisArrayList.get(j).emi_no);
                             card46.setTag(j);
                             break;
                         case 46:
                             linAmortBtn10.setVisibility(View.VISIBLE);
                             txtEmiNo47.setVisibility(View.VISIBLE);
                             card47.setVisibility(View.VISIBLE);
-                            txtEmiNo47.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo47.setText(mLoanEmisArrayList.get(j).emi_no);
                             card47.setTag(j);
                             break;
                         case 47:
                             linAmortBtn10.setVisibility(View.VISIBLE);
                             txtEmiNo48.setVisibility(View.VISIBLE);
                             card48.setVisibility(View.VISIBLE);
-                            txtEmiNo48.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo48.setText(mLoanEmisArrayList.get(j).emi_no);
                             card48.setTag(j);
                             break;
                         case 48:
                             linAmortBtn10.setVisibility(View.VISIBLE);
                             txtEmiNo49.setVisibility(View.VISIBLE);
                             card49.setVisibility(View.VISIBLE);
-                            txtEmiNo49.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo49.setText(mLoanEmisArrayList.get(j).emi_no);
                             card49.setTag(j);
                             break;
                         case 49:
                             linAmortBtn10.setVisibility(View.VISIBLE);
                             txtEmiNo50.setVisibility(View.VISIBLE);
                             card50.setVisibility(View.VISIBLE);
-                            txtEmiNo50.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo50.setText(mLoanEmisArrayList.get(j).emi_no);
                             card50.setTag(j);
                             break;
 
@@ -927,35 +1051,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn11.setVisibility(View.VISIBLE);
                             txtEmiNo51.setVisibility(View.VISIBLE);
                             card51.setVisibility(View.VISIBLE);
-                            txtEmiNo51.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo51.setText(mLoanEmisArrayList.get(j).emi_no);
                             card51.setTag(j);
                             break;
                         case 51:
                             linAmortBtn11.setVisibility(View.VISIBLE);
                             txtEmiNo52.setVisibility(View.VISIBLE);
                             card52.setVisibility(View.VISIBLE);
-                            txtEmiNo52.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo52.setText(mLoanEmisArrayList.get(j).emi_no);
                             card52.setTag(j);
                             break;
                         case 52:
                             linAmortBtn11.setVisibility(View.VISIBLE);
                             txtEmiNo53.setVisibility(View.VISIBLE);
                             card53.setVisibility(View.VISIBLE);
-                            txtEmiNo53.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo53.setText(mLoanEmisArrayList.get(j).emi_no);
                             card53.setTag(j);
                             break;
                         case 53:
                             linAmortBtn11.setVisibility(View.VISIBLE);
                             txtEmiNo54.setVisibility(View.VISIBLE);
                             card54.setVisibility(View.VISIBLE);
-                            txtEmiNo54.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo54.setText(mLoanEmisArrayList.get(j).emi_no);
                             card54.setTag(j);
                             break;
                         case 54:
                             linAmortBtn11.setVisibility(View.VISIBLE);
                             txtEmiNo55.setVisibility(View.VISIBLE);
                             card55.setVisibility(View.VISIBLE);
-                            txtEmiNo55.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo55.setText(mLoanEmisArrayList.get(j).emi_no);
                             card55.setTag(j);
                             break;
 
@@ -963,35 +1087,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn12.setVisibility(View.VISIBLE);
                             txtEmiNo56.setVisibility(View.VISIBLE);
                             card56.setVisibility(View.VISIBLE);
-                            txtEmiNo56.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo56.setText(mLoanEmisArrayList.get(j).emi_no);
                             card56.setTag(j);
                             break;
                         case 56:
                             linAmortBtn12.setVisibility(View.VISIBLE);
                             txtEmiNo57.setVisibility(View.VISIBLE);
                             card57.setVisibility(View.VISIBLE);
-                            txtEmiNo57.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo57.setText(mLoanEmisArrayList.get(j).emi_no);
                             card57.setTag(j);
                             break;
                         case 57:
                             linAmortBtn12.setVisibility(View.VISIBLE);
                             txtEmiNo58.setVisibility(View.VISIBLE);
                             card58.setVisibility(View.VISIBLE);
-                            txtEmiNo58.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo58.setText(mLoanEmisArrayList.get(j).emi_no);
                             card58.setTag(j);
                             break;
                         case 58:
                             linAmortBtn12.setVisibility(View.VISIBLE);
                             txtEmiNo59.setVisibility(View.VISIBLE);
                             card59.setVisibility(View.VISIBLE);
-                            txtEmiNo59.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo59.setText(mLoanEmisArrayList.get(j).emi_no);
                             card59.setTag(j);
                             break;
                         case 59:
                             linAmortBtn12.setVisibility(View.VISIBLE);
                             txtEmiNo60.setVisibility(View.VISIBLE);
                             card60.setVisibility(View.VISIBLE);
-                            txtEmiNo60.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo60.setText(mLoanEmisArrayList.get(j).emi_no);
                             card60.setTag(j);
                             break;
 
@@ -999,35 +1123,35 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn13.setVisibility(View.VISIBLE);
                             txtEmiNo61.setVisibility(View.VISIBLE);
                             card61.setVisibility(View.VISIBLE);
-                            txtEmiNo61.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo61.setText(mLoanEmisArrayList.get(j).emi_no);
                             card61.setTag(j);
                             break;
                         case 61:
                             linAmortBtn13.setVisibility(View.VISIBLE);
                             txtEmiNo62.setVisibility(View.VISIBLE);
                             card62.setVisibility(View.VISIBLE);
-                            txtEmiNo62.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo62.setText(mLoanEmisArrayList.get(j).emi_no);
                             card62.setTag(j);
                             break;
                         case 62:
                             linAmortBtn13.setVisibility(View.VISIBLE);
                             txtEmiNo63.setVisibility(View.VISIBLE);
                             card63.setVisibility(View.VISIBLE);
-                            txtEmiNo63.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo63.setText(mLoanEmisArrayList.get(j).emi_no);
                             card63.setTag(j);
                             break;
                         case 63:
                             linAmortBtn13.setVisibility(View.VISIBLE);
                             txtEmiNo64.setVisibility(View.VISIBLE);
                             card64.setVisibility(View.VISIBLE);
-                            txtEmiNo64.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo64.setText(mLoanEmisArrayList.get(j).emi_no);
                             card64.setTag(j);
                             break;
                         case 64:
                             linAmortBtn13.setVisibility(View.VISIBLE);
                             txtEmiNo65.setVisibility(View.VISIBLE);
                             card65.setVisibility(View.VISIBLE);
-                            txtEmiNo65.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo65.setText(mLoanEmisArrayList.get(j).emi_no);
                             card65.setTag(j);
                             break;
 
@@ -1035,37 +1159,281 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linAmortBtn14.setVisibility(View.VISIBLE);
                             txtEmiNo66.setVisibility(View.VISIBLE);
                             card66.setVisibility(View.VISIBLE);
-                            txtEmiNo66.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo66.setText(mLoanEmisArrayList.get(j).emi_no);
                             card66.setTag(j);
                             break;
                         case 66:
                             linAmortBtn14.setVisibility(View.VISIBLE);
                             txtEmiNo67.setVisibility(View.VISIBLE);
                             card67.setVisibility(View.VISIBLE);
-                            txtEmiNo67.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo67.setText(mLoanEmisArrayList.get(j).emi_no);
                             card67.setTag(j);
                             break;
                         case 67:
                             linAmortBtn14.setVisibility(View.VISIBLE);
                             txtEmiNo68.setVisibility(View.VISIBLE);
                             card68.setVisibility(View.VISIBLE);
-                            txtEmiNo68.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo68.setText(mLoanEmisArrayList.get(j).emi_no);
                             card68.setTag(j);
                             break;
                         case 68:
                             linAmortBtn14.setVisibility(View.VISIBLE);
                             txtEmiNo69.setVisibility(View.VISIBLE);
                             card69.setVisibility(View.VISIBLE);
-                            txtEmiNo69.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo69.setText(mLoanEmisArrayList.get(j).emi_no);
                             card69.setTag(j);
                             break;
                         case 69:
                             linAmortBtn14.setVisibility(View.VISIBLE);
                             txtEmiNo70.setVisibility(View.VISIBLE);
                             card70.setVisibility(View.VISIBLE);
-                            txtEmiNo70.setText("0" + mLoanEmisArrayList.get(j).emi_no);
+                            txtEmiNo70.setText(mLoanEmisArrayList.get(j).emi_no);
                             card70.setTag(j);
                             break;
+
+                        case 70:
+                            linAmortBtn15.setVisibility(View.VISIBLE);
+                            txtEmiNo71.setVisibility(View.VISIBLE);
+                            card71.setVisibility(View.VISIBLE);
+                            txtEmiNo71.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card71.setTag(j);
+                            break;
+                        case 71:
+                            linAmortBtn15.setVisibility(View.VISIBLE);
+                            txtEmiNo72.setVisibility(View.VISIBLE);
+                            card72.setVisibility(View.VISIBLE);
+                            txtEmiNo72.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card72.setTag(j);
+                            break;
+
+                        case 72:
+                            linAmortBtn15.setVisibility(View.VISIBLE);
+                            txtEmiNo73.setVisibility(View.VISIBLE);
+                            card73.setVisibility(View.VISIBLE);
+                            txtEmiNo73.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card73.setTag(j);
+                            break;
+
+                        case 73:
+                            linAmortBtn15.setVisibility(View.VISIBLE);
+                            txtEmiNo74.setVisibility(View.VISIBLE);
+                            card74.setVisibility(View.VISIBLE);
+                            txtEmiNo74.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card74.setTag(j);
+                            break;
+
+                        case 74:
+                            linAmortBtn15.setVisibility(View.VISIBLE);
+                            txtEmiNo75.setVisibility(View.VISIBLE);
+                            card75.setVisibility(View.VISIBLE);
+                            txtEmiNo75.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card75.setTag(j);
+                            break;
+
+                        case 75:
+                            linAmortBtn16.setVisibility(View.VISIBLE);
+                            txtEmiNo76.setVisibility(View.VISIBLE);
+                            card76.setVisibility(View.VISIBLE);
+                            txtEmiNo76.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card76.setTag(j);
+                            break;
+
+                        case 76:
+                            linAmortBtn16.setVisibility(View.VISIBLE);
+                            txtEmiNo77.setVisibility(View.VISIBLE);
+                            card77.setVisibility(View.VISIBLE);
+                            txtEmiNo77.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card77.setTag(j);
+                            break;
+
+                        case 77:
+                            linAmortBtn16.setVisibility(View.VISIBLE);
+                            txtEmiNo78.setVisibility(View.VISIBLE);
+                            card78.setVisibility(View.VISIBLE);
+                            txtEmiNo78.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card78.setTag(j);
+                            break;
+
+                        case 78:
+                            linAmortBtn16.setVisibility(View.VISIBLE);
+                            txtEmiNo79.setVisibility(View.VISIBLE);
+                            card79.setVisibility(View.VISIBLE);
+                            txtEmiNo79.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card79.setTag(j);
+                            break;
+
+                        case 79:
+                            linAmortBtn16.setVisibility(View.VISIBLE);
+                            txtEmiNo80.setVisibility(View.VISIBLE);
+                            card80.setVisibility(View.VISIBLE);
+                            txtEmiNo80.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card80.setTag(j);
+                            break;
+
+                        case 80:
+                            linAmortBtn17.setVisibility(View.VISIBLE);
+                            txtEmiNo81.setVisibility(View.VISIBLE);
+                            card81.setVisibility(View.VISIBLE);
+                            txtEmiNo81.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card81.setTag(j);
+                            break;
+
+                        case 81:
+                            linAmortBtn17.setVisibility(View.VISIBLE);
+                            txtEmiNo82.setVisibility(View.VISIBLE);
+                            card82.setVisibility(View.VISIBLE);
+                            txtEmiNo82.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card82.setTag(j);
+                            break;
+
+                        case 82:
+                            linAmortBtn17.setVisibility(View.VISIBLE);
+                            txtEmiNo83.setVisibility(View.VISIBLE);
+                            card83.setVisibility(View.VISIBLE);
+                            txtEmiNo83.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card83.setTag(j);
+                            break;
+
+                        case 83:
+                            linAmortBtn17.setVisibility(View.VISIBLE);
+                            txtEmiNo84.setVisibility(View.VISIBLE);
+                            card84.setVisibility(View.VISIBLE);
+                            txtEmiNo84.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card84.setTag(j);
+                            break;
+
+                        case 84:
+                            linAmortBtn17.setVisibility(View.VISIBLE);
+                            txtEmiNo85.setVisibility(View.VISIBLE);
+                            card85.setVisibility(View.VISIBLE);
+                            txtEmiNo85.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card85.setTag(j);
+                            break;
+
+                        case 85:
+                            linAmortBtn18.setVisibility(View.VISIBLE);
+                            txtEmiNo86.setVisibility(View.VISIBLE);
+                            card86.setVisibility(View.VISIBLE);
+                            txtEmiNo86.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card86.setTag(j);
+                            break;
+
+                        case 86:
+                            linAmortBtn18.setVisibility(View.VISIBLE);
+                            txtEmiNo87.setVisibility(View.VISIBLE);
+                            card87.setVisibility(View.VISIBLE);
+                            txtEmiNo87.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card87.setTag(j);
+                            break;
+
+                        case 87:
+                            linAmortBtn18.setVisibility(View.VISIBLE);
+                            txtEmiNo88.setVisibility(View.VISIBLE);
+                            card88.setVisibility(View.VISIBLE);
+                            txtEmiNo88.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card88.setTag(j);
+                            break;
+
+                        case 88:
+                            linAmortBtn18.setVisibility(View.VISIBLE);
+                            txtEmiNo89.setVisibility(View.VISIBLE);
+                            card89.setVisibility(View.VISIBLE);
+                            txtEmiNo89.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card89.setTag(j);
+                            break;
+
+                        case 89:
+                            linAmortBtn18.setVisibility(View.VISIBLE);
+                            txtEmiNo90.setVisibility(View.VISIBLE);
+                            card90.setVisibility(View.VISIBLE);
+                            txtEmiNo90.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card90.setTag(j);
+                            break;
+
+                        case 90:
+                            linAmortBtn19.setVisibility(View.VISIBLE);
+                            txtEmiNo91.setVisibility(View.VISIBLE);
+                            card91.setVisibility(View.VISIBLE);
+                            txtEmiNo91.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card91.setTag(j);
+                            break;
+
+                        case 91:
+                            linAmortBtn19.setVisibility(View.VISIBLE);
+                            txtEmiNo92.setVisibility(View.VISIBLE);
+                            card92.setVisibility(View.VISIBLE);
+                            txtEmiNo92.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card92.setTag(j);
+                            break;
+
+                        case 92:
+                            linAmortBtn19.setVisibility(View.VISIBLE);
+                            txtEmiNo93.setVisibility(View.VISIBLE);
+                            card93.setVisibility(View.VISIBLE);
+                            txtEmiNo93.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card93.setTag(j);
+                            break;
+
+                        case 93:
+                            linAmortBtn19.setVisibility(View.VISIBLE);
+                            txtEmiNo94.setVisibility(View.VISIBLE);
+                            card94.setVisibility(View.VISIBLE);
+                            txtEmiNo94.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card94.setTag(j);
+                            break;
+
+                        case 94:
+                            linAmortBtn19.setVisibility(View.VISIBLE);
+                            txtEmiNo95.setVisibility(View.VISIBLE);
+                            card95.setVisibility(View.VISIBLE);
+                            txtEmiNo95.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card95.setTag(j);
+                            break;
+
+                        case 95:
+                            linAmortBtn20.setVisibility(View.VISIBLE);
+                            txtEmiNo96.setVisibility(View.VISIBLE);
+                            card96.setVisibility(View.VISIBLE);
+                            txtEmiNo96.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card96.setTag(j);
+                            break;
+
+                        case 96:
+                            linAmortBtn20.setVisibility(View.VISIBLE);
+                            txtEmiNo97.setVisibility(View.VISIBLE);
+                            card97.setVisibility(View.VISIBLE);
+                            txtEmiNo97.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card97.setTag(j);
+                            break;
+
+                        case 97:
+                            linAmortBtn20.setVisibility(View.VISIBLE);
+                            txtEmiNo98.setVisibility(View.VISIBLE);
+                            card98.setVisibility(View.VISIBLE);
+                            txtEmiNo98.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card98.setTag(j);
+                            break;
+
+                        case 98:
+                            linAmortBtn20.setVisibility(View.VISIBLE);
+                            txtEmiNo99.setVisibility(View.VISIBLE);
+                            card99.setVisibility(View.VISIBLE);
+                            txtEmiNo99.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card99.setTag(j);
+                            break;
+
+                        case 99:
+                            linAmortBtn20.setVisibility(View.VISIBLE);
+                            txtEmiNo100.setVisibility(View.VISIBLE);
+                            card100.setVisibility(View.VISIBLE);
+                            txtEmiNo100.setText(mLoanEmisArrayList.get(j).emi_no);
+                            card100.setTag(j);
+                            break;
+
+
+
+
+
                     }
                 }
 
@@ -1602,6 +1970,99 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                     selectedAmort((Integer) card70.getTag(), card70);
                     break;
 
+                case R.id.card71:
+                    selectedAmort((Integer) card71.getTag(), card71);
+                    break;
+                case R.id.card72:
+                    selectedAmort((Integer) card72.getTag(), card72);
+                    break;
+                case R.id.card73:
+                    selectedAmort((Integer) card73.getTag(), card73);
+                    break;
+                case R.id.card74:
+                    selectedAmort((Integer) card74.getTag(), card74);
+                    break;
+                case R.id.card75:
+                    selectedAmort((Integer) card75.getTag(), card75);
+                    break;
+                case R.id.card76:
+                    selectedAmort((Integer) card76.getTag(), card76);
+                    break;
+                case R.id.card77:
+                    selectedAmort((Integer) card77.getTag(), card77);
+                    break;
+                case R.id.card78:
+                    selectedAmort((Integer) card78.getTag(), card78);
+                    break;
+                case R.id.card79:
+                    selectedAmort((Integer) card79.getTag(), card79);
+                    break;
+                case R.id.card80:
+                    selectedAmort((Integer) card80.getTag(), card80);
+                    break;
+
+                case R.id.card81:
+                    selectedAmort((Integer) card81.getTag(), card81);
+                    break;
+                case R.id.card82:
+                    selectedAmort((Integer) card82.getTag(), card82);
+                    break;
+                case R.id.card83:
+                    selectedAmort((Integer) card83.getTag(), card83);
+                    break;
+                case R.id.card84:
+                    selectedAmort((Integer) card84.getTag(), card84);
+                    break;
+                case R.id.card85:
+                    selectedAmort((Integer) card85.getTag(), card85);
+                    break;
+                case R.id.card86:
+                    selectedAmort((Integer) card86.getTag(), card86);
+                    break;
+                case R.id.card87:
+                    selectedAmort((Integer) card87.getTag(), card87);
+                    break;
+                case R.id.card88:
+                    selectedAmort((Integer) card88.getTag(), card88);
+                    break;
+                case R.id.card89:
+                    selectedAmort((Integer) card89.getTag(), card89);
+                    break;
+                case R.id.card90:
+                    selectedAmort((Integer) card90.getTag(), card90);
+                    break;
+
+                case R.id.card91:
+                    selectedAmort((Integer) card91.getTag(), card91);
+                    break;
+                case R.id.card92:
+                    selectedAmort((Integer) card92.getTag(), card92);
+                    break;
+                case R.id.card93:
+                    selectedAmort((Integer) card93.getTag(), card93);
+                    break;
+                case R.id.card94:
+                    selectedAmort((Integer) card94.getTag(), card94);
+                    break;
+                case R.id.card95:
+                    selectedAmort((Integer) card95.getTag(), card95);
+                    break;
+                case R.id.card96:
+                    selectedAmort((Integer) card96.getTag(), card96);
+                    break;
+                case R.id.card97:
+                    selectedAmort((Integer) card97.getTag(), card97);
+                    break;
+                case R.id.card98:
+                    selectedAmort((Integer) card98.getTag(), card98);
+                    break;
+                case R.id.card99:
+                    selectedAmort((Integer) card99.getTag(), card99);
+                    break;
+                case R.id.card100:
+                    selectedAmort((Integer) card100.getTag(), card100);
+                    break;
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1716,7 +2177,12 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
             linAmortTile.setVisibility(View.VISIBLE);
         }
 
+        if(mLoanEmisArrayList.get(pos).emi_no.length()>1){
+            txtEmiNo.setText(mLoanEmisArrayList.get(pos).emi_no);
+        }
+        else {
         txtEmiNo.setText("0" + mLoanEmisArrayList.get(pos).emi_no);
+        }
         txtEmiAmount.setText(mLoanEmisArrayList.get(pos).emi_amount);
         txtDueBy.setText(mLoanEmisArrayList.get(pos).proposed_payment_date);
         txtPaymentDate.setText(mLoanEmisArrayList.get(pos).actual_payment_date);
@@ -1800,6 +2266,40 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                 card68.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
                 card69.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
                 card70.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+
+                card71.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card72.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card73.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card74.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card75.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card76.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card77.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card78.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card79.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card80.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+
+                card81.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card82.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card83.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card84.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card85.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card86.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card87.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card88.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card89.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card90.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+
+
+                card91.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card92.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card93.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card94.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card95.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card96.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card97.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card98.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card99.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
+                card100.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.white)));
             } catch (Resources.NotFoundException e) {
                 e.printStackTrace();
             }

@@ -60,11 +60,11 @@ public class EmiCalculatorActivity extends AppCompatActivity {
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle("EMI Calculator");
+            getSupportActionBar().setTitle("");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
-            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+//            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
+//            toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
         } catch (Exception e) {
             e.printStackTrace();
