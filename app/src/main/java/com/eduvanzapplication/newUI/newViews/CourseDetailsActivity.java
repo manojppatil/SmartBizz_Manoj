@@ -616,7 +616,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
             if (jsonData.getInt("status") == 1) {
 
                 //  Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(CourseDetailsActivity.this, TenureSelectionActivity.class));
+                startActivity(new Intent(CourseDetailsActivity.this, FinancialAnalysis.class));
+//                startActivity(new Intent(CourseDetailsActivity.this, TenureSelectionActivity.class));
                 CourseDetailsActivity.this.finish();
 
 //                EligibilityCheckFragment_6 eligibilityCheckFragment_6 = new EligibilityCheckFragment_6();

@@ -35,6 +35,7 @@ import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.CardStackAdapter;
 import com.eduvanzapplication.newUI.newViews.EmiCalculatorActivity;
+import com.eduvanzapplication.newUI.newViews.FinancialAnalysis;
 import com.eduvanzapplication.newUI.newViews.LeadOwnerType;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.newUI.newViews.TenureSelectionActivity;
@@ -229,14 +230,14 @@ public class DashboardFragmentNew extends Fragment  {
     }//-----------------------------------END OF ON CREATE----------------------------------------//
 
 
-
     View.OnClickListener FriendlyScoreClkListnr = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            startActivity(new Intent(getActivity(), TenureSelectionActivity.class));
+//            startActivity(new Intent(getActivity(), FinancialAnalysis.class));
             startActivity(new Intent(getActivity(), StartActivityFS.class));
         }
     };
+
 
     View.OnClickListener newApplicationClkListnr = new View.OnClickListener() {
         @Override

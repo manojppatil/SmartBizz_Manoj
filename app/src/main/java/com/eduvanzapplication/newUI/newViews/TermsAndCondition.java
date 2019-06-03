@@ -53,13 +53,14 @@ public class TermsAndCondition extends AppCompatActivity {
 
                         SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt("userpolicyAgreement", 1);
+                        editor.putString("userpolicyAgreement", "1");
                         editor.apply();
                         editor.commit();
 
                     Intent intent = new Intent(TermsAndCondition.this,
                             GetMobileNo.class);
                     startActivity(intent);
+                    TermsAndCondition.this.finish();
 
                 }
             });

@@ -18,6 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
+import com.eduvanzapplication.newUI.newViews.FinancialAnalysis;
 import com.google.gson.JsonIOException;
 
 import org.json.JSONArray;
@@ -90,7 +91,7 @@ public class VolleyCallAlgo360 {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
 //                headers.put("Authorization", "6041c6c1d7c580619c796c25716bf9ed");
-                headers.put("Authorization", "Bearer " + MainActivity.auth_token);
+                headers.put("Authorization", "Bearer " + "90ad441a12b48c6d7c5524b8b2a334c3");
 //                headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -120,78 +121,6 @@ public class VolleyCallAlgo360 {
         }
     }
 
-    public void sendRequest1(Context mContext, String url, AppCompatActivity activity, Fragment fragment, String callingString, final Map<String, String> dataForPost, String ErrorLogId) {
-//        Toast.makeText(activity, "Volley called", Toast.LENGTH_SHORT).show();
-        ErrorLogID = ErrorLogId;
-        screen = callingString;
-        mActivity = activity;
-        aActivity = activity;
-        mfragment = fragment;
-        context = mContext;
-        Log.e(TAG, "sendRequest: " + dataForPost);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e(TAG, "onResponse: +++++++++++" + response);
-                        showJSON(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "onErrorResponse: 1" + error.getMessage() + error.getLocalizedMessage());
-//                        Toast.makeText(VolleyCall.this,error.getMessage(),Toast.LENGTH_LONG).show();
-                    }
-
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put("user_id","2");
-//                params.put("a","Hello");
-//                params.put("file", );
-                Log.e(TAG, "getParams: Data for this url is " + dataForPost);
-                return dataForPost;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-//auth_token":"90a876cf5617b74f1e034c6561669803
-                HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("auth_token", "6041c6c1d7c580619c796c25716bf9ed");
-                headers.put("Authorization", "Bearer " + auth_token);
-//                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-
-            @Override
-            protected VolleyError parseNetworkError(VolleyError volleyError) {
-                if (volleyError.networkResponse != null && volleyError.networkResponse.data != null) {
-                    VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
-                    volleyError = error;
-                }
-                Log.e(TAG, "parseNetworkError: " + volleyError.getMessage());
-                return volleyError;
-            }
-        };
-        // if volley request is getting send more than once then use this.
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 10, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueue requestQueue;
-        try {
-            if (mfragment == null) {
-                requestQueue = Volley.newRequestQueue(mContext);
-            } else {
-                requestQueue = Volley.newRequestQueue(mContext);
-            }
-            requestQueue.add(stringRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void showJSON(String s) {
          if (screen.equalsIgnoreCase("addAlgo360")) {
@@ -203,8 +132,16 @@ public class VolleyCallAlgo360 {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (screen.equalsIgnoreCase("addAlgoscore")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((FinancialAnalysis) mActivity).updateAlgo360Score(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     private String createPostBody(Map<String, String> params) {

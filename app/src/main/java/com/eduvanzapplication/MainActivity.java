@@ -18,7 +18,7 @@ public class MainActivity extends Application {
     public static String TAG = "EDUVANZ LOG";
 //    public static String mainUrl = "http://139.59.32.234/eduvanzApi/"; //PRODUCTION
 //    public static String mainUrl = " http://139.59.61.225/eduvanzApi/"; //TESTING
-//    public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
+//   public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
 
 //    public static String mainUrl = "http://192.168.1.63/eduvanzapi/"; //Sheetal
 //    public static String mainUrl = "http://192.168.1.19/eduvanzapi/"; //Dharam
@@ -36,7 +36,7 @@ public class MainActivity extends Application {
     public void onCreate() {
         super.onCreate();
         setFont();
-//        generateHashkey();
+//      generateHashkey();
     }
 
     private void setFont() {

@@ -11,9 +11,6 @@ import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
-
 /**
  * Created by Vijay on 05-09-17.
  */

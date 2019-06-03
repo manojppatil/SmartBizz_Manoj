@@ -32,20 +32,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Util.JavaGetFileSize;
+import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCountryPersonalPOJO;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
+import com.eduvanzapplication.newUI.pojo.DocumenPOJO;
 import com.eduvanzapplication.uploaddocs.PathFile;
 import com.squareup.picasso.Picasso;
 
@@ -66,6 +73,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -79,27 +87,33 @@ import static com.eduvanzapplication.MainActivity.TAG;
 
 public class UploadDocumentFragment extends Fragment {
 
-    public static LinearLayout linAllDocBlock,linKYCblock, linKYCblockBottom, linFinancBlockBottom, linEducationBlockBottom, linOtherBottom ,
-            linFinancBlock,linEducationBlock,linOther, linKYCDocuments, linFinanceDocuments, linEducationDocuments, linOtherDocuments, linBottomBlocks;
+    public static LinearLayout linAllDocBlock, linKYCblock, linKYCblockBottom, linFinancBlockBottom, linEducationBlockBottom, linOtherBottom,
+            linFinancBlock, linEducationBlock, linOther, linKYCDocuments, linFinanceDocuments, linEducationDocuments, linOtherDocuments, linBottomBlocks;
 
-    public static Animation  scaleInlinKYCDocuments, scaleInlinFinanceDocuments,
-            scaleInlinEducationDocuments, scaleInlinOtherDocuments;
+    public static TextView txtKycDocToggle, txtPhotoToggle, txtAddtionalDocToggle;
+    public static LinearLayout linKycDocToggle, linPhotoToggle, linAddtionalDocToggle;
+    public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle;
+    public static LinearLayout linKycDocBlock, relPhotoBlock, relAddtionalDocBlock;
+    public static Animation expandAnimationPersonal, collapseanimationPersonal;
+    public static Animation expandAnimationIdentity, collapseAnimationIdentity;
+    public static Animation expanAnimationCourse, collapseAnimationCourse;
     ProgressDialog dialog;
 
     /*KYC documents*/
-    static LinearLayout profileImage,aadharCard,panCard,passport,linSeemoreKycBtn,voterId,drivingLicense,telephoneBill,electricityBill,rentAgreement,addressProof;
-    static RelativeLayout profileBckgrnd,aadharBckgrnd,panBckgrnd,passportBckgrnd,voterIdBckgrnd,drivingLicenseBckgrnd,telephoneBillBckgrnd,electricityBillBckgrnd,rentAgreementBckgrnd,addressProofBckgrnd;
+    static LinearLayout profileImage, aadharCard, panCard, passport, linSeemoreKycBtn, voterId, drivingLicense, telephoneBill, electricityBill,
+            rentAgreement, addressProof;
+    static RelativeLayout profileBckgrnd, aadharBckgrnd, panBckgrnd, passportBckgrnd, voterIdBckgrnd, drivingLicenseBckgrnd, telephoneBillBckgrnd, electricityBillBckgrnd, rentAgreementBckgrnd, addressProofBckgrnd;
     /*Financial Documents*/
-    static LinearLayout salSlipSix,salSlipThree,bankStmntThree,linSeemoreFinancialBtn,bankStmntSix,linSeemoreEducationalBtn,kvp,licPolicy,form16,form61,pensionLetter,itr,pnl;
-    static RelativeLayout salSixBckgrnd,salThreeBckgrnd,bankThreeBckgrnd,bankSixBckgrnd,kvpBckgrnd,licPolicyBckgrnd,form16Bckgrnd,form61Bckgrnd,pensionBckgrnd,itrBckgrnd,pnlBckgrnd;
+    static LinearLayout salSlipSix, salSlipThree, bankStmntThree, linSeemoreFinancialBtn, bankStmntSix, linSeemoreEducationalBtn, kvp, licPolicy, form16, form61, pensionLetter, itr, pnl;
+    static RelativeLayout salSixBckgrnd, salThreeBckgrnd, bankThreeBckgrnd, bankSixBckgrnd, kvpBckgrnd, licPolicyBckgrnd, form16Bckgrnd, form61Bckgrnd, pensionBckgrnd, itrBckgrnd, pnlBckgrnd;
     /*Educational Documents*/
-    static LinearLayout tenthMarksheet,twelvethMarksheet,degreeMarkSheet,degreeCertificate;
-    static RelativeLayout tenthBckgrnd,twelthBckgrnd,degreeMarksheetBckgrnd,degreeCertificateBckgrnd;
+    static LinearLayout tenthMarksheet, twelvethMarksheet, degreeMarkSheet, degreeCertificate;
+    static RelativeLayout tenthBckgrnd, twelthBckgrnd, degreeMarksheetBckgrnd, degreeCertificateBckgrnd;
     /*others documents*/
     static LinearLayout others;
     static RelativeLayout othersBckgrnd;
 
-    public static ImageView ivKyc,ivFinancial, ivEducational;
+    public static ImageView ivKyc, ivFinancial, ivEducational;
 
     int tap;
 
@@ -115,6 +129,14 @@ public class UploadDocumentFragment extends Fragment {
     static ImageView imageViewProfilePicSelect;
     public static ProgressBar progressBar;
     long downloadReference;
+
+    //country
+    public static ArrayAdapter arrayAdapter_document;
+    public static ArrayList<String> document_arrayList;
+    public static ArrayList<DocumenPOJO> documenPOJOArrayList;
+    public static Spinner spDocument;
+    public static String selecteddocID = "";
+
     public UploadDocumentFragment() {
         // Required empty public constructor
     }
@@ -129,23 +151,29 @@ public class UploadDocumentFragment extends Fragment {
                              Bundle savedInstanceState) {
         context = getContext();
         mFragment = new UploadDocumentFragment();
-        View view =inflater.inflate(R.layout.fragment_uploaddocument, container, false);
-        linAllDocBlock = view.findViewById(R.id.linAllDocBlock);
-        linKYCblock = view.findViewById(R.id.linKYCblock);
-        linKYCblockBottom = view.findViewById(R.id.linKYCblockBottom);
-        linFinancBlock = view.findViewById(R.id.linFinancBlock);
-        linFinancBlockBottom = view.findViewById(R.id.linFinancBlockBottom);
-        linEducationBlock = view.findViewById(R.id.linEducationBlock);
-        linEducationBlockBottom = view.findViewById(R.id.linEducationBlockBottom);
-        linOther = view.findViewById(R.id.linOther);
-        linOtherBottom = view.findViewById(R.id.linOtherBottom);
-        linBottomBlocks = view.findViewById(R.id.linBottomBlocks);
-        //see more for KYC details
-        linSeemoreKycBtn=view.findViewById(R.id.linSeemoreKycBtn);
-        //see more for Education
-        linSeemoreEducationalBtn=view.findViewById(R.id.linSeemoreEducationalBtn);
-        //see more for Financial
-        linSeemoreFinancialBtn=view.findViewById(R.id.linSeemoreFinancialBtn);
+        View view = inflater.inflate(R.layout.fragment_uploaddocument, container, false);
+
+        expandAnimationPersonal = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+        expandAnimationIdentity = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+        expanAnimationCourse = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
+        collapseanimationPersonal = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
+        collapseAnimationIdentity = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
+        collapseAnimationCourse = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        ivPersonalToggle = view.findViewById(R.id.ivPersonalToggle);
+        ivIdentityToggle = view.findViewById(R.id.ivIdentityToggle);
+        ivCourseToggle = view.findViewById(R.id.ivCourseToggle);
+
+        txtKycDocToggle = view.findViewById(R.id.txtKycDocToggle);
+        linKycDocBlock = view.findViewById(R.id.linKycDocBlock);
+        txtPhotoToggle = view.findViewById(R.id.txtPhotoToggle);
+        linKycDocToggle = view.findViewById(R.id.linKycDocToggle);
+        linPhotoToggle = view.findViewById(R.id.linPhotoToggle);
+        linAddtionalDocToggle = view.findViewById(R.id.linAddtionalDocToggle);
+        relPhotoBlock = view.findViewById(R.id.relPhotoBlock);
+        txtAddtionalDocToggle = view.findViewById(R.id.txtAddtionalDocToggle);
+        relAddtionalDocBlock = view.findViewById(R.id.relAddtionalDocBlock);
 
         //personal details
         profileBckgrnd = view.findViewById(R.id.profileBack);
@@ -175,31 +203,9 @@ public class UploadDocumentFragment extends Fragment {
         twelthBckgrnd = view.findViewById(R.id.twelvethMarksheetBackground);
         degreeMarksheetBckgrnd = view.findViewById(R.id.lastMarksheetBackground);
         degreeCertificateBckgrnd = view.findViewById(R.id.lastCertificateBackground);
-        //others
-        othersBckgrnd = view.findViewById(R.id.othersBackground);
 
-        linKYCDocuments = view.findViewById(R.id.linKYCDocuments);
-        linFinanceDocuments  =view.findViewById(R.id.linFinanceDocuments);
-        linEducationDocuments = view.findViewById(R.id.linEducationDocuments);
-        linOtherDocuments = view.findViewById(R.id.linOtherDocuments);
-
-        ivKyc = view.findViewById(R.id.ivKyc);
-        ivFinancial = view.findViewById(R.id.ivFinancial);
-        ivEducational = view.findViewById(R.id.ivEducational);
-
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar_docupload);
-
-        linAllDocBlock.setVisibility(VISIBLE);
-        linKYCDocuments.setVisibility(GONE);
-        linFinanceDocuments.setVisibility(GONE);
-        linEducationDocuments.setVisibility(GONE);
-        linOtherDocuments.setVisibility(GONE);
-        linBottomBlocks.setVisibility(GONE);
-
-        scaleInlinKYCDocuments = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
-        scaleInlinFinanceDocuments = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
-        scaleInlinEducationDocuments = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
-        scaleInlinOtherDocuments = AnimationUtils.loadAnimation(getContext(), R.anim.scale_in);
+        spDocument = view.findViewById(R.id.spDocument);
+        progressBar = view.findViewById(R.id.progressBar_docupload);
 
         try {
             //============================KYC profile image========================
@@ -207,22 +213,21 @@ public class UploadDocumentFragment extends Fragment {
             profileImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    tap ++;
+                    tap++;
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 profileBckgrnd.setVisibility(GONE);
                                 applicantType = "1";
                                 documentTypeNo = "1";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_profile_picture),getString(R.string.applicant_single_picture_required_to_be_uploaded), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_profile_picture), getString(R.string.applicant_single_picture_required_to_be_uploaded), LoanTabActivity.applicant_id, "1");
                                 tap = 0;
-                            }
-                            else if (tap == 2){
-                                if (profileImage.getTag()!=null){
-                                    String strFileName = profileImage.getTag().toString().substring(profileImage.getTag().toString().lastIndexOf("/")+1);
+                            } else if (tap == 2) {
+                                if (profileImage.getTag() != null) {
+                                    String strFileName = profileImage.getTag().toString().substring(profileImage.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -231,33 +236,32 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(profileImage.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(profileImage.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(profileImage.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
-                                tap=0;
+                                tap = 0;
                             }
-                            tap=0;
+                            tap = 0;
                         }
-                    },700);
+                    }, 700);
 
 
                 }
@@ -274,46 +278,46 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap == 1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "2";
                                 imageToPdf(documentTypeNo, getString(R.string.upload_pan_card), getString(R.string.applicant_pan_card), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (panCard.getTag()!=null){
-                                    String strFileName = panCard.getTag().toString().substring(panCard.getTag().toString().lastIndexOf("/")+1);
-                                    File filePath = new File(Environment.getExternalStorageDirectory().getPath()+"/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/"+strFileName);
-                                    String fileExtension = strFileName.substring(strFileName.lastIndexOf('.')+1);
-                                    if (fileExtension.equals("pdf")){
+                                if (panCard.getTag() != null) {
+                                    String strFileName = panCard.getTag().toString().substring(panCard.getTag().toString().lastIndexOf("/") + 1);
+                                    File filePath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
+                                    String fileExtension = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    if (fileExtension.equals("pdf")) {
                                         openPdf(String.valueOf(panCard.getTag()));
-                                    }else if (fileExtension.equals("zip")||fileExtension.equals("rar")){
-                                        if (filePath.exists()){
+                                    } else if (fileExtension.equals("zip") || fileExtension.equals("rar")) {
+                                        if (filePath.exists()) {
                                             Toast.makeText(getActivity(), "File has already downloaded", Toast.LENGTH_SHORT).show();
-                                        }else {
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(panCard.getTag()));
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(profileImage.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -331,15 +335,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "3";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_adhaar_card),getString(R.string.applicant_adhaar_card_front_and_backside), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_adhaar_card), getString(R.string.applicant_adhaar_card_front_and_backside), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (aadharCard.getTag()!=null){
-                                    String strFileName = aadharCard.getTag().toString().substring(aadharCard.getTag().toString().lastIndexOf("/")+1);
+                                if (aadharCard.getTag() != null) {
+                                    String strFileName = aadharCard.getTag().toString().substring(aadharCard.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -348,227 +352,37 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(aadharCard.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(aadharCard.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(aadharCard.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
             /*========================end of aadha card==========================*/
-
-            /*=========================See More KYC================================*/
-
-            linSeemoreKycBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-
-                //photo
-                public void onClick(View v) {
-                    if (profileImage.getVisibility() ==VISIBLE){
-                    }else {
-                        profileImage.setVisibility(VISIBLE);
-                    }
-
-
-                    //pancard
-
-                    if (panCard.getVisibility() ==VISIBLE){
-                    }else {
-                        panCard.setVisibility(VISIBLE);
-                    }
-
-                    //aaddhaar
-
-                    if (aadharCard.getVisibility() ==VISIBLE){
-                    }else {
-                        aadharCard.setVisibility(VISIBLE);
-                    }
-
-                    //passport
-                    if (passport.getVisibility() ==VISIBLE){
-                    }else {
-                        panCard.setVisibility(VISIBLE);
-                    }
-
-                    //voterID
-
-                    if (voterId.getVisibility() ==VISIBLE){
-                    }else {
-                        voterId.setVisibility(VISIBLE);
-                    }
-
-                    //DrivingLicense
-
-                    if (drivingLicense.getVisibility() ==VISIBLE){
-                    }else {
-                        drivingLicense.setVisibility(VISIBLE);
-                    }
-
-
-                    //TelephoneBill
-
-                    if (telephoneBill.getVisibility() ==VISIBLE){
-                    }else {
-                        telephoneBill.setVisibility(VISIBLE);
-                    }
-
-                    //ElectricBill
-
-                    if (electricityBill.getVisibility() ==VISIBLE){
-                    }else {
-                        electricityBill.setVisibility(VISIBLE);
-                    }
-
-
-                    //RentAgreement
-
-                    if (rentAgreement.getVisibility() ==VISIBLE){
-                    }else {
-                        rentAgreement.setVisibility(VISIBLE);
-                    }
-
-                    //AddressProof
-
-                    if (addressProof.getVisibility() ==VISIBLE){
-
-                    }else {
-                        addressProof.setVisibility(VISIBLE);
-                        linSeemoreKycBtn.setVisibility(GONE);
-                    }
-
-
-
-                }
-            });
-
-            // closelinSeemoreKycBtn
-
-              /*================================See More for EducationDetails===============================*/
-            linSeemoreEducationalBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    //LastCompletedDegreeCertificate
-
-                    if (degreeCertificate.getVisibility() ==VISIBLE){
-                    }else {
-                        degreeCertificate.setVisibility(VISIBLE);
-                    }
-                    //tenthMarksheet
-
-                    if (tenthMarksheet.getVisibility() ==VISIBLE){
-                    }else {
-                        tenthMarksheet.setVisibility(VISIBLE);
-                    }
-                    //12thMarkSheet
-                    if (twelvethMarksheet.getVisibility() ==VISIBLE){
-                    }else {
-                        twelvethMarksheet.setVisibility(VISIBLE);
-                    }
-                    //LastCompletedDegreeMarksheet
-                    if (degreeMarkSheet.getVisibility() ==VISIBLE){
-                    }else {
-                        degreeMarkSheet.setVisibility(VISIBLE);
-                        linSeemoreEducationalBtn.setVisibility(GONE);
-                    }
-                }
-            });
-
-            //close linSeemoreEducationalBtn
-
-            /*================================See More For linSeemoreFinancialBtn===============================*/
-            linSeemoreFinancialBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //salary slip for 6 months
-                    if (salSlipSix.getVisibility() ==VISIBLE){
-                    }else {
-                        twelvethMarksheet.setVisibility(VISIBLE);
-                    }
-                   //salary slip for 3 months
-                    if (salSlipThree.getVisibility() ==VISIBLE){
-                    }else {
-                        twelvethMarksheet.setVisibility(VISIBLE);
-                    }
-                    //Bank satetment 6months
-                    if (bankStmntSix.getVisibility() ==VISIBLE){
-                    }else {
-                        bankStmntSix.setVisibility(VISIBLE);
-                    }
-                    //Bank satetment 3months
-                    if (bankStmntThree.getVisibility() ==VISIBLE){
-                    }else {
-                        bankStmntThree.setVisibility(VISIBLE);
-                    }
-                    //kvp
-
-                    if (kvp.getVisibility() ==VISIBLE){
-                    }else {
-                        kvp.setVisibility(VISIBLE);
-                    }
-
-                    //licpolicy
-
-                    if (licPolicy.getVisibility() ==VISIBLE){
-                    }else {
-                        licPolicy.setVisibility(VISIBLE);
-                    }
-                    //Form-16
-
-                    if (form16.getVisibility() ==VISIBLE){
-                    }else {
-                        form16.setVisibility(VISIBLE);
-                    }
-                   // Form-61
-                    if (form61.getVisibility() ==VISIBLE){
-                    }else {
-                        form61.setVisibility(VISIBLE);
-                    }
-
-                    //pensionLetter
-                    if (pensionLetter.getVisibility() ==VISIBLE){
-                    }else {
-                        pensionLetter.setVisibility(VISIBLE);
-                    }
-                     //ITR
-                    if (itr.getVisibility() ==VISIBLE){
-                    }else {
-                        itr.setVisibility(VISIBLE);
-                    }
-                    //PNL
-                    if (pnl.getVisibility() ==VISIBLE){
-                    }else {
-                        pnl.setVisibility(VISIBLE);
-                        linSeemoreFinancialBtn.setVisibility(GONE);
-                    }
-
-                }
-            });
-
 
             /*================================passport===============================*/
             passport = view.findViewById(R.id.linPassport);
@@ -581,15 +395,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "4";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_passport),getString(R.string.applicant_passport), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_passport), getString(R.string.applicant_passport), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (passport.getTag()!=null){
-                                    String strFileName = passport.getTag().toString().substring(passport.getTag().toString().lastIndexOf("/")+1);
+                                if (passport.getTag() != null) {
+                                    String strFileName = passport.getTag().toString().substring(passport.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -598,34 +412,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(passport.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(passport.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(passport.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
 
                 }
@@ -644,15 +457,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "5";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_voterID),getString(R.string.applicant_voterID), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_voterID), getString(R.string.applicant_voterID), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (voterId.getTag()!=null){
-                                    String strFileName = voterId.getTag().toString().substring(voterId.getTag().toString().lastIndexOf("/")+1);
+                                if (voterId.getTag() != null) {
+                                    String strFileName = voterId.getTag().toString().substring(voterId.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -661,34 +474,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(voterId.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(voterId.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(voterId.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -705,15 +517,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "6";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_driving_license),getString(R.string.applicant_driving_license), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_driving_license), getString(R.string.applicant_driving_license), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (drivingLicense.getTag()!=null){
-                                    String strFileName = drivingLicense.getTag().toString().substring(drivingLicense.getTag().toString().lastIndexOf("/")+1);
+                                if (drivingLicense.getTag() != null) {
+                                    String strFileName = drivingLicense.getTag().toString().substring(drivingLicense.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -722,35 +534,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(drivingLicense.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(drivingLicense.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(drivingLicense.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
                 }
             });
 
@@ -767,47 +577,46 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "7";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_telephone_bill),getString(R.string.applicant_telephone_bill), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_telephone_bill), getString(R.string.applicant_telephone_bill), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (telephoneBill.getTag()!=null){
-                                    String strFileName = telephoneBill.getTag().toString().substring(telephoneBill.getTag().toString().lastIndexOf("/")+1);
+                                if (telephoneBill.getTag() != null) {
+                                    String strFileName = telephoneBill.getTag().toString().substring(telephoneBill.getTag().toString().lastIndexOf("/") + 1);
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
                                     String FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(telephoneBill.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(telephoneBill.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(telephoneBill.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
 
                 }
@@ -826,15 +635,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "8";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_electricity_bill),getString(R.string.applicant_electricity_bill), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_electricity_bill), getString(R.string.applicant_electricity_bill), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (electricityBill.getTag()!=null){
-                                    String strFileName = electricityBill.getTag().toString().substring(electricityBill.getTag().toString().lastIndexOf("/")+1);
+                                if (electricityBill.getTag() != null) {
+                                    String strFileName = electricityBill.getTag().toString().substring(electricityBill.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -843,34 +652,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(electricityBill.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(electricityBill.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(electricityBill.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
 
                 }
@@ -888,15 +696,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "9";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_rent_agreement),getString(R.string.applicant_rent_agreement), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_rent_agreement), getString(R.string.applicant_rent_agreement), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (rentAgreement.getTag()!=null){
-                                    String strFileName = rentAgreement.getTag().toString().substring(rentAgreement.getTag().toString().lastIndexOf("/")+1);
+                                if (rentAgreement.getTag() != null) {
+                                    String strFileName = rentAgreement.getTag().toString().substring(rentAgreement.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -905,34 +713,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(rentAgreement.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(rentAgreement.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(rentAgreement.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
 
                 }
@@ -951,16 +758,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
 
                                 applicantType = "1";
                                 documentTypeNo = "30";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_address_proof),getString(R.string.applicant_address_proof), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_address_proof), getString(R.string.applicant_address_proof), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (addressProof.getTag()!=null){
-                                    String strFileName = addressProof.getTag().toString().substring(addressProof.getTag().toString().lastIndexOf("/")+1);
+                                if (addressProof.getTag() != null) {
+                                    String strFileName = addressProof.getTag().toString().substring(addressProof.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -969,34 +776,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(addressProof.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(addressProof.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(addressProof.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1013,19 +819,17 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "17";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_income_proof_6),getString(R.string.salary_slip_of_applicant_latest_6_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_income_proof_6), getString(R.string.salary_slip_of_applicant_latest_6_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
-
-
+                                tap = 0;
+                            } else if (tap == 2) {
 
 
-                                if (salSlipSix.getTag()!=null){
-                                    String strFileName = salSlipSix.getTag().toString().substring(salSlipSix.getTag().toString().lastIndexOf("/")+1);
+                                if (salSlipSix.getTag() != null) {
+                                    String strFileName = salSlipSix.getTag().toString().substring(salSlipSix.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1034,32 +838,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(salSlipSix.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(salSlipSix.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(salSlipSix.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
                 }
             });
 
@@ -1076,16 +879,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "18";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_income_proof),getString(R.string.salary_slip_of_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_income_proof), getString(R.string.salary_slip_of_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (salSlipThree.getTag()!=null){
-                                    String strFileName = salSlipThree.getTag().toString().substring(salSlipThree.getTag().toString().lastIndexOf("/")+1);
+                                if (salSlipThree.getTag() != null) {
+                                    String strFileName = salSlipThree.getTag().toString().substring(salSlipThree.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1094,34 +897,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(salSlipThree.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(salSlipThree.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(salSlipThree.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1139,16 +941,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "19";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_bank_statement),getString(R.string.current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_bank_statement), getString(R.string.current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (bankStmntThree.getTag()!=null){
-                                    String strFileName = bankStmntThree.getTag().toString().substring(bankStmntThree.getTag().toString().lastIndexOf("/")+1);
+                                if (bankStmntThree.getTag() != null) {
+                                    String strFileName = bankStmntThree.getTag().toString().substring(bankStmntThree.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1157,32 +959,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(bankStmntThree.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(bankStmntThree.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(bankStmntThree.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1201,16 +1002,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "20";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_bank_statement_6),getString(R.string.current_6_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_bank_statement_6), getString(R.string.current_6_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (bankStmntSix.getTag()!=null){
-                                    String strFileName = bankStmntSix.getTag().toString().substring(bankStmntSix.getTag().toString().lastIndexOf("/")+1);
+                                if (bankStmntSix.getTag() != null) {
+                                    String strFileName = bankStmntSix.getTag().toString().substring(bankStmntSix.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1219,34 +1020,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(bankStmntSix.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(bankStmntSix.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(bankStmntSix.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1265,16 +1065,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
 
                                 applicantType = "1";
                                 documentTypeNo = "10";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_KVP),getString(R.string.current_KVP), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_KVP), getString(R.string.current_KVP), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (kvp.getTag()!=null){
-                                    String strFileName = kvp.getTag().toString().substring(kvp.getTag().toString().lastIndexOf("/")+1);
+                                if (kvp.getTag() != null) {
+                                    String strFileName = kvp.getTag().toString().substring(kvp.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1283,32 +1083,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(kvp.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(kvp.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(kvp.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1326,15 +1125,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "11";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_lic_policy),getString(R.string.current_applicant_lic_policy), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_lic_policy), getString(R.string.current_applicant_lic_policy), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (licPolicy.getTag()!=null){
-                                    String strFileName = licPolicy.getTag().toString().substring(licPolicy.getTag().toString().lastIndexOf("/")+1);
+                                if (licPolicy.getTag() != null) {
+                                    String strFileName = licPolicy.getTag().toString().substring(licPolicy.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1343,32 +1142,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(licPolicy.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(licPolicy.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(licPolicy.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
 
                 }
@@ -1387,16 +1185,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
 
                                 applicantType = "1";
                                 documentTypeNo = "12";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_form_16),getString(R.string.current_applicant_form_16), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_form_16), getString(R.string.current_applicant_form_16), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (form16.getTag()!=null){
-                                    String strFileName = form16.getTag().toString().substring(form16.getTag().toString().lastIndexOf("/")+1);
+                                if (form16.getTag() != null) {
+                                    String strFileName = form16.getTag().toString().substring(form16.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1405,34 +1203,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(form16.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(form16.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(form16.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1452,16 +1249,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
 
                                 applicantType = "1";
                                 documentTypeNo = "13";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_form_61),getString(R.string.current_applicant_form_61), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_form_61), getString(R.string.current_applicant_form_61), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (form61.getTag()!=null){
-                                    String strFileName = form61.getTag().toString().substring(form61.getTag().toString().lastIndexOf("/")+1);
+                                if (form61.getTag() != null) {
+                                    String strFileName = form61.getTag().toString().substring(form61.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1470,32 +1267,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(form61.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(form61.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(form61.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1512,15 +1308,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "14";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_pension_letter),getString(R.string.current_applicant_pension_letter), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_pension_letter), getString(R.string.current_applicant_pension_letter), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (pensionLetter.getTag()!=null){
-                                    String strFileName = pensionLetter.getTag().toString().substring(pensionLetter.getTag().toString().lastIndexOf("/")+1);
+                                if (pensionLetter.getTag() != null) {
+                                    String strFileName = pensionLetter.getTag().toString().substring(pensionLetter.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1529,32 +1325,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(pensionLetter.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(pensionLetter.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(pensionLetter.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
 
                 }
@@ -1574,16 +1369,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
 
                                 applicantType = "1";
                                 documentTypeNo = "15";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_itr),getString(R.string.current_itr), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_itr), getString(R.string.current_itr), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (itr.getTag()!=null){
-                                    String strFileName = itr.getTag().toString().substring(itr.getTag().toString().lastIndexOf("/")+1);
+                                if (itr.getTag() != null) {
+                                    String strFileName = itr.getTag().toString().substring(itr.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1592,32 +1387,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(itr.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(itr.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(itr.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1635,15 +1429,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "16";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_pnl),getString(R.string.current_applicant_pnl), LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, getString(R.string.upload_pnl), getString(R.string.current_applicant_pnl), LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (pnl.getTag()!=null){
-                                    String strFileName = pnl.getTag().toString().substring(pnl.getTag().toString().lastIndexOf("/")+1);
+                                if (pnl.getTag() != null) {
+                                    String strFileName = pnl.getTag().toString().substring(pnl.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1652,33 +1446,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(pnl.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(pnl.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(pnl.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
-
+                    }, 700);
 
 
                 }
@@ -1697,16 +1489,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "21";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_latest_marksheet),getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (tenthMarksheet.getTag()!=null){
-                                    String strFileName = tenthMarksheet.getTag().toString().substring(tenthMarksheet.getTag().toString().lastIndexOf("/")+1);
+                                if (tenthMarksheet.getTag() != null) {
+                                    String strFileName = tenthMarksheet.getTag().toString().substring(tenthMarksheet.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1715,32 +1507,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(tenthMarksheet.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(tenthMarksheet.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(tenthMarksheet.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1758,16 +1549,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "22";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_latest_marksheet),getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (twelvethMarksheet.getTag()!=null){
-                                    String strFileName = twelvethMarksheet.getTag().toString().substring(twelvethMarksheet.getTag().toString().lastIndexOf("/")+1);
+                                if (twelvethMarksheet.getTag() != null) {
+                                    String strFileName = twelvethMarksheet.getTag().toString().substring(twelvethMarksheet.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1776,32 +1567,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(twelvethMarksheet.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(twelvethMarksheet.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(twelvethMarksheet.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1818,16 +1608,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "23";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_latest_marksheet),getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (degreeMarkSheet.getTag()!=null){
-                                    String strFileName = degreeMarkSheet.getTag().toString().substring(degreeMarkSheet.getTag().toString().lastIndexOf("/")+1);
+                                if (degreeMarkSheet.getTag() != null) {
+                                    String strFileName = degreeMarkSheet.getTag().toString().substring(degreeMarkSheet.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1836,34 +1626,33 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(degreeMarkSheet.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(degreeMarkSheet.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(degreeMarkSheet.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
 
 
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1881,16 +1670,16 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "24";
-                                imageToPdf(documentTypeNo,getString(R.string.upload_latest_certificate),getString(R.string.latest_certificate_of_the_applicant), LoanTabActivity.applicant_id,"1");
+                                imageToPdf(documentTypeNo, getString(R.string.upload_latest_certificate), getString(R.string.latest_certificate_of_the_applicant), LoanTabActivity.applicant_id, "1");
 
-                                tap=0;
-                            }else if (tap==2){
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (degreeCertificate.getTag()!=null){
-                                    String strFileName = degreeCertificate.getTag().toString().substring(degreeCertificate.getTag().toString().lastIndexOf("/")+1);
+                                if (degreeCertificate.getTag() != null) {
+                                    String strFileName = degreeCertificate.getTag().toString().substring(degreeCertificate.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1899,32 +1688,31 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(degreeCertificate.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(degreeCertificate.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(degreeCertificate.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
@@ -1941,15 +1729,15 @@ public class UploadDocumentFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (tap==1){
+                            if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "31";
-                                imageToPdf(documentTypeNo,"others","others", LoanTabActivity.applicant_id,"1");
-                                tap=0;
-                            }else if (tap==2){
+                                imageToPdf(documentTypeNo, "others", "others", LoanTabActivity.applicant_id, "1");
+                                tap = 0;
+                            } else if (tap == 2) {
 
-                                if (others.getTag()!=null){
-                                    String strFileName = others.getTag().toString().substring(others.getTag().toString().lastIndexOf("/")+1);
+                                if (others.getTag() != null) {
+                                    String strFileName = others.getTag().toString().substring(others.getTag().toString().lastIndexOf("/") + 1);
 
                                     File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.eduvanzapplication/files/Download/Eduvanz/UploadedDoc/" + strFileName);
 
@@ -1958,38 +1746,61 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(others.getTag()));
 
-                                    }else if (FileExtn.equals("zip")||FileExtn.equals("rar")){
-                                        if (filepath.exists()){
-                                            Toast.makeText(getActivity(),"File is already downloaded: ",Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
+                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                        if (filepath.exists()) {
+                                            Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             try {
                                                 downLoadClick(String.valueOf(others.getTag()));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         try {
                                             openImage(String.valueOf(others.getTag()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-                                tap=0;
+                                tap = 0;
                             }
                             tap = 0;
                         }
-                    },700);
+                    }, 700);
 
                 }
             });
             /*===========================================end of others document==========================================*/
+
+            spDocument.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        String text = spDocument.getSelectedItem().toString();
+                        int count = documenPOJOArrayList.size();
+                        for (int i = 0; i < count; i++) {
+                            if (documenPOJOArrayList.get(i).document_name.equalsIgnoreCase(text)) {
+                                selecteddocID = documenPOJOArrayList.get(i).document_type_id;
+                                break;
+                            }
+                        }
+                        ShowDocument();
+                    } catch (Exception e) {
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
             getUploadDocumentsApiCall();
-        }catch (Exception e){
+        } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
             }.getClass().getEnclosingMethod().getName();
@@ -2000,6 +1811,760 @@ public class UploadDocumentFragment extends Fragment {
         }
 
         return view;
+    }
+
+    public static void ShowDocument() {
+
+        switch (selecteddocID) {
+
+//    case "0":
+//        break;
+//
+//    case "1":
+//        input = "Photo" + strapplicantId;
+//        break;
+//
+//    case "2":
+//        input = "PAN" + strapplicantId;
+//        break;
+//
+//    case "3":
+//        input = "Aadhar" + strapplicantId;
+//        break;
+            case "4":
+                //passport
+                if (passport.getVisibility() == VISIBLE) {
+                } else {
+                    passport.setVisibility(VISIBLE);
+                    passport.requestFocus();
+                }
+                others.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "5":
+                //voterID
+                if (voterId.getVisibility() == VISIBLE) {
+                } else {
+                    voterId.setVisibility(VISIBLE);
+                    voterId.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                others.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "6":
+                //DrivingLicense
+                if (drivingLicense.getVisibility() == VISIBLE) {
+                } else {
+                    drivingLicense.setVisibility(VISIBLE);
+                    drivingLicense.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                others.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "7":
+                //TelephoneBill
+                if (telephoneBill.getVisibility() == VISIBLE) {
+                } else {
+                    telephoneBill.setVisibility(VISIBLE);
+                    telephoneBill.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                others.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "8":
+                //ElectricBill
+                if (electricityBill.getVisibility() == VISIBLE) {
+                } else {
+                    electricityBill.setVisibility(VISIBLE);
+                    electricityBill.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                others.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "9":
+                //RentAgreement
+                if (rentAgreement.getVisibility() == VISIBLE) {
+                } else {
+                    rentAgreement.setVisibility(VISIBLE);
+                    rentAgreement.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                others.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "10":
+                //kvp
+                if (kvp.getVisibility() == VISIBLE) {
+                } else {
+                    kvp.setVisibility(VISIBLE);
+                    kvp.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                others.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "11":
+                //licpolicy
+                if (licPolicy.getVisibility() == VISIBLE) {
+                } else {
+                    licPolicy.setVisibility(VISIBLE);
+                    licPolicy.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                others.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "12":
+                //Form-16
+                if (form16.getVisibility() == VISIBLE) {
+                } else {
+                    form16.setVisibility(VISIBLE);
+                    form16.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                others.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "13":
+                // Form-61
+                if (form61.getVisibility() == VISIBLE) {
+                } else {
+                    form61.setVisibility(VISIBLE);
+                    form61.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                others.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "14":
+                //pensionLetter
+                if (pensionLetter.getVisibility() == VISIBLE) {
+                } else {
+                    pensionLetter.setVisibility(VISIBLE);
+                    pensionLetter.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                others.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "15":
+                //ITR
+                if (itr.getVisibility() == VISIBLE) {
+                } else {
+                    itr.setVisibility(VISIBLE);
+                    itr.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                others.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "16":
+                //PNL
+                if (pnl.getVisibility() == VISIBLE) {
+                } else {
+                    pnl.setVisibility(VISIBLE);
+                    linSeemoreFinancialBtn.setVisibility(GONE);
+                    linSeemoreFinancialBtn.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                others.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "17":
+                //salary slip for 6 months
+                if (salSlipSix.getVisibility() == VISIBLE) {
+                } else {
+                    twelvethMarksheet.setVisibility(VISIBLE);
+                    twelvethMarksheet.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                others.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "18":
+                //salary slip for 3 months
+                if (salSlipThree.getVisibility() == VISIBLE) {
+                } else {
+                    twelvethMarksheet.setVisibility(VISIBLE);
+                    twelvethMarksheet.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                others.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "19":
+                //Bank satetment 3months
+                if (bankStmntThree.getVisibility() == VISIBLE) {
+                } else {
+                    bankStmntThree.setVisibility(VISIBLE);
+                    bankStmntThree.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                others.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "20":
+                //Bank satetment 6months
+                if (bankStmntSix.getVisibility() == VISIBLE) {
+                } else {
+                    bankStmntSix.setVisibility(VISIBLE);
+                    bankStmntSix.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                others.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "21":
+                if (tenthMarksheet.getVisibility() == VISIBLE) {
+                } else {
+                    tenthMarksheet.setVisibility(VISIBLE);
+                    panCard.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                others.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "22":
+                //12thMarkSheet
+                if (twelvethMarksheet.getVisibility() == VISIBLE) {
+                } else {
+                    twelvethMarksheet.setVisibility(VISIBLE);
+                    twelvethMarksheet.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                others.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "23":
+                //LastCompletedDegreeMarksheet
+                if (degreeMarkSheet.getVisibility() == VISIBLE) {
+                } else {
+                    degreeMarkSheet.setVisibility(VISIBLE);
+                    degreeMarkSheet.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                others.setVisibility(GONE);
+                break;
+
+            case "24":
+                if (degreeCertificate.getVisibility() == VISIBLE) {
+                } else {
+                    degreeCertificate.setVisibility(VISIBLE);
+                    degreeCertificate.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                others.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+//    case "25":
+//        input = "Finbit" + strapplicantId;
+//        break;
+//
+//    case "26":
+//        input = "Exception" + strapplicantId;
+//        break;
+//
+//    case "27":
+//        input = "CAM" + strapplicantId;
+//        break;
+//
+//    case "28":
+//        input = "LoanAgreement" + strapplicantId;
+//        break;
+//
+//    case "29":
+//        input = "MVerifyDocument" + strapplicantId;
+//        break;
+            case "30":
+                //AddressProof
+                if (addressProof.getVisibility() == VISIBLE) {
+                } else {
+                    addressProof.setVisibility(VISIBLE);
+                    addressProof.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                others.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+            case "31":
+                //AddressProof
+                if (others.getVisibility() == VISIBLE) {
+                } else {
+                    others.setVisibility(VISIBLE);
+                    others.requestFocus();
+                }
+                passport.setVisibility(GONE);
+                voterId.setVisibility(GONE);
+                drivingLicense.setVisibility(GONE);
+                telephoneBill.setVisibility(GONE);
+                electricityBill.setVisibility(GONE);
+                rentAgreement.setVisibility(GONE);
+                addressProof.setVisibility(GONE);
+                bankStmntSix.setVisibility(GONE);
+                bankStmntThree.setVisibility(GONE);
+                kvp.setVisibility(GONE);
+                licPolicy.setVisibility(GONE);
+                form16.setVisibility(GONE);
+                form61.setVisibility(GONE);
+                pensionLetter.setVisibility(GONE);
+                itr.setVisibility(GONE);
+                pnl.setVisibility(GONE);
+                salSlipSix.setVisibility(GONE);
+                salSlipThree.setVisibility(GONE);
+                degreeCertificate.setVisibility(GONE);
+                tenthMarksheet.setVisibility(GONE);
+                twelvethMarksheet.setVisibility(GONE);
+                degreeMarkSheet.setVisibility(GONE);
+                break;
+
+        }
+
     }
 
     private void getUploadDocumentsApiCall() {
@@ -2027,317 +2592,227 @@ public class UploadDocumentFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        linKYCblock.setOnClickListener(kycBlockClkListnr);
-        linKYCblockBottom.setOnClickListener(kycBlockClkListnr);
+        //Personal details
+        txtKycDocToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (linKycDocBlock.getVisibility() == VISIBLE) {
+                    linKycDocBlock.startAnimation(collapseanimationPersonal);
+                } else {
+                    linKycDocBlock.startAnimation(expandAnimationPersonal);
 
-        linFinancBlock.setOnClickListener(financeBlockClkListenr);
-        linFinancBlockBottom.setOnClickListener(financeBlockClkListenr);
+                }
+            }
+        });
+//Identity details
+        txtPhotoToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (relPhotoBlock.getVisibility() == VISIBLE) {
+                    relPhotoBlock.startAnimation(collapseAnimationIdentity);
+                } else {
+                    relPhotoBlock.startAnimation(expandAnimationIdentity);
+                }
+            }
+        });
+//course details.
+        txtAddtionalDocToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (relAddtionalDocBlock.getVisibility() == VISIBLE) {
+                    relAddtionalDocBlock.startAnimation(collapseAnimationCourse);
+                } else {
+                    relAddtionalDocBlock.startAnimation(expanAnimationCourse);
+                }
+            }
+        });
 
-        linEducationBlock.setOnClickListener(educationBlockClkListnr);
-        linEducationBlockBottom.setOnClickListener(educationBlockClkListnr);
+//Personal details
+        linKycDocToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (linKycDocBlock.getVisibility() == VISIBLE) {
+                    linKycDocBlock.startAnimation(collapseanimationPersonal);
+                } else {
+                    linKycDocBlock.startAnimation(expandAnimationPersonal);
+                }
+            }
+        });
+//Identity details
+        linPhotoToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (relPhotoBlock.getVisibility() == VISIBLE) {
+                    relPhotoBlock.startAnimation(collapseAnimationIdentity);
+                } else {
+                    relPhotoBlock.startAnimation(expandAnimationIdentity);
+                }
+            }
+        });
+//course details.
+        linAddtionalDocToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (relAddtionalDocBlock.getVisibility() == VISIBLE) {
+                    relAddtionalDocBlock.startAnimation(collapseAnimationCourse);
+                } else {
+                    relAddtionalDocBlock.startAnimation(expanAnimationCourse);
+                }
+            }
+        });
 
-        linOther.setOnClickListener(otherBlockClkListnr);
-        linOtherBottom.setOnClickListener(otherBlockClkListnr);
-
-        scaleInlinKYCDocuments.setAnimationListener(new Animation.AnimationListener() {
+        /*================================personal details==========================================*/
+        collapseanimationPersonal.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                linKYCDocuments.setVisibility(VISIBLE);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                linBottomBlocks.setVisibility(VISIBLE);
-                linKYCblockBottom.setVisibility(GONE);
-                linFinancBlockBottom.setVisibility(VISIBLE);
-                linEducationBlockBottom.setVisibility(VISIBLE);
-                linOtherBottom.setVisibility(VISIBLE);
+                linKycDocBlock.setVisibility(GONE);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    ivPersonalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivPersonalToggle.setImageDrawable(bg);
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
 
-        scaleInlinFinanceDocuments.setAnimationListener(new Animation.AnimationListener() {
+        expandAnimationPersonal.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                linFinanceDocuments.setVisibility(VISIBLE);
-
+                linKycDocBlock.setVisibility(VISIBLE);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                linBottomBlocks.setVisibility(VISIBLE);
-                linKYCblockBottom.setVisibility(VISIBLE);
-                linFinancBlockBottom.setVisibility(GONE);
-                linEducationBlockBottom.setVisibility(VISIBLE);
-                linOtherBottom.setVisibility(VISIBLE);
+                relPhotoBlock.startAnimation(collapseAnimationIdentity);
+                relAddtionalDocBlock.startAnimation(collapseAnimationCourse);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    ivPersonalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivPersonalToggle.setImageDrawable(bg);
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
-
-        scaleInlinEducationDocuments.setAnimationListener(new Animation.AnimationListener() {
+        /*=============================================identity details===================================*/
+        collapseAnimationIdentity.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                linEducationDocuments.setVisibility(VISIBLE);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                linBottomBlocks.setVisibility(VISIBLE);
-                linKYCblockBottom.setVisibility(VISIBLE);
-                linFinancBlockBottom.setVisibility(VISIBLE);
-                linEducationBlockBottom.setVisibility(GONE);
-                linOtherBottom.setVisibility(VISIBLE);
+                relPhotoBlock.setVisibility(GONE);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    ivIdentityToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivIdentityToggle.setImageDrawable(bg);
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
 
-        scaleInlinOtherDocuments.setAnimationListener(new Animation.AnimationListener() {
+        expandAnimationIdentity.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                linOtherDocuments.setVisibility(VISIBLE);
+                relPhotoBlock.setVisibility(VISIBLE);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                linBottomBlocks.setVisibility(VISIBLE);
-                linKYCblockBottom.setVisibility(VISIBLE);
-                linFinancBlockBottom.setVisibility(VISIBLE);
-                linEducationBlockBottom.setVisibility(VISIBLE);
-                linOtherBottom.setVisibility(GONE);
+                linKycDocBlock.startAnimation(collapseanimationPersonal);
+                relAddtionalDocBlock.startAnimation(collapseAnimationCourse);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    ivIdentityToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivIdentityToggle.setImageDrawable(bg);
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
+        /*===========================================course details=================================*/
+        collapseAnimationCourse.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                relAddtionalDocBlock.setVisibility(GONE);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    ivCourseToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivCourseToggle.setImageDrawable(bg);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        expanAnimationCourse.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                relAddtionalDocBlock.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linKycDocBlock.startAnimation(collapseanimationPersonal);
+                relPhotoBlock.startAnimation(collapseAnimationIdentity);
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    ivCourseToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
+                }
+                ivCourseToggle.setImageDrawable(bg);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
     }
-
-    View.OnClickListener kycBlockClkListnr = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            linAllDocBlock.setVisibility(GONE);
-//            linKYCDocuments.setVisibility(VISIBLE);
-//            linFinanceDocuments.setVisibility(GONE);
-//            linEducationDocuments.setVisibility(GONE);
-//            linOtherDocuments.setVisibility(GONE);
-//            linBottomBlocks.setVisibility(VISIBLE);
-//            linKYCblockBottom.setVisibility(GONE);
-//            linFinancBlockBottom.setVisibility(VISIBLE);
-//            linEducationBlockBottom.setVisibility(VISIBLE);
-//            linOtherBottom.setVisibility(VISIBLE);
-            Animation scaleOutlinAllDocBlock = AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
-            if (linAllDocBlock.getVisibility() == VISIBLE){
-                linAllDocBlock.startAnimation(scaleOutlinAllDocBlock);
-            }else{
-                linAllDocBlock.setVisibility(GONE);
-                linKYCDocuments.setVisibility(VISIBLE);
-                linFinanceDocuments.setVisibility(GONE);
-                linEducationDocuments.setVisibility(GONE);
-                linOtherDocuments.setVisibility(GONE);
-                linBottomBlocks.setVisibility(VISIBLE);
-                linKYCblockBottom.setVisibility(GONE);
-                linFinancBlockBottom.setVisibility(VISIBLE);
-                linEducationBlockBottom.setVisibility(VISIBLE);
-                linOtherBottom.setVisibility(VISIBLE);
-
-            }
-            scaleOutlinAllDocBlock.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    linKYCDocuments.startAnimation(scaleInlinKYCDocuments);
-                    linAllDocBlock.setVisibility(GONE);
-                    linFinanceDocuments.setVisibility(GONE);
-                    linEducationDocuments.setVisibility(GONE);
-                    linOtherDocuments.setVisibility(GONE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-
-        }
-    };
-
-
-
-    View.OnClickListener financeBlockClkListenr = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            linAllDocBlock.setVisibility(GONE);
-//            linKYCDocuments.setVisibility(GONE);
-//            linFinanceDocuments.setVisibility(VISIBLE);
-//            linEducationDocuments.setVisibility(GONE);
-//            linOtherDocuments.setVisibility(GONE);
-//            linBottomBlocks.setVisibility(VISIBLE);
-//            linKYCblockBottom.setVisibility(VISIBLE);
-//            linFinancBlockBottom.setVisibility(GONE);
-//            linEducationBlockBottom.setVisibility(VISIBLE);
-//            linOtherBottom.setVisibility(VISIBLE);
-            Animation scaleOutlinAllDocBlock = AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
-            if (linAllDocBlock.getVisibility() == VISIBLE){
-                linAllDocBlock.startAnimation(scaleOutlinAllDocBlock);
-            }else{
-                linAllDocBlock.setVisibility(GONE);
-                linKYCDocuments.setVisibility(GONE);
-                linFinanceDocuments.setVisibility(VISIBLE);
-                linEducationDocuments.setVisibility(GONE);
-                linOtherDocuments.setVisibility(GONE);
-                linBottomBlocks.setVisibility(VISIBLE);
-                linKYCblockBottom.setVisibility(VISIBLE);
-                linFinancBlockBottom.setVisibility(GONE);
-                linEducationBlockBottom.setVisibility(VISIBLE);
-                linOtherBottom.setVisibility(VISIBLE);
-            }
-            scaleOutlinAllDocBlock.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    linFinanceDocuments.startAnimation(scaleInlinFinanceDocuments);
-                    linAllDocBlock.setVisibility(GONE);
-                    linKYCDocuments.setVisibility(GONE);
-                    linEducationDocuments.setVisibility(GONE);
-                    linOtherDocuments.setVisibility(GONE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-
-
-        }
-    };
-
-    View.OnClickListener educationBlockClkListnr = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            linAllDocBlock.setVisibility(GONE);
-//            linKYCDocuments.setVisibility(GONE);
-//            linFinanceDocuments.setVisibility(GONE);
-//            linEducationDocuments.setVisibility(VISIBLE);
-//            linOtherDocuments.setVisibility(GONE);
-//            linBottomBlocks.setVisibility(VISIBLE);
-//            linKYCblockBottom.setVisibility(VISIBLE);
-//            linFinancBlockBottom.setVisibility(VISIBLE);
-//            linEducationBlockBottom.setVisibility(GONE);
-//            linOtherBottom.setVisibility(VISIBLE);
-            Animation scaleOutlinAllDocBlock = AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
-            if (linAllDocBlock.getVisibility() == VISIBLE){
-                linAllDocBlock.startAnimation(scaleOutlinAllDocBlock);
-            }else{
-                linAllDocBlock.setVisibility(GONE);
-                linKYCDocuments.setVisibility(GONE);
-                linFinanceDocuments.setVisibility(GONE);
-                linEducationDocuments.setVisibility(VISIBLE);
-                linOtherDocuments.setVisibility(GONE);
-                linBottomBlocks.setVisibility(VISIBLE);
-                linKYCblockBottom.setVisibility(VISIBLE);
-                linFinancBlockBottom.setVisibility(VISIBLE);
-                linEducationBlockBottom.setVisibility(GONE);
-                linOtherBottom.setVisibility(VISIBLE);
-            }
-            scaleOutlinAllDocBlock.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    linEducationDocuments.startAnimation(scaleInlinEducationDocuments);
-                    linAllDocBlock.setVisibility(GONE);
-                    linKYCDocuments.setVisibility(GONE);
-                    linFinanceDocuments.setVisibility(GONE);
-                    linOtherDocuments.setVisibility(GONE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-
-        }
-    };
-
-    View.OnClickListener otherBlockClkListnr = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            linAllDocBlock.setVisibility(GONE);
-//            linKYCDocuments.setVisibility(GONE);
-//            linFinanceDocuments.setVisibility(GONE);
-//            linEducationDocuments.setVisibility(GONE);
-//            linOtherDocuments.setVisibility(VISIBLE);
-//            linBottomBlocks.setVisibility(VISIBLE);
-//            linKYCblockBottom.setVisibility(VISIBLE);
-//            linFinancBlockBottom.setVisibility(VISIBLE);
-//            linEducationBlockBottom.setVisibility(VISIBLE);
-//            linOtherBottom.setVisibility(GONE);
-
-            Animation scaleOutlinAllDocBlock = AnimationUtils.loadAnimation(getContext(), R.anim.scale_out);
-            if (linAllDocBlock.getVisibility() == VISIBLE){
-                linAllDocBlock.startAnimation(scaleOutlinAllDocBlock);
-            }else{
-                linAllDocBlock.setVisibility(GONE);
-                linKYCDocuments.setVisibility(GONE);
-                linFinanceDocuments.setVisibility(GONE);
-                linEducationDocuments.setVisibility(GONE);
-                linOtherDocuments.setVisibility(VISIBLE);
-                linBottomBlocks.setVisibility(VISIBLE);
-                linKYCblockBottom.setVisibility(VISIBLE);
-                linFinancBlockBottom.setVisibility(VISIBLE);
-                linEducationBlockBottom.setVisibility(VISIBLE);
-                linOtherBottom.setVisibility(GONE);
-            }
-            scaleOutlinAllDocBlock.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    linOtherDocuments.startAnimation(scaleInlinOtherDocuments);
-                    linAllDocBlock.setVisibility(GONE);
-                    linKYCDocuments.setVisibility(GONE);
-                    linFinanceDocuments.setVisibility(GONE);
-                    linEducationDocuments.setVisibility(GONE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-
-
-        }
-    };
 
     //====================changes by yash=========================
     private void imageToPdf(String documentTypeNo, String toolbarTitle, String note, String strapplicantId, String strapplicantType) {
@@ -2377,8 +2852,7 @@ public class UploadDocumentFragment extends Fragment {
                 @Override
                 public void run() {
                     // your code here
-                    handler.post(new Runnable()
-                    {
+                    handler.post(new Runnable() {
                         public void run() {
                             Log.e(TAG, "downloadUrl+++++: " + uri);
                             Uri Download_Uri = Uri.parse(String.valueOf(uri));
@@ -2421,6 +2895,7 @@ public class UploadDocumentFragment extends Fragment {
         }
 
     }
+
     //solve this
     private void openImage(String mPath) {
 
@@ -2617,17 +3092,17 @@ public class UploadDocumentFragment extends Fragment {
                             form61.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("18")) {
                             pensionLetter.setVisibility(View.VISIBLE);
-                        }else if (documentTypeNo.equalsIgnoreCase("19")) {
+                        } else if (documentTypeNo.equalsIgnoreCase("19")) {
                             itr.setVisibility(View.VISIBLE);
-                        }else if (documentTypeNo.equalsIgnoreCase("20")) {
+                        } else if (documentTypeNo.equalsIgnoreCase("20")) {
                             pnl.setVisibility(View.VISIBLE);
-                        }else if (documentTypeNo.equalsIgnoreCase("21")) {
+                        } else if (documentTypeNo.equalsIgnoreCase("21")) {
                             tenthMarksheet.setVisibility(View.VISIBLE);
-                        }else if (documentTypeNo.equalsIgnoreCase("22")) {
+                        } else if (documentTypeNo.equalsIgnoreCase("22")) {
                             twelvethMarksheet.setVisibility(View.VISIBLE);
-                        }else if (documentTypeNo.equalsIgnoreCase("23")) {
+                        } else if (documentTypeNo.equalsIgnoreCase("23")) {
                             degreeMarkSheet.setVisibility(View.VISIBLE);
-                        }else if (documentTypeNo.equalsIgnoreCase("24")) {
+                        } else if (documentTypeNo.equalsIgnoreCase("24")) {
                             degreeCertificate.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("25")) {
                             others.setVisibility(View.VISIBLE);
@@ -3065,7 +3540,7 @@ public class UploadDocumentFragment extends Fragment {
                             public void run() {
                                 progressBar.setVisibility(View.GONE);
                                 Log.e("TAG", " 2285: " + new Date().toLocaleString());//1538546658896.jpg/
-                                Toast.makeText(context, mData1+" "+mData, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, mData1 + " " + mData, Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -3173,12 +3648,49 @@ public class UploadDocumentFragment extends Fragment {
             if (status.equalsIgnoreCase("1")) {
                 String strFileName, FileExtn;
 
-                Boolean bPhoto = true, bAadhaar = true, bPan = true, bAddress = true, bPassport = true,bVoterId = true,bDrivingLicense = true,
-                        bTelephoneBill = true,bElectricityBill = true,bRentAgreemnet = true,
+                Boolean bPhoto = true, bAadhaar = true, bPan = true, bAddress = true, bPassport = true, bVoterId = true, bDrivingLicense = true,
+                        bTelephoneBill = true, bElectricityBill = true, bRentAgreemnet = true,
 
-                        bSalSlip6 = true , bSalSlip3 = true, bBankStmt3 = true , bBankStmt6 = true ,bKVP = true,bLic = true,bForm16 = true,
-                        bForm61 = true,bPension = true,bITR = true,bPNL = true, bDregreeMarkSheet = true, bDegreeCerti = true,
-                        bOtherDoc = true,btenthmark = true,btwelvethmark = true;
+                        bSalSlip6 = true, bSalSlip3 = true, bBankStmt3 = true, bBankStmt6 = true, bKVP = true, bLic = true, bForm16 = true,
+                        bForm61 = true, bPension = true, bITR = true, bPNL = true, bDregreeMarkSheet = true, bDegreeCerti = true,
+                        bOtherDoc = true, btenthmark = true, btwelvethmark = true;
+
+//                "document_pending": [
+//                {
+//                    "document_type_id": "1",
+//                        "document_name": "Photo"
+//                }
+//  ],
+//                "applicant_type": "1",
+//                        "uploaded_files": [
+//                {
+//                    "fk_document_type_id": "2",
+//                        "doc_path": "uploads\/document\/19703\/PAN+Card_14209_1559297406.pdf",
+//                        "verification_status": "0",
+//                        "document_name": "PAN Card"
+//                }
+//  ],
+
+                document_arrayList = new ArrayList<>();
+                documenPOJOArrayList = new ArrayList<>();
+
+                JSONArray jsonDocArray = jsonData.getJSONArray("extra_document");
+
+                for (int i = 0; i < jsonDocArray.length(); i++) {
+                    JSONObject jsonObject1 = jsonDocArray.getJSONObject(i);
+
+                    DocumenPOJO documenPOJO = new DocumenPOJO();
+                    documenPOJO.document_type_id = jsonObject1.getString("document_type_id");
+                    documenPOJO.document_name = jsonObject1.getString("document_name");
+                    documenPOJO.document_category = jsonObject1.getString("document_category");
+                    documenPOJO.document_purpose = jsonObject1.getString("document_purpose");
+                    document_arrayList.add(jsonObject1.getString("document_name"));
+                    documenPOJOArrayList.add(documenPOJO);
+                }
+
+                arrayAdapter_document = new ArrayAdapter(context, R.layout.custom_layout_spinner, document_arrayList);
+                spDocument.setAdapter(arrayAdapter_document);
+                arrayAdapter_document.notifyDataSetChanged();
 
                 JSONArray jsonArray = jsonData.getJSONArray("uploaded_files");
 
@@ -3190,7 +3702,6 @@ public class UploadDocumentFragment extends Fragment {
                     String verification_status = jsonObject1.getString("verification_status");
                     String document_name = jsonObject1.getString("document_name");
 
-
                     Log.e(TAG, "image: " + image);
 
                     switch (s) {
@@ -3198,8 +3709,8 @@ public class UploadDocumentFragment extends Fragment {
                         case "1":
                             if (bPhoto) {
 
-                                if (profileImage.getVisibility() ==VISIBLE){
-                                }else {
+                                if (profileImage.getVisibility() == VISIBLE) {
+                                } else {
                                     profileImage.setVisibility(VISIBLE);
                                 }
                                 profileImage.setTag(baseUrl + image);
@@ -3208,14 +3719,15 @@ public class UploadDocumentFragment extends Fragment {
                                 txtPhoto1.setVisibility(View.GONE);*/
 //                              imgPhoto1.setBackgroundResource(R.drawable.pdf_image);
                                 /*Picasso.with(context).load(baseUrl + image).into(imgPhoto1);
-                                 */bPhoto = false;
+                                 */
+                                bPhoto = false;
                             }
                             break;
 
                         case "3":
                             if (bAadhaar) {
-                                if (aadharCard.getVisibility() ==VISIBLE){
-                                }else {
+                                if (aadharCard.getVisibility() == VISIBLE) {
+                                } else {
                                     aadharCard.setVisibility(VISIBLE);
                                 }
                                 aadharCard.setTag(baseUrl + image);
@@ -3230,7 +3742,8 @@ public class UploadDocumentFragment extends Fragment {
                                 if (FileExtn.equals("pdf")) {
                                     /*btnAadhar.setText(R.string.preview);*/
                                     /*imgAadhaar3.setBackgroundResource(R.drawable.pdf_image);
-                                     */ } else {
+                                     */
+                                } else {
                                     /*btnAadhar.setText(R.string.download);*/
                                 }
                                 bAadhaar = false;
@@ -3239,8 +3752,8 @@ public class UploadDocumentFragment extends Fragment {
 
                         case "2":
                             if (bPan) {
-                                if (panCard.getVisibility() ==VISIBLE){
-                                }else {
+                                if (panCard.getVisibility() == VISIBLE) {
+                                } else {
                                     panCard.setVisibility(VISIBLE);
                                 }
                                 panCard.setTag(baseUrl + image);
@@ -3266,8 +3779,8 @@ public class UploadDocumentFragment extends Fragment {
 
                         case "4":
                             if (bPassport) {
-                                if (passport.getVisibility() ==VISIBLE){
-                                }else {
+                                if (passport.getVisibility() == VISIBLE) {
+                                } else {
                                     passport.setVisibility(VISIBLE);
                                 }
 
@@ -3296,8 +3809,8 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bVoterId) {
 
-                                if (voterId.getVisibility() ==VISIBLE){
-                                }else {
+                                if (voterId.getVisibility() == VISIBLE) {
+                                } else {
                                     voterId.setVisibility(VISIBLE);
                                 }
 
@@ -3324,8 +3837,8 @@ public class UploadDocumentFragment extends Fragment {
                         case "6":
 
                             if (bDrivingLicense) {
-                                if (drivingLicense.getVisibility() ==VISIBLE){
-                                }else {
+                                if (drivingLicense.getVisibility() == VISIBLE) {
+                                } else {
                                     drivingLicense.setVisibility(VISIBLE);
                                 }
                                 drivingLicense.setTag(baseUrl + image);
@@ -3353,8 +3866,8 @@ public class UploadDocumentFragment extends Fragment {
                         case "7":
 
                             if (bTelephoneBill) {
-                                if (telephoneBill.getVisibility() ==VISIBLE){
-                                }else {
+                                if (telephoneBill.getVisibility() == VISIBLE) {
+                                } else {
                                     telephoneBill.setVisibility(VISIBLE);
                                 }
                                 telephoneBill.setTag(baseUrl + image);
@@ -3381,8 +3894,8 @@ public class UploadDocumentFragment extends Fragment {
                         case "8":
 
                             if (bElectricityBill) {
-                                if (electricityBill.getVisibility() ==VISIBLE){
-                                }else {
+                                if (electricityBill.getVisibility() == VISIBLE) {
+                                } else {
                                     electricityBill.setVisibility(VISIBLE);
                                 }
                                 electricityBill.setTag(baseUrl + image);
@@ -3409,8 +3922,8 @@ public class UploadDocumentFragment extends Fragment {
                         case "24":
 
                             if (bDegreeCerti) {
-                                if (degreeCertificate.getVisibility() ==VISIBLE){
-                                }else {
+                                if (degreeCertificate.getVisibility() == VISIBLE) {
+                                } else {
                                     degreeCertificate.setVisibility(VISIBLE);
                                 }
                                 degreeCertificate.setTag(baseUrl + image);
@@ -3438,8 +3951,8 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bOtherDoc) {
 
-                                if (others.getVisibility() ==VISIBLE){
-                                }else {
+                                if (others.getVisibility() == VISIBLE) {
+                                } else {
                                     others.setVisibility(VISIBLE);
                                 }
                                 others.setTag(baseUrl + image);
@@ -3466,8 +3979,8 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bRentAgreemnet) {
 
-                                if (rentAgreement.getVisibility() ==VISIBLE){
-                                }else {
+                                if (rentAgreement.getVisibility() == VISIBLE) {
+                                } else {
                                     rentAgreement.setVisibility(VISIBLE);
                                 }
                                 rentAgreement.setTag(baseUrl + image);
@@ -3494,8 +4007,8 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bAddress) {
 
-                                if (addressProof.getVisibility() ==VISIBLE){
-                                }else {
+                                if (addressProof.getVisibility() == VISIBLE) {
+                                } else {
                                     addressProof.setVisibility(VISIBLE);
                                 }
                                 addressProof.setTag(baseUrl + image);
@@ -3521,8 +4034,8 @@ public class UploadDocumentFragment extends Fragment {
                         case "17":
 
                             if (bSalSlip6) {
-                                if (salSlipSix.getVisibility() ==VISIBLE){
-                                }else {
+                                if (salSlipSix.getVisibility() == VISIBLE) {
+                                } else {
                                     salSlipSix.setVisibility(VISIBLE);
                                 }
                                 salSlipSix.setTag(baseUrl + image);
@@ -3548,8 +4061,8 @@ public class UploadDocumentFragment extends Fragment {
                         case "18":
 
                             if (bSalSlip3) {
-                                if (salSlipThree.getVisibility() ==VISIBLE){
-                                }else {
+                                if (salSlipThree.getVisibility() == VISIBLE) {
+                                } else {
                                     salSlipThree.setVisibility(VISIBLE);
                                 }
                                 salSlipThree.setTag(baseUrl + image);
@@ -3576,8 +4089,8 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bBankStmt3) {
 
-                                if (bankStmntThree.getVisibility() ==VISIBLE){
-                                }else {
+                                if (bankStmntThree.getVisibility() == VISIBLE) {
+                                } else {
                                     bankStmntThree.setVisibility(VISIBLE);
                                 }
                                 bankStmntThree.setTag(baseUrl + image);
@@ -3604,9 +4117,9 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bBankStmt6) {
 
-                                if (bankStmntSix.getVisibility()==VISIBLE){
+                                if (bankStmntSix.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     bankStmntSix.setVisibility(VISIBLE);
                                 }
                                 bankStmntSix.setTag(baseUrl + image);
@@ -3632,9 +4145,9 @@ public class UploadDocumentFragment extends Fragment {
                         case "10":
 
                             if (bKVP) {
-                                if (kvp.getVisibility()==VISIBLE){
+                                if (kvp.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     kvp.setVisibility(VISIBLE);
                                 }
                                 kvp.setTag(baseUrl + image);
@@ -3660,9 +4173,9 @@ public class UploadDocumentFragment extends Fragment {
                         case "11":
 
                             if (bLic) {
-                                if (licPolicy.getVisibility()==VISIBLE){
+                                if (licPolicy.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     licPolicy.setVisibility(VISIBLE);
                                 }
                                 licPolicy.setTag(baseUrl + image);
@@ -3689,9 +4202,9 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bForm16) {
 
-                                if (form16.getVisibility()==VISIBLE){
+                                if (form16.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     form16.setVisibility(VISIBLE);
                                 }
                                 form16.setTag(baseUrl + image);
@@ -3717,9 +4230,9 @@ public class UploadDocumentFragment extends Fragment {
                         case "13":
 
                             if (bForm61) {
-                                if (form61.getVisibility()==VISIBLE){
+                                if (form61.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     form61.setVisibility(VISIBLE);
                                 }
                                 form61.setTag(baseUrl + image);
@@ -3746,11 +4259,11 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bPension) {
 
-                                    if (pensionLetter.getVisibility()==VISIBLE){
+                                if (pensionLetter.getVisibility() == VISIBLE) {
 
-                                    }else {
-                                        pensionLetter.setVisibility(VISIBLE);
-                                    }
+                                } else {
+                                    pensionLetter.setVisibility(VISIBLE);
+                                }
 
                                 pensionLetter.setTag(baseUrl + image);
                                 pensionBckgrnd.setVisibility(VISIBLE);
@@ -3776,9 +4289,9 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bITR) {
 
-                                if (itr.getVisibility()==VISIBLE){
+                                if (itr.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     itr.setVisibility(VISIBLE);
                                 }
                                 itr.setTag(baseUrl + image);
@@ -3805,9 +4318,9 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bPNL) {
 
-                                if (pnl.getVisibility()==VISIBLE){
+                                if (pnl.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     pnl.setVisibility(VISIBLE);
                                 }
                                 pnl.setTag(baseUrl + image);
@@ -3834,9 +4347,9 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (bDregreeMarkSheet) {
 
-                                if (degreeMarkSheet.getVisibility()==VISIBLE){
+                                if (degreeMarkSheet.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     degreeMarkSheet.setVisibility(VISIBLE);
                                 }
                                 degreeMarkSheet.setTag(baseUrl + image);
@@ -3862,9 +4375,9 @@ public class UploadDocumentFragment extends Fragment {
                         case "21":
 
                             if (btenthmark) {
-                                if (tenthMarksheet.getVisibility()==VISIBLE){
+                                if (tenthMarksheet.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     tenthMarksheet.setVisibility(VISIBLE);
                                 }
                                 tenthMarksheet.setTag(baseUrl + image);
@@ -3891,9 +4404,9 @@ public class UploadDocumentFragment extends Fragment {
 
                             if (btwelvethmark) {
 
-                                if (twelvethMarksheet.getVisibility()==VISIBLE){
+                                if (twelvethMarksheet.getVisibility() == VISIBLE) {
 
-                                }else {
+                                } else {
                                     twelvethMarksheet.setVisibility(VISIBLE);
                                 }
                                 twelvethMarksheet.setTag(baseUrl + image);
@@ -3919,7 +4432,7 @@ public class UploadDocumentFragment extends Fragment {
 
                 }
 
-                if(profileImage.getTag() != null || aadharCard.getTag() != null  || panCard.getTag() != null){//kyc
+                if (profileImage.getTag() != null || aadharCard.getTag() != null || panCard.getTag() != null) {//kyc
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
@@ -3934,8 +4447,8 @@ public class UploadDocumentFragment extends Fragment {
                     linKYCblockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
                 }
 
-                if(salSlipSix.getTag() != null || salSlipThree.getTag() != null || bankStmntThree.getTag() != null|| bankStmntSix.getTag() != null|| kvp.getTag() != null|| licPolicy.getTag()!= null||
-                        form16.getTag() != null|| form61.getTag() != null|| pensionLetter.getTag() != null|| itr.getTag() != null|| pnl.getTag() != null){//Fin
+                if (salSlipSix.getTag() != null || salSlipThree.getTag() != null || bankStmntThree.getTag() != null || bankStmntSix.getTag() != null || kvp.getTag() != null || licPolicy.getTag() != null ||
+                        form16.getTag() != null || form61.getTag() != null || pensionLetter.getTag() != null || itr.getTag() != null || pnl.getTag() != null) {//Fin
 
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -3951,8 +4464,7 @@ public class UploadDocumentFragment extends Fragment {
                     linFinancBlockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
                 }
 
-                if(degreeMarkSheet.getTag() != null || degreeCertificate.getTag() != null || tenthMarksheet.getTag() != null|| twelvethMarksheet.getTag() != null ){//Edu
-
+                if (degreeMarkSheet.getTag() != null || degreeCertificate.getTag() != null || tenthMarksheet.getTag() != null || twelvethMarksheet.getTag() != null) {//Edu
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);

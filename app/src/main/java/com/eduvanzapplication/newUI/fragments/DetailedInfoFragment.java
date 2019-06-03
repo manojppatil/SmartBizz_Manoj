@@ -153,7 +153,7 @@ public class DetailedInfoFragment extends Fragment {
     public static Fragment mFragment;
     public static LinearLayout linBorrowerForm, linIfAddressNotSame;
     //error
-    public  static TextView txtResidentialDetailsErrMsg,txtProfessionalDetailsErrMsg;
+    public static TextView txtResidentialDetailsErrMsg, txtProfessionalDetailsErrMsg;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -223,8 +223,8 @@ public class DetailedInfoFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewpager);
 
         //ErrorMsg ID
-        txtResidentialDetailsErrMsg=view.findViewById(R.id.txtResidentialDetailsErrMsg);
-        txtProfessionalDetailsErrMsg=view.findViewById(R.id.txtProfessionalDetailsErrMsg);
+        txtResidentialDetailsErrMsg = view.findViewById(R.id.txtResidentialDetailsErrMsg);
+        txtProfessionalDetailsErrMsg = view.findViewById(R.id.txtProfessionalDetailsErrMsg);
 
         currentresidenceduration_arrayList = new ArrayList<>();
         currentResidenceDurationPersonalPOJOArrayList = new ArrayList<>();
@@ -388,9 +388,9 @@ public class DetailedInfoFragment extends Fragment {
                 if (LoanTabActivity.isDetailedInfoEdit) {
                     validate();
                 } else {
-                     if(LoanTabActivity.isDetailedInfoEdit) {
-                    checkAllFields();
-                }
+                    if (LoanTabActivity.isDetailedInfoEdit) {
+                        checkAllFields();
+                    }
                     mListener.onDetailedInfoFragment(true, 2);
                 }
 
@@ -432,7 +432,7 @@ public class DetailedInfoFragment extends Fragment {
             public void onClick(View v) {
                 if (linProfessionalBlock.getVisibility() == VISIBLE) {
                     linProfessionalBlock.startAnimation(collapseanimationProfessional);
-                //    txtProfessionalToggle.requestFocus();
+                    //    txtProfessionalToggle.requestFocus();
                 } else {
                     linProfessionalBlock.startAnimation(expandAnimationProfessional);
                 }
@@ -634,9 +634,9 @@ public class DetailedInfoFragment extends Fragment {
                                     }
 
                                 }
-                                 if(LoanTabActivity.isDetailedInfoEdit) {
-                                checkAllFields();
-                }
+                                if (LoanTabActivity.isDetailedInfoEdit) {
+                                    checkAllFields();
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -651,9 +651,9 @@ public class DetailedInfoFragment extends Fragment {
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                             Brpermanent_address = edtPermanentAddress.getText().toString();
-                             if(LoanTabActivity.isDetailedInfoEdit) {
-                            checkAllFields();
-                        }
+                            if (LoanTabActivity.isDetailedInfoEdit) {
+                                checkAllFields();
+                            }
                         }
 
                         @Override
@@ -670,9 +670,9 @@ public class DetailedInfoFragment extends Fragment {
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                             Brpermanent_landmark = edtPermanentLandmark.getText().toString();
-                             if(LoanTabActivity.isDetailedInfoEdit) {
-                            checkAllFields();
-                        }
+                            if (LoanTabActivity.isDetailedInfoEdit) {
+                                checkAllFields();
+                            }
                         }
 
                         @Override
@@ -690,9 +690,9 @@ public class DetailedInfoFragment extends Fragment {
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                             Brpermanent_address_pin = edtPermanentPincode.getText().toString();
-                             if(LoanTabActivity.isDetailedInfoEdit) {
-                            checkAllFields();
-                        }
+                            if (LoanTabActivity.isDetailedInfoEdit) {
+                                checkAllFields();
+                            }
                         }
 
                         @Override
@@ -750,7 +750,7 @@ public class DetailedInfoFragment extends Fragment {
                                 spOwnedBy.setSelection(i);
                                 break;
                             }
-                            if(LoanTabActivity.isDetailedInfoEdit){
+                            if (LoanTabActivity.isDetailedInfoEdit) {
                                 checkAllFields();
                             }
                         }
@@ -828,8 +828,8 @@ public class DetailedInfoFragment extends Fragment {
                 setViewsEnabled(true);
                 LoanTabActivity.isDetailedInfoEdit = true;
                 btnEditDetailedInfo.setVisibility(View.GONE);
-                if(LoanTabActivity.isDetailedInfoEdit) {
-                checkAllFields();
+                if (LoanTabActivity.isDetailedInfoEdit) {
+                    checkAllFields();
                 }
 //          } else {
 //
@@ -852,10 +852,10 @@ public class DetailedInfoFragment extends Fragment {
                             }
 
                         }
-                            if(LoanTabActivity.isDetailedInfoEdit) {
-                                checkAllFields();
-                            }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
                         }
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -872,9 +872,9 @@ public class DetailedInfoFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     Brcurrent_employment_duration = position + "";
-                     if(LoanTabActivity.isDetailedInfoEdit) {
-                    checkAllFields();
-                }
+                    if (LoanTabActivity.isDetailedInfoEdit) {
+                        checkAllFields();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -896,9 +896,9 @@ public class DetailedInfoFragment extends Fragment {
                     } else {
                         Bremployer_type = position + "";
                     }
-                     if(LoanTabActivity.isDetailedInfoEdit) {
-                    checkAllFields();
-                }
+                    if (LoanTabActivity.isDetailedInfoEdit) {
+                        checkAllFields();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -924,9 +924,9 @@ public class DetailedInfoFragment extends Fragment {
                                 break;
                             }
                         }
-                         if(LoanTabActivity.isDetailedInfoEdit) {
-                        checkAllFields();
-                    }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -954,9 +954,9 @@ public class DetailedInfoFragment extends Fragment {
                                 break;
                             }
                         }
-                         if(LoanTabActivity.isDetailedInfoEdit) {
-                        checkAllFields();
-                    }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
+                        }
                     }
 
                 } catch (Exception e) {
@@ -985,9 +985,9 @@ public class DetailedInfoFragment extends Fragment {
                                 break;
                             }
                         }
-                         if(LoanTabActivity.isDetailedInfoEdit) {
-                        checkAllFields();
-                    }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1014,9 +1014,9 @@ public class DetailedInfoFragment extends Fragment {
                                 break;
                             }
                         }
-                         if(LoanTabActivity.isDetailedInfoEdit) {
-                        checkAllFields();
-                    }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1044,9 +1044,9 @@ public class DetailedInfoFragment extends Fragment {
                                 break;
                             }
                         }
-                         if(LoanTabActivity.isDetailedInfoEdit) {
-                        checkAllFields();
-                    }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
+                        }
                     }
                     permanentstateApiCall();
 //                        if (permanentcityID.equals("")) {
@@ -1080,9 +1080,9 @@ public class DetailedInfoFragment extends Fragment {
                                 break;
                             }
                         }
-                         if(LoanTabActivity.isDetailedInfoEdit) {
-                        checkAllFields();
-                    }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1110,9 +1110,9 @@ public class DetailedInfoFragment extends Fragment {
                                 break;
                             }
                         }
-                         if(LoanTabActivity.isDetailedInfoEdit) {
-                        checkAllFields();
-                    }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1141,9 +1141,9 @@ public class DetailedInfoFragment extends Fragment {
                                 break;
                             }
                         }
-                         if(LoanTabActivity.isDetailedInfoEdit) {
-                        checkAllFields();
-                    }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            checkAllFields();
+                        }
                     }
                     offstateApiCall();
 //                        if (OffcityID.equals("")) {
@@ -1171,9 +1171,9 @@ public class DetailedInfoFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Bremployer_name = edtCompanyName.getText().toString();
-                 if(LoanTabActivity.isDetailedInfoEdit) {
-                checkAllFields();
-            }
+                if (LoanTabActivity.isDetailedInfoEdit) {
+                    checkAllFields();
+                }
             }
 
             @Override
@@ -1191,9 +1191,9 @@ public class DetailedInfoFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Brannual_income = edtAnnualIncome.getText().toString();
-                 if(LoanTabActivity.isDetailedInfoEdit) {
-                checkAllFields();
-            }
+                if (LoanTabActivity.isDetailedInfoEdit) {
+                    checkAllFields();
+                }
             }
 
             @Override
@@ -1211,9 +1211,9 @@ public class DetailedInfoFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Broffice_address = edtAddressOff.getText().toString();
-                 if(LoanTabActivity.isDetailedInfoEdit) {
-                checkAllFields();
-            }
+                if (LoanTabActivity.isDetailedInfoEdit) {
+                    checkAllFields();
+                }
             }
 
             @Override
@@ -1231,9 +1231,9 @@ public class DetailedInfoFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Broffice_landmark = edtLandmarkOff.getText().toString();
-                 if(LoanTabActivity.isDetailedInfoEdit) {
-                checkAllFields();
-            }
+                if (LoanTabActivity.isDetailedInfoEdit) {
+                    checkAllFields();
+                }
             }
 
             @Override
@@ -1251,9 +1251,9 @@ public class DetailedInfoFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Broffice_address_pin = edtPincodeOff.getText().toString();
-                 if(LoanTabActivity.isDetailedInfoEdit) {
-                checkAllFields();
-            }
+                if (LoanTabActivity.isDetailedInfoEdit) {
+                    checkAllFields();
+                }
             }
 
             @Override
@@ -1331,38 +1331,38 @@ public class DetailedInfoFragment extends Fragment {
                     || permanentcityID.equals("") || permanentstateID.equals("") || permanentcountryID.equals("")) {
                 if (LoanTabActivity.isDetailedInfoEdit) {
                     txtResidentialDetailsErrMsg.setVisibility(VISIBLE);
-                    if(Brcurrent_residence_type.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select Owned By");
+                    if (Brcurrent_residence_type.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select Owned By");
                         //spOwnedBy.requestFocus();
 
-                    }else if(Brcurrent_address_stay_duration.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select Stay Duration");
+                    } else if (Brcurrent_address_stay_duration.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select Stay Duration");
                         //spDurarionOfStay.requestFocus();
-                    }else if(Brpermanent_address.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select Flat No,Building,Society Name");
+                    } else if (Brpermanent_address.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select Flat No,Building,Society Name");
                         //edtPermanentAddress.requestFocus();
 
-                    }else if(Brpermanent_landmark.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select Street Name,Locality,LandMark");
+                    } else if (Brpermanent_landmark.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select Street Name,Locality,LandMark");
                         //Brpermanent_landmark
                         //edtPermanentLandmark.requestFocus();
 
 
                     } else if (Brpermanent_address_pin.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("please select Pincode");
+                        txtResidentialDetailsErrMsg.setText("Please select Pincode");
                         //edtPermanentPincode.requestFocus();
 
-                    }else if(permanentcountryID.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select Country");
-                       // spPermanentCountry.requestFocus();
+                    } else if (permanentcountryID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select Country");
+                        // spPermanentCountry.requestFocus();
 
-                    }else if(permanentstateID.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select State");
+                    } else if (permanentstateID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select State");
                         //spPermanentState.requestFocus();
 
-                    }else if(permanentcityID.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select city");
-                      //  spPermanentCity.requestFocus();
+                    } else if (permanentcityID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select city");
+                        //  spPermanentCity.requestFocus();
 
                     }
                 }
@@ -1375,12 +1375,12 @@ public class DetailedInfoFragment extends Fragment {
         } else if (!switchIsPermanentAddressSame.isChecked()) {
 
             if (Brcurrent_address_stay_duration.equals("") || Brcurrent_residence_type.equals("")) {
-                if(LoanTabActivity.isDetailedInfoEdit){
+                if (LoanTabActivity.isDetailedInfoEdit) {
                     txtResidentialDetailsErrMsg.setVisibility(VISIBLE);
-                    if(Brcurrent_residence_type.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select Owned By");
-                    }else if(Brcurrent_address_stay_duration.equals("")){
-                        txtResidentialDetailsErrMsg.setText("please select Stay Duration");
+                    if (Brcurrent_residence_type.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select Owned By");
+                    } else if (Brcurrent_address_stay_duration.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("Please select Stay Duration");
                     }
                 }
                 indicateValidationText(txtResidentialToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_residential), false);
@@ -1393,38 +1393,38 @@ public class DetailedInfoFragment extends Fragment {
         if (Brprofession.equals("") || Bremployer_name.equals("") || Brannual_income.equals("")
                 || Broffice_address_pin.equals("") || Broffice_address.equals("") || Broffice_landmark.equals("")
                 || Brcurrent_employment_duration.equals("") || Broffice_address_country.equals("") || offstateID.equals("") || offcityID.equals("")) {
-            if(LoanTabActivity.isDetailedInfoEdit){
+            if (LoanTabActivity.isDetailedInfoEdit) {
                 txtProfessionalDetailsErrMsg.setVisibility(VISIBLE);
-               // txtProfessionalToggle.requestFocus();
-                if (Brprofession.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select Profession");
-                   // spProfession.requestFocus();
-                }else if(Bremployer_name.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select Employer Type");
-                   // spEmployerType.requestFocus();
-                }else if(Brannual_income.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select Annual Income");
+                // txtProfessionalToggle.requestFocus();
+                if (Brprofession.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select Profession");
+                    // spProfession.requestFocus();
+                } else if (Bremployer_name.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select Employer Type");
+                    // spEmployerType.requestFocus();
+                } else if (Brannual_income.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select Annual Income");
                     edtAnnualIncome.requestFocus();
-                }else if(Brcurrent_employment_duration.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select Current Employment Duration");
+                } else if (Brcurrent_employment_duration.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select Current Employment Duration");
                     //spEmployerType.requestFocus();
-                }else if(Broffice_address.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select Current Flat No,Building,Society Name");
+                } else if (Broffice_address.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select Current Flat No,Building,Society Name");
                     //edtAddressOff.requestFocus();
-                }else if(Broffice_landmark.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select Street Name No,Locality,LandMark");
+                } else if (Broffice_landmark.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select Street Name No,Locality,LandMark");
                     //edtLandmarkOff.requestFocus();
-                }else if(Broffice_address_pin.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select Pincode");
+                } else if (Broffice_address_pin.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select Pincode");
                     //edtPincodeOff.requestFocus();
-                }else if(Broffice_address_country.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select Country");
+                } else if (Broffice_address_country.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select Country");
                     //spCountryOff.requestFocus();
-                }else if(offstateID.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select State");
+                } else if (offstateID.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select State");
                     //spStateOff.requestFocus();
-                }else if(offcityID.equals("")){
-                    txtProfessionalDetailsErrMsg.setText("please select City");
+                } else if (offcityID.equals("")) {
+                    txtProfessionalDetailsErrMsg.setText("Please select City");
                     //spCityOff.requestFocus();
                 }
             }

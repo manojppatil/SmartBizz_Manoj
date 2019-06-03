@@ -17,7 +17,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,7 +66,7 @@
                         android:drawableEnd="@drawable/ic_check_circle_green"
                         android:gravity="center_vertical"
                         android:text="   Residential Details"
-                        android:textColor="@color/darkblue"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="21sp" />
 
 
@@ -408,7 +409,8 @@
                                                 android:layout_height="wrap_content"
                                                 android:hint="Flat No, Building, Society Name"
                                                 android:imeOptions="actionNext"
-                                                android:maxLines="1" />
+                                                android:maxLines="1"
+                                                android:singleLine="true"/>
                                         </android.support.design.widget.TextInputLayout>
 
                                         <android.support.design.widget.TextInputLayout
@@ -425,7 +427,8 @@
                                                 android:layout_height="wrap_content"
                                                 android:hint="Street Name, Locality, Landmark"
                                                 android:imeOptions="actionNext"
-                                                android:maxLines="1" />
+                                                android:maxLines="1"
+                                                android:singleLine="true"/>
                                         </android.support.design.widget.TextInputLayout>
 
                                         <LinearLayout
@@ -607,7 +610,7 @@
                         android:drawableEnd="@drawable/ic_check_circle_green"
                         android:gravity="center_vertical"
                         android:text="   Professional Details"
-                        android:textColor="@color/darkblue"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="21sp"
                         style="@style/TextViewLightStyle"/>
 
@@ -891,7 +894,8 @@
                                                     android:layout_height="wrap_content"
                                                     android:hint="Flat No, Building, Society Name"
                                                     android:imeOptions="actionNext"
-                                                    android:maxLines="1" />
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"/>
                                             </android.support.design.widget.TextInputLayout>
 
                                             <android.support.design.widget.TextInputLayout
@@ -908,7 +912,8 @@
                                                     android:layout_height="wrap_content"
                                                     android:hint="Street Name, Locality, Landmark"
                                                     android:imeOptions="actionNext"
-                                                    android:maxLines="1" />
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"/>
                                             </android.support.design.widget.TextInputLayout>
 
                                             <LinearLayout

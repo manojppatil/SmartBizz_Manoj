@@ -30,7 +30,7 @@ public class WebViewPrivacyPolicy extends AppCompatActivity {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             }
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle(R.string.title_privacy_policy);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -39,7 +39,7 @@ public class WebViewPrivacyPolicy extends AppCompatActivity {
             toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
 
-            webView = (WebView) findViewById(R.id.webView);
+            webView = findViewById(R.id.webView);
             //webView.getSettings().setJavaScriptEnabled(true);
 
             //Vijay To load url in app's webview instead of browser
@@ -58,7 +58,8 @@ public class WebViewPrivacyPolicy extends AppCompatActivity {
             webView.getSettings().setPluginState(WebSettings.PluginState.ON);
             webView.getSettings().setAllowFileAccess(true);
 
-            webView.loadUrl("file:///android_asset/privacypolicy.html");
+            webView.loadUrl("https://eduvanz.com/privacy_mobile");
+//            webView.loadUrl("file:///android_asset/privacypolicy.html");
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {

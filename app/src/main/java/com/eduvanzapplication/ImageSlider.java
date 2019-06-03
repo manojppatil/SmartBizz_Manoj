@@ -86,8 +86,8 @@ public class ImageSlider extends AppCompatActivity {
                     finish();
 
                 }else {
-                    Intent intent = new Intent(ImageSlider.this, GetMobileNo.class);
-//                    Intent intent = new Intent(ImageSlider.this, TermsAndCondition.class);
+//                    Intent intent = new Intent(ImageSlider.this, GetMobileNo.class);
+                    Intent intent = new Intent(ImageSlider.this, TermsAndCondition.class);
                     startActivity(intent);
                     finish();
                 }

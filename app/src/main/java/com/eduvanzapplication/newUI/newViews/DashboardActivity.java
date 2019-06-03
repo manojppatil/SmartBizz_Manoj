@@ -68,10 +68,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-//import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
-//import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
+import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
+import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -214,7 +213,8 @@ public class DashboardActivity extends AppCompatActivity
 //                                    Manifest.permission.CAMERA},
 //                            GET_MY_PERMISSION);
                     ActivityCompat.requestPermissions(DashboardActivity.this,
-                            new String[]{Manifest.permission.READ_CONTACTS,
+                            new String[]{
+                                    Manifest.permission.READ_CONTACTS,
                                     Manifest.permission.READ_SMS,
                                     Manifest.permission.RECEIVE_SMS,
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -226,8 +226,8 @@ public class DashboardActivity extends AppCompatActivity
                             GET_MY_PERMISSION);
 
                 } else {
-//                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
-//                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
+                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
                 }
             }
 
@@ -417,7 +417,7 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
-        Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/Raleway-Regular.ttf");
+        Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/sourcesanspro_light.ttf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
         mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
@@ -460,12 +460,13 @@ public class DashboardActivity extends AppCompatActivity
                 else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
+//                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[8] == PackageManager.PERMISSION_GRANTED ) {
                     //granted
-//                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
-//                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
-                } else {
+                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
+                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+                }
+                else {
                     //not granted
 //                    Log.e(MainApplication.TAG, "not granted: Dashboard " + grantResults[0]);
                     {

@@ -60,7 +60,6 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.google.gson.JsonObject;
@@ -78,12 +77,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.content.Context.*;
-import static android.support.v4.content.ContextCompat.getSystemService;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.isProfileEnabled;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.student_id;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class PersonalDetailsFragment extends Fragment {
 
@@ -221,7 +218,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
                         ivMale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                        bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
                         DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
                     }
                     ivMale.setImageDrawable(bg);
@@ -231,7 +228,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
                         ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                        bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
                         DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
                     }
                     ivFemale.setImageDrawable(bg1);
@@ -241,7 +238,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
                         ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                        bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
                         DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
                     }
                     ivOther.setImageDrawable(bg2);
@@ -273,7 +270,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
                         ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                        bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
                         DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
                     }
                     ivMale.setImageDrawable(bg);
@@ -283,7 +280,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
                         ivFemale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                        bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
                         DrawableCompat.setTint(bg1, getResources().getColor(R.color.white));
                     }
                     ivFemale.setImageDrawable(bg1);
@@ -293,7 +290,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
                         ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                        bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
                         DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
                     }
                     ivOther.setImageDrawable(bg2);
@@ -325,7 +322,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
                         ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_male);
+                        bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
                         DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
                     }
                     ivMale.setImageDrawable(bg);
@@ -335,7 +332,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
                         ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg1 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_female);
+                        bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
                         DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
                     }
                     ivFemale.setImageDrawable(bg1);
@@ -345,7 +342,7 @@ public class PersonalDetailsFragment extends Fragment {
                         bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
                         ivOther.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_personal_details_gender);
+                        bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
                         DrawableCompat.setTint(bg2, getResources().getColor(R.color.white));
                     }
                     ivOther.setImageDrawable(bg2);

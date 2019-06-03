@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -56,15 +57,18 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:paddingRight="10dp">
 
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/sms" />
+                    android:layout_gravity="top"
+                    android:layout_marginTop="2dp"
+                    android:tint="@color/permissioncolor"
+                    app:srcCompat="@drawable/ic_permission_sms" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -115,9 +119,13 @@
                 android:paddingRight="10dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/camera" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="3dp"
+                    android:tint="@color/permissioncolor"
+                    app:srcCompat="@drawable/ic_permission_camera" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -167,9 +175,13 @@
                 android:paddingRight="10dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/camera" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="3dp"
+                    android:tint="@color/permissioncolor"
+                    app:srcCompat="@drawable/ic_permission_camera" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -219,9 +231,12 @@
                 android:paddingRight="10dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/icon_institutelocation_eligiblity" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="3dp"
+                    android:tint="@color/permissioncolor"
+                    app:srcCompat="@drawable/ic_permission_location" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -270,9 +285,13 @@
                 android:paddingRight="10dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/icon_coursename_eligibility" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="3dp"
+                    android:tint="@color/permissioncolor"
+                    app:srcCompat="@drawable/ic_permission_social_media" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -323,9 +342,13 @@
                 android:paddingRight="10dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/device" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="3dp"
+                    android:tint="@color/permissioncolor"
+                    app:srcCompat="@drawable/ic_permission_mobile" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

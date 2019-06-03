@@ -82,13 +82,13 @@ public class EditProfile extends AppCompatActivity {
         context = EditProfile.this;
         mActivity = this;
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow_white);
 //        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-//        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
 
         profileImage = findViewById(R.id.profileImage);
@@ -98,7 +98,7 @@ public class EditProfile extends AppCompatActivity {
         email = findViewById(R.id.edtProfileEmail);
         mobile_number = findViewById(R.id.edtProfileMobileNumber);
         submit_button = findViewById(R.id.linSubmit);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar_editProfile);
+        progressBar = findViewById(R.id.progressBar_editProfile);
 
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override

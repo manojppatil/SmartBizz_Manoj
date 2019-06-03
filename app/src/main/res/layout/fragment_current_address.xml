@@ -129,10 +129,12 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/TextViewSmallCapsStyle"
+                                style="@style/TextViewTitle12BoldStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
+                                android:gravity="start"
+                                android:layout_gravity="start"
+                                android:layout_marginLeft="@dimen/_5sdp"
                                 android:text="COUNTRY" />
 
                             <Spinner
@@ -160,10 +162,12 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/TextViewSmallCapsStyle"
+                                style="@style/TextViewTitle12BoldStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
+                                android:gravity="start"
+                                android:layout_gravity="start"
+                                android:layout_marginLeft="@dimen/_5sdp"
                                 android:text="STATE" />
 
                             <Spinner
@@ -184,10 +188,12 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/TextViewSmallCapsStyle"
+                                style="@style/TextViewTitle12BoldStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
+                                android:gravity="start"
+                                android:layout_gravity="start"
+                                android:layout_marginLeft="@dimen/_5sdp"
                                 android:text="CITY" />
 
                             <Spinner

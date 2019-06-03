@@ -52,6 +52,9 @@
         <!--Needed for Pie Device-->
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
+        <activity android:name=".newUI.newViews.FinancialAnalysis"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="sensorPortrait"/>
         <activity android:name=".newUI.newViews.TenureSelectionActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="sensorPortrait"/>

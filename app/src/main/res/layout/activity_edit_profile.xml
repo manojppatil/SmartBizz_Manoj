@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#e54350"
-        app:navigationIcon="@drawable/ic_back_arrow" />
+        app:navigationIcon="@drawable/ic_back_arrow_white" />
     </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
@@ -38,8 +38,8 @@
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_height="@dimen/_90sdp"
         app:civ_border_color="@color/darkblue"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/ic_personal_details_user" />
+        android:alpha="0.4"
+        android:background="@drawable/ic_im_default_profile" />
 
         <LinearLayout
             android:id="@+id/edtProfileLayout"

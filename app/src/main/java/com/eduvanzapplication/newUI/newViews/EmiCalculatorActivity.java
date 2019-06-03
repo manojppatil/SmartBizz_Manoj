@@ -100,7 +100,7 @@ public class EmiCalculatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edtLoanAmt.getText().toString().equals("")) {
-                    Snackbar.make(linCalculateBtn, "please enter loan amount", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(linCalculateBtn, "Please enter loan amount", Snackbar.LENGTH_SHORT).show();
                 } else if (edtRateOfInterest.toString().equals("")) {
                     Snackbar.make(linCalculateBtn, "Please enter rate of interest", Snackbar.LENGTH_SHORT).show();
                 } else if (edtTenure.toString().equals("")) {

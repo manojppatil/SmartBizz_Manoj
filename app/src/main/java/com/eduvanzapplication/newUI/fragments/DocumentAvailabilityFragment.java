@@ -159,12 +159,12 @@ public class DocumentAvailabilityFragment extends Fragment {
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.panNUmber = "";
 //                        edtAadhaar.setError(null);
-//                        edtPAN.setError("please Enter Valid PAN number!");
+//                        edtPAN.setError("Please Enter Valid PAN number!");
                         NewLeadActivity.documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.panNUmber = "";
                         edtAadhaar.setError(null);
-//                        edtPAN.setError("please Enter Valid PAN number!");
+//                        edtPAN.setError("Please Enter Valid PAN number!");
                         NewLeadActivity.documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.panNUmber = "";
@@ -277,7 +277,7 @@ public class DocumentAvailabilityFragment extends Fragment {
                 if(NewLeadActivity.aadharNumber.equals(""))
                 {
                     txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
-                    txtDocAvailableErrMsg.setText("please enter valid aadhaar number!");
+                    txtDocAvailableErrMsg.setText("Please enter valid aadhaar number!");
                     edtAadhaar.requestFocus();
                 }
             } else {
@@ -291,7 +291,7 @@ public class DocumentAvailabilityFragment extends Fragment {
                 if(NewLeadActivity.panNUmber.equals(""))
                 {
                     txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
-                    txtDocAvailableErrMsg.setText("please enter valid pan number!");
+                    txtDocAvailableErrMsg.setText("Please enter valid pan number!");
                     edtPAN.requestFocus();
                 }
             } else {
@@ -305,7 +305,7 @@ public class DocumentAvailabilityFragment extends Fragment {
                 if(NewLeadActivity.aadharNumber.equals("") && NewLeadActivity.panNUmber.equals(""))
                 {
                     txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
-                    txtDocAvailableErrMsg.setText("please enter either aadhaar or pan number!");
+                    txtDocAvailableErrMsg.setText("Please enter either aadhaar or pan number!");
                     edtAadhaar.requestFocus();
                     edtPAN.requestFocus();
                 }
@@ -319,7 +319,7 @@ public class DocumentAvailabilityFragment extends Fragment {
             if ((NewLeadActivity.aadharNumber.equals("") && NewLeadActivity.panNUmber.equals(""))) {
                 mDocListener.onOffButtonsDocuments(false, true);
                 txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
-                txtDocAvailableErrMsg.setText("please enter either aadhaar or pan number");
+                txtDocAvailableErrMsg.setText("Please enter either aadhaar or pan number");
             } else {
                 txtDocAvailableErrMsg.setText(null);
                 txtDocAvailableErrMsg.setVisibility(View.GONE);
@@ -329,7 +329,7 @@ public class DocumentAvailabilityFragment extends Fragment {
             if ((NewLeadActivity.aadharNumber.equals("") && NewLeadActivity.panNUmber.equals(""))) {
                 mDocListener.onOffButtonsDocuments(false, true);
                 txtDocAvailableErrMsg.setVisibility(View.VISIBLE);
-                txtDocAvailableErrMsg.setText("please enter either aadhaar or pan number");
+                txtDocAvailableErrMsg.setText("Please enter either aadhaar or pan number");
             } else {
                 txtDocAvailableErrMsg.setText(null);
                 txtDocAvailableErrMsg.setVisibility(View.GONE);

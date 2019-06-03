@@ -17,15 +17,15 @@
             <!--android:title="Language" />-->
         <item
             android:id="@+id/nav_aboutus"
-            android:icon="@drawable/icon_aboutus"
+            android:icon="@drawable/ic_nav_about_us"
             android:title="@string/title_about_us" />
         <item
             android:id="@+id/nav_faq"
-            android:icon="@drawable/icon_faq"
+            android:icon="@drawable/ic_nav_faq"
             android:title="@string/title_faq" />
         <item
             android:id="@+id/nav_contactus"
-            android:icon="@drawable/icon_contactus"
+            android:icon="@drawable/ic_home_call"
             android:title="@string/title_contact_us" />
         <item
             android:id="@+id/nav_more"
@@ -39,7 +39,7 @@
 
         <item
             android:id="@+id/nav_disclaimer"
-            android:icon="@drawable/ic_exclamation_triangle"
+            android:icon="@drawable/ic_borrower_documents_pending"
             android:title="@string/title_disclaimer" />
         <item
             android:id="@+id/nav_termsandconditions"

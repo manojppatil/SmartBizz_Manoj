@@ -299,32 +299,32 @@ public class CurrentAddressFragment extends Fragment {
 
             if (edtAddress.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("please enter FLAT NUMBER,BUILDING,SOCIETY NAME");
+                txtcurrentAddressErrMsg.setText("Please enter FLAT NUMBER,BUILDING,SOCIETY NAME");
 //                edtAddress.requestFocus();
 
             }else if (edtLandmark.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("please enter your STREET NAME,LOCALITY,LANDMARK");
+                txtcurrentAddressErrMsg.setText("Please enter your STREET NAME,LOCALITY,LANDMARK");
 //                edtLandmark.requestFocus();
 
             } else if (edtPincode.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("please enter your pincode");
+                txtcurrentAddressErrMsg.setText("Please enter your pincode");
 //                edtPincode.requestFocus();
 
             }  else if (NewLeadActivity.countryId.equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("please select country");
+                txtcurrentAddressErrMsg.setText("Please select country");
 //                spCountry.requestFocus();
 
             } else if (NewLeadActivity.stateId.equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("please select state");
+                txtcurrentAddressErrMsg.setText("Please select state");
 //                spState.requestFocus();
 
             } else if (NewLeadActivity.cityId.equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("please select city");
+                txtcurrentAddressErrMsg.setText("Please select city");
 //                spCity.requestFocus();
             }
 
