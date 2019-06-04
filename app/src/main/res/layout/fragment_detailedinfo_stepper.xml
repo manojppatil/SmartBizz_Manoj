@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,77 +14,111 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_20sdp"
-                    android:text="Borrower details"
-                    android:textAllCaps="true"
-                    android:textColor="@color/darkblue"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
             <!--Residential-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:padding="@dimen/_8sdp">
 
                 <LinearLayout
                     android:id="@+id/linResidentialToggle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_vertical"-->
-                        <!--android:gravity="start">-->
-
-                        <!--<ImageView-->
-                            <!--android:layout_width="@dimen/_20sdp"-->
-                            <!--android:layout_height="@dimen/_20sdp"-->
-                            <!--android:layout_gravity="center_vertical"-->
-                            <!--app:srcCompat="@drawable/ic_borrower_details_residential" />-->
-                    <!--</LinearLayout>-->
-
-                    <TextView
-                        android:id="@+id/txtResidentialToggle"
-                        style="@style/TextViewLightStyle"
-                        android:layout_width="@dimen/_200sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:drawableStart="@drawable/ic_borrower_details_residential"
-                        android:drawableEnd="@drawable/ic_check_circle_green"
-                        android:gravity="center_vertical"
-                        android:text="   Residential Details"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="21sp" />
-
-
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="end">
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/ivResidentialToggle"
+                        <LinearLayout
+                            android:id="@+id/linIcon1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="left"
+                            android:gravity="left">
+
+                            <ImageView
+                                android:id="@+id/ivResidentialTitle"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:gravity="center"
+                                app:srcCompat="@drawable/ic_borrower_details_residential" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linTitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/linIcon1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_1sdp">
+
+                            <TextView
+                                android:id="@+id/txtResidentialToggle"
+                                style="@style/TextViewLightStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_25sdp"
+                                android:gravity="center_vertical"
+                                android:text="Residential Details"
+                                android:textColor="@color/darkblue"
+                                android:textSize="21sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linStatus1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_toLeftOf="@+id/linExp1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_1sdp">
+
+                            <ImageView
+                                android:id="@+id/ivResidentialStatus"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:gravity="center"
+                                app:srcCompat="@drawable/ic_check_circle_green" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linExp1"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
-                            android:layout_gravity="center_vertical"
-                            android:tint="@color/darkblue"
-                            app:srcCompat="@drawable/ic_angle_down" />
-                    </LinearLayout>
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="end"
+                            android:gravity="end">
+
+                            <ImageView
+                                android:id="@+id/ivResidentialToggle"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_gravity="center"
+                                android:tint="@color/darkblue"
+                                app:srcCompat="@drawable/ic_angle_up" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
@@ -91,18 +126,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/linResidentialToggle"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/_4sdp"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_8sdp"
-                    android:paddingBottom="@dimen/_4sdp">
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="@dimen/_10sdp"
                         android:layout_height="match_parent"
                         android:layout_alignParentTop="true"
-                        android:minHeight="@dimen/_20sdp"
+                        android:minHeight="@dimen/_15sdp"
                         android:orientation="vertical">
 
                         <View
@@ -128,10 +164,10 @@
                             style="@style/TextViewTitle12BoldStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_8sdp"
-                            android:gravity="start"
                             android:layout_gravity="start"
                             android:layout_marginLeft="@dimen/_2sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:gravity="start"
                             android:text="Is Your Permanent Address Same As Aadhaar Address ?"
                             android:textColor="@color/darkblue" />
 
@@ -216,10 +252,9 @@
                                             style="@style/TextViewTitle12BoldStyle"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:gravity="start"
                                             android:layout_gravity="start"
                                             android:layout_marginLeft="@dimen/_2sdp"
-                                            android:textAllCaps="true"
+                                            android:gravity="start"
                                             android:text="Current Resident Type"
                                             android:textColor="@color/darkblue" />
 
@@ -279,12 +314,15 @@
                                             android:orientation="vertical"
                                             android:visibility="gone">
 
+
                                             <TextView
                                                 android:id="@+id/txtRent"
-                                                style="@style/TextViewSmall10Style"
-                                                android:layout_width="match_parent"
+                                                style="@style/TextViewTitle12BoldStyle"
+                                                android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
+                                                android:layout_gravity="start"
                                                 android:layout_marginLeft="@dimen/_2sdp"
+                                                android:gravity="start"
                                                 android:text="Monthly Rent"
                                                 android:textColor="@color/darkblue" />
 
@@ -293,7 +331,6 @@
                                                 android:layout_height="@dimen/_25sdp"
                                                 android:layout_below="@+id/txtRent"
                                                 android:layout_margin="@dimen/_2sdp"
-                                                android:background="@drawable/border_circular"
                                                 android:gravity="center"
                                                 android:orientation="horizontal"
                                                 android:padding="@dimen/_3sdp">
@@ -301,12 +338,16 @@
                                                 <EditText
                                                     android:id="@+id/edtMonthlyRent"
                                                     style="@style/EditTextStyle"
-                                                    android:layout_width="wrap_content"
+                                                    android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:background="@color/white1"
-                                                    android:imeOptions="actionNext"
+                                                    android:layout_marginLeft="@dimen/_5sdp"
+                                                    android:background="@drawable/border_circular_primary"
+                                                    android:imeOptions="actionDone"
+                                                    android:inputType="number"
+                                                    android:maxLength="8"
                                                     android:maxLines="1"
-                                                    android:text="45909" />
+                                                    android:padding="@dimen/_2sdp"
+                                                    android:textColor="@color/darkblue" />
 
                                             </LinearLayout>
                                         </LinearLayout>
@@ -330,12 +371,11 @@
                                                 style="@style/TextViewTitle12BoldStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginTop="@dimen/_8sdp"
-                                                android:gravity="start"
                                                 android:layout_gravity="start"
                                                 android:layout_marginLeft="@dimen/_2sdp"
-                                                android:textAllCaps="true"
-                                                android:text="Owned By"
+                                                android:layout_marginTop="@dimen/_8sdp"
+                                                android:gravity="start"
+                                                android:text="Owned/Rented By"
                                                 android:textColor="@color/darkblue" />
 
                                             <Spinner
@@ -367,12 +407,11 @@
                                                 style="@style/TextViewTitle12BoldStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginTop="@dimen/_8sdp"
-                                                android:gravity="start"
                                                 android:layout_gravity="start"
                                                 android:layout_marginLeft="@dimen/_2sdp"
-                                                android:textAllCaps="true"
-                                                android:text="Duration of Stay at your Current Address"
+                                                android:layout_marginTop="@dimen/_8sdp"
+                                                android:gravity="start"
+                                                android:text="Duration of Stay at Your Current Address"
                                                 android:textColor="@color/darkblue" />
 
                                             <Spinner
@@ -410,7 +449,7 @@
                                                 android:hint="Flat No, Building, Society Name"
                                                 android:imeOptions="actionNext"
                                                 android:maxLines="1"
-                                                android:singleLine="true"/>
+                                                android:singleLine="true" />
                                         </android.support.design.widget.TextInputLayout>
 
                                         <android.support.design.widget.TextInputLayout
@@ -428,7 +467,7 @@
                                                 android:hint="Street Name, Locality, Landmark"
                                                 android:imeOptions="actionNext"
                                                 android:maxLines="1"
-                                                android:singleLine="true"/>
+                                                android:singleLine="true" />
                                         </android.support.design.widget.TextInputLayout>
 
                                         <LinearLayout
@@ -450,7 +489,7 @@
                                                     style="@style/EditTextStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:hint="PinCode"
+                                                    android:hint="Pincode"
                                                     android:imeOptions="actionDone"
                                                     android:inputType="number"
                                                     android:maxLength="6"
@@ -468,10 +507,10 @@
                                                     style="@style/TextViewTitle12BoldStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:gravity="start"
                                                     android:layout_gravity="start"
                                                     android:layout_marginLeft="@dimen/_5sdp"
-                                                    android:text="COUNTRY" />
+                                                    android:gravity="start"
+                                                    android:text="Country" />
 
                                                 <Spinner
                                                     android:id="@+id/spPermanentCountry"
@@ -502,10 +541,10 @@
                                                     style="@style/TextViewTitle12BoldStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:gravity="start"
                                                     android:layout_gravity="start"
                                                     android:layout_marginLeft="@dimen/_5sdp"
-                                                    android:text="STATE" />
+                                                    android:gravity="start"
+                                                    android:text="State" />
 
 
                                                 <Spinner
@@ -530,10 +569,10 @@
                                                     style="@style/TextViewTitle12BoldStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:gravity="start"
                                                     android:layout_gravity="start"
                                                     android:layout_marginLeft="@dimen/_5sdp"
-                                                    android:text="CITY" />
+                                                    android:gravity="start"
+                                                    android:text="City" />
 
                                                 <Spinner
                                                     android:id="@+id/spPermanentCity"
@@ -586,65 +625,117 @@
                     android:id="@+id/linProfessionalToggle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_vertical"-->
-                        <!--android:gravity="start">-->
-
-                        <!--<ImageView-->
-                            <!--android:layout_width="@dimen/_20sdp"-->
-                            <!--android:layout_height="@dimen/_20sdp"-->
-                            <!--android:layout_gravity="center_vertical"-->
-                            <!--app:srcCompat="@drawable/ic_profession_self_employed" />-->
-                    <!--</LinearLayout>-->
-
-                    <TextView
-                        android:id="@+id/txtProfessionalToggle"
-                        android:layout_width="@dimen/_200sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:drawableStart="@drawable/ic_profession_self_employed"
-                        android:drawableEnd="@drawable/ic_check_circle_green"
-                        android:gravity="center_vertical"
-                        android:text="   Professional Details"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="21sp"
-                        style="@style/TextViewLightStyle"/>
-
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="end">
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/ivProfessionalToggle"
+                        <LinearLayout
+                            android:id="@+id/linIcon2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="left"
+                            android:gravity="left">
+
+                            <ImageView
+                                android:id="@+id/ivProfessionalTitle"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:gravity="center"
+                                app:srcCompat="@drawable/ic_profession_self_employed" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linTitle2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/linIcon2"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_1sdp">
+
+                            <TextView
+                                android:id="@+id/txtProfessionalToggle"
+                                style="@style/TextViewLightStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_25sdp"
+                                android:gravity="center_vertical"
+                                android:text="Professional Details"
+                                android:textColor="@color/darkblue"
+                                android:textSize="21sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linStatus2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_toLeftOf="@+id/linExp2"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_1sdp">
+
+                            <ImageView
+                                android:id="@+id/ivProfessionalStatus"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:gravity="center"
+                                app:srcCompat="@drawable/ic_check_circle_green" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linExp2"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
-                            android:layout_gravity="center_vertical"
-                            android:tint="@color/darkblue"
-                            app:srcCompat="@drawable/ic_angle_down" />
-                    </LinearLayout>
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="end"
+                            android:gravity="end">
+
+                            <ImageView
+                                android:id="@+id/ivProfessionalToggle"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_gravity="center"
+                                android:tint="@color/darkblue"
+                                app:srcCompat="@drawable/ic_angle_up" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/_4sdp"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_8sdp"
-                    android:paddingBottom="@dimen/_8sdp">
+                    android:paddingBottom="@dimen/_4sdp">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:minHeight="@dimen/_25sdp"
+                        android:minHeight="@dimen/_20sdp"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -690,29 +781,29 @@
                         android:visibility="visible">
 
                         <TextView
+                            style="@style/TextViewLightStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_8sdp"
-                            android:text="Now Provide Your"
-                            android:textColor="@color/darkblue"
-                            android:gravity="start"
                             android:layout_gravity="start"
                             android:layout_marginLeft="@dimen/_5sdp"
-                            android:textSize="16sp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:fontFamily="@font/sourcesanspro_regular"
-                            style="@style/TextViewLightStyle"/>
+                            android:gravity="start"
+                            android:text="Now Provide Your"
+                            android:textColor="@color/darkblue"
+                            android:textSize="16sp" />
 
 
                         <TextView
+                            style="@style/TextViewLightStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Professional Details"
-                            android:textColor="@color/darkblue"
-                            android:gravity="start"
                             android:layout_gravity="top"
                             android:layout_marginLeft="@dimen/_5sdp"
-                            android:textSize="25sp"
-                            style="@style/TextViewLightStyle"/>
+                            android:gravity="start"
+                            android:text="Professional Details"
+                            android:textColor="@color/darkblue"
+                            android:textSize="25sp" />
 
 
                         <LinearLayout
@@ -725,12 +816,11 @@
                                 style="@style/TextViewTitle12BoldStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:text="Profession"
-                                android:gravity="start"
                                 android:layout_gravity="start"
                                 android:layout_marginLeft="@dimen/_2sdp"
-                                android:textAllCaps="true"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:gravity="start"
+                                android:text="Select Profession"
                                 android:textColor="@color/darkblue" />
 
                             <Spinner
@@ -788,12 +878,11 @@
                                             style="@style/TextViewTitle12BoldStyle"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="@dimen/_8sdp"
-                                            android:text="Employer Type"
-                                            android:gravity="start"
                                             android:layout_gravity="start"
                                             android:layout_marginLeft="@dimen/_2sdp"
-                                            android:textAllCaps="true"
+                                            android:layout_marginTop="@dimen/_8sdp"
+                                            android:gravity="start"
+                                            android:text="Employer Type"
                                             android:textColor="@color/darkblue" />
 
                                         <Spinner
@@ -844,9 +933,9 @@
                                                     style="@style/TextViewTitle12BoldStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:gravity="start"
                                                     android:layout_gravity="start"
                                                     android:layout_marginLeft="@dimen/_5sdp"
+                                                    android:gravity="start"
                                                     android:text="Current Employment Duration" />
 
                                                 <Spinner
@@ -869,16 +958,16 @@
                                             android:visibility="visible">
 
                                             <TextView
+                                                style="@style/TextViewTitleSmallStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginTop="@dimen/_12sdp"
-                                                android:text=" * Provide your Office Address"
-                                                android:gravity="start"
                                                 android:layout_gravity="start"
                                                 android:layout_marginLeft="@dimen/_2sdp"
+                                                android:layout_marginTop="@dimen/_12sdp"
+                                                android:gravity="start"
+                                                android:text=" * Provide your Office Address"
                                                 android:textAllCaps="true"
-                                                android:textColor="@color/new_red"
-                                                style="@style/TextViewTitleSmallStyle"/>
+                                                android:textColor="@color/new_red" />
 
                                             <android.support.design.widget.TextInputLayout
                                                 android:layout_width="match_parent"
@@ -895,7 +984,7 @@
                                                     android:hint="Flat No, Building, Society Name"
                                                     android:imeOptions="actionNext"
                                                     android:maxLines="1"
-                                                    android:singleLine="true"/>
+                                                    android:singleLine="true" />
                                             </android.support.design.widget.TextInputLayout>
 
                                             <android.support.design.widget.TextInputLayout
@@ -913,7 +1002,7 @@
                                                     android:hint="Street Name, Locality, Landmark"
                                                     android:imeOptions="actionNext"
                                                     android:maxLines="1"
-                                                    android:singleLine="true"/>
+                                                    android:singleLine="true" />
                                             </android.support.design.widget.TextInputLayout>
 
                                             <LinearLayout
@@ -935,7 +1024,7 @@
                                                         style="@style/EditTextStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:hint="PinCode"
+                                                        android:hint="Pincode"
                                                         android:imeOptions="actionDone"
                                                         android:inputType="number"
                                                         android:maxLength="6"
@@ -953,10 +1042,10 @@
                                                         style="@style/TextViewTitle12BoldStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:gravity="start"
                                                         android:layout_gravity="start"
                                                         android:layout_marginLeft="@dimen/_5sdp"
-                                                        android:text="COUNTRY" />
+                                                        android:gravity="start"
+                                                        android:text="Country" />
 
                                                     <Spinner
                                                         android:id="@+id/spCountryOff"
@@ -987,10 +1076,10 @@
                                                         style="@style/TextViewTitle12BoldStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:gravity="start"
                                                         android:layout_gravity="start"
                                                         android:layout_marginLeft="@dimen/_5sdp"
-                                                        android:text="STATE" />
+                                                        android:gravity="start"
+                                                        android:text="State" />
 
                                                     <Spinner
                                                         android:id="@+id/spStateOff"
@@ -1014,10 +1103,10 @@
                                                         style="@style/TextViewTitle12BoldStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:gravity="start"
                                                         android:layout_gravity="start"
                                                         android:layout_marginLeft="@dimen/_5sdp"
-                                                        android:text="CITY" />
+                                                        android:gravity="start"
+                                                        android:text="City" />
 
                                                     <Spinner
                                                         android:id="@+id/spCityOff"
@@ -1063,18 +1152,46 @@
     </android.support.v4.widget.NestedScrollView>
 
 
-    <ImageButton
-        android:id="@+id/btnEditDetailedInfo"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
+    <LinearLayout
+        android:id="@+id/linEditDetailedInfo"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_circular_red_filled"
+        android:orientation="horizontal"
+        android:padding="@dimen/_4sdp"
+        android:gravity="center_vertical"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:background="@drawable/border_circular_red_filled"
-        android:scaleType="centerInside"
-        app:elevation="@dimen/_4sdp"
-        app:srcCompat="@drawable/ic_pencil_alt" />
+        android:layout_marginTop="@dimen/_50sdp"
+        app:elevation="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/txtEmailSubmit"
+            style="@style/TextViewTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit"
+            android:gravity="center"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:background="@color/white" />
+
+        <ImageView
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            app:srcCompat="@drawable/ic_pencil_alt" />
+
+    </LinearLayout>
+
 
     <ImageButton
         android:id="@+id/btnNext"

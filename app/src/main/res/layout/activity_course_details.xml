@@ -153,14 +153,14 @@
 
                     <Spinner
                         android:id="@+id/spCourse"
+                        style="@style/TextViewTitle14Style"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_26sdp"
-                        android:background="@drawable/spinner_rect_background"
+                        android:layout_marginTop="@dimen/_4sdp"
                         android:layout_marginEnd="@dimen/_1sdp"
+                        android:background="@drawable/spinner_rect_background"
                         android:paddingLeft="@dimen/_2sdp"
-                        android:paddingRight="@dimen/_2sdp"
-                        style="@style/TextViewTitle14Style"
-                        android:layout_marginTop="@dimen/_4sdp"/>
+                        android:paddingRight="@dimen/_2sdp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -199,6 +199,7 @@
 
                         </LinearLayout>
 
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -234,7 +235,17 @@
                         </LinearLayout>
 
                     </LinearLayout>
-
+                    <TextView
+                        android:id="@+id/txtcourseDetailsErrMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/red"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="15sp"
+                        style="@style/TextViewTitle14Style" />
                 </LinearLayout>
 
             </RelativeLayout>

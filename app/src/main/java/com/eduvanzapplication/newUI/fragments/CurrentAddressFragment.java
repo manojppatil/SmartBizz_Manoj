@@ -107,7 +107,6 @@ public class CurrentAddressFragment extends Fragment {
 
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -244,6 +243,9 @@ public class CurrentAddressFragment extends Fragment {
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
                                 NewLeadActivity.stateId = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
+                                if(NewLeadActivity.isCurrentAddEnabled) {
+                                    checkAllFields();
+                                }
                                 break;
                             }
                         }

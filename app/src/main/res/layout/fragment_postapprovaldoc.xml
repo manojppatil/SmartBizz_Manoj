@@ -546,7 +546,7 @@
                                         android:layout_height="@dimen/_15sdp"
                                         android:layout_marginLeft="@dimen/_5sdp"
                                         android:tint="@color/textcolordark"
-                                        app:srcCompat="@drawable/ic_borrower_details_id_card" />
+                                        app:srcCompat="@drawable/ic_agreement_sign_manual" />
 
                                     <View
                                         android:layout_width="@dimen/_1sdp"
@@ -582,7 +582,7 @@
                                         android:layout_height="@dimen/_15sdp"
                                         android:layout_marginLeft="@dimen/_5sdp"
                                         android:tint="@color/textcolordark"
-                                        app:srcCompat="@drawable/ic_borrower_details_id_card" />
+                                        app:srcCompat="@drawable/ic_agreement_sign_fingerprint" />
 
                                     <View
                                         android:layout_width="@dimen/_1sdp"
@@ -618,7 +618,7 @@
                                         android:layout_height="@dimen/_15sdp"
                                         android:layout_marginLeft="@dimen/_5sdp"
                                         android:tint="@color/textcolordark"
-                                        app:srcCompat="@drawable/ic_borrower_details_id_card" />
+                                        app:srcCompat="@drawable/ic_key" />
 
                                     <View
                                         android:layout_width="@dimen/_1sdp"

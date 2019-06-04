@@ -28,9 +28,9 @@ public class DataSyncReceiver extends BroadcastReceiver {
         Boolean dataSynced = intent.getBooleanExtra("DataSynced",false);
         String algo360_datasync = String.valueOf(intent.getBooleanExtra("DataSynced",false));
         Log.e("Receiver", "Data synced: " + dataSynced);
-                    if(dataSynced) {
+//                    if(dataSynced) {
                         DashboardActivity.saveAlgo360();
-                    }
+//                    }
     }
 
 }

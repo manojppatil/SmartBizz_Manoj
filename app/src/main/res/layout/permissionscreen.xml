@@ -43,10 +43,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center|left"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
                 android:text="Eduvanz provides loans under NBFC regulations of Reserve Bank of India. In order to comply with all relevant and applicable regulations required for the purpose of granting You the loan, the below mentioned permissions are needed."
                 android:textColor="@color/darkblue" />
 
@@ -181,7 +181,7 @@
                     android:layout_gravity="top"
                     android:layout_marginTop="3dp"
                     android:tint="@color/permissioncolor"
-                    app:srcCompat="@drawable/ic_permission_camera" />
+                    app:srcCompat="@drawable/ic_permission_storage" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -399,21 +399,23 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/lin2"
         android:layout_gravity="center"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
         android:padding="1dp"
         android:text="We, at Eduvanz, are extremely careful about your privacy and will always strive to provide you the best in class service and security." />
-
 
     <LinearLayout
         android:id="@+id/lin2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_above="@+id/button_permission">
 
         <TextView
@@ -422,8 +424,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:gravity="center"
             android:padding="1dp"
             android:text="@string/by_proceeding_you_accept" />

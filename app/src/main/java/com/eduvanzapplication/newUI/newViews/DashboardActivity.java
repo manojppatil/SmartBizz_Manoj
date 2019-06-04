@@ -78,13 +78,13 @@ public class DashboardActivity extends AppCompatActivity
     public static NavigationView navigationView;
     public static DrawerLayout drawer;
     public static Context context;
-//    com.eduvanzapplication.newUI.newViews.CustomDrawerButton customDrawerButton;
-    TextView textViewName,textView_mobileNo, textViewEmail;
+    //    com.eduvanzapplication.newUI.newViews.CustomDrawerButton customDrawerButton;
+    TextView textViewName, textView_mobileNo, textViewEmail;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
-    LinearLayout linearLayoutSignup, linearLayoutUserDetail,editProfile;
+    LinearLayout linearLayoutSignup, linearLayoutUserDetail, editProfile;
     public DataSyncReceiver dataSyncReceiver;
-    static String  student_id = "", appInstallationTimeStamp = "",userFirst = "", userLast = "", userEmail = "", userPic = "",userMobileNo ="";
+    static String student_id = "", appInstallationTimeStamp = "", userFirst = "", userLast = "", userEmail = "", userPic = "", userMobileNo = "", isDataSync = "false";
     public static AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
     public int GET_MY_PERMISSION = 1, permission;
@@ -121,6 +121,14 @@ public class DashboardActivity extends AppCompatActivity
                 e.printStackTrace();
                 firstTimeScrape = 0;
             }
+
+            try {
+                sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                isDataSync = sharedPreferences.getString("Data synced", "false");
+            } catch (Exception e) {
+                e.printStackTrace();
+                firstTimeScrape = 0;
+            }
             drawer = findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -134,16 +142,16 @@ public class DashboardActivity extends AppCompatActivity
 
             View header = navigationView.getHeaderView(0);
 
-            editProfile= header.findViewById(R.id.linearLayout_userdetail_dashboard);
+            editProfile = header.findViewById(R.id.linearLayout_userdetail_dashboard);
             editProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getApplicationContext(),EditProfile.class));
+                    startActivity(new Intent(getApplicationContext(), EditProfile.class));
                 }
             });
             hideMenuOptions();
 
-            textViewName =  header.findViewById(R.id.textView_name);
+            textViewName = header.findViewById(R.id.textView_name);
             textViewName.setText(userFirst);
             textView_mobileNo = header.findViewById(R.id.textView_mobileNo);
             textView_mobileNo.setText(userMobileNo);
@@ -166,6 +174,7 @@ public class DashboardActivity extends AppCompatActivity
 //                e.printStackTrace();
 //                firstTimeScrape = 0;
 //            }
+
             linearLayoutUserDetail = header.findViewById(R.id.linearLayout_userdetail_dashboard);
 
             frameLayoutDashboard = findViewById(R.id.framelayout_dashboard);
@@ -189,7 +198,7 @@ public class DashboardActivity extends AppCompatActivity
             if (sharedPref.getLoginDone(context)) {
                 Menu nav_Menu = navigationView.getMenu();
                 nav_Menu.findItem(R.id.nav_eligibility).setVisible(false);
-            }else {
+            } else {
                 Menu nav_Menu = navigationView.getMenu();
                 nav_Menu.findItem(R.id.nav_logout).setVisible(false);
             }
@@ -204,8 +213,7 @@ public class DashboardActivity extends AppCompatActivity
                 permission = ContextCompat.checkSelfPermission(getApplicationContext(),
                         Manifest.permission.READ_SMS);
 
-                if (permission != PackageManager.PERMISSION_GRANTED)
-                {//Direct Permission without disclaimer dialog
+                if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
 //                    ActivityCompat.requestPermissions(DashboardActivity.this,
 //                            new String[]{
 //                                    Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -226,7 +234,7 @@ public class DashboardActivity extends AppCompatActivity
                             GET_MY_PERMISSION);
 
                 } else {
-                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
+                    ExtraHelperFunctions.putRefUserId(context, userMobileNo);
                     Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
                 }
             }
@@ -238,7 +246,7 @@ public class DashboardActivity extends AppCompatActivity
             String errorMsg = e.getMessage();
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(DashboardActivity.this,className, name, errorMsg, errorMsgDetails, errorLine);
+            Globle.ErrorLog(DashboardActivity.this, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -248,31 +256,32 @@ public class DashboardActivity extends AppCompatActivity
 
             String action = intent.getAction();
 
-            Boolean dataSynced = intent.getBooleanExtra("DataSynced",false);
-
+            Boolean dataSynced = intent.getBooleanExtra("DataSynced", false);
 //            Log.e("Receiver", "Data synced: " + dataSynced);
 //            Log.e("Receiver", "Data Action: " + action);
 
-            if(dataSynced) {
-                saveAlgo360();
-            }
+//            if(dataSynced) {
+            saveAlgo360();
+//            }
         }
     };
 
     public static void saveAlgo360() {
         /** API CALL **/
         try {//auth_token
-            String url = "http://192.168.1.63/eduvanzapi/dashboard/saveAlgo360response";
-//            String url = MainActivity.mainUrl + "dashboard/saveAlgo360response";
-            Map<String, String> params = new HashMap<String, String>();
+//            String url = "http://192.168.1.63/eduvanzapi/dashboard/saveAlgo360response";
+            if (!isDataSync.equals("true")) {
+                String url = MainActivity.mainUrl + "dashboard/saveAlgo360response";
+                Map<String, String> params = new HashMap<String, String>();
 
-            params.put("student_id", student_id);
-            params.put("mobile_no", userMobileNo);
-            params.put("email_id", userEmail);
-            params.put("algo360_datasync", String.valueOf(true));
-            VolleyCallAlgo360 volleyCall = new VolleyCallAlgo360();
+                params.put("student_id", student_id);
+                params.put("mobile_no", userMobileNo);
+                params.put("email_id", userEmail);
+                params.put("algo360_datasync", String.valueOf(true));
+                VolleyCallAlgo360 volleyCall = new VolleyCallAlgo360();
 //            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, "90ad441a12b48c6d7c5524b8b2a334c3");
-            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -307,7 +316,7 @@ public class DashboardActivity extends AppCompatActivity
     protected void onResume() {
 
         IntentFilter intentFilter = new IntentFilter("in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION");
-        registerReceiver(broadcastReceiver,intentFilter);
+        registerReceiver(broadcastReceiver, intentFilter);
         super.onResume();
 
     }
@@ -328,7 +337,7 @@ public class DashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-            if (id == R.id.nav_eligibility) {
+        if (id == R.id.nav_eligibility) {
 //            Intent intent = new Intent(DashboardActivity.this, NewLeadActivity.class);
             Intent intent = new Intent(DashboardActivity.this, LeadOwnerType.class);
             startActivity(intent);
@@ -346,10 +355,12 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_faq) {
             Intent intent = new Intent(DashboardActivity.this, WebViewFAQs.class);
             startActivity(intent);
-        } else if (id == R.id.nav_contactus) {
-            Intent intent = new Intent(DashboardActivity.this, ContactUs.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_more) {
+        }
+//        else if (id == R.id.nav_contactus) {
+//            Intent intent = new Intent(DashboardActivity.this, ContactUs.class);
+//            startActivity(intent);
+//        }
+        else if (id == R.id.nav_more) {
             showMenuOptions();
         }
 //        else if (id == R.id.nav_blog) {
@@ -362,13 +373,13 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_termsandconditions) {
             Intent intent = new Intent(DashboardActivity.this, WebViewTermsNCondition.class);
             startActivity(intent);
-        }else if (id == R.id.nav_privacypolicy) {
+        } else if (id == R.id.nav_privacypolicy) {
             Intent intent = new Intent(DashboardActivity.this, WebViewPrivacyPolicy.class);
             startActivity(intent);
         } else if (id == R.id.nav_interestratepolicy) {
             Intent intent = new Intent(DashboardActivity.this, WebViewInterestRatePolicy.class);
             startActivity(intent);
-        }else if (id == R.id.nav_fairpracticscode) {
+        } else if (id == R.id.nav_fairpracticscode) {
             Intent intent = new Intent(DashboardActivity.this, WebViewFairPracticsCode.class);
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
@@ -417,7 +428,7 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
-        Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/sourcesanspro_light.ttf");
+        Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/sourcesanspro_italic.ttf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
         mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
@@ -461,12 +472,11 @@ public class DashboardActivity extends AppCompatActivity
                         grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
 //                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[8] == PackageManager.PERMISSION_GRANTED ) {
+                        grantResults[8] == PackageManager.PERMISSION_GRANTED) {
                     //granted
-                    ExtraHelperFunctions.putRefUserId(context,userMobileNo);
+                    ExtraHelperFunctions.putRefUserId(context, userMobileNo);
                     Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
-                }
-                else {
+                } else {
                     //not granted
 //                    Log.e(MainApplication.TAG, "not granted: Dashboard " + grantResults[0]);
                     {
@@ -510,9 +520,12 @@ public class DashboardActivity extends AppCompatActivity
 
     public void updateAlgo360Res(JSONObject jsonDataO) {
 
-        sharedPreferences = context.getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Data synced", "true");
-        editor.commit();
+        String status = jsonDataO.optString("status");
+        if (status.equals("1")) {
+            sharedPreferences = context.getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Data synced", "true");
+            editor.commit();
+        }
     }
 }

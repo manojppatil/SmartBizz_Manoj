@@ -2,6 +2,7 @@ package com.eduvanzapplication.newUI.newViews;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,9 +11,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.eduvanzapplication.CustomTypefaceSpan;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.MainApplication;
@@ -92,13 +97,28 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         finish();
     }
 
+    private void applyFontToMenuItem(MenuItem mi) {
+        Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/sourcesanspro_italic.ttf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
+
+
+    }
     private void setupViewPager(ViewPager viewPager) {
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new KycDetailFragment(), "KYC Details");
         adapter.addFrag(new DetailedInfoFragment(), "Detailed Info");
         adapter.addFrag(new UploadDocumentFragment(), "Documents Upload");
         adapter.addFrag(new PostApprovalDocFragment(), "Post approval Documentation");
         adapter.addFrag(new AmortizationFragment(), "Amortization");
+
+//        adapter.addFrag(new KycDetailFragment(), "KYC Details");
+//        adapter.addFrag(new DetailedInfoFragment(), "Detailed Info");
+//        adapter.addFrag(new UploadDocumentFragment(), "Documents Upload");
+//        adapter.addFrag(new PostApprovalDocFragment(), "Post approval Documentation");
+//        adapter.addFrag(new AmortizationFragment(), "Amortization");
         viewPager.setAdapter(adapter);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

@@ -17,7 +17,6 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCallAlgo360;
-import com.eduvanzapplication.newUI.fragments.DashboardFragmentNew;
 
 import org.json.JSONObject;
 
@@ -58,9 +57,10 @@ public class FinancialAnalysis extends AppCompatActivity {
     public static void saveAlgo360() {
         /** API CALL **/
         try {//auth_token
-//            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+//            https://api.eduvanz.com/dashboard/algo360RiskScore
 //            String url = "http://192.168.1.63/eduvanzapi/dashboard/algo360RiskScore";
-            String url = MainActivity.mainUrl + "dashboard/saveAlgo360response";
+            String url = MainActivity.mainUrl + "dashboard/algo360RiskScore";
             Map<String, String> params = new HashMap<String, String>();
             params.put("mobile_no", DashboardActivity.userMobileNo);
             VolleyCallAlgo360 volleyCall = new VolleyCallAlgo360();
@@ -70,19 +70,24 @@ public class FinancialAnalysis extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     public void updateAlgo360Score(JSONObject jsonDataO) {
 
-//        try {
-//            progressBar.setVisibility(View.GONE);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
+        try {
+            progressBar.setVisibility(View.GONE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String status = jsonDataO.optString("status");
         String riskscore = jsonDataO.optString("risk_score_card");
+        try {
+            if (riskscore.equals("")) {
+                txteduvanzCreditScore.setText("0");
+            }else{
+                txteduvanzCreditScore.setText(riskscore);
+            }
+        } catch (Exception e) {
         txteduvanzCreditScore.setText(riskscore);
-
+        }
     }
 
 

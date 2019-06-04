@@ -66,10 +66,10 @@ public class DetailedInfoFragment extends Fragment {
     public static ProgressDialog progressDialog;
 
     public static ViewPager viewPager;
-    public static ImageButton btnEditDetailedInfo, btnNext;
+    public static ImageButton btnNext;
     public static TextView txtResidentialToggle, txtProfessionalToggle;
-    public static LinearLayout linResidentialToggle, linProfessionalToggle;
-    public static ImageView ivResidentialToggle, ivProfessionalToggle;
+    public static LinearLayout linResidentialToggle, linProfessionalToggle,linEditDetailedInfo;
+    public static ImageView ivResidentialToggle, ivProfessionalToggle, ivResidentialTitle, ivResidentialStatus,ivProfessionalTitle,ivProfessionalStatus;
     public static LinearLayout linResidentialBlock, linProfessionalBlock;
     public static Animation collapseanimationResidential, expandAnimationResidential,
             collapseanimationProfessional, expandAnimationProfessional;
@@ -166,11 +166,16 @@ public class DetailedInfoFragment extends Fragment {
 
         progressDialog = new ProgressDialog(context);
 
-        btnEditDetailedInfo = view.findViewById(R.id.btnEditDetailedInfo);
+        linEditDetailedInfo = view.findViewById(R.id.linEditDetailedInfo);
         btnNext = view.findViewById(R.id.btnNext);
 
         ivResidentialToggle = view.findViewById(R.id.ivResidentialToggle);
         ivProfessionalToggle = view.findViewById(R.id.ivProfessionalToggle);
+
+        ivResidentialTitle = view.findViewById(R.id.ivResidentialTitle);
+        ivResidentialStatus = view.findViewById(R.id.ivResidentialStatus);
+        ivProfessionalTitle = view.findViewById(R.id.ivProfessionalTitle);
+        ivProfessionalStatus = view.findViewById(R.id.ivProfessionalStatus);
 
         txtResidentialToggle = view.findViewById(R.id.txtResidentialToggle);
         linResidentialBlock = view.findViewById(R.id.linResidentialBlock);
@@ -412,8 +417,8 @@ public class DetailedInfoFragment extends Fragment {
             }
         });
 
-        linResidentialBlock.startAnimation(expandAnimationResidential);
-        linProfessionalBlock.startAnimation(collapseanimationProfessional);
+//        linResidentialBlock.startAnimation(expandAnimationResidential);
+//        linProfessionalBlock.startAnimation(collapseanimationProfessional);
         setViewsEnabled(false);
 
         txtResidentialToggle.setOnClickListener(new View.OnClickListener() {
@@ -473,10 +478,10 @@ public class DetailedInfoFragment extends Fragment {
                 linResidentialBlock.setVisibility(GONE);
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
                     ivResidentialToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivResidentialToggle.setImageDrawable(bg);
@@ -497,9 +502,8 @@ public class DetailedInfoFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 if (linProfessionalBlock.getVisibility() == VISIBLE) {
-
-                } else {
                     linProfessionalBlock.startAnimation(collapseanimationProfessional);
+                }
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
@@ -509,7 +513,6 @@ public class DetailedInfoFragment extends Fragment {
                         DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                     }
                     ivResidentialToggle.setImageDrawable(bg);
-                }
             }
 
             @Override
@@ -551,20 +554,17 @@ public class DetailedInfoFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 if (linResidentialBlock.getVisibility() == VISIBLE) {
-
-                } else {
                     linResidentialBlock.startAnimation(collapseanimationResidential);
+                }
                     Drawable bg;
-
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
                         ivProfessionalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                     } else {
-                        bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                        bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
                         DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                     }
                     ivProfessionalToggle.setImageDrawable(bg);
-                }
             }
 
             @Override
@@ -820,14 +820,14 @@ public class DetailedInfoFragment extends Fragment {
             }
         });
 
-        btnEditDetailedInfo.setOnClickListener(new View.OnClickListener() {
+        linEditDetailedInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 //          if (lead_status.equals("1") && current_stage.equals("1")) {
                 setViewsEnabled(true);
                 LoanTabActivity.isDetailedInfoEdit = true;
-                btnEditDetailedInfo.setVisibility(View.GONE);
+                linEditDetailedInfo.setVisibility(View.GONE);
                 if (LoanTabActivity.isDetailedInfoEdit) {
                     checkAllFields();
                 }
@@ -1289,7 +1289,7 @@ public class DetailedInfoFragment extends Fragment {
             linMonthlyRent.setEnabled(f);
             edtCompanyName.setEnabled(f);
             edtAnnualIncome.setEnabled(f);
-            edtMonthlyRent.setEnabled(f);
+//            edtMonthlyRent.setEnabled(f);
             edtPermanentPincode.setEnabled(f);
             edtPermanentAddress.setEnabled(f);
             edtPermanentLandmark.setEnabled(f);
@@ -1366,11 +1366,13 @@ public class DetailedInfoFragment extends Fragment {
 
                     }
                 }
-                indicateValidationText(txtResidentialToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_residential), false);
+                indicateValidationText(txtResidentialToggle,false);
+                indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);
             } else {
                 txtResidentialDetailsErrMsg.setText(null);
                 txtResidentialDetailsErrMsg.setVisibility(GONE);
-                indicateValidationText(txtResidentialToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_residential), true);
+                indicateValidationText(txtResidentialToggle,false);
+                indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);
             }
         } else if (!switchIsPermanentAddressSame.isChecked()) {
 
@@ -1383,12 +1385,13 @@ public class DetailedInfoFragment extends Fragment {
                         txtResidentialDetailsErrMsg.setText("Please select Stay Duration");
                     }
                 }
-                indicateValidationText(txtResidentialToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_residential), false);
+                indicateValidationText(txtResidentialToggle,false);
+                indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);
             } else {
                 txtResidentialDetailsErrMsg.setText(null);
                 txtResidentialDetailsErrMsg.setVisibility(GONE);
-                indicateValidationText(txtResidentialToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_residential), true);
-            }
+                indicateValidationText(txtResidentialToggle,false);
+                indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);            }
         }
         if (Brprofession.equals("") || Bremployer_name.equals("") || Brannual_income.equals("")
                 || Broffice_address_pin.equals("") || Broffice_address.equals("") || Broffice_landmark.equals("")
@@ -1429,11 +1432,14 @@ public class DetailedInfoFragment extends Fragment {
                 }
             }
 
-            indicateValidationText(txtProfessionalToggle, context.getResources().getDrawable(R.drawable.ic_profession_self_employed), false);
+            indicateValidationText(txtProfessionalToggle,false);
+            indicateValidationIcon(ivProfessionalStatus, ivProfessionalTitle, false);
         } else {
             txtProfessionalDetailsErrMsg.setText(null);
             txtProfessionalDetailsErrMsg.setVisibility(GONE);
-            indicateValidationText(txtProfessionalToggle, context.getResources().getDrawable(R.drawable.ic_profession_self_employed), true);
+            indicateValidationText(txtProfessionalToggle, true);
+            indicateValidationIcon(ivProfessionalStatus, ivProfessionalTitle, false);
+
         }
 //        if(!switchResidenceType.isChecked())
 //        {
@@ -1484,21 +1490,55 @@ public class DetailedInfoFragment extends Fragment {
 
     }
 
-    public void indicateValidationText(TextView indicator, Drawable start, boolean valid) {
+    public void indicateValidationText(TextView indicator, boolean valid) {
         if (valid) {
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, context.getResources().getDrawable(R.drawable.ic_check_circle_green), null);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                indicator.getCompoundDrawablesRelative()[0].setTint(context.getResources().getColor(R.color.colorGreen));
-                indicator.getCompoundDrawablesRelative()[2].setTint(context.getResources().getColor(R.color.colorGreen));
-            }
             indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
         } else {
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, context.getResources().getDrawable(R.drawable.ic_exclamation_circle), null);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                indicator.getCompoundDrawablesRelative()[0].setTint(context.getResources().getColor(R.color.blue1));
-                indicator.getCompoundDrawablesRelative()[2].setTint(context.getResources().getColor(R.color.new_red));
-            }
             indicator.setTextColor(context.getResources().getColor(R.color.blue1));
+        }
+    }
+
+    public void indicateValidationIcon(ImageView ivStatus, ImageView ivTitle, boolean valid) {
+
+        if(valid) {
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
+            }
+            ivStatus.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 =  ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.colorGreen));
+                ivTitle.setImageDrawable(bg1);
+            }
+
+        }else{
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_exclamation_circle, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.new_red), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_exclamation_circle);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.new_red));
+            }
+            ivStatus.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 =  ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.blue1));
+                ivTitle.setImageDrawable(bg1);
+            }
         }
 
     }
@@ -2076,7 +2116,7 @@ public class DetailedInfoFragment extends Fragment {
 //                {
 //                }
 //                else{
-//                    btnEditDetailedInfo.setVisibility(View.GONE);
+//                    linEditDetailedInfo.setVisibility(View.GONE);
 //                }
                 lead_id = jsondetailedInformation.getString("lead_id");
                 application_id = jsondetailedInformation.getString("application_id");
@@ -2397,7 +2437,7 @@ public class DetailedInfoFragment extends Fragment {
 
             if (lead_status.equals("1") && current_stage.equals("1")) {
             } else {
-                btnEditDetailedInfo.setVisibility(View.GONE);
+                linEditDetailedInfo.setVisibility(View.GONE);
             }
 //             if(LoanTabActivity.isDetailedInfoEdit) {
 //                    checkAllFields();
@@ -2481,7 +2521,7 @@ public class DetailedInfoFragment extends Fragment {
                 isLeadReload = true;
                 setViewsEnabled(false);
                 LoanTabActivity.isDetailedInfoEdit = false;
-                btnEditDetailedInfo.setVisibility(View.VISIBLE);
+                linEditDetailedInfo.setVisibility(View.VISIBLE);
                 mListener.onDetailedInfoFragment(true, 2);
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             } else {

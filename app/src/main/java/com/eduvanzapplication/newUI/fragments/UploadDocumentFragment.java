@@ -27,6 +27,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +55,7 @@ import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.pojo.DocumenPOJO;
 import com.eduvanzapplication.uploaddocs.PathFile;
+import com.eduvanzapplication.uploaddocs.Utility;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -90,6 +92,7 @@ public class UploadDocumentFragment extends Fragment {
     public static LinearLayout linAllDocBlock, linKYCblock, linKYCblockBottom, linFinancBlockBottom, linEducationBlockBottom, linOtherBottom,
             linFinancBlock, linEducationBlock, linOther, linKYCDocuments, linFinanceDocuments, linEducationDocuments, linOtherDocuments, linBottomBlocks;
 
+    public static NestedScrollView nestedScrollView;
     public static TextView txtKycDocToggle, txtPhotoToggle, txtAddtionalDocToggle;
     public static LinearLayout linKycDocToggle, linPhotoToggle, linAddtionalDocToggle;
     public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle;
@@ -112,7 +115,7 @@ public class UploadDocumentFragment extends Fragment {
     /*others documents*/
     static LinearLayout others;
     static RelativeLayout othersBckgrnd;
-
+    public String userChoosenTask;
     public static ImageView ivKyc, ivFinancial, ivEducational;
 
     int tap;
@@ -126,7 +129,6 @@ public class UploadDocumentFragment extends Fragment {
     public String applicantType = "", documentTypeNo = "", userID = "";
     DownloadManager downloadManager;
     static Context context;
-    static ImageView imageViewProfilePicSelect;
     public static ProgressBar progressBar;
     long downloadReference;
 
@@ -161,6 +163,7 @@ public class UploadDocumentFragment extends Fragment {
         collapseAnimationCourse = AnimationUtils.loadAnimation(context, R.anim.scale_collapse);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        nestedScrollView = view.findViewById(R.id.nestedScrollView);
         ivPersonalToggle = view.findViewById(R.id.ivPersonalToggle);
         ivIdentityToggle = view.findViewById(R.id.ivIdentityToggle);
         ivCourseToggle = view.findViewById(R.id.ivCourseToggle);
@@ -206,7 +209,7 @@ public class UploadDocumentFragment extends Fragment {
 
         spDocument = view.findViewById(R.id.spDocument);
         progressBar = view.findViewById(R.id.progressBar_docupload);
-
+        selecteddocID = "";
         try {
             //============================KYC profile image========================
             profileImage = view.findViewById(R.id.linPhoto);
@@ -223,7 +226,8 @@ public class UploadDocumentFragment extends Fragment {
                                 profileBckgrnd.setVisibility(GONE);
                                 applicantType = "1";
                                 documentTypeNo = "1";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_profile_picture), getString(R.string.applicant_single_picture_required_to_be_uploaded), LoanTabActivity.applicant_id, "1");
+                                selectImage();
+//                                imageToPdf(documentTypeNo, getString(R.string.upload_profile_picture), getString(R.string.applicant_single_picture_required_to_be_uploaded), LoanTabActivity.applicant_id, "1");
                                 tap = 0;
                             } else if (tap == 2) {
                                 if (profileImage.getTag() != null) {
@@ -1817,20 +1821,80 @@ public class UploadDocumentFragment extends Fragment {
 
         switch (selecteddocID) {
 
-//    case "0":
-//        break;
-//
-//    case "1":
-//        input = "Photo" + strapplicantId;
-//        break;
-//
-//    case "2":
-//        input = "PAN" + strapplicantId;
-//        break;
-//
-//    case "3":
-//        input = "Aadhar" + strapplicantId;
-//        break;
+            case "":
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+
+                break;
+
             case "4":
                 //passport
                 if (passport.getVisibility() == VISIBLE) {
@@ -1838,28 +1902,74 @@ public class UploadDocumentFragment extends Fragment {
                     passport.setVisibility(VISIBLE);
                     passport.requestFocus();
                 }
-                others.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "5":
@@ -1869,28 +1979,73 @@ public class UploadDocumentFragment extends Fragment {
                     voterId.setVisibility(VISIBLE);
                     voterId.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                others.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "6":
@@ -1900,28 +2055,73 @@ public class UploadDocumentFragment extends Fragment {
                     drivingLicense.setVisibility(VISIBLE);
                     drivingLicense.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                others.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "7":
@@ -1931,28 +2131,73 @@ public class UploadDocumentFragment extends Fragment {
                     telephoneBill.setVisibility(VISIBLE);
                     telephoneBill.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                others.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "8":
@@ -1962,28 +2207,73 @@ public class UploadDocumentFragment extends Fragment {
                     electricityBill.setVisibility(VISIBLE);
                     electricityBill.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                others.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "9":
@@ -1993,28 +2283,73 @@ public class UploadDocumentFragment extends Fragment {
                     rentAgreement.setVisibility(VISIBLE);
                     rentAgreement.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                others.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "10":
@@ -2024,28 +2359,73 @@ public class UploadDocumentFragment extends Fragment {
                     kvp.setVisibility(VISIBLE);
                     kvp.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                others.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "11":
@@ -2055,28 +2435,73 @@ public class UploadDocumentFragment extends Fragment {
                     licPolicy.setVisibility(VISIBLE);
                     licPolicy.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                others.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "12":
@@ -2086,28 +2511,73 @@ public class UploadDocumentFragment extends Fragment {
                     form16.setVisibility(VISIBLE);
                     form16.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                others.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "13":
@@ -2117,28 +2587,73 @@ public class UploadDocumentFragment extends Fragment {
                     form61.setVisibility(VISIBLE);
                     form61.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                others.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "14":
@@ -2148,28 +2663,73 @@ public class UploadDocumentFragment extends Fragment {
                     pensionLetter.setVisibility(VISIBLE);
                     pensionLetter.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                others.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "15":
@@ -2179,28 +2739,73 @@ public class UploadDocumentFragment extends Fragment {
                     itr.setVisibility(VISIBLE);
                     itr.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                others.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "16":
@@ -2211,28 +2816,73 @@ public class UploadDocumentFragment extends Fragment {
                     linSeemoreFinancialBtn.setVisibility(GONE);
                     linSeemoreFinancialBtn.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                others.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "17":
@@ -2242,28 +2892,73 @@ public class UploadDocumentFragment extends Fragment {
                     twelvethMarksheet.setVisibility(VISIBLE);
                     twelvethMarksheet.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                others.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "18":
@@ -2273,28 +2968,73 @@ public class UploadDocumentFragment extends Fragment {
                     twelvethMarksheet.setVisibility(VISIBLE);
                     twelvethMarksheet.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                others.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "19":
@@ -2304,28 +3044,74 @@ public class UploadDocumentFragment extends Fragment {
                     bankStmntThree.setVisibility(VISIBLE);
                     bankStmntThree.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                others.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "20":
@@ -2335,28 +3121,74 @@ public class UploadDocumentFragment extends Fragment {
                     bankStmntSix.setVisibility(VISIBLE);
                     bankStmntSix.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                others.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "21":
@@ -2365,28 +3197,74 @@ public class UploadDocumentFragment extends Fragment {
                     tenthMarksheet.setVisibility(VISIBLE);
                     panCard.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                others.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "22":
@@ -2396,28 +3274,74 @@ public class UploadDocumentFragment extends Fragment {
                     twelvethMarksheet.setVisibility(VISIBLE);
                     twelvethMarksheet.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                others.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "23":
@@ -2427,29 +3351,74 @@ public class UploadDocumentFragment extends Fragment {
                     degreeMarkSheet.setVisibility(VISIBLE);
                     degreeMarkSheet.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                others.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "24":
@@ -2458,49 +3427,76 @@ public class UploadDocumentFragment extends Fragment {
                     degreeCertificate.setVisibility(VISIBLE);
                     degreeCertificate.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                others.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
-//    case "25":
-//        input = "Finbit" + strapplicantId;
-//        break;
-//
-//    case "26":
-//        input = "Exception" + strapplicantId;
-//        break;
-//
-//    case "27":
-//        input = "CAM" + strapplicantId;
-//        break;
-//
-//    case "28":
-//        input = "LoanAgreement" + strapplicantId;
-//        break;
-//
-//    case "29":
-//        input = "MVerifyDocument" + strapplicantId;
-//        break;
             case "30":
                 //AddressProof
                 if (addressProof.getVisibility() == VISIBLE) {
@@ -2508,28 +3504,74 @@ public class UploadDocumentFragment extends Fragment {
                     addressProof.setVisibility(VISIBLE);
                     addressProof.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                others.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (others.getTag() == null) {
+                    others.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
             case "31":
@@ -2539,28 +3581,74 @@ public class UploadDocumentFragment extends Fragment {
                     others.setVisibility(VISIBLE);
                     others.requestFocus();
                 }
-                passport.setVisibility(GONE);
-                voterId.setVisibility(GONE);
-                drivingLicense.setVisibility(GONE);
-                telephoneBill.setVisibility(GONE);
-                electricityBill.setVisibility(GONE);
-                rentAgreement.setVisibility(GONE);
-                addressProof.setVisibility(GONE);
-                bankStmntSix.setVisibility(GONE);
-                bankStmntThree.setVisibility(GONE);
-                kvp.setVisibility(GONE);
-                licPolicy.setVisibility(GONE);
-                form16.setVisibility(GONE);
-                form61.setVisibility(GONE);
-                pensionLetter.setVisibility(GONE);
-                itr.setVisibility(GONE);
-                pnl.setVisibility(GONE);
-                salSlipSix.setVisibility(GONE);
-                salSlipThree.setVisibility(GONE);
-                degreeCertificate.setVisibility(GONE);
-                tenthMarksheet.setVisibility(GONE);
-                twelvethMarksheet.setVisibility(GONE);
-                degreeMarkSheet.setVisibility(GONE);
+                if (drivingLicense.getTag() == null) {
+                    drivingLicense.setVisibility(GONE);
+                }
+                if (passport.getTag() == null) {
+                    passport.setVisibility(GONE);
+                }
+                if (voterId.getTag() == null) {
+                    voterId.setVisibility(GONE);
+                }
+                if (telephoneBill.getTag() == null) {
+                    telephoneBill.setVisibility(GONE);
+                }
+                if (electricityBill.getTag() == null) {
+                    electricityBill.setVisibility(GONE);
+                }
+                if (rentAgreement.getTag() == null) {
+                    rentAgreement.setVisibility(GONE);
+                }
+                if (addressProof.getTag() == null) {
+                    addressProof.setVisibility(GONE);
+                }
+                if (bankStmntSix.getTag() == null) {
+                    bankStmntSix.setVisibility(GONE);
+                }
+                if (bankStmntThree.getTag() == null) {
+                    bankStmntThree.setVisibility(GONE);
+                }
+                if (kvp.getTag() == null) {
+                    kvp.setVisibility(GONE);
+                }
+                if (licPolicy.getTag() == null) {
+                    licPolicy.setVisibility(GONE);
+                }
+                if (form16.getTag() == null) {
+                    form16.setVisibility(GONE);
+                }
+                if (form61.getTag() == null) {
+                    form61.setVisibility(GONE);
+                }
+                if (pensionLetter.getTag() == null) {
+                    pensionLetter.setVisibility(GONE);
+                }
+                if (itr.getTag() == null) {
+                    itr.setVisibility(GONE);
+                }
+                if (pnl.getTag() == null) {
+                    pnl.setVisibility(GONE);
+                }
+                if (salSlipSix.getTag() == null) {
+                    salSlipSix.setVisibility(GONE);
+                }
+
+                if (salSlipThree.getTag() == null) {
+                    salSlipThree.setVisibility(GONE);
+                }
+                if (degreeCertificate.getTag() == null) {
+                    degreeCertificate.setVisibility(GONE);
+                }
+                if (tenthMarksheet.getTag() == null) {
+                    tenthMarksheet.setVisibility(GONE);
+                }
+                if (twelvethMarksheet.getTag() == null) {
+                    twelvethMarksheet.setVisibility(GONE);
+                }
+                if (degreeMarkSheet.getTag() == null) {
+                    degreeMarkSheet.setVisibility(GONE);
+                }
+                nestedScrollView.fullScroll(View.FOCUS_DOWN);
                 break;
 
         }
@@ -2672,10 +3760,10 @@ public class UploadDocumentFragment extends Fragment {
                 linKycDocBlock.setVisibility(GONE);
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
                     ivPersonalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivPersonalToggle.setImageDrawable(bg);
@@ -2694,14 +3782,18 @@ public class UploadDocumentFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                relPhotoBlock.startAnimation(collapseAnimationIdentity);
-                relAddtionalDocBlock.startAnimation(collapseAnimationCourse);
+//                if(relPhotoBlock.getVisibility() == VISIBLE) {
+//                    relPhotoBlock.startAnimation(collapseAnimationCourse);
+//                }
+//                if(relAddtionalDocBlock.getVisibility() == VISIBLE){
+//                    relAddtionalDocBlock.startAnimation(collapseanimationPersonal);
+//                }
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
                     ivPersonalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivPersonalToggle.setImageDrawable(bg);
@@ -2722,10 +3814,10 @@ public class UploadDocumentFragment extends Fragment {
                 relPhotoBlock.setVisibility(GONE);
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
                     ivIdentityToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivIdentityToggle.setImageDrawable(bg);
@@ -2744,14 +3836,18 @@ public class UploadDocumentFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                linKycDocBlock.startAnimation(collapseanimationPersonal);
-                relAddtionalDocBlock.startAnimation(collapseAnimationCourse);
+//                if(linKycDocBlock.getVisibility() == VISIBLE) {
+//                    linKycDocBlock.startAnimation(collapseAnimationCourse);
+//                }
+//                if(relAddtionalDocBlock.getVisibility() == VISIBLE){
+//                    relAddtionalDocBlock.startAnimation(collapseanimationPersonal);
+//                }
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
                     ivIdentityToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivIdentityToggle.setImageDrawable(bg);
@@ -2772,10 +3868,10 @@ public class UploadDocumentFragment extends Fragment {
                 relAddtionalDocBlock.setVisibility(GONE);
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
                     ivCourseToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivCourseToggle.setImageDrawable(bg);
@@ -2794,14 +3890,18 @@ public class UploadDocumentFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                linKycDocBlock.startAnimation(collapseanimationPersonal);
-                relPhotoBlock.startAnimation(collapseAnimationIdentity);
+//                if(linKycDocBlock.getVisibility() == VISIBLE) {
+//                    linKycDocBlock.startAnimation(collapseAnimationCourse);
+//                }
+//                if(relPhotoBlock.getVisibility() == VISIBLE){
+//                    relPhotoBlock.startAnimation(collapseanimationPersonal);
+//                }
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
                     ivCourseToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivCourseToggle.setImageDrawable(bg);
@@ -3016,11 +4116,119 @@ public class UploadDocumentFragment extends Fragment {
             }
         }
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
+            if (requestCode == SELECT_FILE) {
                 onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
+                String FileExtn = null;
+                String doctypeno = applicantType;
+                String strapplicantType = documentTypeNo;
+                String strapplicantId = LoanTabActivity.applicant_id;
+                Double FileSize = null;
+
+                String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).length() - 3);
+                FileSize = Double.valueOf(filesz);
+
+                FileExtn = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
+
+                if (FileExtn.equals("jpg") || FileExtn.equals("jpeg") || FileExtn.equals("png") || FileExtn.equals("pdf") ||
+                        FileExtn.equals("bmp") || FileExtn.equals("webp") || FileExtn.equals("zip") || FileExtn.equals("rar")) {
+
+                    if (FileSize < 30) {
+                        Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
+
+                        if (uploadFilePath != null) {
+                            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                            progressBar.setVisibility(View.VISIBLE);
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        String doctype = "";
+                                        int selectUrl = 0;
+                                        if (doctypeno.length() > 2) {
+                                            doctype = doctypeno.substring(0, 1) + "_SD_PhotoDoc";
+                                            selectUrl = 1;
+                                        } else {
+                                            doctype = doctypeno + "_SD_PhotoDoc";
+                                            selectUrl = 0;
+                                        }
+                                        //creating new thread to handle Http Operations
+//                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                                        if (!Globle.isNetworkAvailable(context)) {
+                                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            uploadFile(uploadFilePath, doctypeno, strapplicantType, strapplicantId);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }).start();
+                        } else {
+                            Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(context, R.string.file_size_exceeds_limits_of_30_mb, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
+                }
+            } else if (requestCode == REQUEST_CAMERA) {
                 onCaptureImageResult(data);
-            else if (requestCode == SELECT_DOC) {
+                String FileExtn = null;
+                String doctypeno = applicantType;
+                String strapplicantType = documentTypeNo;
+                String strapplicantId = LoanTabActivity.applicant_id;
+                Double FileSize = null;
+
+                String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).length() - 3);
+                FileSize = Double.valueOf(filesz);
+
+                FileExtn = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
+
+                if (FileExtn.equals("jpg") || FileExtn.equals("jpeg") || FileExtn.equals("png") || FileExtn.equals("pdf") ||
+                        FileExtn.equals("bmp") || FileExtn.equals("webp") || FileExtn.equals("zip") || FileExtn.equals("rar")) {
+
+                    if (FileSize < 30) {
+                        Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
+
+                        if (uploadFilePath != null) {
+                            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                            progressBar.setVisibility(View.VISIBLE);
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        String doctype = "";
+                                        int selectUrl = 0;
+                                        if (doctypeno.length() > 2) {
+                                            doctype = doctypeno.substring(0, 1) + "_SD_PhotoDoc";
+                                            selectUrl = 1;
+                                        } else {
+                                            doctype = doctypeno + "_SD_PhotoDoc";
+                                            selectUrl = 0;
+                                        }
+                                        //creating new thread to handle Http Operations
+//                            Log.e("TAG", "File:Path absolute : new" + uploadFilePath);
+                                        if (!Globle.isNetworkAvailable(context)) {
+                                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            uploadFile(uploadFilePath, doctypeno, strapplicantType, strapplicantId);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }).start();
+                        } else {
+                            Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(context, R.string.file_size_exceeds_limits_of_30_mb, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
+                }
+            } else if (requestCode == SELECT_DOC) {
                 Bitmap bm = null;
                 String FileExtn = null;
                 Long FileSize = null;
@@ -3597,6 +4805,56 @@ public class UploadDocumentFragment extends Fragment {
 
     }
 
+    private void galleryDocIntent() {
+        Intent intent = new Intent();
+        intent.setType("*/*");  // for all types of file
+//        intent.setType("application/pdf"); // for pdf
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_DOC);
+    }
+
+    private void galleryIntent() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+    }
+
+    private void cameraIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
+    private void selectImage() {
+        final CharSequence[] items = {"Take a Picture", "Choose from Gallery",
+                "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                boolean result = Utility.checkPermission(context);
+
+                if (items[item].equals("Take a Picture")) {
+                    userChoosenTask = "Take a Picture";
+                    if (result)
+                        cameraIntent();
+
+                } else if (items[item].equals("Choose from Gallery")) {
+                    userChoosenTask = "Choose from Gallery";
+                    if (result)
+                        galleryIntent();
+
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
@@ -3654,7 +4912,6 @@ public class UploadDocumentFragment extends Fragment {
                         bSalSlip6 = true, bSalSlip3 = true, bBankStmt3 = true, bBankStmt6 = true, bKVP = true, bLic = true, bForm16 = true,
                         bForm61 = true, bPension = true, bITR = true, bPNL = true, bDregreeMarkSheet = true, bDegreeCerti = true,
                         bOtherDoc = true, btenthmark = true, btwelvethmark = true;
-
 //                "document_pending": [
 //                {
 //                    "document_type_id": "1",
@@ -3675,11 +4932,18 @@ public class UploadDocumentFragment extends Fragment {
                 documenPOJOArrayList = new ArrayList<>();
 
                 JSONArray jsonDocArray = jsonData.getJSONArray("extra_document");
-
+                document_arrayList.add("Select document to upload");
                 for (int i = 0; i < jsonDocArray.length(); i++) {
                     JSONObject jsonObject1 = jsonDocArray.getJSONObject(i);
 
                     DocumenPOJO documenPOJO = new DocumenPOJO();
+                    if (jsonObject1.getString("document_type_id").equals("1") || jsonObject1.getString("document_type_id").equals("2") || jsonObject1.getString("document_type_id").equals("3") ||
+                            jsonObject1.getString("document_type_id").equals("25") || jsonObject1.getString("document_type_id").equals("26") || jsonObject1.getString("document_type_id").equals("27") ||
+                            jsonObject1.getString("document_type_id").equals("28") || jsonObject1.getString("document_type_id").equals("29") || jsonObject1.getString("document_type_id").equals("32") ||
+                            jsonObject1.getString("document_type_id").equals("33") || jsonObject1.getString("document_type_id").equals("34")) {  //student
+                        continue;
+                    }
+
                     documenPOJO.document_type_id = jsonObject1.getString("document_type_id");
                     documenPOJO.document_name = jsonObject1.getString("document_name");
                     documenPOJO.document_category = jsonObject1.getString("document_category");

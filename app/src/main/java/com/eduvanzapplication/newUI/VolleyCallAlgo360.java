@@ -91,7 +91,7 @@ public class VolleyCallAlgo360 {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
 //                headers.put("Authorization", "6041c6c1d7c580619c796c25716bf9ed");
-                headers.put("Authorization", "Bearer " + "90ad441a12b48c6d7c5524b8b2a334c3");
+                headers.put("Authorization", "Bearer " + MainActivity.auth_token);
 //                headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -107,7 +107,7 @@ public class VolleyCallAlgo360 {
             }
         };
         // if volley request is getting send more than once then use this.
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 50, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 60, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue;
         try {
             if (mfragment == null) {

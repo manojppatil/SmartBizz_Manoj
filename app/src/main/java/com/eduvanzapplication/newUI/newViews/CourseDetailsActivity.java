@@ -45,7 +45,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
     public static ImageView ivNextBtn;
     public static AutoCompleteTextView acInstituteName;
     public static Spinner spInsttLocation, spCourse;
-    public static TextView txtCourseFee;
+    public static TextView txtCourseFee,txtcourseDetailsErrMsg;
     public static EditText edtLoanAmt;
     public static Context context;
     public static AppCompatActivity mActivity;
@@ -142,6 +142,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
     }
 
     private void setViews() {
+        txtcourseDetailsErrMsg=findViewById(R.id.txtcourseDetailsErrMsg);
         ivNextBtn = findViewById(R.id.ivNextBtn);
         ivNextBtn.setEnabled(false);
 
@@ -191,19 +192,23 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         if (courseFeeValueinint >= loanAmountvalueInInt) {
                             if (loanAmountvalueInInt >= 5000) {
                                 NewLeadActivity.loanAmount = edtLoanAmt.getText().toString();
-                                edtLoanAmt.setError(null);
+                                txtcourseDetailsErrMsg.setText(null);
+                                txtcourseDetailsErrMsg.setVisibility(View.GONE);
                                 enableDisableButtons(true);
                             } else {
                                 enableDisableButtons(false);
-                                edtLoanAmt.setError("The Loan Amount must be greater than or equal to 5000.");
+                                txtcourseDetailsErrMsg.setVisibility(View.VISIBLE);
+                                txtcourseDetailsErrMsg.setText("The Loan Amount must be greater than or equal to 5000.");
                             }
                         } else {
                             enableDisableButtons(false);
-                            edtLoanAmt.setError("Loan Amount not exceed than course fees!");
+                            txtcourseDetailsErrMsg.setVisibility(View.VISIBLE);
+                            txtcourseDetailsErrMsg.setText("Loan Amount not exceed than course fees!");
                         }
                     } else {
                         enableDisableButtons(false);
-                        edtLoanAmt.setError("Loan Amount not exceed than course fees!");
+                        txtcourseDetailsErrMsg.setVisibility(View.VISIBLE);
+                        txtcourseDetailsErrMsg.setText("Loan Amount not exceed than course fees!");
                     }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();

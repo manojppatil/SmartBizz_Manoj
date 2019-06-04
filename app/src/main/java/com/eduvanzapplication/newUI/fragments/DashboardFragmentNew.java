@@ -463,7 +463,7 @@ public class DashboardFragmentNew extends Fragment  {
     }
 
     public void setstudentDashbBoardDetails(JSONObject jsonDataO) {
-        Log.e(TAG, "setProfileDashbBoardStatus: " + jsonDataO);
+//        Log.e(TAG, "setProfileDashbBoardStatus: " + jsonDataO);
         try {
             progressDialog.dismiss();
             if (jsonDataO.getInt("status") == 1) {

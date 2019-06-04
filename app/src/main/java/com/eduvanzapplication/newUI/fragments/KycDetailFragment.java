@@ -75,7 +75,7 @@ public class KycDetailFragment extends Fragment {
     public static ProgressDialog progressDialog;
     public static TextView txtPersonalToggle, txtIdentityToggle, txtCourseToggle;
     public static LinearLayout linPersonalToggle, linIdentityToggle, linCourseToggle;
-    public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle;
+    public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle,ivPersonalTitle,ivIdentityTitle,ivCourseTitle,ivPersonalStatus,ivIdentityStatus,ivCourseStatus;
     public static LinearLayout linPersonalBlock, relIdentityBlock, relCourseBlock;
     public static Animation expandAnimationPersonal, collapseanimationPersonal;
     public static Animation expandAnimationIdentity, collapseAnimationIdentity;
@@ -94,11 +94,11 @@ public class KycDetailFragment extends Fragment {
     public static ArrayList<LocationsPOJO> locationPOJOArrayList;
 
     public static ImageView ivMale, ivFemale, ivOther, iviewMale, iviewFemale, iviewOther;
-    public static ImageButton fabEditKycDetail, btnNextKycDetail;
+    public static ImageButton btnNextKycDetail;
     public static Switch switchMarital;
     public static TextView txtMaritalStatus;
     public static EditText edtFnameBr, edtMnameBr, edtLnameBr, edtEmailIdBr, edtMobileNoBr, edtAddressbr, edtLandmarkbr, edtPincodeBr;
-    public static LinearLayout linMaleBtn, linFemaleBtn, linOtherBtn, linDob, linMaritalStatus;
+    public static LinearLayout linEditKycDetail, linMaleBtn, linFemaleBtn, linOtherBtn, linDob, linMaritalStatus;
     public static EditText edtAadhaar, edtPAN, edtLoanAmt;
     public static Spinner spCountry, spState, spCity, spInsttLocation, spCourse;
     public static AutoCompleteTextView acInstituteName;
@@ -148,6 +148,14 @@ public class KycDetailFragment extends Fragment {
         ivIdentityToggle = view.findViewById(R.id.ivIdentityToggle);
         ivCourseToggle = view.findViewById(R.id.ivCourseToggle);
 
+        ivPersonalTitle = view.findViewById(R.id.ivPersonalTitle);
+        ivIdentityTitle = view.findViewById(R.id.ivIdentityTitle);
+        ivCourseTitle = view.findViewById(R.id.ivCourseTitle);
+
+        ivPersonalStatus = view.findViewById(R.id.ivPersonalStatus);
+        ivIdentityStatus = view.findViewById(R.id.ivIdentityStatus);
+        ivCourseStatus = view.findViewById(R.id.ivCourseStatus);
+
         txtPersonalToggle = view.findViewById(R.id.txtPersonalToggle);
         linPersonalBlock = view.findViewById(R.id.linPersonalBlock);
         txtIdentityToggle = view.findViewById(R.id.txtIdentityToggle);
@@ -157,7 +165,7 @@ public class KycDetailFragment extends Fragment {
         relIdentityBlock = view.findViewById(R.id.relIdentityBlock);
         txtCourseToggle = view.findViewById(R.id.txtCourseToggle);
         relCourseBlock = view.findViewById(R.id.relCourseBlock);
-        fabEditKycDetail = view.findViewById(R.id.fabEditKycDetail);
+        linEditKycDetail = view.findViewById(R.id.linEditKycDetail);
         btnNextKycDetail = view.findViewById(R.id.btnNextKycDetail);
         edtFnameBr = view.findViewById(R.id.edtFnameBr);
         edtMnameBr = view.findViewById(R.id.edtMnameBr);
@@ -243,9 +251,9 @@ public class KycDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        linPersonalBlock.startAnimation(expandAnimationPersonal);
-        relIdentityBlock.startAnimation(collapseAnimationIdentity);
-        relCourseBlock.startAnimation(collapseAnimationCourse);
+//        linPersonalBlock.startAnimation(collapseanimationPersonal);
+//        relIdentityBlock.startAnimation(collapseAnimationIdentity);
+//        relCourseBlock.startAnimation(collapseAnimationCourse);
         setViewsEnabled(false);
 
         btnNextKycDetail.setOnClickListener(new View.OnClickListener() {
@@ -278,30 +286,14 @@ public class KycDetailFragment extends Fragment {
             }
         });
 
-//        fabEditKycDetail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!LoanTabActivity.isKycEdit){
-//                    LoanTabActivity.isKycEdit = true;
-//                    setViewsEnabled(true);
-//                    fabEditKycDetail.setImageResource(R.drawable.ic_save_white_16dp);
-//                    fabEditKycDetail.setBackgroundColor(getResources().getColor(R.color.colorGreen));
-//                    chekAllFields();
-//                }
-//                else {
-//
-//                }
-//            }
-//        });
-
-        fabEditKycDetail.setOnClickListener(new View.OnClickListener() {
+        linEditKycDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 //				if (lead_status.equals("1") && current_stage.equals("1")) {
                 setViewsEnabled(true);
                 LoanTabActivity.isKycEdit = true;
-                fabEditKycDetail.setVisibility(GONE);
+                linEditKycDetail.setVisibility(GONE);
 //				} else {
 //
 //				}
@@ -405,10 +397,10 @@ public class KycDetailFragment extends Fragment {
                 linPersonalBlock.setVisibility(GONE);
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
                     ivPersonalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivPersonalToggle.setImageDrawable(bg);
@@ -427,14 +419,19 @@ public class KycDetailFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                relIdentityBlock.startAnimation(collapseAnimationIdentity);
-                relCourseBlock.startAnimation(collapseAnimationCourse);
+
+                if(relIdentityBlock.getVisibility() == VISIBLE) {
+                    relIdentityBlock.startAnimation(collapseAnimationCourse);
+                }
+                if(relCourseBlock.getVisibility() == VISIBLE){
+                    relCourseBlock.startAnimation(collapseanimationPersonal);
+                }
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
                     ivPersonalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivPersonalToggle.setImageDrawable(bg);
@@ -455,10 +452,10 @@ public class KycDetailFragment extends Fragment {
                 relIdentityBlock.setVisibility(GONE);
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
                     ivIdentityToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivIdentityToggle.setImageDrawable(bg);
@@ -477,14 +474,18 @@ public class KycDetailFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                linPersonalBlock.startAnimation(collapseanimationPersonal);
-                relCourseBlock.startAnimation(collapseAnimationCourse);
+                if(linPersonalBlock.getVisibility() == VISIBLE){
+                    linPersonalBlock.startAnimation(collapseanimationPersonal);
+                }
+                if(relCourseBlock.getVisibility() == VISIBLE) {
+                    relCourseBlock.startAnimation(collapseAnimationCourse);
+                }
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
                     ivIdentityToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivIdentityToggle.setImageDrawable(bg);
@@ -505,10 +506,10 @@ public class KycDetailFragment extends Fragment {
                 relCourseBlock.setVisibility(GONE);
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
                     ivCourseToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivCourseToggle.setImageDrawable(bg);
@@ -527,14 +528,18 @@ public class KycDetailFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                linPersonalBlock.startAnimation(collapseanimationPersonal);
-                relIdentityBlock.startAnimation(collapseAnimationIdentity);
+                if(linPersonalBlock.getVisibility() == VISIBLE){
+                    linPersonalBlock.startAnimation(collapseanimationPersonal);
+                }
+                if(relIdentityBlock.getVisibility() == VISIBLE) {
+                    relIdentityBlock.startAnimation(collapseAnimationCourse);
+                }
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
                     ivCourseToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivCourseToggle.setImageDrawable(bg);
@@ -560,10 +565,10 @@ public class KycDetailFragment extends Fragment {
                     for (int i = 0; i < count; i++) {
                         if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
                             LoanTabActivity.cityId = currentcityID = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
-                            Log.e(TAG, "spCurrentCityBr: +++++++++++++++++++*********************" + currentcityID);
                             if (LoanTabActivity.isKycEdit) {
                                 chekAllFields();
                             }
+                            break;
                         }
                     }
                 } catch (Exception e) {
@@ -587,11 +592,15 @@ public class KycDetailFragment extends Fragment {
                     for (int i = 0; i < count; i++) {
                         if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
                             LoanTabActivity.stateId = currentstateID = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
+                            if(LoanTabActivity.isKycEdit){
+                                chekAllFields();
+                            }
+                            break;
                         }
                     }
                 } catch (Exception e) {
-
                 }
+
                 cityApiCall();
 
             }
@@ -611,11 +620,15 @@ public class KycDetailFragment extends Fragment {
                     for (int i = 0; i < count; i++) {
                         if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryName.equalsIgnoreCase(text)) {
                             LoanTabActivity.countryId = currentcountryID = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
+                            if(LoanTabActivity.isKycEdit){
+                                chekAllFields();
+                            }
+                            break;
                         }
                     }
-                    stateApiCall();
                 } catch (Exception e) {
                 }
+                stateApiCall();
             }
 
             @Override
@@ -733,7 +746,7 @@ public class KycDetailFragment extends Fragment {
                 isLeadReload = true;
                 setViewsEnabled(false);
                 LoanTabActivity.isKycEdit = false;
-                fabEditKycDetail.setVisibility(VISIBLE);
+                linEditKycDetail.setVisibility(VISIBLE);
                 mListener.onFragmentInteraction(true, 1);
 //                LoanApplicationFragment_2 loanApplicationFragment_2 = new LoanApplicationFragment_2();
 //                transaction.replace(R.id.frameLayout_loanapplication, loanApplicationFragment_2).commit();
@@ -1378,7 +1391,6 @@ public class KycDetailFragment extends Fragment {
     }
 
 //    private void checkingAdharPanField() {
-//
 //        switch (documents) {
 //            case "1":
 //                if (!Globle.validateAadharNumber(LoanTabActivity.aadhar)) {
@@ -1397,7 +1409,6 @@ public class KycDetailFragment extends Fragment {
 //                } else mDocListener.onOffButtonsDocuments(true, true);
 //                break;
 //        }
-//
 //    }
 
     public void chekAllFields() {
@@ -1405,7 +1416,9 @@ public class KycDetailFragment extends Fragment {
         if (LoanTabActivity.firstName.equals("") || LoanTabActivity.lastName.equals("") || LoanTabActivity.email.equals("") ||
                 LoanTabActivity.mobile.equals("") || LoanTabActivity.dob.equals("") || LoanTabActivity.gender.equals("") ||
                 LoanTabActivity.maritalStatus.equals("")) {
-            indicateValidationText(txtPersonalToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_user), false);
+
+            indicateValidationText(txtPersonalToggle, false);
+            indicateValidationIcon(ivPersonalStatus, ivPersonalTitle, false);
 
             if (LoanTabActivity.isKycEdit) {
                 txtPersonalDetailsErrMsg.setVisibility(VISIBLE);
@@ -1442,7 +1455,8 @@ public class KycDetailFragment extends Fragment {
             txtPersonalDetailsErrMsg.setVisibility(GONE);
             txtPersonalDetailsErrMsg.setText(null);
 //            linPersonalBlock.startAnimation(collapseanimationPersonal);
-            indicateValidationText(txtPersonalToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_user), true);
+            indicateValidationText(txtPersonalToggle, true);
+            indicateValidationIcon(ivPersonalStatus, ivPersonalTitle, true);
         }
 
         if (LoanTabActivity.instituteId.equals("") || LoanTabActivity.instituteLocationId.equals("") ||
@@ -1465,16 +1479,17 @@ public class KycDetailFragment extends Fragment {
                     LoanTabActivity.requested_loan_amount = "";
                     //edtLoanAmt.requestFocus();
                 }
-
                 txtCourseDetailsErrMsg.requestFocus();
             }
 
-            indicateValidationText(txtCourseToggle, context.getResources().getDrawable(R.drawable.ic_profession_student), false);
+            indicateValidationText(txtCourseToggle, false);
+            indicateValidationIcon(ivCourseStatus, ivCourseTitle, false);
         } else {
             txtCourseDetailsErrMsg.setText(null);
             txtCourseDetailsErrMsg.setVisibility(GONE);
 //            relCourseBlock.startAnimation(collapseAnimationCourse);
-            indicateValidationText(txtCourseToggle, context.getResources().getDrawable(R.drawable.ic_profession_student), true);
+            indicateValidationText(txtCourseToggle, true);
+            indicateValidationIcon(ivCourseStatus, ivCourseTitle, true);
         }
 
         if (documents.equals("0") || documents.equals("")) {
@@ -1513,15 +1528,16 @@ public class KycDetailFragment extends Fragment {
                         //spCity.requestFocus();
                     }
                     txtIdentityDetailsErrMsg.requestFocus();
-
                 }
 
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
+                indicateValidationText(txtIdentityToggle, false);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, false);
             } else {
                 txtIdentityDetailsErrMsg.setText(null);
                 txtIdentityDetailsErrMsg.setVisibility(GONE);
 //                relIdentityBlock.startAnimation(collapseAnimationIdentity);
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
+                indicateValidationText(txtIdentityToggle, true);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, true);
             }
         }
         if (documents.equals("1")) {
@@ -1559,12 +1575,14 @@ public class KycDetailFragment extends Fragment {
 
                 }
 
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
+                indicateValidationText(txtIdentityToggle, false);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, false);
             } else {
                 txtIdentityDetailsErrMsg.setText(null);
                 txtIdentityDetailsErrMsg.setVisibility(GONE);
 //                relIdentityBlock.startAnimation(collapseAnimationIdentity);
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
+                indicateValidationText(txtIdentityToggle, true);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, true);
             }
         } else if (documents.equals("2")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
@@ -1600,11 +1618,13 @@ public class KycDetailFragment extends Fragment {
                     txtIdentityDetailsErrMsg.requestFocus();
                 }
 
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
+                indicateValidationText(txtIdentityToggle, false);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, false);
             } else {
                 txtIdentityDetailsErrMsg.setText(null);
                 txtIdentityDetailsErrMsg.setVisibility(GONE);
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
+                indicateValidationText(txtIdentityToggle, true);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, true);
             }
         } else if (documents.equals("3")) {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") ||
@@ -1641,12 +1661,14 @@ public class KycDetailFragment extends Fragment {
                     }
                     txtIdentityDetailsErrMsg.requestFocus();
                 }
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
+                indicateValidationText(txtIdentityToggle,  false);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, false);
             } else {
                 txtIdentityDetailsErrMsg.setText(null);
                 txtIdentityDetailsErrMsg.setVisibility(GONE);
 //                relIdentityBlock.startAnimation(collapseAnimationIdentity);
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
+                indicateValidationText(txtIdentityToggle, true);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, true);
             }
         } else {
             if (LoanTabActivity.flatBuildingSociety.equals("") || LoanTabActivity.streetLocalityLandmark.equals("") || LoanTabActivity.pincode.length() < 6 || (LoanTabActivity.aadhar.equals("") && LoanTabActivity.pan.equals("")) || LoanTabActivity.countryId.equals("") || LoanTabActivity.stateId.equals("") || LoanTabActivity.cityId.equals("")) {
@@ -1682,11 +1704,13 @@ public class KycDetailFragment extends Fragment {
                         //spCity.requestFocus();
                     }
                 }
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), false);
+                indicateValidationText(txtIdentityToggle, false);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, false);
             } else {
                 txtIdentityDetailsErrMsg.setText(null);
                 txtIdentityDetailsErrMsg.setVisibility(GONE);
-                indicateValidationText(txtIdentityToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_id_card), true);
+                indicateValidationText(txtIdentityToggle, true);
+                indicateValidationIcon(ivIdentityStatus, ivIdentityTitle, true);
             }
         }
 
@@ -1711,22 +1735,74 @@ public class KycDetailFragment extends Fragment {
         }
     }
 
-    public void indicateValidationText(TextView indicator, Drawable start, boolean valid) {
-        if (valid) {
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, context.getResources().getDrawable(R.drawable.ic_check_circle_green), null);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                indicator.getCompoundDrawablesRelative()[0].setTint(context.getResources().getColor(R.color.colorGreen));
-                indicator.getCompoundDrawablesRelative()[2].setTint(context.getResources().getColor(R.color.colorGreen));
+    public void indicateValidationIcon(ImageView ivStatus, ImageView ivTitle, boolean valid) {
+//        if (valid) {
+//            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, context.getResources().getDrawable(R.drawable.ic_check_circle_green), null);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                indicator.getCompoundDrawablesRelative()[0].setTint(context.getResources().getColor(R.color.colorGreen));
+//                indicator.getCompoundDrawablesRelative()[2].setTint(context.getResources().getColor(R.color.colorGreen));
+//            }
+//            indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
+//        } else {
+//            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, context.getResources().getDrawable(R.drawable.ic_exclamation_circle), null);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                indicator.getCompoundDrawablesRelative()[0].setTint(context.getResources().getColor(R.color.blue1));
+//                indicator.getCompoundDrawablesRelative()[2].setTint(context.getResources().getColor(R.color.new_red));
+//            }
+//            indicator.setTextColor(context.getResources().getColor(R.color.blue1));
+//        }
+
+        if(valid) {
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
             }
+            ivStatus.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 =  ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.colorGreen));
+                ivTitle.setImageDrawable(bg1);
+            }
+
+        }else{
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_exclamation_circle, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.new_red), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_exclamation_circle);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.new_red));
+            }
+            ivStatus.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 =  ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.blue1));
+                ivTitle.setImageDrawable(bg1);
+            }
+        }
+
+    }
+
+    public void indicateValidationText(TextView indicator, boolean valid) {
+        if (valid) {
             indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
         } else {
-            indicator.setCompoundDrawablesRelativeWithIntrinsicBounds(start, null, context.getResources().getDrawable(R.drawable.ic_exclamation_circle), null);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                indicator.getCompoundDrawablesRelative()[0].setTint(context.getResources().getColor(R.color.blue1));
-                indicator.getCompoundDrawablesRelative()[2].setTint(context.getResources().getColor(R.color.new_red));
-            }
+
             indicator.setTextColor(context.getResources().getColor(R.color.blue1));
         }
+
 
     }
 
@@ -2435,7 +2511,7 @@ public class KycDetailFragment extends Fragment {
 
             if (LoanTabActivity.lead_status.equals("1") && LoanTabActivity.current_stage.equals("1")) {
             } else {
-                fabEditKycDetail.setVisibility(GONE);
+                linEditKycDetail.setVisibility(GONE);
             }
 
 //            if(LoanTabActivity.isKycEdit) {
