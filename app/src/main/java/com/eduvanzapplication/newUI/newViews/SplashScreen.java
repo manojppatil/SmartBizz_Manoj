@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -16,7 +15,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -45,7 +43,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import static com.eduvanzapplication.database.DBAdapter.getLocalData;
@@ -116,10 +113,10 @@ public class SplashScreen extends AppCompatActivity {
 //            DisplayMetrics dm = res.getDisplayMetrics();
 //            android.content.res.Configuration conf = res.getConfiguration();
 //            conf.setLocale(new Locale(AppLanguage.toLowerCase())); // API 17+ only.
-//
 //            res.updateConfiguration(conf, dm);
 
             apiCall();
+
 //            StartAnimationsCustomer();
 
             //printHashKey(getApplicationContext());

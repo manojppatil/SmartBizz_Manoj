@@ -5,6 +5,7 @@
     android:background="@color/lightGrey"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <android.support.v4.view.ViewPager
         android:id="@+id/Viewpager"
         android:layout_width="match_parent"
@@ -32,30 +33,77 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/step3_image" />
-    <Button
+
+    <ImageButton
+        android:id="@+id/btnNext"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:padding="10dp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:background="@drawable/border_circular_white_filled"
+        android:elevation="@dimen/_4sdp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_5sdp"
+        android:scaleType="centerInside"
+        android:tint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_angle_right_small" />
+
+    <LinearLayout
+        android:id="@+id/linProceed"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:layout_marginBottom="0dp"
-        android:textStyle="bold"
-        android:background="@color/blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nextbtn"
-        android:layout_above="@+id/indicator"
-        android:textAllCaps="false"
-        android:text="Proceed"/>
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:background="@drawable/border_circular_red_filled"
+        android:backgroundTint="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:elevation="@dimen/_4sdp"
+        android:padding="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/txtGetOtp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Proceed"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            style="@style/TextViewTitleStyle"/>
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:background="@color/colorPrimary" />
+
+        <ImageView
+            android:id="@+id/ivIndicator"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:tint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_angle_right" />
+
+    </LinearLayout>
 
     <com.viewpagerindicator.CirclePageIndicator
-        android:layout_width="match_parent"
-        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/_4sdp"
         android:id="@+id/indicator"
-        app:fillColor="@color/colorPrimary"
-        app:strokeColor="@color/colorPrimaryDark"
-        android:layout_marginBottom="60dp"
+        app:fillColor="@color/white"
+        app:strokeColor="@color/white"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.eduvanzapplication.newUI.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
@@ -8,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,10 +22,13 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -46,12 +51,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Util.JavaGetFileSize;
 import com.eduvanzapplication.fqform.borrowerdetail.pojo.BorrowerCurrentCountryPersonalPOJO;
 import com.eduvanzapplication.newUI.VolleyCall;
+import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.pojo.DocumenPOJO;
 import com.eduvanzapplication.uploaddocs.PathFile;
@@ -80,6 +87,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
+import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
 import vijay.createpdf.activity.ImgToPdfActivity;
 
 import static android.view.View.GONE;
@@ -121,7 +130,7 @@ public class UploadDocumentFragment extends Fragment {
     int tap;
 
     public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
-
+    public int GET_MY_PERMISSION = 1, permission;
     public static Fragment mFragment;
     String uploadFilePath = "";
     StringBuffer sb;
@@ -226,7 +235,19 @@ public class UploadDocumentFragment extends Fragment {
                                 profileBckgrnd.setVisibility(GONE);
                                 applicantType = "1";
                                 documentTypeNo = "1";
-                                selectImage();
+
+                                if (Build.VERSION.SDK_INT >= 23) {
+                                    permission = ContextCompat.checkSelfPermission(context,
+                                            Manifest.permission.CAMERA);
+                                    if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
+                                        ActivityCompat.requestPermissions((Activity) context,
+                                                new String[]{
+                                                        Manifest.permission.CAMERA},
+                                                GET_MY_PERMISSION);
+                                    } else {
+                                        selectImage();
+                                    }
+                                }
 //                                imageToPdf(documentTypeNo, getString(R.string.upload_profile_picture), getString(R.string.applicant_single_picture_required_to_be_uploaded), LoanTabActivity.applicant_id, "1");
                                 tap = 0;
                             } else if (tap == 2) {
@@ -4705,7 +4726,7 @@ public class UploadDocumentFragment extends Fragment {
                 while ((output = br.readLine()) != null) {
                     sb.append(output);
                     Log.e("TAG", "uploadFile: " + br);
-                    Log.e("TAG", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
+//                    Log.e("TAG", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
                 }
                 Log.e("TAG", "uploadFile: " + sb.toString());
                 try {
@@ -5778,6 +5799,45 @@ public class UploadDocumentFragment extends Fragment {
         return String.valueOf(destFile);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+
+            case 1:
+                if (grantResults.length <= 0) {
+                }
+                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
+                    selectImage();
+                    //granted
+                } else {
+                    //not granted
+                    {
+                        Snackbar.make(
+                                getView().findViewById(R.id.relDocUpload),
+                                R.string.permission_denied_explanation,
+                                Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.settings, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        // Build intent that displays the App settings screen.
+                                        Intent intent = new Intent();
+                                        intent.setAction(
+                                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                        Uri uri = Uri.fromParts("package",
+                                                BuildConfig.APPLICATION_ID, null);
+                                        intent.setData(uri);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
+                    }
+                }
+                break;
+        }
+
+    }
 
     /*===============================TILL HERE========================================*/
 }

@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -81,6 +82,8 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         }
         context = this;
         mActivity = NewLeadActivity.this;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
+
         setViews();
 
         isProfileEnabled = false;

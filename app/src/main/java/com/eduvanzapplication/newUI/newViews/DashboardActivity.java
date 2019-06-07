@@ -38,6 +38,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -84,14 +85,14 @@ public class DashboardActivity extends AppCompatActivity
     SharedPref sharedPref;
     LinearLayout linearLayoutSignup, linearLayoutUserDetail, editProfile;
     public DataSyncReceiver dataSyncReceiver;
-    static String student_id = "", appInstallationTimeStamp = "", userFirst = "", userLast = "", userEmail = "", userPic = "", userMobileNo = "", isDataSync = "false";
+    static String student_id = "", appInstallationTimeStamp = "", userFirst = "", userLast = "", userEmail = "", userPic = "",
+            userMobileNo = "", isDataSync = "false";
     public static AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
     public int GET_MY_PERMISSION = 1, permission;
-    ImageView ivUserPic;
+    public static ImageView ivUserPic;
 
     static int firstTimeScrape = 0;
-
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -100,12 +101,14 @@ public class DashboardActivity extends AppCompatActivity
         try {
             setContentView(R.layout.activity_dashboard);
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("");
             context = getApplicationContext();
             sharedPref = new SharedPref();
             mActivity = this;
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
+
 
             try {
                 sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
@@ -467,11 +470,11 @@ public class DashboardActivity extends AppCompatActivity
             case 1:
                 if (grantResults.length <= 0) {
                 }
-//                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
+//              else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
                 else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
-//                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[8] == PackageManager.PERMISSION_GRANTED) {
                     //granted
                     ExtraHelperFunctions.putRefUserId(context, userMobileNo);

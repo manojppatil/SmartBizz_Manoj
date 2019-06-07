@@ -74,6 +74,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         setViews();
         context = getApplicationContext();
         mActivity = this;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 
         spCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -137,7 +138,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             ivNextBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
             ivNextBtn.setOnClickListener(null);
             ivNextBtn.setEnabled(false);
-
         }
     }
 
@@ -358,7 +358,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             VolleyCall volleyCall = new VolleyCall();
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-
             } else {
                 volleyCall.sendRequest(context, url, mActivity, null, "courseId", params, MainActivity.auth_token);
             }

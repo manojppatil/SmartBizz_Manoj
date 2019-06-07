@@ -5,11 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -23,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,7 +48,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,9 +55,13 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.eduvanzapplication.newUI.newViews.DashboardActivity.ivUserPic;
+import static com.eduvanzapplication.newUI.newViews.DashboardActivity.userPic;
+
 public class EditProfile extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
-    private CircleImageView profileImage;
+    private de.hdodenhof.circleimageview.CircleImageView profileImage;
+//    public ImageView profileImage;
     private EditText firstName, middleName, lastName, email;
     private TextView mobile_number;
     private LinearLayout submit_button;
@@ -81,6 +82,7 @@ public class EditProfile extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         context = EditProfile.this;
         mActivity = this;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -124,6 +126,7 @@ public class EditProfile extends AppCompatActivity {
 
             }
         });
+
         setProfileApiCall();
 
     }
@@ -399,14 +402,13 @@ public class EditProfile extends AppCompatActivity {
                         EditProfile.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
 //                                {"document_path":"student\/3423\/user_profile_1557394413.jpg","result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,"message":"Profile Picture Updated Successfully"}
 
                                 try {
                                     SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("user_img", baseUrl + document_path);
-                                    editor.putString("email", mJson.getString("email"));
+//                                    editor.putString("email", mJson.getString("email"));
                                     editor.apply();
                                     editor.commit();
                                 } catch (Exception e) {
@@ -415,15 +417,21 @@ public class EditProfile extends AppCompatActivity {
 
                                 try {
                                     SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                                    email.setText(sharedPreferences.getString("email", ""));
-                                    firstName.setText(sharedPreferences.getString("first_name", ""));
-                                    lastName.setText(sharedPreferences.getString("last_name", ""));
+//                                    email.setText(sharedPreferences.getString("email", ""));
+//                                    firstName.setText(sharedPreferences.getString("first_name", ""));
+//                                    lastName.setText(sharedPreferences.getString("last_name", ""));
                                     Picasso.with(context)
                                             .load(sharedPreferences.getString("user_img", ""))
                                             .into(profileImage);
+
+                                    userPic = sharedPreferences.getString("user_img", "");
+                                    if (!userPic.equalsIgnoreCase("")) {
+                                        Picasso.with(context).load(userPic).placeholder(getResources().getDrawable(R.drawable.profilepic_placeholder)).into(ivUserPic);
+                                    }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+
 
 //                                try {
 //                                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
@@ -449,7 +457,7 @@ public class EditProfile extends AppCompatActivity {
 //                                }
 
                                 progressBar.setVisibility(View.GONE);
-                                Log.e("TAG", "uploadFile: code 1 " + mData);
+//                                Log.e("TAG", "uploadFile: code 1 " + mData);
                                 Toast.makeText(context, mData1, Toast.LENGTH_SHORT).show();
 
                             }
@@ -460,7 +468,7 @@ public class EditProfile extends AppCompatActivity {
                             @Override
                             public void run() {
                                 progressBar.setVisibility(View.GONE);
-                                Log.e("TAG", " 2285: " + new Date().toLocaleString());//1538546658896.jpg/
+//                                Log.e("TAG", " 2285: " + new Date().toLocaleString());//1538546658896.jpg/
                                 Toast.makeText(context, mData1 + " " + mData, Toast.LENGTH_SHORT).show();
 
                             }
@@ -475,7 +483,7 @@ public class EditProfile extends AppCompatActivity {
                     EditProfile.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.e("TAG", " 2303: " + new Date().toLocaleString());//1538546658896.jpg/
+//                            Log.e("TAG", " 2303: " + new Date().toLocaleString());//1538546658896.jpg/
                         }
                     });
                 }
@@ -489,7 +497,7 @@ public class EditProfile extends AppCompatActivity {
                 EditProfile.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("TAG", " 2318: " + new Date().toLocaleString());//1538546658896.jpg/
+//                        Log.e("TAG", " 2318: " + new Date().toLocaleString());//1538546658896.jpg/
                         progressBar.setVisibility(View.GONE);
                     }
                 });
@@ -503,14 +511,14 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.GONE);
-                        Log.e("TAG", " 2335: " + new Date().toLocaleString());//1538546658896.jpg/
+//                        Log.e("TAG", " 2335: " + new Date().toLocaleString());//1538546658896.jpg/
                     }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            Log.e("TAG", " 2342: " + new Date().toLocaleString());//1538546658896.jpg/
+//            Log.e("TAG", " 2342: " + new Date().toLocaleString());//1538546658896.jpg/
 
             return serverResponseCode;
         }

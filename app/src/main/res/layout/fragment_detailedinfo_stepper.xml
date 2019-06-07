@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.eduvanzapplication.newUI.fragments.KycDetailFragment">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -95,8 +96,7 @@
                                 android:layout_height="@dimen/_15sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_4sdp"
-                                android:gravity="center"
-                                app:srcCompat="@drawable/ic_check_circle_green" />
+                                android:gravity="center"/>
 
                         </LinearLayout>
 
@@ -314,7 +314,6 @@
                                             android:orientation="vertical"
                                             android:visibility="gone">
 
-
                                             <TextView
                                                 android:id="@+id/txtRent"
                                                 style="@style/TextViewTitle12BoldStyle"
@@ -340,13 +339,14 @@
                                                     style="@style/EditTextStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_5sdp"
                                                     android:background="@drawable/border_circular_primary"
+                                                    android:drawableStart="@drawable/ic_rupee_sign"
                                                     android:imeOptions="actionDone"
                                                     android:inputType="number"
                                                     android:maxLength="8"
                                                     android:maxLines="1"
-                                                    android:padding="@dimen/_2sdp"
+                                                    android:textSize="14sp"
+                                                    android:padding="@dimen/_6sdp"
                                                     android:textColor="@color/darkblue" />
 
                                             </LinearLayout>
@@ -695,8 +695,7 @@
                                 android:layout_height="@dimen/_15sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_4sdp"
-                                android:gravity="center"
-                                app:srcCompat="@drawable/ic_check_circle_green" />
+                                android:gravity="center" />
 
                         </LinearLayout>
 
@@ -1167,8 +1166,8 @@
         android:layout_marginEnd="@dimen/_20sdp">
 
         <TextView
-            android:id="@+id/txtEmailSubmit"
-            style="@style/TextViewTitleStyle"
+            android:id="@+id/txtBtnEditDtl"
+            style="@style/TextViewTitle14Style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -1186,8 +1185,10 @@
             android:background="@color/white" />
 
         <ImageView
-            android:layout_width="@dimen/_14sdp"
-            android:layout_height="@dimen/_14sdp"
+            android:id="@+id/ivBtnEditDtl"
+            android:layout_width="@dimen/_11sdp"
+            android:layout_height="@dimen/_11sdp"
+            android:layout_marginRight="@dimen/_2sdp"
             app:srcCompat="@drawable/ic_pencil_alt" />
 
     </LinearLayout>

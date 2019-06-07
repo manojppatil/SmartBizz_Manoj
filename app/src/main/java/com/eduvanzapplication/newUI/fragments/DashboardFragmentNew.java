@@ -193,7 +193,6 @@ public class DashboardFragmentNew extends Fragment  {
                 Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
             }
 
-
             /** API CALL POST LOGIN DASHBOARD Details **/
             try {
                 String url = MainActivity.mainUrl + "dashboard/getDashboardDetails";

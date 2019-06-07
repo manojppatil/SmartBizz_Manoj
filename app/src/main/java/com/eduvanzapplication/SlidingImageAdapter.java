@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -20,18 +21,21 @@ public class SlidingImageAdapter extends PagerAdapter {
     Context context;
     LayoutInflater inflater;
     String dataofText[];
+    String dataofTitle[];
     int image[];
-    public SlidingImageAdapter(Context sliderPage, String data[], int[] mResources) {
+    int imagebg[];
+    public SlidingImageAdapter(Context sliderPage, String[] data, String[] dataTitle, int[] mResources, int[] mResourcesbg) {
         this.context = sliderPage;
         inflater = LayoutInflater.from(context);
         dataofText=data;
+        dataofTitle=dataTitle;
         image = mResources;
+        imagebg = mResourcesbg;
     }
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
     }
-
 
     @Override
     public int getCount() {
@@ -50,32 +54,34 @@ public class SlidingImageAdapter extends PagerAdapter {
 //        switch (position)
 //        {
 //            case 0:
-        TextView textForslider;
+        TextView textForSliderTitle,textForslider;
         ImageView imageView;
-//         Typeface breeR = Typeface.createFromAsset(context.getAssets(), "BreeSerif-Regular.ttf");
+        LinearLayout linSliderBackground;
         view = inflater.inflate(R.layout.slidersplash, container, false);
-         textForslider= (TextView) view.findViewById(R.id.textForSlider);
-        imageView = (ImageView) view.findViewById(R.id.imageviewslide);
-//        imageView.setAlpha(160);
+        textForSliderTitle= view.findViewById(R.id.textForSliderTitle);
+        textForslider= view.findViewById(R.id.textForSlider);
+        imageView = view.findViewById(R.id.imageviewslide);
+        linSliderBackground = view.findViewById(R.id.linSliderBackground);
+//      imageView.setAlpha(160);
+        linSliderBackground.setBackground(context.getResources().getDrawable(imagebg[position]));
         imageView.setImageResource(image[position]);
+        textForSliderTitle.setText(dataofTitle[position]);
         textForslider.setText(dataofText[position]);
 
-
         if(position == 1){
-            Log.e(MainApplication.TAG, "instantiateItem: "+position );
+//            Log.e(MainApplication.TAG, "instantiateItem: "+position );
             YoYo.with(Techniques.RollIn)
                     .duration(800)
                     .repeat(0)
                     .playOn(view.findViewById(R.id.imageviewslide));
         }
         if(position == 2){
-            Log.e(MainApplication.TAG, "instantiateItem: "+position );
-            YoYo.with(Techniques.RollIn)
-                    .duration(800)
-                    .repeat(0)
-                    .playOn(view.findViewById(R.id.imageviewslide));
+//            Log.e(MainApplication.TAG, "instantiateItem: "+position );
+//            YoYo.with(Techniques.RollIn)
+//                    .duration(800)
+//                    .repeat(0)
+//                    .playOn(view.findViewById(R.id.imageviewslide));
         }
-
 
 //         textForslider.setText(dataofText[position]);
 //         textForslider.setTypeface(breeR);
@@ -86,8 +92,6 @@ public class SlidingImageAdapter extends PagerAdapter {
 //            case 2:
 //                view = inflater.inflate(R.layout.slideo, container, false);
 //                break;
-
-
 //        }
         container.addView(view);
         return view;

@@ -8,7 +8,9 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -23,7 +25,7 @@ import com.eduvanzapplication.newUI.webviews.WebViewTermsNCondition;
 public class TermsAndCondition extends AppCompatActivity {
 
     TextView below3, below5;
-    Button button;
+    LinearLayout linContinuePermi;
     ScrollView scrollView;
 
     @Override
@@ -32,7 +34,9 @@ public class TermsAndCondition extends AppCompatActivity {
         try {
             setContentView(R.layout.permissionscreen);
 //        button = findViewById(R.id.button_agreetnc);
-            button = findViewById(R.id.button_permission);
+            linContinuePermi = findViewById(R.id.linContinuePermi);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
+
             below3 = findViewById(R.id.below3);
             below5 = findViewById(R.id.below5);
             scrollView = findViewById(R.id.scrollView_tnc);
@@ -47,7 +51,7 @@ public class TermsAndCondition extends AppCompatActivity {
             content1.setSpan(new UnderlineSpan(), 0, mystring1.length(), 0);
             below5.setText(content1);
 
-            button.setOnClickListener(new View.OnClickListener() {
+            linContinuePermi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -92,7 +96,7 @@ public class TermsAndCondition extends AppCompatActivity {
                     if (scrollView != null) {
                         if (scrollView.getChildAt(0).getBottom() <= (scrollView.getHeight() + scrollView.getScrollY())) {
                             //scroll view is at bottom
-                            button.setVisibility(View.VISIBLE);
+                            linContinuePermi.setVisibility(View.VISIBLE);
                         } else {
                             //scroll view is not at bottom
                         }

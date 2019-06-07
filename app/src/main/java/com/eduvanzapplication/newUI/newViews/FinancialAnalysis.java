@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,6 +40,8 @@ public class FinancialAnalysis extends AppCompatActivity {
         setContentView(R.layout.scorecard360);
         context = getApplicationContext();
         mActivity = this;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
+
         linContinue = findViewById(R.id.linContinue);
         progressBar = findViewById(R.id.progressBar_finScore);
 

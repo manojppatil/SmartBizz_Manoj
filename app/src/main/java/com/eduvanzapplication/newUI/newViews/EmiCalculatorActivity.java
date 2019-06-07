@@ -58,6 +58,8 @@ public class EmiCalculatorActivity extends AppCompatActivity {
             context = getApplicationContext();
             mActivity = this;
 
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
+
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("");

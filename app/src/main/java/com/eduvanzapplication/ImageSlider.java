@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
@@ -33,7 +35,8 @@ public class ImageSlider extends AppCompatActivity {
     CirclePageIndicator indicator;
     public static int currentPage=0;
     public static  int numPages=0;
-    Button mbtn;
+    LinearLayout linProceed;
+    ImageButton btnNext;
     String checkForImageSlider = "1";
     ImageView imageView1, imageView2;
     SharedPref sharedPref;
@@ -55,22 +58,34 @@ public class ImageSlider extends AppCompatActivity {
         editor.putString("checkForImageSlider",checkForImageSlider);
         editor.commit();
 
-        String[] data={"Easy and Hassle free education loans to help you grow",
-                "Fill in your details with relevant documents and get instant approvals for your education loan"
-                ,"Get all the information about your loan on your finger tips \n Think Education, Think Eduvanz !!"};
+        String[] dataTitle={"Welcome",
+                "Details Required"
+                ,"Stay Updated"};
+
+        String[] data={"Easy and Hassle-free Education Loans to Help You Grow!",
+                "Fill in Your Details with Relevant Documents!"
+                ,"Get All Your Loan Related Info at Your fingertips!"};
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 
         int[] mResources = {
-                R.drawable.ic_im_welcome,
-                R.drawable.ic_im_documents,
-                R.drawable.ic_im_stay_updated
+                R.drawable.ic_1,
+                R.drawable.ic_2,
+                R.drawable.ic_3
+        };
+
+        int[] mResourcesBg = {
+                R.drawable.ic_bg1,
+                R.drawable.ic_bg2,
+                R.drawable.ic_bg3
         };
 
         mPager=  findViewById(R.id.Viewpager);
         indicator= findViewById(R.id.indicator);
-        mbtn= findViewById(R.id.nextbtn);
-        mbtn.setOnClickListener(new View.OnClickListener() {
+        btnNext = findViewById(R.id.btnNext);
+        linProceed = findViewById(R.id.linProceed);
+
+        linProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -93,7 +108,7 @@ public class ImageSlider extends AppCompatActivity {
                 }
             }
         });
-        mPager.setAdapter(new SlidingImageAdapter(this,data, mResources));
+        mPager.setAdapter(new SlidingImageAdapter(this,data,dataTitle, mResources,mResourcesBg));
         mPager.setOffscreenPageLimit(0);
         mPager.destroyDrawingCache();
         mPager.clearDisappearingChildren();
@@ -135,7 +150,12 @@ public class ImageSlider extends AppCompatActivity {
                 currentPage=position;
                 if(currentPage == 2)
                 {
-                    mbtn.setVisibility(View.VISIBLE);
+                    btnNext.setVisibility(View.GONE);
+                    linProceed.setVisibility(View.VISIBLE);
+                }
+                else{
+                    btnNext.setVisibility(View.VISIBLE);
+                    linProceed.setVisibility(View.GONE);
                 }
             }
             @Override

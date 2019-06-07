@@ -15,6 +15,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.eduvanzapplication.CustomTypefaceSpan;
@@ -45,13 +46,13 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     public static boolean isKycEdit;
     public static boolean isDetailedInfoEdit;
 
-    //kyc values
-    public static String firstName = "", lastName = "", middleName = "", gender = "", dob = "", maritalStatus = "2", email = "", mobile = "",
-            aadhar = "", pan = "", flatBuildingSociety = "", streetLocalityLandmark = "", pincode = "", countryId = "", stateId = "", cityId = "",
-            instituteId = "", courseId = "", instituteLocationId = "", courseFee = "", applicant_id = "",
-            application_id = "", requested_loan_amount = "", institute_name = "", location_name = "",
-            course_name = "", course_cost = "", fk_institutes_id = "", fk_insitutes_location_id = "", fk_course_id = "", lead_status = "",
-            lead_sub_status = "", current_status = "", current_stage = "", has_aadhar_pan = "";
+//    //kyc values
+    public static String firstName = "",applicant_id ="";// lastName = "", middleName = "", gender = "", dob = "", maritalStatus = "2", email = "", mobile = "",
+//            aadhar = "", pan = "", flatBuildingSociety = "", streetLocalityLandmark = "", pincode = "", countryId = "", stateId = "", cityId = "",
+//            instituteId = "", courseId = "", instituteLocationId = "", courseFee = "", applicant_id = "",
+//            application_id = "", requested_loan_amount = "", institute_name = "", location_name = "",
+//            course_name = "", course_cost = "", fk_institutes_id = "", fk_insitutes_location_id = "", fk_course_id = "", lead_status = "",
+//            lead_sub_status = "", current_status = "", current_stage = "", has_aadhar_pan = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
 
         context = getApplicationContext();
         mActivity = this;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 
         try {
             Bundle extras = getIntent().getExtras();
@@ -67,6 +69,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         } catch (Exception e) {
             e.printStackTrace();
         }
+        applicant_id ="";
         isKycEdit = false;
         isDetailedInfoEdit = false;
         try {
@@ -97,22 +100,31 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         finish();
     }
 
-    private void applyFontToMenuItem(MenuItem mi) {
-        Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/sourcesanspro_italic.ttf");
-        SpannableString mNewTitle = new SpannableString(mi.getTitle());
-        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        mi.setTitle(mNewTitle);
-
-
-    }
     private void setupViewPager(ViewPager viewPager) {
 
+        Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/sourcesanspro_italic.ttf");
+
+        SpannableString mKycDetail = new SpannableString("KYC Details");
+        mKycDetail.setSpan(new CustomTypefaceSpan("", font), 0, mKycDetail.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+        SpannableString mDetailedInfo = new SpannableString("Detailed Info");
+        mDetailedInfo.setSpan(new CustomTypefaceSpan("", font), 0, mDetailedInfo.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+        SpannableString mDocUplaod = new SpannableString("Documents Upload");
+        mDocUplaod.setSpan(new CustomTypefaceSpan("", font), 0, mDocUplaod.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+        SpannableString mPostAppr = new SpannableString("Post approval Documentation");
+        mPostAppr.setSpan(new CustomTypefaceSpan("", font), 0, mPostAppr.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+        SpannableString mAmort = new SpannableString("Amortization");
+        mAmort.setSpan(new CustomTypefaceSpan("", font), 0, mAmort.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new KycDetailFragment(), "KYC Details");
-        adapter.addFrag(new DetailedInfoFragment(), "Detailed Info");
-        adapter.addFrag(new UploadDocumentFragment(), "Documents Upload");
-        adapter.addFrag(new PostApprovalDocFragment(), "Post approval Documentation");
-        adapter.addFrag(new AmortizationFragment(), "Amortization");
+        adapter.addFrag(new KycDetailFragment(), String.valueOf(mKycDetail));
+        adapter.addFrag(new DetailedInfoFragment(), String.valueOf(mDetailedInfo));
+        adapter.addFrag(new UploadDocumentFragment(), String.valueOf(mDocUplaod));
+        adapter.addFrag(new PostApprovalDocFragment(), String.valueOf(mPostAppr));
+        adapter.addFrag(new AmortizationFragment(), String.valueOf(mAmort));
 
 //        adapter.addFrag(new KycDetailFragment(), "KYC Details");
 //        adapter.addFrag(new DetailedInfoFragment(), "Detailed Info");
