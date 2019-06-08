@@ -19,18 +19,19 @@ public class DataSyncReceiver extends BroadcastReceiver {
 
     Context context;
     SharedPreferences sharedPreferences;
+
     @Override
     public void onReceive(Context mcontext, Intent intent) {
         context = mcontext;
 
         String action = intent.getAction();
 
-        Boolean dataSynced = intent.getBooleanExtra("DataSynced",false);
-        String algo360_datasync = String.valueOf(intent.getBooleanExtra("DataSynced",false));
+        Boolean dataSynced = intent.getBooleanExtra("DataSynced", false);
+        String algo360_datasync = String.valueOf(intent.getBooleanExtra("DataSynced", false));
         Log.e("Receiver", "Data synced: " + dataSynced);
-//                    if(dataSynced) {
-                        DashboardActivity.saveAlgo360();
-//                    }
+        if (dataSynced) {
+            DashboardActivity.saveAlgo360();
+        }
     }
 
 }

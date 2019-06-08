@@ -225,6 +225,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             android:gravity="start"
+                            android:id="@+id/txtGenderTitle"
                             android:text="Select Gender"
                             android:textColor="@color/darkblue" />
 

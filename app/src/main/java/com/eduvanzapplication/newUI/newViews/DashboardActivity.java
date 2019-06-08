@@ -109,7 +109,6 @@ public class DashboardActivity extends AppCompatActivity
             mActivity = this;
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 
-
             try {
                 sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 userFirst = sharedPreferences.getString("name", "");
@@ -262,10 +261,9 @@ public class DashboardActivity extends AppCompatActivity
             Boolean dataSynced = intent.getBooleanExtra("DataSynced", false);
 //            Log.e("Receiver", "Data synced: " + dataSynced);
 //            Log.e("Receiver", "Data Action: " + action);
-
-//            if(dataSynced) {
+            if(dataSynced) {
             saveAlgo360();
-//            }
+            }
         }
     };
 
@@ -273,7 +271,7 @@ public class DashboardActivity extends AppCompatActivity
         /** API CALL **/
         try {//auth_token
 //            String url = "http://192.168.1.63/eduvanzapi/dashboard/saveAlgo360response";
-            if (!isDataSync.equals("true")) {
+//            if (!isDataSync.equals("true")) {
                 String url = MainActivity.mainUrl + "dashboard/saveAlgo360response";
                 Map<String, String> params = new HashMap<String, String>();
 
@@ -284,7 +282,7 @@ public class DashboardActivity extends AppCompatActivity
                 VolleyCallAlgo360 volleyCall = new VolleyCallAlgo360();
 //            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, "90ad441a12b48c6d7c5524b8b2a334c3");
                 volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
-            }
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }

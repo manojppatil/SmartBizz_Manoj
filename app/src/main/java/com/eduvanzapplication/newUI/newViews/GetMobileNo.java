@@ -99,7 +99,6 @@ public class GetMobileNo extends AppCompatActivity {
                                 Manifest.permission.ACCESS_COARSE_LOCATION,
                                 Manifest.permission.ACCESS_FINE_LOCATION},
                         GET_MY_PERMISSION);
-
             } else {
             }
         }
@@ -140,7 +139,6 @@ public class GetMobileNo extends AppCompatActivity {
         edtOtp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -219,7 +217,6 @@ public class GetMobileNo extends AppCompatActivity {
 //                                                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
 //                                                            Manifest.permission.ACCESS_FINE_LOCATION},
 //                                                    GET_MY_PERMISSION);
-//
 //                                        }
 //                                    })
 //                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -411,7 +408,6 @@ public class GetMobileNo extends AppCompatActivity {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
 
     }
 

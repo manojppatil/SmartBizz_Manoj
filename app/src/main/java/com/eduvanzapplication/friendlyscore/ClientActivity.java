@@ -304,7 +304,7 @@ public class ClientActivity extends LaunchUI implements
             @Override
             public void onApiSuccess(ApiResponse s) {
                 Log.e(TAG, "onApiSuccess");
-                handleAuthorization(s);
+                handleAuthorization(s);//access toke is not set
             }
 
             @Override

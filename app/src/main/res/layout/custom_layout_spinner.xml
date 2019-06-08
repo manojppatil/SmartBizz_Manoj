@@ -5,9 +5,9 @@
         style="?android:attr/dropDownItemStyle"
         android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
         android:singleLine="true"
+        android:textColor="@drawable/spinner_sel_textcolor"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:ellipsize="marquee"
-        android:textColor="@color/darkblue"
         android:fontFamily="@font/sourcesanspro_regular"
         android:textSize="14sp"/>

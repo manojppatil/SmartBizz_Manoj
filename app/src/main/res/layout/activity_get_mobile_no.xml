@@ -315,7 +315,7 @@
                     android:background="@drawable/border_circular_red_filled"
                     android:backgroundTint="#DDee415e"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:orientation="horizontal"
                     android:padding="@dimen/_4sdp">
 

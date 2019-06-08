@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.ViewHolder>{
+
     List<MLeads> list = new ArrayList();
 
     public List<MLeads> getSpots() {

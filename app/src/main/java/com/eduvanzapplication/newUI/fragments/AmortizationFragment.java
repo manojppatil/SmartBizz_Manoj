@@ -6,11 +6,13 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -53,6 +56,8 @@ import java.util.Map;
 import static android.view.View.VISIBLE;
 import static com.eduvanzapplication.Util.Globle.payment_partner;
 import static com.eduvanzapplication.Util.Globle.payment_platform;
+import static com.eduvanzapplication.R.color.colorGreen;
+import static com.eduvanzapplication.R.color.colorRed;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 
 //9773494235 Test
@@ -62,6 +67,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
     public static Context context;
     public static Fragment mFragment;
     public static ProgressBar progressBarAmort;
+    public static ImageView imgpaymentStatus;
 
     public static List<MLoanEmis> mLoanEmisArrayList;
     public static TextView thumbView;
@@ -147,6 +153,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         txtDueBy = view.findViewById(R.id.txtDueBy);
         txtPaymentDate = view.findViewById(R.id.txtPaymentDate);
         txtPaymentStatus = view.findViewById(R.id.txtPaymentStatus);
+        imgpaymentStatus = view.findViewById(R.id.imgpaymentStatus);
         txtBtnText = view.findViewById(R.id.txtBtnText);
         linPayBtn = view.findViewById(R.id.linPayBtn);
         linAmortTile = view.findViewById(R.id.linAmortTile);
@@ -243,7 +250,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         txtEmiNo80 = view.findViewById(R.id.txtEmiNo80);
 
 
-
         txtEmiNo81 = view.findViewById(R.id.txtEmiNo81);
         txtEmiNo82 = view.findViewById(R.id.txtEmiNo82);
         txtEmiNo83 = view.findViewById(R.id.txtEmiNo83);
@@ -254,7 +260,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         txtEmiNo88 = view.findViewById(R.id.txtEmiNo88);
         txtEmiNo89 = view.findViewById(R.id.txtEmiNo89);
         txtEmiNo90 = view.findViewById(R.id.txtEmiNo90);
-
 
 
         txtEmiNo91 = view.findViewById(R.id.txtEmiNo91);
@@ -1431,9 +1436,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             break;
 
 
-
-
-
                     }
                 }
 
@@ -1449,11 +1451,20 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                         txtDueBy.setText(mLoanEmisArrayList.get(k).proposed_payment_date);
                         txtPaymentDate.setText(mLoanEmisArrayList.get(k).actual_payment_date);
                         txtPaymentStatus.setText(" " + mLoanEmisArrayList.get(k).statusMessage);
+
                         if (mLoanEmisArrayList.get(k).status.equals("0")) {
                             txtBtnText.setText(" " + "Pre Pay");
+                            txtPaymentStatus.setTextColor(Color.parseColor("#1ac31a"));
+                            imgpaymentStatus.setImageResource(R.drawable.ic_exclamation_circle);
+                            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorGreen), android.graphics.PorterDuff.Mode.SRC_IN);
+
                         } else {
                             txtBtnText.setText(" " + "EMI History");
+                            txtPaymentStatus.setTextColor(Color.parseColor("#1ac31a"));
+                            imgpaymentStatus.setImageResource(R.drawable.ic_check_circle_green);
+                            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorGreen), android.graphics.PorterDuff.Mode.SRC_IN);
                         }
+
                         linPayBtn.setTag(mLoanEmisArrayList.get(k).loan_emi_id);
                         break;
                     }
@@ -1558,7 +1569,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                     // Payment Gateway Activity or may be due to //
                     // initialization of webview. // Error Message details
                     // the error occurred.
-                    Toast.makeText(context, "Payment Transaction response " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, "Payment Transaction response " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
                     StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
                     s.append("inErrorMessage-");
                     s.append(inErrorMessage);
@@ -1569,7 +1580,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                 @Override
                 public void onTransactionResponse(Bundle inResponse) {
                     Log.d("LOG", "Payment Transaction is successful " + inResponse);
-                    Toast.makeText(context, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
                     StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
                     s.append("inResponse-");
                     s.append(inResponse);
@@ -1642,7 +1653,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                                     params.put("payment_platform", payment_platform);
                                     if (!Globle.isNetworkAvailable(context)) {
                                         Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
-
                                     } else {
                                         volleyCall.sendRequest(context, url, null, mFragment, "kycPaymentCaptureWizard", params, MainActivity.auth_token);
                                     }
@@ -2179,18 +2189,29 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 
         if(mLoanEmisArrayList.get(pos).emi_no.length()>1){
             txtEmiNo.setText(mLoanEmisArrayList.get(pos).emi_no);
-        }
-        else {
+        } else {
         txtEmiNo.setText("0" + mLoanEmisArrayList.get(pos).emi_no);
         }
         txtEmiAmount.setText(mLoanEmisArrayList.get(pos).emi_amount);
         txtDueBy.setText(mLoanEmisArrayList.get(pos).proposed_payment_date);
         txtPaymentDate.setText(mLoanEmisArrayList.get(pos).actual_payment_date);
         txtPaymentStatus.setText(" " + mLoanEmisArrayList.get(pos).statusMessage);
+        String msg = (String) txtPaymentStatus.getText();
+
         if (mLoanEmisArrayList.get(pos).status.equals("0")) {
+
             txtBtnText.setText(" " + "Pre Pay");
+            txtPaymentStatus.setTextColor(Color.parseColor("#ee415e"));
+            imgpaymentStatus.setImageResource(R.drawable.ic_exclamation_circle);
+            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorRed), android.graphics.PorterDuff.Mode.SRC_IN);
+
         } else {
+
             txtBtnText.setText(" " + "EMI History");
+            txtPaymentStatus.setTextColor(Color.parseColor("#1ac31a"));
+            imgpaymentStatus.setImageResource(R.drawable.ic_check_circle_green);
+            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorGreen), android.graphics.PorterDuff.Mode.SRC_IN);
+
         }
         linPayBtn.setTag(mLoanEmisArrayList.get(pos).loan_emi_id);
 

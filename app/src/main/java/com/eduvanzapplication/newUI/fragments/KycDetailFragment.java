@@ -1841,7 +1841,6 @@ public class KycDetailFragment extends Fragment {
             indicator.setTextColor(context.getResources().getColor(R.color.blue1));
         }
 
-
     }
 
     @Override
@@ -1891,23 +1890,18 @@ public class KycDetailFragment extends Fragment {
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
                     BorrowerCurrentCountryPersonalPOJO borrowerCurrentCountryPersonalPOJO = new BorrowerCurrentCountryPersonalPOJO();
                     borrowerCurrentCountryPersonalPOJO.countryName = jsonObject1.getString("country_name");
                     currentCountry_arrayList.add(jsonObject1.getString("country_name"));
                     borrowerCurrentCountryPersonalPOJO.countryID = jsonObject1.getString("country_id");
                     borrowerCurrentCountryPersonalPOJOArrayList.add(borrowerCurrentCountryPersonalPOJO);
-
                 }
 
                 arrayAdapter_currentCountry = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentCountry_arrayList);
                 spCountry.setAdapter(arrayAdapter_currentCountry);
                 arrayAdapter_currentCountry.notifyDataSetChanged();
-
-
             } else {
 //				Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1923,7 +1917,6 @@ public class KycDetailFragment extends Fragment {
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 //                getCurrentStates(currentcountryID);
-
             } else {
                 VolleyCall volleyCall = new VolleyCall();
                 volleyCall.sendRequest(context, url, null, mFragment, "getStatesKyc", params, MainActivity.auth_token);
@@ -1982,7 +1975,6 @@ public class KycDetailFragment extends Fragment {
                     arrayAdapter_currentState.notifyDataSetChanged();
 
                     int count = borrowerCurrentStatePersonalPOJOArrayList.size();
-
                     for (int i = 0; i < count; i++) {
                         if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
                             spState.setSelection(i);
@@ -2078,7 +2070,6 @@ public class KycDetailFragment extends Fragment {
                             spCity.setSelection(i);
                         }
                     }
-
                 } else {
                 }
             }
@@ -2218,7 +2209,6 @@ public class KycDetailFragment extends Fragment {
                             if (loanAmountvalueInInt > courseFeeValueinint) {
 //                                edtLoanAmt.setError("Loan amount not exceed than course fees!");
                                 requested_loan_amount = "";
-
                             } else {
                                 requested_loan_amount = edtLoanAmt.getText().toString();
                                 edtLoanAmt.setError(null);
@@ -2286,6 +2276,7 @@ public class KycDetailFragment extends Fragment {
                         gender = jsonborrowerDetails.getString("gender_id");
                         if (!gender.equals("") && !gender.equals("null")) {
                             if (gender.equals("1")) {
+
                                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
                                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
@@ -2328,6 +2319,7 @@ public class KycDetailFragment extends Fragment {
                                 }
                                 ivOther.setImageDrawable(bg2);
                             } else if (gender.equals("2")) {
+
                                 linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
                                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
@@ -2428,7 +2420,6 @@ public class KycDetailFragment extends Fragment {
                         } else {
                             maritalStatus = "2";
                             switchMarital.setChecked(false);
-
                         }
                     }
 

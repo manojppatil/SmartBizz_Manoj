@@ -49,8 +49,8 @@
                                 style="@style/TextViewTitle10BoldStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
                                 android:layout_weight="1"
+                                android:gravity="center_horizontal"
                                 android:text="EMI Amount"
                                 android:textStyle="normal" />
 
@@ -63,7 +63,7 @@
                                 android:drawableStart="@drawable/ic_rupee_sign"
                                 android:padding="@dimen/_3sdp"
                                 android:text=" 0"
-                                android:textSize="12sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -78,8 +78,8 @@
                                 style="@style/TextViewTitle10BoldStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
                                 android:layout_weight="1"
+                                android:gravity="center_horizontal"
                                 android:text="Next EMI Due" />
 
                             <TextView
@@ -89,7 +89,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/_3sdp"
-                                android:textSize="12sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -104,9 +104,9 @@
                                 style="@style/TextViewTitle10BoldStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
                                 android:layout_weight="1"
-                                android:text="EMI End Date"/>
+                                android:gravity="center_horizontal"
+                                android:text="EMI End Date" />
 
                             <TextView
                                 android:id="@+id/txtNextEmiEndDate"
@@ -115,7 +115,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/_3sdp"
-                                android:textSize="12sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -130,8 +130,8 @@
                                 style="@style/TextViewTitle10BoldStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
                                 android:layout_weight="1"
+                                android:gravity="center_horizontal"
                                 android:text="Outstanding Amt" />
 
                             <TextView
@@ -139,11 +139,11 @@
                                 style="@style/TextViewTitle14Style"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableStart="@drawable/ic_rupee_sign"
                                 android:layout_weight="1"
+                                android:drawableStart="@drawable/ic_rupee_sign"
                                 android:padding="@dimen/_3sdp"
                                 android:text=" 0"
-                                android:textSize="12sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -390,8 +390,9 @@
                                                     android:padding="@dimen/_6sdp">
 
                                                     <ImageView
-                                                        android:layout_width="@dimen/_14sdp"
-                                                        android:layout_height="@dimen/_14sdp"
+                                                        android:id="@+id/imgpaymentStatus"
+                                                        android:layout_width="@dimen/_12sdp"
+                                                        android:layout_height="@dimen/_12sdp"
                                                         android:layout_gravity="center_vertical"
                                                         android:gravity="center"
                                                         android:textAlignment="center"
@@ -504,8 +505,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo1"
@@ -514,8 +515,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -549,8 +550,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo2"
@@ -559,8 +560,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -594,8 +595,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo3"
@@ -604,8 +605,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -639,8 +640,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo4"
@@ -649,8 +650,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -684,8 +685,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo5"
@@ -694,8 +695,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -743,8 +744,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo6"
@@ -753,8 +754,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -788,8 +789,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo7"
@@ -798,8 +799,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -834,8 +835,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo8"
@@ -844,8 +845,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -880,8 +881,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo9"
@@ -890,8 +891,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -926,8 +927,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo10"
@@ -936,8 +937,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -986,8 +987,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo11"
@@ -996,8 +997,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1031,8 +1032,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo12"
@@ -1041,8 +1042,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1076,8 +1077,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo13"
@@ -1086,8 +1087,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1121,8 +1122,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo14"
@@ -1131,8 +1132,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1166,8 +1167,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo15"
@@ -1176,8 +1177,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1225,8 +1226,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo16"
@@ -1235,8 +1236,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1270,8 +1271,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo17"
@@ -1280,8 +1281,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1315,8 +1316,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo18"
@@ -1325,8 +1326,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="18sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="18sp" />
 
                             </LinearLayout>
 
@@ -1360,8 +1361,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo19"
@@ -1370,8 +1371,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1405,8 +1406,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo20"
@@ -1415,8 +1416,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1466,8 +1467,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo21"
@@ -1476,8 +1477,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1511,8 +1512,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo22"
@@ -1521,8 +1522,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1556,8 +1557,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo23"
@@ -1566,8 +1567,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1601,8 +1602,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo24"
@@ -1611,8 +1612,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1646,8 +1647,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo25"
@@ -1656,8 +1657,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1704,8 +1705,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo26"
@@ -1714,8 +1715,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1749,8 +1750,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo27"
@@ -1759,8 +1760,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1794,8 +1795,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                     android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo28"
@@ -1804,8 +1805,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1839,8 +1840,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo29"
@@ -1849,8 +1850,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1884,8 +1885,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo30"
@@ -1894,8 +1895,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1944,8 +1945,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo31"
@@ -1954,8 +1955,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -1989,8 +1990,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo32"
@@ -1999,8 +2000,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2034,8 +2035,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo33"
@@ -2044,8 +2045,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2079,8 +2080,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo34"
@@ -2089,8 +2090,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2124,8 +2125,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo35"
@@ -2134,8 +2135,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2182,8 +2183,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo36"
@@ -2192,8 +2193,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2227,8 +2228,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo37"
@@ -2237,8 +2238,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2272,8 +2273,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo38"
@@ -2282,8 +2283,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2317,8 +2318,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo39"
@@ -2327,8 +2328,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2362,8 +2363,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo40"
@@ -2372,8 +2373,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2422,8 +2423,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo41"
@@ -2432,8 +2433,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2467,8 +2468,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo42"
@@ -2477,8 +2478,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2512,8 +2513,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo43"
@@ -2522,8 +2523,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2557,8 +2558,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo44"
@@ -2567,8 +2568,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="15sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -2602,8 +2603,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo45"
@@ -2612,8 +2613,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2660,8 +2661,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo46"
@@ -2670,8 +2671,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2705,8 +2706,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo47"
@@ -2715,8 +2716,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2750,8 +2751,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo48"
@@ -2760,8 +2761,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2795,8 +2796,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo49"
@@ -2805,8 +2806,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2840,8 +2841,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo50"
@@ -2850,8 +2851,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2900,8 +2901,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                      android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo51"
@@ -2910,8 +2911,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2945,8 +2946,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo52"
@@ -2955,8 +2956,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -2990,8 +2991,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo53"
@@ -3000,8 +3001,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3035,8 +3036,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo54"
@@ -3045,8 +3046,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3080,8 +3081,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo55"
@@ -3090,8 +3091,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3138,8 +3139,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo56"
@@ -3148,8 +3149,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3183,8 +3184,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo57"
@@ -3193,8 +3194,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3228,8 +3229,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo58"
@@ -3238,8 +3239,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3273,8 +3274,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo59"
@@ -3283,8 +3284,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3318,8 +3319,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo60"
@@ -3328,8 +3329,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3378,8 +3379,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo61"
@@ -3388,8 +3389,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3423,8 +3424,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo62"
@@ -3433,8 +3434,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3468,8 +3469,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo63"
@@ -3478,8 +3479,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3513,8 +3514,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo64"
@@ -3523,8 +3524,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3558,8 +3559,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo65"
@@ -3568,8 +3569,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3577,6 +3578,7 @@
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn14"
                         android:layout_width="match_parent"
@@ -3615,8 +3617,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo66"
@@ -3625,8 +3627,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3660,8 +3662,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo67"
@@ -3670,8 +3672,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3704,9 +3706,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo68"
@@ -3714,9 +3716,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="03"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3750,8 +3752,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo69"
@@ -3760,8 +3762,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3794,9 +3796,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo70"
@@ -3805,8 +3807,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3855,8 +3857,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo71"
@@ -3899,8 +3901,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo72"
@@ -3909,8 +3911,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3944,8 +3946,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo73"
@@ -3954,8 +3956,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -3988,9 +3990,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo74"
@@ -3998,9 +4000,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="04"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4034,8 +4036,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo75"
@@ -4044,8 +4046,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4053,6 +4055,7 @@
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn16"
                         android:layout_width="match_parent"
@@ -4091,8 +4094,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo76"
@@ -4100,9 +4103,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="01"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4135,19 +4138,19 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo77"
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="20sp"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4181,8 +4184,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo78"
@@ -4191,8 +4194,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4226,8 +4229,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo79"
@@ -4236,8 +4239,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4270,9 +4273,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo80"
@@ -4280,9 +4283,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="05"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4330,9 +4333,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo81"
@@ -4341,8 +4344,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4375,9 +4378,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo82"
@@ -4385,9 +4388,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="02"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4420,9 +4423,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo83"
@@ -4430,9 +4433,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="03"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4465,9 +4468,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo84"
@@ -4475,9 +4478,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="04"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4510,9 +4513,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo85"
@@ -4520,9 +4523,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="05"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4530,6 +4533,7 @@
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn18"
                         android:layout_width="match_parent"
@@ -4568,8 +4572,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo86"
@@ -4578,8 +4582,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4613,8 +4617,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo87"
@@ -4622,9 +4626,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="02"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4657,9 +4661,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo88"
@@ -4667,9 +4671,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="03"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4702,9 +4706,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo89"
@@ -4713,8 +4717,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4747,9 +4751,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo90"
@@ -4757,9 +4761,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="05"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4808,8 +4812,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo91"
@@ -4818,8 +4822,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4853,8 +4857,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo92"
@@ -4863,8 +4867,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4898,9 +4902,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
 
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo93"
@@ -4908,9 +4912,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="03"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4943,9 +4947,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo94"
@@ -4953,9 +4957,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="04"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -4988,9 +4992,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo95"
@@ -4999,8 +5003,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -5008,6 +5012,7 @@
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/linAmortBtn20"
                         android:layout_width="match_parent"
@@ -5045,9 +5050,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo96"
@@ -5055,9 +5060,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="01"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -5091,8 +5096,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
-                                    android:textSize="15sp"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo97"
@@ -5100,9 +5105,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="02"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -5135,9 +5140,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo98"
@@ -5145,9 +5150,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="03"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -5180,9 +5185,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo99"
@@ -5190,9 +5195,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="04"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -5225,9 +5230,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="15sp"
                                     android:text="EMI"
-                                    android:textAllCaps="true" />
+                                    android:textAllCaps="true"
+                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/txtEmiNo100"
@@ -5235,9 +5240,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/_2sdp"
-                                    android:textSize="20sp"
                                     android:text="05"
-                                    android:textColor="@color/darkblue" />
+                                    android:textColor="@color/darkblue"
+                                    android:textSize="20sp" />
 
                             </LinearLayout>
 
@@ -5245,8 +5250,6 @@
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
-
-
 
 
                     <LinearLayout
@@ -5325,3 +5328,4 @@
         android:visibility="gone" />
 
 </RelativeLayout>
+

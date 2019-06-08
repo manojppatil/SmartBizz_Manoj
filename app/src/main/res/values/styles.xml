@@ -140,7 +140,6 @@
     <style name="TextViewSmallCapsWhiteStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/black_new</item>
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white1</item>
         <item name="android:textSize">10sp</item>
 
