@@ -42,7 +42,10 @@
     <!--<string name="desc_firebase_lockup">Firebase logo and name</string>-->
     <!--<string name="auth_failed">Authentication failed</string>-->
 
+    <!--<string name="facebook_app_id">459976971239553</string>-->
+    <!--<string name="fb_login_protocol_scheme">fb459976971239553</string>-->
 
+<!--original-->
     <string name="facebook_app_id">2033654490205621</string>
     <string name="fb_login_protocol_scheme">fb2033654490205621</string>
 
