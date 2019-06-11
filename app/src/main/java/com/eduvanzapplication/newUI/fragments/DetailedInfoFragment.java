@@ -152,8 +152,12 @@ public class DetailedInfoFragment extends Fragment {
     public static Context context;
     public static Fragment mFragment;
     public static LinearLayout linBorrowerForm, linIfAddressNotSame;
+
+
     //error
-    public static TextView txtResidentialDetailsErrMsg, txtProfessionalDetailsErrMsg;
+    public static TextView txtResidentialDetailsErrMsg, txtProfessionalDetailsErrMsg, tvOwnRenbytitle,
+            tvduraofstayatcurraddtitle, tvcountrytitle, tvstatetitle, tvcitytitle, tvselectprofesstitle,
+            tvperaddsameasaadhrtitle,tvemplytypetitle, tvcurremplydurntitle,txtCurrentResidentType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -228,6 +232,21 @@ public class DetailedInfoFragment extends Fragment {
         spDurationOfJob = view.findViewById(R.id.spDurationOfJob);
         spEmployerType = view.findViewById(R.id.spEmployerType);
         viewPager = view.findViewById(R.id.viewpager);
+
+        //new add field
+
+        tvOwnRenbytitle = view.findViewById(R.id.tvOwnRenbytitle);
+        tvduraofstayatcurraddtitle = view.findViewById(R.id.tvduraofstayatcurraddtitle);
+        tvcountrytitle = view.findViewById(R.id.tvcountrytitle);
+        tvstatetitle = view.findViewById(R.id.tvstatetitle);
+        tvcitytitle = view.findViewById(R.id.tvcitytitle);
+        tvselectprofesstitle = view.findViewById(R.id.tvselectprofesstitle);
+        tvemplytypetitle = view.findViewById(R.id.tvemplytypetitle);
+        tvcurremplydurntitle = view.findViewById(R.id.tvcurremplydurntitle);
+        tvperaddsameasaadhrtitle=view.findViewById(R.id.tvperaddsameasaadhrtitle);
+        txtCurrentResidentType=view.findViewById(R.id.txtCurrentResidentType);
+
+
 
         //ErrorMsg ID
         txtResidentialDetailsErrMsg = view.findViewById(R.id.txtResidentialDetailsErrMsg);
@@ -1307,6 +1326,18 @@ public class DetailedInfoFragment extends Fragment {
 
     private void setViewsEnabled(boolean f) {
         try {
+            txtCurrentResidentType.setEnabled(f);
+
+            tvperaddsameasaadhrtitle.setEnabled(f);
+            tvOwnRenbytitle.setEnabled(f);
+            tvduraofstayatcurraddtitle.setEnabled(f);
+            tvcountrytitle.setEnabled(f);
+            tvstatetitle.setEnabled(f);
+            tvcitytitle.setEnabled(f);
+            tvselectprofesstitle.setEnabled(f);
+            tvemplytypetitle.setEnabled(f);
+            tvcurremplydurntitle.setEnabled(f);
+
 
             switchIsPermanentAddressSame.setEnabled(f);
             switchResidenceType.setEnabled(f);
@@ -1316,7 +1347,7 @@ public class DetailedInfoFragment extends Fragment {
             linMonthlyRent.setEnabled(f);
             edtCompanyName.setEnabled(f);
             edtAnnualIncome.setEnabled(f);
-//            edtMonthlyRent.setEnabled(f);
+            edtMonthlyRent.setEnabled(f);
             edtPermanentPincode.setEnabled(f);
             edtPermanentAddress.setEnabled(f);
             edtPermanentLandmark.setEnabled(f);

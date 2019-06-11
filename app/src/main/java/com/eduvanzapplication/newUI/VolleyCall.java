@@ -336,10 +336,19 @@ public class VolleyCall {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("genrateAgreement")) {
+        } else if (screen.equalsIgnoreCase("genrateManualAgreement")) {
             try {
                 jsonDataO = new JSONObject(s);
-                ((PostApprovalDocFragment) mfragment).setgenrateAgreement(jsonDataO);
+                ((PostApprovalDocFragment) mfragment).setgenrateManualAgreement(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("genrateOTPAgreement")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((PostApprovalDocFragment) mfragment).setgenrateOTPAgreement(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

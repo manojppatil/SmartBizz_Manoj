@@ -174,6 +174,7 @@ public class PersonalDetailsFragment extends Fragment {
         }
 
         switchMarital.setChecked(false);
+        showOCRDialog();
         return view;
     }
 
@@ -373,7 +374,7 @@ public class PersonalDetailsFragment extends Fragment {
                         .btnTextSize(16) // button text size
                         .viewTextSize(35) // pick view text size
                         .colorCancel(Color.parseColor("#999999")) //color of cancel button
-                        .colorConfirm(Color.parseColor("#009900"))//color of confirm button
+                        .colorConfirm(Color.parseColor("#1ac31a"))//color of confirm button
                         .minYear(1900) //min year in loop
                         .maxYear(calendar.get(Calendar.YEAR) - 18) // max year in loop
                         .showDayMonthYear(false) // shows like dd mm yyyy (default is false)
@@ -492,16 +493,16 @@ public class PersonalDetailsFragment extends Fragment {
             txtPersonalDetailsErrMsg.setVisibility(View.VISIBLE);
 
             if(edtFirstName.getText().toString().equals("")){
-                txtPersonalDetailsErrMsg.setText("Please enter first name");
+                txtPersonalDetailsErrMsg.setText(" *Please enter first name");
 //                edtFirstName.requestFocus();
             }else if(edtLastName.getText().toString().equals("")){
-                txtPersonalDetailsErrMsg.setText("Please enter last name");
+                txtPersonalDetailsErrMsg.setText("*Please enter last name");
 //                edtLastName.requestFocus();
             }else if(NewLeadActivity.gender.equals("")){
-                txtPersonalDetailsErrMsg.setText("Please select gender");
+                txtPersonalDetailsErrMsg.setText("*Please select gender");
 //                linMaleBtn.requestFocus();
             }else if(NewLeadActivity.dob.equals("")){
-                txtPersonalDetailsErrMsg.setText("Please enter your birthdate");
+                txtPersonalDetailsErrMsg.setText("*Please enter your birthdate");
 //                linDobBtn.requestFocus();
             }
         } else {
@@ -1165,7 +1166,8 @@ public class PersonalDetailsFragment extends Fragment {
                         "I have no objection if reports generated from such background check are shared with relevant third parties.");
             } catch (JSONException e) {
                 e.printStackTrace();
-            }//{"url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/4ecaa516-35a3-482d-97b0-d531cd417476"}
+            }
+            //{"url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/4ecaa516-35a3-482d-97b0-d531cd417476"}
 //            "data": {
 //                "doc_url": "https://xyz.com/aadhar-123.jpg" ,
 //                        "aadhaar_consent": "I, the holder of Aadhaar number, hereby give my consent to Baldor Technologies Private Limited, to obtain my Aadhaar number, name, date of birth, address and demographic data for authentication with UIDAI. Baldor Technologies Private Limited has informed me that my identity information would only be used for a background check or a verification of my identity and has also informed me that my biometrics will not be stored/ shared and will be submitted to CIDR only for the purpose of authentication. I have no objection if reports generated from such background check are shared with relevant third parties."
@@ -1195,7 +1197,8 @@ public class PersonalDetailsFragment extends Fragment {
             }
 
 //            Test 3
-//postobject = {"tasks":[{"type":"pan_ocr","group_id":"g-6","task_id":"t-13","data":{"doc_url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/51184dec-f70b-476a-9a47-269ec9faace8"}}]}
+//postobject = {"tasks":[{"type":"pan_ocr","group_id":"g-6","task_id":"t-13","data":
+// {"doc_url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/51184dec-f70b-476a-9a47-269ec9faace8"}}]}
             RequestQueue queue = Volley.newRequestQueue(getContext());
 
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,

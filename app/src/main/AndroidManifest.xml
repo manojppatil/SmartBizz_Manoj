@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.eduvanzapplication">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -51,6 +52,7 @@
 
         <!--Needed for Pie Device-->
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
 
         <activity android:name=".newUI.newViews.FinancialAnalysis"
             android:theme="@style/AppTheme"
@@ -194,9 +196,18 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name="com.eduvanzapplication.LocationService"
+            android:exported="false" />
         <!--<activity-->
             <!--android:name=".newUI.newViews.Notification"-->
             <!--android:screenOrientation="sensorPortrait" />-->
+        <activity
+            android:name=".newUI.webviews.WebViewOTPDiag"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@android:style/Theme.Dialog"
+            android:excludeFromRecents="true" />
+
         <activity
             android:name=".newUI.webviews.WebViewFairPracticsCode"
             android:screenOrientation="sensorPortrait" />
@@ -251,6 +262,7 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
+
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
@@ -263,6 +275,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
         <activity
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"

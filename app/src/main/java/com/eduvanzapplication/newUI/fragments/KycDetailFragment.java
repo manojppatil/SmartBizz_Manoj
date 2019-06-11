@@ -97,7 +97,9 @@ public class KycDetailFragment extends Fragment {
     public static ImageView ivMale, ivFemale, ivOther, iviewMale, iviewFemale, iviewOther;
     public static ImageButton btnNextKycDetail;
     public static Switch switchMarital;
-    public static TextView txtMaritalStatus;
+    public static TextView txtMaritalStatus,tvGenderTitle,
+                           tvDOBtitle,tvcountrytitle,tvstatetitle,
+                           tvcitytitle,tvMaritalStatustitle,tvselctInstuTile,tvselecInstuLocnTitle,tvslectCourseTitile,tvcoursefeeTitle,tvloanamountTitle;
     public static EditText edtFnameBr, edtMnameBr, edtLnameBr, edtEmailIdBr, edtMobileNoBr, edtAddressbr, edtLandmarkbr, edtPincodeBr;
     public static LinearLayout linEditKycDetail, linMaleBtn, linFemaleBtn, linOtherBtn, linDob, linMaritalStatus;
     public static EditText edtAadhaar, edtPAN, edtLoanAmt;
@@ -157,6 +159,27 @@ public class KycDetailFragment extends Fragment {
         ivPersonalToggle = view.findViewById(R.id.ivPersonalToggle);
         ivIdentityToggle = view.findViewById(R.id.ivIdentityToggle);
         ivCourseToggle = view.findViewById(R.id.ivCourseToggle);
+
+            //this is New titile Add
+        tvGenderTitle = view.findViewById(R.id.tvGenderTitle);
+        tvDOBtitle = view.findViewById(R.id.tvDOBtitle);
+        tvcountrytitle = view.findViewById(R.id.countrytitle);
+        tvstatetitle = view.findViewById(R.id.statetitle);
+        tvcitytitle = view.findViewById(R.id.citytitle);
+        tvMaritalStatustitle = view.findViewById(R.id.MaritalStatustitle);
+
+
+        tvselctInstuTile = view.findViewById(R.id.tvselctInstuTile);
+        tvselecInstuLocnTitle = view.findViewById(R.id.tvselecInstuLocnTitle);
+
+        tvslectCourseTitile = view.findViewById(R.id.tvslectCourseTitile);
+       tvcoursefeeTitle = view.findViewById(R.id.tvcoursefeeTitle);
+        tvloanamountTitle = view.findViewById(R.id.tvloanamountTitle);
+
+
+
+
+        /*--------------------------------------------------------------------*/
 
         ivPersonalTitle = view.findViewById(R.id.ivPersonalTitle);
         ivIdentityTitle = view.findViewById(R.id.ivIdentityTitle);
@@ -827,6 +850,22 @@ public class KycDetailFragment extends Fragment {
     }
 
     public void setViewsEnabled(boolean f) {
+        //selctInstuTile,selecInstuLocnTitle,slectCourseTitile,coursefeeTitle,loanamountTitle
+
+        tvselctInstuTile.setEnabled(f);
+        tvselecInstuLocnTitle.setEnabled(f);
+        tvslectCourseTitile.setEnabled(f);
+        tvslectCourseTitile.setEnabled(f);
+        tvcoursefeeTitle.setEnabled(f);
+        tvloanamountTitle.setEnabled(f);
+
+
+        tvGenderTitle.setEnabled(f);
+        tvDOBtitle.setEnabled(f);
+        tvcountrytitle.setEnabled(f);
+        tvstatetitle.setEnabled(f);
+        tvcitytitle.setEnabled(f);
+        tvMaritalStatustitle.setEnabled(f);
 
         edtFnameBr.setEnabled(f);
         edtMnameBr.setEnabled(f);

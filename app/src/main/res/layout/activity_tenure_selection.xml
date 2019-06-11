@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_6sdp"
-            android:text="Select your tenure as per your comfort"
+            android:text="Select tenure as per your comfort"
             android:textColor="@color/darkblue"
             style="@style/TextViewTitleStyle" />
 
@@ -96,8 +96,7 @@
                             android:layout_height="@dimen/_25sdp"
                             android:gravity="center"
                             android:padding="@dimen/_2sdp"
-                            android:text="tenure"
-                            android:textAllCaps="true"
+                            android:text="TENURE"
                             android:textColor="@color/darkblue"
                             style="@style/TextViewTitle14Style" />
 
@@ -110,7 +109,8 @@
                             android:layout_width="@dimen/_70sdp"
                             android:layout_height="@dimen/_25sdp"
                             android:padding="@dimen/_2sdp"
-                            android:text="EMI AMOUNT"
+                            android:text="EMI Amount"
+                            android:gravity="center"
                             android:textColor="@color/darkblue"
                             style="@style/TextViewTitle14Style" />
                         <View
@@ -124,7 +124,6 @@
                             android:gravity="center"
                             android:padding="@dimen/_2sdp"
                             android:text="ROI(Flat%)"
-                            android:textAllCaps="true"
                             android:textColor="@color/darkblue"
                             style="@style/TextViewTitle14Style" />
 
@@ -139,7 +138,6 @@
                             android:gravity="center"
                             android:padding="@dimen/_2sdp"
                             android:text="LOAN AMOUNT"
-                            android:textAllCaps="true"
                             android:textColor="@color/darkblue"
                             style="@style/TextViewTitle14Style" />
 

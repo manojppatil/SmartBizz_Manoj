@@ -483,7 +483,6 @@ public class ClientActivity extends LaunchUI implements
     private void fbLogin() {
         fbCallbackManager = CallbackManager.Factory.create();
 
-
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList(Constants.FACEBOOK_PERMISSIONS));
 
         LoginManager.getInstance().registerCallback(fbCallbackManager,
@@ -519,7 +518,6 @@ public class ClientActivity extends LaunchUI implements
 
     // [START auth_with_facebook]
     private void handleFacebookAccessToken(final AccessToken token) {
-
 
         handleFBAuthorization(token);
 

@@ -87,8 +87,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
-import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
 import vijay.createpdf.activity.ImgToPdfActivity;
 
 import static android.view.View.GONE;
@@ -3950,7 +3948,6 @@ public class UploadDocumentFragment extends Fragment {
     }
 
     private void openPdf(String mPath) {
-
         Uri path = Uri.parse(mPath);
         Intent intent = new Intent(Intent.ACTION_VIEW);
 

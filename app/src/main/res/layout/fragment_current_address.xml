@@ -38,8 +38,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:text="@string/current_address"
-                    android:textColor="@color/textcolordark"
+                    android:textColor="@color/darkblue"
                     android:textSize="22sp"
+                    android:layout_marginRight="@dimen/_4sdp"
                     style="@style/TextViewTitleStyle"/>
 
                 <TextView
@@ -49,6 +50,7 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/as_per_aadhar"
                     android:textColor="@color/new_red"
+                    android:layout_marginRight="@dimen/_4sdp"
                     android:textSize="@dimen/_8sdp" />
 
                 <LinearLayout

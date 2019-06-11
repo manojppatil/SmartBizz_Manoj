@@ -1,7 +1,10 @@
 package com.eduvanzapplication.newUI.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +28,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +39,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,8 +63,10 @@ import com.eduvanzapplication.Util.Paytm;
 import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.NachAdapter;
+import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.pojo.MNach;
+import com.eduvanzapplication.newUI.webviews.WebViewOTPDiag;
 import com.eduvanzapplication.uploaddocs.PathFile;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
@@ -86,23 +100,35 @@ import static com.eduvanzapplication.newUI.fragments.DashboardFragmentNew.userNa
 public class PostApprovalDocFragment extends Fragment {
 
     static View view;
-    public static Context context;
-    private static Fragment mFragment;
-    private int SELECT_DOC = 2;
+    static Context context;
+    public static Fragment mFragment;
+    public int SELECT_DOC = 2;
     public static ProgressBar progressBar;
     SharedPreferences sharedPreferences;
     DownloadManager downloadManager;
     private static String uploadFilePath = "";
     StringBuffer sb;
 
-    static View viewDiag;
+   public static View viewDiag;
     public static ProgressBar progressBarDiag;
+    //Manual Diag
     public static LinearLayout linClose, linDownload, linUpload;
+    //OTP Diag
+    public static LinearLayout linCloseOTP, layoutOtp, linSubmitOtp;
+    public static EditText edtOtp;
+    public static WebView webView;
+    final int OTPlength = 6;
+    public static String city, state, country, postalCode, ipaddress,latitude, longitde;
+
     private CFAlertDialog cfAlertDialog;
 
     public static List<MNach> mNachArrayList;
     public static RecyclerView rvNach;
     public static NachAdapter adapter;
+
+    int PERMISSION_ALL = 1;
+    LocationManager locationManager;
+    String[] PERMISSIONS = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION};
 
     public static Animation collapseanimationlinExpand, expandAnimationlinExpand;
 
@@ -225,6 +251,7 @@ public class PostApprovalDocFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(layout.fragment_postapprovaldoc, container, false);
+        viewDiag = getLayoutInflater().inflate(layout.signin_options_otp, null);
 
         context = getContext();
         mFragment = new PostApprovalDocFragment();
@@ -288,6 +315,20 @@ public class PostApprovalDocFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvNach.setLayoutManager(linearLayoutManager);
 
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            city = sharedPreferences.getString("city", "");
+            state = sharedPreferences.getString("state", "");
+            country = sharedPreferences.getString("country", "");
+            postalCode = sharedPreferences.getString("postalCode", "");
+            ipaddress = sharedPreferences.getString("ipaddress", "");
+            latitude = sharedPreferences.getString("latitude", "");
+            longitde = sharedPreferences.getString("longitde", "");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 
@@ -348,6 +389,8 @@ public class PostApprovalDocFragment extends Fragment {
                 linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+//                otpSignInDialog();
+                genrateOTPAgreement();
             }
         });
 
@@ -362,7 +405,6 @@ public class PostApprovalDocFragment extends Fragment {
 //                    linData.setVisibility(View.VISIBLE);
 //                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_up));
 //                }
-//
 //            }
 //        });
 
@@ -987,7 +1029,6 @@ public class PostApprovalDocFragment extends Fragment {
         }
     }
 
-
     public void setLoanDetails(JSONObject jsonDataO) {
         Log.e(TAG, "setLoanDetails: " + jsonDataO);
         try {
@@ -999,7 +1040,7 @@ public class PostApprovalDocFragment extends Fragment {
             if (jsonDataO.getInt("status") == 1) {
 
                 String message = jsonDataO.getString("message");
-                Drawable bg,bg1;
+                Drawable bg, bg1;
                 if (!jsonDataO.get("loanData").equals(null)) {
 
                     JSONObject jsonloanDataDetails = jsonDataO.getJSONObject("loanData");
@@ -1088,11 +1129,11 @@ public class PostApprovalDocFragment extends Fragment {
                         txtTbCourseFee.setText(" " + course_cost + "/-");
                         txtTbRequestedLoanAmount.setText(" " + requested_loan_amount + "/-");
                         txtTbOfferedLoanAmount.setText(" " + offered_amount + "/-");
-                        txtTbSelectRateOFInterest.setText(requested_roi+" "+"%");
+                        txtTbSelectRateOFInterest.setText(requested_roi + " " + "%");
                         txtTbSelectedEMIAmount.setText(" " + emi_amount + "/-");
                         txtTbSanctionLoanAmount.setText(" " + principal_amount + "/-");
                         txtTbDownpayment.setText(" " + down_payment + "/-");
-                        txtTbInterestRate.setText(rate_of_interest+" "+"%");
+                        txtTbInterestRate.setText(rate_of_interest + " " + "%");
                         txtTbEmiAmount.setText(" " + emi_amount + "/-");
                         txtTbProcessingFee.setText(" " + transaction_amount + "/-");
 
@@ -1146,12 +1187,12 @@ public class PostApprovalDocFragment extends Fragment {
 
                             if (no_emi_paid.equals("1")) {
 
-                                if(kyc_status.equals("1")){
+                                if (kyc_status.equals("1")) {
                                     linPayBtn.setVisibility(GONE);
                                     linPayStatus.setVisibility(VISIBLE);
                                     linProcessingFeeRb.setEnabled(false);
                                     linEMIFeeRb.setEnabled(false);
-                                }else{
+                                } else {
                                     linPayBtn.setVisibility(VISIBLE);
                                     linPayStatus.setVisibility(GONE);
                                     linProcessingFeeRb.setEnabled(true);
@@ -1191,21 +1232,21 @@ public class PostApprovalDocFragment extends Fragment {
                                 linEMIFeeRb.setEnabled(true);
                                 linPayBtn.setVisibility(VISIBLE);
                                 linPayStatus.setVisibility(GONE);
-                                if(kyc_status.equals("1")){
+                                if (kyc_status.equals("1")) {
                                     totalAmount = Double.valueOf(emi_amount);
                                     txtTotalAmt.setText(String.valueOf(Double.valueOf(emi_amount)));
                                     linProcessingFeeRb.setEnabled(false);
-                                }else{
+                                } else {
                                     linProcessingFeeRb.setEnabled(true);
                                 }
                             }
                         } else {
                             //No Advance EMI
-                            if(kyc_status.equals("1")){
+                            if (kyc_status.equals("1")) {
                                 linPayBtn.setVisibility(GONE);
                                 linPayStatus.setVisibility(VISIBLE);
                                 linProcessingFeeRb.setEnabled(false);
-                            }else{
+                            } else {
                                 linPayBtn.setVisibility(VISIBLE);
                                 linPayStatus.setVisibility(GONE);
                                 linProcessingFeeRb.setEnabled(true);
@@ -1411,7 +1452,7 @@ public class PostApprovalDocFragment extends Fragment {
                 JSONObject mData2 = jsonDataO.getJSONObject("result");
                 linDownloadSignedAgreement.setTag(mData2.getString("baseUrl").concat(jsonDataO.getString("Url")));
                 downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("Url"));
-            }else {
+            } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -1426,8 +1467,7 @@ public class PostApprovalDocFragment extends Fragment {
 
     }
 
-
-    public void genrateAgreement() {
+    public void genrateManualAgreement() {
 
         try {
             String url = MainActivity.mainUrl + "laf/genrateAgreement";
@@ -1438,7 +1478,7 @@ public class PostApprovalDocFragment extends Fragment {
             } else {
                 progressBarDiag.setVisibility(View.VISIBLE);
                 VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
-                volleyCall.sendRequest(context, url, null, mFragment, "genrateAgreement", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "genrateManualAgreement", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -1451,17 +1491,167 @@ public class PostApprovalDocFragment extends Fragment {
         }
     }
 
-    public void setgenrateAgreement(JSONObject jsonDataO) {
+    public void setgenrateManualAgreement(JSONObject jsonDataO) {
         Log.e(TAG, "setLoanDetails: " + jsonDataO);
         try {//{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/","Url":"uploads\/lamanualupload\/557\/Eduvanz_Agreement.pdf"},
             // "status":0,"message":"Agreement generated"}
             String message = jsonDataO.getString("message");
             progressBarDiag.setVisibility(View.GONE);
             if (jsonDataO.getInt("status") == 1) {
-            JSONObject mData2 = jsonDataO.getJSONObject("result");
-            linDownload.setTag(mData2.getString("baseUrl").concat(mData2.getString("Url")));
-            downloadUrl = mData2.getString("baseUrl").concat(mData2.getString("Url"));
-            }else {
+                JSONObject mData2 = jsonDataO.getJSONObject("result");
+                linDownload.setTag(mData2.getString("baseUrl").concat(mData2.getString("Url")));
+                downloadUrl = mData2.getString("baseUrl").concat(mData2.getString("Url"));
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+    }
+
+    public void genrateOTPAgreement() {
+
+        try {
+            String url = MainActivity.mainUrl + "laf/getAggForOTPSign";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("lead_id", MainActivity.lead_id);
+            params.put("mobile", DashboardFragmentNew.mobile_no);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            } else {
+                progressBar.setVisibility(View.VISIBLE);
+
+                VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                volleyCall.sendRequest(context, url, null, mFragment, "genrateOTPAgreement", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void setgenrateOTPAgreement(JSONObject jsonDataO) {
+//        Log.e(TAG, "setLoanDetails: " + jsonDataO);
+        try {//{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/","Url":"uploads\/lamanualupload\/557\/Eduvanz_Agreement.pdf"},
+            // "status":0,"message":"Agreement generated"}
+            //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,"doc_url":"uploads\/ladocumentstore\/634\/Eduvanz_Agreement.pdf",
+            // "message":"success"}
+            String message = jsonDataO.getString("message");
+            progressBar.setVisibility(View.GONE);
+            if (jsonDataO.getInt("status") == 1) {
+                JSONObject mData2 = jsonDataO.getJSONObject("result");
+                downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("doc_url"));
+
+//                String url = myPdfUrl;
+//                String url = "http://docs.google.com/gview?embedded=true&url="+myPdfUrl;
+//                webView.getSettings().setJavaScriptEnabled(true);
+//                webView.loadUrl(url);
+
+                otpSignInDialog(context);
+                openPdf(downloadUrl);
+
+//                try {
+//                    Intent showDialogIntent = new Intent(context, WebViewOTPDiag.class);
+//                    showDialogIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    showDialogIntent.putExtra("downloadUrl", downloadUrl);
+//                    context.getApplicationContext().startActivity(showDialogIntent);
+//                } catch (NoClassDefFoundError e) {
+//                }
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+    }
+
+    public void submitOTP() {
+
+        try {
+            //otp,mobile,lead_id,online,signed_by_id
+            //in online key i want array which stores as following:
+            //IP,city,regioin,country,location,latitute,longitude,ISP_provider,pincode,browser_name,platform
+
+            JSONObject online = new JSONObject();
+
+            try {
+                online.put("IP", ipaddress);
+                online.put("city", city);
+                online.put("regioin", state);
+                online.put("country", country);
+                online.put("location", "location");
+                online.put("latitute", latitude);
+                online.put("longitude", longitde);
+                online.put("ISP_provider", "ISP_provider");
+                online.put("pincode", postalCode);
+                online.put("browser_name", "Android");
+                online.put("platform", "Android");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+//0 = {HashMap$Node@13140} "mobile" -> "8983501513"
+//1 = {HashMap$Node@13141} "online" -> "{"IP":"192.168.1.39","city":"Mumbai","regioin":"Maharashtra","country":"India","location":"location","latitute":"latitute","longitude":"longitude","ISP_provider":"ISP_provider","pincode":"400059","browser_name":"Android","platform":"Android"}"
+//2 = {HashMap$Node@13142} "otp" -> "251565"
+//3 = {HashMap$Node@13143} "lead_id" -> "634"
+//4 = {HashMap$Node@13144} "signed_by_id" -> "634"
+            String url = MainActivity.mainUrl + "laf/signedByOtpAgg";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("otp", edtOtp.getText().toString());
+            params.put("mobile", DashboardFragmentNew.mobile_no);
+            params.put("lead_id", MainActivity.lead_id);
+            params.put("online", String.valueOf(online));
+            params.put("signed_by_id", DashboardFragmentNew.student_id);
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            } else {
+                progressBar.setVisibility(View.VISIBLE);
+                VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                volleyCall.sendRequest(context, url, null, mFragment, "genrateOTPAgreement", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            String className = this.getClass().getSimpleName();
+            String name = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            String errorMsg = e.getMessage();
+            String errorMsgDetails = e.getStackTrace().toString();
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+    }
+
+    public void submitOTPResponse(JSONObject jsonDataO) {
+//        Log.e(TAG, "setLoanDetails: " + jsonDataO);
+        try {
+            String message = jsonDataO.getString("message");
+            progressBar.setVisibility(View.GONE);
+            //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":4,"message":"Invalid OTP"}
+            if (jsonDataO.getInt("status") == 1) {
+                JSONObject mData2 = jsonDataO.getJSONObject("result");
+                downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("doc_url"));
+
+                otpSignInDialog(context);
+                openPdf(downloadUrl);
+            } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
@@ -1514,7 +1704,7 @@ public class PostApprovalDocFragment extends Fragment {
             }
         });
 
-        genrateAgreement();
+        genrateManualAgreement();
 
         linClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1563,6 +1753,118 @@ public class PostApprovalDocFragment extends Fragment {
 
     }
 
+    private void openPdf(String mPath) {
+        Uri path = Uri.parse(mPath);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+
+        intent.setDataAndType(path, "application/pdf");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        try {
+//            mFragment.startActivityForResult(intent, 1);
+            ((LoanTabActivity) context).mActivity.startActivityForResult(intent, 1);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getActivity(), R.string.no_application_available_ro_view_pdf, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void otpSignInDialog(Context context) {
+
+//        viewDiag = getLayoutInflater().inflate(layout.signin_options_otp, null);
+        linCloseOTP = viewDiag.findViewById(R.id.linCloseOTP);
+        layoutOtp = viewDiag.findViewById(R.id.layoutOtp);
+        linSubmitOtp = viewDiag.findViewById(R.id.linSubmitOtp);
+//        webView = viewDiag.findViewById(id.webView);
+        edtOtp = viewDiag.findViewById(id.edtOtp);
+        progressBarDiag = viewDiag.findViewById(R.id.progressBar);
+        linSubmitOtp.setBackground(context.getResources().getDrawable(R.drawable.border_circular_grey_filled));
+        linSubmitOtp.setClickable(false);
+
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(context)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setFooterView(viewDiag);
+
+        builder.setCancelable(false);
+
+        cfAlertDialog = builder.show();
+        cfAlertDialog.setCancelable(false);
+        cfAlertDialog.setCanceledOnTouchOutside(false);
+
+        cfAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+//                onDialogDismiss();
+            }
+        });
+
+//        genrateOTPAgreement();
+
+        InputFilter[] filterArray = new InputFilter[1];
+        filterArray[0] = new InputFilter.LengthFilter(OTPlength);
+        edtOtp.setFilters(filterArray);
+
+//        WebSettings webSettings = webView.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
+//
+//        webView.setWebViewClient(new WebViewClient() {
+//
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
+//        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+//        webView.getSettings().setAllowFileAccess(true);
+//
+//        webView.loadUrl(downloadUrl);
+
+        edtOtp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (edtOtp.getText().toString().trim().length() == OTPlength) {
+
+                    linSubmitOtp.setBackground(context.getResources().getDrawable(R.drawable.border_circular_red_filled));
+                    linSubmitOtp.setClickable(true);
+                    InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(edtOtp.getWindowToken(), 0);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        linCloseOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cfAlertDialog.dismiss();
+            }
+        });
+
+        linSubmitOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    submitOTP();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+
     private void galleryDocIntent() {
         Intent intent = new Intent();
         intent.setType("application/pdf");  // for all types of file
@@ -1591,7 +1893,6 @@ public class PostApprovalDocFragment extends Fragment {
                             }
                         }).start();
                     }
-
                 }
             }
         } catch (Exception e) {

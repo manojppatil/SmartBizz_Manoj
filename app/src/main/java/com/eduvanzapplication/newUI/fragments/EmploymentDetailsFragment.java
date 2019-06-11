@@ -130,10 +130,10 @@ public class EmploymentDetailsFragment extends Fragment {
           //  mListener.onEmploymentFragmentInteraction(false,0);
             if (companyedt.getText().toString().equals("")) {
             txtEmploymentDetailsErrMsg.setVisibility(View.VISIBLE);
-                txtEmploymentDetailsErrMsg.setText("Please Enter Company Name");
+                txtEmploymentDetailsErrMsg.setText("*Please Enter Company Name");
             } else if (edtaanual.getText().toString().equals("")) {
                 txtEmploymentDetailsErrMsg.setVisibility(View.VISIBLE);
-                txtEmploymentDetailsErrMsg.setText("Please Enter Annual Income");
+                txtEmploymentDetailsErrMsg.setText("*Please Enter Annual Income");
             }
             mListener.onOffButtonEmployentSubmit(false, true);
 

@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Profession"
+            android:gravity="left"
             android:layout_gravity="top|left"
             android:textAllCaps="true"
             android:id="@+id/toolbar_title"
@@ -174,8 +175,8 @@
                 android:padding="@dimen/_1sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:visibility="invisible"
-                android:text="Since you are a student, we need details of a Financial Borrower on your behalf, who will apply for the loan."
-                android:textColor="@color/darkblue"
+                android:text="* Since you are a student, we need details of a Financial Borrower on your behalf, who will apply for the loan."
+                android:textColor="@color/colorRed"
                 style="@style/TextViewTitle14BoldStyle"/>
 
         </LinearLayout>

@@ -225,7 +225,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             android:gravity="start"
-                            android:id="@+id/txtGenderTitle"
+                            android:id="@+id/tvGenderTitle"
                             android:text="Select Gender"
                             android:textColor="@color/darkblue" />
 
@@ -359,6 +359,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/tvDOBtitle"
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -419,6 +420,7 @@
                                 android:orientation="vertical">>
 
                                 <TextView
+                                    android:id="@+id/MaritalStatustitle"
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -841,6 +843,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/countrytitle"
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -874,6 +877,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/statetitle"
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -900,6 +904,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/citytitle"
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1132,6 +1137,7 @@
                             android:textSize="25sp" />
 
                         <TextView
+                            android:id="@+id/tvselctInstuTile"
                             style="@style/TextViewTitle12BoldStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1181,6 +1187,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tvselecInstuLocnTitle"
                             style="@style/TextViewTitle12BoldStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1205,6 +1212,7 @@
 
 
                         <TextView
+                            android:id="@+id/tvslectCourseTitile"
                             style="@style/TextViewTitle12BoldStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1241,6 +1249,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/tvcoursefeeTitle"
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1280,6 +1289,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/tvloanamountTitle"
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1385,5 +1395,4 @@
         app:elevation="@dimen/_4sdp"
         app:srcCompat="@drawable/ic_angle_right_small" />
 </RelativeLayout>
-
 

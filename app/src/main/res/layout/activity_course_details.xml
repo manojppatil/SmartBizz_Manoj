@@ -63,6 +63,7 @@
                     android:text="@string/course_details"
                     android:textColor="@color/darkblue"
                     android:textSize="22sp"
+                    android:layout_marginRight="@dimen/_4sdp"
                     style="@style/TextViewTitleStyle" />
 
                 <LinearLayout
@@ -190,7 +191,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/border_circular"
-                                android:padding="@dimen/_8sdp"
+                                android:padding="@dimen/_6sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 android:inputType="number"
                                 style="@style/TextViewTitle14Style"
                                 android:maxLines="1"
@@ -199,6 +201,11 @@
 
                         </LinearLayout>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="invisible"
+                            android:text=" "/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -223,9 +230,10 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/border_circular"
                                 android:backgroundTint="@color/darkblue"
-                                android:padding="@dimen/_8sdp"
+                                android:padding="@dimen/_6sdp"
                                 android:maxLines="1"
                                 android:inputType="number"
+                                android:layout_marginTop="@dimen/_5sdp"
                                 style="@style/EditTextStyle"
                                 android:maxLength="8"
                                 android:hint="------------"

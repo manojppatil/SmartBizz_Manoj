@@ -69,8 +69,6 @@ public class GoogleServerAuthCodeTask extends AsyncTask<String, Void, JSONObject
                 total.append(line).append('\n');
             }
 
-
-
             Calendar cal = Calendar.getInstance();
 
             long currentTime = cal.getTimeInMillis();

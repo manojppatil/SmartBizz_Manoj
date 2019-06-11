@@ -161,6 +161,7 @@
 
 
                         <TextView
+                            android:id="@+id/tvperaddsameasaadhrtitle"
                             style="@style/TextViewTitle12BoldStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -264,7 +265,7 @@
                                             android:layout_height="@dimen/_25sdp"
                                             android:layout_below="@+id/txtCurrentResidentType"
                                             android:layout_margin="@dimen/_2sdp"
-                                            android:background="@drawable/border_circular"
+                                            android:background="@drawable/border_circular_primary"
                                             android:gravity="center"
                                             android:orientation="horizontal"
                                             android:padding="@dimen/_3sdp">
@@ -299,7 +300,6 @@
                                                 android:layout_marginRight="@dimen/_5sdp"
                                                 android:maxLines="1"
                                                 android:text="Owned"
-
                                                 android:textColor="@color/textcolordark" />
 
                                         </LinearLayout>
@@ -327,24 +327,29 @@
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
-                                                android:layout_height="@dimen/_25sdp"
+                                                android:layout_height="@dimen/_30sdp"
                                                 android:layout_below="@+id/txtRent"
-                                                android:layout_margin="@dimen/_2sdp"
+                                                android:background="@drawable/border_circular_primary"
                                                 android:gravity="center"
+                                                android:layout_margin="@dimen/_2sdp"
+                                                android:layout_gravity="center_vertical"
                                                 android:orientation="horizontal"
-                                                android:padding="@dimen/_3sdp">
+                                                android:padding="@dimen/_1sdp">
 
                                                 <EditText
                                                     android:id="@+id/edtMonthlyRent"
                                                     style="@style/EditTextStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:background="@drawable/border_circular_primary"
+                                                    android:background="@color/transparent"
                                                     android:drawableStart="@drawable/ic_rupee_sign"
                                                     android:imeOptions="actionDone"
                                                     android:inputType="number"
                                                     android:maxLength="8"
                                                     android:maxLines="1"
+                                                    android:text=""
+                                                    android:gravity="center_vertical"
+                                                    android:layout_gravity="center_vertical"
                                                     android:textSize="14sp"
                                                     android:padding="@dimen/_6sdp"
                                                     android:textColor="@color/darkblue" />
@@ -368,6 +373,7 @@
 
 
                                             <TextView
+                                                android:id="@+id/tvOwnRenbytitle"
                                                 style="@style/TextViewTitle12BoldStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
@@ -404,6 +410,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
+                                                android:id="@+id/tvduraofstayatcurraddtitle"
                                                 style="@style/TextViewTitle12BoldStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
@@ -504,6 +511,7 @@
                                                 android:orientation="vertical">
 
                                                 <TextView
+                                                    android:id="@+id/tvcountrytitle"
                                                     style="@style/TextViewTitle12BoldStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
@@ -538,6 +546,7 @@
                                                 android:orientation="vertical">
 
                                                 <TextView
+                                                    android:id="@+id/tvstatetitle"
                                                     style="@style/TextViewTitle12BoldStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
@@ -566,6 +575,7 @@
                                                 android:orientation="vertical">
 
                                                 <TextView
+                                                    android:id="@+id/tvcitytitle"
                                                     style="@style/TextViewTitle12BoldStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
@@ -812,6 +822,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tvselectprofesstitle"
                                 style="@style/TextViewTitle12BoldStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -874,6 +885,7 @@
 
 
                                         <TextView
+                                            android:id="@+id/tvemplytypetitle"
                                             style="@style/TextViewTitle12BoldStyle"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -929,6 +941,7 @@
                                                 android:orientation="vertical">
 
                                                 <TextView
+                                                    android:id="@+id/tvcurremplydurntitle"
                                                     style="@style/TextViewTitle12BoldStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"

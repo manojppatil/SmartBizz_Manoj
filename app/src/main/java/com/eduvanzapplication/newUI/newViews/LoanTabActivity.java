@@ -1,10 +1,19 @@
 package com.eduvanzapplication.newUI.newViews;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,16 +22,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
+import com.eduvanzapplication.LocationService;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.newUI.SharedPref;
+import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.newUI.fragments.AmortizationFragment;
 import com.eduvanzapplication.newUI.fragments.DetailedInfoFragment;
 import com.eduvanzapplication.newUI.fragments.KycDetailFragment;
@@ -31,6 +40,9 @@ import com.eduvanzapplication.newUI.fragments.UploadDocumentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+import static com.FriendlyScoreUI.LaunchUI.hasPermissions;
 
 public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
         DetailedInfoFragment.onDetailedInfoFragmentInteractionListener {
@@ -41,13 +53,17 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     public static ViewPager viewPager;
     public static String lead_id = "", student_id = "";
     Context context;
-    AppCompatActivity mActivity;
+    public AppCompatActivity mActivity;
     SharedPreferences sharedPreferences;
     public static boolean isKycEdit;
     public static boolean isDetailedInfoEdit;
+    int PERMISSION_ALL = 1;
+    LocationManager locationManager;
+    String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
-//    //kyc values
-    public static String firstName = "",applicant_id ="";// lastName = "", middleName = "", gender = "", dob = "", maritalStatus = "2", email = "", mobile = "",
+    //    //kyc values
+    public static String firstName = "", applicant_id = "";
+    // lastName = "", middleName = "", gender = "", dob = "", maritalStatus = "2", email = "", mobile = "",
 //            aadhar = "", pan = "", flatBuildingSociety = "", streetLocalityLandmark = "", pincode = "", countryId = "", stateId = "", cityId = "",
 //            instituteId = "", courseId = "", instituteLocationId = "", courseFee = "", applicant_id = "",
 //            application_id = "", requested_loan_amount = "", institute_name = "", location_name = "",
@@ -69,7 +85,8 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         } catch (Exception e) {
             e.printStackTrace();
         }
-        applicant_id ="";
+
+        applicant_id = "";
         isKycEdit = false;
         isDetailedInfoEdit = false;
         try {
@@ -94,6 +111,119 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                 finish();
             }
         });
+
+        try {
+            //  if (Build.VERSION.SDK_INT >= 23) {
+            if (!hasPermissions(this, PERMISSIONS)) {
+                ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+            } else {
+                startService(new Intent(context, LocationService.class));
+                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
+//                        alertDialog.show();
+                    }
+                }
+
+            }
+
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        try {
+
+            switch (requestCode) {
+                case 1:
+                    if (grantResults.length <= 0) {
+                        // If user interaction was interrupted, the permission request is cancelled and you
+                        // receive empty arrays.
+                    } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                            if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
+                                startService(new Intent(context, LocationService.class));
+//                                alertDialog.show();
+                            } else {
+//                                alertDialog.dismiss();
+//                                alertDialog.cancel();
+                                Globle.dialog(this, "Please turn on your cellular data or wifi for exact location.", "No internet access").show();
+                            }
+
+                        } else {
+//                            showGPSDisabledAlertToUser();
+                        }
+                        // permission was granted, yay! Do the
+                        // contacts-related task you need to do.
+
+                    } else {
+                        // Permission denied.
+//                        alertDialog.dismiss();
+//                        alertDialog.cancel();
+                        Snackbar.make(
+                                findViewById(R.id.Tabs),
+                                R.string.permission_denied_explanation,
+                                Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.settings, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        // Build intent that displays the App settings screen.
+                                        Intent intent = new Intent();
+                                        intent.setAction(
+                                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                        Uri uri = Uri.fromParts("package",
+                                                BuildConfig.APPLICATION_ID, null);
+                                        intent.setData(uri);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
+                        // Notify the user via a SnackBar that they have rejected a core permission for the
+                        // app, which makes the Activity useless. In a real app, core permissions would
+                        // typically be best requested during a welcome-screen flow.
+                        // Additionally, it is important to remember that a permission might have been
+                        // rejected without asking the user for permission (device policy or "Never ask
+                        // again" prompts). Therefore, a user interface affordance is typically implemented
+                        // when permissions are denied. Otherwise, your app could appear unresponsive to
+                        // touches or interactions which have required permissions.
+//                    Toast.makeText(this, R.string.permission_denied_explanation, Toast.LENGTH_LONG).show();
+//                    finish();
+
+                    }
+                    break;
+            }
+//            switch (requestCode) {
+//                case 1:
+//                    if (grantResults.length > 0
+//                            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                        // CameraOn();
+//                        // permission was granted, yay! Do the
+//                        // contacts-related task you need to do.
+//                    }
+//                    break;
+//                case 2:
+//                    try {
+//                        if (grantResults.length > 0
+//                                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                            // permission was granted, yay! Do the
+//                            // contacts-related task you need to do.
+//                            startLocation();
+//                            // showLast();
+//                        }
+//                    } catch (Exception e) {
+//                        if (NetworkUtils.isNetworkAvailable(AddVisitsEntry.this)) {
+//                            MainActivity.ErrorLog("AddVisitsEntry", "onRequestPermissionsResultCase2", e.getMessage().toString().replace("'"," "), String.valueOf(e.getStackTrace()[0]), AddVisitsEntry.this);
+//                        }
+//                    }
+//                    break;
+//
+//            }
+        } catch (Exception e) {
+
+        }
     }
 
     public void onBackPressed() {

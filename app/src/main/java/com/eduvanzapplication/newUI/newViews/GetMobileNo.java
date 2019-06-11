@@ -55,6 +55,7 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 //https://youtu.be/XatTNd7L9vw
 public class GetMobileNo extends AppCompatActivity {
 
@@ -171,7 +172,6 @@ public class GetMobileNo extends AppCompatActivity {
                 if (edtEmail.getText().toString().trim().length() > 0) {
                     linGetOtp.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
                 }
-
             }
 
             @Override
@@ -286,7 +286,7 @@ public class GetMobileNo extends AppCompatActivity {
             // api call - get otp
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(edtOtp.getWindowToken(), 0);
-            if(s.toString().trim().equals("9898989898")){
+            if (s.toString().trim().equals("9898989898")) {
                 try {
                     progressDialog.setMessage("Loading");
                     if (!isFinishing())
@@ -304,8 +304,7 @@ public class GetMobileNo extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-            else{
+            } else {
                 getOtp();
             }
         }
@@ -334,8 +333,9 @@ public class GetMobileNo extends AppCompatActivity {
                             } else {
                                 if (!signUpCalled) {
                                     generateOtpCode();  //signUp
-                                } else
+                                } else {
                                     verifyOtpCode();
+                                }
                             }
                         }
 
@@ -371,6 +371,7 @@ public class GetMobileNo extends AppCompatActivity {
 
     private void setFacebookLogin() {
         fbLoginButton.setReadPermissions(Arrays.asList(EMAIL));
+
         fbLoginButton.registerCallback(callbackManagerFb, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -379,6 +380,11 @@ public class GetMobileNo extends AppCompatActivity {
                 edtFirstName.setText(profile.getFirstName());
                 if (profile.getId().contains("@")) {
                     edtEmail.setText(profile.getId());
+                    if (!signUpCalled) {
+                        generateOtpCode();  //signUp
+                    } else {
+                        verifyOtpCode();
+                    }
                 } else
                     Snackbar.make(linGetOtp, "Unable to get Email ID, Please enter it manually", Snackbar.LENGTH_SHORT).show();
             }
@@ -430,6 +436,11 @@ public class GetMobileNo extends AppCompatActivity {
             edtEmail.setText(userEmail);
             edtFirstName.setText(account.getDisplayName());
             Log.d(TAG, "Google Mail - " + userEmail);
+            if (!signUpCalled) {
+                generateOtpCode();  //signUp
+            } else {
+                verifyOtpCode();
+            }
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -647,7 +658,7 @@ public class GetMobileNo extends AppCompatActivity {
             if (status.equalsIgnoreCase("1")) {
                 progressDialog.dismiss();
                 layoutOtp.setVisibility(View.VISIBLE);
-                linEmailLayout.setVisibility(View.GONE);
+//                linEmailLayout.setVisibility(View.GONE);
 //                startActivity(new Intent(GetMobileNo.this, DashboardActivity.class)
 //                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             } else {

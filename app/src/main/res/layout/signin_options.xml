@@ -30,7 +30,6 @@
         android:textColor="@color/textcolordark"
         style="@style/TextViewTitleStyle"/>
 
-
     <LinearLayout
         android:id="@+id/linClose"
         android:layout_width="wrap_content"

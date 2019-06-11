@@ -17,7 +17,7 @@ android {
         applicationId "com.eduvanzapplication"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 90
+        versionCode 91
         versionName "5.1.4"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -92,7 +92,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'com.facebook.android:facebook-android-sdk:4.28.0'
+    implementation 'com.facebook.android:facebook-android-sdk:4.31.0'
     implementation 'com.twitter.sdk.android:twitter:3.1.1'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.google.firebase:firebase-messaging:17.5.0'

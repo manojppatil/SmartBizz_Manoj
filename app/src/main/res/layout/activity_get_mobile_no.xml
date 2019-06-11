@@ -44,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/first_name"
-                android:textAllCaps="true"
                 android:textColor="@color/darkblue"
                 android:textSize="12sp"
                 style="@style/TextViewTitle14BoldStyle" />
@@ -93,7 +92,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/mobile_number"
-                android:textAllCaps="true"
                 android:textColor="@color/darkblue"
                 android:textSize="12sp"
                 style="@style/TextViewTitle14BoldStyle" />
@@ -125,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+91"
-                    android:textColor="@color/black_new"
+                    android:textColor="@color/darkblue"
                     android:textStyle="bold"
                     style="@style/TextViewTitleStyle" />
 
@@ -155,7 +153,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/email_id"
-                android:textAllCaps="true"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/darkblue"
                 android:textSize="12sp"
@@ -322,6 +319,7 @@
                     <ImageView
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
                         app:srcCompat="@drawable/ic_google_plus_g_brands" />
 
                     <View
@@ -337,7 +335,7 @@
                         android:layout_weight="1"
                         android:text="Connect Using Google"
                         android:textColor="@color/white"
-                        style="@style/TextViewTitle14Style"/>
+                        style="@style/TextViewTitleStyle"/>
 
                     <ImageView
                         android:layout_width="@dimen/_25sdp"
@@ -388,6 +386,7 @@
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:padding="@dimen/_3sdp"
+                android:tint="@color/darkblue"
                 app:srcCompat="@drawable/ic_redo" />
 
         </LinearLayout>

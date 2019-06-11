@@ -118,8 +118,7 @@ public class SplashScreen extends AppCompatActivity {
             apiCall();
 
 //            StartAnimationsCustomer();
-
-            //printHashKey(getApplicationContext());
+//            printHashKey(getApplicationContext());
 
             if (Globle.isNetworkAvailable(SplashScreen.this)) {
                 BackgroundThread bv = new BackgroundThread();
@@ -245,7 +244,6 @@ public class SplashScreen extends AppCompatActivity {
                         startActivity(intent);
                         SplashScreen.this.finish();
                     } else {
-
                         if (checkForImageSlider.equalsIgnoreCase("1")) {
                             if (policyAgreementStatus == 0) {
                                 Intent intent = new Intent(SplashScreen.this,
@@ -283,9 +281,7 @@ public class SplashScreen extends AppCompatActivity {
                             startActivity(intent);
                             SplashScreen.this.finish();
                         }
-
                     }
-
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
@@ -326,7 +322,6 @@ public class SplashScreen extends AppCompatActivity {
 //                        dialog.cancel();
 //                    }
 //                });
-
             AlertDialog alert11 = builder1.create();
             alert11.show();
         } catch (Exception e) {

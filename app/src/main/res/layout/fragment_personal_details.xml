@@ -37,8 +37,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:text="@string/personal_details"
-                    android:textColor="@color/textcolordark"
+                    android:textColor="@color/darkblue"
                     android:textSize="22sp"
+                    android:layout_marginRight="@dimen/_4sdp"
                     style="@style/TextViewTitleStyle"/>
 
                 <LinearLayout

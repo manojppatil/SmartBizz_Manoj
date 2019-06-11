@@ -29,7 +29,7 @@
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/ic_personal_details_user" />
+                    app:srcCompat="@drawable/ic_briefcase" />
 
                 <TextView
                     android:id="@+id/txtPersonalDetails"
@@ -37,8 +37,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:text="@string/employement_details"
-                    android:textColor="@color/textcolordark"
+                    android:textColor="@color/darkblue"
                     android:textSize="22sp"
+                    android:layout_marginRight="@dimen/_4sdp"
                     style="@style/TextViewTitleStyle"/>
 
                 <LinearLayout
