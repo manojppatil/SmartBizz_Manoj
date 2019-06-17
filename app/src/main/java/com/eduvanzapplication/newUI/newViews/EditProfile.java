@@ -48,19 +48,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.eduvanzapplication.newUI.newViews.DashboardActivity.ivUserPic;
 import static com.eduvanzapplication.newUI.newViews.DashboardActivity.userPic;
 
 public class EditProfile extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
-    private de.hdodenhof.circleimageview.CircleImageView profileImage;
+    private  de.hdodenhof.circleimageview.CircleImageView profileImage;
 //    public ImageView profileImage;
     private EditText firstName, middleName, lastName, email;
     private TextView mobile_number;
@@ -92,7 +92,6 @@ public class EditProfile extends AppCompatActivity {
 //        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
-
         profileImage = findViewById(R.id.profileImage);
         firstName = findViewById(R.id.edtFnameProfile);
         middleName = findViewById(R.id.edtMnameProfile);
@@ -109,6 +108,7 @@ public class EditProfile extends AppCompatActivity {
                 finish();
             }
         });
+
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -402,6 +402,7 @@ public class EditProfile extends AppCompatActivity {
                         EditProfile.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
 //                                {"document_path":"student\/3423\/user_profile_1557394413.jpg","result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,"message":"Profile Picture Updated Successfully"}
 
                                 try {

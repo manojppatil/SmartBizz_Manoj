@@ -1453,10 +1453,12 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                         txtPaymentStatus.setText(" " + mLoanEmisArrayList.get(k).statusMessage);
 
                         if (mLoanEmisArrayList.get(k).status.equals("0")) {
+
                             txtBtnText.setText(" " + "Pre Pay");
-                            txtPaymentStatus.setTextColor(Color.parseColor("#1ac31a"));
+                            txtPaymentStatus.setTextColor(Color.parseColor("#ee415e"));
                             imgpaymentStatus.setImageResource(R.drawable.ic_exclamation_circle);
-                            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorGreen), android.graphics.PorterDuff.Mode.SRC_IN);
+
+                            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorRed), android.graphics.PorterDuff.Mode.SRC_IN);
 
                         } else {
                             txtBtnText.setText(" " + "EMI History");

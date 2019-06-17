@@ -1,12 +1,7 @@
 package com.eduvanzapplication.newUI.newViews;
 
-import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -22,52 +17,26 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
-import android.util.Log;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.eduvanzapplication.BuildConfig;
-import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.newUI.SharedPref;
-import com.eduvanzapplication.newUI.VolleyCall;
-import com.facebook.CallbackManager;
-import com.facebook.Profile;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
 
-import org.json.JSONObject;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LeadOwnerType extends AppCompatActivity {
 
     private final String TAG = LeadOwnerType.class.getSimpleName();
     LinearLayout linContinue;
-    public static LinearLayout linStudentBtn, linSalariedBtn, linSelfEmployedBtn;
+    public static LinearLayout linStudentBtn, linSalariedBtn, linSelfEmployedBtn,lin3;
     public static ImageView ivStud,ivSal,ivSelfEmp;
            public static View viewdashStud,viewdashSal, viewdashSelfEmp;
-   public static TextView txtStudent,txtSalaried,txtSelfEmp,txtMsg3 ;
+   public static TextView txtStudent,txtSalaried,txtSelfEmp ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,7 +62,7 @@ public class LeadOwnerType extends AppCompatActivity {
 
     private void setViews() {
 
-        txtMsg3 = findViewById(R.id.txtMsg3);
+        lin3 = findViewById(R.id.lin3);
         linContinue = findViewById(R.id.linContinue);
 
         linStudentBtn = findViewById(R.id.linStudentBtn);
@@ -158,7 +127,7 @@ public class LeadOwnerType extends AppCompatActivity {
                 linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linContinue.setClickable(true);
-                txtMsg3.setVisibility(View.VISIBLE);
+                lin3.setVisibility(View.VISIBLE);
 
                 txtStudent.setTextColor(getResources().getColor(R.color.white));
                 txtSalaried.setTextColor(getResources().getColor(R.color.textcolordark));
@@ -211,7 +180,7 @@ public class LeadOwnerType extends AppCompatActivity {
                 linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linContinue.setClickable(true);
-                txtMsg3.setVisibility(View.INVISIBLE);
+                lin3.setVisibility(View.INVISIBLE);
 
                 txtStudent.setTextColor(getResources().getColor(R.color.textcolordark));
                 txtSalaried.setTextColor(getResources().getColor(R.color.white));
@@ -264,7 +233,7 @@ public class LeadOwnerType extends AppCompatActivity {
                 linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linContinue.setClickable(true);
-                txtMsg3.setVisibility(View.INVISIBLE);
+                lin3.setVisibility(View.INVISIBLE);
 
                 txtStudent.setTextColor(getResources().getColor(R.color.textcolordark));
                 txtSalaried.setTextColor(getResources().getColor(R.color.textcolordark));
@@ -378,4 +347,3 @@ public class LeadOwnerType extends AppCompatActivity {
 
     }
 }
-

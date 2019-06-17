@@ -103,8 +103,9 @@
                 android:id="@+id/eduvanzscoreimage"
                 android:layout_width="@dimen/_136sdp"
                 android:layout_height="@dimen/_153sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_gravity="center_vertical"
-                app:srcCompat="@drawable/ic_eduson_ecrs" />
+                app:srcCompat="@drawable/ic_eduson" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,7 +140,7 @@
                         android:padding="@dimen/_1sdp"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:text="0"
+                        android:text="-"
                         android:textColor="@color/colorPrimary" />
 
                 </LinearLayout>
@@ -199,5 +200,3 @@
         android:indeterminate="false"
         android:layout_gravity="center" />
 </RelativeLayout>
-
-

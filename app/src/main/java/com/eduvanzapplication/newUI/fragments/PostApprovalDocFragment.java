@@ -86,6 +86,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -97,6 +98,7 @@ import static com.eduvanzapplication.MainActivity.TAG;
 import static com.eduvanzapplication.R.*;
 import static com.eduvanzapplication.newUI.fragments.DashboardFragmentNew.userName;
 
+//https://www.linkedin.com/developers/apps/verification/d122f3bd-f765-41a8-98b7-6aa7706d8fce
 public class PostApprovalDocFragment extends Fragment {
 
     static View view;
@@ -109,7 +111,7 @@ public class PostApprovalDocFragment extends Fragment {
     private static String uploadFilePath = "";
     StringBuffer sb;
 
-   public static View viewDiag;
+    public static View viewDiag;
     public static ProgressBar progressBarDiag;
     //Manual Diag
     public static LinearLayout linClose, linDownload, linUpload;
@@ -118,7 +120,7 @@ public class PostApprovalDocFragment extends Fragment {
     public static EditText edtOtp;
     public static WebView webView;
     final int OTPlength = 6;
-    public static String city, state, country, postalCode, ipaddress,latitude, longitde;
+    public static String city, state, country, postalCode, ipaddress, latitude, longitde;
 
     private CFAlertDialog cfAlertDialog;
 
@@ -128,15 +130,18 @@ public class PostApprovalDocFragment extends Fragment {
 
     int PERMISSION_ALL = 1;
     LocationManager locationManager;
-    String[] PERMISSIONS = {Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION};
+    String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     public static Animation collapseanimationlinExpand, expandAnimationlinExpand;
 
-    public String lead_id = "", application_loan_id = "", principal_amount = "", down_payment = "", rate_of_interest = "",
-            emi_type = "", emi_amount = "", no_emi_paid = "", requested_loan_amount = "", requested_tenure = "", requested_roi = "", requested_emi = "",
+    public String lead_id = "", application_loan_id = "", principal_amount = "", down_payment = "", rate_of_interest = "", tenure = "",
+            emi_type = "", emi_amount = "", total_amount_to_be_collected = "", amount_to_be_paid_to_institute = "",
+            is_moratorium = "", moratorium_months = "", no_emi_paid = "", requested_loan_amount = "", requested_tenure = "",
+            requested_roi = "", requested_emi = "",
             offered_amount = "", applicant_id = "", fk_lead_id = "", first_name = "", last_name = "", mobile_number = "",
             email_id = "", kyc_address = "", course_cost = "", paid_on = "", transaction_amount = "", kyc_status = "",
-            disbursal_status = "", loan_agrement_upload_status = "", paid_emi_on = "";
+            disbursal_status = "",rate ="", loan_agrement_upload_status = "", paid_emi_on = "", no_of_advance_emi = "";
+
     String downloadUrl = "", downloadSignedUrl = "", baseUrl = "", paymentOption = "1";
 
     public static Double totalAmount = 0.0;
@@ -150,13 +155,15 @@ public class PostApprovalDocFragment extends Fragment {
 
     public static TextView txtTbCourseFee, txtTbRequestedLoanAmount, txtTbOfferedLoanAmount, txtTbSelectTenure, txtTbSelectRateOFInterest,
             txtTbSelectedEMIAmount, txtTbSanctionLoanAmount, txtTbDownpayment, txtTbInterestRate,
-            txtTbEMIType, txtTbEmiAmount, txtTbProcessingFee;
+            txtTbEMIType, txtTbEmiAmount, txtTbProcessingFee, txtTbNoOfAdvanceEMI, txtTbAdvanceEMIAmount, txtTbGrossLoanTenure, txtTbNetLoantenure, txtTbROI, txtTbEMI, txtTbTotalRepaybleAmount, txtTbMoratoriumDuration, txtTbMoratorium, txtTbEMIDuringMoratorium;
 
     public static TextView txtProcessingFeeAmt, txtProcessingFeeDueByDate, txtEMIFeeAmt, txtEMIDueByDate, txtTotalAmt,
-            txtApplicationLoanID, txtProcessingFeeDueTitle, txtEMIDueByTitle;
-    public static ImageView ivProcessingFee, ivEMIFee;
+            txtApplicationLoanID, txtProcessingFeeDueTitle, txtEMIDueByTitle, txtEMIType;
+    public static ImageView ivProcessingFee, ivEMIFee, ivAdavnceFeeIcon, ivProcessingFeesicon;
     public static RelativeLayout relExpandCollapse;
     public static ImageButton btnExpandCollapse;
+
+
     public static ImageView ivLeadDisbursed, ivAggSigned;
 
     public static TextView txtLeadDisbursedStatus, txtAggSignedStatus;
@@ -222,6 +229,7 @@ public class PostApprovalDocFragment extends Fragment {
         emi_amount = "";
         no_emi_paid = "";
         requested_loan_amount = "";
+        no_of_advance_emi = "";
         requested_tenure = "";
         requested_roi = "";
         requested_emi = "";
@@ -279,16 +287,28 @@ public class PostApprovalDocFragment extends Fragment {
 
         txtApplicationLoanID = view.findViewById(id.txtApplicationLoanID);
         txtTbCourseFee = view.findViewById(id.txtTbCourseFee);
+
+        txtTbGrossLoanTenure = view.findViewById(R.id.txtTbGrossLoanTenure);
+        txtTbNetLoantenure = view.findViewById(R.id.txtTbNetLoantenure);
+        txtTbROI = view.findViewById(R.id.txtTbROI);
+        txtTbEMI = view.findViewById(R.id.txtTbEMI);
+        txtTbTotalRepaybleAmount = view.findViewById(R.id.txtTbTotalRepaybleAmount);
+        txtTbMoratorium = view.findViewById(R.id.txtTbMoratorium);
+        txtTbMoratoriumDuration = view.findViewById(R.id.txtTbMoratoriumDuration);
+        txtTbEMIDuringMoratorium = view.findViewById(R.id.txtTbEMIDuringMoratorium);
+
         txtTbRequestedLoanAmount = view.findViewById(id.txtTbRequestedLoanAmount);
-        txtTbOfferedLoanAmount = view.findViewById(id.txtTbOfferedLoanAmount);
-        txtTbSelectTenure = view.findViewById(id.txtTbSelectTenure);
-        txtTbSelectRateOFInterest = view.findViewById(id.txtTbSelectRateOFInterest);
-        txtTbSelectedEMIAmount = view.findViewById(id.txtTbSelectedEMIAmount);
+        //  txtTbOfferedLoanAmount = view.findViewById(id.txtTbOfferedLoanAmount);
+        //   txtTbSelectTenure = view.findViewById(id.txtTbSelectTenure);
+        //  txtTbSelectRateOFInterest = view.findViewById(id.txtTbSelectRateOFInterest);
+        txtTbNoOfAdvanceEMI = view.findViewById(id.txtTbNoOfAdvanceEMI);
+        txtTbAdvanceEMIAmount = view.findViewById(id.txtTbAdvanceEMIAmount);
+        //  txtTbSelectedEMIAmount = view.findViewById(id.txtTbSelectedEMIAmount);
         txtTbSanctionLoanAmount = view.findViewById(id.txtTbSanctionLoanAmount);
         txtTbDownpayment = view.findViewById(id.txtTbDownpayment);
-        txtTbInterestRate = view.findViewById(id.txtTbInterestRate);
+        //   txtTbInterestRate = view.findViewById(id.txtTbInterestRate);
         txtTbEMIType = view.findViewById(id.txtTbEMIType);
-        txtTbEmiAmount = view.findViewById(id.txtTbEmiAmount);
+        //  txtTbEmiAmount = view.findViewById(id.txtTbEmiAmount);
         txtTbProcessingFee = view.findViewById(id.txtTbProcessingFee);
 
         txtProcessingFeeAmt = view.findViewById(id.txtProcessingFeeAmt);
@@ -300,6 +320,9 @@ public class PostApprovalDocFragment extends Fragment {
         txtEMIDueByTitle = view.findViewById(id.txtEMIDueByTitle);
         ivProcessingFee = view.findViewById(id.ivProcessingFee);
         ivEMIFee = view.findViewById(id.ivEMIFee);
+
+        ivAdavnceFeeIcon = view.findViewById(id.ivAdavnceFeeIcon);
+        ivProcessingFeesicon = view.findViewById(id.ivProcessingFeesicon);
 
         linProcessingFeeRb = view.findViewById(id.linProcessingFeeRb);
         linEMIFeeRb = view.findViewById(id.linEMIFeeRb);
@@ -978,56 +1001,57 @@ public class PostApprovalDocFragment extends Fragment {
     }
 
     public void setDigioDocumentIdForStudent(JSONObject jsonData) {//{"result":{"documentId":"DID180627125727122W11P5DAJQX5NZ2","email":"vijay.shukla@eduvanz.in"},"status":1,"message":"Please follow the instructions to esign the form."}
-        try {
-            Log.e("SERVER CALL", "getDocuments" + jsonData);
-            String status = jsonData.optString("status");
-            String message = jsonData.optString("message");
-
-            if (status.equalsIgnoreCase("1")) {
-
-                JSONObject jsonObject = jsonData.getJSONObject("result");
-
-                String documentID = jsonObject.getString("documentId");//DID180627125727122W11P5DAJQX5NZ2
-                String email = jsonObject.getString("email");//vijay.shukla@eduvanz.in
-
-                // Invoke Esign
-
-                final Digio digio = new Digio();
-                DigioConfig digioConfig = new DigioConfig();
-                digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
-                digioConfig.setEnvironment(DigioEnvironment.PRODUCTION);   //Stage is sandbox
-
-                try {
-                    digio.init((Activity) context, digioConfig);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    digio.esign(documentID, email);
-//                    Log.e(MainActivity.TAG, "downloadUrldownloadUrl: " + downloadUrl + " userEmailiduserEmailid" + userEmailid);
-                } catch (Exception e) {
-                    String className = this.getClass().getSimpleName();
-                    String name = new Object() {
-                    }.getClass().getEnclosingMethod().getName();
-                    String errorMsg = e.getMessage();
-                    String errorMsgDetails = e.getStackTrace().toString();
-                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-                }
-
-            } else {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-        }
+//        try {
+//            Log.e("SERVER CALL", "getDocuments" + jsonData);
+//            String status = jsonData.optString("status");
+//            String message = jsonData.optString("message");
+//
+//            if (status.equalsIgnoreCase("1")) {
+//
+//                JSONObject jsonObject = jsonData.getJSONObject("result");
+//
+//                String documentID = jsonObject.getString("documentId");//DID180627125727122W11P5DAJQX5NZ2
+//                String email = jsonObject.getString("email");//vijay.shukla@eduvanz.in
+//
+//                // Invoke Esign
+//
+//                final Digio digio = new Digio();
+//                DigioConfig digioConfig = new DigioConfig();
+//                digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
+//                digioConfig.setEnvironment(DigioEnvironment.PRODUCTION);   //Stage is sandbox
+//
+//                try {
+//                    digio.init((Activity) context, digioConfig);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                try {
+//                    digio.esign(documentID, email);
+////                    Log.e(MainActivity.TAG, "downloadUrldownloadUrl: " + downloadUrl + " userEmailiduserEmailid" + userEmailid);
+//                } catch (Exception e) {
+//                    String className = this.getClass().getSimpleName();
+//                    String name = new Object() {
+//                    }.getClass().getEnclosingMethod().getName();
+//                    String errorMsg = e.getMessage();
+//                    String errorMsgDetails = e.getStackTrace().toString();
+//                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//                }
+//
+//            } else {
+//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//            }
+//        } catch (Exception e) {
+//            String className = this.getClass().getSimpleName();
+//            String name = new Object() {
+//            }.getClass().getEnclosingMethod().getName();
+//            String errorMsg = e.getMessage();
+//            String errorMsgDetails = e.getStackTrace().toString();
+//            String errorLine = String.valueOf(e.getStackTrace()[0]);
+//            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//        }
     }
+
 
     public void setLoanDetails(JSONObject jsonDataO) {
         Log.e(TAG, "setLoanDetails: " + jsonDataO);
@@ -1069,10 +1093,20 @@ public class PostApprovalDocFragment extends Fragment {
                             down_payment = jsonloanDataDetails.getString("down_payment");
                         if (!jsonloanDataDetails.getString("rate_of_interest").toString().equals("null"))
                             rate_of_interest = jsonloanDataDetails.getString("rate_of_interest");
+                        if (!jsonloanDataDetails.getString("tenure").toString().equals("null"))
+                            tenure = jsonloanDataDetails.getString("tenure");
                         if (!jsonloanDataDetails.getString("emi_type").toString().equals("null"))
                             emi_type = jsonloanDataDetails.getString("emi_type");
                         if (!jsonloanDataDetails.getString("emi_amount").toString().equals("null"))
                             emi_amount = jsonloanDataDetails.getString("emi_amount");
+                        if (!jsonloanDataDetails.getString("total_amount_to_be_collected").toString().equals("null"))
+                            total_amount_to_be_collected = jsonloanDataDetails.getString("total_amount_to_be_collected");
+                        if (!jsonloanDataDetails.getString("amount_to_be_paid_to_institute").toString().equals("null"))
+                            amount_to_be_paid_to_institute = jsonloanDataDetails.getString("amount_to_be_paid_to_institute");
+                        if (!jsonloanDataDetails.getString("is_moratorium").toString().equals("null"))
+                            is_moratorium = jsonloanDataDetails.getString("is_moratorium");
+                        if (!jsonloanDataDetails.getString("moratorium_months").toString().equals("null"))
+                            moratorium_months = jsonloanDataDetails.getString("moratorium_months");
                         if (!jsonloanDataDetails.getString("no_emi_paid").toString().equals("null"))
                             no_emi_paid = jsonloanDataDetails.getString("no_emi_paid");
                         if (!jsonloanDataDetails.getString("requested_loan_amount").toString().equals("null"))
@@ -1109,8 +1143,14 @@ public class PostApprovalDocFragment extends Fragment {
                             kyc_status = jsonloanDataDetails.getString("kyc_status");
                         if (!jsonloanDataDetails.getString("disbursal_status").toString().equals("null"))
                             disbursal_status = jsonloanDataDetails.getString("disbursal_status");
+                        if (!jsonloanDataDetails.getString("rate").toString().equals("null"))
+                            rate = jsonloanDataDetails.getString("rate");
                         if (!jsonloanDataDetails.getString("loan_agrement_upload_status").toString().equals("null"))
                             loan_agrement_upload_status = jsonloanDataDetails.getString("loan_agrement_upload_status");
+
+                        //new
+                        if (!jsonloanDataDetails.getString("no_of_advance_emi").toString().equals("null"))
+                            no_of_advance_emi = jsonloanDataDetails.getString("no_of_advance_emi");
 
                         txtApplicationLoanID.setText(application_loan_id);
                         txtProcessingFeeAmt.setText(String.valueOf(Double.valueOf(transaction_amount)));
@@ -1128,30 +1168,87 @@ public class PostApprovalDocFragment extends Fragment {
 
                         txtTbCourseFee.setText(" " + course_cost + "/-");
                         txtTbRequestedLoanAmount.setText(" " + requested_loan_amount + "/-");
-                        txtTbOfferedLoanAmount.setText(" " + offered_amount + "/-");
-                        txtTbSelectRateOFInterest.setText(requested_roi + " " + "%");
-                        txtTbSelectedEMIAmount.setText(" " + emi_amount + "/-");
+//                        txtTbOfferedLoanAmount.setText(" " + offered_amount + "/-");
+//                        txtTbSelectRateOFInterest.setText(requested_roi + " " + "%");
+//                        txtTbSelectedEMIAmount.setText(" " + emi_amount + "/-");
                         txtTbSanctionLoanAmount.setText(" " + principal_amount + "/-");
                         txtTbDownpayment.setText(" " + down_payment + "/-");
-                        txtTbInterestRate.setText(rate_of_interest + " " + "%");
-                        txtTbEmiAmount.setText(" " + emi_amount + "/-");
+                        txtTbROI.setText(rate_of_interest + " " + "%");
+                        txtTbEMI.setText(" " + emi_amount + "/-");
                         txtTbProcessingFee.setText(" " + transaction_amount + "/-");
 
-                        if (requested_tenure.equals("")) {
-                            txtTbSelectTenure.setText("Months");
-                        } else {
-                            txtTbSelectTenure.setText(requested_tenure + " Months");
-                        }
+                        txtTbTotalRepaybleAmount.setText(" " + total_amount_to_be_collected + "/-");
+
+//
+//                        if (requested_tenure.equals("")) {
+//                            txtTbSelectTenure.setText("Months");
+//                        } else {
+//                            txtTbSelectTenure.setText(requested_tenure + " Months");
+//                        }
 
                         if (emi_type.equals("0")) {
                             txtTbEMIType.setText("Arrear");
+                            txtTbNoOfAdvanceEMI.setText(" " + "0");
 
                         } else if (emi_type.equals("1")) {
                             txtTbEMIType.setText("Advance");
                             linEMIFeeRb.setVisibility(VISIBLE);
+                            float advEMI;
+                            if (!emi_amount.equals("")) {
+                                advEMI = Float.parseFloat(emi_amount) * Float.parseFloat(no_of_advance_emi);
+                            } else {
+                                advEMI = Float.parseFloat(no_of_advance_emi);
+                            }
+                            txtTbNoOfAdvanceEMI.setText(" " + advEMI + "/-");
 
                         } else {
                             txtTbEMIType.setText(" -");
+                        }
+
+                        if (!is_moratorium.equals("")) {
+                            txtTbMoratorium.setText(" " + (is_moratorium.equals("1") ? "Yes" : "No"));
+                        }
+                        if (!moratorium_months.equals("")) {
+                            txtTbMoratoriumDuration.setText(" " + moratorium_months);
+                        }
+                        if (!amount_to_be_paid_to_institute.equals("")) {
+                            txtTbEMIDuringMoratorium.setText(" " + amount_to_be_paid_to_institute);
+                        }
+
+                        try {
+                            if (emi_type.equals("0") && is_moratorium.equals("1") && Integer.parseInt(moratorium_months) > 0) {
+                                Float grossTenure = Float.parseFloat(tenure) * Float.parseFloat(moratorium_months);
+                                txtTbGrossLoanTenure.setText(" " + grossTenure);
+                            } else {
+                                txtTbGrossLoanTenure.setText(" " + Float.parseFloat(tenure));
+                            }
+                        } catch (NumberFormatException e) {
+                            txtTbGrossLoanTenure.setText(" -");
+                        }
+
+                        try {
+                            if (emi_type.equals("0")) {
+                                Float grossTenure = Float.parseFloat(tenure);
+                                txtTbNetLoantenure.setText(" " + grossTenure);
+                            } else if (emi_type.equals("1")) {
+                                Float grossLoanTenure = Float.parseFloat(tenure) - Float.parseFloat(no_of_advance_emi);
+                                txtTbNetLoantenure.setText(" " + grossLoanTenure);
+                            }
+                        } catch (NumberFormatException e) {
+                            txtTbNetLoantenure.setText(" -");
+                        }
+
+                        try {
+                            Float outstanding_principle = Float.parseFloat(amount_to_be_paid_to_institute);
+                            Float Rate = Float.parseFloat(rate) / 1200;
+                            Float interest_comp = outstanding_principle * Rate;
+
+                            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+
+                            txtTbEMIDuringMoratorium.setText(" " + (is_moratorium.equals("1") ? decimalFormat.format(interest_comp) : " -"));
+
+                        } catch (NumberFormatException e) {
+                            txtTbEMIDuringMoratorium.setText(" -");
                         }
 
                         if (kyc_status.equals("1")) {
@@ -1162,7 +1259,7 @@ public class PostApprovalDocFragment extends Fragment {
 
                         } else {
                             txtProcessingFeeDueTitle.setText("Due By");
-                            txtProcessingFeeDueByDate.setText(" - ");
+                            txtProcessingFeeDueByDate.setText(" --");
                             linPayBtn.setVisibility(VISIBLE);
 //                            linPayStatus.setVisibility(GONE);
                         }
@@ -1185,7 +1282,7 @@ public class PostApprovalDocFragment extends Fragment {
                                 e.printStackTrace();
                             }
 
-                            if (no_emi_paid.equals("1")) {
+                            if (Integer.parseInt(no_emi_paid) >= 1) {
 
                                 if (kyc_status.equals("1")) {
                                     linPayBtn.setVisibility(GONE);
@@ -1209,9 +1306,9 @@ public class PostApprovalDocFragment extends Fragment {
                                         JSONObject jsonloanDataadvanceEmi = jsonDataO.getJSONObject("advanceEmi");
                                         if (!jsonloanDataadvanceEmi.getString("paid_emi_date").toString().equals("null")) {
 
-                                            paid_emi_on = jsonloanDataDetails.getString("paid_emi_date");
+                                            paid_emi_on = jsonloanDataadvanceEmi.getString("paid_emi_date");
                                             txtEMIDueByTitle.setText("Paid On");
-                                            txtEMIDueByDate.setText(Globle.dateFormater4(paid_emi_on));
+                                            txtEMIDueByDate.setText(Globle.dateFormater5(paid_emi_on));
                                         }
 
                                     }
@@ -1228,7 +1325,7 @@ public class PostApprovalDocFragment extends Fragment {
                                 ivEMIFee.setImageDrawable(bg1);
                             } else {
                                 txtEMIDueByTitle.setText("Due By");
-                                txtEMIDueByDate.setText(" - ");
+                                txtEMIDueByDate.setText(" -- ");
                                 linEMIFeeRb.setEnabled(true);
                                 linPayBtn.setVisibility(VISIBLE);
                                 linPayStatus.setVisibility(GONE);
@@ -1258,7 +1355,6 @@ public class PostApprovalDocFragment extends Fragment {
                             }
                         }
 
-
                         if (!jsonDataO.get("result").equals(null)) {
 
                             baseUrl = new JSONObject(jsonDataO.getJSONObject("result").toString()).getString("baseUrl");
@@ -1270,12 +1366,14 @@ public class PostApprovalDocFragment extends Fragment {
                         if (disbursal_status.equals("0") || disbursal_status.equals("1")) //Disbursed
                         {
                             txtLeadDisbursedStatus.setText("Disbursal Pending");
+                            txtLeadDisbursedStatus.setTextColor(context.getResources().getColor(color.darkblue));
                             ivLeadDisbursed.setBackground(context.getResources().getDrawable(drawable.ic_borrower_documents_pending));
                             linDisbursed.setBackground(context.getResources().getDrawable(drawable.border_circular_yellow_filled));
                             linDownloadNach.setVisibility(GONE);
                         } else {
                             txtLeadDisbursedStatus.setText("Loan Disbursed");
                             linDisbursed.setBackgroundResource(R.color.colorGreen);
+                            txtLeadDisbursedStatus.setTextColor(context.getResources().getColor(color.white));
                             ivLeadDisbursed.setBackground(context.getResources().getDrawable(drawable.ic_check_circle_white));
                             linDisbursed.setBackground(context.getResources().getDrawable(drawable.border_circular_green_filled));
                             linDownloadNach.setTag(baseUrl.concat("download/downloadENach/").concat(MainActivity.lead_id));
@@ -1287,6 +1385,7 @@ public class PostApprovalDocFragment extends Fragment {
                             linDownloadSignedAgreement.setTag(VISIBLE);
                             linDownloadSignedAgreement.setVisibility(VISIBLE);
                             txtAggSignedStatus.setText("Agreement Signed");
+                            txtAggSignedStatus.setTextColor(context.getResources().getColor(color.white));
                             ivAggSigned.setBackground(context.getResources().getDrawable(drawable.ic_check_circle_white));
                             linAgreementSigned.setBackground(context.getResources().getDrawable(drawable.border_circular_green_filled));
                             genrateSignedAgreementUrl();
@@ -1297,6 +1396,7 @@ public class PostApprovalDocFragment extends Fragment {
                             linAggSignInBtn.setVisibility(VISIBLE);
                             linDownloadSignedAgreement.setVisibility(GONE);
                             txtAggSignedStatus.setText("Agreement Signed Pending");
+                            txtAggSignedStatus.setTextColor(context.getResources().getColor(color.darkblue));
                             ivAggSigned.setBackground(context.getResources().getDrawable(drawable.ic_borrower_documents_pending));
                             linAgreementSigned.setBackground(context.getResources().getDrawable(drawable.border_circular_yellow_filled));
                         }
@@ -1362,6 +1462,9 @@ public class PostApprovalDocFragment extends Fragment {
 
                             if (!jsonEmiDetails.getString("end_date").toString().equals("null"))
                                 mNach.end_date = jsonEmiDetails.getString("end_date");
+
+                            if (!jsonEmiDetails.getString("until_cancel").toString().equals("null"))
+                                mNach.until_cancel = jsonEmiDetails.getString("until_cancel");
 
                             if (!jsonEmiDetails.getString("frequency").toString().equals("null"))
 
@@ -1548,6 +1651,14 @@ public class PostApprovalDocFragment extends Fragment {
             // "status":0,"message":"Agreement generated"}
             //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,"doc_url":"uploads\/ladocumentstore\/634\/Eduvanz_Agreement.pdf",
             // "message":"success"}
+            //
+            //
+            //
+            //
+            //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/","Url":"uploads\/lamanualupload\/634\/Eduvanz_Agreement.pdf"},
+            // "status":1,"message":"All Users Signing Completed"}
+//            {"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,
+//                    "doc_url":"uploads\/ladocumentstore\/13816\/Eduvanz_Agreement.pdf","message":"success"}
             String message = jsonDataO.getString("message");
             progressBar.setVisibility(View.GONE);
             if (jsonDataO.getInt("status") == 1) {
@@ -1596,11 +1707,11 @@ public class PostApprovalDocFragment extends Fragment {
             try {
                 online.put("IP", ipaddress);
                 online.put("city", city);
-                online.put("regioin", state);
+                online.put("region", state);
                 online.put("country", country);
                 online.put("location", "location");
                 online.put("latitute", latitude);
-                online.put("longitude", longitde);
+                online.put("longitute", longitde);
                 online.put("ISP_provider", "ISP_provider");
                 online.put("pincode", postalCode);
                 online.put("browser_name", "Android");
@@ -1609,24 +1720,19 @@ public class PostApprovalDocFragment extends Fragment {
                 e.printStackTrace();
             }
 
-//0 = {HashMap$Node@13140} "mobile" -> "8983501513"
-//1 = {HashMap$Node@13141} "online" -> "{"IP":"192.168.1.39","city":"Mumbai","regioin":"Maharashtra","country":"India","location":"location","latitute":"latitute","longitude":"longitude","ISP_provider":"ISP_provider","pincode":"400059","browser_name":"Android","platform":"Android"}"
-//2 = {HashMap$Node@13142} "otp" -> "251565"
-//3 = {HashMap$Node@13143} "lead_id" -> "634"
-//4 = {HashMap$Node@13144} "signed_by_id" -> "634"
             String url = MainActivity.mainUrl + "laf/signedByOtpAgg";
             Map<String, String> params = new HashMap<String, String>();
             params.put("otp", edtOtp.getText().toString());
             params.put("mobile", DashboardFragmentNew.mobile_no);
             params.put("lead_id", MainActivity.lead_id);
             params.put("online", String.valueOf(online));
-            params.put("signed_by_id", DashboardFragmentNew.student_id);
+            params.put("signed_by_id", LoanTabActivity.applicant_id);
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {
                 progressBar.setVisibility(View.VISIBLE);
                 VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
-                volleyCall.sendRequest(context, url, null, mFragment, "genrateOTPAgreement", params, MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "signedByOtpAgg", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -1645,12 +1751,15 @@ public class PostApprovalDocFragment extends Fragment {
             String message = jsonDataO.getString("message");
             progressBar.setVisibility(View.GONE);
             //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":4,"message":"Invalid OTP"}
+           // {"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/",
+            // "Url":"uploads\/lamanualupload\/13816\/Eduvanz_Agreement.pdf"},"status":1,"message":"All Users Signing Completed"}
             if (jsonDataO.getInt("status") == 1) {
                 JSONObject mData2 = jsonDataO.getJSONObject("result");
-                downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("doc_url"));
+                downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("Url"));
 
-                otpSignInDialog(context);
-                openPdf(downloadUrl);
+                cfAlertDialog.dismiss();
+                getLoanDetails();
+
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }

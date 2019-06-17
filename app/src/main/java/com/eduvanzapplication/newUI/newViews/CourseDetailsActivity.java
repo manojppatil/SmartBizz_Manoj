@@ -203,12 +203,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
                         } else {
                             enableDisableButtons(false);
                             txtcourseDetailsErrMsg.setVisibility(View.VISIBLE);
-                            txtcourseDetailsErrMsg.setText("*Loan Amount not exceed than course fees!");
+                            txtcourseDetailsErrMsg.setText("*Loan Amount should not exceed course fees!");
                         }
                     } else {
                         enableDisableButtons(false);
                         txtcourseDetailsErrMsg.setVisibility(View.VISIBLE);
-                        txtcourseDetailsErrMsg.setText("*Loan Amount not exceed than course fees!");
+                        txtcourseDetailsErrMsg.setText("*Loan Amount should not exceed course fees!");
                     }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();

@@ -103,7 +103,7 @@ public class DocumentAvailabilityFragment extends Fragment {
 //False
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.aadharNumber = "";
-//                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
+//                        edtAadhaar.setError("* Please Enter valid Aadhaar Number!");
                         edtPAN.setError(null);
                         NewLeadActivity.documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
@@ -113,11 +113,11 @@ public class DocumentAvailabilityFragment extends Fragment {
                         NewLeadActivity.documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.aadharNumber = "";
-//                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
+//                        edtAadhaar.setError("* Please Enter valid Aadhaar Number!");
                         NewLeadActivity.documents = "1";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.panNUmber = "";
-//                        edtAadhaar.setError("Please Enter Aadhaar or PAN Number!");
+//                        edtAadhaar.setError("* Please Enter Aadhaar or PAN Number!");
                         edtPAN.setError(null);
                         NewLeadActivity.documents = "0";
                     }
@@ -159,12 +159,12 @@ public class DocumentAvailabilityFragment extends Fragment {
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.panNUmber = "";
 //                        edtAadhaar.setError(null);
-//                        edtPAN.setError("Please Enter Valid PAN number!");
+//                        edtPAN.setError("* Please Enter Valid PAN number!");
                         NewLeadActivity.documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
                         NewLeadActivity.panNUmber = "";
                         edtAadhaar.setError(null);
-//                        edtPAN.setError("Please Enter Valid PAN number!");
+//                        edtPAN.setError("* Please Enter Valid PAN number!");
                         NewLeadActivity.documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.panNUmber = "";
@@ -174,7 +174,7 @@ public class DocumentAvailabilityFragment extends Fragment {
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
                         NewLeadActivity.panNUmber = "";
                         edtAadhaar.setError(null);
-//                        edtPAN.setError("Please Enter PAN Number!");
+//                        edtPAN.setError("* Please Enter PAN Number!");
                         NewLeadActivity.documents = "0";
                     }
                 } else {
@@ -233,7 +233,7 @@ public class DocumentAvailabilityFragment extends Fragment {
 //                if (!Globle.validateAadharNumber(NewLeadActivity.aadharNumber)) {
 //                    mDocListener.onOffButtonsDocuments(false, true);
 //                    //create method here
-//                    edtAadhaar.setError("Please enter valid Aadhar");
+//                    edtAadhaar.setError("* Please enter valid Aadhar");
 //                    edtPAN.setError(null);
 //                } else {
 //                    edtAadhaar.setError(null);

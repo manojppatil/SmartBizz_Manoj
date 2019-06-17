@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -42,8 +44,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static com.FriendlyScoreUI.LaunchUI.hasPermissions;
-
 public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
         DetailedInfoFragment.onDetailedInfoFragmentInteractionListener {
 
@@ -57,7 +57,8 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     SharedPreferences sharedPreferences;
     public static boolean isKycEdit;
     public static boolean isDetailedInfoEdit;
-    int PERMISSION_ALL = 1;
+    public int GET_MY_PERMISSION = 1, permission;
+
     LocationManager locationManager;
     String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
@@ -112,23 +113,42 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
             }
         });
 
-        try {
-            //  if (Build.VERSION.SDK_INT >= 23) {
-            if (!hasPermissions(this, PERMISSIONS)) {
-                ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        if (Build.VERSION.SDK_INT >= 23) {
+            permission = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION);
+
+            if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
+                ActivityCompat.requestPermissions(LoanTabActivity.this,
+                        new String[]{
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION},
+                        GET_MY_PERMISSION);
             } else {
                 startService(new Intent(context, LocationService.class));
-                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                    if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
+//                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+//                    if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
 //                        alertDialog.show();
-                    }
-                }
-
+//                    }
+//                }
             }
-
-        } catch (Exception e) {
-
         }
+
+//        try {
+//            //  if (Build.VERSION.SDK_INT >= 23) {
+//            if (!hasPermissions(this, PERMISSIONS)) {
+//                ActivityCompat.requestPermissions(LoanTabActivity.this, PERMISSIONS, PERMISSION_ALL);
+//            } else {
+//                startService(new Intent(context, LocationService.class));
+//                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+//                    if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
+////                        alertDialog.show();
+//                    }
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//
+//        }
 
     }
 
@@ -149,7 +169,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                             } else {
 //                                alertDialog.dismiss();
 //                                alertDialog.cancel();
-                                Globle.dialog(this, "Please turn on your cellular data or wifi for exact location.", "No internet access").show();
+                                Globle.dialog(LoanTabActivity.this,"Please turn on your cellular data or wifi for exact location.", "No internet access").show();
                             }
 
                         } else {
@@ -230,7 +250,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         finish();
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(final ViewPager viewPager) {
 
         Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/sourcesanspro_italic.ttf");
 

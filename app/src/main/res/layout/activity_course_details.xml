@@ -186,18 +186,64 @@
                                 android:textColor="@color/darkblue"
                                 style="@style/TextViewSmallCapsStyle" />
 
+                         <!--   <LinearLayout
+                                android:background="@drawable/border_circular"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_10sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                app:srcCompat="@drawable/ic_rupee_sign"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/_1sdp"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                />
+
+
                             <TextView
                                 android:id="@+id/txtCourseFee"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/border_circular"
                                 android:padding="@dimen/_6sdp"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:inputType="number"
                                 style="@style/TextViewTitle14Style"
                                 android:maxLines="1"
+                                android:hint=" &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"
+                                />
+                            </LinearLayout>-->
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border_circular"
+                                android:orientation="horizontal">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    app:srcCompat="@drawable/ic_rupee_sign"
+                                    android:layout_gravity="center"
+                                    android:padding="@dimen/_1sdp"
+                                    android:layout_marginLeft="@dimen/_4sdp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/txtCourseFee"
+                                    style="@style/TextViewTitle14Style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                 android:hint="------------"
-                                android:drawableStart="@drawable/ic_rupee_sign"/>
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLines="1"
+                                    android:padding="@dimen/_6sdp" />
+                            </LinearLayout>
+
+
 
                         </LinearLayout>
 
@@ -224,11 +270,25 @@
                                 android:textColor="@color/darkblue"
                                 style="@style/TextViewSmallCapsStyle" />
 
+                          <!--  <LinearLayout
+                                android:background="@drawable/border_circular"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    app:srcCompat="@drawable/ic_rupee_sign"
+                                    android:layout_gravity="center"
+                                    android:padding="@dimen/_1sdp"
+                                    android:layout_marginLeft="@dimen/_4sdp"
+                                    />
+
                             <EditText
                                 android:id="@+id/edtLoanAmt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/border_circular"
                                 android:backgroundTint="@color/darkblue"
                                 android:padding="@dimen/_6sdp"
                                 android:maxLines="1"
@@ -236,10 +296,42 @@
                                 android:layout_marginTop="@dimen/_5sdp"
                                 style="@style/EditTextStyle"
                                 android:maxLength="8"
-                                android:hint="------------"
+                                android:hint=" &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"
                                 android:textSize="14sp"
-                                android:drawableStart="@drawable/ic_rupee_sign"/>
+                               />
+                            </LinearLayout>-->
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border_circular"
+                                android:orientation="horizontal">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    app:srcCompat="@drawable/ic_rupee_sign"
+                                    android:layout_gravity="center"
+                                    android:padding="@dimen/_1sdp"
+                                    android:layout_marginLeft="@dimen/_4sdp"
+                                    />
+
+
+                                <EditText
+                                    android:id="@+id/edtLoanAmt"
+                                    style="@style/EditTextStyle"
+                                    android:background="@color/transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="------------"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:maxLength="8"
+                                    android:maxLines="1"
+                                    android:padding="@dimen/_6sdp"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>

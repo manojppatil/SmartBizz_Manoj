@@ -138,7 +138,7 @@ public class CurrentAddressFragment extends Fragment {
                     if (isCurrentAddEnabled) {
                         if (edtAddress.getText().toString().equals("")) {
                             NewLeadActivity.flatBuildingSoc = "";
-//                        edtFirstName.setError("Please enter first name");
+//                        edtFirstName.setError("* Please enter first name");
                         } else {
                             NewLeadActivity.flatBuildingSoc = edtAddress.getText().toString();
                             edtAddress.setError(null);
@@ -166,7 +166,7 @@ public class CurrentAddressFragment extends Fragment {
 
                         if (edtLandmark.getText().toString().equals("")) {
                             NewLeadActivity.streetLocalityLandMark = "";
-//                        edtFirstName.setError("Please enter first name");
+//                        edtFirstName.setError("* Please enter first name");
                         } else {
                             NewLeadActivity.streetLocalityLandMark = edtLandmark.getText().toString();
                             edtLandmark.setError(null);
@@ -195,7 +195,7 @@ public class CurrentAddressFragment extends Fragment {
                             edtPincode.setError(null);
                         } else {
                             NewLeadActivity.pinCode = "";
-//                        edtPincode.setError("Please Enter valid PINCODE Number!");
+//                        edtPincode.setError("* Please Enter valid PINCODE Number!");
                         }
                         checkAllFields();
                     }
@@ -301,32 +301,32 @@ public class CurrentAddressFragment extends Fragment {
 
             if (edtAddress.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("Please enter FLAT NUMBER,BUILDING,SOCIETY NAME");
+                txtcurrentAddressErrMsg.setText("* Please enter FLAT NUMBER,BUILDING,SOCIETY NAME");
 //                edtAddress.requestFocus();
 
             }else if (edtLandmark.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("Please enter your STREET NAME,LOCALITY,LANDMARK");
+                txtcurrentAddressErrMsg.setText("* Please enter your STREET NAME,LOCALITY,LANDMARK");
 //                edtLandmark.requestFocus();
 
             } else if (edtPincode.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("Please enter your pincode");
+                txtcurrentAddressErrMsg.setText("* Please enter your pincode");
 //                edtPincode.requestFocus();
 
             }  else if (NewLeadActivity.countryId.equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("Please select country");
+                txtcurrentAddressErrMsg.setText("* Please select country");
 //                spCountry.requestFocus();
 
             } else if (NewLeadActivity.stateId.equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("Please select state");
+                txtcurrentAddressErrMsg.setText("* Please select state");
 //                spState.requestFocus();
 
             } else if (NewLeadActivity.cityId.equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("Please select city");
+                txtcurrentAddressErrMsg.setText("* Please select city");
 //                spCity.requestFocus();
             }
 

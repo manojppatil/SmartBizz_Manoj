@@ -1,6 +1,7 @@
 package com.eduvanzapplication.newUI.newViews;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -50,11 +51,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+
 import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 
 //https://youtu.be/XatTNd7L9vw
 public class GetMobileNo extends AppCompatActivity {
@@ -74,6 +77,7 @@ public class GetMobileNo extends AppCompatActivity {
     public int GET_MY_PERMISSION = 1, permission;
     final private int RC_SIGN_IN = 112;
     SharedPref sharedPref;
+    public final static int linkedinRequest = 9419;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -264,6 +268,17 @@ public class GetMobileNo extends AppCompatActivity {
             }
         });
 
+        linLinkedIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(GetMobileNo.this, LinkedinActivity.class);
+
+//                startActivityForResult(intent, linkedinRequest);
+//                                loginonClick();
+
+            }
+        });
+
         linFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,6 +294,7 @@ public class GetMobileNo extends AppCompatActivity {
         });
 
     }
+
 
     private void getOTPAPICall(CharSequence s) {
 
@@ -325,11 +341,11 @@ public class GetMobileNo extends AppCompatActivity {
                             otpLogin();
                         else {
                             if (edtFirstName.getText().toString().equals("")) {
-                                edtFirstName.setError("Please provide your first name");
+                                edtFirstName.setError("* Please provide your first name");
                             } else if (edtMobile.getText().toString().equals("")) {
-                                edtMobile.setError("Please provide mobile number");
+                                edtMobile.setError("* Please provide mobile number");
                             } else if (edtEmail.getText().toString().equals("")) {
-                                edtEmail.setError("Please provide email");
+                                edtEmail.setError("* Please provide email");
                             } else {
                                 if (!signUpCalled) {
                                     generateOtpCode();  //signUp
@@ -426,7 +442,13 @@ public class GetMobileNo extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
+        if (requestCode == linkedinRequest) {
+            if(resultCode == Activity.RESULT_OK){
 
+            }else if(resultCode == Activity.RESULT_CANCELED){
+
+            }
+        }
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {

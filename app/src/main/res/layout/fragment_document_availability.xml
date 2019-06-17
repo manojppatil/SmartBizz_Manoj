@@ -29,6 +29,7 @@
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:tint="@color/colorPrimary"
+
                 app:srcCompat="@drawable/ic_documents_availability_user" />
 
             <TextView
@@ -74,13 +75,12 @@
                         android:layout_marginTop="@dimen/_20sdp">
 
                         <TextView
+                            style="@style/TextViewTitle12BoldStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="AADHAR NUMBER (12 DIGITS)"
-                            android:textAllCaps="true"
+                            android:text="Aadhaar Number (12 Digits)"
                             android:layout_marginBottom="@dimen/_5sdp"
-                            android:textColor="@color/darkblue"
-                            android:textSize="@dimen/_12sdp"/>
+                            android:textColor="@color/darkblue"/>
 
                     <LinearLayout
                         android:id="@+id/linAadhaar"
@@ -91,14 +91,15 @@
                         android:background="@drawable/border_circular"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="@dimen/_5sdp">
+                        android:layout_marginBottom="@dimen/_18sdp">
 
                         <ImageView
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_15sdp"
                             android:layout_marginLeft="@dimen/_7sdp"
-                            android:tint="@color/textcolordark"
-                            app:srcCompat="@drawable/ic_borrower_details_id_card" />
+                            android:tint="@color/darkblue"
+                            app:srcCompat="@drawable/ic_kyc_documents_aadhar"
+                             />
 
                         <View
                             android:layout_width="@dimen/_1sdp"
@@ -131,13 +132,13 @@
                     android:layout_marginTop="@dimen/_20sdp">
 
                     <TextView
+                        style="@style/TextViewTitle12BoldStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="PAN NUMBER (10 DIGITS)"
+                        android:text="PAN Number (10 Digits)"
                         android:textAllCaps="true"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:textColor="@color/darkblue"
-                        android:textSize="@dimen/_12sdp"/>
+                        android:textColor="@color/darkblue"/>
 
                     <LinearLayout
                         android:id="@+id/linPAN"

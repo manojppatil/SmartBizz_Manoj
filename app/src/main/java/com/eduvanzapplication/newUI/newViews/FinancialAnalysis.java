@@ -83,8 +83,8 @@ public class FinancialAnalysis extends AppCompatActivity {
         String status = jsonDataO.optString("status");
         String riskscore = jsonDataO.optString("risk_score_card");
         try {
-            if (riskscore.equals("")) {
-                txteduvanzCreditScore.setText("0");
+            if (riskscore.equals("") || riskscore.equals("null")) {
+                txteduvanzCreditScore.setText("-");
             }else{
                 txteduvanzCreditScore.setText(riskscore);
             }

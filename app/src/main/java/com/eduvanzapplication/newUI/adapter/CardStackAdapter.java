@@ -83,7 +83,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
         TextView  txtLeadfName,txtLeadlName,txtMessage, txtApplicationId, txtStatus1, txtDate, txtStatus2,
                 txtUniversity, txtCourseNmae,txtCity,txtCourseFee,txtLoanAmount ;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             txtLeadfName = itemView.findViewById(R.id.txtLeadfName);
             txtLeadlName = itemView.findViewById(R.id.txtLeadlName);

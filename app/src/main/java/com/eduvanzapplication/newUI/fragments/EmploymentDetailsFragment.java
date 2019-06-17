@@ -25,8 +25,7 @@ import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.isEmployment
 public class EmploymentDetailsFragment extends Fragment {
 
     private static OnEmploymentFragmentInteractionListener mListener;
-    public static TextInputLayout tilAnnualIncome, tilCompanyName;
-    public static EditText companyedt,edtaanual;
+    public static EditText edtAanual,edtCompany;
     public static TextView txtEmploymentDetailsErrMsg;
 
 
@@ -53,10 +52,8 @@ public class EmploymentDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_employment_details, container, false);
-        tilAnnualIncome = view.findViewById(R.id.tilAnnualIncome);
-        tilCompanyName = view.findViewById(R.id.tilCompanyName);
-        edtaanual=view.findViewById(R.id.edtaanual);
-        companyedt=view.findViewById(R.id.companyedt);
+        edtAanual=view.findViewById(R.id.edtAanual);
+        edtCompany=view.findViewById(R.id.edtCompany);
         txtEmploymentDetailsErrMsg = view.findViewById(R.id.txtEmploymentDetailsErrMsg);
 
         return view;
@@ -66,7 +63,7 @@ public class EmploymentDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        companyedt.addTextChangedListener(new TextWatcher() {
+        edtCompany.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -77,10 +74,10 @@ public class EmploymentDetailsFragment extends Fragment {
                 if (isEmploymentDtlEnabled) {
                 if (s.length() > 0) {
                     NewLeadActivity.companyName = s.toString();
-                    companyedt.setError(null);
+                    edtCompany.setError(null);
                 } else {
                     NewLeadActivity.companyName = "";
-                   // companyedt.setError("Please enter Company Name");
+                   // edtCompany.setError("* Please enter Company Name");
                 }
                 checkAllFields();
                 }
@@ -93,7 +90,7 @@ public class EmploymentDetailsFragment extends Fragment {
         });
 
 
-        edtaanual.addTextChangedListener(new TextWatcher() {
+        edtAanual.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -105,11 +102,11 @@ public class EmploymentDetailsFragment extends Fragment {
                 if (isEmploymentDtlEnabled) {
                 if (s.length() > 0) {
                     NewLeadActivity.annualIncome = s.toString();
-                    edtaanual.setError(null);
+                    edtAanual.setError(null);
 
                 } else {
                     NewLeadActivity.annualIncome = "";
-                 //   edtaanual.setError("Please enter Annual Income:");
+                 //   edtAanual.setError("* Please enter Annual Income:");
                 }
                 checkAllFields();
                 }
@@ -128,10 +125,10 @@ public class EmploymentDetailsFragment extends Fragment {
     public static void checkAllFields() {
         if (NewLeadActivity.companyName.equals("") || NewLeadActivity.annualIncome.equals("")) {
           //  mListener.onEmploymentFragmentInteraction(false,0);
-            if (companyedt.getText().toString().equals("")) {
+            if (edtCompany.getText().toString().equals("")) {
             txtEmploymentDetailsErrMsg.setVisibility(View.VISIBLE);
                 txtEmploymentDetailsErrMsg.setText("*Please Enter Company Name");
-            } else if (edtaanual.getText().toString().equals("")) {
+            } else if (edtAanual.getText().toString().equals("")) {
                 txtEmploymentDetailsErrMsg.setVisibility(View.VISIBLE);
                 txtEmploymentDetailsErrMsg.setText("*Please Enter Annual Income");
             }
@@ -175,8 +172,8 @@ public class EmploymentDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        tilCompanyName.getEditText().setText(NewLeadActivity.companyName);
-        tilAnnualIncome.getEditText().setText(NewLeadActivity.annualIncome);
+        edtCompany.setText(NewLeadActivity.companyName);
+        edtAanual.setText(NewLeadActivity.annualIncome);
         if(isEmploymentDtlEnabled) {
             checkAllFields();
         }
@@ -185,8 +182,8 @@ public class EmploymentDetailsFragment extends Fragment {
 
     public static void setEmploymentData() {
         try {
-            tilCompanyName.getEditText().setText(NewLeadActivity.companyName);
-            tilAnnualIncome.getEditText().setText(NewLeadActivity.annualIncome);
+            edtCompany.setText(NewLeadActivity.companyName);
+            edtAanual.setText(NewLeadActivity.annualIncome);
         } catch (Exception e) {
             e.printStackTrace();
         }

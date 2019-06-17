@@ -52,7 +52,7 @@ public class VolleyCallAlgo360 {
     public VolleyCallAlgo360() {
     }
 
-    public void sendRequest(Context mContext, String url, AppCompatActivity activity, Fragment fragment, String callingString, final Map<String, String> dataForPost, String mauth_token) {
+    public void sendRequest(Context mContext, final String url, AppCompatActivity activity, Fragment fragment, String callingString, final Map<String, String> dataForPost, String mauth_token) {
 //        Toast.makeText(activity, "Volley called", Toast.LENGTH_SHORT).show();
         screen = callingString;
         mActivity = activity;

@@ -16,8 +16,10 @@
     <color name="blue">#435692</color>
     <color name="lightblue">#d2e4ec</color>
     <color name="bgcolor">#ECF7FD</color>
+    <color name="defaulticoncolor">#FF000000</color>
+
     <color name="background_user_profile">#F1F5F8</color>
-    <color name="permissioncolor">#4196a0</color>
+    <!--<color name="permissioncolor">#4196a0</color>-->
     <color name="colorGreen">#1ac31a</color>
     <color name="colorYellow">#ffc015</color>
     <color name="colorRed">#ee415e</color>
@@ -26,6 +28,8 @@
     <color name="darkblue">#454a62</color>
     <color name="blue1">#0099cc</color>
     <color name="red">#ee415e</color>
+    <color name="permissioncolor">#0099cc</color>
+    <color name="blue_900">#0D47A1</color>
 
 
 </resources>

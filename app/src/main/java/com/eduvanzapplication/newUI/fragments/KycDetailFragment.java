@@ -327,9 +327,9 @@ public class KycDetailFragment extends Fragment {
             public void onClick(View v) {
 
                 if (LoanTabActivity.isKycEdit) {
-                    setViewsEnabled(false);
                     LoanTabActivity.isKycEdit = false;
                     txtBtnEditKyc.setText("Edit");
+                    setViewsEnabled(false);
 
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -342,9 +342,10 @@ public class KycDetailFragment extends Fragment {
                     ivBtnEditKyc.setImageDrawable(bg);
                     linEditKycDetail.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
                 } else {
-                    setViewsEnabled(true);
                     LoanTabActivity.isKycEdit = true;
                     txtBtnEditKyc.setText("Cancel");
+                    txtBtnEditKyc.setTag("Cancel");
+                    setViewsEnabled(true);
 
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -901,6 +902,135 @@ public class KycDetailFragment extends Fragment {
         txtCourseFee.setEnabled(f);
         edtLoanAmt.setEnabled(f);
 
+        if(!f){
+
+            if (LoanTabActivity.isKycEdit){
+
+                 indicateValidationTextdefault(txtPersonalToggle, false);
+            indicateValidationTextdefault(txtIdentityToggle, false);
+                 indicateValidationTextdefault(txtCourseToggle, false);
+
+                 indicateValidationTextdefaultBlue(txtPersonalToggle, false);
+                 indicateValidationTextdefaultBlue(txtIdentityToggle, false);
+                 indicateValidationTextdefaultBlue(txtCourseToggle, false);
+
+                 //setgender colour blue when click on edit button
+
+            } else {
+
+//         if (txtBtnEditKyc.getTag().toString().toLowerCase().contains("cancel")) {
+                //close cancel button
+         if (txtBtnEditKyc.getTag() != null) {
+
+                    //personal
+             if (firstName.equals("") || lastName.equals("") || email.equals("") ||
+                     mobile.equals("") || dob.equals("") || gender.equals("") ||
+                     maritalStatus.equals("")){
+
+                 indicateValidationTextdefault(txtPersonalToggle, false);
+                 indicateValidationIcondefault(ivPersonalStatus, ivPersonalTitle, false);
+
+             }else{
+
+                 indicateValidationTextdefault(txtPersonalToggle, false);
+                 indicateValidationIcondefault(ivPersonalStatus, ivPersonalTitle, true);
+
+
+                 //select gender ,DOB and Marital status colour grey on click on cancel button
+                     selectgendercolourGrey();
+
+             }
+
+             //Course
+
+             if (instituteId.equals("") || instituteLocationId.equals("") ||
+                     courseId.equals("") || course_cost.equals("") ||
+                     requested_loan_amount.equals("")){
+
+                 indicateValidationTextdefault(txtCourseToggle, false);
+                 indicateValidationIcondefault(ivCourseStatus, ivCourseTitle, false);
+
+             } else{
+
+                 indicateValidationTextdefault(txtCourseToggle, false);
+                 indicateValidationIcondefault(ivCourseStatus, ivCourseTitle, true);
+
+             }
+
+             //Identity
+
+             if(flatBuildingSociety.equals("") || streetLocalityLandmark.equals("") ||
+                     pincode.length() < 6 || (aadhar.equals("") && pan.equals("")) ||
+                     countryId.equals("") || stateId.equals("") || cityId.equals("")){
+
+                 indicateValidationTextdefault(txtIdentityToggle, false);
+                 indicateValidationIcondefault(ivIdentityStatus, ivIdentityTitle, false);
+
+             }else{
+
+                 indicateValidationTextdefault(txtIdentityToggle, false);
+                 indicateValidationIcondefault(ivIdentityStatus, ivIdentityTitle, true);
+             }
+
+
+
+         }else{
+
+             //this below code for onpageload without click on edit btn
+
+            indicateValidationTextdefault(txtPersonalToggle, false);
+                 indicateValidationTextdefault(txtIdentityToggle, false);
+            indicateValidationTextdefault(txtCourseToggle, false);
+
+
+         }
+
+            }
+
+        } //outer if closed
+
+        else {
+                  //on KYC edit click
+
+            if (txtBtnEditKyc.getText().toString().toLowerCase().contains("cancel")) {
+
+                indicateValidationTextdefaultBlue(txtPersonalToggle, true);
+                indicateValidationTextdefaultBlue(txtIdentityToggle, true);
+                indicateValidationTextdefaultBlue(txtCourseToggle, true);
+
+                indicateValidationIcondefaultBlue(ivPersonalStatus, ivPersonalTitle, true);
+                indicateValidationIcondefaultBlue(ivIdentityStatus, ivIdentityTitle, true);
+                indicateValidationIcondefaultBlue(ivCourseStatus, ivCourseTitle, true);
+
+               // select gender ,DOB and Marital status colour Blue on edit btn enable
+                selectgendercolourBlue();
+
+                //  chekAllFields();
+            }
+
+           else  {
+
+             /*  //default text true
+                indicateValidationTextdefault(txtIdentityToggle, true);
+                indicateValidationTextdefault(txtPersonalToggle, true);
+                indicateValidationTextdefault(txtCourseToggle, true);
+                //defaulticon true
+                indicateValidationIcondefault(ivPersonalStatus, ivPersonalTitle, true);
+                indicateValidationIcondefault(ivCourseStatus, ivCourseTitle, true);
+                indicateValidationIcondefault(ivIdentityStatus, ivIdentityTitle, true);
+                //texteditbtn
+                indicateValidationTextdefaultBlue(txtPersonalToggle, true);
+                indicateValidationTextdefaultBlue(txtIdentityToggle, true);
+                indicateValidationTextdefaultBlue(txtCourseToggle, true);
+                //iconeditbtn,titleditbtn
+                indicateValidationIcondefaultBlue(ivPersonalStatus, ivPersonalTitle, true);
+                indicateValidationIcondefaultBlue(ivIdentityStatus, ivIdentityTitle, true);
+                indicateValidationIcondefaultBlue(ivCourseStatus, ivCourseTitle, true);*/
+
+        }
+
+        } //use this code when edit btn click and blue color
+
     }
 
     public void applyFieldsChangeListener() {
@@ -1051,7 +1181,7 @@ public class KycDetailFragment extends Fragment {
 //False
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         aadhar = "";
-                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
+                        edtAadhaar.setError("* Please Enter valid Aadhaar Number!");
                         edtPAN.setError(null);
                         documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
@@ -1061,12 +1191,12 @@ public class KycDetailFragment extends Fragment {
                         documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         aadhar = "";
-                        edtAadhaar.setError("Please Enter valid Aadhaar Number!");
+                        edtAadhaar.setError("* Please Enter valid Aadhaar Number!");
 //                        edtPAN.setError(null);
                         documents = "1";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
                         pan = "";
-                        edtAadhaar.setError("Please Enter Aadhaar or PAN Number!");
+                        edtAadhaar.setError("* Please Enter Aadhaar or PAN Number!");
                         edtPAN.setError(null);
                         documents = "0";
                     }
@@ -1109,12 +1239,12 @@ public class KycDetailFragment extends Fragment {
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         pan = "";
 //                        edtAadhaar.setError(null);
-                        edtPAN.setError("Please Enter Valid PAN number!");
+                        edtPAN.setError("* Please Enter Valid PAN number!");
                         documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
                         pan = "";
                         edtAadhaar.setError(null);
-                        edtPAN.setError("Please Enter Valid PAN number!");
+                        edtPAN.setError("* Please Enter Valid PAN number!");
                         documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         pan = "";
@@ -1123,7 +1253,7 @@ public class KycDetailFragment extends Fragment {
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
                         pan = "";
                         edtAadhaar.setError(null);
-                        edtPAN.setError("Please Enter Aadhaar or PAN Number!");
+                        edtPAN.setError("* Please Enter Aadhaar or PAN Number!");
                         documents = "0";
                     }
                 } else {
@@ -1221,7 +1351,7 @@ public class KycDetailFragment extends Fragment {
                     edtPincodeBr.setError(null);
                 } else {
                     pincode = "";
-                    edtPincodeBr.setError("Please enter valid pincode !");
+                    edtPincodeBr.setError("* Please enter valid pincode !");
                 }
 
                 if (LoanTabActivity.isKycEdit) {
@@ -1299,8 +1429,8 @@ public class KycDetailFragment extends Fragment {
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
 
                 txtMale.setTextColor(getResources().getColor(R.color.white));
-                txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
-                txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+                txtFemale.setTextColor(getResources().getColor(R.color.blue1));
+                txtOther.setTextColor(getResources().getColor(R.color.blue1));
 
                 iviewMale.setBackgroundColor(getResources().getColor(R.color.white));
                 iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
@@ -1319,20 +1449,20 @@ public class KycDetailFragment extends Fragment {
                 Drawable bg1;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
-                    ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    ivFemale.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
                 } else {
                     bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
-                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.blue1));
                 }
                 ivFemale.setImageDrawable(bg1);
 
                 Drawable bg2;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
-                    ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    ivOther.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
                 } else {
                     bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
-                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.blue1));
                 }
                 ivOther.setImageDrawable(bg2);
             }
@@ -1347,9 +1477,9 @@ public class KycDetailFragment extends Fragment {
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
 
-                txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+                txtMale.setTextColor(getResources().getColor(R.color.blue1));
                 txtFemale.setTextColor(getResources().getColor(R.color.white));
-                txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+                txtOther.setTextColor(getResources().getColor(R.color.blue1));
 
                 iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
                 iviewFemale.setBackgroundColor(getResources().getColor(R.color.white));
@@ -1358,10 +1488,10 @@ public class KycDetailFragment extends Fragment {
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
-                    ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    ivMale.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
                 } else {
                     bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
-                    DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+                    DrawableCompat.setTint(bg, getResources().getColor(R.color.blue1));
                 }
                 ivMale.setImageDrawable(bg);
 
@@ -1378,10 +1508,10 @@ public class KycDetailFragment extends Fragment {
                 Drawable bg2;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
-                    ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    ivOther.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
                 } else {
                     bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
-                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+                    DrawableCompat.setTint(bg2, getResources().getColor(R.color.blue1));
                 }
                 ivOther.setImageDrawable(bg2);
 
@@ -1397,8 +1527,8 @@ public class KycDetailFragment extends Fragment {
                 linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
                 linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
 
-                txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
-                txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+                txtMale.setTextColor(getResources().getColor(R.color.blue1));
+                txtFemale.setTextColor(getResources().getColor(R.color.blue1));
                 txtOther.setTextColor(getResources().getColor(R.color.white));
 
                 iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
@@ -1408,20 +1538,20 @@ public class KycDetailFragment extends Fragment {
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
-                    ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    ivMale.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
                 } else {
                     bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
-                    DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+                    DrawableCompat.setTint(bg, getResources().getColor(R.color.blue1));
                 }
                 ivMale.setImageDrawable(bg);
 
                 Drawable bg1;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
-                    ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+                    ivFemale.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
                 } else {
                     bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
-                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+                    DrawableCompat.setTint(bg1, getResources().getColor(R.color.blue1));
                 }
                 ivFemale.setImageDrawable(bg1);
 
@@ -1501,28 +1631,28 @@ public class KycDetailFragment extends Fragment {
                 txtPersonalDetailsErrMsg.setVisibility(VISIBLE);
 
                 if (edtFnameBr.getText().toString().equals("")) {
-                    txtPersonalDetailsErrMsg.setText("Please enter first name");
+                    txtPersonalDetailsErrMsg.setText("*Please enter first name");
                     // edtFnameBr.requestFocus();
 
                 } else if (edtLnameBr.getText().toString().equals("")) {
-                    txtPersonalDetailsErrMsg.setText("Please enter last name");
+                    txtPersonalDetailsErrMsg.setText("*Please enter last name");
                     //  edtLnameBr.requestFocus();
 
                 } else if (gender.equals("")) {
-                    txtPersonalDetailsErrMsg.setText("Please enter gender");
+                    txtPersonalDetailsErrMsg.setText("*Please enter gender");
                     //   linMaleBtn.requestFocus();
 
                 } else if (dob.equals("")) {
-                    txtPersonalDetailsErrMsg.setText("Please enter DOB");
+                    txtPersonalDetailsErrMsg.setText("*Please enter DOB");
                     // txtDOB.requestFocus();
                 } else if (maritalStatus.equals("")) {
-                    txtPersonalDetailsErrMsg.setText("Please enter maritalStatus");
+                    txtPersonalDetailsErrMsg.setText("*Please enter maritalStatus");
                     //  txtMaritalStatus.requestFocus();
                 } else if (email.equals("")) {
-                    txtPersonalDetailsErrMsg.setText("Please enter email");
+                    txtPersonalDetailsErrMsg.setText("*Please enter email");
                     //edtEmailIdBr.requestFocus();
                 } else if (mobile.equals("")) {
-                    txtPersonalDetailsErrMsg.setText("Please enter mobile number");
+                    txtPersonalDetailsErrMsg.setText("*Please enter mobile number");
                     // edtMobileNoBr.requestFocus();
                 }
                 linPersonalBlock.requestFocus();
@@ -1543,13 +1673,13 @@ public class KycDetailFragment extends Fragment {
                 txtCourseDetailsErrMsg.setVisibility(VISIBLE);
 
                 if (instituteId.equals("")) {
-                    txtCourseDetailsErrMsg.setText("Please select Institue Name");
+                    txtCourseDetailsErrMsg.setText("* Please select Institue Name");
                     // spInsttLocation.requestFocus();
                 } else if (course_cost.equals("")) {
-                    txtCourseDetailsErrMsg.setText("Please enter course fee");
+                    txtCourseDetailsErrMsg.setText("* Please enter course fee");
                     //spCourse.requestFocus();
                 } else if (requested_loan_amount.equals("")) {
-                    txtCourseDetailsErrMsg.setText("Please enter loan amount");
+                    txtCourseDetailsErrMsg.setText("* Please enter loan amount");
                     //edtLoanAmt.requestFocus();
                 } else if (loanAmountvalueInInt > courseFeeValueinint) {
                     txtCourseDetailsErrMsg.setText("Loan amount not exceed than course fees!");
@@ -1578,30 +1708,30 @@ public class KycDetailFragment extends Fragment {
                     txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
 
                     if (flatBuildingSociety.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        txtIdentityDetailsErrMsg.setText("* Please enter Flat No,Building Name,Society Name");
                         // edtAddressbr.requestFocus();
 
                     } else if (streetLocalityLandmark.equals("")) {
 
-                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        txtIdentityDetailsErrMsg.setText("* Please enter Street Name,Locality,LandMark");
                         //edtLandmarkbr.requestFocus();
                     } else if (pincode.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        txtIdentityDetailsErrMsg.setText("* Please enter pincode");
                         //edtPincodeBr.requestFocus();
                     } else if (aadhar.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter aadhar");
+                        txtIdentityDetailsErrMsg.setText("* Please enter aadhar");
                         //edtAadhaar.requestFocus();
                     } else if (pan.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pan");
+                        txtIdentityDetailsErrMsg.setText("* Please enter pan");
                         //edtPAN.requestFocus();
                     } else if (countryId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        txtIdentityDetailsErrMsg.setText("* Please enter Country");
                         //spCountry.requestFocus();
                     } else if (stateId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        txtIdentityDetailsErrMsg.setText("* Please enter State");
                         //spState.requestFocus();
                     } else if (cityId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        txtIdentityDetailsErrMsg.setText("* Please enter City");
                         //spCity.requestFocus();
                     }
                     txtIdentityDetailsErrMsg.requestFocus();
@@ -1627,25 +1757,25 @@ public class KycDetailFragment extends Fragment {
                     txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
 
                     if (flatBuildingSociety.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        txtIdentityDetailsErrMsg.setText("* Please enter Flat No,Building Name,Society Name");
                         // edtAddressbr.requestFocus();
                     } else if (streetLocalityLandmark.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        txtIdentityDetailsErrMsg.setText("* Please enter Street Name,Locality,LandMark");
                         //edtLandmarkbr.requestFocus();
                     } else if (pincode.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        txtIdentityDetailsErrMsg.setText("* Please enter pincode");
                         //edtPincodeBr.requestFocus();
                     } else if (aadhar.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter aadhar");
+                        txtIdentityDetailsErrMsg.setText("* Please enter aadhar");
                         //edtAadhaar.requestFocus();
                     } else if (countryId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        txtIdentityDetailsErrMsg.setText("* Please enter Country");
                         //spCountry.requestFocus();
                     } else if (stateId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        txtIdentityDetailsErrMsg.setText("* Please enter State");
                         //spState.requestFocus();
                     } else if (cityId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        txtIdentityDetailsErrMsg.setText("* Please enter City");
                         //spCity.requestFocus();
                     }
                     txtIdentityDetailsErrMsg.requestFocus();
@@ -1671,25 +1801,25 @@ public class KycDetailFragment extends Fragment {
                     txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
 
                     if (flatBuildingSociety.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Flat No,Building Name,Society Name");
                         // edtAddressbr.requestFocus();
                     } else if (streetLocalityLandmark.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Street Name,Locality,LandMark");
                         //edtLandmarkbr.requestFocus();
                     } else if (pincode.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        txtIdentityDetailsErrMsg.setText("*Please enter pincode");
                         //edtPincodeBr.requestFocus();
                     } else if (pan.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pan");
+                        txtIdentityDetailsErrMsg.setText("*Please enter pan");
                         //edtPAN.requestFocus();
                     } else if (countryId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Country");
                         //spCountry.requestFocus();
                     } else if (stateId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        txtIdentityDetailsErrMsg.setText("*Please enter State");
                         //spState.requestFocus();
                     } else if (cityId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        txtIdentityDetailsErrMsg.setText("*Please enter City");
                         //spCity.requestFocus();
                     }
                     txtIdentityDetailsErrMsg.requestFocus();
@@ -1712,28 +1842,28 @@ public class KycDetailFragment extends Fragment {
                     txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
 
                     if (flatBuildingSociety.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Flat No,Building Name,Society Name");
                         //edtAddressbr.requestFocus();
                     } else if (streetLocalityLandmark.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Street Name,Locality,LandMark");
                         // edtLandmarkbr.requestFocus();
                     } else if (pincode.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        txtIdentityDetailsErrMsg.setText("*Please enter pincode");
                         // edtPincodeBr.requestFocus();
                     } else if (aadhar.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter aadhar");
+                        txtIdentityDetailsErrMsg.setText("*Please enter aadhar");
                         //edtAadhaar.requestFocus();
                     } else if (pan.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pan");
+                        txtIdentityDetailsErrMsg.setText("*Please enter pan");
                         //edtPAN.requestFocus();
                     } else if (countryId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Country");
                         //spCountry.requestFocus();
                     } else if (stateId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        txtIdentityDetailsErrMsg.setText("*Please enter State");
                         //spState.requestFocus();
                     } else if (cityId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        txtIdentityDetailsErrMsg.setText("*Please enter City");
                         //spCity.requestFocus();
                     }
                     txtIdentityDetailsErrMsg.requestFocus();
@@ -1754,30 +1884,30 @@ public class KycDetailFragment extends Fragment {
                     txtIdentityDetailsErrMsg.setVisibility(VISIBLE);
 
                     if (flatBuildingSociety.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Flat No,Building Name,Society Name");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Flat No,Building Name,Society Name");
                         //edtAddressbr.requestFocus();
 
                     } else if (streetLocalityLandmark.equals("")) {
 
-                        txtIdentityDetailsErrMsg.setText("Please enter Street Name,Locality,LandMark");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Street Name,Locality,LandMark");
                         //edtLandmarkbr.requestFocus();
                     } else if (pincode.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pincode");
+                        txtIdentityDetailsErrMsg.setText("*Please enter pincode");
                         //edtPincodeBr.requestFocus();
                     } else if (aadhar.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter aadhar");
+                        txtIdentityDetailsErrMsg.setText("*Please enter aadhar");
                         // edtAadhaar.requestFocus();
                     } else if (pan.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter pan");
+                        txtIdentityDetailsErrMsg.setText("*Please enter pan");
                         //edtPAN.requestFocus();
                     } else if (countryId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter Country");
+                        txtIdentityDetailsErrMsg.setText("*Please enter Country");
                         //spCountry.requestFocus();
                     } else if (stateId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter State");
+                        txtIdentityDetailsErrMsg.setText("*Please enter State");
                         //spState.requestFocus();
                     } else if (cityId.equals("")) {
-                        txtIdentityDetailsErrMsg.setText("Please enter City");
+                        txtIdentityDetailsErrMsg.setText("*Please enter City");
                         //spCity.requestFocus();
                     }
                 }
@@ -1830,6 +1960,8 @@ public class KycDetailFragment extends Fragment {
 //        }
 
         if (valid) {
+
+            if (LoanTabActivity.isKycEdit) {
             Drawable bg;
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
@@ -1848,10 +1980,32 @@ public class KycDetailFragment extends Fragment {
                 DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.colorGreen));
                 ivTitle.setImageDrawable(bg1);
             }
-
         } else {
             Drawable bg;
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+                    ivStatus.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.defaulticoncolor));
+                }
+                ivStatus.setImageDrawable(bg);
+
+                Drawable bg1;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    ivTitle.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg1 = ivTitle.getDrawable();
+                    DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.defaulticoncolor));
+                    ivTitle.setImageDrawable(bg1);
+                }
+            }
+
+
+        } else {
+            if (LoanTabActivity.isKycEdit) {
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_exclamation_circle, null);
                 ivStatus.setColorFilter(context.getResources().getColor(R.color.new_red), PorterDuff.Mode.MULTIPLY);
             } else {
@@ -1862,10 +2016,124 @@ public class KycDetailFragment extends Fragment {
 
             Drawable bg1;
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                ivTitle.setColorFilter(context.getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.new_red), PorterDuff.Mode.MULTIPLY);
             } else {
                 bg1 = ivTitle.getDrawable();
-                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.blue1));
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.new_red));
+                ivTitle.setImageDrawable(bg1);
+            }
+            } else {
+                Drawable bg;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_exclamation_circle, null);
+                    ivStatus.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_exclamation_circle);
+                    DrawableCompat.setTint(bg, context.getResources().getColor(R.color.defaulticoncolor));
+                }
+                ivStatus.setImageDrawable(bg);
+
+                Drawable bg1;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    ivTitle.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    bg1 = ivTitle.getDrawable();
+                    DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.defaulticoncolor));
+                    ivTitle.setImageDrawable(bg1);
+                }
+        }
+
+    }
+
+    }
+
+
+    public void indicateValidationIcondefault(ImageView ivStatus, ImageView ivTitle, boolean valid) {
+
+        if (valid) {
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_grey, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_grey);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.defaulticoncolor));
+            }
+            ivStatus.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.defaulticoncolor));
+                ivTitle.setImageDrawable(bg1);
+            }
+
+        } else {
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_exclamation_circle, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_exclamation_circle);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.defaulticoncolor));
+            }
+            ivStatus.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.defaulticoncolor));
+                ivTitle.setImageDrawable(bg1);
+            }
+        }
+
+    }
+
+    public void indicateValidationIcondefaultBlue(ImageView ivStatus, ImageView ivTitle, boolean valid) {
+
+        if (valid) {
+
+          /*  Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorPrimary));
+            }
+            ivStatus.setImageDrawable(bg);
+*/          //this above for icon
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.colorPrimary));
+                ivTitle.setImageDrawable(bg1);
+            }
+
+        } else {
+
+           /* Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_borrower_documents_pending, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_borrower_documents_pending);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.defaulticoncolor));
+            }
+            ivStatus.setImageDrawable(bg);
+*/
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.defaulticoncolor));
                 ivTitle.setImageDrawable(bg1);
             }
         }
@@ -1874,10 +2142,37 @@ public class KycDetailFragment extends Fragment {
 
     public void indicateValidationText(TextView indicator, boolean valid) {
         if (valid) {
+            if (LoanTabActivity.isKycEdit) {
+            indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
+        } else {
+                indicator.setTextColor(context.getResources().getColor(R.color.defaulticoncolor));
+            }
+        } else {
+            if (LoanTabActivity.isKycEdit) {
+            indicator.setTextColor(context.getResources().getColor(R.color.new_red));
+            } else {
+                indicator.setTextColor(context.getResources().getColor(R.color.defaulticoncolor));
+            }
+        }
+
+    }
+
+    public void indicateValidationTextdefault(TextView indicator, boolean valid) {
+        if (valid) {
             indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
         } else {
 
-            indicator.setTextColor(context.getResources().getColor(R.color.blue1));
+            indicator.setTextColor(context.getResources().getColor(R.color.defaulticoncolor));
+        }
+
+    }
+
+    public void indicateValidationTextdefaultBlue(TextView indicator, boolean valid) {
+        if (valid) {
+            indicator.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+        } else {
+
+            indicator.setTextColor(context.getResources().getColor(R.color.defaulticoncolor));
         }
 
     }
@@ -2316,17 +2611,17 @@ public class KycDetailFragment extends Fragment {
                         if (!gender.equals("") && !gender.equals("null")) {
                             if (gender.equals("1")) {
 
-                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
 
                                 txtMale.setTextColor(getResources().getColor(R.color.white));
                                 txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
                                 txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
 
                                 iviewMale.setBackgroundColor(getResources().getColor(R.color.white));
-                                iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
-                                iviewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+                                iviewFemale.setBackgroundColor(getResources().getColor(R.color.textcolordark));
+                                iviewOther.setBackgroundColor(getResources().getColor(R.color.textcolordark));
 
                                 Drawable bg;
                                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -2359,17 +2654,17 @@ public class KycDetailFragment extends Fragment {
                                 ivOther.setImageDrawable(bg2);
                             } else if (gender.equals("2")) {
 
-                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
 
                                 txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
                                 txtFemale.setTextColor(getResources().getColor(R.color.white));
                                 txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
 
-                                iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+                                iviewMale.setBackgroundColor(getResources().getColor(R.color.textcolordark));
                                 iviewFemale.setBackgroundColor(getResources().getColor(R.color.white));
-                                iviewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+                                iviewOther.setBackgroundColor(getResources().getColor(R.color.textcolordark));
 
                                 Drawable bg;
                                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -2401,9 +2696,9 @@ public class KycDetailFragment extends Fragment {
                                 }
                                 ivOther.setImageDrawable(bg2);
                             } else if (gender.equals("3")) {
-                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+                                linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+                                linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
 
                                 txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
                                 txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
@@ -2590,6 +2885,295 @@ public class KycDetailFragment extends Fragment {
         }
 
     }
+
+    public void selectgendercolourGrey(){
+
+
+        if (gender.equals("1")) {
+
+            linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+            linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+            linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+
+            txtMale.setTextColor(getResources().getColor(R.color.white));
+            txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+            txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+
+            iviewMale.setBackgroundColor(getResources().getColor(R.color.white));
+            iviewFemale.setBackgroundColor(getResources().getColor(R.color.textcolordark));
+            iviewOther.setBackgroundColor(getResources().getColor(R.color.textcolordark));
+
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                ivMale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
+                DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
+            }
+            ivMale.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
+                DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+            }
+            ivFemale.setImageDrawable(bg1);
+
+            Drawable bg2;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
+                DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+            }
+            ivOther.setImageDrawable(bg2);
+        } else if (gender.equals("2")) {
+
+            linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+            linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+            linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+
+            txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+            txtFemale.setTextColor(getResources().getColor(R.color.white));
+            txtOther.setTextColor(getResources().getColor(R.color.textcolordark));
+
+            iviewMale.setBackgroundColor(getResources().getColor(R.color.textcolordark));
+            iviewFemale.setBackgroundColor(getResources().getColor(R.color.white));
+            iviewOther.setBackgroundColor(getResources().getColor(R.color.textcolordark));
+
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
+                DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+            }
+            ivMale.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                ivFemale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
+                DrawableCompat.setTint(bg1, getResources().getColor(R.color.white));
+            }
+            ivFemale.setImageDrawable(bg1);
+
+            Drawable bg2;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                ivOther.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
+                DrawableCompat.setTint(bg2, getResources().getColor(R.color.darkblue));
+            }
+            ivOther.setImageDrawable(bg2);
+        } else if (gender.equals("3")) {
+            linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+            linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
+            linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+
+            txtMale.setTextColor(getResources().getColor(R.color.textcolordark));
+            txtFemale.setTextColor(getResources().getColor(R.color.textcolordark));
+            txtOther.setTextColor(getResources().getColor(R.color.white));
+
+            iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+            iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+            iviewOther.setBackgroundColor(getResources().getColor(R.color.white));
+
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                ivMale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
+                DrawableCompat.setTint(bg, getResources().getColor(R.color.darkblue));
+            }
+            ivMale.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                ivFemale.setColorFilter(getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
+                DrawableCompat.setTint(bg1, getResources().getColor(R.color.darkblue));
+            }
+            ivFemale.setImageDrawable(bg1);
+
+            Drawable bg2;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                ivOther.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
+                DrawableCompat.setTint(bg2, getResources().getColor(R.color.white));
+            }
+            ivOther.setImageDrawable(bg2);
+
+
+
+        }
+
+        //DOB
+
+        linDob.setBackground(getResources().getDrawable(R.drawable.border_circular));
+
+        //Marital status
+        linMaritalStatus.setBackground(getResources().getDrawable(R.drawable.border_circular));
+
+
+    }
+
+
+    public void selectgendercolourBlue(){
+
+
+        if (gender.equals("1")) {
+
+            linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+            linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+            linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+
+            txtMale.setTextColor(getResources().getColor(R.color.white));
+            txtFemale.setTextColor(getResources().getColor(R.color.blue1));
+            txtOther.setTextColor(getResources().getColor(R.color.blue1));
+
+            iviewMale.setBackgroundColor(getResources().getColor(R.color.white));
+            iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+            iviewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                ivMale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
+                DrawableCompat.setTint(bg, getResources().getColor(R.color.white));
+            }
+            ivMale.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                ivFemale.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
+                DrawableCompat.setTint(bg1, getResources().getColor(R.color.blue1));
+            }
+            ivFemale.setImageDrawable(bg1);
+
+            Drawable bg2;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                ivOther.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
+                DrawableCompat.setTint(bg2, getResources().getColor(R.color.blue1));
+            }
+            ivOther.setImageDrawable(bg2);
+        } else if (gender.equals("2")) {
+
+            linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+            linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+            linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+
+            txtMale.setTextColor(getResources().getColor(R.color.blue1));
+            txtFemale.setTextColor(getResources().getColor(R.color.white));
+            txtOther.setTextColor(getResources().getColor(R.color.blue1));
+
+            iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+            iviewFemale.setBackgroundColor(getResources().getColor(R.color.white));
+            iviewOther.setBackgroundColor(getResources().getColor(R.color.blue1));
+
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                ivMale.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
+                DrawableCompat.setTint(bg, getResources().getColor(R.color.blue1));
+            }
+            ivMale.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                ivFemale.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
+                DrawableCompat.setTint(bg1, getResources().getColor(R.color.white));
+            }
+            ivFemale.setImageDrawable(bg1);
+
+            Drawable bg2;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                ivOther.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
+                DrawableCompat.setTint(bg2, getResources().getColor(R.color.blue1));
+            }
+            ivOther.setImageDrawable(bg2);
+        } else if (gender.equals("3")) {
+            linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+            linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+            linOtherBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
+
+            txtMale.setTextColor(getResources().getColor(R.color.blue1));
+            txtFemale.setTextColor(getResources().getColor(R.color.blue1));
+            txtOther.setTextColor(getResources().getColor(R.color.white));
+
+            iviewMale.setBackgroundColor(getResources().getColor(R.color.blue1));
+            iviewFemale.setBackgroundColor(getResources().getColor(R.color.blue1));
+            iviewOther.setBackgroundColor(getResources().getColor(R.color.white));
+
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_male, null);
+                ivMale.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_male);
+                DrawableCompat.setTint(bg, getResources().getColor(R.color.blue1));
+            }
+            ivMale.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg1 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_female, null);
+                ivFemale.setColorFilter(getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_female);
+                DrawableCompat.setTint(bg1, getResources().getColor(R.color.blue1));
+            }
+            ivFemale.setImageDrawable(bg1);
+
+            Drawable bg2;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg2 = VectorDrawableCompat.create(getResources(), R.drawable.ic_personal_details_gender, null);
+                ivOther.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg2 = ContextCompat.getDrawable(context, R.drawable.ic_personal_details_gender);
+                DrawableCompat.setTint(bg2, getResources().getColor(R.color.white));
+            }
+            ivOther.setImageDrawable(bg2);
+        }
+
+        //DOB
+
+        linDob.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+
+        //Marital status
+        linMaritalStatus.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
+    }
+
 
     public void instituteApiCall() {
         /**API CALL**/

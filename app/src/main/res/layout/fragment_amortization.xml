@@ -11,7 +11,8 @@
     <LinearLayout
         android:id="@+id/linAmortFrag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_5sdp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -50,7 +51,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center_horizontal"
+                                android:gravity="center_horizontal|left"
                                 android:text="EMI Amount"
                                 android:textStyle="normal" />
 
@@ -60,6 +61,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:gravity="center_horizontal|left"
                                 android:drawableStart="@drawable/ic_rupee_sign"
                                 android:padding="@dimen/_3sdp"
                                 android:text=" 0"
@@ -79,7 +81,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center_horizontal"
+                                android:gravity="center_horizontal|left"
                                 android:text="Next EMI Due" />
 
                             <TextView
@@ -87,6 +89,7 @@
                                 style="@style/TextViewTitle14Style"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|left"
                                 android:layout_weight="1"
                                 android:padding="@dimen/_3sdp"
                                 android:textSize="12sp" />
@@ -105,7 +108,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center_horizontal"
+                                android:gravity="center_horizontal|left"
                                 android:text="EMI End Date" />
 
                             <TextView
@@ -113,6 +116,7 @@
                                 style="@style/TextViewTitle14Style"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|left"
                                 android:layout_weight="1"
                                 android:padding="@dimen/_3sdp"
                                 android:textSize="12sp" />
@@ -131,8 +135,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center_horizontal"
-                                android:text="Outstanding Amt" />
+                                android:gravity="center_horizontal|left"
+                                android:text="Outstanding Amount" />
 
                             <TextView
                                 android:id="@+id/txtOutstandingAmt"
@@ -140,6 +144,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:gravity="center_horizontal|left"
                                 android:drawableStart="@drawable/ic_rupee_sign"
                                 android:padding="@dimen/_3sdp"
                                 android:text=" 0"
@@ -234,6 +239,18 @@
                         android:gravity="center_vertical"
                         android:orientation="vertical"
                         android:visibility="visible">
+
+                        <TextView
+                            style="@style/TextViewTitle15BoldStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:text="Amortization Schedule"
+                            android:textAllCaps="true"
+                            android:textColor="@color/darkblue" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -407,7 +424,7 @@
                                                         android:layout_gravity="center_vertical"
                                                         android:layout_marginLeft="@dimen/_2sdp"
                                                         android:gravity="center"
-                                                        android:text=" Paid"
+                                                        android:text=" EMI Paid"
                                                         android:textAlignment="center"
                                                         android:textAllCaps="true"
                                                         android:textColor="@color/colorGreen" />
@@ -473,6 +490,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="visible"
@@ -503,7 +521,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -513,7 +530,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -548,7 +564,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -558,7 +573,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -593,7 +607,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -603,7 +616,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -638,7 +650,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -648,7 +659,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -683,7 +693,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -693,7 +702,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -711,7 +719,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -742,7 +749,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -752,7 +758,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -787,7 +792,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -797,7 +801,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -833,7 +836,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -843,7 +845,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -879,7 +880,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -889,7 +889,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -925,7 +924,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -935,7 +933,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -954,7 +951,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -985,7 +982,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -995,7 +991,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1030,7 +1025,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1040,7 +1034,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1075,7 +1068,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1085,7 +1077,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1120,7 +1111,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1130,7 +1120,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1165,7 +1154,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1175,7 +1163,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1192,7 +1179,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -1224,7 +1211,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1234,7 +1220,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1269,7 +1254,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1279,7 +1263,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1314,7 +1297,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1324,7 +1306,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="18sp" />
@@ -1359,7 +1340,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1369,7 +1349,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1404,7 +1383,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1414,7 +1392,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1434,7 +1411,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -1465,7 +1442,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1475,7 +1451,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1510,7 +1485,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1520,7 +1494,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1555,7 +1528,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1565,7 +1537,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1600,7 +1571,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1610,7 +1580,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1645,7 +1614,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1655,7 +1623,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1672,7 +1639,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -1703,7 +1670,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1713,7 +1679,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1748,7 +1713,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1758,7 +1722,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1793,7 +1756,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1803,7 +1765,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1838,7 +1799,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1848,7 +1808,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1883,7 +1842,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1893,7 +1851,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1912,7 +1869,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -1943,7 +1900,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1953,7 +1909,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -1988,7 +1943,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -1998,7 +1952,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2033,7 +1986,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2043,7 +1995,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2078,7 +2029,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2088,7 +2038,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2123,7 +2072,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2133,7 +2081,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2150,7 +2097,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -2181,7 +2128,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2191,7 +2137,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2226,7 +2171,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2236,7 +2180,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2271,7 +2214,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2281,7 +2223,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2316,7 +2257,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2326,7 +2266,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2361,7 +2300,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2371,7 +2309,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2390,7 +2327,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -2421,7 +2358,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2431,7 +2367,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2466,7 +2401,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2476,7 +2410,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2511,7 +2444,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2521,7 +2453,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2556,7 +2487,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2566,7 +2496,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="15sp" />
@@ -2601,7 +2530,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2611,7 +2539,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2628,7 +2555,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -2659,7 +2586,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2669,7 +2595,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2704,7 +2629,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2714,7 +2638,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2749,7 +2672,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2759,7 +2681,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2794,7 +2715,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2804,7 +2724,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2839,7 +2758,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2849,7 +2767,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2868,7 +2785,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -2899,7 +2816,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2909,7 +2825,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2944,7 +2859,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2954,7 +2868,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -2989,7 +2902,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -2999,7 +2911,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3034,7 +2945,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3044,7 +2954,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3079,7 +2988,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3089,7 +2997,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3106,7 +3013,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -3137,7 +3044,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3147,7 +3053,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3182,7 +3087,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3192,7 +3096,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3227,7 +3130,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3237,7 +3139,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3272,7 +3173,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3282,7 +3182,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3317,7 +3216,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3327,7 +3225,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3346,7 +3243,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -3377,7 +3274,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3387,7 +3283,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3422,7 +3317,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3432,7 +3326,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3467,7 +3360,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3477,7 +3369,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3512,7 +3403,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3522,7 +3412,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3557,7 +3446,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3567,7 +3455,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3584,7 +3471,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -3615,7 +3502,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3625,7 +3511,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3660,7 +3545,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3670,7 +3554,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3705,7 +3588,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3715,7 +3597,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3750,7 +3631,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3760,7 +3640,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3795,7 +3674,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3805,7 +3683,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3824,7 +3701,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -3855,7 +3732,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3865,7 +3741,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue" />
 
@@ -3899,7 +3774,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3909,7 +3783,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3944,7 +3817,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3954,7 +3826,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -3989,7 +3860,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -3999,7 +3869,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4034,7 +3903,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4044,7 +3912,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4061,7 +3928,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -4092,7 +3959,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4102,7 +3968,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4137,7 +4002,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4147,7 +4011,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4182,7 +4045,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4192,7 +4054,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4227,7 +4088,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4237,7 +4097,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4272,7 +4131,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4282,7 +4140,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4301,7 +4158,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -4332,7 +4189,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4342,7 +4198,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4377,7 +4232,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4387,7 +4241,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4422,7 +4275,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4432,7 +4284,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4467,7 +4318,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4477,7 +4327,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4512,7 +4361,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4522,7 +4370,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4539,7 +4386,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -4570,7 +4417,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4580,7 +4426,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4615,7 +4460,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4625,7 +4469,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4660,7 +4503,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4670,7 +4512,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4705,7 +4546,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4715,7 +4555,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4750,7 +4589,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4760,7 +4598,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4779,7 +4616,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -4810,7 +4647,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4820,7 +4656,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4855,7 +4690,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4865,7 +4699,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4900,7 +4733,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
 
                                     android:text="EMI"
                                     android:textAllCaps="true"
@@ -4911,7 +4743,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4946,7 +4777,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -4956,7 +4786,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -4991,7 +4820,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -5001,7 +4829,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -5018,7 +4845,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="#77FFFFFF"
                         android:orientation="horizontal"
                         android:visibility="gone"
@@ -5049,7 +4876,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -5059,7 +4885,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="01"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -5094,7 +4919,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -5104,7 +4928,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="02"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -5139,7 +4962,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -5149,7 +4971,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="03"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -5184,7 +5005,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -5194,7 +5014,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="04"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />
@@ -5229,7 +5048,6 @@
                                     style="@style/TextViewMiniCapsStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="EMI"
                                     android:textAllCaps="true"
                                     android:textSize="15sp" />
@@ -5239,7 +5057,6 @@
                                     style="@style/TextViewTitle12BoldStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_2sdp"
                                     android:text="05"
                                     android:textColor="@color/darkblue"
                                     android:textSize="20sp" />

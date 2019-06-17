@@ -3948,6 +3948,7 @@ public class UploadDocumentFragment extends Fragment {
     }
 
     private void openPdf(String mPath) {
+
         Uri path = Uri.parse(mPath);
         Intent intent = new Intent(Intent.ACTION_VIEW);
 
@@ -4024,7 +4025,7 @@ public class UploadDocumentFragment extends Fragment {
                 public void onClick(DialogInterface dialog, int which) {
                 }
             });
-            final AlertDialog dialog = builder.create();
+            AlertDialog dialog = builder.create();
             LayoutInflater inflater = getLayoutInflater();
             View dialogLayout = inflater.inflate(R.layout.imagedialog, null);
             dialog.setView(dialogLayout);
@@ -4267,7 +4268,7 @@ public class UploadDocumentFragment extends Fragment {
 
                     FileSize = returnCursor.getLong(sizeIndex);//5383513 //26435143
 //                    Long fsize = returnCursor.getLong(sizeIndex);//5383513 //26435143
-//                    final String[] units = new String[] { "B", "KB", "MB", "GB", "TB" };
+//                    String[] units = new String[] { "B", "KB", "MB", "GB", "TB" };
 //                    int digitGroups = (int) (Math.log10(fsize) / Math.log10(1024));
 //                    FileSize = new DecimalFormat("#,##0.##").format(fsize / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
                 } catch (Exception e) {
@@ -4350,7 +4351,7 @@ public class UploadDocumentFragment extends Fragment {
         BitmapFactory.decodeStream(
                 context.getContentResolver().openInputStream(selectedImage), null, o);
 
-        final int REQUIRED_SIZE = 100;
+        int REQUIRED_SIZE = 100;
 
         int width_tmp = o.outWidth, height_tmp = o.outHeight;
         int scale = 1;
@@ -4596,7 +4597,7 @@ public class UploadDocumentFragment extends Fragment {
 //
 //    }
 
-    public int uploadFile(final String selectedFilePath, String doctypeno, String strapplicantType, String strapplicantId) {
+    public int uploadFile(String selectedFilePath, String doctypeno, String strapplicantType, String strapplicantId) {
         String urlup = MainActivity.mainUrl + "document/documentUpload";
 
         Log.e(TAG, "urlup++++++: " + urlup);
@@ -4617,7 +4618,7 @@ public class UploadDocumentFragment extends Fragment {
 
 
         String[] parts = selectedFilePath.split("/");
-        final String fileName = parts[parts.length - 1];
+        String fileName = parts[parts.length - 1];
         String[] fileExtn = fileName.split(".");
 
 
@@ -4728,8 +4729,8 @@ public class UploadDocumentFragment extends Fragment {
                 Log.e("TAG", "uploadFile: " + sb.toString());
                 try {
                     JSONObject mJson = new JSONObject(sb.toString());
-                    final String mData = mJson.getString("status");
-                    final String mData1 = mJson.getString("message");
+                     String mData = mJson.getString("status");
+                     String mData1 = mJson.getString("message");
 
                     Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
                     if (mData.equalsIgnoreCase("1")) {
@@ -4844,7 +4845,7 @@ public class UploadDocumentFragment extends Fragment {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {"Take a Picture", "Choose from Gallery",
+         CharSequence[] items = {"Take a Picture", "Choose from Gallery",
                 "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

@@ -60,6 +60,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.eduvanzapplication.newUI.fragments.DashboardFragmentNew.isLeadReload;
 import static com.eduvanzapplication.newUI.fragments.KycDetailFragment.ivCourseToggle;
+import static com.eduvanzapplication.newUI.fragments.KycDetailFragment.txtIdentityToggle;
 
 public class DetailedInfoFragment extends Fragment {
 
@@ -131,7 +132,7 @@ public class DetailedInfoFragment extends Fragment {
     public static String Brapplicant_id = "", Brfk_lead_id = "", Brfk_applicant_type_id = "", Brfirst_name = "", Brmiddle_name = "",
             Brlast_name = "", Brhas_aadhar_pan = "", Brdob = "", Brpan_number = "", Braadhar_number = "", Brmarital_status = "",
             Brgender_id = "", Brmobile_number = "", Bremail_id = "", Brrelationship_with_applicant = "", Brprofession = "",
-            Bremployer_type = "1", Bremployer_name = "", Brannual_income = "", Brcurrent_employment_duration = "",
+            Bremployer_type = "", Bremployer_name = "", Brannual_income = "", Brcurrent_employment_duration = "",
             Brtotal_employement_duration = "", Bremployer_mobile_number = "", Bremployer_landline_number = "", Broffice_landmark = "",
             Broffice_address = "", Broffice_address_city = "", Broffice_address_state = "", Broffice_address_country = "",
             Broffice_address_pin = "", Brhas_active_loan = "", BrEMI_Amount = "", Brkyc_landmark = "", Brkyc_address = "",
@@ -156,7 +157,7 @@ public class DetailedInfoFragment extends Fragment {
 
     //error
     public static TextView txtResidentialDetailsErrMsg, txtProfessionalDetailsErrMsg, tvOwnRenbytitle,
-            tvduraofstayatcurraddtitle, tvcountrytitle, tvstatetitle, tvcitytitle, tvselectprofesstitle,
+            tvduraofstayatcurraddtitle, tvcountrytitle,tvcountrytitle1, tvstatetitle,tvstatetitle1, tvcitytitle,tvcitytitle1, tvselectprofesstitle,
             tvperaddsameasaadhrtitle,tvemplytypetitle, tvcurremplydurntitle,txtCurrentResidentType;
 
     @Override
@@ -238,15 +239,16 @@ public class DetailedInfoFragment extends Fragment {
         tvOwnRenbytitle = view.findViewById(R.id.tvOwnRenbytitle);
         tvduraofstayatcurraddtitle = view.findViewById(R.id.tvduraofstayatcurraddtitle);
         tvcountrytitle = view.findViewById(R.id.tvcountrytitle);
+        tvcountrytitle1 = view.findViewById(R.id.tvcountrytitle1);
         tvstatetitle = view.findViewById(R.id.tvstatetitle);
         tvcitytitle = view.findViewById(R.id.tvcitytitle);
+        tvstatetitle1 = view.findViewById(R.id.tvstatetitle1);
+        tvcitytitle1 = view.findViewById(R.id.tvcitytitle1);
         tvselectprofesstitle = view.findViewById(R.id.tvselectprofesstitle);
         tvemplytypetitle = view.findViewById(R.id.tvemplytypetitle);
         tvcurremplydurntitle = view.findViewById(R.id.tvcurremplydurntitle);
         tvperaddsameasaadhrtitle=view.findViewById(R.id.tvperaddsameasaadhrtitle);
         txtCurrentResidentType=view.findViewById(R.id.txtCurrentResidentType);
-
-
 
         //ErrorMsg ID
         txtResidentialDetailsErrMsg = view.findViewById(R.id.txtResidentialDetailsErrMsg);
@@ -356,7 +358,7 @@ public class DetailedInfoFragment extends Fragment {
         Bremail_id = "";
         Brrelationship_with_applicant = "";
         Brprofession = "";
-        Bremployer_type = "1";
+        Bremployer_type = "";
         Bremployer_name = "";
         Brannual_income = "";
         Brcurrent_employment_duration = "";
@@ -823,7 +825,7 @@ public class DetailedInfoFragment extends Fragment {
                     spOwnedBy.setAdapter(arrayAdapter_currentResidencetype);
                     arrayAdapter_currentResidencetype.notifyDataSetChanged();
                     linMonthlyRent.setVisibility(VISIBLE);
-                    edtMonthlyRent.setEnabled(true);
+//                    edtMonthlyRent.setEnabled(true);
 
                     try {
                         int count = borrowerCurrentResidencePersonalPOJOArrayList.size();
@@ -846,9 +848,9 @@ public class DetailedInfoFragment extends Fragment {
             public void onClick(View v) {
 
                 if (LoanTabActivity.isDetailedInfoEdit) {
-                    setViewsEnabled(false);
                     LoanTabActivity.isDetailedInfoEdit = false;
                     txtBtnEditDtl.setText("Edit");
+                    setViewsEnabled(false);
 
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -861,9 +863,10 @@ public class DetailedInfoFragment extends Fragment {
                     ivBtnEditDtl.setImageDrawable(bg);
                     linEditDetailedInfo.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
                 } else {
-                    setViewsEnabled(true);
                     LoanTabActivity.isDetailedInfoEdit = true;
                     txtBtnEditDtl.setText("Cancel");
+                    txtBtnEditDtl.setTag("Cancel");
+                    setViewsEnabled(true);
 
                     Drawable bg;
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -1307,10 +1310,10 @@ public class DetailedInfoFragment extends Fragment {
 
             }
         });
+        ProfessionApiCall();
         countryApiCall();
         permanentstateApiCall();
         offstateApiCall();
-        ProfessionApiCall();
         detailedApiCall();
 
 //    applyFieldsChangeListener();
@@ -1326,14 +1329,18 @@ public class DetailedInfoFragment extends Fragment {
 
     private void setViewsEnabled(boolean f) {
         try {
+
             txtCurrentResidentType.setEnabled(f);
 
             tvperaddsameasaadhrtitle.setEnabled(f);
             tvOwnRenbytitle.setEnabled(f);
             tvduraofstayatcurraddtitle.setEnabled(f);
             tvcountrytitle.setEnabled(f);
+            tvcountrytitle1.setEnabled(f);
             tvstatetitle.setEnabled(f);
             tvcitytitle.setEnabled(f);
+            tvstatetitle1.setEnabled(f);
+            tvcitytitle1.setEnabled(f);
             tvselectprofesstitle.setEnabled(f);
             tvemplytypetitle.setEnabled(f);
             tvcurremplydurntitle.setEnabled(f);
@@ -1344,10 +1351,9 @@ public class DetailedInfoFragment extends Fragment {
 
             linResidentialBlock.setEnabled(f);
             linProfessionalBlock.setEnabled(f);
-            linMonthlyRent.setEnabled(f);
+            edtMonthlyRent.setEnabled(f);
             edtCompanyName.setEnabled(f);
             edtAnnualIncome.setEnabled(f);
-            edtMonthlyRent.setEnabled(f);
             edtPermanentPincode.setEnabled(f);
             edtPermanentAddress.setEnabled(f);
             edtPermanentLandmark.setEnabled(f);
@@ -1369,6 +1375,116 @@ public class DetailedInfoFragment extends Fragment {
             spDurationOfJob.setEnabled(f);
             spEmployerType.setEnabled(f);
 
+            if(!f){
+
+                if (LoanTabActivity.isDetailedInfoEdit) {
+
+                indicateValidationTextdefault(txtResidentialToggle, false);
+                indicateValidationTextdefault(txtProfessionalToggle, false);
+                indicateValidationIcondefault(ivResidentialStatus, ivResidentialTitle, false);
+                indicateValidationIcondefault(ivProfessionalStatus, ivProfessionalTitle, false);
+
+                indicateValidationTextdefaultBlue(txtResidentialToggle, false);
+                indicateValidationTextdefaultBlue(txtProfessionalToggle, false);
+                indicateValidationIcondefaultBlue(ivResidentialStatus, ivResidentialTitle, false);
+                indicateValidationIcondefaultBlue(ivProfessionalStatus, ivProfessionalTitle, false);
+
+                }else{
+
+                    if (txtBtnEditDtl.getTag() != null) {
+                        if (switchIsPermanentAddressSame.isChecked()){
+
+                        //Residential
+
+                        if (Brcurrent_address_stay_duration.equals("") || Brcurrent_residence_type.equals("") || Brpermanent_address_pin.equals("") || Brpermanent_address.equals("") || Brpermanent_landmark.equals("")
+                                || permanentcityID.equals("") || permanentstateID.equals("") || permanentcountryID.equals(""))
+                        {
+
+                indicateValidationTextdefault(txtResidentialToggle, false);
+                            indicateValidationIcondefault(ivResidentialStatus, ivResidentialTitle, false);
+                        }
+                        else{
+                            indicateValidationTextdefault(txtResidentialToggle, false);
+                            indicateValidationIcondefault(ivResidentialStatus, ivResidentialTitle, true);
+
+                        }}
+
+                        else if (!switchIsPermanentAddressSame.isChecked()) {
+
+                            if (Brcurrent_address_stay_duration.equals("") || Brcurrent_residence_type.equals("")){
+
+                                indicateValidationTextdefault(txtResidentialToggle, false);
+                                indicateValidationIcondefault(ivResidentialStatus, ivResidentialTitle, false);
+                            }   else{
+
+                                indicateValidationTextdefault(txtResidentialToggle, false);
+                                indicateValidationIcondefault(ivResidentialStatus, ivResidentialTitle, true);
+                            }
+                        }
+
+
+
+
+                     //profession
+                        if(Brprofession.equals("") || Bremployer_name.equals("") || Brannual_income.equals("")
+                                || Broffice_address_pin.equals("") || Broffice_address.equals("") || Broffice_landmark.equals("")
+                                || Brcurrent_employment_duration.equals("") || Broffice_address_country.equals("") || offstateID.equals("") || offcityID.equals(""))
+                        {
+                indicateValidationTextdefault(txtProfessionalToggle, false);
+                indicateValidationIcondefault(ivProfessionalStatus, ivProfessionalTitle, false);
+                        }
+                        else{
+
+                            indicateValidationTextdefault(txtProfessionalToggle, false);
+                            indicateValidationIcondefault(ivProfessionalStatus, ivProfessionalTitle, true);
+
+                }
+
+
+
+
+
+            }else{
+
+                        //onpage load
+
+                        indicateValidationTextdefault(txtResidentialToggle, false);
+                        indicateValidationTextdefault(txtProfessionalToggle, false);
+
+                        /* indicateValidationTextdefaultBlue(txtResidentialToggle, false);
+                        indicateValidationTextdefaultBlue(txtProfessionalToggle, false);*/
+
+
+                    }
+                }
+
+            }else{
+
+                if (txtBtnEditDtl.getText().toString().toLowerCase().contains("cancel")) {
+
+                    indicateValidationTextdefaultBlue(txtResidentialToggle, true);
+                    indicateValidationTextdefaultBlue(txtProfessionalToggle, true);
+
+                    indicateValidationIcondefaultBlue(ivResidentialStatus, ivResidentialTitle, true);
+                    indicateValidationIcondefaultBlue(ivProfessionalStatus, ivProfessionalTitle, true);
+                    //checkAllFields();
+                }else{
+
+                  /*  indicateValidationTextdefault(txtResidentialToggle, true);
+                    indicateValidationTextdefault(txtProfessionalToggle, true);
+                    indicateValidationIcondefault(ivResidentialStatus, ivResidentialTitle, true);
+                    indicateValidationIcondefault(ivProfessionalStatus, ivProfessionalTitle, true);
+
+                    indicateValidationTextdefaultBlue(txtResidentialToggle, true);
+                    indicateValidationTextdefaultBlue(txtProfessionalToggle, true);
+                    indicateValidationIcondefaultBlue(ivResidentialStatus, ivResidentialTitle, true);
+                    indicateValidationIcondefaultBlue(ivProfessionalStatus, ivProfessionalTitle, true);*/
+
+                }
+
+
+            }
+
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
             String name = new Object() {
@@ -1377,6 +1493,119 @@ public class DetailedInfoFragment extends Fragment {
             String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
+        }
+
+    }
+
+
+    public void indicateValidationIcondefault(ImageView ivStatus, ImageView ivTitle, boolean valid) {
+
+        if (valid) {
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_grey, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_grey);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.defaulticoncolor));
+            }
+            ivStatus.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.defaulticoncolor));
+                ivTitle.setImageDrawable(bg1);
+            }
+
+        } else {
+            Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_exclamation_circle, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_exclamation_circle);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.defaulticoncolor));
+            }
+            ivStatus.setImageDrawable(bg);
+
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.defaulticoncolor));
+                ivTitle.setImageDrawable(bg1);
+            }
+        }
+
+    }
+    public void indicateValidationIcondefaultBlue(ImageView ivStatus, ImageView ivTitle, boolean valid) {
+
+        if (valid) {
+
+          /*  Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorPrimary));
+            }
+            ivStatus.setImageDrawable(bg);
+*/          //this above for icon
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.colorPrimary));
+                ivTitle.setImageDrawable(bg1);
+            }
+
+        } else {
+
+           /* Drawable bg;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_borrower_documents_pending, null);
+                ivStatus.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg = ContextCompat.getDrawable(context, R.drawable.ic_borrower_documents_pending);
+                DrawableCompat.setTint(bg, context.getResources().getColor(R.color.defaulticoncolor));
+            }
+            ivStatus.setImageDrawable(bg);
+*/
+            Drawable bg1;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.defaulticoncolor), PorterDuff.Mode.MULTIPLY);
+            } else {
+                bg1 = ivTitle.getDrawable();
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.defaulticoncolor));
+                ivTitle.setImageDrawable(bg1);
+            }
+        }
+
+    }
+
+
+    public void indicateValidationTextdefault(TextView indicator, boolean valid) {
+        if (valid) {
+            indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
+        } else {
+
+            indicator.setTextColor(context.getResources().getColor(R.color.defaulticoncolor));
+        }
+
+    }
+
+    public void indicateValidationTextdefaultBlue(TextView indicator, boolean valid) {
+        if (valid) {
+            indicator.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+        } else {
+
+            indicator.setTextColor(context.getResources().getColor(R.color.defaulticoncolor));
         }
 
     }
@@ -1390,47 +1619,50 @@ public class DetailedInfoFragment extends Fragment {
                 if (LoanTabActivity.isDetailedInfoEdit) {
                     txtResidentialDetailsErrMsg.setVisibility(VISIBLE);
                     if (Brcurrent_residence_type.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select Owned By");
+                        txtResidentialDetailsErrMsg.setText("*Please select Owned By");
                         //spOwnedBy.requestFocus();
 
                     } else if (Brcurrent_address_stay_duration.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select Stay Duration");
+                        txtResidentialDetailsErrMsg.setText("*Please select Stay Duration");
                         //spDurarionOfStay.requestFocus();
                     } else if (Brpermanent_address.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select Flat No,Building,Society Name");
+                        txtResidentialDetailsErrMsg.setText("*Please select Flat No,Building,Society Name");
                         //edtPermanentAddress.requestFocus();
 
                     } else if (Brpermanent_landmark.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select Street Name,Locality,LandMark");
+                        txtResidentialDetailsErrMsg.setText("*Please select Street Name,Locality,LandMark");
                         //Brpermanent_landmark
                         //edtPermanentLandmark.requestFocus();
 
 
                     } else if (Brpermanent_address_pin.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select Pincode");
+                        txtResidentialDetailsErrMsg.setText("*Please select Pincode");
                         //edtPermanentPincode.requestFocus();
 
                     } else if (permanentcountryID.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select Country");
+                        txtResidentialDetailsErrMsg.setText("*Please select Country");
                         // spPermanentCountry.requestFocus();
 
                     } else if (permanentstateID.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select State");
+                        txtResidentialDetailsErrMsg.setText("*Please select State");
                         //spPermanentState.requestFocus();
 
                     } else if (permanentcityID.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select city");
+                        txtResidentialDetailsErrMsg.setText("*Please select city");
                         //  spPermanentCity.requestFocus();
 
                     }
+                }else{
+                    indicateValidationText(txtResidentialToggle, true);
+                    indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, true);
                 }
                 indicateValidationText(txtResidentialToggle, false);
                 indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);
             } else {
                 txtResidentialDetailsErrMsg.setText(null);
                 txtResidentialDetailsErrMsg.setVisibility(GONE);
-                indicateValidationText(txtResidentialToggle, false);
-                indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);
+                indicateValidationText(txtResidentialToggle, true);
+                indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, true);
             }
         } else if (!switchIsPermanentAddressSame.isChecked()) {
 
@@ -1438,18 +1670,22 @@ public class DetailedInfoFragment extends Fragment {
                 if (LoanTabActivity.isDetailedInfoEdit) {
                     txtResidentialDetailsErrMsg.setVisibility(VISIBLE);
                     if (Brcurrent_residence_type.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select Owned By");
+                        txtResidentialDetailsErrMsg.setText("*Please select Owned By");
                     } else if (Brcurrent_address_stay_duration.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("Please select Stay Duration");
+                        txtResidentialDetailsErrMsg.setText("*Please select Stay Duration");
                     }
+                }else{
+                    indicateValidationText(txtResidentialToggle, true);
+                    indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, true);
+
                 }
                 indicateValidationText(txtResidentialToggle, false);
                 indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);
             } else {
                 txtResidentialDetailsErrMsg.setText(null);
                 txtResidentialDetailsErrMsg.setVisibility(GONE);
-                indicateValidationText(txtResidentialToggle, false);
-                indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);
+                indicateValidationText(txtResidentialToggle, true);
+                indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, true);
             }
         }
         if (Brprofession.equals("") || Bremployer_name.equals("") || Brannual_income.equals("")
@@ -1459,34 +1695,34 @@ public class DetailedInfoFragment extends Fragment {
                 txtProfessionalDetailsErrMsg.setVisibility(VISIBLE);
                 // txtProfessionalToggle.requestFocus();
                 if (Brprofession.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select Profession");
+                    txtProfessionalDetailsErrMsg.setText("*Please select Profession");
                     // spProfession.requestFocus();
                 } else if (Bremployer_name.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select Employer Type");
+                    txtProfessionalDetailsErrMsg.setText("*Please select Employer Type");
                     // spEmployerType.requestFocus();
                 } else if (Brannual_income.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select Annual Income");
+                    txtProfessionalDetailsErrMsg.setText("*Please select Annual Income");
                     edtAnnualIncome.requestFocus();
                 } else if (Brcurrent_employment_duration.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select Current Employment Duration");
+                    txtProfessionalDetailsErrMsg.setText("*Please select Current Employment Duration");
                     //spEmployerType.requestFocus();
                 } else if (Broffice_address.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select Current Flat No,Building,Society Name");
+                    txtProfessionalDetailsErrMsg.setText("*Please select Current Flat No,Building,Society Name");
                     //edtAddressOff.requestFocus();
                 } else if (Broffice_landmark.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select Street Name No,Locality,LandMark");
+                    txtProfessionalDetailsErrMsg.setText("*Please select Street Name No,Locality,LandMark");
                     //edtLandmarkOff.requestFocus();
                 } else if (Broffice_address_pin.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select Pincode");
+                    txtProfessionalDetailsErrMsg.setText("*Please select Pincode");
                     //edtPincodeOff.requestFocus();
                 } else if (Broffice_address_country.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select Country");
+                    txtProfessionalDetailsErrMsg.setText("*Please select Country");
                     //spCountryOff.requestFocus();
                 } else if (offstateID.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select State");
+                    txtProfessionalDetailsErrMsg.setText("*Please select State");
                     //spStateOff.requestFocus();
                 } else if (offcityID.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("Please select City");
+                    txtProfessionalDetailsErrMsg.setText("*Please select City");
                     //spCityOff.requestFocus();
                 }
             }
@@ -1497,7 +1733,7 @@ public class DetailedInfoFragment extends Fragment {
             txtProfessionalDetailsErrMsg.setText(null);
             txtProfessionalDetailsErrMsg.setVisibility(GONE);
             indicateValidationText(txtProfessionalToggle, true);
-            indicateValidationIcon(ivProfessionalStatus, ivProfessionalTitle, false);
+            indicateValidationIcon(ivProfessionalStatus, ivProfessionalTitle, true);
 
         }
 //        if(!switchResidenceType.isChecked())
@@ -1553,7 +1789,7 @@ public class DetailedInfoFragment extends Fragment {
         if (valid) {
             indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
         } else {
-            indicator.setTextColor(context.getResources().getColor(R.color.blue1));
+            indicator.setTextColor(context.getResources().getColor(R.color.new_red));
         }
     }
 
@@ -1592,10 +1828,10 @@ public class DetailedInfoFragment extends Fragment {
 
             Drawable bg1;
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                ivTitle.setColorFilter(context.getResources().getColor(R.color.blue1), PorterDuff.Mode.MULTIPLY);
+                ivTitle.setColorFilter(context.getResources().getColor(R.color.new_red), PorterDuff.Mode.MULTIPLY);
             } else {
                 bg1 = ivTitle.getDrawable();
-                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.blue1));
+                DrawableCompat.setTint(bg1, context.getResources().getColor(R.color.new_red));
                 ivTitle.setImageDrawable(bg1);
             }
         }
@@ -2346,7 +2582,10 @@ public class DetailedInfoFragment extends Fragment {
                         spProfession.setSelection(Integer.parseInt(Brprofession));
                     } catch (Exception e) {
                         e.printStackTrace();
+                        ProfessionApiCall();
                     }
+                }else{
+                    ProfessionApiCall();
                 }
 
                 if (!Brcurrent_employment_duration.equals("") && !Brcurrent_employment_duration.equals("null")) {
@@ -2363,6 +2602,9 @@ public class DetailedInfoFragment extends Fragment {
                     //Same
                     SwitchAddressSameAs = "3";
                     Bris_borrower_permanent_address_same_as = "3";
+                    edtPermanentPincode.setText(Brpermanent_address_pin);
+                    edtPermanentAddress.setText(Brpermanent_address);
+                    edtPermanentLandmark.setText(Brpermanent_landmark);
                     try {
                         if (!Brpermanent_address_country.equals("") && !Brpermanent_address_country.equals("null")) {
                             try {

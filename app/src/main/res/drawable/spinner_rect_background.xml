@@ -19,7 +19,7 @@
         <shape android:shape="line">
             <solid android:color="#FFFF33"/>
             <stroke android:width="@dimen/_1sdp"
-                android:color="@color/blue1"/>
+                android:color="@color/darkblue"/>
         </shape>
     </item>
 </layer-list>

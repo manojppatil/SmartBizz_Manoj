@@ -107,7 +107,7 @@
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
                             android:layout_alignParentRight="true"
-                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
                             android:layout_gravity="end"
                             android:gravity="end">
 
@@ -176,7 +176,8 @@
                                 android:hint="@string/first_name"
                                 android:imeOptions="actionNext"
                                 android:inputType="textCapSentences"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:theme="@style/EditTextStyle" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
@@ -226,8 +227,7 @@
                             android:layout_marginTop="@dimen/_15sdp"
                             android:gravity="start"
                             android:id="@+id/tvGenderTitle"
-                            android:text="Select Gender"
-                            android:textColor="@color/darkblue" />
+                            android:text="Select Gender" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -243,7 +243,7 @@
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_margin="@dimen/_2sdp"
                                 android:layout_weight="1"
-                                android:background="@drawable/border_circular_primary"
+                                android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
@@ -278,7 +278,7 @@
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_margin="@dimen/_2sdp"
                                 android:layout_weight="1.1"
-                                android:background="@drawable/border_circular_primary"
+                                android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
@@ -313,7 +313,7 @@
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_margin="@dimen/_2sdp"
                                 android:layout_weight="1"
-                                android:background="@drawable/border_circular_primary"
+                                android:background="@drawable/border_circular"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
                                 android:padding="@dimen/_3sdp">
@@ -366,15 +366,14 @@
                                     android:layout_gravity="start"
                                     android:layout_marginLeft="@dimen/_5sdp"
                                     android:gravity="start"
-                                    android:text="Date of Birth"
-                                    android:textColor="@color/darkblue" />
+                                    android:text="Date of Birth" />
 
                                 <LinearLayout
                                     android:id="@+id/linDob"
                                     android:layout_width="match_parent"
                                     android:layout_height="@dimen/_25sdp"
                                     android:layout_margin="@dimen/_2sdp"
-                                    android:background="@drawable/border_circular_primary"
+                                    android:background="@drawable/border_circular"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal"
                                     android:padding="@dimen/_3sdp">
@@ -417,7 +416,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="@dimen/_2sdp"
                                 android:layout_weight="0.5"
-                                android:orientation="vertical">>
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/MaritalStatustitle"
@@ -427,15 +426,14 @@
                                     android:layout_gravity="start"
                                     android:layout_marginLeft="@dimen/_5sdp"
                                     android:gravity="start"
-                                    android:text="Marital Status"
-                                    android:textColor="@color/darkblue" />
+                                    android:text="Marital Status" />
 
                                 <LinearLayout
                                     android:id="@+id/linMaritalStatus"
                                     android:layout_width="match_parent"
                                     android:layout_height="@dimen/_25sdp"
                                     android:layout_margin="@dimen/_2sdp"
-                                    android:background="@drawable/border_circular_primary"
+                                    android:background="@drawable/border_circular"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal"
                                     android:padding="@dimen/_3sdp">
@@ -519,7 +517,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:textColor="@color/red"
                             android:textSize="15sp"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
@@ -678,14 +676,30 @@
                         android:visibility="visible">
 
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/_20sdp">
+
+                            <TextView
+                                style="@style/TextViewTitleSmallStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:text="Aadhaar Number(12 Digits)"
+                                android:textColor="@color/darkblue" />
+
+                        <LinearLayout
                             android:id="@+id/linAadhaar"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_25sdp"
                             android:layout_margin="@dimen/_2sdp"
                             android:layout_weight="1"
-                            android:background="@drawable/border_circular_primary"
+                            android:background="@drawable/border_circular"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:padding="@dimen/_3sdp">
 
                             <ImageView
@@ -719,6 +733,23 @@
                                 android:text=""
                                 android:textAllCaps="true" />
                         </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_4sdp">
+
+                            <TextView
+                                style="@style/TextViewTitleSmallStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:text="PAN Number (10 Digits)"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:textColor="@color/darkblue"/>
 
                         <LinearLayout
                             android:id="@+id/linPAN"
@@ -727,7 +758,7 @@
                             android:layout_margin="@dimen/_2sdp"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_weight="1"
-                            android:background="@drawable/border_circular_primary"
+                            android:background="@drawable/border_circular"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
                             android:padding="@dimen/_3sdp">
@@ -762,6 +793,7 @@
                                 android:padding="@dimen/_3sdp"
                                 android:text=""
                                 android:textAllCaps="true" />
+                        </LinearLayout>
                         </LinearLayout>
 
                         <TextView
@@ -1145,14 +1177,13 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             android:gravity="start"
-                            android:text="Select Institute"
-                            android:textColor="@color/darkblue" />
+                            android:text="Select Institute" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@drawable/border_circular_primary"
+                            android:background="@drawable/border_circular"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
                             android:padding="@dimen/_4sdp">
@@ -1195,8 +1226,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             android:gravity="start"
-                            android:text="Select Institute Loction"
-                            android:textColor="@color/darkblue" />
+                            android:text="Select Institute Loction" />
 
                         <Spinner
                             android:id="@+id/spInsttLocation"
@@ -1220,8 +1250,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:gravity="start"
-                            android:text="Select Course Name"
-                            android:textColor="@color/darkblue" />
+                            android:text="Select Course Name" />
 
                         <Spinner
                             android:id="@+id/spCourse"
@@ -1257,22 +1286,35 @@
                                     android:layout_marginLeft="@dimen/_5sdp"
                                     android:layout_marginTop="@dimen/_8sdp"
                                     android:gravity="start"
-                                    android:text="Course Fee"
-                                    android:textColor="@color/darkblue" />
+                                    android:text="Course Fee" />
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/border_circular"
+                                    android:orientation="horizontal">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    app:srcCompat="@drawable/ic_rupee_sign"
+                                    android:layout_gravity="center"
+                                    android:padding="@dimen/_1sdp"
+                                    android:layout_marginLeft="@dimen/_4sdp" />
 
                                 <TextView
                                     android:id="@+id/txtCourseFee"
                                     style="@style/TextViewTitle14Style"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/border_circular_primary"
-                                    android:drawableStart="@drawable/ic_rupee_sign"
                                     android:hint="------------"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLines="1"
                                     android:padding="@dimen/_6sdp" />
-
+                                </LinearLayout>
                             </LinearLayout>
 
                             <TextView
@@ -1297,16 +1339,31 @@
                                     android:layout_marginLeft="@dimen/_5sdp"
                                     android:layout_marginTop="@dimen/_8sdp"
                                     android:gravity="start"
-                                    android:text="Loan Amount"
-                                    android:textColor="@color/darkblue" />
+                                    android:text="Loan Amount" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/border_circular"
+                                    android:orientation="horizontal">
+
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_10sdp"
+                                        android:layout_height="@dimen/_10sdp"
+                                        app:srcCompat="@drawable/ic_rupee_sign"
+                                        android:layout_gravity="center"
+                                        android:padding="@dimen/_1sdp"
+                                        android:layout_marginLeft="@dimen/_4sdp"
+                                        />
+
 
                                 <EditText
                                     android:id="@+id/edtLoanAmt"
                                     style="@style/EditTextStyle"
+                                    android:background="@color/transparent"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/border_circular_primary"
-                                    android:drawableStart="@drawable/ic_rupee_sign"
                                     android:hint="------------"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
@@ -1314,6 +1371,7 @@
                                     android:maxLines="1"
                                     android:padding="@dimen/_6sdp"
                                     android:textSize="14sp" />
+                                </LinearLayout>
 
                             </LinearLayout>
 
@@ -1343,15 +1401,15 @@
         android:id="@+id/linEditKycDetail"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_circular_red_filled"
-        android:orientation="horizontal"
-        android:padding="@dimen/_4sdp"
-        android:gravity="center_vertical"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/_50sdp"
-        app:elevation="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_20sdp">
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/border_circular_red_filled"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_4sdp"
+        app:elevation="@dimen/_5sdp">
 
         <TextView
             android:id="@+id/txtBtnEditKyc"
@@ -1359,17 +1417,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Edit"
             android:gravity="center"
+            android:text="Edit"
             android:textColor="@color/white" />
 
         <View
             android:layout_width="@dimen/_1sdp"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:layout_marginBottom="@dimen/_2sdp"
             android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
             android:background="@color/white" />
 
         <ImageView
@@ -1395,4 +1453,3 @@
         app:elevation="@dimen/_4sdp"
         app:srcCompat="@drawable/ic_angle_right_small" />
 </RelativeLayout>
-

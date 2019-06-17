@@ -74,7 +74,7 @@ public class AmortAdapter extends RecyclerView.Adapter<AmortAdapter.ViewHolder>{
         TextView txtEmiNo,txtEmiAmount,txtDueBy, txtPaymentDate, txtPaymentStatus,txtBtnText;
         LinearLayout linPayBtn;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             txtEmiNo = itemView.findViewById(R.id.txtEmiNo);
             txtEmiAmount = itemView.findViewById(R.id.txtEmiAmount);

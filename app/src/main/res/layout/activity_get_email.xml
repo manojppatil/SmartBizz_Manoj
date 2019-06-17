@@ -232,6 +232,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="@dimen/_50sdp"
+        android:elevation="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_30sdp">
 
         <TextView

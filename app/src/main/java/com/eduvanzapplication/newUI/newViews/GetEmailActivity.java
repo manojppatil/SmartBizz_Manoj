@@ -122,8 +122,6 @@ public class GetEmailActivity extends AppCompatActivity {
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
 
-
-
     }
 
 

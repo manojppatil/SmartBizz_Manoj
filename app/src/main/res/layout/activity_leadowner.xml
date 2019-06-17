@@ -168,16 +168,37 @@
                         android:textColor="@color/textcolordark" />
                 </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtMsg3"
+            <LinearLayout
+                android:id="@+id/lin3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:visibility="invisible"
-                android:text="* Since you are a student, we need details of a Financial Borrower on your behalf, who will apply for the loan."
-                android:textColor="@color/colorRed"
-                style="@style/TextViewTitle14BoldStyle"/>
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtMsg03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="visible"
+                    android:text="*"
+                    android:textColor="@color/colorRed"
+                    style="@style/TextViewTitle14BoldStyle"/>
+
+                <TextView
+                    android:id="@+id/txtMsg3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="visible"
+                    android:text="Since you are a student, we need details of a Financial Borrower on your behalf, who will apply for the loan."
+                    android:textColor="@color/colorRed"
+                    style="@style/TextViewTitle14BoldStyle"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

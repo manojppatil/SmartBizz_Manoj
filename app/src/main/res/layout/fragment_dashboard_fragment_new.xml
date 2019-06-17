@@ -228,7 +228,8 @@
 
                 <RelativeLayout
                     android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:id="@+id/linFriendlyScore"
@@ -251,7 +252,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:gravity="top"
-                            android:text="Score"
+                            android:text="Score!"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -285,8 +286,7 @@
 
                 <RelativeLayout
                     android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_7sdp">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:id="@+id/linStartNew"
@@ -309,7 +309,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:gravity="top"
-                            android:text="Application"
+                            android:text="Application!"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -347,7 +347,7 @@
                 <RelativeLayout
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_7sdp">
+                    android:layout_marginStart="@dimen/_20sdp">
 
                     <LinearLayout
                         android:id="@+id/linEMICalculator"
@@ -370,7 +370,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:gravity="top"
-                            android:text="Calculator"
+                            android:text="Calculator!"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 

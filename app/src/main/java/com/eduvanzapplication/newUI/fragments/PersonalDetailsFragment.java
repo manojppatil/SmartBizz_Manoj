@@ -138,6 +138,8 @@ public class PersonalDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_personal_details, container, false);
         edtFirstName = view.findViewById(R.id.edtFirstName);
@@ -174,7 +176,10 @@ public class PersonalDetailsFragment extends Fragment {
         }
 
         switchMarital.setChecked(false);
-        showOCRDialog();
+
+        if(!NewLeadActivity.isProfileEnabled) {
+            showOCRDialog();
+        }
         return view;
     }
 
@@ -426,7 +431,7 @@ public class PersonalDetailsFragment extends Fragment {
                 if(isProfileEnabled) {
                     if (edtFirstName.getText().toString().equals("")) {
                         NewLeadActivity.firstName = "";
-//                        edtFirstName.setError("Please enter first name");
+//                        edtFirstName.setError("* Please enter first name");
                     } else {
                         NewLeadActivity.firstName = edtFirstName.getText().toString();
                         edtFirstName.setError(null);
@@ -469,7 +474,7 @@ public class PersonalDetailsFragment extends Fragment {
                 if(isProfileEnabled) {
                     if (edtLastName.getText().toString().equals("")) {
                         NewLeadActivity.lastName = "";
-//                        edtLastName.setError("Please enter last name");
+//                        edtLastName.setError("* Please enter last name");
                     } else {
                         NewLeadActivity.lastName = edtLastName.getText().toString();
                         edtLastName.setError(null);

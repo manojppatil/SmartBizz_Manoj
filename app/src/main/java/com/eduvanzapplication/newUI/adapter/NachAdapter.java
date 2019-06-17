@@ -16,43 +16,58 @@ import com.eduvanzapplication.newUI.pojo.MNach;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NachAdapter extends RecyclerView.Adapter<NachAdapter.ViewHolder>{
+public class NachAdapter extends RecyclerView.Adapter<NachAdapter.ViewHolder> {
     List<MNach> list = new ArrayList();
 
     public List<MNach> getSpots() {
         return list;
     }
-     Context context;
+
+    Context context;
     FragmentActivity activity;
 
     public void setSpots(List<MNach> list) {
         this.list = list;
     }
 
-    public NachAdapter(List<MNach> list, Context context, FragmentActivity activity ){
+    public NachAdapter(List<MNach> list, Context context, FragmentActivity activity) {
         this.list = list;
         this.context = context;
         this.activity = activity;
     }
+
     @NonNull
     @Override
     public NachAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.nachlist_card_view,viewGroup, false);
+        View view = inflater.inflate(R.layout.nachlist_card_view, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-            final MNach mNach = list.get(i);
+        final MNach mNach = list.get(i);
 
 //            viewHolder.txtNachId.setText("0"+mNach.emi_no);
-            viewHolder.txtUmrnNum.setText(mNach.umrn_num);
+        viewHolder.txtUmrnNum.setText(mNach.umrn_num);
+        if (mNach.until_cancel.equals("0")) {
             viewHolder.txtEndDate.setText(mNach.end_date);
-            viewHolder.txtStatus.setText(mNach.status);
-            viewHolder.txtPersonName.setText(" "+ mNach.person_name);
-            viewHolder.txtAmount.setText(" "+ mNach.amount);
-            viewHolder.txtFrequency.setText(" "+ mNach.frequency);
+        } else if (mNach.until_cancel.equals("1")) {
+            viewHolder.txtEndDate.setText("Until Cancel");
+        }
+        viewHolder.txtStatus.setText(mNach.status);
+        if (mNach.status.toLowerCase().contains("registered")) {
+            viewHolder.txtStatus.setTextColor(context.getResources().getColor(R.color.white));
+            viewHolder.txtStatus.setBackground(context.getResources().getDrawable(R.drawable.border_circular_green_filled));
+
+        } else {
+            viewHolder.txtStatus.setTextColor(context.getResources().getColor(R.color.darkblue));
+            viewHolder.txtStatus.setBackground(context.getResources().getDrawable(R.drawable.border_circular_yellow_filled));
+
+        }
+        viewHolder.txtPersonName.setText(" " + mNach.person_name);
+        viewHolder.txtAmount.setText(" " + mNach.amount);
+        viewHolder.txtFrequency.setText(" " + mNach.frequency);
 
     }
 
@@ -63,14 +78,14 @@ public class NachAdapter extends RecyclerView.Adapter<NachAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtNachId,txtUmrnNum,txtEndDate, txtStatus, txtPersonName,txtAmount,txtFrequency;
+        TextView txtNachId, txtUmrnNum, txtEndDate, txtStatus, txtPersonName, txtAmount, txtFrequency;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtNachId = itemView.findViewById(R.id.txtNachId);
             txtUmrnNum = itemView.findViewById(R.id.txtUmrnNum);
-            txtEndDate= itemView.findViewById(R.id.txtEndDate);
+            txtEndDate = itemView.findViewById(R.id.txtEndDate);
             txtStatus = itemView.findViewById(R.id.txtStatus);
             txtPersonName = itemView.findViewById(R.id.txtPersonName);
             txtAmount = itemView.findViewById(R.id.txtAmount);

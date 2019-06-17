@@ -463,8 +463,8 @@
     <LinearLayout
         android:id="@+id/linContinuePermi"
         android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:background="@drawable/border_circular_red_filled"
@@ -480,7 +480,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/continu"
-            android:gravity="center"
+            android:gravity="center|center_vertical"
             android:textColor="@color/white"
             style="@style/TextViewTitleStyle"/>
 

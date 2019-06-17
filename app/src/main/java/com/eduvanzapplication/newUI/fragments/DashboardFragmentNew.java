@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
-import com.eduvanzapplication.friendlyscore.StartActivityFS;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
@@ -62,7 +61,7 @@ public class DashboardFragmentNew extends Fragment  {
     static  ViewPager viewPagerDashboard;
     static ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     static TextView textViewDealTitle;
-    static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="",email ="" ,auth_token ="", lead_id="";
+    public static String dealID = "", userName = "", userId = "", student_id = "",mobile_no ="",email ="" ,auth_token ="", lead_id="";
     CirclePageIndicator circlePageIndicatorDashboard;
     public static ImageView ivPrevBtn,ivNextBtn;
     public static RelativeLayout relStartNewLayout;
@@ -233,7 +232,7 @@ public class DashboardFragmentNew extends Fragment  {
         @Override
         public void onClick(View v) {
 //            startActivity(new Intent(getActivity(), FinancialAnalysis.class));
-            startActivity(new Intent(getActivity(), StartActivityFS.class));
+//            startActivity(new Intent(getActivity(), StartActivity.class));
         }
     };
 
@@ -324,6 +323,7 @@ public class DashboardFragmentNew extends Fragment  {
         ivEMICalculatorBtn.setOnClickListener(emiClkListnr);
 
         getDashboardDetails();
+        onResume();
 
     }
 

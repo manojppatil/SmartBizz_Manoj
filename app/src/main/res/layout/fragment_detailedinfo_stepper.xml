@@ -169,8 +169,8 @@
                             android:layout_marginLeft="@dimen/_2sdp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:gravity="start"
-                            android:text="Is Your Permanent Address Same As Aadhaar Address ?"
-                            android:textColor="@color/darkblue" />
+                            android:text="Is Your Permanent Address Same As Current Address ?"
+                             />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -257,7 +257,7 @@
                                             android:layout_marginLeft="@dimen/_2sdp"
                                             android:gravity="start"
                                             android:text="Current Resident Type"
-                                            android:textColor="@color/darkblue" />
+                                            />
 
                                         <LinearLayout
                                             android:id="@+id/linResidentType"
@@ -265,7 +265,7 @@
                                             android:layout_height="@dimen/_25sdp"
                                             android:layout_below="@+id/txtCurrentResidentType"
                                             android:layout_margin="@dimen/_2sdp"
-                                            android:background="@drawable/border_circular_primary"
+                                            android:background="@drawable/border_circular"
                                             android:gravity="center"
                                             android:orientation="horizontal"
                                             android:padding="@dimen/_3sdp">
@@ -312,7 +312,8 @@
                                             android:layout_marginLeft="@dimen/_5sdp"
                                             android:layout_toRightOf="@+id/linResidentType"
                                             android:orientation="vertical"
-                                            android:visibility="gone">
+                                            android:visibility="visible">
+
 
                                             <TextView
                                                 android:id="@+id/txtRent"
@@ -327,14 +328,22 @@
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
-                                                android:layout_height="@dimen/_30sdp"
+                                                android:layout_height="@dimen/_25sdp"
                                                 android:layout_below="@+id/txtRent"
-                                                android:background="@drawable/border_circular_primary"
+                                                android:background="@drawable/border_circular"
                                                 android:gravity="center"
                                                 android:layout_margin="@dimen/_2sdp"
                                                 android:layout_gravity="center_vertical"
                                                 android:orientation="horizontal"
                                                 android:padding="@dimen/_1sdp">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/_10sdp"
+                                                    android:layout_height="@dimen/_10sdp"
+                                                    android:layout_marginLeft="@dimen/_4sdp"
+                                                    android:padding="@dimen/_1sdp"
+                                                    android:layout_gravity="center_vertical"
+                                                    app:srcCompat="@drawable/ic_rupee_sign" />
 
                                                 <EditText
                                                     android:id="@+id/edtMonthlyRent"
@@ -342,16 +351,14 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:background="@color/transparent"
-                                                    android:drawableStart="@drawable/ic_rupee_sign"
                                                     android:imeOptions="actionDone"
                                                     android:inputType="number"
                                                     android:maxLength="8"
                                                     android:maxLines="1"
-                                                    android:text=""
                                                     android:gravity="center_vertical"
                                                     android:layout_gravity="center_vertical"
                                                     android:textSize="14sp"
-                                                    android:padding="@dimen/_6sdp"
+                                                    android:padding="@dimen/_4sdp"
                                                     android:textColor="@color/darkblue" />
 
                                             </LinearLayout>
@@ -382,7 +389,7 @@
                                                 android:layout_marginTop="@dimen/_8sdp"
                                                 android:gravity="start"
                                                 android:text="Owned/Rented By"
-                                                android:textColor="@color/darkblue" />
+                                                 />
 
                                             <Spinner
                                                 android:id="@+id/spOwnedBy"
@@ -419,7 +426,7 @@
                                                 android:layout_marginTop="@dimen/_8sdp"
                                                 android:gravity="start"
                                                 android:text="Duration of Stay at Your Current Address"
-                                                android:textColor="@color/darkblue" />
+                                                />
 
                                             <Spinner
                                                 android:id="@+id/spDurarionOfStay"
@@ -427,6 +434,7 @@
                                                 android:layout_height="@dimen/_26sdp"
                                                 android:layout_marginTop="@dimen/_4sdp"
                                                 android:layout_marginEnd="@dimen/_1sdp"
+                                                android:layout_marginBottom="@dimen/_8sdp"
                                                 android:background="@drawable/spinner_rect_background"
                                                 android:imeOptions="actionNext" />
 
@@ -533,6 +541,7 @@
 
                                         </LinearLayout>
 
+
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -560,11 +569,13 @@
                                                     android:id="@+id/spPermanentState"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="@dimen/_26sdp"
-                                                    android:layout_marginTop="@dimen/_4sdp"
+                                                    android:layout_marginTop="@dimen/_2sdp"
                                                     android:layout_marginEnd="@dimen/_1sdp"
                                                     android:background="@drawable/spinner_rect_background"
                                                     android:dropDownWidth="400px"
                                                     android:imeOptions="actionNext" />
+
+
 
                                             </LinearLayout>
 
@@ -572,7 +583,8 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0.5"
-                                                android:orientation="vertical">
+                                                android:orientation="vertical"
+                                                android:paddingBottom="@dimen/_8sdp">
 
                                                 <TextView
                                                     android:id="@+id/tvcitytitle"
@@ -581,15 +593,26 @@
                                                     android:layout_height="wrap_content"
                                                     android:layout_gravity="start"
                                                     android:layout_marginLeft="@dimen/_5sdp"
+                                                    android:paddingLeft="@dimen/_3sdp"
                                                     android:gravity="start"
                                                     android:text="City" />
 
-                                                <Spinner
+                                              <!--  <Spinner
                                                     android:id="@+id/spPermanentCity"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="@dimen/_26sdp"
                                                     android:layout_marginStart="@dimen/_2sdp"
                                                     android:layout_marginTop="@dimen/_4sdp"
+                                                    android:background="@drawable/spinner_rect_background"
+                                                    android:dropDownWidth="400px"
+                                                    android:imeOptions="actionNext" />-->
+
+                                                <Spinner
+                                                    android:id="@+id/spPermanentCity"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="@dimen/_26sdp"
+                                                    android:layout_marginTop="@dimen/_2sdp"
+                                                    android:layout_marginEnd="@dimen/_1sdp"
                                                     android:background="@drawable/spinner_rect_background"
                                                     android:dropDownWidth="400px"
                                                     android:imeOptions="actionNext" />
@@ -821,17 +844,25 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="@dimen/_8sdp">
+
                             <TextView
                                 android:id="@+id/tvselectprofesstitle"
                                 style="@style/TextViewTitle12BoldStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
-                                android:layout_marginLeft="@dimen/_2sdp"
+                                android:layout_marginLeft="@dimen/_5sdp"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 android:gravity="start"
                                 android:text="Select Profession"
-                                android:textColor="@color/darkblue" />
+                                 />
 
                             <Spinner
                                 android:id="@+id/spProfession"
@@ -843,6 +874,7 @@
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/_2sdp"
                                 android:paddingRight="@dimen/_2sdp" />
+                            </LinearLayout>
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
@@ -883,6 +915,13 @@
                                                 android:maxLines="1" />
                                         </android.support.design.widget.TextInputLayout>
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_6sdp"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical"
+                                        android:paddingBottom="@dimen/_8sdp">
 
                                         <TextView
                                             android:id="@+id/tvemplytypetitle"
@@ -890,13 +929,13 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="start"
-                                            android:layout_marginLeft="@dimen/_2sdp"
+                                            android:layout_marginLeft="@dimen/_5sdp"
                                             android:layout_marginTop="@dimen/_8sdp"
                                             android:gravity="start"
                                             android:text="Employer Type"
-                                            android:textColor="@color/darkblue" />
+                                             />
 
-                                        <Spinner
+                                      <!--  <Spinner
                                             android:id="@+id/spEmployerType"
                                             style="@style/TextViewTitle14Style"
                                             android:layout_width="match_parent"
@@ -906,19 +945,28 @@
                                             android:background="@drawable/spinner_rect_background"
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/_2sdp"
-                                            android:paddingRight="@dimen/_2sdp" />
+                                            android:paddingRight="@dimen/_2sdp" />-->
+                                        <Spinner
+                                            android:id="@+id/spEmployerType"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/_2sdp"
+                                            android:background="@drawable/spinner_rect_background"
+                                            android:dropDownWidth="400px"
+                                            android:imeOptions="actionNext" />
+                                    </LinearLayout>
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="@dimen/_6sdp"
+                                            android:padding="@dimen/_4sdp"
                                             android:orientation="horizontal">
 
                                             <android.support.design.widget.TextInputLayout
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginTop="@dimen/_6sdp"
-                                                android:layout_weight="0.5"
+                                                android:layout_marginTop="@dimen/_4sdp"
+                                                android:layout_weight="1"
                                                 android:theme="@style/EditTextStyle"
                                                 app:hintTextAppearance="@style/CustomTextAppearance">
 
@@ -933,12 +981,15 @@
                                                     android:maxLines="1" />
                                             </android.support.design.widget.TextInputLayout>
 
+                                        </LinearLayout>
+
                                             <LinearLayout
-                                                android:layout_width="0dp"
+                                            android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="@dimen/_6sdp"
-                                                android:layout_weight="0.5"
-                                                android:orientation="vertical">
+                                            android:layout_weight="1"
+                                            android:orientation="vertical"
+                                            android:paddingBottom="@dimen/_8sdp">
 
                                                 <TextView
                                                     android:id="@+id/tvcurremplydurntitle"
@@ -953,15 +1004,13 @@
                                                 <Spinner
                                                     android:id="@+id/spDurationOfJob"
                                                     android:layout_width="match_parent"
-                                                    android:layout_height="@dimen/_26sdp"
+                                                android:layout_height="wrap_content"
                                                     android:layout_marginTop="@dimen/_2sdp"
                                                     android:background="@drawable/spinner_rect_background"
                                                     android:dropDownWidth="400px"
                                                     android:imeOptions="actionNext" />
 
                                             </LinearLayout>
-
-                                        </LinearLayout>
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
@@ -1051,6 +1100,7 @@
                                                     android:orientation="vertical">
 
                                                     <TextView
+                                                        android:id="@+id/tvcountrytitle1"
                                                         style="@style/TextViewTitle12BoldStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
@@ -1085,6 +1135,7 @@
                                                     android:orientation="vertical">
 
                                                     <TextView
+                                                        android:id="@+id/tvstatetitle1"
                                                         style="@style/TextViewTitle12BoldStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
@@ -1112,6 +1163,7 @@
                                                     android:orientation="vertical">
 
                                                     <TextView
+                                                        android:id="@+id/tvcitytitle1"
                                                         style="@style/TextViewTitle12BoldStyle"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
@@ -1221,4 +1273,3 @@
         app:srcCompat="@drawable/ic_angle_right_small" />
 
 </RelativeLayout>
-

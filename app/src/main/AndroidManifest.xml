@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.eduvanzapplication">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -51,39 +50,49 @@
         tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon,android:name">
 
         <!--Needed for Pie Device-->
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
 
-        <activity android:name=".newUI.newViews.FinancialAnalysis"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".newUI.newViews.TenureSelectionActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".newUI.newViews.CourseDetailsActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="sensorPortrait"/>
+        <activity
+            android:name=".newUI.newViews.FinancialAnalysis"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".newUI.newViews.TenureSelectionActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".newUI.newViews.CourseDetailsActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
 
-        <activity android:name=".newUI.newViews.EmiCalculatorActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".newUI.newViews.EmiCalculatorActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
 
-        <activity android:name=".newUI.newViews.LeadOwnerType"
+        <activity
+            android:name=".newUI.newViews.LeadOwnerType"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="sensorPortrait" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
-        <activity android:name=".newUI.newViews.NewLeadActivity"
+        <activity
+            android:name=".newUI.newViews.NewLeadActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="sensorPortrait" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
-        <activity android:name=".newUI.newViews.EditProfile"
+        <activity
+            android:name=".newUI.newViews.EditProfile"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="sensorPortrait" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
-        <activity android:name="com.idfy.rft.CameraView"
+        <activity
+            android:name="com.idfy.rft.CameraView"
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name="com.gun0912.tedpicker.ImagePickerActivity"
@@ -96,18 +105,10 @@
             android:name=".ImageSlider"
             android:screenOrientation="sensorPortrait" />
 
-        <activity
-            android:name="vijay.createpdf.activity.ImgToPdfActivity"/>
+        <activity android:name="vijay.createpdf.activity.ImgToPdfActivity" />
 
-        <activity
-            android:name="vijay.createpdf.activity.RearrangeImages"/>
+        <activity android:name="vijay.createpdf.activity.RearrangeImages" />
 
-         <activity
-         android:name="com.eduvanzapplication.friendlyscore.ClientActivity"
-         android:screenOrientation="portrait" />
-         <activity
-         android:name="com.eduvanzapplication.friendlyscore.StartActivityFS"
-         android:screenOrientation="portrait" />
         <activity
             android:name=".faqexpandablelistview.FAQ"
             android:screenOrientation="portrait" />
@@ -151,8 +152,8 @@
         </activity>
         <activity
             android:name=".newUI.newViews.GetMobileNo"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="sensorPortrait">
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -161,8 +162,8 @@
         </activity>
         <activity
             android:name=".newUI.newViews.OtpValidation"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="sensorPortrait" />
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".newUI.newViews.DashboardActivity"
             android:screenOrientation="sensorPortrait"
@@ -170,13 +171,13 @@
         <activity
             android:name=".newUI.newViews.LoanTabActivity"
             android:screenOrientation="sensorPortrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".newUI.newViews.GetEmailActivity"
             android:screenOrientation="sensorPortrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".newUI.newViews.ContactUs"
             android:screenOrientation="sensorPortrait" />
@@ -189,6 +190,7 @@
         <activity
             android:name=".newUI.newViews.BannerActivity"
             android:screenOrientation="sensorPortrait" />
+
         <receiver android:name=".Util.PowerConnectionReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
@@ -200,13 +202,13 @@
             android:name="com.eduvanzapplication.LocationService"
             android:exported="false" />
         <!--<activity-->
-            <!--android:name=".newUI.newViews.Notification"-->
-            <!--android:screenOrientation="sensorPortrait" />-->
+        <!--android:name=".newUI.newViews.Notification"-->
+        <!--android:screenOrientation="sensorPortrait" />-->
         <activity
             android:name=".newUI.webviews.WebViewOTPDiag"
+            android:excludeFromRecents="true"
             android:screenOrientation="sensorPortrait"
-            android:theme="@android:style/Theme.Dialog"
-            android:excludeFromRecents="true" />
+            android:theme="@android:style/Theme.Dialog" />
 
         <activity
             android:name=".newUI.webviews.WebViewFairPracticsCode"
@@ -276,20 +278,23 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <activity
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!--Think Analytics-->
-    <receiver android:name=".DataSyncReceiver"
-        android:enabled="true"
-        android:exported="false">
-        <intent-filter>
-            <action android:name="in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION" />
-        </intent-filter>
-    </receiver>
+        <receiver
+            android:name=".DataSyncReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION" />
+            </intent-filter>
+        </receiver>
 
         <service
             android:name="in.thinkanalytics.algo360SDK.Algo360_SDK_Init"
@@ -314,7 +319,7 @@
         <receiver
             android:name="in.thinkanalytics.algo360SDK.Receivers.SmsReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
@@ -322,7 +327,7 @@
         <receiver
             android:name="in.thinkanalytics.algo360SDK.Receivers.InternetReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
@@ -331,7 +336,7 @@
         <receiver
             android:name="in.thinkanalytics.algo360SDK.Receivers.GpsReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
 
@@ -341,7 +346,7 @@
         <receiver
             android:name="in.thinkanalytics.algo360SDK.Receivers.BootReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -349,11 +354,10 @@
         <receiver
             android:name="in.thinkanalytics.algo360SDK.Receivers.AlarmBroadcast"
             android:enabled="true"
-            android:exported="true" >
-        </receiver>
+            android:exported="true"></receiver>
         <receiver
             android:name="in.thinkanalytics.algo360SDK.Receivers.LocationReceiver"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.location.sample.backgroundlocationupdates.action.PROCESS_UPDATES" />
             </intent-filter>
@@ -361,7 +365,7 @@
         <receiver
             android:name="in.thinkanalytics.algo360SDK.Receivers.BatteryStatsReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
@@ -389,18 +393,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <!--FriendlyScore-->
-
-        <activity android:name="com.FriendlyScoreUI.FormActivity" >
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-
-        </activity>
-        <activity
-            android:name="com.twitter.sdk.android.core.identity.OAuthActivity"
-            android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true"
-            android:exported="false" />
     </application>
 
 </manifest>

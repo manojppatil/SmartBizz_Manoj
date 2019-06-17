@@ -383,6 +383,34 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_fairpracticscode) {
             Intent intent = new Intent(DashboardActivity.this, WebViewFairPracticsCode.class);
             startActivity(intent);
+        }else if (id == R.id.nav_shareappp) {
+            try {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+                String shareMessage= "\nLet me recommend you this application\n\n";
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "choose one"));
+            } catch(Exception e) {
+                //e.toString();
+            }
+        }else if (id == R.id.nav_rateappp) {
+            Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            // To count with Play market backstack, After pressing back button,
+            // to taken back to our application, we need to add following flags to intent.
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            try {
+                startActivity(goToMarket);
+            } catch (Exception e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+            }
         } else if (id == R.id.nav_logout) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
@@ -443,7 +471,7 @@ public class DashboardActivity extends AppCompatActivity
         nav_Menu.findItem(R.id.nav_privacypolicy).setVisible(false);
         nav_Menu.findItem(R.id.nav_interestratepolicy).setVisible(false);
         nav_Menu.findItem(R.id.nav_fairpracticscode).setVisible(false);
-        nav_Menu.findItem(R.id.nav_logout).setVisible(false);
+//        nav_Menu.findItem(R.id.nav_logout).setVisible(false);
     }
 
     private void showMenuOptions() {

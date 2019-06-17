@@ -127,6 +127,7 @@
                         <ImageView
                             android:layout_width="@dimen/_12sdp"
                             android:layout_height="@dimen/_12sdp"
+                            android:padding="@dimen/_1sdp"
                             android:layout_gravity="center_vertical"
                             app:srcCompat="@drawable/ic_home_status_pending_yellow" />
 
@@ -151,6 +152,8 @@
                             android:layout_width="@dimen/_12sdp"
                             android:layout_height="@dimen/_12sdp"
                             android:layout_gravity="center_vertical"
+                            android:tint="@color/colorPrimary"
+                            android:padding="@dimen/_1sdp"
                             app:srcCompat="@drawable/ic_home_calendar" />
 
                         <TextView
@@ -234,6 +237,7 @@
                         <ImageView
                             android:layout_width="@dimen/_11sdp"
                             android:layout_height="@dimen/_11sdp"
+                            android:padding="@dimen/_1sdp"
                             android:layout_gravity="center_vertical"
                             app:srcCompat="@drawable/ic_home_location" />
 
@@ -243,7 +247,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_4sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
                             android:textSize="12sp" />
 
                     </LinearLayout>

@@ -65,7 +65,7 @@
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/first_name_cap"
+                            android:hint="@string/first_name_new"
                             android:ems="10"
                             android:imeOptions="actionNext"
                             style="@style/EditTextStyle" />
@@ -87,7 +87,7 @@
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/middle_name_cap"
+                            android:hint="@string/middle_name_new"
                             android:imeOptions="actionNext"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>
@@ -107,7 +107,7 @@
                             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/last_name_cap"
+                            android:hint="@string/last_name_new"
                             android:imeOptions="actionDone"
                             style="@style/EditTextStyle" />
                     </android.support.design.widget.TextInputLayout>

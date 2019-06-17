@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<color name="colorPrimary">@android:color/darker_gray</color>-->
+
+    <!--<color name="colorPrimaryDark">@android:color/darker_gray</color>-->
+
+    <!--<color name="colorAccent">#E91171</color>-->
+
+    <!--TODO(Cannot be adjusted on Android)-->
+
+    <!--TODO(Inform client to add, Not in configuration)-->
+
+
+    <!--SMS Auth Colors-->
+
+    <!--- Form Colors -->
+
+    <!--Photo Section Colors-->
+
+    <!--Location Section Colors-->
+
+
+</resources>

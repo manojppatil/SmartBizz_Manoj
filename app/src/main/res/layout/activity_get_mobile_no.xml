@@ -222,7 +222,6 @@
                         android:layout_height="@dimen/_1sdp"
                         android:background="@color/darkblue" />
 
-
                 </LinearLayout>
 
                 <LinearLayout
