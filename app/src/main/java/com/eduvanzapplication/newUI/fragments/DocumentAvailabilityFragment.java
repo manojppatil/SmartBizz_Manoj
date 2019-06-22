@@ -401,6 +401,10 @@ public class DocumentAvailabilityFragment extends Fragment {
             isDocAvailabilityEnabled = false;
             edtAadhaar.setText(NewLeadActivity.aadharNumber);
             edtPAN.setText(NewLeadActivity.panNUmber);
+            if(NewLeadActivity.aadharNumber.length() > 1 ||NewLeadActivity.panNUmber.length() > 1)
+            {
+                txtDocAvailableErrMsg.setVisibility(View.GONE);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

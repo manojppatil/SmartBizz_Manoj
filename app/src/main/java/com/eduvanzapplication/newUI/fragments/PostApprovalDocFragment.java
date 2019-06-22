@@ -630,9 +630,17 @@ public class PostApprovalDocFragment extends Fragment {
                     ivEMIFee.setImageDrawable(bg);
 
                     if (processing_payment && advance_emi) {
+                        if(linProcessingFeeRb.isEnabled())
+                        {
                         totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "3";
+                        }else {
+                            totalAmount = Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                            txtTotalAmt.setText(String.valueOf(totalAmount));
+                            paymentOption = "2";
+                        }
+
                     } else if (processing_payment) {
                         totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim());
                         txtTotalAmt.setText(String.valueOf(totalAmount));
@@ -1178,7 +1186,7 @@ public class PostApprovalDocFragment extends Fragment {
                         txtTbProcessingFee.setText(" " + transaction_amount + "/-");
 
                         txtTbTotalRepaybleAmount.setText(" " + total_amount_to_be_collected + "/-");
-
+                        txtTbNoOfAdvanceEMI.setText(no_of_advance_emi);
 //
 //                        if (requested_tenure.equals("")) {
 //                            txtTbSelectTenure.setText("Months");
@@ -1188,7 +1196,7 @@ public class PostApprovalDocFragment extends Fragment {
 
                         if (emi_type.equals("0")) {
                             txtTbEMIType.setText("Arrear");
-                            txtTbNoOfAdvanceEMI.setText(" " + "0");
+                            txtTbAdvanceEMIAmount.setText(" " + "0");
 
                         } else if (emi_type.equals("1")) {
                             txtTbEMIType.setText("Advance");
@@ -1199,7 +1207,7 @@ public class PostApprovalDocFragment extends Fragment {
                             } else {
                                 advEMI = Float.parseFloat(no_of_advance_emi);
                             }
-                            txtTbNoOfAdvanceEMI.setText(" " + advEMI + "/-");
+                            txtTbAdvanceEMIAmount.setText(" " + advEMI + "/-");
 
                         } else {
                             txtTbEMIType.setText(" -");
@@ -1214,13 +1222,12 @@ public class PostApprovalDocFragment extends Fragment {
                         if (!amount_to_be_paid_to_institute.equals("")) {
                             txtTbEMIDuringMoratorium.setText(" " + amount_to_be_paid_to_institute);
                         }
-
                         try {
                             if (emi_type.equals("0") && is_moratorium.equals("1") && Integer.parseInt(moratorium_months) > 0) {
-                                Float grossTenure = Float.parseFloat(tenure) * Float.parseFloat(moratorium_months);
+                                int grossTenure = Integer.parseInt(tenure) * Integer.parseInt(moratorium_months);
                                 txtTbGrossLoanTenure.setText(" " + grossTenure);
                             } else {
-                                txtTbGrossLoanTenure.setText(" " + Float.parseFloat(tenure));
+                                txtTbGrossLoanTenure.setText(" " + Integer.parseInt(tenure));
                             }
                         } catch (NumberFormatException e) {
                             txtTbGrossLoanTenure.setText(" -");
@@ -1228,10 +1235,10 @@ public class PostApprovalDocFragment extends Fragment {
 
                         try {
                             if (emi_type.equals("0")) {
-                                Float grossTenure = Float.parseFloat(tenure);
+                                int grossTenure = Integer.parseInt(tenure);
                                 txtTbNetLoantenure.setText(" " + grossTenure);
                             } else if (emi_type.equals("1")) {
-                                Float grossLoanTenure = Float.parseFloat(tenure) - Float.parseFloat(no_of_advance_emi);
+                                int grossLoanTenure = Integer.parseInt(tenure) - Integer.parseInt(no_of_advance_emi);
                                 txtTbNetLoantenure.setText(" " + grossLoanTenure);
                             }
                         } catch (NumberFormatException e) {
@@ -1252,15 +1259,36 @@ public class PostApprovalDocFragment extends Fragment {
                         }
 
                         if (kyc_status.equals("1")) {
-                            txtProcessingFeeDueTitle.setText("Paid On");
+                            txtProcessingFeeDueTitle.setText(" Paid On");
                             txtProcessingFeeDueByDate.setText(Globle.dateFormater4(paid_on));
                             linPayBtn.setVisibility(GONE);
+
+                            Drawable bg5;
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                bg5 = VectorDrawableCompat.create(context.getResources(), drawable.ic_check_circle_green, null);
+                                ivProcessingFeesicon.setColorFilter(context.getResources().getColor(color.colorGreen), PorterDuff.Mode.MULTIPLY);
+                            } else {
+                                bg5 = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                                DrawableCompat.setTint(bg5, context.getResources().getColor(color.colorGreen));
+                            }
+                            ivProcessingFeesicon.setImageDrawable(bg5);
 //                            linPayStatus.setVisibility(VISIBLE);
 
                         } else {
-                            txtProcessingFeeDueTitle.setText("Due By");
+                            txtProcessingFeeDueTitle.setText(" Paid on");
                             txtProcessingFeeDueByDate.setText(" --");
                             linPayBtn.setVisibility(VISIBLE);
+
+                            Drawable bg7;
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                bg7 = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_borrower_documents_pending, null);
+                                ivProcessingFeesicon.setColorFilter(context.getResources().getColor(color.colorYellow), PorterDuff.Mode.MULTIPLY);
+                            } else {
+                                bg7 = ContextCompat.getDrawable(context, R.drawable.ic_borrower_documents_pending);
+                                DrawableCompat.setTint(bg7, context.getResources().getColor(color.colorYellow));
+                            }
+                            ivProcessingFeesicon.setImageDrawable(bg7);
+
 //                            linPayStatus.setVisibility(GONE);
                         }
 
@@ -1289,13 +1317,17 @@ public class PostApprovalDocFragment extends Fragment {
                                     linPayStatus.setVisibility(VISIBLE);
                                     linProcessingFeeRb.setEnabled(false);
                                     linEMIFeeRb.setEnabled(false);
+
+                                    totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                                    txtTotalAmt.setText(String.valueOf(totalAmount));
+
                                 } else {
                                     linPayBtn.setVisibility(VISIBLE);
                                     linPayStatus.setVisibility(GONE);
                                     linProcessingFeeRb.setEnabled(true);
                                 }
 
-                                txtEMIDueByTitle.setText("Paid On");
+                                txtEMIDueByTitle.setText(" Paid On");
                                 linEMIFeeRb.setVisibility(VISIBLE);
                                 linEMIFeeRb.setEnabled(false);
                                 txtEMIDueByDate.setText(" - ");
@@ -1307,7 +1339,7 @@ public class PostApprovalDocFragment extends Fragment {
                                         if (!jsonloanDataadvanceEmi.getString("paid_emi_date").toString().equals("null")) {
 
                                             paid_emi_on = jsonloanDataadvanceEmi.getString("paid_emi_date");
-                                            txtEMIDueByTitle.setText("Paid On");
+                                            txtEMIDueByTitle.setText(" Paid On");
                                             txtEMIDueByDate.setText(Globle.dateFormater5(paid_emi_on));
                                         }
 
@@ -1323,30 +1355,102 @@ public class PostApprovalDocFragment extends Fragment {
                                     DrawableCompat.setTint(bg1, context.getResources().getColor(color.colorGreen));
                                 }
                                 ivEMIFee.setImageDrawable(bg1);
+                                //emi icon set green
+
+                                Drawable bg5;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg5 = VectorDrawableCompat.create(context.getResources(), drawable.ic_check_circle_green, null);
+                                    ivAdavnceFeeIcon.setColorFilter(context.getResources().getColor(color.colorGreen), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg5 = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                                    DrawableCompat.setTint(bg5, context.getResources().getColor(color.colorGreen));
+                                }
+                                ivAdavnceFeeIcon.setImageDrawable(bg5);
                             } else {
-                                txtEMIDueByTitle.setText("Due By");
+                                //emi icon set traingle
+
+                                txtEMIDueByTitle.setText(" Paid On");
                                 txtEMIDueByDate.setText(" -- ");
                                 linEMIFeeRb.setEnabled(true);
                                 linPayBtn.setVisibility(VISIBLE);
                                 linPayStatus.setVisibility(GONE);
+
+                                Drawable bg7;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg7 = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_borrower_documents_pending, null);
+                                    ivAdavnceFeeIcon.setColorFilter(context.getResources().getColor(color.colorYellow), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg7 = ContextCompat.getDrawable(context, R.drawable.ic_borrower_documents_pending);
+                                    DrawableCompat.setTint(bg7, context.getResources().getColor(color.colorYellow));
+                                }
+                                ivAdavnceFeeIcon.setImageDrawable(bg7);
+
                                 if (kyc_status.equals("1")) {
+
+                                    //processing icon green
+                                    Drawable bg5;
+                                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                        bg5 = VectorDrawableCompat.create(context.getResources(), drawable.ic_check_circle_green, null);
+                                        ivProcessingFeesicon.setColorFilter(context.getResources().getColor(color.colorGreen), PorterDuff.Mode.MULTIPLY);
+                                    } else {
+                                        bg5 = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                                        DrawableCompat.setTint(bg5, context.getResources().getColor(color.colorGreen));
+                                    }
+                                    ivProcessingFeesicon.setImageDrawable(bg5);
+
                                     totalAmount = Double.valueOf(emi_amount);
                                     txtTotalAmt.setText(String.valueOf(Double.valueOf(emi_amount)));
                                     linProcessingFeeRb.setEnabled(false);
                                 } else {
+                                    //yellow
                                     linProcessingFeeRb.setEnabled(true);
+                                    Drawable bg6;
+                                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                        bg6 = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_borrower_documents_pending, null);
+                                        ivProcessingFeesicon.setColorFilter(context.getResources().getColor(color.colorYellow), PorterDuff.Mode.MULTIPLY);
+                                    } else {
+                                        bg6 = ContextCompat.getDrawable(context, R.drawable.ic_borrower_documents_pending);
+                                        DrawableCompat.setTint(bg6, context.getResources().getColor(color.colorYellow));
+                                    }
+                                    ivProcessingFeesicon.setImageDrawable(bg6);
                                 }
                             }
                         } else {
                             //No Advance EMI
                             if (kyc_status.equals("1")) {
+                                //procee fee icon set green
                                 linPayBtn.setVisibility(GONE);
                                 linPayStatus.setVisibility(VISIBLE);
                                 linProcessingFeeRb.setEnabled(false);
+
+
+                                Drawable bg5;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg5 = VectorDrawableCompat.create(context.getResources(), drawable.ic_check_circle_green, null);
+                                    ivProcessingFeesicon.setColorFilter(context.getResources().getColor(color.colorGreen), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg5 = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+                                    DrawableCompat.setTint(bg5, context.getResources().getColor(color.colorGreen));
+                                }
+                                ivProcessingFeesicon.setImageDrawable(bg5);
+
+
                             } else {
+
                                 linPayBtn.setVisibility(VISIBLE);
                                 linPayStatus.setVisibility(GONE);
                                 linProcessingFeeRb.setEnabled(true);
+
+                                //procee fee icon set yellow
+                                Drawable bg3;
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                                    bg3 = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_borrower_documents_pending, null);
+                                    ivProcessingFeesicon.setColorFilter(context.getResources().getColor(color.colorYellow), PorterDuff.Mode.MULTIPLY);
+                                } else {
+                                    bg3 = ContextCompat.getDrawable(context, R.drawable.ic_borrower_documents_pending);
+                                    DrawableCompat.setTint(bg, context.getResources().getColor(color.colorYellow));
+                                }
+                                ivProcessingFeesicon.setImageDrawable(bg3);
                             }
                             try {
                                 linEMIFeeRb.setVisibility(GONE);
@@ -1440,6 +1544,8 @@ public class PostApprovalDocFragment extends Fragment {
 
                     try {
                         linNachList.setVisibility(VISIBLE);
+                        linDownloadNach.setVisibility(VISIBLE);
+                        linDownloadNach.setTag(baseUrl.concat("download/downloadENach/").concat(MainActivity.lead_id));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1755,7 +1861,7 @@ public class PostApprovalDocFragment extends Fragment {
             // "Url":"uploads\/lamanualupload\/13816\/Eduvanz_Agreement.pdf"},"status":1,"message":"All Users Signing Completed"}
             if (jsonDataO.getInt("status") == 1) {
                 JSONObject mData2 = jsonDataO.getJSONObject("result");
-                downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("Url"));
+                downloadUrl = mData2.getString("baseUrl").concat(mData2.getString("Url"));
 
                 cfAlertDialog.dismiss();
                 getLoanDetails();
@@ -2267,3 +2373,4 @@ public class PostApprovalDocFragment extends Fragment {
     }
 
 }
+

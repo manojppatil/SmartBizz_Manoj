@@ -38,8 +38,15 @@
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_height="@dimen/_100sdp"
         app:civ_border_color="@color/darkblue"
-        android:alpha="0.4"
         android:background="@drawable/ic_im_default_profile" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/profileImage"-->
+            <!--android:layout_width="@dimen/_100sdp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="@dimen/_30sdp"-->
+            <!--android:layout_height="@dimen/_100sdp"-->
+            <!--android:background="@drawable/ic_im_default_profile" />-->
 
         <LinearLayout
             android:id="@+id/edtProfileLayout"

@@ -2,6 +2,7 @@ package com.eduvanzapplication.newUI.newViews;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
@@ -27,6 +29,7 @@ import android.text.SpannableString;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
@@ -43,6 +46,8 @@ import com.eduvanzapplication.newUI.fragments.UploadDocumentFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
+
 
 public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
         DetailedInfoFragment.onDetailedInfoFragmentInteractionListener {
@@ -54,16 +59,17 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     public static String lead_id = "", student_id = "";
     Context context;
     public AppCompatActivity mActivity;
+    private final int REQUEST_LOCATION_PERMISSION = 1;
     SharedPreferences sharedPreferences;
     public static boolean isKycEdit;
     public static boolean isDetailedInfoEdit;
     public int GET_MY_PERMISSION = 1, permission;
-
-    LocationManager locationManager;
+    public LocationManager locationManager;
     String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     //    //kyc values
     public static String firstName = "", applicant_id = "";
+    private AlertDialog mGPSDialog;
     // lastName = "", middleName = "", gender = "", dob = "", maritalStatus = "2", email = "", mobile = "",
 //            aadhar = "", pan = "", flatBuildingSociety = "", streetLocalityLandmark = "", pincode = "", countryId = "", stateId = "", cityId = "",
 //            instituteId = "", courseId = "", instituteLocationId = "", courseFee = "", applicant_id = "",
@@ -124,7 +130,74 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                                 Manifest.permission.ACCESS_FINE_LOCATION},
                         GET_MY_PERMISSION);
             } else {
+
+                locationManager =  (LocationManager) getSystemService( context.LOCATION_SERVICE );
+
+                    //statusofGPS is use for location is on/off
+
+                boolean statusOfGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                //this below code for set location mode to highaccuracy
+
+                try {
+                    //locationMode is use for which mode type is selected currently
+                    //locationMode=0 is high acc is selected
+                    //locationMode=1 is Device only is selected
+                    //locationMode=2 is Battery saving is selected
+
+
+
+                    int locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+
+                    //location on and high acc mode or device only selected
+
+                    if(locationMode == LOCATION_MODE_HIGH_ACCURACY && statusOfGPS==true ||locationMode==1 && statusOfGPS==true) {
+
+                        //request location updates
+                        startService(new Intent(context, LocationService.class));
+
+                    }
+                    //gps off
+
+                    else if(statusOfGPS==false){
+
+
+                        if(locationMode==0) {
+
+                             //gps off and high acc selected
+
+                            showGPSDisabledAlertToUser();
+
+                        }else if(!(locationMode == LOCATION_MODE_HIGH_ACCURACY ) && statusOfGPS==false ){
+
+                            //gps on and high acc.mode isn't selected
+
+                            showGPSModeAlertToUser();
+
+                        }
+
+
+
+                    }
+
+                } catch (Settings.SettingNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+             /*   if ( locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+
+                   // Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
                 startService(new Intent(context, LocationService.class));
+
+                }else{
+                  //  buildAlertMessageNoGps();
+                    showGPSDisabledAlertToUser();
+
+                }
+*/
+               // showGPSDisabledAlertToUser();
+
+              //  startService(new Intent(context, LocationService.class));
 //                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 //                    if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
 //                        alertDialog.show();
@@ -151,6 +224,8 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
 //        }
 
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -245,6 +320,90 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
 
         }
     }
+
+
+    public void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled,Please enable it !")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                });
+
+//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+   /* public void showGPSDiabledDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("GPS Disabled");
+        builder.setMessage("Gps is disabled, in order to use the application properly you need to enable GPS of your device");
+        builder.setPositiveButton("Enable GPS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),GPS_ENABLE_REQUEST);
+            }
+        }).setNegativeButton("No, Just Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        mGPSDialog = builder.create();
+        mGPSDialog.show();
+    }*/
+
+
+    private void showGPSDisabledAlertToUser() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("GPS is disabled in your device.\nGoto Settings Page To Enable GPS and set Mode to High accuracy")
+                .setCancelable(false)
+                .setPositiveButton("Settings",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(callGPSSettingIntent);
+                            }
+                        });
+//        alertDialogBuilder.setNegativeButton("Cancel",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
+    private void showGPSModeAlertToUser() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Please select GPS mode to High Accuracy.\nGoto Settings Page To Enable GPS Mode")
+                .setCancelable(false)
+                .setPositiveButton("Settings",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
+                            }
+                        });
+//        alertDialogBuilder.setNegativeButton("Cancel",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
 
     public void onBackPressed() {
         finish();

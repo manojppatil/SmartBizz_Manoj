@@ -60,7 +60,7 @@ import static com.eduvanzapplication.newUI.newViews.DashboardActivity.userPic;
 
 public class EditProfile extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
-    private  de.hdodenhof.circleimageview.CircleImageView profileImage;
+    public  de.hdodenhof.circleimageview.CircleImageView profileImage;
 //    public ImageView profileImage;
     private EditText firstName, middleName, lastName, email;
     private TextView mobile_number;
@@ -159,8 +159,8 @@ public class EditProfile extends AppCompatActivity {
                     if (result)
                         cameraIntent();
 
-                } else if (items[item].equals("Choose from Library")) {
-                    userChoosenTask = "Choose from Library";
+                } else if (items[item].equals("Choose from Gallery")) {
+                    userChoosenTask = "Choose from Gallery";
                     if (result)
                         galleryIntent();
 

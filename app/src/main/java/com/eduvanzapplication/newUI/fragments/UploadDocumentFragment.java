@@ -102,11 +102,12 @@ public class UploadDocumentFragment extends Fragment {
     public static NestedScrollView nestedScrollView;
     public static TextView txtKycDocToggle, txtPhotoToggle, txtAddtionalDocToggle;
     public static LinearLayout linKycDocToggle, linPhotoToggle, linAddtionalDocToggle;
-    public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle;
+    public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle,ivcolorphotogratitle,ivkyctitlecheck;
     public static LinearLayout linKycDocBlock, relPhotoBlock, relAddtionalDocBlock;
     public static Animation expandAnimationPersonal, collapseanimationPersonal;
     public static Animation expandAnimationIdentity, collapseAnimationIdentity;
     public static Animation expanAnimationCourse, collapseAnimationCourse;
+
     ProgressDialog dialog;
 
     /*KYC documents*/
@@ -146,6 +147,7 @@ public class UploadDocumentFragment extends Fragment {
     public static Spinner spDocument;
     public static String selecteddocID = "";
 
+
     public UploadDocumentFragment() {
         // Required empty public constructor
     }
@@ -180,6 +182,9 @@ public class UploadDocumentFragment extends Fragment {
         txtPhotoToggle = view.findViewById(R.id.txtPhotoToggle);
         linKycDocToggle = view.findViewById(R.id.linKycDocToggle);
         linPhotoToggle = view.findViewById(R.id.linPhotoToggle);
+
+        ivcolorphotogratitle= view.findViewById(R.id.ivcolorphotogratitle);
+        ivkyctitlecheck= view.findViewById(R.id.ivkyctitlecheck);
         linAddtionalDocToggle = view.findViewById(R.id.linAddtionalDocToggle);
         relPhotoBlock = view.findViewById(R.id.relPhotoBlock);
         txtAddtionalDocToggle = view.findViewById(R.id.txtAddtionalDocToggle);
@@ -4733,6 +4738,7 @@ public class UploadDocumentFragment extends Fragment {
                      String mData1 = mJson.getString("message");
 
                     Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
+
                     if (mData.equalsIgnoreCase("1")) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -4931,6 +4937,7 @@ public class UploadDocumentFragment extends Fragment {
                         bSalSlip6 = true, bSalSlip3 = true, bBankStmt3 = true, bBankStmt6 = true, bKVP = true, bLic = true, bForm16 = true,
                         bForm61 = true, bPension = true, bITR = true, bPNL = true, bDregreeMarkSheet = true, bDegreeCerti = true,
                         bOtherDoc = true, btenthmark = true, btwelvethmark = true;
+
 //                "document_pending": [
 //                {
 //                    "document_type_id": "1",
@@ -4975,6 +4982,7 @@ public class UploadDocumentFragment extends Fragment {
                 spDocument.setAdapter(arrayAdapter_document);
                 arrayAdapter_document.notifyDataSetChanged();
 
+                     //uploaded document
                 JSONArray jsonArray = jsonData.getJSONArray("uploaded_files");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -4998,11 +5006,15 @@ public class UploadDocumentFragment extends Fragment {
                                 }
                                 profileImage.setTag(baseUrl + image);
                                 profileBckgrnd.setVisibility(View.VISIBLE);
+                                ivcolorphotogratitle.setVisibility(VISIBLE);
+
+
                                 /*imgPhotoUploadTick.setVisibility(View.VISIBLE);
                                 txtPhoto1.setVisibility(View.GONE);*/
 //                              imgPhoto1.setBackgroundResource(R.drawable.pdf_image);
                                 /*Picasso.with(context).load(baseUrl + image).into(imgPhoto1);
                                  */
+
                                 bPhoto = false;
                             }
                             break;
@@ -5029,7 +5041,18 @@ public class UploadDocumentFragment extends Fragment {
                                 } else {
                                     /*btnAadhar.setText(R.string.download);*/
                                 }
+
+                                //this below condition apply for green icon sign dispaly on KYC title
+
+                                if(bAadhaar && !bPan ){
+
+                                    ivkyctitlecheck.setVisibility(VISIBLE);
+
+                                }
+
                                 bAadhaar = false;
+
+
                             }
                             break;
 
@@ -5055,6 +5078,14 @@ public class UploadDocumentFragment extends Fragment {
                                     /* imgPan2.setBackgroundResource(R.drawable.zip_image);*/
 
                                 }
+
+                                //required two condition for if aadhar and pan both uploaded then only display check sign
+                                if(!bAadhaar && bPan ){
+
+                                    ivkyctitlecheck.setVisibility(VISIBLE);
+
+                                }
+
 //                        Picasso.with(context).load(String.valueOf(bm)).into(imgPan2);
                                 bPan = false;
                             }

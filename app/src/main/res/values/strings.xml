@@ -34,7 +34,7 @@
     <!--<string name="facebook_app_id">459976971239553</string>-->
     <!--<string name="fb_login_protocol_scheme">fb459976971239553</string>-->
 
-<!--original-->
+    <!--original-->
     <string name="facebook_app_id">2033654490205621</string>
     <string name="fb_login_protocol_scheme">fb2033654490205621</string>
 
@@ -138,9 +138,9 @@
     <string name="privacy_policy"> privacy policy.</string>
 
     <!--<string name="tenurestring"><b> \t Great Job !!! \n</b>\n-->
-<!--Your application is successfully registerded with us. \n \n-->
-<!--To complete the process we need some additional details. Request you to select the best suited loan plan and proceed further to complete the application-->
-<!--</string>-->
+    <!--Your application is successfully registerded with us. \n \n-->
+    <!--To complete the process we need some additional details. Request you to select the best suited loan plan and proceed further to complete the application-->
+    <!--</string>-->
 
     <string name="please_check_your_network_connection">Please check your network connection</string>
     <string name="please_choose_a_file_first">Please choose a File First</string>
@@ -241,6 +241,7 @@
 
     <string name="no_application_available_ro_view_pdf">No Application Available to View PDF</string>
     <string name="file_size_exceeds_limits_of_30_mb">File size exceeds limit of 30 MB</string>
+    <string name="file_size_exceeds_limits_of_2_mb">File size exceeds limit of 2 MB</string>
 
     <string name="error">error</string>
 

@@ -172,7 +172,7 @@
                 android:id="@+id/lin3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <TextView

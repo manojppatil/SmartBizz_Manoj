@@ -521,8 +521,7 @@
                                                     style="@style/TextViewTitleSmallStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                    android:text=" 0/-" />
+                                                    android:text=" -" />
 
                                             </LinearLayout>
 
@@ -1207,10 +1206,9 @@
 
                                                 <ImageView
                                                     android:id="@+id/ivProcessingFeesicon"
-                                                    android:layout_width="@dimen/_14sdp"
-                                                    android:layout_height="@dimen/_14sdp"
+                                                    android:layout_width="@dimen/_12sdp"
+                                                    android:layout_height="@dimen/_12sdp"
                                                     android:layout_marginTop="@dimen/_3sdp"
-                                                    android:tint="@color/colorYellow"
                                                     app:srcCompat="@drawable/ic_borrower_documents_pending" />
 
                                                 <LinearLayout
@@ -1336,10 +1334,9 @@
 
                                                 <ImageView
                                                     android:id="@+id/ivAdavnceFeeIcon"
-                                                    android:layout_width="@dimen/_14sdp"
-                                                    android:layout_height="@dimen/_14sdp"
+                                                    android:layout_width="@dimen/_12sdp"
+                                                    android:layout_height="@dimen/_12sdp"
                                                     android:layout_marginTop="@dimen/_3sdp"
-                                                    android:tint="@color/colorYellow"
                                                     app:srcCompat="@drawable/ic_borrower_documents_pending" />
 
 

@@ -103,6 +103,20 @@ public class Globle {
         return formatedDate;
     }
 
+    public static String dateFormaterForKarza(String date) {
+        String formatedDate = null;
+        SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy"); //07/15/2016
+        try {
+            Date oneWayTripDate = input.parse(date);
+            formatedDate = output.format(oneWayTripDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return formatedDate;
+    }
+
     public static String panPattern = "[A-Z]{5}[0-9]{4}[A-Z]{1}";
     public static String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String emailPattern1 = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"

@@ -77,6 +77,7 @@ public class DetailedInfoFragment extends Fragment {
     public static onDetailedInfoFragmentInteractionListener mListener;
     public static TextView txtBtnEditDtl;
     public static ImageView ivBtnEditDtl;
+
     //Borrower
     public static EditText edtCourseFeeBr, edtLoanAmtBr, edtPermanentPincode, edtPermanentAddress, edtPermanentLandmark,
             edtPincodeOff, edtAddressOff, edtLandmarkOff, edtMonthlyRent, edtCompanyName, edtAnnualIncome;
@@ -529,10 +530,10 @@ public class DetailedInfoFragment extends Fragment {
                 }
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
                     ivResidentialToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivResidentialToggle.setImageDrawable(bg);
@@ -542,7 +543,9 @@ public class DetailedInfoFragment extends Fragment {
             public void onAnimationRepeat(Animation animation) {
             }
         });
+
         /*=========================================Professional===========================================*/
+
         collapseanimationProfessional.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -553,10 +556,10 @@ public class DetailedInfoFragment extends Fragment {
                 linProfessionalBlock.setVisibility(GONE);
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
+                    bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_down, null);
                     ivProfessionalToggle.setColorFilter(context.getResources().getColor(R.color.darkblue), PorterDuff.Mode.MULTIPLY);
                 } else {
-                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_up);
+                    bg = ContextCompat.getDrawable(context, R.drawable.ic_angle_down);
                     DrawableCompat.setTint(bg, context.getResources().getColor(R.color.darkblue));
                 }
                 ivProfessionalToggle.setImageDrawable(bg);
@@ -579,6 +582,7 @@ public class DetailedInfoFragment extends Fragment {
                 if (linResidentialBlock.getVisibility() == VISIBLE) {
                     linResidentialBlock.startAnimation(collapseanimationResidential);
                 }
+
                 Drawable bg;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_angle_up, null);
@@ -1407,7 +1411,8 @@ public class DetailedInfoFragment extends Fragment {
                             indicateValidationTextdefault(txtResidentialToggle, false);
                             indicateValidationIcondefault(ivResidentialStatus, ivResidentialTitle, true);
 
-                        }}
+                        }
+                        }
 
                         else if (!switchIsPermanentAddressSame.isChecked()) {
 
@@ -1459,6 +1464,7 @@ public class DetailedInfoFragment extends Fragment {
                 }
 
             }else{
+                //on Edit click
 
                 if (txtBtnEditDtl.getText().toString().toLowerCase().contains("cancel")) {
 
@@ -1610,6 +1616,7 @@ public class DetailedInfoFragment extends Fragment {
 
     }
 
+
     public void checkAllFields() {
 
         if (switchIsPermanentAddressSame.isChecked()) {
@@ -1635,8 +1642,8 @@ public class DetailedInfoFragment extends Fragment {
                         //edtPermanentLandmark.requestFocus();
 
 
-                    } else if (Brpermanent_address_pin.equals("")) {
-                        txtResidentialDetailsErrMsg.setText("*Please select Pincode");
+                    } else if (Brpermanent_address_pin.equals("") ||Brpermanent_address_pin.toString().length()<6) {
+                        txtResidentialDetailsErrMsg.setText("*Please Enter your 6 digit Pincode");
                         //edtPermanentPincode.requestFocus();
 
                     } else if (permanentcountryID.equals("")) {
@@ -1712,8 +1719,8 @@ public class DetailedInfoFragment extends Fragment {
                 } else if (Broffice_landmark.equals("")) {
                     txtProfessionalDetailsErrMsg.setText("*Please select Street Name No,Locality,LandMark");
                     //edtLandmarkOff.requestFocus();
-                } else if (Broffice_address_pin.equals("")) {
-                    txtProfessionalDetailsErrMsg.setText("*Please select Pincode");
+                } else if (Broffice_address_pin.equals("") || Broffice_address_pin.toString().length()<6) {
+                    txtProfessionalDetailsErrMsg.setText("*Please Enter your 6 digit Pincode");
                     //edtPincodeOff.requestFocus();
                 } else if (Broffice_address_country.equals("")) {
                     txtProfessionalDetailsErrMsg.setText("*Please select Country");
@@ -1736,6 +1743,7 @@ public class DetailedInfoFragment extends Fragment {
             indicateValidationIcon(ivProfessionalStatus, ivProfessionalTitle, true);
 
         }
+
 //        if(!switchResidenceType.isChecked())
 //        {
 //            if(edtMonthlyRent.getText().toString().equals("")){
@@ -1744,6 +1752,7 @@ public class DetailedInfoFragment extends Fragment {
 //                indicateValidationText(txtResidentialToggle, context.getResources().getDrawable(R.drawable.ic_borrower_details_residential), true);
 //            }
 //        }
+
     }
 
     public static void validate() {
@@ -1752,7 +1761,7 @@ public class DetailedInfoFragment extends Fragment {
             if (Brcurrent_address_stay_duration.equals("") || Brcurrent_residence_type.equals("") || Brpermanent_address_pin.equals("") ||
                     Brpermanent_address.equals("") || Brpermanent_landmark.equals("") || permanentcityID.equals("") ||
                     permanentstateID.equals("") || permanentcountryID.equals("") || Brprofession.equals("") || Bremployer_name.equals("") ||
-                    Brannual_income.equals("") || Broffice_address_pin.equals("") || Broffice_address.equals("") || Broffice_landmark.equals("")
+                    Brannual_income.equals("") ||  Broffice_address_pin.equals("") ||  Broffice_address_pin.toString().length()<6|| Broffice_address.equals("") || Broffice_landmark.equals("")
                     || Brcurrent_employment_duration.equals("") || Broffice_address_country.equals("") || offstateID.equals("") ||
                     offcityID.equals("")) {
                 mListener.onDetailedInfoFragment(false, 1);

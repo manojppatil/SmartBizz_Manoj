@@ -95,7 +95,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:text="Dashboard"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:gravity="center" />
     </LinearLayout>
 

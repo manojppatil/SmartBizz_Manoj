@@ -1,12 +1,17 @@
 package com.eduvanzapplication.newUI.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -14,11 +19,15 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
+import android.support.annotation.RequiresApi;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -60,36 +69,46 @@ import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.Util.JavaGetFileSize;
 import com.eduvanzapplication.newUI.VolleyCall;
+import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
+import com.eduvanzapplication.uploaddocs.PathFile;
+import com.eduvanzapplication.uploaddocs.Utility;
 import com.google.gson.JsonObject;
-import com.idfy.rft.RFTSdk;
-import com.idfy.rft.RftSdkCallbackInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import vijay.createpdf.activity.ImgToPdfActivity;
+
 import static android.content.Context.*;
-import static com.eduvanzapplication.newUI.MainApplication.TAG;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.isProfileEnabled;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.student_id;
 import static com.eduvanzapplication.newUI.newViews.NewLeadActivity.viewPager;
 
 public class PersonalDetailsFragment extends Fragment {
 
-    //    private static ProgressBar progressbar;
-    private static final String idfy_account_id = "99cde5a9e632/744939bd-4fe2-42e8-94d2-971a79928ee4";
-    private static final String idfy_token = "2075c38b-31c3-4fc8-a642-ba7c02697c42";
-    public static RFTSdk rftsdk;
-    Bitmap bitmapFront = null, bitmapBack = null;
-    String doctype = "";
+    //  private static ProgressBar progressbar;
     public static final String GALLERY_DIRECTORY_NAME = "Hello Camera";
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final String IMAGE_EXTENSION = "jpg";
@@ -97,18 +116,22 @@ public class PersonalDetailsFragment extends Fragment {
     public static EditText edtFirstName, edtMiddleName, edtLastName;
     public static LinearLayout linMaleBtn, linFemaleBtn, linOtherBtn, linDobBtn;
     public static Switch switchMarital;
-    public static TextView txtMaritalStatus,txtPersonalDetailsErrMsg;
+    public static TextView txtMaritalStatus, txtPersonalDetailsErrMsg;
 
     public static ImageView ivMale, ivFemale, ivOther;
-    public static View viewMale, viewFemale,viewOther;
-    public static TextView txtMale ,txtFemale,txtOther;
+    public static View viewMale, viewFemale, viewOther;
+    public static TextView txtMale, txtFemale, txtOther;
 
-    LinearLayout linPan, linAadhar, linClose, linFooter1, linTakePicture, linQR, linStudentType, linOCR, newLinOcr;
+    LinearLayout linPan, linAadhar, linClose;
     public static Context context;
     public static Fragment mFragment;
     SharedPreferences sharedPreferences;
     ProgressBar progressBar;
-
+    public String userChoosenTask;
+    public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
+    public int GET_MY_PERMISSION = 1, permission;
+    String uploadFilePath = "";
+    StringBuffer sb;
     private static OnFragmentInteractionListener mListener;
     private TextView txtDOB;
 
@@ -139,7 +162,6 @@ public class PersonalDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_personal_details, container, false);
         edtFirstName = view.findViewById(R.id.edtFirstName);
@@ -167,7 +189,6 @@ public class PersonalDetailsFragment extends Fragment {
         context = getContext();
         mFragment = new PersonalDetailsFragment();
         // Checking availability of the camera
-        rftsdk = RFTSdk.init((NewLeadActivity) context, idfy_account_id, idfy_token);
 
         try {
             sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
@@ -177,7 +198,7 @@ public class PersonalDetailsFragment extends Fragment {
 
         switchMarital.setChecked(false);
 
-        if(!NewLeadActivity.isProfileEnabled) {
+        if (!NewLeadActivity.isProfileEnabled) {
             showOCRDialog();
         }
         return view;
@@ -201,11 +222,10 @@ public class PersonalDetailsFragment extends Fragment {
             }
         });
 
-
         linMaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isProfileEnabled) {
+                if (isProfileEnabled) {
                     NewLeadActivity.gender = "1";
                     linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                     linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
@@ -253,11 +273,10 @@ public class PersonalDetailsFragment extends Fragment {
             }
         });
 
-
         linFemaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isProfileEnabled) {
+                if (isProfileEnabled) {
                     NewLeadActivity.gender = "2";
                     linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
                     linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
@@ -309,7 +328,7 @@ public class PersonalDetailsFragment extends Fragment {
         linOtherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isProfileEnabled) {
+                if (isProfileEnabled) {
                     NewLeadActivity.gender = "3";
                     linMaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
                     linFemaleBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
@@ -368,7 +387,7 @@ public class PersonalDetailsFragment extends Fragment {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
 //                        Toast.makeText(getContext(), dateDesc, Toast.LENGTH_SHORT).show();
-                        if(isProfileEnabled) {
+                        if (isProfileEnabled) {
                             NewLeadActivity.dob = day + "-" + month + "-" + year;
                             txtDOB.setText(NewLeadActivity.dob);
                             checkAllFields();
@@ -428,7 +447,7 @@ public class PersonalDetailsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(isProfileEnabled) {
+                if (isProfileEnabled) {
                     if (edtFirstName.getText().toString().equals("")) {
                         NewLeadActivity.firstName = "";
 //                        edtFirstName.setError("* Please enter first name");
@@ -471,7 +490,7 @@ public class PersonalDetailsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(isProfileEnabled) {
+                if (isProfileEnabled) {
                     if (edtLastName.getText().toString().equals("")) {
                         NewLeadActivity.lastName = "";
 //                        edtLastName.setError("* Please enter last name");
@@ -488,7 +507,6 @@ public class PersonalDetailsFragment extends Fragment {
 
             }
         });
-
     }
 
     public static void checkAllFields() {
@@ -497,16 +515,16 @@ public class PersonalDetailsFragment extends Fragment {
             mListener.onOffButtons(false, false);
             txtPersonalDetailsErrMsg.setVisibility(View.VISIBLE);
 
-            if(edtFirstName.getText().toString().equals("")){
+            if (edtFirstName.getText().toString().equals("")) {
                 txtPersonalDetailsErrMsg.setText(" *Please enter first name");
 //                edtFirstName.requestFocus();
-            }else if(edtLastName.getText().toString().equals("")){
+            } else if (edtLastName.getText().toString().equals("")) {
                 txtPersonalDetailsErrMsg.setText("*Please enter last name");
 //                edtLastName.requestFocus();
-            }else if(NewLeadActivity.gender.equals("")){
+            } else if (NewLeadActivity.gender.equals("")) {
                 txtPersonalDetailsErrMsg.setText("*Please select gender");
 //                linMaleBtn.requestFocus();
-            }else if(NewLeadActivity.dob.equals("")){
+            } else if (NewLeadActivity.dob.equals("")) {
                 txtPersonalDetailsErrMsg.setText("*Please enter your birthdate");
 //                linDobBtn.requestFocus();
             }
@@ -558,8 +576,32 @@ public class PersonalDetailsFragment extends Fragment {
 //            showOCRDialog();
 //        } else {
 //        }
+        String[] Name = NewLeadActivity.firstName.split(" ");
 
-        edtFirstName.setText(NewLeadActivity.firstName);
+        if (Name.length > 1) {
+            StringBuilder midname = new StringBuilder();
+            for (int i = 1; i <= Name.length - 2; i++) {
+                if (i == 1) {
+                    midname.append(Name[i]);
+                } else {
+                    midname.append(" ");
+                    midname.append(Name[i]);
+                }
+            }
+
+            edtFirstName.setText(Name[0]);
+
+            edtMiddleName.setText(midname);
+
+            edtLastName.setText(Name[Name.length - 1]);
+
+        } else {
+            if (Name[0].equals("")) {
+            } else {
+                edtFirstName.setText(Name[0]);
+            }
+        }
+
         edtMiddleName.setText(NewLeadActivity.middleName);
         edtLastName.setText(NewLeadActivity.lastName);
 
@@ -570,8 +612,11 @@ public class PersonalDetailsFragment extends Fragment {
         } else if (NewLeadActivity.gender.equals("3")) {
             linOtherBtn.performClick();
         }
+           String dob=NewLeadActivity.dob;
+    //    txtDOB.setText(NewLeadActivity.dob);
+        txtDOB.setText(Globle.dateFormaterForKarza(dob));
+        NewLeadActivity.dob = txtDOB.getText().toString();
 
-        txtDOB.setText(NewLeadActivity.dob);
         if (NewLeadActivity.maritalStatus.equals("0") || NewLeadActivity.maritalStatus.equals("1")) {
             txtMaritalStatus.setText("Married");
         } else  //2
@@ -579,7 +624,7 @@ public class PersonalDetailsFragment extends Fragment {
             txtMaritalStatus.setText("Unmarried");
         }
 
-        if(isProfileEnabled) {
+        if (isProfileEnabled) {
             checkAllFields();
         }
         isProfileEnabled = true;
@@ -609,13 +654,28 @@ public class PersonalDetailsFragment extends Fragment {
         linPan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
-                    doctype = "ind_pan";
-                    rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_pan", rftSdkCallbackInterface);
-                } else {
-//                        requestCameraPermission(MEDIA_TYPE_IMAGE);
-                }
-//Unable to find explicit activity class {com.eduvanzapplication/com.idfy.rft.CameraView}; have you declared this activity in your AndroidManifest.xml?
+//                if (Build.VERSION.SDK_INT >= 23) {
+//                    permission = ContextCompat.checkSelfPermission(context,
+//                            Manifest.permission.CAMERA);
+//                    if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
+//                        ActivityCompat.requestPermissions((Activity) context,
+//                                new String[]{
+//                                        Manifest.permission.CAMERA},
+//                                GET_MY_PERMISSION);
+//                    } else {
+//                        selectImage();
+//                    }
+//                }
+
+                Intent intent = new Intent(getActivity(), ImgToPdfActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("strapplicantId", "0");
+                bundle.putString("strapplicantType", "1");
+                bundle.putString("documentTypeNo", "01");
+                bundle.putString("toolbarTitle", "PAN OCR");
+                bundle.putString("note", "Please upload Pan Card");
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 2);// Activity is started with requestCode 2
 
             }
         });
@@ -623,16 +683,28 @@ public class PersonalDetailsFragment extends Fragment {
         linAadhar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
-//                        progressBar.setVisibility(View.VISIBLE);
-                    Toast.makeText(getActivity(), "Capture front-side image of Aadhaar", Toast.LENGTH_LONG).show();
+//                if (Build.VERSION.SDK_INT >= 23) {
+//                    permission = ContextCompat.checkSelfPermission(context,
+//                            Manifest.permission.CAMERA);
+//                    if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
+//                        ActivityCompat.requestPermissions((Activity) context,
+//                                new String[]{
+//                                        Manifest.permission.CAMERA},
+//                                GET_MY_PERMISSION);
+//                    } else {
+//                        selectImage();
+//                    }
+//                }
 
-                    doctype = "ind_aadhaar";
-//                    doctype = "aadhaar_ocr";
-                    rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_aadhaar", rftSdkCallbackInterface);
-                } else {
-//                        requestCameraPermission(MEDIA_TYPE_IMAGE);
-                }
+                Intent intent = new Intent(getActivity(), ImgToPdfActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("strapplicantId", "0");
+                bundle.putString("strapplicantType", "1");
+                bundle.putString("documentTypeNo", "02");
+                bundle.putString("toolbarTitle", "Aadhaar OCR");
+                bundle.putString("note", "Please upload Aadhaar Card");
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 2);// Activity is started with requestCode 2
             }
         });
 
@@ -651,933 +723,687 @@ public class PersonalDetailsFragment extends Fragment {
 
     }
 
-//    private void showOCRDialog() {
-//
-//        View view = getLayoutInflater().inflate(R.layout.layout_ocr_options, null);
-//
-//        linStudentBtn = view.findViewById(R.id.linStudentBtn);
-//        linSalariedBtn = view.findViewById(R.id.linSalariedBtn);
-//        linSelfEmployedBtn = view.findViewById(R.id.linSelfEmployedBtn);
-//
-//        linPan = view.findViewById(R.id.linPan);
-//        linAadhar = view.findViewById(R.id.linAadhar);
-//        linClose = view.findViewById(R.id.linClose);
-//        linFooter1 = view.findViewById(R.id.linFooter1);
-//        linTakePicture = view.findViewById(R.id.linTakePicture);
-//        linQR = view.findViewById(R.id.linQR);
-//        linStudentType = view.findViewById(R.id.linStudentType);
-//        linOCR = view.findViewById(R.id.linOCR);
-//        newLinOcr = view.findViewById(R.id.newLinOcr);
-//        progressBar = view.findViewById(R.id.progressBar);
-//
-//        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(context)
-//                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-//                .setFooterView(view);
-//
-//        linFooter1.setVisibility(View.VISIBLE);
-//        newLinOcr.setVisibility(View.GONE);
-//        linTakePicture.setVisibility(View.GONE);
-//        linQR.setVisibility(View.GONE);
-//
-//        linStudentBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession = "1";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                linOCR.setVisibility(View.VISIBLE);
-//                linStudentType.setVisibility(View.GONE);
-//                newLinOcr.setVisibility(View.VISIBLE);
-//            }
-//        });
-//
-//        linSalariedBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession = "2";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-//                linOCR.setVisibility(View.VISIBLE);
-//                linStudentType.setVisibility(View.GONE);
-//                newLinOcr.setVisibility(View.VISIBLE);
-//            }
-//        });
-//
-//        linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NewLeadActivity.profession = "3";
-//                linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-//                linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_primary));
-//                linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                linOCR.setVisibility(View.VISIBLE);
-//                linStudentType.setVisibility(View.GONE);
-//                newLinOcr.setVisibility(View.VISIBLE);
-//            }
-//        });
-//
-//        linClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                cfAlertDialog.dismiss();
-//            }
-//        });
-//
-//        linPan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                linTakePicture.setVisibility(View.VISIBLE);
-//                linQR.setVisibility(View.GONE);
-//                linFooter1.setVisibility(View.VISIBLE);
-//
-//            }
-//        });
-//
-//        linAadhar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                linTakePicture.setVisibility(View.VISIBLE);
-//                linQR.setVisibility(View.VISIBLE);
-//                linFooter1.setVisibility(View.VISIBLE);
-//            }
-//        });
-//
-//        linTakePicture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (linQR.getVisibility() != View.VISIBLE) {  //pan is selected
-//                    if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
-//                        doctype = "ind_pan";
-//                        rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_pan", rftSdkCallbackInterface);
-//                    } else {
-////                        requestCameraPermission(MEDIA_TYPE_IMAGE);
-//                    }
-////Unable to find explicit activity class {com.eduvanzapplication/com.idfy.rft.CameraView}; have you declared this activity in your AndroidManifest.xml?
-//                } else {
-//                    if (CameraUtils.checkPermissions((NewLeadActivity) context)) {
-////                        progressBar.setVisibility(View.VISIBLE);
-//                        Toast.makeText(getActivity(), "Capture front-side image of Aadhaar", Toast.LENGTH_LONG).show();
-//
-//                        doctype = "ind_aadhaar";
-////                    doctype = "aadhaar_ocr";
-//                        rftsdk.CaptureDocImage((NewLeadActivity) context, "ind_aadhaar", rftSdkCallbackInterface);
-//                    } else {
-////                        requestCameraPermission(MEDIA_TYPE_IMAGE);
-//                    }
-//
-//                }
-//            }
-//        });
-//
-//        builder.setCancelable(false);
-//
-//        cfAlertDialog = builder.show();
-//        cfAlertDialog.setCancelable(false);
-//        cfAlertDialog.setCanceledOnTouchOutside(false);
-//
-//        cfAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-////                onDialogDismiss();
-//            }
-//        });
-//
-//    }
-
-
-    private RftSdkCallbackInterface rftSdkCallbackInterface = new RftSdkCallbackInterface() {
-        @Override
-        public void onImageCaptureSuccess(final Bitmap image) {
-            try {
-                progressBar.setVisibility(View.VISIBLE);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (doctype.equals("ind_pan")) {
-                PersonalDetailsFragment.AsyncReq bv = new PersonalDetailsFragment.AsyncReq(rftsdk, image);
-                bv.execute();
-
-//                runOnUiThread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        final Handler handler = new Handler();
-//                        handler.postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//
-//                                AsyncReq bv = new AsyncReq(rftsdk, image);
-//                                bv.execute();
-//                            }
-//                        }, 1000);
-//
-//                    }
-//                });
-
-            } else {
-                if (bitmapFront == null) {
-                    bitmapFront = image;
-                    Toast.makeText(getActivity(), "Capture backside image of Aadhaar", Toast.LENGTH_LONG).show();
-                    rftsdk.CaptureDocImage(getActivity(), "ind_aadhaar", rftSdkCallbackInterface);
-                } else {
-                    bitmapBack = image;
-                    PersonalDetailsFragment.AsyncReqAaDhaar av = new PersonalDetailsFragment.AsyncReqAaDhaar(rftsdk, bitmapFront, bitmapBack);
-                    av.execute();
-
-//                    runOnUiThread(new Runnable() {
-//
-//                        @Override
-//                        public void run() {
-//                            final Handler handler = new Handler();
-//                            handler.postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//
-//                                    AsyncReqAaDhaar av = new AsyncReqAaDhaar(rftsdk, bitmapFront, bitmapBack);
-//                                    av.execute();
-//                                }
-//                            }, 1000);
-//
-//                        }
-//                    });
-
-                }
-
-            }
-        }
-
-        @Override
-        public void onImageCaptureFaliure(JSONObject response) {
-            JsonObject jsonObject = new JsonObject();
-//            Toast.makeText(getActivity(), "Upload Failure, Response-> " + jsonObject.toString(), Toast.LENGTH_LONG).show();
-        }
-
-    };
-
-    private class AsyncReq extends AsyncTask<Void, Void, JSONObject> {
-
-        RFTSdk rftsdk;
-        Bitmap bitmap;
-
-        public AsyncReq(RFTSdk instance, Bitmap bitmap) {
-            this.rftsdk = instance;
-            this.bitmap = bitmap;
-        }
-
-        @Override
-        protected JSONObject doInBackground(Void... voids) {
-
-            JSONObject result = null;
-            try {
-                String group = "g-" + new SimpleDateFormat("MM dd HH:mm").format(new Date());
-
-//                result = rftsdk.UploadImage("fa5942a5-73d7-4fd7-8158-f87f50c73c82",
-//                        "0e48c481-fdc1-4c18-8f86-88aebc5b9a8a",
-//                        group,
-//                        doctype, bitmap);
-
-//                "token": "2075c38b-31c3-4fc8-a642-ba7c02697c42",
-//                "account_id": "99cde5a9e632/744939bd-4fe2-42e8-94d2-971a79928ee4"
-
-                result = rftsdk.UploadImage(idfy_account_id, idfy_token, group, doctype, bitmap);
-                // {"url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/17d8011c-9896-4c91-bcc1-1f233fd32505"}
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            super.onPostExecute(jsonObject);
-            JSONObject tasks = new JSONObject();
-            try {
-                String group = "g-" + new SimpleDateFormat("MM dd HH:mm").format(new Date());
-                String task = "t-" + new SimpleDateFormat("MM dd HH:mm").format(new Date());
-                tasks.put("type", "pan_ocr");
-                tasks.put("group_id", group);
-                tasks.put("task_id", task);
-                tasks.put("data", new JSONObject().put("doc_url", (String) jsonObject.get("url")));
-
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            JSONArray jsonArray = new JSONArray();
-
-            jsonArray.put(tasks);
-
-            JSONObject postobject = new JSONObject();
-            try {
-                postobject.put("tasks", jsonArray);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            //Test 3
-//postobject = {"tasks":[{"type":"pan_ocr","group_id":"g-6","task_id":"t-13","data":{"doc_url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/51184dec-f70b-476a-9a47-269ec9faace8"}}]}
-            RequestQueue queue = Volley.newRequestQueue(getContext());
-
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                    "https://api.idfy.com/v2/tasks", postobject,
-                    new Response.Listener<JSONObject>() {
-
-                        @Override
-                        public void onResponse(final JSONObject response) {
-//                            Log.d(TAG, response.toString());
-                            try {
-                                if (response.getString("request_id") != null) {
-                                    getActivity().runOnUiThread(new Runnable() {
-
-                                        @Override
-                                        public void run() {
-                                            final Handler handler = new Handler();
-                                            handler.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    try {
-                                                        getPANData((String) response.getString("request_id"));
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            }, 6000);
-
-                                        }
-                                    });
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.d(TAG, "Error: " + error.getMessage()); //com.android.volley.ClientError
-                    try {
-                        progressBar.setVisibility(View.GONE);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }) {
-
-                /**
-                 * Passing some request headers
-                 * */
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-
-                    HashMap<String, String> headers = new HashMap<String, String>();
-                    headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-//                    headers.put("apikey", account_id);
-                    headers.put("Content-Type", "application/json; charset=utf-8");
-                    return headers;
-                }
-
-                @Override
-                protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                    return super.parseNetworkResponse(response);
-                }
-            };
-
-            // Adding request to request queue
-            queue.add(jsonObjReq);
-
-            //Test 2
-
-//            RequestQueue queue = Volley.newRequestQueue(context);
-//            JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-//                    Request.Method.POST,"https://api.idfy.com/v2/tasks", postobject,
-//                    new Response.Listener<JSONObject>() {
-//                        @Override
-//                        public void onResponse(JSONObject response) {
-//
-//                            BreakIterator msgResponse = null;
-//                            msgResponse.setText(response.toString());
-//                        }
-//                    }, new Response.ErrorListener() {
-//
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                }
-//            }) {
-//
-//                /**
-//                 * Passing some request headers
-//                 */
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-//                    headers.put("Content-Type", "application/x-www-form-urlencoded");
-//                    return headers;
-//                }
-//
-//                @Override
-//                protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-//                    return super.parseNetworkResponse(response);
-//                }
-//            };
-//            queue.add(jsonObjReq);
-
-            //Test 1
-////postobject = {"tasks":[{"type":"pan_ocr","group_id":"g-6","task_id":"t-13","data":{"doc_url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/3778f140-a80f-49cc-964d-f6a9532c1a87"}}]}
-//            RequestQueue requestQueue = Volley.newRequestQueue(context);
-//
-//            final String mRequestBody = postobject.toString();
-//
-//            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://api.idfy.com/v2/tasks", new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//                    Log.i("LOG_RESPONSE", response);
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Log.e("LOG_RESPONSE", error.toString());
-//                }
-//            }) {
-//                // Passing some request headers
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-//                    headers.put("Content-Type", "application/x-www-form-urlencoded");
-//                    return headers;
-//                }
-//
-//                @Override
-//                public String getBodyContentType() {
-//                    return "application/json; charset=utf-8";
-//                }
-//
-//                @Override
-//                public byte[] getBody() throws AuthFailureError {
-//                    try {
-//                        return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
-//                    } catch (UnsupportedEncodingException uee) {
-//                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
-//                        return null;
-//                    }
-//                }
-//
-//                @Override
-//                protected Response<String> parseNetworkResponse(NetworkResponse response) {
-//                    String responseString = "";
-//                    if (response != null) {
-//                        responseString = String.valueOf(response.statusCode);
-//                    }
-//                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-//                }
-//            };
-//
-//            requestQueue.add(stringRequest);
-
-//            Use response as required
-//            It will contain a selflink for uploaded image
-
-//            Toast.makeText(getActivity(), "Upload succes, Response-> " + jsonObject.toString(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private class AsyncReqAaDhaar extends AsyncTask<Void, Void, JSONArray> {
-
-        RFTSdk rftsdk;
-        Bitmap bitmap1, bitmap2;
-
-        public AsyncReqAaDhaar(RFTSdk instance, Bitmap bitmapfrt, Bitmap bitmapbck) {
-            this.rftsdk = instance;
-            this.bitmap1 = bitmapfrt;
-            this.bitmap2 = bitmapbck;
-        }
-
-        @Override
-        protected JSONArray doInBackground(Void... voids) {
-
-            JSONObject result1 = null;
-            JSONObject result2 = null;
-            try {
-                String group = "g-" + new SimpleDateFormat("MM dd HH:mm").format(new Date());
-
-//                result1 = rftsdk.UploadImage("fa5942a5-73d7-4fd7-8158-f87f50c73c82",
-//                        "0e48c481-fdc1-4c18-8f86-88aebc5b9a8a",
-//                        group,
-//                        doctype, bitmap1);
-//
-//                result2 = rftsdk.UploadImage("fa5942a5-73d7-4fd7-8158-f87f50c73c82",
-//                        "0e48c481-fdc1-4c18-8f86-88aebc5b9a8a",
-//                        group,
-//                        doctype, bitmap2);
-
-//                "token": "2075c38b-31c3-4fc8-a642-ba7c02697c42",
-//                "account_id": "99cde5a9e632/744939bd-4fe2-42e8-94d2-971a79928ee4"
-                result1 = rftsdk.UploadImage(idfy_account_id, idfy_token, group, doctype, bitmap1);//Unable to resolve host "signed-urls.idfy.com": No address associated with hostname
-
-                result2 = rftsdk.UploadImage(idfy_account_id, idfy_token, group, doctype, bitmap2);//Unable to resolve host "signed-urls.idfy.com": No address associated with hostname
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            JSONArray jsonArray = new JSONArray();
-            jsonArray.put(result1);
-            jsonArray.put(result2);
-
-            bitmapFront = null;
-            bitmapBack = null;
-
-            return jsonArray;
-        }
-
-        //{"url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/a5799223-7648-454f-9462-c8d5e9f17eff"}
-        //{"url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/8dad48ce-fe07-453a-bcd1-552a43b115d6"}
-
-        @Override
-        protected void onPostExecute(JSONArray jsonArrayImg) {
-            super.onPostExecute(jsonArrayImg);
-            JSONObject tasks = new JSONObject();
-
-            JSONObject data = new JSONObject();
-            JSONArray docurl = new JSONArray();
-            try {
-                docurl.put(jsonArrayImg.getJSONObject(0).get("url"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                docurl.put(jsonArrayImg.getJSONObject(1).get("url"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                data.put("doc_url", docurl);
-                data.put("aadhaar_consent", "I, the holder of Aadhaar number, hereby give my consent to Baldor Technologies Private Limited, " +
-                        "to obtain my Aadhaar number, name, date of birth, address and demographic data for authentication with UIDAI. " +
-                        "Baldor Technologies Private Limited has informed me that my identity information would only be used " +
-                        "for a background check or a verification of my identity and has also informed me that " +
-                        "my biometrics will not be stored/ shared and will be submitted to CIDR only for the purpose of authentication. " +
-                        "I have no objection if reports generated from such background check are shared with relevant third parties.");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //{"url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/4ecaa516-35a3-482d-97b0-d531cd417476"}
-//            "data": {
-//                "doc_url": "https://xyz.com/aadhar-123.jpg" ,
-//                        "aadhaar_consent": "I, the holder of Aadhaar number, hereby give my consent to Baldor Technologies Private Limited, to obtain my Aadhaar number, name, date of birth, address and demographic data for authentication with UIDAI. Baldor Technologies Private Limited has informed me that my identity information would only be used for a background check or a verification of my identity and has also informed me that my biometrics will not be stored/ shared and will be submitted to CIDR only for the purpose of authentication. I have no objection if reports generated from such background check are shared with relevant third parties."
-//            }
-            try {
-                String group = "g-" + new SimpleDateFormat("MM dd HH:mm").format(new Date());
-                String task = "t-" + new SimpleDateFormat("MM dd HH:mm").format(new Date());
-                tasks.put("type", "aadhaar_ocr");
-                tasks.put("group_id", group);
-                tasks.put("task_id", task);
-                tasks.put("data", data);
-
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            JSONArray jsonArray = new JSONArray();
-
-            jsonArray.put(tasks);
-
-            JSONObject postobject = new JSONObject();
-            try {
-                postobject.put("tasks", jsonArray);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-//            Test 3
-//postobject = {"tasks":[{"type":"pan_ocr","group_id":"g-6","task_id":"t-13","data":
-// {"doc_url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/51184dec-f70b-476a-9a47-269ec9faace8"}}]}
-            RequestQueue queue = Volley.newRequestQueue(getContext());
-
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                    "https://api.idfy.com/v2/tasks", postobject,
-                    new Response.Listener<JSONObject>() {
-
-                        @Override
-                        public void onResponse(final JSONObject response) {
-                            Log.d(TAG, response.toString());
-                            try {
-                                if (response.getString("request_id") != null) {
-                                    getActivity().runOnUiThread(new Runnable() {
-
-                                        @Override
-                                        public void run() {
-                                            final Handler handler = new Handler();
-                                            handler.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    try {
-                                                        getAadhaarData((String) response.getString("request_id"));
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            }, 6000);
-
-                                        }
-                                    });
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.d(TAG, "Error: " + error.getMessage()); //com.android.volley.ClientError
-                    try {
-                        progressBar.setVisibility(View.GONE);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }) {
-
-                /**
-                 * Passing some request headers
-                 * */
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-
-                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("apikey", account_id);
-                    headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-                    headers.put("Content-Type", "application/json; charset=utf-8");
-                    return headers;
-                }
-
-                @Override
-                protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                    return super.parseNetworkResponse(response);
-                }
-            };
-
-            jsonObjReq.setTag(TAG);
-            // Adding request to request queue
-            queue.add(jsonObjReq);
-
-            //InCorrect Get Request
-//            RequestQueue queue = Volley.newRequestQueue(context);
-//
-//            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,"https://api.idfy.com/v2/tasks?request_id=5128d990-6287-4b3a-a9b8-ea12edc3459e",
-//                    null, new Response.Listener<JSONObject>() {
-//
-//                @Override
-//                public void onResponse(JSONObject response) {
-//                    Log.d(TAG, response.toString());
-//
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Log.e(TAG, "Site Info Error: " + error.getMessage());
-//                }
-//            }) {
-//
-//                /**
-//                 * Passing some request headers
-//                 */
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-//                    headers.put("Content-Type", "application/json; charset=utf-8");
-//                    return headers;
-//                }
-//            };
-//            queue.add(req);
-
-            //Test 2
-
-//            RequestQueue queue = Volley.newRequestQueue(context);
-//            JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-//                    Request.Method.POST,"https://api.idfy.com/v2/tasks", postobject,
-//                    new Response.Listener<JSONObject>() {
-//                        @Override
-//                        public void onResponse(JSONObject response) {
-//
-//                            BreakIterator msgResponse = null;
-//                            msgResponse.setText(response.toString());
-//                        }
-//                    }, new Response.ErrorListener() {
-//
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                }
-//            }) {
-//
-//                /**
-//                 * Passing some request headers
-//                 */
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-//                    headers.put("Content-Type", "application/x-www-form-urlencoded");
-//                    return headers;
-//                }
-//
-//                @Override
-//                protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-//                    return super.parseNetworkResponse(response);
-//                }
-//            };
-//            queue.add(jsonObjReq);
-
-            //Test 1
-////postobject = {"tasks":[{"type":"pan_ocr","group_id":"g-6","task_id":"t-13","data":{"doc_url":"https:\/\/www.googleapis.com\/storage\/v1\/b\/storage.idfy.com\/o\/3778f140-a80f-49cc-964d-f6a9532c1a87"}}]}
-//            RequestQueue requestQueue = Volley.newRequestQueue(context);
-//
-//            final String mRequestBody = postobject.toString();
-//
-//            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://api.idfy.com/v2/tasks", new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//                    Log.i("LOG_RESPONSE", response);
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Log.e("LOG_RESPONSE", error.toString());
-//                }
-//            }) {
-//                // Passing some request headers
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-//                    headers.put("Content-Type", "application/x-www-form-urlencoded");
-//                    return headers;
-//                }
-//
-//                @Override
-//                public String getBodyContentType() {
-//                    return "application/json; charset=utf-8";
-//                }
-//
-//                @Override
-//                public byte[] getBody() throws AuthFailureError {
-//                    try {
-//                        return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
-//                    } catch (UnsupportedEncodingException uee) {
-//                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
-//                        return null;
-//                    }
-//                }
-//
-//                @Override
-//                protected Response<String> parseNetworkResponse(NetworkResponse response) {
-//                    String responseString = "";
-//                    if (response != null) {
-//                        responseString = String.valueOf(response.statusCode);
-//                    }
-//                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-//                }
-//            };
-//
-//            requestQueue.add(stringRequest);
-
-//            Use response as required
-//            It will contain a selflink for uploaded image
-
-        }
-    }
-
-    private void getPANData(String Requestid) {
-
-        RequestQueue queue12 = Volley.newRequestQueue(getContext());
-        StringRequest getRequest = new StringRequest(Request.Method.GET, "https://api.idfy.com/v2/tasks?request_id=" + Requestid,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(final String response) {
-                        // response
-                        Log.d("Response", response);
-                        try {
-                            progressBar.setVisibility(View.GONE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        Boolean success = false;
-                        try {
-                            if (new JSONArray(response.toString()).getJSONObject(0).getString("status").toLowerCase().equals("completed")) {
-                                success = true;
-                                getActivity().runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        final Handler handler = new Handler();
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    saveOCRData(new JSONArray(response.toString()).getJSONObject(0).getString("status"), Requestid, response.toString());
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }, 0);
-
-                                    }
-                                });
-
-                            } else if (new JSONArray(response.toString()).getJSONObject(0).getString("status").toLowerCase().equals("in_progress")) {
-                                success = false;
-
-                                try {
-                                    progressBar.setVisibility(View.VISIBLE);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                                getActivity().runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        final Handler handler = new Handler();
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    getPANData((String) new JSONArray(response.toString()).getJSONObject(0).getString("request_id"));
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }, 3000);
-
-                                    }
-                                });
-
-                            } else {
-//                                Toast.makeText(getActivity(), "OCR Response-> " + response.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (success) {
-                            try {
-                                NewLeadActivity.Ppanno = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pan_number");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Ppantype = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pan_type");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Pname = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("name_on_card");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Pdob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_on_card");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Pdoi = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_of_issue");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Page = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("age");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Pfathersname = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("fathers_name");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Pisminor = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("minor");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Pisscanned = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("is_scanned");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("Ppanno", NewLeadActivity.Ppanno);
-                                editor.putString("Ppantype", NewLeadActivity.Ppantype);
-                                editor.putString("Pname", NewLeadActivity.Pname);
-                                editor.putString("Pdob", NewLeadActivity.Pdob);
-                                editor.putString("Pdoi", NewLeadActivity.Pdoi);
-                                editor.putString("Page", NewLeadActivity.Page);
-                                editor.putString("Pfathersname", NewLeadActivity.Pfathersname);
-                                editor.putString("Pisminor", NewLeadActivity.Pisminor);
-                                editor.putString("Pisscanned", NewLeadActivity.Pisscanned);
-                                editor.apply();
-                                editor.commit();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            NewLeadActivity.setOcrData();
-                            onResume();
-                        }
-//                        else {
-//                            Toast.makeText(context, "Upload Failed, Response-> " + response.toString(), Toast.LENGTH_LONG).show();
-//                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
-                        try {
-                            progressBar.setVisibility(View.GONE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-//                        Toast.makeText(getActivity(), "Upload Failed, Response-> " + error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }
-        ) {
+    private void selectImage() {
+        CharSequence[] items = {"Take a Picture", "Choose from Gallery",
+                "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
+            public void onClick(DialogInterface dialog, int item) {
+                boolean result = Utility.checkPermission(context);
+
+                if (items[item].equals("Take a Picture")) {
+                    userChoosenTask = "Take a Picture";
+                    if (result)
+                        cameraIntent();
+
+                } else if (items[item].equals("Choose from Gallery")) {
+                    userChoosenTask = "Choose from Gallery";
+                    if (result)
+                        galleryIntent();
+
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
             }
-        };
-        queue12.add(getRequest);
+        });
+        builder.show();
     }
 
+    private void galleryIntent() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+    }
+
+    private void cameraIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+
+        Bitmap bm = null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(context.getContentResolver(), data.getData());
+                Uri selectedFileUri = data.getData();
+                uploadFilePath = PathFile.getPath(context, selectedFileUri);
+                Log.e("TAG", "onSelectFromGalleryResult: " + uploadFilePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public static int getQualityNumber(Bitmap bitmap) {
+        int size = bitmap.getByteCount();
+        int percentage = 0;
+
+        if (size > 500000 && size <= 800000) {
+            percentage = 15;
+        } else if (size > 800000 && size <= 1000000) {
+            percentage = 20;
+        } else if (size > 1000000 && size <= 1500000) {
+            percentage = 25;
+        } else if (size > 1500000 && size <= 2500000) {
+            percentage = 27;
+        } else if (size > 2500000 && size <= 3500000) {
+            percentage = 30;
+        } else if (size > 3500000 && size <= 4000000) {
+            percentage = 40;
+        } else if (size > 4000000 && size <= 5000000) {
+            percentage = 50;
+        } else if (size > 5000000) {
+            percentage = 75;
+        }
+
+        return percentage;
+    }
+
+    private void onCaptureImageResult(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, getQualityNumber(thumbnail), bytes);
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        uploadFilePath = destination.toString();
+        Log.e("TAG", "onCaptureImageResult: " + uploadFilePath);
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onCaptureImageResult1(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.PNG, getQualityNumber(thumbnail), bytes);
+
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".png");
+
+        uploadFilePath = destination.toString();
+        Log.e("TAG", "onCaptureImageResult1: " + uploadFilePath);
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int uploadFile(String selectedFilePath) {
+        String urlup = "https://api.karza.in/v2/ocr/kyc";
+//        String urlup = "https://testapi.karza.in/v3/ocr/kyc";//UAT
+//      String urlup = MainActivity.mainUrl + "document/documentUpload";//RELemGo0j2pZ5rC3
+
+        Log.e(MainActivity.TAG, "urlup++++++: " + urlup);
+
+        int serverResponseCode = 0;
+        HttpURLConnection connection;
+        DataOutputStream dataOutputStream;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        File selectedFile = new File(selectedFilePath);
+
+        String[] parts = selectedFilePath.split("/");
+        String fileName = parts[parts.length - 1];
+        String[] fileExtn = fileName.split(".");
+
+        if (!selectedFile.isFile()) {
+            //dialog.dismiss();
+            try {
+                progressBar.setVisibility(View.GONE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("TAG", "run: " + "Source File Doesn't Exist: " + selectedFilePath);
+                }
+            });
+            return 0;
+        } else {
+            try {
+
+                FileInputStream fileInputStream = new FileInputStream(selectedFile);
+                URL url = new URL(urlup);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setUseCaches(false);
+                connection.setChunkedStreamingMode(1024);
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Connection", "Keep-Alive");
+                connection.setRequestProperty("ENCTYPE", "multipart/form-data");
+                connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                connection.setRequestProperty("x-karza-key", "POSJDFLJKNSFNJWD");
+//                connection.setRequestProperty("x-karza-key", "RELemGo0j2pZ5rC3");//UAT
+                connection.setRequestProperty("document", selectedFilePath);
+                Log.e("TAG", "Server property" + connection.getRequestMethod() + ":property " + connection.getRequestProperties());
+                dataOutputStream = new DataOutputStream(connection.getOutputStream());
+
+                dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\""
+                        + selectedFilePath + "\"" + lineEnd);
+                dataOutputStream.writeBytes(lineEnd);
+
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                buffer = new byte[bufferSize];
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                while (bytesRead > 0) {
+                    dataOutputStream.write(buffer, 0, bufferSize);
+                    Log.e("TAG", " here: \n\n" + buffer + "\n" + bufferSize);
+                    bytesAvailable = fileInputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                }
+                dataOutputStream.writeBytes(lineEnd);
+
+                dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                serverResponseCode = connection.getResponseCode();
+                Log.e("TAG", " here:server response serverResponseCode\n\n" + serverResponseCode);
+                String serverResponseMessage = connection.getResponseMessage();
+                Log.e("TAG", " here: server message serverResponseMessage \n\n" + serverResponseMessage.toString() + "\n" + bufferSize);
+                BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+                String output = "";
+                sb = new StringBuffer();
+
+                while ((output = br.readLine()) != null) {
+                    sb.append(output);
+                    Log.e("TAG", "uploadFile0: " + br);
+                }
+                Log.e("TAG", "uploadFile: " + sb.toString());
+                try {
+                    JSONObject mJson = new JSONObject(sb.toString());
+                    String mData = mJson.getString("statusCode");
+                    String mData1 = mJson.getString("requestId");//bd465245-91d3-11e9-a314-43e47afa752f //e5068f45-91d3-11e9-9bd4-99bf0db4f686
+
+                    switch (mData) {
+                        case "101":
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Successful OCR", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        cfAlertDialog.dismiss();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+                            JSONArray jsonOCRArray = mJson.getJSONArray("result");
+
+                            for (int i = 0; i < jsonOCRArray.length(); i++) {
+
+                                JSONObject jsonObject1 = jsonOCRArray.getJSONObject(i);
+
+                                if (jsonObject1.getString("type").equals("Aadhaar Front Top")) {
+
+                                    JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
+
+                                    if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
+                                        NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                    }
+                                    NewLeadActivity.Aname = jsonObjectData.getJSONObject("name").get("value").toString();
+                                    NewLeadActivity.Aaddress = jsonObjectData.getJSONObject("address").get("value").toString();
+                                    NewLeadActivity.Astreet_address = jsonObjectData.getJSONObject("addressSplit").get("line1").toString();
+                                    NewLeadActivity.Adistrict = jsonObjectData.getJSONObject("addressSplit").get("city").toString();
+                                    if (NewLeadActivity.Adistrict.length() < 1) {
+                                        NewLeadActivity.Adistrict = jsonObjectData.getJSONObject("addressSplit").get("district").toString();
+                                    }
+                                    NewLeadActivity.Astate = jsonObjectData.getJSONObject("addressSplit").get("state").toString();
+                                    NewLeadActivity.Apincode = jsonObjectData.getJSONObject("pin").get("value").toString();
+                                    NewLeadActivity.Aisscanned = "true";
+
+                                    try {
+                                        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("Aaadhaarno", NewLeadActivity.Aaadhaarno);
+                                        editor.putString("Aname", NewLeadActivity.Aname);
+                                        editor.putString("Adob", NewLeadActivity.Adob);
+                                        editor.putString("Ayob", NewLeadActivity.Ayob);
+                                        editor.putString("Agender", NewLeadActivity.Agender);
+                                        editor.putString("Aaddress", NewLeadActivity.Aaddress);
+                                        editor.putString("Astreet_address", NewLeadActivity.Astreet_address);
+                                        editor.putString("Adistrict", NewLeadActivity.Adistrict);
+                                        editor.putString("Apincode", NewLeadActivity.Apincode);
+                                        editor.putString("Astate", NewLeadActivity.Astate);
+                                        editor.putString("Aisscanned", NewLeadActivity.Aisscanned);
+                                        editor.apply();
+                                        editor.commit();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if (jsonObject1.getString("type").equals("Aadhaar Front Bottom")) {
+
+                                    JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
+                                    if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
+                                        NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                    }
+                                    NewLeadActivity.Aname = jsonObjectData.getJSONObject("name").get("value").toString();
+                                    NewLeadActivity.Adob = jsonObjectData.getJSONObject("dob").get("value").toString();
+                                    NewLeadActivity.Agender = jsonObjectData.getJSONObject("gender").get("value").toString();
+                                    NewLeadActivity.Ayob = jsonObjectData.getJSONObject("yob").get("value").toString();
+                                    NewLeadActivity.Aisscanned = "true";
+
+                                    try {
+                                        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("Aaadhaarno", NewLeadActivity.Aaadhaarno);
+                                        editor.putString("Aname", NewLeadActivity.Aname);
+                                        editor.putString("Adob", NewLeadActivity.Adob);
+                                        editor.putString("Ayob", NewLeadActivity.Ayob);
+                                        editor.putString("Agender", NewLeadActivity.Agender);
+                                        editor.putString("Aaddress", NewLeadActivity.Aaddress);
+                                        editor.putString("Astreet_address", NewLeadActivity.Astreet_address);
+                                        editor.putString("Adistrict", NewLeadActivity.Adistrict);
+                                        editor.putString("Apincode", NewLeadActivity.Apincode);
+                                        editor.putString("Astate", NewLeadActivity.Astate);
+                                        editor.putString("Aisscanned", NewLeadActivity.Aisscanned);
+                                        editor.apply();
+                                        editor.commit();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if (jsonObject1.getString("type").equals("Aadhaar Back")) {
+
+                                    JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
+
+                                    if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
+                                        NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                    }
+                                    NewLeadActivity.Aaddress = jsonObjectData.getJSONObject("address").get("value").toString();
+                                    NewLeadActivity.Astreet_address = jsonObjectData.getJSONObject("addressSplit").get("line1").toString();
+                                    NewLeadActivity.Adistrict = jsonObjectData.getJSONObject("addressSplit").get("city").toString();
+                                    if (NewLeadActivity.Adistrict.length() < 1) {
+                                        NewLeadActivity.Adistrict = jsonObjectData.getJSONObject("addressSplit").get("district").toString();
+                                    }
+                                    NewLeadActivity.Astate = jsonObjectData.getJSONObject("addressSplit").get("state").toString();
+                                    NewLeadActivity.Apincode = jsonObjectData.getJSONObject("pin").get("value").toString();
+                                    NewLeadActivity.Aisscanned = "true";
+
+                                    try {
+                                        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("Aaadhaarno", NewLeadActivity.Aaadhaarno);
+                                        editor.putString("Aname", NewLeadActivity.Aname);
+                                        editor.putString("Adob", NewLeadActivity.Adob);
+                                        editor.putString("Ayob", NewLeadActivity.Ayob);
+                                        editor.putString("Agender", NewLeadActivity.Agender);
+                                        editor.putString("Aaddress", NewLeadActivity.Aaddress);
+                                        editor.putString("Astreet_address", NewLeadActivity.Astreet_address);
+                                        editor.putString("Adistrict", NewLeadActivity.Adistrict);
+                                        editor.putString("Apincode", NewLeadActivity.Apincode);
+                                        editor.putString("Astate", NewLeadActivity.Astate);
+                                        editor.putString("Aisscanned", NewLeadActivity.Aisscanned);
+                                        editor.apply();
+                                        editor.commit();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if (jsonObject1.getString("type").equals("Pan")) {
+
+                                    JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
+
+                                    NewLeadActivity.Ppanno = jsonObjectData.getJSONObject("panNo").get("value").toString();
+                                    NewLeadActivity.Pname = jsonObjectData.getJSONObject("name").get("value").toString();
+                                    NewLeadActivity.Pdob = jsonObjectData.getJSONObject("date").get("value").toString();
+                                    NewLeadActivity.Pdoi = jsonObjectData.getJSONObject("dateOfIssue").get("value").toString();
+                                    NewLeadActivity.Pisscanned = "true";
+
+                                    try {
+                                        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("Ppanno", NewLeadActivity.Ppanno);
+                                        editor.putString("Ppantype", NewLeadActivity.Ppantype);
+                                        editor.putString("Pname", NewLeadActivity.Pname);
+                                        editor.putString("Pdob", NewLeadActivity.Pdob);
+                                        editor.putString("Pdoi", NewLeadActivity.Pdoi);
+                                        editor.putString("Page", NewLeadActivity.Page);
+                                        editor.putString("Pfathersname", NewLeadActivity.Pfathersname);
+                                        editor.putString("Pisminor", NewLeadActivity.Pisminor);
+                                        editor.putString("Pisscanned", NewLeadActivity.Pisscanned);
+                                        editor.apply();
+                                        editor.commit();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        NewLeadActivity.setOcrData();
+                                        onResume();
+                                    }
+                                });
+                            }
+                            break;
+                        case "102":
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "No KYC Document identified", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            break;
+                        case "103":
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Image Format Not Supported OR Size Exceeds 6MB", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            break;
+                        case "104":
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Max retries exceeded", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            break;
+                        case "105":
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Missing Consent", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            break;
+                        case "106":
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Multiple Records Exist", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            break;
+                        case "107":
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Not Supported", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            break;
+                    }
+
+                    Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.GONE);
+//                            Log.e("TAG", " 2285: " + new Date().toLocaleString());//1538546658896.jpg/
+                        }
+                    });
+
+                } catch (Exception e) {
+                    progressBar.setVisibility(View.GONE);
+                    e.printStackTrace();
+                }
+
+                if (serverResponseCode == 200) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            Log.e("TAG", " 2303: " + new Date().toLocaleString());//1538546658896.jpg/
+                        }
+                    });
+                }
+
+                fileInputStream.close();
+                dataOutputStream.flush();
+                dataOutputStream.close();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            return serverResponseCode;
+        }
+
+    }
+
+    private Bitmap decodeUri(Uri selectedImage, Context context) throws FileNotFoundException {
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(
+                context.getContentResolver().openInputStream(selectedImage), null, o);
+        int REQUIRED_SIZE = 100;
+
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE) {
+                break;
+            }
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        return BitmapFactory.decodeStream(
+                context.getContentResolver().openInputStream(selectedImage), null, o2);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == 2) {
+            if (resultCode == 2) {
+
+                String message = data.getStringExtra("PATH");
+                String doctypeno = data.getStringExtra("documentTypeNo");
+                String strapplicantType = data.getStringExtra("strapplicantType");
+                String strapplicantId = data.getStringExtra("strapplicantId");
+
+                String FileExtn = null;
+                Double FileSize = null;
+
+                uploadFilePath = message;
+
+                String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(message)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(message)).length() - 3);
+                FileSize = Double.valueOf(filesz);
+
+                FileExtn = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
+
+                if (FileExtn.equals("jpg") || FileExtn.equals("jpeg") || FileExtn.equals("png") || FileExtn.equals("pdf")) {
+
+                    if (FileSize <= 2) {
+                        Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
+
+                        if (uploadFilePath != null) {
+                            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                            progressBar.setVisibility(View.VISIBLE);
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+
+                                        if (!Globle.isNetworkAvailable(context)) {
+                                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            uploadFile(uploadFilePath);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }).start();
+                        } else {
+                            Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(context, R.string.file_size_exceeds_limits_of_2_mb, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
+                }
+
+            }
+        } else if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE) {
+                onSelectFromGalleryResult(data);
+                String FileExtn = null;
+                Double FileSize = null;
+
+                String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).length() - 3);
+                FileSize = Double.valueOf(filesz);
+
+                FileExtn = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
+
+                if (FileExtn.equals("jpg") || FileExtn.equals("jpeg") || FileExtn.equals("png") || FileExtn.equals("pdf")) {
+
+                    if (FileSize <= 4) {
+                        Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
+
+                        if (uploadFilePath != null) {
+                            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                            progressBar.setVisibility(View.VISIBLE);
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        int selectUrl = 0;
+
+                                        //creating new thread to handle Http Operations
+                                        if (!Globle.isNetworkAvailable(context)) {
+                                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            uploadFile(uploadFilePath);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }).start();
+                        } else {
+                            Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(context, R.string.file_size_exceeds_limits_of_2_mb, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
+                }
+            } else if (requestCode == REQUEST_CAMERA) {
+//                onCaptureImageResult(data);
+                onCaptureImageResult1(data);
+//                uploadFilePath = f;
+                String FileExtn = null;
+                Double FileSize = null;
+
+                String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).length() - 3);
+                FileSize = Double.valueOf(filesz);
+
+                FileExtn = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
+
+                if (FileExtn.equals("jpg") || FileExtn.equals("jpeg") || FileExtn.equals("png") || FileExtn.equals("pdf")) {
+
+                    if (FileSize <= 4) {
+                        Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
+
+                        if (uploadFilePath != null) {
+                            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                            progressBar.setVisibility(View.VISIBLE);
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        int selectUrl = 0;
+
+                                        //creating new thread to handle Http Operations
+                                        if (!Globle.isNetworkAvailable(context)) {
+                                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            uploadFile(uploadFilePath);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }).start();
+                        } else {
+                            Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(context, R.string.file_size_exceeds_limits_of_2_mb, Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+//2019-06-22 18:07:43.928 10443-13853/com.eduvanzapplication E/TAG: uploadFile: {"statusCode":101,"requestId":"8696ab40-94ea-11e9-98cb-cdeb9eba58a2","result":[{"type":"Aadhaar Front Bottom","details":{"qr":{"value":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PrintLetterBarcodeData uid=\"855065682173\" name=\"Vijaykumar Baijnath Shukla\" gender=\"M\" yob=\"1989\" house=\"306, tulshi complex\" street=\"kalyan road\" lm=\"near murlidhar temple\" loc=\"murlidhar compound\" vtc=\"Bhiwandi\" po=\"Dandekarwadi\" dist=\"Thane\" subdist=\"Bhiwandi\" state=\"Maharashtra\" pc=\"421302\" dob=\"17/12/1989\"/>"},"name":{"value":"Vijaykumar Baijnath Shukla"},"dob":{"value":"17/12/1989"},"gender":{"value":"MALE"},"father":{"value":""},"yob":{"value":""},"aadhaar":{"isMasked":"no","value":"855065682173"},"mother":{"value":""}}},{"type":"Aadhaar Back","details":{"qr":{"value":""},"pin":{"value":"421302"},"addressSplit":{"city":"Dandekarwadi","district":"Thane","pin":"421302","locality":"murlidhar compound, Bhiwandi","line2":"murlidhar compound, Bhiwandi, Dandekarwadi","line1":"306, tulshi complex, Kalyan road, near muridhar temple","state":"Maharashtra","street":"Kalyan road","landmark":"near muridhar temple","careOf":"","houseNumber":"306, tulshi complex"},"father":{"value":""},"aadhaar":{"isMasked":"no","value":"855065682173"},"address":{"value":"306, tulshi complex, Kalyan road, near muridhar temple, murlidhar compound, Bhiwandi, Dandekarwadi, Thane, Maharashtra, 421302 "},"husband":{"value":""}}}]}
     private void saveOCRData(String strStatus, String strRequestId, String strResponse) {
         /** API CALL **/
         try {//auth_token
@@ -1601,199 +1427,6 @@ public class PersonalDetailsFragment extends Fragment {
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
-    }
-
-    private void getAadhaarData(String Requestid) {
-        RequestQueue queue12 = Volley.newRequestQueue(getContext());//https://api.idfy.com/v2/tasks?request_id=d740cbd1-6af1-45f6-a609-8c2170dc3418
-        StringRequest getRequest = new StringRequest(Request.Method.GET, "https://api.idfy.com/v2/tasks?request_id=" + Requestid,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(final String response) {
-                        // response
-                        Log.d("Response", response);
-                        try {
-                            progressBar.setVisibility(View.GONE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        Boolean success = false;
-                        try {
-                            if (new JSONArray(response.toString()).getJSONObject(0).getString("status").toLowerCase().equals("completed")) {
-                                success = true;
-
-                                getActivity().runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        final Handler handler = new Handler();
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    saveOCRData(new JSONArray(response.toString()).getJSONObject(0).getString("status"), Requestid, response.toString());
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }, 0);
-
-                                    }
-                                });
-
-                            } else if (new JSONArray(response.toString()).getJSONObject(0).getString("status").toLowerCase().equals("in_progress")) {
-                                success = false;
-
-                                try {
-                                    progressBar.setVisibility(View.VISIBLE);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                                getActivity().runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        final Handler handler = new Handler();
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    getAadhaarData((String) new JSONArray(response.toString()).getJSONObject(0).getString("request_id"));
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }, 3000);
-
-                                    }
-                                });
-
-                            } else {
-//                                Toast.makeText(getContext(), "OCR Response-> " + response.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (success) {
-
-                            try {
-                                NewLeadActivity.Aaadhaarno = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("aadhaar_number");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Aname = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("name_on_card");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Adob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("date_of_birth");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Ayob = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("year_of_birth");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Agender = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("gender");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Aaddress = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("address");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Astreet_address = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("street_address");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Apincode = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("pincode");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                NewLeadActivity.Adistrict = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("district");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                NewLeadActivity.Astate = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("state");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                NewLeadActivity.Aisscanned = new JSONObject(new JSONArray(response.toString()).getJSONObject(0).getString("ocr_output")).getString("Aisscanned");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-//                            Log.v(TAG, response);
-
-                            try {
-                                SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("Aaadhaarno", NewLeadActivity.Aaadhaarno);
-                                editor.putString("Aname", NewLeadActivity.Aname);
-                                editor.putString("Adob", NewLeadActivity.Adob);
-                                editor.putString("Ayob", NewLeadActivity.Ayob);
-                                editor.putString("Agender", NewLeadActivity.Agender);
-                                editor.putString("Aaddress", NewLeadActivity.Aaddress);
-                                editor.putString("Astreet_address", NewLeadActivity.Astreet_address);
-                                editor.putString("Adistrict", NewLeadActivity.Adistrict);
-                                editor.putString("Apincode", NewLeadActivity.Apincode);
-                                editor.putString("Astate", NewLeadActivity.Astate);
-                                editor.putString("Aisscanned", NewLeadActivity.Aisscanned);
-                                editor.apply();
-                                editor.commit();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            NewLeadActivity.setOcrData();
-                            onResume();
-                        }
-//                        else {
-//                            Toast.makeText(context, "Upload Failed, Response-> " + response.toString(), Toast.LENGTH_LONG).show();
-//                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
-                        try {
-                            progressBar.setVisibility(View.GONE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-//                        Toast.makeText(getActivity(), "Upload Failure, Response-> " + error.toString(), Toast.LENGTH_LONG).show();
-
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("apikey", "fa5942a5-73d7-4fd7-8158-f87f50c73c82");
-//                headers.put("apikey", account_id);
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-        };
-        queue12.add(getRequest);
     }
 
     public interface OnFragmentInteractionListener {

@@ -309,9 +309,9 @@ public class CurrentAddressFragment extends Fragment {
                 txtcurrentAddressErrMsg.setText("* Please enter your STREET NAME,LOCALITY,LANDMARK");
 //                edtLandmark.requestFocus();
 
-            } else if (edtPincode.getText().toString().equals("")) {
+            } else if (edtPincode.getText().toString().equals("") || edtPincode.getText().toString().length()<6) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
-                txtcurrentAddressErrMsg.setText("* Please enter your pincode");
+                txtcurrentAddressErrMsg.setText("* Please enter your 6 digit pincode");
 //                edtPincode.requestFocus();
 
             }  else if (NewLeadActivity.countryId.equals("")) {

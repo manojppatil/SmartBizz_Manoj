@@ -312,7 +312,7 @@
                                             android:layout_marginLeft="@dimen/_5sdp"
                                             android:layout_toRightOf="@+id/linResidentType"
                                             android:orientation="vertical"
-                                            android:visibility="visible">
+                                            android:visibility="invisible">
 
 
                                             <TextView
