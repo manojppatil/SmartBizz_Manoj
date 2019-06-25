@@ -854,7 +854,8 @@ public class PersonalDetailsFragment extends Fragment {
     }
 
     public int uploadFile(String selectedFilePath) {
-        String urlup = "https://api.karza.in/v2/ocr/kyc";
+        String urlup = "https://api.karza.in/v3/ocr/kyc";
+//        String urlup = "https://api.karza.in/v2/ocr/kyc";
 //        String urlup = "https://testapi.karza.in/v3/ocr/kyc";//UAT
 //      String urlup = MainActivity.mainUrl + "document/documentUpload";//RELemGo0j2pZ5rC3
 
@@ -948,7 +949,9 @@ public class PersonalDetailsFragment extends Fragment {
                 try {
                     JSONObject mJson = new JSONObject(sb.toString());
                     String mData = mJson.getString("statusCode");
-                    String mData1 = mJson.getString("requestId");//bd465245-91d3-11e9-a314-43e47afa752f //e5068f45-91d3-11e9-9bd4-99bf0db4f686
+                    String mData1 = mJson.getString("requestId");
+//                    String mData = mJson.getString("status-code");
+//                    String mData1 = mJson.getString("request_id");
 
                     switch (mData) {
                         case "101":
@@ -981,7 +984,7 @@ public class PersonalDetailsFragment extends Fragment {
                                     NewLeadActivity.Aaddress = jsonObjectData.getJSONObject("address").get("value").toString();
                                     NewLeadActivity.Astreet_address = jsonObjectData.getJSONObject("addressSplit").get("line1").toString();
                                     NewLeadActivity.Adistrict = jsonObjectData.getJSONObject("addressSplit").get("city").toString();
-                                    if (NewLeadActivity.Adistrict.length() < 1) {
+                                    if (jsonObjectData.getJSONObject("addressSplit").get("district").toString().length() > 1) {
                                         NewLeadActivity.Adistrict = jsonObjectData.getJSONObject("addressSplit").get("district").toString();
                                     }
                                     NewLeadActivity.Astate = jsonObjectData.getJSONObject("addressSplit").get("state").toString();
@@ -1050,7 +1053,7 @@ public class PersonalDetailsFragment extends Fragment {
                                     NewLeadActivity.Aaddress = jsonObjectData.getJSONObject("address").get("value").toString();
                                     NewLeadActivity.Astreet_address = jsonObjectData.getJSONObject("addressSplit").get("line1").toString();
                                     NewLeadActivity.Adistrict = jsonObjectData.getJSONObject("addressSplit").get("city").toString();
-                                    if (NewLeadActivity.Adistrict.length() < 1) {
+                                    if (jsonObjectData.getJSONObject("addressSplit").get("district").toString().length() > 1) {
                                         NewLeadActivity.Adistrict = jsonObjectData.getJSONObject("addressSplit").get("district").toString();
                                     }
                                     NewLeadActivity.Astate = jsonObjectData.getJSONObject("addressSplit").get("state").toString();
@@ -1190,6 +1193,7 @@ public class PersonalDetailsFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            progressBar.setVisibility(View.GONE);
 //                            Log.e("TAG", " 2303: " + new Date().toLocaleString());//1538546658896.jpg/
                         }
                     });
