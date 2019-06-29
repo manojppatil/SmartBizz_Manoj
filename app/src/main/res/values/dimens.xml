@@ -4,5 +4,4 @@
     <dimen tools:override="true" name="design_navigation_icon_padding">15dp</dimen>
 
     <!--<dimen name="activity_horizontal_margin">16dp</dimen>-->
-    <dimen name="fab_margin">16dp</dimen>
 </resources>

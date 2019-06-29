@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViews"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/rootViews">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_100sdp"
         android:background="@drawable/ic_topbg"
-        app:title=""
-        app:navigationIcon="@drawable/ic_back_arrow_white" >
+        app:navigationIcon="@drawable/ic_back_arrow_white"
+        app:title="">
 
         <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/TextViewTitle16BoldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Profession"
-            android:gravity="left"
             android:layout_gravity="top|left"
+            android:gravity="left"
+            android:text="Profession"
             android:textAllCaps="true"
-            android:id="@+id/toolbar_title"
-            android:textColor="@color/white"
-            style="@style/TextViewTitle16BoldStyle"/>
+            android:textColor="@color/white" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -38,21 +38,21 @@
 
         <TextView
             android:id="@+id/txtMsg1"
+            style="@style/TextViewLightStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Please"
             android:textColor="@color/darkblue"
-            android:textSize="25sp"
-            style="@style/TextViewLightStyle"/>
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/txtMsg2"
+            style="@style/TextViewLightStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Select your Profession"
             android:textColor="@color/darkblue"
-            android:textSize="25sp"
-            style="@style/TextViewLightStyle"/>
+            android:textSize="25sp" />
 
 
         <LinearLayout
@@ -61,143 +61,152 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/linStudentBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_circular"
-                    android:backgroundTint="@color/blue1"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_4sdp">
-
-                    <ImageView
-                        android:id="@+id/ivStud"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginLeft="@dimen/_4sdp"
-                        app:srcCompat="@drawable/ic_profession_student" />
-
-                    <View
-                        android:id="@+id/viewdashStud"
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:background="@color/blue1" />
-
-                    <TextView
-                        android:id="@+id/txtStudent"
-                        style="@style/TextViewTitle14Style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="Student"
-                        android:textColor="@color/textcolordark" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linSalariedBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/border_circular"
-                    android:backgroundTint="@color/blue1"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_4sdp">
-
-                    <ImageView
-                        android:id="@+id/ivSal"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginLeft="@dimen/_4sdp"
-                        app:srcCompat="@drawable/ic_profession_salaried" />
-
-                    <View
-                        android:id="@+id/viewdashSal"
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:background="@color/blue1" />
-
-                    <TextView
-                        android:id="@+id/txtSalaried"
-                        style="@style/TextViewTitle14Style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="Salaried"
-                        android:textColor="@color/textcolordark" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linSelfEmployedBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/border_circular"
-                    android:backgroundTint="@color/blue1"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_4sdp">
-
-                    <ImageView
-                        android:id="@+id/ivSelfEmp"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginLeft="@dimen/_4sdp"
-                        app:srcCompat="@drawable/ic_profession_self_employed" />
-
-                    <View
-                        android:id="@+id/viewdashSelfEmp"
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:background="@color/blue1" />
-
-                    <TextView
-                        android:id="@+id/txtSelfEmp"
-                        style="@style/TextViewTitle14Style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="Self Employed"
-                        android:textColor="@color/textcolordark" />
-                </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/lin3"
+                android:id="@+id/linStudentBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="horizontal">
+                android:background="@drawable/border_circular"
+                android:backgroundTint="@color/blue1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_4sdp">
+
+                <ImageView
+                    android:id="@+id/ivStud"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    app:srcCompat="@drawable/ic_profession_student" />
+
+                <View
+                    android:id="@+id/viewdashStud"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:background="@color/blue1" />
 
                 <TextView
-                    android:id="@+id/txtMsg03"
+                    android:id="@+id/txtStudent"
+                    style="@style/TextViewTitle14Style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_1sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:visibility="visible"
-                    android:text="*"
-                    android:textColor="@color/colorRed"
-                    style="@style/TextViewTitle14BoldStyle"/>
+                    android:maxLines="1"
+                    android:text="Student"
+                    android:textColor="@color/textcolordark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linSalariedBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/border_circular"
+                android:backgroundTint="@color/blue1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_4sdp">
+
+                <ImageView
+                    android:id="@+id/ivSal"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    app:srcCompat="@drawable/ic_profession_salaried" />
+
+                <View
+                    android:id="@+id/viewdashSal"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:background="@color/blue1" />
 
                 <TextView
-                    android:id="@+id/txtMsg3"
-                    android:layout_width="match_parent"
+                    android:id="@+id/txtSalaried"
+                    style="@style/TextViewTitle14Style"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_1sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:visibility="visible"
-                    android:text="Since you are a student, we need details of a Financial Borrower on your behalf, who will apply for the loan."
-                    android:textColor="@color/colorRed"
-                    style="@style/TextViewTitle14BoldStyle"/>
-
+                    android:maxLines="1"
+                    android:text="Salaried"
+                    android:textColor="@color/textcolordark" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linSelfEmployedBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/border_circular"
+                android:backgroundTint="@color/blue1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_4sdp">
+
+                <ImageView
+                    android:id="@+id/ivSelfEmp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    app:srcCompat="@drawable/ic_profession_self_employed" />
+
+                <View
+                    android:id="@+id/viewdashSelfEmp"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:background="@color/blue1" />
+
+                <TextView
+                    android:id="@+id/txtSelfEmp"
+                    style="@style/TextViewTitle14Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="Self Employed"
+                    android:textColor="@color/textcolordark" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/lin3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="invisible"
+                android:background="@drawable/ic_finborrower"
+                android:padding="@dimen/_4sdp"/>
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/lin3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/_10sdp"-->
+                <!--android:visibility="visible">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/txtMsg03"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/_1sdp"-->
+                <!--android:layout_marginTop="@dimen/_10sdp"-->
+                <!--android:visibility="visible"-->
+                <!--android:text="*"-->
+                <!--android:textColor="@color/colorRed"-->
+                <!--style="@style/TextViewTitle14BoldStyle"/>-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/txtMsg3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/_1sdp"-->
+                <!--android:layout_marginTop="@dimen/_10sdp"-->
+                <!--android:visibility="visible"-->
+                <!--android:text="Since you are a student, we need details of a Financial Borrower on your behalf, who will apply for the loan."-->
+                <!--android:textColor="@color/colorRed"-->
+                <!--style="@style/TextViewTitle14BoldStyle"/>-->
+
+            <!--</LinearLayout>-->
 
 
         </LinearLayout>
@@ -214,28 +223,28 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/_30sdp"
         android:layout_marginBottom="@dimen/_40sdp"
-        android:clickable="false"
         android:background="@drawable/border_circular_grey_filled"
+        android:clickable="false"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/_5sdp">
 
         <TextView
+            style="@style/TextViewTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Continue"
             android:gravity="center"
-            android:textColor="@color/white"
-            style="@style/TextViewTitleStyle"/>
+            android:text="Continue"
+            android:textColor="@color/white" />
 
         <View
             android:layout_width="@dimen/_1sdp"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:layout_marginBottom="@dimen/_2sdp"
             android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
             android:background="@color/white" />
 
         <ImageView

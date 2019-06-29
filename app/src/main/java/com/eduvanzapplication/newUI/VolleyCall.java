@@ -868,7 +868,25 @@ public class VolleyCall {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("dtlgetPermanentStates")) {
+        } else if (screen.equalsIgnoreCase("dtlgetCurrentStates")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((DetailedInfoFragment) mfragment).dtlgetCurrentStates(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("dtlgetCurrentCity")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((DetailedInfoFragment) mfragment).dtlgetCurrentCity(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("dtlgetPermanentStates")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((DetailedInfoFragment) mfragment).dtlgetPermanentStates(jsonDataO);

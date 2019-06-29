@@ -55,14 +55,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.eduvanzapplication.newUI.newViews.DashboardActivity.textViewName;
+import static com.eduvanzapplication.newUI.newViews.DashboardActivity.textView_mobileNo;
+import static com.eduvanzapplication.newUI.newViews.DashboardActivity.textViewEmail;
 import static com.eduvanzapplication.newUI.newViews.DashboardActivity.ivUserPic;
 import static com.eduvanzapplication.newUI.newViews.DashboardActivity.userPic;
+import static com.eduvanzapplication.newUI.newViews.DashboardActivity.userFirst;
+import static com.eduvanzapplication.newUI.newViews.DashboardActivity.userEmail;
+import static com.eduvanzapplication.newUI.newViews.DashboardActivity.userMobileNo;
 
 public class EditProfile extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
-    public  de.hdodenhof.circleimageview.CircleImageView profileImage;
-//    public ImageView profileImage;
-    private EditText firstName, middleName, lastName, email;
+    public static CircleImageView profileImage;
+    public EditText firstName, middleName, lastName, email;
     private TextView mobile_number;
     private LinearLayout submit_button;
     public int REQUEST_CAMERA = 0, SELECT_FILE = 1, SELECT_DOC = 2;
@@ -112,16 +119,7 @@ public class EditProfile extends AppCompatActivity {
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                intent.setType("image/*");
-//
-//                Intent pickIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                pickIntent.setType("images/*");
-//
-//                Intent chooserIntent = Intent.createChooser(intent,"Select Images");
-//                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,new Intent[]{pickIntent});
-//
-//                startActivityForResult(chooserIntent,PICK_IMAGE);
+
                 selectImage();
 
             }
@@ -144,7 +142,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library",
+        final CharSequence[] items = {"Take Photo", "Choose from Gallery",
                 "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -175,7 +173,7 @@ public class EditProfile extends AppCompatActivity {
     private void galleryIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
     }
 
@@ -183,25 +181,6 @@ public class EditProfile extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        if (requestCode == PICK_IMAGE){
-//            Uri selectedImage = data.getData();
-//            String[] filePath = {MediaStore.Images.Media.DATA};
-//
-//            Cursor cursor = getContentResolver().query(selectedImage,filePath,null,null,null);
-//            cursor.moveToFirst();
-//
-//            int columnIndex = cursor.getColumnIndex(filePath[0]);
-//            String picturePath = cursor.getString(columnIndex);
-//            cursor.close();
-//
-//            uploadFile(picturePath);
-////            editingProfilePicture(picturePath);
-//        }
-//    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -519,8 +498,6 @@ public class EditProfile extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-//            Log.e("TAG", " 2342: " + new Date().toLocaleString());//1538546658896.jpg/
-
             return serverResponseCode;
         }
 
@@ -536,6 +513,7 @@ public class EditProfile extends AppCompatActivity {
             params.put("fname", firstName.getText().toString());
             params.put("mname", middleName.getText().toString());
             params.put("lname", lastName.getText().toString());
+            params.put("mobile", mobile_number.getText().toString());
 
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
@@ -560,12 +538,13 @@ public class EditProfile extends AppCompatActivity {
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
 
-//            if (jsonData.getInt("status") == 1) {
+            if (jsonData.getInt("status") == 1) {
 
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-//            }
+            } else {
+                setProfileApiCall();
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -608,32 +587,38 @@ public class EditProfile extends AppCompatActivity {
                 }
 
                 try {
+
                     SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("first_name", jsonObj.getString("name"));
                     editor.putString("first_name", jsonObj.getString("first_name"));
                     editor.putString("last_name", jsonObj.getString("last_name"));
                     editor.putString("user_img", jsonObj.getString("img_profile"));
                     editor.putString("email", jsonObj.getString("email"));
                     editor.apply();
                     editor.commit();
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-//                try {
-//                    SharedPreferences sharedPreferences = context.getSharedPreferences("ProfileData", Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putString("first_name", jsonObj.getString("first_name"));
-//                    editor.putString("last_name", jsonObj.getString("last_name"));
-//                    editor.putString("image_profile", jsonObj.getString("img_profile"));
-//                    editor.putString("email_id", jsonObj.getString("email"));
-//                    editor.apply();
-//                    editor.commit();
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+                    userFirst = sharedPreferences.getString("first_name", "");
+                    userEmail = sharedPreferences.getString("email", "");
+                    userMobileNo = sharedPreferences.getString("mobile_no", "");
+                    userPic = sharedPreferences.getString("user_img", "");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    textViewName.setText(userFirst);
+                    textView_mobileNo.setText(userMobileNo);
+                    textViewEmail.setText(userEmail);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
 //            {"document_path":"student\/3354\/user_profile_1556790017.jpg","status":0,"message":"Profile Picture Updated Successfully"}
 //            http:\/\/159.89.204.41\/eduvanzbeta\/uploads\/student\/3354\/user_profile_1556789668.jpg;

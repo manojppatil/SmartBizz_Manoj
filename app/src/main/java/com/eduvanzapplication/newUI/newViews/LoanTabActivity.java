@@ -6,7 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
@@ -26,8 +28,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -52,7 +57,6 @@ import static android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
 public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
         DetailedInfoFragment.onDetailedInfoFragmentInteractionListener {
 
-    private Toolbar toolbar;
     private TabLayout tabLayout;
     private LinearLayout linDashBoard;
     public static ViewPager viewPager;
@@ -131,9 +135,9 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                         GET_MY_PERMISSION);
             } else {
 
-                locationManager =  (LocationManager) getSystemService( context.LOCATION_SERVICE );
+                locationManager = (LocationManager) getSystemService(context.LOCATION_SERVICE);
 
-                    //statusofGPS is use for location is on/off
+                //statusofGPS is use for location is on/off
 
                 boolean statusOfGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
@@ -146,12 +150,11 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                     //locationMode=2 is Battery saving is selected
 
 
-
                     int locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
 
                     //location on and high acc mode or device only selected
 
-                    if(locationMode == LOCATION_MODE_HIGH_ACCURACY && statusOfGPS==true ||locationMode==1 && statusOfGPS==true) {
+                    if (locationMode == LOCATION_MODE_HIGH_ACCURACY && statusOfGPS == true || locationMode == 1 && statusOfGPS == true) {
 
                         //request location updates
                         startService(new Intent(context, LocationService.class));
@@ -159,23 +162,22 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                     }
                     //gps off
 
-                    else if(statusOfGPS==false){
+                    else if (statusOfGPS == false) {
 
 
-                        if(locationMode==0) {
+                        if (locationMode == 0) {
 
-                             //gps off and high acc selected
+                            //gps off and high acc selected
 
                             showGPSDisabledAlertToUser();
 
-                        }else if(!(locationMode == LOCATION_MODE_HIGH_ACCURACY ) && statusOfGPS==false ){
+                        } else if (!(locationMode == LOCATION_MODE_HIGH_ACCURACY) && statusOfGPS == false) {
 
                             //gps on and high acc.mode isn't selected
 
                             showGPSModeAlertToUser();
 
                         }
-
 
 
                     }
@@ -195,9 +197,9 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
 
                 }
 */
-               // showGPSDisabledAlertToUser();
+                // showGPSDisabledAlertToUser();
 
-              //  startService(new Intent(context, LocationService.class));
+                //  startService(new Intent(context, LocationService.class));
 //                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 //                    if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
 //                        alertDialog.show();
@@ -226,7 +228,6 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     }
 
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         try {
@@ -244,7 +245,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                             } else {
 //                                alertDialog.dismiss();
 //                                alertDialog.cancel();
-                                Globle.dialog(LoanTabActivity.this,"Please turn on your cellular data or wifi for exact location.", "No internet access").show();
+                                Globle.dialog(LoanTabActivity.this, "Please turn on your cellular data or wifi for exact location.", "No internet access").show();
                             }
 
                         } else {
@@ -406,7 +407,59 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
 
 
     public void onBackPressed() {
-        finish();
+        try {
+            if (LoanTabActivity.isKycEdit == true || LoanTabActivity.isDetailedInfoEdit == true) {
+                Log.e(MainActivity.TAG, "onBackPressed: " + MainActivity.currrentFrag);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.savedialog, null);
+                dialogBuilder.setView(dialogView);
+                LinearLayout buttonNo = dialogView.findViewById(R.id.button_dialog_no);
+                LinearLayout buttonSave = dialogView.findViewById(R.id.button_dialog_save);
+                final AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+                buttonNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                buttonSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                        LoanTabActivity.super.onBackPressed();
+                        finish();//coment this line
+                        //                    if (!MainActivity.borrowerValue13.equals("") &&
+                        //                            !MainActivity.borrowerValue14.equals("") &&
+                        //                            !MainActivity.borrowerValue15.equals("") &&
+                        //                            !MainActivity.borrowerValue18.equals("")
+                        //                            ||
+                        //                            !MainActivity.coborrowerValue14.equals("") &&
+                        //                                    !MainActivity.coborrowerValue15.equals("") &&
+                        //                                    !MainActivity.coborrowerValue18.equals("") &&
+                        //                                    !MainActivity.coborrowerValue13.equals("")) {
+//                        if (MainActivity.currrentFrag == 1) {
+//                            MainActivity.apiCallBorrower(context, mActivity, userID);
+//                        } else if (MainActivity.currrentFrag == 2) {
+//                            MainActivity.apiCallCoBorrower(context, mActivity, userID);
+//                        }
+
+                        //                    } else {
+                        //                        alertDialog.dismiss();
+                        //                        Toast.makeText(getApplicationContext(), "Please provide Firstname, Lastname, Dob and Aadhaar No.", Toast.LENGTH_LONG).show();
+                        //                    }
+                    }
+                });
+            } else {
+                finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupViewPager(final ViewPager viewPager) {

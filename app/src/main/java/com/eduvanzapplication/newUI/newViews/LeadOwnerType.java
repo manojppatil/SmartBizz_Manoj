@@ -28,12 +28,12 @@ import android.widget.TextView;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.R;
 
-
 public class LeadOwnerType extends AppCompatActivity {
 
     private final String TAG = LeadOwnerType.class.getSimpleName();
     LinearLayout linContinue;
-    public static LinearLayout linStudentBtn, linSalariedBtn, linSelfEmployedBtn,lin3;
+    public static LinearLayout linStudentBtn, linSalariedBtn, linSelfEmployedBtn;
+    public static ImageView lin3;
     public static ImageView ivStud,ivSal,ivSelfEmp;
            public static View viewdashStud,viewdashSal, viewdashSelfEmp;
    public static TextView txtStudent,txtSalaried,txtSelfEmp ;
@@ -58,7 +58,6 @@ public class LeadOwnerType extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
-
 
     private void setViews() {
 

@@ -146,6 +146,7 @@ public class KycDetailFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_kycdetail_stepper, container, false);
         context = getContext();
         mFragment = new KycDetailFragment();
+        MainActivity.currrentFrag = 1;
 
         progressDialog = new ProgressDialog(getActivity());
         expandAnimationPersonal = AnimationUtils.loadAnimation(context, R.anim.scale_expand);
@@ -776,13 +777,13 @@ public class KycDetailFragment extends Fragment {
             params.put("email_id", email);
             params.put("pan_number", pan);
             params.put("aadhar_number", aadhar);
-            params.put("current_address", flatBuildingSociety);
-            params.put("current_landmark", streetLocalityLandmark);
-            params.put("current_address_pin", pincode);
+            params.put("kyc_address", flatBuildingSociety);
+            params.put("kyc_landmark", streetLocalityLandmark);
+            params.put("kyc_address_pin", pincode);
             params.put("marital_status", maritalStatus);
-            params.put("current_address_country", countryId);
-            params.put("current_address_state", stateId);
-            params.put("current_address_city", cityId);
+            params.put("kyc_address_country", countryId);
+            params.put("kyc_address_state", stateId);
+            params.put("kyc_address_city", cityId);
             params.put("has_aadhar_pan", documents);
 
             if (!Globle.isNetworkAvailable(context)) {

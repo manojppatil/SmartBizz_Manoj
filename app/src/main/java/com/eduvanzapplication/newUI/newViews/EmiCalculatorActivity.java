@@ -194,8 +194,6 @@ public class EmiCalculatorActivity extends AppCompatActivity {
 
     }
 
-
-
    /* public float calFinalDvdnt(float principal,  float dvdnt) {
         return (float) (principal* dvdnt);
 

@@ -27,7 +27,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -53,32 +52,18 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.Util.CameraUtils;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Util.JavaGetFileSize;
 import com.eduvanzapplication.newUI.VolleyCall;
-import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
 import com.eduvanzapplication.uploaddocs.PathFile;
 import com.eduvanzapplication.uploaddocs.Utility;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -612,8 +597,8 @@ public class PersonalDetailsFragment extends Fragment {
         } else if (NewLeadActivity.gender.equals("3")) {
             linOtherBtn.performClick();
         }
-           String dob=NewLeadActivity.dob;
-    //    txtDOB.setText(NewLeadActivity.dob);
+        String dob = NewLeadActivity.dob;
+        //    txtDOB.setText(NewLeadActivity.dob);
         txtDOB.setText(Globle.dateFormaterForKarza(dob));
         NewLeadActivity.dob = txtDOB.getText().toString();
 
@@ -654,18 +639,6 @@ public class PersonalDetailsFragment extends Fragment {
         linPan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (Build.VERSION.SDK_INT >= 23) {
-//                    permission = ContextCompat.checkSelfPermission(context,
-//                            Manifest.permission.CAMERA);
-//                    if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
-//                        ActivityCompat.requestPermissions((Activity) context,
-//                                new String[]{
-//                                        Manifest.permission.CAMERA},
-//                                GET_MY_PERMISSION);
-//                    } else {
-//                        selectImage();
-//                    }
-//                }
 
                 Intent intent = new Intent(getActivity(), ImgToPdfActivity.class);
                 Bundle bundle = new Bundle();
@@ -673,7 +646,7 @@ public class PersonalDetailsFragment extends Fragment {
                 bundle.putString("strapplicantType", "1");
                 bundle.putString("documentTypeNo", "01");
                 bundle.putString("toolbarTitle", "PAN OCR");
-                bundle.putString("note", "Please upload Pan Card");
+                bundle.putString("note", getString(R.string.applicant_pan_card));
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 2);// Activity is started with requestCode 2
 
@@ -683,18 +656,6 @@ public class PersonalDetailsFragment extends Fragment {
         linAadhar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (Build.VERSION.SDK_INT >= 23) {
-//                    permission = ContextCompat.checkSelfPermission(context,
-//                            Manifest.permission.CAMERA);
-//                    if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
-//                        ActivityCompat.requestPermissions((Activity) context,
-//                                new String[]{
-//                                        Manifest.permission.CAMERA},
-//                                GET_MY_PERMISSION);
-//                    } else {
-//                        selectImage();
-//                    }
-//                }
 
                 Intent intent = new Intent(getActivity(), ImgToPdfActivity.class);
                 Bundle bundle = new Bundle();
@@ -702,7 +663,7 @@ public class PersonalDetailsFragment extends Fragment {
                 bundle.putString("strapplicantType", "1");
                 bundle.putString("documentTypeNo", "02");
                 bundle.putString("toolbarTitle", "Aadhaar OCR");
-                bundle.putString("note", "Please upload Aadhaar Card");
+                bundle.putString("note", getString(R.string.applicant_adhaar_card_front_and_backside));
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 2);// Activity is started with requestCode 2
             }
@@ -721,47 +682,6 @@ public class PersonalDetailsFragment extends Fragment {
             }
         });
 
-    }
-
-    private void selectImage() {
-        CharSequence[] items = {"Take a Picture", "Choose from Gallery",
-                "Cancel"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(context);
-
-                if (items[item].equals("Take a Picture")) {
-                    userChoosenTask = "Take a Picture";
-                    if (result)
-                        cameraIntent();
-
-                } else if (items[item].equals("Choose from Gallery")) {
-                    userChoosenTask = "Choose from Gallery";
-                    if (result)
-                        galleryIntent();
-
-                } else if (items[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
-
-    private void galleryIntent() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
-    }
-
-    private void cameraIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -807,57 +727,10 @@ public class PersonalDetailsFragment extends Fragment {
         return percentage;
     }
 
-    private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, getQualityNumber(thumbnail), bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-
-        uploadFilePath = destination.toString();
-        Log.e("TAG", "onCaptureImageResult: " + uploadFilePath);
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void onCaptureImageResult1(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.PNG, getQualityNumber(thumbnail), bytes);
-
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".png");
-
-        uploadFilePath = destination.toString();
-        Log.e("TAG", "onCaptureImageResult1: " + uploadFilePath);
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public int uploadFile(String selectedFilePath) {
         String urlup = "https://api.karza.in/v3/ocr/kyc";
 //        String urlup = "https://api.karza.in/v2/ocr/kyc";
 //        String urlup = "https://testapi.karza.in/v3/ocr/kyc";//UAT
-//      String urlup = MainActivity.mainUrl + "document/documentUpload";//RELemGo0j2pZ5rC3
 
         Log.e(MainActivity.TAG, "urlup++++++: " + urlup);
 
@@ -1010,6 +883,7 @@ public class PersonalDetailsFragment extends Fragment {
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
+
                                 }
                                 if (jsonObject1.getString("type").equals("Aadhaar Front Bottom")) {
 
@@ -1109,20 +983,35 @@ public class PersonalDetailsFragment extends Fragment {
                                     }
 
                                 }
+
                                 getActivity().runOnUiThread(new Runnable() {
+
                                     @Override
                                     public void run() {
-                                        NewLeadActivity.setOcrData();
-                                        onResume();
+                                        final Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    saveOCRData(mJson.getString("statusCode").toString(), mJson.getString("requestId").toString(), mJson.getJSONArray("result").toString());
+                                                    NewLeadActivity.setOcrData();
+                                                    onResume();
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }, 0);
+
                                     }
                                 });
+
                             }
                             break;
                         case "102":
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, "No KYC Document identified", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "No KYC Document identified", Toast.LENGTH_LONG).show();
                                 }
                             });
 
@@ -1131,7 +1020,7 @@ public class PersonalDetailsFragment extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, "Image Format Not Supported OR Size Exceeds 6MB", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Image Format Not Supported OR Size Exceeds 6MB", Toast.LENGTH_LONG).show();
                                 }
                             });
 
@@ -1140,7 +1029,7 @@ public class PersonalDetailsFragment extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, "Max retries exceeded", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Max retries exceeded", Toast.LENGTH_LONG).show();
                                 }
                             });
 
@@ -1149,7 +1038,7 @@ public class PersonalDetailsFragment extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, "Missing Consent", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Missing Consent", Toast.LENGTH_LONG).show();
                                 }
                             });
 
@@ -1158,7 +1047,7 @@ public class PersonalDetailsFragment extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, "Multiple Records Exist", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Multiple Records Exist", Toast.LENGTH_LONG).show();
                                 }
                             });
 
@@ -1167,14 +1056,12 @@ public class PersonalDetailsFragment extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, "Not Supported", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Not Supported", Toast.LENGTH_LONG).show();
                                 }
                             });
 
                             break;
                     }
-
-                    Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -1233,30 +1120,6 @@ public class PersonalDetailsFragment extends Fragment {
 
     }
 
-    private Bitmap decodeUri(Uri selectedImage, Context context) throws FileNotFoundException {
-        BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(
-                context.getContentResolver().openInputStream(selectedImage), null, o);
-        int REQUIRED_SIZE = 100;
-
-        int width_tmp = o.outWidth, height_tmp = o.outHeight;
-        int scale = 1;
-        while (true) {
-            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE) {
-                break;
-            }
-            width_tmp /= 2;
-            height_tmp /= 2;
-            scale *= 2;
-        }
-
-        BitmapFactory.Options o2 = new BitmapFactory.Options();
-        o2.inSampleSize = scale;
-        return BitmapFactory.decodeStream(
-                context.getContentResolver().openInputStream(selectedImage), null, o2);
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -1312,102 +1175,10 @@ public class PersonalDetailsFragment extends Fragment {
                 }
 
             }
-        } else if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE) {
-                onSelectFromGalleryResult(data);
-                String FileExtn = null;
-                Double FileSize = null;
-
-                String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).length() - 3);
-                FileSize = Double.valueOf(filesz);
-
-                FileExtn = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
-
-                if (FileExtn.equals("jpg") || FileExtn.equals("jpeg") || FileExtn.equals("png") || FileExtn.equals("pdf")) {
-
-                    if (FileSize <= 4) {
-                        Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
-
-                        if (uploadFilePath != null) {
-                            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                            progressBar.setVisibility(View.VISIBLE);
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        int selectUrl = 0;
-
-                                        //creating new thread to handle Http Operations
-                                        if (!Globle.isNetworkAvailable(context)) {
-                                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            uploadFile(uploadFilePath);
-                                        }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }).start();
-                        } else {
-                            Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(context, R.string.file_size_exceeds_limits_of_2_mb, Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
-                }
-            } else if (requestCode == REQUEST_CAMERA) {
-//                onCaptureImageResult(data);
-                onCaptureImageResult1(data);
-//                uploadFilePath = f;
-                String FileExtn = null;
-                Double FileSize = null;
-
-                String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(uploadFilePath)).length() - 3);
-                FileSize = Double.valueOf(filesz);
-
-                FileExtn = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
-
-                if (FileExtn.equals("jpg") || FileExtn.equals("jpeg") || FileExtn.equals("png") || FileExtn.equals("pdf")) {
-
-                    if (FileSize <= 4) {
-                        Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
-
-                        if (uploadFilePath != null) {
-                            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
-                            progressBar.setVisibility(View.VISIBLE);
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        int selectUrl = 0;
-
-                                        //creating new thread to handle Http Operations
-                                        if (!Globle.isNetworkAvailable(context)) {
-                                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            uploadFile(uploadFilePath);
-                                        }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }).start();
-                        } else {
-                            Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(context, R.string.file_size_exceeds_limits_of_2_mb, Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
-                }
-            }
         }
     }
 
-//2019-06-22 18:07:43.928 10443-13853/com.eduvanzapplication E/TAG: uploadFile: {"statusCode":101,"requestId":"8696ab40-94ea-11e9-98cb-cdeb9eba58a2","result":[{"type":"Aadhaar Front Bottom","details":{"qr":{"value":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PrintLetterBarcodeData uid=\"855065682173\" name=\"Vijaykumar Baijnath Shukla\" gender=\"M\" yob=\"1989\" house=\"306, tulshi complex\" street=\"kalyan road\" lm=\"near murlidhar temple\" loc=\"murlidhar compound\" vtc=\"Bhiwandi\" po=\"Dandekarwadi\" dist=\"Thane\" subdist=\"Bhiwandi\" state=\"Maharashtra\" pc=\"421302\" dob=\"17/12/1989\"/>"},"name":{"value":"Vijaykumar Baijnath Shukla"},"dob":{"value":"17/12/1989"},"gender":{"value":"MALE"},"father":{"value":""},"yob":{"value":""},"aadhaar":{"isMasked":"no","value":"855065682173"},"mother":{"value":""}}},{"type":"Aadhaar Back","details":{"qr":{"value":""},"pin":{"value":"421302"},"addressSplit":{"city":"Dandekarwadi","district":"Thane","pin":"421302","locality":"murlidhar compound, Bhiwandi","line2":"murlidhar compound, Bhiwandi, Dandekarwadi","line1":"306, tulshi complex, Kalyan road, near muridhar temple","state":"Maharashtra","street":"Kalyan road","landmark":"near muridhar temple","careOf":"","houseNumber":"306, tulshi complex"},"father":{"value":""},"aadhaar":{"isMasked":"no","value":"855065682173"},"address":{"value":"306, tulshi complex, Kalyan road, near muridhar temple, murlidhar compound, Bhiwandi, Dandekarwadi, Thane, Maharashtra, 421302 "},"husband":{"value":""}}}]}
+    //2019-06-22 18:07:43.928 10443-13853/com.eduvanzapplication E/TAG: uploadFile: {"statusCode":101,"requestId":"8696ab40-94ea-11e9-98cb-cdeb9eba58a2","result":[{"type":"Aadhaar Front Bottom","details":{"qr":{"value":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PrintLetterBarcodeData uid=\"855065682173\" name=\"Vijaykumar Baijnath Shukla\" gender=\"M\" yob=\"1989\" house=\"306, tulshi complex\" street=\"kalyan road\" lm=\"near murlidhar temple\" loc=\"murlidhar compound\" vtc=\"Bhiwandi\" po=\"Dandekarwadi\" dist=\"Thane\" subdist=\"Bhiwandi\" state=\"Maharashtra\" pc=\"421302\" dob=\"17/12/1989\"/>"},"name":{"value":"Vijaykumar Baijnath Shukla"},"dob":{"value":"17/12/1989"},"gender":{"value":"MALE"},"father":{"value":""},"yob":{"value":""},"aadhaar":{"isMasked":"no","value":"855065682173"},"mother":{"value":""}}},{"type":"Aadhaar Back","details":{"qr":{"value":""},"pin":{"value":"421302"},"addressSplit":{"city":"Dandekarwadi","district":"Thane","pin":"421302","locality":"murlidhar compound, Bhiwandi","line2":"murlidhar compound, Bhiwandi, Dandekarwadi","line1":"306, tulshi complex, Kalyan road, near muridhar temple","state":"Maharashtra","street":"Kalyan road","landmark":"near muridhar temple","careOf":"","houseNumber":"306, tulshi complex"},"father":{"value":""},"aadhaar":{"isMasked":"no","value":"855065682173"},"address":{"value":"306, tulshi complex, Kalyan road, near muridhar temple, murlidhar compound, Bhiwandi, Dandekarwadi, Thane, Maharashtra, 421302 "},"husband":{"value":""}}}]}
     private void saveOCRData(String strStatus, String strRequestId, String strResponse) {
         /** API CALL **/
         try {//auth_token

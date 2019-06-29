@@ -384,6 +384,13 @@ public class CurrentAddressFragment extends Fragment {
             edtAddress.setText(NewLeadActivity.flatBuildingSoc);
             edtLandmark.setText(NewLeadActivity.streetLocalityLandMark);
             edtPincode.setText(NewLeadActivity.pinCode);
+            int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
+            for (int i = 0; i < count; i++) {
+                if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase("1")) {
+                    spCountry.setSelection(i);
+                    break;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -63,10 +63,8 @@ import com.eduvanzapplication.Util.Paytm;
 import com.eduvanzapplication.Utils;
 import com.eduvanzapplication.newUI.VolleyCall;
 import com.eduvanzapplication.newUI.adapter.NachAdapter;
-import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.pojo.MNach;
-import com.eduvanzapplication.newUI.webviews.WebViewOTPDiag;
 import com.eduvanzapplication.uploaddocs.PathFile;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
@@ -102,7 +100,7 @@ import static com.eduvanzapplication.newUI.fragments.DashboardFragmentNew.userNa
 public class PostApprovalDocFragment extends Fragment {
 
     static View view;
-    static Context context;
+    public static Context context;
     public static Fragment mFragment;
     public int SELECT_DOC = 2;
     public static ProgressBar progressBar;
@@ -140,7 +138,7 @@ public class PostApprovalDocFragment extends Fragment {
             requested_roi = "", requested_emi = "",
             offered_amount = "", applicant_id = "", fk_lead_id = "", first_name = "", last_name = "", mobile_number = "",
             email_id = "", kyc_address = "", course_cost = "", paid_on = "", transaction_amount = "", kyc_status = "",
-            disbursal_status = "",rate ="", loan_agrement_upload_status = "", paid_emi_on = "", no_of_advance_emi = "";
+            disbursal_status = "", rate = "", loan_agrement_upload_status = "", paid_emi_on = "", no_of_advance_emi = "";
 
     String downloadUrl = "", downloadSignedUrl = "", baseUrl = "", paymentOption = "1";
 
@@ -263,6 +261,7 @@ public class PostApprovalDocFragment extends Fragment {
 
         context = getContext();
         mFragment = new PostApprovalDocFragment();
+        MainActivity.currrentFrag = 4;
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         progressBar = view.findViewById(R.id.progressBar_signsubmit);
@@ -532,7 +531,7 @@ public class PostApprovalDocFragment extends Fragment {
                     ivProcessingFee.setImageDrawable(bg);
 
                     if (processing_payment && advance_emi) {
-                        totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                        totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "3";
                     } else if (processing_payment) {
@@ -540,7 +539,7 @@ public class PostApprovalDocFragment extends Fragment {
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "1";
                     } else if (advance_emi) {
-                        totalAmount = Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                        totalAmount = Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "2";
                     } else {
@@ -562,7 +561,7 @@ public class PostApprovalDocFragment extends Fragment {
                     ivProcessingFee.setImageDrawable(bg);
 
                     if (processing_payment && advance_emi) {
-                        totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                        totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "3";
                     } else if (processing_payment) {
@@ -570,7 +569,7 @@ public class PostApprovalDocFragment extends Fragment {
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "1";
                     } else if (advance_emi) {
-                        totalAmount = Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                        totalAmount = Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "2";
                     } else {
@@ -600,7 +599,7 @@ public class PostApprovalDocFragment extends Fragment {
                     ivEMIFee.setImageDrawable(bg);
 
                     if (processing_payment && advance_emi) {
-                        totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                        totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "3";
                     } else if (processing_payment) {
@@ -608,7 +607,7 @@ public class PostApprovalDocFragment extends Fragment {
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "1";
                     } else if (advance_emi) {
-                        totalAmount = Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                        totalAmount = Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "2";
                     } else {
@@ -630,13 +629,13 @@ public class PostApprovalDocFragment extends Fragment {
                     ivEMIFee.setImageDrawable(bg);
 
                     if (processing_payment && advance_emi) {
-                        if(linProcessingFeeRb.isEnabled())
-                        {
-                        totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
-                        txtTotalAmt.setText(String.valueOf(totalAmount));
-                        paymentOption = "3";
-                        }else {
-                            totalAmount = Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                        if (linProcessingFeeRb.isEnabled()) {
+                            //txtTbAdvanceEMIAmount.getText().toString().split("/")[0]
+                            totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
+                            txtTotalAmt.setText(String.valueOf(totalAmount));
+                            paymentOption = "3";
+                        } else {
+                            totalAmount = Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                             txtTotalAmt.setText(String.valueOf(totalAmount));
                             paymentOption = "2";
                         }
@@ -646,7 +645,7 @@ public class PostApprovalDocFragment extends Fragment {
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "1";
                     } else if (advance_emi) {
-                        totalAmount = Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                        totalAmount = Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                         txtTotalAmt.setText(String.valueOf(totalAmount));
                         paymentOption = "2";
                     } else {
@@ -1163,7 +1162,12 @@ public class PostApprovalDocFragment extends Fragment {
                         txtApplicationLoanID.setText(application_loan_id);
                         txtProcessingFeeAmt.setText(String.valueOf(Double.valueOf(transaction_amount)));
                         totalAmount = Double.valueOf(transaction_amount);
-                        txtEMIFeeAmt.setText(String.valueOf(Double.valueOf(emi_amount)));
+                        if (!no_of_advance_emi.equals("")) {
+                            txtEMIFeeAmt.setText(String.valueOf(Float.parseFloat(emi_amount) * Float.parseFloat(no_of_advance_emi)));
+
+                        } else {
+                            txtEMIFeeAmt.setText(String.valueOf(Double.valueOf(emi_amount)));
+                        }
                         txtTotalAmt.setText(String.valueOf(Double.valueOf(transaction_amount)));
 
 //                        if (paid_on.length() > 5) {
@@ -1205,7 +1209,7 @@ public class PostApprovalDocFragment extends Fragment {
                             if (!emi_amount.equals("")) {
                                 advEMI = Float.parseFloat(emi_amount) * Float.parseFloat(no_of_advance_emi);
                             } else {
-                                advEMI = Float.parseFloat(no_of_advance_emi);
+                                advEMI = Float.parseFloat(emi_amount);
                             }
                             txtTbAdvanceEMIAmount.setText(" " + advEMI + "/-");
 
@@ -1318,7 +1322,7 @@ public class PostApprovalDocFragment extends Fragment {
                                     linProcessingFeeRb.setEnabled(false);
                                     linEMIFeeRb.setEnabled(false);
 
-                                    totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtEMIFeeAmt.getText().toString().trim());
+                                    totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
                                     txtTotalAmt.setText(String.valueOf(totalAmount));
 
                                 } else {
@@ -1398,8 +1402,10 @@ public class PostApprovalDocFragment extends Fragment {
                                     }
                                     ivProcessingFeesicon.setImageDrawable(bg5);
 
-                                    totalAmount = Double.valueOf(emi_amount);
-                                    txtTotalAmt.setText(String.valueOf(Double.valueOf(emi_amount)));
+                                    totalAmount = Double.valueOf(txtProcessingFeeAmt.getText().toString().trim()) + Double.valueOf(txtTbAdvanceEMIAmount.getText().toString().split("/")[0]);
+                                    txtTotalAmt.setText(String.valueOf(totalAmount));
+//                                    totalAmount = Double.valueOf(emi_amount);
+//                                    txtTotalAmt.setText(String.valueOf(Double.valueOf(emi_amount)));
                                     linProcessingFeeRb.setEnabled(false);
                                 } else {
                                     //yellow
@@ -1422,7 +1428,6 @@ public class PostApprovalDocFragment extends Fragment {
                                 linPayBtn.setVisibility(GONE);
                                 linPayStatus.setVisibility(VISIBLE);
                                 linProcessingFeeRb.setEnabled(false);
-
 
                                 Drawable bg5;
                                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -1857,7 +1862,7 @@ public class PostApprovalDocFragment extends Fragment {
             String message = jsonDataO.getString("message");
             progressBar.setVisibility(View.GONE);
             //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":4,"message":"Invalid OTP"}
-           // {"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/",
+            // {"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/",
             // "Url":"uploads\/lamanualupload\/13816\/Eduvanz_Agreement.pdf"},"status":1,"message":"All Users Signing Completed"}
             if (jsonDataO.getInt("status") == 1) {
                 JSONObject mData2 = jsonDataO.getJSONObject("result");

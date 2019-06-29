@@ -18,7 +18,7 @@ public class MainActivity extends Application {
     public static String TAG = "EDUVANZ LOG";
 //    public static String mainUrl = "http://139.59.32.234/eduvanzApi/"; //PRODUCTION
 //    public static String mainUrl = " http://139.59.61.225/eduvanzApi/"; //TESTING
-//   public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
+   public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
 
 //    public static String mainUrl = "http://192.168.1.63/eduvanzapi/"; //Sheetal
 //    public static String mainUrl = "http://192.168.1.19/eduvanzapi/"; //Dharam
@@ -28,9 +28,10 @@ public class MainActivity extends Application {
 //    public static String mainUrl = "http://192.168.0.108/eduvanzapi/"; //Samir
 //    public static String mainUrl = "http://192.168.0.101/eduvanzapi/index.php/"; //Vijay
 
-    public static String mainUrl = "https://api.eduvanz.com/"; ///////////////////L I V E//////////////
+//    public static String mainUrl = "https://api.eduvanz.com/"; ///////////////////L I V E//////////////
 
     public static String auth_token ="", lead_id ="", application_id = "", applicant_id ="" ;
+    public static int currrentFrag = 0;
 
     @Override
     public void onCreate() {

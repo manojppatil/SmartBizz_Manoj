@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "577641006287-jjudtfkcio2t3asvqehul59n4tq8o7ta.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.eduvanz",
-            "certificate_hash": "b76f26f5d775f6fa42a63ca4d7b865322d7f9ba6"
-          }
-        },
-        {
           "client_id": "577641006287-pjtjo76e1keer6nup3a8pvphn1i01n6h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.eduvanz",
             "certificate_hash": "bbc8a426c10f67db192b9a0e737955c37bf8ffbb"
+          }
+        },
+        {
+          "client_id": "577641006287-jjudtfkcio2t3asvqehul59n4tq8o7ta.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eduvanz",
+            "certificate_hash": "b76f26f5d775f6fa42a63ca4d7b865322d7f9ba6"
           }
         },
         {
@@ -41,23 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-83860258-1"
-          }
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     },
@@ -70,11 +60,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "577641006287-6hfrn89shk4covsnttkeqhcsrfcshcku.apps.googleusercontent.com",
+          "client_id": "577641006287-g7bak4g86tj6m56u3i5ogucf14gq76sg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.eduvanzapplication",
-            "certificate_hash": "a21bb846bb15174d151aabf3da9f61eebee526bd"
+            "certificate_hash": "818fecb5cb217ab275564d4834eb0ab2b263d3bc"
           }
         },
         {
@@ -83,6 +73,14 @@
           "android_info": {
             "package_name": "com.eduvanzapplication",
             "certificate_hash": "b76f26f5d775f6fa42a63ca4d7b865322d7f9ba6"
+          }
+        },
+        {
+          "client_id": "577641006287-6hfrn89shk4covsnttkeqhcsrfcshcku.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eduvanzapplication",
+            "certificate_hash": "a21bb846bb15174d151aabf3da9f61eebee526bd"
           }
         },
         {
@@ -96,20 +94,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

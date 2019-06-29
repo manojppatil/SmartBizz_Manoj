@@ -56,7 +56,6 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-
         <activity
             android:name=".newUI.newViews.FinancialAnalysis"
             android:screenOrientation="sensorPortrait"

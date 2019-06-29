@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +16,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -119,24 +123,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                 } else {
 
                 }
-
-//                switch (position) {
-//                    case 0:
-//                        lastPage = position;
-//                        break;
-//                    case 1:
-//                        PersonalDetailsFragment.validate();
-//                        lastPage = position;
-//                        break;
-//                    case 2:
-//                        DocumentAvailabilityFragment.validate();
-//                        lastPage = position;
-//                        break;
-//                    case 3:
-//                        CurrentAddressFragment.validate();
-//                        lastPage = position;
-//                        break;
-//                }
 
             }
 
@@ -360,7 +346,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         if (Aaadhaarno.length() > 3) {
 
             if (Pname.length() > 3) {
-                if (!Pname.contains(Aname.substring(0, 4))) {
+                if (!Pname.toLowerCase().contains(Aname.toLowerCase().substring(0, 4))) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle(R.string.app_name);
                     builder.setIcon(R.drawable.eduvanz_logo_new);
@@ -393,6 +379,9 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                                     Pisminor = "";
                                     Pisscanned = "";
                                     setOcrData();
+                                    DocumentAvailabilityFragment.setDcoAvailabilityData();
+                                    CurrentAddressFragment.setCurrentAddressData();
+                                    EmploymentDetailsFragment.setEmploymentData();
                                     dialog.cancel();
 
                                 }
@@ -427,6 +416,9 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
                                     Astate = "";
                                     Aisscanned = "";
                                     setOcrData();
+                                    DocumentAvailabilityFragment.setDcoAvailabilityData();
+                                    CurrentAddressFragment.setCurrentAddressData();
+                                    EmploymentDetailsFragment.setEmploymentData();
                                     dialog.cancel();
                                 }
                             });
@@ -462,7 +454,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         } else if (Ppanno.length() > 3) {
 
             if (Aname.length() > 3) {
-                if (!Aname.contains(Pname.substring(0, 4))) {
+                if (!Aname.toLowerCase().contains(Pname.toLowerCase().substring(0, 4))) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle(R.string.app_name);
                     builder.setIcon(R.drawable.eduvanz_logo_new);
@@ -501,6 +493,39 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         CurrentAddressFragment.setCurrentAddressData();
         EmploymentDetailsFragment.setEmploymentData();
     }
+
+    public void onBackPressed() {
+        try {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                // ...Irrelevant code for customizing the buttons and title
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.savedialog, null);
+                dialogBuilder.setView(dialogView);
+                LinearLayout buttonNo = dialogView.findViewById(R.id.button_dialog_no);
+                LinearLayout buttonSave = dialogView.findViewById(R.id.button_dialog_save);
+                final AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+                buttonNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                buttonSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                        NewLeadActivity.super.onBackPressed();
+                        finish();//coment this line
+                    }
+                });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void setViews() {
         viewPager = findViewById(R.id.viewpager);
@@ -543,50 +568,6 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
         adapter.addFrag(new EmploymentDetailsFragment(), "Employment Details");
         viewPager.setAdapter(adapter);
         stepperIndicator.setViewPager(viewPager);
-
-//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                if (position == 0) {
-//                    ivPrevBtn.setVisibility(View.GONE);
-//                    ivOCRBtn.setVisibility(View.VISIBLE);
-//                } else {
-//                    ivPrevBtn.setVisibility(View.VISIBLE);
-//                    ivOCRBtn.setVisibility(View.GONE);
-//                }
-//                txtStepTracker.setText("Step ".concat(String.valueOf(position + 1)).concat(" of ").concat(String.valueOf(adapter.getCount())));
-//
-//                switch (position) {
-//                    case 0:
-//                        break;
-//                    case 1:
-//                        break;
-//                    case 2:
-//                        break;
-//                    case 3:
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//                if (state == ViewPager.SCROLL_STATE_IDLE) {
-//                    if (viewPager.getCurrentItem() == 1) {
-//                        PersonalDetailsFragment.validate();
-//                    }
-//                    if (viewPager.getCurrentItem() == 2) {
-//                        DocumentAvailabilityFragment.validate();
-//                    }
-//                    if (viewPager.getCurrentItem() == 3) {
-//                        CurrentAddressFragment.validate();
-//                    }
-//                }
-//            }
-//        });
 
     }
 
@@ -765,17 +746,17 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             params.put("first_name", NewLeadActivity.firstName);
             params.put("middle_name", NewLeadActivity.middleName);
             params.put("last_name", NewLeadActivity.lastName);
-            params.put("pincode", NewLeadActivity.pinCode);
+            params.put("kyc_address_pin", NewLeadActivity.pinCode);
             params.put("dob", NewLeadActivity.dob);
-            params.put("current_address", NewLeadActivity.flatBuildingSoc);
-            params.put("current_address_city", NewLeadActivity.cityId);
-            params.put("current_address_state", NewLeadActivity.stateId);
+            params.put("kyc_address", NewLeadActivity.flatBuildingSoc);
+            params.put("kyc_address_city", NewLeadActivity.cityId);
+            params.put("kyc_address_state", NewLeadActivity.stateId);
             params.put("pan_number", NewLeadActivity.panNUmber);
             params.put("aadhar_number", NewLeadActivity.aadharNumber);
             params.put("mobile_number", mobileNo);
             params.put("loan_amount", "");
-            params.put("current_landmark", NewLeadActivity.streetLocalityLandMark);
-            params.put("current_address_country", NewLeadActivity.countryId);
+            params.put("kyc_landmark", NewLeadActivity.streetLocalityLandMark);
+            params.put("kyc_address_country", NewLeadActivity.countryId);
             params.put("gender_id", NewLeadActivity.gender);
             params.put("marital_status", NewLeadActivity.maritalStatus);
 //            params.put("has_aadhar_pan", NewLeadActivity.documents);

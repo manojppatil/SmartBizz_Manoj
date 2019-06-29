@@ -80,7 +80,7 @@ public class DashboardActivity extends AppCompatActivity
     public static DrawerLayout drawer;
     public static Context context;
     //    com.eduvanzapplication.newUI.newViews.CustomDrawerButton customDrawerButton;
-    TextView textViewName, textView_mobileNo, textViewEmail;
+    public static TextView textViewName, textView_mobileNo, textViewEmail;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
     LinearLayout linearLayoutSignup, linearLayoutUserDetail, editProfile;

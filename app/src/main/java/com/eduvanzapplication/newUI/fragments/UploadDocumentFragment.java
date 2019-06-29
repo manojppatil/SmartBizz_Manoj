@@ -162,6 +162,7 @@ public class UploadDocumentFragment extends Fragment {
                              Bundle savedInstanceState) {
         context = getContext();
         mFragment = new UploadDocumentFragment();
+        MainActivity.currrentFrag = 3;
         View view = inflater.inflate(R.layout.fragment_uploaddocument, container, false);
 
         expandAnimationPersonal = AnimationUtils.loadAnimation(context, R.anim.scale_expand);

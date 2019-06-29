@@ -49,8 +49,6 @@ dependencies {
     implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     implementation 'org.bouncycastle:bcprov-jdk15on:1.50'
 
-
-
                 /*
                    Event & Background tasks dispatcher
                 */

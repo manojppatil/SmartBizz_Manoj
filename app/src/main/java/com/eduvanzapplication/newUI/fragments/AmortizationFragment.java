@@ -140,6 +140,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 
         context = getContext();
         mFragment = new AmortizationFragment();
+        MainActivity.currrentFrag = 5;
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         seek_bar = view.findViewById(R.id.seek_bar);
         rvAmort = view.findViewById(R.id.rvAmort);
