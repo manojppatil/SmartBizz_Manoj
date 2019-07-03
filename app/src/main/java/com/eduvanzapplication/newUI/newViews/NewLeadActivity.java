@@ -496,31 +496,31 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
 
     public void onBackPressed() {
         try {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-                // ...Irrelevant code for customizing the buttons and title
-                LayoutInflater inflater = this.getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.savedialog, null);
-                dialogBuilder.setView(dialogView);
-                LinearLayout buttonNo = dialogView.findViewById(R.id.button_dialog_no);
-                LinearLayout buttonSave = dialogView.findViewById(R.id.button_dialog_save);
-                final AlertDialog alertDialog = dialogBuilder.create();
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                alertDialog.show();
-                buttonNo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            // ...Irrelevant code for customizing the buttons and title
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.savedialog, null);
+            dialogBuilder.setView(dialogView);
+            LinearLayout buttonNo = dialogView.findViewById(R.id.button_dialog_no);
+            LinearLayout buttonSave = dialogView.findViewById(R.id.button_dialog_save);
+            final AlertDialog alertDialog = dialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            alertDialog.show();
+            buttonNo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                }
+            });
 
-                buttonSave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                        NewLeadActivity.super.onBackPressed();
-                        finish();//coment this line
-                    }
-                });
+            buttonSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                    NewLeadActivity.super.onBackPressed();
+                    finish();//coment this line
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -760,7 +760,7 @@ public class NewLeadActivity extends AppCompatActivity implements PersonalDetail
             params.put("gender_id", NewLeadActivity.gender);
             params.put("marital_status", NewLeadActivity.maritalStatus);
 //            params.put("has_aadhar_pan", NewLeadActivity.documents);
-            params.put("profession", "1");
+            params.put("profession", MainActivity.profession);
             params.put("employer_name", NewLeadActivity.companyName);
             params.put("annual_income", NewLeadActivity.annualIncome);
             params.put("has_aadhar_pan", documents);

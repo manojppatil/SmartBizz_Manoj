@@ -927,23 +927,17 @@ public class KycDetailFragment extends Fragment {
              if (firstName.equals("") || lastName.equals("") || email.equals("") ||
                      mobile.equals("") || dob.equals("") || gender.equals("") ||
                      maritalStatus.equals("")){
-
                  indicateValidationTextdefault(txtPersonalToggle, false);
                  indicateValidationIcondefault(ivPersonalStatus, ivPersonalTitle, false);
 
              }else{
-
                  indicateValidationTextdefault(txtPersonalToggle, false);
                  indicateValidationIcondefault(ivPersonalStatus, ivPersonalTitle, true);
-
-
                  //select gender ,DOB and Marital status colour grey on click on cancel button
                      selectgendercolourGrey();
-
              }
 
              //Course
-
              if (instituteId.equals("") || instituteLocationId.equals("") ||
                      courseId.equals("") || course_cost.equals("") ||
                      requested_loan_amount.equals("")){
@@ -1634,15 +1628,12 @@ public class KycDetailFragment extends Fragment {
                 if (edtFnameBr.getText().toString().equals("")) {
                     txtPersonalDetailsErrMsg.setText("*Please enter first name");
                     // edtFnameBr.requestFocus();
-
                 } else if (edtLnameBr.getText().toString().equals("")) {
                     txtPersonalDetailsErrMsg.setText("*Please enter last name");
                     //  edtLnameBr.requestFocus();
-
                 } else if (gender.equals("")) {
                     txtPersonalDetailsErrMsg.setText("*Please enter gender");
                     //   linMaleBtn.requestFocus();
-
                 } else if (dob.equals("")) {
                     txtPersonalDetailsErrMsg.setText("*Please enter DOB");
                     // txtDOB.requestFocus();
@@ -2772,26 +2763,51 @@ public class KycDetailFragment extends Fragment {
                         }
                     }
 
-                    if (jsonborrowerDetails.getString("current_address") != null) {
+                   /* if (jsonborrowerDetails.getString("current_address") != null) {
                         flatBuildingSociety = jsonborrowerDetails.getString("current_address");
                         if (!flatBuildingSociety.equals("") && !flatBuildingSociety.equals("null")) {
                             edtAddressbr.setText(flatBuildingSociety);
                         }
+                    }*/
+
+                    if (jsonborrowerDetails.getString("kyc_address") != null) {
+                        flatBuildingSociety = jsonborrowerDetails.getString("kyc_address");
+                        if (!flatBuildingSociety.equals("") && !flatBuildingSociety.equals("null")) {
+                            edtAddressbr.setText(flatBuildingSociety);
                     }
-                    if (jsonborrowerDetails.getString("current_landmark") != null) {
+                    }
+
+                   /* if (jsonborrowerDetails.getString("current_landmark") != null) {
                         streetLocalityLandmark = jsonborrowerDetails.getString("current_landmark");
                         if (!streetLocalityLandmark.equals("") && !streetLocalityLandmark.equals("null")) {
                             edtLandmarkbr.setText(streetLocalityLandmark);
                         }
+                    }*/
+
+
+                    if (jsonborrowerDetails.getString("kyc_landmark") != null) {
+                        streetLocalityLandmark = jsonborrowerDetails.getString("kyc_landmark");
+                        if (!streetLocalityLandmark.equals("") && !streetLocalityLandmark.equals("null")) {
+                            edtLandmarkbr.setText(streetLocalityLandmark);
                     }
-                    if (jsonborrowerDetails.getString("current_address_pin") != null) {
+                    }
+
+                  /*  if (jsonborrowerDetails.getString("current_address_pin") != null) {
                         pincode = jsonborrowerDetails.getString("current_address_pin");
                         if (!pincode.equals("") && !pincode.equals("null")) {
                             edtPincodeBr.setText(pincode);
                         }
                     }
+*/
+                    if (jsonborrowerDetails.getString("kyc_address_pin") != null) {
+                        pincode = jsonborrowerDetails.getString("kyc_address_pin");
+                        if (!pincode.equals("") && !pincode.equals("null")) {
+                            edtPincodeBr.setText(pincode);
+                        }
+                    }
 
-                    if (jsonborrowerDetails.getString("current_address_country") != null) {
+
+              /*      if (jsonborrowerDetails.getString("current_address_country") != null) {
                         countryId = jsonborrowerDetails.getString("current_address_country");
 
                         try {
@@ -2814,9 +2830,35 @@ public class KycDetailFragment extends Fragment {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }*/
+
+
+                    if (jsonborrowerDetails.getString("kyc_address_country") != null) {
+                        countryId = jsonborrowerDetails.getString("kyc_address_country");
+
+                        try {
+                            if (!countryId.equals("") && !countryId.equals("null")) {
+                                try {
+                                    currentcountryID = countryId;
+
+                                    int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
+                                    for (int i = 0; i < count; i++) {
+                                        if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase(currentcountryID)) {
+                                            spCountry.setSelection(i);
+                                            break;
+                                        }
                     }
 
-                    if (jsonborrowerDetails.getString("current_address_state") != null) {
+                                } catch (Exception e) {
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                   /* if (jsonborrowerDetails.getString("current_address_state") != null) {
                         stateId = jsonborrowerDetails.getString("current_address_state");
 
                         try {
@@ -2837,8 +2879,32 @@ public class KycDetailFragment extends Fragment {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }*/
+
+
+                    if (jsonborrowerDetails.getString("kyc_address_state") != null) {
+                        stateId = jsonborrowerDetails.getString("kyc_address_state");
+
+                        try {
+                            if (!stateId.equals("") && !stateId.equals("null")) {
+                                currentstateID = stateId;
+                                try {
+                                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
+                                    for (int i = 0; i < count; i++) {
+                                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                            spState.setSelection(i);
+                                            break;
+                                        }
                     }
-                    if (jsonborrowerDetails.getString("current_address_city") != null) {
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                 /*   if (jsonborrowerDetails.getString("current_address_city") != null) {
                         cityId = jsonborrowerDetails.getString("current_address_city");
 
                         try {
@@ -2859,7 +2925,33 @@ public class KycDetailFragment extends Fragment {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }*/
+
+
+
+                    if (jsonborrowerDetails.getString("kyc_address_city") != null) {
+                        cityId = jsonborrowerDetails.getString("kyc_address_city");
+
+                        try {
+                            if (!cityId.equals("") && !cityId.equals("null")) {
+                                currentcityID = cityId;
+                                try {
+                                    int count = borrowerCurrentCityPersonalPOJOArrayList.size();
+                                    for (int i = 0; i < count; i++) {
+                                        if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                            spCity.setSelection(i);
+                                            break;
+                                        }
                     }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                 }
             } else {
                 //           Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

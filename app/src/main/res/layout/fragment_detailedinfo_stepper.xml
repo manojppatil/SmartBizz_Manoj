@@ -1204,7 +1204,6 @@
 
                                         </LinearLayout>
 
-
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -1283,19 +1282,19 @@
 
                                         </LinearLayout>
 
-                                        <TextView
-                                            android:id="@+id/txtResidentialDetailsErrMsg"
-                                            style="@style/TextViewTitle14Style"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_horizontal"
-                                            android:layout_margin="@dimen/_5sdp"
-                                            android:layout_marginLeft="@dimen/_5sdp"
-                                            android:textColor="@color/red"
-                                            android:textSize="15sp"
-                                            android:visibility="gone" />
-
                                     </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txtResidentialDetailsErrMsg"
+                                        style="@style/TextViewTitle14Style"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_margin="@dimen/_5sdp"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:textColor="@color/red"
+                                        android:textSize="15sp"
+                                        android:visibility="gone" />
                                 </LinearLayout>
 
                             </RelativeLayout>

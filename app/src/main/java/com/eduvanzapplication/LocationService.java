@@ -114,15 +114,15 @@ public class LocationService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        if (mLocationManager != null) {
-//            for (int i = 0; i < mLocationListeners.length; i++) {
-//                try {
-//                    mLocationManager.removeUpdates(mLocationListeners[i]);
-//                } catch (Exception ex) {
-//                    Log.i(TAG, "fail to remove location listners, ignore", ex);
-//                }
-//            }
-//        }
+        if (mLocationManager != null) {
+            for (int i = 0; i < mLocationListeners.length; i++) {
+                try {
+                    mLocationManager.removeUpdates(mLocationListeners[i]);
+                } catch (Exception ex) {
+                    Log.i(TAG, "fail to remove location listners, ignore", ex);
+                }
+            }
+        }
     }
 
     private void initializeLocationManager() {
@@ -179,6 +179,7 @@ public class LocationService extends Service {
             editor.apply();
             editor.commit();
 
+           onDestroy();
         }
 
         @Override

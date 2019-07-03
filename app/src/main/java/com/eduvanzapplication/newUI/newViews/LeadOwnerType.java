@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.eduvanzapplication.BuildConfig;
+import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 
 public class LeadOwnerType extends AppCompatActivity {
@@ -121,7 +122,7 @@ public class LeadOwnerType extends AppCompatActivity {
         linStudentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLeadActivity.profession = "2";
+                MainActivity.profession = "2";
                 linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
@@ -174,7 +175,7 @@ public class LeadOwnerType extends AppCompatActivity {
         linSalariedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLeadActivity.profession = "1";
+                MainActivity.profession = "1";
                 linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
@@ -227,7 +228,7 @@ public class LeadOwnerType extends AppCompatActivity {
         linSelfEmployedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLeadActivity.profession = "3";
+                MainActivity.profession = "3";
                 linStudentBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linSalariedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linSelfEmployedBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));

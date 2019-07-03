@@ -657,29 +657,40 @@ public class DetailedInfoFragment extends Fragment {
                         }
                         isCurrentAddressSameAs = "1";
                         linIfCurrentAddressNotSame.setVisibility(View.GONE);
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            txtResidentialDetailsErrMsg.setText("");
+                            txtResidentialDetailsErrMsg.setVisibility(GONE);
+                            checkAllFields();
+                        }
                         break;
                     case R.id.rbNo:
 
                         linIfCurrentAddressNotSame.setVisibility(View.VISIBLE);
                         isCurrentAddressSameAs = "2";
-                        edtCurrentPincode.setText(Brcurrent_address_pin);
-                        edtCurrentAddress.setText(Brcurrent_address);
-                        edtCurrentLandmark.setText(Brcurrent_landmark);
+                        if (LoanTabActivity.isDetailedInfoEdit) {
 
-                        if (!Brcurrent_address_country.equals("null") && !Brcurrent_address_country.equals("")) {
-                            currentcountryID = "1";
-                            if (!spCurrentCountry.getSelectedItem().equals("India")) {
-                                spCurrentCountry.setSelection(Integer.parseInt(currentcountryID));
-                            }
-                        }
-                        if (!Brcurrent_address_state.equals("null") && !Brcurrent_address_state.equals("")) {
-                            currentstateID = Brcurrent_address_state;
+                            txtResidentialDetailsErrMsg.setText("");
+                            txtResidentialDetailsErrMsg.setVisibility(GONE);
 
-                            if (borrowerCurrentStatePersonalPOJOArrayList != null) {
+                            edtCurrentPincode.setText("");
+                            edtCurrentAddress.setText("");
+                            edtCurrentLandmark.setText("");
+                            Brcurrent_address_pin = "";
+                            Brcurrent_address = "";
+                            Brcurrent_landmark = "";
+                            Brcurrent_address_country = "";
+                            Brcurrent_address_state = "";
+                            Brcurrent_address_city = "";
+                            currentcountryID = "";
+                            currentstateID = "";
+                            currentcityID = "";
+
+                            if (!Brcurrent_address_country.equals("null") && !Brcurrent_address_country.equals("")) {
+                                currentcountryID = "1";
                                 try {
-                                    int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+                                    int count1 = borrowerCurrentCountryPersonalPOJOArrayList.size();
                                     for (int i = 0; i < count1; i++) {
-                                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                        if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase(currentstateID)) {
                                             spCurrentState.setSelection(i);
                                         }
                                     }
@@ -687,20 +698,62 @@ public class DetailedInfoFragment extends Fragment {
                                     e.printStackTrace();
                                 }
                             }
-                        }
-                        if (!Brcurrent_address_city.equals("null") && !Brcurrent_address_city.equals("")) {
-                            currentcityID = Brcurrent_address_city;
+                            if (!Brcurrent_address_state.equals("null") && !Brcurrent_address_state.equals("")) {
+                                currentstateID = "";
+                            }
+                            if (!Brcurrent_address_city.equals("null") && !Brcurrent_address_city.equals("")) {
+                                currentcityID = "";
+                            }
+                        } else {
+                            edtCurrentPincode.setText(Brcurrent_address_pin);
+                            edtCurrentAddress.setText(Brcurrent_address);
+                            edtCurrentLandmark.setText(Brcurrent_landmark);
 
-                            if (borrowerCurrentCityPersonalPOJOArrayList != null) {
-                                try {
-                                    int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
-                                    for (int i = 0; i < count2; i++) {
-                                        if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-                                            spCurrentCity.setSelection(i);
+                            if (!Brcurrent_address_country.equals("null") && !Brcurrent_address_country.equals("")) {
+                                currentcountryID = Brcurrent_address_country;
+                                if (!spCurrentCountry.getSelectedItem().equals("India")) {
+
+                                    try {
+                                        int count1 = borrowerCurrentCountryPersonalPOJOArrayList.size();
+                                        for (int i = 0; i < count1; i++) {
+                                            if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase(currentstateID)) {
+                                                spCurrentState.setSelection(i);
+                                            }
                                         }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                }
+                            }
+                            if (!Brcurrent_address_state.equals("null") && !Brcurrent_address_state.equals("")) {
+                                currentstateID = Brcurrent_address_state;
+                                if (borrowerCurrentStatePersonalPOJOArrayList != null) {
+                                    try {
+                                        int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+                                        for (int i = 0; i < count1; i++) {
+                                            if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
+                                                spCurrentState.setSelection(i);
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                            if (!Brcurrent_address_city.equals("null") && !Brcurrent_address_city.equals("")) {
+                                currentcityID = Brcurrent_address_city;
+
+                                if (borrowerCurrentCityPersonalPOJOArrayList != null) {
+                                    try {
+                                        int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
+                                        for (int i = 0; i < count2; i++) {
+                                            if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
+                                                spCurrentCity.setSelection(i);
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             }
                         }
@@ -773,79 +826,104 @@ public class DetailedInfoFragment extends Fragment {
                 switch (checkedId) {
                     case R.id.rbAadhaar:
                         linIfPermanentAddressNotSame.setVisibility(GONE);
-                        edtPermanentPincode.setText(Brpermanent_address_pin);
-                        edtPermanentAddress.setText(Brpermanent_address);
-                        edtPermanentLandmark.setText(Brpermanent_landmark);
+                        edtPermanentPincode.setText(Brkyc_address_pin);
+                        edtPermanentAddress.setText(Brkyc_address);
+                        edtPermanentLandmark.setText(Brkyc_landmark);
+
                         isPermanentAddressSameAs = "1";
 
-                        if (!Brcurrent_address_country.equals("null") && !Brcurrent_address_country.equals("")) {
-                            permanentcountryID = Brcurrent_address_country;
+                        if (!Brkyc_address_country.equals("null") && !Brkyc_address_country.equals("")) {
+                            permanentcountryID = Brkyc_address_country;
                         }
 
-                        if (!Brcurrent_address_state.equals("null") && !Brcurrent_address_state.equals("")) {
-                            permanentstateID = Brcurrent_address_state;
+                        if (!Brkyc_address_state.equals("null") && !Brkyc_address_state.equals("")) {
+                            permanentstateID = Brkyc_address_state;
                         }
 
-                        if (!Brcurrent_address_city.equals("null") && !Brcurrent_address_city.equals("")) {
-                            permanentcityID = Brcurrent_address_city;
+                        if (!Brkyc_address_city.equals("null") && !Brkyc_address_city.equals("")) {
+                            permanentcityID = Brkyc_address_city;
                         }
-
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            txtResidentialDetailsErrMsg.setText("");
+                            txtResidentialDetailsErrMsg.setVisibility(GONE);
+                            checkAllFields();
+                        }
                         break;
 
                     case R.id.rbCurrent:
                         linIfPermanentAddressNotSame.setVisibility(GONE);
-                        edtPermanentPincode.setText(Brpermanent_address_pin);
-                        edtPermanentAddress.setText(Brpermanent_address);
-                        edtPermanentLandmark.setText(Brpermanent_landmark);
+                        edtPermanentPincode.setText(edtCurrentPincode.getText());
+                        edtPermanentAddress.setText(edtCurrentAddress.getText());
+                        edtPermanentLandmark.setText(edtCurrentLandmark.getText());
                         isPermanentAddressSameAs = "2";
 
                         if (!Brcurrent_address_country.equals("null") && !Brcurrent_address_country.equals("")) {
-                            permanentcountryID = Brcurrent_address_country;
+                            permanentcountryID = currentcountryID;
                         }
 
                         if (!Brcurrent_address_state.equals("null") && !Brcurrent_address_state.equals("")) {
-                            permanentstateID = Brcurrent_address_state;
+                            permanentstateID = currentstateID;
                         }
                         if (!Brcurrent_address_city.equals("null") && !Brcurrent_address_city.equals("")) {
-                            permanentcityID = Brcurrent_address_city;
+                            permanentcityID = currentcityID;
+                        }
+                        if (LoanTabActivity.isDetailedInfoEdit) {
+                            txtResidentialDetailsErrMsg.setText("");
+                            txtResidentialDetailsErrMsg.setVisibility(GONE);
+                            checkAllFields();
                         }
                         break;
 
                     case R.id.rbNone:
                         linIfPermanentAddressNotSame.setVisibility(VISIBLE);
-                        edtPermanentPincode.setText(Brpermanent_address_pin);
-                        edtPermanentAddress.setText(Brpermanent_address);
-                        edtPermanentLandmark.setText(Brpermanent_landmark);
-                        isPermanentAddressSameAs = "3";
 
-                        if (!Brpermanent_address_country.equals("null") && !Brpermanent_address_country.equals("")) {
-                            permanentcountryID = Brpermanent_address_country;
+                        if (LoanTabActivity.isDetailedInfoEdit) {
 
-                            try {
-                                int count1 = borrowerPermanentCountryPersonalPOJOArrayList.size();
-                                for (int i = 0; i < count1; i++) {
-                                    if (borrowerPermanentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase(permanentcountryID)) {
-                                        spPermanentCountry.setSelection(i);
-                                        break;
-                                    }
-                                    if (LoanTabActivity.isDetailedInfoEdit) {
-                                        checkAllFields();
-                                    }
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            txtResidentialDetailsErrMsg.setText("");
+                            txtResidentialDetailsErrMsg.setVisibility(GONE);
+
+                            edtPermanentPincode.setText("");
+                            edtPermanentAddress.setText("");
+                            edtPermanentLandmark.setText("");
+                            Brpermanent_address_pin = "";
+                            Brpermanent_address = "";
+                            Brpermanent_landmark = "";
+                            Brpermanent_address_country = "";
+                            Brcurrent_address_state = "";
+                            Brcurrent_address_city = "";
+                            permanentcountryID = "";
+                            permanentstateID = "";
+                            permanentcityID = "";
+
+                            isPermanentAddressSameAs = "3";
+
+                            if (!Brpermanent_address_country.equals("null") && !Brpermanent_address_country.equals("")) {
+                                permanentcountryID = "1";
                             }
-                        }
 
-                        if (!Brpermanent_address_state.equals("null") && !Brpermanent_address_state.equals("")) {
-                            permanentstateID = Brpermanent_address_state;
+                            if (!Brpermanent_address_state.equals("null") && !Brpermanent_address_state.equals("")) {
+                                permanentstateID = "";
+                            }
+                            if (!Brpermanent_address_city.equals("null") && !Brpermanent_address_city.equals("")) {
+                                permanentcityID = "";
+                            }
 
-                            if (borrowerPermanentStatePersonalPOJOArrayList != null) {
+                        } else {
+
+                            edtPermanentPincode.setText(Brpermanent_address_pin);
+                            edtPermanentAddress.setText(Brpermanent_address);
+                            edtPermanentLandmark.setText(Brpermanent_landmark);
+
+                            isPermanentAddressSameAs = "3";
+
+                            if (!Brpermanent_address_country.equals("null") && !Brpermanent_address_country.equals("")) {
+                                permanentcountryID = Brpermanent_address_country;
+
                                 try {
-                                    int count1 = borrowerPermanentStatePersonalPOJOArrayList.size();
+                                    int count1 = borrowerPermanentCountryPersonalPOJOArrayList.size();
                                     for (int i = 0; i < count1; i++) {
-                                        if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(permanentstateID)) {
-                                            spPermanentState.setSelection(i);
+                                        if (borrowerPermanentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase(permanentcountryID)) {
+                                            spPermanentCountry.setSelection(i);
                                             break;
                                         }
                                         if (LoanTabActivity.isDetailedInfoEdit) {
@@ -856,24 +934,45 @@ public class DetailedInfoFragment extends Fragment {
                                     e.printStackTrace();
                                 }
                             }
-                        }
-                        if (!Brpermanent_address_city.equals("null") && !Brpermanent_address_city.equals("")) {
-                            permanentcityID = Brpermanent_address_city;
 
-                            if (borrowerPermanentCityPersonalPOJOArrayList != null) {
-                                try {
-                                    int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
-                                    for (int i = 0; i < count2; i++) {
-                                        if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(permanentcityID)) {
-                                            spPermanentCity.setSelection(i);
-                                            break;
+                            if (!Brpermanent_address_state.equals("null") && !Brpermanent_address_state.equals("")) {
+                                permanentstateID = Brpermanent_address_state;
+
+                                if (borrowerPermanentStatePersonalPOJOArrayList != null) {
+                                    try {
+                                        int count1 = borrowerPermanentStatePersonalPOJOArrayList.size();
+                                        for (int i = 0; i < count1; i++) {
+                                            if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(permanentstateID)) {
+                                                spPermanentState.setSelection(i);
+                                                break;
+                                            }
+                                            if (LoanTabActivity.isDetailedInfoEdit) {
+                                                checkAllFields();
+                                            }
                                         }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
-                                    if (LoanTabActivity.isDetailedInfoEdit) {
-                                        checkAllFields();
+                                }
+                            }
+                            if (!Brpermanent_address_city.equals("null") && !Brpermanent_address_city.equals("")) {
+                                permanentcityID = Brpermanent_address_city;
+
+                                if (borrowerPermanentCityPersonalPOJOArrayList != null) {
+                                    try {
+                                        int count2 = borrowerPermanentCityPersonalPOJOArrayList.size();
+                                        for (int i = 0; i < count2; i++) {
+                                            if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(permanentcityID)) {
+                                                spPermanentCity.setSelection(i);
+                                                break;
+                                            }
+                                        }
+                                        if (LoanTabActivity.isDetailedInfoEdit) {
+                                            checkAllFields();
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
                                 }
                             }
                         }
@@ -1241,7 +1340,6 @@ public class DetailedInfoFragment extends Fragment {
                     String text = spDurarionOfStay.getSelectedItem().toString();
                     if (currentResidenceDurationPersonalPOJOArrayList != null) {
                         int count = currentResidenceDurationPersonalPOJOArrayList.size();
-                        Log.e("TAG", "count: " + count);
                         for (int i = 0; i < count; i++) {
                             if (currentResidenceDurationPersonalPOJOArrayList.get(i).durationName.equalsIgnoreCase(text)) {
                                 Brcurrent_address_stay_duration = currentResidenceDurationPersonalPOJOArrayList.get(i).durationID;
@@ -1377,7 +1475,7 @@ public class DetailedInfoFragment extends Fragment {
                         int count = borrowerCurrentCityPersonalPOJOArrayList.size();
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
-                                currentcityID = Brcurrent_address_city = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
+                                currentcityID = borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID;
                                 break;
                             }
                         }
@@ -1406,7 +1504,7 @@ public class DetailedInfoFragment extends Fragment {
                         int count = borrowerCurrentStatePersonalPOJOArrayList.size();
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
-                                currentstateID = Brcurrent_address_state = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
+                                currentstateID = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
                                 break;
                             }
                         }
@@ -1436,7 +1534,7 @@ public class DetailedInfoFragment extends Fragment {
                         int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
                         for (int i = 1; i < count; i++) {
                             if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryName.equalsIgnoreCase(text)) {
-                                currentcountryID = Brcurrent_address_country = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
+                                currentcountryID = borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID;
                                 break;
                             }
                         }
@@ -1445,11 +1543,6 @@ public class DetailedInfoFragment extends Fragment {
                         }
                     }
                     stateApiCall();
-//                        if (permanentcityID.equals("")) {
-//                            sppermanentCityBr.setSelection(0);
-//                        } else {
-//                            spPermanentCityBr.setSelection(Integer.parseInt(permanentcityID));
-//                        }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1471,7 +1564,7 @@ public class DetailedInfoFragment extends Fragment {
                         int count = borrowerPermanentCityPersonalPOJOArrayList.size();
                         for (int i = 0; i < count; i++) {
                             if (borrowerPermanentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(text)) {
-                                permanentcityID = Brpermanent_address_city = borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID;
+                                permanentcityID = borrowerPermanentCityPersonalPOJOArrayList.get(i).cityID;
 
                                 break;
                             }
@@ -1501,7 +1594,7 @@ public class DetailedInfoFragment extends Fragment {
                         int count = borrowerPermanentStatePersonalPOJOArrayList.size();
                         for (int i = 0; i < count; i++) {
                             if (borrowerPermanentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
-                                permanentstateID = Brpermanent_address_state = borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID;
+                                permanentstateID = borrowerPermanentStatePersonalPOJOArrayList.get(i).stateID;
                                 break;
                             }
                         }
@@ -1531,7 +1624,7 @@ public class DetailedInfoFragment extends Fragment {
                         int count = borrowerPermanentCountryPersonalPOJOArrayList.size();
                         for (int i = 1; i < count; i++) {
                             if (borrowerPermanentCountryPersonalPOJOArrayList.get(i).countryName.equalsIgnoreCase(text)) {
-                                permanentcountryID = Brpermanent_address_country = borrowerPermanentCountryPersonalPOJOArrayList.get(i).countryID;
+                                permanentcountryID = borrowerPermanentCountryPersonalPOJOArrayList.get(i).countryID;
                                 break;
                             }
                         }
@@ -1766,7 +1859,6 @@ public class DetailedInfoFragment extends Fragment {
         try {
 
             txtCurrentResidentType.setEnabled(f);
-
             tvperaddsameasaadhrtitle.setEnabled(f);
             tvOwnRenbytitle.setEnabled(f);
             tvduraofstayatcurraddtitle.setEnabled(f);
@@ -1876,6 +1968,21 @@ public class DetailedInfoFragment extends Fragment {
 //                            }
 //                        }
 
+                        boolean isCurrentAddressChecked = (rgCurrentAddress.getCheckedRadioButtonId() == R.id.rbYes) || (rgCurrentAddress.getCheckedRadioButtonId() == R.id.rbNo);
+                        boolean isPermanentAddressChecked = (rgPermanentAddress.getCheckedRadioButtonId() == R.id.rbAadhaar) || (rgPermanentAddress.getCheckedRadioButtonId() == R.id.rbCurrent || (rgPermanentAddress.getCheckedRadioButtonId() == R.id.rbNone));
+
+                        //residential
+                        if ((!isCurrentAddressChecked) || (!isPermanentAddressChecked) || Brcurrent_address_stay_duration.equals("") || Brcurrent_residence_type.equals("")
+                                || edtCurrentPincode.getText().length() < 6 || edtCurrentPincode.getText().equals("") || edtCurrentAddress.getText().equals("") || edtCurrentLandmark.getText().equals("") ||
+                                currentcityID.equals("") || currentstateID.equals("") || currentcountryID.equals("")
+                                || edtPermanentPincode.getText().length() < 6 || edtPermanentPincode.getText().equals("") || edtPermanentAddress.getText().equals("") || edtPermanentLandmark.getText().equals("") ||
+                                permanentcityID.equals("") || permanentstateID.equals("") || permanentcountryID.equals("")) {
+                            indicateValidationTextdefault(txtResidentialToggle, false);
+                            indicateValidationIcondefault(ivResidentialStatus, ivProfessionalTitle, false);
+                        } else {
+                            indicateValidationTextdefault(txtResidentialToggle, false);
+                            indicateValidationIcondefault(ivResidentialStatus, ivProfessionalTitle, true);
+                        }
 
                         //profession
                         if (Brprofession.equals("") || Bremployer_name.equals("") || Brannual_income.equals("")
@@ -1884,10 +1991,8 @@ public class DetailedInfoFragment extends Fragment {
                             indicateValidationTextdefault(txtProfessionalToggle, false);
                             indicateValidationIcondefault(ivProfessionalStatus, ivProfessionalTitle, false);
                         } else {
-
                             indicateValidationTextdefault(txtProfessionalToggle, false);
                             indicateValidationIcondefault(ivProfessionalStatus, ivProfessionalTitle, true);
-
                         }
 
 
@@ -2038,7 +2143,6 @@ public class DetailedInfoFragment extends Fragment {
 
     }
 
-
     public void indicateValidationTextdefault(TextView indicator, boolean valid) {
         if (valid) {
             indicator.setTextColor(context.getResources().getColor(R.color.colorGreen));
@@ -2056,63 +2160,70 @@ public class DetailedInfoFragment extends Fragment {
 
             indicator.setTextColor(context.getResources().getColor(R.color.defaulticoncolor));
         }
-
     }
-
 
     public void checkAllFields() {
 
         boolean isCurrentAddressChecked = (rgCurrentAddress.getCheckedRadioButtonId() == R.id.rbYes) || (rgCurrentAddress.getCheckedRadioButtonId() == R.id.rbNo);
         boolean isPermanentAddressChecked = (rgPermanentAddress.getCheckedRadioButtonId() == R.id.rbAadhaar) || (rgPermanentAddress.getCheckedRadioButtonId() == R.id.rbCurrent || (rgPermanentAddress.getCheckedRadioButtonId() == R.id.rbNone));
 
-        if (Brcurrent_address_stay_duration.equals("") || Brcurrent_residence_type.equals("")
-                || Brcurrent_address_pin.equals("") || Brcurrent_address.equals("") || Brcurrent_landmark.equals("") ||
+        if ((!isCurrentAddressChecked) || (!isPermanentAddressChecked) || Brcurrent_address_stay_duration.equals("") || Brcurrent_residence_type.equals("")
+                || edtCurrentPincode.getText().length() < 6 || edtCurrentPincode.getText().equals("") || edtCurrentAddress.getText().equals("") || edtCurrentLandmark.getText().equals("") ||
                 currentcityID.equals("") || currentstateID.equals("") || currentcountryID.equals("")
-                || Brpermanent_address_pin.equals("") || Brpermanent_address.equals("") || Brpermanent_landmark.equals("") ||
+                || edtPermanentPincode.getText().length() < 6 || edtPermanentPincode.getText().equals("") || edtPermanentAddress.getText().equals("") || edtPermanentLandmark.getText().equals("") ||
                 permanentcityID.equals("") || permanentstateID.equals("") || permanentcountryID.equals("")) {
             if (LoanTabActivity.isDetailedInfoEdit) {
                 txtResidentialDetailsErrMsg.setVisibility(VISIBLE);
-                if (Brcurrent_residence_type.equals("")) {
+                if (!isCurrentAddressChecked) {
+                    txtResidentialDetailsErrMsg.setText("*Please check current address radio button");
+                } else if (!isPermanentAddressChecked) {
+                    txtResidentialDetailsErrMsg.setText("*Please check permanent address radio button");
+                } else if (Brcurrent_residence_type.equals("")) {
                     txtResidentialDetailsErrMsg.setText("*Please select Owned By");
                     //spOwnedBy.requestFocus();
                 } else if (Brcurrent_address_stay_duration.equals("")) {
                     txtResidentialDetailsErrMsg.setText("*Please select Stay Duration");
                     //spDurarionOfStay.requestFocus();
-                } else if (Brcurrent_address.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select Flat No,Building,Society Name");
-                    //edtPermanentAddress.requestFocus();
-                } else if (Brcurrent_landmark.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select Street Name,Locality,LandMark");
-                } else if (Brcurrent_address_pin.equals("") || Brcurrent_address_pin.toString().length() < 6) {
-                    txtResidentialDetailsErrMsg.setText("*Please Enter your 6 digit Pincode");
-                    //edtPermanentPincode.requestFocus();
-                } else if (currentcountryID.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select Country");
-                    // spPermanentCountry.requestFocus();
-                } else if (currentstateID.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select State");
-                    //spPermanentState.requestFocus();
-                } else if (currentcityID.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select city");
-                    //  spPermanentCity.requestFocus();
-                } else if (Brpermanent_address.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select Flat No,Building,Society Name");
-                    //edtPermanentAddress.requestFocus();
-                } else if (Brpermanent_landmark.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select Street Name,Locality,LandMark");
-                } else if (Brpermanent_address_pin.equals("") || Brpermanent_address_pin.toString().length() < 6) {
-                    txtResidentialDetailsErrMsg.setText("*Please Enter your 6 digit Pincode");
-                    //edtPermanentPincode.requestFocus();
-                } else if (permanentcountryID.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select Country");
-                    // spPermanentCountry.requestFocus();
-                } else if (permanentstateID.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select State");
-                    //spPermanentState.requestFocus();
-                } else if (permanentcityID.equals("")) {
-                    txtResidentialDetailsErrMsg.setText("*Please select city");
-                    //  spPermanentCity.requestFocus();
+                } else if (rbNo.isChecked()) {
+                    if (Brcurrent_address.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select Flat No,Building,Society Name");
+                        //edtPermanentAddress.requestFocus();
+                    } else if (Brcurrent_landmark.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select Street Name,Locality,LandMark");
+                    } else if (Brcurrent_address_pin.equals("") || Brcurrent_address_pin.toString().length() < 6) {
+                        txtResidentialDetailsErrMsg.setText("*Please Enter your 6 digit Pincode");
+                        //edtPermanentPincode.requestFocus();
+                    } else if (currentcountryID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select Country");
+                        // spPermanentCountry.requestFocus();
+                    } else if (currentstateID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select State");
+                        //spPermanentState.requestFocus();
+                    } else if (currentcityID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select city");
+                        //  spPermanentCity.requestFocus();
+                    }
+                } else if (rbNone.isChecked()) {
+                    if (Brpermanent_address.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select Flat No,Building,Society Name");
+                        //edtPermanentAddress.requestFocus();
+                    } else if (Brpermanent_landmark.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select Street Name,Locality,LandMark");
+                    } else if (Brpermanent_address_pin.equals("") || Brpermanent_address_pin.toString().length() < 6) {
+                        txtResidentialDetailsErrMsg.setText("*Please Enter your 6 digit Pincode");
+                        //edtPermanentPincode.requestFocus();
+                    } else if (permanentcountryID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select Country");
+                        // spPermanentCountry.requestFocus();
+                    } else if (permanentstateID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select State");
+                        //spPermanentState.requestFocus();
+                    } else if (permanentcityID.equals("")) {
+                        txtResidentialDetailsErrMsg.setText("*Please select city");
+                        //  spPermanentCity.requestFocus();
+                    }
                 }
+
             } else {
                 indicateValidationText(txtResidentialToggle, true);
                 indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, true);
@@ -2120,6 +2231,7 @@ public class DetailedInfoFragment extends Fragment {
             indicateValidationText(txtResidentialToggle, false);
             indicateValidationIcon(ivResidentialStatus, ivResidentialTitle, false);
         } else {
+
             txtResidentialDetailsErrMsg.setText(null);
             txtResidentialDetailsErrMsg.setVisibility(GONE);
             indicateValidationText(txtResidentialToggle, true);
@@ -2191,14 +2303,14 @@ public class DetailedInfoFragment extends Fragment {
 //        if (switchIsPermanentAddressSame.isChecked()) {
         if (Brcurrent_address_stay_duration.equals("") || Brcurrent_residence_type.equals("") ||
                 isCurrentAddressSameAs.equals("") || isPermanentAddressSameAs.equals("") ||
-                Brcurrent_address_pin.equals("") || Brcurrent_address.equals("") || Brcurrent_landmark.equals("") ||
+                edtCurrentPincode.getText().length() < 6 || edtCurrentPincode.getText().equals("") || edtCurrentAddress.getText().equals("") || edtCurrentLandmark.getText().equals("") ||
                 currentcityID.equals("") || currentstateID.equals("") || currentcountryID.equals("") ||
-                Brpermanent_address_pin.equals("") || Brpermanent_address.equals("") || Brpermanent_landmark.equals("") ||
+                edtPermanentPincode.toString().length() < 6 || edtPermanentPincode.getText().equals("") || edtPermanentAddress.getText().equals("") || edtPermanentLandmark.getText().equals("") ||
                 permanentcityID.equals("") || permanentstateID.equals("") || permanentcountryID.equals("") ||
                 Brprofession.equals("") || Bremployer_name.equals("") ||
-                Brannual_income.equals("") || Broffice_address_pin.equals("") || Broffice_address_pin.toString().length() < 6 || Broffice_address.equals("") || Broffice_landmark.equals("")
-                || Brcurrent_employment_duration.equals("") || Broffice_address_country.equals("") || offstateID.equals("") ||
-                offcityID.equals("")) {
+                Brannual_income.equals("") || Broffice_address_pin.equals("") || Broffice_address_pin.toString().length() < 6 ||
+                Broffice_address.equals("") || Broffice_landmark.equals("") || Brcurrent_employment_duration.equals("") ||
+                Broffice_address_country.equals("") || offstateID.equals("") || offcityID.equals("")) {
             mListener.onDetailedInfoFragment(false, 1);
 
         } else {
@@ -3353,90 +3465,15 @@ public class DetailedInfoFragment extends Fragment {
 
                         case "1":
                             rbAadhaar.setChecked(true);
-//                            edtPermanentPincode.setText(Brcurrent_address_pin);
-//                            edtPermanentAddress.setText(Brcurrent_address);
-//                            edtPermanentLandmark.setText(Brcurrent_landmark);
-//                            try {
-//                                if (!Brcurrent_address_country.equals("") && !Brcurrent_address_country.equals("null")) {
-//                                    permanentcountryID = Brcurrent_address_country;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                            try {
-//                                if (!Brcurrent_address_state.equals("") && !Brcurrent_address_state.equals("null")) {
-//                                    permanentstateID = Brcurrent_address_state;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                            try {
-//                                if (!Brcurrent_address_city.equals("") && !Brcurrent_address_city.equals("null")) {
-//                                    permanentcityID = Brcurrent_address_city;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
 
                             break;
                         case "2":
                             rbCurrent.setChecked(true);
-//                            edtPermanentPincode.setText(Brcurrent_address_pin);
-//                            edtPermanentAddress.setText(Brcurrent_address);
-//                            edtPermanentLandmark.setText(Brcurrent_landmark);
-//                            try {
-//                                if (!Brcurrent_address_country.equals("") && !Brcurrent_address_country.equals("null")) {
-//                                    permanentcountryID = Brcurrent_address_country;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                            try {
-//                                if (!Brcurrent_address_state.equals("") && !Brcurrent_address_state.equals("null")) {
-//                                    permanentstateID = Brcurrent_address_state;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                            try {
-//                                if (!Brcurrent_address_city.equals("") && !Brcurrent_address_city.equals("null")) {
-//                                    permanentcityID = Brcurrent_address_city;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
 
                             break;
 
                         case "3":
                             rbNone.setChecked(true);
-//                            edtPermanentPincode.setText(Brpermanent_address_pin);
-//                            edtPermanentAddress.setText(Brpermanent_address);
-//                            edtPermanentLandmark.setText(Brpermanent_landmark);
-//                            try {
-//                                if (!Brpermanent_address_country.equals("") && !Brpermanent_address_country.equals("null")) {
-//                                    permanentcountryID = Brpermanent_address_country;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                            try {
-//                                if (!Brpermanent_address_state.equals("") && !Brpermanent_address_state.equals("null")) {
-//                                    permanentstateID = Brpermanent_address_state;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                            try {
-//                                if (!Brpermanent_address_city.equals("") && !Brpermanent_address_city.equals("null")) {
-//                                    permanentcityID = Brpermanent_address_city;
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
 
                             break;
                     }
@@ -3558,17 +3595,17 @@ public class DetailedInfoFragment extends Fragment {
             }
 
             params.put("is_borrower_current_address_same_as", isCurrentAddressSameAs);
-            params.put("current_address", Brcurrent_address);
-            params.put("current_landmark", Brcurrent_landmark);
-            params.put("current_address_pin", Brcurrent_address_pin);
+            params.put("current_address", edtCurrentAddress.getText().toString());
+            params.put("current_landmark", edtCurrentAddress.getText().toString());
+            params.put("current_address_pin", edtCurrentAddress.getText().toString());
             params.put("current_address_country", currentcountryID);
             params.put("current_address_state", currentstateID);
             params.put("current_address_city", currentcityID);
 
             params.put("is_borrower_permanent_address_same_as", isPermanentAddressSameAs);
-            params.put("permanent_address", Brpermanent_address);
-            params.put("permanent_landmark", Brpermanent_landmark);
-            params.put("permanent_address_pin", Brpermanent_address_pin);
+            params.put("permanent_address", edtPermanentAddress.getText().toString());
+            params.put("permanent_landmark", edtPermanentLandmark.getText().toString());
+            params.put("permanent_address_pin", edtPermanentPincode.getText().toString());
             params.put("permanent_address_country", permanentcountryID);
             params.put("permanent_address_state", permanentstateID);
             params.put("permanent_address_city", permanentcityID);

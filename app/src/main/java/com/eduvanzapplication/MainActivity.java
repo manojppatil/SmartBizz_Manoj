@@ -32,7 +32,7 @@ public class MainActivity extends Application {
 
     public static String auth_token ="", lead_id ="", application_id = "", applicant_id ="" ;
     public static int currrentFrag = 0;
-
+    public static String profession ="1";
     @Override
     public void onCreate() {
         super.onCreate();
