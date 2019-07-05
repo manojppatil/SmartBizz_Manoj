@@ -61,7 +61,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
                                     android:layout_marginLeft="@dimen/_10sdp"
-                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
                                     android:gravity="center_horizontal"
                                     android:text="loan ID"
                                     android:textAllCaps="true" />
@@ -76,36 +76,36 @@
                                     android:layout_marginLeft="@dimen/_10sdp"
                                     android:gravity="center_horizontal" />
 
-                                <TextView
-                                    android:id="@+id/txtCoursFeeTitle"
-                                    style="@style/TextViewSmallCapsStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_below="@+id/txtApplicationLoanID"
-                                    android:layout_marginLeft="@dimen/_10sdp"
-                                    android:layout_marginTop="@dimen/_3sdp"
-                                    android:gravity="center_horizontal"
-                                    android:text="Course Fee"
-                                    android:textAllCaps="true" />
+                                <!--<TextView-->
+                                    <!--android:id="@+id/txtCoursFeeTitle"-->
+                                    <!--style="@style/TextViewSmallCapsStyle"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_alignParentLeft="true"-->
+                                    <!--android:layout_below="@+id/txtApplicationLoanID"-->
+                                    <!--android:layout_marginLeft="@dimen/_10sdp"-->
+                                    <!--android:layout_marginTop="@dimen/_3sdp"-->
+                                    <!--android:gravity="center_horizontal"-->
+                                    <!--android:text="Course Fee"-->
+                                    <!--android:textAllCaps="true" />-->
 
-                                <TextView
-                                    android:id="@+id/txtTbCourseFee"
-                                    style="@style/TextViewTitleStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/txtCoursFeeTitle"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_marginLeft="@dimen/_10sdp"
-                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                    android:gravity="center_horizontal"
-                                    android:text=" 0/-"/>
+                                <!--<TextView-->
+                                    <!--android:id="@+id/txtTbCourseFee"-->
+                                    <!--style="@style/TextViewTitleStyle"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_below="@+id/txtCoursFeeTitle"-->
+                                    <!--android:layout_alignParentLeft="true"-->
+                                    <!--android:layout_marginLeft="@dimen/_10sdp"-->
+                                    <!--android:drawableLeft="@drawable/ic_rupee_sign_small"-->
+                                    <!--android:gravity="center_horizontal"-->
+                                    <!--android:text=" 0/-"/>-->
 
                                 <ImageButton
                                     android:id="@+id/btnExpandCollapse"
                                     android:layout_width="@dimen/_14sdp"
                                     android:layout_height="@dimen/_14sdp"
-                                    android:layout_below="@+id/txtTbCourseFee"
+                                    android:layout_below="@+id/txtApplicationLoanID"
                                     android:layout_alignParentLeft="true"
                                     android:layout_marginLeft="@dimen/_10sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
@@ -206,6 +206,32 @@
                                                     style="@style/TextViewMiniCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
+                                                    android:text="Course Fee"
+                                                    android:textAllCaps="true" />
+
+                                                <TextView
+                                                    android:id="@+id/txtTbCourseFee"
+                                                    style="@style/TextViewTitleSmallStyle"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/_1sdp"
+                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
+                                                    android:text=" 0/-" />
+
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:gravity="center_vertical"
+                                                android:orientation="vertical"
+                                                android:padding="@dimen/_6sdp">
+
+                                                <TextView
+                                                    style="@style/TextViewMiniCapsStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
                                                     android:text="Requested loan amount"
                                                     android:textAllCaps="true" />
 
@@ -214,6 +240,7 @@
                                                     style="@style/TextViewTitleSmallStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/_1sdp"
                                                     android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                     android:text=" 0/-" />
 
@@ -231,7 +258,6 @@
                                                     style="@style/TextViewMiniCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
                                                     android:text="Sanction Loan Amount"
                                                     android:textAllCaps="true" />
 
@@ -240,59 +266,7 @@
                                                     style="@style/TextViewTitleSmallStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                    android:text=" 0/-" />
-
-                                            </LinearLayout>
-
-<!--
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
-                                                    android:text="Offered loan Amount"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbOfferedLoanAmount"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                    android:text=" 0/-" />
-
-                                            </LinearLayout>
--->
-
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:text="Downpayment"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbDownpayment"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/_1sdp"
                                                     android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                     android:text=" 0/-" />
 
@@ -307,7 +281,6 @@
                                             android:layout_height="wrap_content"
                                             android:padding="@dimen/_2sdp">
 
-<!--
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
@@ -320,33 +293,6 @@
                                                     style="@style/TextViewMiniCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
-                                                    android:text="Selected Tenure"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbSelectTenure"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:text=" -" />
-
-                                            </LinearLayout>
--->
-
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
                                                     android:text="EMI Type"
                                                     android:textAllCaps="true" />
 
@@ -358,32 +304,6 @@
                                                     android:text=" -" />
 
                                             </LinearLayout>
-
-<!--
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:text="Selected Rate OF Interest"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbSelectRateOFInterest"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:text=" 0 %" />
-
-                                            </LinearLayout>
--->
 
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
@@ -409,32 +329,6 @@
 
                                             </LinearLayout>
 
-                                         <!--   <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
-                                                    android:text="Selected EMI Amount"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbSelectedEMIAmount"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                    android:text=" 0/-" />
-
-                                            </LinearLayout>-->
-
                                             <LinearLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
@@ -447,7 +341,6 @@
                                                     style="@style/TextViewMiniCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
                                                     android:text="ADVANCE EMI Amount"
                                                     android:textAllCaps="true" />
 
@@ -456,6 +349,7 @@
                                                     style="@style/TextViewTitleSmallStyle"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/_1sdp"
                                                     android:drawableLeft="@drawable/ic_rupee_sign_small"
                                                     android:text=" 0/-" />
 
@@ -464,7 +358,7 @@
                                         </TableRow>
 
                                         <TableRow
-                                            android:id="@+id/tableRow4"
+                                            android:id="@+id/tableRow3"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:background="@drawable/tablecell"
@@ -482,7 +376,91 @@
                                                     style="@style/TextViewMiniCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
+                                                    android:text="MORATORIUM TYPE"
+                                                    android:textAllCaps="true" />
+
+                                                <TextView
+                                                    android:id="@+id/txtTbMoratoriumType"
+                                                    style="@style/TextViewTitleSmallStyle"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text=" -" />
+
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:gravity="center_vertical"
+                                                android:orientation="vertical"
+                                                android:padding="@dimen/_6sdp">
+
+                                                <TextView
+                                                    style="@style/TextViewMiniCapsStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Downpayment"
+                                                    android:textAllCaps="true" />
+
+                                                <TextView
+                                                    android:id="@+id/txtTbDownpayment"
+                                                    style="@style/TextViewTitleSmallStyle"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/_1sdp"
+                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
+                                                    android:text=" 0/-" />
+
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:visibility="invisible"
+                                                android:gravity="center_vertical"
+                                                android:orientation="vertical"
+                                                android:padding="@dimen/_6sdp">
+
+                                                <!--<TextView-->
+                                                    <!--style="@style/TextViewMiniCapsStyle"-->
+                                                    <!--android:layout_width="wrap_content"-->
+                                                    <!--android:layout_height="wrap_content"-->
+                                                    <!--android:layout_marginLeft="@dimen/_2sdp"-->
+                                                    <!--android:text="ADVANCE EMI Amount"-->
+                                                    <!--android:textAllCaps="true" />-->
+
+                                                <!--<TextView-->
+                                                    <!--android:id="@+id/txtTbAdvanceEMIAmount"-->
+                                                    <!--style="@style/TextViewTitleSmallStyle"-->
+                                                    <!--android:layout_width="match_parent"-->
+                                                    <!--android:layout_height="wrap_content"-->
+                                                    <!--android:drawableLeft="@drawable/ic_rupee_sign_small"-->
+                                                    <!--android:text=" 0/-" />-->
+
+                                            </LinearLayout>
+
+                                        </TableRow>
+
+                                        <TableRow
+                                            android:id="@+id/tableRow4"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/_2sdp">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:gravity="center_vertical"
+                                                android:orientation="vertical"
+                                                android:padding="@dimen/_6sdp">
+
+                                                <TextView
+                                                    style="@style/TextViewMiniCapsStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
                                                     android:text="GROSS LOAN TENURE"
                                                     android:textAllCaps="true" />
 
@@ -531,7 +509,6 @@
                                                     style="@style/TextViewMiniCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
                                                     android:text="ROI"
                                                     android:textAllCaps="true" />
 
@@ -544,144 +521,6 @@
 
                                             </LinearLayout>
 
-                                        </TableRow>
-
-                                        <TableRow
-                                            android:id="@+id/tableRow3"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:padding="@dimen/_2sdp">
-
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
-                                                    android:text="EMI"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbEMI"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:text=" -" />
-
-                                            </LinearLayout>
-
-<!--
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
-                                                    android:text="EMI Type"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbEMIType"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:text=" -" />
-
-                                            </LinearLayout>
--->
-
-<!--
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:text="Emi amount"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbEmiAmount"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                    android:text=" 0/-" />
-
-                                            </LinearLayout>
--->
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
-                                                    android:text="Processing Fee"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbProcessingFee"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                    android:text=" 0/-" />
-
-                                            </LinearLayout>
-
-
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:gravity="center_vertical"
-                                                android:orientation="vertical"
-                                                android:padding="@dimen/_6sdp">
-
-                                                <TextView
-                                                    style="@style/TextViewMiniCapsStyle"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
-                                                    android:text="TOTAL REPAYBLE AMOUNT"
-                                                    android:textAllCaps="true" />
-
-                                                <TextView
-                                                    android:id="@+id/txtTbTotalRepaybleAmount"
-                                                    style="@style/TextViewTitleSmallStyle"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                    android:text=" 0/-" />
-
-                                            </LinearLayout>
                                         </TableRow>
 
                                         <TableRow
@@ -703,7 +542,90 @@
                                                     style="@style/TextViewMiniCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
+                                                    android:text="EMI"
+                                                    android:textAllCaps="true" />
+
+                                                <TextView
+                                                    android:id="@+id/txtTbEMI"
+                                                    style="@style/TextViewTitleSmallStyle"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text=" -" />
+
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:gravity="center_vertical"
+                                                android:orientation="vertical"
+                                                android:padding="@dimen/_6sdp">
+
+                                                <TextView
+                                                    style="@style/TextViewMiniCapsStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Processing Fee"
+                                                    android:textAllCaps="true" />
+
+                                                <TextView
+                                                    android:id="@+id/txtTbProcessingFee"
+                                                    style="@style/TextViewTitleSmallStyle"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/_1sdp"
+                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
+                                                    android:text=" 0/-" />
+
+                                            </LinearLayout>
+
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:gravity="center_vertical"
+                                                android:orientation="vertical"
+                                                android:padding="@dimen/_6sdp">
+
+                                                <TextView
+                                                    style="@style/TextViewMiniCapsStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="TOTAL REPAYBLE AMOUNT"
+                                                    android:textAllCaps="true" />
+
+                                                <TextView
+                                                    android:id="@+id/txtTbTotalRepaybleAmount"
+                                                    style="@style/TextViewTitleSmallStyle"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/_1sdp"
+                                                    android:drawableLeft="@drawable/ic_rupee_sign_small"
+                                                    android:text=" 0/-" />
+
+                                            </LinearLayout>
+                                        </TableRow>
+
+                                        <TableRow
+                                            android:id="@+id/tableRow6"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/_2sdp">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:gravity="center_vertical"
+                                                android:orientation="vertical"
+                                                android:padding="@dimen/_6sdp">
+
+                                                <TextView
+                                                    style="@style/TextViewMiniCapsStyle"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
                                                     android:text="MORATORIUM"
                                                     android:textAllCaps="true" />
 
@@ -752,7 +674,6 @@
                                                     style="@style/TextViewMiniCapsStyle"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/_2sdp"
                                                     android:text="EMI DURING MORATORIUM"
                                                     android:textAllCaps="true" />
 
@@ -766,7 +687,6 @@
                                             </LinearLayout>
 
                                         </TableRow>
-
 
                                     </TableLayout>
 

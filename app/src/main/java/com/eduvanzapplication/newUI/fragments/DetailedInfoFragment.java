@@ -165,7 +165,7 @@ public class DetailedInfoFragment extends Fragment {
 
     public static Context context;
     public static Fragment mFragment;
-    public static LinearLayout linBorrowerForm, linIfCurrentAddressNotSame, linIfPermanentAddressNotSame;
+    public static LinearLayout linBorrowerForm, linIfCurrentAddressNotSame, linIfPermanentAddressNotSame, linPermanentAddressNotSameCheck;
 
 
     //error
@@ -216,6 +216,7 @@ public class DetailedInfoFragment extends Fragment {
 
         linIfCurrentAddressNotSame = view.findViewById(R.id.linIfCurrentAddressNotSame);
         linIfPermanentAddressNotSame = view.findViewById(R.id.linIfPermanentAddressNotSame);
+        linPermanentAddressNotSameCheck = view.findViewById(R.id.linPermanentAddressNotSameCheck);
 
 //        switchIsPermanentAddressSame = view.findViewById(R.id.switchIsPermanentAddressSame);
         switchResidenceType = view.findViewById(R.id.switchResidenceType);
@@ -639,7 +640,7 @@ public class DetailedInfoFragment extends Fragment {
                 // checkedId is the RadioButton selected
                 switch (checkedId) {
                     case R.id.rbYes:
-
+                        linPermanentAddressNotSameCheck.setVisibility(VISIBLE);
                         edtCurrentPincode.setText(Brkyc_address_pin);
                         edtCurrentAddress.setText(Brkyc_address);
                         edtCurrentLandmark.setText(Brkyc_landmark);
@@ -664,7 +665,7 @@ public class DetailedInfoFragment extends Fragment {
                         }
                         break;
                     case R.id.rbNo:
-
+                        linPermanentAddressNotSameCheck.setVisibility(VISIBLE);
                         linIfCurrentAddressNotSame.setVisibility(View.VISIBLE);
                         isCurrentAddressSameAs = "2";
                         if (LoanTabActivity.isDetailedInfoEdit) {
@@ -3383,70 +3384,10 @@ public class DetailedInfoFragment extends Fragment {
 
                         case "1":
                             rbYes.setChecked(true);
-//                            edtCurrentPincode.setText(Brkyc_address_pin);
-//                            edtCurrentAddress.setText(Brkyc_address);
-//                            edtCurrentLandmark.setText(Brkyc_landmark);
-//
-//                            if (!Brkyc_address_country.equals("null") && !Brkyc_address_country.equals("")) {
-//                                currentcountryID = Brkyc_address_country;
-//                            }
-//
-//                            if (!Brkyc_address_state.equals("null") && !Brkyc_address_state.equals("")) {
-//                                currentstateID = Brkyc_address_state;
-//                            }
-//
-//                            if (!Brkyc_address_city.equals("null") && !Brkyc_address_city.equals("")) {
-//                                currentcityID = Brkyc_address_city;
-//                            }
-//                            linIfCurrentAddressNotSame.setVisibility(View.GONE);
 
                             break;
                         case "2":
                             rbNo.setChecked(true);
-//                            linIfCurrentAddressNotSame.setVisibility(View.VISIBLE);
-//
-//                            edtCurrentPincode.setText(Brcurrent_address_pin);
-//                            edtCurrentAddress.setText(Brcurrent_address);
-//                            edtCurrentLandmark.setText(Brcurrent_landmark);
-//
-//                            if (!Brcurrent_address_country.equals("null") && !Brcurrent_address_country.equals("")) {
-//                                currentcountryID = "1";
-//                                if (!spCurrentCountry.getSelectedItem().equals("India")) {
-//                                    spCurrentCountry.setSelection(Integer.parseInt(currentcountryID));
-//                                }
-//                            }
-//                            if (!Brcurrent_address_state.equals("null") && !Brcurrent_address_state.equals("")) {
-//                                currentstateID = Brcurrent_address_state;
-//
-//                                if (borrowerCurrentStatePersonalPOJOArrayList != null) {
-//                                    try {
-//                                        int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
-//                                        for (int i = 0; i < count1; i++) {
-//                                            if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
-//                                                spCurrentState.setSelection(i);
-//                                            }
-//                                        }
-//                                    } catch (Exception e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }
-//                            if (!Brcurrent_address_city.equals("null") && !Brcurrent_address_city.equals("")) {
-//                                currentcityID = Brcurrent_address_city;
-//
-//                                if (borrowerCurrentCityPersonalPOJOArrayList != null) {
-//                                    try {
-//                                        int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
-//                                        for (int i = 0; i < count2; i++) {
-//                                            if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(currentcityID)) {
-//                                                spCurrentCity.setSelection(i);
-//                                            }
-//                                        }
-//                                    } catch (Exception e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }
 
                             break;
 
@@ -3464,20 +3405,26 @@ public class DetailedInfoFragment extends Fragment {
                     switch (Bris_borrower_permanent_address_same_as) {
 
                         case "1":
+                            linPermanentAddressNotSameCheck.setVisibility(VISIBLE);
+                            linIfPermanentAddressNotSame.setVisibility(VISIBLE);
                             rbAadhaar.setChecked(true);
-
                             break;
                         case "2":
+                            linPermanentAddressNotSameCheck.setVisibility(VISIBLE);
+                            linIfPermanentAddressNotSame.setVisibility(VISIBLE);
                             rbCurrent.setChecked(true);
 
                             break;
 
                         case "3":
+                            linPermanentAddressNotSameCheck.setVisibility(VISIBLE);
+                            linIfPermanentAddressNotSame.setVisibility(VISIBLE);
                             rbNone.setChecked(true);
 
                             break;
                     }
                     SwitchAddressSameAs = Bris_borrower_permanent_address_same_as;
+
 
                 } else {
 
@@ -3589,7 +3536,7 @@ public class DetailedInfoFragment extends Fragment {
             params.put("current_employment_duration", Brcurrent_employment_duration);
             params.put("current_residence_type", Brcurrent_residence_type);
             if (switchResidenceType.isChecked()) {
-                params.put("current_address_rent", edtMonthlyRent.getText().toString());
+                params.put("current_address_rent", "");
             } else {
                 params.put("current_address_rent", edtMonthlyRent.getText().toString());
             }
@@ -3597,7 +3544,7 @@ public class DetailedInfoFragment extends Fragment {
             params.put("is_borrower_current_address_same_as", isCurrentAddressSameAs);
             params.put("current_address", edtCurrentAddress.getText().toString());
             params.put("current_landmark", edtCurrentAddress.getText().toString());
-            params.put("current_address_pin", edtCurrentAddress.getText().toString());
+            params.put("current_address_pin", edtCurrentPincode.getText().toString());
             params.put("current_address_country", currentcountryID);
             params.put("current_address_state", currentstateID);
             params.put("current_address_city", currentcityID);
@@ -3673,3 +3620,13 @@ public class DetailedInfoFragment extends Fragment {
     }
 
 }
+
+//2019-07-04 18:11:11.055 5459-5459/com.eduvanzapplication D/DETAILEDINFO:
+// PARAMS{permanent_address_state=14, office_address_country=1, current_employment_duration=3,
+// current_address_pin=676767, is_borrower_current_address_same_as=1, current_landmark=hshs,
+// permanent_address_country=1, employer_name=eduvanz, permanent_address=hshs, office_address_city=122,
+// permanent_landmark=hzhz, permanent_address_pin=676767, office_address_pin=646466,
+// is_borrower_permanent_address_same_as=1, office_landmark=hsjs, lead_id=13842, annual_income=64646,
+// current_address_city=632, permanent_address_city=632, profession=1, current_address_rent=5000,
+// current_residence_type=3, current_address_country=1, current_address_state=14, current_address=hshs,
+// office_address_state=2, office_address=hshs, applicant_id=A190703004, current_address_stay_duration=4, employer_type=0}

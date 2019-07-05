@@ -56,7 +56,7 @@ public class AmortAdapter extends RecyclerView.Adapter<AmortAdapter.ViewHolder>{
             viewHolder.txtPaymentDate.setText(mLoanEmis.actual_payment_date);
             viewHolder.txtPaymentStatus.setText(" "+ mLoanEmis.statusMessage);
             if(mLoanEmis.status.equals("0")) {
-                viewHolder.txtBtnText.setText(" " + "Pre Pay");
+                viewHolder.txtBtnText.setText(" " + "Pay Now");
             }
             else {
                 viewHolder.txtBtnText.setText(" " + "EMI History");

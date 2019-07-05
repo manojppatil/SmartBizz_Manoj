@@ -1,1 +1,15 @@
-include ':app', ':digio-android-sdk-0.1.0', ':libraryMobilePaymentSDK', ':library'
+include ':app', ':digio-android-sdk-0.1.0', ':libraryMobilePaymentSDK', ':library',
+        ':linkedin-sdk', ':friendlyscore-libs', ':fs-calls-sms-release-1.001',
+//        ':fs-core-sdk-release-3.5',
+//        ':fs-ui-sdk-release-3.5',
+//        ':fs-camera-sdk-release-3.5',
+        ':fs-calendar-sdk-release-3.5', ':fs-contacts-sdk-release-3.5',
+//        ':fs-location-sdk-release-3.5',
+//        ':fs-core-sdk-release-3.51',
+//        ':fs-ui-sdk-release-3.6',
+//        ':fs-location-sdk-release-3.51',
+//        ':fs-ui-sdk-release-3.51',
+//        ':fs-ui-sdk-release-3.70',
+        ':fs-core-sdk-release-3.61',
+//        ':fs-ui-sdk-release-3.71',
+        ':FriendlyScoreAndroidSDK-UI-release'

@@ -5045,10 +5045,8 @@ public class UploadDocumentFragment extends Fragment {
 
                                 //this below condition apply for green icon sign dispaly on KYC title
 
-                                if(bAadhaar && !bPan ){
-
+                                if(bAadhaar ){
                                     ivkyctitlecheck.setVisibility(VISIBLE);
-
                                 }
 
                                 bAadhaar = false;
@@ -5077,14 +5075,11 @@ public class UploadDocumentFragment extends Fragment {
                                 } else {
                                     /*btnPanCard.setText(R.string.download);*/
                                     /* imgPan2.setBackgroundResource(R.drawable.zip_image);*/
-
                                 }
 
                                 //required two condition for if aadhar and pan both uploaded then only display check sign
-                                if(!bAadhaar && bPan ){
-
+                                if(bPan ){
                                     ivkyctitlecheck.setVisibility(VISIBLE);
-
                                 }
 
 //                        Picasso.with(context).load(String.valueOf(bm)).into(imgPan2);

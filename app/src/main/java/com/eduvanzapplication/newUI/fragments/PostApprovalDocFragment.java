@@ -40,9 +40,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -134,8 +132,8 @@ public class PostApprovalDocFragment extends Fragment {
 
     public String lead_id = "", application_loan_id = "", principal_amount = "", down_payment = "", rate_of_interest = "", tenure = "",
             emi_type = "", emi_amount = "", total_amount_to_be_collected = "", amount_to_be_paid_to_institute = "",
-            is_moratorium = "", moratorium_months = "", no_emi_paid = "", requested_loan_amount = "", requested_tenure = "",
-            requested_roi = "", requested_emi = "",
+            is_moratorium = "", moratorium_months = "",moratorium_type ="", no_emi_paid = "", requested_loan_amount = "",
+            requested_tenure = "", requested_roi = "", requested_emi = "",
             offered_amount = "", applicant_id = "", fk_lead_id = "", first_name = "", last_name = "", mobile_number = "",
             email_id = "", kyc_address = "", course_cost = "", paid_on = "", transaction_amount = "", kyc_status = "",
             disbursal_status = "", rate = "", loan_agrement_upload_status = "", paid_emi_on = "", no_of_advance_emi = "";
@@ -153,7 +151,9 @@ public class PostApprovalDocFragment extends Fragment {
 
     public static TextView txtTbCourseFee, txtTbRequestedLoanAmount, txtTbOfferedLoanAmount, txtTbSelectTenure, txtTbSelectRateOFInterest,
             txtTbSelectedEMIAmount, txtTbSanctionLoanAmount, txtTbDownpayment, txtTbInterestRate,
-            txtTbEMIType, txtTbEmiAmount, txtTbProcessingFee, txtTbNoOfAdvanceEMI, txtTbAdvanceEMIAmount, txtTbGrossLoanTenure, txtTbNetLoantenure, txtTbROI, txtTbEMI, txtTbTotalRepaybleAmount, txtTbMoratoriumDuration, txtTbMoratorium, txtTbEMIDuringMoratorium;
+            txtTbEMIType, txtTbEmiAmount, txtTbProcessingFee, txtTbNoOfAdvanceEMI, txtTbAdvanceEMIAmount, txtTbGrossLoanTenure,
+            txtTbNetLoantenure, txtTbROI, txtTbEMI, txtTbTotalRepaybleAmount, txtTbMoratoriumDuration, txtTbMoratorium,
+            txtTbEMIDuringMoratorium,txtTbMoratoriumType;
 
     public static TextView txtProcessingFeeAmt, txtProcessingFeeDueByDate, txtEMIFeeAmt, txtEMIDueByDate, txtTotalAmt,
             txtApplicationLoanID, txtProcessingFeeDueTitle, txtEMIDueByTitle, txtEMIType;
@@ -295,6 +295,7 @@ public class PostApprovalDocFragment extends Fragment {
         txtTbMoratorium = view.findViewById(R.id.txtTbMoratorium);
         txtTbMoratoriumDuration = view.findViewById(R.id.txtTbMoratoriumDuration);
         txtTbEMIDuringMoratorium = view.findViewById(R.id.txtTbEMIDuringMoratorium);
+        txtTbMoratoriumType = view.findViewById(R.id.txtTbMoratoriumType);
 
         txtTbRequestedLoanAmount = view.findViewById(id.txtTbRequestedLoanAmount);
         //  txtTbOfferedLoanAmount = view.findViewById(id.txtTbOfferedLoanAmount);
@@ -1114,6 +1115,8 @@ public class PostApprovalDocFragment extends Fragment {
                             is_moratorium = jsonloanDataDetails.getString("is_moratorium");
                         if (!jsonloanDataDetails.getString("moratorium_months").toString().equals("null"))
                             moratorium_months = jsonloanDataDetails.getString("moratorium_months");
+                        if (!jsonloanDataDetails.getString("moratorium_type").toString().equals("null"))
+                            moratorium_type = jsonloanDataDetails.getString("moratorium_type");
                         if (!jsonloanDataDetails.getString("no_emi_paid").toString().equals("null"))
                             no_emi_paid = jsonloanDataDetails.getString("no_emi_paid");
                         if (!jsonloanDataDetails.getString("requested_loan_amount").toString().equals("null"))
@@ -1154,8 +1157,6 @@ public class PostApprovalDocFragment extends Fragment {
                             rate = jsonloanDataDetails.getString("rate");
                         if (!jsonloanDataDetails.getString("loan_agrement_upload_status").toString().equals("null"))
                             loan_agrement_upload_status = jsonloanDataDetails.getString("loan_agrement_upload_status");
-
-                        //new
                         if (!jsonloanDataDetails.getString("no_of_advance_emi").toString().equals("null"))
                             no_of_advance_emi = jsonloanDataDetails.getString("no_of_advance_emi");
 
@@ -1164,7 +1165,6 @@ public class PostApprovalDocFragment extends Fragment {
                         totalAmount = Double.valueOf(transaction_amount);
                         if (!no_of_advance_emi.equals("")) {
                             txtEMIFeeAmt.setText(String.valueOf(Float.parseFloat(emi_amount) * Float.parseFloat(no_of_advance_emi)));
-
                         } else {
                             txtEMIFeeAmt.setText(String.valueOf(Double.valueOf(emi_amount)));
                         }
@@ -1178,25 +1178,25 @@ public class PostApprovalDocFragment extends Fragment {
 //                            linPayStatus.setVisibility(GONE);
 //                        }
 
-                        txtTbCourseFee.setText(" " + course_cost + "/-");
-                        txtTbRequestedLoanAmount.setText(" " + requested_loan_amount + "/-");
+                        txtTbCourseFee.setText(" " + Globle.decimalFormat.format(Float.parseFloat(course_cost)) + "/-");
+                        txtTbRequestedLoanAmount.setText(" " + Globle.decimalFormat.format(Float.parseFloat(requested_loan_amount)) + "/-");
 //                        txtTbOfferedLoanAmount.setText(" " + offered_amount + "/-");
 //                        txtTbSelectRateOFInterest.setText(requested_roi + " " + "%");
 //                        txtTbSelectedEMIAmount.setText(" " + emi_amount + "/-");
-                        txtTbSanctionLoanAmount.setText(" " + principal_amount + "/-");
-                        txtTbDownpayment.setText(" " + down_payment + "/-");
+                        txtTbSanctionLoanAmount.setText(" " + Globle.decimalFormat.format(Float.parseFloat(principal_amount)) + "/-");
+                        txtTbDownpayment.setText(" " + Globle.decimalFormat.format(Float.parseFloat(down_payment)) + "/-");
                         txtTbROI.setText(rate_of_interest + " " + "%");
-                        txtTbEMI.setText(" " + emi_amount + "/-");
-                        txtTbProcessingFee.setText(" " + transaction_amount + "/-");
+                        txtTbEMI.setText(" " + Globle.decimalFormat.format(Float.parseFloat(emi_amount)) + "/-");
+                        txtTbProcessingFee.setText(" " + Globle.decimalFormat.format(Float.parseFloat(transaction_amount)) + "/-");
 
-                        txtTbTotalRepaybleAmount.setText(" " + total_amount_to_be_collected + "/-");
+                        txtTbTotalRepaybleAmount.setText(" " + Globle.decimalFormat.format(Float.parseFloat(total_amount_to_be_collected)) + "/-");
                         txtTbNoOfAdvanceEMI.setText(no_of_advance_emi);
-//
-//                        if (requested_tenure.equals("")) {
-//                            txtTbSelectTenure.setText("Months");
-//                        } else {
-//                            txtTbSelectTenure.setText(requested_tenure + " Months");
-//                        }
+
+                        if (moratorium_type.equals("2")) {
+                            txtTbMoratoriumType.setText("Total");
+                        } else if (moratorium_type.equals("1")) {
+                            txtTbMoratoriumType.setText("Principal");
+                        }
 
                         if (emi_type.equals("0")) {
                             txtTbEMIType.setText("Arrear");
@@ -1223,9 +1223,9 @@ public class PostApprovalDocFragment extends Fragment {
                         if (!moratorium_months.equals("")) {
                             txtTbMoratoriumDuration.setText(" " + moratorium_months);
                         }
-                        if (!amount_to_be_paid_to_institute.equals("")) {
-                            txtTbEMIDuringMoratorium.setText(" " + amount_to_be_paid_to_institute);
-                        }
+//                        if (!amount_to_be_paid_to_institute.equals("")) {
+//                            txtTbEMIDuringMoratorium.setText(" " + amount_to_be_paid_to_institute);
+//                        }
                         try {
                             if (emi_type.equals("0") && is_moratorium.equals("1") && Integer.parseInt(moratorium_months) > 0) {
                                 int grossTenure = Integer.parseInt(tenure) * Integer.parseInt(moratorium_months);
@@ -1254,9 +1254,7 @@ public class PostApprovalDocFragment extends Fragment {
                             Float Rate = Float.parseFloat(rate) / 1200;
                             Float interest_comp = outstanding_principle * Rate;
 
-                            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-
-                            txtTbEMIDuringMoratorium.setText(" " + (is_moratorium.equals("1") ? decimalFormat.format(interest_comp) : " -"));
+                            txtTbEMIDuringMoratorium.setText(" " + (is_moratorium.equals("1") ? Globle.decimalFormat.format(interest_comp)+"/-" : " /-"));
 
                         } catch (NumberFormatException e) {
                             txtTbEMIDuringMoratorium.setText(" -");

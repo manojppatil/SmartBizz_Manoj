@@ -1176,7 +1176,7 @@ public class KycDetailFragment extends Fragment {
 //False
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         aadhar = "";
-                        edtAadhaar.setError("* Please Enter valid Aadhaar Number!");
+//                        edtAadhaar.setError("* Please Enter valid Aadhaar Number!");
                         edtPAN.setError(null);
                         documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
@@ -1186,12 +1186,12 @@ public class KycDetailFragment extends Fragment {
                         documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         aadhar = "";
-                        edtAadhaar.setError("* Please Enter valid Aadhaar Number!");
+//                        edtAadhaar.setError("* Please Enter valid Aadhaar Number!");
 //                        edtPAN.setError(null);
                         documents = "1";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
                         pan = "";
-                        edtAadhaar.setError("* Please Enter Aadhaar or PAN Number!");
+//                        edtAadhaar.setError("* Please Enter Aadhaar or PAN Number!");
                         edtPAN.setError(null);
                         documents = "0";
                     }
@@ -1234,12 +1234,12 @@ public class KycDetailFragment extends Fragment {
                     if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() > 0) {
                         pan = "";
 //                        edtAadhaar.setError(null);
-                        edtPAN.setError("* Please Enter Valid PAN number!");
+//                        edtPAN.setError("* Please Enter Valid PAN number!");
                         documents = "3";
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() > 0) {
                         pan = "";
                         edtAadhaar.setError(null);
-                        edtPAN.setError("* Please Enter Valid PAN number!");
+//                        edtPAN.setError("* Please Enter Valid PAN number!");
                         documents = "2";
                     } else if (edtAadhaar.getText().toString().length() > 0 && edtPAN.getText().toString().length() == 0) {
                         pan = "";
@@ -1248,7 +1248,7 @@ public class KycDetailFragment extends Fragment {
                     } else if (edtAadhaar.getText().toString().length() == 0 && edtPAN.getText().toString().length() == 0) {
                         pan = "";
                         edtAadhaar.setError(null);
-                        edtPAN.setError("* Please Enter Aadhaar or PAN Number!");
+//                        edtPAN.setError("* Please Enter Aadhaar or PAN Number!");
                         documents = "0";
                     }
                 } else {

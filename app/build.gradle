@@ -17,11 +17,15 @@ android {
         applicationId "com.eduvanzapplication"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 96
-        versionName "5.1.6"
+        versionCode 97
+        versionName "5.1.7"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        manifestPlaceholders = [
+                'appAuthRedirectScheme': 'com.eduvanzapplication'
+        ]
     }
     buildTypes {
         release {
@@ -34,9 +38,9 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
-//    configurations {
-//        all*.exclude group: 'com.android.volley'
-//    }
+    configurations {
+        all*.exclude group: 'com.android.volley'
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -90,20 +94,37 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.facebook.android:facebook-android-sdk:4.31.0'
+    implementation 'com.twitter.sdk.android:twitter:3.1.1'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.google.firebase:firebase-messaging:17.5.0'
     implementation 'com.google.android.gms:play-services-base:16.1.0'//For Algo 360
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     implementation 'com.intuit.sdp:sdp-android:1.0.4'//Multi Screen Common Font Size
     implementation 'com.crowdfire.cfalertdialog:cfalertdialog:1.1.0'
+
+    //Friendly-Score
+    // Twitter Android SDK (only required for Twitter Login)
+    implementation('com.twitter.sdk.android:twitter:3.1.1@aar') {
+        transitive = true;
+    }
+    implementation project(':FriendlyScoreAndroidSDK-UI-release')
+
+    implementation project(':linkedin-sdk')
+    implementation 'com.pnikosis:materialish-progress:1.7'
+    /*
+                             If you implement Linkedin Authentication via Linkedin SDK, Linkedin requires their app download.
+
+                             Better to implement using OAuth.
+                                                                                                                       */
+    api project(':friendlyscore-libs')
 
     /* Google packages used in SDK*/
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-identity:16.0.0'
+
+    api 'net.openid:appauth:0.7.1'
 
     /*Events dispatcher*/
     api 'org.greenrobot:eventbus:3.0.0'

@@ -30,7 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -40,17 +40,16 @@
                         android:weightSum="4">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/rounded_border_tv"
                             android:orientation="vertical">
 
                             <TextView
                                 style="@style/TextViewTitle10BoldStyle"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:gravity="center_horizontal|left"
                                 android:text="EMI Amount"
                                 android:textStyle="normal" />
@@ -58,19 +57,18 @@
                             <TextView
                                 android:id="@+id/txtNextEmiAmount"
                                 style="@style/TextViewTitle14Style"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal|left"
                                 android:drawableStart="@drawable/ic_rupee_sign"
-                                android:padding="@dimen/_3sdp"
+                                android:gravity="center_horizontal|left"
+                                android:padding="@dimen/_1sdp"
                                 android:text=" 0"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_weight="1"
                             android:background="@drawable/rounded_border_tv"
@@ -78,26 +76,24 @@
 
                             <TextView
                                 style="@style/TextViewTitle10BoldStyle"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:gravity="center_horizontal|left"
                                 android:text="Next EMI Due" />
 
                             <TextView
                                 android:id="@+id/txtNextEmiDue"
                                 style="@style/TextViewTitle14Style"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_horizontal|left"
-                                android:layout_weight="1"
-                                android:padding="@dimen/_3sdp"
+                                android:padding="@dimen/_1sdp"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_weight="1"
                             android:background="@drawable/rounded_border_tv"
@@ -105,26 +101,24 @@
 
                             <TextView
                                 style="@style/TextViewTitle10BoldStyle"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:gravity="center_horizontal|left"
                                 android:text="EMI End Date" />
 
                             <TextView
                                 android:id="@+id/txtNextEmiEndDate"
                                 style="@style/TextViewTitle14Style"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_horizontal|left"
-                                android:layout_weight="1"
-                                android:padding="@dimen/_3sdp"
+                                android:padding="@dimen/_1sdp"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_weight="1"
                             android:background="@drawable/rounded_border_tv"
@@ -132,21 +126,20 @@
 
                             <TextView
                                 style="@style/TextViewTitle10BoldStyle"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:gravity="center_horizontal|left"
                                 android:text="Outstanding Amount" />
 
                             <TextView
                                 android:id="@+id/txtOutstandingAmt"
                                 style="@style/TextViewTitle14Style"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center_horizontal|left"
                                 android:drawableStart="@drawable/ic_rupee_sign"
-                                android:padding="@dimen/_3sdp"
+                                android:gravity="center_horizontal|left"
+                                android:padding="@dimen/_1sdp"
                                 android:text=" 0"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -155,7 +148,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/_20sdp">
 
                         <SeekBar
@@ -180,7 +173,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                style="@style/TextViewTitle12BoldStyle"
+                                style="@style/TextViewTitleSmallStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_horizontal"
@@ -206,7 +199,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                style="@style/TextViewTitle12BoldStyle"
+                                style="@style/TextViewTitleSmallStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_horizontal"
@@ -253,232 +246,220 @@
                             android:textColor="@color/darkblue" />
 
                         <RelativeLayout
+                            android:id="@+id/relStartNewLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:clipChildren="false"
-                            android:clipToPadding="false"
-                            android:paddingTop="@dimen/_4sdp"
-                            android:paddingBottom="@dimen/_4sdp">
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/linBanner"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:visibility="visible">
 
-                            <android.support.v7.widget.CardView
+                            <LinearLayout
+                                android:id="@+id/layout2"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_55sdp"
-                                android:layout_margin="@dimen/_5sdp"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/border"
-                                android:elevation="@dimen/_3sdp"
-                                android:padding="@dimen/_1sdp"
-                                app:cardCornerRadius="@dimen/_5sdp"
-                                app:cardElevation="@dimen/_3sdp">
+                                android:orientation="vertical">
 
-                                <RelativeLayout
+                                <TableLayout
+                                    android:id="@+id/tabla_cuerpo"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="match_parent">
 
-                                    <LinearLayout
-                                        android:id="@+id/linData"
+                                    <TableRow
+                                        android:id="@+id/tableRow1"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_alignParentTop="true"
-                                        android:orientation="vertical">
+                                        android:padding="@dimen/_2sdp">
 
-                                        <TableLayout
-                                            android:id="@+id/tabla_cuerpo"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent">
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.5"
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
-                                            <TableRow
-                                                android:id="@+id/tableRow1"
+                                            <TextView
+                                                style="@style/TextViewMiniCapsStyle"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/_2sdp"
+                                                android:text="EMI"
+                                                android:textAllCaps="true"
+                                                android:textSize="10sp" />
+
+                                            <TextView
+                                                android:id="@+id/txtEmiNo"
+                                                style="@style/TextViewTitle14BoldStyle"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:padding="@dimen/_2sdp">
+                                                android:layout_marginLeft="@dimen/_2sdp"
+                                                android:text="01"
+                                                android:textColor="@color/darkblue" />
 
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="0.8"
-                                                    android:gravity="center_vertical"
-                                                    android:orientation="vertical"
-                                                    android:padding="@dimen/_6sdp">
+                                        </LinearLayout>
 
-                                                    <TextView
-                                                        style="@style/TextViewMiniCapsStyle"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:text="EMI"
-                                                        android:textAllCaps="true" />
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
-                                                    <TextView
-                                                        android:id="@+id/txtEmiNo"
-                                                        style="@style/TextViewTitle14BoldStyle"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:text="01"
-                                                        android:textColor="@color/darkblue" />
+                                            <TextView
+                                                style="@style/TextViewMiniCapsStyle"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="Amount"
+                                                android:textAllCaps="true" />
 
-                                                </LinearLayout>
+                                            <TextView
+                                                android:id="@+id/txtEmiAmount"
+                                                style="@style/TextViewTitleSmallStyle"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:drawableLeft="@drawable/ic_rupee_sign_small"
+                                                android:text=" 3,3345" />
 
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1.2"
-                                                    android:gravity="center_vertical"
-                                                    android:orientation="vertical"
-                                                    android:padding="@dimen/_6sdp">
+                                        </LinearLayout>
 
-                                                    <TextView
-                                                        style="@style/TextViewMiniCapsStyle"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:text="Amount"
-                                                        android:textAllCaps="true" />
-
-                                                    <TextView
-                                                        android:id="@+id/txtEmiAmount"
-                                                        style="@style/TextViewTitleSmallStyle"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:drawableLeft="@drawable/ic_rupee_sign_small"
-                                                        android:text=" 3,3345" />
-
-                                                </LinearLayout>
-
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center_vertical"
-                                                    android:orientation="vertical"
-                                                    android:padding="@dimen/_6sdp">
-
-                                                    <TextView
-                                                        style="@style/TextViewMiniCapsStyle"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:text="Due By"
-                                                        android:textAllCaps="true" />
-
-                                                    <TextView
-                                                        android:id="@+id/txtDueBy"
-                                                        style="@style/TextViewTitleSmallStyle"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:text="05 Apr 2019"
-                                                        android:textColor="@color/red" />
-
-                                                </LinearLayout>
-
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center_vertical"
-                                                    android:orientation="vertical"
-                                                    android:padding="@dimen/_6sdp">
-
-                                                    <TextView
-                                                        style="@style/TextViewMiniCapsStyle"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:text="Payment Date"
-                                                        android:textAllCaps="true" />
-
-                                                    <TextView
-                                                        android:id="@+id/txtPaymentDate"
-                                                        style="@style/TextViewTitleSmallStyle"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:text="05 Apr 2019"
-                                                        android:textColor="@color/colorPrimary" />
-
-                                                </LinearLayout>
-
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="center_vertical"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center_vertical"
-                                                    android:orientation="horizontal"
-                                                    android:padding="@dimen/_6sdp">
-
-                                                    <ImageView
-                                                        android:id="@+id/imgpaymentStatus"
-                                                        android:layout_width="@dimen/_12sdp"
-                                                        android:layout_height="@dimen/_12sdp"
-                                                        android:layout_gravity="center_vertical"
-                                                        android:gravity="center"
-                                                        android:textAlignment="center"
-                                                        android:tint="@color/colorGreen"
-                                                        app:srcCompat="@drawable/ic_check_circle" />
-
-                                                    <TextView
-                                                        android:id="@+id/txtPaymentStatus"
-                                                        style="@style/TextViewTitle12BoldStyle"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_gravity="center_vertical"
-                                                        android:layout_marginLeft="@dimen/_2sdp"
-                                                        android:gravity="center"
-                                                        android:text=" EMI Paid"
-                                                        android:textAlignment="center"
-                                                        android:textAllCaps="true"
-                                                        android:textColor="@color/colorGreen" />
-
-                                                </LinearLayout>
-
-                                            </TableRow>
-
-                                        </TableLayout>
-
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:id="@+id/linPayBtn"
-                                        android:layout_width="@dimen/_80sdp"
-                                        android:layout_height="@dimen/_20sdp"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_alignParentBottom="true"
-                                        android:layout_marginEnd="@dimen/_5sdp"
-                                        android:background="@drawable/border_circular_red_filled"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal"
-                                        android:padding="@dimen/_3sdp">
-
-                                        <TextView
-                                            android:id="@+id/txtBtnText"
-                                            style="@style/TextViewSmallCapsWhiteStyle"
-                                            android:layout_width="match_parent"
+                                        <LinearLayout
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:gravity="center"
-                                            android:text="Preview" />
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
-                                        <View
-                                            android:layout_width="@dimen/_1sdp"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginStart="@dimen/_4sdp"
-                                            android:layout_marginEnd="@dimen/_4sdp"
-                                            android:background="@color/white" />
+                                            <TextView
+                                                style="@style/TextViewMiniCapsStyle"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/_2sdp"
+                                                android:text="Due By"
+                                                android:textAllCaps="true" />
 
-                                        <ImageView
-                                            android:layout_width="@dimen/_12sdp"
-                                            android:layout_height="@dimen/_12sdp"
-                                            android:tint="@color/white"
-                                            app:srcCompat="@drawable/ic_course_details_search" />
+                                            <TextView
+                                                android:id="@+id/txtDueBy"
+                                                style="@style/TextViewTitleSmallStyle"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="05 Apr 2019"
+                                                android:textColor="@color/red" />
 
-                                    </LinearLayout>
+                                        </LinearLayout>
 
-                                </RelativeLayout>
-                            </android.support.v7.widget.CardView>
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_6sdp">
 
+                                            <TextView
+                                                style="@style/TextViewMiniCapsStyle"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/_2sdp"
+                                                android:text="Payment Date"
+                                                android:textAllCaps="true" />
+
+                                            <TextView
+                                                android:id="@+id/txtPaymentDate"
+                                                style="@style/TextViewTitleSmallStyle"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="05 Apr 2019"
+                                                android:textColor="@color/colorPrimary" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_weight="1.3"
+                                            android:gravity="center_vertical"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/_2sdp">
+
+                                            <ImageView
+                                                android:id="@+id/imgpaymentStatus"
+                                                android:layout_width="@dimen/_12sdp"
+                                                android:layout_height="@dimen/_12sdp"
+                                                android:layout_gravity="center_vertical|left"
+                                                android:gravity="center"
+                                                android:textAlignment="center"
+                                                android:tint="@color/colorGreen"
+                                                app:srcCompat="@drawable/ic_check_circle" />
+
+                                            <TextView
+                                                android:id="@+id/txtPaymentStatus"
+                                                style="@style/TextViewTitle12BoldStyle"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical|left"
+                                                android:layout_marginLeft="@dimen/_2sdp"
+                                                android:gravity="center"
+                                                android:text=" Paid"
+                                                android:textAlignment="center"
+                                                android:textAllCaps="true"
+                                                android:textColor="@color/colorGreen" />
+
+                                        </LinearLayout>
+
+                                    </TableRow>
+
+                                </TableLayout>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linPayBtn"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_below="@id/layout2"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginTop="-12dp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:background="@drawable/border_circular_red_filled"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_3sdp">
+
+                                <TextView
+                                    android:id="@+id/txtBtnText"
+                                    style="@style/TextViewSmallCapsWhiteStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Preview" />
+
+                                <View
+                                    android:layout_width="@dimen/_1sdp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_4sdp"
+                                    android:layout_marginEnd="@dimen/_4sdp"
+                                    android:background="@color/white" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_12sdp"
+                                    android:layout_height="@dimen/_12sdp"
+                                    android:tint="@color/white"
+                                    app:srcCompat="@drawable/ic_angle_right" />
+
+                            </LinearLayout>
 
                         </RelativeLayout>
+
 
                     </LinearLayout>
 

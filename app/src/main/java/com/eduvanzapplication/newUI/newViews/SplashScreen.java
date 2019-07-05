@@ -58,7 +58,6 @@ public class SplashScreen extends AppCompatActivity {
     static Context context;
     int policyAgreementStatus = 0;
     AppCompatActivity mActivity;
-    static Context mContext;
     private String isMandateToUpdate;
     private String AppLanguage;
     ArrayList<String> errorLogIDArraylist;
@@ -89,6 +88,16 @@ public class SplashScreen extends AppCompatActivity {
 
             DBAdapter.Init(this);
 
+//            saveUserPrefernce("name", "");
+//            saveUserPrefernce("otp_done", "1");
+//            saveUserPrefernce("mobile_no", "9898989898");
+//            saveUserPrefernce("user_img", "");
+//            saveUserPrefernce("email", "abc@gmail.com");
+//            saveUserPrefernce("auth_token", "c13d962aa5d7d0e490131614ccebb566");
+//            saveUserPrefernce("student_id", "1290");
+//            saveUserPrefernce("userpolicyAgreement", "1");
+//            sharedPref.setLoginDone(getApplicationContext(), true);
+
             SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
             checkOTPDone = sharedPreferences.getString("otp_done", "0");
             policyAgreementStatus = Integer.parseInt(sharedPreferences.getString("userpolicyAgreement", "0"));
@@ -105,9 +114,9 @@ public class SplashScreen extends AppCompatActivity {
                 int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
                 decorView.setSystemUiVisibility(uiOptions);
             }
-            imageViewCustomer = (ImageView) view1.findViewById(R.id.splash_image);
-            textViewCustomer = (TextView) view1.findViewById(R.id.splash_text);
-            relativeLayoutCustomer = (RelativeLayout) view1.findViewById(R.id.rel_lay);
+            imageViewCustomer = view1.findViewById(R.id.splash_image);
+            textViewCustomer = view1.findViewById(R.id.splash_text);
+            relativeLayoutCustomer = view1.findViewById(R.id.rel_lay);
 
 //            Resources res = context.getResources();
 //            DisplayMetrics dm = res.getDisplayMetrics();
@@ -127,16 +136,18 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }
         } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(SplashScreen.this, className, name, errorMsg, errorMsgDetails, errorLine);
+            e.printStackTrace();
         }
 
     }
+
+//    private void saveUserPrefernce(String key, String value) {
+//        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(key, value);
+//        editor.apply();
+//        editor.commit();
+//    }
 
     public void apiCall() {
 

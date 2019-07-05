@@ -54,6 +54,7 @@ public class Globle {
     public static final String status = "1"; //For Success
     public static final String payment_platform = "2"; //(1-web, 2-app)
     public static final String payment_partner = "1"; //(1-paytm, 2-atom)
+    public static DecimalFormat decimalFormat = new DecimalFormat("##,##,##0.00");
 
     //payment_platform = 2 (1-web, 2-app)
     //payment_partner = 1 (1-paytm, 2-atom)
@@ -64,6 +65,7 @@ public class Globle {
         }
         return instance;
     }
+
 
     public static String formatDate(long milliseconds) /* This is your topStory.getTime()*1000 */ {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy' 'HH:mm:ss");
@@ -291,6 +293,5 @@ public class Globle {
         alert.getWindow().getAttributes();
         return builder.create();
     }
-
 
 }

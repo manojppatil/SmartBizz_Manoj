@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.eduvanzapplication">
 
+    <uses-sdk tools:overrideLibrary="com.android.support:appcompat" />
+
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -391,6 +393,92 @@
             android:enabled="true"
             android:exported="true" />
 
+        <!--FriendlyScore-->
+
+        <service
+            android:name="com.FriendlyScoreUI.NetworkSchedulerService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name="com.eduvanzapplication.friendlyscore.ClientActivity"
+            android:label="@string/title_activity_main2"
+            android:parentActivityName="com.eduvanzapplication.friendlyscore.StartActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eduvanzapplication.friendlyscore.StartActivity" />
+
+        </activity>
+
+
+        <activity
+            android:name="com.eduvanzapplication.friendlyscore.instagramhelper.InstagramLoginActivity"
+            android:parentActivityName="com.eduvanzapplication.friendlyscore.ClientActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eduvanzapplication.friendlyscore.ClientActivity" />
+        </activity>
+        <activity
+            android:name="com.eduvanzapplication.friendlyscore.StartActivity"
+            android:label="@string/title_activity_start"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name="com.eduvanzapplication.friendlyscore.LinkedinActivity"
+            android:label=""
+            android:parentActivityName="com.eduvanzapplication.friendlyscore.StartActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_api_key" />
+
+        <activity
+            android:name="com.eduvanzapplication.friendlyscore.AnotherClientActivity" />
+
+        <activity
+            android:name="net.openid.appauth.RedirectUriReceiverActivity"
+            android:parentActivityName="com.eduvanzapplication.friendlyscore.AnotherClientActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eduvanzapplication.friendlyscore.AnotherClientActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="com.eduvanzapplication" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name="net.openid.appauth.AuthorizationManagementActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleTask" />
+        <!--<activity-->
+            <!--android:name="com.FriendlyScoreUI.FormActivity"-->
+            <!--android:screenOrientation="portrait">-->
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+        <!--</activity>-->
+        <activity
+            android:name="com.twitter.sdk.android.core.identity.OAuthActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false" />
     </application>
 
 </manifest>

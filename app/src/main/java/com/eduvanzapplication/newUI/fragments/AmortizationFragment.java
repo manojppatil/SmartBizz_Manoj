@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -88,7 +89,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 
     public static LinearLayout linAmortBtn1, linAmortBtn2, linAmortBtn3, linAmortBtn4, linAmortBtn5, linAmortBtn6,
             linAmortBtn7, linAmortBtn8, linAmortBtn9, linAmortBtn10, linAmortBtn11, linAmortBtn12, linAmortBtn13, linAmortBtn14,
-            linAmortBtn15,linAmortBtn16,linAmortBtn17,linAmortBtn18,linAmortBtn19,linAmortBtn20,linAmortTile;
+            linAmortBtn15, linAmortBtn16, linAmortBtn17, linAmortBtn18, linAmortBtn19, linAmortBtn20, linAmortTile;
     public static CardView card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
             card11, card12, card13, card14, card15, card16, card17, card18, card19, card20,
             card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
@@ -663,28 +664,28 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 //                txtOutstandingDue.setText(" " + String.valueOf(OutstandingDue));
                 txtOutstandingDue.setText(" " + outstanding_amount1);
 
-                txtNextEmiAmount.setText(" "+emi_amount1);
-                if(next_emi_date1.length() > 5) {
+                txtNextEmiAmount.setText(" " + emi_amount1);
+                if (next_emi_date1.length() > 5) {
 
-                     String[] split = next_emi_date1.split(" ");
-                     String day = split[0].toString();
-                     String month = split[1].toString().substring(0,3);
-                     String year = split[2];
-                    txtNextEmiDue.setText(day+" "+month+" "+year);
+                    String[] split = next_emi_date1.split(" ");
+                    String day = split[0].toString();
+                    String month = split[1].toString().substring(0, 3);
+                    String year = split[2];
+                    txtNextEmiDue.setText(day + " " + month + " " + year);
 
-                }else{
+                } else {
                     txtNextEmiDue.setText(next_emi_date1);
                 }
 
-                if(emi_end_date1.length() > 5) {
+                if (emi_end_date1.length() > 5) {
 
                     String[] split = emi_end_date1.split(" ");
                     String day = split[0].toString();
-                    String month = split[1].toString().substring(0,3);
+                    String month = split[1].toString().substring(0, 3);
                     String year = split[2];
-                    txtNextEmiEndDate.setText(day+" "+month+" "+year);
+                    txtNextEmiEndDate.setText(day + " " + month + " " + year);
 
-                }else{
+                } else {
                     txtNextEmiEndDate.setText(emi_end_date1);
                 }
 
@@ -1435,8 +1436,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             txtEmiNo100.setText(mLoanEmisArrayList.get(j).emi_no);
                             card100.setTag(j);
                             break;
-
-
                     }
                 }
 
@@ -1449,13 +1448,13 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 
                         txtEmiNo.setText("0" + mLoanEmisArrayList.get(k).emi_no);
                         txtEmiAmount.setText(mLoanEmisArrayList.get(k).emi_amount);
-                        txtDueBy.setText(mLoanEmisArrayList.get(k).proposed_payment_date);
-                        txtPaymentDate.setText(mLoanEmisArrayList.get(k).actual_payment_date);
+                        txtDueBy.setText(Globle.dateFormater5(mLoanEmisArrayList.get(k).proposed_payment_date));
+                        txtPaymentDate.setText(Globle.dateFormater5(mLoanEmisArrayList.get(k).actual_payment_date));
                         txtPaymentStatus.setText(" " + mLoanEmisArrayList.get(k).statusMessage);
 
                         if (mLoanEmisArrayList.get(k).status.equals("0")) {
 
-                            txtBtnText.setText(" " + "Pre Pay");
+                            txtBtnText.setText(" " + "Pay Now");
                             txtPaymentStatus.setTextColor(Color.parseColor("#ee415e"));
                             imgpaymentStatus.setImageResource(R.drawable.ic_exclamation_circle);
 
@@ -1751,6 +1750,18 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                 case R.id.linPayBtn:
                     if (txtBtnText.getText().toString().contains("EMI History")) {
 
+
+                        if (txtEmiAmount.getText().toString().equals("0")) {
+
+                            linPayBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                            linPayBtn.setClickable(false);
+                        } else {
+
+                            linPayBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
+                            linPayBtn.setClickable(true);
+                        }
+
+
                         try {
                             String url = MainActivity.mainUrl + "dashboard/getEmiTransactionDetails";
                             Map<String, String> params = new HashMap<String, String>();
@@ -1772,8 +1783,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                     break;
 
                 case R.id.card1:
-                    selectedAmort((Integer) card1.getTag(),card1);
-
+                    selectedAmort((Integer) card1.getTag(), card1);
                     break;
                 case R.id.card2:
                     selectedAmort((Integer) card2.getTag(), card2);
@@ -2186,34 +2196,56 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
 
     private void selectedAmort(int pos, CardView CheckedCard) {
 
-        if (linAmortTile.getVisibility() != View.VISIBLE) {
-            linAmortTile.setVisibility(View.VISIBLE);
+        if (linAmortTile.getVisibility() != VISIBLE) {
+            linAmortTile.setVisibility(VISIBLE);
         }
 
-        if(mLoanEmisArrayList.get(pos).emi_no.length()>1){
+        if (mLoanEmisArrayList.get(pos).emi_no.length() > 1) {
             txtEmiNo.setText(mLoanEmisArrayList.get(pos).emi_no);
         } else {
-        txtEmiNo.setText("0" + mLoanEmisArrayList.get(pos).emi_no);
+            txtEmiNo.setText("0" + mLoanEmisArrayList.get(pos).emi_no);
         }
         txtEmiAmount.setText(mLoanEmisArrayList.get(pos).emi_amount);
-        txtDueBy.setText(mLoanEmisArrayList.get(pos).proposed_payment_date);
-        txtPaymentDate.setText(mLoanEmisArrayList.get(pos).actual_payment_date);
+        txtDueBy.setText(Globle.dateFormater5(mLoanEmisArrayList.get(pos).proposed_payment_date));
+        txtPaymentDate.setText(Globle.dateFormater5(mLoanEmisArrayList.get(pos).actual_payment_date));
         txtPaymentStatus.setText(" " + mLoanEmisArrayList.get(pos).statusMessage);
         String msg = (String) txtPaymentStatus.getText();
 
         if (mLoanEmisArrayList.get(pos).status.equals("0")) {
 
-            txtBtnText.setText(" " + "Pre Pay");
+            txtBtnText.setText(" " + "Pay Now");
             txtPaymentStatus.setTextColor(Color.parseColor("#ee415e"));
+            //  linPayBtn.setTextColor(Color.parseColor("#ee415e"));
+            linPayBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
+            linPayBtn.setClickable(true);
+
             imgpaymentStatus.setImageResource(R.drawable.ic_exclamation_circle);
-            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorRed), android.graphics.PorterDuff.Mode.SRC_IN);
+            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorRed), PorterDuff.Mode.SRC_IN);
 
         } else {
 
             txtBtnText.setText(" " + "EMI History");
+            //grey and disable
+
+            //  linPayBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+
+
             txtPaymentStatus.setTextColor(Color.parseColor("#1ac31a"));
             imgpaymentStatus.setImageResource(R.drawable.ic_check_circle_green);
-            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorGreen), android.graphics.PorterDuff.Mode.SRC_IN);
+            imgpaymentStatus.setColorFilter(ContextCompat.getColor(context, colorGreen), PorterDuff.Mode.SRC_IN);
+
+            // linPayBtn.setEnabled(false);
+
+            if (txtEmiAmount.getText().toString().equals("0")) {
+
+                linPayBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                linPayBtn.setClickable(false);
+            } else {
+                linPayBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_red_filled));
+                linPayBtn.setClickable(true);
+
+            }
+
 
         }
         linPayBtn.setTag(mLoanEmisArrayList.get(pos).loan_emi_id);

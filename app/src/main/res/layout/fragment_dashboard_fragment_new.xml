@@ -228,8 +228,7 @@
 
                 <RelativeLayout
                     android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:id="@+id/linFriendlyScore"
@@ -286,7 +285,8 @@
 
                 <RelativeLayout
                     android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_7sdp">
 
                     <LinearLayout
                         android:id="@+id/linStartNew"
@@ -347,7 +347,7 @@
                 <RelativeLayout
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp">
+                    android:layout_marginStart="@dimen/_7sdp">
 
                     <LinearLayout
                         android:id="@+id/linEMICalculator"
