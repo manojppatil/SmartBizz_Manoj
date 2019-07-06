@@ -43,6 +43,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -107,6 +109,10 @@ public class UploadDocumentFragment extends Fragment {
     public static Animation expandAnimationPersonal, collapseanimationPersonal;
     public static Animation expandAnimationIdentity, collapseAnimationIdentity;
     public static Animation expanAnimationCourse, collapseAnimationCourse;
+    public static ImageButton btnNextUploadDetail;
+
+    public static onUploadFragmentInteractionListener mListener;
+
 
     ProgressDialog dialog;
 
@@ -184,6 +190,9 @@ public class UploadDocumentFragment extends Fragment {
         linKycDocToggle = view.findViewById(R.id.linKycDocToggle);
         linPhotoToggle = view.findViewById(R.id.linPhotoToggle);
 
+        btnNextUploadDetail = view.findViewById(R.id.btnNextUploadDetail);
+
+
         ivcolorphotogratitle= view.findViewById(R.id.ivcolorphotogratitle);
         ivkyctitlecheck= view.findViewById(R.id.ivkyctitlecheck);
         linAddtionalDocToggle = view.findViewById(R.id.linAddtionalDocToggle);
@@ -223,6 +232,18 @@ public class UploadDocumentFragment extends Fragment {
         spDocument = view.findViewById(R.id.spDocument);
         progressBar = view.findViewById(R.id.progressBar_docupload);
         selecteddocID = "";
+
+
+
+        btnNextUploadDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+       mListener.onUploadInfoFragment(true,3);
+            }
+        });
+
+
+
         try {
             //============================KYC profile image========================
             profileImage = view.findViewById(R.id.linPhoto);
@@ -3679,6 +3700,29 @@ public class UploadDocumentFragment extends Fragment {
         }
 
     }
+
+    public interface onUploadFragmentInteractionListener {
+        void onUploadInfoFragment(boolean valid, int next);
+
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof UploadDocumentFragment.onUploadFragmentInteractionListener) {
+            mListener = (UploadDocumentFragment.onUploadFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement onUploadFragmentInteractionListener");
+        }
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
 
     private void getUploadDocumentsApiCall() {
         /** API CALL **/

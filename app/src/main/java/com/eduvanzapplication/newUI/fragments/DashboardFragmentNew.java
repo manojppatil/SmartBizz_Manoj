@@ -615,8 +615,6 @@ public class DashboardFragmentNew extends Fragment  {
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
-
     }
-
 
 }

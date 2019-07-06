@@ -21,7 +21,7 @@ public class MainActivity extends Application {
    public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
 
 //    public static String mainUrl = "http://192.168.1.63/eduvanzapi/"; //Sheetal
-//    public static String mainUrl = "http://192.168.1.19/eduvanzapi/"; //Dharam
+//    public static String mainUrl = "http://192.168.1.36/eduvanzapi/"; //Sharad
 //    public static String mainUrl = "http://192.168.1.19/eduvanzapi/"; //Dharam
 //    public static String mainUrl = "http://192.168.0.115/eduvanzapi/"; //Sachin
 //    public static String mainUrl = "http://192.168.1.78/eduvanzapi/"; //Sachin
@@ -46,7 +46,6 @@ public class MainActivity extends Application {
         FontsOverride.setDefaultFont(getApplicationContext(), "NORMAL", "fonts/sourcesanspro_regular.ttf");//Regular
         FontsOverride.setDefaultFont(getApplicationContext(), "SANS", "fonts/sourcesanspro_light.ttf");//Light
         FontsOverride.setDefaultFont(getApplicationContext(), "SERIF", "fonts/sourcesanspro_semibold.ttf");//Semibold
-
     }
 
     public void generateHashkey(){

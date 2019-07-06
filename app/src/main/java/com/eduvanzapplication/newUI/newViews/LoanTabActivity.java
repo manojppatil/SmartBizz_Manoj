@@ -55,7 +55,7 @@ import static android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
 
 
 public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
-        DetailedInfoFragment.onDetailedInfoFragmentInteractionListener {
+        DetailedInfoFragment.onDetailedInfoFragmentInteractionListener,UploadDocumentFragment.onUploadFragmentInteractionListener,PostApprovalDocFragment.onPostFragmentInteractionListener {
 
     private TabLayout tabLayout;
     private LinearLayout linDashBoard;
@@ -528,8 +528,19 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     }
 
     @Override
+    public void onUploadInfoFragment(boolean valid, int next) {
+        viewPager.setCurrentItem(next);
+    }
+
+    @Override
     public void onFragmentInteraction(boolean valid, int next) {
         viewPager.setCurrentItem(next);
+    }
+
+    @Override
+    public void onPostApprovalFragment(boolean valid, int next) {
+        viewPager.setCurrentItem(next);
+
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

@@ -3599,6 +3599,29 @@ public class DetailedInfoFragment extends Fragment {
                 setViewsEnabled(false);
                 LoanTabActivity.isDetailedInfoEdit = false;
                 linEditDetailedInfo.setVisibility(View.VISIBLE);
+
+                if (txtBtnEditDtl.getText().toString().toLowerCase().contains("cancel")) {
+
+                    txtBtnEditDtl.setText("Edit");
+
+                    Drawable bg;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_pencil_alt, null);
+                        ivBtnEditDtl.setColorFilter(context.getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+                    } else {
+                        bg = ContextCompat.getDrawable(context, R.drawable.ic_pencil_alt);
+                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.white));
+                    }
+                    ivBtnEditDtl.setImageDrawable(bg);
+                    linEditDetailedInfo.setBackground(context.getResources().getDrawable(R.drawable.border_circular_red_filled));
+
+                    indicateValidationTextdefault(txtResidentialToggle, false);
+                    indicateValidationTextdefault(txtProfessionalToggle, false);
+
+                    indicateValidationIcondefault(ivResidentialStatus, ivResidentialTitle, true);
+                    indicateValidationIcondefault(ivProfessionalStatus, ivProfessionalTitle, true);
+                    //checkAllFields();
+                }
                 mListener.onDetailedInfoFragment(true, 2);
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             } else {
@@ -3620,13 +3643,3 @@ public class DetailedInfoFragment extends Fragment {
     }
 
 }
-
-//2019-07-04 18:11:11.055 5459-5459/com.eduvanzapplication D/DETAILEDINFO:
-// PARAMS{permanent_address_state=14, office_address_country=1, current_employment_duration=3,
-// current_address_pin=676767, is_borrower_current_address_same_as=1, current_landmark=hshs,
-// permanent_address_country=1, employer_name=eduvanz, permanent_address=hshs, office_address_city=122,
-// permanent_landmark=hzhz, permanent_address_pin=676767, office_address_pin=646466,
-// is_borrower_permanent_address_same_as=1, office_landmark=hsjs, lead_id=13842, annual_income=64646,
-// current_address_city=632, permanent_address_city=632, profession=1, current_address_rent=5000,
-// current_residence_type=3, current_address_country=1, current_address_state=14, current_address=hshs,
-// office_address_state=2, office_address=hshs, applicant_id=A190703004, current_address_stay_duration=4, employer_type=0}

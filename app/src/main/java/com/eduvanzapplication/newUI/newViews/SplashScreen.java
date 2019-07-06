@@ -94,7 +94,7 @@ public class SplashScreen extends AppCompatActivity {
 //            saveUserPrefernce("user_img", "");
 //            saveUserPrefernce("email", "abc@gmail.com");
 //            saveUserPrefernce("auth_token", "c13d962aa5d7d0e490131614ccebb566");
-//            saveUserPrefernce("student_id", "1290");
+//            saveUserPrefernce("student_id", "3446");
 //            saveUserPrefernce("userpolicyAgreement", "1");
 //            sharedPref.setLoginDone(getApplicationContext(), true);
 
@@ -141,13 +141,13 @@ public class SplashScreen extends AppCompatActivity {
 
     }
 
-//    private void saveUserPrefernce(String key, String value) {
-//        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString(key, value);
-//        editor.apply();
-//        editor.commit();
-//    }
+    private void saveUserPrefernce(String key, String value) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.apply();
+        editor.commit();
+    }
 
     public void apiCall() {
 

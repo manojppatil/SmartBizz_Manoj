@@ -109,6 +109,9 @@ public class PostApprovalDocFragment extends Fragment {
 
     public static View viewDiag;
     public static ProgressBar progressBarDiag;
+
+    public static onPostFragmentInteractionListener mListener;
+
     //Manual Diag
     public static LinearLayout linClose, linDownload, linUpload;
     //OTP Diag
@@ -160,6 +163,8 @@ public class PostApprovalDocFragment extends Fragment {
     public static ImageView ivProcessingFee, ivEMIFee, ivAdavnceFeeIcon, ivProcessingFeesicon;
     public static RelativeLayout relExpandCollapse;
     public static ImageButton btnExpandCollapse;
+    public static ImageButton btnNextPostApprovalDoc;
+
 
 
     public static ImageView ivLeadDisbursed, ivAggSigned;
@@ -296,6 +301,8 @@ public class PostApprovalDocFragment extends Fragment {
         txtTbMoratoriumDuration = view.findViewById(R.id.txtTbMoratoriumDuration);
         txtTbEMIDuringMoratorium = view.findViewById(R.id.txtTbEMIDuringMoratorium);
         txtTbMoratoriumType = view.findViewById(R.id.txtTbMoratoriumType);
+        btnNextPostApprovalDoc = view.findViewById(R.id.btnNextPostApprovalDoc);
+
 
         txtTbRequestedLoanAmount = view.findViewById(id.txtTbRequestedLoanAmount);
         //  txtTbOfferedLoanAmount = view.findViewById(id.txtTbOfferedLoanAmount);
@@ -370,6 +377,13 @@ public class PostApprovalDocFragment extends Fragment {
                 lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 manualSignInDialog();
+            }
+        });
+
+        btnNextPostApprovalDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onPostApprovalFragment(true,4);
             }
         });
 
@@ -1228,7 +1242,7 @@ public class PostApprovalDocFragment extends Fragment {
 //                        }
                         try {
                             if (emi_type.equals("0") && is_moratorium.equals("1") && Integer.parseInt(moratorium_months) > 0) {
-                                int grossTenure = Integer.parseInt(tenure) * Integer.parseInt(moratorium_months);
+                                int grossTenure = Integer.parseInt(tenure) - Integer.parseInt(moratorium_months);
                                 txtTbGrossLoanTenure.setText(" " + grossTenure);
                             } else {
                                 txtTbGrossLoanTenure.setText(" " + Integer.parseInt(tenure));
@@ -2375,5 +2389,28 @@ public class PostApprovalDocFragment extends Fragment {
 
     }
 
+
+
+
+    public interface onPostFragmentInteractionListener {
+        void onPostApprovalFragment(boolean valid, int next);
+
+
 }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof PostApprovalDocFragment.onPostFragmentInteractionListener) {
+            mListener = (PostApprovalDocFragment.onPostFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement onUploadFragmentInteractionListener");
+        }
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+}

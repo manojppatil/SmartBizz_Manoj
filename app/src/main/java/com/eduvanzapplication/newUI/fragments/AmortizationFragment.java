@@ -493,7 +493,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         card79.setOnClickListener(this);
         card80.setOnClickListener(this);
 
-
         card81.setOnClickListener(this);
         card82.setOnClickListener(this);
         card83.setOnClickListener(this);
@@ -504,7 +503,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
         card88.setOnClickListener(this);
         card89.setOnClickListener(this);
         card90.setOnClickListener(this);
-
 
         card91.setOnClickListener(this);
         card92.setOnClickListener(this);
@@ -563,7 +561,7 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
     }
 
     public void setAmortDetails(JSONObject jsonDataO) {
-        Log.e(TAG, "setProfileDashbBoardStatus: " + jsonDataO);
+        Log.e(TAG, "setAmortData: " + jsonDataO);
         try {
 //            progressDialog.dismiss();
             mLoanEmisArrayList = new ArrayList<>();
