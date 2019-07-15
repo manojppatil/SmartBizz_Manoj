@@ -371,6 +371,9 @@ public class DashboardActivity extends AppCompatActivity
         else if (id == R.id.nav_disclaimer) {
             Intent intent = new Intent(DashboardActivity.this, WebViewDisclaimer.class);
             startActivity(intent);
+        }  else if (id == R.id.nav_emicalculator) {
+            Intent intent = new Intent(context,EmiCalculatorActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_termsandconditions) {
             Intent intent = new Intent(DashboardActivity.this, WebViewTermsNCondition.class);
             startActivity(intent);

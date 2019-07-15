@@ -142,8 +142,8 @@ public class DashboardFragmentNew extends Fragment  {
             linFriendlyScore = view.findViewById(R.id.linFriendlyScore);
             linStartNew = view.findViewById(R.id.linStartNew);
             ivStartNewBtn = view.findViewById(R.id.ivStartNewBtn);
-            linEMICalculator = view.findViewById(R.id.linEMICalculator);
-            ivEMICalculatorBtn = view.findViewById(R.id.ivEMICalculatorBtn);
+            /*linEMICalculator = view.findViewById(R.id.linEMICalculator);
+            ivEMICalculatorBtn = view.findViewById(R.id.ivEMICalculatorBtn);*/
             txtCallUs = view.findViewById(R.id.txtCallUs);
             txtWhatsAppUs = view.findViewById(R.id.txtWhatsAppUs);
             txtEmailUs = view.findViewById(R.id.txtEmailUs);
@@ -321,8 +321,8 @@ public class DashboardFragmentNew extends Fragment  {
         txtCallUs.setOnClickListener(callUsListener);
         txtWhatsAppUs.setOnClickListener(whatsAppUsListener);
         txtEmailUs.setOnClickListener(emailUsListener);
-        linEMICalculator.setOnClickListener(emiClkListnr);
-        ivEMICalculatorBtn.setOnClickListener(emiClkListnr);
+      //  linEMICalculator.setOnClickListener(emiClkListnr);
+      //  ivEMICalculatorBtn.setOnClickListener(emiClkListnr);
 
         getDashboardDetails();
         onResume();

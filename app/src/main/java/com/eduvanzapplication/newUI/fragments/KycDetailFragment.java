@@ -64,6 +64,7 @@ import java.util.Map;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.eduvanzapplication.R.color.textcolordark;
 import static com.eduvanzapplication.newUI.MainApplication.TAG;
 import static com.eduvanzapplication.newUI.fragments.DashboardFragmentNew.isLeadReload;
 
@@ -178,8 +179,6 @@ public class KycDetailFragment extends Fragment {
         tvloanamountTitle = view.findViewById(R.id.tvloanamountTitle);
 
 
-
-
         /*--------------------------------------------------------------------*/
 
         ivPersonalTitle = view.findViewById(R.id.ivPersonalTitle);
@@ -195,6 +194,7 @@ public class KycDetailFragment extends Fragment {
         txtIdentityToggle = view.findViewById(R.id.txtIdentityToggle);
         linPersonalToggle = view.findViewById(R.id.linPersonalToggle);
         linIdentityToggle = view.findViewById(R.id.linIdentityToggle);
+
         linCourseToggle = view.findViewById(R.id.linCourseToggle);
         relIdentityBlock = view.findViewById(R.id.relIdentityBlock);
         txtCourseToggle = view.findViewById(R.id.txtCourseToggle);

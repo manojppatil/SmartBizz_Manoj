@@ -41,6 +41,12 @@
             android:id="@+id/nav_disclaimer"
             android:icon="@drawable/ic_borrower_documents_pending"
             android:title="@string/title_disclaimer" />
+
+        <item
+            android:id="@+id/nav_emicalculator"
+            android:icon="@drawable/ic_nav_emi_calc"
+            android:title="@string/title_emi_calculator"
+            />
         <item
             android:id="@+id/nav_termsandconditions"
             android:icon="@drawable/ic_nav_legal_terms_conditions"
