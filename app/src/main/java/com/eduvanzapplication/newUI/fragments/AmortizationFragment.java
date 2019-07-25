@@ -1639,6 +1639,13 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                                 Log.e(MainActivity.TAG, "onActivityResult: " + "Transaction Successful!");
                                 /** API CALL **/
                                 try {
+                                    //0 = {HashMap$Node@8793} "STATUS" -> "TXN_SUCCESS"
+                                    //1 = {HashMap$Node@8794} "loan_emi_id" -> "23523"
+                                    //2 = {HashMap$Node@8795} "paymentOption" -> "1"
+                                    //3 = {HashMap$Node@8796} "payment_platform" -> "2"
+                                    //4 = {HashMap$Node@8797} "TXNAMOUNT" -> "1.00"
+                                    //5 = {HashMap$Node@8798} "TXNID" -> "20190717111212800110168973179354942"
+                                    //6 = {HashMap$Node@8799} "payment_partner" -> "1"
 //                                        String ipaddress = Utils.getIPAddress(true);
                                     String url = MainActivity.mainUrl + "epayment/studentEmiReceive";
                                     Map<String, String> params = new HashMap<String, String>();
@@ -1759,7 +1766,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             linPayBtn.setClickable(true);
                         }
 
-
                         try {
                             String url = MainActivity.mainUrl + "dashboard/getEmiTransactionDetails";
                             Map<String, String> params = new HashMap<String, String>();
@@ -1774,7 +1780,6 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                             e.printStackTrace();
                         }
                     } else {
-
                         makePayment(linPayBtn.getTag().toString(), txtEmiAmount.getText().toString());
 
                     }

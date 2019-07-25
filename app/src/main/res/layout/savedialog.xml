@@ -38,11 +38,11 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/_5sdp">
 
-                <ImageView
-                    android:id="@+id/ivIndicator"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    app:srcCompat="@drawable/eduvanz_logo_new" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/ivIndicator"-->
+                    <!--android:layout_width="@dimen/_20sdp"-->
+                    <!--android:layout_height="@dimen/_20sdp"-->
+                    <!--app:srcCompat="@drawable/eduvanz_logo_new" />-->
 
             </LinearLayout>
 

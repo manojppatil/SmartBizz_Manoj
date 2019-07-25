@@ -391,7 +391,7 @@ public class DashboardActivity extends AppCompatActivity
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
-                String shareMessage= "\nLet me recommend you this application\n\n";
+                String shareMessage= "\nYou have been refered to Eduvanz, an NBFC that provides loans for all kinds of skill building and education courses.\n\n\n";
 //                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
 
                 shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";

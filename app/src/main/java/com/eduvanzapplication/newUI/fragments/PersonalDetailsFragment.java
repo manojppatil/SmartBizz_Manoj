@@ -3,6 +3,7 @@ package com.eduvanzapplication.newUI.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -106,6 +107,8 @@ public class PersonalDetailsFragment extends Fragment {
     public static ImageView ivMale, ivFemale, ivOther;
     public static View viewMale, viewFemale, viewOther;
     public static TextView txtMale, txtFemale, txtOther;
+
+    DatePickerDialog dpd;
 
     LinearLayout linPan, linAadhar, linClose;
     public static Context context;
@@ -367,8 +370,25 @@ public class PersonalDetailsFragment extends Fragment {
             public void onClick(View v) {
 
                 Calendar calendar = Calendar.getInstance();
+                int day=calendar.get(Calendar.DAY_OF_MONTH);
+                int month=calendar.get(Calendar.MONTH);
+              int year=calendar.get((Calendar.YEAR));
+              dpd=new DatePickerDialog( getActivity(),new DatePickerDialog.OnDateSetListener() {
+                   @Override
+                   public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                DatePickerPopWin datePickerPopWin = new DatePickerPopWin.Builder(getActivity(), new DatePickerPopWin.OnDatePickedListener() {
+                       if (isProfileEnabled) {
+                           NewLeadActivity.dob=dayOfMonth+"-"+(month+1)+"-"+(year);
+                           txtDOB.setText(NewLeadActivity.dob);
+                           checkAllFields();
+                       }
+
+                   }
+               },year-18,month,day);
+
+
+               dpd.show();
+             /*   DatePickerPopWin datePickerPopWin = new DatePickerPopWin.Builder(getActivity(), new DatePickerPopWin.OnDatePickedListener() {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
 //                        Toast.makeText(getContext(), dateDesc, Toast.LENGTH_SHORT).show();
@@ -390,7 +410,7 @@ public class PersonalDetailsFragment extends Fragment {
                         .dateChose("2000-01-01") // date chose when init popwindow
                         .build();
 //                datePickerPopWin.showPopWin(getActivity());
-                datePickerPopWin.showAsDropDown(linDobBtn);
+                datePickerPopWin.showAsDropDown(linDobBtn);*/
 
 //                Calendar calendar = Calendar.getInstance();
 //                calendar.set(Calendar.YEAR,calendar.get(Calendar.YEAR)-18);
@@ -1113,7 +1133,6 @@ public class PersonalDetailsFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
 
             return serverResponseCode;
         }

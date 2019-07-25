@@ -375,8 +375,10 @@ To gain information about your interest and likings to generate your credit scor
     <string name="click">Click</string>
     <string name="Proceed">\"Proceed\"</string>
     <string name="to_complete">to complete the process</string>
-    <string name="fs_msg"><![CDATA[Check your \'Friendly Score\' to ensure a Quick & Smooth Loan Process]]></string>
-    <string name="start_new_msg">Apply Now for an Instant Loan</string>
+    <!--<string name="fs_msg"><![CDATA[Check your \'Friendly Score\' to ensure a Quick & Smooth Loan Process]]></string>-->
+    <string name="fs_msg"><![CDATA[Use your social media to instantly improve your credit rating & get better rates on Eduvanz loan]]></string>
+    <!--<string name="start_new_msg">Apply Now for an Instant Loan</string>-->
+    <string name="start_new_msg">Apply for a new loan</string>
     <string name="emi_cal_msg">Calculate the approx EMI amount, you need to pay</string>
     <string name="call_us_s">\t Call Us</string>
     <string name="whatsapp_us">\t WhatsApp Us</string>

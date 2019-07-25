@@ -1,6 +1,7 @@
 package com.eduvanzapplication.newUI.newViews;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +37,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.digio.in.esign2sdk.Digio;
+import com.digio.in.esign2sdk.DigioConfig;
+import com.digio.in.esign2sdk.DigioEnvironment;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.CustomTypefaceSpan;
 import com.eduvanzapplication.LocationService;
@@ -62,7 +66,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     public static ViewPager viewPager;
     public static String lead_id = "", student_id = "";
     Context context;
-    public AppCompatActivity mActivity;
+    public  static AppCompatActivity mActivity;
     private final int REQUEST_LOCATION_PERMISSION = 1;
     SharedPreferences sharedPreferences;
     public static boolean isKycEdit;
@@ -570,5 +574,37 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    public static void initDigio(String documentID, String email){
+
+        final Digio digio = new Digio();
+        DigioConfig digioConfig = new DigioConfig();
+        digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
+        digioConfig.setEnvironment(DigioEnvironment.PRODUCTION);   //Stage is sandbox
+
+        try {
+            digio.init(mActivity, digioConfig);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            digio.esign(documentID, email);
+        } catch (Exception e) {
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+        }
+    }
+
+
+    public void onSigningSuccess(String documentId,String message) {
+        Log.e(MainActivity.TAG, "onSigningSuccess2: ");
+//        Toast.makeText(context, documentId +" " + message, Toast.LENGTH_SHORT).show();
+        PostApprovalDocFragment.digioSuccess(documentId);//DID180802180658447Q6OOLIITSFR2DJ
+    }
+
+    public void onSigningFailure(String documentId, int code, String response) {
+        Log.e(MainActivity.TAG, "onSigningFailure: ");
+        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+        PostApprovalDocFragment.digioFailure(documentId, code, response);
     }
 }

@@ -12,12 +12,6 @@
         android:orientation="vertical"
         android:padding="@dimen/_10sdp">
 
-        <!--<android.support.v7.widget.CardView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/_180sdp"-->
-            <!--android:layout_marginTop="@dimen/_30sdp"-->
-            <!--app:cardCornerRadius="@dimen/_3sdp">-->
-
             <RelativeLayout
                 android:id="@+id/rel1"
                 android:layout_width="match_parent"
@@ -35,9 +29,7 @@
                 android:background="@drawable/tenurefail"
                 android:visibility="gone">
 
-
             </RelativeLayout>
-        <!--</android.support.v7.widget.CardView>-->
 
         <TextView
             android:id="@+id/txtTenureTitle"

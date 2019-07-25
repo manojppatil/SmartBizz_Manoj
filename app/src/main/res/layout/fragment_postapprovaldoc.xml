@@ -721,7 +721,7 @@
                                 android:layout_marginRight="@dimen/_10sdp"
                                 android:orientation="horizontal"
                                 android:visibility="visible"
-                                android:weightSum="3.2">
+                                android:weightSum="3">
 
                                 <LinearLayout
                                     android:id="@+id/linManualBtn"
@@ -749,7 +749,6 @@
                                         android:background="@color/textcolordark" />
 
                                     <TextView
-                                        android:id="@+id/txtMale"
                                         style="@style/TextViewRadioStyle"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -763,12 +762,12 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/_2sdp"
-                                    android:layout_weight="1.2"
+                                    android:layout_weight="1"
                                     android:background="@drawable/border_circular"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal"
                                     android:padding="@dimen/_5sdp"
-                                    android:visibility="gone">
+                                    android:visibility="visible">
 
                                     <ImageView
                                         android:layout_width="@dimen/_15sdp"
@@ -785,12 +784,11 @@
                                         android:background="@color/textcolordark" />
 
                                     <TextView
-                                        android:id="@+id/txtFemale"
                                         style="@style/TextViewRadioStyle"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:maxLines="1"
-                                        android:text="e-Signing"
+                                        android:text="e-Sign"
                                         android:textColor="@color/textcolordark" />
                                 </LinearLayout>
 

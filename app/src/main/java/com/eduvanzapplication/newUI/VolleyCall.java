@@ -282,7 +282,35 @@ public class VolleyCall {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("instituteId")) {
+        }else if (screen.equalsIgnoreCase("getAddressFromPincode")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((CurrentAddressFragment) mfragment).setAddressFromPincode(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (screen.equalsIgnoreCase("getAddressFromPincodeKyc")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((KycDetailFragment) mfragment).setAddressFromPincodeKyc(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("getAddressFromPincodeDtl")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((DetailedInfoFragment) mfragment).setAddressFromPincodeDtl(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (screen.equalsIgnoreCase("instituteId")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((CourseDetailsActivity) mActivity).instituteName(jsonDataO);
@@ -961,7 +989,7 @@ public class VolleyCall {
         } else if (screen.equalsIgnoreCase("onSuccessfulRegisterStudentESignCase")) {
             try {
                 jsonDataO = new JSONObject(s);
-                //LoanApplicationFragment_4 mfragment).onSuccessfulRegisterStudentESignCase(jsonDataO);
+                ((PostApprovalDocFragment) mfragment).onSuccessfulRegisterStudentESignCase(jsonDataO);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e) {

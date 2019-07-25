@@ -301,7 +301,7 @@
                                         android:layout_toRightOf="@+id/linResidentType"
                                         android:layout_marginTop="@dimen/_6sdp"
                                         android:orientation="vertical"
-                                        android:visibility="visible">
+                                        android:visibility="gone">
 
                                         <TextView
                                             android:id="@+id/txtRent"

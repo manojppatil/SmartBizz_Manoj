@@ -68,7 +68,12 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
         linProceedTenure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveTenureApiCall();
+
+                    if(SLA.equals("0")) {
+                        saveTenureApiCall();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Please select tenure", Toast.LENGTH_SHORT).show();
+                    }
             }
         });
     }
@@ -153,7 +158,6 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             progressDialog.show();
             String url = MainActivity.mainUrl + "dashboard/getTenureList";
             Map<String, String> params = new HashMap<String, String>();
-//            params.put("lead_id", "588");
             params.put("lead_id", NewLeadActivity.leadId);
             if (!Globle.isNetworkAvailable(getApplicationContext())) {
                 Toast.makeText(TenureSelectionActivity.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
@@ -227,13 +231,7 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             }
         } catch (Exception e) {
             progressDialog.dismiss();
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(TenureSelectionActivity.this, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -242,7 +240,6 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
         switch (id) {
 
             case R.id.rbrequested:
-
                 requestedAdapter.selectedItem();
                 requestedtenure = horizontalList.get(position).tenure;
                 requestedroi = horizontalList.get(position).roi;

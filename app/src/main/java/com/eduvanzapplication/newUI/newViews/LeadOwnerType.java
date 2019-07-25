@@ -347,3 +347,28 @@ public class LeadOwnerType extends AppCompatActivity {
 
     }
 }
+
+// Process: com.eduvanzapplication, PID: 29746
+//    android.content.ActivityNotFoundException: Unable to find explicit activity class {com.eduvanzapplication/com.FriendlyScoreUI.FMFeedbackView}; have you declared this activity in your AndroidManifest.xml?
+//        at android.app.Instrumentation.checkStartActivityResult(Instrumentation.java:2012)
+//        at android.app.Instrumentation.execStartActivity(Instrumentation.java:1675)
+//        at android.app.Activity.startActivityForResult(Activity.java:4590)
+//        at android.support.v4.app.FragmentActivity.startActivityForResult(FragmentActivity.java:767)
+//        at android.support.v4.app.ActivityCompat.startActivityForResult(ActivityCompat.java:234)
+//        at android.support.v4.app.FragmentActivity.startActivityFromFragment(FragmentActivity.java:886)
+//        at android.support.v4.app.FragmentActivity$HostCallbacks.onStartActivityFromFragment(FragmentActivity.java:995)
+//        at android.support.v4.app.Fragment.startActivityForResult(Fragment.java:1103)
+//        at android.support.v4.app.Fragment.startActivityForResult(Fragment.java:1092)
+//        at com.FriendlyScoreUI.FinancialMarkersFragment.startFeedbackView(FinancialMarkersFragment.java:479)
+//        at com.FriendlyScoreUI.FinancialMarkersFragment$1.onClick(FinancialMarkersFragment.java:453)
+//        at android.view.View.performClick(View.java:6605)
+//        at android.view.View.performClickInternal(View.java:6582)
+//        at android.view.View.access$3100(View.java:778)
+//        at android.view.View$PerformClick.run(View.java:25897)
+//        at android.os.Handler.handleCallback(Handler.java:873)
+//        at android.os.Handler.dispatchMessage(Handler.java:99)
+//        at android.os.Looper.loop(Looper.java:193)
+//        at android.app.ActivityThread.main(ActivityThread.java:6692)
+//        at java.lang.reflect.Method.invoke(Native Method)
+//        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:493)
+//        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:858)

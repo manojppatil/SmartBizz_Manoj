@@ -90,11 +90,11 @@ public class SplashScreen extends AppCompatActivity {
 
 //            saveUserPrefernce("name", "");
 //            saveUserPrefernce("otp_done", "1");
-//            saveUserPrefernce("mobile_no", "9898989898");
+//            saveUserPrefernce("mobile_no", "8830422294");
 //            saveUserPrefernce("user_img", "");
-//            saveUserPrefernce("email", "abc@gmail.com");
-//            saveUserPrefernce("auth_token", "c13d962aa5d7d0e490131614ccebb566");
-//            saveUserPrefernce("student_id", "3446");
+//            saveUserPrefernce("email", "sharadargade7@gmail.com");
+//            saveUserPrefernce("auth_token", "edc2d3029bcb36a6b76fa2c046b3721b");
+//            saveUserPrefernce("student_id", "3335");
 //            saveUserPrefernce("userpolicyAgreement", "1");
 //            sharedPref.setLoginDone(getApplicationContext(), true);
 

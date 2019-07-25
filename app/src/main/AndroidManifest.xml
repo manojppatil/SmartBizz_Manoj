@@ -234,9 +234,11 @@
         <activity
             android:name=".newUI.webviews.WebViewInterestRatePolicy"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.digio.in.esignsdk.DigioEsignActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <activity android:name="com.digio.in.esign2sdk.DigioEsignActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+        </activity>
+
         <activity
             android:name=".newUI.newViews.TermsAndCondition"
             android:screenOrientation="portrait" />
@@ -442,6 +444,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_api_key" />
+
+        <activity
+            android:name="com.FriendlyScoreUI.FMFeedbackView" />
 
         <activity
             android:name="com.eduvanzapplication.friendlyscore.AnotherClientActivity" />

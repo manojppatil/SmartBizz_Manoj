@@ -162,7 +162,7 @@ public class DashboardFragmentNew extends Fragment  {
             adapter = new CardStackAdapter(mLeadsArrayList, context, getActivity());
             rvLeads.setAdapter(adapter);
             rvLeads.setNestedScrollingEnabled(false);
-            circlePageIndicatorDashboard = (CirclePageIndicator) view.findViewById(R.id.viewPageIndicator);
+            circlePageIndicatorDashboard = view.findViewById(R.id.viewPageIndicator);
             final float density = getResources().getDisplayMetrics().density;
             circlePageIndicatorDashboard.setRadius(4 * density);
 
@@ -194,27 +194,27 @@ public class DashboardFragmentNew extends Fragment  {
                 Globle.ErrorLog(getActivity(),className, name, errorMsg, errorMsgDetails, errorLine);
             }
 
-            /** API CALL POST LOGIN DASHBOARD Details **/
-            try {
-                String url = MainActivity.mainUrl + "dashboard/getDashboardDetails";
-                Map<String, String> params = new HashMap<String, String>();
-//                params.put("studentId","" );
-                params.put("studentId", student_id);
-                if (!Globle.isNetworkAvailable(context)) {
-                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
-                } else {
-                    VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
-                    volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardDetails", params, MainActivity.auth_token);
-                }
-            } catch (Exception e) {
-                String className = this.getClass().getSimpleName();
-                String name = new Object() {
-                }.getClass().getEnclosingMethod().getName();
-                String errorMsg = e.getMessage();
-                String errorMsgDetails = e.getStackTrace().toString();
-                String errorLine = String.valueOf(e.getStackTrace()[0]);
-                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-            }
+//            /** API CALL POST LOGIN DASHBOARD Details **/
+//            try {
+//                String url = MainActivity.mainUrl + "dashboard/getDashboardDetails";
+//                Map<String, String> params = new HashMap<String, String>();
+////                params.put("studentId","" );
+//                params.put("studentId", student_id);
+//                if (!Globle.isNetworkAvailable(context)) {
+//                    Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+//                } else {
+//                    VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+//                    volleyCall.sendRequest(context, url, null, mFragment, "studentDashbBoardDetails", params, MainActivity.auth_token);
+//                }
+//            } catch (Exception e) {
+//                String className = this.getClass().getSimpleName();
+//                String name = new Object() {
+//                }.getClass().getEnclosingMethod().getName();
+//                String errorMsg = e.getMessage();
+//                String errorMsgDetails = e.getStackTrace().toString();
+//                String errorLine = String.valueOf(e.getStackTrace()[0]);
+//                Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+//            }
 
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -336,7 +336,6 @@ public class DashboardFragmentNew extends Fragment  {
         if(isLeadReload) {
             getDashboardDetails();
         }
-
     }
 
     private void getDashboardDetails() {   //get leads
@@ -535,6 +534,9 @@ public class DashboardFragmentNew extends Fragment  {
 
                         if (!jsonleadStatus.getString("student_id").toString().equals("null"))
                             mLeads.student_id = jsonleadStatus.getString("student_id");
+
+                        if (!jsonleadStatus.getString("tickers").toString().equals("null"))
+                            mLeads.tickers = jsonleadStatus.getString("tickers");
 
                     } catch (JSONException e) {
                         String className = this.getClass().getSimpleName();

@@ -134,6 +134,7 @@ public class DetailedInfoFragment extends Fragment {
     public ArrayList<String> duarationOfWorkListBr;
     public ArrayList<String> employerType;
 
+    public static String PCountryID = "1", PStateName = "", PCityName = "";
     public static String offcityID = "", offstateID = "", offcountryID = "",
             currentcityID = "", currentstateID = "", currentcountryID = "",
             permanentcityID = "", permanentstateID = "", permanentcountryID = "", SwitchAddressSameAs = "";
@@ -1826,10 +1827,22 @@ public class DetailedInfoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Broffice_address_pin = edtPincodeOff.getText().toString();
+
+                if (edtPincodeOff.getText().toString().length() == 6) {
+                    Broffice_address_pin = edtPincodeOff.getText().toString();
+                    if (LoanTabActivity.isDetailedInfoEdit) {
+                        getAddressFromPincode(s.toString());
+                    }
+//                    edtPincodeOff.setError(null);
+                } else {
+                    Broffice_address_pin = "";
+//                    edtPincodeOff.setError("* Please enter valid pincode !");
+                }
+
                 if (LoanTabActivity.isDetailedInfoEdit) {
                     checkAllFields();
                 }
+
             }
 
             @Override
@@ -1852,7 +1865,6 @@ public class DetailedInfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
 //        isEdit = false;
     }
 
@@ -2006,7 +2018,6 @@ public class DetailedInfoFragment extends Fragment {
 
                         /* indicateValidationTextdefaultBlue(txtResidentialToggle, false);
                         indicateValidationTextdefaultBlue(txtProfessionalToggle, false);*/
-
 
                     }
                 }
@@ -2891,6 +2902,74 @@ public class DetailedInfoFragment extends Fragment {
         }
     }
 
+    private void getAddressFromPincode(String strPin) {   //get leads
+        try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            if (!getActivity().isFinishing())
+                progressDialog.show();
+            String url = "http://postalpincode.in/api/pincode/" + strPin;
+            Map<String, String> params = new HashMap<String, String>();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                volleyCall.sendRequest(context, url, null, mFragment, "getAddressFromPincodeDtl", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+        }
+
+    }
+
+    public void setAddressFromPincodeDtl(JSONObject jsonDataO) {
+        try {
+            progressDialog.dismiss();
+            if (jsonDataO.getString("Status").equals("Success")) {
+
+                String message = jsonDataO.getString("Message");
+
+                JSONArray jsonArray1 = jsonDataO.getJSONArray("PostOffice");
+
+                if (jsonArray1.length() == 0) {
+
+                } else {
+                    JSONObject jsonPincodeObject = jsonArray1.getJSONObject(0);
+
+                    if (!jsonPincodeObject.getString("Country").equals("null"))
+//                        PCountryID = jsonPincodeObject.getString("Country");
+                        PCountryID = "1";
+
+                    int count = borrowerOffCountryPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerOffCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase("1")) {
+                            spCountryOff.setSelection(i);
+                            break;
+                        }
+                    }
+
+                    if (!jsonPincodeObject.getString("State").equals("null"))
+                        PStateName = jsonPincodeObject.getString("State");
+                    int count1 = borrowerOffStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count1; i++) {
+                        if (borrowerOffStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(PStateName)) {
+                            spStateOff.setSelection(i);
+                            break;
+                        }
+                    }
+
+                    if (!jsonPincodeObject.getString("District").equals("null"))
+                        PCityName = jsonPincodeObject.getString("District");
+                }
+
+            }
+
+        } catch (Exception e) {
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+        }
+
+    }
 
     private void offcityApiCall() {
         /**API CALL**/
@@ -2990,6 +3069,14 @@ public class DetailedInfoFragment extends Fragment {
                     for (int i = 0; i < count; i++) {
                         if (borrowerOffCityPersonalPOJOArrayList.get(i).cityID.equalsIgnoreCase(offcityID)) {
                             spCityOff.setSelection(i);
+                        }
+                    }
+
+                    int count2 = borrowerOffCityPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count2; i++) {
+                        if (borrowerOffCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(PCityName)) {
+                            spCityOff.setSelection(i);
+                            break;
                         }
                     }
 

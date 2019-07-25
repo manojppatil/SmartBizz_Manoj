@@ -54,7 +54,6 @@
             android:textColor="@color/darkblue"
             android:textSize="25sp" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -173,7 +172,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_105sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:background="@drawable/ic_finborrower"
                 android:padding="@dimen/_4sdp"/>
 

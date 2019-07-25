@@ -22,6 +22,7 @@ public class MLeads {
     public String location_name="";
     public String institute_name="";
     public String student_id="";
+    public String tickers="";
 
 
 }

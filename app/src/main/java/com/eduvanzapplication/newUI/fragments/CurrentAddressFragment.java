@@ -51,6 +51,8 @@ public class CurrentAddressFragment extends Fragment {
     public static TextView txtcurrentAddressErrMsg;
     public static Spinner spCountry, spState, spCity;
 
+    public static String PCountryID = "1", PStateName = "", PCityName = "";
+
     //city
     public static ArrayAdapter arrayAdapter_currentCity;
     public static ArrayList<String> currentcity_arrayList;
@@ -88,7 +90,6 @@ public class CurrentAddressFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_current_address, container, false);
@@ -191,6 +192,7 @@ public class CurrentAddressFragment extends Fragment {
 
                     if (isCurrentAddEnabled) {
                         if (s.toString().length() == 6) {
+                            getAddressFromPincode(s.toString());
                             NewLeadActivity.pinCode = s.toString();
                             edtPincode.setError(null);
                         } else {
@@ -243,7 +245,7 @@ public class CurrentAddressFragment extends Fragment {
                         for (int i = 0; i < count; i++) {
                             if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(text)) {
                                 NewLeadActivity.stateId = borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID;
-                                if(NewLeadActivity.isCurrentAddEnabled) {
+                                if (NewLeadActivity.isCurrentAddEnabled) {
                                     checkAllFields();
                                 }
                                 break;
@@ -293,9 +295,80 @@ public class CurrentAddressFragment extends Fragment {
 
     }
 
+    private void getAddressFromPincode(String strPin) {   //get leads
+        try {
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            if (!getActivity().isFinishing())
+                progressDialog.show();
+            String url = "http://postalpincode.in/api/pincode/" + strPin;
+            Map<String, String> params = new HashMap<String, String>();
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            } else {
+                VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                volleyCall.sendRequest(context, url, null, mFragment, "getAddressFromPincode", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+        }
+
+    }
+
+    public void setAddressFromPincode(JSONObject jsonDataO) {
+//        Log.e(TAG, "setProfileDashbBoardStatus: " + jsonDataO);
+        try {
+            progressDialog.dismiss();
+            if (jsonDataO.getString("Status").equals("Success")) {
+
+                String message = jsonDataO.getString("Message");
+
+                JSONArray jsonArray1 = jsonDataO.getJSONArray("PostOffice");
+
+                if (jsonArray1.length() == 0) {
+
+                } else {
+                    JSONObject jsonPincodeObject = jsonArray1.getJSONObject(0);
+
+                    if (!jsonPincodeObject.getString("Country").equals("null"))
+//                        PCountryID = jsonPincodeObject.getString("Country");
+                        PCountryID = "1";
+
+                    int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count; i++) {
+                        if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase("1")) {
+                            spCountry.setSelection(i);
+                            break;
+                        }
+                    }
+
+                    if (!jsonPincodeObject.getString("State").equals("null"))
+                        PStateName = jsonPincodeObject.getString("State");
+
+                    int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count1; i++) {
+                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(PStateName)) {
+                            spState.setSelection(i);
+                            break;
+                        }
+                    }
+
+                    if (!jsonPincodeObject.getString("District").equals("null"))
+                        PCityName = jsonPincodeObject.getString("District");
+                }
+
+            }
+
+        } catch (Exception e) {
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+        }
+
+    }
+
     public static void checkAllFields() {
         if (NewLeadActivity.flatBuildingSoc.equals("") || NewLeadActivity.streetLocalityLandMark.equals("")
-                || NewLeadActivity.pinCode.equals("")|| NewLeadActivity.pinCode.toString().length()<6 || NewLeadActivity.countryId.equals("") ||
+                || NewLeadActivity.pinCode.equals("") || NewLeadActivity.pinCode.toString().length() < 6 || NewLeadActivity.countryId.equals("") ||
                 NewLeadActivity.stateId.equals("") || NewLeadActivity.cityId.equals("")) {
             mListener.onOffButtonsCurrentAddress(false, false);
 
@@ -304,17 +377,17 @@ public class CurrentAddressFragment extends Fragment {
                 txtcurrentAddressErrMsg.setText("* Please enter FLAT NUMBER,BUILDING,SOCIETY NAME");
 //                edtAddress.requestFocus();
 
-            }else if (edtLandmark.getText().toString().equals("")) {
+            } else if (edtLandmark.getText().toString().equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
                 txtcurrentAddressErrMsg.setText("* Please enter your STREET NAME,LOCALITY,LANDMARK");
 //                edtLandmark.requestFocus();
 
-            } else if (edtPincode.getText().toString().equals("") || edtPincode.getText().toString().length()<6) {
+            } else if (edtPincode.getText().toString().equals("") || edtPincode.getText().toString().length() < 6) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
                 txtcurrentAddressErrMsg.setText("* Please enter your 6 digit pincode");
 //                edtPincode.requestFocus();
 
-            }  else if (NewLeadActivity.countryId.equals("")) {
+            } else if (NewLeadActivity.countryId.equals("")) {
                 txtcurrentAddressErrMsg.setVisibility(View.VISIBLE);
                 txtcurrentAddressErrMsg.setText("* Please select country");
 //                spCountry.requestFocus();
@@ -339,13 +412,13 @@ public class CurrentAddressFragment extends Fragment {
 
     public static void validate() {
         if (NewLeadActivity.flatBuildingSoc.equals("") || NewLeadActivity.streetLocalityLandMark.equals("")
-                || NewLeadActivity.pinCode.equals("")|| NewLeadActivity.pinCode.toString().length()<6 || NewLeadActivity.countryId.equals("") ||
+                || NewLeadActivity.pinCode.equals("") || NewLeadActivity.pinCode.toString().length() < 6 || NewLeadActivity.countryId.equals("") ||
                 NewLeadActivity.stateId.equals("") || NewLeadActivity.cityId.equals("")) {
 
             mListener.onCurrentAddrFragmentInteraction(false, 2);
-        } else{
+        } else {
             mListener.onCurrentAddrFragmentInteraction(true, 3);
-    }
+        }
     }
 
     @Override
@@ -380,10 +453,12 @@ public class CurrentAddressFragment extends Fragment {
     }
 
     public static void setCurrentAddressData() {
+
         try {
             edtAddress.setText(NewLeadActivity.flatBuildingSoc);
             edtLandmark.setText(NewLeadActivity.streetLocalityLandMark);
             edtPincode.setText(NewLeadActivity.pinCode);
+
             int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
             for (int i = 0; i < count; i++) {
                 if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase("1")) {
@@ -391,6 +466,19 @@ public class CurrentAddressFragment extends Fragment {
                     break;
                 }
             }
+
+            PStateName = NewLeadActivity.Astate;
+
+            int count1 = borrowerCurrentStatePersonalPOJOArrayList.size();
+
+            for (int i = 0; i < count1; i++) {
+                if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(PStateName)) {
+                    spState.setSelection(i);
+                    break;
+                }
+            }
+            PCityName = NewLeadActivity.Adistrict;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -447,11 +535,16 @@ public class CurrentAddressFragment extends Fragment {
                 spCountry.setAdapter(arrayAdapter_currentCountry);
                 arrayAdapter_currentCountry.notifyDataSetChanged();
 
+                int count = borrowerCurrentCountryPersonalPOJOArrayList.size();
+                for (int i = 0; i < count; i++) {
+                    if (borrowerCurrentCountryPersonalPOJOArrayList.get(i).countryID.equalsIgnoreCase("1")) {
+                        spCountry.setSelection(i);
+                        break;
+                    }
+                }
 
             } else {
-
 //				Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -524,14 +617,6 @@ public class CurrentAddressFragment extends Fragment {
                     spState.setAdapter(arrayAdapter_currentState);
                     arrayAdapter_currentState.notifyDataSetChanged();
 
-//                    int count = borrowerCurrentStatePersonalPOJOArrayList.size();
-
-//                    for (int i = 0; i < count; i++) {
-//                        if (borrowerCurrentStatePersonalPOJOArrayList.get(i).stateID.equalsIgnoreCase(currentstateID)) {
-//                            spState.setSelection(i);
-//                        }
-//                    }
-
                 } else {
                 }
             }
@@ -561,13 +646,7 @@ public class CurrentAddressFragment extends Fragment {
                 volleyCall.sendRequest(context, url, null, mFragment, "getCityCA", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
         }
     }
 
@@ -582,13 +661,7 @@ public class CurrentAddressFragment extends Fragment {
                     arrayAdapter_currentCity.notifyDataSetChanged();
                     spCity.setSelection(0);
                 } catch (Exception e) {
-                    String className = this.getClass().getSimpleName();
-                    String name = new Object() {
-                    }.getClass().getEnclosingMethod().getName();
-                    String errorMsg = e.getMessage();
-                    String errorMsgDetails = e.getStackTrace().toString();
                     String errorLine = String.valueOf(e.getStackTrace()[0]);
-                    Globle.ErrorLog(context, className, name, errorMsg, errorMsgDetails, errorLine);
                 }
 
             } else {
@@ -614,6 +687,15 @@ public class CurrentAddressFragment extends Fragment {
                     arrayAdapter_currentCity = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentcity_arrayList);
                     spCity.setAdapter(arrayAdapter_currentCity);
                     arrayAdapter_currentCity.notifyDataSetChanged();
+
+                    int count2 = borrowerCurrentCityPersonalPOJOArrayList.size();
+
+                    for (int i = 0; i < count2; i++) {
+                        if (borrowerCurrentCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(PCityName)) {
+                            spCity.setSelection(i);
+                            break;
+                        }
+                    }
 
                 } else {
                 }

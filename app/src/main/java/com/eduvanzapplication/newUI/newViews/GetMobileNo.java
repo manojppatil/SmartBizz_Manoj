@@ -102,7 +102,8 @@ public class GetMobileNo extends AppCompatActivity {
                                 Manifest.permission.READ_PHONE_STATE,
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                 Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.ACCESS_FINE_LOCATION},
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.CAMERA},
                         GET_MY_PERMISSION);
             } else {
             }
@@ -767,7 +768,8 @@ public class GetMobileNo extends AppCompatActivity {
                 } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED) {
+                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[8] == PackageManager.PERMISSION_GRANTED) {
                     //granted
 //                    apiCall();
                 } else {

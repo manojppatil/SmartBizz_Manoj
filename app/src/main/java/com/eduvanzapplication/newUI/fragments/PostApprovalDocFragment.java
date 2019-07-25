@@ -51,9 +51,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
-import com.digio.in.esignsdk.Digio;
-import com.digio.in.esignsdk.DigioConfig;
-import com.digio.in.esignsdk.DigioEnvironment;
+//import com.digio.in.esignsdk.Digio;
+//import com.digio.in.esignsdk.DigioConfig;
+//import com.digio.in.esignsdk.DigioEnvironment;
+import com.digio.in.esign2sdk.Digio;
+import com.digio.in.esign2sdk.DigioConfig;
+import com.digio.in.esign2sdk.DigioEnvironment;
+import com.digio.in.esign2sdk.DigioServiceMode;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
@@ -141,7 +145,8 @@ public class PostApprovalDocFragment extends Fragment {
             email_id = "", kyc_address = "", course_cost = "", paid_on = "", transaction_amount = "", kyc_status = "",
             disbursal_status = "", rate = "", loan_agrement_upload_status = "", paid_emi_on = "", no_of_advance_emi = "";
 
-    String downloadUrl = "", downloadSignedUrl = "", baseUrl = "", paymentOption = "1";
+    String downloadUrl = "", downloadSignedUrl = "", baseUrl = "";
+            public static String paymentOption = "1";
 
     public static Double totalAmount = 0.0;
 
@@ -164,8 +169,6 @@ public class PostApprovalDocFragment extends Fragment {
     public static RelativeLayout relExpandCollapse;
     public static ImageButton btnExpandCollapse;
     public static ImageButton btnNextPostApprovalDoc;
-
-
 
     public static ImageView ivLeadDisbursed, ivAggSigned;
 
@@ -303,7 +306,6 @@ public class PostApprovalDocFragment extends Fragment {
         txtTbMoratoriumType = view.findViewById(R.id.txtTbMoratoriumType);
         btnNextPostApprovalDoc = view.findViewById(R.id.btnNextPostApprovalDoc);
 
-
         txtTbRequestedLoanAmount = view.findViewById(id.txtTbRequestedLoanAmount);
         //  txtTbOfferedLoanAmount = view.findViewById(id.txtTbOfferedLoanAmount);
         //   txtTbSelectTenure = view.findViewById(id.txtTbSelectTenure);
@@ -372,11 +374,11 @@ public class PostApprovalDocFragment extends Fragment {
         linManualBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                NewLeadActivity.gender = "1";
                 linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
-                manualSignInDialog();
+                manualSignInDialog();//                    int count = borrowerOffStatePersonalPOJOArrayList.size();
+
             }
         });
 
@@ -390,13 +392,13 @@ public class PostApprovalDocFragment extends Fragment {
         lineSignBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                NewLeadActivity.gender = "2";
                 linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
                 linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
 
                 try {
                     String ipaddress = Utils.getIPAddress(true);
+//                  String url = "http://192.168.1.19/eduvanzapi/laf/getDigioDocumentIdForStudent";
                     String url = MainActivity.mainUrl + "laf/getDigioDocumentIdForStudent";
                     Map<String, String> params = new HashMap<String, String>();
                     if (!Globle.isNetworkAvailable(context)) {
@@ -406,6 +408,7 @@ public class PostApprovalDocFragment extends Fragment {
                         VolleyCall volleyCall = new VolleyCall();
                         params.put("logged_id", LoanTabActivity.student_id);
                         params.put("created_by_ip", ipaddress);
+                        params.put("lead_id", LoanTabActivity.lead_id);
                         if (!Globle.isNetworkAvailable(context)) {
                             Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
@@ -422,7 +425,6 @@ public class PostApprovalDocFragment extends Fragment {
         linOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                NewLeadActivity.gender = "2";
                 linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
@@ -430,20 +432,6 @@ public class PostApprovalDocFragment extends Fragment {
                 genrateOTPAgreement();
             }
         });
-
-//        linExpandCollapse.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (linData.getVisibility() == 0) {
-//                    linData.setVisibility(View.GONE);
-//                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_down));
-//                } else {
-//                    linData.setVisibility(View.VISIBLE);
-//                    btnExpandCollapse.setBackground(getActivity().getResources().getDrawable(R.drawable.ic_chevron_up));
-//                }
-//            }
-//        });
 
         btnExpandCollapse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -729,7 +717,6 @@ public class PostApprovalDocFragment extends Fragment {
         });
 
         getLoanDetails();
-
     }
 
     public void initializePaytmPayment(JSONObject jsonData) {
@@ -831,7 +818,6 @@ public class PostApprovalDocFragment extends Fragment {
                             //                            String[] resKey = data.getStringArrayExtra("responseKeyArray");
                             //                            String[] resValue = data.getStringArrayExtra("responseValueArray");
                             //                            String merTxn = "", bnkTxn = "", amt = "";
-
                             //                            if (resKey != null && resValue != null) {
                             //                                for (int i = 0; i < resKey.length; i++) {
                             //                                    System.out.println("  " + i + " resKey : " + resKey[i] + " resValue : " + resValue[i]);
@@ -863,7 +849,7 @@ public class PostApprovalDocFragment extends Fragment {
                                     params.put("TXNID", TXNID); // merchant ID
 //                                  params.put("bankTxnId", BANKTXNID); // Bank ID
                                     params.put("STATUS", "TXN_SUCCESS");
-                                    params.put("paymentoption", "1");
+                                    params.put("paymentoption", paymentOption);
 //                                        params.put("created_by_ip", ipaddress);
 //                                        params.put("payment_partner", payment_partner);
 //                                        params.put("payment_platform", payment_platform);
@@ -890,7 +876,7 @@ public class PostApprovalDocFragment extends Fragment {
                                     params.put("TXNID", TXNID); // merchant ID
 //                                  params.put("bankTxnId", BANKTXNID); // Bank ID
                                     params.put("STATUS", "TXN_SUCCESS");
-                                    params.put("paymentoption", "1");
+                                    params.put("paymentoption", paymentOption);
 //                                        params.put("created_by_ip", ipaddress);
 //                                        params.put("payment_partner", payment_partner);
 //                                        params.put("payment_platform", payment_platform);
@@ -918,7 +904,11 @@ public class PostApprovalDocFragment extends Fragment {
 
                     }
                 }
-
+//0 = {HashMap$Node@8742} "STATUS" -> "TXN_SUCCESS"
+//1 = {HashMap$Node@8743} "paymentoption" -> "2"
+//2 = {HashMap$Node@8744} "TXNAMOUNT" -> "2.00"
+//3 = {HashMap$Node@8745} "TXNID" -> "20190723111212800110168530279646077"
+//4 = {HashMap$Node@8746} "lead_id" -> "13893"
                 @Override
                 public void networkNotAvailable() { // If network is not
                     // available, then this
@@ -1011,70 +1001,115 @@ public class PostApprovalDocFragment extends Fragment {
                 volleyCall.sendRequest(context, url, null, mFragment, "getLoanDetails", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
-            String className = this.getClass().getSimpleName();
-            String name = new Object() {
-            }.getClass().getEnclosingMethod().getName();
-            String errorMsg = e.getMessage();
-            String errorMsgDetails = e.getStackTrace().toString();
             String errorLine = String.valueOf(e.getStackTrace()[0]);
-            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
     }
 
     public void setDigioDocumentIdForStudent(JSONObject jsonData) {//{"result":{"documentId":"DID180627125727122W11P5DAJQX5NZ2","email":"vijay.shukla@eduvanz.in"},"status":1,"message":"Please follow the instructions to esign the form."}
-//        try {
-//            Log.e("SERVER CALL", "getDocuments" + jsonData);
-//            String status = jsonData.optString("status");
-//            String message = jsonData.optString("message");
-//
-//            if (status.equalsIgnoreCase("1")) {
-//
-//                JSONObject jsonObject = jsonData.getJSONObject("result");
-//
-//                String documentID = jsonObject.getString("documentId");//DID180627125727122W11P5DAJQX5NZ2
-//                String email = jsonObject.getString("email");//vijay.shukla@eduvanz.in
-//
-//                // Invoke Esign
-//
-//                final Digio digio = new Digio();
-//                DigioConfig digioConfig = new DigioConfig();
-//                digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
-//                digioConfig.setEnvironment(DigioEnvironment.PRODUCTION);   //Stage is sandbox
-//
-//                try {
-//                    digio.init((Activity) context, digioConfig);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                try {
-//                    digio.esign(documentID, email);
-////                    Log.e(MainActivity.TAG, "downloadUrldownloadUrl: " + downloadUrl + " userEmailiduserEmailid" + userEmailid);
-//                } catch (Exception e) {
-//                    String className = this.getClass().getSimpleName();
-//                    String name = new Object() {
-//                    }.getClass().getEnclosingMethod().getName();
-//                    String errorMsg = e.getMessage();
-//                    String errorMsgDetails = e.getStackTrace().toString();
-//                    String errorLine = String.valueOf(e.getStackTrace()[0]);
-//                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-//                }
-//
-//            } else {
-//                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-//            }
-//        } catch (Exception e) {
-//            String className = this.getClass().getSimpleName();
-//            String name = new Object() {
-//            }.getClass().getEnclosingMethod().getName();
-//            String errorMsg = e.getMessage();
-//            String errorMsgDetails = e.getStackTrace().toString();
-//            String errorLine = String.valueOf(e.getStackTrace()[0]);
-//            Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
-//        }
+        try {
+            Log.e("SERVER CALL", "getDocuments" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+
+                String documentID = jsonObject.getString("documentId");//DID180627125727122W11P5DAJQX5NZ2
+                String email = jsonObject.getString("email");//vijay.shukla@eduvanz.in
+
+                // Invoke Esign
+
+//                LoanTabActivity.initDigio(documentID,email);
+
+                final Digio digio = new Digio();
+                DigioConfig digioConfig = new DigioConfig();
+                digioConfig.setLogo("https://lh3.googleusercontent.com/v6lR_JSsjovEzLBkHPYPbVuw1161rkBjahSxW0d38RT4f2YoOYeN2rQSrcW58MAfuA=w300"); //Your company logo
+                digioConfig.setEnvironment(DigioEnvironment.PRODUCTION);   //Stage is sandbox
+                digioConfig.setServiceMode(DigioServiceMode.OTP);
+
+                try {
+                    digio.init((Activity) context, digioConfig); //
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    digio.esign(documentID, email);
+                } catch (Exception e) {
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                }
+
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            String errorLine = String.valueOf(e.getStackTrace()[0]);
+        }
     }
 
+    // Callback listener functions for Digio
 
+    public void onSigningSuccess(String documentId,String message) {
+        Log.e(MainActivity.TAG, "onSigningSuccessFrg2: ");
+//        Toast.makeText(context, documentId +" " + message, Toast.LENGTH_SHORT).show();
+        digioSuccess(documentId);//DID180802180658447Q6OOLIITSFR2DJ
+    }
+
+    public void onSigningFailure(String documentId, int code, String response) {
+        Log.e(MainActivity.TAG, "onSigningFailureFragment: ");
+        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+        digioFailure(documentId, code, response);
+    }
+
+    public static void digioSuccess(String documentId){
+
+        /** API CALL **/
+        try {
+            String ipaddress = Utils.getIPAddress(true);
+            String url = MainActivity.mainUrl + "laf/onSuccessfulRegisterStudentESignCase";
+            Map<String, String> params = new HashMap<String, String>();
+            VolleyCall volleyCall = new VolleyCall();
+            if(!Globle.isNetworkAvailable(context))
+            {
+                Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
+
+            } else {
+                params.put("logged_id", LoanTabActivity.student_id);                //1290
+                params.put("lead_id", LoanTabActivity.lead_id);//6138
+                params.put("created_by_ip", ipaddress);                             //192.168.1.16
+                volleyCall.sendRequest(context, url, null, mFragment, "onSuccessfulRegisterStudentESignCase", params,MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void onSuccessfulRegisterStudentESignCase(JSONObject jsonData) {
+        try {//{"result":{"docPath":"http:\/\/eduvanz.com\/admin\/"},"status":1,"message":"Document Successfully Signed.You Can Now Pay The Processing Fees To Submit Your Application."}
+            Log.e("SERVER CALL", "onSuccessfulRegisterStudentESignCase" + jsonData);
+            String status = jsonData.optString("status");
+            String message = jsonData.optString("message");
+
+            if (status.equalsIgnoreCase("1")) {
+
+                JSONObject jsonObject = jsonData.getJSONObject("result");
+//                downloadSignedUrl = jsonObject.getString("docPath");
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                getLoanDetails();
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void digioFailure(String documentId, int code, String response){
+//        radioButtonEsign.setChecked(false);
+        Log.e(MainActivity.TAG, "onSigningFailureFragment: ");
+    }
     public void setLoanDetails(JSONObject jsonDataO) {
         Log.e(TAG, "setLoanDetails: " + jsonDataO);
         try {
@@ -1718,7 +1753,7 @@ public class PostApprovalDocFragment extends Fragment {
     }
 
     public void setgenrateManualAgreement(JSONObject jsonDataO) {
-        Log.e(TAG, "setLoanDetails: " + jsonDataO);
+//        Log.e(TAG, "setLoanDetails: " + jsonDataO);
         try {//{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/","Url":"uploads\/lamanualupload\/557\/Eduvanz_Agreement.pdf"},
             // "status":0,"message":"Agreement generated"}
             String message = jsonDataO.getString("message");
@@ -1769,14 +1804,10 @@ public class PostApprovalDocFragment extends Fragment {
     }
 
     public void setgenrateOTPAgreement(JSONObject jsonDataO) {
-//        Log.e(TAG, "setLoanDetails: " + jsonDataO);
         try {//{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/","Url":"uploads\/lamanualupload\/557\/Eduvanz_Agreement.pdf"},
             // "status":0,"message":"Agreement generated"}
             //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,"doc_url":"uploads\/ladocumentstore\/634\/Eduvanz_Agreement.pdf",
             // "message":"success"}
-            //
-            //
-            //
             //
             //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/","Url":"uploads\/lamanualupload\/634\/Eduvanz_Agreement.pdf"},
             // "status":1,"message":"All Users Signing Completed"}
@@ -1786,7 +1817,7 @@ public class PostApprovalDocFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
             if (jsonDataO.getInt("status") == 1) {
                 JSONObject mData2 = jsonDataO.getJSONObject("result");
-                downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("doc_url"));
+                downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("doc_url"));//{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,"doc_url":52618,"message":"success"}
 
 //                String url = myPdfUrl;
 //                String url = "http://docs.google.com/gview?embedded=true&url="+myPdfUrl;

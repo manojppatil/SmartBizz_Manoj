@@ -32,7 +32,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_330sdp"
+            android:layout_height="@dimen/_350sdp"
             android:layout_below="@id/stepperIndicator"
             android:padding="@dimen/_8sdp"
             android:elevation="@dimen/_10sdp"
