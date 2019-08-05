@@ -20,11 +20,11 @@ public class MainActivity extends Application {
 //    public static String mainUrl = " http://139.59.61.225/eduvanzApi/"; //TESTING
 //   public static String mainUrl = "http://159.89.204.41/eduvanzApi/"; //BETA
 
-//    public static String mainUrl = "http://192.168.1.63/eduvanzapi/"; //Sheetal
+//    public static String mainUrl = "http://192.168.1.6                                                                                                                                                                                                                                                                                    3/eduvanzapi/"; //Sheetal
 //    public static String mainUrl = "http://192.168.1.36/eduvanzapi/"; //Sharad
 //    public static String mainUrl = "http://192.168.1.19/eduvanzapi/"; //Dharam
 //    public static String mainUrl = "http://192.168.0.115/eduvanzapi/"; //Sachin
-//    public static String mainUrl = "http://192.168.1.78/eduvanzapi/"; //Sachin
+//    public static String mainUrl = "http://13.234.168.50/eduvanzapi/"; //AWS Server
 //    public static String mainUrl = "http://192.168.0.108/eduvanzapi/"; //Samir
 //    public static String mainUrl = "http://192.168.0.101/eduvanzapi/index.php/"; //Vijay
 

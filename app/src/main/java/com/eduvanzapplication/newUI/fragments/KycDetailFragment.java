@@ -53,6 +53,7 @@ import com.eduvanzapplication.newUI.VolleyCall;
 
 import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.newViews.NewLeadActivity;
+import com.eduvanzapplication.newUI.newViews.TenureSelectionActivity;
 import com.eduvanzapplication.pqformfragments.pojo.LocationsPOJO;
 import com.eduvanzapplication.pqformfragments.pojo.NameOfCoursePOJO;
 import com.eduvanzapplication.pqformfragments.pojo.NameOfInsitituePOJO;
@@ -293,6 +294,16 @@ public class KycDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        try {
+            if(LoanTabActivity.tenureselectedflag.equals("1")){
+                mListener.onFragmentInteraction(true, 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 //        linPersonalBlock.startAnimation(collapseanimationPersonal);
 //        relIdentityBlock.startAnimation(collapseAnimationIdentity);
 //        relCourseBlock.startAnimation(collapseAnimationCourse);
@@ -2368,6 +2379,7 @@ public class KycDetailFragment extends Fragment {
 //            progressDialog.setCancelable(false);
             String url = MainActivity.mainUrl + "dashboard/getcountrylist";
             Map<String, String> params = new HashMap<String, String>();
+
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {

@@ -84,6 +84,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -104,7 +106,7 @@ public class UploadDocumentFragment extends Fragment {
     public static NestedScrollView nestedScrollView;
     public static TextView txtKycDocToggle, txtPhotoToggle, txtAddtionalDocToggle;
     public static LinearLayout linKycDocToggle, linPhotoToggle, linAddtionalDocToggle;
-    public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle,ivcolorphotogratitle,ivkyctitlecheck;
+    public static ImageView ivPersonalToggle, ivIdentityToggle, ivCourseToggle, ivcolorphotogratitle, ivkyctitlecheck;
     public static LinearLayout linKycDocBlock, relPhotoBlock, relAddtionalDocBlock;
     public static Animation expandAnimationPersonal, collapseanimationPersonal;
     public static Animation expandAnimationIdentity, collapseAnimationIdentity;
@@ -192,9 +194,8 @@ public class UploadDocumentFragment extends Fragment {
 
         btnNextUploadDetail = view.findViewById(R.id.btnNextUploadDetail);
 
-
-        ivcolorphotogratitle= view.findViewById(R.id.ivcolorphotogratitle);
-        ivkyctitlecheck= view.findViewById(R.id.ivkyctitlecheck);
+        ivcolorphotogratitle = view.findViewById(R.id.ivcolorphotogratitle);
+        ivkyctitlecheck = view.findViewById(R.id.ivkyctitlecheck);
         linAddtionalDocToggle = view.findViewById(R.id.linAddtionalDocToggle);
         relPhotoBlock = view.findViewById(R.id.relPhotoBlock);
         txtAddtionalDocToggle = view.findViewById(R.id.txtAddtionalDocToggle);
@@ -234,14 +235,12 @@ public class UploadDocumentFragment extends Fragment {
         selecteddocID = "";
 
 
-
         btnNextUploadDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-       mListener.onUploadInfoFragment(true,3);
+                mListener.onUploadInfoFragment(true, 3);
             }
         });
-
 
 
         try {
@@ -994,7 +993,7 @@ public class UploadDocumentFragment extends Fragment {
                             if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "19";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_bank_statement), getString(R.string.current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
+                                imageToPdfBankStmt(documentTypeNo, getString(R.string.upload_bank_statement), getString(R.string.current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
 
                                 tap = 0;
                             } else if (tap == 2) {
@@ -1055,7 +1054,7 @@ public class UploadDocumentFragment extends Fragment {
                             if (tap == 1) {
                                 applicantType = "1";
                                 documentTypeNo = "20";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_bank_statement_6), getString(R.string.current_6_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
+                                imageToPdfBankStmt(documentTypeNo, getString(R.string.upload_bank_statement_6), getString(R.string.current_6_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
 
                                 tap = 0;
                             } else if (tap == 2) {
@@ -1859,6 +1858,7 @@ public class UploadDocumentFragment extends Fragment {
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
+
 
         return view;
     }
@@ -3717,6 +3717,7 @@ public class UploadDocumentFragment extends Fragment {
                     + " must implement onUploadFragmentInteractionListener");
         }
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -3993,6 +3994,21 @@ public class UploadDocumentFragment extends Fragment {
         bundle.putString("documentTypeNo", documentTypeNo);
         bundle.putString("toolbarTitle", toolbarTitle);
         bundle.putString("note", note);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, 2);// Activity is started with requestCode 2
+    }
+
+    private void imageToPdfBankStmt(String documentTypeNo, String toolbarTitle, String note, String strapplicantId, String strapplicantType) {
+
+        Intent intent = new Intent(getActivity(), ImgToPdfActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("strapplicantId", strapplicantId);
+        bundle.putString("strapplicantType", strapplicantType);
+        bundle.putString("documentTypeNo", documentTypeNo);
+        bundle.putString("toolbarTitle", toolbarTitle);
+        bundle.putString("note", note);
+        bundle.putString("lead_id", MainActivity.lead_id);
+        bundle.putString("auth_token", MainActivity.auth_token);
         intent.putExtras(bundle);
         startActivityForResult(intent, 2);// Activity is started with requestCode 2
     }
@@ -4679,7 +4695,7 @@ public class UploadDocumentFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            getActivity().runOnUiThread(new Runnable() {
+            ((LoanTabActivity) context).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     Log.e("TAG", "run: " + "Source File Doesn't Exist: " + selectedFilePath);
@@ -4779,47 +4795,39 @@ public class UploadDocumentFragment extends Fragment {
                 Log.e("TAG", "uploadFile: " + sb.toString());
                 try {
                     JSONObject mJson = new JSONObject(sb.toString());
-                     String mData = mJson.getString("status");
-                     String mData1 = mJson.getString("message");
+                    String mData = mJson.getString("status");
+                    String mData1 = mJson.getString("message");
 
                     Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
 
                     if (mData.equalsIgnoreCase("1")) {
-                        getActivity().runOnUiThread(new Runnable() {
+                        ((LoanTabActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 uploadFilePath = "";
-
+                                //delete file path.
+                                try {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                        Files.deleteIfExists(Paths.get(selectedFilePath));
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 getUploadDocumentsApiCall();
 
-                                progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility(GONE);
                                 Log.e("TAG", "uploadFile: code 1 " + mData);
                                 Toast.makeText(context, mData1, Toast.LENGTH_SHORT).show();
-
-                                //UnComment this for offline
-//                                        try {
-//                                            String sSql = "Update DocumentUpload set ISUploaded = '" + true + "' WHERE FilePath = '"+selectedFilePath+"'" ;
-//                                            ExecuteSql(sSql);
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                        }
-//
-//                                    uploadFilePath = "";
-//                                    progressBar.setVisibility(View.GONE);
-//                                Log.e(TAG, "uploadFile 2267: " + selectUrl + "doctype  " + doctype + "  doctypeno " + doctypeno + " selectedFilePath " + selectedFilePath + " coBorrowerID   " + coBorrowerID);
-//                                Toast.makeText(context, mData1, Toast.LENGTH_SHORT).show();
-
                             }
                         });
 
                     } else {
-                        getActivity().runOnUiThread(new Runnable() {
+                        ((LoanTabActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 progressBar.setVisibility(View.GONE);
                                 Log.e("TAG", " 2285: " + new Date().toLocaleString());//1538546658896.jpg/
                                 Toast.makeText(context, mData1 + " " + mData, Toast.LENGTH_SHORT).show();
-
                             }
                         });
                     }
@@ -4830,21 +4838,20 @@ public class UploadDocumentFragment extends Fragment {
                 }
 
                 if (serverResponseCode == 200) {
-                    getActivity().runOnUiThread(new Runnable() {
+                    ((LoanTabActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Log.e("TAG", " 2303: " + new Date().toLocaleString());//1538546658896.jpg/
                         }
                     });
                 }
-
                 fileInputStream.close();
                 dataOutputStream.flush();
                 dataOutputStream.close();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                getActivity().runOnUiThread(new Runnable() {
+                ((LoanTabActivity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Log.e("TAG", " 2318: " + new Date().toLocaleString());//1538546658896.jpg/
@@ -4857,7 +4864,7 @@ public class UploadDocumentFragment extends Fragment {
                 e.printStackTrace();
             }
             try {
-                getActivity().runOnUiThread(new Runnable() {
+                ((LoanTabActivity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.GONE);
@@ -4896,7 +4903,7 @@ public class UploadDocumentFragment extends Fragment {
     }
 
     private void selectImage() {
-         CharSequence[] items = {"Take a Picture", "Choose from Gallery",
+        CharSequence[] items = {"Take a Picture", "Choose from Gallery",
                 "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -4983,22 +4990,6 @@ public class UploadDocumentFragment extends Fragment {
                         bForm61 = true, bPension = true, bITR = true, bPNL = true, bDregreeMarkSheet = true, bDegreeCerti = true,
                         bOtherDoc = true, btenthmark = true, btwelvethmark = true;
 
-//                "document_pending": [
-//                {
-//                    "document_type_id": "1",
-//                        "document_name": "Photo"
-//                }
-//  ],
-//                "applicant_type": "1",
-//                        "uploaded_files": [
-//                {
-//                    "fk_document_type_id": "2",
-//                        "doc_path": "uploads\/document\/19703\/PAN+Card_14209_1559297406.pdf",
-//                        "verification_status": "0",
-//                        "document_name": "PAN Card"
-//                }
-//  ],
-
                 document_arrayList = new ArrayList<>();
                 documenPOJOArrayList = new ArrayList<>();
 
@@ -5027,764 +5018,940 @@ public class UploadDocumentFragment extends Fragment {
                 spDocument.setAdapter(arrayAdapter_document);
                 arrayAdapter_document.notifyDataSetChanged();
 
-                     //uploaded document
-                JSONArray jsonArray = jsonData.getJSONArray("uploaded_files");
+                //uploaded document
 
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                try {
+                    JSONArray jsonArray = jsonData.getJSONArray("uploaded_files");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                    String s = jsonObject1.getString("fk_document_type_id");
-                    String image = jsonObject1.getString("doc_path");
-                    String verification_status = jsonObject1.getString("verification_status");
-                    String document_name = jsonObject1.getString("document_name");
+                        String s = jsonObject1.getString("fk_document_type_id");
+                        String image = jsonObject1.getString("doc_path");
+                        String verification_status = jsonObject1.getString("verification_status");
+                        String document_name = jsonObject1.getString("document_name");
 
-                    Log.e(TAG, "image: " + image);
+                        Log.e(TAG, "image: " + image);
 
-                    switch (s) {
+                        switch (s) {
 
-                        case "1":
-                            if (bPhoto) {
+                            case "1":
+                                if (bPhoto) {
 
-                                if (profileImage.getVisibility() == VISIBLE) {
-                                } else {
-                                    profileImage.setVisibility(VISIBLE);
-                                }
-                                profileImage.setTag(baseUrl + image);
-                                profileBckgrnd.setVisibility(View.VISIBLE);
-                                ivcolorphotogratitle.setVisibility(VISIBLE);
+                                    if (profileImage.getVisibility() == VISIBLE) {
+                                    } else {
+                                        profileImage.setVisibility(VISIBLE);
+                                    }
+                                    profileImage.setTag(baseUrl + image);
+                                    profileBckgrnd.setVisibility(View.VISIBLE);
+                                    ivcolorphotogratitle.setVisibility(VISIBLE);
 
 
                                 /*imgPhotoUploadTick.setVisibility(View.VISIBLE);
                                 txtPhoto1.setVisibility(View.GONE);*/
 //                              imgPhoto1.setBackgroundResource(R.drawable.pdf_image);
-                                /*Picasso.with(context).load(baseUrl + image).into(imgPhoto1);
-                                 */
+                                    /*Picasso.with(context).load(baseUrl + image).into(imgPhoto1);
+                                     */
 
-                                bPhoto = false;
-                            }
-                            break;
-
-                        case "3":
-                            if (bAadhaar) {
-                                if (aadharCard.getVisibility() == VISIBLE) {
-                                } else {
-                                    aadharCard.setVisibility(VISIBLE);
+                                    bPhoto = false;
                                 }
-                                aadharCard.setTag(baseUrl + image);
-                                aadharBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "3":
+                                if (bAadhaar) {
+                                    if (aadharCard.getVisibility() == VISIBLE) {
+                                    } else {
+                                        aadharCard.setVisibility(VISIBLE);
+                                    }
+                                    aadharCard.setTag(baseUrl + image);
+                                    aadharBckgrnd.setVisibility(VISIBLE);
                                /* imgAadhaarUploadTick3.setVisibility(View.VISIBLE);
                                 txtAadhaar3.setVisibility(View.GONE);
 */
-                                strFileName = aadharCard.getTag().toString().substring(aadharCard.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = aadharCard.getTag().toString().substring(aadharCard.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnAadhar.setText(R.string.preview);*/
-                                    /*imgAadhaar3.setBackgroundResource(R.drawable.pdf_image);
-                                     */
-                                } else {
-                                    /*btnAadhar.setText(R.string.download);*/
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnAadhar.setText(R.string.preview);*/
+                                        /*imgAadhaar3.setBackgroundResource(R.drawable.pdf_image);
+                                         */
+                                    } else {
+                                        /*btnAadhar.setText(R.string.download);*/
+                                    }
+
+                                    //this below condition apply for green icon sign dispaly on KYC title
+
+                                    if (bAadhaar) {
+                                        ivkyctitlecheck.setVisibility(VISIBLE);
+                                    }
+
+                                    bAadhaar = false;
+
+
                                 }
+                                break;
 
-                                //this below condition apply for green icon sign dispaly on KYC title
-
-                                if(bAadhaar ){
-                                    ivkyctitlecheck.setVisibility(VISIBLE);
-                                }
-
-                                bAadhaar = false;
-
-
-                            }
-                            break;
-
-                        case "2":
-                            if (bPan) {
-                                if (panCard.getVisibility() == VISIBLE) {
-                                } else {
-                                    panCard.setVisibility(VISIBLE);
-                                }
-                                panCard.setTag(baseUrl + image);
-                                panBckgrnd.setVisibility(View.VISIBLE);
+                            case "2":
+                                if (bPan) {
+                                    if (panCard.getVisibility() == VISIBLE) {
+                                    } else {
+                                        panCard.setVisibility(VISIBLE);
+                                    }
+                                    panCard.setTag(baseUrl + image);
+                                    panBckgrnd.setVisibility(View.VISIBLE);
                                 /*imgPanUploadTick2.setVisibility(View.VISIBLE);
                                 txtPan2.setVisibility(View.GONE);*/
-                                strFileName = panCard.getTag().toString().substring(panCard.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = panCard.getTag().toString().substring(panCard.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnPanCard.setText(R.string.preview);*/
-                                    /*imgPan2.setBackgroundResource(R.drawable.pdf_image);*/
-                                } else {
-                                    /*btnPanCard.setText(R.string.download);*/
-                                    /* imgPan2.setBackgroundResource(R.drawable.zip_image);*/
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnPanCard.setText(R.string.preview);*/
+                                        /*imgPan2.setBackgroundResource(R.drawable.pdf_image);*/
+                                    } else {
+                                        /*btnPanCard.setText(R.string.download);*/
+                                        /* imgPan2.setBackgroundResource(R.drawable.zip_image);*/
+                                    }
 
-                                //required two condition for if aadhar and pan both uploaded then only display check sign
-                                if(bPan ){
-                                    ivkyctitlecheck.setVisibility(VISIBLE);
-                                }
+                                    //required two condition for if aadhar and pan both uploaded then only display check sign
+                                    if (bPan) {
+                                        ivkyctitlecheck.setVisibility(VISIBLE);
+                                    }
 
 //                        Picasso.with(context).load(String.valueOf(bm)).into(imgPan2);
-                                bPan = false;
-                            }
-                            break;
-
-                        case "4":
-                            if (bPassport) {
-                                if (passport.getVisibility() == VISIBLE) {
-                                } else {
-                                    passport.setVisibility(VISIBLE);
+                                    bPan = false;
                                 }
+                                break;
 
-                                passport.setTag(baseUrl + image);
-                                passportBckgrnd.setVisibility(VISIBLE);
+                            case "4":
+                                if (bPassport) {
+                                    if (passport.getVisibility() == VISIBLE) {
+                                    } else {
+                                        passport.setVisibility(VISIBLE);
+                                    }
+
+                                    passport.setTag(baseUrl + image);
+                                    passportBckgrnd.setVisibility(VISIBLE);
                                 /*imgAddressUploadTick38.setVisibility(View.VISIBLE);
                                 txtAddress38.setVisibility(View.GONE);*/
-                                strFileName = passport.getTag().toString().substring(passport.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = passport.getTag().toString().substring(passport.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnPassport.setText(R.string.preview);*/
-                                    /*imgAddress38.setBackgroundResource(R.drawable.pdf_image);*/
-                                } else {
-                                    /*btnPassport.setText(R.string.download);*/
-                                    /*imgAddress38.setBackgroundResource(R.drawable.zip_image);*/
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnPassport.setText(R.string.preview);*/
+                                        /*imgAddress38.setBackgroundResource(R.drawable.pdf_image);*/
+                                    } else {
+                                        /*btnPassport.setText(R.string.download);*/
+                                        /*imgAddress38.setBackgroundResource(R.drawable.zip_image);*/
+                                    }
 
 //                        Picasso.with(context).load(String.valueOf(bm)).into(imgAddress38);
-                                bAddress = false;
-                            }
-                            break;
-
-                        case "5":
-
-                            if (bVoterId) {
-
-                                if (voterId.getVisibility() == VISIBLE) {
-                                } else {
-                                    voterId.setVisibility(VISIBLE);
+                                    bAddress = false;
                                 }
+                                break;
 
-                                voterId.setTag(baseUrl + image);
-                                voterIdBckgrnd.setVisibility(VISIBLE);
+                            case "5":
+
+                                if (bVoterId) {
+
+                                    if (voterId.getVisibility() == VISIBLE) {
+                                    } else {
+                                        voterId.setVisibility(VISIBLE);
+                                    }
+
+                                    voterId.setTag(baseUrl + image);
+                                    voterIdBckgrnd.setVisibility(VISIBLE);
                                 /*imgSalarySlipUploadTick18.setVisibility(View.VISIBLE);
                                 txtSalarySlip18.setVisibility(View.GONE);*/
-                                strFileName = voterId.getTag().toString().substring(voterId.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = voterId.getTag().toString().substring(voterId.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /* btnVoterId.setText(R.string.preview);*/
-                                    /*imgSalarySlip18.setBackgroundResource(R.drawable.pdf_image);*/
-                                } else {
-                                    /*btnVoterId.setText(R.string.download);*/
-                                    /* imgSalarySlip18.setBackgroundResource(R.drawable.zip_image);*/
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /* btnVoterId.setText(R.string.preview);*/
+                                        /*imgSalarySlip18.setBackgroundResource(R.drawable.pdf_image);*/
+                                    } else {
+                                        /*btnVoterId.setText(R.string.download);*/
+                                        /* imgSalarySlip18.setBackgroundResource(R.drawable.zip_image);*/
+                                    }
 //                        Picasso.with(context).load(baseUrl + image).into(imgSalarySlip18);
-                                bVoterId = false;
-                            }
-                            break;
-
-                        case "6":
-
-                            if (bDrivingLicense) {
-                                if (drivingLicense.getVisibility() == VISIBLE) {
-                                } else {
-                                    drivingLicense.setVisibility(VISIBLE);
+                                    bVoterId = false;
                                 }
-                                drivingLicense.setTag(baseUrl + image);
-                                drivingLicenseBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "6":
+
+                                if (bDrivingLicense) {
+                                    if (drivingLicense.getVisibility() == VISIBLE) {
+                                    } else {
+                                        drivingLicense.setVisibility(VISIBLE);
+                                    }
+                                    drivingLicense.setTag(baseUrl + image);
+                                    drivingLicenseBckgrnd.setVisibility(VISIBLE);
                                /* imgBankStmtUploadTick19.setVisibility(View.VISIBLE);
                                 txtBankStmt19.setVisibility(View.GONE);*/
-                                strFileName = drivingLicense.getTag().toString().substring(drivingLicense.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = drivingLicense.getTag().toString().substring(drivingLicense.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*drivingLicense.setText(R.string.preview);*/
-                                    //imgBankStmt19.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnDrivingLicense.setText(R.string.download);*/
-                                    //imgBankStmt19.setBackgroundResource(R.drawable.zip_image);
+                                    if (FileExtn.equals("pdf")) {
+                                        /*drivingLicense.setText(R.string.preview);*/
+                                        //imgBankStmt19.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnDrivingLicense.setText(R.string.download);*/
+                                        //imgBankStmt19.setBackgroundResource(R.drawable.zip_image);
 
-                                }
+                                    }
 //                        Picasso.with(context).load(baseUrl + image).into(imgBankStmt19);
-                                bDrivingLicense = false;
-                            }
-
-                            break;
-
-                        case "7":
-
-                            if (bTelephoneBill) {
-                                if (telephoneBill.getVisibility() == VISIBLE) {
-                                } else {
-                                    telephoneBill.setVisibility(VISIBLE);
+                                    bDrivingLicense = false;
                                 }
-                                telephoneBill.setTag(baseUrl + image);
-                                telephoneBillBckgrnd.setVisibility(VISIBLE);
+
+                                break;
+
+                            case "7":
+
+                                if (bTelephoneBill) {
+                                    if (telephoneBill.getVisibility() == VISIBLE) {
+                                    } else {
+                                        telephoneBill.setVisibility(VISIBLE);
+                                    }
+                                    telephoneBill.setTag(baseUrl + image);
+                                    telephoneBillBckgrnd.setVisibility(VISIBLE);
                                 /*imgDegreeMarkSheetUploadTick23.setVisibility(View.VISIBLE);
                                 txtDegreeMarkSheet23.setVisibility(View.GONE);*/
-                                strFileName = telephoneBill.getTag().toString().substring(telephoneBill.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = telephoneBill.getTag().toString().substring(telephoneBill.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnTelephoneBill.setText(R.string.preview);*/
-                                    //      imgDegreeMarkSheet23.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnTelephoneBill.setText(R.string.download);*/
-                                    //  imgDegreeMarkSheet23.setBackgroundResource(R.drawable.zip_image);
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnTelephoneBill.setText(R.string.preview);*/
+                                        //      imgDegreeMarkSheet23.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnTelephoneBill.setText(R.string.download);*/
+                                        //  imgDegreeMarkSheet23.setBackgroundResource(R.drawable.zip_image);
 
+                                    }
+                                    //                        Picasso.with(context).load(baseUrl + image).into(imgDegreeMarkSheet23);
+                                    bTelephoneBill = false;
                                 }
-                                //                        Picasso.with(context).load(baseUrl + image).into(imgDegreeMarkSheet23);
-                                bTelephoneBill = false;
-                            }
-                            break;
+                                break;
 
-                        case "8":
+                            case "8":
 
-                            if (bElectricityBill) {
-                                if (electricityBill.getVisibility() == VISIBLE) {
-                                } else {
-                                    electricityBill.setVisibility(VISIBLE);
-                                }
-                                electricityBill.setTag(baseUrl + image);
-                                electricityBillBckgrnd.setVisibility(VISIBLE);
+                                if (bElectricityBill) {
+                                    if (electricityBill.getVisibility() == VISIBLE) {
+                                    } else {
+                                        electricityBill.setVisibility(VISIBLE);
+                                    }
+                                    electricityBill.setTag(baseUrl + image);
+                                    electricityBillBckgrnd.setVisibility(VISIBLE);
                                /* imgDegreeMarkSheetUploadTick23.setVisibility(View.VISIBLE);
                                 txtDegreeMarkSheet23.setVisibility(View.GONE);*/
-                                strFileName = electricityBill.getTag().toString().substring(electricityBill.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = electricityBill.getTag().toString().substring(electricityBill.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*electricityBill.setText(R.string.preview);*/
-                                    //imgDegreeMarkSheet23.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnTelephoneBill.setText(R.string.download);*/
-                                    //imgDegreeMarkSheet23.setBackgroundResource(R.drawable.zip_image);
+                                    if (FileExtn.equals("pdf")) {
+                                        /*electricityBill.setText(R.string.preview);*/
+                                        //imgDegreeMarkSheet23.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnTelephoneBill.setText(R.string.download);*/
+                                        //imgDegreeMarkSheet23.setBackgroundResource(R.drawable.zip_image);
 
+                                    }
+                                    //                        Picasso.with(context).load(baseUrl + image).into(imgDegreeMarkSheet23);
+                                    bElectricityBill = false;
                                 }
-                                //                        Picasso.with(context).load(baseUrl + image).into(imgDegreeMarkSheet23);
-                                bElectricityBill = false;
-                            }
-                            break;
+                                break;
 
-                        case "24":
+                            case "24":
 
-                            if (bDegreeCerti) {
-                                if (degreeCertificate.getVisibility() == VISIBLE) {
-                                } else {
-                                    degreeCertificate.setVisibility(VISIBLE);
-                                }
-                                degreeCertificate.setTag(baseUrl + image);
-                                degreeCertificateBckgrnd.setVisibility(VISIBLE);
+                                if (bDegreeCerti) {
+                                    if (degreeCertificate.getVisibility() == VISIBLE) {
+                                    } else {
+                                        degreeCertificate.setVisibility(VISIBLE);
+                                    }
+                                    degreeCertificate.setTag(baseUrl + image);
+                                    degreeCertificateBckgrnd.setVisibility(VISIBLE);
                                 /*imgDegreeCertiUploadTick24.setVisibility(View.VISIBLE);
                                 txtDegreeCerti24.setVisibility(View.GONE);*/
-                                strFileName = degreeCertificate.getTag().toString().substring(degreeCertificate.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = degreeCertificate.getTag().toString().substring(degreeCertificate.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnDegreeCertificate.setText(R.string.preview);*/
-                                    // imgDegreeCerti24.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnDegreeCertificate.setText(R.string.download);*/
-                                    //imgDegreeCerti24.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnDegreeCertificate.setText(R.string.preview);*/
+                                        // imgDegreeCerti24.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnDegreeCertificate.setText(R.string.download);*/
+                                        //imgDegreeCerti24.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                        Picasso.with(context).load(baseUrl + image).into(imgDegreeCerti24);
-                                bDegreeCerti = false;
-                            }
-
-                            break;
-
-                        case "31":
-
-                            if (bOtherDoc) {
-
-                                if (others.getVisibility() == VISIBLE) {
-                                } else {
-                                    others.setVisibility(VISIBLE);
+                                    bDegreeCerti = false;
                                 }
-                                others.setTag(baseUrl + image);
-                                othersBckgrnd.setVisibility(VISIBLE);
+
+                                break;
+
+                            case "31":
+
+                                if (bOtherDoc) {
+
+                                    if (others.getVisibility() == VISIBLE) {
+                                    } else {
+                                        others.setVisibility(VISIBLE);
+                                    }
+                                    others.setTag(baseUrl + image);
+                                    othersBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = others.getTag().toString().substring(others.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = others.getTag().toString().substring(others.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnOthers.setText(R.string.preview);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnOthers.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnOthers.setText(R.string.preview);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnOthers.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bOtherDoc = false;
-                            }
-                            break;
-
-                        case "9":
-
-                            if (bRentAgreemnet) {
-
-                                if (rentAgreement.getVisibility() == VISIBLE) {
-                                } else {
-                                    rentAgreement.setVisibility(VISIBLE);
+                                    bOtherDoc = false;
                                 }
-                                rentAgreement.setTag(baseUrl + image);
-                                rentAgreementBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "9":
+
+                                if (bRentAgreemnet) {
+
+                                    if (rentAgreement.getVisibility() == VISIBLE) {
+                                    } else {
+                                        rentAgreement.setVisibility(VISIBLE);
+                                    }
+                                    rentAgreement.setTag(baseUrl + image);
+                                    rentAgreementBckgrnd.setVisibility(VISIBLE);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = rentAgreement.getTag().toString().substring(rentAgreement.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = rentAgreement.getTag().toString().substring(rentAgreement.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnRentAgreement.setText(R.string.preview);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnRentAgreement.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnRentAgreement.setText(R.string.preview);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnRentAgreement.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bRentAgreemnet = false;
-                            }
-                            break;
-
-                        case "30":
-
-                            if (bAddress) {
-
-                                if (addressProof.getVisibility() == VISIBLE) {
-                                } else {
-                                    addressProof.setVisibility(VISIBLE);
+                                    bRentAgreemnet = false;
                                 }
-                                addressProof.setTag(baseUrl + image);
-                                addressProofBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "30":
+
+                                if (bAddress) {
+
+                                    if (addressProof.getVisibility() == VISIBLE) {
+                                    } else {
+                                        addressProof.setVisibility(VISIBLE);
+                                    }
+                                    addressProof.setTag(baseUrl + image);
+                                    addressProofBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = addressProof.getTag().toString().substring(addressProof.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = addressProof.getTag().toString().substring(addressProof.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnAddressProof.setText(R.string.preview);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /* btnAddressProof.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnAddressProof.setText(R.string.preview);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /* btnAddressProof.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bAddress = false;
-                            }
-                            break;
-
-                        case "17":
-
-                            if (bSalSlip6) {
-                                if (salSlipSix.getVisibility() == VISIBLE) {
-                                } else {
-                                    salSlipSix.setVisibility(VISIBLE);
+                                    bAddress = false;
                                 }
-                                salSlipSix.setTag(baseUrl + image);
-                                salSixBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "17":
+
+                                if (bSalSlip6) {
+                                    if (salSlipSix.getVisibility() == VISIBLE) {
+                                    } else {
+                                        salSlipSix.setVisibility(VISIBLE);
+                                    }
+                                    salSlipSix.setTag(baseUrl + image);
+                                    salSixBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = salSlipSix.getTag().toString().substring(salSlipSix.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = salSlipSix.getTag().toString().substring(salSlipSix.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnSalSlipSix.setText(R.string.preview);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnSalSlipSix.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnSalSlipSix.setText(R.string.preview);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnSalSlipSix.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bSalSlip6 = false;
-                            }
-                            break;
-
-                        case "18":
-
-                            if (bSalSlip3) {
-                                if (salSlipThree.getVisibility() == VISIBLE) {
-                                } else {
-                                    salSlipThree.setVisibility(VISIBLE);
+                                    bSalSlip6 = false;
                                 }
-                                salSlipThree.setTag(baseUrl + image);
-                                salThreeBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "18":
+
+                                if (bSalSlip3) {
+                                    if (salSlipThree.getVisibility() == VISIBLE) {
+                                    } else {
+                                        salSlipThree.setVisibility(VISIBLE);
+                                    }
+                                    salSlipThree.setTag(baseUrl + image);
+                                    salThreeBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = salSlipThree.getTag().toString().substring(salSlipThree.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = salSlipThree.getTag().toString().substring(salSlipThree.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnSalSlipThree.setText(R.string.preview);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnSalSlipThree.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnSalSlipThree.setText(R.string.preview);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnSalSlipThree.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bSalSlip3 = false;
-                            }
-                            break;
-
-                        case "19":
-
-                            if (bBankStmt3) {
-
-                                if (bankStmntThree.getVisibility() == VISIBLE) {
-                                } else {
-                                    bankStmntThree.setVisibility(VISIBLE);
+                                    bSalSlip3 = false;
                                 }
-                                bankStmntThree.setTag(baseUrl + image);
-                                bankThreeBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "19":
+
+                                if (bBankStmt3) {
+
+                                    if (bankStmntThree.getVisibility() == VISIBLE) {
+                                    } else {
+                                        bankStmntThree.setVisibility(VISIBLE);
+                                    }
+                                    bankStmntThree.setTag(baseUrl + image);
+                                    bankThreeBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = bankStmntThree.getTag().toString().substring(bankStmntThree.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = bankStmntThree.getTag().toString().substring(bankStmntThree.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnBankStmntThree.setText(R.string.preview);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnBankStmntThree.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnBankStmntThree.setText(R.string.preview);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnBankStmntThree.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bBankStmt3 = false;
-                            }
-                            break;
-
-                        case "20":
-
-                            if (bBankStmt6) {
-
-                                if (bankStmntSix.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    bankStmntSix.setVisibility(VISIBLE);
+                                    bBankStmt3 = false;
                                 }
-                                bankStmntSix.setTag(baseUrl + image);
-                                bankSixBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "20":
+
+                                if (bBankStmt6) {
+
+                                    if (bankStmntSix.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        bankStmntSix.setVisibility(VISIBLE);
+                                    }
+                                    bankStmntSix.setTag(baseUrl + image);
+                                    bankSixBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = bankStmntSix.getTag().toString().substring(bankStmntSix.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = bankStmntSix.getTag().toString().substring(bankStmntSix.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*bankStmntSix.setText(R.string.preview);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnBankStmntSix.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*bankStmntSix.setText(R.string.preview);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnBankStmntSix.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bBankStmt6 = false;
-                            }
-                            break;
-
-                        case "10":
-
-                            if (bKVP) {
-                                if (kvp.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    kvp.setVisibility(VISIBLE);
+                                    bBankStmt6 = false;
                                 }
-                                kvp.setTag(baseUrl + image);
-                                kvpBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "10":
+
+                                if (bKVP) {
+                                    if (kvp.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        kvp.setVisibility(VISIBLE);
+                                    }
+                                    kvp.setTag(baseUrl + image);
+                                    kvpBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = kvp.getTag().toString().substring(kvp.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = kvp.getTag().toString().substring(kvp.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnKVP.setText(R.string.preview);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnKVP.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnKVP.setText(R.string.preview);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnKVP.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bKVP = false;
-                            }
-                            break;
-
-                        case "11":
-
-                            if (bLic) {
-                                if (licPolicy.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    licPolicy.setVisibility(VISIBLE);
+                                    bKVP = false;
                                 }
-                                licPolicy.setTag(baseUrl + image);
-                                licPolicyBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "11":
+
+                                if (bLic) {
+                                    if (licPolicy.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        licPolicy.setVisibility(VISIBLE);
+                                    }
+                                    licPolicy.setTag(baseUrl + image);
+                                    licPolicyBckgrnd.setVisibility(VISIBLE);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = licPolicy.getTag().toString().substring(licPolicy.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = licPolicy.getTag().toString().substring(licPolicy.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnLICPolicy.setText(R.string.preview);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnLICPolicy.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnLICPolicy.setText(R.string.preview);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnLICPolicy.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bLic = false;
-                            }
-                            break;
-
-                        case "12":
-
-                            if (bForm16) {
-
-                                if (form16.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    form16.setVisibility(VISIBLE);
+                                    bLic = false;
                                 }
-                                form16.setTag(baseUrl + image);
-                                form16Bckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "12":
+
+                                if (bForm16) {
+
+                                    if (form16.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        form16.setVisibility(VISIBLE);
+                                    }
+                                    form16.setTag(baseUrl + image);
+                                    form16Bckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = form16.getTag().toString().substring(form16.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = form16.getTag().toString().substring(form16.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /* btnForm16.setText(R.string.preview);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnForm16.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /* btnForm16.setText(R.string.preview);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnForm16.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bForm16 = false;
-                            }
-                            break;
-
-                        case "13":
-
-                            if (bForm61) {
-                                if (form61.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    form61.setVisibility(VISIBLE);
+                                    bForm16 = false;
                                 }
-                                form61.setTag(baseUrl + image);
-                                form61Bckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "13":
+
+                                if (bForm61) {
+                                    if (form61.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        form61.setVisibility(VISIBLE);
+                                    }
+                                    form61.setTag(baseUrl + image);
+                                    form61Bckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = form61.getTag().toString().substring(form61.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = form61.getTag().toString().substring(form61.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnForm61.setText(R.string.preview);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnForm61.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnForm61.setText(R.string.preview);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnForm61.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bForm61 = false;
-                            }
-                            break;
-
-                        case "14":
-
-                            if (bPension) {
-
-                                if (pensionLetter.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    pensionLetter.setVisibility(VISIBLE);
+                                    bForm61 = false;
                                 }
+                                break;
 
-                                pensionLetter.setTag(baseUrl + image);
-                                pensionBckgrnd.setVisibility(VISIBLE);
+                            case "14":
+
+                                if (bPension) {
+
+                                    if (pensionLetter.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        pensionLetter.setVisibility(VISIBLE);
+                                    }
+
+                                    pensionLetter.setTag(baseUrl + image);
+                                    pensionBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = pensionLetter.getTag().toString().substring(pensionLetter.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = pensionLetter.getTag().toString().substring(pensionLetter.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnPensionLetter.setText(R.string.preview);*/
-                                    //   imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnPensionLetter.setText(R.string.download);*/
-                                    //  imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnPensionLetter.setText(R.string.preview);*/
+                                        //   imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnPensionLetter.setText(R.string.download);*/
+                                        //  imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bPension = false;
-                            }
-                            break;
-
-                        case "15":
-
-                            if (bITR) {
-
-                                if (itr.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    itr.setVisibility(VISIBLE);
+                                    bPension = false;
                                 }
-                                itr.setTag(baseUrl + image);
-                                itrBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "15":
+
+                                if (bITR) {
+
+                                    if (itr.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        itr.setVisibility(VISIBLE);
+                                    }
+                                    itr.setTag(baseUrl + image);
+                                    itrBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = itr.getTag().toString().substring(itr.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = itr.getTag().toString().substring(itr.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnITR.setText(R.string.preview);*/
-                                    //   imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnITR.setText(R.string.download);*/
-                                    //  imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnITR.setText(R.string.preview);*/
+                                        //   imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnITR.setText(R.string.download);*/
+                                        //  imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bITR = false;
-                            }
-                            break;
-
-                        case "16":
-
-                            if (bPNL) {
-
-                                if (pnl.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    pnl.setVisibility(VISIBLE);
+                                    bITR = false;
                                 }
-                                pnl.setTag(baseUrl + image);
-                                pnlBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "16":
+
+                                if (bPNL) {
+
+                                    if (pnl.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        pnl.setVisibility(VISIBLE);
+                                    }
+                                    pnl.setTag(baseUrl + image);
+                                    pnlBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = pnl.getTag().toString().substring(pnl.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = pnl.getTag().toString().substring(pnl.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnPNL.setText(R.string.preview);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnPNL.setText(R.string.download);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnPNL.setText(R.string.preview);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnPNL.setText(R.string.download);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bPNL = false;
-                            }
-                            break;
-
-                        case "23":
-
-                            if (bDregreeMarkSheet) {
-
-                                if (degreeMarkSheet.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    degreeMarkSheet.setVisibility(VISIBLE);
+                                    bPNL = false;
                                 }
-                                degreeMarkSheet.setTag(baseUrl + image);
-                                degreeMarksheetBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "23":
+
+                                if (bDregreeMarkSheet) {
+
+                                    if (degreeMarkSheet.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        degreeMarkSheet.setVisibility(VISIBLE);
+                                    }
+                                    degreeMarkSheet.setTag(baseUrl + image);
+                                    degreeMarksheetBckgrnd.setVisibility(VISIBLE);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = degreeMarkSheet.getTag().toString().substring(degreeMarkSheet.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = degreeMarkSheet.getTag().toString().substring(degreeMarkSheet.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btnDegreeMarksheet.setText(R.string.preview);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btnDegreeMarksheet.setText(R.string.download);*/
-                                    //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btnDegreeMarksheet.setText(R.string.preview);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btnDegreeMarksheet.setText(R.string.download);*/
+                                        //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                bDregreeMarkSheet = false;
-                            }
-                            break;
-
-                        case "21":
-
-                            if (btenthmark) {
-                                if (tenthMarksheet.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    tenthMarksheet.setVisibility(VISIBLE);
+                                    bDregreeMarkSheet = false;
                                 }
-                                tenthMarksheet.setTag(baseUrl + image);
-                                tenthBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "21":
+
+                                if (btenthmark) {
+                                    if (tenthMarksheet.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        tenthMarksheet.setVisibility(VISIBLE);
+                                    }
+                                    tenthMarksheet.setTag(baseUrl + image);
+                                    tenthBckgrnd.setVisibility(VISIBLE);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = tenthMarksheet.getTag().toString().substring(tenthMarksheet.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = tenthMarksheet.getTag().toString().substring(tenthMarksheet.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /* btntenthMarksheet.setText(R.string.preview);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btntenthMarksheet.setText(R.string.download);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /* btntenthMarksheet.setText(R.string.preview);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btntenthMarksheet.setText(R.string.download);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                btenthmark = false;
-                            }
-                            break;
-
-                        case "22":
-
-                            if (btwelvethmark) {
-
-                                if (twelvethMarksheet.getVisibility() == VISIBLE) {
-
-                                } else {
-                                    twelvethMarksheet.setVisibility(VISIBLE);
+                                    btenthmark = false;
                                 }
-                                twelvethMarksheet.setTag(baseUrl + image);
-                                twelthBckgrnd.setVisibility(VISIBLE);
+                                break;
+
+                            case "22":
+
+                                if (btwelvethmark) {
+
+                                    if (twelvethMarksheet.getVisibility() == VISIBLE) {
+
+                                    } else {
+                                        twelvethMarksheet.setVisibility(VISIBLE);
+                                    }
+                                    twelvethMarksheet.setTag(baseUrl + image);
+                                    twelthBckgrnd.setVisibility(VISIBLE);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
-                                strFileName = twelvethMarksheet.getTag().toString().substring(twelvethMarksheet.getTag().toString().lastIndexOf("/") + 1);
+                                    strFileName = twelvethMarksheet.getTag().toString().substring(twelvethMarksheet.getTag().toString().lastIndexOf("/") + 1);
 
-                                FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
+                                    FileExtn = strFileName.substring(strFileName.lastIndexOf('.') + 1);
 
-                                if (FileExtn.equals("pdf")) {
-                                    /*btntwelvethMarksheet.setText(R.string.preview);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                } else {
-                                    /*btntwelvethMarksheet.setText(R.string.download);*/
-                                    // imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
-                                }
+                                    if (FileExtn.equals("pdf")) {
+                                        /*btntwelvethMarksheet.setText(R.string.preview);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else {
+                                        /*btntwelvethMarksheet.setText(R.string.download);*/
+                                        // imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
+                                    }
 //                      Picasso.with(context).load(baseUrl + image).into(imgOtherDoc31);
-                                btwelvethmark = false;
-                            }
-                            break;
+                                    btwelvethmark = false;
+                                }
+                                break;
+                        }
+
+
                     }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
+
+                //Add new code for auto upload document of  aadhar and pan if file is exist.
+
+                if (aadharCard.getTag() == null) {
+
+                    File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/PDFfiles");
+
+                    if (filepath.exists()) {
+                        File file = null;
+                        File[] files = filepath.listFiles();
+                        for (int i = 0; i < files.length; ++i) {
+                            if (files[i].getName().contains("AadhaarOcr.pdf")) {
+                                file = files[i];
+                            }
+                        }
+
+                        if (file != null) {
+                            if (file.getName().contains("AadhaarOcr.pdf")) {
+                                String message1 = file.getPath();
+                                String doctypeno = "3";
+                                String strapplicantType = "1";
+                                String strapplicantId = LoanTabActivity.applicant_id;
+
+                                String FileExtn1 = null;
+                                Double FileSize = null;
+
+                                uploadFilePath = message1;
+
+                                String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(message)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(message)).length() - 3);
+                                FileSize = Double.valueOf(filesz);
+
+                                FileExtn1 = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
+
+                                if (FileExtn1.equals("jpg") || FileExtn1.equals("jpeg") || FileExtn1.equals("png") || FileExtn1.equals("pdf") ||
+                                        FileExtn1.equals("bmp") || FileExtn1.equals("webp") || FileExtn1.equals("zip") || FileExtn1.equals("rar")) {
+
+                                    if (FileSize < 30) {
+                                        Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
+
+                                        if (uploadFilePath != null) {
+                                            // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                                            // progressBar.setVisibility(View.VISIBLE);
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+
+                                                        String doctype = "";
+                                                        int selectUrl = 0;
+                                                        if (doctypeno.length() > 2) {
+                                                            doctype = doctypeno.substring(0, 1) + "_SD_PhotoDoc";
+                                                            selectUrl = 1;
+                                                        } else {
+                                                            doctype = doctypeno + "_SD_PhotoDoc";
+                                                            selectUrl = 0;
+                                                        }
+                                                        //creating new thread to handle Http Operations
+                                                        if (!Globle.isNetworkAvailable(context)) {
+                                                            //uploadFileOffline(uploadFilePath, doctype, doctypeno, selectUrl);
+                                                            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                                                        } else {
+                                                            uploadFile(uploadFilePath, doctypeno, strapplicantType, strapplicantId);
+                                                        }
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }).start();
+                                        } else {
+                                            Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(context, R.string.file_size_exceeds_limits_of_30_mb, Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        }
+
+                    }
+
+                } else if (panCard.getTag() == null) {
+
+                    File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/PDFfiles");
+
+                    if (filepath.exists()) {
+                        File file = null;
+                        File[] files = filepath.listFiles();
+                        for (int i = 0; i < files.length; ++i) {
+                            if (files[i].getName().contains("PanOcr.pdf")) {
+                                file = files[i];
+                            }
+                        }
+
+                        if (file != null) {
+
+                            if (file.getName().contains("PanOcr.pdf")) {
+                                {
+                                    String message1 = file.getPath();
+                                    String doctypeno = "2";
+                                    String strapplicantType = "1";
+                                    String strapplicantId = LoanTabActivity.applicant_id;
+
+                                    String FileExtn1 = null;
+                                    Double FileSize = null;
+
+                                    uploadFilePath = message1;
+
+                                    String filesz = JavaGetFileSize.getFileSizeMegaBytes(new File(message)).substring(0, JavaGetFileSize.getFileSizeMegaBytes(new File(message)).length() - 3);
+                                    FileSize = Double.valueOf(filesz);
+
+                                    FileExtn1 = uploadFilePath.substring(uploadFilePath.lastIndexOf(".") + 1);// Without dot jpg, png
+
+                                    if (FileExtn1.equals("jpg") || FileExtn1.equals("jpeg") || FileExtn1.equals("png") || FileExtn1.equals("pdf") ||
+                                            FileExtn1.equals("bmp") || FileExtn1.equals("webp") || FileExtn1.equals("zip") || FileExtn1.equals("rar")) {
+
+                                        if (FileSize < 30) {
+                                            Log.e("TAG", "onActivityResult: DOC PATH " + uploadFilePath);
+
+                                            if (uploadFilePath != null) {
+                                                // dialog = ProgressDialog.show(MainActivity.this,"","Uploading File...",true);
+                                                // progressBar.setVisibility(View.VISIBLE);
+                                                new Thread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            //note add sleep.thread if take time to find path
+
+                                                            String doctype = "";
+                                                            int selectUrl = 0;
+                                                            if (doctypeno.length() > 2) {
+                                                                doctype = doctypeno.substring(0, 1) + "_SD_PhotoDoc";
+                                                                selectUrl = 1;
+                                                            } else {
+                                                                doctype = doctypeno + "_SD_PhotoDoc";
+                                                                selectUrl = 0;
+                                                            }
+                                                            //creating new thread to handle Http Operations
+                                                            if (!Globle.isNetworkAvailable(context)) {
+                                                                //uploadFileOffline(uploadFilePath, doctype, doctypeno, selectUrl);
+                                                                Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                                                            } else {
+                                                                uploadFile(uploadFilePath, doctypeno, strapplicantType, strapplicantId);
+                                                            }
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                }).start();
+                                            } else {
+                                                Toast.makeText(context, R.string.please_choose_a_file_first, Toast.LENGTH_SHORT).show();
+                                            }
+                                        } else {
+                                            Toast.makeText(context, R.string.file_size_exceeds_limits_of_30_mb, Toast.LENGTH_LONG).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(context, R.string.file_is_not_in_supported_format, Toast.LENGTH_LONG).show();
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+
 
                 if (profileImage.getTag() != null || aadharCard.getTag() != null || panCard.getTag() != null) {//kyc
                     Drawable bg;
@@ -5837,8 +6004,54 @@ public class UploadDocumentFragment extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
+
+
+           /* if(aadharCard.getTag() == null)
+            {
+                // String strFileName1 = aadharCard.getTag().toString().substring(aadharCard.getTag().toString().lastIndexOf("/") + 1);
+
+                    File filepath = new File(Environment.getExternalStorageDirectory().getPath()+"/PDFfiles");
+
+                if (filepath.exists()) {
+                    File file=null;
+                    File[] files = filepath.listFiles();
+                    for (int i = 0; i < files.length; ++i) {
+                         file = files[i];
+
+                    }
+
+                    if (file.getName().contains("AadhaarOcr.pdf")) {
+                        imageToPdf(documentTypeNo, getString(R.string.upload_adhaar_card), getString(R.string.applicant_adhaar_card_front_and_backside), LoanTabActivity.applicant_id, "1");
+                    } else {
+                        // do something here with the file
+                    }
+                }
+
+
+//new File(Environment.getExternalStorageDirectory().getPath()+"/PDFfiles").exists()
+                   *//* String FileExtn1 = strFileName1.substring(strFileName1.lastIndexOf('.') + 1);
+
+                    if (FileExtn1.equals("pdf")) {
+                        openPdf(String.valueOf(aadharCard.getTag()));
+
+                    }*//*
+            }*/
             String.valueOf(e.getStackTrace()[0]);
-            e.printStackTrace();
+
+        }
+    }
+
+    public static void traverse(File dir) {
+        if (dir.exists()) {
+            File[] files = dir.listFiles();
+            for (int i = 0; i < files.length; ++i) {
+                File file = files[i];
+                if (file.isDirectory()) {
+                    traverse(file);
+                } else {
+                    // do something here with the file
+                }
+            }
         }
     }
 
@@ -5875,8 +6088,7 @@ public class UploadDocumentFragment extends Fragment {
 
             case 1:
                 if (grantResults.length <= 0) {
-                }
-                else if (grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
+                } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     selectImage();
                     //granted
                 } else {

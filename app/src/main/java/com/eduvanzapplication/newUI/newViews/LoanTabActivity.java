@@ -57,7 +57,6 @@ import java.util.List;
 
 import static android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
 
-
 public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
         DetailedInfoFragment.onDetailedInfoFragmentInteractionListener,UploadDocumentFragment.onUploadFragmentInteractionListener,PostApprovalDocFragment.onPostFragmentInteractionListener {
 
@@ -76,7 +75,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     //    //kyc values
-    public static String firstName = "", applicant_id = "";
+    public static String firstName = "", applicant_id = "",tenureselectedflag="";
     private AlertDialog mGPSDialog;
     // lastName = "", middleName = "", gender = "", dob = "", maritalStatus = "2", email = "", mobile = "",
 //            aadhar = "", pan = "", flatBuildingSociety = "", streetLocalityLandmark = "", pincode = "", countryId = "", stateId = "", cityId = "",
@@ -486,11 +485,17 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         mAmort.setSpan(new CustomTypefaceSpan("", font), 0, mAmort.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
         adapter.addFrag(new KycDetailFragment(), String.valueOf(mKycDetail));
         adapter.addFrag(new DetailedInfoFragment(), String.valueOf(mDetailedInfo));
         adapter.addFrag(new UploadDocumentFragment(), String.valueOf(mDocUplaod));
         adapter.addFrag(new PostApprovalDocFragment(), String.valueOf(mPostAppr));
         adapter.addFrag(new AmortizationFragment(), String.valueOf(mAmort));
+
+         tenureselectedflag = getIntent().getExtras().getString("tenureselectedflag");
+
+
+
 
 //        adapter.addFrag(new KycDetailFragment(), "KYC Details");
 //        adapter.addFrag(new DetailedInfoFragment(), "Detailed Info");
@@ -507,6 +512,10 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
 
             @Override
             public void onPageSelected(int i) {
+
+               /* if ( adapter.mFragmentList.toString().contains("DetailedInfoFragment")){
+                    adapter.addFrag(new DetailedInfoFragment(), String.valueOf(mDetailedInfo));
+                }*/
 
             }
 

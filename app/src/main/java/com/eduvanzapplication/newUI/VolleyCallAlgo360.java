@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.newUI.newViews.DashboardActivity;
 import com.eduvanzapplication.newUI.newViews.FinancialAnalysis;
+import com.eduvanzapplication.newUI.newViews.FinancialAnalysisOnNavigationBar;
 import com.google.gson.JsonIOException;
 
 import org.json.JSONArray;
@@ -29,7 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.eduvanzapplication.database.DBAdapter.ExecuteSql;
-
 
 /**
  * Created by vijay on 23/1/17.
@@ -47,7 +47,6 @@ public class VolleyCallAlgo360 {
     String TAG = "VolleyCall";
     String BOUNDARY = "s2retfgsGSRFsERFGHfgdfgw734yhFHW567TYHSrf4yarg"; //This the boundary which is used by the server to split the post parameters.
     String MULTIPART_FORMDATA = "multipart/form-data;boundary=" + BOUNDARY;
-
 
     public VolleyCallAlgo360() {
     }
@@ -141,6 +140,15 @@ public class VolleyCallAlgo360 {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else if (screen.equalsIgnoreCase("addAlgoscorenavbar")) {
+             try {
+                 jsonDataO = new JSONObject(s);
+                 ((FinancialAnalysisOnNavigationBar) mActivity).updateAlgo360ScoreOnNav(jsonDataO);
+             } catch (JSONException e) {
+                 e.printStackTrace();
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
         }
     }
 

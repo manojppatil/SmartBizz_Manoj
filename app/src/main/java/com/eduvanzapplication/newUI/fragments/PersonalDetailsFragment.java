@@ -871,7 +871,10 @@ public class PersonalDetailsFragment extends Fragment {
                                     JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
 
                                     if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
-                                        NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                        if(!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals(""))
+                                        {
+                                            NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                        }
                                     }
                                     NewLeadActivity.Aname = jsonObjectData.getJSONObject("name").get("value").toString();
                                     NewLeadActivity.Aaddress = jsonObjectData.getJSONObject("address").get("value").toString();
@@ -909,7 +912,10 @@ public class PersonalDetailsFragment extends Fragment {
 
                                     JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
                                     if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
-                                        NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                        if(!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals(""))
+                                        {
+                                            NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                        }
                                     }
                                     NewLeadActivity.Aname = jsonObjectData.getJSONObject("name").get("value").toString();
                                     NewLeadActivity.Adob = jsonObjectData.getJSONObject("dob").get("value").toString();
@@ -942,7 +948,10 @@ public class PersonalDetailsFragment extends Fragment {
                                     JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
 
                                     if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
-                                        NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                        if(!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals(""))
+                                        {
+                                            NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
+                                        }
                                     }
                                     NewLeadActivity.Aaddress = jsonObjectData.getJSONObject("address").get("value").toString();
                                     NewLeadActivity.Astreet_address = jsonObjectData.getJSONObject("addressSplit").get("line1").toString();

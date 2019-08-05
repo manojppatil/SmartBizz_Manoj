@@ -131,9 +131,16 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             String message = jsonData.optString("message");
 
             if (status.equalsIgnoreCase("1")) {
-                startActivity(new Intent(TenureSelectionActivity.this, DashboardActivity.class)
+
+             /*   startActivity(new Intent(TenureSelectionActivity.this, DashboardActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-                TenureSelectionActivity.this.finish();
+                TenureSelectionActivity.this.finish();*/
+
+                Intent intent = new Intent(TenureSelectionActivity.this, LoanTabActivity.class);
+                intent.putExtra("tenureselectedflag","1");
+                intent.putExtra("lead_id", leadid);
+
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

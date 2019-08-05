@@ -2954,6 +2954,7 @@ public class DetailedInfoFragment extends Fragment {
 
                     for (int i = 0; i < count1; i++) {
                         if (borrowerOffStatePersonalPOJOArrayList.get(i).stateName.equalsIgnoreCase(PStateName)) {
+                            offstateID = borrowerOffStatePersonalPOJOArrayList.get(i).stateID;
                             spStateOff.setSelection(i);
                             break;
                         }
@@ -2961,6 +2962,15 @@ public class DetailedInfoFragment extends Fragment {
 
                     if (!jsonPincodeObject.getString("District").equals("null"))
                         PCityName = jsonPincodeObject.getString("District");
+
+                    int count2 = borrowerOffCityPersonalPOJOArrayList.size();
+                    for (int i = 0; i < count2; i++) {
+                        if (borrowerOffCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(PCityName)) {
+                            offcityID = borrowerOffCityPersonalPOJOArrayList.get(i).cityID;
+                            spCityOff.setSelection(i);
+                            break;
+                        }
+                    }
                 }
 
             }
@@ -3072,13 +3082,13 @@ public class DetailedInfoFragment extends Fragment {
                         }
                     }
 
-                    int count2 = borrowerOffCityPersonalPOJOArrayList.size();
-                    for (int i = 0; i < count2; i++) {
-                        if (borrowerOffCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(PCityName)) {
-                            spCityOff.setSelection(i);
-                            break;
-                        }
-                    }
+//                    int count2 = borrowerOffCityPersonalPOJOArrayList.size();
+//                    for (int i = 0; i < count2; i++) {
+//                        if (borrowerOffCityPersonalPOJOArrayList.get(i).cityName.equalsIgnoreCase(PCityName)) {
+//                            spCityOff.setSelection(i);
+//                            break;
+//                        }
+//                    }
 
                 } else {
                 }

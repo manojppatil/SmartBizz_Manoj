@@ -73,8 +73,7 @@ import in.thinkanalytics.algo360SDK.Algo360_SDK_Init;
 import in.thinkanalytics.algo360SDK.ExtraHelperFunctions;
 
 
-public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static NavigationView navigationView;
     public static DrawerLayout drawer;
@@ -373,6 +372,9 @@ public class DashboardActivity extends AppCompatActivity
             startActivity(intent);
         }  else if (id == R.id.nav_emicalculator) {
             Intent intent = new Intent(context,EmiCalculatorActivity.class);
+            startActivity(intent);
+        }  else if (id == R.id.nav_yourscore) {
+            Intent intent = new Intent(context,FinancialAnalysisOnNavigationBar.class);
             startActivity(intent);
         } else if (id == R.id.nav_termsandconditions) {
             Intent intent = new Intent(DashboardActivity.this, WebViewTermsNCondition.class);

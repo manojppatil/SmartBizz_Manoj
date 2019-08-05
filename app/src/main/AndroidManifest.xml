@@ -63,6 +63,10 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".newUI.newViews.FinancialAnalysisOnNavigationBar"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".newUI.newViews.TenureSelectionActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme" />

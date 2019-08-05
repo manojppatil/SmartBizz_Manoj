@@ -45,7 +45,12 @@
         <item
             android:id="@+id/nav_emicalculator"
             android:icon="@drawable/ic_nav_emi_calc"
-            android:title="@string/title_emi_calculator"
+            android:title="@string/title_emi_calculator" />
+
+        <item
+            android:id="@+id/nav_yourscore"
+            android:icon="@drawable/ic_creditriskscoreicon"
+            android:title="@string/title_your_score"
             />
         <item
             android:id="@+id/nav_termsandconditions"
