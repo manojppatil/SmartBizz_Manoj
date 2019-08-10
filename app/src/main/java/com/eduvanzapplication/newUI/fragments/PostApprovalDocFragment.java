@@ -11,7 +11,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -26,6 +28,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -139,14 +142,14 @@ public class PostApprovalDocFragment extends Fragment {
 
     public String lead_id = "", application_loan_id = "", principal_amount = "", down_payment = "", rate_of_interest = "", tenure = "",
             emi_type = "", emi_amount = "", total_amount_to_be_collected = "", amount_to_be_paid_to_institute = "",
-            is_moratorium = "", moratorium_months = "",moratorium_type ="", no_emi_paid = "", requested_loan_amount = "",
+            is_moratorium = "", moratorium_months = "", moratorium_type = "", no_emi_paid = "", requested_loan_amount = "",
             requested_tenure = "", requested_roi = "", requested_emi = "",
             offered_amount = "", applicant_id = "", fk_lead_id = "", first_name = "", last_name = "", mobile_number = "",
             email_id = "", kyc_address = "", course_cost = "", paid_on = "", transaction_amount = "", kyc_status = "",
             disbursal_status = "", rate = "", loan_agrement_upload_status = "", paid_emi_on = "", no_of_advance_emi = "";
 
     String downloadUrl = "", downloadSignedUrl = "", baseUrl = "";
-            public static String paymentOption = "1";
+    public static String paymentOption = "1";
 
     public static Double totalAmount = 0.0;
 
@@ -161,7 +164,7 @@ public class PostApprovalDocFragment extends Fragment {
             txtTbSelectedEMIAmount, txtTbSanctionLoanAmount, txtTbDownpayment, txtTbInterestRate,
             txtTbEMIType, txtTbEmiAmount, txtTbProcessingFee, txtTbNoOfAdvanceEMI, txtTbAdvanceEMIAmount, txtTbGrossLoanTenure,
             txtTbNetLoantenure, txtTbROI, txtTbEMI, txtTbTotalRepaybleAmount, txtTbMoratoriumDuration, txtTbMoratorium,
-            txtTbEMIDuringMoratorium,txtTbMoratoriumType;
+            txtTbEMIDuringMoratorium, txtTbMoratoriumType;
 
     public static TextView txtProcessingFeeAmt, txtProcessingFeeDueByDate, txtEMIFeeAmt, txtEMIDueByDate, txtTotalAmt,
             txtApplicationLoanID, txtProcessingFeeDueTitle, txtEMIDueByTitle, txtEMIType;
@@ -385,7 +388,7 @@ public class PostApprovalDocFragment extends Fragment {
         btnNextPostApprovalDoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onPostApprovalFragment(true,4);
+                mListener.onPostApprovalFragment(true, 4);
             }
         });
 
@@ -904,7 +907,8 @@ public class PostApprovalDocFragment extends Fragment {
 
                     }
                 }
-//0 = {HashMap$Node@8742} "STATUS" -> "TXN_SUCCESS"
+
+                //0 = {HashMap$Node@8742} "STATUS" -> "TXN_SUCCESS"
 //1 = {HashMap$Node@8743} "paymentoption" -> "2"
 //2 = {HashMap$Node@8744} "TXNAMOUNT" -> "2.00"
 //3 = {HashMap$Node@8745} "TXNID" -> "20190723111212800110168530279646077"
@@ -1050,7 +1054,7 @@ public class PostApprovalDocFragment extends Fragment {
 
     // Callback listener functions for Digio
 
-    public void onSigningSuccess(String documentId,String message) {
+    public void onSigningSuccess(String documentId, String message) {
         Log.e(MainActivity.TAG, "onSigningSuccessFrg2: ");
 //        Toast.makeText(context, documentId +" " + message, Toast.LENGTH_SHORT).show();
         digioSuccess(documentId);//DID180802180658447Q6OOLIITSFR2DJ
@@ -1062,7 +1066,7 @@ public class PostApprovalDocFragment extends Fragment {
         digioFailure(documentId, code, response);
     }
 
-    public static void digioSuccess(String documentId){
+    public static void digioSuccess(String documentId) {
 
         /** API CALL **/
         try {
@@ -1070,15 +1074,14 @@ public class PostApprovalDocFragment extends Fragment {
             String url = MainActivity.mainUrl + "laf/onSuccessfulRegisterStudentESignCase";
             Map<String, String> params = new HashMap<String, String>();
             VolleyCall volleyCall = new VolleyCall();
-            if(!Globle.isNetworkAvailable(context))
-            {
+            if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, "Please check your network connection", Toast.LENGTH_SHORT).show();
 
             } else {
                 params.put("logged_id", LoanTabActivity.student_id);                //1290
                 params.put("lead_id", LoanTabActivity.lead_id);//6138
                 params.put("created_by_ip", ipaddress);                             //192.168.1.16
-                volleyCall.sendRequest(context, url, null, mFragment, "onSuccessfulRegisterStudentESignCase", params,MainActivity.auth_token);
+                volleyCall.sendRequest(context, url, null, mFragment, "onSuccessfulRegisterStudentESignCase", params, MainActivity.auth_token);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1106,10 +1109,11 @@ public class PostApprovalDocFragment extends Fragment {
         }
     }
 
-    public static void digioFailure(String documentId, int code, String response){
+    public static void digioFailure(String documentId, int code, String response) {
 //        radioButtonEsign.setChecked(false);
         Log.e(MainActivity.TAG, "onSigningFailureFragment: ");
     }
+
     public void setLoanDetails(JSONObject jsonDataO) {
         Log.e(TAG, "setLoanDetails: " + jsonDataO);
         try {
@@ -1303,7 +1307,7 @@ public class PostApprovalDocFragment extends Fragment {
                             Float Rate = Float.parseFloat(rate) / 1200;
                             Float interest_comp = outstanding_principle * Rate;
 
-                            txtTbEMIDuringMoratorium.setText(" " + (is_moratorium.equals("1") ? Globle.decimalFormat.format(interest_comp)+"/-" : " /-"));
+                            txtTbEMIDuringMoratorium.setText(" " + (is_moratorium.equals("1") ? Globle.decimalFormat.format(interest_comp) + "/-" : " /-"));
 
                         } catch (NumberFormatException e) {
                             txtTbEMIDuringMoratorium.setText(" -");
@@ -1564,6 +1568,24 @@ public class PostApprovalDocFragment extends Fragment {
                         }
                         try {
                             linNoLoan.setVisibility(VISIBLE);
+//                                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(((LoanTabActivity) context));
+//                                // ...Irrelevant code for customizing the buttons and title
+//                                LayoutInflater inflater = ((LoanTabActivity) context).getLayoutInflater();
+//                                View dialogView = inflater.inflate(layout.thanksdialog, null);
+//                                dialogBuilder.setView(dialogView);
+//                                LinearLayout buttonSave = dialogView.findViewById(R.id.linDashBoard);
+//                                final AlertDialog alertDialog = dialogBuilder.create();
+//                                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                                alertDialog.show();
+//
+//                                buttonSave.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        alertDialog.dismiss();
+////                                        LoanTabActivity.super.onBackPressed();
+//                                    }
+//                                });
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -2060,27 +2082,9 @@ public class PostApprovalDocFragment extends Fragment {
             }
         });
 
-//        genrateOTPAgreement();
-
         InputFilter[] filterArray = new InputFilter[1];
         filterArray[0] = new InputFilter.LengthFilter(OTPlength);
         edtOtp.setFilters(filterArray);
-
-//        WebSettings webSettings = webView.getSettings();
-//        webSettings.setJavaScriptEnabled(true);
-//
-//        webView.setWebViewClient(new WebViewClient() {
-//
-//            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                view.loadUrl(url);
-//                return true;
-//            }
-//        });
-//        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-//        webView.getSettings().setAllowFileAccess(true);
-//
-//        webView.loadUrl(downloadUrl);
 
         edtOtp.addTextChangedListener(new TextWatcher() {
             @Override
@@ -2127,6 +2131,28 @@ public class PostApprovalDocFragment extends Fragment {
 
     }
 
+    public static void showDiaThanksDiag() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(((LoanTabActivity) context));
+        LayoutInflater inflater = ((LoanTabActivity) context).getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.thanksdialog, null);
+        dialogBuilder.setView(dialogView);
+        LinearLayout buttonSave = dialogView.findViewById(R.id.linDashBoard);
+        final AlertDialog alertDialog = dialogBuilder.create();
+//        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((LoanTabActivity) context).finish();
+                alertDialog.dismiss();
+            }
+        });
+
+    }
 
     private void galleryDocIntent() {
         Intent intent = new Intent();
@@ -2421,13 +2447,9 @@ public class PostApprovalDocFragment extends Fragment {
     }
 
 
-
-
     public interface onPostFragmentInteractionListener {
         void onPostApprovalFragment(boolean valid, int next);
-
-
-}
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -2439,6 +2461,7 @@ public class PostApprovalDocFragment extends Fragment {
                     + " must implement onUploadFragmentInteractionListener");
         }
     }
+
     @Override
     public void onDetach() {
         super.onDetach();

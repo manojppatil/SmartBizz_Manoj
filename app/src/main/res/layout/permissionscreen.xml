@@ -60,7 +60,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
@@ -75,7 +74,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
 
                     <TextView
                         style="@style/TextViewTitle14BoldStyle"
@@ -385,7 +383,6 @@
 
                 </LinearLayout>
 
-
             </LinearLayout>
 
         </LinearLayout>
@@ -407,60 +404,78 @@
         android:padding="1dp"
         android:text="We, at Eduvanz, are extremely careful about your privacy and will always strive to provide you the best in class service and security." />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/lin2"
-        style="@style/TextViewTitleSmallStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linContinuePermi"
-        android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
         android:padding="1dp">
 
         <CheckBox
             android:id="@+id/below2"
-            style="@style/TextViewTitle10BoldStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/by_proceeding_you_accept" />
+            android:layout_gravity="left"
+            android:gravity="left" />
 
-        <TextView
-            android:id="@+id/below3"
+        <LinearLayout
+            android:id="@+id/linTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="12sp" />
+            android:layout_toRightOf="@+id/below2"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/below4"
-            style="@style/TextViewTitle10BoldStyle"
+            <TextView
+                android:id="@+id/below23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:text="@string/by_proceeding_you_accept"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/linContinuePermi"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text=" @string/and"
-            android:textSize="12sp" />
+            android:layout_below="@+id/linTop"
+            android:layout_toRightOf="@+id/below2"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/below5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/below3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:textSize="12sp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/below4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:text=" @string/and"
+                android:textSize="12sp" />
 
+            <TextView
+                android:id="@+id/below5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linContinuePermi"

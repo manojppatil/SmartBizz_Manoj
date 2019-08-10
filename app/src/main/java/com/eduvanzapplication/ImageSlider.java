@@ -91,7 +91,6 @@ public class ImageSlider extends AppCompatActivity {
             public void onClick(View v) {
 
                 mPager.setCurrentItem(mPager.getCurrentItem() + 1);
-
             }
         });
 

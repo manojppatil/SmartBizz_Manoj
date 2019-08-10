@@ -1068,6 +1068,10 @@ public class KycDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                int year0=2019, month0=1, day0=1; // for min. date: 1. feb. 2017
+                Calendar cal = Calendar.getInstance();
+                cal.set( cal.get((Calendar.YEAR))-18, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0); //hour=0 min=0 sec=0
+
                 Calendar calendar = Calendar.getInstance();
 
                 int day=calendar.get(Calendar.DAY_OF_MONTH);
@@ -1087,9 +1091,8 @@ public class KycDetailFragment extends Fragment {
                     }
                 },year-18,month,day);
 
-
+                dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
                 dpd.show();
-
 
                /* DatePickerPopWin datePickerPopWin = new DatePickerPopWin.Builder(getActivity(), new DatePickerPopWin.OnDatePickedListener() {
                     @Override

@@ -4,19 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.newUI.SharedPref;
 import com.eduvanzapplication.newUI.VolleyCallAlgo360;
 
 import org.json.JSONObject;
@@ -29,7 +26,6 @@ public class FinancialAnalysisOnNavigationBar extends AppCompatActivity {
     public static Context context;
     public static AppCompatActivity mActivity;
     public ImageView ivbackbtn;
-    SharedPref sharedPref;
     public static ProgressBar progressBar;
     SharedPreferences sharedPreferences;
 

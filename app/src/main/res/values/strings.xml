@@ -13,83 +13,10 @@
     <!--/** FRIENDLY SCORE STRINGS XML CONTENT **/-->
     /** FRIENDLY SCORE STRINGS XML CONTENT **/
 
-    <string name="label_google_sign_in">Firebase + Google Sign In</string>
-    <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
-
-    <string name="label_facebook_login">Firebase + Facebook Login</string>
-    <string name="desc_facebook_login">Use a Facebook Login credential to authenticate with Firebase.</string>
-
-    <string name="label_twitter_login">Firebase + Twitter Login</string>
-    <string name="desc_twitter_login">Use a Twitter Login credential to authenticate with Firebase.</string>
-
-    <string name="label_emailpassword">Email/Password Authentication</string>
-    <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
-
-    <string name="label_anonymous_auth">Anonymous Authentication</string>
-    <string name="desc_anonymous_auth">Sign in anonymously and then later upgrade to a full Firebase Auth user.</string>
-
-    <string name="label_custom_auth">Custom Authentication</string>
-    <string name="desc_custom_auth">Use a custom token signed by your own server to authenticate with Firebase.</string>
-
-    <string name="label_firebase_ui">FirebaseUI Auth</string>
-    <string name="desc_firebase_ui">Use the FirebaseUI-Android library to authenticate with Firebase.</string>
-
-    <string name="hint_user_id">User ID</string>
-    <string name="get_custom_token">Get Token</string>
-    <string name="sign_in">Sign In</string>
-    <string name="create_account">Create Account</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="verify_email">Verify Email</string>
-    <string name="disconnect">Disconnect</string>
-    <string name="loading">Loading…</string>
-    <string name="custom_token">Custom Token</string>
-    <string name="signed_out">Signed Out</string>
-    <string name="token_null">Token: null</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
-    <string name="desc_firebase_lockup">Firebase logo and name</string>
-    <string name="auth_failed">Authentication failed</string>
-
-    <string name="firebase_status_fmt">Firebase User: %s</string>
-    <string name="firebase_user_management">Firebase User Management</string>
-
-    <string name="google_status_fmt">Google User: %s</string>
-    <string name="google_title_text">Google Sign In</string>
-
-    <string name="facebook_status_fmt">Facebook User: %s</string>
-    <string name="facebook_title_text">Facebook Login</string>
-
-    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
-    <string name="emailpassword_title_text">Email and Password</string>
-
-    <string name="twitter_status_fmt">Twitter User: %s</string>
-    <string name="twitter_title_text">Twitter Login</string>
-
-    <string name="firebaseui_status_fmt">Firebase User: %s</string>
-    <string name="firebaseui_title_text">FirebaseUI Auth</string>
-
-    <string name="id_fmt">User ID: %s</string>
-    <string name="email_fmt">Email: %s</string>
-
-    <string name="desc_linkedin_login">Use Linkedin Login</string>
-    <string name="desc_paypal_login">Login with Paypal</string>
-    <string name="title_activity_test_google_login">TestGoogleLoginActivity</string>
     <string name="title_activity_main2">Connect &amp; Score</string>
     <string name="title_activity_start">New Scoring</string>
 
     <string name="ok">I understand</string>
-    <string name="google_play_services_invalid">Google Play Service Version on your device is invalid</string>
-    <string name="google_play_services_invalid_title">Invalid Google Play Services</string>
-    <string name="no_google_play_services">Your device does not have Google Pay Services. Install From &google_play_services_link;</string>
-    <string name="no_google_play_services_title">Google Play Services Missing</string>
-    <string name="google_play_services_update">Update Google Play Services on your devices. Update from &google_play_services_link;</string>
-    <string name="google_play_services_title_update">Google Play Services is not updated on your device.</string>
-
-    <string name="google_play_services_updating">Google Play Services is being updated on your device. Check from &google_play_services_link;</string>
-    <string name="google_play_services_updating_title">Google Play Services is being updated.</string>
-    <string name="google_play_services_disabled">Google Play Services is disabled on your device. To use the App, Enable it.</string>
-    <string name="google_play_services_disabled_title">Google Play Services Disabled</string>
-    <string name="default_web_client_id1" translatable="false">577641006287-mdumdjrsf6o32obdrr74kttbifio73ku.apps.googleusercontent.com</string>
 
     <!--<string name="hint_user_id">User ID</string>-->
     <!--<string name="get_custom_token">Get Token</string>-->
@@ -158,7 +85,7 @@
     <string name="title_blog">Blog</string>
     <string name="title_interest_rate_policy">Interest Rate Policy</string>
     <string name="title_privacy_policy">Privacy Policy</string>
-    <string name="title_terms_and_condition">Terms &amp; Condition</string>
+    <string name="title_terms_and_condition">Terms &amp; Conditions</string>
     <string name="title_faq">FAQs</string>
     <string name="title_disclaimer">Disclaimer</string>
     <string name="title_about_us">About Us</string>
@@ -210,46 +137,18 @@
 
     <string name="sms_data">SMS Data</string>
     <string name="permissions_required">PERMISSIONS REQUIRED</string>
-    <string name="contacts_and_call_info">Contacts and Call Info</string>
-    <string name="device_info">Device Info</string>
-    <string name="camera_and_storage">Camera and Storage</string>
-    <string name="location_info_and_appusage">Location Info and AppUsage</string>
-    <string name="by_proceeding_you_accept">By proceeding you accept</string>
-    <string name="and"> and </string>
+    <!--<string name="by_proceeding_you_accept">By proceeding you accept</string>-->
+    <string name="by_proceeding_you_accept">By proceeding, I hereby authorises Eduvanz to carry out credit enquiries on the credit bureaus and accept</string>
+    <!--<string name="by_proceeding_you_accept">By proceeding I hereby, accept</string>-->
     <string name="terms_of_service"> terms of service</string>
     <string name="privacy_policy"> privacy policy.</string>
+    <string name="and"> and </string>
 
-    <string name="tenurestring">
-To complete the process we need some additional details. Request you to select the best suited loan plan and proceed further to complete the application
-</string>
     <!--<string name="tenurestring"><b> \t Great Job !!! \n</b>\n-->
     <!--Your application is successfully registerded with us. \n \n-->
     <!--To complete the process we need some additional details. Request you to select the best suited loan plan and proceed further to complete the application-->
     <!--</string>-->
 
-    <string name="permissionsms">To collect and monitor information about bank transactions, names of transacting parties, description of the transactions
-    and amount for faster loan processing.</string>
-    <string name="permissioncontacts">
-<b>Contacts -</b>
-To automatically identify potential references for your loan application. \n
-<b>Call History -</b>
-To gain information from your call logs that may be useful in the processing of your loan application.
-</string>
-    <string name="permissiondevice">
-To collect and monitor specific information about your device including IMEI number , call logs and phone number , in order to uniquely identify the device and ensure unauthorized devices are not able to act on your behalf, thereby help us prevent fraudulent activity.
-</string>
-    <string name="permissioncamera">
-<b>Camera -</b>
-To allow to take pictures required for loan application.\n
-<b>Storage -</b>
-To allow to upload documents and pictures for your loan application.
-</string>
-    <string name="permissionlocation">
-<b>Location -</b>
-To collect and monitor information about location of your device.\n
-<b>App Usage -</b>
-To gain information about your interest and likings to generate your credit score that may be useful in the processing of your loan application.
-</string>
     <string name="please_check_your_network_connection">Please check your network connection</string>
     <string name="please_choose_a_file_first">Please choose a File First</string>
     <string name="file_not_found">File Not Found</string>
@@ -262,7 +161,6 @@ To gain information about your interest and likings to generate your credit scor
     <string name="fair_practise_code">Fair Practices Code</string>
     <string name="eduvanz_push_notification">Eduvanz Push Notification</string>
     <string name="eduvanz">Eduvanz</string>
-    <string name="enter_institute_location">Enter Institute Location</string>
     <string name="more">Legal</string>
     <!--
    <string name="profile_photo">Profile Photo <font fgcolor="#EE415E">*</font></string>
@@ -273,10 +171,7 @@ To gain information about your interest and likings to generate your credit scor
     <string name="enter_received_otp">Enter Received OTP</string>
     <string name="now_enter">Now Enter</string>
     <string name="your_regtd_emalid">Your Registered Email ID</string>
-    <string name="close">Close</string>
     <string name="adhar_card">Aadhar Card</string>
-    <string name="take_picture_aadhar">Take the picture of your Aadhar card</string>
-    <string name="scan_aadhar">Scan QR code of your Aadhar card</string>
 
     <!-- Vertical Stepper View Sample Item -->
 
@@ -352,6 +247,7 @@ To gain information about your interest and likings to generate your credit scor
     <string name="latest_certificate_of_the_applicant">Latest Certificate of the Applicant</string>
 
     <string name="no_application_available_ro_view_pdf">No Application Available to View PDF</string>
+    <string name="no_application_available_ro_view_excel">No Application Available to View Excel</string>
     <string name="file_size_exceeds_limits_of_30_mb">File size exceeds limit of 30 MB</string>
     <string name="file_size_exceeds_limits_of_2_mb">File size exceeds limit of 2 MB</string>
 
@@ -361,10 +257,6 @@ To gain information about your interest and likings to generate your credit scor
     <string name="file_is_not_in_supported_format">file is not in supported format</string>
     <string name="downloading_of_file_just_finished">Downloading of File just finished</string>
     <string name="something_went_wrong_please_try_again_later">Something went wrong, please try again later.</string>
-
-
-    <string name="upload_profile_picture">Upload Profile Picture</string>
-    <string name="applicant_single_picture_required_to_be_uploaded">Applicant\'s single picture required to be uploaded</string>
 
 
     <string name="new_user">New User</string>
@@ -380,25 +272,20 @@ To gain information about your interest and likings to generate your credit scor
     <string name="fs_msg"><![CDATA[Use your social media to instantly improve your credit rating & get better rates on Eduvanz loan]]></string>
     <!--<string name="start_new_msg">Apply Now for an Instant Loan</string>-->
     <string name="start_new_msg">Apply for a new loan</string>
-    <string name="emi_cal_msg">Calculate the approx EMI amount, you need to pay</string>
     <string name="call_us_s">\t Call Us</string>
     <string name="whatsapp_us">\t WhatsApp Us</string>
     <string name="emailus">\t Email Us</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="as_per_aadhar"> * Address ss per your Aadhaar Card</string>
-    <string name="first_name_cap">FIRST NAME</string>
+    <string name="as_per_aadhar"> * Address as per your Aadhaar Card</string>
     <string name="first_name_new">First Name</string>
-    <string name="middle_name_cap">MIDDLE NAME</string>
     <string name="middle_name_new">Middle Name</string>
 
-    <string name="last_name_cap">LAST NAME</string>
     <string name="last_name_new">Last Name</string>
     <string name="select_your_gender">Select your gender</string>
     <string name="documents_availability">Documents Availability</string>
     <string name="current_address">Current Address</string>
     <string name="employement_details">Employment Details</string>
-    <string name="select_your_profession">Select Your Profession</string>
     <string name="course_details">Course Details</string>
 </resources>

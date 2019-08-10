@@ -141,6 +141,7 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
                 intent.putExtra("lead_id", leadid);
 
                 startActivity(intent);
+                TenureSelectionActivity.this.finish();
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

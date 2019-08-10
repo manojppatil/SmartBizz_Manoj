@@ -29,7 +29,7 @@
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/blue1"
                 app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-                app:tabTextColor="@color/lightGrey" />
+                app:tabTextColor="@color/grey" />
 
             <ImageView
                 android:layout_width="@dimen/_20sdp"

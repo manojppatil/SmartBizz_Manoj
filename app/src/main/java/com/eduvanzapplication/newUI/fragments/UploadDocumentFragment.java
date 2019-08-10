@@ -1008,7 +1008,11 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(bankStmntThree.getTag()));
 
-                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                    }
+//                                    else if (FileExtn.equalsIgnoreCase("xls") || FileExtn.equalsIgnoreCase("xlsx")) {
+//                                        openAnyFile(String.valueOf(bankStmntThree.getTag()));
+//                                    }
+                                    else if (FileExtn.equals("zip") || FileExtn.equals("rar") || FileExtn.equalsIgnoreCase("xls") || FileExtn.equalsIgnoreCase("xlsx")) {
                                         if (filepath.exists()) {
                                             Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
                                         } else {
@@ -1069,7 +1073,11 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         openPdf(String.valueOf(bankStmntSix.getTag()));
 
-                                    } else if (FileExtn.equals("zip") || FileExtn.equals("rar")) {
+                                    }
+//                                    else if (FileExtn.equalsIgnoreCase("xls") || FileExtn.equalsIgnoreCase("xlsx")) {
+//                                        openAnyFile(String.valueOf(bankStmntSix.getTag()));
+//                                    }
+                                    else if (FileExtn.equalsIgnoreCase("zip") || FileExtn.equalsIgnoreCase("rar") || FileExtn.equalsIgnoreCase("xls") || FileExtn.equalsIgnoreCase("xlsx")) {
                                         if (filepath.exists()) {
                                             Toast.makeText(getActivity(), "File is already downloaded: ", Toast.LENGTH_SHORT).show();
                                         } else {
@@ -1089,7 +1097,6 @@ public class UploadDocumentFragment extends Fragment {
                                 } else {
                                     Toast.makeText(getActivity(), "Please upload document first to preview", Toast.LENGTH_SHORT).show();
                                 }
-
 
                                 tap = 0;
                             }
@@ -4029,6 +4036,21 @@ public class UploadDocumentFragment extends Fragment {
         }
     }
 
+    private void openAnyFile(String mPath) {
+
+        Uri path = Uri.parse(mPath);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(path, "application/vnd.ms-excel");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        try {
+            startActivityForResult(intent, 1);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getActivity(), R.string.no_application_available_ro_view_excel, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void downLoadClick(String uri) {
         try {
             Handler handler = new Handler();
@@ -5006,7 +5028,7 @@ public class UploadDocumentFragment extends Fragment {
                         continue;
                     }
 
-                    documenPOJO.document_type_id = jsonObject1.getString("document_type_id");
+                    documenPOJO.document_type_id = jsonObject1.getString("document_type_id");//fk_document_type_id  document_type_id
                     documenPOJO.document_name = jsonObject1.getString("document_name");
                     documenPOJO.document_category = jsonObject1.getString("document_category");
                     documenPOJO.document_purpose = jsonObject1.getString("document_purpose");
@@ -5025,8 +5047,9 @@ public class UploadDocumentFragment extends Fragment {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                        String s = jsonObject1.getString("fk_document_type_id");
+                        String s = jsonObject1.getString("document_type_id");
                         String image = jsonObject1.getString("doc_path");
+                        String doc_upload_id = jsonObject1.getString("doc_upload_id");
                         String verification_status = jsonObject1.getString("verification_status");
                         String document_name = jsonObject1.getString("document_name");
 
@@ -5450,6 +5473,8 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         /*btnBankStmntThree.setText(R.string.preview);*/
                                         // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
+                                    } else if (FileExtn.equalsIgnoreCase("xls") || FileExtn.equalsIgnoreCase("xlsx")) {
+
                                     } else {
                                         /*btnBankStmntThree.setText(R.string.download);*/
                                         //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
@@ -5949,7 +5974,6 @@ public class UploadDocumentFragment extends Fragment {
                         }
                     }
 
-
                 }
 
 
@@ -6026,9 +6050,7 @@ public class UploadDocumentFragment extends Fragment {
                         // do something here with the file
                     }
                 }
-
-
-//new File(Environment.getExternalStorageDirectory().getPath()+"/PDFfiles").exists()
+            //new File(Environment.getExternalStorageDirectory().getPath()+"/PDFfiles").exists()
                    *//* String FileExtn1 = strFileName1.substring(strFileName1.lastIndexOf('.') + 1);
 
                     if (FileExtn1.equals("pdf")) {

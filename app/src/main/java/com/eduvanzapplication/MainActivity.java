@@ -22,7 +22,7 @@ public class MainActivity extends Application {
 
 //    public static String mainUrl = "http://192.168.1.6                                                                                                                                                                                                                                                                                    3/eduvanzapi/"; //Sheetal
 //    public static String mainUrl = "http://192.168.1.36/eduvanzapi/"; //Sharad
-//    public static String mainUrl = "http://192.168.1.19/eduvanzapi/"; //Dharam
+//    public static String mainUrl = "http://192.168.1.80/eduvanzapi/"; //Dharam 19/80
 //    public static String mainUrl = "http://192.168.0.115/eduvanzapi/"; //Sachin
 //    public static String mainUrl = "http://13.234.168.50/eduvanzapi/"; //AWS Server
 //    public static String mainUrl = "http://192.168.0.108/eduvanzapi/"; //Samir

@@ -133,14 +133,7 @@
     <color name="colorFMIcon">#E91171</color>
     <color name="colorFMIconDisabled">@android:color/darker_gray</color>
     <color name="feedback_header_background_color">#10808080</color>
-    <color name="on_board_color">#E91171</color>
     <color name="user_input_color">#E91171</color>
-    <color name="submitted_photo">#519E6D</color>
-    <color name="colorVerificationRectangle">#E91171</color>
-    <color name="colorVerificationIcon">#E91171</color>
-    <color name="colorCameraUnpressed">#E91171</color>
-    <color name="colorCameraPressed">#E91171</color>
-    <color name="photo_loading_color">#E91171</color>
     <color name="colorDottedLoading">#E91171</color>
 
 </resources>

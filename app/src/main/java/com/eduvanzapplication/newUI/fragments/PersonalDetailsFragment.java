@@ -369,25 +369,30 @@ public class PersonalDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                int year0=2019, month0=1, day0=1; // for min. date: 1. feb. 2017
+                Calendar cal = Calendar.getInstance();
+                cal.set( cal.get((Calendar.YEAR))-18, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0); //hour=0 min=0 sec=0
+
                 Calendar calendar = Calendar.getInstance();
-                int day=calendar.get(Calendar.DAY_OF_MONTH);
-                int month=calendar.get(Calendar.MONTH);
-              int year=calendar.get((Calendar.YEAR));
-              dpd=new DatePickerDialog( getActivity(),new DatePickerDialog.OnDateSetListener() {
-                   @Override
-                   public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get((Calendar.YEAR));
+                dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                       if (isProfileEnabled) {
-                           NewLeadActivity.dob=dayOfMonth+"-"+(month+1)+"-"+(year);
-                           txtDOB.setText(NewLeadActivity.dob);
-                           checkAllFields();
-                       }
+                        if (isProfileEnabled) {
+                            NewLeadActivity.dob = dayOfMonth + "-" + (month + 1) + "-" + (year);
+                            txtDOB.setText(NewLeadActivity.dob);
+                            checkAllFields();
+                        }
 
-                   }
-               },year-18,month,day);
-
-
-               dpd.show();
+                    }
+                }, year - 18, month, day);
+//                dpd.getDatePicker().setMinDate(cal.getTimeInMillis());
+                dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
+//                dpd.getDatePicker().setMaxDate(System.currentTimeMillis() - 1234564);
+                dpd.show();
              /*   DatePickerPopWin datePickerPopWin = new DatePickerPopWin.Builder(getActivity(), new DatePickerPopWin.OnDatePickedListener() {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
@@ -871,8 +876,7 @@ public class PersonalDetailsFragment extends Fragment {
                                     JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
 
                                     if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
-                                        if(!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals(""))
-                                        {
+                                        if (!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals("")) {
                                             NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
                                         }
                                     }
@@ -912,8 +916,7 @@ public class PersonalDetailsFragment extends Fragment {
 
                                     JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
                                     if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
-                                        if(!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals(""))
-                                        {
+                                        if (!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals("")) {
                                             NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
                                         }
                                     }
@@ -948,8 +951,7 @@ public class PersonalDetailsFragment extends Fragment {
                                     JSONObject jsonObjectData = jsonObject1.getJSONObject("details");
 
                                     if (jsonObjectData.getJSONObject("aadhaar").get("isMasked").toString().equals("no")) {
-                                        if(!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals(""))
-                                        {
+                                        if (!jsonObjectData.getJSONObject("aadhaar").get("value").toString().equals("")) {
                                             NewLeadActivity.Aaadhaarno = jsonObjectData.getJSONObject("aadhaar").get("value").toString();
                                         }
                                     }

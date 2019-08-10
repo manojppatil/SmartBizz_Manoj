@@ -1,0 +1,186 @@
+<!--<RelativeLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:card_view="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:gravity="center_horizontal"-->
+    <!--android:background="@color/transparent"-->
+    <!--android:orientation="vertical">-->
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/tools"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:gravity="center_horizontal"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardBackgroundColor="@color/colorRed"
+        card_view:cardElevation="@dimen/_5sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/lin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_star" />
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_star" />
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_star" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin2"
+                android:layout_below="@+id/lin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtMsg1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thank You"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    style="@style/TextViewLightStyle"/>
+
+                <TextView
+                    android:id="@+id/txtMsg2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="For Completing Your Application."
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    style="@style/TextViewTitle14BoldStyle"/>
+
+                <TextView
+                    android:id="@+id/txtMsg3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Your Application is under Evaluation."
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    style="@style/TextViewTitle14BoldStyle"/>
+
+                <TextView
+                    android:id="@+id/txtMsg4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="We'll Update as soon as"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    style="@style/TextViewTitle14BoldStyle"/>
+
+                <TextView
+                    android:id="@+id/txtMsg5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="The process is over!"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    style="@style/TextViewTitle14BoldStyle"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/lin2"
+                android:layout_toLeftOf="@+id/linbtn"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="For Any query you can contact our executives via Phone or Email."
+                    android:textColor="@color/white"
+                    android:fontFamily="@fonts/sourcesanspro_italic"
+                    style="@style/TextViewTitle14Style"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_below="@+id/lin2"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linDashBoard"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_circular_red_filled"
+                    android:elevation="@dimen/_4sdp"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:backgroundTint="@color/white"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        style="@style/TextViewTitleStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:text="Dashboard"
+                        android:textColor="@color/red"
+                        android:gravity="center" />
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:background="@color/red" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:tint="@color/red"
+                        app:srcCompat="@drawable/ic_angle_right" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+<!--</RelativeLayout>-->

@@ -37,6 +37,7 @@ import com.eduvanzapplication.R;
 import com.eduvanzapplication.Util.Globle;
 import com.eduvanzapplication.Util.Paytm;
 import com.eduvanzapplication.newUI.VolleyCall;
+import com.eduvanzapplication.newUI.newViews.LoanTabActivity;
 import com.eduvanzapplication.newUI.pojo.MLoanEmis;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
@@ -2094,6 +2095,28 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
             e.printStackTrace();
         }
 
+    }
+
+    public static void showDiaThanksDiag() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(((LoanTabActivity) context));
+        LayoutInflater inflater = ((LoanTabActivity) context).getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.thanksdialog, null);
+        dialogBuilder.setView(dialogView);
+        LinearLayout buttonSave = dialogView.findViewById(R.id.linDashBoard);
+        final AlertDialog alertDialog = dialogBuilder.create();
+//        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((LoanTabActivity) context).finish();
+                alertDialog.dismiss();
+            }
+        });
     }
 
     public void emiHistoryDialog(JSONObject jsonObject) {

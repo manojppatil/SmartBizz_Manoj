@@ -58,14 +58,14 @@ import java.util.List;
 import static android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
 
 public class LoanTabActivity extends AppCompatActivity implements KycDetailFragment.OnFragmentInteracting,
-        DetailedInfoFragment.onDetailedInfoFragmentInteractionListener,UploadDocumentFragment.onUploadFragmentInteractionListener,PostApprovalDocFragment.onPostFragmentInteractionListener {
+        DetailedInfoFragment.onDetailedInfoFragmentInteractionListener, UploadDocumentFragment.onUploadFragmentInteractionListener, PostApprovalDocFragment.onPostFragmentInteractionListener {
 
     private TabLayout tabLayout;
     private LinearLayout linDashBoard;
     public static ViewPager viewPager;
     public static String lead_id = "", student_id = "";
     Context context;
-    public  static AppCompatActivity mActivity;
+    public static AppCompatActivity mActivity;
     private final int REQUEST_LOCATION_PERMISSION = 1;
     SharedPreferences sharedPreferences;
     public static boolean isKycEdit;
@@ -75,7 +75,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     //    //kyc values
-    public static String firstName = "", applicant_id = "",tenureselectedflag="";
+    public static String firstName = "", applicant_id = "", tenureselectedflag = "";
     private AlertDialog mGPSDialog;
     // lastName = "", middleName = "", gender = "", dob = "", maritalStatus = "2", email = "", mobile = "",
 //            aadhar = "", pan = "", flatBuildingSociety = "", streetLocalityLandmark = "", pincode = "", countryId = "", stateId = "", cityId = "",
@@ -152,7 +152,6 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                     //locationMode=1 is Device only is selected
                     //locationMode=2 is Battery saving is selected
 
-
                     int locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
 
                     //location on and high acc mode or device only selected
@@ -166,7 +165,6 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                     //gps off
 
                     else if (statusOfGPS == false) {
-
 
                         if (locationMode == 0) {
 
@@ -492,10 +490,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         adapter.addFrag(new PostApprovalDocFragment(), String.valueOf(mPostAppr));
         adapter.addFrag(new AmortizationFragment(), String.valueOf(mAmort));
 
-         tenureselectedflag = getIntent().getExtras().getString("tenureselectedflag");
-
-
-
+        tenureselectedflag = getIntent().getExtras().getString("tenureselectedflag");
 
 //        adapter.addFrag(new KycDetailFragment(), "KYC Details");
 //        adapter.addFrag(new DetailedInfoFragment(), "Detailed Info");
@@ -516,7 +511,6 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                /* if ( adapter.mFragmentList.toString().contains("DetailedInfoFragment")){
                     adapter.addFrag(new DetailedInfoFragment(), String.valueOf(mDetailedInfo));
                 }*/
-
             }
 
             @Override
@@ -526,10 +520,22 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                         if (isKycEdit == true)
                             KycDetailFragment.validate();
                     }
+
                     if (viewPager.getCurrentItem() == 2) {
                         if (isDetailedInfoEdit == true)
                             DetailedInfoFragment.validate();
                     }
+
+//                    if (viewPager.getCurrentItem() == 3) {
+//                        if (PostApprovalDocFragment.linNoLoan.getVisibility() == View.VISIBLE)
+//                            PostApprovalDocFragment.showDiaThanksDiag();
+//                    }
+//
+//                    if (viewPager.getCurrentItem() == 4) {
+//                        if (AmortizationFragment.linNoAmort.getVisibility() == View.VISIBLE)
+//                            AmortizationFragment.showDiaThanksDiag();
+//                    }
+
                 }
             }
         });
@@ -585,7 +591,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         }
     }
 
-    public static void initDigio(String documentID, String email){
+    public static void initDigio(String documentID, String email) {
 
         final Digio digio = new Digio();
         DigioConfig digioConfig = new DigioConfig();
@@ -604,8 +610,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         }
     }
 
-
-    public void onSigningSuccess(String documentId,String message) {
+    public void onSigningSuccess(String documentId, String message) {
         Log.e(MainActivity.TAG, "onSigningSuccess2: ");
 //        Toast.makeText(context, documentId +" " + message, Toast.LENGTH_SHORT).show();
         PostApprovalDocFragment.digioSuccess(documentId);//DID180802180658447Q6OOLIITSFR2DJ

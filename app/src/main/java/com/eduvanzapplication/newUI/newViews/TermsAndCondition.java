@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -38,7 +39,7 @@ import com.eduvanzapplication.newUI.webviews.WebViewTermsNCondition;
 
 public class TermsAndCondition extends AppCompatActivity {
 
-    TextView below3, below5;
+    TextView below23, below3, below5;
     CheckBox below2;
     LinearLayout linContinuePermi;
     ScrollView scrollView;
@@ -53,25 +54,29 @@ public class TermsAndCondition extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//---HIDE STATUS BAR
 
             below2 = findViewById(R.id.below2);
+            below23 = findViewById(R.id.below23);
             below3 = findViewById(R.id.below3);
             below5 = findViewById(R.id.below5);
             scrollView = findViewById(R.id.scrollView_tnc);
 
-            String mystring = " " + getResources().getString(R.string.terms_of_service) + " ";
+            String mystring = getResources().getString(R.string.terms_of_service);
             SpannableString content = new SpannableString(mystring);
             content.setSpan(new UnderlineSpan(), 0, mystring.length(), 0);
-            below3.setText(content);
+            below3.setText(content +" ");
 
-            String mystring1 = " " + getResources().getString(R.string.privacy_policy);
+            String mystring1 = getResources().getString(R.string.privacy_policy);
             SpannableString content1 = new SpannableString(mystring1);
             content1.setSpan(new UnderlineSpan(), 0, mystring1.length(), 0);
-            below5.setText(content1);
+            below5.setText(" " + content1);
+
+            below3.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+            below5.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
             linContinuePermi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    if(below2.isChecked()) {
+                    if (below2.isChecked()) {
                         SharedPreferences sharedPreferences = getSharedPreferences("UserData", getApplicationContext().MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("userpolicyAgreement", "1");
@@ -81,7 +86,7 @@ public class TermsAndCondition extends AppCompatActivity {
                                 GetMobileNo.class);
                         startActivity(intent);
                         TermsAndCondition.this.finish();
-                    } else{
+                    } else {
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             below2.setBackgroundTintList(TermsAndCondition.this.getResources().getColorStateList(R.color.colorRed));
