@@ -288,4 +288,5 @@
     <string name="current_address">Current Address</string>
     <string name="employement_details">Employment Details</string>
     <string name="course_details">Course Details</string>
+    <string name="Thanks_msg">Your application is Under Evaluation. \nWe\'ll update as soon as \nthe process is over!</string>
 </resources>

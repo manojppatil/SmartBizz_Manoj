@@ -6,9 +6,11 @@ import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -20,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
@@ -34,6 +37,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,10 +102,15 @@ import static android.view.View.VISIBLE;
 import static com.eduvanzapplication.MainActivity.TAG;
 
 
-public class UploadDocumentFragment extends Fragment {
+public class UploadDocumentFragment extends Fragment implements View.OnClickListener {
 
-    public static LinearLayout linAllDocBlock, linKYCblock, linKYCblockBottom, linFinancBlockBottom, linEducationBlockBottom, linOtherBottom,
-            linFinancBlock, linEducationBlock, linOther, linKYCDocuments, linFinanceDocuments, linEducationDocuments, linOtherDocuments, linBottomBlocks;
+    public static LinearLayout linKYCblock, linKYCblockBottom, linFinancBlockBottom, linEducationBlockBottom,
+            linFinancBlock, linEducationBlock, linKYCDocuments, linFinanceDocuments, linEducationDocuments,
+            linDelAadhaarBtn, linDelPanBtn, linDelPhotoBtn, linDelPassportBtn, linDelVoterIdBtn, linDelDrivingLicenseBtn,
+            linDelTelephoneBillBtn, linDelElectricityBillBtn, linDelRentAgreementBtn, linDelAddressProofBtn, linDelSalarySlipSixBtn,
+            linDelSalarySlipThreeBtn, linDelBankStatementThreeBtn, linDelBankStatementSixBtn, linDelKVPBtn, linDelLICPolicyBtn,
+            linDelForm16Btn, linDelForm61Btn, linDelPensionLetterBtn, linDelITRBtn, linDelPNLBtn, linDeltenth_mark_sheetBtn,
+            linDeltwelvethMarkSheetBtn, linDellastCompletedMarkSheetBtn, linDellastcompletedDegreeCertificateBtn, linDelothersBtn;
 
     public static NestedScrollView nestedScrollView;
     public static TextView txtKycDocToggle, txtPhotoToggle, txtAddtionalDocToggle;
@@ -115,22 +124,21 @@ public class UploadDocumentFragment extends Fragment {
 
     public static onUploadFragmentInteractionListener mListener;
 
-
-    ProgressDialog dialog;
-
     /*KYC documents*/
-    static LinearLayout profileImage, aadharCard, panCard, passport, linSeemoreKycBtn, voterId, drivingLicense, telephoneBill, electricityBill,
+    static LinearLayout profileImage, aadharCard, panCard, passport, voterId, drivingLicense, telephoneBill, electricityBill,
             rentAgreement, addressProof;
-    static RelativeLayout profileBckgrnd, aadharBckgrnd, panBckgrnd, passportBckgrnd, voterIdBckgrnd, drivingLicenseBckgrnd, telephoneBillBckgrnd, electricityBillBckgrnd, rentAgreementBckgrnd, addressProofBckgrnd;
+    static RelativeLayout profileBckgrnd, aadharBckgrnd, panBckgrnd, passportBckgrnd, voterIdBckgrnd, drivingLicenseBckgrnd,
+            telephoneBillBckgrnd, electricityBillBckgrnd, rentAgreementBckgrnd, addressProofBckgrnd,othersBackground;
     /*Financial Documents*/
-    static LinearLayout salSlipSix, salSlipThree, bankStmntThree, linSeemoreFinancialBtn, bankStmntSix, linSeemoreEducationalBtn, kvp, licPolicy, form16, form61, pensionLetter, itr, pnl;
-    static RelativeLayout salSixBckgrnd, salThreeBckgrnd, bankThreeBckgrnd, bankSixBckgrnd, kvpBckgrnd, licPolicyBckgrnd, form16Bckgrnd, form61Bckgrnd, pensionBckgrnd, itrBckgrnd, pnlBckgrnd;
+    static LinearLayout salSlipSix, salSlipThree, bankStmntThree, linSeemoreFinancialBtn, bankStmntSix, kvp, licPolicy,
+            form16, form61, pensionLetter, itr, pnl;
+    static RelativeLayout salSixBckgrnd, salThreeBckgrnd, bankThreeBckgrnd, bankSixBckgrnd, kvpBckgrnd, licPolicyBckgrnd,
+            form16Bckgrnd, form61Bckgrnd, pensionBckgrnd, itrBckgrnd, pnlBckgrnd;
     /*Educational Documents*/
     static LinearLayout tenthMarksheet, twelvethMarksheet, degreeMarkSheet, degreeCertificate;
     static RelativeLayout tenthBckgrnd, twelthBckgrnd, degreeMarksheetBckgrnd, degreeCertificateBckgrnd;
     /*others documents*/
     static LinearLayout others;
-    static RelativeLayout othersBckgrnd;
     public String userChoosenTask;
     public static ImageView ivKyc, ivFinancial, ivEducational;
 
@@ -155,6 +163,46 @@ public class UploadDocumentFragment extends Fragment {
     public static Spinner spDocument;
     public static String selecteddocID = "";
 
+    public BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            //check if the broadcast message is for our Enqueued download
+            long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if (downloadReference == referenceId) {
+
+                int ch;
+                ParcelFileDescriptor file;
+                StringBuffer strContent = new StringBuffer("");
+
+                //parse the JSON data and display on the screen
+                try {
+                    file = downloadManager.openDownloadedFile(downloadReference);
+                    FileInputStream fileInputStream
+                            = new ParcelFileDescriptor.AutoCloseInputStream(file);
+
+                    while ((ch = fileInputStream.read()) != -1)
+                        strContent.append((char) ch);
+
+                    progressBar.setVisibility(View.GONE);
+                    try {
+                        progressBar.setVisibility(View.GONE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Toast toast = Toast.makeText(context, R.string.downloading_of_file_just_finished, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP, 25, 400);
+                    toast.show();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
 
     public UploadDocumentFragment() {
         // Required empty public constructor
@@ -194,6 +242,33 @@ public class UploadDocumentFragment extends Fragment {
 
         btnNextUploadDetail = view.findViewById(R.id.btnNextUploadDetail);
 
+        linDelAadhaarBtn = view.findViewById(R.id.linDelAadhaarBtn);
+        linDelPanBtn = view.findViewById(R.id.linDelPanBtn);
+        linDelPhotoBtn = view.findViewById(R.id.linDelPhotoBtn);
+        linDelPassportBtn = view.findViewById(R.id.linDelPassportBtn);
+        linDelVoterIdBtn = view.findViewById(R.id.linDelVoterIdBtn);
+        linDelDrivingLicenseBtn = view.findViewById(R.id.linDelDrivingLicenseBtn);
+        linDelTelephoneBillBtn = view.findViewById(R.id.linDelTelephoneBillBtn);
+        linDelElectricityBillBtn = view.findViewById(R.id.linDelElectricityBillBtn);
+        linDelRentAgreementBtn = view.findViewById(R.id.linDelRentAgreementBtn);
+        linDelAddressProofBtn = view.findViewById(R.id.linDelAddressProofBtn);
+        linDelSalarySlipSixBtn = view.findViewById(R.id.linDelSalarySlipSixBtn);
+        linDelSalarySlipThreeBtn = view.findViewById(R.id.linDelSalarySlipThreeBtn);
+        linDelBankStatementThreeBtn = view.findViewById(R.id.linDelBankStatementThreeBtn);
+        linDelBankStatementSixBtn = view.findViewById(R.id.linDelBankStatementSixBtn);
+        linDelKVPBtn = view.findViewById(R.id.linDelKVPBtn);
+        linDelLICPolicyBtn = view.findViewById(R.id.linDelLICPolicyBtn);
+        linDelForm16Btn = view.findViewById(R.id.linDelForm16Btn);
+        linDelForm61Btn = view.findViewById(R.id.linDelForm61Btn);
+        linDelPensionLetterBtn = view.findViewById(R.id.linDelPensionLetterBtn);
+        linDelITRBtn = view.findViewById(R.id.linDelITRBtn);
+        linDelPNLBtn = view.findViewById(R.id.linDelPNLBtn);
+        linDeltenth_mark_sheetBtn = view.findViewById(R.id.linDeltenth_mark_sheetBtn);
+        linDeltwelvethMarkSheetBtn = view.findViewById(R.id.linDeltwelvethMarkSheetBtn);
+        linDellastCompletedMarkSheetBtn = view.findViewById(R.id.linDellastCompletedMarkSheetBtn);
+        linDellastcompletedDegreeCertificateBtn = view.findViewById(R.id.linDellastcompletedDegreeCertificateBtn);
+        linDelothersBtn = view.findViewById(R.id.linDelothersBtn);
+
         ivcolorphotogratitle = view.findViewById(R.id.ivcolorphotogratitle);
         ivkyctitlecheck = view.findViewById(R.id.ivkyctitlecheck);
         linAddtionalDocToggle = view.findViewById(R.id.linAddtionalDocToggle);
@@ -212,6 +287,7 @@ public class UploadDocumentFragment extends Fragment {
         electricityBillBckgrnd = view.findViewById(R.id.electricityBillBackground);
         rentAgreementBckgrnd = view.findViewById(R.id.rentAgreementBackground);
         addressProofBckgrnd = view.findViewById(R.id.addressProofBackground);
+        othersBackground = view.findViewById(R.id.othersBackground);
         //financial details
         salSixBckgrnd = view.findViewById(R.id.salSixBackground);
         salThreeBckgrnd = view.findViewById(R.id.salThreeBackground);
@@ -234,6 +310,8 @@ public class UploadDocumentFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar_docupload);
         selecteddocID = "";
 
+        IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+        context.registerReceiver(downloadReceiver, filter);
 
         btnNextUploadDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,6 +320,32 @@ public class UploadDocumentFragment extends Fragment {
             }
         });
 
+        linDelAadhaarBtn.setOnClickListener(this);
+        linDelPanBtn.setOnClickListener(this);
+        linDelPhotoBtn.setOnClickListener(this);
+        linDelPassportBtn.setOnClickListener(this);
+        linDelVoterIdBtn.setOnClickListener(this);
+        linDelDrivingLicenseBtn.setOnClickListener(this);
+        linDelTelephoneBillBtn.setOnClickListener(this);
+        linDelElectricityBillBtn.setOnClickListener(this);
+        linDelRentAgreementBtn.setOnClickListener(this);
+        linDelAddressProofBtn.setOnClickListener(this);
+        linDelSalarySlipSixBtn.setOnClickListener(this);
+        linDelSalarySlipThreeBtn.setOnClickListener(this);
+        linDelBankStatementThreeBtn.setOnClickListener(this);
+        linDelBankStatementSixBtn.setOnClickListener(this);
+        linDelKVPBtn.setOnClickListener(this);
+        linDelLICPolicyBtn.setOnClickListener(this);
+        linDelForm16Btn.setOnClickListener(this);
+        linDelForm61Btn.setOnClickListener(this);
+        linDelPensionLetterBtn.setOnClickListener(this);
+        linDelITRBtn.setOnClickListener(this);
+        linDelPNLBtn.setOnClickListener(this);
+        linDeltenth_mark_sheetBtn.setOnClickListener(this);
+        linDeltwelvethMarkSheetBtn.setOnClickListener(this);
+        linDellastCompletedMarkSheetBtn.setOnClickListener(this);
+        linDellastcompletedDegreeCertificateBtn.setOnClickListener(this);
+        linDelothersBtn.setOnClickListener(this);
 
         try {
             //============================KYC profile image========================
@@ -353,7 +457,7 @@ public class UploadDocumentFragment extends Fragment {
                                         }
                                     } else {
                                         try {
-                                            openImage(String.valueOf(profileImage.getTag()));
+                                            openImage(String.valueOf(panCard.getTag()));
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -1866,8 +1970,129 @@ public class UploadDocumentFragment extends Fragment {
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
 
-
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.linDelAadhaarBtn:
+                deleteFileAPI("3", linDelAadhaarBtn.getTag().toString());
+                break;
+            case R.id.linDelPanBtn:
+                deleteFileAPI("2", linDelPanBtn.getTag().toString());
+                break;
+            case R.id.linDelPhotoBtn:
+                deleteFileAPI("1", linDelPhotoBtn.getTag().toString());
+                break;
+            case R.id.linDelPassportBtn:
+                deleteFileAPI("4", linDelPassportBtn.getTag().toString());
+                break;
+            case R.id.linDelVoterIdBtn:
+                deleteFileAPI("5", linDelVoterIdBtn.getTag().toString());
+                break;
+            case R.id.linDelDrivingLicenseBtn:
+                deleteFileAPI("6", linDelDrivingLicenseBtn.getTag().toString());
+                break;
+            case R.id.linDelTelephoneBillBtn:
+                deleteFileAPI("7", linDelTelephoneBillBtn.getTag().toString());
+                break;
+            case R.id.linDelElectricityBillBtn:
+                deleteFileAPI("8", linDelElectricityBillBtn.getTag().toString());
+                break;
+            case R.id.linDelRentAgreementBtn:
+                deleteFileAPI("9", linDelRentAgreementBtn.getTag().toString());
+                break;
+            case R.id.linDelAddressProofBtn:
+                deleteFileAPI("30", linDelAddressProofBtn.getTag().toString());
+                break;
+            case R.id.linDelSalarySlipSixBtn:
+                deleteFileAPI("17", linDelSalarySlipSixBtn.getTag().toString());
+                break;
+            case R.id.linDelSalarySlipThreeBtn:
+                deleteFileAPI("18", linDelSalarySlipThreeBtn.getTag().toString());
+                break;
+            case R.id.linDelBankStatementThreeBtn:
+                deleteFileAPI("19", linDelBankStatementThreeBtn.getTag().toString());
+                break;
+            case R.id.linDelBankStatementSixBtn:
+                deleteFileAPI("20", linDelBankStatementSixBtn.getTag().toString());
+                break;
+            case R.id.linDelKVPBtn:
+                deleteFileAPI("10", linDelKVPBtn.getTag().toString());
+                break;
+            case R.id.linDelLICPolicyBtn:
+                deleteFileAPI("11", linDelLICPolicyBtn.getTag().toString());
+                break;
+            case R.id.linDelForm16Btn:
+                deleteFileAPI("12", linDelForm16Btn.getTag().toString());
+                break;
+            case R.id.linDelForm61Btn:
+                deleteFileAPI("13", linDelForm61Btn.getTag().toString());
+                break;
+            case R.id.linDelPensionLetterBtn:
+                deleteFileAPI("14", linDelPensionLetterBtn.getTag().toString());
+                break;
+            case R.id.linDelITRBtn:
+                deleteFileAPI("15", linDelITRBtn.getTag().toString());
+                break;
+            case R.id.linDelPNLBtn:
+                deleteFileAPI("16", linDelPNLBtn.getTag().toString());
+                break;
+            case R.id.linDeltenth_mark_sheetBtn:
+                deleteFileAPI("21", linDeltenth_mark_sheetBtn.getTag().toString());
+                break;
+            case R.id.linDeltwelvethMarkSheetBtn:
+                deleteFileAPI("22", linDeltwelvethMarkSheetBtn.getTag().toString());
+                break;
+            case R.id.linDellastCompletedMarkSheetBtn:
+                deleteFileAPI("23", linDellastCompletedMarkSheetBtn.getTag().toString());
+                break;
+            case R.id.linDellastcompletedDegreeCertificateBtn:
+                deleteFileAPI("24", linDellastcompletedDegreeCertificateBtn.getTag().toString());
+                break;
+            case R.id.linDelothersBtn:
+                deleteFileAPI("31", linDelothersBtn.getTag().toString());
+                break;
+        }
+    }
+
+    public void deleteFileAPI(String docTypeId, String docId) {
+
+        try {
+            String url = MainActivity.mainUrl + "document/deleteDocument";
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("lead_id", MainActivity.lead_id);
+            params.put("applicant_id", LoanTabActivity.applicant_id);
+            params.put("document_type_id", docTypeId);//19
+            params.put("docid", docId);//52692
+            if (!Globle.isNetworkAvailable(context)) {
+                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+            } else {
+                progressBar.setVisibility(View.VISIBLE);
+                VolleyCall volleyCall = new VolleyCall();
+                volleyCall.sendRequest(context, url, null, mFragment, "deletedocument", params, MainActivity.auth_token);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setdeleteFileStatus(JSONObject jsonDataO) {
+        try {
+            String message = jsonDataO.getString("message");
+            progressBar.setVisibility(View.GONE);
+            if (jsonDataO.getInt("status") == 1) {
+                getUploadDocumentsApiCall();
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            progressBar.setVisibility(View.GONE);
+        }
+
     }
 
     public static void ShowDocument() {
@@ -4373,54 +4598,79 @@ public class UploadDocumentFragment extends Fragment {
 //                imgAadhaar3.setImageDrawable(getResources().getDrawable(R.drawable.pdf_image));
                         if (documentTypeNo.equalsIgnoreCase("1")) {
                             aadharCard.setVisibility(View.VISIBLE);
+                            linDelAadhaarBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("2")) {
                             panCard.setVisibility(View.VISIBLE);
+                            linDelPanBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("3")) {
                             passport.setVisibility(View.VISIBLE);
+                            linDelPassportBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("4")) {
                             voterId.setVisibility(View.VISIBLE);
+                            linDelVoterIdBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("5")) {
                             drivingLicense.setVisibility(View.VISIBLE);
+                            linDelDrivingLicenseBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("6")) {
                             telephoneBill.setVisibility(View.VISIBLE);
+                            linDelTelephoneBillBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("7")) {
                             electricityBill.setVisibility(View.VISIBLE);
+                            linDelElectricityBillBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("8")) {
                             rentAgreement.setVisibility(View.VISIBLE);
+                            linDelRentAgreementBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("9")) {
                             addressProof.setVisibility(View.VISIBLE);
+                            linDelAddressProofBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("10")) {
                             salSlipSix.setVisibility(View.VISIBLE);
+                            linDelSalarySlipThreeBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("11")) {
                             salSlipThree.setVisibility(View.VISIBLE);
+                            linDelSalarySlipThreeBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("12")) {
                             bankStmntThree.setVisibility(View.VISIBLE);
+                            linDelBankStatementThreeBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("13")) {
                             bankStmntSix.setVisibility(View.VISIBLE);
+                            linDelBankStatementSixBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("14")) {
                             kvp.setVisibility(View.VISIBLE);
+                            linDelKVPBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("15")) {
                             licPolicy.setVisibility(View.VISIBLE);
+                            linDelLICPolicyBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("16")) {
                             form16.setVisibility(View.VISIBLE);
+                            linDelForm16Btn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("17")) {
                             form61.setVisibility(View.VISIBLE);
+                            linDelForm61Btn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("18")) {
                             pensionLetter.setVisibility(View.VISIBLE);
+                            linDelPensionLetterBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("19")) {
                             itr.setVisibility(View.VISIBLE);
+                            linDelITRBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("20")) {
                             pnl.setVisibility(View.VISIBLE);
+                            linDelPNLBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("21")) {
                             tenthMarksheet.setVisibility(View.VISIBLE);
+                            linDeltenth_mark_sheetBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("22")) {
                             twelvethMarksheet.setVisibility(View.VISIBLE);
+                            linDeltwelvethMarkSheetBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("23")) {
                             degreeMarkSheet.setVisibility(View.VISIBLE);
+                            linDellastCompletedMarkSheetBtn.setVisibility(View.VISIBLE);
                         } else if (documentTypeNo.equalsIgnoreCase("24")) {
                             degreeCertificate.setVisibility(View.VISIBLE);
-                        } else if (documentTypeNo.equalsIgnoreCase("25")) {
+                            linDellastcompletedDegreeCertificateBtn.setVisibility(View.VISIBLE);
+                        } else if (documentTypeNo.equalsIgnoreCase("31")) {
                             others.setVisibility(View.VISIBLE);
+                            linDelothersBtn.setVisibility(View.VISIBLE);
 
                         }
                     } else {
@@ -4688,8 +4938,6 @@ public class UploadDocumentFragment extends Fragment {
     public int uploadFile(String selectedFilePath, String doctypeno, String strapplicantType, String strapplicantId) {
         String urlup = MainActivity.mainUrl + "document/documentUpload";
 
-        Log.e(TAG, "urlup++++++: " + urlup);
-
         int serverResponseCode = 0;
         documentTypeNo = doctypeno;
         Log.e(TAG, "applicantType: " + strapplicantType + "documentTypeNo: " + doctypeno);
@@ -4704,11 +4952,9 @@ public class UploadDocumentFragment extends Fragment {
         int maxBufferSize = 1 * 1024 * 1024;
         File selectedFile = new File(selectedFilePath);
 
-
         String[] parts = selectedFilePath.split("/");
         String fileName = parts[parts.length - 1];
         String[] fileExtn = fileName.split(".");
-
 
         if (!selectedFile.isFile()) {
             //dialog.dismiss();
@@ -4798,7 +5044,6 @@ public class UploadDocumentFragment extends Fragment {
                 dataOutputStream.writeBytes(documentTypeNo);
                 dataOutputStream.writeBytes(lineEnd);
 
-
                 dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
                 serverResponseCode = connection.getResponseCode();
@@ -4811,8 +5056,6 @@ public class UploadDocumentFragment extends Fragment {
 
                 while ((output = br.readLine()) != null) {
                     sb.append(output);
-                    Log.e("TAG", "uploadFile: " + br);
-//                    Log.e("TAG", "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
                 }
                 Log.e("TAG", "uploadFile: " + sb.toString());
                 try {
@@ -4820,7 +5063,7 @@ public class UploadDocumentFragment extends Fragment {
                     String mData = mJson.getString("status");
                     String mData1 = mJson.getString("message");
 
-                    Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
+//                    Log.e("TAG", " 2252: " + new Date().toLocaleString());//1538546658896.jpg/
 
                     if (mData.equalsIgnoreCase("1")) {
                         ((LoanTabActivity) context).runOnUiThread(new Runnable() {
@@ -4828,14 +5071,18 @@ public class UploadDocumentFragment extends Fragment {
                             public void run() {
                                 uploadFilePath = "";
                                 //delete file path.
+
+                                getUploadDocumentsApiCall();
+
                                 try {
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                        Files.deleteIfExists(Paths.get(selectedFilePath));
+                                    if (selectedFilePath.toString().contains("Ocr")) {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                            Files.deleteIfExists(Paths.get(selectedFilePath));
+                                        }
                                     }
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                getUploadDocumentsApiCall();
 
                                 progressBar.setVisibility(GONE);
                                 Log.e("TAG", "uploadFile: code 1 " + mData);
@@ -4863,7 +5110,7 @@ public class UploadDocumentFragment extends Fragment {
                     ((LoanTabActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.e("TAG", " 2303: " + new Date().toLocaleString());//1538546658896.jpg/
+//                            Log.e("TAG", " 2303: " + new Date().toLocaleString());//1538546658896.jpg/
                         }
                     });
                 }
@@ -4876,7 +5123,7 @@ public class UploadDocumentFragment extends Fragment {
                 ((LoanTabActivity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("TAG", " 2318: " + new Date().toLocaleString());//1538546658896.jpg/
+//                        Log.e("TAG", " 2318: " + new Date().toLocaleString());//1538546658896.jpg/
                         progressBar.setVisibility(View.GONE);
                     }
                 });
@@ -4890,14 +5137,12 @@ public class UploadDocumentFragment extends Fragment {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.GONE);
-                        Log.e("TAG", " 2335: " + new Date().toLocaleString());//1538546658896.jpg/
+//                        Log.e("TAG", " 2335: " + new Date().toLocaleString());//1538546658896.jpg/
                     }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            Log.e("TAG", " 2342: " + new Date().toLocaleString());//1538546658896.jpg/
 
             return serverResponseCode;
         }
@@ -4953,7 +5198,6 @@ public class UploadDocumentFragment extends Fragment {
         builder.show();
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
@@ -5001,6 +5245,60 @@ public class UploadDocumentFragment extends Fragment {
             Log.e("SERVER CALL", "getDocuments" + jsonData);
             String status = jsonData.optString("status");
             String message = jsonData.optString("message");
+
+            profileImage.setTag("");
+            profileBckgrnd.setVisibility(View.GONE);
+            aadharCard.setTag("");
+            aadharBckgrnd.setVisibility(View.GONE);
+            panCard.setTag("");
+            panBckgrnd.setVisibility(View.GONE);
+            passport.setTag("");
+            passportBckgrnd.setVisibility(View.GONE);
+            voterId.setTag("");
+            voterIdBckgrnd.setVisibility(View.GONE);
+            drivingLicense.setTag("");
+            drivingLicenseBckgrnd.setVisibility(View.GONE);
+            telephoneBill.setTag("");
+            telephoneBillBckgrnd.setVisibility(View.GONE);
+            electricityBill.setTag("");
+            electricityBillBckgrnd.setVisibility(View.GONE);
+            degreeCertificate.setTag("");
+            degreeCertificateBckgrnd.setVisibility(View.GONE);
+            others.setTag("");
+            othersBackground.setVisibility(View.GONE);
+            rentAgreement.setTag("");
+            rentAgreementBckgrnd.setVisibility(View.GONE);
+            addressProof.setTag("");
+            addressProofBckgrnd.setVisibility(View.GONE);
+            salSlipSix.setTag("");
+            salSixBckgrnd.setVisibility(View.GONE);
+            salSlipThree.setTag("");
+            salThreeBckgrnd.setVisibility(View.GONE);
+            bankStmntThree.setTag("");
+            bankThreeBckgrnd.setVisibility(View.GONE);
+            bankStmntSix.setTag("");
+            bankSixBckgrnd.setVisibility(View.GONE);
+            kvp.setTag("");
+            kvpBckgrnd.setVisibility(View.GONE);
+            licPolicy.setTag("");
+            licPolicyBckgrnd.setVisibility(View.GONE);
+            form16.setTag("");
+            form16Bckgrnd.setVisibility(View.GONE);
+            form61.setTag("");
+            form61Bckgrnd.setVisibility(View.GONE);
+            pensionLetter.setTag("");
+            pensionBckgrnd.setVisibility(View.GONE);
+            itr.setTag("");
+            itrBckgrnd.setVisibility(View.GONE);
+            pnl.setTag("");
+            pnlBckgrnd.setVisibility(View.GONE);
+            degreeMarkSheet.setTag("");
+            degreeMarksheetBckgrnd.setVisibility(View.GONE);
+            tenthMarksheet.setTag("");
+            tenthBckgrnd.setVisibility(View.GONE);
+            twelvethMarksheet.setTag("");
+            twelthBckgrnd.setVisibility(View.GONE);
+
             String baseUrl = String.valueOf(jsonData.getJSONObject("result").get("baseUrl"));
             if (status.equalsIgnoreCase("1")) {
                 String strFileName, FileExtn;
@@ -5053,8 +5351,6 @@ public class UploadDocumentFragment extends Fragment {
                         String verification_status = jsonObject1.getString("verification_status");
                         String document_name = jsonObject1.getString("document_name");
 
-                        Log.e(TAG, "image: " + image);
-
                         switch (s) {
 
                             case "1":
@@ -5067,7 +5363,7 @@ public class UploadDocumentFragment extends Fragment {
                                     profileImage.setTag(baseUrl + image);
                                     profileBckgrnd.setVisibility(View.VISIBLE);
                                     ivcolorphotogratitle.setVisibility(VISIBLE);
-
+                                    linDelPhotoBtn.setTag(doc_upload_id);
 
                                 /*imgPhotoUploadTick.setVisibility(View.VISIBLE);
                                 txtPhoto1.setVisibility(View.GONE);*/
@@ -5087,6 +5383,8 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     aadharCard.setTag(baseUrl + image);
                                     aadharBckgrnd.setVisibility(VISIBLE);
+                                    linDelAadhaarBtn.setTag(doc_upload_id);
+
                                /* imgAadhaarUploadTick3.setVisibility(View.VISIBLE);
                                 txtAadhaar3.setVisibility(View.GONE);
 */
@@ -5101,7 +5399,6 @@ public class UploadDocumentFragment extends Fragment {
                                     } else {
                                         /*btnAadhar.setText(R.string.download);*/
                                     }
-
                                     //this below condition apply for green icon sign dispaly on KYC title
 
                                     if (bAadhaar) {
@@ -5122,6 +5419,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     panCard.setTag(baseUrl + image);
                                     panBckgrnd.setVisibility(View.VISIBLE);
+                                    linDelPanBtn.setTag(doc_upload_id);
                                 /*imgPanUploadTick2.setVisibility(View.VISIBLE);
                                 txtPan2.setVisibility(View.GONE);*/
                                     strFileName = panCard.getTag().toString().substring(panCard.getTag().toString().lastIndexOf("/") + 1);
@@ -5155,6 +5453,7 @@ public class UploadDocumentFragment extends Fragment {
 
                                     passport.setTag(baseUrl + image);
                                     passportBckgrnd.setVisibility(VISIBLE);
+                                    linDelPassportBtn.setTag(doc_upload_id);
                                 /*imgAddressUploadTick38.setVisibility(View.VISIBLE);
                                 txtAddress38.setVisibility(View.GONE);*/
                                     strFileName = passport.getTag().toString().substring(passport.getTag().toString().lastIndexOf("/") + 1);
@@ -5185,6 +5484,7 @@ public class UploadDocumentFragment extends Fragment {
 
                                     voterId.setTag(baseUrl + image);
                                     voterIdBckgrnd.setVisibility(VISIBLE);
+                                    linDelVoterIdBtn.setTag(doc_upload_id);
                                 /*imgSalarySlipUploadTick18.setVisibility(View.VISIBLE);
                                 txtSalarySlip18.setVisibility(View.GONE);*/
                                     strFileName = voterId.getTag().toString().substring(voterId.getTag().toString().lastIndexOf("/") + 1);
@@ -5212,6 +5512,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     drivingLicense.setTag(baseUrl + image);
                                     drivingLicenseBckgrnd.setVisibility(VISIBLE);
+                                    linDelDrivingLicenseBtn.setTag(doc_upload_id);
                                /* imgBankStmtUploadTick19.setVisibility(View.VISIBLE);
                                 txtBankStmt19.setVisibility(View.GONE);*/
                                     strFileName = drivingLicense.getTag().toString().substring(drivingLicense.getTag().toString().lastIndexOf("/") + 1);
@@ -5241,6 +5542,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     telephoneBill.setTag(baseUrl + image);
                                     telephoneBillBckgrnd.setVisibility(VISIBLE);
+                                    linDelTelephoneBillBtn.setTag(doc_upload_id);
                                 /*imgDegreeMarkSheetUploadTick23.setVisibility(View.VISIBLE);
                                 txtDegreeMarkSheet23.setVisibility(View.GONE);*/
                                     strFileName = telephoneBill.getTag().toString().substring(telephoneBill.getTag().toString().lastIndexOf("/") + 1);
@@ -5269,6 +5571,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     electricityBill.setTag(baseUrl + image);
                                     electricityBillBckgrnd.setVisibility(VISIBLE);
+                                    linDelElectricityBillBtn.setTag(doc_upload_id);
                                /* imgDegreeMarkSheetUploadTick23.setVisibility(View.VISIBLE);
                                 txtDegreeMarkSheet23.setVisibility(View.GONE);*/
                                     strFileName = electricityBill.getTag().toString().substring(electricityBill.getTag().toString().lastIndexOf("/") + 1);
@@ -5297,6 +5600,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     degreeCertificate.setTag(baseUrl + image);
                                     degreeCertificateBckgrnd.setVisibility(VISIBLE);
+                                    linDellastcompletedDegreeCertificateBtn.setTag(doc_upload_id);
                                 /*imgDegreeCertiUploadTick24.setVisibility(View.VISIBLE);
                                 txtDegreeCerti24.setVisibility(View.GONE);*/
                                     strFileName = degreeCertificate.getTag().toString().substring(degreeCertificate.getTag().toString().lastIndexOf("/") + 1);
@@ -5325,7 +5629,8 @@ public class UploadDocumentFragment extends Fragment {
                                         others.setVisibility(VISIBLE);
                                     }
                                     others.setTag(baseUrl + image);
-                                    othersBckgrnd.setVisibility(VISIBLE);
+                                    othersBackground.setVisibility(VISIBLE);
+                                    linDelothersBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = others.getTag().toString().substring(others.getTag().toString().lastIndexOf("/") + 1);
@@ -5354,6 +5659,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     rentAgreement.setTag(baseUrl + image);
                                     rentAgreementBckgrnd.setVisibility(VISIBLE);
+                                    linDelRentAgreementBtn.setTag(doc_upload_id);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = rentAgreement.getTag().toString().substring(rentAgreement.getTag().toString().lastIndexOf("/") + 1);
@@ -5382,6 +5688,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     addressProof.setTag(baseUrl + image);
                                     addressProofBckgrnd.setVisibility(VISIBLE);
+                                    linDelAddressProofBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = addressProof.getTag().toString().substring(addressProof.getTag().toString().lastIndexOf("/") + 1);
@@ -5409,6 +5716,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     salSlipSix.setTag(baseUrl + image);
                                     salSixBckgrnd.setVisibility(VISIBLE);
+                                    linDelSalarySlipSixBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = salSlipSix.getTag().toString().substring(salSlipSix.getTag().toString().lastIndexOf("/") + 1);
@@ -5436,6 +5744,8 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     salSlipThree.setTag(baseUrl + image);
                                     salThreeBckgrnd.setVisibility(VISIBLE);
+                                    linDelSalarySlipThreeBtn.setTag(doc_upload_id);
+
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = salSlipThree.getTag().toString().substring(salSlipThree.getTag().toString().lastIndexOf("/") + 1);
@@ -5464,6 +5774,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     bankStmntThree.setTag(baseUrl + image);
                                     bankThreeBckgrnd.setVisibility(VISIBLE);
+                                    linDelBankStatementThreeBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = bankStmntThree.getTag().toString().substring(bankStmntThree.getTag().toString().lastIndexOf("/") + 1);
@@ -5473,8 +5784,6 @@ public class UploadDocumentFragment extends Fragment {
                                     if (FileExtn.equals("pdf")) {
                                         /*btnBankStmntThree.setText(R.string.preview);*/
                                         // imgOtherDoc31.setBackgroundResource(R.drawable.pdf_image);
-                                    } else if (FileExtn.equalsIgnoreCase("xls") || FileExtn.equalsIgnoreCase("xlsx")) {
-
                                     } else {
                                         /*btnBankStmntThree.setText(R.string.download);*/
                                         //imgOtherDoc31.setBackgroundResource(R.drawable.zip_image);
@@ -5495,6 +5804,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     bankStmntSix.setTag(baseUrl + image);
                                     bankSixBckgrnd.setVisibility(VISIBLE);
+                                    linDelBankStatementSixBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = bankStmntSix.getTag().toString().substring(bankStmntSix.getTag().toString().lastIndexOf("/") + 1);
@@ -5523,6 +5833,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     kvp.setTag(baseUrl + image);
                                     kvpBckgrnd.setVisibility(VISIBLE);
+                                    linDelKVPBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = kvp.getTag().toString().substring(kvp.getTag().toString().lastIndexOf("/") + 1);
@@ -5551,6 +5862,8 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     licPolicy.setTag(baseUrl + image);
                                     licPolicyBckgrnd.setVisibility(VISIBLE);
+                                    linDelLICPolicyBtn.setTag(doc_upload_id);
+
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = licPolicy.getTag().toString().substring(licPolicy.getTag().toString().lastIndexOf("/") + 1);
@@ -5580,6 +5893,8 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     form16.setTag(baseUrl + image);
                                     form16Bckgrnd.setVisibility(VISIBLE);
+                                    linDelForm16Btn.setTag(doc_upload_id);
+
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = form16.getTag().toString().substring(form16.getTag().toString().lastIndexOf("/") + 1);
@@ -5608,6 +5923,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     form61.setTag(baseUrl + image);
                                     form61Bckgrnd.setVisibility(VISIBLE);
+                                    linDelForm61Btn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = form61.getTag().toString().substring(form61.getTag().toString().lastIndexOf("/") + 1);
@@ -5635,9 +5951,10 @@ public class UploadDocumentFragment extends Fragment {
                                     } else {
                                         pensionLetter.setVisibility(VISIBLE);
                                     }
-
                                     pensionLetter.setTag(baseUrl + image);
                                     pensionBckgrnd.setVisibility(VISIBLE);
+                                    linDelPensionLetterBtn.setTag(doc_upload_id);
+
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = pensionLetter.getTag().toString().substring(pensionLetter.getTag().toString().lastIndexOf("/") + 1);
@@ -5667,6 +5984,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     itr.setTag(baseUrl + image);
                                     itrBckgrnd.setVisibility(VISIBLE);
+                                    linDelITRBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = itr.getTag().toString().substring(itr.getTag().toString().lastIndexOf("/") + 1);
@@ -5696,6 +6014,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     pnl.setTag(baseUrl + image);
                                     pnlBckgrnd.setVisibility(VISIBLE);
+                                    linDelPNLBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = pnl.getTag().toString().substring(pnl.getTag().toString().lastIndexOf("/") + 1);
@@ -5725,6 +6044,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     degreeMarkSheet.setTag(baseUrl + image);
                                     degreeMarksheetBckgrnd.setVisibility(VISIBLE);
+                                    linDellastCompletedMarkSheetBtn.setTag(doc_upload_id);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = degreeMarkSheet.getTag().toString().substring(degreeMarkSheet.getTag().toString().lastIndexOf("/") + 1);
@@ -5753,6 +6073,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     tenthMarksheet.setTag(baseUrl + image);
                                     tenthBckgrnd.setVisibility(VISIBLE);
+                                    linDeltenth_mark_sheetBtn.setTag(doc_upload_id);
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = tenthMarksheet.getTag().toString().substring(tenthMarksheet.getTag().toString().lastIndexOf("/") + 1);
@@ -5782,6 +6103,7 @@ public class UploadDocumentFragment extends Fragment {
                                     }
                                     twelvethMarksheet.setTag(baseUrl + image);
                                     twelthBckgrnd.setVisibility(VISIBLE);
+                                    linDeltwelvethMarkSheetBtn.setTag(doc_upload_id);
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = twelvethMarksheet.getTag().toString().substring(twelvethMarksheet.getTag().toString().lastIndexOf("/") + 1);
@@ -5807,7 +6129,6 @@ public class UploadDocumentFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
                 //Add new code for auto upload document of  aadhar and pan if file is exist.
 
@@ -5976,59 +6297,57 @@ public class UploadDocumentFragment extends Fragment {
 
                 }
 
+//                if (profileImage.getTag() != null || aadharCard.getTag() != null || panCard.getTag() != null) {//kyc
+//                    Drawable bg;
+//                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+//                        ivKyc.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+//                    } else {
+//                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+//                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
+//                    }
+//                    ivKyc.setImageDrawable(bg);
+//                    linKYCblock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                    linKYCDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                    linKYCblockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                }
 
-                if (profileImage.getTag() != null || aadharCard.getTag() != null || panCard.getTag() != null) {//kyc
-                    Drawable bg;
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
-                        ivKyc.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
-                    } else {
-                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
-                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
-                    }
-                    ivKyc.setImageDrawable(bg);
-                    linKYCblock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                    linKYCDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                    linKYCblockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                }
+//                if (salSlipSix.getTag() != null || salSlipThree.getTag() != null || bankStmntThree.getTag() != null || bankStmntSix.getTag() != null || kvp.getTag() != null || licPolicy.getTag() != null ||
+//                        form16.getTag() != null || form61.getTag() != null || pensionLetter.getTag() != null || itr.getTag() != null || pnl.getTag() != null) {//Fin
+//
+//                    Drawable bg;
+//                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+//                        ivFinancial.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+//                    } else {
+//                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+//                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
+//                    }
+//                    ivFinancial.setImageDrawable(bg);
+//                    linFinancBlock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                    linFinanceDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                    linFinancBlockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                }
 
-                if (salSlipSix.getTag() != null || salSlipThree.getTag() != null || bankStmntThree.getTag() != null || bankStmntSix.getTag() != null || kvp.getTag() != null || licPolicy.getTag() != null ||
-                        form16.getTag() != null || form61.getTag() != null || pensionLetter.getTag() != null || itr.getTag() != null || pnl.getTag() != null) {//Fin
-
-                    Drawable bg;
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
-                        ivFinancial.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
-                    } else {
-                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
-                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
-                    }
-                    ivFinancial.setImageDrawable(bg);
-                    linFinancBlock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                    linFinanceDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                    linFinancBlockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                }
-
-                if (degreeMarkSheet.getTag() != null || degreeCertificate.getTag() != null || tenthMarksheet.getTag() != null || twelvethMarksheet.getTag() != null) {//Edu
-                    Drawable bg;
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
-                        ivEducational.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
-                    } else {
-                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
-                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
-                    }
-                    ivEducational.setImageDrawable(bg);
-                    linEducationBlock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                    linEducationDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                    linEducationBlockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
-                }
+//                if (degreeMarkSheet.getTag() != null || degreeCertificate.getTag() != null || tenthMarksheet.getTag() != null || twelvethMarksheet.getTag() != null) {//Edu
+//                    Drawable bg;
+//                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//                        bg = VectorDrawableCompat.create(context.getResources(), R.drawable.ic_check_circle_green, null);
+//                        ivEducational.setColorFilter(context.getResources().getColor(R.color.colorGreen), PorterDuff.Mode.MULTIPLY);
+//                    } else {
+//                        bg = ContextCompat.getDrawable(context, R.drawable.ic_check_circle_green);
+//                        DrawableCompat.setTint(bg, context.getResources().getColor(R.color.colorGreen));
+//                    }
+//                    ivEducational.setImageDrawable(bg);
+//                    linEducationBlock.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                    linEducationDocuments.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                    linEducationBlockBottom.setBackground(context.getResources().getDrawable(R.drawable.border_green));
+//                }
 
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-
 
            /* if(aadharCard.getTag() == null)
             {
@@ -6041,7 +6360,6 @@ public class UploadDocumentFragment extends Fragment {
                     File[] files = filepath.listFiles();
                     for (int i = 0; i < files.length; ++i) {
                          file = files[i];
-
                     }
 
                     if (file.getName().contains("AadhaarOcr.pdf")) {

@@ -526,15 +526,15 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                             DetailedInfoFragment.validate();
                     }
 
-//                    if (viewPager.getCurrentItem() == 3) {
-//                        if (PostApprovalDocFragment.linNoLoan.getVisibility() == View.VISIBLE)
-//                            PostApprovalDocFragment.showDiaThanksDiag();
-//                    }
-//
-//                    if (viewPager.getCurrentItem() == 4) {
-//                        if (AmortizationFragment.linNoAmort.getVisibility() == View.VISIBLE)
-//                            AmortizationFragment.showDiaThanksDiag();
-//                    }
+                    if (viewPager.getCurrentItem() == 3) {
+                        if (PostApprovalDocFragment.linNoLoan.getVisibility() == View.VISIBLE)
+                            PostApprovalDocFragment.showDiaThanksDiag();
+                    }
+
+                    if (viewPager.getCurrentItem() == 4) {
+                        if (AmortizationFragment.linNoAmort.getVisibility() == View.VISIBLE)
+                            AmortizationFragment.showDiaThanksDiag();
+                    }
 
                 }
             }

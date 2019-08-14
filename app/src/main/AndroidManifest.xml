@@ -164,6 +164,23 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!--<activity-->
+            <!--android:name=".newUI.newViews.GetMobileNoAutoRead"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:windowSoftInputMode="stateAlwaysHidden|adjustPan">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+
+        <!--<receiver android:name="com.eduvanzapplication.Util.MySMSBroadcastReceiver" android:exported="true">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
         <activity
             android:name=".newUI.newViews.OtpValidation"
             android:screenOrientation="sensorPortrait"

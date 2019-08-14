@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relDocUpload"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:id="@+id/relDocUpload"
     tools:context="com.eduvanzapplication.newUI.fragments.UploadDocumentFragment">
 
     <android.support.v4.widget.NestedScrollView
@@ -240,6 +240,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelAadhaarBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -257,7 +274,6 @@
                                 android:textSize="15sp" />
 
                             <Button
-                                android:id="@+id/aadharBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_15sdp"
                                 android:layout_below="@+id/txtPhotoTitle1"
@@ -316,6 +332,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDelPanBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -580,6 +613,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelPhotoBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -696,11 +746,11 @@
                             <ImageView
                                 android:id="@+id/ivadditionaldoctitle"
                                 android:layout_width="@dimen/_15sdp"
-                                android:visibility="gone"
                                 android:layout_height="@dimen/_15sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_4sdp"
                                 android:gravity="center"
+                                android:visibility="gone"
                                 app:srcCompat="@drawable/ic_check_circle_green" />
 
                         </LinearLayout>
@@ -856,6 +906,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelPassportBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -925,6 +992,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelVoterIdBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -993,6 +1077,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDelDrivingLicenseBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -1064,6 +1165,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelTelephoneBillBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -1132,6 +1250,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDelElectricityBillBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -1202,6 +1337,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelRentAgreementBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -1270,6 +1422,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDelAddressProofBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -1340,6 +1509,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelSalarySlipSixBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -1408,6 +1594,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDelSalarySlipThreeBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -1479,6 +1682,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelBankStatementThreeBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -1548,6 +1768,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDelBankStatementSixBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -1619,6 +1856,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelKVPBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -1689,6 +1943,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelLICPolicyBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -1729,7 +2000,6 @@
                             android:orientation="horizontal"
                             android:visibility="gone">
 
-
                             <RelativeLayout
                                 android:id="@+id/form16Background"
                                 android:layout_width="match_parent"
@@ -1758,6 +2028,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDelForm16Btn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -1829,6 +2116,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelForm61Btn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -1898,6 +2202,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDelPensionLetterBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -1969,6 +2290,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelITRBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -2039,6 +2377,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelPNLBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -2079,7 +2434,6 @@
                             android:orientation="horizontal"
                             android:visibility="gone">
 
-
                             <RelativeLayout
                                 android:id="@+id/tenthMarksheetBackground"
                                 android:layout_width="match_parent"
@@ -2108,6 +2462,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDeltenth_mark_sheetBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -2150,7 +2521,6 @@
                             android:orientation="horizontal"
                             android:visibility="gone">
 
-
                             <RelativeLayout
                                 android:id="@+id/twelvethMarksheetBackground"
                                 android:layout_width="match_parent"
@@ -2179,6 +2549,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDeltwelvethMarkSheetBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -2250,6 +2637,23 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDellastCompletedMarkSheetBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <ImageView
@@ -2318,6 +2722,23 @@
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:id="@+id/linDellastcompletedDegreeCertificateBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
 
                             </RelativeLayout>
 
@@ -2389,6 +2810,22 @@
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold" />
 
+                                <LinearLayout
+                                    android:id="@+id/linDelothersBtn"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:tint="@color/white"
+                                        android:visibility="visible"
+                                        app:srcCompat="@drawable/ic_trash_alt" />
+                                </LinearLayout>
                             </RelativeLayout>
 
                             <ImageView

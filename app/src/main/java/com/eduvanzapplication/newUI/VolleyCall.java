@@ -355,7 +355,16 @@ public class VolleyCall {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (screen.equalsIgnoreCase("getLoanDetails")) {
+        } else if (screen.equalsIgnoreCase("deletedocument")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((UploadDocumentFragment) mfragment).setdeleteFileStatus(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }  else if (screen.equalsIgnoreCase("getLoanDetails")) {
             try {
                 jsonDataO = new JSONObject(s);
                 ((PostApprovalDocFragment) mfragment).setLoanDetails(jsonDataO);
