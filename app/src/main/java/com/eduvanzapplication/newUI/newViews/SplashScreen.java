@@ -265,11 +265,13 @@ public class SplashScreen extends AppCompatActivity {
                             } else {
                                 if (sharedPref.getLoginDone(SplashScreen.this)) {
                                     Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);
+//                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo1.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                     startActivity(intent);
                                     SplashScreen.this.finish();
                                 } else {
                                     Intent intent = new Intent(SplashScreen.this, GetMobileNo.class);// This is commented for testing
+//                                    Intent intent = new Intent(SplashScreen.this, GetMobileNo1.class);// This is commented for testing
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                     startActivity(intent);
                                     SplashScreen.this.finish();

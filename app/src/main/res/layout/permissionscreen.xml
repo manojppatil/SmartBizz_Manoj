@@ -47,8 +47,64 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="center"
-                android:text="Eduvanz provides loans under NBFC regulations of Reserve Bank of India. In order to comply with all relevant and applicable regulations required for the purpose of granting You the loan, the below mentioned permissions are needed."
+                android:text="Eduvanz provides loans under NBFC regulations of Reserve Bank of India. In order to comply with all relevant and applicable regulations required for the purpose of performing a credit risk assessment for your loan application and disbursal, the below mentioned permissions are required."
                 android:textColor="@color/darkblue" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="3dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/permissioncolor"
+                    app:srcCompat="@drawable/ic_permission_mobile__email" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewTitle14BoldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:text="Mobile number &amp; email address"
+                        android:textColor="@color/permissioncolor" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextViewTitleSmallStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center|left"
+                            android:text="When you sign up with us, we collect your mobile number and email address to uniquely identify you. This helps us ensure that no unauthorised device or person is acting on your behalf."
+                            android:textColor="@color/permissioncolor" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,7 +154,63 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Collect and monitor only financial transaction SMS which includes name of transacting party, a description of the transaction and transaction amount for the purpose of performing a credit risk assessment. This credit risk assessment enables faster and quicker loan disbursal. No personal SMS are accessed, read or collected."
+                            android:text="We collect and monitor only your financial transactional SMS about bank related transactions, the names of the transacting parties, a description of the transaction and the amount of the transaction for the purpose of performing credit risk assessment. This credit risk assessment enables us to perform a faster and quicker loan disbursal. No personal SMS data is collected, read or stored."
+                            android:textColor="@color/permissioncolor" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="3dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/permissioncolor"
+                    app:srcCompat="@drawable/ic_permission_mobile" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewTitle14BoldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:text="Phone"
+                        android:textColor="@color/permissioncolor" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextViewTitleSmallStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center|left"
+                            android:text="We collect and monitor specific information about your device including your hardware model, operating system and version, unique device identifier, user profile information, wi-fi information, mobile network information to uniquely identify the device and to ensure that unauthorised devices are not able to act on your behalf. This helps us to mitigate fraud."
                             android:textColor="@color/permissioncolor" />
                     </RelativeLayout>
 
@@ -138,7 +250,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:gravity="center|left"
-                        android:text="Gallery, Audio &amp; Video Camera"
+                        android:text="Camera &amp; Gallery "
                         android:textColor="@color/permissioncolor" />
 
                     <RelativeLayout
@@ -154,7 +266,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="We require access to your Gallery and Video Camera to complete your KYC and Loan application process. This video verification process enables us to check fraud by establishing your physical presence, location confirmation and identity authentication. Furthermore, Camera access is also required to easily scan or capture QR codes, required documents."
+                            android:text="We require access to your gallery and video camera to complete your KYC and loan application process. This video verification process enables us to check fraud by establishing your physical presence, location confirmation and identity authentication. Furthermore, camera access is also required to easily scan images for optical character recognition, QR codes and other required documents."
                             android:textColor="@color/permissioncolor" />
                     </RelativeLayout>
 
@@ -210,7 +322,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="This permission is required so that your KYC and loan related documents can be securely uploaded for a quicker KYC and Loan application process resulting in a faster approval and disbursal of your loan. Also, this helps provide a very smooth seamless experience while using the app."
+                            android:text="We require storage permission so that your loan account statement and other relevant documents can be securely downloaded and saved on your phone. You can then easily upload the right KYC related documents for faster loan application filing and disbursal process. This ensures that you are provided with a seamless experience while using the application."
                             android:textColor="@color/permissioncolor" />
                     </RelativeLayout>
 
@@ -265,7 +377,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="For example, your location helps us to locate our nearest branches for you and make location-based service or visit recommendations as needed."
+                            android:text="We collect and monitor your location to help us locate our nearest branch office for you and make location-based service or visits as recommended. Your location information also helps us to verify the address, make a better credit risk decision and fasten your KYC process."
                             android:textColor="@color/permissioncolor" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -320,68 +432,12 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:gravity="center|left"
-                            android:text="Collect and monitor information such as email address, name, age, gender, address from third party accounts like Facebook, Gmail and LinkedIn. This helps us to enrich your profile information to preapprove you for loan offers."
+                            android:text="We collect and monitor the list of accounts configured in the device to verify the information such as your email address, name, age, gender, from third party accounts like Facebook, Gmail and LinkedIn. This helps us to enrich your profile information to pre-approve loan offers."
                             android:textColor="@color/permissioncolor" />
                     </RelativeLayout>
 
                 </LinearLayout>
 
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="3dp"
-                    android:scaleType="fitCenter"
-                    android:tint="@color/permissioncolor"
-                    app:srcCompat="@drawable/ic_permission_mobile" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextViewTitle14BoldStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:gravity="center|left"
-                        android:text="Phone State"
-                        android:textColor="@color/permissioncolor" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextViewTitleSmallStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
-                            android:gravity="center|left"
-                            android:text="To collect and monitor specific information about your phone like your phone’s unique device identifier, user profile information as this information helps us in uniquely identifying a user, so that we can detect and prevent any unauthorized device from acting on your behalf. This enables us to detect fraud and manage risks better"
-                            android:textColor="@color/permissioncolor" />
-                    </RelativeLayout>
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -402,7 +458,7 @@
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:padding="1dp"
-        android:text="We, at Eduvanz, are extremely careful about your privacy and will always strive to provide you the best in class service and security." />
+        android:text="Please note that certain information that is required mandatorily to perform your credit risk assessment is securely shared with our registered third-party service provider. We at Eduvanz are extremely careful about your privacy and will always strive to provide you with the best in class service and security." />
 
     <RelativeLayout
         android:id="@+id/lin2"

@@ -3,8 +3,10 @@ package com.eduvanzapplication.newUI.newViews;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -33,6 +35,7 @@ import android.widget.Toast;
 import com.eduvanzapplication.BuildConfig;
 import com.eduvanzapplication.MainActivity;
 import com.eduvanzapplication.Util.Globle;
+import com.eduvanzapplication.Util.MySMSBroadcastReceiver;
 import com.eduvanzapplication.newUI.MainApplication;
 import com.eduvanzapplication.R;
 import com.eduvanzapplication.newUI.SharedPref;
@@ -44,11 +47,14 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.Task;
 
 
@@ -63,9 +69,9 @@ import java.util.Map;
 public class GetMobileNo extends AppCompatActivity {
 
     private final String TAG = GetMobileNo.class.getSimpleName();
-    EditText edtMobile, edtOtp, edtFirstName, edtEmail;
+    public static EditText edtMobile, edtOtp, edtFirstName, edtEmail;
     ImageView ivRetry, ivIndicator;
-    TextView txtGetOtp, txtMsg1, txtMsg2;
+    public TextView txtGetOtp, txtMsg1, txtMsg2;
     String userEmail = "";
     LinearLayout linGetOtp, layoutOtp, linEmailLayout, linFacebook, linLinkedIn, linGoogle;
     LoginButton fbLoginButton;
@@ -78,6 +84,7 @@ public class GetMobileNo extends AppCompatActivity {
     final private int RC_SIGN_IN = 112;
     SharedPref sharedPref;
     public final static int linkedinRequest = 9419;
+    public MySMSBroadcastReceiver mySMSBroadcastReceiver;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,7 +102,6 @@ public class GetMobileNo extends AppCompatActivity {
             if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
                 ActivityCompat.requestPermissions(GetMobileNo.this,
                         new String[]{
-                                Manifest.permission.READ_CONTACTS,
                                 Manifest.permission.READ_SMS,
                                 Manifest.permission.RECEIVE_SMS,
                                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -199,52 +205,17 @@ public class GetMobileNo extends AppCompatActivity {
                             Manifest.permission.READ_SMS);
 
                     if (permission != PackageManager.PERMISSION_GRANTED)
-//                        {//Permission with disclaimer dialog
-////                            makeRequest();
-//
-//                            AlertDialog.Builder builder;
-//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                                builder = new AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert);
-//                            } else {
-//                                builder = new AlertDialog.Builder(mContext);
-//                            }
-//                            builder.setTitle("Disclaimer")
-//                                    .setMessage("Dear Student, \n" +
-//                                            "This app will access your mobile details like contacts and SMS to calculate your eligibility and give faster loans. Incase if you are comfortable with the same press ok else cancel")
-//                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                        public void onClick(DialogInterface dialog, int which) {
-//
-//                                            ActivityCompat.requestPermissions(GetMobileNo.this,
-//                                                    new String[]{Manifest.permission.READ_CONTACTS,
-//                                                            Manifest.permission.READ_SMS,
-//                                                            Manifest.permission.READ_EXTERNAL_STORAGE,
-//                                                            Manifest.permission.READ_PHONE_STATE,
-//                                                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                                                            Manifest.permission.ACCESS_FINE_LOCATION},
-//                                                    GET_MY_PERMISSION);
-//                                        }
-//                                    })
-//                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            finish();
-//                                        }
-//                                    })
-//                                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                                    .show();
-//
-//                        }
                     {//Direct Permission without disclaimer dialog
                         ActivityCompat.requestPermissions(GetMobileNo.this,
                                 new String[]{
-                                        Manifest.permission.READ_CONTACTS,
                                         Manifest.permission.READ_SMS,
                                         Manifest.permission.RECEIVE_SMS,
                                         Manifest.permission.READ_EXTERNAL_STORAGE,
                                         Manifest.permission.READ_PHONE_STATE,
                                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                         Manifest.permission.ACCESS_COARSE_LOCATION,
-                                        Manifest.permission.ACCESS_FINE_LOCATION},
+                                        Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.CAMERA},
                                 GET_MY_PERMISSION);
 
                     } else {
@@ -273,10 +244,8 @@ public class GetMobileNo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(GetMobileNo.this, LinkedinActivity.class);
-
 //                startActivityForResult(intent, linkedinRequest);
 //                                loginonClick();
-
             }
         });
 
@@ -431,7 +400,6 @@ public class GetMobileNo extends AppCompatActivity {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
     }
 
     @Override
@@ -444,9 +412,9 @@ public class GetMobileNo extends AppCompatActivity {
             handleSignInResult(task);
         }
         if (requestCode == linkedinRequest) {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
 
-            }else if(resultCode == Activity.RESULT_CANCELED){
+            } else if (resultCode == Activity.RESULT_CANCELED) {
 
             }
         }
@@ -513,6 +481,7 @@ public class GetMobileNo extends AppCompatActivity {
                 VolleyCall volleyCall = new VolleyCall();
                 volleyCall.sendRequest(getApplicationContext(), url, GetMobileNo.this, null, "getOtp", params, MainActivity.auth_token);
             }
+
         } catch (Exception e) {
             progressDialog.dismiss();
             String className = this.getClass().getSimpleName();
@@ -758,6 +727,35 @@ public class GetMobileNo extends AppCompatActivity {
 
     }
 
+//    public final BroadcastReceiver SMSBroadcastReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            if (SmsRetriever.SMS_RETRIEVED_ACTION.equals(intent.getAction())) {
+//                Bundle extras = intent.getExtras();
+//                Status status = (Status) extras.get(SmsRetriever.EXTRA_STATUS);
+//
+//                switch (status.getStatusCode()) {
+//                    case CommonStatusCodes.SUCCESS:
+//                        // Get SMS message contents
+//                        String message = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
+//                        // Extract one-time code from the message and complete verification
+//                        // by sending the code back to your server.
+//                        if (message.contains(":") && message.contains(".")) {
+//                            String otp = message.substring(message.indexOf(":") + 1, message.indexOf(".")).trim();
+//                            edtOtp.setText(otp);
+//                            Toast.makeText(GetMobileNo.this, "The OTP is " + otp, Toast.LENGTH_SHORT).show();
+//                        }
+//                        unregisterReceiver(SMSBroadcastReceiver);
+//                        break;
+//                    case CommonStatusCodes.TIMEOUT:
+//                        // Waiting for SMS timed out (5 minutes)
+//                        // Handle the error ...
+//                        break;
+//                }
+//            }
+//        }
+//    };
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -768,8 +766,7 @@ public class GetMobileNo extends AppCompatActivity {
                 } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[8] == PackageManager.PERMISSION_GRANTED) {
+                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED ) {
                     //granted
 //                    apiCall();
                 } else {
@@ -819,4 +816,3 @@ public class GetMobileNo extends AppCompatActivity {
 
     }
 }
-

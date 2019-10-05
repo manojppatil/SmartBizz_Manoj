@@ -11,13 +11,10 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -78,15 +75,15 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     public static NavigationView navigationView;
     public static DrawerLayout drawer;
     public static Context context;
-    //    com.eduvanzapplication.newUI.newViews.CustomDrawerButton customDrawerButton;
     public static TextView textViewName, textView_mobileNo, textViewEmail;
     FrameLayout frameLayoutDashboard;
     SharedPref sharedPref;
     LinearLayout linearLayoutSignup, linearLayoutUserDetail, editProfile;
     public DataSyncReceiver dataSyncReceiver;
     static String student_id = "", appInstallationTimeStamp = "", userFirst = "", userLast = "", userEmail = "", userPic = "",
-            userMobileNo = "", isDataSync = "false";
+                  isDataSync = "false";
     public static AppCompatActivity mActivity;
+    public static String userMobileNo ="";
     SharedPreferences sharedPreferences;
     public int GET_MY_PERMISSION = 1, permission;
     public static ImageView ivUserPic;
@@ -223,7 +220,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 //                            GET_MY_PERMISSION);
                     ActivityCompat.requestPermissions(DashboardActivity.this,
                             new String[]{
-                                    Manifest.permission.READ_CONTACTS,
                                     Manifest.permission.READ_SMS,
                                     Manifest.permission.RECEIVE_SMS,
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -236,7 +232,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
                 } else {
                     ExtraHelperFunctions.putRefUserId(context, userMobileNo);
-                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+//                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.PRODUCTION_ENV, Algo360_SDK_Init.ENABLE_PRINT);
                 }
             }
 
@@ -258,10 +255,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             String action = intent.getAction();
 
             Boolean dataSynced = intent.getBooleanExtra("DataSynced", false);
-//            Log.e("Receiver", "Data synced: " + dataSynced);
+            Log.e("Receiver", "Data synced: " + dataSynced);
 //            Log.e("Receiver", "Data Action: " + action);
-            if(dataSynced) {
-            saveAlgo360();
+            if (dataSynced) {
+                saveAlgo360();
             }
         }
     };
@@ -271,16 +268,15 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         try {//auth_token
 //            String url = "http://192.168.1.63/eduvanzapi/dashboard/saveAlgo360response";
 //            if (!isDataSync.equals("true")) {
-                String url = MainActivity.mainUrl + "dashboard/saveAlgo360response";
-                Map<String, String> params = new HashMap<String, String>();
+            String url = MainActivity.mainUrl + "dashboard/saveAlgo360response";
+            Map<String, String> params = new HashMap<String, String>();
 
-                params.put("student_id", student_id);
-                params.put("mobile_no", userMobileNo);
-                params.put("email_id", userEmail);
-                params.put("algo360_datasync", String.valueOf(true));
-                VolleyCallAlgo360 volleyCall = new VolleyCallAlgo360();
-//            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, "90ad441a12b48c6d7c5524b8b2a334c3");
-                volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
+            params.put("student_id", student_id);
+            params.put("mobile_no", userMobileNo);
+            params.put("email_id", userEmail);
+            params.put("algo360_datasync", String.valueOf(true));
+            VolleyCallAlgo360 volleyCall = new VolleyCallAlgo360();
+            volleyCall.sendRequest(context, url, mActivity, null, "addAlgo360", params, MainActivity.auth_token);
 //            }
         } catch (Exception e) {
             e.printStackTrace();
@@ -314,7 +310,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     protected void onResume() {
-
         IntentFilter intentFilter = new IntentFilter("in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION");
         registerReceiver(broadcastReceiver, intentFilter);
         super.onResume();
@@ -345,10 +340,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             Intent intent = new Intent(context, HowItWorks.class);
             startActivity(intent);
         }
-//        else if (id == R.id.nav_language) {
-//            Intent intent = new Intent(DashboardActivity.this, Language.class);
-//            startActivity(intent);
-//        }
+        else if (id == R.id.nav_videokyc) {
+            Intent intent = new Intent(DashboardActivity.this, VideoKYC.class);
+            startActivity(intent);
+        }
         else if (id == R.id.nav_aboutus) {
             Intent intent = new Intent(DashboardActivity.this, WebViewAboutUs.class);
             startActivity(intent);
@@ -370,11 +365,11 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         else if (id == R.id.nav_disclaimer) {
             Intent intent = new Intent(DashboardActivity.this, WebViewDisclaimer.class);
             startActivity(intent);
-        }  else if (id == R.id.nav_emicalculator) {
-            Intent intent = new Intent(context,EmiCalculatorActivity.class);
+        } else if (id == R.id.nav_emicalculator) {
+            Intent intent = new Intent(context, EmiCalculatorActivity.class);
             startActivity(intent);
-        }  else if (id == R.id.nav_yourscore) {
-            Intent intent = new Intent(context,FinancialAnalysisOnNavigationBar.class);
+        } else if (id == R.id.nav_yourscore) {
+            Intent intent = new Intent(context, FinancialAnalysisOnNavigationBar.class);
             startActivity(intent);
         } else if (id == R.id.nav_termsandconditions) {
             Intent intent = new Intent(DashboardActivity.this, WebViewTermsNCondition.class);
@@ -388,21 +383,21 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         } else if (id == R.id.nav_fairpracticscode) {
             Intent intent = new Intent(DashboardActivity.this, WebViewFairPracticsCode.class);
             startActivity(intent);
-        }else if (id == R.id.nav_shareappp) {
+        } else if (id == R.id.nav_shareappp) {
             try {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
-                String shareMessage= "\nYou have been refered to Eduvanz, an NBFC that provides loans for all kinds of skill building and education courses.\n\n\n";
+                String shareMessage = "\nYou have been refered to Eduvanz, an NBFC that provides loans for all kinds of skill building and education courses.\n\n\n";
 //                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
 
-                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 startActivity(Intent.createChooser(shareIntent, "choose one"));
-            } catch(Exception e) {
+            } catch (Exception e) {
                 //e.toString();
             }
-        }else if (id == R.id.nav_rateappp) {
+        } else if (id == R.id.nav_rateappp) {
             Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             // To count with Play market backstack, After pressing back button,
@@ -430,7 +425,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                             sharedPref.clearSharedPreference(DashboardActivity.this);
 //            /** STORING THE COLOR and BOOLEAN VALUE FOR FIRST TIME DEFAULT COLOR STORE INTO SHARED PREFERENCE **/
 //            SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            SharedPreferences.Ed                                                                                                                                                      itor editor = sharedPreferences.edit();
 //            editor.putString("primary_color", "#4FC0E8");
 //            editor.putString("primary_color_dark", "#197b9d");
 //            editor.putString("fcm_id", fcmID);
@@ -505,11 +500,11 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 else if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[2] == PackageManager.PERMISSION_GRANTED && grantResults[3] == PackageManager.PERMISSION_GRANTED &&
                         grantResults[4] == PackageManager.PERMISSION_GRANTED && grantResults[5] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED &&
-                        grantResults[8] == PackageManager.PERMISSION_GRANTED) {
+                        grantResults[6] == PackageManager.PERMISSION_GRANTED && grantResults[7] == PackageManager.PERMISSION_GRANTED) {
                     //granted
                     ExtraHelperFunctions.putRefUserId(context, userMobileNo);
-                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+//                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.TESTING_ENV, Algo360_SDK_Init.ENABLE_PRINT);
+                    Algo360_SDK_Init.startAlgo360(getApplicationContext(), Algo360_SDK_Init.PRODUCTION_ENV, Algo360_SDK_Init.ENABLE_PRINT);
                 } else {
                     //not granted
 //                    Log.e(MainApplication.TAG, "not granted: Dashboard " + grantResults[0]);
@@ -563,3 +558,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 }
+
+//2019-09-26 15:36:21.063 32325-32325/com.eduvanzapplication E/TAG: requestId EDDU2319-1569492381061
+//2019-09-26 15:36:21.063 32325-32325/com.eduvanzapplication E/TAG: hash 8B07DFF1D4BB8DC3F52EB753785193DC0C5CA34DE354F92AE4636B6B7F437F12
+//2019-09-26 15:36:21.087 32325-32325/com.eduvanzapplication E/TAG: ipadd 192.168.1.24
+//2019-09-26 15:38:31.977 32325-32325/com.eduvanzapplication E/TAG: userId c1d76b6f-4521-4186-966b-7491e6d33513

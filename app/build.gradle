@@ -1,8 +1,7 @@
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
-    }
-
+                                                                                                                                                                              }
     dependencies {
         classpath 'io.fabric.tools:gradle:1.+'
     }
@@ -17,8 +16,8 @@ android {
         applicationId "com.eduvanzapplication"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 102
-        versionName "5.2.0"
+        versionCode 109
+        versionName "5.2.6"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -26,6 +25,23 @@ android {
         manifestPlaceholders = [
                 'appAuthRedirectScheme': 'com.eduvanzapplication'
         ]
+
+        ndk{
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+        }
+
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
+    }
+
+    packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libRSSupport.so'
+        pickFirst 'lib/arm64-v8a/librsjni.so'
+
+        pickFirst 'lib/x86_64/libopencv_java3.so'
+        pickFirst 'lib/x86/libopencv_java3.so'
+        pickFirst 'lib/armeabi-v7a/libopencv_java3.so'
+        pickFirst 'lib/arm64-v8a/libopencv_java3.so'
     }
     buildTypes {
         release {
@@ -65,15 +81,29 @@ dependencies {
     //Dotted View For View pager
 
     implementation 'com.github.lzyzsd:circleprogress:1.2.1'
-    implementation project(':libraryMobilePaymentSDK')
+//    implementation project(':libraryMobilePaymentSDK')
     implementation('com.paytm:pgplussdk:1.3.3') {
         transitive = true;
     }
+
+//    //Khosla Labs Sandbox
+//    implementation 'com.khoslalabs.sdk:videoidkyc:3.6.4-SB'
+//    implementation 'com.khoslalabs.sdk:base:3.6.4-SB'
+//    implementation 'com.khoslalabs.sdk:ocrsdk:3.6.4-SB'
+//    implementation 'com.khoslalabs.sdk:facesdk:3.6.4-SB'
+
+    //Khosla Labs Production
+    implementation 'com.khoslalabs.sdk:videoidkyc:3.6.4-GA'
+    implementation 'com.khoslalabs.sdk:base:3.6.4-GA'
+    implementation 'com.khoslalabs.sdk:ocrsdk:3.6.4-GA'
+    implementation 'com.khoslalabs.sdk:facesdk:3.6.4-GA'
+
     implementation project(':digio-esign-2.6')
     //implementation project(':digio-android-sdk-0.1.0')
     implementation files('libs/commons-codec-1.10-rep.jar')
     implementation(name: "imgtopdf", ext: "aar")//Image To PDF SDK
-    implementation (name: "Algo360SDK-eduvanz-prod", ext:"aar")//Algo 360 SDK
+//    implementation (name: "Algo360SDK-eduvanz-prod", ext:"aar")//Algo 360 SDK
+    implementation (name: "Algo360SDK-eduvanz-5.0", ext:"aar")//Algo 360 SDK
 //    implementation (name: "Algo360SDK-edu-test", ext:"aar")//Algo 360 SDK
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     //noinspection GradleCompatible
@@ -81,6 +111,7 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.jaredrummler:material-spinner:1.1.0@aar'
     implementation 'com.android.support:cardview-v7:28.0.0'
+//    implementation 'com.github.aabhasr1:OtpView:1.0.5'
     implementation 'org.adw.library:discrete-seekbar:1.0.1'
     implementation 'com.android.support:design:28.0.0'
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
@@ -125,6 +156,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-identity:16.0.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:16.0.0'
 
     api 'net.openid:appauth:0.7.1'
 

@@ -135,7 +135,7 @@
     <string name="resend_otp">Resend OTP</string>
     <string name="skip">SKIP</string>
 
-    <string name="sms_data">SMS Data</string>
+    <string name="sms_data">Financial SMS</string>
     <string name="permissions_required">PERMISSIONS REQUIRED</string>
     <!--<string name="by_proceeding_you_accept">By proceeding you accept</string>-->
     <string name="by_proceeding_you_accept">By proceeding, I hereby authorises Eduvanz to carry out credit enquiries on the credit bureaus and accept</string>

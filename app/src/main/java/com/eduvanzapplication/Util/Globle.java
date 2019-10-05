@@ -16,10 +16,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.eduvanzapplication.R;
-import com.eduvanzapplication.Util.Paytm;
 import com.eduvanzapplication.Utils;
-import com.eduvanzapplication.newUI.MainApplication;
-import com.eduvanzapplication.uploaddocs.PathFile;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -55,6 +52,11 @@ public class Globle {
     public static final String payment_platform = "2"; //(1-web, 2-app)
     public static final String payment_partner = "1"; //(1-paytm, 2-atom)
     public static DecimalFormat decimalFormat = new DecimalFormat("##,##,##0.00");
+
+    public static final String clientCode= "EDUV8729"; //Sandbox EDDU2319 Prduction EDUV8729
+    public static final String apiKey = "762753152658161";	//Sandbox gq991xYd Production 762753152658161
+    public static final String salt = "Jge5fSh37nfKLsy88L"; //Sandbox hj17fhd8 Production Jge5fSh37nfKLsy88L
+    public static final String screenTitle = "Eduvanz eKYC";
 
     //payment_platform = 2 (1-web, 2-app)
     //payment_partner = 1 (1-paytm, 2-atom)
@@ -101,7 +103,6 @@ public class Globle {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return formatedDate;
     }
 

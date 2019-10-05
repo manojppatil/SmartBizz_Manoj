@@ -139,13 +139,10 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
             } else {
 
                 locationManager = (LocationManager) getSystemService(context.LOCATION_SERVICE);
-
                 //statusofGPS is use for location is on/off
-
                 boolean statusOfGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
                 //this below code for set location mode to highaccuracy
-
                 try {
                     //locationMode is use for which mode type is selected currently
                     //locationMode=0 is high acc is selected
@@ -157,29 +154,20 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                     //location on and high acc mode or device only selected
 
                     if (locationMode == LOCATION_MODE_HIGH_ACCURACY && statusOfGPS == true || locationMode == 1 && statusOfGPS == true) {
-
                         //request location updates
                         startService(new Intent(context, LocationService.class));
-
                     }
                     //gps off
 
                     else if (statusOfGPS == false) {
 
                         if (locationMode == 0) {
-
                             //gps off and high acc selected
-
                             showGPSDisabledAlertToUser();
-
                         } else if (!(locationMode == LOCATION_MODE_HIGH_ACCURACY) && statusOfGPS == false) {
-
                             //gps on and high acc.mode isn't selected
-
                             showGPSModeAlertToUser();
-
                         }
-
 
                     }
 
@@ -227,7 +215,6 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
 //        }
 
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

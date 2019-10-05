@@ -120,21 +120,21 @@
                     android:background="@color/darkblue" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                     android:text="+91"
                     android:textColor="@color/darkblue"
                     android:textStyle="bold"
                     style="@style/TextViewTitleStyle" />
 
                 <EditText
-                    android:id="@+id/edtMobile"
+                        android:id="@+id/edtMobile"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                        android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
+                        android:background="@android:color/transparent"
                     android:inputType="phone|textNoSuggestions"
-                    android:maxLength="10"
+                        android:maxLength="10"
                     android:padding="@dimen/_4sdp"
                     android:digits="0123456789"
                     android:text=""
@@ -159,189 +159,189 @@
                 style="@style/TextViewTitle14BoldStyle" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingBottom="@dimen/_4sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:padding="@dimen/_3sdp"
+                    app:srcCompat="@drawable/ic_login_email" />
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:background="@color/darkblue" />
+
+
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingTop="@dimen/_4sdp"
-                    android:paddingBottom="@dimen/_4sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:padding="@dimen/_3sdp"
-                        app:srcCompat="@drawable/ic_login_email" />
-
-                    <View
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:layout_marginEnd="@dimen/_6sdp"
-                        android:background="@color/darkblue" />
-
-
-                    <EditText
-                        android:id="@+id/edtEmail"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:inputType="textEmailAddress"
-                        android:padding="@dimen/_4sdp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/_4sdp"
                         android:text=""
                         android:imeOptions="actionNext"
                         style="@style/TextViewTitleStyle" />
-                </LinearLayout>
+            </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/darkblue" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_1sdp"
-                        android:background="@color/darkblue" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:text="@string/or"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="@string/or"
                         android:textColor="@color/darkblue"
                         style="@style/TextViewTitleStyle" />
 
-                    <View
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_1sdp"
-                        android:background="@color/darkblue" />
+                <View
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/darkblue" />
 
-                </LinearLayout>
+            </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/linFacebook"
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/linFacebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/border_circular_red_filled"
+                android:backgroundTint="#3b5998"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_4sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    app:srcCompat="@drawable/ic_facebook_f_brands" />
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:background="@drawable/border_circular_red_filled"
-                    android:backgroundTint="#3b5998"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_4sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_18sdp"
-                        android:layout_height="@dimen/_18sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        app:srcCompat="@drawable/ic_facebook_f_brands" />
-
-                    <View
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:background="@color/white" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Connect Using Facebook"
+                    android:layout_weight="1"
+                    android:text="Connect Using Facebook"
                         android:textColor="@color/white"
                         style="@style/TextViewTitleStyle"/>
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        app:srcCompat="@drawable/ic_angle_right" />
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:srcCompat="@drawable/ic_angle_right" />
 
-                </LinearLayout>
+            </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/linLinkedIn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/border_circular_red_filled"
-                    android:backgroundTint="#0077b5"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
+            <LinearLayout
+                android:id="@+id/linLinkedIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/border_circular_red_filled"
+                android:backgroundTint="#0077b5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                     android:visibility="gone"
                     android:padding="@dimen/_4sdp">
 
-                    <ImageView
-                        android:layout_width="@dimen/_18sdp"
-                        android:layout_height="@dimen/_18sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        app:srcCompat="@drawable/ic_linkedin_in_brands" />
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    app:srcCompat="@drawable/ic_linkedin_in_brands" />
 
-                    <View
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:background="@color/white" />
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:background="@color/white" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Connect Using LinkedIn"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Connect Using LinkedIn"
                         android:textColor="@color/white"
                         style="@style/TextViewTitleStyle"/>
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        app:srcCompat="@drawable/ic_angle_right" />
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:srcCompat="@drawable/ic_angle_right" />
 
-                </LinearLayout>
+            </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/linGoogle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/border_circular_red_filled"
-                    android:backgroundTint="#DDee415e"
-                    android:gravity="center_vertical"
+            <LinearLayout
+                android:id="@+id/linGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/border_circular_red_filled"
+                android:backgroundTint="#DDee415e"
+                android:gravity="center_vertical"
                     android:visibility="visible"
-                    android:orientation="horizontal"
+                android:orientation="horizontal"
                     android:padding="@dimen/_4sdp">
 
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        app:srcCompat="@drawable/ic_google_plus_g_brands" />
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    app:srcCompat="@drawable/ic_google_plus_g_brands" />
 
-                    <View
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:layout_marginEnd="@dimen/_6sdp"
-                        android:background="@color/white" />
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:background="@color/white" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Connect Using Google"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Connect Using Google"
                         android:textColor="@color/white"
                         style="@style/TextViewTitleStyle"/>
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        app:srcCompat="@drawable/ic_angle_right" />
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:srcCompat="@drawable/ic_angle_right" />
 
-                </LinearLayout>
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -443,5 +443,3 @@
         android:layout_marginBottom="30dp" />
 
 </RelativeLayout>
-
-

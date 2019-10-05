@@ -1024,7 +1024,6 @@ public class PostApprovalDocFragment extends Fragment {
                 String email = jsonObject.getString("email");//vijay.shukla@eduvanz.in
 
                 // Invoke Esign
-
 //                LoanTabActivity.initDigio(documentID,email);
 
                 final Digio digio = new Digio();

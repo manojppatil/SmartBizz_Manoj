@@ -154,10 +154,30 @@ public class LocationService extends Service {
             //otp,mobile,lead_id,online,signed_by_id	in online key i want array which stores as following:
             // IP,city,regioin,country,location,latitute,longitude,ISP_provider,pincode,browser_name,platform
 //            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only,// check with max available address lines by getMaxAddressLineIndex()
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-            String postalCode = addresses.get(0).getPostalCode();
+            String city = "";
+            try {
+                city = addresses.get(0).getLocality();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String state = "";
+            try {
+                state = addresses.get(0).getAdminArea();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String country = "";
+            try {
+                country = addresses.get(0).getCountryName();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String postalCode = "";
+            try {
+                postalCode = addresses.get(0).getPostalCode();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 //            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
             SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);

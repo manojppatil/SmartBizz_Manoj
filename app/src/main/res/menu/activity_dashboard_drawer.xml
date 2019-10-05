@@ -7,14 +7,14 @@
             android:id="@+id/nav_eligibility"
             android:icon="@drawable/icon_eligibility"
             android:title="Apply Now" />
-
         <item
             android:id="@+id/nav_howitworks"
             android:icon="@drawable/ic_nav_how_it_works"
             android:title="@string/title_how_it_works"/>
-        <!--<item-->
-            <!--android:id="@+id/nav_language"-->
-            <!--android:title="Language" />-->
+        <item
+            android:id="@+id/nav_videokyc"
+            android:icon="@drawable/ic_nav_ekyc"
+            android:title="Instant eKYC" />
         <item
             android:id="@+id/nav_aboutus"
             android:icon="@drawable/ic_nav_about_us"

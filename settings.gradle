@@ -1,4 +1,6 @@
-include ':app', ':libraryMobilePaymentSDK', ':library',
+include ':app',
+//        ':libraryMobilePaymentSDK',
+        ':library',
         ':linkedin-sdk', ':friendlyscore-libs', ':fs-calls-sms-release-1.001',
 //        ':fs-core-sdk-release-3.5',
 //        ':fs-ui-sdk-release-3.5',
