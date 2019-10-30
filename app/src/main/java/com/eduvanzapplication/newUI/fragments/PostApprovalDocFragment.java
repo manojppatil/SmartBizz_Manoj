@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -122,13 +123,13 @@ public class PostApprovalDocFragment extends Fragment {
     //Manual Diag
     public static LinearLayout linClose, linDownload, linUpload;
     //OTP Diag
-    public static LinearLayout linCloseOTP, layoutOtp, linSubmitOtp;
-    public static EditText edtOtp;
+    public static LinearLayout linCloseOTP, layoutOtp, linSubmitOtpBo, linSubmitOtpCo, linStep2, linGetOtpBo, linGetOtpCo,layoutOtpBo,layoutOtpCo;
+    public static EditText edtOtpBo, edtOtpCo;
     public static WebView webView;
     final int OTPlength = 6;
     public static String city, state, country, postalCode, ipaddress, latitude, longitde;
 
-    private CFAlertDialog cfAlertDialog;
+    public CFAlertDialog cfAlertDialog;
 
     public static List<MNach> mNachArrayList;
     public static RecyclerView rvNach;
@@ -147,6 +148,8 @@ public class PostApprovalDocFragment extends Fragment {
             offered_amount = "", applicant_id = "", fk_lead_id = "", first_name = "", last_name = "", mobile_number = "",
             email_id = "", kyc_address = "", course_cost = "", paid_on = "", transaction_amount = "", kyc_status = "",
             disbursal_status = "", rate = "", loan_agrement_upload_status = "", paid_emi_on = "", no_of_advance_emi = "";
+
+    public static String mobile_numberCoBo = "",applicant_idCoBo;
 
     String downloadUrl = "", downloadSignedUrl = "", baseUrl = "";
     public static String paymentOption = "1";
@@ -261,6 +264,8 @@ public class PostApprovalDocFragment extends Fragment {
         baseUrl = "";
         paymentOption = "1";
         paid_emi_on = "";
+        mobile_numberCoBo = "";
+        applicant_idCoBo = "";
     }
 
     @Override
@@ -268,7 +273,6 @@ public class PostApprovalDocFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(layout.fragment_postapprovaldoc, container, false);
-        viewDiag = getLayoutInflater().inflate(layout.signin_options_otp, null);
 
         context = getContext();
         mFragment = new PostApprovalDocFragment();
@@ -431,8 +435,20 @@ public class PostApprovalDocFragment extends Fragment {
                 linManualBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 lineSignBtn.setBackground(getResources().getDrawable(R.drawable.border_circular));
                 linOTPBtn.setBackground(getResources().getDrawable(R.drawable.border_circular_blue_filled));
-//                otpSignInDialog();
-                genrateOTPAgreement();
+
+//                try {
+//                    if(sharedPreferences.getString("city", "") != "" && sharedPreferences.getString("state", "") != ""
+//                            && sharedPreferences.getString("country", "") != "" && sharedPreferences.getString("postalCode", "") != ""
+//                            && sharedPreferences.getString("latitude", "") != "" && sharedPreferences.getString("longitde", "") != ""
+//                            && sharedPreferences.getString("ipaddress", "") != "") {
+//                        otpSignInDialog(context);
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                genrateOTPAgreement();
+                otpSignInDialog(context);
+
             }
         });
 
@@ -781,10 +797,10 @@ public class PostApprovalDocFragment extends Fragment {
                     // initialization of webview. // Error Message details
                     // the error occurred.
 //                    Toast.makeText(context, "Payment Transaction response " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inErrorMessage-");
-                    s.append(inErrorMessage);
-                    Globle.appendLog(String.valueOf(s));
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inErrorMessage-");
+//                    s.append(inErrorMessage);
+//                    Globle.appendLog(String.valueOf(s));
 
                 }
 
@@ -792,10 +808,10 @@ public class PostApprovalDocFragment extends Fragment {
                 public void onTransactionResponse(Bundle inResponse) {
                     Log.d("LOG", "Payment Transaction is successful " + inResponse);
 //                    Toast.makeText(context, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inResponse-");
-                    s.append(inResponse);
-                    Globle.appendLog(String.valueOf(s));
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inResponse-");
+//                    s.append(inResponse);
+//                    Globle.appendLog(String.valueOf(s));
                     //"Bundle[{STATUS=TXN_SUCCESS,
                     // CHECKSUMHASH=ENXZLPAIk3AlC/rdD7EfpMnG8Okxe0819nIQvFBjJL+aGnTrGIQfHHtGLFoiI+sWxVEFmOer+UCZiNaRNaRyOGbE4NMF66qRldhhHLJFaUs=,
                     // BANKNAME=Union Bank of India, ORDERID=ORDER100008205, TXNAMOUNT=10.00,
@@ -1603,6 +1619,21 @@ public class PostApprovalDocFragment extends Fragment {
                     }
                 }
 
+                try {
+                    if (!jsonDataO.get("coApplicant").equals(null)) {
+
+                        JSONObject jsonObjectCoBo = jsonDataO.getJSONObject("coApplicant");
+
+                        if (!jsonObjectCoBo.getString("mobile_number").toString().equals("null"))
+                            mobile_numberCoBo = jsonObjectCoBo.getString("mobile_number");
+
+                        if (!jsonObjectCoBo.getString("applicant_id").toString().equals("null"))
+                            applicant_idCoBo = jsonObjectCoBo.getString("applicant_id");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             if (!jsonDataO.get("nachData").equals(null)) {
@@ -1798,17 +1829,26 @@ public class PostApprovalDocFragment extends Fragment {
 
     }
 
-    public void genrateOTPAgreement() {
+    public void genrateOTPAgreement(String mobile,String UserType) {
 
         try {
             String url = MainActivity.mainUrl + "laf/getAggForOTPSign";
             Map<String, String> params = new HashMap<String, String>();
             params.put("lead_id", MainActivity.lead_id);
-            params.put("mobile", DashboardFragmentNew.mobile_no);
+            params.put("mobile", mobile);
             if (!Globle.isNetworkAvailable(context)) {
                 Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {
-                progressBar.setVisibility(View.VISIBLE);
+
+                if(UserType.equals("1")){
+                    edtOtpBo.setEnabled(true);
+                    edtOtpCo.setEnabled(false);
+
+                }else{
+                    edtOtpBo.setEnabled(false);
+                    edtOtpCo.setEnabled(true);
+                }
+                progressBarDiag.setVisibility(VISIBLE);
 
                 VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
                 volleyCall.sendRequest(context, url, null, mFragment, "genrateOTPAgreement", params, MainActivity.auth_token);
@@ -1835,7 +1875,7 @@ public class PostApprovalDocFragment extends Fragment {
 //            {"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,
 //                    "doc_url":"uploads\/ladocumentstore\/13816\/Eduvanz_Agreement.pdf","message":"success"}
             String message = jsonDataO.getString("message");
-            progressBar.setVisibility(View.GONE);
+            progressBarDiag.setVisibility(GONE);
             if (jsonDataO.getInt("status") == 1) {
                 JSONObject mData2 = jsonDataO.getJSONObject("result");
                 downloadUrl = mData2.getString("baseUrl").concat(jsonDataO.getString("doc_url"));//{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":1,"doc_url":52618,"message":"success"}
@@ -1845,16 +1885,10 @@ public class PostApprovalDocFragment extends Fragment {
 //                webView.getSettings().setJavaScriptEnabled(true);
 //                webView.loadUrl(url);
 
-                otpSignInDialog(context);
+//                otpSignInDialog(context);
+
                 openPdf(downloadUrl);
 
-//                try {
-//                    Intent showDialogIntent = new Intent(context, WebViewOTPDiag.class);
-//                    showDialogIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    showDialogIntent.putExtra("downloadUrl", downloadUrl);
-//                    context.getApplicationContext().startActivity(showDialogIntent);
-//                } catch (NoClassDefFoundError e) {
-//                }
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
@@ -1870,44 +1904,29 @@ public class PostApprovalDocFragment extends Fragment {
 
     }
 
-    public void submitOTP() {
-
+    public void submitOTPResponse(JSONObject jsonDataO) {
+//        Log.e(TAG, "setLoanDetails: " + jsonDataO);
         try {
-            //otp,mobile,lead_id,online,signed_by_id
-            //in online key i want array which stores as following:
-            //IP,city,regioin,country,location,latitute,longitude,ISP_provider,pincode,browser_name,platform
+            String message = jsonDataO.getString("message");
+            progressBarDiag.setVisibility(GONE);
+            //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":4,"message":"Invalid OTP"}
+            // {"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/",
+            // "Url":"uploads\/lamanualupload\/13816\/Eduvanz_Agreement.pdf"},"status":1,"message":"All Users Signing Completed"}
+            if (jsonDataO.getInt("status") == 1) {
+                JSONObject mData2 = jsonDataO.getJSONObject("result");
+                downloadUrl = mData2.getString("baseUrl").concat(mData2.getString("Url"));
 
-            JSONObject online = new JSONObject();
+                linGetOtpBo.setBackground(context.getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                linGetOtpBo.setClickable(false);
+                edtOtpBo.setEnabled(false);
+                linSubmitOtpBo.setBackground(context.getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                linSubmitOtpBo.setClickable(false);
 
-            try {
-                online.put("IP", ipaddress);
-                online.put("city", city);
-                online.put("region", state);
-                online.put("country", country);
-                online.put("location", "location");
-                online.put("latitute", latitude);
-                online.put("longitute", longitde);
-                online.put("ISP_provider", "ISP_provider");
-                online.put("pincode", postalCode);
-                online.put("browser_name", "Android");
-                online.put("platform", "Android");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//                cfAlertDialog.dismiss();
+//                getLoanDetails();
 
-            String url = MainActivity.mainUrl + "laf/signedByOtpAgg";
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("otp", edtOtp.getText().toString());
-            params.put("mobile", DashboardFragmentNew.mobile_no);
-            params.put("lead_id", MainActivity.lead_id);
-            params.put("online", String.valueOf(online));
-            params.put("signed_by_id", LoanTabActivity.applicant_id);
-            if (!Globle.isNetworkAvailable(context)) {
-                Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
             } else {
-                progressBar.setVisibility(View.VISIBLE);
-                VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
-                volleyCall.sendRequest(context, url, null, mFragment, "signedByOtpAgg", params, MainActivity.auth_token);
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             String className = this.getClass().getSimpleName();
@@ -1918,22 +1937,29 @@ public class PostApprovalDocFragment extends Fragment {
             String errorLine = String.valueOf(e.getStackTrace()[0]);
             Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
         }
+
     }
 
-    public void submitOTPResponse(JSONObject jsonDataO) {
+    public void submitOTPResponseCo(JSONObject jsonDataO) {
 //        Log.e(TAG, "setLoanDetails: " + jsonDataO);
         try {
             String message = jsonDataO.getString("message");
-            progressBar.setVisibility(View.GONE);
+            progressBarDiag.setVisibility(GONE);
+//                {"leadDetails":{"fk_institutes_id":"123"},"result":{"baseUrl":"https:\/\/eduvanz.com\/admin\/","Url":"uploads\/ladocumentstore\/21094\/Eduvanz_Agreement.pdf"},"status":1,"message":"All Users Signing Completed"}
             //{"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/"},"status":4,"message":"Invalid OTP"}
-            // {"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/",
-            // "Url":"uploads\/lamanualupload\/13816\/Eduvanz_Agreement.pdf"},"status":1,"message":"All Users Signing Completed"}
+//             {"result":{"baseUrl":"http:\/\/159.89.204.41\/eduvanzbeta\/","Url":"uploads\/lamanualupload\/13816\/Eduvanz_Agreement.pdf"},"status":1,"message":"All Users Signing Completed"}
             if (jsonDataO.getInt("status") == 1) {
                 JSONObject mData2 = jsonDataO.getJSONObject("result");
                 downloadUrl = mData2.getString("baseUrl").concat(mData2.getString("Url"));
 
-                cfAlertDialog.dismiss();
-                getLoanDetails();
+                linGetOtpCo.setBackground(context.getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                linGetOtpCo.setClickable(false);
+                edtOtpCo.setEnabled(false);
+                linSubmitOtpCo.setBackground(context.getResources().getDrawable(R.drawable.border_circular_grey_filled));
+                linSubmitOtpCo.setClickable(false);
+
+//                cfAlertDialog.dismiss();
+//                getLoanDetails();
 
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -1979,7 +2005,11 @@ public class PostApprovalDocFragment extends Fragment {
 
         cfAlertDialog = builder.show();
         cfAlertDialog.setCancelable(false);
-        cfAlertDialog.setCanceledOnTouchOutside(false);
+        try {
+            cfAlertDialog.setCanceledOnTouchOutside(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         cfAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -2054,15 +2084,37 @@ public class PostApprovalDocFragment extends Fragment {
 
     public void otpSignInDialog(Context context) {
 
-//        viewDiag = getLayoutInflater().inflate(layout.signin_options_otp, null);
-        linCloseOTP = viewDiag.findViewById(R.id.linCloseOTP);
+        viewDiag = getLayoutInflater().inflate(layout.signin_otp_bo_co, null);
+
+        linClose = viewDiag.findViewById(R.id.linClose);
+        linStep2 = viewDiag.findViewById(R.id.linStep2);
+
+        linGetOtpBo = viewDiag.findViewById(R.id.linGetOtpBo);
         layoutOtp = viewDiag.findViewById(R.id.layoutOtp);
-        linSubmitOtp = viewDiag.findViewById(R.id.linSubmitOtp);
-//        webView = viewDiag.findViewById(id.webView);
-        edtOtp = viewDiag.findViewById(id.edtOtp);
+        linSubmitOtpBo = viewDiag.findViewById(R.id.linSubmitOtpBo);
+        layoutOtpBo = viewDiag.findViewById(R.id.layoutOtpBo);
+        edtOtpBo = viewDiag.findViewById(id.edtOtpBo);
+
+        linGetOtpCo = viewDiag.findViewById(R.id.linGetOtpCo);
+        linSubmitOtpCo = viewDiag.findViewById(R.id.linSubmitOtpCo);
+        layoutOtpCo = viewDiag.findViewById(R.id.layoutOtpCo);
+        edtOtpCo = viewDiag.findViewById(id.edtOtpCo);
+
         progressBarDiag = viewDiag.findViewById(R.id.progressBar);
-        linSubmitOtp.setBackground(context.getResources().getDrawable(R.drawable.border_circular_grey_filled));
-        linSubmitOtp.setClickable(false);
+
+        linSubmitOtpBo.setBackground(context.getResources().getDrawable(R.drawable.border_circular_grey_filled));
+        linSubmitOtpBo.setClickable(false);
+        edtOtpBo.setEnabled(false);
+
+        linSubmitOtpCo.setBackground(context.getResources().getDrawable(R.drawable.border_circular_grey_filled));
+        linSubmitOtpCo.setClickable(false);
+        edtOtpCo.setEnabled(false);
+
+        if (mobile_numberCoBo.length() > 1) {
+            linStep2.setVisibility(VISIBLE);
+        } else {
+            linStep2.setVisibility(GONE);
+        }
 
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(context)
                 .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
@@ -2072,7 +2124,11 @@ public class PostApprovalDocFragment extends Fragment {
 
         cfAlertDialog = builder.show();
         cfAlertDialog.setCancelable(false);
-        cfAlertDialog.setCanceledOnTouchOutside(false);
+        try {
+            cfAlertDialog.setCanceledOnTouchOutside(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         cfAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -2083,9 +2139,9 @@ public class PostApprovalDocFragment extends Fragment {
 
         InputFilter[] filterArray = new InputFilter[1];
         filterArray[0] = new InputFilter.LengthFilter(OTPlength);
-        edtOtp.setFilters(filterArray);
+        edtOtpBo.setFilters(filterArray);
 
-        edtOtp.addTextChangedListener(new TextWatcher() {
+        edtOtpBo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -2093,12 +2149,16 @@ public class PostApprovalDocFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (edtOtp.getText().toString().trim().length() == OTPlength) {
+                try {
+                    if (edtOtpBo.getText().toString().trim().length() == OTPlength) {
 
-                    linSubmitOtp.setBackground(context.getResources().getDrawable(R.drawable.border_circular_red_filled));
-                    linSubmitOtp.setClickable(true);
-                    InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(edtOtp.getWindowToken(), 0);
+                        linSubmitOtpBo.setBackground(context.getResources().getDrawable(drawable.border_circular_red_filled));
+                        linSubmitOtpBo.setClickable(true);
+                        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(edtOtpBo.getWindowToken(), 0);
+                    }
+                } catch (Resources.NotFoundException e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -2109,21 +2169,164 @@ public class PostApprovalDocFragment extends Fragment {
             }
         });
 
-        linCloseOTP.setOnClickListener(new View.OnClickListener() {
+        InputFilter[] filterArray1 = new InputFilter[1];
+        filterArray1[0] = new InputFilter.LengthFilter(OTPlength);
+        edtOtpCo.setFilters(filterArray1);
+
+        edtOtpCo.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                cfAlertDialog.dismiss();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                try {
+                    if (edtOtpCo.getText().toString().trim().length() == OTPlength) {
+
+                        linSubmitOtpCo.setBackground(context.getResources().getDrawable(drawable.border_circular_red_filled));
+                        linSubmitOtpCo.setClickable(true);
+                        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(edtOtpCo.getWindowToken(), 0);
+                    }
+                } catch (Resources.NotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
-        linSubmitOtp.setOnClickListener(new View.OnClickListener() {
+        linClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cfAlertDialog.dismiss();
+                getLoanDetails();
+            }
+        });
+
+        linGetOtpBo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                genrateOTPAgreement(DashboardFragmentNew.mobile_no,"1");
+            }
+        });
+
+        linGetOtpCo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                genrateOTPAgreement(mobile_numberCoBo,"2");
+            }
+        });
+
+        linSubmitOtpBo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
-                    submitOTP();
+                    //otp,mobile,lead_id,online,signed_by_id
+                    //in online key i want array which stores as following:
+                    //IP,city,regioin,country,location,latitute,longitude,ISP_provider,pincode,browser_name,platform
+
+                    JSONObject online = new JSONObject();
+
+                    try {
+                        online.put("IP", ipaddress);
+                        online.put("city", city);
+                        online.put("region", state);
+                        online.put("country", country);
+                        online.put("location", "location");
+                        online.put("latitute", latitude);
+                        online.put("longitute", longitde);
+                        online.put("ISP_provider", "ISP_provider");
+                        online.put("pincode", postalCode);
+                        online.put("browser_name", "Android");
+                        online.put("platform", "Android");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    String url = MainActivity.mainUrl + "laf/signedByOtpAgg";
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("otp", edtOtpBo.getText().toString());
+                    params.put("mobile", DashboardFragmentNew.mobile_no);
+                    params.put("lead_id", MainActivity.lead_id);
+                    params.put("online", String.valueOf(online));
+                    params.put("signed_by_id", LoanTabActivity.applicant_id);
+                    if (!Globle.isNetworkAvailable(context)) {
+                        Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+                    } else {
+                        progressBarDiag.setVisibility(VISIBLE);
+                        VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                        volleyCall.sendRequest(context, url, null, mFragment, "signedByOtpAgg", params, MainActivity.auth_token);
+                    }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
+                }
+            }
+        });
+
+        linSubmitOtpCo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    //otp,mobile,lead_id,online,signed_by_id
+                    //in online key i want array which stores as following:
+                    //IP,city,regioin,country,location,latitute,longitude,ISP_provider,pincode,browser_name,platform
+
+                    JSONObject online = new JSONObject();
+
+                    try {
+                        online.put("IP", ipaddress);
+                        online.put("city", city);
+                        online.put("region", state);
+                        online.put("country", country);
+                        online.put("location", "location");
+                        online.put("latitute", latitude);
+                        online.put("longitute", longitde);
+                        online.put("ISP_provider", "ISP_provider");
+                        online.put("pincode", postalCode);
+                        online.put("browser_name", "Android");
+                        online.put("platform", "Android");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    String url = MainActivity.mainUrl + "laf/signedByOtpAgg";
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("otp", edtOtpCo.getText().toString());
+                    params.put("mobile", mobile_numberCoBo);
+                    params.put("lead_id", MainActivity.lead_id);
+                    params.put("online", String.valueOf(online));
+                    params.put("signed_by_id", applicant_idCoBo);
+                    if (!Globle.isNetworkAvailable(context)) {
+                        Toast.makeText(context, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
+                    } else {
+                        progressBarDiag.setVisibility(VISIBLE);
+                        VolleyCall volleyCall = new VolleyCall();//http://192.168.0.110/eduvanzapi/dashboard/getStudentDashbBoardStatus
+                        volleyCall.sendRequest(context, url, null, mFragment, "signedByOtpAggCo", params, MainActivity.auth_token);
+                    }
+                } catch (Exception e) {
+                    String className = this.getClass().getSimpleName();
+                    String name = new Object() {
+                    }.getClass().getEnclosingMethod().getName();
+                    String errorMsg = e.getMessage();
+                    String errorMsgDetails = e.getStackTrace().toString();
+                    String errorLine = String.valueOf(e.getStackTrace()[0]);
+                    Globle.ErrorLog(getActivity(), className, name, errorMsg, errorMsgDetails, errorLine);
                 }
             }
         });

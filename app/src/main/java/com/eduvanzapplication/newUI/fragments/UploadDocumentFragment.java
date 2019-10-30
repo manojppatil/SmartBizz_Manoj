@@ -128,7 +128,7 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
     static LinearLayout profileImage, aadharCard, panCard, passport, voterId, drivingLicense, telephoneBill, electricityBill,
             rentAgreement, addressProof;
     static RelativeLayout profileBckgrnd, aadharBckgrnd, panBckgrnd, passportBckgrnd, voterIdBckgrnd, drivingLicenseBckgrnd,
-            telephoneBillBckgrnd, electricityBillBckgrnd, rentAgreementBckgrnd, addressProofBckgrnd,othersBackground;
+            telephoneBillBckgrnd, electricityBillBckgrnd, rentAgreementBckgrnd, addressProofBckgrnd, othersBackground;
     /*Financial Documents*/
     static LinearLayout salSlipSix, salSlipThree, bankStmntThree, linSeemoreFinancialBtn, bankStmntSix, kvp, licPolicy,
             form16, form61, pensionLetter, itr, pnl;
@@ -360,24 +360,27 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                profileBckgrnd.setVisibility(GONE);
-                                applicantType = "1";
-                                documentTypeNo = "1";
+                                if (LoanTabActivity.isEditaDocble) {
+                                    profileBckgrnd.setVisibility(GONE);
+                                    applicantType = "1";
+                                    documentTypeNo = "1";
 
-                                if (Build.VERSION.SDK_INT >= 23) {
-                                    permission = ContextCompat.checkSelfPermission(context,
-                                            Manifest.permission.CAMERA);
-                                    if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
-                                        ActivityCompat.requestPermissions((Activity) context,
-                                                new String[]{
-                                                        Manifest.permission.CAMERA},
-                                                GET_MY_PERMISSION);
-                                    } else {
-                                        selectImage();
+                                    if (Build.VERSION.SDK_INT >= 23) {
+                                        permission = ContextCompat.checkSelfPermission(context,
+                                                Manifest.permission.CAMERA);
+                                        if (permission != PackageManager.PERMISSION_GRANTED) {//Direct Permission without disclaimer dialog
+                                            ActivityCompat.requestPermissions((Activity) context,
+                                                    new String[]{
+                                                            Manifest.permission.CAMERA},
+                                                    GET_MY_PERMISSION);
+                                        } else {
+                                            selectImage();
+                                        }
                                     }
-                                }
 //                                imageToPdf(documentTypeNo, getString(R.string.upload_profile_picture), getString(R.string.applicant_single_picture_required_to_be_uploaded), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                    tap = 0;
+
+                                }
                             } else if (tap == 2) {
                                 if (profileImage.getTag() != null) {
                                     String strFileName = profileImage.getTag().toString().substring(profileImage.getTag().toString().lastIndexOf("/") + 1);
@@ -432,11 +435,13 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "2";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_pan_card), getString(R.string.applicant_pan_card), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "2";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_pan_card), getString(R.string.applicant_pan_card), LoanTabActivity.applicant_id, "1");
 
-                                tap = 0;
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (panCard.getTag() != null) {
@@ -489,10 +494,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "3";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_adhaar_card), getString(R.string.applicant_adhaar_card_front_and_backside), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "3";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_adhaar_card), getString(R.string.applicant_adhaar_card_front_and_backside), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (aadharCard.getTag() != null) {
@@ -549,10 +556,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "4";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_passport), getString(R.string.applicant_passport), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "4";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_passport), getString(R.string.applicant_passport), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (passport.getTag() != null) {
@@ -611,10 +620,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "5";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_voterID), getString(R.string.applicant_voterID), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "5";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_voterID), getString(R.string.applicant_voterID), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (voterId.getTag() != null) {
@@ -671,10 +682,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "6";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_driving_license), getString(R.string.applicant_driving_license), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "6";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_driving_license), getString(R.string.applicant_driving_license), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (drivingLicense.getTag() != null) {
@@ -731,10 +744,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "7";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_telephone_bill), getString(R.string.applicant_telephone_bill), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "7";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_telephone_bill), getString(R.string.applicant_telephone_bill), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (telephoneBill.getTag() != null) {
@@ -789,10 +804,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "8";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_electricity_bill), getString(R.string.applicant_electricity_bill), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "8";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_electricity_bill), getString(R.string.applicant_electricity_bill), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (electricityBill.getTag() != null) {
@@ -850,10 +867,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "9";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_rent_agreement), getString(R.string.applicant_rent_agreement), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "9";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_rent_agreement), getString(R.string.applicant_rent_agreement), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (rentAgreement.getTag() != null) {
@@ -912,11 +931,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-
-                                applicantType = "1";
-                                documentTypeNo = "30";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_address_proof), getString(R.string.applicant_address_proof), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "30";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_address_proof), getString(R.string.applicant_address_proof), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (addressProof.getTag() != null) {
@@ -973,11 +993,13 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "17";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_income_proof_6), getString(R.string.salary_slip_of_applicant_latest_6_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "17";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_income_proof_6), getString(R.string.salary_slip_of_applicant_latest_6_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted), LoanTabActivity.applicant_id, "1");
 
-                                tap = 0;
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
 
@@ -1033,11 +1055,13 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "18";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_income_proof), getString(R.string.salary_slip_of_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "18";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_income_proof), getString(R.string.salary_slip_of_applicant_latest_3_months_if_not_available_salary_certificate_stating_the_same_details_would_be_accepted), LoanTabActivity.applicant_id, "1");
 
-                                tap = 0;
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (salSlipThree.getTag() != null) {
@@ -1095,11 +1119,13 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "19";
-                                imageToPdfBankStmt(documentTypeNo, getString(R.string.upload_bank_statement), getString(R.string.current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "19";
+                                    imageToPdfBankStmt(documentTypeNo, getString(R.string.upload_bank_statement), getString(R.string.current_3_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
 
-                                tap = 0;
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (bankStmntThree.getTag() != null) {
@@ -1160,11 +1186,13 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "20";
-                                imageToPdfBankStmt(documentTypeNo, getString(R.string.upload_bank_statement_6), getString(R.string.current_6_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "20";
+                                    imageToPdfBankStmt(documentTypeNo, getString(R.string.upload_bank_statement_6), getString(R.string.current_6_months_bank_statement_of_applicant_reflecting_salary_along_with_the_front_page), LoanTabActivity.applicant_id, "1");
 
-                                tap = 0;
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (bankStmntSix.getTag() != null) {
@@ -1226,11 +1254,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-
-                                applicantType = "1";
-                                documentTypeNo = "10";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_KVP), getString(R.string.current_KVP), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "10";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_KVP), getString(R.string.current_KVP), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (kvp.getTag() != null) {
@@ -1286,10 +1315,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "11";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_lic_policy), getString(R.string.current_applicant_lic_policy), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "11";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_lic_policy), getString(R.string.current_applicant_lic_policy), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (licPolicy.getTag() != null) {
@@ -1346,11 +1377,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-
-                                applicantType = "1";
-                                documentTypeNo = "12";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_form_16), getString(R.string.current_applicant_form_16), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "12";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_form_16), getString(R.string.current_applicant_form_16), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (form16.getTag() != null) {
@@ -1410,11 +1442,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-
-                                applicantType = "1";
-                                documentTypeNo = "13";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_form_61), getString(R.string.current_applicant_form_61), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "13";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_form_61), getString(R.string.current_applicant_form_61), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (form61.getTag() != null) {
@@ -1469,10 +1502,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "14";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_pension_letter), getString(R.string.current_applicant_pension_letter), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "14";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_pension_letter), getString(R.string.current_applicant_pension_letter), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (pensionLetter.getTag() != null) {
@@ -1530,11 +1565,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-
-                                applicantType = "1";
-                                documentTypeNo = "15";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_itr), getString(R.string.current_itr), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "15";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_itr), getString(R.string.current_itr), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (itr.getTag() != null) {
@@ -1590,10 +1626,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "16";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_pnl), getString(R.string.current_applicant_pnl), LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "16";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_pnl), getString(R.string.current_applicant_pnl), LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (pnl.getTag() != null) {
@@ -1650,11 +1688,13 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "21";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "21";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
 
-                                tap = 0;
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (tenthMarksheet.getTag() != null) {
@@ -1710,11 +1750,13 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "22";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
+                                    applicantType = "1";
+                                    documentTypeNo = "22";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
 
-                                tap = 0;
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (twelvethMarksheet.getTag() != null) {
@@ -1769,11 +1811,14 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "23";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
 
-                                tap = 0;
+                                    applicantType = "1";
+                                    documentTypeNo = "23";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_latest_marksheet), getString(R.string.latest_marksheet_of_the_applicant), LoanTabActivity.applicant_id, "1");
+
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (degreeMarkSheet.getTag() != null) {
@@ -1831,11 +1876,14 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "24";
-                                imageToPdf(documentTypeNo, getString(R.string.upload_latest_certificate), getString(R.string.latest_certificate_of_the_applicant), LoanTabActivity.applicant_id, "1");
+                                if (LoanTabActivity.isEditaDocble) {
 
-                                tap = 0;
+                                    applicantType = "1";
+                                    documentTypeNo = "24";
+                                    imageToPdf(documentTypeNo, getString(R.string.upload_latest_certificate), getString(R.string.latest_certificate_of_the_applicant), LoanTabActivity.applicant_id, "1");
+
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (degreeCertificate.getTag() != null) {
@@ -1890,10 +1938,13 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                         @Override
                         public void run() {
                             if (tap == 1) {
-                                applicantType = "1";
-                                documentTypeNo = "31";
-                                imageToPdf(documentTypeNo, "others", "others", LoanTabActivity.applicant_id, "1");
-                                tap = 0;
+                                if (LoanTabActivity.isEditaDocble) {
+
+                                    applicantType = "1";
+                                    documentTypeNo = "31";
+                                    imageToPdf(documentTypeNo, "others", "others", LoanTabActivity.applicant_id, "1");
+                                    tap = 0;
+                                }
                             } else if (tap == 2) {
 
                                 if (others.getTag() != null) {
@@ -4598,79 +4649,129 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
 //                imgAadhaar3.setImageDrawable(getResources().getDrawable(R.drawable.pdf_image));
                         if (documentTypeNo.equalsIgnoreCase("1")) {
                             aadharCard.setVisibility(View.VISIBLE);
-                            linDelAadhaarBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelAadhaarBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("2")) {
                             panCard.setVisibility(View.VISIBLE);
-                            linDelPanBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelPanBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("3")) {
                             passport.setVisibility(View.VISIBLE);
-                            linDelPassportBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelPassportBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("4")) {
                             voterId.setVisibility(View.VISIBLE);
-                            linDelVoterIdBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelVoterIdBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("5")) {
                             drivingLicense.setVisibility(View.VISIBLE);
-                            linDelDrivingLicenseBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelDrivingLicenseBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("6")) {
                             telephoneBill.setVisibility(View.VISIBLE);
-                            linDelTelephoneBillBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelTelephoneBillBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("7")) {
                             electricityBill.setVisibility(View.VISIBLE);
-                            linDelElectricityBillBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelElectricityBillBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("8")) {
                             rentAgreement.setVisibility(View.VISIBLE);
-                            linDelRentAgreementBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelRentAgreementBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("9")) {
                             addressProof.setVisibility(View.VISIBLE);
-                            linDelAddressProofBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelAddressProofBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("10")) {
                             salSlipSix.setVisibility(View.VISIBLE);
-                            linDelSalarySlipThreeBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelSalarySlipThreeBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("11")) {
                             salSlipThree.setVisibility(View.VISIBLE);
-                            linDelSalarySlipThreeBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelSalarySlipThreeBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("12")) {
                             bankStmntThree.setVisibility(View.VISIBLE);
-                            linDelBankStatementThreeBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelBankStatementThreeBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("13")) {
                             bankStmntSix.setVisibility(View.VISIBLE);
-                            linDelBankStatementSixBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelBankStatementSixBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("14")) {
                             kvp.setVisibility(View.VISIBLE);
-                            linDelKVPBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelKVPBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("15")) {
                             licPolicy.setVisibility(View.VISIBLE);
-                            linDelLICPolicyBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelLICPolicyBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("16")) {
                             form16.setVisibility(View.VISIBLE);
-                            linDelForm16Btn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelForm16Btn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("17")) {
                             form61.setVisibility(View.VISIBLE);
-                            linDelForm61Btn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelForm61Btn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("18")) {
                             pensionLetter.setVisibility(View.VISIBLE);
-                            linDelPensionLetterBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelPensionLetterBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("19")) {
                             itr.setVisibility(View.VISIBLE);
-                            linDelITRBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelITRBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("20")) {
                             pnl.setVisibility(View.VISIBLE);
-                            linDelPNLBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelPNLBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("21")) {
                             tenthMarksheet.setVisibility(View.VISIBLE);
-                            linDeltenth_mark_sheetBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDeltenth_mark_sheetBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("22")) {
                             twelvethMarksheet.setVisibility(View.VISIBLE);
-                            linDeltwelvethMarkSheetBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDeltwelvethMarkSheetBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("23")) {
                             degreeMarkSheet.setVisibility(View.VISIBLE);
-                            linDellastCompletedMarkSheetBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDellastCompletedMarkSheetBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("24")) {
                             degreeCertificate.setVisibility(View.VISIBLE);
-                            linDellastcompletedDegreeCertificateBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDellastcompletedDegreeCertificateBtn.setVisibility(View.VISIBLE);
+                            }
                         } else if (documentTypeNo.equalsIgnoreCase("31")) {
                             others.setVisibility(View.VISIBLE);
-                            linDelothersBtn.setVisibility(View.VISIBLE);
+                            if (LoanTabActivity.isEditaDocble) {
+                                linDelothersBtn.setVisibility(View.VISIBLE);
+                            }
 
                         }
                     } else {
@@ -5364,6 +5465,11 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     profileBckgrnd.setVisibility(View.VISIBLE);
                                     ivcolorphotogratitle.setVisibility(VISIBLE);
                                     linDelPhotoBtn.setTag(doc_upload_id);
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelPhotoBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelPhotoBtn.setVisibility(GONE);
+                                    }
 
                                 /*imgPhotoUploadTick.setVisibility(View.VISIBLE);
                                 txtPhoto1.setVisibility(View.GONE);*/
@@ -5385,6 +5491,11 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     aadharBckgrnd.setVisibility(VISIBLE);
                                     linDelAadhaarBtn.setTag(doc_upload_id);
 
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelAadhaarBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelAadhaarBtn.setVisibility(GONE);
+                                    }
                                /* imgAadhaarUploadTick3.setVisibility(View.VISIBLE);
                                 txtAadhaar3.setVisibility(View.GONE);
 */
@@ -5420,6 +5531,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     panCard.setTag(baseUrl + image);
                                     panBckgrnd.setVisibility(View.VISIBLE);
                                     linDelPanBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelPanBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelPanBtn.setVisibility(GONE);
+                                    }
                                 /*imgPanUploadTick2.setVisibility(View.VISIBLE);
                                 txtPan2.setVisibility(View.GONE);*/
                                     strFileName = panCard.getTag().toString().substring(panCard.getTag().toString().lastIndexOf("/") + 1);
@@ -5454,6 +5571,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     passport.setTag(baseUrl + image);
                                     passportBckgrnd.setVisibility(VISIBLE);
                                     linDelPassportBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelPassportBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelPassportBtn.setVisibility(GONE);
+                                    }
                                 /*imgAddressUploadTick38.setVisibility(View.VISIBLE);
                                 txtAddress38.setVisibility(View.GONE);*/
                                     strFileName = passport.getTag().toString().substring(passport.getTag().toString().lastIndexOf("/") + 1);
@@ -5485,6 +5608,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     voterId.setTag(baseUrl + image);
                                     voterIdBckgrnd.setVisibility(VISIBLE);
                                     linDelVoterIdBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelVoterIdBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelVoterIdBtn.setVisibility(GONE);
+                                    }
                                 /*imgSalarySlipUploadTick18.setVisibility(View.VISIBLE);
                                 txtSalarySlip18.setVisibility(View.GONE);*/
                                     strFileName = voterId.getTag().toString().substring(voterId.getTag().toString().lastIndexOf("/") + 1);
@@ -5513,6 +5642,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     drivingLicense.setTag(baseUrl + image);
                                     drivingLicenseBckgrnd.setVisibility(VISIBLE);
                                     linDelDrivingLicenseBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelDrivingLicenseBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelDrivingLicenseBtn.setVisibility(GONE);
+                                    }
                                /* imgBankStmtUploadTick19.setVisibility(View.VISIBLE);
                                 txtBankStmt19.setVisibility(View.GONE);*/
                                     strFileName = drivingLicense.getTag().toString().substring(drivingLicense.getTag().toString().lastIndexOf("/") + 1);
@@ -5543,6 +5678,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     telephoneBill.setTag(baseUrl + image);
                                     telephoneBillBckgrnd.setVisibility(VISIBLE);
                                     linDelTelephoneBillBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelTelephoneBillBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelTelephoneBillBtn.setVisibility(GONE);
+                                    }
                                 /*imgDegreeMarkSheetUploadTick23.setVisibility(View.VISIBLE);
                                 txtDegreeMarkSheet23.setVisibility(View.GONE);*/
                                     strFileName = telephoneBill.getTag().toString().substring(telephoneBill.getTag().toString().lastIndexOf("/") + 1);
@@ -5572,6 +5713,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     electricityBill.setTag(baseUrl + image);
                                     electricityBillBckgrnd.setVisibility(VISIBLE);
                                     linDelElectricityBillBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelElectricityBillBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelElectricityBillBtn.setVisibility(GONE);
+                                    }
                                /* imgDegreeMarkSheetUploadTick23.setVisibility(View.VISIBLE);
                                 txtDegreeMarkSheet23.setVisibility(View.GONE);*/
                                     strFileName = electricityBill.getTag().toString().substring(electricityBill.getTag().toString().lastIndexOf("/") + 1);
@@ -5601,6 +5748,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     degreeCertificate.setTag(baseUrl + image);
                                     degreeCertificateBckgrnd.setVisibility(VISIBLE);
                                     linDellastcompletedDegreeCertificateBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDellastcompletedDegreeCertificateBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDellastcompletedDegreeCertificateBtn.setVisibility(GONE);
+                                    }
                                 /*imgDegreeCertiUploadTick24.setVisibility(View.VISIBLE);
                                 txtDegreeCerti24.setVisibility(View.GONE);*/
                                     strFileName = degreeCertificate.getTag().toString().substring(degreeCertificate.getTag().toString().lastIndexOf("/") + 1);
@@ -5631,6 +5784,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     others.setTag(baseUrl + image);
                                     othersBackground.setVisibility(VISIBLE);
                                     linDelothersBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelothersBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelothersBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = others.getTag().toString().substring(others.getTag().toString().lastIndexOf("/") + 1);
@@ -5660,6 +5819,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     rentAgreement.setTag(baseUrl + image);
                                     rentAgreementBckgrnd.setVisibility(VISIBLE);
                                     linDelRentAgreementBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelRentAgreementBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelRentAgreementBtn.setVisibility(GONE);
+                                    }
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = rentAgreement.getTag().toString().substring(rentAgreement.getTag().toString().lastIndexOf("/") + 1);
@@ -5689,6 +5854,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     addressProof.setTag(baseUrl + image);
                                     addressProofBckgrnd.setVisibility(VISIBLE);
                                     linDelAddressProofBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelAddressProofBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelAddressProofBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = addressProof.getTag().toString().substring(addressProof.getTag().toString().lastIndexOf("/") + 1);
@@ -5717,6 +5888,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     salSlipSix.setTag(baseUrl + image);
                                     salSixBckgrnd.setVisibility(VISIBLE);
                                     linDelSalarySlipSixBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelSalarySlipSixBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelSalarySlipSixBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = salSlipSix.getTag().toString().substring(salSlipSix.getTag().toString().lastIndexOf("/") + 1);
@@ -5745,6 +5922,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     salSlipThree.setTag(baseUrl + image);
                                     salThreeBckgrnd.setVisibility(VISIBLE);
                                     linDelSalarySlipThreeBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelSalarySlipThreeBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelSalarySlipThreeBtn.setVisibility(GONE);
+                                    }
 
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
@@ -5775,6 +5958,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     bankStmntThree.setTag(baseUrl + image);
                                     bankThreeBckgrnd.setVisibility(VISIBLE);
                                     linDelBankStatementThreeBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelBankStatementThreeBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelBankStatementThreeBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = bankStmntThree.getTag().toString().substring(bankStmntThree.getTag().toString().lastIndexOf("/") + 1);
@@ -5805,6 +5994,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     bankStmntSix.setTag(baseUrl + image);
                                     bankSixBckgrnd.setVisibility(VISIBLE);
                                     linDelBankStatementSixBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelBankStatementSixBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelBankStatementSixBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = bankStmntSix.getTag().toString().substring(bankStmntSix.getTag().toString().lastIndexOf("/") + 1);
@@ -5834,6 +6029,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     kvp.setTag(baseUrl + image);
                                     kvpBckgrnd.setVisibility(VISIBLE);
                                     linDelKVPBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelKVPBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelKVPBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = kvp.getTag().toString().substring(kvp.getTag().toString().lastIndexOf("/") + 1);
@@ -5863,6 +6064,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     licPolicy.setTag(baseUrl + image);
                                     licPolicyBckgrnd.setVisibility(VISIBLE);
                                     linDelLICPolicyBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelLICPolicyBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelLICPolicyBtn.setVisibility(GONE);
+                                    }
 
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
@@ -5895,6 +6102,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     form16Bckgrnd.setVisibility(VISIBLE);
                                     linDelForm16Btn.setTag(doc_upload_id);
 
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelForm16Btn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelForm16Btn.setVisibility(GONE);
+                                    }
+
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = form16.getTag().toString().substring(form16.getTag().toString().lastIndexOf("/") + 1);
@@ -5924,6 +6137,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     form61.setTag(baseUrl + image);
                                     form61Bckgrnd.setVisibility(VISIBLE);
                                     linDelForm61Btn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelForm61Btn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelForm61Btn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = form61.getTag().toString().substring(form61.getTag().toString().lastIndexOf("/") + 1);
@@ -5955,6 +6174,11 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     pensionBckgrnd.setVisibility(VISIBLE);
                                     linDelPensionLetterBtn.setTag(doc_upload_id);
 
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelPensionLetterBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelPensionLetterBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = pensionLetter.getTag().toString().substring(pensionLetter.getTag().toString().lastIndexOf("/") + 1);
@@ -5985,6 +6209,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     itr.setTag(baseUrl + image);
                                     itrBckgrnd.setVisibility(VISIBLE);
                                     linDelITRBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelITRBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelITRBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = itr.getTag().toString().substring(itr.getTag().toString().lastIndexOf("/") + 1);
@@ -6015,6 +6245,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     pnl.setTag(baseUrl + image);
                                     pnlBckgrnd.setVisibility(VISIBLE);
                                     linDelPNLBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDelPNLBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDelPNLBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = pnl.getTag().toString().substring(pnl.getTag().toString().lastIndexOf("/") + 1);
@@ -6045,6 +6281,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     degreeMarkSheet.setTag(baseUrl + image);
                                     degreeMarksheetBckgrnd.setVisibility(VISIBLE);
                                     linDellastCompletedMarkSheetBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDellastCompletedMarkSheetBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDellastCompletedMarkSheetBtn.setVisibility(GONE);
+                                    }
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = degreeMarkSheet.getTag().toString().substring(degreeMarkSheet.getTag().toString().lastIndexOf("/") + 1);
@@ -6074,6 +6316,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     tenthMarksheet.setTag(baseUrl + image);
                                     tenthBckgrnd.setVisibility(VISIBLE);
                                     linDeltenth_mark_sheetBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDeltenth_mark_sheetBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDeltenth_mark_sheetBtn.setVisibility(GONE);
+                                    }
                                 /*imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = tenthMarksheet.getTag().toString().substring(tenthMarksheet.getTag().toString().lastIndexOf("/") + 1);
@@ -6104,6 +6352,12 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
                                     twelvethMarksheet.setTag(baseUrl + image);
                                     twelthBckgrnd.setVisibility(VISIBLE);
                                     linDeltwelvethMarkSheetBtn.setTag(doc_upload_id);
+
+                                    if (LoanTabActivity.isEditaDocble) {
+                                        linDeltwelvethMarkSheetBtn.setVisibility(VISIBLE);
+                                    } else {
+                                        linDeltwelvethMarkSheetBtn.setVisibility(GONE);
+                                    }
                                /* imgOtherDocUploadTick31.setVisibility(View.VISIBLE);
                                 txtOtherDoc31.setVisibility(View.GONE);*/
                                     strFileName = twelvethMarksheet.getTag().toString().substring(twelvethMarksheet.getTag().toString().lastIndexOf("/") + 1);

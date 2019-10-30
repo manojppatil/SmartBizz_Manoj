@@ -184,7 +184,6 @@ public class KycDetailFragment extends Fragment {
         tvcoursefeeTitle = view.findViewById(R.id.tvcoursefeeTitle);
         tvloanamountTitle = view.findViewById(R.id.tvloanamountTitle);
 
-
         /*--------------------------------------------------------------------*/
 
         ivPersonalTitle = view.findViewById(R.id.ivPersonalTitle);
@@ -3172,14 +3171,21 @@ public class KycDetailFragment extends Fragment {
                 current_status = jsonleadStatus.getString("current_status");
             }
 
-            if (lead_status.equals("1") && current_stage.equals("1")) {
+//            if (lead_status.equals("1") && current_stage.equals("1")&& Integer.parseInt(current_status) <= 4) {
+            if (lead_status.equals("1") && (current_status.equals("1") || current_status.equals("2") || current_status.equals("3")
+                    || current_status.equals("20"))) {
+                LoanTabActivity.isEditaDocble = true;
+
             } else {
                 linEditKycDetail.setVisibility(GONE);
+                LoanTabActivity.isEditaDocble = false;
+
             }
 
 //            if(LoanTabActivity.isKycEdit) {
 //                        chekAllFields();
 //                    }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

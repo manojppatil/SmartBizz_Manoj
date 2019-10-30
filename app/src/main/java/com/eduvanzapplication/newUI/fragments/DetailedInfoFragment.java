@@ -3600,10 +3600,15 @@ public class DetailedInfoFragment extends Fragment {
                 current_status = jsonleadStatus.getString("current_status");
             }
 
-            if (lead_status.equals("1") && current_stage.equals("1")) {
+//            if (lead_status.equals("1") && current_stage.equals("1") && Integer.parseInt(current_status) <= 4) {
+            if (lead_status.equals("1") && (current_status.equals("1") || current_status.equals("2") || current_status.equals("3")
+                    || current_status.equals("20"))) {
+                LoanTabActivity.isEditaDocble = true;
             } else {
                 linEditDetailedInfo.setVisibility(View.GONE);
+                LoanTabActivity.isEditaDocble = false;
             }
+
 //             if(LoanTabActivity.isDetailedInfoEdit) {
 //                    checkAllFields();
 //                }

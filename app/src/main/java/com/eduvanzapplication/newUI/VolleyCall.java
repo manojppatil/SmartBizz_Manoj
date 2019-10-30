@@ -419,6 +419,15 @@ public class VolleyCall {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else if (screen.equalsIgnoreCase("signedByOtpAggCo")) {
+            try {
+                jsonDataO = new JSONObject(s);
+                ((PostApprovalDocFragment) mfragment).submitOTPResponseCo(jsonDataO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (screen.equalsIgnoreCase("genrateSignedAgreementUrl")) {
             try {
                 jsonDataO = new JSONObject(s);

@@ -38,7 +38,6 @@ public class WebViewTermsNCondition extends AppCompatActivity {
             toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
             toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-
             webView = (WebView) findViewById(R.id.webView);
             //webView.getSettings().setJavaScriptEnabled(true);
 

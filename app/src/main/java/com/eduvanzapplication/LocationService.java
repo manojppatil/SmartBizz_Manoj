@@ -17,12 +17,15 @@ import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.util.TimeUtils;
 
 import com.eduvanzapplication.newUI.MainApplication;
 
 import java.io.IOException;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,7 +35,7 @@ import java.util.Locale;
 
 public class LocationService extends Service {
     private static final String TAG = "BOOMBOOMTESTGPS";
-    private static final int LOCATION_INTERVAL = 60 * 60 * 1000;
+    private static final int LOCATION_INTERVAL = 60 * 1000;
     private static final float LOCATION_DISTANCE = 0f;
     public static Context mContext;
     public static String userMobileNo;
@@ -86,7 +89,7 @@ public class LocationService extends Service {
         pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
-        int interval = 6 * 60 * 60 * 1000;
+        int interval = 60 * 1000;
 //            int interval = 2 * 1000;
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
 
@@ -178,7 +181,6 @@ public class LocationService extends Service {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-//            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
             SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -192,7 +194,19 @@ public class LocationService extends Service {
             editor.apply();
             editor.commit();
 
-           onDestroy();
+
+            Log.e(TAG, "Location Time: " + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date()));
+
+            try {
+                if(sharedPreferences.getString("city", "") != "" && sharedPreferences.getString("state", "") != ""
+                        && sharedPreferences.getString("country", "") != "" && sharedPreferences.getString("postalCode", "") != ""
+                        && sharedPreferences.getString("latitude", "") != "" && sharedPreferences.getString("longitde", "") != ""
+                        && sharedPreferences.getString("ipaddress", "") != "") {
+                    onDestroy();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

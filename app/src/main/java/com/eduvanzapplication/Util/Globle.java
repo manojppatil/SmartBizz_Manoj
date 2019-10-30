@@ -37,7 +37,6 @@ import java.util.regex.Pattern;
 
 import static android.content.ContentValues.TAG;
 import static com.eduvanzapplication.database.DBAdapter.ExecuteSql;
-import static com.eduvanzapplication.database.DBAdapter.getLocalData;
 
 public class Globle {
     public static void setInstance(Globle instance) {

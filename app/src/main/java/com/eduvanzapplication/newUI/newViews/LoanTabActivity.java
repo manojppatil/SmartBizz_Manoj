@@ -70,6 +70,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
     SharedPreferences sharedPreferences;
     public static boolean isKycEdit;
     public static boolean isDetailedInfoEdit;
+    public static boolean isEditaDocble = true;
     public int GET_MY_PERMISSION = 1, permission;
     public LocationManager locationManager;
     String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
@@ -125,6 +126,29 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
                 finish();
             }
         });
+
+//        try {
+//            //  if (Build.VERSION.SDK_INT >= 23) {
+//            if (!hasPermissions(this, PERMISSIONS)) {
+//                ActivityCompat.requestPermissions(LoanTabActivity.this, PERMISSIONS, PERMISSION_ALL);
+//            } else {
+//                startService(new Intent(context, LocationService.class));
+//                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+//                    if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
+////                        alertDialog.show();
+//                    }
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//
+//        }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         if (Build.VERSION.SDK_INT >= 23) {
             permission = ContextCompat.checkSelfPermission(getApplicationContext(),
@@ -197,23 +221,11 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
             }
         }
 
-//        try {
-//            //  if (Build.VERSION.SDK_INT >= 23) {
-//            if (!hasPermissions(this, PERMISSIONS)) {
-//                ActivityCompat.requestPermissions(LoanTabActivity.this, PERMISSIONS, PERMISSION_ALL);
-//            } else {
-//                startService(new Intent(context, LocationService.class));
-//                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-//                    if (Globle.isNetworkAvailable(LoanTabActivity.this)) {
-////                        alertDialog.show();
-//                    }
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//
-//        }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -593,7 +605,7 @@ public class LoanTabActivity extends AppCompatActivity implements KycDetailFragm
         try {
             digio.esign(documentID, email);
         } catch (Exception e) {
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            String.valueOf(e.getStackTrace()[0]);
         }
     }
 

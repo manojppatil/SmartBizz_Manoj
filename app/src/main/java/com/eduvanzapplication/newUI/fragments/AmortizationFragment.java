@@ -1571,10 +1571,10 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                     // initialization of webview. // Error Message details
                     // the error occurred.
 //                    Toast.makeText(context, "Payment Transaction response " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inErrorMessage-");
-                    s.append(inErrorMessage);
-                    Globle.appendLog(String.valueOf(s));
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inErrorMessage-");
+//                    s.append(inErrorMessage);
+//                    Globle.appendLog(String.valueOf(s));
 
                 }
 
@@ -1582,10 +1582,10 @@ public class AmortizationFragment extends Fragment implements View.OnClickListen
                 public void onTransactionResponse(Bundle inResponse) {
                     Log.d("LOG", "Payment Transaction is successful " + inResponse);
 //                    Toast.makeText(context, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
-                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
-                    s.append("inResponse-");
-                    s.append(inResponse);
-                    Globle.appendLog(String.valueOf(s));
+//                    StringBuilder s = new StringBuilder();//cb 207np 63w 54more text
+//                    s.append("inResponse-");
+//                    s.append(inResponse);
+//                    Globle.appendLog(String.valueOf(s));
                     //"Bundle[{STATUS=TXN_SUCCESS,
                     // CHECKSUMHASH=ENXZLPAIk3AlC/rdD7EfpMnG8Okxe0819nIQvFBjJL+aGnTrGIQfHHtGLFoiI+sWxVEFmOer+UCZiNaRNaRyOGbE4NMF66qRldhhHLJFaUs=,
                     // BANKNAME=Union Bank of India, ORDERID=ORDER100008205, TXNAMOUNT=10.00,

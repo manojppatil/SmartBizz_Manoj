@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_12sdp">
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Follow the below instructions"
+        android:textColor="@color/textcolordark"
+        style="@style/TextViewTitle16BoldStyle"/>
+
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt1"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:fontFamily="@font/sourcesanspro_light"
+        android:text="To Sign the Agreement"
+        android:textSize="18sp"
+        android:textColor="@color/textcolordark"
+        style="@style/TextViewTitleStyle"/>
+
+    <LinearLayout
+        android:id="@+id/linClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/border_circular_red_filled"
+        android:backgroundTint="@color/darkblue"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_6sdp">
+
+        <ImageView
+            android:id="@+id/ivIndicator"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            app:srcCompat="@drawable/ic_clear" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linStep1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linClose"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Step 1 >"
+            style="@style/TextViewTitle12BoldStyle"
+            android:textColor="@color/textcolordark" />
+
+        <TextView
+            android:id="@+id/txt4"
+            style="@style/TextViewTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="Sign the Agreement via OTP For Borrower"
+            android:textColor="@color/red" />
+
+        <LinearLayout
+            android:id="@+id/linGetOtpBo"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_2sdp"
+            android:background="@drawable/border_circular_red_filled"
+            android:gravity="center_vertical"
+            android:visibility="visible"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextViewTitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Get OTP"
+                android:gravity="center"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:background="@color/white" />
+
+            <ImageView
+                android:id="@+id/ivDownload"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_angle_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/layoutOtpBo"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/border_circular"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/edtOtpBo"
+                    style="@style/TextViewTitleStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_horizontal"
+                    android:hint="Enter OTP"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linSubmitOtpBo"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/border_circular_red_filled"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    style="@style/TextViewTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Submit"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:background="@color/white" />
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    app:srcCompat="@drawable/ic_angle_right" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linStep2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linStep1"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt5"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Step 2 >"
+            style="@style/TextViewTitle12BoldStyle"
+            android:textColor="@color/textcolordark" />
+
+        <TextView
+            android:id="@+id/txt6"
+            style="@style/TextViewTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="Sign the Agreement via OTP For Co-Borrower"
+            android:textColor="@color/red" />
+
+        <LinearLayout
+            android:id="@+id/linGetOtpCo"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_2sdp"
+            android:background="@drawable/border_circular_red_filled"
+            android:gravity="center_vertical"
+            android:visibility="visible"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextViewTitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Get OTP"
+                android:gravity="center"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:background="@color/white" />
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_angle_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/layoutOtpCo"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/border_circular"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/edtOtpCo"
+                    style="@style/TextViewTitleStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_horizontal"
+                    android:hint="Enter OTP"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linSubmitOtpCo"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/border_circular_red_filled"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    style="@style/TextViewTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Submit"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:background="@color/white" />
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    app:srcCompat="@drawable/ic_angle_right" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        android:visibility="gone" />
+
+</RelativeLayout>

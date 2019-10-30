@@ -317,8 +317,6 @@ public class VideoKYC extends AppCompatActivity {
 /**
  * here we have are calling one activity method(startkycDataActivity) as demo to process the KYCinfo block
  */
-                        //fetchkycinfiapi
-
                         try {
                             progressDialog.setMessage("Loading");
                             progressDialog.setCancelable(false);
