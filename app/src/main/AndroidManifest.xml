@@ -434,6 +434,13 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
+        <meta-data
+            android:name="com.thinkanalytics.algo360.sdk.init.apikey.CLIENT_ID"
+            android:value="eduvanz"/>
+
+        <meta-data
+            android:name="com.thinkanalytics.algo360.sdk.init.apikey.CLIENT_SECRET"
+            android:value="esdfghjklertyuxcfghuierthjmxcghjedx"/>
 
         <!--Paytm-->
         <activity

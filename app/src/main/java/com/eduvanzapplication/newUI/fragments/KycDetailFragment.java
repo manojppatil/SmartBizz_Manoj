@@ -176,7 +176,6 @@ public class KycDetailFragment extends Fragment {
         tvcitytitle = view.findViewById(R.id.citytitle);
         tvMaritalStatustitle = view.findViewById(R.id.MaritalStatustitle);
 
-
         tvselctInstuTile = view.findViewById(R.id.tvselctInstuTile);
         tvselecInstuLocnTitle = view.findViewById(R.id.tvselecInstuLocnTitle);
 
@@ -302,7 +301,6 @@ public class KycDetailFragment extends Fragment {
             e.printStackTrace();
         }
 
-
 //        linPersonalBlock.startAnimation(collapseanimationPersonal);
 //        relIdentityBlock.startAnimation(collapseAnimationIdentity);
 //        relCourseBlock.startAnimation(collapseAnimationCourse);
@@ -332,7 +330,6 @@ public class KycDetailFragment extends Fragment {
 
                 } else {
                     mListener.onFragmentInteraction(true, 1);
-
                 }
 
             }

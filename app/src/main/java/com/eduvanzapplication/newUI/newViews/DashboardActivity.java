@@ -369,6 +369,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             Intent intent = new Intent(context, EmiCalculatorActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_yourscore) {
+//            Intent intent = new Intent(context, TenureSelectionActivity.class);
             Intent intent = new Intent(context, FinancialAnalysisOnNavigationBar.class);
             startActivity(intent);
         } else if (id == R.id.nav_termsandconditions) {

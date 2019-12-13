@@ -39,12 +39,12 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
     RecyclerView rvRequested;
     TenureRequestedAdapter requestedAdapter;
     LinearLayout linProceedTenure;
-    public  static  LinearLayout linHeader;
+    public static LinearLayout linHeader;
     public static TextView txtTenureTitle;
-    public static RelativeLayout rel1,rel2;
+    public static RelativeLayout rel1, rel2;
     ProgressDialog progressDialog;
-    public static String leadid ="", requestedtenure ="", requestedroi ="", requestedemi ="", offeredamount="",
-            requestedloanamount ="", studentid = "", SLA = "", RLA = "";
+    public static String leadid = "", requestedtenure = "", requestedroi = "", requestedemi = "", offeredamount = "",
+            requestedloanamount = "", studentid = "", SLA = "", RLA = "", IPA_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +69,11 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             @Override
             public void onClick(View v) {
 
-                    if(SLA.equals("0")) {
-                        saveTenureApiCall();
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Please select tenure", Toast.LENGTH_SHORT).show();
-                    }
+                if (SLA.equals("0")) {
+                    saveTenureApiCall();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please select tenure", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -84,16 +84,20 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             String url = MainActivity.mainUrl + "dashboard/saveTenure";
             Map<String, String> params = new HashMap<String, String>();
             params.put("lead_id", leadid);
-            if(requestedtenure == null){
-                requestedtenure ="";
-            }if(requestedroi == null){
-                requestedroi ="";
-            }if(requestedemi == null){
-                requestedemi ="";
-            }if(offeredamount == null){
-                offeredamount ="";
-            }if(requestedloanamount == null){
-                requestedloanamount ="";
+            if (requestedtenure == null) {
+                requestedtenure = "";
+            }
+            if (requestedroi == null) {
+                requestedroi = "";
+            }
+            if (requestedemi == null) {
+                requestedemi = "";
+            }
+            if (offeredamount == null) {
+                offeredamount = "";
+            }
+            if (requestedloanamount == null) {
+                requestedloanamount = "";
             }
             params.put("requested_tenure", requestedtenure);
             params.put("requested_roi", requestedroi);
@@ -137,7 +141,7 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
                 TenureSelectionActivity.this.finish();*/
 
                 Intent intent = new Intent(TenureSelectionActivity.this, LoanTabActivity.class);
-                intent.putExtra("tenureselectedflag","1");
+                intent.putExtra("tenureselectedflag", "1");
                 intent.putExtra("lead_id", leadid);
 
                 startActivity(intent);
@@ -167,6 +171,7 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             String url = MainActivity.mainUrl + "dashboard/getTenureList";
             Map<String, String> params = new HashMap<String, String>();
             params.put("lead_id", NewLeadActivity.leadId);
+//            params.put("lead_id", "31195");
             if (!Globle.isNetworkAvailable(getApplicationContext())) {
                 Toast.makeText(TenureSelectionActivity.this, R.string.please_check_your_network_connection, Toast.LENGTH_SHORT).show();
 
@@ -195,6 +200,7 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
 
             requestedloanamount = jsonData.optString("requested_loan_amount");
             leadid = jsonData.optString("lead_id");
+            IPA_status = jsonData.optString("IPA_status");
 
             if (status.equalsIgnoreCase("1")) {
 
@@ -219,6 +225,14 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
                         horizontalList.add(mforrequestedloan);
                     }
 
+                    if (IPA_status.equalsIgnoreCase("1")) {
+                        rel1.setVisibility(View.VISIBLE);
+                        rel2.setVisibility(View.GONE);
+                    } else {
+                        rel1.setVisibility(View.GONE);
+                        rel2.setVisibility(View.VISIBLE);
+                    }
+
                     requestedAdapter = new TenureRequestedAdapter(horizontalList, TenureSelectionActivity.this);
                     LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                     rvRequested.setLayoutManager(horizontalLayoutManager);
@@ -239,7 +253,7 @@ public class TenureSelectionActivity extends AppCompatActivity implements Tenure
             }
         } catch (Exception e) {
             progressDialog.dismiss();
-            String errorLine = String.valueOf(e.getStackTrace()[0]);
+            String.valueOf(e.getStackTrace()[0]);
         }
     }
 

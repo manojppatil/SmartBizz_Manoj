@@ -6,16 +6,11 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.eduvanzapplication.R;
 import com.eduvanzapplication.Utils;
 
 import java.io.BufferedWriter;
@@ -26,16 +21,12 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-import static android.content.ContentValues.TAG;
 import static com.eduvanzapplication.database.DBAdapter.ExecuteSql;
 
 public class Globle {
@@ -53,7 +44,7 @@ public class Globle {
     public static DecimalFormat decimalFormat = new DecimalFormat("##,##,##0.00");
 
     public static final String clientCode= "EDUV8729"; //Sandbox EDDU2319 Prduction EDUV8729
-    public static final String apiKey = "762753152658161";	//Sandbox gq991xYd Production 762753152658161
+    public static final String apiKey = "762753152658161";//	Sandbox gq991xYd Production 762753152658161
     public static final String salt = "Jge5fSh37nfKLsy88L"; //Sandbox hj17fhd8 Production Jge5fSh37nfKLsy88L
     public static final String screenTitle = "Eduvanz eKYC";
 

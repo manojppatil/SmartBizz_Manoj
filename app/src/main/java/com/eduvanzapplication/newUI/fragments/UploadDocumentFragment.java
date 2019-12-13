@@ -4495,7 +4495,6 @@ public class UploadDocumentFragment extends Fragment implements View.OnClickList
         if (requestCode == 1) {
             if (resultCode == 1) {
                 String message = data.getStringExtra("BACK");
-
             }
         }
         if (resultCode == Activity.RESULT_OK) {

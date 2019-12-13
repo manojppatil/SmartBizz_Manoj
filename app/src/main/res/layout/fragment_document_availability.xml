@@ -15,6 +15,7 @@
         android:elevation="@dimen/_8sdp"
         app:cardElevation="@dimen/_8sdp"
         android:background="@drawable/border">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

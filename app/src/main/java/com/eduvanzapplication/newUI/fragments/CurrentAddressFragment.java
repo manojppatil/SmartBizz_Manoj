@@ -605,6 +605,7 @@ public class CurrentAddressFragment extends Fragment {
                     JSONArray jsonArray3 = jsonObject.getJSONArray("states");
                     currentstate_arrayList = new ArrayList<>();
                     borrowerCurrentStatePersonalPOJOArrayList = new ArrayList<>();
+
                     for (int i = 0; i < jsonArray3.length(); i++) {
                         BorrowerCurrentStatePersonalPOJO borrowerCurrentStatePersonalPOJO = new BorrowerCurrentStatePersonalPOJO();
                         JSONObject mJsonti = jsonArray3.getJSONObject(i);
@@ -613,6 +614,7 @@ public class CurrentAddressFragment extends Fragment {
                         borrowerCurrentStatePersonalPOJO.stateID = mJsonti.getString("state_id");
                         borrowerCurrentStatePersonalPOJOArrayList.add(borrowerCurrentStatePersonalPOJO);
                     }
+
                     arrayAdapter_currentState = new ArrayAdapter(context, R.layout.custom_layout_spinner, currentstate_arrayList);
                     spState.setAdapter(arrayAdapter_currentState);
                     arrayAdapter_currentState.notifyDataSetChanged();
