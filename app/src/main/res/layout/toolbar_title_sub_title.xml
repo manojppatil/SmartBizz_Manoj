@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/toolbarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTheme"
+        android:paddingLeft="15dp">
+
+        <com.smartbizz.newUI.view.EduvanzTextView
+            android:id="@+id/tvPrimaryText"
+            style="@style/StyleCardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/my_applications"
+            android:textColor="@color/colorWhite" />
+
+        <com.smartbizz.newUI.view.EduvanzTextView
+            android:id="@+id/tvSecondaryText"
+            style="@style/StyleCardSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPrimaryText"
+            android:text="@string/sub_title_my_loan_applications"
+            android:textColor="#99ffffff" />
+    </RelativeLayout>
+</FrameLayout>

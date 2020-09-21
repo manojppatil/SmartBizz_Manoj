@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTheme"
+    android:orientation="vertical"
+    tools:context=".newUI.newViews.VerifyOTPActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:paddingStart="35dp"
+        android:paddingEnd="30dp">
+
+        <com.smartbizz.newUI.view.EduvanzTextView
+            android:id="@+id/tvTitle"
+            style="@style/StyleCommonTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_details" />
+
+
+        <com.smartbizz.newUI.view.EduvanzTextView
+            android:id="@+id/tvSubTitle"
+            style="@style/StyleCommonSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:text="@string/otp_sent_to" />
+
+        <com.smartbizz.newUI.view.EduvanzTextView
+            android:id="@+id/tvEdit"
+            style="@style/StyleCommonSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/tvSubTitle"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/edit"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_login" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/cardview_large_radius"
+        android:paddingLeft="35dp"
+        android:paddingTop="15dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="15dp">
+
+        <com.smartbizz.newUI.view.EduvanzTextView
+            android:id="@+id/tvVerifyOTP"
+            style="@style/StyleCommonLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_otp" />
+
+        <com.smartbizz.newUI.view.OTPPinEntry
+            android:id="@+id/editTextPinEntry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvVerifyOTP"
+            android:layout_marginTop="5dp"
+            android:maxLength="6"
+            style="@style/StyleOTPField" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextPinEntry"
+            android:layout_marginTop="10dp"
+            android:gravity="right|end|center_vertical"
+            android:orientation="horizontal">
+
+            <com.smartbizz.newUI.view.EduvanzTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextPinEntry"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/did_not_receive_otp"
+                android:textSize="@dimen/default_text_size" />
+
+            <com.smartbizz.newUI.view.EduvanzTextView
+                android:id="@+id/tvResend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/resend"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/default_text_size" />
+
+
+            <com.smartbizz.newUI.view.EduvanzTextView
+                android:id="@+id/tvTimer"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/otp_timer_selector"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="center"
+                android:text="12"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/default_text_size"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

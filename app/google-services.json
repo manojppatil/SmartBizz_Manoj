@@ -55,7 +55,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:577641006287:android:11ea30761fa20029",
         "android_client_info": {
-          "package_name": "com.eduvanzapplication"
+          "package_name": "com.smartbizz"
         }
       },
       "oauth_client": [
@@ -63,7 +63,7 @@
           "client_id": "577641006287-g7bak4g86tj6m56u3i5ogucf14gq76sg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.eduvanzapplication",
+            "package_name": "com.smartbizz",
             "certificate_hash": "818fecb5cb217ab275564d4834eb0ab2b263d3bc"
           }
         },
@@ -71,7 +71,7 @@
           "client_id": "577641006287-973j1sik6nqhqmdgsj73hsljbi84gh0f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.eduvanzapplication",
+            "package_name": "com.smartbizz",
             "certificate_hash": "b76f26f5d775f6fa42a63ca4d7b865322d7f9ba6"
           }
         },
@@ -79,7 +79,7 @@
           "client_id": "577641006287-6hfrn89shk4covsnttkeqhcsrfcshcku.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.eduvanzapplication",
+            "package_name": "com.smartbizz",
             "certificate_hash": "a21bb846bb15174d151aabf3da9f61eebee526bd"
           }
         },

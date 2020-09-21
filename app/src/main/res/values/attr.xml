@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PermissionContentView">
+        <attr name="permissionResource" format="reference" />
+        <attr name="permissionHeader" format="string" />
+        <attr name="permissionContent" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="BottomOptionsView">
+        <attr name="leftButtonText" format="string" />
+        <attr name="rightButtonText" format="string" />
+    </declare-styleable>
+    <attr name="primaryText" format="string" />
+    <attr name="secondaryText" format="string" />
+    <attr name="text" format="string" />
+    <declare-styleable name="EduvanzCustomToolBar">
+        <attr name="primaryText" />
+        <attr name="secondaryText" />
+        <attr name="hideContactUs" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="EduvanzToolBarTitleSubTitle">
+        <attr name="primaryText" />
+        <attr name="secondaryText" />
+        <attr name="layoutBackgroundColor" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="EduvanzFormHeader">
+        <attr name="title" />
+        <attr name="resource" format="reference" />
+        <attr name="isActive" format="boolean" />
+        <attr name="hideIndicator" format="boolean"/>
+        <attr name="customGravity" />
+    </declare-styleable>
+
+    <declare-styleable name="PinEntryEditText">
+        <attr name="pinAnimationType" format="enum">
+            <enum name="popIn" value="0" />
+            <enum name="fromBottom" value="1" />
+            <enum name="none" value="-1" />
+        </attr>
+        <attr name="pinCharacterMask" format="string" />
+        <attr name="pinRepeatedHint" format="string" />
+        <attr name="pinLineStroke" format="dimension" />
+        <attr name="pinLineStrokeSelected" format="dimension" />
+        <attr name="pinCharacterSpacing" format="dimension" />
+        <attr name="pinTextBottomPadding" format="dimension" />
+        <attr name="pinLineColors" format="color" />
+        <attr name="pinBackgroundDrawable" format="reference" />
+        <attr name="pinBackgroundIsSquare" format="boolean" />
+    </declare-styleable>
+
+
+    <attr name="customGravity" format="enum">
+        <enum name="left" value="0" />
+        <enum name="right" value="1" />
+        <enum name="center_horizontal" value="2" />
+        <enum name="center_vertical" value="3" />
+    </attr>
+    <attr name="title" format="string" />
+
+    <declare-styleable name="EduvanzNoteView">
+        <attr name="title" />
+        <attr name="subTitle" format="string" />
+    </declare-styleable>
+
+    <attr name="imageResource" format="reference" />
+    <declare-styleable name="EduvanzNavigationItem">
+        <attr name="imageResource" />
+        <attr name="menuText" format="string" />
+        <attr name="index" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="EduvanzUploadedDocument">
+        <attr name="text" />
+        <attr name="hidePreviewIcon" format="boolean"/>
+        <attr name="imageResource" />
+    </declare-styleable>
+
+    <declare-styleable name="PaymentOptionView">
+        <attr name="text" />
+        <attr name="amountValue" format="string"/>
+        <attr name="isSelected" format="boolean"/>
+    </declare-styleable>
+</resources>

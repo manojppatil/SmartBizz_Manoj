@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardPersonalDetails"
+    style="@style/StyleFormCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:padding="@dimen/card_view_padding">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/common_edit_text_selector"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.smartbizz.newUI.view.EduvanzTextView
+                        android:id="@+id/tvEmployerType"
+                        style="@style/StyleCommonLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category Type"/>
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerEmployerType"
+                        style="@style/StyleSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top"
+            android:background="@drawable/accent_border_selector_bottom_radius"
+            android:orientation="horizontal">
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnEdit"
+                style="@style/StyleBaseButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-5dp"
+                android:layout_weight="0.1"
+                android:background="@null"
+                android:text="@string/edit"
+                android:visibility="gone"
+                android:textColor="@color/colorAccent" />
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnContinue"
+                style="@style/commonButtonAccentBG"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:background="@drawable/accent_gradient_selector_bottom_right_radius"
+                android:text="Create Request" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

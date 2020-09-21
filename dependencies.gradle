@@ -1,0 +1,10 @@
+ext {
+    versions = [
+            'minSdkVersion'    : 17,
+            'compileSdkVersion': 28,
+            'targetSdkVersion' : 28,
+            'gradle'           : '3.5.0',
+            'kotlin'           : '1.3.31',
+            'supportLibrary'   : '25.0.0',
+    ]
+}

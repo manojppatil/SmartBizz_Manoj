@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:text="Smart Biz"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:textAllCaps="true">
+
+    </TextView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtTitle"
+        android:layout_marginTop="50dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linPromotion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/promotion">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="promotion"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_gravity="center_horizontal"
+                    android:textAllCaps="true">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linSMS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/linPromotion"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="60dp"
+                android:layout_alignParentLeft="true">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/sms">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sms"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_gravity="center_horizontal"
+                    android:textAllCaps="true">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linProductCatalog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/linSMS"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="60dp"
+                android:layout_alignParentLeft="true">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/catlog">
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Catalog"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_gravity="center_horizontal"
+                    android:textAllCaps="true">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linDesigner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginRight="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/designer">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="designer"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_gravity="center_horizontal"
+                    android:textAllCaps="true">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linSender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linDesigner"
+                android:orientation="vertical"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/whatsapp">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sender"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_gravity="center_horizontal"
+                    android:textAllCaps="true">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linVideoDesigner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linSender"
+                android:orientation="vertical"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/video_designer">
+
+                </ImageView>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_below="@+id/linVideoDesigner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="46dp"
+                android:layout_marginTop="5dp"
+                android:text="video designer"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="true">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/home">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/payment">
+
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/plus">
+
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/profile">
+
+                </ImageView>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
+

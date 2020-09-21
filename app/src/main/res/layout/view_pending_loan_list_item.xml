@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardPersonalDetails"
+    style="@style/StyleFormCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:padding="@dimen/card_view_padding">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/common_edit_text_selector"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <LinearLayout
+                    android:id="@+id/layoutImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivView"
+                        android:layout_width="120dp"
+                        android:layout_height="100dp"/>
+
+                </LinearLayout>
+
+                <com.smartbizz.newUI.view.EduvanzTextView
+                    android:id="@+id/txtCategory"
+                    style="@style/StyleMyApplicationRegularField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/layoutImage"/>
+
+<!--                <com.smartbizz.newUI.view.EduvanzEditText-->
+<!--                    android:id="@+id/etRemarks"-->
+<!--                    style="@style/StyleCommonTextField"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/txtCategory"-->
+<!--                    android:layout_toRightOf="@+id/layoutImage"-->
+<!--                    android:layout_toLeftOf="@+id/checkbox"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:inputType="text"-->
+<!--                    android:hint="Remarks..."/>-->
+
+<!--                <CheckBox-->
+<!--                    android:id="@+id/checkbox"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_marginTop="10dp" />-->
+
+                <ImageView
+                    android:id="@+id/ivStatus"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_check_circle"/>
+
+            </RelativeLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_weight="0.8"-->
+<!--                android:background="@drawable/common_edit_text_selector"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingTop="5dp"-->
+<!--                android:paddingBottom="5dp">-->
+
+<!--                <com.smartbizz.newUI.view.EduvanzTextView-->
+<!--                    android:id="@+id/tvTypeOfLoan"-->
+<!--                    style="@style/StyleMyApplicationRegularField"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="sdvfdfv"-->
+<!--                    android:layout_gravity="center_vertical"/>-->
+
+<!--                <CheckBox-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:id="@+id/checkbox"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_gravity="center_vertical" />-->
+<!--            </LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top"
+            android:background="@drawable/accent_border_selector_bottom_radius"
+            android:orientation="horizontal">
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnEdit"
+                style="@style/StyleBaseButton1"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="0.1"
+                android:background="@null"
+                android:text="Reject"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:textColor="@color/colorAccent" />
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnContinue"
+                style="@style/commonButtonAccentBG1"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="0.1"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:background="@drawable/accent_gradient_selector_bottom_right_radius"
+                android:text="Accept" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -31,7 +31,7 @@
     </style>
 
     <style name="TextViewTitle14Style" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@android:color/white</item>
+        <item name="colorAccent">@color/textcolordark</item>
         <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="colorControlActivated">@color/red</item>
         <item name="colorControlHighlight">@color/textcolordark</item>
@@ -50,183 +50,284 @@
 
     </style>
 
-    <style name="TextViewTitle15BoldStyle" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@android:color/white</item>
-        <item name="colorControlNormal">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/red</item>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="EditTextProfileStyle" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/textcolordark</item>
+        <item name="colorControlNormal">@color/textcolordark</item>
+        <item name="colorControlActivated">@color/textcolordark</item>
         <item name="colorControlHighlight">@color/textcolordark</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textSize">15sp</item>
-
-    </style>
-
-    <style name="TextViewTitle16BoldStyle" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@android:color/white</item>
-        <item name="colorControlNormal">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/red</item>
-        <item name="colorControlHighlight">@color/textcolordark</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textSize">16sp</item>
-
-    </style>
-
-    <style name="TextViewTitleWhiteStyle" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@android:color/white</item>
-        <item name="colorControlNormal">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/red</item>
-        <item name="colorControlHighlight">@color/textcolordark</item>
-        <item name="android:textColor">@color/white1</item>
+        <item name="android:textColorHint">@color/textcolordark</item>
         <item name="android:fontFamily">@font/sourcesanspro_regular</item>
         <item name="android:textSize">16sp</item>
 
     </style>
 
-    <style name="TextViewTitleSmallStyle" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@android:color/white</item>
-        <item name="colorControlNormal">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/red</item>
-        <item name="colorControlHighlight">@color/textcolordark</item>
-        <item name="android:fontFamily">@font/sourcesanspro_regular</item>
+    <style name="CustomTextProfileAppearance" parent="@android:style/TextAppearance">
         <item name="android:textSize">12sp</item>
-
-    </style>
-
-    <style name="TextViewTitle12BoldStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/textcolordark</item>
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textSize">12sp</item>
-
+        <item name="android:color">@color/textcolordark</item>
+        <item name="android:textColorHint">@color/textcolordark</item>
+        <item name="android:textColor">@color/textcolordark</item>
     </style>
 
-    <style name="TextViewTitle10BoldStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/textcolordark</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textSize">10sp</item>
+<!--    <style name="StyleProgressDialog" parent="Theme.AppCompat.Dialog">-->
+<!--        <item name="android:alertDialogStyle">@style/CustomAlertDialogStyle</item>-->
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+<!--        <item name="android:textColorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="android:textColor">@android:color/white</item>-->
+<!--        <item name="colorAccent">@android:color/white</item>-->
+<!--    </style>-->
 
-    </style>
-
-    <style name="TextViewSmallCapsStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/black_new</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textColor">@color/black_new</item>
-        <item name="android:textSize">10sp</item>
-
-    </style>
-
-    <style name="TextViewSmall10Style" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/black_new</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textColor">@color/black_new</item>
-        <item name="android:textSize">10sp</item>
-
-    </style>
-
-    <style name="TextViewSmall9Style" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/black_new</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textColor">@color/black_new</item>
-        <item name="android:textSize">9sp</item>
-
-    </style>
-
-    <style name="TextViewMiniCapsStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/black_new</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textColor">@color/black_new</item>
-        <item name="android:textSize">8sp</item>
-
-    </style>
-
-    <style name="TextViewSmallCapsWhiteStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/black_new</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:textColor">@color/white1</item>
-        <item name="android:textSize">10sp</item>
-
-    </style>
-
-    <style name="TextViewRadioStyle" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@android:color/white</item>
-        <item name="colorControlNormal">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/red</item>
-        <item name="colorControlHighlight">@color/textcolordark</item>
-        <item name="android:fontFamily">@font/sourcesanspro_regular</item>
-        <item name="android:textSize">14sp</item>
-
-    </style>
-
-    <style name="TextViewTenureRadio" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@android:color/white</item>
-        <item name="colorControlNormal">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/white</item>
-        <item name="colorControlHighlight">@color/white</item>
-        <item name="android:fontFamily">@font/sourcesanspro_regular</item>
-        <item name="android:textSize">14sp</item>
-
-    </style>
-
-    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
-        <!-- active thumb & track color (30% transparency) -->
-        <item name="colorControlActivated">@color/blue1</item>
-        <item name="colorAccent">@color/blue1</item>
-
-        <!-- inactive thumb color -->
-        <item name="colorSwitchThumbNormal">@color/blue1
-        </item>
-
-        <!-- inactive track color (30% transparency) -->
-        <item name="android:colorForeground">@color/textcolordark
-        </item>
-    </style>
+<!--    <style name="CustomAlertDialogStyle">-->
+<!--        <item name="android:bottomBright">@android:color/transparent</item>-->
+<!--        <item name="android:bottomDark">@android:color/transparent</item>-->
+<!--        <item name="android:bottomMedium">@android:color/transparent</item>-->
+<!--        <item name="android:centerBright">@android:color/transparent</item>-->
+<!--        <item name="android:centerDark">@android:color/transparent</item>-->
+<!--        <item name="android:centerMedium">@android:color/transparent</item>-->
+<!--        <item name="android:fullBright">@android:color/transparent</item>-->
+<!--        <item name="android:fullDark">@android:color/transparent</item>-->
+<!--        <item name="android:topBright">@android:color/transparent</item>-->
+<!--        <item name="android:topDark">@android:color/transparent</item>-->
+<!--    </style>-->
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="EditText">
+        <item name="android:singleLine">true</item>
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="colorControlActivated">#FFFFFF</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="EditTextStyle" parent="Theme.AppCompat.Light">
+    <style name="StyleProgressDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:alertDialogStyle">@style/CustomAlertDialogStyle</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="colorAccent">@android:color/white</item>
-        <item name="colorControlNormal">@color/textcolordark</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
-        <item name="colorControlHighlight">@color/red</item>
-        <item name="android:fontFamily">@font/sourcesanspro_regular</item>
+    </style>
+
+    <style name="CustomAlertDialogStyle">
+        <item name="android:bottomBright">@android:color/transparent</item>
+        <item name="android:bottomDark">@android:color/transparent</item>
+        <item name="android:bottomMedium">@android:color/transparent</item>
+        <item name="android:centerBright">@android:color/transparent</item>
+        <item name="android:centerDark">@android:color/transparent</item>
+        <item name="android:centerMedium">@android:color/transparent</item>
+        <item name="android:fullBright">@android:color/transparent</item>
+        <item name="android:fullDark">@android:color/transparent</item>
+        <item name="android:topBright">@android:color/transparent</item>
+        <item name="android:topDark">@android:color/transparent</item>
+    </style>
+
+    <style name="StyleBaseButton">
+        <item name="android:textSize">@dimen/font_size_common_button</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="StyleBaseButton1">
+        <item name="android:textSize">@dimen/font_size_common_button</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="commonButtonAccentBG" parent="StyleBaseButton">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/accent_gradient_selector</item>
+    </style>
+
+    <style name="commonButtonAccentBG1" parent="StyleBaseButton1">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/accent_gradient_selector</item>
+    </style>
+
+    <style name="commonButtonAccentBG2" parent="StyleBaseButton1">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/accent_gradient_selector_red</item>
+    </style>
+
+    <style name="StyleBottomButton">
+        <item name="android:textColor">@color/colorBottomSheetSubTitle</item>
+        <item name="android:textSize">@dimen/font_size_common_button</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="StyleLargeTextField">
+        <item name="android:background">@drawable/common_edit_text_selector</item>
+        <item name="android:textSize">@dimen/font_size_input_value</item>
+        <item name="android:layout_marginTop">@dimen/margin_between_label_and_value</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:digits">@string/digits_without_special_characters</item>
+    </style>
+
+
+    <style name="StyleFormCardView" parent="CardView">
+        <item name="android:layout_marginRight">@dimen/card_view_margin_top_bottom</item>
+        <item name="android:layout_marginLeft">@dimen/card_view_margin_top_bottom</item>
+        <item name="android:layout_marginTop">@dimen/card_view_margin_top_bottom
+        </item><!--need to check in multiple cards-->
+        <item name="android:layout_marginBottom">@dimen/card_view_margin_top_bottom
+        </item>  <!--need to check in multiple cards-->
+        <item name="cardCornerRadius">@dimen/cardview_radius</item>
+    </style>
+
+    <style name="StyleCardTitle">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/font_size_card_title</item>
+    </style>
+
+    <style name="StyleCardSubTitle">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/colorSubTitle</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
+    </style>
+
+    <style name="StyleMyApplicationTab">
+        <item name="android:textSize">@dimen/font_size_common_button</item>
+        <item name="android:textColor">@color/colorBottomSheetSubTitle</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <style name="StyleMyApplicationRegularField">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorBottomSheetSubTitle</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="StyleCommonLabel">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorSubTitle</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
+    <style name="StyleSpinner" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_marginTop">@dimen/margin_between_label_and_value</item>
+        <item name="android:background">@drawable/common_edit_text_selector</item>
+    </style>
+
+    <style name="StyleCommonTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="StyleCommonSubTitle">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/colorSubTitle</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="StyleOTPField">
+        <item name="android:digits">1234567890</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">6</item>
+        <item name="android:textIsSelectable">false</item>
         <item name="android:textSize">16sp</item>
-
+        <item name="pinAnimationType">popIn</item>
     </style>
 
-    <style name="EditTextProfileStyle" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@android:color/white</item>
-        <item name="colorControlNormal">@color/white</item>
-        <item name="colorControlActivated">@color/white</item>
-        <item name="colorControlHighlight">@color/white</item>
-        <item name="android:textColorHint">@color/white</item>
-        <item name="android:fontFamily">@font/sourcesanspro_regular</item>
-        <item name="android:textSize">16sp</item>
-
+    <style name="loginBtnLink" parent="@style/StyleCommonLabel">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_marginTop">20dp</item>
     </style>
 
-    <style name="CustomTextAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:color">@color/textcolordark</item>
+    <style name="StyleErrorTextView">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/colorInvalid</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_marginTop">7dp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:text">@string/this_field_is_required</item>
     </style>
 
-    <style name="CustomTextProfileAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
-        <item name="android:color">@color/white</item>
-        <item name="android:textColorHint">@color/white</item>
-        <item name="android:textColor">@color/white</item>
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
-    <style
-        name="VideoIdKycSdkTheme.TextAppearance.ActionButton"
-        parent="TextAppearance.AppCompat.Widget.Button">
-        <item name="android:textColor">#ffffff</item>
+    <style name="StyleCommonTextField">
+        <item name="android:background">@drawable/common_edit_text_selector</item>
+        <item name="android:textSize">@dimen/font_size_input_value</item>
+        <item name="android:layout_marginTop">@dimen/margin_between_label_and_value</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:digits">@string/digits_without_special_characters</item>
+    </style>
+
+    <style name="StyleCommonTextFieldLarge">
+        <item name="android:background">@drawable/common_edit_text_selector</item>
+        <item name="android:textSize">@dimen/font_size_input_value</item>
+        <item name="android:layout_marginTop">@dimen/margin_between_label_and_value</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="StyleHomeScreenHeader">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="styleBottomSheetTitle">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:layout_marginTop">25dp</item>
+    </style>
+
+    <style name="StyleBottomSheetNoPadding">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="android:paddingBottom">25dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
 </resources>

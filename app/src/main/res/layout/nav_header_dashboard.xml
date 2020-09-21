@@ -10,17 +10,30 @@
         android:layout_height="match_parent"
         android:background="@drawable/ic_topbg"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivUserPic"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+<!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--        android:id="@+id/circleImageView"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:padding="2dp"/>-->
+
+    <LinearLayout
+        android:id="@+id/linPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        app:civ_border_width="1dp"
-        app:civ_border_color="@color/darkblue"
-        android:src="@drawable/profilepic_placeholder" />
+        android:layout_marginStart="@dimen/_10sdp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivUserPic"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_building"/>
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/linearLayout_userdetail_dashboard"
@@ -28,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:gravity="center"
-        android:layout_toRightOf="@+id/ivUserPic"
+        android:layout_toRightOf="@+id/linPic"
         android:layout_marginTop="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_5sdp"
@@ -43,19 +56,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:textColor="@color/white"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:singleLine="true"
             style="@style/TextViewTitleStyle"/>
-
-        <TextView
-            android:ellipsize="marquee"
-            android:id="@+id/textView_mobileNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:singleLine="true"
-            style="@style/TextViewTitle12BoldStyle"/>
 
         <TextView
             android:ellipsize="marquee"
@@ -65,8 +69,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:singleLine="true"
-            style="@style/TextViewTitle12BoldStyle"/>
+            android:textSize="18sp"
+            android:singleLine="true"/>
+
+        <TextView
+            android:ellipsize="marquee"
+            android:id="@+id/textView_mobileNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:singleLine="true"/>
+
 
     </LinearLayout>
 

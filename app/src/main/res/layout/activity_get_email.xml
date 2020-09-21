@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".newUI.newViews.GetEmailActivity">
 
-
     <LinearLayout
         android:id="@+id/layoutMobile"
         android:layout_width="match_parent"
@@ -32,7 +31,6 @@
             android:textSize="20sp"
             android:textColor="@color/black_new"
             style="@style/TextViewTitleStyle" />
-
 
         <TextView
             android:layout_width="match_parent"
@@ -97,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:text="@string/or"
+                android:text="or"
                 android:textColor="@color/black_new"
                 style="@style/TextViewTitleStyle" />
             <View

@@ -6,24 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".newUI.newViews.EditProfile">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#e54350"
+        android:background="#0ABAB5"
         app:navigationIcon="@drawable/ic_back_arrow_white" />
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_profile_bg"
         android:layout_below="@+id/appbar">
 
     <RelativeLayout
@@ -31,26 +30,58 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_400sdp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_height="@dimen/_100sdp"
-        app:civ_border_color="@color/darkblue"
-        android:background="@drawable/ic_im_default_profile" />
+<!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--        android:id="@+id/profileImage"-->
+<!--        android:layout_width="@dimen/_100sdp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="@dimen/_30sdp"-->
+<!--        android:layout_height="@dimen/_100sdp"-->
+<!--        app:civ_border_color="@color/darkblue"-->
+<!--        android:background="@drawable/ic_im_default_profile" />-->
 
         <LinearLayout
             android:id="@+id/edtProfileLayout"
-            android:layout_below="@+id/profileImage"
-            android:layout_width="@dimen/_190sdp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:orientation="horizontal">
 
-        <android.support.design.widget.TextInputLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@+id/linProfileImg"
+                    android:text="Business Logo"/>
+
+                <LinearLayout
+                    android:id="@+id/linProfileImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_building" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
@@ -59,58 +90,17 @@
             app:hintTextAppearance="@style/CustomTextProfileAppearance">
 
             <EditText
-                android:textColor="@color/white"
-                android:id="@+id/edtFnameProfile"
+                android:textColor="#687078"
+                android:id="@+id/etFirstNme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="User Name"
+                android:hint="Person Name"
                 android:imeOptions="actionNext"
                 android:inputType="textCapSentences"
                 style="@style/EditTextProfileStyle" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:layout_marginBottom="@dimen/_6sdp"
-            android:backgroundTint="@color/white"
-            android:theme="@style/EditTextProfileStyle"
-            android:visibility="gone"
-            app:hintTextAppearance="@style/CustomTextProfileAppearance">
-
-            <EditText
-                android:id="@+id/edtMnameProfile"
-                android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/middle_name"
-                android:imeOptions="actionNext"
-                android:inputType="textCapSentences"
-                style="@style/EditTextProfileStyle" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:layout_marginBottom="@dimen/_6sdp"
-            android:theme="@style/EditTextProfileStyle"
-            android:visibility="gone"
-            app:hintTextAppearance="@style/CustomTextProfileAppearance">
-
-            <EditText
-                android:id="@+id/edtLnameProfile"
-                android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/last_name"
-                android:imeOptions="actionNext"
-                android:inputType="textCapSentences"
-                android:theme="@style/EditTextProfileStyle" />
-        </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"
@@ -119,28 +109,79 @@
                 app:hintTextAppearance="@style/CustomTextProfileAppearance">
 
                 <EditText
-                    android:id="@+id/edtProfileEmail"
-                    android:textColor="@color/white"
+                    android:textColor="#687078"
+                    android:id="@+id/etBrandName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Brand/Business Name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    style="@style/EditTextProfileStyle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+           <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:theme="@style/EditTextProfileStyle"
+                app:hintTextAppearance="@style/CustomTextProfileAppearance">
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:textColor="#687078"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email_id"
                     android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
                     android:theme="@style/EditTextProfileStyle" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.smartbizz.newUI.view.EduvanzTextView
+                android:id="@+id/tvEmployerType"
+                style="@style/StyleCommonLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Type"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerEmployerType"
+                style="@style/StyleSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:theme="@style/EditTextProfileStyle"
+                app:hintTextAppearance="@style/CustomTextProfileAppearance">
+
+                <EditText
+                    android:id="@+id/etAddress"
+                    android:textColor="#687078"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Address"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:lines="3"
+                    android:maxLines="3"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/edtProfileMobileNumber"
+                android:id="@+id/txtMobileNumber"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:textColor="@color/white"
+                android:textColor="#687078"
                 android:layout_centerHorizontal="true"
                 style="@style/TextViewTitle14Style"/>
         </LinearLayout>
 
     </RelativeLayout>
-
 
     <LinearLayout
         android:id="@+id/linSubmit"
@@ -173,7 +214,7 @@
             android:layout_marginBottom="@dimen/_2sdp"
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_4sdp"
-            android:background="@color/white" />
+            android:textColor="@color/textcolordark" />
 
         <ImageView
             android:id="@+id/ivDownload"

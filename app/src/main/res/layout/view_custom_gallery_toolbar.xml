@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorTheme"
+    android:paddingLeft="15dp">
+
+    <com.smartbizz.newUI.view.EduvanzTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="left"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:text="SMS Service Registration"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

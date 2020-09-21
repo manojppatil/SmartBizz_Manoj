@@ -6,25 +6,100 @@
     android:layout_height="match_parent"
     android:id="@+id/rel_lay">
 
-        <ImageView
-            android:id="@+id/splash_image"
+        <RelativeLayout
+            android:id="@+id/rel1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:background="@color/bgcolor"
-            android:src="@drawable/splacsh_screen2"/>
-        <TextView
-            android:visibility="gone"
-            android:layout_marginBottom="450dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/ivSplash"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/smartbiz_original" />
+
+                <TextView
+            android:visibility="visible"
             android:id="@+id/splash_text"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/eduvanz"
+            android:text="Welcome to Smart Biz"
+            android:layout_below="@+id/ivSplash"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="35sp"/>
+
+
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/splash_text1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/splash_text"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="India Ka"
+            android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="50sp"/>
+            android:textSize="30sp"/>
+
+        <LinearLayout
+            android:id="@+id/linBusines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/splash_text1"
+            android:orientation="horizontal">
+
+                <TextView
+                    android:visibility="visible"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/splash_text2"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#1"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:visibility="visible"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/splash_text3"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Business"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="30sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:visibility="visible"
+            android:layout_marginTop="10dp"
+            android:id="@+id/splash_text4"
+            android:layout_below="@+id/linBusines"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Promotion Network"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="30sp"/>
+        </RelativeLayout>
+
 </RelativeLayout>

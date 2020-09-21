@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/StyleBottomSheetNoPadding"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    tools:context="com.smartbizz.newUI.view.NachInfoBottomSheet">
+
+    <include layout="@layout/view_bottom_sheet_top_indicator" />
+<!--//We will be launching soon this feature-->
+    <com.smartbizz.newUI.view.EduvanzTextView
+        android:id="@+id/txtTitle"
+        style="@style/styleBottomSheetTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register Here."
+        android:layout_marginTop="20dp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <com.smartbizz.newUI.view.EduvanzTextView
+            android:id="@+id/tvRegisterSMSService"
+            style="@style/StyleHomeScreenHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp">
+
+        <com.smartbizz.newUI.view.EduvanzButton
+            android:id="@+id/btnRequest"
+            style="@style/commonButtonAccentBG1"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:text="Request" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

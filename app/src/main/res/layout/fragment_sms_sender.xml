@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="com.smartbizz.newUI.fragments.PostCardFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            style="@style/StyleFormCardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+        <com.smartbizz.newUI.view.EduvanzEditText
+            android:id="@+id/etMesage"
+            style="@style/StyleCommonTextFieldLarge"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:maxLines="4"
+            android:inputType="textMultiLine"
+            android:hint="Write you SMS content here."/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/linDropDown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <com.smartbizz.newUI.view.EduvanzTextView
+                            android:id="@+id/tvContactGrp"
+                            style="@style/StyleCommonLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:text="Contact Group"/>
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/spinnerContactGrp"
+                            style="@style/StyleSpinner"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <com.smartbizz.newUI.view.EduvanzTextView
+                        android:id="@+id/txtOr"
+                        style="@style/StyleCommonLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/linDropDown"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="18sp"
+                        android:text=" OR " />
+
+                    <LinearLayout
+                        android:id="@+id/linContack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true">
+
+                        <ImageView
+                            android:id="@+id/btnContactPicker"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            app:srcCompat="@drawable/ic_address_book" />
+
+                        <com.smartbizz.newUI.view.EduvanzTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/sourcesanspro_semibold"
+                            android:textSize="14sp"
+                            android:layout_marginTop="3dp"
+                            android:textColor="@color/colorTheme"
+                            android:text="Add Contacts"/>
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtContacts"
+                android:layout_width="match_parent"
+                android:layout_marginRight="20dp"
+                android:layout_height="100dp"/>
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linContack"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/btnContactPicker"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    app:srcCompat="@drawable/ic_address_book" />-->
+
+<!--                <com.smartbizz.newUI.view.EduvanzTextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:fontFamily="@font/sourcesanspro_semibold"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:layout_marginTop="3dp"-->
+<!--                    android:textColor="@color/colorTheme"-->
+<!--                    android:text="Add Contacts"/>-->
+<!--            </LinearLayout>-->
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnReset"
+                style="@style/commonButtonAccentBG2"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:text="Reset" />
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnSubmit"
+                style="@style/commonButtonAccentBG1"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Submit" />
+
+        </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txtNoData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:text="Oops! No record found for selected category. Please change the category."
+            android:fontFamily="@font/sourcesanspro_semibold" />
+
+        <View xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="200dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="#cccccc" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/StyleFormCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
+
+                    <com.smartbizz.newUI.view.EduvanzTextView
+                        android:id="@+id/txtTitle"
+                        style="@style/styleBottomSheetTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Create Contacts Group"
+                        android:gravity="center" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.smartbizz.newUI.view.EduvanzEditText
+                            android:id="@+id/etContactGrpTitle"
+                            style="@style/StyleCommonTextField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/linContactGrp"
+                            android:layout_marginRight="20dp"
+                            android:hint="Group Title"/>
+
+                        <TextView
+                            android:id="@+id/txtContactGrp"
+                            android:layout_width="match_parent"
+                            android:layout_toLeftOf="@+id/linContactGrp"
+                            android:layout_below="@+id/etContactGrpTitle"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_height="wrap_content"/>
+
+                        <LinearLayout
+                            android:id="@+id/linContactGrp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="right"
+                            android:layout_alignParentRight="true">
+
+                            <ImageView
+                                android:id="@+id/btnContactGrpPicker"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_address_book" />
+
+                            <com.smartbizz.newUI.view.EduvanzTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/sourcesanspro_semibold"
+                                android:textSize="14sp"
+                                android:layout_marginTop="3dp"
+                                android:textColor="@color/colorTheme"
+                                android:text="Add Contacts"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                        <com.smartbizz.newUI.view.EduvanzButton
+                            android:id="@+id/btnCreateGrp"
+                            style="@style/commonButtonAccentBG1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="10dp"
+                            android:text="Create Group" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
+

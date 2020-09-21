@@ -4,70 +4,40 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_eligibility"
+            android:id="@+id/nav_myproject"
+            android:icon="@drawable/ic_home_alt"
+            android:iconTint="#454a62"
+            android:title="My Projects"/>
+
+        <item
+            android:id="@+id/nav_promotion"
             android:icon="@drawable/icon_eligibility"
-            android:title="Apply Now" />
-        <item
-            android:id="@+id/nav_howitworks"
-            android:icon="@drawable/ic_nav_how_it_works"
-            android:title="@string/title_how_it_works"/>
-        <item
-            android:id="@+id/nav_videokyc"
-            android:icon="@drawable/ic_nav_ekyc"
-            android:title="Instant eKYC" />
-        <item
-            android:id="@+id/nav_aboutus"
-            android:icon="@drawable/ic_nav_about_us"
-            android:title="@string/title_about_us" />
-        <item
-            android:id="@+id/nav_faq"
-            android:icon="@drawable/ic_nav_faq"
-            android:title="@string/title_faq" />
-        <!--<item-->
-            <!--android:id="@+id/nav_contactus"-->
-            <!--android:icon="@drawable/ic_home_call"-->
-            <!--android:title="@string/title_contact_us" />-->
-        <item
-            android:id="@+id/nav_more"
-            android:icon="@drawable/ic_nav_leagal"
-            android:title="@string/more" />
-
-        <!--<item-->
-            <!--android:id="@+id/nav_blog"-->
-            <!--android:icon="@drawable/icon_privacypolicy"-->
-            <!--android:title="@string/title_blog" />-->
+            android:title="Promotion" />
 
         <item
-            android:id="@+id/nav_disclaimer"
-            android:icon="@drawable/ic_borrower_documents_pending"
-            android:title="@string/title_disclaimer" />
+            android:id="@+id/nav_designer"
+            android:icon="@drawable/ic_pen_nib"
+            android:iconTint="#454a62"
+            android:title="Designer"/>
 
         <item
-            android:id="@+id/nav_emicalculator"
-            android:icon="@drawable/ic_nav_emi_calc"
-            android:title="@string/title_emi_calculator" />
+            android:id="@+id/nav_whatsappGrp"
+            android:icon="@drawable/ic_whatsapp"
+            android:iconTint="#454a62"
+            android:title="Whatsapp Group"/>
 
         <item
-            android:id="@+id/nav_yourscore"
-            android:icon="@drawable/ic_creditriskscoreicon"
-            android:title="@string/title_your_score"
-            />
+            android:id="@+id/nav_balanceData"
+            android:icon="@drawable/ic_tachometer"
+            android:iconTint="#454a62"
+            android:title="Balance SMS"/>
+
         <item
-            android:id="@+id/nav_termsandconditions"
-            android:icon="@drawable/ic_nav_legal_terms_conditions"
-            android:title="@string/title_terms_and_condition" />
-        <item
-            android:id="@+id/nav_privacypolicy"
-            android:icon="@drawable/ic_nav_legal_privacy_policy"
-            android:title="@string/title_privacy_policy" />
-        <item
-            android:id="@+id/nav_interestratepolicy"
-            android:icon="@drawable/ic_nav_legal_interest_rate"
-            android:title="@string/title_interest_rate_policy" />
-        <item
-            android:id="@+id/nav_fairpracticscode"
-            android:icon="@drawable/ic_nav_leagal_fair_practices_code"
-            android:title="@string/title_fair_practics_code" />
+            android:id="@+id/nav_smsReport"
+            android:icon="@drawable/ic_tachometer"
+            android:iconTint="#454a62"
+            android:title="SMS Report"/>
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_nav_logout"

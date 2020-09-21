@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+
+    <com.smartbizz.newUI.view.EduvanzTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/step_basic"
+        android:textColor="@android:color/white"
+        android:singleLine="true"
+        android:lines="1"
+        android:textSize="@dimen/font_size_basic_header" />
+
+    <View
+        android:id="@+id/viewIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/left_corner_selector" />
+
+</LinearLayout>

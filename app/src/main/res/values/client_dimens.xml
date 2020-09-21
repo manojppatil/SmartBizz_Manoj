@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="default_drop_shadow_elevation">3dp</dimen>
-    <dimen name="default_drop_shadow_translationZ">3dp</dimen>
-    <dimen name="cardCornerRadius">12dp</dimen>
 
-    <item name="default_drop_shadow_opacity" format="float" type="dimen">0.2</item>
-    <item name="default_drop_shadow_radius" format="float" type="dimen">0.7</item>
 </resources>

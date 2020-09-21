@@ -7,133 +7,18 @@
 
     <!--<color name="colorAccent">#E91171</color>-->
 
-    <color name="colorCardStart">#E91171</color>
-
-    <color name="colorPhoneRect">#E91171</color>
-
-    <color name="colorCardEnd">#E91171</color>
-
-    <color name="colorAppBackgroundStart">#fff</color>
-
-    <color name="colorAppBackgroundEnd">#fff</color>
-
-    <color name="colorCompleteButtonStart">#7038A7</color>
-
-    <color name="colorCompleteButtonEnd">#7038A7</color>
-
-    <color name="colorCompleteButtonPressed">#9838A7</color>
-
-    <color name="complete_button_label_color">#ffffff</color>
-
-    <color name="info_label_color">#ffffff</color>
-
-    <color name="average_score_bar_color">#E91171</color>
-
-    <color name="your_score_bar_color">#7038A7</color>
-
-    <color name="bar_background_color">#f6f6f6</color>
-
     <!--TODO(Cannot be adjusted on Android)-->
-    <color name="default_drop_shadow_color">#000000</color>
 
     <!--TODO(Inform client to add, Not in configuration)-->
-    <color name="connectDataColorButtonPress">#80d33a6d</color>
-
-    <color name="unselected_pager_color">#000</color>
-
-    <color name="selected_pager_color">#fff</color>
-
-    <color name="initial_loading_color_start">#fff</color>
-
-    <color name="initial_loading_color_end">#fff</color>
-
-    <color name="toolbar_text_color">#000</color>
-
-    <color name="toolbar_icon_color">#000</color>
-
-    <color name="toolbar_background">#3F51B5</color>
-
-
 
 
     <!--SMS Auth Colors-->
 
-    <color name="country_code_color">#FFF</color>
-
-    <color name="greeting_label_color">#6dcddd</color>
-
-    <color name="arrow_resend_color">#6dcddd</color>
-
-    <color name="verify_box_start_color">#d33a6d</color>
-
-    <color name="verify_box_end_color">#d33a6d</color>
-
-    <color name="sms_code_hint_color">#F48FB1</color>
-
     <!--- Form Colors -->
-    <color name="switch_color_thumb_text">#ffffff</color>
-
-    <color name="colorSwitchThumbNormal">#ff0000</color>
-
-    <color name="switch_color_track">#ffffff</color>
-
-    <color name="hint_color">#a9a9a9</color>
-
-    <color name="section_divider">@android:color/darker_gray</color>
-
-    <color name="error_color">#D32F2F</color>
-
-    <color name="tint_color">#FFFF</color>
 
     <!--Photo Section Colors-->
-    <color name="colorPhotoUpdating">#7038A7</color>
-    <color name="colorPhotoRemove">@android:color/transparent</color>
 
     <!--Location Section Colors-->
-    <color name="colorLocationOn">#7038A7</color>
 
-
-    <color name="colorMapRadius">#E91171</color>
-
-    <color name="colorInfoWindowBorder">#2196aa</color>
-
-
-    <color name="colorBackground">#FF4081</color>
-
-    <color name="scoreTextColors">#000</color>
-
-    <color name="form_direct_color">#000</color>
-
-    <color name="form_text_color">#000</color>
-
-    <color name="form_background">#fff</color>
-
-    <color name="main_text_color">#000</color>
-
-    <color name="cardIconColor">#fff</color>
-
-    <color name="colorEnabledLocation">#519E6D</color>
-
-    <color name="data_stored_color">#519E6D</color>
-    <color name="card_button_text_color">#fff</color>
-    <color name="average_score_label_color">#000</color>
-    <color name="your_score_label_color">#000</color>
-    <color name="your_score_color">#7038A7</color>
-    <color name="average_score_color">#E91171</color>
-    <color name="colorTextUpdating">#fff</color>
-    <color name="unanswered_color">#000</color>
-    <color name="answered_color">#808080</color>
-    <color name="arrow_color">#E91171</color>
-    <color name="processing_fin_markers">#E91171</color>
-    <color name="colorFMHeader">#E91171</color>
-    <color name="save_button_unpressed">#E91171</color>
-    <color name="save_button_pressed">#50E91171</color>
-    <color name="colorFMArrow">#E91171</color>
-    <color name="colorTickMark">#fff</color>
-    <color name="colorFMIcon">#E91171</color>
-    <color name="colorFMIconDisabled">@android:color/darker_gray</color>
-    <color name="feedback_header_background_color">#10808080</color>
-    <color name="user_input_color">#E91171</color>
-    <color name="colorDottedLoading">#E91171</color>
 
 </resources>

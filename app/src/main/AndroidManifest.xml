@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.eduvanzapplication">
+    package="com.smartbizz">
 
     <uses-sdk tools:overrideLibrary="com.android.support:appcompat" />
 
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -21,6 +17,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -40,14 +40,12 @@
         android:name=".MainActivity"
         android:allowBackup="false"
         android:fullBackupContent="false"
-        android:icon="@drawable/eduvanz_logo_new"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:usesCleartextTraffic="true"
-        android:hardwareAccelerated="true"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@drawable/eduvanz_logo_new"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme"
         tools:node="replace"
         tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:fullBackupContent,android:roundIcon,android:name">
@@ -58,123 +56,15 @@
             android:required="false" />
 
         <activity
-            android:name=".newUI.newViews.FinancialAnalysis"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name="com.eduvanzapplication.newUI.newViews.VideoKYC"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-
-<!--        Khosla-->
-         <activity
-            android:name="com.khoslalabs.videoidkyc.ui.init.VideoIdKycInitActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.khoslalabs.videoidkyc.ui.init.VideoIdKycInitRequest"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.khoslalabs.facesdk.FaceSdkModuleFactory"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.khoslalabs.ocrsdk.OcrSdkModuleFactory"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.khoslalabs.base.ViKycResults"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.khoslalabs.vikycapi.TimeUtil"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.frslabs.android.sdk.scanid.activities.IDScannerActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.frslabs.android.sdk.facesdk.activities.FaceCaptureActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".newUI.newViews.FinancialAnalysisOnNavigationBar"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".newUI.newViews.TenureSelectionActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".newUI.newViews.CourseDetailsActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".newUI.newViews.EmiCalculatorActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".newUI.newViews.LeadOwnerType"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-
-        <activity
-            android:name=".newUI.newViews.NewLeadActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-
-        <activity
             android:name=".newUI.newViews.EditProfile"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <activity
-            android:name="com.gun0912.tedpicker.ImagePickerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
-        <activity
-            android:name=".ImageSlider"
-            android:screenOrientation="sensorPortrait" />
-
-        <activity android:name="vijay.createpdf.activity.ImgToPdfActivity" />
-
-        <activity android:name="vijay.createpdf.activity.RearrangeImages" />
-
-        <activity
             android:name=".faqexpandablelistview.FAQ"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".SuccessSplash"
-            android:screenOrientation="sensorPortrait" />
 
-        <service android:name=".FCM.NotificationService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service android:name=".FCM.GettingDeviceTokenService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-
-        <activity android:name=".UsageStatistic" />
-
-        <activity
-            android:name="com.atom.mobilepaymentsdk.PayActivity"
-            android:label="@string/app_name" /> <!-- replace with splash after testing time. -->
         <activity
             android:name=".newUI.newViews.SplashScreen"
             android:screenOrientation="sensorPortrait">
@@ -184,14 +74,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".newUI.newViews.LoginActivity"
+            android:screenOrientation="portrait">
+
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".newUI.newViews.VerifyOTPActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".newUI.newViews.Language"
             android:screenOrientation="sensorPortrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            <!--                <category android:name="android.intent.category.DEFAULT" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".newUI.newViews.GetMobileNo"
@@ -204,36 +110,27 @@
             </intent-filter>
         </activity>
 
-        <!--<receiver android:name="com.eduvanzapplication.Util.MySMSBroadcastReceiver" android:exported="true">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>-->
-        <!--</intent-filter>-->
-        <!--</receiver>-->
-
-        <!--<activity-->
-            <!--android:name=".newUI.newViews.GetMobileNo1"-->
-            <!--android:screenOrientation="sensorPortrait"-->
-            <!--android:windowSoftInputMode="stateAlwaysHidden|adjustPan">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-
-        <activity
-            android:name=".newUI.newViews.OtpValidation"
-            android:screenOrientation="sensorPortrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".newUI.newViews.DashboardActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+        </activity>
+
         <activity
-            android:name=".newUI.newViews.LoanTabActivity"
+            android:name=".newUI.newViews.DesignActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:theme="@style/AppTheme">
+<!--        <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--        </intent-filter>-->
+        </activity>
         <activity
             android:name=".newUI.newViews.GetEmailActivity"
             android:screenOrientation="sensorPortrait"
@@ -243,314 +140,159 @@
             android:name=".newUI.newViews.ContactUs"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".newUI.newViews.Faq"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".newUI.newViews.HowItWorks"
-            android:screenOrientation="sensorPortrait" />
-        <activity
             android:name=".newUI.newViews.BannerActivity"
             android:screenOrientation="sensorPortrait" />
 
-        <receiver android:name=".Util.PowerConnectionReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="com.eduvanzapplication.LocationService"
-            android:exported="false" />
-        <!--<activity-->
-        <!--android:name=".newUI.newViews.Notification"-->
-        <!--android:screenOrientation="sensorPortrait" />-->
         <activity
-            android:name=".newUI.webviews.WebViewOTPDiag"
-            android:excludeFromRecents="true"
+            android:name=".newUI.newViews.PostCardActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@android:style/Theme.Dialog" />
-
-        <activity
-            android:name=".newUI.webviews.WebViewFairPracticsCode"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".newUI.webviews.WebViewPrivacyPolicy"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".newUI.webviews.WebViewFAQs"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".newUI.webviews.WebViewDisclaimer"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".newUI.webviews.WebViewAboutUs"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newUI.webviews.WebViewTermsNCondition"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newUI.webviews.WebViewBlog"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".newUI.webviews.WebViewInterestRatePolicy"
-            android:screenOrientation="portrait" />
-
-        <activity android:name="com.digio.in.esign2sdk.DigioEsignActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+            android:theme="@style/AppTheme">
+            <intent-filter
+                android:label="@string/app_intent_name"
+                android:scheme="file"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
         </activity>
 
         <activity
-            android:name=".newUI.newViews.TermsAndCondition"
+            android:name=".newUI.newViews.PostCardTabActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme">
+            <intent-filter
+                android:label="@string/app_intent_name"
+                android:scheme="file"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".newUI.newViews.SMSTabActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".newUI.newViews.SMSBalanceActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".newUI.newViews.SMSReportActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".newUI.newViews.MyProjectActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme">
+            <intent-filter
+                android:label="@string/app_intent_name"
+                android:scheme="file"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".newUI.newViews.BrandDesigningActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme">
+            <intent-filter
+                android:label="@string/app_intent_name"
+                android:scheme="file"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.smartbizz.newUI.newViews.EditImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter
+                android:label="@string/app_intent_name"
+                android:scheme="file"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.smartbizz.newUI.newViews.WebViewSMSService"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.smartbizz.newUI.newViews.WebAdvSiteActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.vijay.shareFile"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.smartbizz.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="android:authorities">
+            android:grantUriPermissions="true">
+
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"
-                tools:replace="android:resource" />
+                android:resource="@xml/file_paths" />
+
         </provider>
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="c680de8fc2b43dd325fdd6a3925861a5103d73d8" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
 
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
+        <activity android:name="com.digimitra.whatsapppost.Sender">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <action android:name="android.intent.action.VIEW" />-->
 
-        <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter>
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <activity
-            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-
-        <!--Think Analytics-->
-        <receiver
-            android:name=".DataSyncReceiver"
-            android:enabled="true"
-            android:exported="false">
+        <service
+            android:name="com.digimitra.whatsapppost.WASenderAccSvc"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
-                <action android:name="in.thinkanalytics.app.app_init.DATASYNC_BROADCAST_ACTION" />
+                <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
-        </receiver>
 
-        <service
-            android:name="in.thinkanalytics.algo360SDK.Algo360_SDK_Init"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
-            android:name="in.thinkanalytics.algo360SDK.Service.MyService"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
-            android:name="in.thinkanalytics.algo360SDK.Service.MyJobService"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
-            android:name="in.thinkanalytics.algo360SDK.Service.LocationUpdatesIntentService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <receiver
-            android:name="in.thinkanalytics.algo360SDK.Receivers.SmsReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="in.thinkanalytics.algo360SDK.Receivers.InternetReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="in.thinkanalytics.algo360SDK.Receivers.GpsReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.location.PROVIDERS_CHANGED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="in.thinkanalytics.algo360SDK.Receivers.BootReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="in.thinkanalytics.algo360SDK.Receivers.AlarmBroadcast"
-            android:enabled="true"
-            android:exported="true"></receiver>
-        <receiver
-            android:name="in.thinkanalytics.algo360SDK.Receivers.LocationReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.android.gms.location.sample.backgroundlocationupdates.action.PROCESS_UPDATES" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="in.thinkanalytics.algo360SDK.Receivers.BatteryStatsReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-            </intent-filter>
-        </receiver>
-        <meta-data
-            android:name="com.thinkanalytics.algo360.sdk.init.apikey.CLIENT_ID"
-            android:value="eduvanz"/>
-
-        <meta-data
-            android:name="com.thinkanalytics.algo360.sdk.init.apikey.CLIENT_SECRET"
-            android:value="esdfghjklertyuxcfghuierthjmxcghjedx"/>
-
-        <!--Paytm-->
-        <activity
-            android:name="com.paytm.pgsdk.PaytmPGActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-
-        <service
-            android:name="com.paytm.pgsdk.IntentServicePostNotification"
-            android:exported="false" />
-        <service
-            android:name="com.paytm.pgsdk.IntentServicePreNotification"
-            android:exported="false" />
-        <service
-            android:name="com.paytm.pgsdk.easypay.utils.EasypayLoaderService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name="com.paytm.pgsdk.easypay.utils.AnalyticsService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <!--FriendlyScore-->
-
-        <service
-            android:name="com.FriendlyScoreUI.NetworkSchedulerService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <activity
-            android:name="com.eduvanzapplication.friendlyscore.ClientActivity"
-            android:label="@string/title_activity_main2"
-            android:parentActivityName="com.eduvanzapplication.friendlyscore.StartActivity"
-            android:theme="@style/AppTheme">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.eduvanzapplication.friendlyscore.StartActivity" />
-
-        </activity>
-
-        <activity
-            android:name="com.eduvanzapplication.friendlyscore.instagramhelper.InstagramLoginActivity"
-            android:parentActivityName="com.eduvanzapplication.friendlyscore.ClientActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.eduvanzapplication.friendlyscore.ClientActivity" />
-        </activity>
-        <activity
-            android:name="com.eduvanzapplication.friendlyscore.StartActivity"
-            android:label="@string/title_activity_start"
-            android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-
-        <activity
-            android:name="com.eduvanzapplication.friendlyscore.LinkedinActivity"
-            android:label=""
-            android:parentActivityName="com.eduvanzapplication.friendlyscore.StartActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize">
-
-        </activity>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_api_key" />
-
-        <activity
-            android:name="com.FriendlyScoreUI.FMFeedbackView" />
-
-        <activity
-            android:name="com.eduvanzapplication.friendlyscore.AnotherClientActivity" />
-
-        <activity
-            android:name="net.openid.appauth.RedirectUriReceiverActivity"
-            android:parentActivityName="com.eduvanzapplication.friendlyscore.AnotherClientActivity"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.eduvanzapplication.friendlyscore.AnotherClientActivity" />
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:scheme="com.eduvanzapplication" />
-            </intent-filter>
-
-        </activity>
-
-        <activity android:name="net.openid.appauth.AuthorizationManagementActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:launchMode="singleTask" />
-        <!--<activity-->
-            <!--android:name="com.FriendlyScoreUI.FormActivity"-->
-            <!--android:screenOrientation="portrait">-->
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-        <!--</activity>-->
-        <activity
-            android:name="com.twitter.sdk.android.core.identity.OAuthActivity"
-            android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true"
+                android:name="android.accessibilityservice"
+                android:resource="@xml/service_config" />
+        </service>
+        <service
+            android:name="com.digimitra.whatsapppost.WASenderFgSvc"
+            android:enabled="true"
             android:exported="false" />
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="com.digimitra.whatsapppost.fileprovider"-->
+<!--            android:grantUriPermissions="true"-->
+<!--            android:exported="false">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/filepaths" />-->
+<!--        </provider>-->
+
     </application>
 
 </manifest>

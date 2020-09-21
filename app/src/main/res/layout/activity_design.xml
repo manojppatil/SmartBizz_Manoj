@@ -1,0 +1,98 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFormBG"
+    tools:context=".newUI.newViews.DesignActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+<!--            <com.smartbizz.newUI.view.EduvanzToolBarTitleSubTitle-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:primaryText="@string/my_loan_applications"-->
+<!--                app:secondaryText="@string/sub_title_my_loan_applications" />-->
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/card_view_margin_padding_left_right"
+            android:paddingTop="10dp"
+            android:paddingRight="@dimen/card_view_margin_padding_left_right"
+            android:paddingBottom="15dp">
+
+            <com.smartbizz.newUI.view.EduvanzTextView
+                android:id="@+id/tvDisbursal"
+                style="@style/StyleMyApplicationTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="Designing"
+                android:textColor="@android:color/white" />
+
+            <View
+                android:id="@+id/viewDisbursal"
+                android:layout_width="100dp"
+                android:layout_height="2dp"
+                android:layout_below="@+id/tvDisbursal"
+                android:layout_alignLeft="@+id/tvDisbursal"
+                android:layout_alignRight="@+id/tvDisbursal"
+                android:background="@android:color/white"
+                android:visibility="gone"/>
+
+            <com.smartbizz.newUI.view.EduvanzTextView
+                android:id="@+id/tvPending"
+                style="@style/StyleMyApplicationTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tvDisbursal"
+                android:gravity="center"
+                android:text="New Request"
+                android:textColor="@android:color/white"/>
+
+            <View
+                android:id="@+id/viewPending"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_below="@+id/tvPending"
+                android:layout_alignLeft="@+id/tvPending"
+                android:layout_alignRight="@+id/tvPending"
+                android:background="@android:color/white"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

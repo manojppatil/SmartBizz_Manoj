@@ -3,33 +3,116 @@
     <color name="colorSecondary">#0099cc</color>
     <color name="black_new">#666666</color>
     <color name="grey">#8e8e8e</color>
-    <color name="textcolor">#818181</color>
     <color name="textcolordark">#666666</color>
 
-    <color name="colorPrimaryold">#2BD3DD</color>
+<!--    <color name="colorPrimary">#1b8069</color>-->
+<!--    <color name="colorPrimaryDark">#004D40</color>-->
+<!--    <color name="colorAccent">#607D8B</color>-->
+
     <color name="colorPrimary">#0099cc</color>
     <color name="colorPrimaryDark">#0099cc</color>
     <color name="colorAccent">#0099cc</color>
-    <color name="lightGrey">#D3D3D3</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="blue">#435692</color>
     <color name="lightblue">#d2e4ec</color>
-    <color name="bgcolor">#ECF7FD</color>
-    <color name="defaulticoncolor">#FF000000</color>
 
-    <color name="background_user_profile">#F1F5F8</color>
     <!--<color name="permissioncolor">#4196a0</color>-->
-    <color name="colorGreen">#1ac31a</color>
-    <color name="colorYellow">#ffc015</color>
     <color name="colorRed">#ee415e</color>
-    <color name="white1">#f9fbfb</color>
 
     <color name="darkblue">#454a62</color>
-    <color name="blue1">#0099cc</color>
     <color name="red">#ee415e</color>
-    <color name="permissioncolor">#0099cc</color>
     <color name="blue_900">#0D47A1</color>
 
+    <color name="blue_color_picker">#0066FF</color>
+    <color name="brown_color_picker">#AF593E</color>
+    <color name="green_color_picker">#01A368</color>
+    <color name="orange_color_picker">#FF861F</color>
+    <color name="red_color_picker">#ED0A3F</color>
+    <color name="red_orange_color_picker">#FF3F34</color>
+    <color name="sky_blue_color_picker">#76D7EA</color>
+    <color name="violet_color_picker">#8359A3</color>
+    <color name="yellow_color_picker">#FBE870</color>
+    <color name="yellow_green_color_picker">#C5E17A</color>
+    <color name="tool_bg">#151414</color>
+    <color name="semi_black_transparent">#99000000</color>
+
+<!--    <color name="colorPrimary">#213455</color>-->
+<!--    <color name="colorPrimaryDark">#213455</color>-->
+<!--    <color name="colorAccent">#3399f0</color>-->
+    <!--<color name="colorSubTitle">#57ebf0ff</color>-->
+    <color name="colorSubTitle">#9c9c9c</color>
+    <color name="colorAccentEnd">#44cafc</color>
+    <color name="colorSectionSmallText">#57ebf0ff</color>
+    <color name="colorFormBG">#f4f4f4</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorHint">#c2c2c2</color>
+    <color name="colorBottomSheetSubTitle">#707070</color>
+    <color name="statusGreenTextColor">#00d1a1</color>
+    <color name="colorInvalid">#f2253f</color>
+
+    <color name="colorTheme">#0ABAB5</color>
+
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+
+    <color name="colorTblBlue">#D5D5D5</color>
+
+<!--    <color name="blue_btn_bg_pressed_color">#96BFD2</color>-->
+<!--    <color name="button_text_color">#FFFFFF</color>-->
+<!--    <color name="error_stroke_color">#F27474</color>-->
+<!--    <color name="float_transparent">#00000000</color>-->
+<!--    <color name="gray_btn_bg_color">#D0D0D0</color>-->
+<!--    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>-->
+<!--    <color name="material_blue_grey_80">#ff37474f</color>-->
+<!--    <color name="material_blue_grey_90">#ff263238</color>-->
+<!--    <color name="material_blue_grey_95">#ff21272b</color>-->
+<!--    <color name="material_deep_teal_20">#ff80cbc4</color>-->
+<!--    <color name="material_deep_teal_50">#ff009688</color>-->
+<!--    <color name="red_btn_bg_color">#DD6B55</color>-->
+<!--    <color name="red_btn_bg_pressed_color">#CD5B55</color>-->
+<!--    <color name="success_stroke_color">#A5DC86</color>-->
+<!--    <color name="sweet_dialog_bg_color">#FFFFFF</color>-->
+<!--    <color name="text_color">#575757</color>-->
+<!--    <color name="trans_success_stroke_color">#33A5DC86</color>-->
+<!--    <color name="warning_stroke_color">#F8BB86</color>-->
+<!--    <dimen name="alert_width">290dp</dimen>-->
+<!--    <dimen name="common_circle_width">3dp</dimen>-->
+<!--    <dimen name="progress_circle_radius">34dp</dimen>-->
+<!--    <string name="LOADING">Loading...</string>-->
+<!--    <string name="app_name">SweetAlertDialog</string>-->
+<!--    <string name="dialog_cancel">Cancel</string>-->
+<!--    <string name="dialog_default_title">Here\'s a message!</string>-->
+<!--    <string name="dialog_ok">OK</string>-->
+<!--    <style name="alert_dialog" parent="android:Theme.Dialog">-->
+<!--        <item name="android:windowIsFloating">true</item>-->
+<!--        <item name="android:windowIsTranslucent">false</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowFullscreen">false</item>-->
+<!--        <item name="android:windowBackground">@color/float_transparent</item>-->
+<!--        <item name="android:windowAnimationStyle">@null</item>-->
+<!--        <item name="android:backgroundDimEnabled">true</item>-->
+<!--        <item name="android:backgroundDimAmount">0.4</item>-->
+<!--    </style>-->
+<!--    <style name="dialog_blue_button" parent="android:Widget.Button">-->
+<!--        <item name="android:layout_width">wrap_content</item>-->
+<!--        <item name="android:layout_height">31dp</item>-->
+<!--        <item name="android:background">@drawable/blue_button_background</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--        <item name="android:paddingLeft">21dp</item>-->
+<!--        <item name="android:paddingRight">21dp</item>-->
+<!--        <item name="android:textColor">@color/button_text_color</item>-->
+<!--    </style>-->
+<!--    <declare-styleable name="Rotate3dAnimation">-->
+<!--        <attr format="enum" name="rollType">-->
+<!--            <enum name="x" value="0"/>-->
+<!--            <enum name="y" value="1"/>-->
+<!--            <enum name="z" value="2"/>-->
+<!--        </attr>-->
+<!--        <attr format="float" name="fromDeg"/>-->
+<!--        <attr format="float" name="toDeg"/>-->
+<!--        <attr format="fraction" name="pivotX"/>-->
+<!--        <attr format="fraction" name="pivotY"/>-->
+<!--    </declare-styleable>-->
 
 </resources>

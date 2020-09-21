@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="com.smartbizz.newUI.fragments.PostCardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <com.smartbizz.newUI.view.EduvanzEditText
+            android:id="@+id/etMesage"
+            style="@style/StyleCommonTextFieldLarge"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:inputType="textMultiLine"
+            android:maxLines="4"
+            android:hint="Write you SMS content here."/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnFilePicker"
+                style="@style/commonButtonAccentBG1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="File Picker" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnReset"
+                style="@style/commonButtonAccentBG2"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:text="Reset" />
+
+            <com.smartbizz.newUI.view.EduvanzButton
+                android:id="@+id/btnSubmit"
+                style="@style/commonButtonAccentBG1"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Submit" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtNoData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:text="Oops! No record found for selected category. Please change the category."
+            android:fontFamily="@font/sourcesanspro_semibold" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
