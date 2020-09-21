@@ -37,12 +37,7 @@
 
     <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
     <string name="settings">Settings</string>
-    <!--
-   <string name="profile_photo">Profile Photo <font fgcolor="#EE415E">*</font></string>
-   -->
-    <!--
-   <string name="aadhar_card">Aadhar Card <font fgcolor="#EE415E">*</font></string>
-   -->
+
     <string name="submit">Submit</string>
 
     <string name="check_eligiblity">Check Eligiblity</string>
@@ -58,13 +53,6 @@
     <string name="makwana_road_marol_andheri_east">lorem ipsum,</string>
     <string name="mumbai_400059">Mumbai 400059.</string>
 
-    <!--<string name="by_proceeding_you_accept">By proceeding you accept</string>-->
-    <!--<string name="by_proceeding_you_accept">By proceeding I hereby, accept</string>-->
-
-    <!--<string name="tenurestring"><b> \t Great Job !!! \n</b>\n-->
-    <!--Your application is successfully registerded with us. \n \n-->
-    <!--To complete the process we need some additional details. Request you to select the best suited loan plan and proceed further to complete the application-->
-    <!--</string>-->
 
     <string name="please_check_your_network_connection">Please check your network connection</string>
     <string name="are_you_sure_you_waqnt_to_exit">Are you sure, You want to exit ?</string>
@@ -82,10 +70,6 @@
 
     <string name="first_name">First Name</string>
 
-    <!--<string name="profile_photo">Profile Photo <font fgcolor="#EE415E">*</font></string>-->
-
-    <!--<string name="fs_msg"><![CDATA[Check your \'Friendly Score\' to ensure a Quick & Smooth Loan Process]]></string>-->
-    <!--<string name="start_new_msg">Apply Now for an Instant Loan</string>-->
 
     <string name="error_message_unable_to_connect">Unable to connect to server. Check your network connection or try after some time.</string>
     <string name="error_message_request_timeout">Request timeout and please try after some time.</string>
@@ -101,138 +85,16 @@
 
 
 
-        <!--intro screen start-->
-    <!--intro screen end-->
-
-        <!-- TODO: Remove or change this placeholder text -->
-
-    <!--permissions screen start-->
-    <!--permissions screen end-->
-
-        <!--login screen start-->
-    <!--login screen end-->
-
-        <!--verify otp start-->
-    <!--verify otp end-->
-
-        <!--basic details start-->
     <string name="step_basic">A) Basic</string>
-    <!--basic details end-->
 
-        <!--personal details start-->
-
-    <!--personal details start-->
-
-        <!--course details start-->
-    <!--course details end-->
-
-        <!--half approval start-->
-    <!--half approval end-->
-
-        <!--half un-approval end-->
-    <!--half un-approval end-->
-
-        <!--address activity start-->
-    <!--residential-->
-    <!--work-->
-    <!--address activity end-->
-
-
-        <!--risk score start-->
-    <!--risk score end-->
-
-        <!--contact_us start-->
-    <!--contact_us end-->
-
-        <!--maps start-->
-    <!--maps end-->
-
-        <!--upload_aadhar start-->
-    <!--upload_aadhar end-->
-
-        <!--add photo start-->
-    <!--add photo end-->
-
-        <!--documents screen start-->
-    <!--documents screen end-->
-
-        <!--banking screen start-->
-    <!--banking screen start-->
-
-        <!--home screen start-->
     <string name="my_applications">My Applications</string>
     <string name="sub_title_my_loan_applications">Here, you will find all your pending and disbursed loan applications</string>
     <string name="edit">edit</string>
 
-    <!--home screen end-->
-
-        <!--navigation menu start-->
-
-    <!--navigation menu end-->
-
-        <!--emi calculator start-->
-    <!--emi calculator end-->
-
-        <!--connect with finbit start-->
-
-    <!--connect with finbit end-->
-
-        <!--paymentActivity start-->
-    <!--paymentActivity end-->
-
-
-        <!--nach setup start-->
-
-        <!--nach setup end-->
-
-    <!--Bank transfer start-->
-    <!--Bank transfer end-->
-
-        <!--Repayment start-->
-    <!--Repayment end-->
-
-        <!--Regular payment activity start-->
-    <!--Regular payment activity end-->
-
-    <!--payment start-->
-
-    <!--payment end-->
-
-
-        <!--common start-->
-
     <string name="digits_without_special_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789- ,/@.</string>
 
-    <!--    <string name="this_field_is_required">This field is required*</string>-->
-
-    <!--common end-->
-
-        <!--    ImageToPdf-->
-
-    <!--    <string name="cropImage_activityTitle">Crop image No.</string>-->
-
-    <!-- Watermark Strings -->
-
-        <!-- Split PDF -->
-
-    <!-- Remove Pages -->
-
-
-    <!-- Select Images string -->
-
-    <!-- Feedback Strings -->
 
     <string name="File_hint_two" tools:keep="@string/File_hint_two">File Path for PDF two</string>
-
-
-    <!-- Directory Strings -->
-
-
-    <!--    <string name="ocr_document_aadhar_note">Upload your Aadhaar card front &amp; back, don’t forget!!</string>-->
-        <!--    <string name="largerFileSize">* Your File size is more than 2 mb. Please Edit/Crop the images.</string>-->
-        <!--    <string name="note">Note:</string>-->
-
-    <!--    <string name="details"><b>Details</b></string>-->
 
     <string name="this_field_is_required">Required field*</string>
     <string name="error_enter_valid_mobile_number">Please enter a valid mobile number</string>
