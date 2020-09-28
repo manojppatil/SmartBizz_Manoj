@@ -1,25 +1,15 @@
 package com.smartbizz.newUI.newViews;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.smartbizz.R;
@@ -27,22 +17,13 @@ import com.smartbizz.Util.Constants;
 import com.smartbizz.Util.DialogUtil;
 import com.smartbizz.Util.PreferenceManager;
 import com.smartbizz.newUI.adapter.SMSTabAdapter;
-import com.smartbizz.newUI.adapter.TabAdapter;
-import com.smartbizz.newUI.network.ApiConstants;
 import com.smartbizz.newUI.network.NetworkManager;
-import com.smartbizz.newUI.pojo.Category;
 import com.google.android.material.tabs.TabLayout;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.smartbizz.Util.DialogUtil.dismissProgressDialog;
-import static com.smartbizz.newUI.newViews.EditImageActivity.FILE_PROVIDER_AUTHORITY;
 
 public class SMSTabActivity extends BaseActivity {
 

@@ -6,39 +6,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.digimitra.whatsapppost.Sender;
 import com.smartbizz.Util.Constants;
 import com.smartbizz.Util.DialogUtil;
 import com.smartbizz.Util.PermissionUtil;
 import com.smartbizz.Util.PreferenceManager;
-import com.smartbizz.newUI.network.ApiConstants;
-import com.smartbizz.newUI.newViews.BrandDesigningActivity;
-import com.smartbizz.newUI.newViews.DashboardActivity;
-import com.smartbizz.newUI.newViews.DesignActivity;
 import com.smartbizz.newUI.newViews.EditProfile;
-import com.smartbizz.newUI.newViews.PostCardActivity;
-import com.smartbizz.newUI.newViews.PostCardTabActivity;
 import com.smartbizz.newUI.newViews.SMSTabActivity;
 import com.smartbizz.newUI.view.NachInfoBottomSheet;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +35,6 @@ import com.smartbizz.newUI.MainApplication;
 import com.smartbizz.R;
 import com.smartbizz.newUI.SharedPref;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,9 +122,11 @@ public class DashboardFragmentNew extends BaseFragment {
 
 
     View.OnClickListener PromotionClkListnr = v -> {
-        if(askRequiredPermissions()) {
-            startActivity(new Intent(getActivity(), PostCardTabActivity.class));
-        }
+//        if(askRequiredPermissions()) {
+//            startActivity(new Intent(getActivity(), PostCardTabActivity.class));
+//        }
+        callNachIno();
+
     };
 
     View.OnClickListener SmsClkListnr = v -> {
@@ -210,7 +195,7 @@ public class DashboardFragmentNew extends BaseFragment {
             } else {
                 //Handle success case
 //                startActivity(new Intent(getActivity(), PostCardActivity.class));
-                startActivity(new Intent(getActivity(), PostCardTabActivity.class));
+//                startActivity(new Intent(getActivity(), PostCardTabActivity.class));
             }
         }
     }

@@ -2,7 +2,6 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen tools:override="true" name="design_navigation_icon_padding">15dp</dimen>
     <dimen name="editor_size">35dp</dimen>
-    <dimen name="top_tool_icon_width">50dp</dimen>
 
     <dimen name="card_view_margin_padding_left_right">30dp</dimen>
     <dimen name="card_view_margin_top_bottom">10dp</dimen>

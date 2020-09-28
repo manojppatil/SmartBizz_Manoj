@@ -1,21 +1,13 @@
 package com.smartbizz.newUI.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,23 +16,15 @@ import com.smartbizz.R;
 import com.smartbizz.Util.DialogUtil;
 import com.smartbizz.newUI.network.ApiConstants;
 import com.smartbizz.newUI.network.NetworkManager;
-import com.smartbizz.newUI.newViews.BaseActivity;
-import com.smartbizz.newUI.newViews.EditImageActivity;
 import com.smartbizz.newUI.newViews.BrandDesigningActivity;
 import com.smartbizz.newUI.pojo.Requests;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 import ja.burhanrashid52.photoeditor.OnPhotoEditorListener;
 import ja.burhanrashid52.photoeditor.PhotoEditor;
 import ja.burhanrashid52.photoeditor.PhotoEditorView;
-import ja.burhanrashid52.photoeditor.SaveSettings;
 import ja.burhanrashid52.photoeditor.TextStyleBuilder;
 import ja.burhanrashid52.photoeditor.ViewType;
 

@@ -67,8 +67,6 @@ public class ViewPagerAdapterDashboard extends PagerAdapter {
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
-            //http://159.89.204.41/eduvanzbeta/uploads/mobileadvertisement/1/image_1513427852.png
-            //http://eduvanz.com/admin/uploads/mobileadvertisement/1/image_1513427852.png
             Picasso.with(mContext).load(mData.get(position).image).placeholder(mContext.getResources().getDrawable(R.drawable.bannersplaceholder)).into(myImage);
 
 //            myImage.setOnClickListener(new View.OnClickListener() {

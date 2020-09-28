@@ -19,7 +19,6 @@ import com.smartbizz.R;
 import com.smartbizz.Util.CollectionUtil;
 import com.smartbizz.newUI.interfaces.OnApplicationEditListener;
 import com.smartbizz.newUI.network.ApiConstants;
-import com.smartbizz.newUI.newViews.EditImageActivity;
 import com.smartbizz.newUI.pojo.Requests;
 import com.squareup.picasso.Picasso;
 
@@ -62,9 +61,9 @@ public class PendingLoansAdapter extends RecyclerView.Adapter<PendingLoansAdapte
         viewHolder.ivView.setOnClickListener(view -> {
             Requests object = (Requests) view.getTag();
             if (viewHolder.ivView.getTag() != null) {
-                Intent intent = new Intent(context, EditImageActivity.class);
-                intent.putExtra("imgUri", viewHolder.ivView.getTag().toString());
-                context.startActivity(intent);
+//                Intent intent = new Intent(context, EditImageActivity.class);
+//                intent.putExtra("imgUri", viewHolder.ivView.getTag().toString());
+//                context.startActivity(intent);
             }
         });
 

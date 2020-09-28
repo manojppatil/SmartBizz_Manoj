@@ -29,7 +29,6 @@ import com.smartbizz.newUI.pojo.MBeats;
 import java.io.File;
 import java.util.ArrayList;
 
-import static com.smartbizz.newUI.newViews.EditImageActivity.FILE_PROVIDER_AUTHORITY;
 
 
 public class BrandDesigningActivity extends BaseActivity implements View.OnClickListener {
@@ -163,10 +162,10 @@ public class BrandDesigningActivity extends BaseActivity implements View.OnClick
         super.onPause();
     }
 
-    public Uri buildFileProviderUri(@NonNull Uri uri) {
-        return FileProvider.getUriForFile(BrandDesigningActivity.this,
-                FILE_PROVIDER_AUTHORITY,
-                new File(uri.getPath()));
-    }
+//    public Uri buildFileProviderUri(@NonNull Uri uri) {
+//        return FileProvider.getUriForFile(BrandDesigningActivity.this,
+//                FILE_PROVIDER_AUTHORITY,
+//                new File(uri.getPath()));
+//    }
 
 }

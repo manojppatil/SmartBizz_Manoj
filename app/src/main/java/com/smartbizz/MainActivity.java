@@ -14,9 +14,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends Application {
 
-    public static String TAG = "EDUVANZ LOG";
+    public static String TAG = "SMARTBIZZ LOG";
 
-    public static String mainUrl = "https://api.eduvanz.com/"; ///////////////////L I V E//////////////
 
     public static String auth_token ="", lead_id ="", application_id = "", applicant_id ="" ;
     @Override

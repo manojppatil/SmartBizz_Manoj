@@ -2,69 +2,34 @@ package com.smartbizz.newUI.fragments;
 
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.smartbizz.R;
 import com.smartbizz.Util.CommonUtil;
 import com.smartbizz.Util.Constants;
 import com.smartbizz.Util.DialogUtil;
 import com.smartbizz.Util.FileUtil;
+import com.smartbizz.Util.GenericTextWatcher;
 import com.smartbizz.Util.PreferenceManager;
-import com.smartbizz.Util.VerticalLineDecorator;
-import com.smartbizz.newUI.adapter.PostCardAdapter;
-import com.smartbizz.newUI.network.ApiConstants;
 import com.smartbizz.newUI.network.NetworkManager;
-import com.smartbizz.newUI.newViews.PostCardTabActivity;
-import com.smartbizz.newUI.pojo.Category;
-import com.smartbizz.newUI.pojo.Requests;
 import com.smartbizz.newUI.view.SMSSuccessBottomSheet;
 import com.smartbizz.newUI.view.SenderIdBottomSheet;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SMSBulkUploadCardFragment extends BaseFragment implements View.OnClickListener {
     View view;
@@ -75,7 +40,7 @@ public class SMSBulkUploadCardFragment extends BaseFragment implements View.OnCl
     public String userChoosenTask;
 
     private EditText etMesage;
-    private TextView txtNoData;
+    private TextView txtNoData, txtCharCount;
     private Button btnFilePicker, btnSubmit, btnReset;
 
     @Nullable
@@ -87,11 +52,12 @@ public class SMSBulkUploadCardFragment extends BaseFragment implements View.OnCl
         btnFilePicker = view.findViewById(R.id.btnFilePicker);
         btnSubmit = view.findViewById(R.id.btnSubmit);
         btnReset = view.findViewById(R.id.btnReset);
+        txtCharCount = view.findViewById(R.id.txtCharCount);
 
         btnFilePicker.setOnClickListener(this);
         btnReset.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
-
+        RegisterListner();
         return view;
     }
 
@@ -103,6 +69,25 @@ public class SMSBulkUploadCardFragment extends BaseFragment implements View.OnCl
 //                .setCancelable(true)
 //                .setIcon(R.drawable.success)
 //                .show();
+
+    }
+
+    private void RegisterListner() {
+
+
+        TextWatcher pinCodeTextWatcher = new GenericTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                if (s.length() == 150) {
+                    makeToast("You have reached max character");
+                    CommonUtil.hideKeyboard(activity, etMesage);
+                }
+                txtCharCount.setText("Char count: " + s.length());
+            }
+        };
+
+        etMesage.addTextChangedListener(pinCodeTextWatcher);
 
     }
 

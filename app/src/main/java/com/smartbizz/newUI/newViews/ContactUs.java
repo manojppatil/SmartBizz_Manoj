@@ -83,7 +83,7 @@ public class ContactUs extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse(getString(R.string.tel_0224523689)));
+                    intent.setData(Uri.parse(getString(R.string.tel)));
                     startActivity(intent);
                 }
             });
@@ -91,7 +91,7 @@ public class ContactUs extends AppCompatActivity {
             linearLayoutEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    shareToGMail(new String[]{"support@eduvanz.com"}, "", "");
+                    shareToGMail(new String[]{"shreesamarthservices@gmail.com"}, "", "");
                 }
             });
         } catch (Exception e) {

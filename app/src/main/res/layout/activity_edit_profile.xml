@@ -138,7 +138,7 @@
                     android:theme="@style/EditTextProfileStyle" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.smartbizz.newUI.view.EduvanzTextView
+            <com.smartbizz.newUI.view.SmartBizzTextView
                 android:id="@+id/tvEmployerType"
                 style="@style/StyleCommonLabel"
                 android:layout_width="wrap_content"

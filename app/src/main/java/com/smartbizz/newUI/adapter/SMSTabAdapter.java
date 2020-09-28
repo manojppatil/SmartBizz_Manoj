@@ -5,16 +5,10 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.smartbizz.newUI.fragments.DynamicPostCardFragment;
 import com.smartbizz.newUI.fragments.SMSBulkUploadCardFragment;
 import com.smartbizz.newUI.fragments.SMSSenderFragment;
 import com.smartbizz.newUI.fragments.SMSSenderIDUpdateFragment;
-import com.smartbizz.newUI.pojo.Category;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SMSTabAdapter extends FragmentPagerAdapter {
 
