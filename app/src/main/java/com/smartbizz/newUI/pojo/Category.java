@@ -28,7 +28,7 @@ public class Category {
     @SerializedName("id")
     private String id;
 
-        public Category(JSONObject jsonObject) {
+    public Category(JSONObject jsonObject) {
         if (jsonObject != null) {
             isDeleted = jsonObject.optString("is_deleted");
             isActive = jsonObject.optString("is_active");
@@ -41,7 +41,7 @@ public class Category {
         }
     }
 
-    public Category(String isDeleted, String isActive, String createdDatetime,String description,String name,String categoryType,String id) {
+    public Category(String isDeleted, String isActive, String createdDatetime, String description, String name, String categoryType, String id) {
         this.isDeleted = isDeleted;
         this.isActive = isActive;
         this.createdDatetime = createdDatetime;

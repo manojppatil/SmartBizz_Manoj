@@ -30,7 +30,7 @@ import ja.burhanrashid52.photoeditor.ViewType;
 
 import static com.smartbizz.Util.TextEditorDialogFragment.TAG;
 
-public class BrandDesignAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BrandDesignAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public final int TYPE_MOVIE = 0;
     public final int TYPE_LOAD = 1;

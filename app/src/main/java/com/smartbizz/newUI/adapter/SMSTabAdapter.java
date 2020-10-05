@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.smartbizz.newUI.fragments.CreateGroupFragment;
+import com.smartbizz.newUI.fragments.MSmsSenderFragment;
 import com.smartbizz.newUI.fragments.SMSBulkUploadCardFragment;
 import com.smartbizz.newUI.fragments.SMSSenderFragment;
 import com.smartbizz.newUI.fragments.SMSSenderIDUpdateFragment;
@@ -26,11 +28,11 @@ public class SMSTabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                SMSSenderFragment homeFragment = new SMSSenderFragment();
+                MSmsSenderFragment homeFragment = new MSmsSenderFragment();
                 return homeFragment;
             case 1:
-                SMSBulkUploadCardFragment sportFragment = new SMSBulkUploadCardFragment();
-                return sportFragment;
+                CreateGroupFragment createGroupFragment = new CreateGroupFragment();
+                return createGroupFragment;
             case 2:
                 SMSSenderIDUpdateFragment smsSenderIDUpdateFragment = new SMSSenderIDUpdateFragment();
                 return smsSenderIDUpdateFragment;

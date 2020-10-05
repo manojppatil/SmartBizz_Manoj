@@ -287,4 +287,9 @@ public class NetworkManager {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(request);
     }
+
+    public void getTemplatesCatgList(Context context, final Response.Listener<NetworkResponse> responseListener) {
+        Map<String, Object> params = new HashMap<>();
+        sendJsonRequest(context, Request.Method.GET, ApiConstants.Url.URL_GET_TEMPLATE_CATEGORY, new JSONObject(params), responseListener);
+    }
 }

@@ -71,7 +71,7 @@ public class SMSTabActivity extends BaseActivity {
     private void setupViewPager() {
 
         tab.addTab(tab.newTab().setText("SMS Sender"));
-        tab.addTab(tab.newTab().setText("SMS Bulk Push"));
+        tab.addTab(tab.newTab().setText("Create Group"));
         tab.addTab(tab.newTab().setText("Sender Id"));
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
 

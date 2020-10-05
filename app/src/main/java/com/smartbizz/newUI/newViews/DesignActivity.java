@@ -35,7 +35,7 @@ public class DesignActivity extends BaseActivity implements View.OnClickListener
     private View viewDisbursal, viewPending;
     private ViewPager viewPager;
     private List<Requests> pendingsList = new ArrayList<>();
-            private List<Category> disbursedList = new ArrayList<>();
+    private List<Category> disbursedList = new ArrayList<>();
     private int selectedTabIndex = 0;
     private String baseUrl;
 
@@ -89,11 +89,11 @@ public class DesignActivity extends BaseActivity implements View.OnClickListener
 //            tvDisbursal.setVisibility(View.GONE);
 //        }
 
-        if(pendingsList.size()>0) {
+        if (pendingsList.size() > 0) {
             viewPending.setVisibility(View.VISIBLE);
             tvPending.setVisibility(View.VISIBLE);
             adapter.addFragment(PendingApplicationsFragment.newInstance(pendingsList));
-        }else{
+        } else {
             selectPendingApplication();
             viewPending.setVisibility(View.GONE);
             tvPending.setVisibility(View.GONE);
@@ -103,7 +103,7 @@ public class DesignActivity extends BaseActivity implements View.OnClickListener
         viewPager.setOffscreenPageLimit(adapter.getCount());
         viewPager.setAdapter(adapter);
         viewPager.getAdapter().notifyDataSetChanged();
-        if(selectedTabIndex<=adapter.getCount()){
+        if (selectedTabIndex <= adapter.getCount()) {
             viewPager.setCurrentItem(selectedTabIndex);
         }
     }
@@ -125,7 +125,7 @@ public class DesignActivity extends BaseActivity implements View.OnClickListener
                             int size = categoryArray.length();
                             for (int i = 0; i < size; i++) {
                                 JSONObject categoryJson = categoryArray.optJSONObject(i);
-                                if(categoryJson != null) {
+                                if (categoryJson != null) {
                                     Category application = new Category(categoryArray.optJSONObject(i));
                                     disbursedList.add(application);
                                 }
@@ -138,28 +138,28 @@ public class DesignActivity extends BaseActivity implements View.OnClickListener
                             int size = requestsArray.length();
                             for (int i = 0; i < size; i++) {
                                 JSONObject categoryJson = requestsArray.optJSONObject(i);
-                                if(categoryJson != null) {
+                                if (categoryJson != null) {
                                     Requests application = new Requests(requestsArray.optJSONObject(i));
                                     pendingsList.add(application);
                                 }
                             }//resultObj.optString("url")
 
 //                            setupViewPager();
-                        }else {
+                        } else {
                             makeToast("No design found. Create a new desing request");
                         }
                         setupViewPager();
                     }
                 }
-            }else{
+            } else {
                 makeToast(response.getMessage());
             }
             dismissProgressBar();
         });
     }
 
-    private void dismissProgressBar(){
-        new Handler().postDelayed(() -> DialogUtil.dismissProgressDialog(),1000);
+    private void dismissProgressBar() {
+        new Handler().postDelayed(() -> DialogUtil.dismissProgressDialog(), 1000);
     }
 
     @Override
